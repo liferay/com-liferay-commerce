@@ -92,6 +92,8 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setAdvanceStatus(model.getAdvanceStatus());
 		soapModel.setPaymentStatus(model.getPaymentStatus());
 		soapModel.setOrderStatus(model.getOrderStatus());
+		soapModel.setPrintedNote(model.getPrintedNote());
+		soapModel.setRequestedDeliveryDate(model.getRequestedDeliveryDate());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -509,6 +511,22 @@ public class CommerceOrderSoap implements Serializable {
 		_orderStatus = orderStatus;
 	}
 
+	public String getPrintedNote() {
+		return _printedNote;
+	}
+
+	public void setPrintedNote(String printedNote) {
+		_printedNote = printedNote;
+	}
+
+	public Date getRequestedDeliveryDate() {
+		return _requestedDeliveryDate;
+	}
+
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		_requestedDeliveryDate = requestedDeliveryDate;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -583,6 +601,8 @@ public class CommerceOrderSoap implements Serializable {
 	private String _advanceStatus;
 	private int _paymentStatus;
 	private int _orderStatus;
+	private String _printedNote;
+	private Date _requestedDeliveryDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

@@ -67,7 +67,7 @@ public class CommerceOrderCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(93);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -153,6 +153,10 @@ public class CommerceOrderCacheModel
 		sb.append(paymentStatus);
 		sb.append(", orderStatus=");
 		sb.append(orderStatus);
+		sb.append(", printedNote=");
+		sb.append(printedNote);
+		sb.append(", requestedDeliveryDate=");
+		sb.append(requestedDeliveryDate);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -302,6 +306,22 @@ public class CommerceOrderCacheModel
 
 		commerceOrderImpl.setPaymentStatus(paymentStatus);
 		commerceOrderImpl.setOrderStatus(orderStatus);
+
+		if (printedNote == null) {
+			commerceOrderImpl.setPrintedNote("");
+		}
+		else {
+			commerceOrderImpl.setPrintedNote(printedNote);
+		}
+
+		if (requestedDeliveryDate == Long.MIN_VALUE) {
+			commerceOrderImpl.setRequestedDeliveryDate(null);
+		}
+		else {
+			commerceOrderImpl.setRequestedDeliveryDate(new Date(
+					requestedDeliveryDate));
+		}
+
 		commerceOrderImpl.setStatus(status);
 		commerceOrderImpl.setStatusByUserId(statusByUserId);
 
@@ -381,6 +401,8 @@ public class CommerceOrderCacheModel
 		paymentStatus = objectInput.readInt();
 
 		orderStatus = objectInput.readInt();
+		printedNote = objectInput.readUTF();
+		requestedDeliveryDate = objectInput.readLong();
 
 		status = objectInput.readInt();
 
@@ -500,6 +522,15 @@ public class CommerceOrderCacheModel
 
 		objectOutput.writeInt(orderStatus);
 
+		if (printedNote == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(printedNote);
+		}
+
+		objectOutput.writeLong(requestedDeliveryDate);
+
 		objectOutput.writeInt(status);
 
 		objectOutput.writeLong(statusByUserId);
@@ -556,6 +587,8 @@ public class CommerceOrderCacheModel
 	public String advanceStatus;
 	public int paymentStatus;
 	public int orderStatus;
+	public String printedNote;
+	public long requestedDeliveryDate;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;

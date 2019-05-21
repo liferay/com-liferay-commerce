@@ -492,6 +492,14 @@ public interface CommerceOrderLocalService
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateInfo(
+			long commerceOrderId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws PortalException;

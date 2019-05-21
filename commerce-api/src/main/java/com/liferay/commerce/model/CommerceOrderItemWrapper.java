@@ -88,6 +88,10 @@ public class CommerceOrderItemWrapper
 		attributes.put(
 			"discountPercentageLevel4", getDiscountPercentageLevel4());
 		attributes.put("subscription", isSubscription());
+		attributes.put("deliveryGroup", getDeliveryGroup());
+		attributes.put("shippingAddressId", getShippingAddressId());
+		attributes.put("printedNote", getPrintedNote());
+		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
 
 		return attributes;
 	}
@@ -243,6 +247,31 @@ public class CommerceOrderItemWrapper
 		if (subscription != null) {
 			setSubscription(subscription);
 		}
+
+		String deliveryGroup = (String)attributes.get("deliveryGroup");
+
+		if (deliveryGroup != null) {
+			setDeliveryGroup(deliveryGroup);
+		}
+
+		Long shippingAddressId = (Long)attributes.get("shippingAddressId");
+
+		if (shippingAddressId != null) {
+			setShippingAddressId(shippingAddressId);
+		}
+
+		String printedNote = (String)attributes.get("printedNote");
+
+		if (printedNote != null) {
+			setPrintedNote(printedNote);
+		}
+
+		Date requestedDeliveryDate = (Date)attributes.get(
+			"requestedDeliveryDate");
+
+		if (requestedDeliveryDate != null) {
+			setRequestedDeliveryDate(requestedDeliveryDate);
+		}
 	}
 
 	@Override
@@ -359,6 +388,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public String getDefaultLanguageId() {
 		return _commerceOrderItem.getDefaultLanguageId();
+	}
+
+	/**
+	 * Returns the delivery group of this commerce order item.
+	 *
+	 * @return the delivery group of this commerce order item
+	 */
+	@Override
+	public String getDeliveryGroup() {
+		return _commerceOrderItem.getDeliveryGroup();
 	}
 
 	/**
@@ -566,6 +605,16 @@ public class CommerceOrderItemWrapper
 	}
 
 	/**
+	 * Returns the printed note of this commerce order item.
+	 *
+	 * @return the printed note of this commerce order item
+	 */
+	@Override
+	public String getPrintedNote() {
+		return _commerceOrderItem.getPrintedNote();
+	}
+
+	/**
 	 * Returns the quantity of this commerce order item.
 	 *
 	 * @return the quantity of this commerce order item
@@ -576,6 +625,16 @@ public class CommerceOrderItemWrapper
 	}
 
 	/**
+	 * Returns the requested delivery date of this commerce order item.
+	 *
+	 * @return the requested delivery date of this commerce order item
+	 */
+	@Override
+	public Date getRequestedDeliveryDate() {
+		return _commerceOrderItem.getRequestedDeliveryDate();
+	}
+
+	/**
 	 * Returns the shipped quantity of this commerce order item.
 	 *
 	 * @return the shipped quantity of this commerce order item
@@ -583,6 +642,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public int getShippedQuantity() {
 		return _commerceOrderItem.getShippedQuantity();
+	}
+
+	/**
+	 * Returns the shipping address ID of this commerce order item.
+	 *
+	 * @return the shipping address ID of this commerce order item
+	 */
+	@Override
+	public long getShippingAddressId() {
+		return _commerceOrderItem.getShippingAddressId();
 	}
 
 	/**
@@ -765,6 +834,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceOrderItem.setCreateDate(createDate);
+	}
+
+	/**
+	 * Sets the delivery group of this commerce order item.
+	 *
+	 * @param deliveryGroup the delivery group of this commerce order item
+	 */
+	@Override
+	public void setDeliveryGroup(String deliveryGroup) {
+		_commerceOrderItem.setDeliveryGroup(deliveryGroup);
 	}
 
 	/**
@@ -980,6 +1059,16 @@ public class CommerceOrderItemWrapper
 	}
 
 	/**
+	 * Sets the printed note of this commerce order item.
+	 *
+	 * @param printedNote the printed note of this commerce order item
+	 */
+	@Override
+	public void setPrintedNote(String printedNote) {
+		_commerceOrderItem.setPrintedNote(printedNote);
+	}
+
+	/**
 	 * Sets the quantity of this commerce order item.
 	 *
 	 * @param quantity the quantity of this commerce order item
@@ -990,6 +1079,16 @@ public class CommerceOrderItemWrapper
 	}
 
 	/**
+	 * Sets the requested delivery date of this commerce order item.
+	 *
+	 * @param requestedDeliveryDate the requested delivery date of this commerce order item
+	 */
+	@Override
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		_commerceOrderItem.setRequestedDeliveryDate(requestedDeliveryDate);
+	}
+
+	/**
 	 * Sets the shipped quantity of this commerce order item.
 	 *
 	 * @param shippedQuantity the shipped quantity of this commerce order item
@@ -997,6 +1096,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public void setShippedQuantity(int shippedQuantity) {
 		_commerceOrderItem.setShippedQuantity(shippedQuantity);
+	}
+
+	/**
+	 * Sets the shipping address ID of this commerce order item.
+	 *
+	 * @param shippingAddressId the shipping address ID of this commerce order item
+	 */
+	@Override
+	public void setShippingAddressId(long shippingAddressId) {
+		_commerceOrderItem.setShippingAddressId(shippingAddressId);
 	}
 
 	/**

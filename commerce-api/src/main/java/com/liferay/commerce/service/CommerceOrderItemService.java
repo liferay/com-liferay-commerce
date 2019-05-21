@@ -141,6 +141,14 @@ public interface CommerceOrderItemService extends BaseService {
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceOrderItem updateCommerceOrderItemInfo(
+			long commerceOrderItemId, String deliveryGroup,
+			long shippingAddressId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException;
+
 	public CommerceOrderItem upsertCommerceOrderItem(
 			long commerceOrderId, long cpInstanceId, int quantity,
 			int shippedQuantity, String json, CommerceContext commerceContext,

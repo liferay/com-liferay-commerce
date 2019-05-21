@@ -69,7 +69,7 @@ public class CommerceOrderItemCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -119,6 +119,14 @@ public class CommerceOrderItemCacheModel
 		sb.append(discountPercentageLevel4);
 		sb.append(", subscription=");
 		sb.append(subscription);
+		sb.append(", deliveryGroup=");
+		sb.append(deliveryGroup);
+		sb.append(", shippingAddressId=");
+		sb.append(shippingAddressId);
+		sb.append(", printedNote=");
+		sb.append(printedNote);
+		sb.append(", requestedDeliveryDate=");
+		sb.append(requestedDeliveryDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -203,6 +211,30 @@ public class CommerceOrderItemCacheModel
 			discountPercentageLevel4);
 		commerceOrderItemImpl.setSubscription(subscription);
 
+		if (deliveryGroup == null) {
+			commerceOrderItemImpl.setDeliveryGroup("");
+		}
+		else {
+			commerceOrderItemImpl.setDeliveryGroup(deliveryGroup);
+		}
+
+		commerceOrderItemImpl.setShippingAddressId(shippingAddressId);
+
+		if (printedNote == null) {
+			commerceOrderItemImpl.setPrintedNote("");
+		}
+		else {
+			commerceOrderItemImpl.setPrintedNote(printedNote);
+		}
+
+		if (requestedDeliveryDate == Long.MIN_VALUE) {
+			commerceOrderItemImpl.setRequestedDeliveryDate(null);
+		}
+		else {
+			commerceOrderItemImpl.setRequestedDeliveryDate(
+				new Date(requestedDeliveryDate));
+		}
+
 		commerceOrderItemImpl.resetOriginalValues();
 
 		return commerceOrderItemImpl;
@@ -246,6 +278,11 @@ public class CommerceOrderItemCacheModel
 		discountPercentageLevel4 = (BigDecimal)objectInput.readObject();
 
 		subscription = objectInput.readBoolean();
+		deliveryGroup = objectInput.readUTF();
+
+		shippingAddressId = objectInput.readLong();
+		printedNote = objectInput.readUTF();
+		requestedDeliveryDate = objectInput.readLong();
 	}
 
 	@Override
@@ -315,6 +352,24 @@ public class CommerceOrderItemCacheModel
 		objectOutput.writeObject(discountPercentageLevel4);
 
 		objectOutput.writeBoolean(subscription);
+
+		if (deliveryGroup == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(deliveryGroup);
+		}
+
+		objectOutput.writeLong(shippingAddressId);
+
+		if (printedNote == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(printedNote);
+		}
+
+		objectOutput.writeLong(requestedDeliveryDate);
 	}
 
 	public String externalReferenceCode;
@@ -341,5 +396,9 @@ public class CommerceOrderItemCacheModel
 	public BigDecimal discountPercentageLevel3;
 	public BigDecimal discountPercentageLevel4;
 	public boolean subscription;
+	public String deliveryGroup;
+	public long shippingAddressId;
+	public String printedNote;
+	public long requestedDeliveryDate;
 
 }

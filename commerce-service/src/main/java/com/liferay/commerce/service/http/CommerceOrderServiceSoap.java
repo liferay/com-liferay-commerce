@@ -729,6 +729,32 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderSoap updateInfo(
+			long commerceOrderId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue =
+				CommerceOrderServiceUtil.updateInfo(
+					commerceOrderId, printedNote, requestedDeliveryDateMonth,
+					requestedDeliveryDateDay, requestedDeliveryDateYear,
+					requestedDeliveryDateHour, requestedDeliveryDateMinute,
+					serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderSoap
 			updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws RemoteException {

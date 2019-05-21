@@ -181,6 +181,15 @@ public class CommerceOrderItemPersistenceTest {
 
 		newCommerceOrderItem.setSubscription(RandomTestUtil.randomBoolean());
 
+		newCommerceOrderItem.setDeliveryGroup(RandomTestUtil.randomString());
+
+		newCommerceOrderItem.setShippingAddressId(RandomTestUtil.nextLong());
+
+		newCommerceOrderItem.setPrintedNote(RandomTestUtil.randomString());
+
+		newCommerceOrderItem.setRequestedDeliveryDate(
+			RandomTestUtil.nextDate());
+
 		_commerceOrderItems.add(_persistence.update(newCommerceOrderItem));
 
 		CommerceOrderItem existingCommerceOrderItem =
@@ -257,6 +266,20 @@ public class CommerceOrderItemPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceOrderItem.isSubscription(),
 			newCommerceOrderItem.isSubscription());
+		Assert.assertEquals(
+			existingCommerceOrderItem.getDeliveryGroup(),
+			newCommerceOrderItem.getDeliveryGroup());
+		Assert.assertEquals(
+			existingCommerceOrderItem.getShippingAddressId(),
+			newCommerceOrderItem.getShippingAddressId());
+		Assert.assertEquals(
+			existingCommerceOrderItem.getPrintedNote(),
+			newCommerceOrderItem.getPrintedNote());
+		Assert.assertEquals(
+			Time.getShortTimestamp(
+				existingCommerceOrderItem.getRequestedDeliveryDate()),
+			Time.getShortTimestamp(
+				newCommerceOrderItem.getRequestedDeliveryDate()));
 	}
 
 	@Test
@@ -338,7 +361,9 @@ public class CommerceOrderItemPersistenceTest {
 			"name", true, "sku", true, "unitPrice", true, "discountAmount",
 			true, "finalPrice", true, "discountPercentageLevel1", true,
 			"discountPercentageLevel2", true, "discountPercentageLevel3", true,
-			"discountPercentageLevel4", true, "subscription", true);
+			"discountPercentageLevel4", true, "subscription", true,
+			"deliveryGroup", true, "shippingAddressId", true, "printedNote",
+			true, "requestedDeliveryDate", true);
 	}
 
 	@Test
@@ -641,6 +666,14 @@ public class CommerceOrderItemPersistenceTest {
 			new BigDecimal(RandomTestUtil.nextDouble()));
 
 		commerceOrderItem.setSubscription(RandomTestUtil.randomBoolean());
+
+		commerceOrderItem.setDeliveryGroup(RandomTestUtil.randomString());
+
+		commerceOrderItem.setShippingAddressId(RandomTestUtil.nextLong());
+
+		commerceOrderItem.setPrintedNote(RandomTestUtil.randomString());
+
+		commerceOrderItem.setRequestedDeliveryDate(RandomTestUtil.nextDate());
 
 		_commerceOrderItems.add(_persistence.update(commerceOrderItem));
 

@@ -347,6 +347,14 @@ public interface CommerceOrderItemLocalService
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrderItem updateCommerceOrderItemInfo(
+		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
+		String printedNote, int requestedDeliveryDateMonth,
+		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
+		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
+		ServiceContext serviceContext) throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(
 			long commerceOrderItemId, CommerceContext commerceContext)
 		throws PortalException;
