@@ -17,13 +17,18 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Alec Sloan
@@ -56,6 +61,19 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setExternalReferenceCode(externalReferenceCode);
 
 		commerceChannelPersistence.update(commerceChannel);
+
+		// Group
+
+		Map<Locale, String> nameMap = Collections.singletonMap(
+			serviceContext.getLocale(), name);
+
+		groupLocalService.addGroup(
+			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
+			CommerceChannel.class.getName(), commerceChannelId,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, null,
+			GroupConstants.TYPE_SITE_PRIVATE, false,
+			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
+			null);
 
 		return commerceChannel;
 	}
@@ -97,10 +115,30 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
+	public CommerceChannel fetchCommerceChannelByGroupId(long siteGroupId) {
+		return commerceChannelPersistence.fetchBySiteGroupId(siteGroupId);
+	}
+
+	@Override
 	public List<CommerceChannel> getCommerceChannels(long companyId) {
 		return commerceChannelPersistence.findByCompanyId(companyId);
 	}
 
+	@Override
+	public Group getCommerceChannelGroup(long commerceChannelId)
+		throws PortalException {
+
+		CommerceChannel commerceChannel =
+			commerceChannelLocalService.getCommerceChannel(commerceChannelId);
+
+		long classNameId = classNameLocalService.getClassNameId(
+			CommerceChannel.class.getName());
+
+		return groupPersistence.findByC_C_C(
+			commerceChannel.getCompanyId(), classNameId, commerceChannelId);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String type,
