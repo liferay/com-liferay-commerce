@@ -78,6 +78,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	 */
 	public static final String TABLE_NAME = "CommerceCatalog";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commerceCatalogId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -85,11 +86,13 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
-			{ "catalogDefaultLanguageId", Types.VARCHAR }
+			{ "catalogDefaultLanguageId", Types.VARCHAR },
+			{ "system", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCatalogId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -98,9 +101,10 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("catalogDefaultLanguageId", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("system", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceCatalog (commerceCatalogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,catalogDefaultLanguageId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceCatalog (externalReferenceCode VARCHAR(75) null,commerceCatalogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,catalogDefaultLanguageId VARCHAR(75) null,system BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceCatalog";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceCatalog.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceCatalog.createDate DESC";
@@ -117,7 +121,9 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CommerceCatalog"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 2L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
+	public static final long SYSTEM_COLUMN_BITMASK = 4L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -132,6 +138,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 		CommerceCatalog model = new CommerceCatalogImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceCatalogId(soapModel.getCommerceCatalogId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -140,6 +147,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setCatalogDefaultLanguageId(soapModel.getCatalogDefaultLanguageId());
+		model.setSystem(soapModel.isSystem());
 
 		return model;
 	}
@@ -205,6 +213,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceCatalogId", getCommerceCatalogId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -213,6 +222,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("catalogDefaultLanguageId", getCatalogDefaultLanguageId());
+		attributes.put("system", isSystem());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -222,6 +232,13 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceCatalogId = (Long)attributes.get("commerceCatalogId");
 
 		if (commerceCatalogId != null) {
@@ -270,6 +287,38 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		if (catalogDefaultLanguageId != null) {
 			setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 		}
+
+		Boolean system = (Boolean)attributes.get("system");
+
+		if (system != null) {
+			setSystem(system);
+		}
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -494,6 +543,35 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		_catalogDefaultLanguageId = catalogDefaultLanguageId;
 	}
 
+	@JSON
+	@Override
+	public boolean getSystem() {
+		return _system;
+	}
+
+	@JSON
+	@Override
+	public boolean isSystem() {
+		return _system;
+	}
+
+	@Override
+	public void setSystem(boolean system) {
+		_columnBitmask |= SYSTEM_COLUMN_BITMASK;
+
+		if (!_setOriginalSystem) {
+			_setOriginalSystem = true;
+
+			_originalSystem = _system;
+		}
+
+		_system = system;
+	}
+
+	public boolean getOriginalSystem() {
+		return _originalSystem;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -586,6 +664,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	public Object clone() {
 		CommerceCatalogImpl commerceCatalogImpl = new CommerceCatalogImpl();
 
+		commerceCatalogImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceCatalogImpl.setCommerceCatalogId(getCommerceCatalogId());
 		commerceCatalogImpl.setCompanyId(getCompanyId());
 		commerceCatalogImpl.setUserId(getUserId());
@@ -594,6 +673,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		commerceCatalogImpl.setModifiedDate(getModifiedDate());
 		commerceCatalogImpl.setName(getName());
 		commerceCatalogImpl.setCatalogDefaultLanguageId(getCatalogDefaultLanguageId());
+		commerceCatalogImpl.setSystem(isSystem());
 
 		commerceCatalogImpl.resetOriginalValues();
 
@@ -657,11 +737,17 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	public void resetOriginalValues() {
 		CommerceCatalogModelImpl commerceCatalogModelImpl = this;
 
+		commerceCatalogModelImpl._originalExternalReferenceCode = commerceCatalogModelImpl._externalReferenceCode;
+
 		commerceCatalogModelImpl._originalCompanyId = commerceCatalogModelImpl._companyId;
 
 		commerceCatalogModelImpl._setOriginalCompanyId = false;
 
 		commerceCatalogModelImpl._setModifiedDate = false;
+
+		commerceCatalogModelImpl._originalSystem = commerceCatalogModelImpl._system;
+
+		commerceCatalogModelImpl._setOriginalSystem = false;
 
 		commerceCatalogModelImpl._columnBitmask = 0;
 	}
@@ -669,6 +755,15 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	@Override
 	public CacheModel<CommerceCatalog> toCacheModel() {
 		CommerceCatalogCacheModel commerceCatalogCacheModel = new CommerceCatalogCacheModel();
+
+		commerceCatalogCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commerceCatalogCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commerceCatalogCacheModel.externalReferenceCode = null;
+		}
 
 		commerceCatalogCacheModel.commerceCatalogId = getCommerceCatalogId();
 
@@ -719,14 +814,18 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 			commerceCatalogCacheModel.catalogDefaultLanguageId = null;
 		}
 
+		commerceCatalogCacheModel.system = isSystem();
+
 		return commerceCatalogCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
-		sb.append("{commerceCatalogId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
+		sb.append(", commerceCatalogId=");
 		sb.append(getCommerceCatalogId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -742,6 +841,8 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		sb.append(getName());
 		sb.append(", catalogDefaultLanguageId=");
 		sb.append(getCatalogDefaultLanguageId());
+		sb.append(", system=");
+		sb.append(isSystem());
 		sb.append("}");
 
 		return sb.toString();
@@ -749,12 +850,16 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CommerceCatalog");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceCatalogId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceCatalogId());
@@ -787,6 +892,10 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 			"<column><column-name>catalogDefaultLanguageId</column-name><column-value><![CDATA[");
 		sb.append(getCatalogDefaultLanguageId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>system</column-name><column-value><![CDATA[");
+		sb.append(isSystem());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -797,6 +906,8 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CommerceCatalog.class, ModelWrapper.class
 		};
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceCatalogId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -809,6 +920,9 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	private String _name;
 	private String _nameCurrentLanguageId;
 	private String _catalogDefaultLanguageId;
+	private boolean _system;
+	private boolean _originalSystem;
+	private boolean _setOriginalSystem;
 	private long _columnBitmask;
 	private CommerceCatalog _escapedModel;
 }

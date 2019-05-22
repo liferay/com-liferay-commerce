@@ -122,5 +122,20 @@ public class CommerceChannelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CommerceChannelSoap[] getCommerceChannels(
+		long companyId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceChannel> returnValue =
+				CommerceChannelServiceUtil.getCommerceChannels(companyId);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceChannelServiceSoap.class);
 }

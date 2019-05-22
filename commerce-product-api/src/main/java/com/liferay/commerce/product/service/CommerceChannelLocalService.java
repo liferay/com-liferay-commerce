@@ -74,9 +74,8 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceChannel addCommerceChannel(CommerceChannel commerceChannel);
 
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceChannel addCommerceChannel(String name, String filterType,
-		String type, UnicodeProperties typeSettingsProperties,
+	public CommerceChannel addCommerceChannel(String name, String type,
+		UnicodeProperties typeSettingsProperties, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
 	/**
@@ -95,6 +94,7 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	* @return the commerce channel that was removed
 	*/
 	@Indexable(type = IndexableType.DELETE)
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceChannel deleteCommerceChannel(
 		CommerceChannel commerceChannel);
 
@@ -105,10 +105,11 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	* @return the commerce channel that was removed
 	* @throws PortalException if a commerce channel with the primary key could not be found
 	*/
-	@Indexable(type = IndexableType.REINDEX)
-	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
+	@Indexable(type = IndexableType.DELETE)
 	public CommerceChannel deleteCommerceChannel(long commerceChannelId)
 		throws PortalException;
+
+	public void deleteCommerceChannels(long companyId);
 
 	/**
 	* @throws PortalException
@@ -185,6 +186,17 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceChannel fetchCommerceChannel(long commerceChannelId);
 
+	/**
+	* Returns the commerce channel with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce channel's external reference code
+	* @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceChannel fetchCommerceChannelByReferenceCode(long companyId,
+		String externalReferenceCode);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -212,6 +224,9 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceChannel> getCommerceChannels(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannel> getCommerceChannels(long companyId);
 
 	/**
 	* Returns the number of commerce channels.
@@ -246,9 +261,7 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	public CommerceChannel updateCommerceChannel(
 		CommerceChannel commerceChannel);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String filterType, String type,
-		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+		String name, String type, UnicodeProperties typeSettingsProperties)
 		throws PortalException;
 }

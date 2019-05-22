@@ -65,9 +65,11 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
-		sb.append("{commerceCatalogId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceCatalogId=");
 		sb.append(commerceCatalogId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -83,6 +85,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 		sb.append(name);
 		sb.append(", catalogDefaultLanguageId=");
 		sb.append(catalogDefaultLanguageId);
+		sb.append(", system=");
+		sb.append(system);
 		sb.append("}");
 
 		return sb.toString();
@@ -91,6 +95,13 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 	@Override
 	public CommerceCatalog toEntityModel() {
 		CommerceCatalogImpl commerceCatalogImpl = new CommerceCatalogImpl();
+
+		if (externalReferenceCode == null) {
+			commerceCatalogImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceCatalogImpl.setExternalReferenceCode(externalReferenceCode);
+		}
 
 		commerceCatalogImpl.setCommerceCatalogId(commerceCatalogId);
 		commerceCatalogImpl.setCompanyId(companyId);
@@ -131,6 +142,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 			commerceCatalogImpl.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 		}
 
+		commerceCatalogImpl.setSystem(system);
+
 		commerceCatalogImpl.resetOriginalValues();
 
 		return commerceCatalogImpl;
@@ -138,6 +151,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceCatalogId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
@@ -148,11 +163,20 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 		modifiedDate = objectInput.readLong();
 		name = objectInput.readUTF();
 		catalogDefaultLanguageId = objectInput.readUTF();
+
+		system = objectInput.readBoolean();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceCatalogId);
 
 		objectOutput.writeLong(companyId);
@@ -182,8 +206,11 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 		else {
 			objectOutput.writeUTF(catalogDefaultLanguageId);
 		}
+
+		objectOutput.writeBoolean(system);
 	}
 
+	public String externalReferenceCode;
 	public long commerceCatalogId;
 	public long companyId;
 	public long userId;
@@ -192,4 +219,5 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 	public long modifiedDate;
 	public String name;
 	public String catalogDefaultLanguageId;
+	public boolean system;
 }

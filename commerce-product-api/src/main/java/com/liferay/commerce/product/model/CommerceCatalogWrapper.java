@@ -58,6 +58,7 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceCatalogId", getCommerceCatalogId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -66,12 +67,20 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("catalogDefaultLanguageId", getCatalogDefaultLanguageId());
+		attributes.put("system", isSystem());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceCatalogId = (Long)attributes.get("commerceCatalogId");
 
 		if (commerceCatalogId != null) {
@@ -120,6 +129,12 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		if (catalogDefaultLanguageId != null) {
 			setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 		}
+
+		Boolean system = (Boolean)attributes.get("system");
+
+		if (system != null) {
+			setSystem(system);
+		}
 	}
 
 	@Override
@@ -145,6 +160,18 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public String getCatalogDefaultLanguageId() {
 		return _commerceCatalog.getCatalogDefaultLanguageId();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalog.getCommerceCatalogGroup();
+	}
+
+	@Override
+	public long getCommerceCatalogGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalog.getCommerceCatalogGroupId();
 	}
 
 	/**
@@ -185,6 +212,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceCatalog.getExpandoBridge();
+	}
+
+	/**
+	* Returns the external reference code of this commerce catalog.
+	*
+	* @return the external reference code of this commerce catalog
+	*/
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceCatalog.getExternalReferenceCode();
 	}
 
 	/**
@@ -289,6 +326,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	/**
+	* Returns the system of this commerce catalog.
+	*
+	* @return the system of this commerce catalog
+	*/
+	@Override
+	public boolean getSystem() {
+		return _commerceCatalog.getSystem();
+	}
+
+	/**
 	* Returns the user ID of this commerce catalog.
 	*
 	* @return the user ID of this commerce catalog
@@ -336,6 +383,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public boolean isNew() {
 		return _commerceCatalog.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce catalog is system.
+	*
+	* @return <code>true</code> if this commerce catalog is system; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSystem() {
+		return _commerceCatalog.isSystem();
 	}
 
 	@Override
@@ -415,6 +472,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceCatalog.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the external reference code of this commerce catalog.
+	*
+	* @param externalReferenceCode the external reference code of this commerce catalog
+	*/
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceCatalog.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
@@ -506,6 +573,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_commerceCatalog.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets whether this commerce catalog is system.
+	*
+	* @param system the system of this commerce catalog
+	*/
+	@Override
+	public void setSystem(boolean system) {
+		_commerceCatalog.setSystem(system);
 	}
 
 	/**

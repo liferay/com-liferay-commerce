@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
@@ -54,6 +55,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -962,6 +964,1192 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceCatalog.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_S = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByC_S",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_S",
+			new String[] { Long.class.getName(), Boolean.class.getName() },
+			CommerceCatalogModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceCatalogModelImpl.SYSTEM_COLUMN_BITMASK |
+			CommerceCatalogModelImpl.CREATEDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+
+	/**
+	 * Returns all the commerce catalogs where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @return the matching commerce catalogs
+	 */
+	@Override
+	public List<CommerceCatalog> findByC_S(long companyId, boolean system) {
+		return findByC_S(companyId, system, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param start the lower bound of the range of commerce catalogs
+	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
+	 * @return the range of matching commerce catalogs
+	 */
+	@Override
+	public List<CommerceCatalog> findByC_S(long companyId, boolean system,
+		int start, int end) {
+		return findByC_S(companyId, system, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param start the lower bound of the range of commerce catalogs
+	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce catalogs
+	 */
+	@Override
+	public List<CommerceCatalog> findByC_S(long companyId, boolean system,
+		int start, int end, OrderByComparator<CommerceCatalog> orderByComparator) {
+		return findByC_S(companyId, system, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param start the lower bound of the range of commerce catalogs
+	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce catalogs
+	 */
+	@Override
+	public List<CommerceCatalog> findByC_S(long companyId, boolean system,
+		int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S;
+			finderArgs = new Object[] { companyId, system };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_S;
+			finderArgs = new Object[] {
+					companyId, system,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceCatalog> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceCatalog>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceCatalog commerceCatalog : list) {
+					if ((companyId != commerceCatalog.getCompanyId()) ||
+							(system != commerceCatalog.isSystem())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_COMMERCECATALOG_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceCatalogModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(system);
+
+				if (!pagination) {
+					list = (List<CommerceCatalog>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceCatalog>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce catalog
+	 * @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog findByC_S_First(long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws NoSuchCatalogException {
+		CommerceCatalog commerceCatalog = fetchByC_S_First(companyId, system,
+				orderByComparator);
+
+		if (commerceCatalog != null) {
+			return commerceCatalog;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", system=");
+		msg.append(system);
+
+		msg.append("}");
+
+		throw new NoSuchCatalogException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog fetchByC_S_First(long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+		List<CommerceCatalog> list = findByC_S(companyId, system, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce catalog
+	 * @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog findByC_S_Last(long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws NoSuchCatalogException {
+		CommerceCatalog commerceCatalog = fetchByC_S_Last(companyId, system,
+				orderByComparator);
+
+		if (commerceCatalog != null) {
+			return commerceCatalog;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", system=");
+		msg.append(system);
+
+		msg.append("}");
+
+		throw new NoSuchCatalogException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog fetchByC_S_Last(long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+		int count = countByC_S(companyId, system);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceCatalog> list = findByC_S(companyId, system, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce catalogs before and after the current commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	 *
+	 * @param commerceCatalogId the primary key of the current commerce catalog
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce catalog
+	 * @throws NoSuchCatalogException if a commerce catalog with the primary key could not be found
+	 */
+	@Override
+	public CommerceCatalog[] findByC_S_PrevAndNext(long commerceCatalogId,
+		long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws NoSuchCatalogException {
+		CommerceCatalog commerceCatalog = findByPrimaryKey(commerceCatalogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceCatalog[] array = new CommerceCatalogImpl[3];
+
+			array[0] = getByC_S_PrevAndNext(session, commerceCatalog,
+					companyId, system, orderByComparator, true);
+
+			array[1] = commerceCatalog;
+
+			array[2] = getByC_S_PrevAndNext(session, commerceCatalog,
+					companyId, system, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceCatalog getByC_S_PrevAndNext(Session session,
+		CommerceCatalog commerceCatalog, long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_COMMERCECATALOG_WHERE);
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceCatalogModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(system);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceCatalog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceCatalog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @return the matching commerce catalogs that the user has permission to view
+	 */
+	@Override
+	public List<CommerceCatalog> filterFindByC_S(long companyId, boolean system) {
+		return filterFindByC_S(companyId, system, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param start the lower bound of the range of commerce catalogs
+	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
+	 * @return the range of matching commerce catalogs that the user has permission to view
+	 */
+	@Override
+	public List<CommerceCatalog> filterFindByC_S(long companyId,
+		boolean system, int start, int end) {
+		return filterFindByC_S(companyId, system, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce catalogs that the user has permissions to view where companyId = &#63; and system = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param start the lower bound of the range of commerce catalogs
+	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce catalogs that the user has permission to view
+	 */
+	@Override
+	public List<CommerceCatalog> filterFindByC_S(long companyId,
+		boolean system, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_S(companyId, system, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceCatalogModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceCatalogModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceCatalog.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CommerceCatalogImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CommerceCatalogImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(system);
+
+			return (List<CommerceCatalog>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the commerce catalogs before and after the current commerce catalog in the ordered set of commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	 *
+	 * @param commerceCatalogId the primary key of the current commerce catalog
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce catalog
+	 * @throws NoSuchCatalogException if a commerce catalog with the primary key could not be found
+	 */
+	@Override
+	public CommerceCatalog[] filterFindByC_S_PrevAndNext(
+		long commerceCatalogId, long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws NoSuchCatalogException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_S_PrevAndNext(commerceCatalogId, companyId, system,
+				orderByComparator);
+		}
+
+		CommerceCatalog commerceCatalog = findByPrimaryKey(commerceCatalogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceCatalog[] array = new CommerceCatalogImpl[3];
+
+			array[0] = filterGetByC_S_PrevAndNext(session, commerceCatalog,
+					companyId, system, orderByComparator, true);
+
+			array[1] = commerceCatalog;
+
+			array[2] = filterGetByC_S_PrevAndNext(session, commerceCatalog,
+					companyId, system, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceCatalog filterGetByC_S_PrevAndNext(Session session,
+		CommerceCatalog commerceCatalog, long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECATALOG_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceCatalogModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceCatalogModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceCatalog.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CommerceCatalogImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CommerceCatalogImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(system);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceCatalog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceCatalog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce catalogs where companyId = &#63; and system = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 */
+	@Override
+	public void removeByC_S(long companyId, boolean system) {
+		for (CommerceCatalog commerceCatalog : findByC_S(companyId, system,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(commerceCatalog);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce catalogs where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @return the number of matching commerce catalogs
+	 */
+	@Override
+	public int countByC_S(long companyId, boolean system) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_S;
+
+		Object[] finderArgs = new Object[] { companyId, system };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCECATALOG_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(system);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param system the system
+	 * @return the number of matching commerce catalogs that the user has permission to view
+	 */
+	@Override
+	public int filterCountByC_S(long companyId, boolean system) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByC_S(companyId, system);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCECATALOG_WHERE);
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_SYSTEM_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceCatalog.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(system);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "commerceCatalog.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_SYSTEM_2 = "commerceCatalog.system = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED,
+			CommerceCatalogImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CommerceCatalogModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceCatalogModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_ERC = new FinderPath(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceCatalogModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCatalogException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce catalog
+	 * @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog findByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchCatalogException {
+		CommerceCatalog commerceCatalog = fetchByC_ERC(companyId,
+				externalReferenceCode);
+
+		if (commerceCatalog == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCatalogException(msg.toString());
+		}
+
+		return commerceCatalog;
+	}
+
+	/**
+	 * Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return fetchByC_ERC(companyId, externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_ERC,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceCatalog) {
+			CommerceCatalog commerceCatalog = (CommerceCatalog)result;
+
+			if ((companyId != commerceCatalog.getCompanyId()) ||
+					!Objects.equals(externalReferenceCode,
+						commerceCatalog.getExternalReferenceCode())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCECATALOG_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CommerceCatalog> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"CommerceCatalogPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CommerceCatalog commerceCatalog = list.get(0);
+
+					result = commerceCatalog;
+
+					cacheResult(commerceCatalog);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceCatalog)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce catalog that was removed
+	 */
+	@Override
+	public CommerceCatalog removeByC_ERC(long companyId,
+		String externalReferenceCode) throws NoSuchCatalogException {
+		CommerceCatalog commerceCatalog = findByC_ERC(companyId,
+				externalReferenceCode);
+
+		return remove(commerceCatalog);
+	}
+
+	/**
+	 * Returns the number of commerce catalogs where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce catalogs
+	 */
+	@Override
+	public int countByC_ERC(long companyId, String externalReferenceCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_ERC;
+
+		Object[] finderArgs = new Object[] { companyId, externalReferenceCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCECATALOG_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode == null) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1);
+			}
+			else if (externalReferenceCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 = "commerceCatalog.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_1 = "commerceCatalog.externalReferenceCode IS NULL";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 = "commerceCatalog.externalReferenceCode = ?";
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 = "(commerceCatalog.externalReferenceCode IS NULL OR commerceCatalog.externalReferenceCode = '')";
 
 	public CommerceCatalogPersistenceImpl() {
 		setModelClass(CommerceCatalog.class);
@@ -977,6 +2165,12 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey(),
 			commerceCatalog);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
+			new Object[] {
+				commerceCatalog.getCompanyId(),
+				commerceCatalog.getExternalReferenceCode()
+			}, commerceCatalog);
 
 		commerceCatalog.resetOriginalValues();
 	}
@@ -1031,6 +2225,8 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((CommerceCatalogModelImpl)commerceCatalog, true);
 	}
 
 	@Override
@@ -1041,6 +2237,46 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
 			entityCache.removeResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey());
+
+			clearUniqueFindersCache((CommerceCatalogModelImpl)commerceCatalog,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceCatalogModelImpl commerceCatalogModelImpl) {
+		Object[] args = new Object[] {
+				commerceCatalogModelImpl.getCompanyId(),
+				commerceCatalogModelImpl.getExternalReferenceCode()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_ERC, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC, args,
+			commerceCatalogModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceCatalogModelImpl commerceCatalogModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					commerceCatalogModelImpl.getCompanyId(),
+					commerceCatalogModelImpl.getExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
+		}
+
+		if ((commerceCatalogModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_ERC.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceCatalogModelImpl.getOriginalCompanyId(),
+					commerceCatalogModelImpl.getOriginalExternalReferenceCode()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ERC, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_ERC, args);
 		}
 	}
 
@@ -1224,6 +2460,15 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 				args);
 
+			args = new Object[] {
+					commerceCatalogModelImpl.getCompanyId(),
+					commerceCatalogModelImpl.isSystem()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -1246,11 +2491,35 @@ public class CommerceCatalogPersistenceImpl extends BasePersistenceImpl<Commerce
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
+
+			if ((commerceCatalogModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceCatalogModelImpl.getOriginalCompanyId(),
+						commerceCatalogModelImpl.getOriginalSystem()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S,
+					args);
+
+				args = new Object[] {
+						commerceCatalogModelImpl.getCompanyId(),
+						commerceCatalogModelImpl.isSystem()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_S,
+					args);
+			}
 		}
 
 		entityCache.putResult(CommerceCatalogModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCatalogImpl.class, commerceCatalog.getPrimaryKey(),
 			commerceCatalog, false);
+
+		clearUniqueFindersCache(commerceCatalogModelImpl, false);
+		cacheUniqueFindersCache(commerceCatalogModelImpl);
 
 		commerceCatalog.resetOriginalValues();
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -55,6 +56,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -122,6 +124,8 @@ public class CommerceChannelPersistenceTest {
 
 		CommerceChannel newCommerceChannel = _persistence.create(pk);
 
+		newCommerceChannel.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommerceChannel.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceChannel.setUserId(RandomTestUtil.nextLong());
@@ -134,8 +138,6 @@ public class CommerceChannelPersistenceTest {
 
 		newCommerceChannel.setName(RandomTestUtil.randomString());
 
-		newCommerceChannel.setFilterType(RandomTestUtil.randomString());
-
 		newCommerceChannel.setType(RandomTestUtil.randomString());
 
 		newCommerceChannel.setTypeSettings(RandomTestUtil.randomString());
@@ -144,6 +146,8 @@ public class CommerceChannelPersistenceTest {
 
 		CommerceChannel existingCommerceChannel = _persistence.findByPrimaryKey(newCommerceChannel.getPrimaryKey());
 
+		Assert.assertEquals(existingCommerceChannel.getExternalReferenceCode(),
+			newCommerceChannel.getExternalReferenceCode());
 		Assert.assertEquals(existingCommerceChannel.getCommerceChannelId(),
 			newCommerceChannel.getCommerceChannelId());
 		Assert.assertEquals(existingCommerceChannel.getCompanyId(),
@@ -160,12 +164,26 @@ public class CommerceChannelPersistenceTest {
 			Time.getShortTimestamp(newCommerceChannel.getModifiedDate()));
 		Assert.assertEquals(existingCommerceChannel.getName(),
 			newCommerceChannel.getName());
-		Assert.assertEquals(existingCommerceChannel.getFilterType(),
-			newCommerceChannel.getFilterType());
 		Assert.assertEquals(existingCommerceChannel.getType(),
 			newCommerceChannel.getType());
 		Assert.assertEquals(existingCommerceChannel.getTypeSettings(),
 			newCommerceChannel.getTypeSettings());
+	}
+
+	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
 	}
 
 	@Test
@@ -192,9 +210,10 @@ public class CommerceChannelPersistenceTest {
 
 	protected OrderByComparator<CommerceChannel> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceChannel",
-			"commerceChannelId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true, "name",
-			true, "filterType", true, "type", true, "typeSettings", true);
+			"externalReferenceCode", true, "commerceChannelId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true, "type", true,
+			"typeSettings", true);
 	}
 
 	@Test
@@ -391,10 +410,29 @@ public class CommerceChannelPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceChannel newCommerceChannel = addCommerceChannel();
+
+		_persistence.clearCache();
+
+		CommerceChannel existingCommerceChannel = _persistence.findByPrimaryKey(newCommerceChannel.getPrimaryKey());
+
+		Assert.assertEquals(Long.valueOf(existingCommerceChannel.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceChannel,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceChannel.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommerceChannel,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+	}
+
 	protected CommerceChannel addCommerceChannel() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceChannel commerceChannel = _persistence.create(pk);
+
+		commerceChannel.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceChannel.setCompanyId(RandomTestUtil.nextLong());
 
@@ -407,8 +445,6 @@ public class CommerceChannelPersistenceTest {
 		commerceChannel.setModifiedDate(RandomTestUtil.nextDate());
 
 		commerceChannel.setName(RandomTestUtil.randomString());
-
-		commerceChannel.setFilterType(RandomTestUtil.randomString());
 
 		commerceChannel.setType(RandomTestUtil.randomString());
 

@@ -48,12 +48,13 @@ public class CommerceChannelLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String filterType, String type,
+		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceChannelLocalService.addCommerceChannel(name,
-			filterType, type, typeSettingsProperties, serviceContext);
+		return _commerceChannelLocalService.addCommerceChannel(name, type,
+			typeSettingsProperties, externalReferenceCode, serviceContext);
 	}
 
 	/**
@@ -92,6 +93,11 @@ public class CommerceChannelLocalServiceWrapper
 		long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelLocalService.deleteCommerceChannel(commerceChannelId);
+	}
+
+	@Override
+	public void deleteCommerceChannels(long companyId) {
+		_commerceChannelLocalService.deleteCommerceChannels(companyId);
 	}
 
 	/**
@@ -196,6 +202,20 @@ public class CommerceChannelLocalServiceWrapper
 		return _commerceChannelLocalService.fetchCommerceChannel(commerceChannelId);
 	}
 
+	/**
+	* Returns the commerce channel with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce channel's external reference code
+	* @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
+	*/
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceChannelLocalService.fetchCommerceChannelByReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _commerceChannelLocalService.getActionableDynamicQuery();
@@ -230,6 +250,12 @@ public class CommerceChannelLocalServiceWrapper
 	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
 		int start, int end) {
 		return _commerceChannelLocalService.getCommerceChannels(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		long companyId) {
+		return _commerceChannelLocalService.getCommerceChannels(companyId);
 	}
 
 	/**
@@ -278,12 +304,11 @@ public class CommerceChannelLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long commerceChannelId, String name, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelLocalService.updateCommerceChannel(commerceChannelId,
-			name, filterType, type, typeSettingsProperties, serviceContext);
+			name, type, typeSettingsProperties);
 	}
 
 	@Override

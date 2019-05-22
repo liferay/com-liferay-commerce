@@ -71,7 +71,7 @@ import java.util.Map;
 public class CommerceCatalogServiceSoap {
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap addCommerceCatalog(
 		String[] nameMapLanguageIds, String[] nameMapValues,
-		String catalogDefaultLanguageId,
+		String catalogDefaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -79,7 +79,8 @@ public class CommerceCatalogServiceSoap {
 					nameMapValues);
 
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.addCommerceCatalog(nameMap,
-					catalogDefaultLanguageId, serviceContext);
+					catalogDefaultLanguageId, externalReferenceCode,
+					serviceContext);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}
@@ -124,6 +125,21 @@ public class CommerceCatalogServiceSoap {
 			com.liferay.portal.kernel.model.Group returnValue = CommerceCatalogServiceUtil.getCommerceCatalogGroup(commerceCatalogId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] getCommerceCatalogs(
+		long companyId, boolean system) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
+				CommerceCatalogServiceUtil.getCommerceCatalogs(companyId, system);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -180,16 +196,15 @@ public class CommerceCatalogServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap updateCommerceCatalog(
-		long commerceCatalogId, String catalogDefaultLanguageId,
-		String[] nameMapLanguageIds, String[] nameMapValues,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long commerceCatalogId, String[] nameMapLanguageIds,
+		String[] nameMapValues, String catalogDefaultLanguageId)
 		throws RemoteException {
 		try {
 			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
 					nameMapValues);
 
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.updateCommerceCatalog(commerceCatalogId,
-					catalogDefaultLanguageId, nameMap, serviceContext);
+					nameMap, catalogDefaultLanguageId);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}
