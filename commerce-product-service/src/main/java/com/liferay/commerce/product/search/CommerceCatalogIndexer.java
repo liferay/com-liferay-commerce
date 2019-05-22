@@ -56,6 +56,13 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 	public static final String FIELD_CATALOG_GROUP_ID =
 		"commerceCatalogGroupId";
 
+	public CommerceCatalogIndexer() {
+		setDefaultSelectedFieldNames(
+			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID);
+		setFilterSearch(true);
+		setPermissionAware(true);
+	}
+
 	@Override
 	public String getClassName() {
 		return CLASS_NAME;

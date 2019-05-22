@@ -14,12 +14,17 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +41,9 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.ADD_COMMERCE_CATALOG);
+
 		return commerceCatalogLocalService.addCommerceCatalog(
 			nameMap, catalogDefaultLanguageId, serviceContext);
 	}
@@ -44,17 +52,29 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException {
 
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalogId, ActionKeys.DELETE);
+
 		return commerceCatalogLocalService.deleteCommerceCatalog(
 			commerceCatalogId);
 	}
 
-	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId) {
+	@Override
+	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId)
+		throws PortalException {
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalogId, ActionKeys.VIEW);
+
 		return commerceCatalogLocalService.fetchCommerceCatalog(
 			commerceCatalogId);
 	}
 
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException {
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalogId, ActionKeys.VIEW);
 
 		return commerceCatalogLocalService.getCommerceCatalogGroup(
 			commerceCatalogId);
@@ -71,6 +91,9 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	public List<CommerceCatalog> searchCommerceCatalogs(
 			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
 
 		return commerceCatalogLocalService.searchCommerceCatalogs(
 			companyId, keywords, start, end, sort);
@@ -90,9 +113,19 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			Map<Locale, String> nameMap, ServiceContext serviceContext)
 		throws PortalException {
 
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalogId, ActionKeys.UPDATE);
+
 		return commerceCatalogLocalService.updateCommerceCatalog(
 			commerceCatalogId, catalogDefaultLanguageId, nameMap,
 			serviceContext);
 	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceCatalogServiceImpl.class,
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 
 }

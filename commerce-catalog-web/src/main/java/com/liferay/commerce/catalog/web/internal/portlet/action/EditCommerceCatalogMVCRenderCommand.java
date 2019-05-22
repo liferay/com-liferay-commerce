@@ -17,10 +17,12 @@ package com.liferay.commerce.catalog.web.internal.portlet.action;
 import com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
@@ -59,7 +61,8 @@ public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 
 			CommerceCatalogDisplayContext commerceCatalogDisplayContext =
 				new CommerceCatalogDisplayContext(
-					httpServletRequest, _commerceCatalogService, _itemSelector,
+					httpServletRequest, _commerceCatalogService,
+					_commerceCatalogModelResourcePermission, _itemSelector,
 					_portal, _portletResourcePermission);
 
 			renderRequest.setAttribute(
@@ -76,6 +79,12 @@ public class EditCommerceCatalogMVCRenderCommand implements MVCRenderCommand {
 
 		return "/details.jsp";
 	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
