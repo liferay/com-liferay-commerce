@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -24,7 +25,9 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -47,6 +50,8 @@ public class CommerceCatalogDisplayContext
 	public CommerceCatalogDisplayContext(
 			HttpServletRequest httpServletRequest,
 			CommerceCatalogService commerceCatalogService,
+			ModelResourcePermission<CommerceCatalog>
+				commerceCatalogModelResourcePermission,
 			ItemSelector itemSelector, Portal portal,
 			PortletResourcePermission portletResourcePermission)
 		throws PortalException {
@@ -56,6 +61,8 @@ public class CommerceCatalogDisplayContext
 		setDefaultOrderByType("desc");
 
 		_commerceCatalogService = commerceCatalogService;
+		_commerceCatalogModelResourcePermission =
+			commerceCatalogModelResourcePermission;
 		_itemSelector = itemSelector;
 		_portal = portal;
 		_portletResourcePermission = portletResourcePermission;
@@ -87,6 +94,10 @@ public class CommerceCatalogDisplayContext
 	public CommerceCatalog getCommerceCatalog() throws PortalException {
 		long commerceCatalogId = ParamUtil.getLong(
 			httpServletRequest, "commerceCatalogId");
+
+		if (commerceCatalogId == 0) {
+			return null;
+		}
 
 		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
 	}
@@ -152,6 +163,29 @@ public class CommerceCatalogDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasAddCatalogPermission() {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
+			CPActionKeys.ADD_COMMERCE_CATALOG);
+	}
+
+	public boolean hasPermission(long commerceCatalogId, String actionId)
+		throws PortalException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return _commerceCatalogModelResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), commerceCatalogId, actionId);
+	}
+
+	private final ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 	private final CommerceCatalogService _commerceCatalogService;
 	private final ItemSelector _itemSelector;
 	private final Portal _portal;

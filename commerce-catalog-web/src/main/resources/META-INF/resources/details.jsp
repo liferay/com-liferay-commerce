@@ -21,15 +21,11 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 
 CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog();
 
-String title = LanguageUtil.get(request, "add-catalog");
+boolean isViewOnly = false;
 
 if (commerceCatalog != null) {
-	title = commerceCatalog.getName(locale);
+	isViewOnly = !commerceCatalogDisplayContext.hasPermission(commerceCatalog.getCommerceCatalogId(), ActionKeys.UPDATE);
 }
-
-Map<String, Object> data = new HashMap<>();
-
-data.put("direction-right", StringPool.TRUE);
 %>
 
 <portlet:actionURL name="editCommerceCatalog" var="editCommerceCatalogActionURL" />
@@ -42,9 +38,9 @@ data.put("direction-right", StringPool.TRUE);
 	<div class="lfr-form-content">
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input bean="<%= commerceCatalog %>" model="<%= CommerceCatalog.class %>" name="name" required="<%= true %>" />
+				<aui:input bean="<%= commerceCatalog %>" disabled="<%= isViewOnly %>" model="<%= CommerceCatalog.class %>" name="name" required="<%= true %>" />
 
-				<aui:select helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="<%= true %>" title="language">
+				<aui:select disabled="<%= isViewOnly %>" helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="<%= true %>" title="language">
 
 					<%
 					String catalogDefaultLanguageId = themeDisplay.getLanguageId();
@@ -70,7 +66,9 @@ data.put("direction-right", StringPool.TRUE);
 	</div>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+		<c:if test="<%= !isViewOnly %>">
+			<aui:button cssClass="btn-lg" type="submit" />
+		</c:if>
 
 		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
 	</aui:button-row>

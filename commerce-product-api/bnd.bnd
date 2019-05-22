@@ -11,6 +11,7 @@ Export-Package:\
 	com.liferay.commerce.product.importer,\
 	com.liferay.commerce.product.links,\
 	com.liferay.commerce.product.model,\
+	com.liferay.commerce.product.permission,\
 	com.liferay.commerce.product.service,\
 	com.liferay.commerce.product.service.persistence,\
 	com.liferay.commerce.product.type,\
