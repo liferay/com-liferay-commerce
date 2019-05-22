@@ -19,6 +19,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPTaxCategoryService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -38,19 +39,19 @@ public class CPDefinitionTaxCategoryDisplayContext
 	extends CPDefinitionsDisplayContext {
 
 	public CPDefinitionTaxCategoryDisplayContext(
-			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			CPDefinitionHelper cpDefinitionHelper,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
-			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-			PortletResourcePermission portletResourcePermission,
-			CPTaxCategoryService cpTaxCategoryService)
-		throws PortalException {
+		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		CommerceCatalogService commerceCatalogService,
+		CPDefinitionHelper cpDefinitionHelper,
+		ModelResourcePermission<CPDefinition>
+			cpDefinitionModelResourcePermission,
+		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission,
+		CPTaxCategoryService cpTaxCategoryService) {
 
 		super(
-			actionHelper, httpServletRequest, cpDefinitionHelper,
-			cpDefinitionModelResourcePermission, cpDefinitionService,
-			itemSelector, portletResourcePermission);
+			actionHelper, httpServletRequest, commerceCatalogService,
+			cpDefinitionHelper, cpDefinitionModelResourcePermission,
+			cpDefinitionService, itemSelector, portletResourcePermission);
 
 		_cpTaxCategoryService = cpTaxCategoryService;
 	}

@@ -20,18 +20,21 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -72,32 +75,45 @@ import org.osgi.service.component.annotations.Reference;
 public class CPDefinitionsPortlet extends MVCPortlet {
 
 	@Override
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
+				new ProxyModeThreadLocalCloseable()) {
+
+			ProxyModeThreadLocal.setForceSync(true);
+
+			super.processAction(actionRequest, actionResponse);
+		}
+	}
+
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			renderRequest);
 
-			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
-				new CPDefinitionsDisplayContext(
-					_actionHelper, httpServletRequest, _cpDefinitionHelper,
-					_cpDefinitionModelResourcePermission, _cpDefinitionService,
-					_itemSelector, _portletResourcePermission);
+		CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
+			new CPDefinitionsDisplayContext(
+				_actionHelper, httpServletRequest, _commerceCatalogService,
+				_cpDefinitionHelper, _cpDefinitionModelResourcePermission,
+				_cpDefinitionService, _itemSelector,
+				_portletResourcePermission);
 
-			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(renderRequest, pe.getClass());
-		}
+		renderRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
 
 		super.render(renderRequest, renderResponse);
 	}
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
