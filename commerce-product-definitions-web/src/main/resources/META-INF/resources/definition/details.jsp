@@ -20,8 +20,8 @@
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CPDefinition cpDefinition = cpDefinitionsDisplayContext.getCPDefinition();
-
 long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
+List<CommerceCatalog> commerceCatalogs = cpDefinitionsDisplayContext.getCommerceCatalogs();
 
 String productTypeName = BeanParamUtil.getString(cpDefinition, request, "productTypeName");
 
@@ -69,6 +69,22 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 				<liferay-frontend:info-bar>
 					<aui:workflow-status id="<%= String.valueOf(cpDefinitionId) %>" markupView="lexicon" showHelpMessage="<%= false %>" showIcon="<%= false %>" showLabel="<%= false %>" status="<%= cpDefinition.getStatus() %>" />
 				</liferay-frontend:info-bar>
+			</c:if>
+
+			<c:if test="<%= commerceCatalogs.size() > 1 %>">
+				<aui:select disabled="<%= cpDefinition != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
+
+					<%
+					for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+					%>
+
+						<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (cpDefinition == null) ? false : cpDefinitionsDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogId() %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 			</c:if>
 
 			<aui:input autoFocus="<%= true %>" label="name" localized="<%= true %>" name="nameMapAsXML" type="text">
