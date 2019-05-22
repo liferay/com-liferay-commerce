@@ -1,0 +1,33 @@
+.table-summary {
+	margin-top: -25px;
+	
+	.panel-body {
+		line-height: 1.6;
+		padding: 12px 25px;
+	}
+
+	.component-title {
+		margin: 0;
+		font-weight: normal;
+	}
+
+	&__label {
+		font-size: 11px;
+		letter-spacing: 1.1px;
+		text-transform: uppercase;
+		display: inline-block;
+		vertical-align: baseline;
+	}
+
+	&__value {
+		font-size: 14px;
+		display: inline-block;
+		vertical-align: baseline;
+
+		&--lg {
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}
+
+}

@@ -81,7 +81,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		<div class="panel-body">
 			<div class="row">
 				<div class="col">
-					<div class="row">
+					<div class="row row-with-separators">
 						<div class="col-auto">
 							<div class="row">
 								<div class="col-auto">
@@ -113,7 +113,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						</div>
 						<div class="col">
 							<div class="header-panel__assignee">
-								<div class="input-label">Assigned to</div>
+								<aui:select name="assignedTo" showEmptyOption="<%= true %>" inlineField="<%= true %>" inlineLabel="assigned-to" />
 							</div>
 						</div>
 					</div>
@@ -282,7 +282,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	<div class="panel-body">
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title table-summary__field-name">
+				<div class="component-title table-summary__label">
 					<liferay-ui:message key="subtotal" />
 				</div>
 			</div>
@@ -297,7 +297,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title table-summary__field-name">
+					<div class="component-title table-summary__label">
 						<liferay-ui:message key="subtotal-discount" />
 					</div>
 				</div>
@@ -314,7 +314,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title table-summary__field-name">
+				<div class="component-title table-summary__label">
 					<liferay-ui:message key="delivery" />
 				</div>
 			</div>
@@ -329,7 +329,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title table-summary__field-name">
+					<div class="component-title table-summary__label">
 						<liferay-ui:message key="delivery-discount" />
 					</div>
 				</div>
@@ -349,7 +349,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title table-summary__field-name">
+				<div class="component-title table-summary__label">
 					<liferay-ui:message key="tax" />
 				</div>
 			</div>
@@ -364,7 +364,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title table-summary__field-name">
+					<div class="component-title table-summary__label">
 						<liferay-ui:message key="delivery-discount" />
 					</div>
 				</div>
@@ -381,12 +381,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title table-summary__field-name">
+				<div class="component-title table-summary__label">
 					<liferay-ui:message key="total" />
 				</div>
 			</div>
 			<div class="col-2 text-right table-summary__value-container">
-				<div class="table-summary__value">
+				<div class="table-summary__value table-summary__value--lg">
 					<%= HtmlUtil.escape(totalOrder.format(locale)) %>
 				</div>
 			</div>

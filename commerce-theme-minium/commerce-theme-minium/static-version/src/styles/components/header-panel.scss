@@ -1,11 +1,8 @@
 .header-panel {
-	position: sticky;
-    top: 150px;
-	z-index: 1;
 	font-size: 12px;
-	
+
 	.panel-body {
-		// line-height: 1.2;
+		line-height: 24px;
 	}
 
 	&__main-title {
@@ -45,6 +42,22 @@
 	}
 
 	&__assignee {
-		vertical-align: center;
+		display: flex;
+		align-items: center;
+		height: 100%;
+
+		.form-inline{
+			display: inline;
+
+			.control-label {
+				margin-top: 0;
+				width: auto;
+			}
+
+			.form-control {
+				display: inline-block;
+				min-width: auto;
+			}
+		}
 	}
 }
