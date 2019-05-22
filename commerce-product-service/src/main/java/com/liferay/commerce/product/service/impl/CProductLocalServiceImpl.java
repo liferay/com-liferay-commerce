@@ -24,8 +24,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 
-import java.util.Date;
-
 /**
  * @author Ethan Bustad
  * @author Alessio Antonio Rendina
@@ -34,26 +32,22 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 	@Override
 	public CProduct addCProduct(
-			String externalReferenceCode, ServiceContext serviceContext)
+			long groupId, long userId, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
+		User user = userLocalService.getUser(userId);
 
 		validate(serviceContext.getCompanyId(), externalReferenceCode);
 
 		CProduct cProduct = cProductLocalService.createCProduct(
 			counterLocalService.increment());
 
-		cProduct.setGroupId(serviceContext.getScopeGroupId());
+		cProduct.setGroupId(groupId);
 		cProduct.setCompanyId(user.getCompanyId());
 		cProduct.setUserId(user.getUserId());
 		cProduct.setUserName(user.getFullName());
 		cProduct.setUuid(serviceContext.getUuid());
-
-		Date now = new Date();
-
-		cProduct.setCreateDate(now);
-		cProduct.setModifiedDate(now);
 
 		cProduct.setExternalReferenceCode(externalReferenceCode);
 		cProduct.setLatestVersion(1);
@@ -64,10 +58,6 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 	@Override
 	public int increment(long cProductId) throws PortalException {
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
-
-		Date now = new Date();
-
-		cProduct.setModifiedDate(now);
 
 		cProduct.setLatestVersion(cProduct.getLatestVersion() + 1);
 
@@ -89,10 +79,6 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		if (originalPublishedCPDefinitionId == publishedCPDefinitionId) {
 			return cProduct;
 		}
-
-		Date now = new Date();
-
-		cProduct.setModifiedDate(now);
 
 		cProduct.setPublishedCPDefinitionId(publishedCPDefinitionId);
 
