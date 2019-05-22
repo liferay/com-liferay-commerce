@@ -16,24 +16,31 @@ package com.liferay.commerce.product.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
+
 /**
- * The extended model implementation for the CommerceCatalog service. Represents a row in the &quot;CommerceCatalog&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.product.model.CommerceCatalog} interface.
- * </p>
- *
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceCatalogImpl extends CommerceCatalogBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce catalog model instance should use the {@link com.liferay.commerce.product.model.CommerceCatalog} interface instead.
-	 */
 	public CommerceCatalogImpl() {
+	}
+
+	@Override
+	public Group getCommerceCatalogGroup() throws PortalException {
+		return CommerceCatalogLocalServiceUtil.getCommerceCatalogGroup(
+			getCommerceCatalogId());
+	}
+
+	@Override
+	public long getCommerceCatalogGroupId() throws PortalException {
+		Group group = CommerceCatalogLocalServiceUtil.getCommerceCatalogGroup(
+			getCommerceCatalogId());
+
+		return group.getGroupId();
 	}
 
 }
