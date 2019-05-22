@@ -31,9 +31,11 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOptionCategory;
+import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPContentContributor;
@@ -44,11 +46,14 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -148,8 +153,27 @@ public class CPContentHelperImpl implements CPContentHelper {
 	public CPCatalogEntry getCPCatalogEntry(
 		HttpServletRequest httpServletRequest) {
 
-		return (CPCatalogEntry)httpServletRequest.getAttribute(
-			CPWebKeys.CP_CATALOG_ENTRY);
+		CPCatalogEntry cpCatalogEntry =
+			(CPCatalogEntry)httpServletRequest.getAttribute(
+				CPWebKeys.CP_CATALOG_ENTRY);
+
+		if (cpCatalogEntry == null) {
+			long productId = ParamUtil.getLong(httpServletRequest, "productId");
+
+			try {
+				CProduct cProduct = _cProductLocalService.getCProduct(
+					productId);
+
+				cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
+					cProduct.getPublishedCPDefinitionId(),
+					_portal.getLocale(httpServletRequest));
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return cpCatalogEntry;
 	}
 
 	@Override
@@ -427,6 +451,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 			renderResponse);
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPContentHelperImpl.class);
+
 	@Reference
 	private CommerceCatalogDefaultImage _catalogCommerceMediaDefaultImage;
 
@@ -454,6 +481,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 	@Reference
 	private CPOptionCategoryLocalService _cpOptionCategoryLocalService;
+
+	@Reference
+	private CProductLocalService _cProductLocalService;
 
 	@Reference
 	private CPTypeServicesTracker _cpTypeServicesTracker;
