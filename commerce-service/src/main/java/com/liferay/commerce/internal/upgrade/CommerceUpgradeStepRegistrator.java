@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.upgrade;
 
+import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
 import com.liferay.commerce.internal.upgrade.v1_1_0.CommerceOrderItemUpgradeProcess;
@@ -27,8 +28,10 @@ import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceWarehouseItemUpgrade
 import com.liferay.commerce.internal.upgrade.v3_0_0.CommerceSubscriptionCycleEntryUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.EmailAddressLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -98,6 +101,13 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new com.liferay.commerce.internal.upgrade.v3_1_0.
 				CommerceOrderUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_3_1_0, _SCHEMA_VERSION_3_2_0,
+			new com.liferay.commerce.internal.upgrade.v3_2_0.
+				CommerceOrderUpgradeProcess(
+					_assetEntryLocalService, _classNameLocalService,
+					_counterLocalService));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -119,8 +129,16 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 	private static final String _SCHEMA_VERSION_3_1_0 = "3.1.0";
 
+	private static final String _SCHEMA_VERSION_3_2_0 = "3.2.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
+
+	@Reference
+	private AssetEntryLocalService _assetEntryLocalService;
+
+	@Reference
+	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;
@@ -128,6 +146,9 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	@Reference
 	private CommerceAccountOrganizationRelLocalService
 		_commerceAccountOrganizationRelLocalService;
+
+	@Reference
+	private CounterLocalService _counterLocalService;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;

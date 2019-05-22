@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.configuration.CommerceOrderConfiguration;
 import com.liferay.commerce.constants.CommerceDestinationNames;
@@ -72,6 +74,7 @@ import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.spring.extender.service.ServiceReference;
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 
 import java.io.Serializable;
 
@@ -257,6 +260,10 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setExpandoBridgeAttributes(serviceContext);
 
 		commerceOrderPersistence.update(commerceOrder);
+
+		// AssetEntry
+
+		updateAsset(commerceOrder);
 
 		// Workflow
 
@@ -839,6 +846,8 @@ public class CommerceOrderLocalServiceImpl
 		serviceContext.setUserId(userId);
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
+		updateAsset(commerceOrder);
+
 		return startWorkflowInstance(
 			serviceContext.getUserId(), commerceOrder, serviceContext);
 	}
@@ -859,6 +868,26 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setCommerceAccountId(commerceAccountId);
 
 		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Override
+	public void updateAsset(CommerceOrder commerceOrder) {
+		long commerceOrderClassNameId = classNameLocalService.getClassNameId(
+			CommerceOrder.class);
+
+		AssetEntry assetEntry = _assetEntryLocalService.fetchEntry(
+			commerceOrderClassNameId, commerceOrder.getCommerceOrderId());
+
+		if (assetEntry == null) {
+			assetEntry = new AssetEntryImpl();
+		}
+
+		assetEntry.setEntryId(counterLocalService.increment());
+		assetEntry.setClassNameId(commerceOrderClassNameId);
+		assetEntry.setClassName(CommerceOrder.class.getName());
+		assetEntry.setClassPK(commerceOrder.getCommerceOrderId());
+
+		_assetEntryLocalService.updateAssetEntry(assetEntry);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -1634,6 +1663,9 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTotalDiscountPercentageLevel4(
 			discountPercentageLevel4);
 	}
+
+	@ServiceReference(type = AssetEntryLocalService.class)
+	private AssetEntryLocalService _assetEntryLocalService;
 
 	@ServiceReference(type = CommerceCurrencyLocalService.class)
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;

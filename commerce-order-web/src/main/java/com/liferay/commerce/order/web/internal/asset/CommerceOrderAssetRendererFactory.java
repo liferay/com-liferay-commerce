@@ -18,6 +18,7 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetRenderer;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.asset.kernel.model.BaseAssetRendererFactory;
+import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -51,7 +52,7 @@ public class CommerceOrderAssetRendererFactory
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException {
 
-		return null;
+		return _assetEntryLocalService.fetchEntry(className, classPK);
 	}
 
 	@Override
@@ -74,6 +75,9 @@ public class CommerceOrderAssetRendererFactory
 	public String getType() {
 		return TYPE;
 	}
+
+	@Reference
+	private AssetEntryLocalService _assetEntryLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
