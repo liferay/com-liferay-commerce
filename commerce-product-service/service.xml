@@ -4,7 +4,7 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.product">
 	<author>Marco Leo</author>
 	<namespace>Commerce</namespace>
-	<entity local-service="true" name="CommerceCatalog" remote-service="true">
+	<entity external-reference-code="true" local-service="true" name="CommerceCatalog" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -22,6 +22,7 @@
 
 		<column localized="true" name="name" type="String" />
 		<column name="catalogDefaultLanguageId" type="String" />
+		<column name="system" type="boolean" />
 
 		<!-- Order -->
 
@@ -34,12 +35,17 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="system" />
+		</finder>
 
 		<!-- References -->
 
+		<reference entity="Company" package-path="com.liferay.portal" />
 		<reference entity="Group" package-path="com.liferay.portal" />
 	</entity>
-	<entity local-service="true" name="CommerceChannel" remote-service="true">
+	<entity external-reference-code="true" local-service="true" name="CommerceChannel" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -56,7 +62,6 @@
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
-		<column name="filterType" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
 
@@ -65,6 +70,53 @@
 		<order by="desc">
 			<order-column name="createDate" />
 		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+	</entity>
+	<entity local-service="true" name="CommerceChannelRel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceChannelRelId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="commerceChannelId" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CommerceChannelId" return-type="Collection">
+			<finder-column name="commerceChannelId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="C_C_C" return-type="CommerceChannelRel" unique="true">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="commerceChannelId" />
+		</finder>
 	</entity>
 	<entity external-reference-code="true" local-service="true" name="CPAttachmentFileEntry" remote-service="true" uuid="true">
 
@@ -246,6 +298,7 @@
 
 		<!-- References -->
 
+		<reference entity="Group" package-path="com.liferay.portal" />
 		<reference entity="WorkflowInstanceLink" package-path="com.liferay.portal" />
 		<reference entity="AssetCategory" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
@@ -1025,6 +1078,7 @@
 		</finder>
 	</entity>
 	<exceptions>
+		<exception>CommerceCatalogSystem</exception>
 		<exception>CPAttachmentFileEntryDisplayDate</exception>
 		<exception>CPAttachmentFileEntryExpirationDate</exception>
 		<exception>CPAttachmentFileEntryName</exception>
@@ -1049,6 +1103,8 @@
 		<exception>CPSpecificationOptionKey</exception>
 		<exception>CPSpecificationOptionTitle</exception>
 		<exception>CPTaxCategoryName</exception>
+		<exception>DuplicateCommerceChannelRel</exception>
+		<exception>DuplicateCPAttachmentFileEntry</exception>
 		<exception>DuplicateCPFriendlyURLEntry</exception>
 		<exception>DuplicateCProduct</exception>
 		<exception>NoSuchSkuContributorCPDefinitionOptionRel</exception>
