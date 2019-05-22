@@ -34,32 +34,36 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 	showWhenSingleIcon="<%= true %>"
 >
 	<liferay-ui:icon
-		message="view"
+		message='<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.UPDATE) ? "edit" : "view" %>'
 		url="<%= commerceCatalogDisplayContext.getCatalogURL(commerceCatalog) %>"
 	/>
 
-	<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.DELETE) %>">
+		<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		message="delete"
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			message="delete"
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 
-	<liferay-security:permissionsURL
-		modelResource="<%= CommerceCatalog.class.getName() %>"
-		modelResourceDescription="<%= commerceCatalog.getName(locale) %>"
-		resourcePrimKey="<%= String.valueOf(commerceCatalogId) %>"
-		var="permissionsCatalogURL"
-		windowState="<%= LiferayWindowState.POP_UP.toString() %>"
-	/>
+	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= CommerceCatalog.class.getName() %>"
+			modelResourceDescription="<%= commerceCatalog.getName(locale) %>"
+			resourcePrimKey="<%= String.valueOf(commerceCatalogId) %>"
+			var="permissionsCatalogURL"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+		/>
 
-	<liferay-ui:icon
-		message="permissions"
-		method="get"
-		url="<%= permissionsCatalogURL %>"
-		useDialog="<%= true %>"
-	/>
+		<liferay-ui:icon
+			message="permissions"
+			method="get"
+			url="<%= permissionsCatalogURL %>"
+			useDialog="<%= true %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
