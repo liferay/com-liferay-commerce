@@ -113,7 +113,7 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	* @return the commerce catalog that was removed
 	* @throws PortalException if a commerce catalog with the primary key could not be found
 	*/
-	@Indexable(type = IndexableType.REINDEX)
+	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException;
