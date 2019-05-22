@@ -39,14 +39,16 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:renderURL>
 
-			<liferay-frontend:add-menu
-				inline="<%= true %>"
-			>
-				<liferay-frontend:add-menu-item
-					title='<%= LanguageUtil.get(request, "add-catalog") %>'
-					url="<%= addCommerceCatalogURL.toString() %>"
-				/>
-			</liferay-frontend:add-menu>
+			<c:if test="<%= commerceCatalogDisplayContext.hasAddCatalogPermission() %>">
+				<liferay-frontend:add-menu
+					inline="<%= true %>"
+				>
+					<liferay-frontend:add-menu-item
+						title='<%= LanguageUtil.get(request, "add-catalog") %>'
+						url="<%= addCommerceCatalogURL.toString() %>"
+					/>
+				</liferay-frontend:add-menu>
+			</c:if>
 		</liferay-frontend:management-bar-buttons>
 
 		<liferay-frontend:management-bar-filters>
