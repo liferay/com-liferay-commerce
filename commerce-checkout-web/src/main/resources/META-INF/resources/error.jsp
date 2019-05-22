@@ -22,7 +22,7 @@ String orderDetailURL = (String)request.getAttribute(CommerceCheckoutWebKeys.COM
 
 <div class="commerce-checkout-confirmation">
 	<div class="success-message">
-		<liferay-ui:message key="your-order-has-been-already-placed" />
+		<liferay-ui:message key="your-order-has-already-been-placed" />
 	</div>
 
 	<aui:button-row>
