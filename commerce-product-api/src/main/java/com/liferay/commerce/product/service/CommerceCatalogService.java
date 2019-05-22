@@ -67,7 +67,8 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId);
+	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
