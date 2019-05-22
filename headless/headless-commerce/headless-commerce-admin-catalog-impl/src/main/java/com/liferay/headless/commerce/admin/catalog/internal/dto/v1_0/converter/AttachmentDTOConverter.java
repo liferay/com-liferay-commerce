@@ -86,28 +86,26 @@ public class AttachmentDTOConverter implements DTOConverter {
 			CPAttachmentFileEntry cpAttachmentFileEntry)
 		throws JSONException {
 
-		String cpAttachmentFileEntryJSON = cpAttachmentFileEntry.getJson();
+		String json = cpAttachmentFileEntry.getJson();
 
-		if (Validator.isNull(cpAttachmentFileEntryJSON)) {
+		if (Validator.isNull(json)) {
 			return Collections.emptyMap();
 		}
 
 		Map<String, String> options = new HashMap<>();
 
-		JSONArray jsonArray = _jsonFactory.createJSONArray(
-			cpAttachmentFileEntryJSON);
+		JSONArray jsonArray = _jsonFactory.createJSONArray(json);
 
-		jsonArray.forEach(
-			arrayElement -> {
-				JSONObject jsonObject = (JSONObject)arrayElement;
+		for (Object element : jsonArray) {
+			JSONObject jsonObject = (JSONObject)element;
 
-				if (!jsonObject.has("key")) {
-					return;
-				}
+			if (!jsonObject.has("key")) {
+				continue;
+			}
 
-				options.put(
-					jsonObject.getString("key"), jsonObject.getString("value"));
-			});
+			options.put(
+				jsonObject.getString("key"), jsonObject.getString("value"));
+		}
 
 		return options;
 	}
