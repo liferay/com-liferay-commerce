@@ -66,6 +66,21 @@ public interface CommerceChannelModel extends AuditedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the external reference code of this commerce channel.
+	 *
+	 * @return the external reference code of this commerce channel
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce channel.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce channel
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce channel ID of this commerce channel.
 	 *
 	 * @return the commerce channel ID of this commerce channel
@@ -190,21 +205,6 @@ public interface CommerceChannelModel extends AuditedModel,
 	 * @param name the name of this commerce channel
 	 */
 	public void setName(String name);
-
-	/**
-	 * Returns the filter type of this commerce channel.
-	 *
-	 * @return the filter type of this commerce channel
-	 */
-	@AutoEscape
-	public String getFilterType();
-
-	/**
-	 * Sets the filter type of this commerce channel.
-	 *
-	 * @param filterType the filter type of this commerce channel
-	 */
-	public void setFilterType(String filterType);
 
 	/**
 	 * Returns the type of this commerce channel.

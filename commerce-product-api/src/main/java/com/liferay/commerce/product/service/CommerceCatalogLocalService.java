@@ -79,12 +79,15 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
-		String catalogDefaultLanguageId, ServiceContext serviceContext)
+		String catalogDefaultLanguageId, boolean system,
+		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceCatalog addCommerceCatalog(String name,
-		String catalogDefaultLanguageId, ServiceContext serviceContext)
+	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
+		String defaultLanguageId, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceCatalog addDefaultCommerceCatalog(long companyId)
 		throws PortalException;
 
 	/**
@@ -101,10 +104,12 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	*
 	* @param commerceCatalog the commerce catalog
 	* @return the commerce catalog that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(
-		CommerceCatalog commerceCatalog);
+		CommerceCatalog commerceCatalog) throws PortalException;
 
 	/**
 	* Deletes the commerce catalog with the primary key from the database. Also notifies the appropriate model listeners.
@@ -114,8 +119,10 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	* @throws PortalException if a commerce catalog with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
+		throws PortalException;
+
+	public void deleteCommerceCatalogs(long companyId)
 		throws PortalException;
 
 	/**
@@ -193,6 +200,17 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId);
 
+	/**
+	* Returns the commerce catalog with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce catalog's external reference code
+	* @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCatalog fetchCommerceCatalogByReferenceCode(long companyId,
+		String externalReferenceCode);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -224,6 +242,10 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCatalog> getCommerceCatalogs(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCatalog> getCommerceCatalogs(long companyId,
+		boolean system);
 
 	/**
 	* Returns the number of commerce catalogs.
@@ -273,6 +295,6 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
-		ServiceContext serviceContext) throws PortalException;
+		Map<Locale, String> nameMap, String catalogDefaultLanguageId)
+		throws PortalException;
 }

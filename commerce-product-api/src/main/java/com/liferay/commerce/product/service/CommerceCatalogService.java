@@ -60,8 +60,8 @@ public interface CommerceCatalogService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CommerceCatalogServiceUtil} to access the commerce catalog remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
-		String catalogDefaultLanguageId, ServiceContext serviceContext)
-		throws PortalException;
+		String catalogDefaultLanguageId, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
 		throws PortalException;
@@ -73,6 +73,10 @@ public interface CommerceCatalogService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCatalog> getCommerceCatalogs(long companyId,
+		boolean system) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -95,6 +99,6 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		String catalogDefaultLanguageId, Map<Locale, String> nameMap,
-		ServiceContext serviceContext) throws PortalException;
+		Map<Locale, String> nameMap, String catalogDefaultLanguageId)
+		throws PortalException;
 }

@@ -71,6 +71,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	 */
 	public static final String TABLE_NAME = "CommerceChannel";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "externalReferenceCode", Types.VARCHAR },
 			{ "commerceChannelId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -78,13 +79,13 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
-			{ "filterType", Types.VARCHAR },
 			{ "type_", Types.VARCHAR },
 			{ "typeSettings", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceChannelId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -92,12 +93,11 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("filterType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,filterType VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (externalReferenceCode VARCHAR(75) null,commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceChannel";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceChannel.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceChannel.createDate DESC";
@@ -110,7 +110,12 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.product.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.commerce.product.model.CommerceChannel"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.product.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CommerceChannel"),
+			true);
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -125,6 +130,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 		CommerceChannel model = new CommerceChannelImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceChannelId(soapModel.getCommerceChannelId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -132,7 +138,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
-		model.setFilterType(soapModel.getFilterType());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 
@@ -200,6 +205,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceChannelId", getCommerceChannelId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -207,7 +213,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
-		attributes.put("filterType", getFilterType());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 
@@ -219,6 +224,13 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceChannelId = (Long)attributes.get("commerceChannelId");
 
 		if (commerceChannelId != null) {
@@ -261,12 +273,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			setName(name);
 		}
 
-		String filterType = (String)attributes.get("filterType");
-
-		if (filterType != null) {
-			setFilterType(filterType);
-		}
-
 		String type = (String)attributes.get("type");
 
 		if (type != null) {
@@ -278,6 +284,32 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		if (typeSettings != null) {
 			setTypeSettings(typeSettings);
 		}
+	}
+
+	@JSON
+	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
 	}
 
 	@JSON
@@ -299,7 +331,19 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -353,6 +397,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public void setCreateDate(Date createDate) {
+		_columnBitmask = -1L;
+
 		_createDate = createDate;
 	}
 
@@ -391,22 +437,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@JSON
 	@Override
-	public String getFilterType() {
-		if (_filterType == null) {
-			return "";
-		}
-		else {
-			return _filterType;
-		}
-	}
-
-	@Override
-	public void setFilterType(String filterType) {
-		_filterType = filterType;
-	}
-
-	@JSON
-	@Override
 	public String getType() {
 		if (_type == null) {
 			return "";
@@ -437,6 +467,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		_typeSettings = typeSettings;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -464,6 +498,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	public Object clone() {
 		CommerceChannelImpl commerceChannelImpl = new CommerceChannelImpl();
 
+		commerceChannelImpl.setExternalReferenceCode(getExternalReferenceCode());
 		commerceChannelImpl.setCommerceChannelId(getCommerceChannelId());
 		commerceChannelImpl.setCompanyId(getCompanyId());
 		commerceChannelImpl.setUserId(getUserId());
@@ -471,7 +506,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		commerceChannelImpl.setCreateDate(getCreateDate());
 		commerceChannelImpl.setModifiedDate(getModifiedDate());
 		commerceChannelImpl.setName(getName());
-		commerceChannelImpl.setFilterType(getFilterType());
 		commerceChannelImpl.setType(getType());
 		commerceChannelImpl.setTypeSettings(getTypeSettings());
 
@@ -537,12 +571,29 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	public void resetOriginalValues() {
 		CommerceChannelModelImpl commerceChannelModelImpl = this;
 
+		commerceChannelModelImpl._originalExternalReferenceCode = commerceChannelModelImpl._externalReferenceCode;
+
+		commerceChannelModelImpl._originalCompanyId = commerceChannelModelImpl._companyId;
+
+		commerceChannelModelImpl._setOriginalCompanyId = false;
+
 		commerceChannelModelImpl._setModifiedDate = false;
+
+		commerceChannelModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<CommerceChannel> toCacheModel() {
 		CommerceChannelCacheModel commerceChannelCacheModel = new CommerceChannelCacheModel();
+
+		commerceChannelCacheModel.externalReferenceCode = getExternalReferenceCode();
+
+		String externalReferenceCode = commerceChannelCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+				(externalReferenceCode.length() == 0)) {
+			commerceChannelCacheModel.externalReferenceCode = null;
+		}
 
 		commerceChannelCacheModel.commerceChannelId = getCommerceChannelId();
 
@@ -584,14 +635,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			commerceChannelCacheModel.name = null;
 		}
 
-		commerceChannelCacheModel.filterType = getFilterType();
-
-		String filterType = commerceChannelCacheModel.filterType;
-
-		if ((filterType != null) && (filterType.length() == 0)) {
-			commerceChannelCacheModel.filterType = null;
-		}
-
 		commerceChannelCacheModel.type = getType();
 
 		String type = commerceChannelCacheModel.type;
@@ -615,7 +658,9 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
-		sb.append("{commerceChannelId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(getExternalReferenceCode());
+		sb.append(", commerceChannelId=");
 		sb.append(getCommerceChannelId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -629,8 +674,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getModifiedDate());
 		sb.append(", name=");
 		sb.append(getName());
-		sb.append(", filterType=");
-		sb.append(getFilterType());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", typeSettings=");
@@ -648,6 +691,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append("com.liferay.commerce.product.model.CommerceChannel");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>externalReferenceCode</column-name><column-value><![CDATA[");
+		sb.append(getExternalReferenceCode());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>commerceChannelId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceChannelId());
@@ -677,10 +724,6 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>filterType</column-name><column-value><![CDATA[");
-		sb.append(getFilterType());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
@@ -698,16 +741,20 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CommerceChannel.class, ModelWrapper.class
 		};
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceChannelId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private String _name;
-	private String _filterType;
 	private String _type;
 	private String _typeSettings;
+	private long _columnBitmask;
 	private CommerceChannel _escapedModel;
 }

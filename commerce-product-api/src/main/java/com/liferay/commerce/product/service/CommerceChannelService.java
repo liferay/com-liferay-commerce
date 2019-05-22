@@ -56,8 +56,8 @@ public interface CommerceChannelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceChannelServiceUtil} to access the commerce channel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceChannel addCommerceChannel(String name, String filterType,
-		String type, UnicodeProperties typeSettingsProperties,
+	public CommerceChannel addCommerceChannel(String name, String type,
+		UnicodeProperties typeSettingsProperties, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceChannel deleteCommerceChannel(long commerceChannelId)
@@ -74,6 +74,10 @@ public interface CommerceChannelService extends BaseService {
 	public List<CommerceChannel> getCommerceChannels(int start, int end)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannel> getCommerceChannels(long companyId)
+		throws PortalException;
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -82,7 +86,6 @@ public interface CommerceChannelService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String filterType, String type,
-		UnicodeProperties typeSettingsProperties, ServiceContext serviceContext)
+		String name, String type, UnicodeProperties typeSettingsProperties)
 		throws PortalException;
 }

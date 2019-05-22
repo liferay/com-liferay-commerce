@@ -350,6 +350,327 @@ public class CommerceCatalogUtil {
 	}
 
 	/**
+	* Returns all the commerce catalogs where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @return the matching commerce catalogs
+	*/
+	public static List<CommerceCatalog> findByC_S(long companyId, boolean system) {
+		return getPersistence().findByC_S(companyId, system);
+	}
+
+	/**
+	* Returns a range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param start the lower bound of the range of commerce catalogs
+	* @param end the upper bound of the range of commerce catalogs (not inclusive)
+	* @return the range of matching commerce catalogs
+	*/
+	public static List<CommerceCatalog> findByC_S(long companyId,
+		boolean system, int start, int end) {
+		return getPersistence().findByC_S(companyId, system, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param start the lower bound of the range of commerce catalogs
+	* @param end the upper bound of the range of commerce catalogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce catalogs
+	*/
+	public static List<CommerceCatalog> findByC_S(long companyId,
+		boolean system, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+		return getPersistence()
+				   .findByC_S(companyId, system, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce catalogs where companyId = &#63; and system = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param start the lower bound of the range of commerce catalogs
+	* @param end the upper bound of the range of commerce catalogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce catalogs
+	*/
+	public static List<CommerceCatalog> findByC_S(long companyId,
+		boolean system, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByC_S(companyId, system, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce catalog
+	* @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog findByC_S_First(long companyId,
+		boolean system, OrderByComparator<CommerceCatalog> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence()
+				   .findByC_S_First(companyId, system, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog fetchByC_S_First(long companyId,
+		boolean system, OrderByComparator<CommerceCatalog> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_S_First(companyId, system, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce catalog
+	* @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog findByC_S_Last(long companyId,
+		boolean system, OrderByComparator<CommerceCatalog> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence()
+				   .findByC_S_Last(companyId, system, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog fetchByC_S_Last(long companyId,
+		boolean system, OrderByComparator<CommerceCatalog> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_S_Last(companyId, system, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce catalogs before and after the current commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
+	*
+	* @param commerceCatalogId the primary key of the current commerce catalog
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce catalog
+	* @throws NoSuchCatalogException if a commerce catalog with the primary key could not be found
+	*/
+	public static CommerceCatalog[] findByC_S_PrevAndNext(
+		long commerceCatalogId, long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence()
+				   .findByC_S_PrevAndNext(commerceCatalogId, companyId, system,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @return the matching commerce catalogs that the user has permission to view
+	*/
+	public static List<CommerceCatalog> filterFindByC_S(long companyId,
+		boolean system) {
+		return getPersistence().filterFindByC_S(companyId, system);
+	}
+
+	/**
+	* Returns a range of all the commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param start the lower bound of the range of commerce catalogs
+	* @param end the upper bound of the range of commerce catalogs (not inclusive)
+	* @return the range of matching commerce catalogs that the user has permission to view
+	*/
+	public static List<CommerceCatalog> filterFindByC_S(long companyId,
+		boolean system, int start, int end) {
+		return getPersistence().filterFindByC_S(companyId, system, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce catalogs that the user has permissions to view where companyId = &#63; and system = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCatalogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @param start the lower bound of the range of commerce catalogs
+	* @param end the upper bound of the range of commerce catalogs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce catalogs that the user has permission to view
+	*/
+	public static List<CommerceCatalog> filterFindByC_S(long companyId,
+		boolean system, int start, int end,
+		OrderByComparator<CommerceCatalog> orderByComparator) {
+		return getPersistence()
+				   .filterFindByC_S(companyId, system, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce catalogs before and after the current commerce catalog in the ordered set of commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	*
+	* @param commerceCatalogId the primary key of the current commerce catalog
+	* @param companyId the company ID
+	* @param system the system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce catalog
+	* @throws NoSuchCatalogException if a commerce catalog with the primary key could not be found
+	*/
+	public static CommerceCatalog[] filterFindByC_S_PrevAndNext(
+		long commerceCatalogId, long companyId, boolean system,
+		OrderByComparator<CommerceCatalog> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence()
+				   .filterFindByC_S_PrevAndNext(commerceCatalogId, companyId,
+			system, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce catalogs where companyId = &#63; and system = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	*/
+	public static void removeByC_S(long companyId, boolean system) {
+		getPersistence().removeByC_S(companyId, system);
+	}
+
+	/**
+	* Returns the number of commerce catalogs where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @return the number of matching commerce catalogs
+	*/
+	public static int countByC_S(long companyId, boolean system) {
+		return getPersistence().countByC_S(companyId, system);
+	}
+
+	/**
+	* Returns the number of commerce catalogs that the user has permission to view where companyId = &#63; and system = &#63;.
+	*
+	* @param companyId the company ID
+	* @param system the system
+	* @return the number of matching commerce catalogs that the user has permission to view
+	*/
+	public static int filterCountByC_S(long companyId, boolean system) {
+		return getPersistence().filterCountByC_S(companyId, system);
+	}
+
+	/**
+	* Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchCatalogException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce catalog
+	* @throws NoSuchCatalogException if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog findByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence().findByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog fetchByC_ERC(long companyId,
+		String externalReferenceCode) {
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	public static CommerceCatalog fetchByC_ERC(long companyId,
+		String externalReferenceCode, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByC_ERC(companyId, externalReferenceCode,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the commerce catalog that was removed
+	*/
+	public static CommerceCatalog removeByC_ERC(long companyId,
+		String externalReferenceCode)
+		throws com.liferay.commerce.product.exception.NoSuchCatalogException {
+		return getPersistence().removeByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
+	* Returns the number of commerce catalogs where companyId = &#63; and externalReferenceCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param externalReferenceCode the external reference code
+	* @return the number of matching commerce catalogs
+	*/
+	public static int countByC_ERC(long companyId, String externalReferenceCode) {
+		return getPersistence().countByC_ERC(companyId, externalReferenceCode);
+	}
+
+	/**
 	* Caches the commerce catalog in the entity cache if it is enabled.
 	*
 	* @param commerceCatalog the commerce catalog

@@ -70,6 +70,21 @@ public interface CommerceCatalogModel extends AuditedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the external reference code of this commerce catalog.
+	 *
+	 * @return the external reference code of this commerce catalog
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce catalog.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce catalog
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce catalog ID of this commerce catalog.
 	 *
 	 * @return the commerce catalog ID of this commerce catalog
@@ -293,6 +308,27 @@ public interface CommerceCatalogModel extends AuditedModel,
 	 * @param catalogDefaultLanguageId the catalog default language ID of this commerce catalog
 	 */
 	public void setCatalogDefaultLanguageId(String catalogDefaultLanguageId);
+
+	/**
+	 * Returns the system of this commerce catalog.
+	 *
+	 * @return the system of this commerce catalog
+	 */
+	public boolean getSystem();
+
+	/**
+	 * Returns <code>true</code> if this commerce catalog is system.
+	 *
+	 * @return <code>true</code> if this commerce catalog is system; <code>false</code> otherwise
+	 */
+	public boolean isSystem();
+
+	/**
+	 * Sets whether this commerce catalog is system.
+	 *
+	 * @param system the system of this commerce catalog
+	 */
+	public void setSystem(boolean system);
 
 	@Override
 	public boolean isNew();

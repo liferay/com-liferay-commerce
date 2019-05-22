@@ -102,4 +102,10 @@ create index IX_77F5B8F8 on CProduct (groupId);
 create index IX_39773566 on CProduct (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_9F9DD68 on CProduct (uuid_[$COLUMN_LENGTH:75$], groupId);
 
-create index IX_7CD290C4 on CommerceCatalog (companyId);
+create index IX_1198BFF9 on CommerceCatalog (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+create index IX_3D14D2A7 on CommerceCatalog (companyId, system);
+
+create index IX_690E2FE3 on CommerceChannel (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+
+create unique index IX_3B0D3DC7 on CommerceChannelRel (classNameId, classPK, commerceChannelId);
+create index IX_48F8F6FC on CommerceChannelRel (commerceChannelId);

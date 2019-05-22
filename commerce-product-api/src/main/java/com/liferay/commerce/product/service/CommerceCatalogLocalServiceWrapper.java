@@ -49,20 +49,30 @@ public class CommerceCatalogLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId,
+		String catalogDefaultLanguageId, boolean system,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
-			catalogDefaultLanguageId, serviceContext);
+			catalogDefaultLanguageId, system, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
-		String name, String catalogDefaultLanguageId,
+		java.util.Map<java.util.Locale, String> nameMap,
+		String defaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogLocalService.addCommerceCatalog(name,
-			catalogDefaultLanguageId, serviceContext);
+		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
+			defaultLanguageId, externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog addDefaultCommerceCatalog(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCatalogLocalService.addDefaultCommerceCatalog(companyId);
 	}
 
 	/**
@@ -82,10 +92,12 @@ public class CommerceCatalogLocalServiceWrapper
 	*
 	* @param commerceCatalog the commerce catalog
 	* @return the commerce catalog that was removed
+	* @throws PortalException
 	*/
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog deleteCommerceCatalog(
-		com.liferay.commerce.product.model.CommerceCatalog commerceCatalog) {
+		com.liferay.commerce.product.model.CommerceCatalog commerceCatalog)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.deleteCommerceCatalog(commerceCatalog);
 	}
 
@@ -101,6 +113,12 @@ public class CommerceCatalogLocalServiceWrapper
 		long commerceCatalogId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.deleteCommerceCatalog(commerceCatalogId);
+	}
+
+	@Override
+	public void deleteCommerceCatalogs(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceCatalogLocalService.deleteCommerceCatalogs(companyId);
 	}
 
 	/**
@@ -205,6 +223,20 @@ public class CommerceCatalogLocalServiceWrapper
 		return _commerceCatalogLocalService.fetchCommerceCatalog(commerceCatalogId);
 	}
 
+	/**
+	* Returns the commerce catalog with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce catalog's external reference code
+	* @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	*/
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalogByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceCatalogLocalService.fetchCommerceCatalogByReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _commerceCatalogLocalService.getActionableDynamicQuery();
@@ -246,6 +278,13 @@ public class CommerceCatalogLocalServiceWrapper
 	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
 		int start, int end) {
 		return _commerceCatalogLocalService.getCommerceCatalogs(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
+		long companyId, boolean system) {
+		return _commerceCatalogLocalService.getCommerceCatalogs(companyId,
+			system);
 	}
 
 	/**
@@ -317,12 +356,12 @@ public class CommerceCatalogLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
-		long commerceCatalogId, String catalogDefaultLanguageId,
+		long commerceCatalogId,
 		java.util.Map<java.util.Locale, String> nameMap,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.updateCommerceCatalog(commerceCatalogId,
-			catalogDefaultLanguageId, nameMap, serviceContext);
+			nameMap, catalogDefaultLanguageId);
 	}
 
 	@Override
