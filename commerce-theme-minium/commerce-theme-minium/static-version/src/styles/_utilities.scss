@@ -70,3 +70,33 @@
 		}
 	}
 }
+
+.row-with-separators {
+	> [class*="col"] {
+		position: relative;
+		padding-right: 24px;
+		padding-left: 24px;
+
+		&::after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 20px;
+			left: 100%;
+			bottom: 20px;
+			border-left: 1px solid $color-border;
+		}
+
+		&:first-of-type {
+			padding-left: 12px;
+		}
+
+		&:last-of-type {
+			padding-right: 12px;
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+}

@@ -1,8 +1,12 @@
 .data-box {
-	line-height: 1.2 !important;
-	margin-bottom: 0;
+	margin-bottom: 20px;
 
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+	
 	&__body {
+		line-height: 1.2;
 		padding: 0 !important; 
 	}
 }

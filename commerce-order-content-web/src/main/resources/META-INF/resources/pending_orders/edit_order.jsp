@@ -77,7 +77,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 	<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
 
-	<div class="panel panel-secondary order-panel">
+	<div class="panel panel-secondary header-panel">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col">
@@ -85,26 +85,25 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 						<div class="col-auto">
 							<div class="row">
 								<div class="col-auto">
-									<span class="order-panel__order-name component-title">
+									<span class="header-panel__main-title component-title">
 										<%= HtmlUtil.escape(commerceAccount.getName()) %>
 									</span>
 								</div>
 								<div class="col">
-									<span class="order-panel__account-id">
-										ID: <%= commerceAccount.getCommerceAccountId() %>
+									<span class="header-panel__main-id">
+										ID: <a href="#"><%= commerceAccount.getCommerceAccountId() %></a>
 									</span>
 								</div>
 							</div>
-							<div class="order-panel__date">
-								<%= HtmlUtil.escape(commerceAccount.getName()) %>
+							<div class="header-panel__main-detail">
+								Aug 24, 2019 @ 9:51 AM CST
 							</div>
 						</div>
 						<div class="col-auto">
-							<div class="order-panel__state">
-								#<%= commerceOrder.getCommerceOrderId() %>
+							<div class="header-panel__secondary-id">
+								# <%= commerceOrder.getCommerceOrderId() %>
 							</div>
-
-							<div class="order-panel__state">
+							<div class="header-panel__state">
 								<span class="label label-warning">
 									<span class="label-item label-item-expand">
 										Pending
@@ -113,8 +112,8 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 							</div>
 						</div>
 						<div class="col">
-							<div class="order-panel__assignee">
-								Assigned to
+							<div class="header-panel__assignee">
+								<div class="input-label">Assigned to</div>
 							</div>
 						</div>
 					</div>
@@ -147,10 +146,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 	<div class="panel panel-secondary data-box-container">
 		<div class="panel-header">
-			<liferay-ui:message key="info" />
+			<div class="panel-title">
+				<liferay-ui:message key="info" />
+			</div>
 		</div>
 		<div class="panel-body">
-			<div class="row">
+			<div class="row row-with-separators">
 				<div class="col-4">
 					<div class="panel panel-secondary data-box">
 						<div class="panel-body data-box__body">
@@ -277,16 +278,16 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	tableName="commercePendingOrderItems"
 />
 
-<div class="panel panel-secondary summary">
+<div class="panel panel-secondary table-summary">
 	<div class="panel-body">
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title summary__field-name">
+				<div class="component-title table-summary__field-name">
 					<liferay-ui:message key="subtotal" />
 				</div>
 			</div>
-			<div class="col-2 text-right summary__value-container">
-				<div class="summary__value">
+			<div class="col-2 text-right table-summary__value-container">
+				<div class="table-summary__value">
 					<%= HtmlUtil.escape(subtotal.format(locale)) %>
 				</div>
 			</div>
@@ -296,15 +297,15 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney subtotalDiscountAmount = subtotalDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title summary__field-name">
+					<div class="component-title table-summary__field-name">
 						<liferay-ui:message key="subtotal-discount" />
 					</div>
 				</div>
-				<div class="col-2 text-right summary__value-container">
-					<div class="summary__value">
+				<div class="col-2 text-right table-summary__value-container">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %>
 					</div>
-					<div class="summary__value">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %>
 					</div>
 				</div>
@@ -313,12 +314,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title summary__field-name">
+				<div class="component-title table-summary__field-name">
 					<liferay-ui:message key="delivery" />
 				</div>
 			</div>
-			<div class="col-2 text-right summary__value-container">
-				<div class="summary__value">
+			<div class="col-2 text-right table-summary__value-container">
+				<div class="table-summary__value">
 					<%= HtmlUtil.escape(shippingValue.format(locale)) %>
 				</div>
 			</div>
@@ -328,18 +329,18 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney shippingDiscountAmount = shippingDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title summary__field-name">
+					<div class="component-title table-summary__field-name">
 						<liferay-ui:message key="delivery-discount" />
 					</div>
 				</div>
-				<div class="col-2 text-right summary__value-container">
-					<div class="summary__value">
+				<div class="col-2 text-right table-summary__value-container">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(shippingValue.format(locale)) %>
 					</div>
-					<div class="summary__value">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %>
 					</div>
-					<div class="summary__value">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %>
 					</div>
 				</div>
@@ -348,12 +349,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title summary__field-name">
+				<div class="component-title table-summary__field-name">
 					<liferay-ui:message key="tax" />
 				</div>
 			</div>
-			<div class="col-2 text-right summary__value-container">
-				<div class="summary__value">
+			<div class="col-2 text-right table-summary__value-container">
+				<div class="table-summary__value">
 					<%= HtmlUtil.escape(taxValue.format(locale)) %>
 				</div>
 			</div>
@@ -363,15 +364,15 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			<% CommerceMoney totalDiscountAmount = totalDiscountValue.getDiscountAmount(); %>
 			<div class="row">
 				<div class="col text-right">
-					<div class="component-title summary__field-name">
+					<div class="component-title table-summary__field-name">
 						<liferay-ui:message key="delivery-discount" />
 					</div>
 				</div>
-				<div class="col-2 text-right summary__value-container">
-					<div class="summary__value">
+				<div class="col-2 text-right table-summary__value-container">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %>
 					</div>
-					<div class="summary__value">
+					<div class="table-summary__value">
 						<%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %>
 					</div>
 				</div>
@@ -380,12 +381,12 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 		<div class="row">
 			<div class="col text-right">
-				<div class="component-title summary__field-name">
+				<div class="component-title table-summary__field-name">
 					<liferay-ui:message key="total" />
 				</div>
 			</div>
-			<div class="col-2 text-right summary__value-container">
-				<div class="summary__value">
+			<div class="col-2 text-right table-summary__value-container">
+				<div class="table-summary__value">
 					<%= HtmlUtil.escape(totalOrder.format(locale)) %>
 				</div>
 			</div>

@@ -2,6 +2,13 @@
 	color: $color-fg;
 	margin-bottom: $minium-big-gutter;
 
+	&__header {
+		background-color: $color-bg;
+		border-radius: 8px;
+		margin-bottom: 5px;
+		padding: 12px 30px;
+	}
+
 	&__title {
 		@include minium-panel-title;
 	}

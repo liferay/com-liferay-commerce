@@ -14,21 +14,16 @@
 }
 
 @mixin minium-panel-title {
-	background-color: $color-bg;
-	border-radius: 8px;
 	font-size: 12px;
 	font-weight: 500;
 	letter-spacing: 1.2px;
 	line-height: 16px;
-	margin-bottom: 5px;
-	padding: 12px 30px;
 	text-transform: uppercase;
 }
 
 @mixin minium-panel-body {
-	@include minium-typo-text;
-
+	font-size: 14px;
 	background-color: $color-bg;
 	border-radius: 8px;
-	padding: 10px 25px;
+	padding: 25px;
 }

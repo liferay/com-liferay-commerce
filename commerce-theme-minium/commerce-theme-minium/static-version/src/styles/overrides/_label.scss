@@ -1,0 +1,28 @@
+.label {
+	margin: 0;
+	padding: 0;
+	border: none;
+
+	&::before {
+		content: '';
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 5px;
+		height: 14px;
+		width: 14px;
+		border-radius: 50%;
+		background-color: $color-disabled; 
+	}
+
+	&.label-warning {
+		&::before {
+			background-color: $color-mood-neutral;
+		}
+	}
+}
+
+.label-item {
+	color: $color-fg;
+    font-size: 14px;
+    font-weight: normal;
+}

@@ -1,0 +1,50 @@
+.header-panel {
+	position: sticky;
+    top: 150px;
+	z-index: 1;
+	font-size: 12px;
+	
+	.panel-body {
+		// line-height: 1.2;
+	}
+
+	&__main-title {
+		font-size: 18px;
+	}
+
+	&__main-id {
+		position: relative;
+
+		&::before {
+			content: '';
+			display: block;
+			position: absolute;
+			left: -12px;
+			top: 0;
+			bottom: 0;
+			width: 10px;
+			border-left: 1px solid $color-border;
+		}
+	}
+
+	&__secondary-id {
+		font-weight: bold;
+	}
+
+	&__detail {
+		color: $color-fg-alt;
+	}
+	
+	&__label {
+		color: $color-fg-alt;
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+	}
+
+	&__assignee {
+		vertical-align: center;
+	}
+}

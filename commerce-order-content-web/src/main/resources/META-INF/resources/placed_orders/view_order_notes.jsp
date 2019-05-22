@@ -41,59 +41,57 @@ CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrde
 	for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
 	%>
 
-		<article class="commerce-panel">
-			<div class="commerce-panel__content">
-				<div class="panel-body">
-					<div class="card-row">
-						<div class="card-col-content">
-							<div class="lfr-discussion-details">
-								<liferay-ui:user-portrait
-									cssClass="user-icon-lg"
-									userId="<%= commerceOrderNote.getUserId() %>"
-									userName="<%= commerceOrderNote.getUserName() %>"
-								/>
-							</div>
+		<article class="panel panel-secondary">
+			<div class="panel-body">
+				<div class="card-row">
+					<div class="card-col-content">
+						<div class="lfr-discussion-details">
+							<liferay-ui:user-portrait
+								cssClass="user-icon-lg"
+								userId="<%= commerceOrderNote.getUserId() %>"
+								userName="<%= commerceOrderNote.getUserName() %>"
+							/>
+						</div>
 
-							<div class="lfr-discussion-body">
-								<div class="lfr-discussion-message">
-									<header class="lfr-discussion-message-author">
+						<div class="lfr-discussion-body">
+							<div class="lfr-discussion-message">
+								<header class="lfr-discussion-message-author">
 
-										<%
-										User noteUser = commerceOrderNote.getUser();
-										%>
+									<%
+									User noteUser = commerceOrderNote.getUser();
+									%>
 
-										<aui:a cssClass="author-link" href="<%= ((noteUser != null) && noteUser.isActive()) ? noteUser.getDisplayURL(themeDisplay) : null %>">
-											<%= HtmlUtil.escape(commerceOrderNote.getUserName()) %>
+									<aui:a cssClass="author-link" href="<%= ((noteUser != null) && noteUser.isActive()) ? noteUser.getDisplayURL(themeDisplay) : null %>">
+										<%= HtmlUtil.escape(commerceOrderNote.getUserName()) %>
 
-											<c:if test="<%= commerceOrderNote.getUserId() == user.getUserId() %>">
-												(<liferay-ui:message key="you" />)
-											</c:if>
-										</aui:a>
-
-										<c:if test="<%= commerceOrderNote.isRestricted() %>">
-											<aui:icon image="lock" markupView="lexicon" message="private" />
+										<c:if test="<%= commerceOrderNote.getUserId() == user.getUserId() %>">
+											(<liferay-ui:message key="you" />)
 										</c:if>
+									</aui:a>
 
-										<%
-										Date createDate = commerceOrderNote.getCreateDate();
+									<c:if test="<%= commerceOrderNote.isRestricted() %>">
+										<aui:icon image="lock" markupView="lexicon" message="private" />
+									</c:if>
 
-										String createDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true);
-										%>
+									<%
+									Date createDate = commerceOrderNote.getCreateDate();
 
-										<span class="small">
-											<liferay-ui:message arguments="<%= createDateDescription %>" key="x-ago" translateArguments="<%= false %>" />
+									String createDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true);
+									%>
 
-											<c:if test="<%= createDate.before(commerceOrderNote.getModifiedDate()) %>">
-												<strong onmouseover="Liferay.Portal.ToolTip.show(this, '<%= HtmlUtil.escapeJS(dateFormatDateTime.format(commerceOrderNote.getModifiedDate())) %>');">
-													- <liferay-ui:message key="edited" />
-												</strong>
-											</c:if>
-										</span>
-									</header>
+									<span class="small">
+										<liferay-ui:message arguments="<%= createDateDescription %>" key="x-ago" translateArguments="<%= false %>" />
 
-									<div class="lfr-discussion-message-body">
-										<%= HtmlUtil.escape(commerceOrderNote.getContent()) %>
-									</div>
+										<c:if test="<%= createDate.before(commerceOrderNote.getModifiedDate()) %>">
+											<strong onmouseover="Liferay.Portal.ToolTip.show(this, '<%= HtmlUtil.escapeJS(dateFormatDateTime.format(commerceOrderNote.getModifiedDate())) %>');">
+												- <liferay-ui:message key="edited" />
+											</strong>
+										</c:if>
+									</span>
+								</header>
+
+								<div class="lfr-discussion-message-body">
+									<%= HtmlUtil.escape(commerceOrderNote.getContent()) %>
 								</div>
 							</div>
 						</div>

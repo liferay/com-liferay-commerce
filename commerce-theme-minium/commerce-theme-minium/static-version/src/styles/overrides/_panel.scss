@@ -1,53 +1,50 @@
-#minium {
-	.panel {
-		background-color: transparent;
-		border: 0;
+.panel {
+	background-color: transparent;
+	border: 0;
 
-		.list-unstyled {
-			margin-bottom: 0;
+	.list-unstyled {
+		margin-bottom: 0;
+	}
+}
+
+.panel-header,
+.panel-body {
+	background-color: white;
+	border-radius: 8px;
+}
+
+.panel-group + .panel-group {
+	margin-top: $minium-big-gutter;
+}
+
+.panel-header {
+	margin-bottom: 5px;
+    padding: 10px 25px;
+
+	.panel-title {
+		@include minium-panel-title;
+
+		.collapse-icon {
+			padding: 0;
 		}
 	}
+}
 
-	.panel-header,
-	.panel-heading,
-	.panel-body {
-		background-color: white;
-		border-radius: 8px;
-	}
+.panel-body {
+	@include minium-panel-body;
+}
 
-	.panel-group + .panel-group {
-		margin-top: $minium-big-gutter;
-	}
+.facet-checkbox-label {
+	color: #7F848D;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.6;
+	padding-left: 25px;
+	position: relative;
 
-	.panel-header,
-	.panel-heading {
-		margin-bottom: 5px;
-
-		.panel-title {
-			@include minium-panel-title;
-	
-			.collapse-icon {
-				padding: 0;
-			}
-		}
-	}
-
-	.panel-body {
-		@include minium-panel-body;
-	}
-
-	.facet-checkbox-label {
-		color: #7F848D;
-		font-size: 13px;
-		font-weight: 400;
-		line-height: 1.6;
-		padding-left: 25px;
-		position: relative;
-
-		input[type="checkbox"] {
-			left: 0;
-			position: absolute;
-			top: 2px;
-		}
+	input[type="checkbox"] {
+		left: 0;
+		position: absolute;
+		top: 2px;
 	}
 }
