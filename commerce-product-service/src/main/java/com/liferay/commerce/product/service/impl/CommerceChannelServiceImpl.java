@@ -24,18 +24,19 @@ import java.util.List;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 
 	@Override
 	public CommerceChannel addCommerceChannel(
-			String name, String filterType, String type,
-			UnicodeProperties typeSettingsProperties,
-			ServiceContext serviceContext)
+			String name, String type, UnicodeProperties typeSettingsProperties,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelLocalService.addCommerceChannel(
-			name, filterType, type, typeSettingsProperties, serviceContext);
+			name, type, typeSettingsProperties, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
@@ -68,15 +69,20 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceChannel> getCommerceChannels(long companyId)
+		throws PortalException {
+
+		return commerceChannelLocalService.getCommerceChannels(companyId);
+	}
+
+	@Override
 	public CommerceChannel updateCommerceChannel(
-			long commerceChannelId, String name, String filterType, String type,
-			UnicodeProperties typeSettingsProperties,
-			ServiceContext serviceContext)
+			long commerceChannelId, String name, String type,
+			UnicodeProperties typeSettingsProperties)
 		throws PortalException {
 
 		return commerceChannelLocalService.updateCommerceChannel(
-			commerceChannelId, name, filterType, type, typeSettingsProperties,
-			serviceContext);
+			commerceChannelId, name, type, typeSettingsProperties);
 	}
 
 }
