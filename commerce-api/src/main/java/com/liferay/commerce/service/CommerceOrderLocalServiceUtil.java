@@ -548,6 +548,11 @@ public class CommerceOrderLocalServiceUtil {
 				   .updateAccount(commerceOrderId, userId, commerceAccountId);
 	}
 
+	public static void updateAsset(
+		com.liferay.commerce.model.CommerceOrder commerceOrder) {
+		getService().updateAsset(commerceOrder);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 		long commerceOrderId, String name, String description, String street1,
 		String street2, String street3, String city, String zip,

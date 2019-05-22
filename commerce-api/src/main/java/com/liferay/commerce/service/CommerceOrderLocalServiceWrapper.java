@@ -595,6 +595,12 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public void updateAsset(
+		com.liferay.commerce.model.CommerceOrder commerceOrder) {
+		_commerceOrderLocalService.updateAsset(commerceOrder);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 		long commerceOrderId, String name, String description, String street1,
 		String street2, String street3, String city, String zip,
