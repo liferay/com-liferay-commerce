@@ -32,20 +32,22 @@ import java.util.Map;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
 	@Override
 	public CommerceCatalog addCommerceCatalog(
 			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
-			ServiceContext serviceContext)
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(), CPActionKeys.ADD_COMMERCE_CATALOG);
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			nameMap, catalogDefaultLanguageId, serviceContext);
+			nameMap, catalogDefaultLanguageId, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
@@ -70,6 +72,7 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			commerceCatalogId);
 	}
 
+	@Override
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException {
 
@@ -81,10 +84,25 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceCatalog> getCommerceCatalogs(
+			long companyId, boolean system)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
+
+		return commerceCatalogLocalService.getCommerceCatalogs(
+			companyId, system);
+	}
+
+	@Override
 	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
 		throws PortalException {
 
-		return searchCommerceCatalogs(companyId);
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
+
+		return commerceCatalogLocalService.searchCommerceCatalogs(companyId);
 	}
 
 	@Override
@@ -103,22 +121,24 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	public int searchCommerceCatalogsCount(long companyId, String keywords)
 		throws PortalException {
 
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
+
 		return commerceCatalogLocalService.searchCommerceCatalogsCount(
 			companyId, keywords);
 	}
 
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, String catalogDefaultLanguageId,
-			Map<Locale, String> nameMap, ServiceContext serviceContext)
+			long commerceCatalogId, Map<Locale, String> nameMap,
+			String catalogDefaultLanguageId)
 		throws PortalException {
 
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalogId, ActionKeys.UPDATE);
 
 		return commerceCatalogLocalService.updateCommerceCatalog(
-			commerceCatalogId, catalogDefaultLanguageId, nameMap,
-			serviceContext);
+			commerceCatalogId, nameMap, catalogDefaultLanguageId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceCatalog>
