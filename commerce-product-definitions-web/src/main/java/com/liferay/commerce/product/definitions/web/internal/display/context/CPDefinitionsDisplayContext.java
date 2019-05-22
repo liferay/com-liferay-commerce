@@ -22,7 +22,9 @@ import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsP
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.item.selector.ItemSelector;
@@ -73,13 +75,13 @@ public class CPDefinitionsDisplayContext
 	extends BaseCPDefinitionsSearchContainerDisplayContext<CPDefinition> {
 
 	public CPDefinitionsDisplayContext(
-			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			CPDefinitionHelper cpDefinitionHelper,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
-			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-			PortletResourcePermission portletResourcePermission)
-		throws PortalException {
+		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		CommerceCatalogService commerceCatalogService,
+		CPDefinitionHelper cpDefinitionHelper,
+		ModelResourcePermission<CPDefinition>
+			cpDefinitionModelResourcePermission,
+		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission) {
 
 		super(
 			actionHelper, httpServletRequest,
@@ -87,6 +89,7 @@ public class CPDefinitionsDisplayContext
 
 		setDefaultOrderByType("desc");
 
+		_commerceCatalogService = commerceCatalogService;
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpDefinitionModelResourcePermission =
 			cpDefinitionModelResourcePermission;
@@ -111,6 +114,11 @@ public class CPDefinitionsDisplayContext
 		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		return portletURL.toString();
+	}
+
+	public List<CommerceCatalog> getCommerceCatalogs() throws PortalException {
+		return _commerceCatalogService.searchCommerceCatalogs(
+			cpRequestHelper.getCompanyId());
 	}
 
 	public String getItemSelectorUrl() {
@@ -294,9 +302,9 @@ public class CPDefinitionsDisplayContext
 
 		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
 			_cpDefinitionService.searchCPDefinitions(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				getKeywords(), filterFields, filtersValues,
-				searchContainer.getStart(), searchContainer.getEnd(), sort);
+				themeDisplay.getCompanyId(), getKeywords(), filterFields,
+				filtersValues, searchContainer.getStart(),
+				searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(cpDefinitionBaseModelSearchResult.getLength());
 		searchContainer.setResults(
@@ -382,6 +390,21 @@ public class CPDefinitionsDisplayContext
 			ActionKeys.VIEW);
 	}
 
+	public boolean isSelectedCatalog(CommerceCatalog commerceCatalog)
+		throws PortalException {
+
+		CPDefinition cpDefinition = getCPDefinition();
+
+		if (commerceCatalog.getCommerceCatalogGroupId() ==
+				cpDefinition.getGroupId()) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission;
