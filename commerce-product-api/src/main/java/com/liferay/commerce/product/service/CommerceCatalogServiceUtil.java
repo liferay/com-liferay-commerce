@@ -59,7 +59,8 @@ public class CommerceCatalogServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
-		long commerceCatalogId) {
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCommerceCatalog(commerceCatalogId);
 	}
 
