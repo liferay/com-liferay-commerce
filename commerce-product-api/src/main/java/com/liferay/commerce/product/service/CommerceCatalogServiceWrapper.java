@@ -52,7 +52,8 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
-		long commerceCatalogId) {
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
 	}
 

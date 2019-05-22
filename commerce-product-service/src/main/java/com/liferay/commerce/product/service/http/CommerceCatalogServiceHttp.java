@@ -124,7 +124,8 @@ public class CommerceCatalogServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
-		HttpPrincipal httpPrincipal, long commerceCatalogId) {
+		HttpPrincipal httpPrincipal, long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"fetchCommerceCatalog", _fetchCommerceCatalogParameterTypes2);
@@ -138,6 +139,10 @@ public class CommerceCatalogServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
