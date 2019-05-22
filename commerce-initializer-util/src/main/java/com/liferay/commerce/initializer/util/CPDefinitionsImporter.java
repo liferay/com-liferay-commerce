@@ -35,6 +35,7 @@ import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CPTaxCategory;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
@@ -45,6 +46,7 @@ import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.product.service.CPTaxCategoryLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
@@ -184,6 +186,12 @@ public class CPDefinitionsImporter {
 
 		User user = _userLocalService.getUser(serviceContext.getUserId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			user.getTimeZone());
 
@@ -225,14 +233,15 @@ public class CPDefinitionsImporter {
 			locale, description);
 
 		return _cpDefinitionLocalService.addCPDefinition(
+			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 			nameMap, shortDescriptionMap, descriptionMap, nameMap, null, null,
-			null, "simple", true, true, false, false, 0, width, height, depth,
+			null, "simple", true, true, false, false, 0D, width, height, depth,
 			weight, _getCPTaxCategoryId(taxCategory, serviceContext), false,
 			false, null, true, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, true, sku,
-			externalReferenceCode, serviceContext);
+			expirationDateHour, expirationDateMinute, true, sku, false, 0, null,
+			null, 0L, externalReferenceCode, serviceContext);
 	}
 
 	private void _addWarehouseQuantities(
@@ -774,6 +783,9 @@ public class CPDefinitionsImporter {
 	@Reference
 	private CommerceAvailabilityEstimateLocalService
 		_commerceAvailabilityEstimateLocalService;
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceWarehouseItemLocalService

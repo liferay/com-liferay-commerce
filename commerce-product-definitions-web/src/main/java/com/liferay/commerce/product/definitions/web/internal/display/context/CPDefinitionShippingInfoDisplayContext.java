@@ -21,10 +21,10 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -39,20 +39,20 @@ public class CPDefinitionShippingInfoDisplayContext
 	extends CPDefinitionsDisplayContext {
 
 	public CPDefinitionShippingInfoDisplayContext(
-			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			CommerceCurrencyLocalService commerceCurrencyLocalService,
-			CPDefinitionHelper cpDefinitionHelper,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
-			CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-			PortletResourcePermission portletResourcePermission,
-			CPMeasurementUnitLocalService cpMeasurementUnitLocalService)
-		throws PortalException {
+		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+		CommerceCatalogService commerceCatalogService,
+		CommerceCurrencyLocalService commerceCurrencyLocalService,
+		CPDefinitionHelper cpDefinitionHelper,
+		ModelResourcePermission<CPDefinition>
+			cpDefinitionModelResourcePermission,
+		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
+		PortletResourcePermission portletResourcePermission,
+		CPMeasurementUnitLocalService cpMeasurementUnitLocalService) {
 
 		super(
-			actionHelper, httpServletRequest, cpDefinitionHelper,
-			cpDefinitionModelResourcePermission, cpDefinitionService,
-			itemSelector, portletResourcePermission);
+			actionHelper, httpServletRequest, commerceCatalogService,
+			cpDefinitionHelper, cpDefinitionModelResourcePermission,
+			cpDefinitionService, itemSelector, portletResourcePermission);
 
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;

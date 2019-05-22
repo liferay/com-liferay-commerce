@@ -15,7 +15,9 @@
 package com.liferay.commerce.product.internal.osgi.commands;
 
 import com.liferay.commerce.product.model.CPInstanceConstants;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -27,6 +29,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -51,6 +54,12 @@ public class CPOSGiCommands {
 		Group group = _groupLocalService.getGroup(groupId);
 
 		User user = _userLocalService.getDefaultUser(group.getCompanyId());
+
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -85,13 +94,18 @@ public class CPOSGiCommands {
 			titleMap.put(LocaleUtil.US, title);
 
 			_cpDefinitionLocalService.addCPDefinition(
+				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 				titleMap, null, null, null, null, null, null, "simple", true,
 				false, false, false, 0, 0, 0, 0, 0, 0, false, false, null, true,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, 0, 0, 0, 0, 0, true,
-				CPInstanceConstants.DEFAULT_SKU, serviceContext);
+				CPInstanceConstants.DEFAULT_SKU, false, 0, null, null, 0, null,
+				serviceContext);
 		}
 	}
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
