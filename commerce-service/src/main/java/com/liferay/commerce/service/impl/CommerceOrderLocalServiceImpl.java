@@ -311,9 +311,15 @@ public class CommerceOrderLocalServiceImpl
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
-			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId());
+		if (hasWorkflowDefinition(
+				commerceOrder.getGroupId(),
+				CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+				commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
+				CommerceOrder.class.getName(),
+				commerceOrder.getCommerceOrderId());
+		}
 
 		return commerceOrder;
 	}
@@ -416,15 +422,11 @@ public class CommerceOrderLocalServiceImpl
 		// Workflow
 
 		if (hasWorkflowDefinition(
-				commerceOrder.getScopeGroupId(),
-				commerceOrder.getCommerceOrderId())) {
-
-			CommerceAccount commerceAccount =
-				commerceOrder.getCommerceAccount();
+				commerceOrder.getGroupId(),
+				CommerceOrderConstants.TYPE_PK_APPROVAL)) {
 
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-				commerceOrder.getCompanyId(),
-				commerceAccount.getCommerceAccountGroupId(),
+				commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
 				CommerceOrder.class.getName(),
 				commerceOrder.getCommerceOrderId());
 		}
