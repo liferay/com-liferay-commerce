@@ -14,11 +14,14 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CommerceCatalogConstants;
+import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -39,16 +42,17 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class CommerceCatalogLocalServiceImpl
 	extends CommerceCatalogLocalServiceBaseImpl {
@@ -57,27 +61,25 @@ public class CommerceCatalogLocalServiceImpl
 	@Override
 	public CommerceCatalog addCommerceCatalog(
 			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
+			boolean system, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long commerceCatalogId = counterLocalService.increment();
 
 		CommerceCatalog commerceCatalog = commerceCatalogPersistence.create(
 			commerceCatalogId);
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
 		commerceCatalog.setCompanyId(user.getCompanyId());
 		commerceCatalog.setUserId(user.getUserId());
 		commerceCatalog.setUserName(user.getFullName());
 
-		Date now = new Date();
-
-		commerceCatalog.setCreateDate(now);
-		commerceCatalog.setModifiedDate(now);
-
 		commerceCatalog.setNameMap(nameMap);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
+		commerceCatalog.setSystem(system);
+		commerceCatalog.setExternalReferenceCode(externalReferenceCode);
 
 		commerceCatalogPersistence.update(commerceCatalog);
 
@@ -98,42 +100,85 @@ public class CommerceCatalogLocalServiceImpl
 		return commerceCatalog;
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			String name, String catalogDefaultLanguageId,
-			ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String defaultLanguageId,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
-		Locale locale = LocaleUtil.fromLanguageId(catalogDefaultLanguageId);
+		return commerceCatalogLocalService.addCommerceCatalog(
+			nameMap, defaultLanguageId, false, externalReferenceCode,
+			serviceContext);
+	}
+
+	@Override
+	public CommerceCatalog addDefaultCommerceCatalog(long companyId)
+		throws PortalException {
+
+		Company company = companyLocalService.getCompany(companyId);
+
+		User defaultUser = company.getDefaultUser();
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCompanyId(company.getCompanyId());
+		serviceContext.setUserId(defaultUser.getUserId());
+		serviceContext.setUuid(PortalUUIDUtil.generate());
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			Collections.singletonMap(locale, name), catalogDefaultLanguageId,
-			serviceContext);
+			Collections.singletonMap(
+				LocaleUtil.fromLanguageId(defaultUser.getLanguageId()),
+				CommerceCatalogConstants.MASTER_COMMERCE_CATALOG),
+			defaultUser.getLanguageId(), true, null, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
-	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
+	public CommerceCatalog deleteCommerceCatalog(
+			CommerceCatalog commerceCatalog)
 		throws PortalException {
+
+		if (commerceCatalog.isSystem()) {
+			throw new CommerceCatalogSystemException();
+		}
 
 		// Group
 
-		Group group = getCommerceCatalogGroup(commerceCatalogId);
+		Group group = getCommerceCatalogGroup(
+			commerceCatalog.getCommerceCatalogId());
 
 		groupLocalService.deleteGroup(group);
 
 		// Resources
-
-		CommerceCatalog commerceCatalog = getCommerceCatalog(commerceCatalogId);
 
 		resourceLocalService.deleteResource(
 			commerceCatalog, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Commerce catalog
 
-		return commerceCatalogPersistence.remove(commerceCatalogId);
+		return commerceCatalogPersistence.remove(commerceCatalog);
+	}
+
+	@Override
+	public CommerceCatalog deleteCommerceCatalog(long commerceCatalogId)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogPersistence.findByPrimaryKey(commerceCatalogId);
+
+		return commerceCatalogLocalService.deleteCommerceCatalog(
+			commerceCatalog);
+	}
+
+	@Override
+	public void deleteCommerceCatalogs(long companyId) throws PortalException {
+		List<CommerceCatalog> commerceCatalogs =
+			commerceCatalogPersistence.findByCompanyId(companyId);
+
+		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+			commerceCatalogLocalService.deleteCommerceCatalog(commerceCatalog);
+		}
 	}
 
 	@Override
@@ -148,6 +193,13 @@ public class CommerceCatalogLocalServiceImpl
 
 		return groupPersistence.findByC_C_C(
 			commerceCatalog.getCompanyId(), classNameId, commerceCatalogId);
+	}
+
+	@Override
+	public List<CommerceCatalog> getCommerceCatalogs(
+		long companyId, boolean system) {
+
+		return commerceCatalogPersistence.findByC_S(companyId, system);
 	}
 
 	@Override
@@ -187,12 +239,16 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, String catalogDefaultLanguageId,
-			Map<Locale, String> nameMap, ServiceContext serviceContext)
+			long commerceCatalogId, Map<Locale, String> nameMap,
+			String catalogDefaultLanguageId)
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
 			commerceCatalogPersistence.findByPrimaryKey(commerceCatalogId);
+
+		if (commerceCatalog.isSystem()) {
+			throw new CommerceCatalogSystemException();
+		}
 
 		commerceCatalog.setNameMap(nameMap);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
