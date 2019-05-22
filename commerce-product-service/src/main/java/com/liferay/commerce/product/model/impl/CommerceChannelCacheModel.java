@@ -67,7 +67,9 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
-		sb.append("{commerceChannelId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceChannelId=");
 		sb.append(commerceChannelId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -81,8 +83,6 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		sb.append(modifiedDate);
 		sb.append(", name=");
 		sb.append(name);
-		sb.append(", filterType=");
-		sb.append(filterType);
 		sb.append(", type=");
 		sb.append(type);
 		sb.append(", typeSettings=");
@@ -95,6 +95,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	@Override
 	public CommerceChannel toEntityModel() {
 		CommerceChannelImpl commerceChannelImpl = new CommerceChannelImpl();
+
+		if (externalReferenceCode == null) {
+			commerceChannelImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceChannelImpl.setExternalReferenceCode(externalReferenceCode);
+		}
 
 		commerceChannelImpl.setCommerceChannelId(commerceChannelId);
 		commerceChannelImpl.setCompanyId(companyId);
@@ -128,13 +135,6 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			commerceChannelImpl.setName(name);
 		}
 
-		if (filterType == null) {
-			commerceChannelImpl.setFilterType("");
-		}
-		else {
-			commerceChannelImpl.setFilterType(filterType);
-		}
-
 		if (type == null) {
 			commerceChannelImpl.setType("");
 		}
@@ -156,6 +156,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceChannelId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
@@ -165,7 +167,6 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		name = objectInput.readUTF();
-		filterType = objectInput.readUTF();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
 	}
@@ -173,6 +174,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceChannelId);
 
 		objectOutput.writeLong(companyId);
@@ -196,13 +204,6 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			objectOutput.writeUTF(name);
 		}
 
-		if (filterType == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(filterType);
-		}
-
 		if (type == null) {
 			objectOutput.writeUTF("");
 		}
@@ -218,6 +219,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		}
 	}
 
+	public String externalReferenceCode;
 	public long commerceChannelId;
 	public long companyId;
 	public long userId;
@@ -225,7 +227,6 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public long createDate;
 	public long modifiedDate;
 	public String name;
-	public String filterType;
 	public String type;
 	public String typeSettings;
 }

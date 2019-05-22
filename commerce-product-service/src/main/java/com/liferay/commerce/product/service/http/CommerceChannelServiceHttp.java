@@ -56,9 +56,9 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceChannelServiceHttp {
 	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		HttpPrincipal httpPrincipal, String name, String filterType,
-		String type,
+		HttpPrincipal httpPrincipal, String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -66,7 +66,8 @@ public class CommerceChannelServiceHttp {
 					"addCommerceChannel", _addCommerceChannelParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					filterType, type, typeSettingsProperties, serviceContext);
+					type, typeSettingsProperties, externalReferenceCode,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -214,20 +215,49 @@ public class CommerceChannelServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		HttpPrincipal httpPrincipal, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceChannelServiceUtil.class,
+					"getCommerceChannels", _getCommerceChannelsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CommerceChannel>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
 		HttpPrincipal httpPrincipal, long commerceChannelId, String name,
-		String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceChannelServiceUtil.class,
 					"updateCommerceChannel",
-					_updateCommerceChannelParameterTypes5);
+					_updateCommerceChannelParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceChannelId, name, filterType, type,
-					typeSettingsProperties, serviceContext);
+					commerceChannelId, name, type, typeSettingsProperties);
 
 			Object returnObj = null;
 
@@ -253,8 +283,8 @@ public class CommerceChannelServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceChannelServiceHttp.class);
 	private static final Class<?>[] _addCommerceChannelParameterTypes0 = new Class[] {
-			String.class, String.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class,
+			String.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceChannelParameterTypes1 = new Class[] {
@@ -269,9 +299,11 @@ public class CommerceChannelServiceHttp {
 	private static final Class<?>[] _getCommerceChannelsParameterTypes4 = new Class[] {
 			int.class, int.class
 		};
-	private static final Class<?>[] _updateCommerceChannelParameterTypes5 = new Class[] {
-			long.class, String.class, String.class, String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
+	private static final Class<?>[] _getCommerceChannelsParameterTypes5 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateCommerceChannelParameterTypes6 = new Class[] {
+			long.class, String.class, String.class,
+			com.liferay.portal.kernel.util.UnicodeProperties.class
 		};
 }

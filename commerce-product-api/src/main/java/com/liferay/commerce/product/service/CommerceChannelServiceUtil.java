@@ -43,13 +43,14 @@ public class CommerceChannelServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String filterType, String type,
+		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceChannel(name, filterType, type,
-			typeSettingsProperties, serviceContext);
+				   .addCommerceChannel(name, type, typeSettingsProperties,
+			externalReferenceCode, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel deleteCommerceChannel(
@@ -75,6 +76,12 @@ public class CommerceChannelServiceUtil {
 		return getService().getCommerceChannels(start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannels(companyId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -85,13 +92,12 @@ public class CommerceChannelServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long commerceChannelId, String name, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceChannel(commerceChannelId, name, filterType,
-			type, typeSettingsProperties, serviceContext);
+				   .updateCommerceChannel(commerceChannelId, name, type,
+			typeSettingsProperties);
 	}
 
 	public static CommerceChannelService getService() {

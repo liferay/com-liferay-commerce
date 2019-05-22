@@ -35,12 +35,13 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String filterType, String type,
+		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceChannelService.addCommerceChannel(name, filterType,
-			type, typeSettingsProperties, serviceContext);
+		return _commerceChannelService.addCommerceChannel(name, type,
+			typeSettingsProperties, externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -70,6 +71,13 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 		return _commerceChannelService.getCommerceChannels(start, end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.getCommerceChannels(companyId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -82,12 +90,11 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long commerceChannelId, String name, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelService.updateCommerceChannel(commerceChannelId,
-			name, filterType, type, typeSettingsProperties, serviceContext);
+			name, type, typeSettingsProperties);
 	}
 
 	@Override

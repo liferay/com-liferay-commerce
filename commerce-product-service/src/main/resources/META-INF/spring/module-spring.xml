@@ -13,6 +13,9 @@
 	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelLocalServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CommerceChannelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CommerceChannelPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelRelLocalServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelRelLocalService" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelRelServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelRelService" />
+	<bean class="com.liferay.commerce.product.service.persistence.impl.CommerceChannelRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.product.service.impl.CPAttachmentFileEntryLocalServiceImpl" id="com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl" id="com.liferay.commerce.product.service.CPAttachmentFileEntryService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPAttachmentFileEntryPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryPersistence" parent="basePersistence" />

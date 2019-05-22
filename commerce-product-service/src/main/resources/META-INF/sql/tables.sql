@@ -370,6 +370,7 @@ create table CProduct (
 );
 
 create table CommerceCatalog (
+	externalReferenceCode VARCHAR(75) null,
 	commerceCatalogId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
@@ -377,10 +378,12 @@ create table CommerceCatalog (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name STRING null,
-	catalogDefaultLanguageId VARCHAR(75) null
+	catalogDefaultLanguageId VARCHAR(75) null,
+	system BOOLEAN
 );
 
 create table CommerceChannel (
+	externalReferenceCode VARCHAR(75) null,
 	commerceChannelId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
@@ -388,7 +391,18 @@ create table CommerceChannel (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	filterType VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	typeSettings VARCHAR(75) null
+);
+
+create table CommerceChannelRel (
+	commerceChannelRelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	commerceChannelId LONG
 );

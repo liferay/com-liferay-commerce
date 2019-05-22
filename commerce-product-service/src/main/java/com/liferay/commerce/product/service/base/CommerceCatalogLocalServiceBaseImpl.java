@@ -43,6 +43,7 @@ import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
 import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
 import com.liferay.commerce.product.service.persistence.CommerceChannelPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -64,6 +65,7 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalServiceImpl;
 import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
+import com.liferay.portal.kernel.service.persistence.CompanyPersistence;
 import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -144,11 +146,12 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	 *
 	 * @param commerceCatalog the commerce catalog
 	 * @return the commerce catalog that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public CommerceCatalog deleteCommerceCatalog(
-		CommerceCatalog commerceCatalog) {
+		CommerceCatalog commerceCatalog) throws PortalException {
 		return commerceCatalogPersistence.remove(commerceCatalog);
 	}
 
@@ -238,6 +241,19 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	@Override
 	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId) {
 		return commerceCatalogPersistence.fetchByPrimaryKey(commerceCatalogId);
+	}
+
+	/**
+	 * Returns the commerce catalog with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce catalog's external reference code
+	 * @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
+	 */
+	@Override
+	public CommerceCatalog fetchCommerceCatalogByReferenceCode(long companyId,
+		String externalReferenceCode) {
+		return commerceCatalogPersistence.fetchByC_ERC(companyId, null);
 	}
 
 	/**
@@ -417,6 +433,44 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	public void setCommerceChannelPersistence(
 		CommerceChannelPersistence commerceChannelPersistence) {
 		this.commerceChannelPersistence = commerceChannelPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel rel local service.
+	 *
+	 * @return the commerce channel rel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelRelLocalService getCommerceChannelRelLocalService() {
+		return commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel rel local service.
+	 *
+	 * @param commerceChannelRelLocalService the commerce channel rel local service
+	 */
+	public void setCommerceChannelRelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelRelLocalService commerceChannelRelLocalService) {
+		this.commerceChannelRelLocalService = commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel rel persistence.
+	 *
+	 * @return the commerce channel rel persistence
+	 */
+	public CommerceChannelRelPersistence getCommerceChannelRelPersistence() {
+		return commerceChannelRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel rel persistence.
+	 *
+	 * @param commerceChannelRelPersistence the commerce channel rel persistence
+	 */
+	public void setCommerceChannelRelPersistence(
+		CommerceChannelRelPersistence commerceChannelRelPersistence) {
+		this.commerceChannelRelPersistence = commerceChannelRelPersistence;
 	}
 
 	/**
@@ -1270,6 +1324,43 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the company local service.
+	 *
+	 * @return the company local service
+	 */
+	public com.liferay.portal.kernel.service.CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	/**
+	 * Sets the company local service.
+	 *
+	 * @param companyLocalService the company local service
+	 */
+	public void setCompanyLocalService(
+		com.liferay.portal.kernel.service.CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	/**
+	 * Returns the company persistence.
+	 *
+	 * @return the company persistence
+	 */
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	/**
+	 * Sets the company persistence.
+	 *
+	 * @param companyPersistence the company persistence
+	 */
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
+	}
+
+	/**
 	 * Returns the group local service.
 	 *
 	 * @return the group local service
@@ -1422,6 +1513,10 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	protected com.liferay.commerce.product.service.CommerceChannelLocalService commerceChannelLocalService;
 	@BeanReference(type = CommerceChannelPersistence.class)
 	protected CommerceChannelPersistence commerceChannelPersistence;
+	@BeanReference(type = com.liferay.commerce.product.service.CommerceChannelRelLocalService.class)
+	protected com.liferay.commerce.product.service.CommerceChannelRelLocalService commerceChannelRelLocalService;
+	@BeanReference(type = CommerceChannelRelPersistence.class)
+	protected CommerceChannelRelPersistence commerceChannelRelPersistence;
 	@BeanReference(type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class)
 	protected com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService cpAttachmentFileEntryLocalService;
 	@BeanReference(type = CPAttachmentFileEntryPersistence.class)
@@ -1512,6 +1607,10 @@ public abstract class CommerceCatalogLocalServiceBaseImpl
 	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
+	@ServiceReference(type = com.liferay.portal.kernel.service.CompanyLocalService.class)
+	protected com.liferay.portal.kernel.service.CompanyLocalService companyLocalService;
+	@ServiceReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
 	@ServiceReference(type = com.liferay.portal.kernel.service.GroupLocalService.class)
 	protected com.liferay.portal.kernel.service.GroupLocalService groupLocalService;
 	@ServiceReference(type = GroupPersistence.class)

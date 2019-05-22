@@ -58,6 +58,7 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceChannelId", getCommerceChannelId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -65,7 +66,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
-		attributes.put("filterType", getFilterType());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 
@@ -74,6 +74,13 @@ public class CommerceChannelWrapper implements CommerceChannel,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+				"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceChannelId = (Long)attributes.get("commerceChannelId");
 
 		if (commerceChannelId != null) {
@@ -114,12 +121,6 @@ public class CommerceChannelWrapper implements CommerceChannel,
 
 		if (name != null) {
 			setName(name);
-		}
-
-		String filterType = (String)attributes.get("filterType");
-
-		if (filterType != null) {
-			setFilterType(filterType);
 		}
 
 		String type = (String)attributes.get("type");
@@ -181,13 +182,13 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	}
 
 	/**
-	* Returns the filter type of this commerce channel.
+	* Returns the external reference code of this commerce channel.
 	*
-	* @return the filter type of this commerce channel
+	* @return the external reference code of this commerce channel
 	*/
 	@Override
-	public String getFilterType() {
-		return _commerceChannel.getFilterType();
+	public String getExternalReferenceCode() {
+		return _commerceChannel.getExternalReferenceCode();
 	}
 
 	/**
@@ -357,13 +358,13 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	}
 
 	/**
-	* Sets the filter type of this commerce channel.
+	* Sets the external reference code of this commerce channel.
 	*
-	* @param filterType the filter type of this commerce channel
+	* @param externalReferenceCode the external reference code of this commerce channel
 	*/
 	@Override
-	public void setFilterType(String filterType) {
-		_commerceChannel.setFilterType(filterType);
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceChannel.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

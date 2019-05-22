@@ -55,13 +55,14 @@ public class CommerceChannelLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String filterType, String type,
+		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceChannel(name, filterType, type,
-			typeSettingsProperties, serviceContext);
+				   .addCommerceChannel(name, type, typeSettingsProperties,
+			externalReferenceCode, serviceContext);
 	}
 
 	/**
@@ -97,6 +98,10 @@ public class CommerceChannelLocalServiceUtil {
 		long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCommerceChannel(commerceChannelId);
+	}
+
+	public static void deleteCommerceChannels(long companyId) {
+		getService().deleteCommerceChannels(companyId);
 	}
 
 	/**
@@ -191,6 +196,20 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().fetchCommerceChannel(commerceChannelId);
 	}
 
+	/**
+	* Returns the commerce channel with the matching external reference code and company.
+	*
+	* @param companyId the primary key of the company
+	* @param externalReferenceCode the commerce channel's external reference code
+	* @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
+	*/
+	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelByReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchCommerceChannelByReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}
@@ -222,6 +241,11 @@ public class CommerceChannelLocalServiceUtil {
 	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
 		int start, int end) {
 		return getService().getCommerceChannels(start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> getCommerceChannels(
+		long companyId) {
+		return getService().getCommerceChannels(companyId);
 	}
 
 	/**
@@ -264,13 +288,12 @@ public class CommerceChannelLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String filterType, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		long commerceChannelId, String name, String type,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceChannel(commerceChannelId, name, filterType,
-			type, typeSettingsProperties, serviceContext);
+				   .updateCommerceChannel(commerceChannelId, name, type,
+			typeSettingsProperties);
 	}
 
 	public static CommerceChannelLocalService getService() {

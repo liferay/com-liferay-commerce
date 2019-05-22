@@ -74,8 +74,9 @@ public interface CProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CProduct addCProduct(CProduct cProduct);
 
-	public CProduct addCProduct(String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+	public CProduct addCProduct(long groupId, long userId,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new c product with the primary key. Does not add the c product to the database.

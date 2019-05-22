@@ -34,6 +34,7 @@ public class CommerceChannelSoap implements Serializable {
 	public static CommerceChannelSoap toSoapModel(CommerceChannel model) {
 		CommerceChannelSoap soapModel = new CommerceChannelSoap();
 
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceChannelId(model.getCommerceChannelId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -41,7 +42,6 @@ public class CommerceChannelSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
-		soapModel.setFilterType(model.getFilterType());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 
@@ -96,6 +96,14 @@ public class CommerceChannelSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCommerceChannelId(pk);
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceChannelId() {
@@ -154,14 +162,6 @@ public class CommerceChannelSoap implements Serializable {
 		_name = name;
 	}
 
-	public String getFilterType() {
-		return _filterType;
-	}
-
-	public void setFilterType(String filterType) {
-		_filterType = filterType;
-	}
-
 	public String getType() {
 		return _type;
 	}
@@ -178,6 +178,7 @@ public class CommerceChannelSoap implements Serializable {
 		_typeSettings = typeSettings;
 	}
 
+	private String _externalReferenceCode;
 	private long _commerceChannelId;
 	private long _companyId;
 	private long _userId;
@@ -185,7 +186,6 @@ public class CommerceChannelSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
-	private String _filterType;
 	private String _type;
 	private String _typeSettings;
 }

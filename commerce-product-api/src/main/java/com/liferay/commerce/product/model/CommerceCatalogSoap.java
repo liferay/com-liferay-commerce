@@ -34,6 +34,7 @@ public class CommerceCatalogSoap implements Serializable {
 	public static CommerceCatalogSoap toSoapModel(CommerceCatalog model) {
 		CommerceCatalogSoap soapModel = new CommerceCatalogSoap();
 
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceCatalogId(model.getCommerceCatalogId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -42,6 +43,7 @@ public class CommerceCatalogSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setCatalogDefaultLanguageId(model.getCatalogDefaultLanguageId());
+		soapModel.setSystem(model.isSystem());
 
 		return soapModel;
 	}
@@ -94,6 +96,14 @@ public class CommerceCatalogSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCommerceCatalogId(pk);
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceCatalogId() {
@@ -160,6 +170,19 @@ public class CommerceCatalogSoap implements Serializable {
 		_catalogDefaultLanguageId = catalogDefaultLanguageId;
 	}
 
+	public boolean getSystem() {
+		return _system;
+	}
+
+	public boolean isSystem() {
+		return _system;
+	}
+
+	public void setSystem(boolean system) {
+		_system = system;
+	}
+
+	private String _externalReferenceCode;
 	private long _commerceCatalogId;
 	private long _companyId;
 	private long _userId;
@@ -168,4 +191,5 @@ public class CommerceCatalogSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _catalogDefaultLanguageId;
+	private boolean _system;
 }

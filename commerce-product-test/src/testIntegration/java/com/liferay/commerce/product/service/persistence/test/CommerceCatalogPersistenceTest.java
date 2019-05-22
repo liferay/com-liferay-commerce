@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -55,6 +56,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -122,6 +124,8 @@ public class CommerceCatalogPersistenceTest {
 
 		CommerceCatalog newCommerceCatalog = _persistence.create(pk);
 
+		newCommerceCatalog.setExternalReferenceCode(RandomTestUtil.randomString());
+
 		newCommerceCatalog.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceCatalog.setUserId(RandomTestUtil.nextLong());
@@ -136,10 +140,14 @@ public class CommerceCatalogPersistenceTest {
 
 		newCommerceCatalog.setCatalogDefaultLanguageId(RandomTestUtil.randomString());
 
+		newCommerceCatalog.setSystem(RandomTestUtil.randomBoolean());
+
 		_commerceCatalogs.add(_persistence.update(newCommerceCatalog));
 
 		CommerceCatalog existingCommerceCatalog = _persistence.findByPrimaryKey(newCommerceCatalog.getPrimaryKey());
 
+		Assert.assertEquals(existingCommerceCatalog.getExternalReferenceCode(),
+			newCommerceCatalog.getExternalReferenceCode());
 		Assert.assertEquals(existingCommerceCatalog.getCommerceCatalogId(),
 			newCommerceCatalog.getCommerceCatalogId());
 		Assert.assertEquals(existingCommerceCatalog.getCompanyId(),
@@ -158,6 +166,8 @@ public class CommerceCatalogPersistenceTest {
 			newCommerceCatalog.getName());
 		Assert.assertEquals(existingCommerceCatalog.getCatalogDefaultLanguageId(),
 			newCommerceCatalog.getCatalogDefaultLanguageId());
+		Assert.assertEquals(existingCommerceCatalog.isSystem(),
+			newCommerceCatalog.isSystem());
 	}
 
 	@Test
@@ -165,6 +175,23 @@ public class CommerceCatalogPersistenceTest {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
 		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountByC_S() throws Exception {
+		_persistence.countByC_S(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean());
+
+		_persistence.countByC_S(0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
 	}
 
 	@Test
@@ -191,9 +218,10 @@ public class CommerceCatalogPersistenceTest {
 
 	protected OrderByComparator<CommerceCatalog> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceCatalog",
-			"commerceCatalogId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true, "name",
-			true, "catalogDefaultLanguageId", true);
+			"externalReferenceCode", true, "commerceCatalogId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true,
+			"catalogDefaultLanguageId", true, "system", true);
 	}
 
 	@Test
@@ -390,10 +418,29 @@ public class CommerceCatalogPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceCatalog newCommerceCatalog = addCommerceCatalog();
+
+		_persistence.clearCache();
+
+		CommerceCatalog existingCommerceCatalog = _persistence.findByPrimaryKey(newCommerceCatalog.getPrimaryKey());
+
+		Assert.assertEquals(Long.valueOf(existingCommerceCatalog.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceCatalog,
+				"getOriginalCompanyId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCommerceCatalog.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(existingCommerceCatalog,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+	}
+
 	protected CommerceCatalog addCommerceCatalog() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceCatalog commerceCatalog = _persistence.create(pk);
+
+		commerceCatalog.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceCatalog.setCompanyId(RandomTestUtil.nextLong());
 
@@ -408,6 +455,8 @@ public class CommerceCatalogPersistenceTest {
 		commerceCatalog.setName(RandomTestUtil.randomString());
 
 		commerceCatalog.setCatalogDefaultLanguageId(RandomTestUtil.randomString());
+
+		commerceCatalog.setSystem(RandomTestUtil.randomBoolean());
 
 		_commerceCatalogs.add(_persistence.update(commerceCatalog));
 
