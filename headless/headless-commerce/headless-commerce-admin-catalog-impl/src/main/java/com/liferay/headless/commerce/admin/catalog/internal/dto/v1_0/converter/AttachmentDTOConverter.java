@@ -21,15 +21,17 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.File;
+import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -37,6 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	property = "model.class.name=com.liferay.commerce.product.model.CPAttachmentFileEntry",
@@ -83,18 +86,28 @@ public class AttachmentDTOConverter implements DTOConverter {
 			CPAttachmentFileEntry cpAttachmentFileEntry)
 		throws JSONException {
 
+		String cpAttachmentFileEntryJSON = cpAttachmentFileEntry.getJson();
+
+		if (Validator.isNull(cpAttachmentFileEntryJSON)) {
+			return Collections.emptyMap();
+		}
+
 		Map<String, String> options = new HashMap<>();
 
-		JSONObject jsonObject = _jsonFactory.createJSONObject(
-			cpAttachmentFileEntry.getJson());
+		JSONArray jsonArray = _jsonFactory.createJSONArray(
+			cpAttachmentFileEntryJSON);
 
-		Iterator<String> keys = jsonObject.keys();
+		jsonArray.forEach(
+			arrayElement -> {
+				JSONObject jsonObject = (JSONObject)arrayElement;
 
-		while (keys.hasNext()) {
-			String key = keys.next();
+				if (!jsonObject.has("key")) {
+					return;
+				}
 
-			options.put(key, jsonObject.getString(key));
-		}
+				options.put(
+					jsonObject.getString("key"), jsonObject.getString("value"));
+			});
 
 		return options;
 	}
