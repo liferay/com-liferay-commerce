@@ -28,7 +28,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.PlacedOrderItem;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
@@ -136,7 +135,6 @@ public class CommercePlacedOrderItemClayTable
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 				String price = StringPool.BLANK;
-				String discount = StringPool.BLANK;
 				String total = StringPool.BLANK;
 
 				CommerceMoney unitPriceMoney =
@@ -157,7 +155,8 @@ public class CommercePlacedOrderItemClayTable
 					commerceOrder.getCommerceCurrency(),
 					commerceOrderItem.getDiscountAmount());
 
-				discount = discountAmount.format(themeDisplay.getLocale());
+				String discount = discountAmount.format(
+					themeDisplay.getLocale());
 
 				String viewShipmentURL = null;
 
@@ -207,9 +206,6 @@ public class CommercePlacedOrderItemClayTable
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;

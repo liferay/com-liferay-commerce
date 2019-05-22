@@ -18,15 +18,21 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 
 import java.util.List;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceOrderHelper {
+
+	public String getFriendlyURL(
+			long commerceOrderId, ThemeDisplay themeDisplay)
+		throws PortalException;
 
 	public List<ObjectValuePair<Long, String>> getWorkflowTransitions(
 			long userId, CommerceOrder commerceOrder)

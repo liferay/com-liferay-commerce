@@ -1,0 +1,7 @@
+Bundle-Name: Liferay Commerce Order Content API
+Bundle-SymbolicName: com.liferay.commerce.order.content.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.commerce.order.content.constants,\
+	com.liferay.commerce.order.content.render,\
+	com.liferay.commerce.order.content.util

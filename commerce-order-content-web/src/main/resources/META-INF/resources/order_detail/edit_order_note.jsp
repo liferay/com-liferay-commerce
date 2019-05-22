@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrderNote commerceOrderNote = commerceOrderContentDisplayContext.getCommerceOrderNote();
+CommerceOrderNote commerceOrderNote = commerceOrderDetailHelper.getCommerceOrderNote(request);
 %>
 
 <portlet:actionURL name="editCommerceOrderNote" var="editCommerceOrderNoteActionURL">
@@ -65,7 +65,7 @@ CommerceOrderNote commerceOrderNote = commerceOrderContentDisplayContext.getComm
 			<aui:fieldset>
 				<aui:input autoFocus="<%= true %>" name="content" />
 
-				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrderNote.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES) %>">
+				<c:if test="<%= commerceOrderDetailHelper.hasPermission(commerceOrderNote.getCommerceOrderId(), CommerceOrderActionKeys.MANAGE_COMMERCE_ORDER_RESTRICTED_NOTES, request) %>">
 					<aui:input helpMessage="restricted-help" label="private" name="restricted" />
 				</c:if>
 			</aui:fieldset>

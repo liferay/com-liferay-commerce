@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
+CommerceOrder commerceOrder = commerceOrderDetailHelper.getCommerceOrder(request);
 
 CommerceAddress billingCommerceAddress = commerceOrder.getBillingAddress();
 CommerceAddress shippingCommerceAddress = commerceOrder.getShippingAddress();
 
-CommerceOrderPrice commerceOrderPrice = commerceOrderContentDisplayContext.getCommerceOrderPrice();
+CommerceOrderPrice commerceOrderPrice = commerceOrderDetailHelper.getCommerceOrderPrice(request);
 
 CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
 CommerceDiscountValue shippingDiscountValue = commerceOrderPrice.getShippingDiscountValue();
@@ -34,11 +34,7 @@ CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
 CommerceDiscountValue totalDiscountValue = commerceOrderPrice.getTotalDiscountValue();
 CommerceMoney totalOrder = commerceOrderPrice.getTotal();
 
-CommerceAccount commerceAccount = commerceOrderContentDisplayContext.getCommerceAccount();
-
-if (commerceOrder != null) {
-	commerceAccount = commerceOrder.getCommerceAccount();
-}
+CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 %>
 
 <div class="commerce-panel">
@@ -94,8 +90,8 @@ if (commerceOrder != null) {
 				<dl class="commerce-list">
 					<dt><liferay-ui:message key="order-date" /></dt>
 					<dd>
-						<%= commerceOrderContentDisplayContext.getCommerceOrderDate(commerceOrder) %>
-						<%= commerceOrderContentDisplayContext.getCommerceOrderTime(commerceOrder) %>
+						<%= commerceOrderDetailHelper.getCommerceOrderDate(commerceOrder, request) %>
+						<%= commerceOrderDetailHelper.getCommerceOrderTime(commerceOrder, request) %>
 					</dd>
 				</dl>
 			</div>
@@ -155,9 +151,7 @@ if (commerceOrder != null) {
 </div>
 
 <div class="commerce-cta is-visible">
-	<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL">
-		<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderDetails" />
-	</portlet:actionURL>
+	<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL" />
 
 	<aui:form action="<%= editCommerceOrderActionURL %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" />
@@ -173,8 +167,8 @@ if (commerceOrder != null) {
 			dataProviderKey="commercePlacedOrderItems"
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"
-			pageNumber="1"
-			portletURL="<%= commerceOrderContentDisplayContext.getPortletURL() %>"
+			pageNumber="<%= 1 %>"
+			portletURL="<%= currentURLObj %>"
 			tableName="commercePlacedOrderItems"
 		/>
 	</div>
@@ -200,7 +194,7 @@ if (commerceOrder != null) {
 						<dt><liferay-ui:message key="subtotal-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(subtotalDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(subtotalDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 
 					<dt><liferay-ui:message key="delivery" /></dt>
@@ -215,7 +209,7 @@ if (commerceOrder != null) {
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(shippingDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(shippingDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 
 					<dt><liferay-ui:message key="tax" /></dt>
@@ -230,7 +224,7 @@ if (commerceOrder != null) {
 						<dt><liferay-ui:message key="delivery-discount" /></dt>
 						<dd class="text-right"><%= HtmlUtil.escape(totalDiscountAmount.format(locale)) %></dd>
 						<dt></dt>
-						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderContentDisplayContext.getFormattedPercentage(totalDiscountValue.getDiscountPercentage())) %></dd>
+						<dd class="text-right"><%= HtmlUtil.escape(commerceOrderDetailHelper.getFormattedPercentage(totalDiscountValue.getDiscountPercentage(), request)) %></dd>
 					</c:if>
 				</dl>
 			</div>

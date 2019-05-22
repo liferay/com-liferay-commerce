@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceOrderDetailHelper commerceOrderDetailHelper = (CommerceOrderDetailHelper)request.getAttribute(CommerceOrderDetailWebKeys.COMMERCE_ORDER_DETAIL_HELPER);
 
-CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrder();
+CommerceOrder commerceOrder = commerceOrderDetailHelper.getCommerceOrder(request);
 %>
 
 <div class="b2b-portlet-content-header">
@@ -37,7 +37,7 @@ CommerceOrder commerceOrder = commerceOrderContentDisplayContext.getCommerceOrde
 	<%
 	Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 
-	for (CommerceOrderNote commerceOrderNote : commerceOrderContentDisplayContext.getCommerceOrderNotes(commerceOrder)) {
+	for (CommerceOrderNote commerceOrderNote : commerceOrderDetailHelper.getCommerceOrderNotes(commerceOrder.getCommerceOrderId(), request)) {
 	%>
 
 		<article class="commerce-panel">

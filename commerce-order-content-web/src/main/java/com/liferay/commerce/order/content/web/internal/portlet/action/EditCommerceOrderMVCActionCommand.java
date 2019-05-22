@@ -58,6 +58,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_CART_CONTENT_MINI,
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_CONTENT,
+		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_ORDER_DETAIL,
 		"mvc.command.name=editCommerceOrder"
 	},
 	service = MVCActionCommand.class

@@ -40,6 +40,19 @@
 	{
 		"hidden": true,
 		"layoutTemplateId": "1_column",
+		"name": "Order Detail",
+		"portlets": [
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderDetailPortlet"
+			}
+		],
+		"privateLayout": true
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "1_column",
 		"name": "Product Detail",
 		"portlets": [
 			{
