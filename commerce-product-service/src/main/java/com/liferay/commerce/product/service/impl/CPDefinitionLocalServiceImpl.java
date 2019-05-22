@@ -35,7 +35,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
@@ -54,6 +53,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
@@ -124,81 +124,7 @@ public class CPDefinitionLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, boolean hasDefaultInstance,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		String defaultSku = null;
-
-		if (hasDefaultInstance) {
-			defaultSku = CPInstanceConstants.DEFAULT_SKU;
-		}
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, StringPool.BLANK, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, CPInstanceConstants.DEFAULT_SKU, serviceContext);
-	}
-
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -223,8 +149,7 @@ public class CPDefinitionLocalServiceImpl
 
 		// Commerce product definition
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
 		Date displayDate = null;
 		Date expirationDate = null;
@@ -251,14 +176,8 @@ public class CPDefinitionLocalServiceImpl
 		CPDefinition cpDefinition = cpDefinitionPersistence.create(
 			cpDefinitionId);
 
-		ServiceContext cProductServiceContext = new ServiceContext();
-
-		cProductServiceContext.setScopeGroupId(
-			serviceContext.getScopeGroupId());
-		cProductServiceContext.setUserId(serviceContext.getUserId());
-
 		CProduct cProduct = cProductLocalService.addCProduct(
-			externalReferenceCode, cProductServiceContext);
+			groupId, userId, externalReferenceCode, new ServiceContext());
 
 		cpDefinition.setUuid(serviceContext.getUuid());
 		cpDefinition.setGroupId(groupId);
@@ -358,103 +277,6 @@ public class CPDefinitionLocalServiceImpl
 
 		return startWorkflowInstance(
 			user.getUserId(), cpDefinition, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSku,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, StringPool.BLANK, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSku,
-			String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, defaultSku, false, 1, StringPool.BLANK, null, 0,
-			externalReferenceCode, serviceContext);
-	}
-
-	@Override
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, String ddmStructureKey,
-			boolean published, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return cpDefinitionLocalService.addCPDefinition(
-			nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaDescriptionMap, metaKeywordsMap, productTypeName,
-			ignoreSKUCombinations, true, false, false, 0, 0, 0, 0, 0, 0, false,
-			false, ddmStructureKey, published, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			serviceContext);
 	}
 
 	@Override
@@ -1065,8 +887,8 @@ public class CPDefinitionLocalServiceImpl
 			assetCategoryLocalService.getAssetCategory(categoryId);
 
 		SearchContext searchContext = buildSearchContext(
-			assetCategory.getCompanyId(), assetCategory.getGroupId(), null,
-			WorkflowConstants.STATUS_ANY, start, end, null);
+			assetCategory.getCompanyId(), null, WorkflowConstants.STATUS_ANY,
+			start, end, null);
 
 		searchContext.setAssetCategoryIds(new long[] {categoryId});
 
@@ -1109,9 +931,8 @@ public class CPDefinitionLocalServiceImpl
 			assetCategoryLocalService.getAssetCategory(categoryId);
 
 		SearchContext searchContext = buildSearchContext(
-			assetCategory.getCompanyId(), assetCategory.getGroupId(), null,
-			WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+			assetCategory.getCompanyId(), null, WorkflowConstants.STATUS_ANY,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		searchContext.setAssetCategoryIds(new long[] {categoryId});
 
@@ -1502,25 +1323,25 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, keywords, status, start, end, sort);
 
 		return searchCPDefinitions(searchContext);
 	}
 
 	@Override
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, String filterFields,
+			long companyId, String keywords, String filterFields,
 			String filterValues, int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, WorkflowConstants.STATUS_ANY, start,
-			end, sort);
+			companyId, keywords, WorkflowConstants.STATUS_ANY, start, end,
+			sort);
 
 		List<Facet> facets = getFacets(
 			filterFields, filterValues, searchContext);
@@ -1536,8 +1357,11 @@ public class CPDefinitionLocalServiceImpl
 			String[] assetTagNames, long[] assetLinkEntryIds, Double priority)
 		throws PortalException {
 
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			cpDefinition.getCompanyId());
+
 		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
-			userId, cpDefinition.getGroupId(), cpDefinition.getCreateDate(),
+			userId, companyGroup.getGroupId(), cpDefinition.getCreateDate(),
 			cpDefinition.getModifiedDate(), CPDefinition.class.getName(),
 			cpDefinition.getCPDefinitionId(), cpDefinition.getUuid(), 0,
 			assetCategoryIds, assetTagNames, true, true, null, null,
@@ -1961,7 +1785,7 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public CPDefinition upsertCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -1977,8 +1801,11 @@ public class CPDefinitionLocalServiceImpl
 			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSKU,
-			String externalReferenceCode, ServiceContext serviceContext)
+			boolean neverExpire, String defaultSku, boolean subscriptionEnabled,
+			int subscriptionLength, String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CPDefinition cpDefinition;
@@ -1988,8 +1815,8 @@ public class CPDefinitionLocalServiceImpl
 
 		if (cProduct == null) {
 			cpDefinition = cpDefinitionLocalService.addCPDefinition(
-				nameMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-				metaTitleMap, metaDescriptionMap, metaKeywordsMap,
+				groupId, userId, nameMap, shortDescriptionMap, descriptionMap,
+				urlTitleMap, metaTitleMap, metaDescriptionMap, metaKeywordsMap,
 				productTypeName, ignoreSKUCombinations, shippable, freeShipping,
 				shipSeparately, shippingExtraPrice, width, height, depth,
 				weight, cpTaxCategoryId, taxExempt, telcoOrElectronics,
@@ -1997,7 +1824,9 @@ public class CPDefinitionLocalServiceImpl
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, neverExpire,
-				defaultSKU, externalReferenceCode, serviceContext);
+				defaultSku, subscriptionEnabled, subscriptionLength,
+				subscriptionType, subscriptionTypeSettingsProperties,
+				maxSubscriptionCycles, externalReferenceCode, serviceContext);
 		}
 		else {
 			cpDefinition = cpDefinitionLocalService.updateCPDefinition(
@@ -2017,8 +1846,8 @@ public class CPDefinitionLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int status, int start,
-		int end, Sort sort) {
+		long companyId, String keywords, int status, int start, int end,
+		Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -2040,7 +1869,6 @@ public class CPDefinitionLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
