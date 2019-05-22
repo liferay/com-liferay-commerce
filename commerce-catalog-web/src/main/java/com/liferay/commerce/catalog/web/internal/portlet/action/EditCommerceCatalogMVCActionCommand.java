@@ -17,7 +17,6 @@ package com.liferay.commerce.catalog.web.internal.portlet.action;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -27,15 +26,12 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -89,10 +85,7 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				String redirect = getSaveAndContinueRedirect(
-					actionRequest, updateCommerceCatalog(actionRequest));
-
-				sendRedirect(actionRequest, actionResponse, redirect);
+				updateCommerceCatalog(actionRequest);
 			}
 		}
 		catch (PrincipalException pe) {
@@ -100,27 +93,6 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 
 			actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 		}
-	}
-
-	protected String getSaveAndContinueRedirect(
-			ActionRequest actionRequest, CommerceCatalog commerceCatalog)
-		throws PortalException {
-
-		PortletURL portletURL = _portal.getControlPanelPortletURL(
-			actionRequest, CPPortletKeys.COMMERCE_CATALOGS,
-			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceCatalog");
-
-		portletURL.setParameter(
-			"commerceCatalogId",
-			String.valueOf(commerceCatalog.getCommerceCatalogId()));
-
-		String backURL = ParamUtil.getString(actionRequest, "backURL");
-
-		portletURL.setParameter("backURL", backURL);
-
-		return portletURL.toString();
 	}
 
 	protected CommerceCatalog updateCommerceCatalog(ActionRequest actionRequest)
@@ -138,18 +110,14 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceCatalogId <= 0) {
 			return _commerceCatalogService.addCommerceCatalog(
-				nameMap, catalogDefaultLanguageId, serviceContext);
+				nameMap, catalogDefaultLanguageId, null, serviceContext);
 		}
 
 		return _commerceCatalogService.updateCommerceCatalog(
-			commerceCatalogId, catalogDefaultLanguageId, nameMap,
-			serviceContext);
+			commerceCatalogId, nameMap, catalogDefaultLanguageId);
 	}
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
-	private Portal _portal;
 
 }
