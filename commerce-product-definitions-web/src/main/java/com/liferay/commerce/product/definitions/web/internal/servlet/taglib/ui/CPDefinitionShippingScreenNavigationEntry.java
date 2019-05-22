@@ -22,6 +22,7 @@ import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefiniti
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -107,24 +108,18 @@ public class CPDefinitionShippingScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		try {
-			CPDefinitionShippingInfoDisplayContext
-				cpDefinitionShippingInfoDisplayContext =
-					new CPDefinitionShippingInfoDisplayContext(
-						_actionHelper, httpServletRequest,
-						_commerceCurrencyLocalService, _cpDefinitionHelper,
-						_cpDefinitionModelResourcePermission,
-						_cpDefinitionService, _itemSelector,
-						_portletResourcePermission,
-						_cpMeasurementUnitLocalService);
+		CPDefinitionShippingInfoDisplayContext
+			cpDefinitionShippingInfoDisplayContext =
+				new CPDefinitionShippingInfoDisplayContext(
+					_actionHelper, httpServletRequest, _commerceCatalogService,
+					_commerceCurrencyLocalService, _cpDefinitionHelper,
+					_cpDefinitionModelResourcePermission, _cpDefinitionService,
+					_itemSelector, _portletResourcePermission,
+					_cpMeasurementUnitLocalService);
 
-			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				cpDefinitionShippingInfoDisplayContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		httpServletRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
+			cpDefinitionShippingInfoDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_setServletContext, httpServletRequest, httpServletResponse,
@@ -136,6 +131,9 @@ public class CPDefinitionShippingScreenNavigationEntry
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;

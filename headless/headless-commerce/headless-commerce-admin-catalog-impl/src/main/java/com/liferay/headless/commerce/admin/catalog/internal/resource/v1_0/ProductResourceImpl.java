@@ -18,6 +18,7 @@ import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
@@ -25,6 +26,7 @@ import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.service.CPOptionService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
@@ -499,10 +501,19 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		ProductShippingConfiguration shippingConfiguration =
 			product.getShippingConfiguration();
+		ProductSubscriptionConfiguration subscriptionConfiguration =
+			product.getSubscriptionConfiguration();
 		ProductTaxConfiguration taxConfiguration =
 			product.getTaxConfiguration();
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				contextCompany.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
+			commerceCatalog.getCommerceCatalogGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(product.getShortDescription()),
 			LanguageUtils.getLocalizedMap(product.getDescription()), null,
@@ -527,6 +538,13 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
 			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
 			neverExpire, product.getDefaultSku(),
+			GetterUtil.getBoolean(subscriptionConfiguration.getEnable(), false),
+			GetterUtil.getInteger(subscriptionConfiguration.getLength(), 0),
+			GetterUtil.getString(
+				subscriptionConfiguration.getSubscriptionTypeAsString()),
+			null,
+			GetterUtil.getLong(
+				subscriptionConfiguration.getNumberOfLength(), 0L),
 			product.getExternalReferenceCode(), serviceContext);
 
 		// Workflow
@@ -559,6 +577,9 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
