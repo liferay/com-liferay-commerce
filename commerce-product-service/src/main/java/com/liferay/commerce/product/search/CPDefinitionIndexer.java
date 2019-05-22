@@ -26,11 +26,15 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -75,11 +79,16 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = Indexer.class)
 public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	public static final String CLASS_NAME = CPDefinition.class.getName();
+
+	public static final String FIELD_CHANNEL_IDS = "channelIds";
+
+	public static final String FIELD_CHANNEL_NAMES = "channelNames";
 
 	public static final String FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID =
 		"defaultImageFileEntryId";
@@ -332,6 +341,27 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addText(
 			FIELD_SHORT_DESCRIPTION,
 			cpDefinition.getShortDescription(cpDefinitionDefaultLanguageId));
+
+		List<Long> channelIds = new ArrayList<>();
+		List<String> channelNames = new ArrayList<>();
+
+		for (CommerceChannelRel commerceChannelRel :
+				_commerceChannelRelLocalService.getCommerceChannelRels(
+					cpDefinition.getModelClassName(),
+					cpDefinition.getCPDefinitionId(), QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
+			CommerceChannel commerceChannel =
+				commerceChannelRel.getCommerceChannel();
+
+			channelIds.add(commerceChannel.getCommerceChannelId());
+			channelNames.add(commerceChannel.getName());
+		}
+
+		document.addNumber(
+			FIELD_CHANNEL_IDS, ArrayUtil.toLongArray(channelIds));
+		document.addNumber(
+			FIELD_CHANNEL_NAMES, ArrayUtil.toStringArray(channelNames));
 
 		List<String> optionNames = new ArrayList<>();
 		List<Long> optionIds = new ArrayList<>();
@@ -645,6 +675,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceMediaResolver _commerceMediaResolver;
