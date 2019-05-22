@@ -19,7 +19,6 @@ import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -33,8 +32,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -90,10 +87,7 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				String redirect = getSaveAndContinueRedirect(
-					actionRequest, updateCommerceChannel(actionRequest));
-
-				sendRedirect(actionRequest, actionResponse, redirect);
+				updateCommerceChannel(actionRequest);
 			}
 		}
 		catch (PrincipalException pe) {
@@ -103,41 +97,13 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		}
 	}
 
-	protected String getSaveAndContinueRedirect(
-			ActionRequest actionRequest, CommerceChannel commerceChannel)
-		throws PortalException {
-
-		PortletURL portletURL = _portal.getControlPanelPortletURL(
-			actionRequest, CPPortletKeys.COMMERCE_CHANNELS,
-			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter(
-			"commerceChannelId",
-			String.valueOf(commerceChannel.getCommerceChannelId()));
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
-
-		String backURL = ParamUtil.getString(actionRequest, "backURL");
-
-		portletURL.setParameter("backURL", backURL);
-
-		return portletURL.toString();
-	}
-
 	protected CommerceChannel updateCommerceChannel(ActionRequest actionRequest)
 		throws Exception {
 
 		long commerceChannelId = ParamUtil.getLong(
 			actionRequest, "commerceChannelId");
+
 		String name = ParamUtil.getString(actionRequest, "name");
-
-		String filterType = "AND";
-
-		boolean orSearch = ParamUtil.getBoolean(actionRequest, "orSearch");
-
-		if (orSearch) {
-			filterType = "OR";
-		}
-
 		String type = ParamUtil.getString(actionRequest, "type");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -159,12 +125,11 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
-				name, filterType, type, typeSettingsProperties, serviceContext);
+				name, type, typeSettingsProperties, null, serviceContext);
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, name, filterType, type, typeSettingsProperties,
-			serviceContext);
+			commerceChannelId, name, type, typeSettingsProperties);
 	}
 
 	@Reference
