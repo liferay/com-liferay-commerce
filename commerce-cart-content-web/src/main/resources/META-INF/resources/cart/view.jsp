@@ -127,6 +127,29 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
+						name="unit-price"
+					>
+						<c:if test="<%= commerceCartContentDisplayContext.hasViewPricePermission() %>">
+
+							<%
+							CommerceMoney unitPriceMoney = commerceOrderItem.getUnitPriceMoney();
+							%>
+
+							<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
+						</c:if>
+					</liferay-ui:search-container-column-text>
+
+					<liferay-ui:search-container-column-text
+						cssClass="quantity-control-column"
+						name="quantity"
+					>
+						<liferay-commerce-cart:quantity-control
+							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
+							useSelect="<%= false %>"
+						/>
+					</liferay-ui:search-container-column-text>
+
+					<liferay-ui:search-container-column-text
 						name="price"
 					>
 						<c:if test="<%= commerceCartContentDisplayContext.hasViewPricePermission() %>">
@@ -151,16 +174,6 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 								url="<%= commerceCartContentDisplayContext.getDeleteURL(commerceOrderItem) %>"
 							/>
 						</c:if>
-					</liferay-ui:search-container-column-text>
-
-					<liferay-ui:search-container-column-text
-						cssClass="quantity-control-column"
-						name="quantity"
-					>
-						<liferay-commerce-cart:quantity-control
-							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
-							useSelect="<%= false %>"
-						/>
 					</liferay-ui:search-container-column-text>
 				</liferay-ui:search-container-row>
 
