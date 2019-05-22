@@ -21,6 +21,7 @@ import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefiniti
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -107,19 +108,15 @@ public class CPDefinitionDisplayPageScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		try {
-			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
-				new CPDefinitionsDisplayContext(
-					_actionHelper, httpServletRequest, _cpDefinitionHelper,
-					_cpDefinitionModelResourcePermission, _cpDefinitionService,
-					_itemSelector, _portletResourcePermission);
+		CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
+			new CPDefinitionsDisplayContext(
+				_actionHelper, httpServletRequest, _commerceCatalogService,
+				_cpDefinitionHelper, _cpDefinitionModelResourcePermission,
+				_cpDefinitionService, _itemSelector,
+				_portletResourcePermission);
 
-			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		httpServletRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_setServletContext, httpServletRequest, httpServletResponse,
@@ -131,6 +128,9 @@ public class CPDefinitionDisplayPageScreenNavigationEntry
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;

@@ -118,9 +118,9 @@ public class CPDefinitionItemSelectorViewDisplayContext
 
 		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
 			_cpDefinitionService.searchCPDefinitions(
-				cpRequestHelper.getCompanyId(), getScopeGroupId(),
-				getKeywords(), WorkflowConstants.STATUS_APPROVED,
-				searchContainer.getStart(), searchContainer.getEnd(), sort);
+				cpRequestHelper.getCompanyId(), getKeywords(),
+				WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(),
+				searchContainer.getEnd(), sort);
 
 		total = cpDefinitionBaseModelSearchResult.getLength();
 		results = cpDefinitionBaseModelSearchResult.getBaseModels();
