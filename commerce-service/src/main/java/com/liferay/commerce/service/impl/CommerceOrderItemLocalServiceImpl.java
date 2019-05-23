@@ -467,9 +467,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setPrintedNote(printedNote);
 		commerceOrderItem.setRequestedDeliveryDate(requestedDeliveryDate);
 
-		commerceOrderItemPersistence.update(commerceOrderItem);
-
-		return commerceOrderItem;
+		return commerceOrderItemPersistence.update(commerceOrderItem);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -495,9 +493,7 @@ public class CommerceOrderItemLocalServiceImpl
 		_setCommerceOrderItemDiscountValue(
 			commerceOrderItem, commerceProductPrice.getDiscountValue());
 
-		commerceOrderItemPersistence.update(commerceOrderItem);
-
-		return commerceOrderItem;
+		return commerceOrderItemPersistence.update(commerceOrderItem);
 	}
 
 	@Override

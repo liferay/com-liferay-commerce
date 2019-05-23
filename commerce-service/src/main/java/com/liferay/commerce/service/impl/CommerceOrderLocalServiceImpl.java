@@ -999,9 +999,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setPrintedNote(printedNote);
 		commerceOrder.setRequestedDeliveryDate(requestedDeliveryDate);
 
-		commerceOrderPersistence.update(commerceOrder);
-
-		return commerceOrder;
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
