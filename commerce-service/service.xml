@@ -356,6 +356,7 @@
 		<column name="discountPercentageLevel3" type="BigDecimal" />
 		<column name="discountPercentageLevel4" type="BigDecimal" />
 		<column name="subscription" type="boolean" />
+		<column name="bookedQuantityId" type="long" />
 
 		<!-- Order -->
 
