@@ -19,6 +19,10 @@ import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
@@ -26,8 +30,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingMethod;
-import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.model.CommerceWarehouseItem;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -41,8 +43,6 @@ import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
-import com.liferay.commerce.service.CommerceWarehouseItemLocalServiceUtil;
-import com.liferay.commerce.service.CommerceWarehouseLocalServiceUtil;
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalServiceUtil;
 import com.liferay.petra.string.StringPool;
@@ -115,10 +115,11 @@ public class CommerceTestUtil {
 
 		CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
-		CommerceWarehouse commerceWarehouse = addCommerceWarehouse(groupId);
+		CommerceInventoryWarehouse commerceWarehouse = addCommerceWarehouse(
+			groupId);
 
 		addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 10);
+			commerceWarehouse, cpInstance.getSku(), 10, userId);
 
 		addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -246,7 +247,7 @@ public class CommerceTestUtil {
 			serviceContext);
 	}
 
-	public static CommerceWarehouse addCommerceWarehouse(long groupId)
+	public static CommerceInventoryWarehouse addCommerceWarehouse(long groupId)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -258,42 +259,40 @@ public class CommerceTestUtil {
 		CommerceRegion commerceRegion = _setUpRegion(
 			commerceCountry, serviceContext);
 
-		return CommerceWarehouseLocalServiceUtil.addCommerceWarehouse(
+		return CommerceInventoryWarehouseLocalServiceUtil.addCommerceWarehouse(
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), commerceRegion.getCommerceRegionId(),
-			commerceCountry.getCommerceCountryId(), 45.4386111, 12.3266667,
+			RandomTestUtil.randomString(), commerceRegion.getCode(),
+			commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
 			serviceContext);
 	}
 
-	public static CommerceWarehouse addCommerceWarehouse(
+	public static CommerceInventoryWarehouse addCommerceWarehouse(
 			long groupId, String name)
 		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		return CommerceWarehouseLocalServiceUtil.addCommerceWarehouse(
+		return CommerceInventoryWarehouseLocalServiceUtil.addCommerceWarehouse(
 			name, RandomTestUtil.randomString(), true,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), 0, 0, RandomTestUtil.randomDouble(),
-			RandomTestUtil.randomDouble(), serviceContext);
+			RandomTestUtil.randomString(), null, null,
+			RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
+			serviceContext);
 	}
 
-	public static CommerceWarehouseItem addCommerceWarehouseItem(
-			CommerceWarehouse commerceWarehouse, long cpInstanceId,
-			int quantity)
+	public static CommerceInventoryWarehouseItem addCommerceWarehouseItem(
+			CommerceInventoryWarehouse commerceWarehouse, String sku,
+			int quantity, long userId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(
-				commerceWarehouse.getGroupId());
-
-		return CommerceWarehouseItemLocalServiceUtil.addCommerceWarehouseItem(
-			commerceWarehouse.getCommerceWarehouseId(), cpInstanceId, quantity,
-			serviceContext);
+		return CommerceInventoryWarehouseItemLocalServiceUtil.
+			addCommerceWarehouseItem(
+				commerceWarehouse.getCommerceInventoryWarehouseId(), sku,
+				quantity, userId);
 	}
 
 	public static CommerceAddress addUserCommerceAddress(
