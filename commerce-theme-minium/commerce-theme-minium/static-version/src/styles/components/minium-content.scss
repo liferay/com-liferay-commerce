@@ -7,4 +7,13 @@
 	padding: $minium-big-gutter;
 	padding-bottom: 104px;
 	width: 100%;
+
+	&--wide {
+		margin: 0 auto;
+		padding: 0;
+		max-width: 100%;
+		min-width: 100%;
+		width: 100%;
+		overflow-x: hidden;
+	}
 }

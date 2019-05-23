@@ -1,6 +1,7 @@
 <#assign
 	copyright = getterUtil.getString(themeDisplay.getThemeSetting("copyright"))
 	show_top_menu = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-top-menu"))
+	wide_layout = getterUtil.getBoolean(themeDisplay.getThemeSetting("wide-layout"))
 	userManagementUrl = commerceThemeMiniumHttpHelper.getAccountManagementPortletURL(request)
 	wishlistUrl = commerceWishListHttpHelper.getCommerceWishListPortletURL(request)
 	wish_lists_text = commerceThemeMiniumHttpHelper.getMyListsLabel(locale)
@@ -9,7 +10,14 @@
 	notification_url = commerceThemeMiniumHttpHelper.getNotificationsURL(request)
 	notification_count = commerceThemeMiniumHttpHelper.getNotificationsCount(themeDisplay)
 	back_url = paramUtil.getString(request, "p_r_p_backURL")
+	minium_content_css_class = "minium-content"
 />
+
+<#if wide_layout>
+	<#assign
+	minium_content_css_class = "minium-content minium-content--wide"
+	/>
+</#if>
 
 <#macro site_navigation_menu_main default_preferences = "">
 	<@liferay_portlet["runtime"]
