@@ -16,25 +16,24 @@ package com.liferay.commerce.account.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 
 /**
- * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public class CommerceAccountOrganizationRelImpl
-	extends CommerceAccountOrganizationRelBaseImpl {
+public class CommerceAccountGroupCommerceAccountRelImpl
+	extends CommerceAccountGroupCommerceAccountRelBaseImpl {
 
-	public CommerceAccountOrganizationRelImpl() {
+	public CommerceAccountGroupCommerceAccountRelImpl() {
 	}
 
 	@Override
-	public Organization getOrganization() throws PortalException {
-		return OrganizationLocalServiceUtil.getOrganization(
-			getOrganizationId());
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		return CommerceAccountLocalServiceUtil.getCommerceAccount(
+			getCommerceAccountId());
 	}
 
 }
