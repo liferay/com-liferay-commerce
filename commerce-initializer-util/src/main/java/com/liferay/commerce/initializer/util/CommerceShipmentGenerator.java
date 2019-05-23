@@ -21,7 +21,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceWarehouse;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalService;
@@ -53,7 +52,6 @@ import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -325,8 +323,6 @@ public class CommerceShipmentGenerator {
 		List<User> roleUsers = _userLocalService.getRoleUsers(role.getRoleId());
 
 		User user = roleUsers.get(0);
-
-		CPRulesThreadLocal.setCPRules(new ArrayList<>());
 
 		PermissionChecker permissionChecker = _permissionCheckerFactory.create(
 			user);

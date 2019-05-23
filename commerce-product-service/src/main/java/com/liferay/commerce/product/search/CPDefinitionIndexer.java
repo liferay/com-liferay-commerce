@@ -15,12 +15,7 @@
 package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.media.CommerceMediaResolver;
-import com.liferay.commerce.product.catalog.rule.CPRuleType;
-import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
-import com.liferay.commerce.product.configuration.CPRuleGroupServiceConfiguration;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
-import com.liferay.commerce.product.constants.CPRuleConstants;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -29,20 +24,17 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOption;
-import com.liferay.commerce.product.model.CPRule;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
@@ -55,15 +47,11 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -90,8 +78,6 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = Indexer.class)
 public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
-
-	public static final String ATTRIBUTE_FILTER_BY_CP_RULES = "filterByCPRules";
 
 	public static final String CLASS_NAME = CPDefinition.class.getName();
 
@@ -211,14 +197,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			contextBooleanFilter.add(linkFilter, BooleanClauseOccur.MUST);
 		}
 
-		if (GetterUtil.getBoolean(
-				attributes.get(ATTRIBUTE_FILTER_BY_CP_RULES))) {
-
-			long[] groupIds = searchContext.getGroupIds();
-
-			addCPRulesFilters(contextBooleanFilter, groupIds[0]);
-		}
-
 		if (attributes.containsKey("excludedCPDefinitionId")) {
 			String excludedCPDefinitionId = String.valueOf(
 				attributes.get("excludedCPDefinitionId"));
@@ -258,70 +236,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			if (Validator.isNotNull(expandoAttributes)) {
 				addSearchExpando(searchQuery, searchContext, expandoAttributes);
 			}
-		}
-	}
-
-	protected void addCPRulesFilters(BooleanFilter booleanFilter, long groupId)
-		throws PortalException {
-
-		Group group = _groupLocalService.getGroup(groupId);
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker.isCompanyAdmin(group.getCompanyId()) ||
-			permissionChecker.isGroupAdmin(groupId) ||
-			_portletResourcePermission.contains(
-				permissionChecker, groupId, CPActionKeys.MANAGE_CATALOG)) {
-
-			return;
-		}
-
-		List<CPRule> cpRules = CPRulesThreadLocal.getCPRules();
-
-		if (ListUtil.isEmpty(cpRules)) {
-			booleanFilter.addTerm(
-				Field.ENTRY_CLASS_PK, "-1", BooleanClauseOccur.MUST);
-		}
-		else {
-			BooleanFilter cpRulesBooleanFilter = new BooleanFilter();
-
-			BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.MUST;
-
-			try {
-				CPRuleGroupServiceConfiguration
-					cpRuleGroupServiceConfiguration =
-						_configurationProvider.getConfiguration(
-							CPRuleGroupServiceConfiguration.class,
-							new GroupServiceSettingsLocator(
-								groupId, CPRuleConstants.SERVICE_NAME));
-
-				if ((cpRuleGroupServiceConfiguration != null) &&
-					(cpRuleGroupServiceConfiguration.
-						catalogRuleApplicationType() ==
-							CPRuleConstants.APPLICATION_TYPE_ANY)) {
-
-					booleanClauseOccur = BooleanClauseOccur.SHOULD;
-				}
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-			}
-
-			for (CPRule cpRule : cpRules) {
-				BooleanFilter cpRuleBooleanFilter = new BooleanFilter();
-
-				CPRuleType cpRuleType = _cpRuleTypeRegistry.getCPRuleType(
-					cpRule.getType());
-
-				cpRuleType.postProcessContextBooleanFilter(
-					cpRuleBooleanFilter, cpRule);
-
-				cpRulesBooleanFilter.add(
-					cpRuleBooleanFilter, booleanClauseOccur);
-			}
-
-			booleanFilter.add(cpRulesBooleanFilter, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -635,10 +549,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			document.addKeyword(Field.HIDDEN, true);
 		}
 
-		for (CPRuleType cpRuleType : _cpRuleTypeRegistry.getCPRuleTypes()) {
-			cpRuleType.contributeDocument(document, cpDefinition);
-		}
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + cpDefinition + " indexed successfully");
 		}
@@ -756,9 +666,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;
-
-	@Reference
-	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference
 	private GroupLocalService _groupLocalService;

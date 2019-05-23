@@ -10,24 +10,6 @@ definition {
 		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryName}");
 	}
 
-	macro addNewCatalogRule {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
-
-		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
-
-		Select(locator1 = "Select#TYPE", value1 = "${catalogRuleType}");
-
-		Button.clickSave();
-
-		CommerceEntry.gotoMenuTab(menuTab = "Account groupss");
-
-		Click(locator1 = "Button#PLUS");
-
-		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
-
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
-	}
-
 	macro addNewCountriesEntry {
 		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 

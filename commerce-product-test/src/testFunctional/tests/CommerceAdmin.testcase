@@ -60,31 +60,6 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
-	test CreateNewCatalogRule {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCatalogRule";
-
-		CommerceEntry.createNewAccountGroup(
-			criteriaType = "Users",
-			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
-
-		ProductMenu.gotoPortlet(
-			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Catalog Rules"
-		);
-
-		Click(locator1 = "Button#PLUS");
-
-		CommerceEntry.addNewCatalogRule(
-			catalogRuleType = "All Products",
-			entryName = "New Catalog Rule",
-			accountGroup = "Account groups"
-		);
-	}
-
 	test CreateNewCountry {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCountry";

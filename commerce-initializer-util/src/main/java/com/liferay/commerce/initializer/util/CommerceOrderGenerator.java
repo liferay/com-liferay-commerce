@@ -38,7 +38,6 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
-import com.liferay.commerce.product.util.CPRulesThreadLocal;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
@@ -74,7 +73,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -456,8 +454,6 @@ public class CommerceOrderGenerator {
 		List<User> roleUsers = _userLocalService.getRoleUsers(role.getRoleId());
 
 		User user = roleUsers.get(0);
-
-		CPRulesThreadLocal.setCPRules(new ArrayList<>());
 
 		PermissionChecker permissionChecker = _permissionCheckerFactory.create(
 			user);

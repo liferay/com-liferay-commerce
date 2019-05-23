@@ -24,8 +24,6 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -33,7 +31,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,8 +44,7 @@ public class CommerceContextImpl implements CommerceContext {
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
 		CommercePriceListLocalService commercePriceListLocalService,
-		ConfigurationProvider configurationProvider,
-		CPRuleLocalService cpRuleLocalService) {
+		ConfigurationProvider configurationProvider) {
 
 		_groupId = groupId;
 		_userId = userId;
@@ -58,7 +54,6 @@ public class CommerceContextImpl implements CommerceContext {
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
 		_commercePriceListLocalService = commercePriceListLocalService;
-		_cpRuleLocalService = cpRuleLocalService;
 
 		try {
 			_commerceAccountGroupServiceConfiguration =
@@ -141,18 +136,6 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
-	public List<CPRule> getCPRules() throws PortalException {
-		if (_cpRules != null) {
-			return _cpRules;
-		}
-
-		_cpRules = _cpRuleLocalService.getCPRules(
-			_groupId, getCommerceAccountGroupIds());
-
-		return null;
-	}
-
-	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _groupId;
 	}
@@ -176,8 +159,6 @@ public class CommerceContextImpl implements CommerceContext {
 	private final CommerceOrderService _commerceOrderService;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
-	private final CPRuleLocalService _cpRuleLocalService;
-	private List<CPRule> _cpRules;
 	private final long _groupId;
 	private final long _orderId;
 	private final long _userId;
