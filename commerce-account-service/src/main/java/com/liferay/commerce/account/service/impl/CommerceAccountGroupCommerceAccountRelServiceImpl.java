@@ -14,29 +14,60 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupCommerceAccountRelServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce account group commerce account rel remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
- * @author Marco Leo
- * @see CommerceAccountGroupCommerceAccountRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountGroupCommerceAccountRelServiceImpl
 	extends CommerceAccountGroupCommerceAccountRelServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil} to access the commerce account group commerce account rel remote service.
-	 */
+	@Override
+	public CommerceAccountGroupCommerceAccountRel
+			addCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId,
+				ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAccountGroupCommerceAccountRelLocalService.
+			addCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupId, commerceAccountId, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountGroupCommerceAccountRel(
+			long commerceAccountGroupCommerceAccountRelId)
+		throws PortalException {
+
+		commerceAccountGroupCommerceAccountRelLocalService.
+			deleteCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupCommerceAccountRelId);
+	}
+
+	@Override
+	public List<CommerceAccountGroupCommerceAccountRel>
+			getCommerceAccountGroupCommerceAccountRels(
+				long commerceAccountGroupId, int start, int end)
+		throws PortalException {
+
+		return commerceAccountGroupCommerceAccountRelLocalService.
+			getCommerceAccountGroupCommerceAccountRels(
+				commerceAccountGroupId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountGroupCommerceAccountRelsCount(
+			long commerceAccountGroupId)
+		throws PortalException {
+
+		return commerceAccountGroupCommerceAccountRelLocalService.
+			getCommerceAccountGroupCommerceAccountRelsCount(
+				commerceAccountGroupId);
+	}
 
 }
