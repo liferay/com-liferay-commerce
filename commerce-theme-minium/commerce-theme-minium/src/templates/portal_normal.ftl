@@ -29,7 +29,7 @@
 		<div class="minium-frame__content js-scroll-area">
 			<a name="minium-top"></a>
 
-			<div class="minium-content">
+			<div class="${minium_content_css_class}">
 				<#if selectable>
 					<@liferay_util["include"] page=content_include />
 				<#else>
