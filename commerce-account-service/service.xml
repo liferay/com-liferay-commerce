@@ -124,6 +124,47 @@
 		<reference entity="Role" package-path="com.liferay.portal" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
+	<entity local-service="true" name="CommerceAccountGroupRel" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountGroupRelId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="commerceAccountGroupId" type="long" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="C_C_C" return-type="CommerceAccountGroupRel" unique="true">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="commerceAccountGroupId" />
+		</finder>
+	</entity>
 	<entity local-service="true" name="CommerceAccountOrganizationRel" remote-service="true">
 
 		<!-- PK fields -->
@@ -192,5 +233,6 @@
 		<exception>CommerceAccountName</exception>
 		<exception>CommerceAccountType</exception>
 		<exception>DuplicateCommerceAccount</exception>
+		<exception>DuplicateCommerceAccountGroupRel</exception>
 	</exceptions>
 </service-builder>
