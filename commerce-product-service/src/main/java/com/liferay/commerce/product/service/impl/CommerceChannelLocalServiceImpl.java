@@ -138,6 +138,11 @@ public class CommerceChannelLocalServiceImpl
 			commerceChannel.getCompanyId(), classNameId, commerceChannelId);
 	}
 
+	@Override
+	public List<Long> getUsedSiteGroupIds() {
+		return commerceChannelFinder.getUsedSiteGroupIds();
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel updateCommerceChannel(
