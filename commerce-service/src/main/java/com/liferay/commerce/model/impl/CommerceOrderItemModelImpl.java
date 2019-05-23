@@ -103,7 +103,8 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			{ "discountPercentageLevel2", Types.DECIMAL },
 			{ "discountPercentageLevel3", Types.DECIMAL },
 			{ "discountPercentageLevel4", Types.DECIMAL },
-			{ "subscription", Types.BOOLEAN }
+			{ "subscription", Types.BOOLEAN },
+			{ "bookedQuantityId", Types.BIGINT }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -132,9 +133,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel3", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel4", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("subscription", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("bookedQuantityId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,bookedQuantityId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceOrderItem.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceOrderItem.createDate ASC";
@@ -195,6 +197,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		model.setDiscountPercentageLevel3(soapModel.getDiscountPercentageLevel3());
 		model.setDiscountPercentageLevel4(soapModel.getDiscountPercentageLevel4());
 		model.setSubscription(soapModel.isSubscription());
+		model.setBookedQuantityId(soapModel.getBookedQuantityId());
 
 		return model;
 	}
@@ -284,6 +287,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		attributes.put("discountPercentageLevel3", getDiscountPercentageLevel3());
 		attributes.put("discountPercentageLevel4", getDiscountPercentageLevel4());
 		attributes.put("subscription", isSubscription());
+		attributes.put("bookedQuantityId", getBookedQuantityId());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -440,6 +444,12 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		if (subscription != null) {
 			setSubscription(subscription);
+		}
+
+		Long bookedQuantityId = (Long)attributes.get("bookedQuantityId");
+
+		if (bookedQuantityId != null) {
+			setBookedQuantityId(bookedQuantityId);
 		}
 	}
 
@@ -915,6 +925,17 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		return _originalSubscription;
 	}
 
+	@JSON
+	@Override
+	public long getBookedQuantityId() {
+		return _bookedQuantityId;
+	}
+
+	@Override
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_bookedQuantityId = bookedQuantityId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1031,6 +1052,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		commerceOrderItemImpl.setDiscountPercentageLevel3(getDiscountPercentageLevel3());
 		commerceOrderItemImpl.setDiscountPercentageLevel4(getDiscountPercentageLevel4());
 		commerceOrderItemImpl.setSubscription(isSubscription());
+		commerceOrderItemImpl.setBookedQuantityId(getBookedQuantityId());
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -1216,12 +1238,14 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 		commerceOrderItemCacheModel.subscription = isSubscription();
 
+		commerceOrderItemCacheModel.bookedQuantityId = getBookedQuantityId();
+
 		return commerceOrderItemCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -1271,6 +1295,8 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 		sb.append(getDiscountPercentageLevel4());
 		sb.append(", subscription=");
 		sb.append(isSubscription());
+		sb.append(", bookedQuantityId=");
+		sb.append(getBookedQuantityId());
 		sb.append("}");
 
 		return sb.toString();
@@ -1278,7 +1304,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceOrderItem");
@@ -1380,6 +1406,10 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 			"<column><column-name>subscription</column-name><column-value><![CDATA[");
 		sb.append(isSubscription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bookedQuantityId</column-name><column-value><![CDATA[");
+		sb.append(getBookedQuantityId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1427,6 +1457,7 @@ public class CommerceOrderItemModelImpl extends BaseModelImpl<CommerceOrderItem>
 	private boolean _subscription;
 	private boolean _originalSubscription;
 	private boolean _setOriginalSubscription;
+	private long _bookedQuantityId;
 	private long _columnBitmask;
 	private CommerceOrderItem _escapedModel;
 }

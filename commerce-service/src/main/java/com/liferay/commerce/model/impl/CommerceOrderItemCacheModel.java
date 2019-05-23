@@ -67,7 +67,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -117,6 +117,8 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		sb.append(discountPercentageLevel4);
 		sb.append(", subscription=");
 		sb.append(subscription);
+		sb.append(", bookedQuantityId=");
+		sb.append(bookedQuantityId);
 		sb.append("}");
 
 		return sb.toString();
@@ -194,6 +196,7 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		commerceOrderItemImpl.setDiscountPercentageLevel3(discountPercentageLevel3);
 		commerceOrderItemImpl.setDiscountPercentageLevel4(discountPercentageLevel4);
 		commerceOrderItemImpl.setSubscription(subscription);
+		commerceOrderItemImpl.setBookedQuantityId(bookedQuantityId);
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -237,6 +240,8 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		discountPercentageLevel4 = (BigDecimal)objectInput.readObject();
 
 		subscription = objectInput.readBoolean();
+
+		bookedQuantityId = objectInput.readLong();
 	}
 
 	@Override
@@ -307,6 +312,8 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 		objectOutput.writeObject(discountPercentageLevel4);
 
 		objectOutput.writeBoolean(subscription);
+
+		objectOutput.writeLong(bookedQuantityId);
 	}
 
 	public String externalReferenceCode;
@@ -333,4 +340,5 @@ public class CommerceOrderItemCacheModel implements CacheModel<CommerceOrderItem
 	public BigDecimal discountPercentageLevel3;
 	public BigDecimal discountPercentageLevel4;
 	public boolean subscription;
+	public long bookedQuantityId;
 }

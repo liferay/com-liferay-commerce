@@ -168,6 +168,7 @@
 		<field name="discountPercentageLevel3" type="BigDecimal" />
 		<field name="discountPercentageLevel4" type="BigDecimal" />
 		<field name="subscription" type="boolean" />
+		<field name="bookedQuantityId" type="long" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderNote">
 		<field name="externalReferenceCode" type="String" />

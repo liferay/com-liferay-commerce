@@ -84,6 +84,7 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		attributes.put("discountPercentageLevel3", getDiscountPercentageLevel3());
 		attributes.put("discountPercentageLevel4", getDiscountPercentageLevel4());
 		attributes.put("subscription", isSubscription());
+		attributes.put("bookedQuantityId", getBookedQuantityId());
 
 		return attributes;
 	}
@@ -238,6 +239,12 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		if (subscription != null) {
 			setSubscription(subscription);
 		}
+
+		Long bookedQuantityId = (Long)attributes.get("bookedQuantityId");
+
+		if (bookedQuantityId != null) {
+			setBookedQuantityId(bookedQuantityId);
+		}
 	}
 
 	@Override
@@ -253,6 +260,16 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 	@Override
 	public String[] getAvailableLanguageIds() {
 		return _commerceOrderItem.getAvailableLanguageIds();
+	}
+
+	/**
+	* Returns the booked quantity ID of this commerce order item.
+	*
+	* @return the booked quantity ID of this commerce order item
+	*/
+	@Override
+	public long getBookedQuantityId() {
+		return _commerceOrderItem.getBookedQuantityId();
 	}
 
 	@Override
@@ -684,6 +701,16 @@ public class CommerceOrderItemWrapper implements CommerceOrderItem,
 		java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.kernel.exception.LocaleException {
 		_commerceOrderItem.prepareLocalizedFieldsForImport(defaultImportLocale);
+	}
+
+	/**
+	* Sets the booked quantity ID of this commerce order item.
+	*
+	* @param bookedQuantityId the booked quantity ID of this commerce order item
+	*/
+	@Override
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_commerceOrderItem.setBookedQuantityId(bookedQuantityId);
 	}
 
 	@Override
