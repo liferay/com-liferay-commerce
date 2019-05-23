@@ -38,7 +38,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 	tableName="<%= CommerceAccountAddressClayTable.NAME %>"
 />
 
-<c:if test="<%= commerceAccountDisplayContext.hasManageCommerceAccountPermissions() %>">
+<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount, ActionKeys.UPDATE) %>">
 	<div class="commerce-cta is-visible">
 		<aui:button cssClass="commerce-button commerce-button--big js-add-address" onClick='<%= renderResponse.getNamespace() + "openAddressModal();" %>' value="add-address" />
 	</div>
