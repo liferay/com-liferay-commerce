@@ -24,8 +24,8 @@ import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.test.util.CommerceDiscountTestUtil;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -102,17 +102,19 @@ public class CommerceOrderDiscountTest {
 
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
-		CommerceWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceWarehouse =
 			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstanceDiscount.getCPInstanceId(), quantity);
+			commerceWarehouse, cpInstanceDiscount.getSku(), quantity,
+			_user.getUserId());
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstancePlain.getCPInstanceId(), quantity);
+			commerceWarehouse, cpInstancePlain.getSku(), quantity,
+			_user.getUserId());
 
 		CommerceDiscount commerceDiscount1 =
 			CommerceDiscountTestUtil.addFixedCommerceDiscount(
@@ -198,17 +200,19 @@ public class CommerceOrderDiscountTest {
 
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
-		CommerceWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceWarehouse =
 			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstanceDiscount.getCPInstanceId(), quantity);
+			commerceWarehouse, cpInstanceDiscount.getSku(), quantity,
+			_user.getUserId());
 
 		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstancePlain.getCPInstanceId(), quantity);
+			commerceWarehouse, cpInstancePlain.getSku(), quantity,
+			_user.getUserId());
 
 		CommerceDiscount commerceDiscount1 =
 			CommerceDiscountTestUtil.addFixedCommerceDiscount(
