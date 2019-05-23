@@ -362,6 +362,7 @@
 		<column name="shippingAddressId" type="long" />
 		<column name="printedNote" type="String" />
 		<column name="requestedDeliveryDate" type="Date" />
+		<column name="bookedQuantityId" type="long" />
 
 		<!-- Order -->
 
