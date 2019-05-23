@@ -55,13 +55,77 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 @ProviderType
 public class CommerceAccountGroupServiceHttp {
+	public static com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
+		HttpPrincipal httpPrincipal, String name, int type,
+		String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"addCommerceAccountGroup",
+					_addCommerceAccountGroupParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
+					type, externalReferenceCode, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccountGroup)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteCommerceAccountGroup(HttpPrincipal httpPrincipal,
+		long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"deleteCommerceAccountGroup",
+					_deleteCommerceAccountGroupParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountGroupId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroup getCommerceAccountGroup(
 		HttpPrincipal httpPrincipal, long commerceAccountGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"getCommerceAccountGroup",
-					_getCommerceAccountGroupParameterTypes0);
+					_getCommerceAccountGroupParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountGroupId);
@@ -88,8 +152,198 @@ public class CommerceAccountGroupServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroups(
+		HttpPrincipal httpPrincipal, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"getCommerceAccountGroups",
+					_getCommerceAccountGroupsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCommerceAccountGroupsCount(
+		HttpPrincipal httpPrincipal, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"getCommerceAccountGroupsCount",
+					_getCommerceAccountGroupsCountParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> searchCommerceAccountGroups(
+		HttpPrincipal httpPrincipal, long companyId, String keywords,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"searchCommerceAccountGroups",
+					_searchCommerceAccountGroupsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, keywords, start, end, sort);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int searchCommerceAccountsGroupCount(
+		HttpPrincipal httpPrincipal, long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"searchCommerceAccountsGroupCount",
+					_searchCommerceAccountsGroupCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, keywords);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroup updateCommerceAccountGroup(
+		HttpPrincipal httpPrincipal, long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"updateCommerceAccountGroup",
+					_updateCommerceAccountGroupParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					commerceAccountGroupId, name, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccountGroup)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceAccountGroupServiceHttp.class);
-	private static final Class<?>[] _getCommerceAccountGroupParameterTypes0 = new Class[] {
+	private static final Class<?>[] _addCommerceAccountGroupParameterTypes0 = new Class[] {
+			String.class, int.class, String.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteCommerceAccountGroupParameterTypes1 = new Class[] {
 			long.class
+		};
+	private static final Class<?>[] _getCommerceAccountGroupParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCommerceAccountGroupsParameterTypes3 = new Class[] {
+			long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCommerceAccountGroupsCountParameterTypes4 =
+		new Class[] { long.class };
+	private static final Class<?>[] _searchCommerceAccountGroupsParameterTypes5 = new Class[] {
+			long.class, String.class, int.class, int.class,
+			com.liferay.portal.kernel.search.Sort.class
+		};
+	private static final Class<?>[] _searchCommerceAccountsGroupCountParameterTypes6 =
+		new Class[] { long.class, String.class };
+	private static final Class<?>[] _updateCommerceAccountGroupParameterTypes7 = new Class[] {
+			long.class, String.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 }

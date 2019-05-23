@@ -239,6 +239,14 @@ public class CommerceAccountGroupLocalServiceUtil {
 		return getService().getCommerceAccountGroups(start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroups(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator) {
+		return getService()
+				   .getCommerceAccountGroups(companyId, start, end,
+			orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce account groups.
 	*
@@ -246,6 +254,10 @@ public class CommerceAccountGroupLocalServiceUtil {
 	*/
 	public static int getCommerceAccountGroupsCount() {
 		return getService().getCommerceAccountGroupsCount();
+	}
+
+	public static int getCommerceAccountGroupsCount(long companyId) {
+		return getService().getCommerceAccountGroupsCount(companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
@@ -267,6 +279,21 @@ public class CommerceAccountGroupLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceAccountGroups(companyId, keywords, start,
+			end, sort);
+	}
+
+	public static int searchCommerceAccountsGroupCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceAccountsGroupCount(companyId, keywords);
+	}
+
 	/**
 	* Updates the commerce account group in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -279,10 +306,12 @@ public class CommerceAccountGroupLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountGroup updateCommerceAccountGroup(
-		long commerceAccountGroupId, String name)
+		long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .updateCommerceAccountGroup(commerceAccountGroupId, name);
+				   .updateCommerceAccountGroup(commerceAccountGroupId, name,
+			serviceContext);
 	}
 
 	public static CommerceAccountGroupLocalService getService() {

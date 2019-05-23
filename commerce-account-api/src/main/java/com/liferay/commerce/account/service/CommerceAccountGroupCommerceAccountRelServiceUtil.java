@@ -42,6 +42,36 @@ public class CommerceAccountGroupCommerceAccountRelServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountGroupCommerceAccountRelServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupId,
+			commerceAccountId, serviceContext);
+	}
+
+	public static void deleteCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupCommerceAccountRelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteCommerceAccountGroupCommerceAccountRel(commerceAccountGroupCommerceAccountRelId);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountGroupCommerceAccountRels(commerceAccountGroupId,
+			start, end);
+	}
+
+	public static int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountGroupCommerceAccountRelsCount(commerceAccountGroupId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -228,6 +229,11 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 	public List<CommerceAccountGroup> getCommerceAccountGroups(int start,
 		int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountGroup> getCommerceAccountGroups(long companyId,
+		int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator);
+
 	/**
 	* Returns the number of commerce account groups.
 	*
@@ -235,6 +241,9 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountGroupsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountGroupsCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -251,6 +260,15 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountGroup> searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCommerceAccountsGroupCount(long companyId, String keywords)
+		throws PortalException;
+
 	/**
 	* Updates the commerce account group in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -263,5 +281,6 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccountGroup updateCommerceAccountGroup(
-		long commerceAccountGroupId, String name) throws PortalException;
+		long commerceAccountGroupId, String name, ServiceContext serviceContext)
+		throws PortalException;
 }

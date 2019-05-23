@@ -34,6 +34,37 @@ public class CommerceAccountGroupCommerceAccountRelServiceWrapper
 		_commerceAccountGroupCommerceAccountRelService = commerceAccountGroupCommerceAccountRelService;
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupCommerceAccountRelService.addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupId,
+			commerceAccountId, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupCommerceAccountRelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountGroupCommerceAccountRelService.deleteCommerceAccountGroupCommerceAccountRel(commerceAccountGroupCommerceAccountRelId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupCommerceAccountRelService.getCommerceAccountGroupCommerceAccountRels(commerceAccountGroupId,
+			start, end);
+	}
+
+	@Override
+	public int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupCommerceAccountRelService.getCommerceAccountGroupCommerceAccountRelsCount(commerceAccountGroupId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

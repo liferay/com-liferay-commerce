@@ -46,6 +46,15 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceWrapper
 		return _commerceAccountGroupCommerceAccountRelLocalService.addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupCommerceAccountRel);
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupCommerceAccountRelLocalService.addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupId,
+			commerceAccountId, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account group commerce account rel with the primary key. Does not add the commerce account group commerce account rel to the database.
 	*
@@ -243,6 +252,13 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end) {
+		return _commerceAccountGroupCommerceAccountRelLocalService.getCommerceAccountGroupCommerceAccountRels(commerceAccountGroupId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of commerce account group commerce account rels.
 	*
@@ -251,6 +267,12 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceWrapper
 	@Override
 	public int getCommerceAccountGroupCommerceAccountRelsCount() {
 		return _commerceAccountGroupCommerceAccountRelLocalService.getCommerceAccountGroupCommerceAccountRelsCount();
+	}
+
+	@Override
+	public int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId) {
+		return _commerceAccountGroupCommerceAccountRelLocalService.getCommerceAccountGroupCommerceAccountRelsCount(commerceAccountGroupId);
 	}
 
 	@Override
