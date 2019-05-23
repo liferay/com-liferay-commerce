@@ -14,14 +14,10 @@
 
 package com.liferay.commerce.account.admin.web.internal.display.context.util;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import javax.portlet.RenderRequest;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alessio Antonio Rendina
@@ -30,13 +26,6 @@ public class CommerceAccountAdminRequestHelper extends BaseRequestHelper {
 
 	public CommerceAccountAdminRequestHelper(RenderRequest renderRequest) {
 		super(PortalUtil.getHttpServletRequest(renderRequest));
-	}
-
-	public CommerceContext getCommerceContext() {
-		HttpServletRequest httpServletRequest = getRequest();
-
-		return (CommerceContext)httpServletRequest.getAttribute(
-			CommerceWebKeys.COMMERCE_CONTEXT);
 	}
 
 }
