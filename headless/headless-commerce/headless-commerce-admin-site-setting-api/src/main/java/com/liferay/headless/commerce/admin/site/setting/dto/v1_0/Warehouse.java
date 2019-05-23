@@ -24,7 +24,12 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -40,9 +45,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Warehouse")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"commerceCountryId", "name"})
 @XmlRootElement(name = "Warehouse")
 public class Warehouse {
 
+	@Schema
 	public Boolean getActive() {
 		return active;
 	}
@@ -58,6 +65,9 @@ public class Warehouse {
 		try {
 			active = activeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -67,6 +77,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean active;
 
+	@Schema
 	public String getCity() {
 		return city;
 	}
@@ -80,6 +91,9 @@ public class Warehouse {
 		try {
 			city = cityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -89,6 +103,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String city;
 
+	@Schema
 	public Long getCommerceCountryId() {
 		return commerceCountryId;
 	}
@@ -104,6 +119,9 @@ public class Warehouse {
 		try {
 			commerceCountryId = commerceCountryIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -114,6 +132,7 @@ public class Warehouse {
 	@NotNull
 	protected Long commerceCountryId;
 
+	@Schema
 	public Long getCommerceRegionId() {
 		return commerceRegionId;
 	}
@@ -129,6 +148,9 @@ public class Warehouse {
 		try {
 			commerceRegionId = commerceRegionIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -138,6 +160,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long commerceRegionId;
 
+	@Schema
 	public String getDescription() {
 		return description;
 	}
@@ -153,6 +176,9 @@ public class Warehouse {
 		try {
 			description = descriptionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -162,6 +188,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String description;
 
+	@Schema
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -177,6 +204,9 @@ public class Warehouse {
 		try {
 			groupId = groupIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -186,6 +216,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long groupId;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -199,6 +230,9 @@ public class Warehouse {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -208,6 +242,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long id;
 
+	@Schema
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -223,6 +258,9 @@ public class Warehouse {
 		try {
 			latitude = latitudeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -232,6 +270,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double latitude;
 
+	@Schema
 	public Double getLongitude() {
 		return longitude;
 	}
@@ -247,6 +286,9 @@ public class Warehouse {
 		try {
 			longitude = longitudeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -256,6 +298,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double longitude;
 
+	@Schema
 	public String getName() {
 		return name;
 	}
@@ -269,6 +312,9 @@ public class Warehouse {
 		try {
 			name = nameUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -279,6 +325,7 @@ public class Warehouse {
 	@NotEmpty
 	protected String name;
 
+	@Schema
 	public Boolean getPrimary() {
 		return primary;
 	}
@@ -294,6 +341,9 @@ public class Warehouse {
 		try {
 			primary = primaryUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -303,6 +353,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean primary;
 
+	@Schema
 	public String getStreet1() {
 		return street1;
 	}
@@ -318,6 +369,9 @@ public class Warehouse {
 		try {
 			street1 = street1UnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -327,6 +381,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String street1;
 
+	@Schema
 	public String getStreet2() {
 		return street2;
 	}
@@ -342,6 +397,9 @@ public class Warehouse {
 		try {
 			street2 = street2UnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -351,6 +409,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String street2;
 
+	@Schema
 	public String getStreet3() {
 		return street3;
 	}
@@ -366,6 +425,9 @@ public class Warehouse {
 		try {
 			street3 = street3UnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -375,6 +437,7 @@ public class Warehouse {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String street3;
 
+	@Schema
 	public String getZip() {
 		return zip;
 	}
@@ -387,6 +450,9 @@ public class Warehouse {
 	public void setZip(UnsafeSupplier<String, Exception> zipUnsafeSupplier) {
 		try {
 			zip = zipUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -424,93 +490,218 @@ public class Warehouse {
 
 		sb.append("{");
 
-		sb.append("\"active\": ");
+		if (active != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(active);
-		sb.append(", ");
+			sb.append("\"active\": ");
 
-		sb.append("\"city\": ");
+			sb.append(active);
+		}
 
-		sb.append("\"");
-		sb.append(city);
-		sb.append("\"");
-		sb.append(", ");
+		if (city != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"commerceCountryId\": ");
+			sb.append("\"city\": ");
 
-		sb.append(commerceCountryId);
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"commerceRegionId\": ");
+			sb.append(_escape(city));
 
-		sb.append(commerceRegionId);
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"description\": ");
+		if (commerceCountryId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(description);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"commerceCountryId\": ");
 
-		sb.append("\"groupId\": ");
+			sb.append(commerceCountryId);
+		}
 
-		sb.append(groupId);
-		sb.append(", ");
+		if (commerceRegionId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"id\": ");
+			sb.append("\"commerceRegionId\": ");
 
-		sb.append(id);
-		sb.append(", ");
+			sb.append(commerceRegionId);
+		}
 
-		sb.append("\"latitude\": ");
+		if (description != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(latitude);
-		sb.append(", ");
+			sb.append("\"description\": ");
 
-		sb.append("\"longitude\": ");
+			sb.append("\"");
 
-		sb.append(longitude);
-		sb.append(", ");
+			sb.append(_escape(description));
 
-		sb.append("\"name\": ");
+			sb.append("\"");
+		}
 
-		sb.append("\"");
-		sb.append(name);
-		sb.append("\"");
-		sb.append(", ");
+		if (groupId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"primary\": ");
+			sb.append("\"groupId\": ");
 
-		sb.append(primary);
-		sb.append(", ");
+			sb.append(groupId);
+		}
 
-		sb.append("\"street1\": ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(street1);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"id\": ");
 
-		sb.append("\"street2\": ");
+			sb.append(id);
+		}
 
-		sb.append("\"");
-		sb.append(street2);
-		sb.append("\"");
-		sb.append(", ");
+		if (latitude != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"street3\": ");
+			sb.append("\"latitude\": ");
 
-		sb.append("\"");
-		sb.append(street3);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(latitude);
+		}
 
-		sb.append("\"zip\": ");
+		if (longitude != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(zip);
-		sb.append("\"");
+			sb.append("\"longitude\": ");
+
+			sb.append(longitude);
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(name));
+
+			sb.append("\"");
+		}
+
+		if (primary != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"primary\": ");
+
+			sb.append(primary);
+		}
+
+		if (street1 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"street1\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(street1));
+
+			sb.append("\"");
+		}
+
+		if (street2 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"street2\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(street2));
+
+			sb.append("\"");
+		}
+
+		if (street3 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"street3\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(street3));
+
+			sb.append("\"");
+		}
+
+		if (zip != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"zip\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(zip));
+
+			sb.append("\"");
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

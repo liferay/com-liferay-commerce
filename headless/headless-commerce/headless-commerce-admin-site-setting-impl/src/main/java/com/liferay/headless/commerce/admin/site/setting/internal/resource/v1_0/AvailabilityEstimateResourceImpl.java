@@ -18,8 +18,6 @@ import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEst
 import com.liferay.headless.commerce.admin.site.setting.internal.util.v1_0.AvailabilityEstimateHelper;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.validation.constraints.NotNull;
 
@@ -56,37 +54,6 @@ public class AvailabilityEstimateResourceImpl
 		throws Exception {
 
 		return _availabilityEstimateHelper.getAvailabilityEstimate(id);
-	}
-
-	@Override
-	public Page<AvailabilityEstimate> getAvailabilityEstimates(
-			@NotNull Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _availabilityEstimateHelper.getAvailabilityEstimates(
-			groupId, pagination);
-	}
-
-	@Override
-	public Response updateAvailabilityEstimate(
-			@NotNull Long id, AvailabilityEstimate availabilityEstimate)
-		throws Exception {
-
-		_availabilityEstimateHelper.updateAvailabilityEstimate(
-			id, availabilityEstimate, _user);
-
-		Response.ResponseBuilder responseBuilder = Response.noContent();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	public AvailabilityEstimate upsertAvailabilityEstimate(
-			@NotNull Long groupId, AvailabilityEstimate availabilityEstimate)
-		throws Exception {
-
-		return _availabilityEstimateHelper.upsertAvailabilityEstimate(
-			groupId, availabilityEstimate, _user);
 	}
 
 	@Reference

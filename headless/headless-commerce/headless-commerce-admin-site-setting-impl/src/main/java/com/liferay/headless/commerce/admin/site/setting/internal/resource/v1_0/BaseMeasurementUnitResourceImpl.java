@@ -63,6 +63,8 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "groupId"),
+			@Parameter(in = ParameterIn.QUERY, name = "type"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
@@ -70,9 +72,12 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public Page<MeasurementUnit> getMeasurementUnits(
-			@NotNull @PathParam("groupId") Long groupId,
-			@QueryParam("type") Integer type, @Context Pagination pagination)
+	public Page<MeasurementUnit>
+			getCommerceAdminSiteSettingGroupMeasurementUnitPage(
+				@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+					groupId,
+				@Parameter(hidden = true) @QueryParam("type") Integer type,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -81,11 +86,13 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
 	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public MeasurementUnit upsertMeasurementUnit(
-			@NotNull @PathParam("groupId") Long groupId,
+	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
+			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+				groupId,
 			MeasurementUnit measurementUnit)
 		throws Exception {
 
@@ -94,10 +101,12 @@ public abstract class BaseMeasurementUnitResourceImpl
 
 	@Override
 	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public Response deleteMeasurementUnit(@NotNull @PathParam("id") Long id)
+	public Response deleteMeasurementUnit(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -107,10 +116,12 @@ public abstract class BaseMeasurementUnitResourceImpl
 
 	@Override
 	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public MeasurementUnit getMeasurementUnit(@NotNull @PathParam("id") Long id)
+	public MeasurementUnit getMeasurementUnit(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new MeasurementUnit();
@@ -119,11 +130,13 @@ public abstract class BaseMeasurementUnitResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@PUT
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/measurementUnit/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public Response updateMeasurementUnit(
-			@NotNull @PathParam("id") Long id, MeasurementUnit measurementUnit)
+	public Response putMeasurementUnit(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			MeasurementUnit measurementUnit)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -135,7 +148,9 @@ public abstract class BaseMeasurementUnitResourceImpl
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(MeasurementUnit measurementUnit) {
+	protected void preparePatch(
+		MeasurementUnit measurementUnit,
+		MeasurementUnit existingMeasurementUnit) {
 	}
 
 	protected <T, R> List<R> transform(

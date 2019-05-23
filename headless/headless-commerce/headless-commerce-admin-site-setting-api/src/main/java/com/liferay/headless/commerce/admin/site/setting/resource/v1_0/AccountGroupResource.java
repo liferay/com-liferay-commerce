@@ -14,9 +14,8 @@
 
 package com.liferay.headless.commerce.admin.site.setting.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Category;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroupCriterion;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -34,28 +33,42 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface CatalogRuleResource {
+public interface AccountGroupResource {
 
-	public Page<Category> getCatalogRuleCategories(
+	public Response deleteAccountGroupAccountGroupCriterion(
+			Long criterionId, Long id)
+		throws Exception;
+
+	public AccountGroupCriterion getAccountGroupAccountGroupCriterion(
+			Long criterionId, Long id)
+		throws Exception;
+
+	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
+			Long criterionId, Long id,
+			AccountGroupCriterion accountGroupCriterion)
+		throws Exception;
+
+	public Page<AccountGroupCriterion> getAccountGroupAccountGroupCriterionPage(
 			Long id, Pagination pagination)
 		throws Exception;
 
-	public Page<UserSegment> getCatalogRuleUserSegments(
-			Long id, Pagination pagination)
+	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
+			Long id, AccountGroupCriterion accountGroupCriterion)
 		throws Exception;
 
-	public Response deleteCatalogRule(Long id) throws Exception;
+	public Response deleteAccountGroup(Long id) throws Exception;
 
-	public CatalogRule getCatalogRule(Long id) throws Exception;
+	public AccountGroup getAccountGroup(Long id) throws Exception;
 
-	public Response updateCatalogRule(Long id, CatalogRule catalogRule)
+	public Response putAccountGroup(Long id, AccountGroup accountGroup)
 		throws Exception;
 
-	public Page<CatalogRule> getCatalogRules(
+	public Page<AccountGroup> getCommerceAdminSiteSettingGroupAccountGroupPage(
 			Long groupId, Pagination pagination)
 		throws Exception;
 
-	public CatalogRule upsertCatalogRule(Long groupId, CatalogRule catalogRule)
+	public AccountGroup postCommerceAdminSiteSettingGroupAccountGroup(
+			Long groupId, AccountGroup accountGroup)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

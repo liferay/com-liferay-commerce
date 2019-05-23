@@ -60,11 +60,12 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 
 	@Override
 	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
 	public Response deleteAvailabilityEstimate(
-			@NotNull @PathParam("id") Long id)
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -74,11 +75,12 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 
 	@Override
 	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
 	public AvailabilityEstimate getAvailabilityEstimate(
-			@NotNull @PathParam("id") Long id)
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new AvailabilityEstimate();
@@ -87,11 +89,12 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@PUT
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/availabilityEstimate/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public Response updateAvailabilityEstimate(
-			@NotNull @PathParam("id") Long id,
+	public Response putAvailabilityEstimate(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			AvailabilityEstimate availabilityEstimate)
 		throws Exception {
 
@@ -104,6 +107,7 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "groupId"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
@@ -111,9 +115,11 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Path("/commerceAdminSiteSetting/{groupId}/availabilityEstimate/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public Page<AvailabilityEstimate> getAvailabilityEstimates(
-			@NotNull @PathParam("groupId") Long groupId,
-			@Context Pagination pagination)
+	public Page<AvailabilityEstimate>
+			getCommerceAdminSiteSettingGroupAvailabilityEstimatePage(
+				@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+					groupId,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -122,12 +128,15 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
 	@Path("/commerceAdminSiteSetting/{groupId}/availabilityEstimate/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AvailabilityEstimate")})
-	public AvailabilityEstimate upsertAvailabilityEstimate(
-			@NotNull @PathParam("groupId") Long groupId,
-			AvailabilityEstimate availabilityEstimate)
+	public AvailabilityEstimate
+			postCommerceAdminSiteSettingGroupAvailabilityEstimate(
+				@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+					groupId,
+				AvailabilityEstimate availabilityEstimate)
 		throws Exception {
 
 		return new AvailabilityEstimate();
@@ -137,7 +146,9 @@ public abstract class BaseAvailabilityEstimateResourceImpl
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(AvailabilityEstimate availabilityEstimate) {
+	protected void preparePatch(
+		AvailabilityEstimate availabilityEstimate,
+		AvailabilityEstimate existingAvailabilityEstimate) {
 	}
 
 	protected <T, R> List<R> transform(

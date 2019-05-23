@@ -76,15 +76,13 @@ public class OpenAPIResourceImpl {
 
 	private final Set<Class<?>> _resourceClasses = new HashSet<Class<?>>() {
 		{
-			add(AvailabilityEstimateResourceImpl.class);
+			add(AccountGroupResourceImpl.class);
 
-			add(CatalogRuleResourceImpl.class);
+			add(AvailabilityEstimateResourceImpl.class);
 
 			add(MeasurementUnitResourceImpl.class);
 
 			add(TaxCategoryResourceImpl.class);
-
-			add(UserSegmentResourceImpl.class);
 
 			add(WarehouseResourceImpl.class);
 

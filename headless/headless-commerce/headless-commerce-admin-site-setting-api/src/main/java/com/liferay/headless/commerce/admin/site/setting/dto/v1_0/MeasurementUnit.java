@@ -24,8 +24,12 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -41,9 +45,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("MeasurementUnit")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"key", "name"})
 @XmlRootElement(name = "MeasurementUnit")
 public class MeasurementUnit {
 
+	@Schema
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -59,6 +65,9 @@ public class MeasurementUnit {
 		try {
 			groupId = groupIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -68,6 +77,7 @@ public class MeasurementUnit {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long groupId;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +91,9 @@ public class MeasurementUnit {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -90,6 +103,7 @@ public class MeasurementUnit {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long id;
 
+	@Schema
 	public String getKey() {
 		return key;
 	}
@@ -103,6 +117,9 @@ public class MeasurementUnit {
 		try {
 			key = keyUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -113,6 +130,7 @@ public class MeasurementUnit {
 	@NotEmpty
 	protected String key;
 
+	@Schema
 	public Map<String, String> getName() {
 		return name;
 	}
@@ -128,6 +146,9 @@ public class MeasurementUnit {
 		try {
 			name = nameUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -138,6 +159,7 @@ public class MeasurementUnit {
 	@NotNull
 	protected Map<String, String> name;
 
+	@Schema
 	public Boolean getPrimary() {
 		return primary;
 	}
@@ -153,6 +175,9 @@ public class MeasurementUnit {
 		try {
 			primary = primaryUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -162,6 +187,7 @@ public class MeasurementUnit {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean primary;
 
+	@Schema
 	public Double getPriority() {
 		return priority;
 	}
@@ -177,6 +203,9 @@ public class MeasurementUnit {
 		try {
 			priority = priorityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -186,6 +215,7 @@ public class MeasurementUnit {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double priority;
 
+	@Schema
 	public Double getRate() {
 		return rate;
 	}
@@ -199,6 +229,9 @@ public class MeasurementUnit {
 		try {
 			rate = rateUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -208,6 +241,7 @@ public class MeasurementUnit {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double rate;
 
+	@Schema
 	public Integer getType() {
 		return type;
 	}
@@ -220,6 +254,9 @@ public class MeasurementUnit {
 	public void setType(UnsafeSupplier<Integer, Exception> typeUnsafeSupplier) {
 		try {
 			type = typeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -257,46 +294,124 @@ public class MeasurementUnit {
 
 		sb.append("{");
 
-		sb.append("\"groupId\": ");
+		if (groupId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(groupId);
-		sb.append(", ");
+			sb.append("\"groupId\": ");
 
-		sb.append("\"id\": ");
+			sb.append(groupId);
+		}
 
-		sb.append(id);
-		sb.append(", ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"key\": ");
+			sb.append("\"id\": ");
 
-		sb.append("\"");
-		sb.append(key);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(id);
+		}
 
-		sb.append("\"name\": ");
+		if (key != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(name);
-		sb.append(", ");
+			sb.append("\"key\": ");
 
-		sb.append("\"primary\": ");
+			sb.append("\"");
 
-		sb.append(primary);
-		sb.append(", ");
+			sb.append(_escape(key));
 
-		sb.append("\"priority\": ");
+			sb.append("\"");
+		}
 
-		sb.append(priority);
-		sb.append(", ");
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"rate\": ");
+			sb.append("\"name\": ");
 
-		sb.append(rate);
-		sb.append(", ");
+			sb.append(_toJSON(name));
+		}
 
-		sb.append("\"type\": ");
+		if (primary != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(type);
+			sb.append("\"primary\": ");
+
+			sb.append(primary);
+		}
+
+		if (priority != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priority\": ");
+
+			sb.append(priority);
+		}
+
+		if (rate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"rate\": ");
+
+			sb.append(rate);
+		}
+
+		if (type != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"type\": ");
+
+			sb.append(type);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

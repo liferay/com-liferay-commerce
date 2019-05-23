@@ -39,16 +39,18 @@ public interface AvailabilityEstimateResource {
 	public AvailabilityEstimate getAvailabilityEstimate(Long id)
 		throws Exception;
 
-	public Response updateAvailabilityEstimate(
+	public Response putAvailabilityEstimate(
 			Long id, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 
-	public Page<AvailabilityEstimate> getAvailabilityEstimates(
-			Long groupId, Pagination pagination)
+	public Page<AvailabilityEstimate>
+			getCommerceAdminSiteSettingGroupAvailabilityEstimatePage(
+				Long groupId, Pagination pagination)
 		throws Exception;
 
-	public AvailabilityEstimate upsertAvailabilityEstimate(
-			Long groupId, AvailabilityEstimate availabilityEstimate)
+	public AvailabilityEstimate
+			postCommerceAdminSiteSettingGroupAvailabilityEstimate(
+				Long groupId, AvailabilityEstimate availabilityEstimate)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
