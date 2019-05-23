@@ -35,10 +35,40 @@ public class CommerceAccountGroupServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
+		String name, int type, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.addCommerceAccountGroup(name, type,
+			externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceAccountGroup(long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountGroupService.deleteCommerceAccountGroup(commerceAccountGroupId);
+	}
+
+	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup getCommerceAccountGroup(
 		long commerceAccountGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupService.getCommerceAccountGroup(commerceAccountGroupId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroups(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.getCommerceAccountGroups(companyId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceAccountGroupsCount(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.getCommerceAccountGroupsCount(companyId);
 	}
 
 	/**
@@ -49,6 +79,31 @@ public class CommerceAccountGroupServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAccountGroupService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.searchCommerceAccountGroups(companyId,
+			keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceAccountsGroupCount(long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.searchCommerceAccountsGroupCount(companyId,
+			keywords);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup updateCommerceAccountGroup(
+		long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.updateCommerceAccountGroup(commerceAccountGroupId,
+			name, serviceContext);
 	}
 
 	@Override

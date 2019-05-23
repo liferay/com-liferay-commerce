@@ -145,6 +145,12 @@ public class CommerceAccountGroupCommerceAccountRelWrapper
 		return _commerceAccountGroupCommerceAccountRel.compareTo(commerceAccountGroupCommerceAccountRel);
 	}
 
+	@Override
+	public CommerceAccount getCommerceAccount()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupCommerceAccountRel.getCommerceAccount();
+	}
+
 	/**
 	* Returns the commerce account group commerce account rel ID of this commerce account group commerce account rel.
 	*

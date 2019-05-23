@@ -46,6 +46,18 @@ create table CommerceAccountGroup (
 	type_ INTEGER
 );
 
+create table CommerceAccountGroupRel (
+	commerceAccountGroupRelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	commerceAccountGroupId LONG
+);
+
 create table CommerceAccountOrganizationRel (
 	commerceAccountId LONG not null,
 	organizationId LONG not null,

@@ -5,6 +5,7 @@
 	<import class="com.liferay.commerce.account.model.CommerceAccount" />
 	<import class="com.liferay.commerce.account.model.CommerceAccountGroup" />
 	<import class="com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel" />
+	<import class="com.liferay.commerce.account.model.CommerceAccountGroupRel" />
 	<import class="com.liferay.commerce.account.model.CommerceAccountOrganizationRel" />
 	<import class="com.liferay.commerce.account.model.CommerceAccountUserRel" />
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountImpl" table="CommerceAccount">
@@ -57,6 +58,19 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="commerceAccountGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceAccountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.commerce.account.model.impl.CommerceAccountGroupRelImpl" table="CommerceAccountGroupRel">
+		<id name="commerceAccountGroupRelId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceAccountGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl" table="CommerceAccountOrganizationRel">
 		<composite-id class="com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK" name="primaryKey">
