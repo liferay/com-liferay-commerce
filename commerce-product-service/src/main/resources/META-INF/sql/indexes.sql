@@ -90,14 +90,6 @@ create index IX_F5E154F5 on CPOptionValue (groupId);
 create index IX_17FEC609 on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_1D633ACB on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], groupId);
 
-create index IX_B4B2EAFB on CPRule (groupId);
-
-create index IX_5AF83912 on CPRuleAssetCategoryRel (CPRuleId);
-create index IX_D8DFC5F on CPRuleAssetCategoryRel (assetCategoryId);
-
-create index IX_75E91D01 on CPRuleCommerceAccountGroupRel (CPRuleId);
-create index IX_8C986585 on CPRuleCommerceAccountGroupRel (commerceAccountGroupId);
-
 create index IX_421ED80 on CPSpecificationOption (CPOptionCategoryId);
 create unique index IX_1E01842D on CPSpecificationOption (groupId, key_[$COLUMN_LENGTH:75$]);
 create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], companyId);
