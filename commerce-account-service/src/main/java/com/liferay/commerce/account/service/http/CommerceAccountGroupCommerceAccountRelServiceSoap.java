@@ -16,9 +16,16 @@ package com.liferay.commerce.account.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil} service utility. The
+ * {@link CommerceAccountGroupCommerceAccountRelServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,72 @@ import aQute.bnd.annotation.ProviderType;
  * @author Marco Leo
  * @see CommerceAccountGroupCommerceAccountRelServiceHttp
  * @see com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRelSoap
- * @see com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil
+ * @see CommerceAccountGroupCommerceAccountRelServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceAccountGroupCommerceAccountRelServiceSoap {
+	public static com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRelSoap addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel returnValue =
+				CommerceAccountGroupCommerceAccountRelServiceUtil.addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupId,
+					commerceAccountId, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupCommerceAccountRelId)
+		throws RemoteException {
+		try {
+			CommerceAccountGroupCommerceAccountRelServiceUtil.deleteCommerceAccountGroupCommerceAccountRel(commerceAccountGroupCommerceAccountRelId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRelSoap[] getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel> returnValue =
+				CommerceAccountGroupCommerceAccountRelServiceUtil.getCommerceAccountGroupCommerceAccountRels(commerceAccountGroupId,
+					start, end);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId) throws RemoteException {
+		try {
+			int returnValue = CommerceAccountGroupCommerceAccountRelServiceUtil.getCommerceAccountGroupCommerceAccountRelsCount(commerceAccountGroupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CommerceAccountGroupCommerceAccountRelServiceSoap.class);
 }

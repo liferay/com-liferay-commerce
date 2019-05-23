@@ -42,10 +42,38 @@ public class CommerceAccountGroupServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountGroupServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
+		String name, int type, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountGroup(name, type, externalReferenceCode,
+			serviceContext);
+	}
+
+	public static void deleteCommerceAccountGroup(long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().deleteCommerceAccountGroup(commerceAccountGroupId);
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroup getCommerceAccountGroup(
 		long commerceAccountGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceAccountGroup(commerceAccountGroupId);
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroups(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceAccountGroups(companyId, start, end,
+			orderByComparator);
+	}
+
+	public static int getCommerceAccountGroupsCount(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceAccountGroupsCount(companyId);
 	}
 
 	/**
@@ -55,6 +83,30 @@ public class CommerceAccountGroupServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceAccountGroups(companyId, keywords, start,
+			end, sort);
+	}
+
+	public static int searchCommerceAccountsGroupCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceAccountsGroupCount(companyId, keywords);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroup updateCommerceAccountGroup(
+		long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCommerceAccountGroup(commerceAccountGroupId, name,
+			serviceContext);
 	}
 
 	public static CommerceAccountGroupService getService() {

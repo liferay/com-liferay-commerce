@@ -65,10 +65,120 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class CommerceAccountGroupServiceSoap {
+	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap addCommerceAccountGroup(
+		String name, int type, String externalReferenceCode,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.addCommerceAccountGroup(name,
+					type, externalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceAccountGroup(long commerceAccountGroupId)
+		throws RemoteException {
+		try {
+			CommerceAccountGroupServiceUtil.deleteCommerceAccountGroup(commerceAccountGroupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap getCommerceAccountGroup(
 		long commerceAccountGroupId) throws RemoteException {
 		try {
 			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.getCommerceAccountGroup(commerceAccountGroupId);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap[] getCommerceAccountGroups(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> returnValue =
+				CommerceAccountGroupServiceUtil.getCommerceAccountGroups(companyId,
+					start, end, orderByComparator);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAccountGroupsCount(long companyId)
+		throws RemoteException {
+		try {
+			int returnValue = CommerceAccountGroupServiceUtil.getCommerceAccountGroupsCount(companyId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap[] searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> returnValue =
+				CommerceAccountGroupServiceUtil.searchCommerceAccountGroups(companyId,
+					keywords, start, end, sort);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int searchCommerceAccountsGroupCount(long companyId,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceAccountGroupServiceUtil.searchCommerceAccountsGroupCount(companyId,
+					keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap updateCommerceAccountGroup(
+		long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.updateCommerceAccountGroup(commerceAccountGroupId,
+					name, serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModel(returnValue);
 		}

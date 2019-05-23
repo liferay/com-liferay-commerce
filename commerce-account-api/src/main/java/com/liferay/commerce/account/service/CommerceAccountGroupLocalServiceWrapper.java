@@ -248,6 +248,14 @@ public class CommerceAccountGroupLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroups(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroup> orderByComparator) {
+		return _commerceAccountGroupLocalService.getCommerceAccountGroups(companyId,
+			start, end, orderByComparator);
+	}
+
 	/**
 	* Returns the number of commerce account groups.
 	*
@@ -256,6 +264,11 @@ public class CommerceAccountGroupLocalServiceWrapper
 	@Override
 	public int getCommerceAccountGroupsCount() {
 		return _commerceAccountGroupLocalService.getCommerceAccountGroupsCount();
+	}
+
+	@Override
+	public int getCommerceAccountGroupsCount(long companyId) {
+		return _commerceAccountGroupLocalService.getCommerceAccountGroupsCount(companyId);
 	}
 
 	@Override
@@ -280,6 +293,22 @@ public class CommerceAccountGroupLocalServiceWrapper
 		return _commerceAccountGroupLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> searchCommerceAccountGroups(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupLocalService.searchCommerceAccountGroups(companyId,
+			keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceAccountsGroupCount(long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupLocalService.searchCommerceAccountsGroupCount(companyId,
+			keywords);
+	}
+
 	/**
 	* Updates the commerce account group in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -294,10 +323,11 @@ public class CommerceAccountGroupLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup updateCommerceAccountGroup(
-		long commerceAccountGroupId, String name)
+		long commerceAccountGroupId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupLocalService.updateCommerceAccountGroup(commerceAccountGroupId,
-			name);
+			name, serviceContext);
 	}
 
 	@Override

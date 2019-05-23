@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -70,6 +71,10 @@ public interface CommerceAccountGroupCommerceAccountRelLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
 		CommerceAccountGroupCommerceAccountRel commerceAccountGroupCommerceAccountRel);
+
+	public CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce account group commerce account rel with the primary key. Does not add the commerce account group commerce account rel to the database.
@@ -223,6 +228,10 @@ public interface CommerceAccountGroupCommerceAccountRelLocalService
 	public List<CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end);
+
 	/**
 	* Returns the number of commerce account group commerce account rels.
 	*
@@ -230,6 +239,10 @@ public interface CommerceAccountGroupCommerceAccountRelLocalService
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountGroupCommerceAccountRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

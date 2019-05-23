@@ -16,7 +16,7 @@ package com.liferay.commerce.account.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
+import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -28,50 +28,55 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 
 /**
- * Provides the remote service interface for CommerceAccountGroupCommerceAccountRel. Methods of this
+ * Provides the remote service interface for CommerceAccountGroupRel. Methods of this
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
  * @author Marco Leo
- * @see CommerceAccountGroupCommerceAccountRelServiceUtil
- * @see com.liferay.commerce.account.service.base.CommerceAccountGroupCommerceAccountRelServiceBaseImpl
- * @see com.liferay.commerce.account.service.impl.CommerceAccountGroupCommerceAccountRelServiceImpl
+ * @see CommerceAccountGroupRelServiceUtil
+ * @see com.liferay.commerce.account.service.base.CommerceAccountGroupRelServiceBaseImpl
+ * @see com.liferay.commerce.account.service.impl.CommerceAccountGroupRelServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
 @OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAccountGroupCommerceAccountRel"}, service = CommerceAccountGroupCommerceAccountRelService.class)
+	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceAccountGroupRel"}, service = CommerceAccountGroupRelService.class)
 @ProviderType
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CommerceAccountGroupCommerceAccountRelService
-	extends BaseService {
+public interface CommerceAccountGroupRelService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceAccountGroupCommerceAccountRelServiceUtil} to access the commerce account group commerce account rel remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountGroupCommerceAccountRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountGroupRelServiceUtil} to access the commerce account group rel remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountGroupRelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
-		long commerceAccountGroupId, long commerceAccountId,
+	public CommerceAccountGroupRel addCommerceAccountGroupRel(
+		String className, long classPK, long commerceAccountGroupId,
 		ServiceContext serviceContext) throws PortalException;
 
-	public void deleteCommerceAccountGroupCommerceAccountRel(
-		long commerceAccountGroupCommerceAccountRelId)
-		throws PortalException;
+	public void deleteCommerceAccountGroupRels(String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
-		long commerceAccountGroupId, int start, int end)
-		throws PortalException;
+	public List<CommerceAccountGroupRel> getCommerceAccountGroupRels(
+		long commerceAccountGroupId, int start, int end,
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceAccountGroupCommerceAccountRelsCount(
-		long commerceAccountGroupId) throws PortalException;
+	public List<CommerceAccountGroupRel> getCommerceAccountGroupRels(
+		String className, long classPK, int start, int end,
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountGroupRelsCount(long commerceAccountGroupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountGroupRelsCount(String className, long classPK);
 
 	/**
 	* Returns the OSGi service identifier.

@@ -55,6 +55,15 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceUtil {
 				   .addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupCommerceAccountRel);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel addCommerceAccountGroupCommerceAccountRel(
+		long commerceAccountGroupId, long commerceAccountId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addCommerceAccountGroupCommerceAccountRel(commerceAccountGroupId,
+			commerceAccountId, serviceContext);
+	}
+
 	/**
 	* Creates a new commerce account group commerce account rel with the primary key. Does not add the commerce account group commerce account rel to the database.
 	*
@@ -241,6 +250,13 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceUtil {
 				   .getCommerceAccountGroupCommerceAccountRels(start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels(
+		long commerceAccountGroupId, int start, int end) {
+		return getService()
+				   .getCommerceAccountGroupCommerceAccountRels(commerceAccountGroupId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of commerce account group commerce account rels.
 	*
@@ -248,6 +264,12 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceUtil {
 	*/
 	public static int getCommerceAccountGroupCommerceAccountRelsCount() {
 		return getService().getCommerceAccountGroupCommerceAccountRelsCount();
+	}
+
+	public static int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId) {
+		return getService()
+				   .getCommerceAccountGroupCommerceAccountRelsCount(commerceAccountGroupId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

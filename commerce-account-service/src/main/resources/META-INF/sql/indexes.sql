@@ -7,6 +7,9 @@ create index IX_FE5BDB63 on CommerceAccount (userId, type_);
 
 create index IX_E487EEC8 on CommerceAccountGroup (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 
+create unique index IX_C5D83543 on CommerceAccountGroupRel (classNameId, classPK, commerceAccountGroupId);
+create index IX_8B84036E on CommerceAccountGroupRel (commerceAccountGroupId);
+
 create index IX_2236CBA3 on CommerceAccountOrganizationRel (commerceAccountId);
 create index IX_16599BBC on CommerceAccountOrganizationRel (organizationId);
 
