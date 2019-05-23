@@ -19,7 +19,6 @@ import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
-import com.liferay.commerce.initializer.util.CPRulesImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
@@ -317,24 +316,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private void _importCPRules(ServiceContext serviceContext)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Importing catalog rules...");
-		}
-
-		JSONArray jsonArray = _getJSONArray("catalog-rules.json");
-
-		_cpRulesImporter.importCPRules(
-			jsonArray, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Catalog rules successfully imported");
-		}
-	}
-
 	private void _importCPSpecificationOptions(ServiceContext serviceContext)
 		throws Exception {
 
@@ -602,8 +583,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		_importCPDefinitions(commerceWarehouses, serviceContext);
 
-		_importCPRules(serviceContext);
-
 		_importJournalArticles(serviceContext);
 		_importPortletSettings(serviceContext);
 		_importThemePortletSettings(serviceContext);
@@ -719,9 +698,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CPOptionsImporter _cpOptionsImporter;
-
-	@Reference
-	private CPRulesImporter _cpRulesImporter;
 
 	@Reference
 	private CPSpecificationOptionsImporter _cpSpecificationOptionsImporter;

@@ -76,18 +76,6 @@ definition {
 			);
 		}
 
-		ProductMenu.gotoPortlet(
-			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Catalog Rules"
-		);
-
-		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			CommerceProducts.deleteEntries(
-				deleteMessage = "Are you sure you want to delete the selected catalog rules?"
-			);
-		}
-
 		User.logoutPG();
 	}
 
