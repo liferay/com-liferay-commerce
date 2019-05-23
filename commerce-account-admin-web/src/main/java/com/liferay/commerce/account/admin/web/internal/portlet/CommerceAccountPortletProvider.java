@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CommerceAccountPortletProvider
 	extends BasePortletProvider
-	implements ViewPortletProvider, EditPortletProvider {
+	implements EditPortletProvider, ViewPortletProvider {
 
 	@Override
 	public String getPortletName() {
