@@ -28,86 +28,90 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 
 <portlet:actionURL name="editCommerceAddress" var="editCommerceAddressActionURL" />
 
-<aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAddress == null) ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
-	<aui:input name="commerceAddressId" type="hidden" value="<%= commerceAddressId %>" />
-	<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAddress == null) ? commerceAccountAddressAdminDisplayContext.getCommerceAccountId() : commerceAddress.getClassPK() %>" />
+<div class="container-fluid-1280 mt-4 sheet">
+	<aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAddress == null) ? Constants.ADD : Constants.UPDATE %>" />
+		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
+		<aui:input name="commerceAddressId" type="hidden" value="<%= commerceAddressId %>" />
+		<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAddress == null) ? commerceAccountAddressAdminDisplayContext.getCommerceAccountId() : commerceAddress.getClassPK() %>" />
 
-	<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
+		<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
 
-	<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
-	<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
-	<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
-	<liferay-ui:error exception="<%= CommerceAddressZipException.class %>" message="please-enter-a-valid-zip" />
+		<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
+		<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
+		<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
+		<liferay-ui:error exception="<%= CommerceAddressZipException.class %>" message="please-enter-a-valid-zip" />
 
-	<div class="lfr-form-content">
-		<aui:fieldset cssClass="addresses">
-			<div class="col-md-6">
-				<aui:input name="name" />
+		<div class="lfr-form-content">
+			<aui:fieldset cssClass="addresses">
+				<div class="row">
+					<div class="col-md-6">
+						<aui:input name="name" />
 
-				<aui:input name="description" />
+						<aui:input name="description" />
 
-				<aui:input name="street1" />
+						<aui:input name="street1" />
 
-				<aui:input name="street2" />
+						<aui:input name="street2" />
 
-				<aui:input name="street3" />
+						<aui:input name="street3" />
+					</div>
+
+					<div class="col-md-6">
+						<aui:input name="city" />
+
+						<aui:input label="postal-code" name="zip" />
+
+						<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
+
+							<%
+							List<CommerceCountry> commerceCountries = commerceAccountAddressAdminDisplayContext.getCommerceCountries();
+
+							for (CommerceCountry commerceCountry : commerceCountries) {
+							%>
+
+								<aui:option label="<%= commerceCountry.getName(LanguageUtil.getLanguageId(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
+
+							<%
+							List<CommerceRegion> commerceRegions = commerceAccountAddressAdminDisplayContext.getCommerceRegions();
+
+							for (CommerceRegion commerceRegion : commerceRegions) {
+							%>
+
+								<aui:option label="<%= commerceRegion.getName() %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:input name="phoneNumber" />
+
+						<aui:input name="defaultBilling" />
+
+						<aui:input name="defaultShipping" />
+					</aui:fieldset>
+				</div>
+
+				<aui:button-row>
+					<aui:button cssClass="btn-lg" type="submit" />
+
+					<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
+				</aui:button-row>
 			</div>
-
-			<div class="col-md-6">
-				<aui:input name="city" />
-
-				<aui:input label="postal-code" name="zip" />
-
-				<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
-
-					<%
-					List<CommerceCountry> commerceCountries = commerceAccountAddressAdminDisplayContext.getCommerceCountries();
-
-					for (CommerceCountry commerceCountry : commerceCountries) {
-					%>
-
-						<aui:option label="<%= commerceCountry.getName(LanguageUtil.getLanguageId(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
-				<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
-
-					<%
-					List<CommerceRegion> commerceRegions = commerceAccountAddressAdminDisplayContext.getCommerceRegions();
-
-					for (CommerceRegion commerceRegion : commerceRegions) {
-					%>
-
-						<aui:option label="<%= commerceRegion.getName() %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
-				<aui:input name="phoneNumber" />
-
-				<aui:input name="defaultBilling" />
-
-				<aui:input name="defaultShipping" />
-			</div>
-		</aui:fieldset>
-
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" type="submit" />
-
-			<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
-		</aui:button-row>
-	</div>
-</aui:form>
+		</div>
+	</aui:form>
+</div>
 
 <aui:script use="aui-base,liferay-dynamic-select">
 	new Liferay.DynamicSelect(
