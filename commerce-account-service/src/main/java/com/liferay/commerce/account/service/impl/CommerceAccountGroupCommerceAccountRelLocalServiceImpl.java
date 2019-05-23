@@ -14,19 +14,77 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupCommerceAccountRelLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.List;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 	extends CommerceAccountGroupCommerceAccountRelLocalServiceBaseImpl {
 
+	@Override
+	public CommerceAccountGroupCommerceAccountRel
+			addCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId,
+				ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		long commerceAccountGroupCommerceAccountRelId =
+			counterLocalService.increment();
+
+		CommerceAccountGroupCommerceAccountRel
+			commerceAccountGroupCommerceAccountRel =
+				commerceAccountGroupCommerceAccountRelPersistence.create(
+					commerceAccountGroupCommerceAccountRelId);
+
+		commerceAccountGroupCommerceAccountRel.setCompanyId(
+			user.getCompanyId());
+		commerceAccountGroupCommerceAccountRel.setUserId(user.getUserId());
+		commerceAccountGroupCommerceAccountRel.setUserName(user.getFullName());
+
+		commerceAccountGroupCommerceAccountRel.setCommerceAccountGroupId(
+			commerceAccountGroupId);
+		commerceAccountGroupCommerceAccountRel.setCommerceAccountId(
+			commerceAccountId);
+
+		commerceAccountGroupCommerceAccountRelPersistence.update(
+			commerceAccountGroupCommerceAccountRel);
+
+		return commerceAccountGroupCommerceAccountRel;
+	}
+
+	@Override
 	public void deleteCommerceAccountGroupCommerceAccountRelByCAccountGroupId(
 		long commerceAccountGroupId) {
 
 		commerceAccountGroupCommerceAccountRelPersistence.
 			removeByCommerceAccountGroupId(commerceAccountGroupId);
+	}
+
+	@Override
+	public List<CommerceAccountGroupCommerceAccountRel>
+		getCommerceAccountGroupCommerceAccountRels(
+			long commerceAccountGroupId, int start, int end) {
+
+		return commerceAccountGroupCommerceAccountRelPersistence.
+			findByCommerceAccountGroupId(commerceAccountGroupId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountGroupCommerceAccountRelsCount(
+		long commerceAccountGroupId) {
+
+		return commerceAccountGroupCommerceAccountRelPersistence.
+			countByCommerceAccountGroupId(commerceAccountGroupId);
 	}
 
 }
