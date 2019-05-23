@@ -19,7 +19,13 @@
 <%
 SiteCommerceChannelTypeDisplayContext siteCommerceChannelTypeDisplayContext = (SiteCommerceChannelTypeDisplayContext)request.getAttribute("site.jsp-portletDisplayContext");
 
-List<Group> groups = siteCommerceChannelTypeDisplayContext.getGroups();
+Group site = siteCommerceChannelTypeDisplayContext.getChannelSite();
+
+List<Group> siteAsList = new ArrayList<>();
+
+if (site != null) {
+	siteAsList = Arrays.asList(site);
+}
 %>
 
 <liferay-util:buffer
@@ -37,10 +43,10 @@ List<Group> groups = siteCommerceChannelTypeDisplayContext.getGroups();
 	headerNames="null,null"
 	id="CommerceChannelSitesSearchContainer"
 	iteratorURL="<%= currentURLObj %>"
-	total="<%= groups.size() %>"
+	total="<%= siteAsList.size() %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= groups.subList(searchContainer.getStart(), searchContainer.getResultEnd()) %>"
+		results="<%= siteAsList %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -65,77 +71,25 @@ List<Group> groups = siteCommerceChannelTypeDisplayContext.getGroups();
 
 <aui:button name="selectSite" value="select" />
 
-<aui:script use="liferay-item-selector-dialog">
+<aui:script use="aui-base,liferay-item-selector-dialog">
 	$('#<portlet:namespace />selectSite').on(
 		'click',
 		function(event) {
 			event.preventDefault();
 
-			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
+			Liferay.Util.selectEntity(
 				{
-					eventName: 'sitesSelectItem',
-					on: {
-						selectedItemChange: function(event) {
-							var selectedItems = event.newVal;
-
-							if (selectedItems) {
-								var A = AUI();
-
-								A.Array.each(
-									selectedItems,
-									function(item, index, selectedItems) {
-										<portlet:namespace />addCommerceChannelTypeSite(item);
-									}
-								);
-							}
-						}
+					dialog: {
+					constrain: true,
+					modal: true
 					},
+					eventName: 'sitesSelectItem',
 					title: '<liferay-ui:message arguments="site" key="select-x" />',
-					url: '<%= siteCommerceChannelTypeDisplayContext.getItemSelectorUrl() %>'
+					uri: '<%= siteCommerceChannelTypeDisplayContext.getItemSelectorUrl() %>'
 				}
 			);
-
-			itemSelectorDialog.open();
 		}
 	);
-</aui:script>
-
-<aui:script>
-	var <portlet:namespace />addCommerceChannelTypeSiteIds = [];
-	var <portlet:namespace />deleteCommerceChannelTypeSiteIds = [];
-
-	function <portlet:namespace />addCommerceChannelTypeSite(item) {
-		var A = AUI();
-
-		var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />CommerceChannelSitesSearchContainer');
-
-		var rowColumns = [];
-
-		rowColumns.push(item.name);
-		rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceChannelSiteIcon) %></a>');
-
-		A.Array.removeItem(<portlet:namespace />deleteCommerceChannelTypeSiteIds, item.id);
-
-		<portlet:namespace />addCommerceChannelTypeSiteIds.push(item.id);
-
-		document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceChannelTypeSiteIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceChannelTypeSiteIds.join(',');
-
-		searchContainer.addRow(rowColumns, item.id);
-
-		searchContainer.updateDataStore();
-	}
-
-	function <portlet:namespace />deleteCommerceChannelTypeSite(id) {
-		var A = AUI();
-
-		A.Array.removeItem(<portlet:namespace />addCommerceChannelTypeSiteIds, id);
-
-		<portlet:namespace />deleteCommerceChannelTypeSiteIds.push(id);
-
-		document.<portlet:namespace />fm.<portlet:namespace />addTypeSettings.value = <portlet:namespace />addCommerceChannelTypeSiteIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deleteTypeSettings.value = <portlet:namespace />deleteCommerceChannelTypeSiteIds.join(',');
-	}
 </aui:script>
 
 <aui:script use="liferay-search-container">
@@ -154,8 +108,40 @@ List<Group> groups = siteCommerceChannelTypeDisplayContext.getGroups();
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-			<portlet:namespace />deleteCommerceChannelTypeSite(rowId);
+			A.one('#<portlet:namespace />siteGroupId').val(0)
 		},
 		'.modify-link'
+	);
+
+	Liferay.on(
+		'sitesSelectItem',
+		function(event) {
+			var item = event.data;
+
+			if (item) {
+				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />CommerceChannelSitesSearchContainer');
+
+				var link = A.one("[data-rowid="+searchContainer.getData()+"]")
+
+				if (link !== null) {
+					var rowId = link.attr('data-rowId');
+
+					var tr = link.ancestor('tr');
+
+					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+				}
+
+				var rowColumns = [];
+
+				rowColumns.push(item.name);
+				rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceChannelSiteIcon) %></a>');
+
+				A.one('#<portlet:namespace />siteGroupId').val(item.id);
+
+				searchContainer.addRow(rowColumns, item.id);
+
+				searchContainer.updateDataStore();
+			}
+		}
 	);
 </aui:script>

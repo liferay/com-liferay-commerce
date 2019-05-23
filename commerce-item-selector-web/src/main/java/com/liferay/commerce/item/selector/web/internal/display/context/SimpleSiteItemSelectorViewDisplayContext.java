@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.item.selector.web.internal.display.context;
 
-import com.liferay.commerce.item.selector.web.internal.search.SimpleSiteChecker;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -45,13 +47,27 @@ public class SimpleSiteItemSelectorViewDisplayContext
 	extends BaseCommerceItemSelectorViewDisplayContext<Group> {
 
 	public SimpleSiteItemSelectorViewDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
 		GroupService groupService, HttpServletRequest httpServletRequest,
 		PortletURL portletURL, String itemSelectedEventName, boolean search) {
 
 		super(httpServletRequest, portletURL, itemSelectedEventName);
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_groupService = groupService;
 		_search = search;
+	}
+
+	public String getChannelUsingSite(long siteGroupId) throws PortalException {
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+				siteGroupId);
+
+		if (commerceChannel == null) {
+			return StringPool.BLANK;
+		}
+
+		return commerceChannel.getName();
 	}
 
 	public long getGroupId() {
@@ -107,9 +123,6 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByComparator(orderByComparator);
 		searchContainer.setOrderByType(orderByType);
-		searchContainer.setRowChecker(
-			new SimpleSiteChecker(
-				cpRequestHelper.getRenderResponse(), getCheckedGroupIds()));
 		searchContainer.setSearch(_search);
 
 		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
@@ -131,9 +144,8 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		return searchContainer;
 	}
 
-	protected long[] getCheckedGroupIds() {
-		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(), "checkedGroupIds");
+	public long[] getUsedSiteGroupIds() {
+		return _commerceChannelLocalService.getUsedSiteGroupIds();
 	}
 
 	protected ManagementBarFilterItem getManagementBarFilterItem(
@@ -155,6 +167,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 			active, String.valueOf(siteGroupId), label, portletURL.toString());
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final GroupService _groupService;
 	private final boolean _search;
 

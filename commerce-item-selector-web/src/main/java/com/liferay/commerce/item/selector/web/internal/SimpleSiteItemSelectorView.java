@@ -16,6 +16,7 @@ package com.liferay.commerce.item.selector.web.internal;
 
 import com.liferay.commerce.item.selector.criterion.SimpleSiteItemSelectorCriterion;
 import com.liferay.commerce.item.selector.web.internal.display.context.SimpleSiteItemSelectorViewDisplayContext;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -93,8 +94,9 @@ public class SimpleSiteItemSelectorView
 		SimpleSiteItemSelectorViewDisplayContext
 			simpleSiteItemSelectorViewDisplayContext =
 				new SimpleSiteItemSelectorViewDisplayContext(
-					_groupService, httpServletRequest, portletURL,
-					itemSelectedEventName, search);
+					_commerceChannelLocalService, _groupService,
+					httpServletRequest, portletURL, itemSelectedEventName,
+					search);
 
 		servletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -111,6 +113,9 @@ public class SimpleSiteItemSelectorView
 	private static final List<ItemSelectorReturnType>
 		_supportedItemSelectorReturnTypes = Collections.singletonList(
 			new UUIDItemSelectorReturnType());
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private GroupService _groupService;
