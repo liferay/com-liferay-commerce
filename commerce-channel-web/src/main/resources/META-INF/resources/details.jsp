@@ -49,12 +49,13 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
 
-<aui:form action="<%= editCommerceChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form action="<%= editCommerceChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="channelFm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceChannel == null) ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
 	<aui:input name="addTypeSettings" type="hidden" />
 	<aui:input name="commerceChannelId" type="hidden" value="<%= commerceChannelId %>" />
 	<aui:input name="deleteTypeSettings" type="hidden" />
+	<aui:input name="siteGroupId" type="hidden" value="<%= (commerceChannel == null) ? 0 : commerceChannel.getSiteGroupId() %>" />
 
 	<div class="lfr-form-content">
 		<aui:model-context bean="<%= commerceChannel %>" model="<%= CommerceChannel.class %>" />

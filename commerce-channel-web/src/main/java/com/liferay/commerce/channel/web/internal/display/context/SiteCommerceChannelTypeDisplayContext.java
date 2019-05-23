@@ -29,12 +29,8 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -65,18 +61,14 @@ public class SiteCommerceChannelTypeDisplayContext
 		_itemSelector = itemSelector;
 	}
 
-	public List<Group> getGroups() throws PortalException {
-		List<Group> groups = new ArrayList<>();
+	public Group getChannelSite() throws PortalException {
+		CommerceChannel commerceChannel = getCommerceChannel();
 
-		for (long siteGroupId : getCheckedGroupIds()) {
-			Group group = _groupLocalService.fetchGroup(siteGroupId);
-
-			if (group != null) {
-				groups.add(group);
-			}
+		if (commerceChannel == null) {
+			return null;
 		}
 
-		return groups;
+		return _groupLocalService.fetchGroup(commerceChannel.getSiteGroupId());
 	}
 
 	public String getItemSelectorUrl() throws PortalException {
@@ -94,25 +86,7 @@ public class SiteCommerceChannelTypeDisplayContext
 			requestBackedPortletURLFactory, "sitesSelectItem",
 			simpleSiteItemSelectorCriterion);
 
-		String checkedGroupIds = StringUtil.merge(getCheckedGroupIds());
-
-		itemSelectorURL.setParameter("checkedGroupIds", checkedGroupIds);
-
 		return itemSelectorURL.toString();
-	}
-
-	protected long[] getCheckedGroupIds() throws PortalException {
-		CommerceChannel commerceChannel = getCommerceChannel();
-
-		if (commerceChannel == null) {
-			return new long[0];
-		}
-
-		UnicodeProperties typeSettingsProperties =
-			commerceChannel.getTypeSettingsProperties();
-
-		return StringUtil.split(
-			typeSettingsProperties.getProperty("groupIds"), 0L);
 	}
 
 	private final GroupLocalService _groupLocalService;

@@ -20,10 +20,12 @@
 SimpleSiteItemSelectorViewDisplayContext simpleSiteItemSelectorViewDisplayContext = (SimpleSiteItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 String itemSelectedEventName = simpleSiteItemSelectorViewDisplayContext.getItemSelectedEventName();
+
+long[] usedSiteGroupIds = simpleSiteItemSelectorViewDisplayContext.getUsedSiteGroupIds();
 %>
 
 <liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
+	includeCheckBox="<%= false %>"
 	searchContainerId="sites"
 >
 	<liferay-frontend:management-bar-filters>
@@ -54,6 +56,17 @@ String itemSelectedEventName = simpleSiteItemSelectorViewDisplayContext.getItemS
 			keyProperty="groupId"
 			modelVar="group"
 		>
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				name="name"
+				value="<%= HtmlUtil.escape(group.getName(locale)) %>"
+			/>
+
+			<liferay-ui:search-container-column-text
+				cssClass="table-cell-content"
+				name="channel"
+				value="<%= HtmlUtil.escape(simpleSiteItemSelectorViewDisplayContext.getChannelUsingSite(group.getGroupId())) %>"
+			/>
 
 			<%
 			Map<String, Object> data = new HashMap<>();
@@ -66,9 +79,16 @@ String itemSelectedEventName = simpleSiteItemSelectorViewDisplayContext.getItemS
 
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
-				name="name"
-				value="<%= HtmlUtil.escape(group.getName(locale)) %>"
-			/>
+			>
+				<c:choose>
+					<c:when test="<%= ArrayUtil.contains(usedSiteGroupIds, group.getGroupId()) %>">
+						<liferay-ui:message key="that-site-is-already-associated-with-another-channel" />
+					</c:when>
+					<c:otherwise>
+						<aui:button cssClass="selector-button" value="choose" />
+					</c:otherwise>
+				</c:choose>
+			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator
@@ -77,32 +97,27 @@ String itemSelectedEventName = simpleSiteItemSelectorViewDisplayContext.getItemS
 	</liferay-ui:search-container>
 </div>
 
-<aui:script use="liferay-search-container">
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />sites');
-
-	searchContainer.on(
-		'rowToggled',
+<aui:script use="aui-base">
+	A.one('#<portlet:namespace/>sites').delegate(
+		'click',
 		function(event) {
-			var arr = [];
+			var row = this.ancestor('tr');
 
-			var allSelectedElements = event.elements.allSelectedElements;
-
-			allSelectedElements.each(
-				function() {
-					var row = this.ancestor('tr');
-
-					var data = row.getDOM().dataset;
-
-					arr.push({id: data.id, name: data.name});
-				}
-			);
+			var data = row.getDOM().dataset;
 
 			Liferay.Util.getOpener().Liferay.fire(
 				'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
 				{
-					data: arr
+					data: {id: data.id, name: data.name}
 				}
 			);
-		}
+
+			var popupWindow = Liferay.Util.getWindow();
+
+			if (popupWindow !== null) {
+				Liferay.Util.getWindow().hide()
+			}
+		},
+		'.selector-button'
 	);
 </aui:script>
