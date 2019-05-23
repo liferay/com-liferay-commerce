@@ -111,7 +111,7 @@ public class CommercePriceListAccountGroupTest {
 		throws Exception {
 
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
@@ -148,7 +148,7 @@ public class CommercePriceListAccountGroupTest {
 	@Test
 	public void testPriceListWithUserAndRoleAccountGroups() throws Exception {
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
@@ -196,14 +196,14 @@ public class CommercePriceListAccountGroupTest {
 		throws Exception {
 
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
 			"I add a price list"
 		).and(
-			"I associate to the price list to a account groups, a role" +
-				" segment and an organization segment"
+			"I associate to the price list to a account groups, a role " +
+				"segment and an organization segment"
 		).when(
 			"I try to get the price list"
 		).then(

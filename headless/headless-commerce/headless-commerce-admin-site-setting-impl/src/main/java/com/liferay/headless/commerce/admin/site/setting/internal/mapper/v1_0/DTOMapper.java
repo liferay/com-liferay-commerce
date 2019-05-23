@@ -14,7 +14,6 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0;
 
-import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
@@ -24,11 +23,8 @@ import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -122,10 +118,5 @@ public class DTOMapper {
 
 		return taxCategory;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
-
-	@Reference
-	private AssetVocabularyLocalService _assetVocabularyLocalService;
 
 }
