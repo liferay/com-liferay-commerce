@@ -10,6 +10,7 @@
 		<settings>
 			<setting configurable="true" key="copyright" type="textarea" />
 			<setting configurable="true" key="show-top-menu" type="checkbox" value="false" />
+			<setting configurable="true" key="wide-layout" type="checkbox" value="false" />
 		</settings>
 		<layout-templates>
 			<custom>
