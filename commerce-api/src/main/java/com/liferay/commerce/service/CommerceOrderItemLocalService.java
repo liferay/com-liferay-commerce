@@ -17,6 +17,7 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrderItem;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -336,6 +337,9 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
 		int quantity, String json, CommerceContext commerceContext,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CommerceOrderItem updateCommerceOrderItem(long commerceOrderItemId,
+		long bookedQuantityId) throws NoSuchOrderItemException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(

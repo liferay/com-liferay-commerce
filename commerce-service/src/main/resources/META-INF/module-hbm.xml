@@ -170,6 +170,7 @@
 		<property name="discountPercentageLevel3" type="org.hibernate.type.BigDecimalType" />
 		<property name="discountPercentageLevel4" type="org.hibernate.type.BigDecimalType" />
 		<property name="subscription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="bookedQuantityId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceOrderNoteImpl" table="CommerceOrderNote">
 		<id name="commerceOrderNoteId" type="long">
