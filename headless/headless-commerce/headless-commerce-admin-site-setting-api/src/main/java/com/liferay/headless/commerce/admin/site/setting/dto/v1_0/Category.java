@@ -26,7 +26,10 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -41,9 +44,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Category")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"externalReferenceCode", "name"})
 @XmlRootElement(name = "Category")
 public class Category {
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -59,6 +64,9 @@ public class Category {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -69,6 +77,7 @@ public class Category {
 	@NotEmpty
 	protected String externalReferenceCode;
 
+	@Schema
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -84,6 +93,9 @@ public class Category {
 		try {
 			groupId = groupIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -93,6 +105,7 @@ public class Category {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long groupId;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -105,6 +118,9 @@ public class Category {
 	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
 		try {
 			id = idUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -129,6 +145,9 @@ public class Category {
 		try {
 			name = nameUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -139,6 +158,7 @@ public class Category {
 	@NotEmpty
 	protected String name;
 
+	@Schema
 	public String getVocabulary() {
 		return vocabulary;
 	}
@@ -153,6 +173,9 @@ public class Category {
 
 		try {
 			vocabulary = vocabularyUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -190,35 +213,102 @@ public class Category {
 
 		sb.append("{");
 
-		sb.append("\"externalReferenceCode\": ");
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"externalReferenceCode\": ");
 
-		sb.append("\"groupId\": ");
+			sb.append("\"");
 
-		sb.append(groupId);
-		sb.append(", ");
+			sb.append(_escape(externalReferenceCode));
 
-		sb.append("\"id\": ");
+			sb.append("\"");
+		}
 
-		sb.append(id);
-		sb.append(", ");
+		if (groupId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"name\": ");
+			sb.append("\"groupId\": ");
 
-		sb.append("\"");
-		sb.append(name);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(groupId);
+		}
 
-		sb.append("\"vocabulary\": ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(vocabulary);
-		sb.append("\"");
+			sb.append("\"id\": ");
+
+			sb.append(id);
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(name));
+
+			sb.append("\"");
+		}
+
+		if (vocabulary != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"vocabulary\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(vocabulary));
+
+			sb.append("\"");
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

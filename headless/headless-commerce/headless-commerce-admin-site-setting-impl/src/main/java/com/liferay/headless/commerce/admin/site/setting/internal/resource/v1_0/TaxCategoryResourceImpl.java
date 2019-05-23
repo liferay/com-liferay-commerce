@@ -18,8 +18,6 @@ import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.internal.util.v1_0.TaxCategoryHelper;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.validation.constraints.NotNull;
 
@@ -49,36 +47,8 @@ public class TaxCategoryResourceImpl extends BaseTaxCategoryResourceImpl {
 	}
 
 	@Override
-	public Page<TaxCategory> getTaxCategories(
-			@NotNull Long groupId, Pagination pagination)
-		throws Exception {
-
-		return _taxCategoryHelper.getTaxCategories(groupId, pagination);
-	}
-
-	@Override
 	public TaxCategory getTaxCategory(@NotNull Long id) throws Exception {
 		return _taxCategoryHelper.getTaxCategory(id);
-	}
-
-	@Override
-	public Response updateTaxCategory(@NotNull Long id, TaxCategory taxCategory)
-		throws Exception {
-
-		_taxCategoryHelper.updateTaxCategory(id, taxCategory);
-
-		Response.ResponseBuilder responseBuilder = Response.noContent();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	public TaxCategory upsertTaxCategory(
-			@NotNull Long groupId, TaxCategory taxCategory)
-		throws Exception {
-
-		return _taxCategoryHelper.upsertTaxCategory(
-			groupId, taxCategory, _user);
 	}
 
 	@Reference

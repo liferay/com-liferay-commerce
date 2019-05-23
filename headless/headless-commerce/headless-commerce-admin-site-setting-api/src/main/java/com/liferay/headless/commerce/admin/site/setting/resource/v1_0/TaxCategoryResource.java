@@ -34,18 +34,19 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface TaxCategoryResource {
 
-	public Page<TaxCategory> getTaxCategories(
+	public Page<TaxCategory> getCommerceAdminSiteSettingGroupTaxCategoryPage(
 			Long groupId, Pagination pagination)
 		throws Exception;
 
-	public TaxCategory upsertTaxCategory(Long groupId, TaxCategory taxCategory)
+	public TaxCategory postCommerceAdminSiteSettingGroupTaxCategory(
+			Long groupId, TaxCategory taxCategory)
 		throws Exception;
 
 	public Response deleteTaxCategory(Long id) throws Exception;
 
 	public TaxCategory getTaxCategory(Long id) throws Exception;
 
-	public Response updateTaxCategory(Long id, TaxCategory taxCategory)
+	public Response putTaxCategory(Long id, TaxCategory taxCategory)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
