@@ -33,6 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,27 +43,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("AvailabilityEstimate")
+@GraphQLName("AccountGroupCriterion")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"title"})
-@XmlRootElement(name = "AvailabilityEstimate")
-public class AvailabilityEstimate {
+@Schema(requiredProperties = {"commerceAccountGroupId", "type"})
+@XmlRootElement(name = "AccountGroupCriterion")
+public class AccountGroupCriterion {
 
 	@Schema
-	public Long getGroupId() {
-		return groupId;
+	public Long getCommerceAccountGroupId() {
+		return commerceAccountGroupId;
 	}
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
+	public void setCommerceAccountGroupId(Long commerceAccountGroupId) {
+		this.commerceAccountGroupId = commerceAccountGroupId;
 	}
 
 	@JsonIgnore
-	public void setGroupId(
-		UnsafeSupplier<Long, Exception> groupIdUnsafeSupplier) {
+	public void setCommerceAccountGroupId(
+		UnsafeSupplier<Long, Exception> commerceAccountGroupIdUnsafeSupplier) {
 
 		try {
-			groupId = groupIdUnsafeSupplier.get();
+			commerceAccountGroupId = commerceAccountGroupIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -73,8 +74,9 @@ public class AvailabilityEstimate {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	protected Long groupId;
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotNull
+	protected Long commerceAccountGroupId;
 
 	@Schema
 	public Long getId() {
@@ -131,20 +133,18 @@ public class AvailabilityEstimate {
 	protected Double priority;
 
 	@Schema
-	public Map<String, String> getTitle() {
-		return title;
+	public String getType() {
+		return type;
 	}
 
-	public void setTitle(Map<String, String> title) {
-		this.title = title;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@JsonIgnore
-	public void setTitle(
-		UnsafeSupplier<Map<String, String>, Exception> titleUnsafeSupplier) {
-
+	public void setType(UnsafeSupplier<String, Exception> typeUnsafeSupplier) {
 		try {
-			title = titleUnsafeSupplier.get();
+			type = typeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -156,8 +156,36 @@ public class AvailabilityEstimate {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Map<String, String> title;
+	@NotEmpty
+	protected String type;
+
+	@Schema
+	public String getTypeSettings() {
+		return typeSettings;
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		this.typeSettings = typeSettings;
+	}
+
+	@JsonIgnore
+	public void setTypeSettings(
+		UnsafeSupplier<String, Exception> typeSettingsUnsafeSupplier) {
+
+		try {
+			typeSettings = typeSettingsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String typeSettings;
 
 	@Override
 	public boolean equals(Object object) {
@@ -165,14 +193,14 @@ public class AvailabilityEstimate {
 			return true;
 		}
 
-		if (!(object instanceof AvailabilityEstimate)) {
+		if (!(object instanceof AccountGroupCriterion)) {
 			return false;
 		}
 
-		AvailabilityEstimate availabilityEstimate =
-			(AvailabilityEstimate)object;
+		AccountGroupCriterion accountGroupCriterion =
+			(AccountGroupCriterion)object;
 
-		return Objects.equals(toString(), availabilityEstimate.toString());
+		return Objects.equals(toString(), accountGroupCriterion.toString());
 	}
 
 	@Override
@@ -187,14 +215,14 @@ public class AvailabilityEstimate {
 
 		sb.append("{");
 
-		if (groupId != null) {
+		if (commerceAccountGroupId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"groupId\": ");
+			sb.append("\"commerceAccountGroupId\": ");
 
-			sb.append(groupId);
+			sb.append(commerceAccountGroupId);
 		}
 
 		if (id != null) {
@@ -217,14 +245,32 @@ public class AvailabilityEstimate {
 			sb.append(priority);
 		}
 
-		if (title != null) {
+		if (type != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"title\": ");
+			sb.append("\"type\": ");
 
-			sb.append(_toJSON(title));
+			sb.append("\"");
+
+			sb.append(_escape(type));
+
+			sb.append("\"");
+		}
+
+		if (typeSettings != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"typeSettings\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(typeSettings));
+
+			sb.append("\"");
 		}
 
 		sb.append("}");

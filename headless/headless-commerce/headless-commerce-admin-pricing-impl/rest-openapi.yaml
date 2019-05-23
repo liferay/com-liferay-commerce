@@ -77,8 +77,106 @@ components:
                         $ref: '#/components/schemas/Error'
             description: Authentication information is missing or invalid
     schemas:
+        AccountGroup:
+            properties:
+                active:
+                    example: true
+                    type: boolean
+                criteria:
+                    example:
+                        - commerceAccountGroupId: 30130
+                          id: 20546
+                          name:
+                              en_US: Croatia
+                              hr_HR: Hrvatska
+                              hu_HU: Horvatorszag
+                          priority: 1.1
+                          type: users
+                          typeSettings: 22134,23567
+                    items:
+                        $ref: '#/components/schemas/AccountGroupCriterion'
+                    type: array
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                key:
+                    example: account-group-key
+                    type: string
+                name:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                system:
+                    example: true
+                    type: boolean
+            required:
+                - key
+                - name
+            type: object
+        AccountGroupCriterion:
+            properties:
+                commerceAccountGroupId:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                priority:
+                    example: 1.1
+                    format: double
+                    minimum: 0
+                    type: number
+                type:
+                    example: users
+                    type: string
+                typeSettings:
+                    example: 22134,23567
+                    type: string
+            required:
+                - commerceAccountGroupId
+                - type
+            type: object
         Discount:
             properties:
+                accountGroups:
+                    example:
+                        - active: true
+                          criteria:
+                              commerceAccountGroupId: 23145
+                              id: 20467
+                              name:
+                                  en_US: Croatia
+                                  hr_HR: Hrvatska
+                                  hu_HU: Horvatorszag
+                              priority: 1.1
+                              type: users
+                              typeSettings: 22134,23567
+                          id: 20546
+                          key: account-group-key
+                          name:
+                              en_US: Croatia
+                              hr_HR: Hrvatska
+                              hu_HU: Horvatorszag
+                          priority: 1.1
+                          system: true
+                    items:
+                        $ref: '#/components/schemas/AccountGroup'
+                    type: array
                 active:
                     example: true
                     type: boolean
@@ -155,30 +253,6 @@ components:
                 usePercentage:
                     example: true
                     type: boolean
-                userSegments:
-                    example:
-                        - active: true
-                          criteria:
-                              commerceUserSegmentEntryId: 23145
-                              id: 20467
-                              name:
-                                  en_US: Croatia
-                                  hr_HR: Hrvatska
-                                  hu_HU: Horvatorszag
-                              priority: 1.1
-                              type: users
-                              typeSettings: 22134,23567
-                          id: 20546
-                          key: user-segment-key
-                          name:
-                              en_US: Croatia
-                              hr_HR: Hrvatska
-                              hu_HU: Horvatorszag
-                          priority: 1.1
-                          system: true
-                    items:
-                        $ref: '#/components/schemas/UserSegment'
-                    type: array
             required:
                 - limitationType
                 - target
@@ -418,80 +492,6 @@ components:
             required:
                 - commercePriceEntryId
                 - externalReferenceCode
-            type: object
-        UserSegment:
-            properties:
-                active:
-                    example: true
-                    type: boolean
-                criteria:
-                    example:
-                        - commerceUserSegmentEntryId: 30130
-                          id: 20546
-                          name:
-                              en_US: Croatia
-                              hr_HR: Hrvatska
-                              hu_HU: Horvatorszag
-                          priority: 1.1
-                          type: users
-                          typeSettings: 22134,23567
-                    items:
-                        $ref: '#/components/schemas/UserSegmentCriterion'
-                    type: array
-                id:
-                    example: 30130
-                    format: int64
-                    minimum: 0
-                    type: integer
-                key:
-                    example: user-segment-key
-                    type: string
-                name:
-                    additionalProperties:
-                        type: string
-                    example:
-                        en_US: Croatia
-                        hr_HR: Hrvatska
-                        hu_HU: Horvatorszag
-                    type: object
-                priority:
-                    example: 1.1
-                    format: double
-                    minimum: 0
-                    type: number
-                system:
-                    example: true
-                    type: boolean
-            required:
-                - key
-                - name
-            type: object
-        UserSegmentCriterion:
-            properties:
-                commerceUserSegmentEntryId:
-                    example: 30130
-                    format: int64
-                    minimum: 0
-                    type: integer
-                id:
-                    example: 30130
-                    format: int64
-                    minimum: 0
-                    type: integer
-                priority:
-                    example: 1.1
-                    format: double
-                    minimum: 0
-                    type: number
-                type:
-                    example: users
-                    type: string
-                typeSettings:
-                    example: 22134,23567
-                    type: string
-            required:
-                - commerceUserSegmentEntryId
-                - type
             type: object
     securitySchemes:
         BasicAuth:

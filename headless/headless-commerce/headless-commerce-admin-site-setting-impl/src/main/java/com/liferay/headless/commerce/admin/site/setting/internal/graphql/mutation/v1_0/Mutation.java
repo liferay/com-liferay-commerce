@@ -14,18 +14,16 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.graphql.mutation.v1_0;
 
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroupCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
+import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.CatalogRuleResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.UserSegmentResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.WarehouseResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
@@ -49,20 +47,20 @@ import org.osgi.service.component.ComponentServiceObjects;
 @Generated("")
 public class Mutation {
 
+	public static void setAccountGroupResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountGroupResource>
+			accountGroupResourceComponentServiceObjects) {
+
+		_accountGroupResourceComponentServiceObjects =
+			accountGroupResourceComponentServiceObjects;
+	}
+
 	public static void setAvailabilityEstimateResourceComponentServiceObjects(
 		ComponentServiceObjects<AvailabilityEstimateResource>
 			availabilityEstimateResourceComponentServiceObjects) {
 
 		_availabilityEstimateResourceComponentServiceObjects =
 			availabilityEstimateResourceComponentServiceObjects;
-	}
-
-	public static void setCatalogRuleResourceComponentServiceObjects(
-		ComponentServiceObjects<CatalogRuleResource>
-			catalogRuleResourceComponentServiceObjects) {
-
-		_catalogRuleResourceComponentServiceObjects =
-			catalogRuleResourceComponentServiceObjects;
 	}
 
 	public static void setMeasurementUnitResourceComponentServiceObjects(
@@ -81,20 +79,99 @@ public class Mutation {
 			taxCategoryResourceComponentServiceObjects;
 	}
 
-	public static void setUserSegmentResourceComponentServiceObjects(
-		ComponentServiceObjects<UserSegmentResource>
-			userSegmentResourceComponentServiceObjects) {
-
-		_userSegmentResourceComponentServiceObjects =
-			userSegmentResourceComponentServiceObjects;
-	}
-
 	public static void setWarehouseResourceComponentServiceObjects(
 		ComponentServiceObjects<WarehouseResource>
 			warehouseResourceComponentServiceObjects) {
 
 		_warehouseResourceComponentServiceObjects =
 			warehouseResourceComponentServiceObjects;
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteAccountGroupAccountGroupCriterion(
+			@GraphQLName("criterionId") Long criterionId,
+			@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.deleteAccountGroupAccountGroupCriterion(
+					criterionId, id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
+			@GraphQLName("criterionId") Long criterionId,
+			@GraphQLName("id") Long id,
+			@GraphQLName("accountGroupCriterion") AccountGroupCriterion
+				accountGroupCriterion)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.postAccountGroupAccountGroupCriterion(
+					criterionId, id, accountGroupCriterion));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
+			@GraphQLName("id") Long id,
+			@GraphQLName("accountGroupCriterion") AccountGroupCriterion
+				accountGroupCriterion)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.postAccountGroupAccountGroupCriterion(
+					id, accountGroupCriterion));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteAccountGroup(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.deleteAccountGroup(
+				id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response putAccountGroup(
+			@GraphQLName("id") Long id,
+			@GraphQLName("accountGroup") AccountGroup accountGroup)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.putAccountGroup(
+				id, accountGroup));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup postCommerceAdminSiteSettingGroupAccountGroup(
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("accountGroup") AccountGroup accountGroup)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.
+					postCommerceAdminSiteSettingGroupAccountGroup(
+						groupId, accountGroup));
 	}
 
 	@GraphQLInvokeDetached
@@ -109,9 +186,9 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateAvailabilityEstimate(
+	public Response putAvailabilityEstimate(
 			@GraphQLName("id") Long id,
-			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
+			@GraphQLName("availabilityEstimate") AvailabilityEstimate
 				availabilityEstimate)
 		throws Exception {
 
@@ -119,76 +196,42 @@ public class Mutation {
 			_availabilityEstimateResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			availabilityEstimateResource ->
-				availabilityEstimateResource.updateAvailabilityEstimate(
+				availabilityEstimateResource.putAvailabilityEstimate(
 					id, availabilityEstimate));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public AvailabilityEstimate upsertAvailabilityEstimate(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("AvailabilityEstimate") AvailabilityEstimate
-				availabilityEstimate)
+	public AvailabilityEstimate
+			postCommerceAdminSiteSettingGroupAvailabilityEstimate(
+				@GraphQLName("groupId") Long groupId,
+				@GraphQLName("availabilityEstimate") AvailabilityEstimate
+					availabilityEstimate)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_availabilityEstimateResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			availabilityEstimateResource ->
-				availabilityEstimateResource.upsertAvailabilityEstimate(
-					groupId, availabilityEstimate));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteCatalogRule(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_catalogRuleResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			catalogRuleResource -> catalogRuleResource.deleteCatalogRule(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateCatalogRule(
-			@GraphQLName("id") Long id,
-			@GraphQLName("CatalogRule") CatalogRule catalogRule)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_catalogRuleResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			catalogRuleResource -> catalogRuleResource.updateCatalogRule(
-				id, catalogRule));
+				availabilityEstimateResource.
+					postCommerceAdminSiteSettingGroupAvailabilityEstimate(
+						groupId, availabilityEstimate));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public CatalogRule upsertCatalogRule(
+	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("CatalogRule") CatalogRule catalogRule)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_catalogRuleResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			catalogRuleResource -> catalogRuleResource.upsertCatalogRule(
-				groupId, catalogRule));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public MeasurementUnit upsertMeasurementUnit(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
+			@GraphQLName("measurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_measurementUnitResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			measurementUnitResource ->
-				measurementUnitResource.upsertMeasurementUnit(
-					groupId, measurementUnit));
+				measurementUnitResource.
+					postCommerceAdminSiteSettingGroupMeasurementUnit(
+						groupId, measurementUnit));
 	}
 
 	@GraphQLInvokeDetached
@@ -203,31 +246,33 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateMeasurementUnit(
+	public Response putMeasurementUnit(
 			@GraphQLName("id") Long id,
-			@GraphQLName("MeasurementUnit") MeasurementUnit measurementUnit)
+			@GraphQLName("measurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_measurementUnitResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			measurementUnitResource ->
-				measurementUnitResource.updateMeasurementUnit(
+				measurementUnitResource.putMeasurementUnit(
 					id, measurementUnit));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public TaxCategory upsertTaxCategory(
+	public TaxCategory postCommerceAdminSiteSettingGroupTaxCategory(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("TaxCategory") TaxCategory taxCategory)
+			@GraphQLName("taxCategory") TaxCategory taxCategory)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_taxCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			taxCategoryResource -> taxCategoryResource.upsertTaxCategory(
-				groupId, taxCategory));
+			taxCategoryResource ->
+				taxCategoryResource.
+					postCommerceAdminSiteSettingGroupTaxCategory(
+						groupId, taxCategory));
 	}
 
 	@GraphQLInvokeDetached
@@ -241,114 +286,31 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateTaxCategory(
+	public Response putTaxCategory(
 			@GraphQLName("id") Long id,
-			@GraphQLName("TaxCategory") TaxCategory taxCategory)
+			@GraphQLName("taxCategory") TaxCategory taxCategory)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_taxCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			taxCategoryResource -> taxCategoryResource.updateTaxCategory(
+			taxCategoryResource -> taxCategoryResource.putTaxCategory(
 				id, taxCategory));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public UserSegment upsertUserSegment(
+	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("UserSegment") UserSegment userSegment)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.upsertUserSegment(
-				groupId, userSegment));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteUserSegmentCriterion(
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.deleteUserSegmentCriterion(
-					criterionId, id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public UserSegmentCriterion updateUserSegmentCriterion(
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.updateUserSegmentCriterion(
-					criterionId, id, userSegmentCriterion));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public UserSegmentCriterion upsertUserSegmentCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegmentCriterion") UserSegmentCriterion
-				userSegmentCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource ->
-				userSegmentResource.upsertUserSegmentCriterion(
-					id, userSegmentCriterion));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteUserSegment(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.deleteUserSegment(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response updateUserSegment(
-			@GraphQLName("id") Long id,
-			@GraphQLName("UserSegment") UserSegment userSegment)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_userSegmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			userSegmentResource -> userSegmentResource.updateUserSegment(
-				id, userSegment));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Warehouse upsertWarehouse(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("Warehouse") Warehouse warehouse)
+			@GraphQLName("warehouse") Warehouse warehouse)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_warehouseResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			warehouseResource -> warehouseResource.upsertWarehouse(
-				groupId, warehouse));
+			warehouseResource ->
+				warehouseResource.postCommerceAdminSiteSettingGroupWarehouse(
+					groupId, warehouse));
 	}
 
 	@GraphQLInvokeDetached
@@ -362,16 +324,15 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateWarehouse(
+	public Response putWarehouse(
 			@GraphQLName("id") Long id,
-			@GraphQLName("Warehouse") Warehouse warehouse)
+			@GraphQLName("warehouse") Warehouse warehouse)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_warehouseResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			warehouseResource -> warehouseResource.updateWarehouse(
-				id, warehouse));
+			warehouseResource -> warehouseResource.putWarehouse(id, warehouse));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -413,19 +374,19 @@ public class Mutation {
 	}
 
 	private void _populateResourceContext(
-			AvailabilityEstimateResource availabilityEstimateResource)
+			AccountGroupResource accountGroupResource)
 		throws Exception {
 
-		availabilityEstimateResource.setContextCompany(
+		accountGroupResource.setContextCompany(
 			CompanyLocalServiceUtil.getCompany(
 				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private void _populateResourceContext(
-			CatalogRuleResource catalogRuleResource)
+			AvailabilityEstimateResource availabilityEstimateResource)
 		throws Exception {
 
-		catalogRuleResource.setContextCompany(
+		availabilityEstimateResource.setContextCompany(
 			CompanyLocalServiceUtil.getCompany(
 				CompanyThreadLocal.getCompanyId()));
 	}
@@ -448,15 +409,6 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
-	private void _populateResourceContext(
-			UserSegmentResource userSegmentResource)
-		throws Exception {
-
-		userSegmentResource.setContextCompany(
-			CompanyLocalServiceUtil.getCompany(
-				CompanyThreadLocal.getCompanyId()));
-	}
-
 	private void _populateResourceContext(WarehouseResource warehouseResource)
 		throws Exception {
 
@@ -465,16 +417,14 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private static ComponentServiceObjects<AccountGroupResource>
+		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AvailabilityEstimateResource>
 		_availabilityEstimateResourceComponentServiceObjects;
-	private static ComponentServiceObjects<CatalogRuleResource>
-		_catalogRuleResourceComponentServiceObjects;
 	private static ComponentServiceObjects<MeasurementUnitResource>
 		_measurementUnitResourceComponentServiceObjects;
 	private static ComponentServiceObjects<TaxCategoryResource>
 		_taxCategoryResourceComponentServiceObjects;
-	private static ComponentServiceObjects<UserSegmentResource>
-		_userSegmentResourceComponentServiceObjects;
 	private static ComponentServiceObjects<WarehouseResource>
 		_warehouseResourceComponentServiceObjects;
 

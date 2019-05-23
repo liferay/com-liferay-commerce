@@ -14,33 +14,18 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.mapper.v1_0;
 
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.model.CPRuleAssetCategoryRel;
-import com.liferay.commerce.product.model.CPRuleUserSegmentRel;
 import com.liferay.commerce.product.model.CPTaxCategory;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentCriterion;
-import com.liferay.commerce.user.segment.model.CommerceUserSegmentEntry;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.CatalogRule;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Category;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegment;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.UserSegmentCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -51,66 +36,6 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = DTOMapper.class)
 public class DTOMapper {
-
-	public Category[] modelsToCategoryArray(
-		List<CPRuleAssetCategoryRel> cpRuleAssetCategoryRels) {
-
-		if (cpRuleAssetCategoryRels == null) {
-			return null;
-		}
-
-		List<Category> categories = new ArrayList<>();
-
-		for (CPRuleAssetCategoryRel cpRuleAssetCategoryRel :
-				cpRuleAssetCategoryRels) {
-
-			categories.add(modelToDTO(cpRuleAssetCategoryRel));
-		}
-
-		Stream<Category> stream = categories.stream();
-
-		return stream.toArray(Category[]::new);
-	}
-
-	public UserSegment[] modelsToUserSegmentArray(
-		List<CPRuleUserSegmentRel> cpRuleUserSegmentRels) {
-
-		if (cpRuleUserSegmentRels == null) {
-			return null;
-		}
-
-		List<UserSegment> userSegments = new ArrayList<>();
-
-		for (CPRuleUserSegmentRel cpRuleUserSegmentRel :
-				cpRuleUserSegmentRels) {
-
-			userSegments.add(modelToDTO(cpRuleUserSegmentRel));
-		}
-
-		Stream<UserSegment> stream = userSegments.stream();
-
-		return stream.toArray(UserSegment[]::new);
-	}
-
-	public UserSegmentCriterion[] modelsToUserSegmentCriterionArray(
-		List<CommerceUserSegmentCriterion> commerceUserSegmentCriteria) {
-
-		if (commerceUserSegmentCriteria == null) {
-			return null;
-		}
-
-		List<UserSegmentCriterion> userSegmentCriteria = new ArrayList<>();
-
-		for (CommerceUserSegmentCriterion commerceUserSegmentCriterion :
-				commerceUserSegmentCriteria) {
-
-			userSegmentCriteria.add(modelToDTO(commerceUserSegmentCriterion));
-		}
-
-		Stream<UserSegmentCriterion> stream = userSegmentCriteria.stream();
-
-		return stream.toArray(UserSegmentCriterion[]::new);
-	}
 
 	public AvailabilityEstimate modelToDTO(
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
@@ -132,54 +57,6 @@ public class DTOMapper {
 				commerceAvailabilityEstimate.getTitleMap()));
 
 		return availabilityEstimate;
-	}
-
-	public UserSegmentCriterion modelToDTO(
-		CommerceUserSegmentCriterion commerceUserSegmentCriterion) {
-
-		UserSegmentCriterion userSegmentCriterion = new UserSegmentCriterion();
-
-		if (commerceUserSegmentCriterion == null) {
-			return userSegmentCriterion;
-		}
-
-		userSegmentCriterion.setCommerceUserSegmentEntryId(
-			commerceUserSegmentCriterion.getCommerceUserSegmentEntryId());
-		userSegmentCriterion.setId(
-			commerceUserSegmentCriterion.getCommerceUserSegmentCriterionId());
-		userSegmentCriterion.setPriority(
-			commerceUserSegmentCriterion.getPriority());
-		userSegmentCriterion.setType(commerceUserSegmentCriterion.getType());
-		userSegmentCriterion.setTypeSettings(
-			commerceUserSegmentCriterion.getTypeSettings());
-
-		return userSegmentCriterion;
-	}
-
-	public UserSegment modelToDTO(
-		CommerceUserSegmentEntry commerceUserSegmentEntry) {
-
-		UserSegment userSegment = new UserSegment();
-
-		if (commerceUserSegmentEntry == null) {
-			return userSegment;
-		}
-
-		userSegment.setActive(commerceUserSegmentEntry.isActive());
-		userSegment.setCriteria(
-			modelsToUserSegmentCriterionArray(
-				commerceUserSegmentEntry.getCommerceUserSegmentCriteria()));
-		userSegment.setGroupId(commerceUserSegmentEntry.getGroupId());
-		userSegment.setId(
-			commerceUserSegmentEntry.getCommerceUserSegmentEntryId());
-		userSegment.setKey(commerceUserSegmentEntry.getKey());
-		userSegment.setName(
-			LanguageUtils.getLanguageIdMap(
-				commerceUserSegmentEntry.getNameMap()));
-		userSegment.setPriority(commerceUserSegmentEntry.getPriority());
-		userSegment.setSystem(commerceUserSegmentEntry.isSystem());
-
-		return userSegment;
 	}
 
 	public Warehouse modelToDTO(CommerceWarehouse commerceWarehouse) {
@@ -227,71 +104,6 @@ public class DTOMapper {
 		measurementUnit.setType(cpMeasurementUnit.getType());
 
 		return measurementUnit;
-	}
-
-	public CatalogRule modelToDTO(CPRule cpRule) {
-		CatalogRule catalogRule = new CatalogRule();
-
-		if (cpRule == null) {
-			return catalogRule;
-		}
-
-		catalogRule.setActive(cpRule.isActive());
-		catalogRule.setCategories(
-			modelsToCategoryArray(cpRule.getCPRuleAssetCategoryRels()));
-		catalogRule.setGroupId(catalogRule.getGroupId());
-		catalogRule.setId(cpRule.getCPRuleId());
-		catalogRule.setName(cpRule.getName());
-		catalogRule.setType(cpRule.getType());
-		catalogRule.setTypeSettings(cpRule.getTypeSettingsProperties());
-		catalogRule.setUserSegments(
-			modelsToUserSegmentArray(cpRule.getCPRuleUserSegmentRels()));
-
-		return catalogRule;
-	}
-
-	public Category modelToDTO(CPRuleAssetCategoryRel cpRuleAssetCategoryRel) {
-		Category category = new Category();
-
-		if (cpRuleAssetCategoryRel == null) {
-			return category;
-		}
-
-		try {
-			AssetCategory assetCategory =
-				cpRuleAssetCategoryRel.getAssetCategory();
-
-			category.setExternalReferenceCode(
-				assetCategory.getExternalReferenceCode());
-			category.setGroupId(assetCategory.getGroupId());
-			category.setId(assetCategory.getCategoryId());
-			category.setName(assetCategory.getName());
-
-			AssetVocabulary assetVocabulary =
-				_assetVocabularyLocalService.getAssetVocabulary(
-					assetCategory.getVocabularyId());
-
-			category.setVocabulary(assetVocabulary.getName());
-		}
-		catch (Exception e) {
-			_log.error("Cannot instantiate Category ", e);
-
-			throw new RuntimeException(e);
-		}
-
-		return category;
-	}
-
-	public UserSegment modelToDTO(CPRuleUserSegmentRel cpRuleUserSegmentRel) {
-		try {
-			return modelToDTO(
-				cpRuleUserSegmentRel.getCommerceUserSegmentEntry());
-		}
-		catch (Exception e) {
-			_log.error("Cannot instantiate UserSegment ", e);
-
-			throw new RuntimeException(e);
-		}
 	}
 
 	public TaxCategory modelToDTO(CPTaxCategory cpTaxCategory) {

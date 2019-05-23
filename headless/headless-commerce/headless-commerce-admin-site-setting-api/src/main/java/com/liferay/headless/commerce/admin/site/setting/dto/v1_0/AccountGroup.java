@@ -33,6 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,11 +43,68 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("AvailabilityEstimate")
+@GraphQLName("AccountGroup")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"title"})
-@XmlRootElement(name = "AvailabilityEstimate")
-public class AvailabilityEstimate {
+@Schema(requiredProperties = {"key", "name"})
+@XmlRootElement(name = "AccountGroup")
+public class AccountGroup {
+
+	@Schema
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	@JsonIgnore
+	public void setActive(
+		UnsafeSupplier<Boolean, Exception> activeUnsafeSupplier) {
+
+		try {
+			active = activeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Boolean active;
+
+	@Schema
+	public AccountGroupCriterion[] getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(AccountGroupCriterion[] criteria) {
+		this.criteria = criteria;
+	}
+
+	@JsonIgnore
+	public void setCriteria(
+		UnsafeSupplier<AccountGroupCriterion[], Exception>
+			criteriaUnsafeSupplier) {
+
+		try {
+			criteria = criteriaUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected AccountGroupCriterion[] criteria;
 
 	@Schema
 	public Long getGroupId() {
@@ -103,6 +161,62 @@ public class AvailabilityEstimate {
 	protected Long id;
 
 	@Schema
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	@JsonIgnore
+	public void setKey(UnsafeSupplier<String, Exception> keyUnsafeSupplier) {
+		try {
+			key = keyUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotEmpty
+	protected String key;
+
+	@Schema
+	public Map<String, String> getName() {
+		return name;
+	}
+
+	public void setName(Map<String, String> name) {
+		this.name = name;
+	}
+
+	@JsonIgnore
+	public void setName(
+		UnsafeSupplier<Map<String, String>, Exception> nameUnsafeSupplier) {
+
+		try {
+			name = nameUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotNull
+	protected Map<String, String> name;
+
+	@Schema
 	public Double getPriority() {
 		return priority;
 	}
@@ -131,20 +245,20 @@ public class AvailabilityEstimate {
 	protected Double priority;
 
 	@Schema
-	public Map<String, String> getTitle() {
-		return title;
+	public Boolean getSystem() {
+		return system;
 	}
 
-	public void setTitle(Map<String, String> title) {
-		this.title = title;
+	public void setSystem(Boolean system) {
+		this.system = system;
 	}
 
 	@JsonIgnore
-	public void setTitle(
-		UnsafeSupplier<Map<String, String>, Exception> titleUnsafeSupplier) {
+	public void setSystem(
+		UnsafeSupplier<Boolean, Exception> systemUnsafeSupplier) {
 
 		try {
-			title = titleUnsafeSupplier.get();
+			system = systemUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -156,8 +270,7 @@ public class AvailabilityEstimate {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Map<String, String> title;
+	protected Boolean system;
 
 	@Override
 	public boolean equals(Object object) {
@@ -165,14 +278,13 @@ public class AvailabilityEstimate {
 			return true;
 		}
 
-		if (!(object instanceof AvailabilityEstimate)) {
+		if (!(object instanceof AccountGroup)) {
 			return false;
 		}
 
-		AvailabilityEstimate availabilityEstimate =
-			(AvailabilityEstimate)object;
+		AccountGroup accountGroup = (AccountGroup)object;
 
-		return Objects.equals(toString(), availabilityEstimate.toString());
+		return Objects.equals(toString(), accountGroup.toString());
 	}
 
 	@Override
@@ -186,6 +298,36 @@ public class AvailabilityEstimate {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (active != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"active\": ");
+
+			sb.append(active);
+		}
+
+		if (criteria != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"criteria\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < criteria.length; i++) {
+				sb.append(String.valueOf(criteria[i]));
+
+				if ((i + 1) < criteria.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
+		}
 
 		if (groupId != null) {
 			if (sb.length() > 1) {
@@ -207,6 +349,30 @@ public class AvailabilityEstimate {
 			sb.append(id);
 		}
 
+		if (key != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"key\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(key));
+
+			sb.append("\"");
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append(_toJSON(name));
+		}
+
 		if (priority != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -217,14 +383,14 @@ public class AvailabilityEstimate {
 			sb.append(priority);
 		}
 
-		if (title != null) {
+		if (system != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"title\": ");
+			sb.append("\"system\": ");
 
-			sb.append(_toJSON(title));
+			sb.append(system);
 		}
 
 		sb.append("}");
