@@ -20,9 +20,12 @@ import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.exception.GuestCartItemMaxAllowedException;
+import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.internal.search.CommerceOrderItemIndexer;
-import com.liferay.commerce.inventory.model.CommerceWarehouseItem;
-import com.liferay.commerce.inventory.service.CommerceWarehouseItemLocalService;
+import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
@@ -202,6 +205,19 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderLocalService.recalculatePrice(
 			commerceOrder.getCommerceOrderId(), commerceContext);
 
+		if (commerceOrderItem.getBookedQuantityId() > 0) {
+			CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+				_commerceInventoryBookedQuantityLocalService.
+					fetchCommerceInventoryBookedQuantity(
+						commerceOrderItem.getBookedQuantityId());
+
+			if (commerceInventoryBookedQuantity != null) {
+				_commerceInventoryBookedQuantityLocalService.
+					deleteCommerceInventoryBookedQuantity(
+						commerceInventoryBookedQuantity);
+			}
+		}
+
 		return commerceOrderItem;
 	}
 
@@ -313,9 +329,10 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-		CommerceWarehouseItem commerceWarehouseItem =
-			_commerceWarehouseItemLocalService.fetchCommerceWarehouseItem(
-				commerceWarehouseId, cpInstance.getSku());
+		CommerceInventoryWarehouseItem commerceWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
+				fetchCommerceWarehouseItem(
+					commerceWarehouseId, cpInstance.getSku());
 
 		if (commerceWarehouseItem == null) {
 			return 0;
@@ -435,6 +452,19 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderItem.getCommerceOrderId(), commerceContext);
 
 		return commerceOrderItem;
+	}
+
+	@Override
+	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, long bookedQuantityId)
+		throws NoSuchOrderItemException {
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
+
+		commerceOrderItem.setBookedQuantityId(bookedQuantityId);
+
+		return commerceOrderItemPersistence.update(commerceOrderItem);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -660,6 +690,14 @@ public class CommerceOrderItemLocalServiceImpl
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
 
+	@ServiceReference(type = CommerceInventoryBookedQuantityLocalService.class)
+	private CommerceInventoryBookedQuantityLocalService
+		_commerceInventoryBookedQuantityLocalService;
+
+	@ServiceReference(type = CommerceInventoryWarehouseItemLocalService.class)
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceInventoryWarehouseItemLocalService;
+
 	@ServiceReference(type = CommerceOrderConfiguration.class)
 	private CommerceOrderConfiguration _commerceOrderConfiguration;
 
@@ -671,10 +709,6 @@ public class CommerceOrderItemLocalServiceImpl
 
 	@ServiceReference(type = CommerceShippingHelper.class)
 	private CommerceShippingHelper _commerceShippingHelper;
-
-	@ServiceReference(type = CommerceWarehouseItemLocalService.class)
-	private CommerceWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
 
 	@ServiceReference(type = CPDefinitionLocalService.class)
 	private CPDefinitionLocalService _cpDefinitionLocalService;
