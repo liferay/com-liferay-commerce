@@ -22,7 +22,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId", "cp
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
-<div class="definition-toolbar-management-bar">
+<div class="definition-toolbar-managment-bar">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="<%= searchContainerId %>"
@@ -107,7 +107,7 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 
 <liferay-portlet:resourceURL id="cpDefinitionsFacets" var="cpDefinitionsFacetsURL" />
 
-<aui:script require="commerce-product-definitions-web@1.1.10/DefinitionToolbarFilter.es as DefinitionToolbarFilter">
+<aui:script require="commerce-product-definitions-web@1.2.0/DefinitionToolbarFilter.es as DefinitionToolbarFilter">
 	var definitionToolbarFilter = new DefinitionToolbarFilter.default(
 		{
 			categorySelectorURL: '<%= cpDefinitionsDisplayContext.getCategorySelectorURL(renderResponse.getNamespace() + "selectCategory") %>',
