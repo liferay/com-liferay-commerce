@@ -16,19 +16,24 @@ package com.liferay.commerce.account.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceAccountGroupCommerceAccountRelImpl
 	extends CommerceAccountGroupCommerceAccountRelBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce account group commerce account rel model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel} interface instead.
-	 */
 	public CommerceAccountGroupCommerceAccountRelImpl() {
+	}
+
+	@Override
+	public CommerceAccount getCommerceAccount() throws PortalException {
+		return CommerceAccountLocalServiceUtil.getCommerceAccount(
+			getCommerceAccountId());
 	}
 
 }
