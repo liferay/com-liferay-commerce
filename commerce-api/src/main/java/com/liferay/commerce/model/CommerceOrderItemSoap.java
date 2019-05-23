@@ -60,6 +60,7 @@ public class CommerceOrderItemSoap implements Serializable {
 		soapModel.setDiscountPercentageLevel3(model.getDiscountPercentageLevel3());
 		soapModel.setDiscountPercentageLevel4(model.getDiscountPercentageLevel4());
 		soapModel.setSubscription(model.isSubscription());
+		soapModel.setBookedQuantityId(model.getBookedQuantityId());
 
 		return soapModel;
 	}
@@ -311,6 +312,14 @@ public class CommerceOrderItemSoap implements Serializable {
 		_subscription = subscription;
 	}
 
+	public long getBookedQuantityId() {
+		return _bookedQuantityId;
+	}
+
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_bookedQuantityId = bookedQuantityId;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
@@ -335,4 +344,5 @@ public class CommerceOrderItemSoap implements Serializable {
 	private BigDecimal _discountPercentageLevel3;
 	private BigDecimal _discountPercentageLevel4;
 	private boolean _subscription;
+	private long _bookedQuantityId;
 }

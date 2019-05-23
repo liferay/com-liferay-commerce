@@ -436,6 +436,14 @@ public class CommerceOrderItemLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
+		long commerceOrderItemId, long bookedQuantityId)
+		throws com.liferay.commerce.exception.NoSuchOrderItemException {
+		return _commerceOrderItemLocalService.updateCommerceOrderItem(commerceOrderItemId,
+			bookedQuantityId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemPrice(
 		long commerceOrderItemId,
 		com.liferay.commerce.context.CommerceContext commerceContext)

@@ -409,6 +409,14 @@ public class CommerceOrderItemLocalServiceUtil {
 			json, commerceContext, serviceContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
+		long commerceOrderItemId, long bookedQuantityId)
+		throws com.liferay.commerce.exception.NoSuchOrderItemException {
+		return getService()
+				   .updateCommerceOrderItem(commerceOrderItemId,
+			bookedQuantityId);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemPrice(
 		long commerceOrderItemId,
 		com.liferay.commerce.context.CommerceContext commerceContext)

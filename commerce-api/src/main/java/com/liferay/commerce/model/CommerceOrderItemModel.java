@@ -531,6 +531,20 @@ public interface CommerceOrderItemModel extends BaseModel<CommerceOrderItem>,
 	 */
 	public void setSubscription(boolean subscription);
 
+	/**
+	 * Returns the booked quantity ID of this commerce order item.
+	 *
+	 * @return the booked quantity ID of this commerce order item
+	 */
+	public long getBookedQuantityId();
+
+	/**
+	 * Sets the booked quantity ID of this commerce order item.
+	 *
+	 * @param bookedQuantityId the booked quantity ID of this commerce order item
+	 */
+	public void setBookedQuantityId(long bookedQuantityId);
+
 	@Override
 	public boolean isNew();
 
