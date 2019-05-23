@@ -20,13 +20,10 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
-import com.liferay.commerce.product.model.CPRule;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -81,11 +78,6 @@ public class TestCommerceContext implements CommerceContext {
 	@Override
 	public int getCommerceSiteType() {
 		return 0;
-	}
-
-	@Override
-	public List<CPRule> getCPRules() {
-		return Collections.emptyList();
 	}
 
 	@Override

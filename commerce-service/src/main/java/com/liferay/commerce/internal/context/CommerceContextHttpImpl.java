@@ -25,8 +25,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.model.CPRule;
-import com.liferay.commerce.product.service.CPRuleLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,7 +32,6 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,15 +47,13 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
-		ConfigurationProvider configurationProvider,
-		CPRuleLocalService cpRuleLocalService, Portal portal) {
+		ConfigurationProvider configurationProvider, Portal portal) {
 
 		_httpServletRequest = httpServletRequest;
 		_commerceAccountHelper = commerceAccountHelper;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commercePriceListLocalService = commercePriceListLocalService;
-		_cpRuleLocalService = cpRuleLocalService;
 		_portal = portal;
 
 		try {
@@ -151,20 +146,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	}
 
 	@Override
-	public List<CPRule> getCPRules() throws PortalException {
-		if (_cpRules != null) {
-			return _cpRules;
-		}
-
-		long groupId = _portal.getScopeGroupId(_httpServletRequest);
-
-		_cpRules = _cpRuleLocalService.getCPRules(
-			groupId, getCommerceAccountGroupIds());
-
-		return null;
-	}
-
-	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _portal.getScopeGroupId(_httpServletRequest);
 	}
@@ -187,8 +168,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
-	private final CPRuleLocalService _cpRuleLocalService;
-	private List<CPRule> _cpRules;
 	private final HttpServletRequest _httpServletRequest;
 	private final Portal _portal;
 

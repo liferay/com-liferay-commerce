@@ -128,8 +128,6 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 			cpQuery);
 
 		searchContext.setAttribute(
-			CPDefinitionIndexer.ATTRIBUTE_FILTER_BY_CP_RULES, Boolean.TRUE);
-		searchContext.setAttribute(
 			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
 
 		searchContext.setEnd(end);

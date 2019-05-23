@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.internal.security.permission.resource.definition;
 
-import com.liferay.commerce.product.catalog.rule.CPRuleTypeRegistry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.internal.security.permission.resource.CPDefinitionModelResourcePermissionLogic;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -66,8 +65,7 @@ public class CPDefinitionModelResourcePermissionDefinition
 
 		modelResourcePermissionLogicConsumer.accept(
 			new CPDefinitionModelResourcePermissionLogic(
-				_cpRuleTypeRegistry, _portletResourcePermission,
-				_configurationProvider));
+				_portletResourcePermission, _configurationProvider));
 	}
 
 	@Reference
@@ -75,9 +73,6 @@ public class CPDefinitionModelResourcePermissionDefinition
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
-
-	@Reference
-	private CPRuleTypeRegistry _cpRuleTypeRegistry;
 
 	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;

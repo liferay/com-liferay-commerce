@@ -23,7 +23,6 @@ import com.liferay.commerce.initializer.util.BlogsImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
-import com.liferay.commerce.initializer.util.CPRulesImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceAccountsImporter;
 import com.liferay.commerce.initializer.util.CommerceDiscountsImporter;
@@ -46,16 +45,12 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
-import com.liferay.commerce.product.service.CPRuleCommerceAccountGroupRelLocalService;
-import com.liferay.commerce.product.service.CPRuleLocalService;
-import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
-import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -74,7 +69,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -89,7 +83,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.site.exception.InitializationException;
@@ -214,8 +207,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_importCommerceAccounts(serviceContext);
 
 			_importCommerceUsers(serviceContext);
-
-			_importCPRules(serviceContext);
 
 			_importDDMForms(serviceContext);
 
@@ -712,24 +703,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			serviceContext.getUserId());
 	}
 
-	private void _importCPRules(ServiceContext serviceContext)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Importing CPRules...");
-		}
-
-		JSONArray jsonArray = _getJSONArray("catalog-rules.json");
-
-		_cpRulesImporter.importCPRules(
-			jsonArray, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
-
-		if (_log.isInfoEnabled()) {
-			_log.info("CPRules imported");
-		}
-	}
-
 	private void _importCPSpecificationOptions(ServiceContext serviceContext)
 		throws Exception {
 
@@ -915,10 +888,10 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private AssetCategoriesImporter _assetCategoriesImporter;
 
 	@Reference
-	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+	private BlogsImporter _blogsImporter;
 
 	@Reference
-	private BlogsImporter _blogsImporter;
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
@@ -983,13 +956,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CPOptionsImporter _cpOptionsImporter;
-
-	@Reference
-	private CPRuleCommerceAccountGroupRelLocalService
-		_cpRuleCommerceAccountGroupRelLocalService;
-
-	@Reference
-	private CPRulesImporter _cpRulesImporter;
 
 	@Reference
 	private CPSpecificationOptionsImporter _cpSpecificationOptionsImporter;
