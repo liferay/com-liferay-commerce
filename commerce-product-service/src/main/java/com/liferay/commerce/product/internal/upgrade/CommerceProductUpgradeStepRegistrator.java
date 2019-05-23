@@ -25,9 +25,12 @@ import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPInstanceUpgradePro
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CProductUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_4_0.CPDefinitionSpecificationOptionValueUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_5_0.CProductExternalReferenceCodeUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceCatalogUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceChannelUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -72,6 +75,11 @@ public class CommerceProductUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_4_0, _SCHEMA_VERSION_1_5_0,
 			new CProductExternalReferenceCodeUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_5_0, _SCHEMA_VERSION_1_6_0,
+			new CommerceChannelUpgradeProcess(),
+			new CommerceCatalogUpgradeProcess(_groupLocalService));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -89,10 +97,15 @@ public class CommerceProductUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_5_0 = "1.5.0";
 
+	private static final String _SCHEMA_VERSION_1_6_0 = "1.6.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 }

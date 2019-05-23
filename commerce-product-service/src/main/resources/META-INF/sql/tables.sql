@@ -368,3 +368,27 @@ create table CProduct (
 	publishedCPDefinitionId LONG,
 	latestVersion INTEGER
 );
+
+create table CommerceCatalog (
+	commerceCatalogId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name STRING null,
+	catalogDefaultLanguageId VARCHAR(75) null
+);
+
+create table CommerceChannel (
+	commerceChannelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	filterType VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	typeSettings VARCHAR(75) null
+);
