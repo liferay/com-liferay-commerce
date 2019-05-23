@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = "model.class.name=com.liferay.commerce.account.model.CommerceAccount",
-	service = ViewPortletProvider.class
+	service = {EditPortletProvider.class, ViewPortletProvider.class}
 )
 public class CommerceAccountPortletProvider
 	extends BasePortletProvider
