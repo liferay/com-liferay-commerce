@@ -26,6 +26,14 @@ List<Group> siteAsList = new ArrayList<>();
 if (site != null) {
 	siteAsList = Arrays.asList(site);
 }
+
+CommerceChannel commerceChannel = siteCommerceChannelTypeDisplayContext.getCommerceChannel();
+
+boolean isViewOnly = false;
+
+if (commerceChannel != null) {
+	isViewOnly = !siteCommerceChannelTypeDisplayContext.hasPermission(commerceChannel.getCommerceChannelId(), ActionKeys.UPDATE);
+}
 %>
 
 <liferay-util:buffer
@@ -59,9 +67,11 @@ if (site != null) {
 			value="<%= HtmlUtil.escape(group.getName(locale)) %>"
 		/>
 
-		<liferay-ui:search-container-column-text>
-			<a class="float-right modify-link" data-rowId="<%= group.getGroupId() %>" href="javascript:;"><%= removeCommerceChannelSiteIcon %></a>
-		</liferay-ui:search-container-column-text>
+		<c:if test="<%= !isViewOnly %>">
+			<liferay-ui:search-container-column-text>
+				<a class="float-right modify-link" data-rowId="<%= group.getGroupId() %>" href="javascript:;"><%= removeCommerceChannelSiteIcon %></a>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator
@@ -69,7 +79,9 @@ if (site != null) {
 	/>
 </liferay-ui:search-container>
 
-<aui:button name="selectSite" value="select" />
+<c:if test="<%= !isViewOnly %>">
+	<aui:button name="selectSite" value="select" />
+</c:if>
 
 <aui:script use="aui-base,liferay-item-selector-dialog">
 	$('#<portlet:namespace />selectSite').on(
