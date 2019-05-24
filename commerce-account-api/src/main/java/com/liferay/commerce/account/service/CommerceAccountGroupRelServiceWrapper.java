@@ -52,7 +52,8 @@ public class CommerceAccountGroupRelServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		long commerceAccountGroupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupRelService.getCommerceAccountGroupRels(commerceAccountGroupId,
 			start, end, orderByComparator);
 	}
@@ -60,18 +61,21 @@ public class CommerceAccountGroupRelServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupRelService.getCommerceAccountGroupRels(className,
 			classPK, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceAccountGroupRelsCount(long commerceAccountGroupId) {
+	public int getCommerceAccountGroupRelsCount(long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupRelService.getCommerceAccountGroupRelsCount(commerceAccountGroupId);
 	}
 
 	@Override
-	public int getCommerceAccountGroupRelsCount(String className, long classPK) {
+	public int getCommerceAccountGroupRelsCount(String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceAccountGroupRelService.getCommerceAccountGroupRelsCount(className,
 			classPK);
 	}
