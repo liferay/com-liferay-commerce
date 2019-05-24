@@ -16,17 +16,32 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +54,7 @@ import java.util.Map;
 public class CommerceChannelLocalServiceImpl
 	extends CommerceChannelLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel addCommerceChannel(
 			String name, String type, UnicodeProperties typeSettingsProperties,
@@ -89,10 +105,12 @@ public class CommerceChannelLocalServiceImpl
 		return commerceChannel;
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceChannel deleteCommerceChannel(
-		CommerceChannel commerceChannel) throws PortalException {
+			CommerceChannel commerceChannel)
+		throws PortalException {
 
 		// Commerce channel rel
 
@@ -181,6 +199,40 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceChannel> searchCommerceChannels(long companyId)
+		throws PortalException {
+
+		return searchCommerceChannels(
+			companyId, StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	@Override
+	public List<CommerceChannel> searchCommerceChannels(
+			long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, start, end, sort);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceChannels(searchContext);
+	}
+
+	@Override
+	public int searchCommerceChannelsCount(long companyId, String keywords)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceChannelsCount(searchContext);
+	}
+
+	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String type,
 			UnicodeProperties typeSettingsProperties,
@@ -200,5 +252,94 @@ public class CommerceChannelLocalServiceImpl
 
 		return commerceChannel;
 	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, int start, int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
+	}
+
+	protected List<CommerceChannel> getCommerceChannels(Hits hits)
+		throws PortalException {
+
+		List<Document> documents = hits.toList();
+
+		List<CommerceChannel> commerceChannels = new ArrayList<>(
+			documents.size());
+
+		for (Document document : documents) {
+			long commerceChannelId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			CommerceChannel commerceChannel = fetchCommerceChannel(
+				commerceChannelId);
+
+			if (commerceChannel == null) {
+				commerceChannels = null;
+
+				Indexer<CommerceChannel> indexer =
+					IndexerRegistryUtil.getIndexer(CommerceChannel.class);
+
+				long companyId = GetterUtil.getLong(
+					document.get(Field.COMPANY_ID));
+
+				indexer.delete(companyId, document.getUID());
+			}
+			else if (commerceChannels != null) {
+				commerceChannels.add(commerceChannel);
+			}
+		}
+
+		return commerceChannels;
+	}
+
+	protected List<CommerceChannel> searchCommerceChannels(
+			SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceChannel> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceChannel.class);
+
+		for (int i = 0; i < 10; i++) {
+			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
+
+			List<CommerceChannel> commerceChannels = getCommerceChannels(hits);
+
+			if (commerceChannels != null) {
+				return commerceChannels;
+			}
+		}
+
+		throw new SearchException(
+			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected int searchCommerceChannelsCount(SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceChannel> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CommerceChannel.class);
+
+		return GetterUtil.getInteger(indexer.searchCount(searchContext));
+	}
+
+	private static final String[] _SELECTED_FIELD_NAMES = {
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
+	};
 
 }
