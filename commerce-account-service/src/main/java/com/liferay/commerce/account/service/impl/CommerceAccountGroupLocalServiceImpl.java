@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.exception.CommerceAccountGroupNameException;
+import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -37,6 +39,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +62,8 @@ public class CommerceAccountGroupLocalServiceImpl
 		// Commerce Account Group
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
 
 		long commerceAccountGroupId = counterLocalService.increment();
 
@@ -179,6 +184,11 @@ public class CommerceAccountGroupLocalServiceImpl
 			commerceAccountGroupPersistence.findByPrimaryKey(
 				commerceAccountGroupId);
 
+		validate(
+			serviceContext.getCompanyId(),
+			commerceAccountGroup.getCommerceAccountGroupId(), name,
+			commerceAccountGroup.getExternalReferenceCode());
+
 		commerceAccountGroup.setName(name);
 		commerceAccountGroup.setExpandoBridgeAttributes(serviceContext);
 
@@ -270,6 +280,33 @@ public class CommerceAccountGroupLocalServiceImpl
 			IndexerRegistryUtil.nullSafeGetIndexer(CommerceAccountGroup.class);
 
 		return GetterUtil.getInteger(indexer.searchCount(searchContext));
+	}
+
+	protected void validate(
+			long companyId, long commerceAccountGroupRelId, String name,
+			String externalReferenceCode)
+		throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new CommerceAccountGroupNameException();
+		}
+
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
+
+		CommerceAccountGroup commerceAccountGroup =
+			commerceAccountGroupPersistence.fetchByC_ERC(
+				companyId, externalReferenceCode);
+
+		if ((commerceAccountGroup != null) &&
+			(commerceAccountGroup.getCommerceAccountGroupId() !=
+				commerceAccountGroupRelId)) {
+
+			throw new DuplicateCommerceAccountException(
+				"There is another commerce account group with external " +
+					"reference code " + externalReferenceCode);
+		}
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {
