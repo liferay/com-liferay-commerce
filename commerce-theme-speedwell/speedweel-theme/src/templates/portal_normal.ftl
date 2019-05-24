@@ -26,7 +26,7 @@
 		<div class="speedwell-frame__content">
 			<a name="speedwell-top"></a>
 
-			<div class="speedwell-content">
+			<div class="speedwell-content container-fluid">
 				<#if selectable>
 					<@liferay_util["include"] page=content_include />
 				<#else>
