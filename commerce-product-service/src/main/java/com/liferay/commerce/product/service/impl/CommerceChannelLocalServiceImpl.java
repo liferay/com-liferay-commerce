@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.Collections;
@@ -44,6 +46,10 @@ public class CommerceChannelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		if (ArrayUtil.contains(getUsedSiteGroupIds(), siteGroupId)) {
+			throw new PortalException();
+		}
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long commerceChannelId = counterLocalService.increment();
@@ -55,6 +61,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setUserId(user.getUserId());
 		commerceChannel.setUserName(user.getFullName());
 		commerceChannel.setName(name);
+		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
@@ -120,11 +127,6 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceChannel> getCommerceChannels(long companyId) {
-		return commerceChannelPersistence.findByCompanyId(companyId);
-	}
-
-	@Override
 	public Group getCommerceChannelGroup(long commerceChannelId)
 		throws PortalException {
 
@@ -139,11 +141,16 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
-	public List<Long> getUsedSiteGroupIds() {
-		return commerceChannelFinder.getUsedSiteGroupIds();
+	public List<CommerceChannel> getCommerceChannels(long companyId) {
+		return commerceChannelPersistence.findByCompanyId(companyId);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public long[] getUsedSiteGroupIds() {
+		return ArrayUtil.toLongArray(
+			commerceChannelFinder.getUsedSiteGroupIds());
+	}
+
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String type,
@@ -155,6 +162,7 @@ public class CommerceChannelLocalServiceImpl
 			commerceChannelPersistence.findByPrimaryKey(commerceChannelId);
 
 		commerceChannel.setName(name);
+		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
