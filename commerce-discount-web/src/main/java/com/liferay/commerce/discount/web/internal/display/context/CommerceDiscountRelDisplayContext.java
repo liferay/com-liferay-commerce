@@ -27,6 +27,7 @@ import com.liferay.commerce.discount.web.internal.util.CommerceDiscountPortletUt
 import com.liferay.commerce.product.item.selector.criterion.CPDefinitionItemSelectorCriterion;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -38,7 +39,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -60,6 +60,7 @@ public class CommerceDiscountRelDisplayContext
 	extends CommerceDiscountDisplayContext {
 
 	public CommerceDiscountRelDisplayContext(
+		CommerceCatalogService commerceCatalogService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		ModelResourcePermission<CommerceDiscount>
 			commerceDiscountModelResourcePermission,
@@ -69,15 +70,14 @@ public class CommerceDiscountRelDisplayContext
 		CommerceDiscountCommerceAccountGroupRelService
 			commerceDiscountCommerceAccountGroupRelService,
 		CPDefinitionService cpDefinitionService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
 
 		super(
-			commerceCurrencyLocalService,
+			commerceCatalogService, commerceCurrencyLocalService,
 			commerceDiscountModelResourcePermission, commerceDiscountService,
 			commerceDiscountTargetRegistry,
 			commerceDiscountCommerceAccountGroupRelService, httpServletRequest,
-			itemSelector, portletResourcePermission);
+			itemSelector);
 
 		_commerceDiscountRelService = commerceDiscountRelService;
 		_cpDefinitionService = cpDefinitionService;
