@@ -21,6 +21,7 @@ import com.liferay.commerce.product.channel.CommerceChannelType;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
+import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
@@ -28,9 +29,14 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 
@@ -47,6 +53,8 @@ public class CommerceChannelDisplayContext
 	extends BaseCommerceChannelSearchContainerDisplayContext<CommerceChannel> {
 
 	public CommerceChannelDisplayContext(
+		ModelResourcePermission<CommerceChannel>
+			commerceChannelModelResourcePermission,
 		CommerceChannelService commerceChannelService,
 		CommerceChannelTypeRegistry commerceChannelTypeRegistry,
 		CommerceChannelTypeJSPContributorRegistry
@@ -58,6 +66,8 @@ public class CommerceChannelDisplayContext
 
 		setDefaultOrderByType("desc");
 
+		_commerceChannelModelResourcePermission =
+			commerceChannelModelResourcePermission;
 		_commerceChannelService = commerceChannelService;
 		_commerceChannelTypeRegistry = commerceChannelTypeRegistry;
 		_commerceChannelTypeJSPContributorRegistry =
@@ -92,6 +102,10 @@ public class CommerceChannelDisplayContext
 	public CommerceChannel getCommerceChannel() throws PortalException {
 		long commerceChannelId = ParamUtil.getLong(
 			httpServletRequest, "commerceChannelId");
+
+		if (commerceChannelId == 0) {
+			return null;
+		}
 
 		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
 	}
@@ -178,6 +192,29 @@ public class CommerceChannelDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasAddChannelPermission() {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
+			CPActionKeys.ADD_COMMERCE_CHANNEL);
+	}
+
+	public boolean hasPermission(long commerceChannelId, String actionId)
+		throws PortalException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return _commerceChannelModelResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), commerceChannelId, actionId);
+	}
+
+	private final ModelResourcePermission<CommerceChannel>
+		_commerceChannelModelResourcePermission;
 	private final CommerceChannelService _commerceChannelService;
 	private final CommerceChannelTypeJSPContributorRegistry
 		_commerceChannelTypeJSPContributorRegistry;

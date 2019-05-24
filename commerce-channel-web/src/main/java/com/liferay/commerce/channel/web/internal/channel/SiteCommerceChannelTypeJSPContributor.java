@@ -19,9 +19,13 @@ import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
+import com.liferay.commerce.product.constants.CPConstants;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -52,6 +56,7 @@ public class SiteCommerceChannelTypeJSPContributor
 		SiteCommerceChannelTypeDisplayContext
 			siteCommerceChannelTypeDisplayContext =
 				new SiteCommerceChannelTypeDisplayContext(
+					_commerceChannelModelResourcePermission,
 					_commerceChannelService, _commerceChannelTypeRegistry,
 					_commerceChannelTypeJSPContributorRegistry,
 					_commerceCurrencyService, _groupLocalService,
@@ -65,6 +70,12 @@ public class SiteCommerceChannelTypeJSPContributor
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/contributor/site.jsp");
 	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceChannel)"
+	)
+	private ModelResourcePermission<CommerceChannel>
+		_commerceChannelModelResourcePermission;
 
 	@Reference
 	private CommerceChannelService _commerceChannelService;

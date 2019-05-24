@@ -19,11 +19,11 @@ import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBase
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
@@ -82,18 +82,27 @@ public class CommerceChannelLocalServiceImpl
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
+		// Resources
+
+		resourceLocalService.addModelResources(commerceChannel, serviceContext);
+
 		return commerceChannel;
 	}
 
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceChannel deleteCommerceChannel(
-		CommerceChannel commerceChannel) {
+		CommerceChannel commerceChannel) throws PortalException {
 
 		// Commerce channel rel
 
 		commerceChannelRelLocalService.deleteCommerceChannelRels(
 			commerceChannel.getCommerceChannelId());
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			commerceChannel, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Commerce channel
 

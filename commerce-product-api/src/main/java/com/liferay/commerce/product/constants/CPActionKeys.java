@@ -22,6 +22,8 @@ public class CPActionKeys {
 
 	public static final String ADD_COMMERCE_CATALOG = "ADD_COMMERCE_CATALOG";
 
+	public static final String ADD_COMMERCE_CHANNEL = "ADD_COMMERCE_CHANNEL";
+
 	public static final String ADD_COMMERCE_PRODUCT_DEFINITION =
 		"ADD_COMMERCE_PRODUCT_DEFINITION";
 
@@ -74,6 +76,9 @@ public class CPActionKeys {
 
 	public static final String VIEW_COMMERCE_CATALOGS =
 		"VIEW_COMMERCE_CATALOGS";
+
+	public static final String VIEW_COMMERCE_CHANNELS =
+		"VIEW_COMMERCE_CHANNELS";
 
 	public static final String VIEW_COMMERCE_PRODUCT_RULES =
 		"VIEW_COMMERCE_PRODUCT_RULES";
