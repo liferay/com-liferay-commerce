@@ -20,6 +20,8 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLink;
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.asset.kernel.service.AssetLinkLocalService;
+import com.liferay.commerce.account.model.CommerceAccountGroupRel;
+import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionException;
@@ -164,6 +166,13 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
+			else if (cmd.equals("updateAccountGroups")) {
+				Callable<Object> cpDefinitionAccountGroupsCallable =
+					new CPDefinitionAccountGroupsCallable(actionRequest);
+
+				TransactionInvokerUtil.invoke(
+					_transactionConfig, cpDefinitionAccountGroupsCallable);
+			}
 			else if (cmd.equals("updateChannels")) {
 				Callable<Object> cpDefinitionChannelsCallable =
 					new CPDefinitionChannelsCallable(actionRequest);
@@ -297,6 +306,28 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 		for (long restoreTrashEntryId : restoreTrashEntryIds) {
 			_trashEntryService.restoreEntry(restoreTrashEntryId);
+		}
+	}
+
+	protected void updateAccountGroups(ActionRequest actionRequest)
+		throws PortalException {
+
+		long cpDefinitionId = ParamUtil.getLong(
+			actionRequest, "cpDefinitionId");
+
+		long[] commerceAccountGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "commerceAccountGroupIds"), 0L);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceAccountGroupRel.class.getName(), actionRequest);
+
+		_commerceAccountGroupRelService.deleteCommerceAccountGroupRels(
+			CPDefinition.class.getName(), cpDefinitionId);
+
+		for (long commerceAccountGroupId : commerceAccountGroupIds) {
+			_commerceAccountGroupRelService.addCommerceAccountGroupRel(
+				CPDefinition.class.getName(), cpDefinitionId,
+				commerceAccountGroupId, serviceContext);
 		}
 	}
 
@@ -560,6 +591,9 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 	private AssetLinkLocalService _assetLinkLocalService;
 
 	@Reference
+	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
+
+	@Reference
 	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
@@ -573,6 +607,24 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private TrashEntryService _trashEntryService;
+
+	private class CPDefinitionAccountGroupsCallable
+		implements Callable<Object> {
+
+		@Override
+		public Object call() throws Exception {
+			updateAccountGroups(_actionRequest);
+
+			return null;
+		}
+
+		private CPDefinitionAccountGroupsCallable(ActionRequest actionRequest) {
+			_actionRequest = actionRequest;
+		}
+
+		private final ActionRequest _actionRequest;
+
+	}
 
 	private class CPDefinitionChannelsCallable implements Callable<Object> {
 
