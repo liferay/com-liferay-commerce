@@ -17,6 +17,8 @@ package com.liferay.headless.commerce.admin.pricing.internal.util.v1_0;
 import com.liferay.commerce.discount.exception.NoSuchDiscountException;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
 import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.core.util.DateConfig;
@@ -192,8 +194,15 @@ public class DiscountHelper {
 			expirationDateHour += 12;
 		}
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommerceDiscount commerceDiscount =
 			_commerceDiscountService.addCommerceDiscount(
+				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 				discount.getTitle(), discount.getTarget(),
 				GetterUtil.get(discount.getUseCouponCode(), false),
 				discount.getCouponCode(),
@@ -221,6 +230,9 @@ public class DiscountHelper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(DiscountHelper.class);
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceDiscountService _commerceDiscountService;
