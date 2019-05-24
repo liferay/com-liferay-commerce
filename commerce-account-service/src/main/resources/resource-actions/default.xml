@@ -7,15 +7,19 @@
 		<permissions>
 			<supports>
 				<action-key>ADD_ACCOUNT</action-key>
+				<action-key>ADD_COMMERCE_ACCOUNT_GROUP</action-key>
 				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
 				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
+				<action-key>VIEW_COMMERCE_ACCOUNT_GROUPS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
 				<action-key>ADD_ACCOUNT</action-key>
+				<action-key>ADD_COMMERCE_ACCOUNT_GROUP</action-key>
 				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
 				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
+				<action-key>VIEW_COMMERCE_ACCOUNT_GROUPS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
@@ -48,6 +52,35 @@
 				<action-key>VIEW_ADDRESSES</action-key>
 				<action-key>VIEW_MEMBERS</action-key>
 			</guest-unsupported>
+		</permissions>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.commerce.account.model.CommerceAccountGroup</model-name>
+		<portlet-ref>
+			<portlet-name>com_liferay_commerce_account_group_admin_web_internal_portlet_CommerceAccountGroupAdminPortlet</portlet-name>
+		</portlet-ref>
+		<weight>2</weight>
+		<permissions>
+			<supports>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</guest-unsupported>
+			<owner-defaults>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</owner-defaults>
 		</permissions>
 	</model-resource>
 </resource-action-mapping>
