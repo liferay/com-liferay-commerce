@@ -30,6 +30,7 @@ page import="com.liferay.commerce.account.admin.web.internal.display.context.Com
 page import="com.liferay.commerce.account.admin.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.account.constants.CommerceAccountActionKeys" %><%@
 page import="com.liferay.commerce.account.constants.CommerceAccountConstants" %><%@
+page import="com.liferay.commerce.account.exception.CommerceAccountNameException" %><%@
 page import="com.liferay.commerce.account.exception.NoSuchAccountException" %><%@
 page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
 page import="com.liferay.commerce.account.model.CommerceAccountOrganizationRel" %><%@

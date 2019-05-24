@@ -24,6 +24,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.account.constants.CommerceAccountActionKeys" %><%@
+page import="com.liferay.commerce.account.exception.CommerceAccountGroupNameException" %><%@
 page import="com.liferay.commerce.account.exception.NoSuchAccountGroupCommerceAccountRelException" %><%@
 page import="com.liferay.commerce.account.exception.NoSuchAccountGroupException" %><%@
 page import="com.liferay.commerce.account.group.admin.web.internal.display.context.CommerceAccountGroupAdminDisplayContext" %><%@
