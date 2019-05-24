@@ -33,6 +33,8 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 
 	<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
 
+	<liferay-ui:error exception="<%= CommerceAccountNameException.class %>" message="please-enter-a-valid-name" />
+
 	<div class="lfr-form-content">
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
