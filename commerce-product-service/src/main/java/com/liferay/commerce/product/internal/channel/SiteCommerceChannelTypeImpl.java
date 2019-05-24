@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.internal.channel;
 
 import com.liferay.commerce.product.channel.CommerceChannelType;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,23 +32,22 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.product.channel.type.key=" + SiteCommerceChannelTypeImpl.KEY,
+		"commerce.product.channel.type.key=" + CommerceChannelConstants.CHANNEL_TYPE_SITE,
 		"commerce.product.channel.type.order:Integer=10"
 	},
 	service = CommerceChannelType.class
 )
 public class SiteCommerceChannelTypeImpl implements CommerceChannelType {
 
-	public static final String KEY = "site";
-
 	@Override
 	public String getKey() {
-		return KEY;
+		return CommerceChannelConstants.CHANNEL_TYPE_SITE;
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, KEY);
+		return LanguageUtil.get(
+			locale, CommerceChannelConstants.CHANNEL_TYPE_SITE);
 	}
 
 	@Override
