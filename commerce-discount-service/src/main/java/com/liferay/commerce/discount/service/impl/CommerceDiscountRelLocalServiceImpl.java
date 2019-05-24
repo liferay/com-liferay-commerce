@@ -43,14 +43,12 @@ public class CommerceDiscountRelLocalServiceImpl
 		// Commerce discount rel
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		long commerceDiscountRelId = counterLocalService.increment();
 
 		CommerceDiscountRel commerceDiscountRel =
 			commerceDiscountRelPersistence.create(commerceDiscountRelId);
 
-		commerceDiscountRel.setGroupId(groupId);
 		commerceDiscountRel.setCompanyId(user.getCompanyId());
 		commerceDiscountRel.setUserId(user.getUserId());
 		commerceDiscountRel.setUserName(user.getFullName());
