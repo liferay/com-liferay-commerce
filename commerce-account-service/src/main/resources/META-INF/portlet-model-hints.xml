@@ -26,6 +26,41 @@
 		<field name="statusByUserName" type="String" />
 		<field name="statusDate" type="Date" />
 	</model>
+	<model name="com.liferay.commerce.account.model.CommerceAccountGroup">
+		<field name="externalReferenceCode" type="String" />
+		<field name="commerceAccountGroupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
+		<field name="type" type="int" />
+	</model>
+	<model name="com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel">
+		<field name="externalReferenceCode" type="String" />
+		<field name="commerceAccountGroupCommerceAccountRelId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="commerceAccountGroupId" type="long" />
+		<field name="commerceAccountId" type="long" />
+	</model>
+	<model name="com.liferay.commerce.account.model.CommerceAccountGroupRel">
+		<field name="commerceAccountGroupRelId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="commerceAccountGroupId" type="long" />
+	</model>
 	<model name="com.liferay.commerce.account.model.CommerceAccountOrganizationRel">
 		<field name="commerceAccountId" type="long" />
 		<field name="organizationId" type="long" />
