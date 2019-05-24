@@ -58,7 +58,8 @@ public class CommerceAccountGroupRelServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		long commerceAccountGroupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAccountGroupRels(commerceAccountGroupId, start,
 			end, orderByComparator);
@@ -66,20 +67,23 @@ public class CommerceAccountGroupRelServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		String className, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator) {
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.account.model.CommerceAccountGroupRel> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAccountGroupRels(className, classPK, start, end,
 			orderByComparator);
 	}
 
 	public static int getCommerceAccountGroupRelsCount(
-		long commerceAccountGroupId) {
+		long commerceAccountGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .getCommerceAccountGroupRelsCount(commerceAccountGroupId);
 	}
 
 	public static int getCommerceAccountGroupRelsCount(String className,
-		long classPK) {
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceAccountGroupRelsCount(className, classPK);
 	}
 
