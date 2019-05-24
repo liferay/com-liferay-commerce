@@ -39,14 +39,16 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 			</portlet:renderURL>
 
-			<liferay-frontend:add-menu
-				inline="<%= true %>"
-			>
-				<liferay-frontend:add-menu-item
-					title='<%= LanguageUtil.get(request, "add-channel") %>'
-					url="<%= addCommerceChannelURL.toString() %>"
-				/>
-			</liferay-frontend:add-menu>
+			<c:if test="<%= commerceChannelDisplayContext.hasAddChannelPermission() %>">
+				<liferay-frontend:add-menu
+					inline="<%= true %>"
+				>
+					<liferay-frontend:add-menu-item
+						title='<%= LanguageUtil.get(request, "add-channel") %>'
+						url="<%= addCommerceChannelURL.toString() %>"
+					/>
+				</liferay-frontend:add-menu>
+			</c:if>
 		</liferay-frontend:management-bar-buttons>
 
 		<liferay-frontend:management-bar-filters>

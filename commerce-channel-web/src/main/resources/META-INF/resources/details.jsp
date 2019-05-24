@@ -28,23 +28,11 @@ String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
 String commerceCurrencyCode = BeanParamUtil.getString(commerceChannel, request, "commerceCurrencyCode");
 
-String title = LanguageUtil.get(request, "add-channel");
+boolean isViewOnly = false;
 
 if (commerceChannel != null) {
-	title = HtmlUtil.escape(commerceChannel.getName());
+	isViewOnly = !commerceChannelDisplayContext.hasPermission(commerceChannelId, ActionKeys.UPDATE);
 }
-
-Map<String, Object> data = new HashMap<>();
-
-data.put("direction-right", StringPool.TRUE);
-
-PortletURL editChannelURL = renderResponse.createRenderURL();
-
-editChannelURL.setParameter("commerceChannelId", String.valueOf(commerceChannelId));
-editChannelURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
-
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "channels"), String.valueOf(renderResponse.createRenderURL()), data);
-PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), data);
 %>
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
@@ -62,9 +50,9 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" name="name" required="<%= true %>" value="<%= name %>" />
+				<aui:input autoFocus="<%= true %>" disabled="<%= isViewOnly %>" name="name" required="<%= true %>" value="<%= name %>" />
 
-				<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
+				<aui:select disabled="<%= isViewOnly %>" name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
 					<%
 					for (CommerceChannelType commerceChannelType : commerceChannelTypes) {
@@ -121,7 +109,9 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 	</div>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+		<c:if test="<%= !isViewOnly %>">
+			<aui:button cssClass="btn-lg" type="submit" />
+		</c:if>
 
 		<aui:button cssClass="btn-lg" href="<%= backURL %>" type="cancel" />
 	</aui:button-row>
