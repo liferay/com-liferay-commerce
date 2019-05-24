@@ -72,7 +72,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 	public static final String TABLE_NAME = "CommerceDiscountRule";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "commerceDiscountRuleId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -86,7 +85,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceDiscountRuleId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -97,7 +95,7 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.CLOB);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountRule (commerceDiscountRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,type_ VARCHAR(75) null,typeSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountRule (commerceDiscountRuleId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,type_ VARCHAR(75) null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscountRule";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceDiscountRule.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceDiscountRule.createDate DESC";
@@ -131,7 +129,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 		CommerceDiscountRule model = new CommerceDiscountRuleImpl();
 
 		model.setCommerceDiscountRuleId(soapModel.getCommerceDiscountRuleId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -206,7 +203,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceDiscountRuleId", getCommerceDiscountRuleId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -229,12 +225,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 
 		if (commerceDiscountRuleId != null) {
 			setCommerceDiscountRuleId(commerceDiscountRuleId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -295,17 +285,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 	@Override
 	public void setCommerceDiscountRuleId(long commerceDiscountRuleId) {
 		_commerceDiscountRuleId = commerceDiscountRuleId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	@JSON
@@ -479,7 +458,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 		CommerceDiscountRuleImpl commerceDiscountRuleImpl = new CommerceDiscountRuleImpl();
 
 		commerceDiscountRuleImpl.setCommerceDiscountRuleId(getCommerceDiscountRuleId());
-		commerceDiscountRuleImpl.setGroupId(getGroupId());
 		commerceDiscountRuleImpl.setCompanyId(getCompanyId());
 		commerceDiscountRuleImpl.setUserId(getUserId());
 		commerceDiscountRuleImpl.setUserName(getUserName());
@@ -566,8 +544,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 
 		commerceDiscountRuleCacheModel.commerceDiscountRuleId = getCommerceDiscountRuleId();
 
-		commerceDiscountRuleCacheModel.groupId = getGroupId();
-
 		commerceDiscountRuleCacheModel.companyId = getCompanyId();
 
 		commerceDiscountRuleCacheModel.userId = getUserId();
@@ -621,12 +597,10 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{commerceDiscountRuleId=");
 		sb.append(getCommerceDiscountRuleId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -650,7 +624,7 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.discount.model.CommerceDiscountRule");
@@ -659,10 +633,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 		sb.append(
 			"<column><column-name>commerceDiscountRuleId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceDiscountRuleId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -707,7 +677,6 @@ public class CommerceDiscountRuleModelImpl extends BaseModelImpl<CommerceDiscoun
 			CommerceDiscountRule.class, ModelWrapper.class
 		};
 	private long _commerceDiscountRuleId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

@@ -73,7 +73,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 	public static final String TABLE_NAME = "CDiscountCAccountGroupRel";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "CDiscountCAccountGroupRelId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -86,7 +85,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("CDiscountCAccountGroupRelId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -96,7 +94,7 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 		TABLE_COLUMNS_MAP.put("commerceAccountGroupId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CDiscountCAccountGroupRel (CDiscountCAccountGroupRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,commerceAccountGroupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CDiscountCAccountGroupRel (CDiscountCAccountGroupRelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,commerceAccountGroupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CDiscountCAccountGroupRel";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceDiscountCommerceAccountGroupRel.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CDiscountCAccountGroupRel.createDate DESC";
@@ -131,7 +129,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 		CommerceDiscountCommerceAccountGroupRel model = new CommerceDiscountCommerceAccountGroupRelImpl();
 
 		model.setCommerceDiscountCommerceAccountGroupRelId(soapModel.getCommerceDiscountCommerceAccountGroupRelId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -206,7 +203,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 		attributes.put("commerceDiscountCommerceAccountGroupRelId",
 			getCommerceDiscountCommerceAccountGroupRelId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -228,12 +224,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 		if (commerceDiscountCommerceAccountGroupRelId != null) {
 			setCommerceDiscountCommerceAccountGroupRelId(commerceDiscountCommerceAccountGroupRelId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -290,17 +280,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 	public void setCommerceDiscountCommerceAccountGroupRelId(
 		long commerceDiscountCommerceAccountGroupRelId) {
 		_commerceDiscountCommerceAccountGroupRelId = commerceDiscountCommerceAccountGroupRelId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	@JSON
@@ -467,7 +446,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 			new CommerceDiscountCommerceAccountGroupRelImpl();
 
 		commerceDiscountCommerceAccountGroupRelImpl.setCommerceDiscountCommerceAccountGroupRelId(getCommerceDiscountCommerceAccountGroupRelId());
-		commerceDiscountCommerceAccountGroupRelImpl.setGroupId(getGroupId());
 		commerceDiscountCommerceAccountGroupRelImpl.setCompanyId(getCompanyId());
 		commerceDiscountCommerceAccountGroupRelImpl.setUserId(getUserId());
 		commerceDiscountCommerceAccountGroupRelImpl.setUserName(getUserName());
@@ -561,8 +539,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 		commerceDiscountCommerceAccountGroupRelCacheModel.commerceDiscountCommerceAccountGroupRelId = getCommerceDiscountCommerceAccountGroupRelId();
 
-		commerceDiscountCommerceAccountGroupRelCacheModel.groupId = getGroupId();
-
 		commerceDiscountCommerceAccountGroupRelCacheModel.companyId = getCompanyId();
 
 		commerceDiscountCommerceAccountGroupRelCacheModel.userId = getUserId();
@@ -602,12 +578,10 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{commerceDiscountCommerceAccountGroupRelId=");
 		sb.append(getCommerceDiscountCommerceAccountGroupRelId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -629,7 +603,7 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -639,10 +613,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 		sb.append(
 			"<column><column-name>commerceDiscountCommerceAccountGroupRelId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceDiscountCommerceAccountGroupRelId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -683,7 +653,6 @@ public class CommerceDiscountCommerceAccountGroupRelModelImpl
 			CommerceDiscountCommerceAccountGroupRel.class, ModelWrapper.class
 		};
 	private long _commerceDiscountCommerceAccountGroupRelId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

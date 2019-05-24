@@ -62,7 +62,6 @@ public class CommerceDiscountCommerceAccountGroupRelWrapper
 
 		attributes.put("commerceDiscountCommerceAccountGroupRelId",
 			getCommerceDiscountCommerceAccountGroupRelId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -81,12 +80,6 @@ public class CommerceDiscountCommerceAccountGroupRelWrapper
 
 		if (commerceDiscountCommerceAccountGroupRelId != null) {
 			setCommerceDiscountCommerceAccountGroupRelId(commerceDiscountCommerceAccountGroupRelId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -203,16 +196,6 @@ public class CommerceDiscountCommerceAccountGroupRelWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceDiscountCommerceAccountGroupRel.getExpandoBridge();
-	}
-
-	/**
-	* Returns the group ID of this commerce discount commerce account group rel.
-	*
-	* @return the group ID of this commerce discount commerce account group rel
-	*/
-	@Override
-	public long getGroupId() {
-		return _commerceDiscountCommerceAccountGroupRel.getGroupId();
 	}
 
 	/**
@@ -365,16 +348,6 @@ public class CommerceDiscountCommerceAccountGroupRelWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceDiscountCommerceAccountGroupRel.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the group ID of this commerce discount commerce account group rel.
-	*
-	* @param groupId the group ID of this commerce discount commerce account group rel
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceDiscountCommerceAccountGroupRel.setGroupId(groupId);
 	}
 
 	/**

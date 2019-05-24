@@ -505,297 +505,227 @@ public class CommerceDiscountUtil {
 	}
 
 	/**
-	* Returns all the commerce discounts where groupId = &#63;.
+	* Returns all the commerce discounts where companyId = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @return the matching commerce discounts
 	*/
-	public static List<CommerceDiscount> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
+	public static List<CommerceDiscount> findByCompanyId(long companyId) {
+		return getPersistence().findByCompanyId(companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce discounts where groupId = &#63;.
+	* Returns a range of all the commerce discounts where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @return the range of matching commerce discounts
 	*/
-	public static List<CommerceDiscount> findByGroupId(long groupId, int start,
-		int end) {
-		return getPersistence().findByGroupId(groupId, start, end);
+	public static List<CommerceDiscount> findByCompanyId(long companyId,
+		int start, int end) {
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce discounts where groupId = &#63;.
+	* Returns an ordered range of all the commerce discounts where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce discounts
 	*/
-	public static List<CommerceDiscount> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceDiscount> orderByComparator) {
+	public static List<CommerceDiscount> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator) {
 		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator);
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce discounts where groupId = &#63;.
+	* Returns an ordered range of all the commerce discounts where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce discounts
 	*/
-	public static List<CommerceDiscount> findByGroupId(long groupId, int start,
-		int end, OrderByComparator<CommerceDiscount> orderByComparator,
+	public static List<CommerceDiscount> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator,
+				   .findByCompanyId(companyId, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce discount in the ordered set where groupId = &#63;.
+	* Returns the first commerce discount in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce discount
 	* @throws NoSuchDiscountException if a matching commerce discount could not be found
 	*/
-	public static CommerceDiscount findByGroupId_First(long groupId,
+	public static CommerceDiscount findByCompanyId_First(long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce discount in the ordered set where groupId = &#63;.
+	* Returns the first commerce discount in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	*/
-	public static CommerceDiscount fetchByGroupId_First(long groupId,
+	public static CommerceDiscount fetchByCompanyId_First(long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
-		return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+		return getPersistence()
+				   .fetchByCompanyId_First(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce discount in the ordered set where groupId = &#63;.
+	* Returns the last commerce discount in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce discount
 	* @throws NoSuchDiscountException if a matching commerce discount could not be found
 	*/
-	public static CommerceDiscount findByGroupId_Last(long groupId,
+	public static CommerceDiscount findByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce discount in the ordered set where groupId = &#63;.
+	* Returns the last commerce discount in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	*/
-	public static CommerceDiscount fetchByGroupId_Last(long groupId,
+	public static CommerceDiscount fetchByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+		return getPersistence()
+				   .fetchByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce discounts before and after the current commerce discount in the ordered set where groupId = &#63;.
+	* Returns the commerce discounts before and after the current commerce discount in the ordered set where companyId = &#63;.
 	*
 	* @param commerceDiscountId the primary key of the current commerce discount
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce discount
 	* @throws NoSuchDiscountException if a commerce discount with the primary key could not be found
 	*/
-	public static CommerceDiscount[] findByGroupId_PrevAndNext(
-		long commerceDiscountId, long groupId,
+	public static CommerceDiscount[] findByCompanyId_PrevAndNext(
+		long commerceDiscountId, long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
 		return getPersistence()
-				   .findByGroupId_PrevAndNext(commerceDiscountId, groupId,
+				   .findByCompanyId_PrevAndNext(commerceDiscountId, companyId,
 			orderByComparator);
 	}
 
 	/**
-	* Returns all the commerce discounts that the user has permission to view where groupId = &#63;.
+	* Removes all the commerce discounts where companyId = &#63; from the database.
 	*
-	* @param groupId the group ID
-	* @return the matching commerce discounts that the user has permission to view
+	* @param companyId the company ID
 	*/
-	public static List<CommerceDiscount> filterFindByGroupId(long groupId) {
-		return getPersistence().filterFindByGroupId(groupId);
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce discounts that the user has permission to view where groupId = &#63;.
+	* Returns the number of commerce discounts where companyId = &#63;.
 	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of commerce discounts
-	* @param end the upper bound of the range of commerce discounts (not inclusive)
-	* @return the range of matching commerce discounts that the user has permission to view
-	*/
-	public static List<CommerceDiscount> filterFindByGroupId(long groupId,
-		int start, int end) {
-		return getPersistence().filterFindByGroupId(groupId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce discounts that the user has permissions to view where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of commerce discounts
-	* @param end the upper bound of the range of commerce discounts (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce discounts that the user has permission to view
-	*/
-	public static List<CommerceDiscount> filterFindByGroupId(long groupId,
-		int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator) {
-		return getPersistence()
-				   .filterFindByGroupId(groupId, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns the commerce discounts before and after the current commerce discount in the ordered set of commerce discounts that the user has permission to view where groupId = &#63;.
-	*
-	* @param commerceDiscountId the primary key of the current commerce discount
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce discount
-	* @throws NoSuchDiscountException if a commerce discount with the primary key could not be found
-	*/
-	public static CommerceDiscount[] filterFindByGroupId_PrevAndNext(
-		long commerceDiscountId, long groupId,
-		OrderByComparator<CommerceDiscount> orderByComparator)
-		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
-		return getPersistence()
-				   .filterFindByGroupId_PrevAndNext(commerceDiscountId,
-			groupId, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce discounts where groupId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	*/
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
-	}
-
-	/**
-	* Returns the number of commerce discounts where groupId = &#63;.
-	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @return the number of matching commerce discounts
 	*/
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	/**
-	* Returns the number of commerce discounts that the user has permission to view where groupId = &#63;.
+	* Returns all the commerce discounts where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @return the number of matching commerce discounts that the user has permission to view
-	*/
-	public static int filterCountByGroupId(long groupId) {
-		return getPersistence().filterCountByGroupId(groupId);
-	}
-
-	/**
-	* Returns all the commerce discounts where groupId = &#63; and couponCode = &#63;.
-	*
-	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @return the matching commerce discounts
 	*/
-	public static List<CommerceDiscount> findByG_C(long groupId,
-		String couponCode) {
-		return getPersistence().findByG_C(groupId, couponCode);
+	public static List<CommerceDiscount> findByG_C(long groupId, long companyId) {
+		return getPersistence().findByG_C(groupId, companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce discounts where groupId = &#63; and couponCode = &#63;.
+	* Returns a range of all the commerce discounts where groupId = &#63; and companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @return the range of matching commerce discounts
 	*/
 	public static List<CommerceDiscount> findByG_C(long groupId,
-		String couponCode, int start, int end) {
-		return getPersistence().findByG_C(groupId, couponCode, start, end);
+		long companyId, int start, int end) {
+		return getPersistence().findByG_C(groupId, companyId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce discounts where groupId = &#63; and couponCode = &#63;.
+	* Returns an ordered range of all the commerce discounts where groupId = &#63; and companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce discounts
 	*/
 	public static List<CommerceDiscount> findByG_C(long groupId,
-		String couponCode, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
 		return getPersistence()
-				   .findByG_C(groupId, couponCode, start, end, orderByComparator);
+				   .findByG_C(groupId, companyId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce discounts where groupId = &#63; and couponCode = &#63;.
+	* Returns an ordered range of all the commerce discounts where groupId = &#63; and companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -803,194 +733,523 @@ public class CommerceDiscountUtil {
 	* @return the ordered range of matching commerce discounts
 	*/
 	public static List<CommerceDiscount> findByG_C(long groupId,
-		String couponCode, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceDiscount> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByG_C(groupId, couponCode, start, end,
+				   .findByG_C(groupId, companyId, start, end,
 			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce discount in the ordered set where groupId = &#63; and couponCode = &#63;.
+	* Returns the first commerce discount in the ordered set where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce discount
 	* @throws NoSuchDiscountException if a matching commerce discount could not be found
 	*/
 	public static CommerceDiscount findByG_C_First(long groupId,
-		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator)
+		long companyId, OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
 		return getPersistence()
-				   .findByG_C_First(groupId, couponCode, orderByComparator);
+				   .findByG_C_First(groupId, companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce discount in the ordered set where groupId = &#63; and couponCode = &#63;.
+	* Returns the first commerce discount in the ordered set where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	*/
 	public static CommerceDiscount fetchByG_C_First(long groupId,
-		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator) {
+		long companyId, OrderByComparator<CommerceDiscount> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_C_First(groupId, couponCode, orderByComparator);
+				   .fetchByG_C_First(groupId, companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce discount in the ordered set where groupId = &#63; and couponCode = &#63;.
+	* Returns the last commerce discount in the ordered set where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce discount
 	* @throws NoSuchDiscountException if a matching commerce discount could not be found
 	*/
-	public static CommerceDiscount findByG_C_Last(long groupId,
-		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator)
+	public static CommerceDiscount findByG_C_Last(long groupId, long companyId,
+		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
 		return getPersistence()
-				   .findByG_C_Last(groupId, couponCode, orderByComparator);
+				   .findByG_C_Last(groupId, companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce discount in the ordered set where groupId = &#63; and couponCode = &#63;.
+	* Returns the last commerce discount in the ordered set where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	*/
 	public static CommerceDiscount fetchByG_C_Last(long groupId,
-		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator) {
+		long companyId, OrderByComparator<CommerceDiscount> orderByComparator) {
 		return getPersistence()
-				   .fetchByG_C_Last(groupId, couponCode, orderByComparator);
+				   .fetchByG_C_Last(groupId, companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce discounts before and after the current commerce discount in the ordered set where groupId = &#63; and couponCode = &#63;.
+	* Returns the commerce discounts before and after the current commerce discount in the ordered set where groupId = &#63; and companyId = &#63;.
 	*
 	* @param commerceDiscountId the primary key of the current commerce discount
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce discount
 	* @throws NoSuchDiscountException if a commerce discount with the primary key could not be found
 	*/
 	public static CommerceDiscount[] findByG_C_PrevAndNext(
-		long commerceDiscountId, long groupId, String couponCode,
+		long commerceDiscountId, long groupId, long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
 		return getPersistence()
 				   .findByG_C_PrevAndNext(commerceDiscountId, groupId,
-			couponCode, orderByComparator);
+			companyId, orderByComparator);
 	}
 
 	/**
-	* Returns all the commerce discounts that the user has permission to view where groupId = &#63; and couponCode = &#63;.
+	* Returns all the commerce discounts that the user has permission to view where groupId = &#63; and companyId = &#63;.
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @return the matching commerce discounts that the user has permission to view
 	*/
 	public static List<CommerceDiscount> filterFindByG_C(long groupId,
-		String couponCode) {
-		return getPersistence().filterFindByG_C(groupId, couponCode);
+		long companyId) {
+		return getPersistence().filterFindByG_C(groupId, companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce discounts that the user has permission to view where groupId = &#63; and couponCode = &#63;.
+	* Returns a range of all the commerce discounts that the user has permission to view where groupId = &#63; and companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @return the range of matching commerce discounts that the user has permission to view
 	*/
 	public static List<CommerceDiscount> filterFindByG_C(long groupId,
-		String couponCode, int start, int end) {
-		return getPersistence().filterFindByG_C(groupId, couponCode, start, end);
+		long companyId, int start, int end) {
+		return getPersistence().filterFindByG_C(groupId, companyId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce discounts that the user has permissions to view where groupId = &#63; and couponCode = &#63;.
+	* Returns an ordered range of all the commerce discounts that the user has permissions to view where groupId = &#63; and companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce discounts
 	* @param end the upper bound of the range of commerce discounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce discounts that the user has permission to view
 	*/
 	public static List<CommerceDiscount> filterFindByG_C(long groupId,
-		String couponCode, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
 		return getPersistence()
-				   .filterFindByG_C(groupId, couponCode, start, end,
+				   .filterFindByG_C(groupId, companyId, start, end,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the commerce discounts before and after the current commerce discount in the ordered set of commerce discounts that the user has permission to view where groupId = &#63; and couponCode = &#63;.
+	* Returns the commerce discounts before and after the current commerce discount in the ordered set of commerce discounts that the user has permission to view where groupId = &#63; and companyId = &#63;.
 	*
 	* @param commerceDiscountId the primary key of the current commerce discount
 	* @param groupId the group ID
-	* @param couponCode the coupon code
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce discount
 	* @throws NoSuchDiscountException if a commerce discount with the primary key could not be found
 	*/
 	public static CommerceDiscount[] filterFindByG_C_PrevAndNext(
-		long commerceDiscountId, long groupId, String couponCode,
+		long commerceDiscountId, long groupId, long companyId,
 		OrderByComparator<CommerceDiscount> orderByComparator)
 		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
 		return getPersistence()
 				   .filterFindByG_C_PrevAndNext(commerceDiscountId, groupId,
+			companyId, orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce discounts that the user has permission to view where groupId = any &#63; and companyId = &#63;.
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @return the matching commerce discounts that the user has permission to view
+	*/
+	public static List<CommerceDiscount> filterFindByG_C(long[] groupIds,
+		long companyId) {
+		return getPersistence().filterFindByG_C(groupIds, companyId);
+	}
+
+	/**
+	* Returns a range of all the commerce discounts that the user has permission to view where groupId = any &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @return the range of matching commerce discounts that the user has permission to view
+	*/
+	public static List<CommerceDiscount> filterFindByG_C(long[] groupIds,
+		long companyId, int start, int end) {
+		return getPersistence().filterFindByG_C(groupIds, companyId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce discounts that the user has permission to view where groupId = any &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce discounts that the user has permission to view
+	*/
+	public static List<CommerceDiscount> filterFindByG_C(long[] groupIds,
+		long companyId, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator) {
+		return getPersistence()
+				   .filterFindByG_C(groupIds, companyId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce discounts where groupId = any &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @return the matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByG_C(long[] groupIds,
+		long companyId) {
+		return getPersistence().findByG_C(groupIds, companyId);
+	}
+
+	/**
+	* Returns a range of all the commerce discounts where groupId = any &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @return the range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByG_C(long[] groupIds,
+		long companyId, int start, int end) {
+		return getPersistence().findByG_C(groupIds, companyId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce discounts where groupId = any &#63; and companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByG_C(long[] groupIds,
+		long companyId, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator) {
+		return getPersistence()
+				   .findByG_C(groupIds, companyId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce discounts where groupId = &#63; and companyId = &#63;, optionally using the finder cache.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param companyId the company ID
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByG_C(long[] groupIds,
+		long companyId, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByG_C(groupIds, companyId, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Removes all the commerce discounts where groupId = &#63; and companyId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param companyId the company ID
+	*/
+	public static void removeByG_C(long groupId, long companyId) {
+		getPersistence().removeByG_C(groupId, companyId);
+	}
+
+	/**
+	* Returns the number of commerce discounts where groupId = &#63; and companyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param companyId the company ID
+	* @return the number of matching commerce discounts
+	*/
+	public static int countByG_C(long groupId, long companyId) {
+		return getPersistence().countByG_C(groupId, companyId);
+	}
+
+	/**
+	* Returns the number of commerce discounts where groupId = any &#63; and companyId = &#63;.
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @return the number of matching commerce discounts
+	*/
+	public static int countByG_C(long[] groupIds, long companyId) {
+		return getPersistence().countByG_C(groupIds, companyId);
+	}
+
+	/**
+	* Returns the number of commerce discounts that the user has permission to view where groupId = &#63; and companyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param companyId the company ID
+	* @return the number of matching commerce discounts that the user has permission to view
+	*/
+	public static int filterCountByG_C(long groupId, long companyId) {
+		return getPersistence().filterCountByG_C(groupId, companyId);
+	}
+
+	/**
+	* Returns the number of commerce discounts that the user has permission to view where groupId = any &#63; and companyId = &#63;.
+	*
+	* @param groupIds the group IDs
+	* @param companyId the company ID
+	* @return the number of matching commerce discounts that the user has permission to view
+	*/
+	public static int filterCountByG_C(long[] groupIds, long companyId) {
+		return getPersistence().filterCountByG_C(groupIds, companyId);
+	}
+
+	/**
+	* Returns all the commerce discounts where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @return the matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByC_C(long companyId,
+		String couponCode) {
+		return getPersistence().findByC_C(companyId, couponCode);
+	}
+
+	/**
+	* Returns a range of all the commerce discounts where companyId = &#63; and couponCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @return the range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByC_C(long companyId,
+		String couponCode, int start, int end) {
+		return getPersistence().findByC_C(companyId, couponCode, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce discounts where companyId = &#63; and couponCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByC_C(long companyId,
+		String couponCode, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator) {
+		return getPersistence()
+				   .findByC_C(companyId, couponCode, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce discounts where companyId = &#63; and couponCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceDiscountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param start the lower bound of the range of commerce discounts
+	* @param end the upper bound of the range of commerce discounts (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce discounts
+	*/
+	public static List<CommerceDiscount> findByC_C(long companyId,
+		String couponCode, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByC_C(companyId, couponCode, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce discount in the ordered set where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce discount
+	* @throws NoSuchDiscountException if a matching commerce discount could not be found
+	*/
+	public static CommerceDiscount findByC_C_First(long companyId,
+		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator)
+		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
+		return getPersistence()
+				   .findByC_C_First(companyId, couponCode, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce discount in the ordered set where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
+	*/
+	public static CommerceDiscount fetchByC_C_First(long companyId,
+		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_C_First(companyId, couponCode, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce discount in the ordered set where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce discount
+	* @throws NoSuchDiscountException if a matching commerce discount could not be found
+	*/
+	public static CommerceDiscount findByC_C_Last(long companyId,
+		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator)
+		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
+		return getPersistence()
+				   .findByC_C_Last(companyId, couponCode, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce discount in the ordered set where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
+	*/
+	public static CommerceDiscount fetchByC_C_Last(long companyId,
+		String couponCode, OrderByComparator<CommerceDiscount> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_C_Last(companyId, couponCode, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce discounts before and after the current commerce discount in the ordered set where companyId = &#63; and couponCode = &#63;.
+	*
+	* @param commerceDiscountId the primary key of the current commerce discount
+	* @param companyId the company ID
+	* @param couponCode the coupon code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce discount
+	* @throws NoSuchDiscountException if a commerce discount with the primary key could not be found
+	*/
+	public static CommerceDiscount[] findByC_C_PrevAndNext(
+		long commerceDiscountId, long companyId, String couponCode,
+		OrderByComparator<CommerceDiscount> orderByComparator)
+		throws com.liferay.commerce.discount.exception.NoSuchDiscountException {
+		return getPersistence()
+				   .findByC_C_PrevAndNext(commerceDiscountId, companyId,
 			couponCode, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce discounts where groupId = &#63; and couponCode = &#63; from the database.
+	* Removes all the commerce discounts where companyId = &#63; and couponCode = &#63; from the database.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param couponCode the coupon code
 	*/
-	public static void removeByG_C(long groupId, String couponCode) {
-		getPersistence().removeByG_C(groupId, couponCode);
+	public static void removeByC_C(long companyId, String couponCode) {
+		getPersistence().removeByC_C(companyId, couponCode);
 	}
 
 	/**
-	* Returns the number of commerce discounts where groupId = &#63; and couponCode = &#63;.
+	* Returns the number of commerce discounts where companyId = &#63; and couponCode = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param couponCode the coupon code
 	* @return the number of matching commerce discounts
 	*/
-	public static int countByG_C(long groupId, String couponCode) {
-		return getPersistence().countByG_C(groupId, couponCode);
-	}
-
-	/**
-	* Returns the number of commerce discounts that the user has permission to view where groupId = &#63; and couponCode = &#63;.
-	*
-	* @param groupId the group ID
-	* @param couponCode the coupon code
-	* @return the number of matching commerce discounts that the user has permission to view
-	*/
-	public static int filterCountByG_C(long groupId, String couponCode) {
-		return getPersistence().filterCountByG_C(groupId, couponCode);
+	public static int countByC_C(long companyId, String couponCode) {
+		return getPersistence().countByC_C(companyId, couponCode);
 	}
 
 	/**
