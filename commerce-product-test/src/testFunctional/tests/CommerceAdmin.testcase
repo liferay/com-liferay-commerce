@@ -37,6 +37,7 @@ definition {
 		}
 	}
 
+	@ignore = "true"
 	test CreateNewAvailabilityEstimate {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAvailabilityEstimate";
@@ -60,6 +61,7 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
+	@ignore = "true"
 	test CreateNewCountry {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCountry";
@@ -91,10 +93,12 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
+	@ignore = "true"
 	test CreateNewCurrency {
 		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
 	}
 
+	@ignore = "true"
 	test CreateNewDiscount {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewDiscount";
@@ -126,6 +130,7 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
+	@ignore = "true"
 	test CreateNewMeasurementUnits {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewMeasurementUnits";
@@ -193,6 +198,7 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
+	@ignore = "true"
 	test CreateNewPriceList {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewPriceList";
@@ -224,6 +230,7 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
+	@ignore = "true"
 	test CreateNewAccountGroupByOrganizations {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByOrganizations";
@@ -243,6 +250,7 @@ definition {
 		);
 	}
 
+	@ignore = "true"
 	test CreateNewAccountGroupByRegularRole {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByRegularRole";
@@ -255,6 +263,7 @@ definition {
 		);
 	}
 
+	@ignore = "true"
 	test CreateNewAccountGroupByUserGroups {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUserGroups";
@@ -274,6 +283,7 @@ definition {
 		);
 	}
 
+	@ignore = "true"
 	test CreateNewAccountGroupByUsers {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUsers";
