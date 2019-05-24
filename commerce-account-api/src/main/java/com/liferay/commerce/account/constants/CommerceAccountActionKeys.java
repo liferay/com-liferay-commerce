@@ -22,6 +22,8 @@ public class CommerceAccountActionKeys {
 
 	public static final String ADD_ACCOUNT = "ADD_ACCOUNT";
 
+	public static final String ADD_ACCOUNT_GROUP = "ADD_ACCOUNT_GROUP";
+
 	public static final String MANAGE_ADDRESS = "MANAGE_ADDRESS";
 
 	public static final String MANAGE_ALL_ACCOUNTS = "MANAGE_ALL_ACCOUNTS";
@@ -34,6 +36,9 @@ public class CommerceAccountActionKeys {
 	public static final String MANAGE_ORGANIZATIONS = "MANAGE_ORGANIZATIONS";
 
 	public static final String VIEW_ADDRESSES = "VIEW_ADDRESSES";
+
+	public static final String VIEW_COMMERCE_ACCOUNT_GROUPS =
+		"VIEW_COMMERCE_ACCOUNT_GROUPS";
 
 	public static final String VIEW_MEMBERS = "VIEW_MEMBERS";
 
