@@ -99,6 +99,13 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannelRelLocalService.deleteCommerceChannelRels(
 			commerceChannel.getCommerceChannelId());
 
+		// Group
+
+		Group group = getCommerceChannelGroup(
+			commerceChannel.getCommerceChannelId());
+
+		groupLocalService.deleteGroup(group);
+
 		// Resources
 
 		resourceLocalService.deleteResource(
@@ -121,7 +128,7 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceChannels(long companyId) {
+	public void deleteCommerceChannels(long companyId) throws PortalException {
 		List<CommerceChannel> commerceChannels =
 			commerceChannelPersistence.findByCompanyId(companyId);
 
