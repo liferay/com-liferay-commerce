@@ -39,6 +39,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.commerce.service.base.CommerceOrderLocalServiceBaseImpl;
 import com.liferay.commerce.util.CommerceShippingHelper;
@@ -229,13 +230,17 @@ public class CommerceOrderLocalServiceImpl
 			}
 		}
 
+		long groupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				serviceContext.getScopeGroupId());
+
 		long commerceOrderId = counterLocalService.increment();
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.create(
 			commerceOrderId);
 
 		commerceOrder.setUuid(serviceContext.getUuid());
-		commerceOrder.setGroupId(serviceContext.getScopeGroupId());
+		commerceOrder.setGroupId(groupId);
 		commerceOrder.setCompanyId(user.getCompanyId());
 		commerceOrder.setUserId(userId);
 		commerceOrder.setUserName(user.getFullName());
@@ -1668,6 +1673,9 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTotalDiscountPercentageLevel4(
 			discountPercentageLevel4);
 	}
+
+	@ServiceReference(type = CommerceChannelLocalService.class)
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@ServiceReference(type = CommerceCurrencyLocalService.class)
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
