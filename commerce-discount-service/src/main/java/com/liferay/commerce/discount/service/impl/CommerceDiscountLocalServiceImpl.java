@@ -74,8 +74,8 @@ public class CommerceDiscountLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceDiscount addCommerceDiscount(
-			String title, String target, boolean useCouponCode,
-			String couponCode, boolean usePercentage,
+			long groupId, long userId, String title, String target,
+			boolean useCouponCode, String couponCode, boolean usePercentage,
 			BigDecimal maximumDiscountAmount, BigDecimal level1,
 			BigDecimal level2, BigDecimal level3, BigDecimal level4,
 			String limitationType, int limitationTimes, boolean active,
@@ -88,13 +88,11 @@ public class CommerceDiscountLocalServiceImpl
 
 		// Commerce discount
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
 		validate(
-			groupId, 0, title, target, useCouponCode, couponCode,
-			limitationType);
+			serviceContext.getCompanyId(), 0, title, target, useCouponCode,
+			couponCode, limitationType);
 
 		Date now = new Date();
 
@@ -229,9 +227,9 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceDiscounts(long groupId) throws PortalException {
+	public void deleteCommerceDiscounts(long companyId) throws PortalException {
 		List<CommerceDiscount> commerceDiscounts =
-			commerceDiscountPersistence.findByGroupId(groupId);
+			commerceDiscountPersistence.findByCompanyId(companyId);
 
 		for (CommerceDiscount commerceDiscount : commerceDiscounts) {
 			commerceDiscountLocalService.deleteCommerceDiscount(
@@ -241,28 +239,28 @@ public class CommerceDiscountLocalServiceImpl
 
 	@Override
 	public List<CommerceDiscount> getCommerceDiscounts(
-		long groupId, int start, int end,
+		long[] groupIds, long companyId, int start, int end,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
 
-		return commerceDiscountPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceDiscountPersistence.findByG_C(
+			groupIds, companyId, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceDiscount> getCommerceDiscounts(
-		long groupId, String couponCode) {
+		long companyId, String couponCode) {
 
-		return commerceDiscountPersistence.findByG_C(groupId, couponCode);
+		return commerceDiscountPersistence.findByC_C(companyId, couponCode);
 	}
 
 	@Override
-	public int getCommerceDiscountsCount(long groupId) {
-		return commerceDiscountPersistence.countByGroupId(groupId);
+	public int getCommerceDiscountsCount(long[] groupIds, long companyId) {
+		return commerceDiscountPersistence.countByG_C(groupIds, companyId);
 	}
 
 	@Override
-	public int getCommerceDiscountsCount(long groupId, String couponCode) {
-		return commerceDiscountPersistence.countByG_C(groupId, couponCode);
+	public int getCommerceDiscountsCount(long companyId, String couponCode) {
+		return commerceDiscountPersistence.countByC_C(companyId, couponCode);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -283,12 +281,12 @@ public class CommerceDiscountLocalServiceImpl
 
 	@Override
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 
 		return searchCommerceDiscounts(searchContext);
 	}
@@ -338,7 +336,7 @@ public class CommerceDiscountLocalServiceImpl
 			commerceDiscountPersistence.findByPrimaryKey(commerceDiscountId);
 
 		validate(
-			commerceDiscount.getGroupId(), commerceDiscountId, title, target,
+			serviceContext.getCompanyId(), commerceDiscountId, title, target,
 			useCouponCode, couponCode, limitationType);
 
 		Date now = new Date();
@@ -438,7 +436,7 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int status, int start,
+		long companyId, long[] groupIds, String keywords, int status, int start,
 		int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
@@ -459,7 +457,7 @@ public class CommerceDiscountLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setGroupIds(groupIds);
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -580,8 +578,9 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, long commerceDiscountId, String title, String target,
-			boolean useCouponCode, String couponCode, String limitationType)
+			long companyId, long commerceDiscountId, String title,
+			String target, boolean useCouponCode, String couponCode,
+			String limitationType)
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
@@ -601,8 +600,8 @@ public class CommerceDiscountLocalServiceImpl
 			}
 
 			CommerceDiscount commerceDiscount =
-				commerceDiscountPersistence.fetchByG_C_First(
-					groupId, couponCode,
+				commerceDiscountPersistence.fetchByC_C_First(
+					companyId, couponCode,
 					new CommerceDiscountCreateDateComparator(true));
 
 			if (((commerceDiscountId <= 0) && (commerceDiscount != null)) ||
@@ -620,7 +619,7 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.UID
 	};
 
 	private static final Log _log = LogFactoryUtil.getLog(
