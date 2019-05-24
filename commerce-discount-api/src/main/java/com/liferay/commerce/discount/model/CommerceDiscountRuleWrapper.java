@@ -60,7 +60,6 @@ public class CommerceDiscountRuleWrapper implements CommerceDiscountRule,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceDiscountRuleId", getCommerceDiscountRuleId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -80,12 +79,6 @@ public class CommerceDiscountRuleWrapper implements CommerceDiscountRule,
 
 		if (commerceDiscountRuleId != null) {
 			setCommerceDiscountRuleId(commerceDiscountRuleId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -190,16 +183,6 @@ public class CommerceDiscountRuleWrapper implements CommerceDiscountRule,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceDiscountRule.getExpandoBridge();
-	}
-
-	/**
-	* Returns the group ID of this commerce discount rule.
-	*
-	* @return the group ID of this commerce discount rule
-	*/
-	@Override
-	public long getGroupId() {
-		return _commerceDiscountRule.getGroupId();
 	}
 
 	/**
@@ -371,16 +354,6 @@ public class CommerceDiscountRuleWrapper implements CommerceDiscountRule,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceDiscountRule.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the group ID of this commerce discount rule.
-	*
-	* @param groupId the group ID of this commerce discount rule
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceDiscountRule.setGroupId(groupId);
 	}
 
 	/**

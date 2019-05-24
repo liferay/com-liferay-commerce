@@ -67,7 +67,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	public static final String TABLE_NAME = "CommerceDiscountUsageEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "commerceDiscountUsageEntryId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -81,7 +80,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceDiscountUsageEntryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -92,7 +90,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		TABLE_COLUMNS_MAP.put("commerceDiscountId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscountUsageEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceDiscountUsageEntry.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceDiscountUsageEntry.createDate DESC";
@@ -105,11 +103,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.discount.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.commerce.discount.model.CommerceDiscountUsageEntry"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.discount.service.util.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.liferay.commerce.discount.model.CommerceDiscountUsageEntry"),
-			true);
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 2L;
+	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.commerce.discount.service.util.ServiceProps.get(
 				"lock.expiration.time.com.liferay.commerce.discount.model.CommerceDiscountUsageEntry"));
 
@@ -152,7 +146,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 		attributes.put("commerceDiscountUsageEntryId",
 			getCommerceDiscountUsageEntryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -175,12 +168,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 		if (commerceDiscountUsageEntryId != null) {
 			setCommerceDiscountUsageEntryId(commerceDiscountUsageEntryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -244,28 +231,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	}
 
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -323,8 +288,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	@Override
 	public void setCreateDate(Date createDate) {
-		_columnBitmask = -1L;
-
 		_createDate = createDate;
 	}
 
@@ -374,10 +337,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		_commerceDiscountId = commerceDiscountId;
 	}
 
-	public long getColumnBitmask() {
-		return _columnBitmask;
-	}
-
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -406,7 +365,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		CommerceDiscountUsageEntryImpl commerceDiscountUsageEntryImpl = new CommerceDiscountUsageEntryImpl();
 
 		commerceDiscountUsageEntryImpl.setCommerceDiscountUsageEntryId(getCommerceDiscountUsageEntryId());
-		commerceDiscountUsageEntryImpl.setGroupId(getGroupId());
 		commerceDiscountUsageEntryImpl.setCompanyId(getCompanyId());
 		commerceDiscountUsageEntryImpl.setUserId(getUserId());
 		commerceDiscountUsageEntryImpl.setUserName(getUserName());
@@ -478,13 +436,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	public void resetOriginalValues() {
 		CommerceDiscountUsageEntryModelImpl commerceDiscountUsageEntryModelImpl = this;
 
-		commerceDiscountUsageEntryModelImpl._originalGroupId = commerceDiscountUsageEntryModelImpl._groupId;
-
-		commerceDiscountUsageEntryModelImpl._setOriginalGroupId = false;
-
 		commerceDiscountUsageEntryModelImpl._setModifiedDate = false;
-
-		commerceDiscountUsageEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -493,8 +445,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 			new CommerceDiscountUsageEntryCacheModel();
 
 		commerceDiscountUsageEntryCacheModel.commerceDiscountUsageEntryId = getCommerceDiscountUsageEntryId();
-
-		commerceDiscountUsageEntryCacheModel.groupId = getGroupId();
 
 		commerceDiscountUsageEntryCacheModel.companyId = getCompanyId();
 
@@ -537,12 +487,10 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{commerceDiscountUsageEntryId=");
 		sb.append(getCommerceDiscountUsageEntryId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -566,7 +514,7 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -576,10 +524,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 		sb.append(
 			"<column><column-name>commerceDiscountUsageEntryId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceDiscountUsageEntryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -624,9 +568,6 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 			CommerceDiscountUsageEntry.class, ModelWrapper.class
 		};
 	private long _commerceDiscountUsageEntryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
@@ -636,6 +577,5 @@ public class CommerceDiscountUsageEntryModelImpl extends BaseModelImpl<CommerceD
 	private long _commerceAccountId;
 	private long _commerceOrderId;
 	private long _commerceDiscountId;
-	private long _columnBitmask;
 	private CommerceDiscountUsageEntry _escapedModel;
 }
