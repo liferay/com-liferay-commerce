@@ -54,14 +54,14 @@ public class SiteCommerceChannelTypeDisplayContext
 			CommerceCurrencyService commerceCurrencyService,
 			GroupLocalService groupLocalService,
 			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-			Portal portal, PortletResourcePermission portletResourcePermission)
+			Portal portal)
 		throws PortalException {
 
 		super(
 			commerceChannelModelResourcePermission, commerceChannelService,
 			commerceChannelTypeRegistry,
 			commerceChannelTypeJSPContributorRegistry, commerceCurrencyService,
-			httpServletRequest,	portal, portletResourcePermission);
+			httpServletRequest, portal);
 
 		_groupLocalService = groupLocalService;
 		_itemSelector = itemSelector;
