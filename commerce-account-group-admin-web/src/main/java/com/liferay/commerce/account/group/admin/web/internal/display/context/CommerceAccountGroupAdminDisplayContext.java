@@ -15,11 +15,11 @@
 package com.liferay.commerce.account.group.admin.web.internal.display.context;
 
 import com.liferay.commerce.account.group.admin.web.internal.display.context.util.CommerceAccountGroupAdminRequestHelper;
+import com.liferay.commerce.account.item.selector.criterion.CommerceAccountItemSelectorCriterion;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
-import com.liferay.commerce.item.selector.criterion.CommerceAccountItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;

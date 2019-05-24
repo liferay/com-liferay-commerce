@@ -18,6 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.io.IOException;
@@ -69,6 +70,17 @@ public class CommerceAccountGroupAccountScreenNavigationEntry
 	public String getScreenNavigationKey() {
 		return CommerceAccountGroupScreenNavigationConstants.
 			SCREEN_NAVIGATION_KEY_COMMERCE_ACCOUNT_GROUP_GENERAL;
+	}
+
+	@Override
+	public boolean isVisible(
+		User user, CommerceAccountGroup commerceAccountGroup) {
+
+		if (commerceAccountGroup == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override

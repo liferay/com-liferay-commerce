@@ -37,20 +37,6 @@ long commerceAccountGroupId = commerceAccountGroupAdminDisplayContext.getCommerc
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
 				<aui:input autoFocus="<%= true %>" name="name" />
-
-				<aui:select name="type">
-
-					<%
-					for (int type : CommerceAccountConstants.ACCOUNT_TYPES) {
-					%>
-
-						<aui:option label="<%= CommerceAccountConstants.getAccountTypeLabel(type) %>" selected="<%= (commerceAccountGroup != null) && (commerceAccountGroup.getType() == type) %>" value="<%= type %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
 			</aui:fieldset>
 
 			<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasCustomAttributesAvailable() %>">
