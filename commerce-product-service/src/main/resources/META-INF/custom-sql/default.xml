@@ -1,14 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.commerce.product.service.persistence.CommerceChannelFinder.getUsedSiteGroupIds">
-		<![CDATA[
-			SELECT
-				DISTINCT siteGroupId
-			FROM
-				CommerceChannel
-		]]>
-	</sql>
 	<sql id="com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder.findByExpirationDate">
 		<![CDATA[
 			SELECT

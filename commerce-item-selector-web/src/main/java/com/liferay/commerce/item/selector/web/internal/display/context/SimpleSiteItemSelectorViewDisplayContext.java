@@ -144,8 +144,14 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		return searchContainer;
 	}
 
-	public long[] getUsedSiteGroupIds() {
-		return _commerceChannelLocalService.getUsedSiteGroupIds();
+	public boolean isSiteAvailable(long siteGroupId) {
+		if (_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+				siteGroupId) == null) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected ManagementBarFilterItem getManagementBarFilterItem(
