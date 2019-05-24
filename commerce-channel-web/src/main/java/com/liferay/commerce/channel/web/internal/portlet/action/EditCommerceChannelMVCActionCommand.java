@@ -18,6 +18,7 @@ import com.liferay.commerce.product.channel.CommerceChannelType;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -121,7 +122,9 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		String channelType = commerceChannelType.getKey();
 
-		if ((commerceChannelType != null) && !channelType.equals("site")) {
+		if ((commerceChannelType != null) &&
+			!channelType.equals(CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
+
 			typeSettingsProperties =
 				commerceChannelType.getTypeSettingsProperties(
 					httpServletRequest.getParameterMap());
