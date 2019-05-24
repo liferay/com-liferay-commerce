@@ -65,18 +65,22 @@ public interface CommerceAccountGroupRelService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		long commerceAccountGroupId, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator);
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountGroupRel> getCommerceAccountGroupRels(
 		String className, long classPK, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator);
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceAccountGroupRelsCount(long commerceAccountGroupId);
+	public int getCommerceAccountGroupRelsCount(long commerceAccountGroupId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceAccountGroupRelsCount(String className, long classPK);
+	public int getCommerceAccountGroupRelsCount(String className, long classPK)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
