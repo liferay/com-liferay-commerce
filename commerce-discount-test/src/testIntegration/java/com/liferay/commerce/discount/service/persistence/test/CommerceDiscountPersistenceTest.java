@@ -285,19 +285,33 @@ public class CommerceDiscountPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
 	public void testCountByG_C() throws Exception {
-		_persistence.countByG_C(RandomTestUtil.nextLong(), "");
+		_persistence.countByG_C(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
 
-		_persistence.countByG_C(0L, "null");
+		_persistence.countByG_C(0L, 0L);
+	}
 
-		_persistence.countByG_C(0L, (String)null);
+	@Test
+	public void testCountByG_CArrayable() throws Exception {
+		_persistence.countByG_C(new long[] { RandomTestUtil.nextLong(), 0L },
+			RandomTestUtil.nextLong());
+	}
+
+	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_C(0L, "null");
+
+		_persistence.countByC_C(0L, (String)null);
 	}
 
 	@Test
@@ -336,12 +350,6 @@ public class CommerceDiscountPersistenceTest {
 	public void testFindAll() throws Exception {
 		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			getOrderByComparator());
-	}
-
-	@Test
-	public void testFilterFindByGroupId() throws Exception {
-		_persistence.filterFindByGroupId(0, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceDiscount> getOrderByComparator() {

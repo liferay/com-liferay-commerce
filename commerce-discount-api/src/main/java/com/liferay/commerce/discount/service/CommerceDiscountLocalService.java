@@ -84,15 +84,15 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 		CommerceDiscount commerceDiscount);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceDiscount addCommerceDiscount(String title, String target,
-		boolean useCouponCode, String couponCode, boolean usePercentage,
-		BigDecimal maximumDiscountAmount, BigDecimal level1, BigDecimal level2,
-		BigDecimal level3, BigDecimal level4, String limitationType,
-		int limitationTimes, boolean active, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire,
+	public CommerceDiscount addCommerceDiscount(long groupId, long userId,
+		String title, String target, boolean useCouponCode, String couponCode,
+		boolean usePercentage, BigDecimal maximumDiscountAmount,
+		BigDecimal level1, BigDecimal level2, BigDecimal level3,
+		BigDecimal level4, String limitationType, int limitationTimes,
+		boolean active, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 
 	public void checkCommerceDiscounts() throws PortalException;
@@ -129,7 +129,8 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 	public CommerceDiscount deleteCommerceDiscount(long commerceDiscountId)
 		throws PortalException;
 
-	public void deleteCommerceDiscounts(long groupId) throws PortalException;
+	public void deleteCommerceDiscounts(long companyId)
+		throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -258,12 +259,13 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 	public List<CommerceDiscount> getCommerceDiscounts(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscounts(long groupId, int start,
-		int end, OrderByComparator<CommerceDiscount> orderByComparator);
+	public List<CommerceDiscount> getCommerceDiscounts(long companyId,
+		String couponCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscounts(long groupId,
-		String couponCode);
+	public List<CommerceDiscount> getCommerceDiscounts(long[] groupIds,
+		long companyId, int start, int end,
+		OrderByComparator<CommerceDiscount> orderByComparator);
 
 	/**
 	* Returns all the commerce discounts matching the UUID and company.
@@ -300,10 +302,10 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 	public int getCommerceDiscountsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId);
+	public int getCommerceDiscountsCount(long companyId, String couponCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId, String couponCode);
+	public int getCommerceDiscountsCount(long[] groupIds, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -330,8 +332,8 @@ public interface CommerceDiscountLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
-		long companyId, long groupId, String keywords, int status, int start,
-		int end, Sort sort) throws PortalException;
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(

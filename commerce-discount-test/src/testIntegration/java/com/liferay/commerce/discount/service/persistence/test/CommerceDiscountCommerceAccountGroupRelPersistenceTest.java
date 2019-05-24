@@ -127,8 +127,6 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 		CommerceDiscountCommerceAccountGroupRel newCommerceDiscountCommerceAccountGroupRel =
 			_persistence.create(pk);
 
-		newCommerceDiscountCommerceAccountGroupRel.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceDiscountCommerceAccountGroupRel.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceDiscountCommerceAccountGroupRel.setUserId(RandomTestUtil.nextLong());
@@ -151,8 +149,6 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 
 		Assert.assertEquals(existingCommerceDiscountCommerceAccountGroupRel.getCommerceDiscountCommerceAccountGroupRelId(),
 			newCommerceDiscountCommerceAccountGroupRel.getCommerceDiscountCommerceAccountGroupRelId());
-		Assert.assertEquals(existingCommerceDiscountCommerceAccountGroupRel.getGroupId(),
-			newCommerceDiscountCommerceAccountGroupRel.getGroupId());
 		Assert.assertEquals(existingCommerceDiscountCommerceAccountGroupRel.getCompanyId(),
 			newCommerceDiscountCommerceAccountGroupRel.getCompanyId());
 		Assert.assertEquals(existingCommerceDiscountCommerceAccountGroupRel.getUserId(),
@@ -214,9 +210,9 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 
 	protected OrderByComparator<CommerceDiscountCommerceAccountGroupRel> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CDiscountCAccountGroupRel",
-			"commerceDiscountCommerceAccountGroupRelId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commerceDiscountId", true,
+			"commerceDiscountCommerceAccountGroupRelId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceDiscountId", true,
 			"commerceAccountGroupId", true);
 	}
 
@@ -447,8 +443,6 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 
 		CommerceDiscountCommerceAccountGroupRel commerceDiscountCommerceAccountGroupRel =
 			_persistence.create(pk);
-
-		commerceDiscountCommerceAccountGroupRel.setGroupId(RandomTestUtil.nextLong());
 
 		commerceDiscountCommerceAccountGroupRel.setCompanyId(RandomTestUtil.nextLong());
 
