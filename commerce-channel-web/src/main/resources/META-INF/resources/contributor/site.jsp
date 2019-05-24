@@ -143,16 +143,18 @@ if (commerceChannel != null) {
 					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 				}
 
-				var rowColumns = [];
+				if (!searchContainer.getData().includes(item.id)) {
+					var rowColumns = [];
 
-				rowColumns.push(item.name);
-				rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceChannelSiteIcon) %></a>');
+					rowColumns.push(item.name);
+					rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceChannelSiteIcon) %></a>');
 
-				A.one('#<portlet:namespace />siteGroupId').val(item.id);
+					A.one('#<portlet:namespace />siteGroupId').val(item.id);
 
-				searchContainer.addRow(rowColumns, item.id);
+					searchContainer.addRow(rowColumns, item.id);
 
-				searchContainer.updateDataStore();
+					searchContainer.updateDataStore();
+				}
 			}
 		}
 	);
