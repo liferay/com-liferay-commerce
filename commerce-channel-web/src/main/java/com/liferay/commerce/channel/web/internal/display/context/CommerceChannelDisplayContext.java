@@ -25,12 +25,13 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
+import com.liferay.commerce.product.util.CPUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -182,9 +183,17 @@ public class CommerceChannelDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		Sort sort = CPUtil.getCommerceChannelSort(
+			getOrderByCol(), getOrderByType());
+
 		List<CommerceChannel> commerceChannels =
-			_commerceChannelService.getCommerceChannels(
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			_commerceChannelService.searchCommerceChannels(
+				themeDisplay.getCompanyId(), getKeywords(),
+				searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(commerceChannels.size());
 		searchContainer.setResults(commerceChannels);
