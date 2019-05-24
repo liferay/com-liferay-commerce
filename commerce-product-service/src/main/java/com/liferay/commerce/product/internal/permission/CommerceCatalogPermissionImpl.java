@@ -82,7 +82,8 @@ public class CommerceCatalogPermissionImpl
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.getCommerceCatalog(commerceCatalogId);
+			_commerceCatalogLocalService.fetchCommerceCatalog(
+				commerceCatalogId);
 
 		if (commerceCatalog == null) {
 			return false;
