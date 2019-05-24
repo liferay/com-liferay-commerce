@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -43,19 +45,23 @@ public class SiteCommerceChannelTypeDisplayContext
 	extends CommerceChannelDisplayContext {
 
 	public SiteCommerceChannelTypeDisplayContext(
-		CommerceChannelService commerceChannelService,
-		CommerceChannelTypeRegistry commerceChannelTypeRegistry,
-		CommerceChannelTypeJSPContributorRegistry
-			commerceChannelTypeJSPContributorRegistry,
-		CommerceCurrencyService commerceCurrencyService,
-		GroupLocalService groupLocalService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-		Portal portal) {
+			ModelResourcePermission<CommerceChannel>
+				commerceChannelModelResourcePermission,
+			CommerceChannelService commerceChannelService,
+			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
+			CommerceChannelTypeJSPContributorRegistry
+				commerceChannelTypeJSPContributorRegistry,
+			CommerceCurrencyService commerceCurrencyService,
+			GroupLocalService groupLocalService,
+			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+			Portal portal, PortletResourcePermission portletResourcePermission)
+		throws PortalException {
 
 		super(
-			commerceChannelService, commerceChannelTypeRegistry,
+			commerceChannelModelResourcePermission, commerceChannelService,
+			commerceChannelTypeRegistry,
 			commerceChannelTypeJSPContributorRegistry, commerceCurrencyService,
-			httpServletRequest, portal);
+			httpServletRequest,	portal, portletResourcePermission);
 
 		_groupLocalService = groupLocalService;
 		_itemSelector = itemSelector;
