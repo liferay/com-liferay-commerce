@@ -22,6 +22,7 @@ definition {
 		}
 	}
 
+	@ignore = "true"
 	test ViewStoreFrontSimpleProduct {
 		property portal.acceptance = "true";
 
