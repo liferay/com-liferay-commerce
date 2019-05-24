@@ -20,8 +20,6 @@
 SimpleSiteItemSelectorViewDisplayContext simpleSiteItemSelectorViewDisplayContext = (SimpleSiteItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 String itemSelectedEventName = simpleSiteItemSelectorViewDisplayContext.getItemSelectedEventName();
-
-long[] usedSiteGroupIds = simpleSiteItemSelectorViewDisplayContext.getUsedSiteGroupIds();
 %>
 
 <liferay-frontend:management-bar
@@ -81,11 +79,11 @@ long[] usedSiteGroupIds = simpleSiteItemSelectorViewDisplayContext.getUsedSiteGr
 				cssClass="table-cell-content"
 			>
 				<c:choose>
-					<c:when test="<%= ArrayUtil.contains(usedSiteGroupIds, group.getGroupId()) %>">
-						<liferay-ui:message key="that-site-is-already-associated-with-another-channel" />
+					<c:when test="<%= simpleSiteItemSelectorViewDisplayContext.isSiteAvailable(group.getGroupId()) %>">
+						<aui:button cssClass="selector-button" value="choose" />
 					</c:when>
 					<c:otherwise>
-						<aui:button cssClass="selector-button" value="choose" />
+						<liferay-ui:message key="that-site-is-already-associated-with-another-channel" />
 					</c:otherwise>
 				</c:choose>
 			</liferay-ui:search-container-column-text>
