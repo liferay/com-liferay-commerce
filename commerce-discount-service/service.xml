@@ -54,11 +54,15 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="G_C" return-type="Collection">
-			<finder-column name="groupId" />
+			<finder-column arrayable-operator="OR" name="groupId" />
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="couponCode" />
 		</finder>
 		<finder name="LtD_S" return-type="Collection">
@@ -80,10 +84,6 @@
 		<!-- PK fields -->
 
 		<column db-name="CDiscountCAccountGroupRelId" name="commerceDiscountCommerceAccountGroupRelId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -118,10 +118,6 @@
 		<!-- PK fields -->
 
 		<column name="commerceDiscountRelId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -163,10 +159,6 @@
 
 		<column name="commerceDiscountRuleId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -199,10 +191,6 @@
 
 		<column name="commerceDiscountUsageEntryId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -222,12 +210,6 @@
 		<order by="desc">
 			<order-column name="createDate" />
 		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 	</entity>
 	<exceptions>
 		<exception>CommerceDiscountCouponCode</exception>
