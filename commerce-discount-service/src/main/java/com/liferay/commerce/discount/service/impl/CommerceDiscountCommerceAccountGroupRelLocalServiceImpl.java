@@ -37,7 +37,6 @@ public class CommerceDiscountCommerceAccountGroupRelLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		long commerceDiscountCommerceAccountGroupRelId =
 			counterLocalService.increment();
@@ -47,7 +46,6 @@ public class CommerceDiscountCommerceAccountGroupRelLocalServiceImpl
 				commerceDiscountCommerceAccountGroupRelPersistence.create(
 					commerceDiscountCommerceAccountGroupRelId);
 
-		commerceDiscountCommerceAccountGroupRel.setGroupId(groupId);
 		commerceDiscountCommerceAccountGroupRel.setCompanyId(
 			user.getCompanyId());
 		commerceDiscountCommerceAccountGroupRel.setUserId(user.getUserId());
