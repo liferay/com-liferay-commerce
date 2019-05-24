@@ -23,6 +23,8 @@ import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGrou
 import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -33,6 +35,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import java.math.BigDecimal;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * @author Luca Pellizzon
@@ -112,10 +115,17 @@ public class CommerceDiscountTestUtil {
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
 		CommerceDiscount commerceDiscount =
 			CommerceDiscountLocalServiceUtil.addCommerceDiscount(
+				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 				RandomTestUtil.randomString(), target, false, null, false,
 				BigDecimal.ZERO, discount, BigDecimal.ZERO, BigDecimal.ZERO,
 				BigDecimal.ZERO,
@@ -150,10 +160,17 @@ public class CommerceDiscountTestUtil {
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
 		CommerceDiscount commerceDiscount =
 			CommerceDiscountLocalServiceUtil.addCommerceDiscount(
+				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 				RandomTestUtil.randomString(), target, false, null, true,
 				BigDecimal.valueOf(10000), level1, level2, level3, level4,
 				CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, true,
