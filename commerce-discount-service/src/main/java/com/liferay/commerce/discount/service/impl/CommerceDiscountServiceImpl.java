@@ -15,23 +15,28 @@
 package com.liferay.commerce.discount.service.impl;
 
 import com.liferay.commerce.discount.constants.CommerceDiscountActionKeys;
-import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.base.CommerceDiscountServiceBaseImpl;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.function.ToLongFunction;
+import java.util.stream.Stream;
 
 /**
  * @author Marco Leo
@@ -42,8 +47,8 @@ public class CommerceDiscountServiceImpl
 
 	@Override
 	public CommerceDiscount addCommerceDiscount(
-			String title, String target, boolean useCouponCode,
-			String couponCode, boolean usePercentage,
+			long groupId, long userId, String title, String target,
+			boolean useCouponCode, String couponCode, boolean usePercentage,
 			BigDecimal maximumDiscountAmount, BigDecimal level1,
 			BigDecimal level2, BigDecimal level3, BigDecimal level4,
 			String limitationType, int limitationTimes, boolean active,
@@ -54,14 +59,14 @@ public class CommerceDiscountServiceImpl
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceDiscountActionKeys.ADD_COMMERCE_DISCOUNT);
 
 		return commerceDiscountLocalService.addCommerceDiscount(
-			title, target, useCouponCode, couponCode, usePercentage,
-			maximumDiscountAmount, level1, level2, level3, level4,
-			limitationType, limitationTimes, active, displayDateMonth,
+			groupId, userId, title, target, useCouponCode, couponCode,
+			usePercentage, maximumDiscountAmount, level1, level2, level3,
+			level4, limitationType, limitationTimes, active, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
@@ -107,64 +112,95 @@ public class CommerceDiscountServiceImpl
 
 	@Override
 	public List<CommerceDiscount> getCommerceDiscounts(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceDiscount> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.searchCommerceCatalogs(companyId);
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		long[] commerceCatalogGroupIds = stream.mapToLong(
+			_getCommerceCatalogToLongFunction()
+		).toArray();
+
 		return commerceDiscountLocalService.getCommerceDiscounts(
-			groupId, start, end, orderByComparator);
+			commerceCatalogGroupIds, companyId, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceDiscount> getCommerceDiscounts(
-			long groupId, String couponCode)
+			long companyId, String couponCode)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
 
 		return commerceDiscountLocalService.getCommerceDiscounts(
-			groupId, couponCode);
+			companyId, couponCode);
 	}
 
 	@Override
-	public int getCommerceDiscountsCount(long groupId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
-
-		return commerceDiscountLocalService.getCommerceDiscountsCount(groupId);
-	}
-
-	@Override
-	public int getCommerceDiscountsCount(long groupId, String couponCode)
+	public int getCommerceDiscountsCount(long companyId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
+
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.searchCommerceCatalogs(companyId);
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		long[] commerceCatalogGroupIds = stream.mapToLong(
+			_getCommerceCatalogToLongFunction()
+		).toArray();
+
+		return commerceDiscountLocalService.getCommerceDiscountsCount(
+			commerceCatalogGroupIds, companyId);
+	}
+
+	@Override
+	public int getCommerceDiscountsCount(long companyId, String couponCode)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
 
 		return commerceDiscountLocalService.getCommerceDiscountsCount(
-			groupId, couponCode);
+			companyId, couponCode);
 	}
 
 	@Override
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS);
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.searchCommerceCatalogs(companyId);
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		long[] commerceCatalogGroupIds = stream.mapToLong(
+			_getCommerceCatalogToLongFunction()
+		).toArray();
+
 		return commerceDiscountLocalService.searchCommerceDiscounts(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, commerceCatalogGroupIds, keywords, status, start, end,
+			sort);
 	}
 
 	@Override
@@ -194,15 +230,36 @@ public class CommerceDiscountServiceImpl
 			serviceContext);
 	}
 
+	private ToLongFunction<CommerceCatalog>
+		_getCommerceCatalogToLongFunction() {
+
+		return new ToLongFunction<CommerceCatalog>() {
+
+			@Override
+			public long applyAsLong(CommerceCatalog commerceCatalog) {
+				try {
+					return commerceCatalog.getCommerceCatalogGroupId();
+				}
+				catch (PortalException pe) {
+					_log.error(pe, pe);
+
+					return 0;
+				}
+			}
+
+		};
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceDiscountServiceImpl.class);
+
 	private static volatile ModelResourcePermission<CommerceDiscount>
 		_commerceDiscountResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CommerceDiscountServiceImpl.class,
 				"_commerceDiscountResourcePermission", CommerceDiscount.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceDiscountServiceImpl.class, "_portletResourcePermission",
-				CommerceDiscountConstants.RESOURCE_NAME);
+
+	@ServiceReference(type = CommerceCatalogService.class)
+	private CommerceCatalogService _commerceCatalogService;
 
 }
