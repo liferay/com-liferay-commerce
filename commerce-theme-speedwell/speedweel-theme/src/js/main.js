@@ -38,7 +38,7 @@ Liferay.on(
 		['main-menu', 'search', 'account'].forEach(function(el) {
 			document.querySelectorAll('.js-toggle-' + el).forEach(function(element) {
 				element.addEventListener('click', function() {
-					this.focus();
+					element.focus();
 					document.querySelector('.speedwell-' + el).classList.toggle('is-open');
 				})
 			});
