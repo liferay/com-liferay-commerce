@@ -57,6 +57,17 @@ public class CommerceAccountConstants {
 		SITE_TYPE_B2C, SITE_TYPE_B2B, SITE_TYPE_B2C_B2B
 	};
 
+	public static String getAccountGroupTypeLabel(int accountGroupType) {
+		if (accountGroupType == ACCOUNT_GROUP_TYPE_STATIC) {
+			return "static";
+		}
+		else if (accountGroupType == ACCOUNT_GROUP_TYPE_DYNAMIC) {
+			return "dynamic";
+		}
+
+		return null;
+	}
+
 	public static String getAccountTypeLabel(int accountType) {
 		if (accountType == ACCOUNT_TYPE_BUSINESS) {
 			return "business";
