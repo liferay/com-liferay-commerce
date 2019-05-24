@@ -19,8 +19,11 @@ import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -53,6 +56,7 @@ public class CommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 		CommerceChannelDisplayContext commerceChannelDisplayContext =
 			new CommerceChannelDisplayContext(
+				_commerceChannelModelResourcePermission,
 				_commerceChannelService, _commerceChannelTypeRegistry,
 				_commerceChannelTypeJSPContributorRegistry,
 				_commerceCurrencyService, httpServletRequest, _portal);
@@ -62,6 +66,12 @@ public class CommerceChannelMVCRenderCommand implements MVCRenderCommand {
 
 		return "/view.jsp";
 	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceChannel)"
+	)
+	private ModelResourcePermission<CommerceChannel>
+		_commerceChannelModelResourcePermission;
 
 	@Reference
 	private CommerceChannelService _commerceChannelService;
