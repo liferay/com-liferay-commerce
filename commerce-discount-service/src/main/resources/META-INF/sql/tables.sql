@@ -1,6 +1,5 @@
 create table CDiscountCAccountGroupRel (
 	CDiscountCAccountGroupRelId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -44,7 +43,6 @@ create table CommerceDiscount (
 
 create table CommerceDiscountRel (
 	commerceDiscountRelId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -57,7 +55,6 @@ create table CommerceDiscountRel (
 
 create table CommerceDiscountRule (
 	commerceDiscountRuleId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -70,7 +67,6 @@ create table CommerceDiscountRule (
 
 create table CommerceDiscountUsageEntry (
 	commerceDiscountUsageEntryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

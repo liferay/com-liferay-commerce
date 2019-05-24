@@ -65,12 +65,10 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{commerceDiscountRelId=");
 		sb.append(commerceDiscountRelId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -97,7 +95,6 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 		CommerceDiscountRelImpl commerceDiscountRelImpl = new CommerceDiscountRelImpl();
 
 		commerceDiscountRelImpl.setCommerceDiscountRelId(commerceDiscountRelId);
-		commerceDiscountRelImpl.setGroupId(groupId);
 		commerceDiscountRelImpl.setCompanyId(companyId);
 		commerceDiscountRelImpl.setUserId(userId);
 
@@ -135,8 +132,6 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		commerceDiscountRelId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -155,8 +150,6 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(commerceDiscountRelId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -180,7 +173,6 @@ public class CommerceDiscountRelCacheModel implements CacheModel<CommerceDiscoun
 	}
 
 	public long commerceDiscountRelId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
