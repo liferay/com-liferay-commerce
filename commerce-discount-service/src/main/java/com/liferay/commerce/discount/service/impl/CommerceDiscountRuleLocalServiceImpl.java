@@ -47,7 +47,6 @@ public class CommerceDiscountRuleLocalServiceImpl
 		// Commerce discount rule
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		validate(type);
 
@@ -56,7 +55,6 @@ public class CommerceDiscountRuleLocalServiceImpl
 		CommerceDiscountRule commerceDiscountRule =
 			commerceDiscountRulePersistence.create(commerceDiscountRuleId);
 
-		commerceDiscountRule.setGroupId(groupId);
 		commerceDiscountRule.setCompanyId(user.getCompanyId());
 		commerceDiscountRule.setUserId(user.getUserId());
 		commerceDiscountRule.setUserName(user.getFullName());
