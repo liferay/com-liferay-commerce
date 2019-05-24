@@ -16,6 +16,7 @@ package com.liferay.commerce.account.group.admin.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
+import com.liferay.commerce.account.exception.CommerceAccountGroupNameException;
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
@@ -102,8 +103,16 @@ public class EditCommerceAccountGroupMVCActionCommand
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchAccountGroupException ||
-				e instanceof PrincipalException) {
+			if (e instanceof CommerceAccountGroupNameException) {
+				hideDefaultErrorMessage(actionRequest);
+
+				SessionErrors.add(actionRequest, e.getClass());
+
+				actionResponse.setRenderParameter(
+					"mvcRenderCommandName", "editCommerceAccountGroup");
+			}
+			else if (e instanceof NoSuchAccountGroupException ||
+					 e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
