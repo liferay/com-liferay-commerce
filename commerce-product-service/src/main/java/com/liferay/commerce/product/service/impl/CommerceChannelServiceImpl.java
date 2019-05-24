@@ -18,6 +18,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
@@ -99,6 +100,39 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CHANNELS);
 
 		return commerceChannelLocalService.getCommerceChannels(companyId);
+	}
+
+	@Override
+	public List<CommerceChannel> searchCommerceChannels(long companyId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CHANNELS);
+
+		return commerceChannelLocalService.searchCommerceChannels(companyId);
+	}
+
+	@Override
+	public List<CommerceChannel> searchCommerceChannels(
+			long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CHANNELS);
+
+		return commerceChannelLocalService.searchCommerceChannels(
+			companyId, keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceChannelsCount(long companyId, String keywords)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CHANNELS);
+
+		return commerceChannelLocalService.searchCommerceChannelsCount(
+			companyId, keywords);
 	}
 
 	@Override

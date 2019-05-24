@@ -47,4 +47,27 @@ public class CPUtil {
 		return sort;
 	}
 
+	public static Sort getCommerceChannelSort(
+		String orderByCol, String orderByType) {
+
+		boolean reverse = true;
+
+		if (orderByType.equals("asc")) {
+			reverse = false;
+		}
+
+		Sort sort = null;
+
+		if (orderByCol.equals("name")) {
+			sort = SortFactoryUtil.create(
+				Field.NAME, Sort.STRING_TYPE, reverse);
+		}
+		else if (orderByCol.equals("modified-date")) {
+			sort = SortFactoryUtil.create(
+				Field.MODIFIED_DATE, Sort.STRING_TYPE, reverse);
+		}
+
+		return sort;
+	}
+
 }
