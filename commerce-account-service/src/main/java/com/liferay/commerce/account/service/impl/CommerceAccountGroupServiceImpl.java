@@ -14,11 +14,16 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -36,6 +41,10 @@ public class CommerceAccountGroupServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.ADD_ACCOUNT_GROUP);
+
 		return commerceAccountGroupLocalService.addCommerceAccountGroup(
 			name, type, externalReferenceCode, serviceContext);
 	}
@@ -43,6 +52,9 @@ public class CommerceAccountGroupServiceImpl
 	@Override
 	public void deleteCommerceAccountGroup(long commerceAccountGroupId)
 		throws PortalException {
+
+		_commerceAccountGroupModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountGroupId, ActionKeys.DELETE);
 
 		commerceAccountGroupLocalService.deleteCommerceAccountGroup(
 			commerceAccountGroupId);
@@ -52,6 +64,9 @@ public class CommerceAccountGroupServiceImpl
 	public CommerceAccountGroup getCommerceAccountGroup(
 			long commerceAccountGroupId)
 		throws PortalException {
+
+		_commerceAccountGroupModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountGroupId, ActionKeys.VIEW);
 
 		return commerceAccountGroupLocalService.getCommerceAccountGroup(
 			commerceAccountGroupId);
@@ -63,6 +78,10 @@ public class CommerceAccountGroupServiceImpl
 			OrderByComparator<CommerceAccountGroup> orderByComparator)
 		throws PortalException {
 
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS);
+
 		return commerceAccountGroupLocalService.getCommerceAccountGroups(
 			companyId, start, end, orderByComparator);
 	}
@@ -70,6 +89,10 @@ public class CommerceAccountGroupServiceImpl
 	@Override
 	public int getCommerceAccountGroupsCount(long companyId)
 		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS);
 
 		return commerceAccountGroupLocalService.getCommerceAccountGroupsCount(
 			companyId);
@@ -80,6 +103,10 @@ public class CommerceAccountGroupServiceImpl
 			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS);
+
 		return commerceAccountGroupLocalService.searchCommerceAccountGroups(
 			companyId, keywords, start, end, sort);
 	}
@@ -87,6 +114,10 @@ public class CommerceAccountGroupServiceImpl
 	@Override
 	public int searchCommerceAccountsGroupCount(long companyId, String keywords)
 		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS);
 
 		return commerceAccountGroupLocalService.
 			searchCommerceAccountsGroupCount(companyId, keywords);
@@ -98,8 +129,18 @@ public class CommerceAccountGroupServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		_commerceAccountGroupModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountGroupId, ActionKeys.UPDATE);
+
 		return commerceAccountGroupLocalService.updateCommerceAccountGroup(
 			commerceAccountGroupId, name, serviceContext);
 	}
+
+	private static volatile ModelResourcePermission<CommerceAccountGroup>
+		_commerceAccountGroupModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommerceAccountGroupServiceImpl.class,
+				"_commerceAccountGroupModelResourcePermission",
+				CommerceAccountGroup.class);
 
 }
