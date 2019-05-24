@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.DuplicateCommerceChannelSiteGroupIdException;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
@@ -37,7 +38,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
@@ -62,9 +62,7 @@ public class CommerceChannelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		if (ArrayUtil.contains(getUsedSiteGroupIds(), siteGroupId)) {
-			throw new PortalException();
-		}
+		validate(siteGroupId);
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
@@ -190,12 +188,6 @@ public class CommerceChannelLocalServiceImpl
 	@Override
 	public List<CommerceChannel> getCommerceChannels(long companyId) {
 		return commerceChannelPersistence.findByCompanyId(companyId);
-	}
-
-	@Override
-	public long[] getUsedSiteGroupIds() {
-		return ArrayUtil.toLongArray(
-			commerceChannelFinder.getUsedSiteGroupIds());
 	}
 
 	@Override
@@ -336,6 +328,12 @@ public class CommerceChannelLocalServiceImpl
 			IndexerRegistryUtil.nullSafeGetIndexer(CommerceChannel.class);
 
 		return GetterUtil.getInteger(indexer.searchCount(searchContext));
+	}
+
+	protected void validate(long siteGroupId) throws PortalException {
+		if (fetchCommerceChannelByGroupId(siteGroupId) != null) {
+			throw new DuplicateCommerceChannelSiteGroupIdException();
+		}
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {

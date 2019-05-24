@@ -29,7 +29,6 @@ page import="com.liferay.commerce.item.selector.web.internal.display.context.Com
 page import="com.liferay.commerce.item.selector.web.internal.display.context.SimpleSiteItemSelectorViewDisplayContext" %><%@
 page import="com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.util.ArrayUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
