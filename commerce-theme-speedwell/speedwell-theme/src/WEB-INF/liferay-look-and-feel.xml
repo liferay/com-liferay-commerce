@@ -5,7 +5,7 @@
 	<compatibility>
 		<version>7.1.0+</version>
 	</compatibility>
-	<theme id="speedweel" name="Speedweel">
+	<theme id="speedwell" name="speedwell">
 		<template-extension>ftl</template-extension>
 		<layout-templates>
 			<custom>
