@@ -43,8 +43,9 @@ public class CommerceDiscountServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.discount.service.impl.CommerceDiscountServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.discount.model.CommerceDiscount addCommerceDiscount(
-		String title, String target, boolean useCouponCode, String couponCode,
-		boolean usePercentage, java.math.BigDecimal maximumDiscountAmount,
+		long groupId, long userId, String title, String target,
+		boolean useCouponCode, String couponCode, boolean usePercentage,
+		java.math.BigDecimal maximumDiscountAmount,
 		java.math.BigDecimal level1, java.math.BigDecimal level2,
 		java.math.BigDecimal level3, java.math.BigDecimal level4,
 		String limitationType, int limitationTimes, boolean active,
@@ -55,13 +56,13 @@ public class CommerceDiscountServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceDiscount(title, target, useCouponCode,
-			couponCode, usePercentage, maximumDiscountAmount, level1, level2,
-			level3, level4, limitationType, limitationTimes, active,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, serviceContext);
+				   .addCommerceDiscount(groupId, userId, title, target,
+			useCouponCode, couponCode, usePercentage, maximumDiscountAmount,
+			level1, level2, level3, level4, limitationType, limitationTimes,
+			active, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, serviceContext);
 	}
 
 	public static void deleteCommerceDiscount(long commerceDiscountId)
@@ -82,27 +83,29 @@ public class CommerceDiscountServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> getCommerceDiscounts(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscount> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceDiscounts(groupId, start, end, orderByComparator);
+				   .getCommerceDiscounts(companyId, start, end,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> getCommerceDiscounts(
-		long groupId, String couponCode)
+		long companyId, String couponCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceDiscounts(groupId, couponCode);
+		return getService().getCommerceDiscounts(companyId, couponCode);
 	}
 
-	public static int getCommerceDiscountsCount(long groupId)
+	public static int getCommerceDiscountsCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceDiscountsCount(groupId);
+		return getService().getCommerceDiscountsCount(companyId);
 	}
 
-	public static int getCommerceDiscountsCount(long groupId, String couponCode)
+	public static int getCommerceDiscountsCount(long companyId,
+		String couponCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceDiscountsCount(groupId, couponCode);
+		return getService().getCommerceDiscountsCount(companyId, couponCode);
 	}
 
 	/**
@@ -115,12 +118,12 @@ public class CommerceDiscountServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.discount.model.CommerceDiscount> searchCommerceDiscounts(
-		long companyId, long groupId, String keywords, int status, int start,
-		int end, com.liferay.portal.kernel.search.Sort sort)
+		long companyId, String keywords, int status, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCommerceDiscounts(companyId, groupId, keywords,
-			status, start, end, sort);
+				   .searchCommerceDiscounts(companyId, keywords, status, start,
+			end, sort);
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscount updateCommerceDiscount(

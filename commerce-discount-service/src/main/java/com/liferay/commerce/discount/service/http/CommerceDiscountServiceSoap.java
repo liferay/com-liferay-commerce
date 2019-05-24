@@ -66,8 +66,9 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CommerceDiscountServiceSoap {
 	public static com.liferay.commerce.discount.model.CommerceDiscountSoap addCommerceDiscount(
-		String title, String target, boolean useCouponCode, String couponCode,
-		boolean usePercentage, java.math.BigDecimal maximumDiscountAmount,
+		long groupId, long userId, String title, String target,
+		boolean useCouponCode, String couponCode, boolean usePercentage,
+		java.math.BigDecimal maximumDiscountAmount,
 		java.math.BigDecimal level1, java.math.BigDecimal level2,
 		java.math.BigDecimal level3, java.math.BigDecimal level4,
 		String limitationType, int limitationTimes, boolean active,
@@ -78,13 +79,13 @@ public class CommerceDiscountServiceSoap {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.commerce.discount.model.CommerceDiscount returnValue = CommerceDiscountServiceUtil.addCommerceDiscount(title,
-					target, useCouponCode, couponCode, usePercentage,
-					maximumDiscountAmount, level1, level2, level3, level4,
-					limitationType, limitationTimes, active, displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
+			com.liferay.commerce.discount.model.CommerceDiscount returnValue = CommerceDiscountServiceUtil.addCommerceDiscount(groupId,
+					userId, title, target, useCouponCode, couponCode,
+					usePercentage, maximumDiscountAmount, level1, level2,
+					level3, level4, limitationType, limitationTimes, active,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, serviceContext);
 
 			return com.liferay.commerce.discount.model.CommerceDiscountSoap.toSoapModel(returnValue);
@@ -137,12 +138,12 @@ public class CommerceDiscountServiceSoap {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountSoap[] getCommerceDiscounts(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscount> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> returnValue =
-				CommerceDiscountServiceUtil.getCommerceDiscounts(groupId,
+				CommerceDiscountServiceUtil.getCommerceDiscounts(companyId,
 					start, end, orderByComparator);
 
 			return com.liferay.commerce.discount.model.CommerceDiscountSoap.toSoapModels(returnValue);
@@ -155,10 +156,10 @@ public class CommerceDiscountServiceSoap {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountSoap[] getCommerceDiscounts(
-		long groupId, String couponCode) throws RemoteException {
+		long companyId, String couponCode) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> returnValue =
-				CommerceDiscountServiceUtil.getCommerceDiscounts(groupId,
+				CommerceDiscountServiceUtil.getCommerceDiscounts(companyId,
 					couponCode);
 
 			return com.liferay.commerce.discount.model.CommerceDiscountSoap.toSoapModels(returnValue);
@@ -170,10 +171,10 @@ public class CommerceDiscountServiceSoap {
 		}
 	}
 
-	public static int getCommerceDiscountsCount(long groupId)
+	public static int getCommerceDiscountsCount(long companyId)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId);
+			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(companyId);
 
 			return returnValue;
 		}
@@ -184,10 +185,10 @@ public class CommerceDiscountServiceSoap {
 		}
 	}
 
-	public static int getCommerceDiscountsCount(long groupId, String couponCode)
-		throws RemoteException {
+	public static int getCommerceDiscountsCount(long companyId,
+		String couponCode) throws RemoteException {
 		try {
-			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(groupId,
+			int returnValue = CommerceDiscountServiceUtil.getCommerceDiscountsCount(companyId,
 					couponCode);
 
 			return returnValue;

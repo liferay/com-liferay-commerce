@@ -55,8 +55,9 @@ public class CommerceDiscountLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscount addCommerceDiscount(
-		String title, String target, boolean useCouponCode, String couponCode,
-		boolean usePercentage, java.math.BigDecimal maximumDiscountAmount,
+		long groupId, long userId, String title, String target,
+		boolean useCouponCode, String couponCode, boolean usePercentage,
+		java.math.BigDecimal maximumDiscountAmount,
 		java.math.BigDecimal level1, java.math.BigDecimal level2,
 		java.math.BigDecimal level3, java.math.BigDecimal level4,
 		String limitationType, int limitationTimes, boolean active,
@@ -67,13 +68,13 @@ public class CommerceDiscountLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceDiscount(title, target, useCouponCode,
-			couponCode, usePercentage, maximumDiscountAmount, level1, level2,
-			level3, level4, limitationType, limitationTimes, active,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, serviceContext);
+				   .addCommerceDiscount(groupId, userId, title, target,
+			useCouponCode, couponCode, usePercentage, maximumDiscountAmount,
+			level1, level2, level3, level4, limitationType, limitationTimes,
+			active, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, serviceContext);
 	}
 
 	public static void checkCommerceDiscounts()
@@ -118,9 +119,9 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().deleteCommerceDiscount(commerceDiscountId);
 	}
 
-	public static void deleteCommerceDiscounts(long groupId)
+	public static void deleteCommerceDiscounts(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCommerceDiscounts(groupId);
+		getService().deleteCommerceDiscounts(companyId);
 	}
 
 	/**
@@ -275,15 +276,16 @@ public class CommerceDiscountLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> getCommerceDiscounts(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscount> orderByComparator) {
-		return getService()
-				   .getCommerceDiscounts(groupId, start, end, orderByComparator);
+		long companyId, String couponCode) {
+		return getService().getCommerceDiscounts(companyId, couponCode);
 	}
 
 	public static java.util.List<com.liferay.commerce.discount.model.CommerceDiscount> getCommerceDiscounts(
-		long groupId, String couponCode) {
-		return getService().getCommerceDiscounts(groupId, couponCode);
+		long[] groupIds, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.discount.model.CommerceDiscount> orderByComparator) {
+		return getService()
+				   .getCommerceDiscounts(groupIds, companyId, start, end,
+			orderByComparator);
 	}
 
 	/**
@@ -326,12 +328,13 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().getCommerceDiscountsCount();
 	}
 
-	public static int getCommerceDiscountsCount(long groupId) {
-		return getService().getCommerceDiscountsCount(groupId);
+	public static int getCommerceDiscountsCount(long companyId,
+		String couponCode) {
+		return getService().getCommerceDiscountsCount(companyId, couponCode);
 	}
 
-	public static int getCommerceDiscountsCount(long groupId, String couponCode) {
-		return getService().getCommerceDiscountsCount(groupId, couponCode);
+	public static int getCommerceDiscountsCount(long[] groupIds, long companyId) {
+		return getService().getCommerceDiscountsCount(groupIds, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -366,11 +369,11 @@ public class CommerceDiscountLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.discount.model.CommerceDiscount> searchCommerceDiscounts(
-		long companyId, long groupId, String keywords, int status, int start,
-		int end, com.liferay.portal.kernel.search.Sort sort)
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCommerceDiscounts(companyId, groupId, keywords,
+				   .searchCommerceDiscounts(companyId, groupIds, keywords,
 			status, start, end, sort);
 	}
 
