@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce Product Options Web
 Bundle-SymbolicName: com.liferay.commerce.product.options.web
-Bundle-Version: 1.0.14
+Bundle-Version: 1.0.15
 Provide-Capability:\
 	soy;\
 		type="options-web";\
