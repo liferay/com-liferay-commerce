@@ -26,6 +26,8 @@ import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.util.comparator.CommerceDiscountCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.commerce.discount.web.internal.display.context.util.CommerceDiscountRequestHelper;
 import com.liferay.commerce.discount.web.internal.util.CommerceDiscountPortletUtil;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -42,7 +44,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -69,6 +71,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceDiscountDisplayContext {
 
 	public CommerceDiscountDisplayContext(
+		CommerceCatalogService commerceCatalogService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		ModelResourcePermission<CommerceDiscount>
 			commerceDiscountModelResourcePermission,
@@ -76,9 +79,9 @@ public class CommerceDiscountDisplayContext {
 		CommerceDiscountTargetRegistry commerceDiscountTargetRegistry,
 		CommerceDiscountCommerceAccountGroupRelService
 			commerceDiscountCommerceAccountGroupRelService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
 
+		_commerceCatalogService = commerceCatalogService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceDiscountModelResourcePermission =
 			commerceDiscountModelResourcePermission;
@@ -89,12 +92,15 @@ public class CommerceDiscountDisplayContext {
 
 		this.itemSelector = itemSelector;
 
-		_portletResourcePermission = portletResourcePermission;
-
 		commerceDiscountRequestHelper = new CommerceDiscountRequestHelper(
 			httpServletRequest);
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			httpServletRequest);
+	}
+
+	public List<CommerceCatalog> getCommerceCatalogs() throws PortalException {
+		return _commerceCatalogService.searchCommerceCatalogs(
+			commerceDiscountRequestHelper.getCompanyId());
 	}
 
 	public CommerceDiscount getCommerceDiscount() throws PortalException {
@@ -275,8 +281,6 @@ public class CommerceDiscountDisplayContext {
 			new EmptyOnClickRowChecker(
 				commerceDiscountRequestHelper.getLiferayPortletResponse()));
 
-		long groupId = commerceDiscountRequestHelper.getScopeGroupId();
-
 		if (isSearch()) {
 			Sort sort = CommerceDiscountPortletUtil.getCommerceDiscountSort(
 				_searchContainer.getOrderByCol(),
@@ -284,24 +288,24 @@ public class CommerceDiscountDisplayContext {
 
 			BaseModelSearchResult<CommerceDiscount> baseModelSearchResult =
 				_commerceDiscountService.searchCommerceDiscounts(
-					commerceDiscountRequestHelper.getCompanyId(), groupId,
-					getKeywords(), WorkflowConstants.STATUS_ANY,
-					_searchContainer.getStart(), _searchContainer.getEnd(),
-					sort);
+					commerceDiscountRequestHelper.getCompanyId(), getKeywords(),
+					WorkflowConstants.STATUS_ANY, _searchContainer.getStart(),
+					_searchContainer.getEnd(), sort);
 
 			_searchContainer.setTotal(baseModelSearchResult.getLength());
 			_searchContainer.setResults(baseModelSearchResult.getBaseModels());
 		}
 		else {
 			int total = _commerceDiscountService.getCommerceDiscountsCount(
-				groupId);
+				commerceDiscountRequestHelper.getCompanyId());
 
 			_searchContainer.setTotal(total);
 
 			List<CommerceDiscount> results =
 				_commerceDiscountService.getCommerceDiscounts(
-					groupId, _searchContainer.getStart(),
-					_searchContainer.getEnd(), orderByComparator);
+					commerceDiscountRequestHelper.getCompanyId(),
+					_searchContainer.getStart(), _searchContainer.getEnd(),
+					orderByComparator);
 
 			_searchContainer.setResults(results);
 		}
@@ -324,9 +328,22 @@ public class CommerceDiscountDisplayContext {
 	}
 
 	public boolean hasPermission(String actionId) {
-		return _portletResourcePermission.contains(
-			commerceDiscountRequestHelper.getPermissionChecker(),
-			commerceDiscountRequestHelper.getScopeGroupId(), actionId);
+		return PortalPermissionUtil.contains(
+			commerceDiscountRequestHelper.getPermissionChecker(), actionId);
+	}
+
+	public boolean isSelectedCatalog(CommerceCatalog commerceCatalog)
+		throws PortalException {
+
+		CommerceDiscount commerceDiscount = getCommerceDiscount();
+
+		if (commerceCatalog.getCommerceCatalogGroupId() ==
+				commerceDiscount.getGroupId()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public BigDecimal round(BigDecimal value) {
@@ -428,6 +445,7 @@ public class CommerceDiscountDisplayContext {
 	protected final ItemSelector itemSelector;
 	protected final PortalPreferences portalPreferences;
 
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private CommerceDiscount _commerceDiscount;
 	private final CommerceDiscountCommerceAccountGroupRelService
@@ -438,7 +456,6 @@ public class CommerceDiscountDisplayContext {
 	private final CommerceDiscountTargetRegistry
 		_commerceDiscountTargetRegistry;
 	private String _keywords;
-	private final PortletResourcePermission _portletResourcePermission;
 	private SearchContainer<CommerceDiscount> _searchContainer;
 
 }
