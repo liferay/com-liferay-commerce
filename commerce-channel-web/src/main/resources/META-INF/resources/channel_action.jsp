@@ -22,6 +22,8 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceChannel commerceChannel = (CommerceChannel)row.getObject();
+
+long commerceChannelId = commerceChannel.getCommerceChannelId();
 %>
 
 <liferay-ui:icon-menu
@@ -32,17 +34,36 @@ CommerceChannel commerceChannel = (CommerceChannel)row.getObject();
 	showWhenSingleIcon="<%= true %>"
 >
 	<liferay-ui:icon
-		message="view"
+		message='<%= commerceChannelDisplayContext.hasPermission(commerceChannelId, ActionKeys.UPDATE) ? "edit" : "view" %>'
 		url="<%= commerceChannelDisplayContext.getChannelURL(commerceChannel) %>"
 	/>
 
-	<portlet:actionURL name="editCommerceChannel" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="commerceChannelId" value="<%= String.valueOf(commerceChannel.getCommerceChannelId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= commerceChannelDisplayContext.hasPermission(commerceChannelId, ActionKeys.DELETE) %>">
+		<portlet:actionURL name="editCommerceChannel" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="commerceChannelId" value="<%= String.valueOf(commerceChannelId) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		message="delete"
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			message="delete"
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= commerceChannelDisplayContext.hasPermission(commerceChannelId, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= CommerceChannel.class.getName() %>"
+			modelResourceDescription="<%= commerceChannel.getName() %>"
+			resourcePrimKey="<%= String.valueOf(commerceChannelId) %>"
+			var="permissionsChannelURL"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+		/>
+
+		<liferay-ui:icon
+			message="permissions"
+			method="get"
+			url="<%= permissionsChannelURL %>"
+			useDialog="<%= true %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
