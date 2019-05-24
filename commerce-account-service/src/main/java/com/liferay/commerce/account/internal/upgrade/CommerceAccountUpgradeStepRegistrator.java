@@ -14,9 +14,12 @@
 
 package com.liferay.commerce.account.internal.upgrade;
 
+import com.liferay.commerce.account.internal.upgrade.v1_1_0.CommerceAccountUpgradeProcess;
+import com.liferay.commerce.account.internal.upgrade.v1_2_0.CommerceAccountGroupCommerceAccountRelUpgradeProcess;
+import com.liferay.commerce.account.internal.upgrade.v1_2_0.CommerceAccountGroupRelUpgradeProcess;
+import com.liferay.commerce.account.internal.upgrade.v1_2_0.CommerceAccountGroupUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -36,7 +39,13 @@ public class CommerceAccountUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
-			new DummyUpgradeStep());
+			new CommerceAccountUpgradeProcess());
+
+		registry.register(
+			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
+			new CommerceAccountGroupCommerceAccountRelUpgradeProcess(),
+			new CommerceAccountGroupRelUpgradeProcess(),
+			new CommerceAccountGroupUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE ACCOUNT UPGRADE STEP REGISTRATOR FINISHED");
@@ -46,6 +55,8 @@ public class CommerceAccountUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_0_0 = "1.0.0";
 
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
+
+	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountUpgradeStepRegistrator.class);
