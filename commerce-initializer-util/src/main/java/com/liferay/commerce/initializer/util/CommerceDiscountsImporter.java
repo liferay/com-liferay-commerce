@@ -20,6 +20,8 @@ import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalService;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
@@ -68,6 +70,12 @@ public class CommerceDiscountsImporter {
 
 		// Add Commerce Discount
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		String title = jsonObject.getString("title");
 
 		boolean useCouponCode = jsonObject.getBoolean("useCouponCode");
@@ -80,7 +88,9 @@ public class CommerceDiscountsImporter {
 		boolean active = jsonObject.getBoolean("active");
 
 		return _commerceDiscountLocalService.addCommerceDiscount(
-			title, CommerceDiscountConstants.TARGET_CATEGORIES, useCouponCode,
+			commerceCatalog.getCommerceCatalogGroupId(),
+			serviceContext.getUserId(), title,
+			CommerceDiscountConstants.TARGET_CATEGORIES, useCouponCode,
 			couponCode, usePercentage, maximumDiscountAmount, level1,
 			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, active, 1,
@@ -128,6 +138,9 @@ public class CommerceDiscountsImporter {
 
 	@Reference
 	private AssetCategoryLocalService _assetCategoryLocalService;
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceDiscountLocalService _commerceDiscountLocalService;
