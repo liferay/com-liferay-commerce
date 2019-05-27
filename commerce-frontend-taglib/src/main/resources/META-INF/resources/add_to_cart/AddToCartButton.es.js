@@ -4,6 +4,8 @@ import Soy, {Config} from 'metal-soy';
 
 import '../quantity_selector/QuantitySelector.es';
 
+let notificationDidShow = false;
+
 const selectInput = (element) => {
 	const inputBox = element.querySelector('input');
 	const selectBox = element.querySelector('select');
@@ -18,7 +20,7 @@ const selectInput = (element) => {
 };
 
 function showNotification(message, type) {
-	AUI().use(
+	!notificationDidShow && AUI().use(
 		'liferay-notification',
 		() => {
 			new Liferay.Notification(
@@ -37,6 +39,12 @@ function showNotification(message, type) {
 			);
 		}
 	);
+
+	notificationDidShow = true;
+
+	setTimeout(() => {
+		notificationDidShow = false;
+	}, 500);
 }
 
 function resetInputQuantity() {
