@@ -10,10 +10,6 @@
 
 		<column name="commercePriceEntryId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -40,9 +36,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -103,9 +96,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -115,22 +105,28 @@
 		<finder name="ParentCommercePriceListId" return-type="CommercePriceList">
 			<finder-column name="parentCommercePriceListId" />
 		</finder>
-		<finder name="G_S" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="status" />
-		</finder>
-		<finder name="G_NotS" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column comparator="!=" name="status" />
+		<finder name="G_C" return-type="Collection">
+			<finder-column arrayable-operator="OR" name="groupId" />
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="LtD_S" return-type="Collection">
 			<finder-column comparator="&lt;" name="displayDate" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_C_S" return-type="Collection">
+			<finder-column arrayable-operator="OR" name="groupId" />
+			<finder-column name="companyId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_C_NotS" return-type="Collection">
+			<finder-column arrayable-operator="OR" name="groupId" />
+			<finder-column name="companyId" />
+			<finder-column comparator="!=" name="status" />
+		</finder>
 
 		<!-- References -->
 
-		<reference entity="Group" package-path="com.liferay.portal" />
+		<reference entity="Company" package-path="com.liferay.portal" />
 		<reference entity="WorkflowInstanceLink" package-path="com.liferay.portal" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
@@ -139,10 +135,6 @@
 		<!-- PK fields -->
 
 		<column name="commercePriceListAccountRelId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -185,10 +177,6 @@
 
 		<column db-name="CPLCommerceAccountGroupRelId" name="commercePriceListCommerceAccountGroupRelId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -230,10 +218,6 @@
 
 		<column name="commerceTierPriceEntryId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -258,9 +242,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -284,6 +265,7 @@
 		<exception>CommercePriceListCurrency</exception>
 		<exception>CommercePriceListDisplayDate</exception>
 		<exception>CommercePriceListExpirationDate</exception>
+		<exception>CommercePriceListParentPriceListGroupId</exception>
 		<exception>DuplicateCommercePriceEntry</exception>
 		<exception>DuplicateCommercePriceList</exception>
 		<exception>DuplicateCommerceTierPriceEntry</exception>
