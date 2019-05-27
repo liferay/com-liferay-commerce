@@ -15,7 +15,6 @@
 package com.liferay.commerce.price.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -63,15 +61,13 @@ public class CommercePriceEntryDisplayContext
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
 		CPInstanceService cpInstanceService, ItemSelector itemSelector,
-		HttpServletRequest httpServletRequest,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
 		_commercePriceEntryService = commercePriceEntryService;
 		_cpInstanceService = cpInstanceService;
 		_itemSelector = itemSelector;
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public CommercePriceEntry getCommercePriceEntry() throws PortalException {
@@ -186,11 +182,9 @@ public class CommercePriceEntryDisplayContext
 			BaseModelSearchResult<CommercePriceEntry>
 				commercePriceListBaseModelSearchResult =
 					_commercePriceEntryService.searchCommercePriceEntries(
-						themeDisplay.getCompanyId(),
-						themeDisplay.getScopeGroupId(),
-						getCommercePriceListId(), getKeywords(),
-						searchContainer.getStart(), searchContainer.getEnd(),
-						sort);
+						themeDisplay.getCompanyId(), getCommercePriceListId(),
+						getKeywords(), searchContainer.getStart(),
+						searchContainer.getEnd(), sort);
 
 			searchContainer.setTotal(
 				commercePriceListBaseModelSearchResult.getLength());
@@ -212,16 +206,6 @@ public class CommercePriceEntryDisplayContext
 		}
 
 		return searchContainer;
-	}
-
-	public boolean hasManageCommercePriceListPermission() {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
 	protected long[] getCheckedCPInstanceIds() throws PortalException {
@@ -256,6 +240,5 @@ public class CommercePriceEntryDisplayContext
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final CPInstanceService _cpInstanceService;
 	private final ItemSelector _itemSelector;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }

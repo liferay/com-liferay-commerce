@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.price.list.web.internal.portlet.action;
 
-import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceEntryDisplayContext;
@@ -22,7 +21,6 @@ import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActio
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -60,8 +58,7 @@ public class EditCommercePriceEntryMVCRenderCommand
 		CommercePriceEntryDisplayContext commercePriceEntryDisplayContext =
 			new CommercePriceEntryDisplayContext(
 				_commercePriceListActionHelper, _commercePriceEntryService,
-				_cpInstanceService, _itemSelector, httpServletRequest,
-				_portletResourcePermission);
+				_cpInstanceService, _itemSelector, httpServletRequest);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commercePriceEntryDisplayContext);
@@ -83,10 +80,5 @@ public class EditCommercePriceEntryMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommercePriceListConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 }
