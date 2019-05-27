@@ -246,7 +246,7 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 				commerceCatalog = commerceCatalogs.get(0);
 			}
 
-			// Commerce Discount
+			// Commerce discount
 
 			commerceDiscount = _commerceDiscountService.addCommerceDiscount(
 				commerceCatalog.getCommerceCatalogGroupId(),

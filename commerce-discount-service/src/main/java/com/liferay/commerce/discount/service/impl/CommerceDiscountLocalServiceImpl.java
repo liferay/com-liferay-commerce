@@ -239,6 +239,13 @@ public class CommerceDiscountLocalServiceImpl
 
 	@Override
 	public List<CommerceDiscount> getCommerceDiscounts(
+		long companyId, String couponCode) {
+
+		return commerceDiscountPersistence.findByC_C(companyId, couponCode);
+	}
+
+	@Override
+	public List<CommerceDiscount> getCommerceDiscounts(
 		long[] groupIds, long companyId, int start, int end,
 		OrderByComparator<CommerceDiscount> orderByComparator) {
 
@@ -247,20 +254,13 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceDiscount> getCommerceDiscounts(
-		long companyId, String couponCode) {
-
-		return commerceDiscountPersistence.findByC_C(companyId, couponCode);
+	public int getCommerceDiscountsCount(long companyId, String couponCode) {
+		return commerceDiscountPersistence.countByC_C(companyId, couponCode);
 	}
 
 	@Override
 	public int getCommerceDiscountsCount(long[] groupIds, long companyId) {
 		return commerceDiscountPersistence.countByG_C(groupIds, companyId);
-	}
-
-	@Override
-	public int getCommerceDiscountsCount(long companyId, String couponCode) {
-		return commerceDiscountPersistence.countByC_C(companyId, couponCode);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
