@@ -97,8 +97,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 			BaseModelSearchResult<CommercePriceList>
 				commercePriceListBaseModelSearchResult =
 					_commercePriceListService.searchCommercePriceLists(
-						themeDisplay.getCompanyId(),
-						themeDisplay.getScopeGroupId(), getKeywords(),
+						themeDisplay.getCompanyId(), getKeywords(),
 						WorkflowConstants.STATUS_APPROVED,
 						searchContainer.getStart(), searchContainer.getEnd(),
 						sort);
@@ -111,7 +110,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 		else {
 			List<CommercePriceList> results =
 				_commercePriceListService.getCommercePriceLists(
-					themeDisplay.getScopeGroupId(),
+					themeDisplay.getCompanyId(),
 					WorkflowConstants.STATUS_APPROVED,
 					searchContainer.getStart(), searchContainer.getEnd(),
 					orderByComparator);
@@ -119,8 +118,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 			searchContainer.setResults(results);
 
 			int total = _commercePriceListService.getCommercePriceListsCount(
-				themeDisplay.getScopeGroupId(),
-				WorkflowConstants.STATUS_APPROVED);
+				themeDisplay.getCompanyId(), WorkflowConstants.STATUS_APPROVED);
 
 			searchContainer.setTotal(total);
 		}

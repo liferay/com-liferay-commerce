@@ -16,6 +16,7 @@ package com.liferay.commerce.price.list.test.util;
 
 import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
+import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalServiceUtil;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServiceUtil;
@@ -43,9 +44,12 @@ public class CommerceTierPriceEntryTestUtil {
 			CommercePriceEntryLocalServiceUtil.getCommercePriceEntry(
 				commercePriceEntryId);
 
+		CommercePriceList commercePriceList =
+			commercePriceEntry.getCommercePriceList();
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
-				commercePriceEntry.getGroupId());
+				commercePriceList.getGroupId());
 
 		return CommerceTierPriceEntryLocalServiceUtil.addCommerceTierPriceEntry(
 			commercePriceEntryId, externalReferenceCode,
@@ -84,7 +88,10 @@ public class CommerceTierPriceEntryTestUtil {
 					commercePriceEntryId);
 
 			if (commercePriceEntry != null) {
-				return commercePriceEntry.getGroupId();
+				CommercePriceList commercePriceList =
+					commercePriceEntry.getCommercePriceList();
+
+				return commercePriceList.getGroupId();
 			}
 		}
 
@@ -95,7 +102,10 @@ public class CommerceTierPriceEntryTestUtil {
 					priceEntryExternalReferenceCode);
 
 			if (commercePriceEntry != null) {
-				return commercePriceEntry.getGroupId();
+				CommercePriceList commercePriceList =
+					commercePriceEntry.getCommercePriceList();
+
+				return commercePriceList.getGroupId();
 			}
 		}
 

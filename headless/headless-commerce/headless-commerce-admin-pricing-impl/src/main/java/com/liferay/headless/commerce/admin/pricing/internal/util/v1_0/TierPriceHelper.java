@@ -16,6 +16,7 @@ package com.liferay.headless.commerce.admin.pricing.internal.util.v1_0;
 
 import com.liferay.commerce.price.list.exception.NoSuchTierPriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
+import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
@@ -123,8 +124,14 @@ public class TierPriceHelper {
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			getCommerceTierPriceEntry(id, companyId);
 
+		CommercePriceEntry commercePriceEntry =
+			commerceTierPriceEntry.getCommercePriceEntry();
+
+		CommercePriceList commercePriceList =
+			commercePriceEntry.getCommercePriceList();
+
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commerceTierPriceEntry.getGroupId());
+			commercePriceList.getGroupId());
 
 		_commerceTierPriceEntryService.updateCommerceTierPriceEntry(
 			commerceTierPriceEntry.getCommerceTierPriceEntryId(),
@@ -147,8 +154,11 @@ public class TierPriceHelper {
 			_priceEntryHelper.getCommercePriceEntry(
 				commercePriceEntryId, company.getCompanyId());
 
+		CommercePriceList commercePriceList =
+			commercePriceEntry.getCommercePriceList();
+
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commercePriceEntry.getGroupId());
+			commercePriceList.getGroupId());
 
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			_commerceTierPriceEntryService.upsertCommerceTierPriceEntry(
