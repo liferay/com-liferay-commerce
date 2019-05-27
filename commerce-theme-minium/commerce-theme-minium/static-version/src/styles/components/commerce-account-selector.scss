@@ -16,10 +16,13 @@
 	&__image {
 		grid-area: image;
 		position: relative;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
 
 		img {
-			border-radius: 50%;
 			width: 100%;
+			height: auto;
 		}
 
 		&:empty {
