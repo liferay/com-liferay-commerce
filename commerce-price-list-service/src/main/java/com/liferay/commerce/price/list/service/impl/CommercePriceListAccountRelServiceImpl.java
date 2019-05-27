@@ -15,14 +15,11 @@
 package com.liferay.commerce.price.list.service.impl;
 
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
-import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
-import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.service.base.CommercePriceListAccountRelServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import java.util.List;
 
@@ -38,12 +35,8 @@ public class CommercePriceListAccountRelServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CommercePriceList commercePriceList =
-			commercePriceListLocalService.getCommercePriceList(
-				commercePriceListId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commercePriceList.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListAccountRelLocalService.
@@ -56,16 +49,8 @@ public class CommercePriceListAccountRelServiceImpl
 			long commercePriceListAccountRelId)
 		throws PortalException {
 
-		CommercePriceListAccountRel commercePriceListAccountRel =
-			commercePriceListAccountRelLocalService.
-				fetchCommercePriceListAccountRel(commercePriceListAccountRelId);
-
-		if (commercePriceListAccountRel == null) {
-			return;
-		}
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commercePriceListAccountRel.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		commercePriceListAccountRelLocalService.
@@ -77,19 +62,13 @@ public class CommercePriceListAccountRelServiceImpl
 			long commercePriceListId, long commerceAccountId)
 		throws PortalException {
 
-		CommercePriceListAccountRel commercePriceListAccountRel =
-			commercePriceListAccountRelLocalService.
-				fetchCommercePriceListAccountRel(
-					commercePriceListId, commerceAccountId);
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
-		if (commercePriceListAccountRel != null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(),
-				commercePriceListAccountRel.getGroupId(),
-				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
-		}
-
-		return commercePriceListAccountRel;
+		return commercePriceListAccountRelLocalService.
+			fetchCommercePriceListAccountRel(
+				commercePriceListId, commerceAccountId);
 	}
 
 	@Override
@@ -97,23 +76,12 @@ public class CommercePriceListAccountRelServiceImpl
 			long commercePriceListId)
 		throws PortalException {
 
-		CommercePriceList commercePriceList =
-			commercePriceListLocalService.getCommercePriceList(
-				commercePriceListId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commercePriceList.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListAccountRelLocalService.
 			getCommercePriceListAccountRels(commercePriceListId);
 	}
-
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommercePriceListAccountRelServiceImpl.class,
-				"_portletResourcePermission",
-				CommercePriceListConstants.RESOURCE_NAME);
 
 }
