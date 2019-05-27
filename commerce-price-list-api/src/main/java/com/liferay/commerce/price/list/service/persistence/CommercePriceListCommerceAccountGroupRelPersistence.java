@@ -180,58 +180,6 @@ public interface CommercePriceListCommerceAccountGroupRelPersistence
 	public int countByUuid(String uuid);
 
 	/**
-	* Returns the commerce price list commerce account group rel where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchPriceListCommerceAccountGroupRelException} if it could not be found.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce price list commerce account group rel
-	* @throws NoSuchPriceListCommerceAccountGroupRelException if a matching commerce price list commerce account group rel could not be found
-	*/
-	public CommercePriceListCommerceAccountGroupRel findByUUID_G(String uuid,
-		long groupId) throws NoSuchPriceListCommerceAccountGroupRelException;
-
-	/**
-	* Returns the commerce price list commerce account group rel where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce price list commerce account group rel, or <code>null</code> if a matching commerce price list commerce account group rel could not be found
-	*/
-	public CommercePriceListCommerceAccountGroupRel fetchByUUID_G(String uuid,
-		long groupId);
-
-	/**
-	* Returns the commerce price list commerce account group rel where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce price list commerce account group rel, or <code>null</code> if a matching commerce price list commerce account group rel could not be found
-	*/
-	public CommercePriceListCommerceAccountGroupRel fetchByUUID_G(String uuid,
-		long groupId, boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce price list commerce account group rel where uuid = &#63; and groupId = &#63; from the database.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the commerce price list commerce account group rel that was removed
-	*/
-	public CommercePriceListCommerceAccountGroupRel removeByUUID_G(
-		String uuid, long groupId)
-		throws NoSuchPriceListCommerceAccountGroupRelException;
-
-	/**
-	* Returns the number of commerce price list commerce account group rels where uuid = &#63; and groupId = &#63;.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the number of matching commerce price list commerce account group rels
-	*/
-	public int countByUUID_G(String uuid, long groupId);
-
-	/**
 	* Returns all the commerce price list commerce account group rels where uuid = &#63; and companyId = &#63;.
 	*
 	* @param uuid the uuid

@@ -56,7 +56,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -131,8 +130,6 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 
 		newCommercePriceListCommerceAccountGroupRel.setUuid(RandomTestUtil.randomString());
 
-		newCommercePriceListCommerceAccountGroupRel.setGroupId(RandomTestUtil.nextLong());
-
 		newCommercePriceListCommerceAccountGroupRel.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommercePriceListCommerceAccountGroupRel.setUserId(RandomTestUtil.nextLong());
@@ -161,8 +158,6 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 			newCommercePriceListCommerceAccountGroupRel.getUuid());
 		Assert.assertEquals(existingCommercePriceListCommerceAccountGroupRel.getCommercePriceListCommerceAccountGroupRelId(),
 			newCommercePriceListCommerceAccountGroupRel.getCommercePriceListCommerceAccountGroupRelId());
-		Assert.assertEquals(existingCommercePriceListCommerceAccountGroupRel.getGroupId(),
-			newCommercePriceListCommerceAccountGroupRel.getGroupId());
 		Assert.assertEquals(existingCommercePriceListCommerceAccountGroupRel.getCompanyId(),
 			newCommercePriceListCommerceAccountGroupRel.getCompanyId());
 		Assert.assertEquals(existingCommercePriceListCommerceAccountGroupRel.getUserId(),
@@ -196,15 +191,6 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 		_persistence.countByUuid("null");
 
 		_persistence.countByUuid((String)null);
-	}
-
-	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
 	}
 
 	@Test
@@ -259,10 +245,10 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 	protected OrderByComparator<CommercePriceListCommerceAccountGroupRel> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPLCommerceGroupAccountRel",
 			"uuid", true, "commercePriceListCommerceAccountGroupRelId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true,
-			"commercePriceListId", true, "commerceAccountGroupId", true,
-			"order", true, "lastPublishDate", true);
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commercePriceListId", true,
+			"commerceAccountGroupId", true, "order", true, "lastPublishDate",
+			true);
 	}
 
 	@Test
@@ -496,17 +482,6 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 		CommercePriceListCommerceAccountGroupRel existingCommercePriceListCommerceAccountGroupRel =
 			_persistence.findByPrimaryKey(newCommercePriceListCommerceAccountGroupRel.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
-				existingCommercePriceListCommerceAccountGroupRel.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommercePriceListCommerceAccountGroupRel,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCommercePriceListCommerceAccountGroupRel.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommercePriceListCommerceAccountGroupRel,
-				"getOriginalGroupId", new Class<?>[0]));
-
 		Assert.assertEquals(Long.valueOf(
 				existingCommercePriceListCommerceAccountGroupRel.getCommercePriceListId()),
 			ReflectionTestUtil.<Long>invoke(
@@ -527,8 +502,6 @@ public class CommercePriceListCommerceAccountGroupRelPersistenceTest {
 			_persistence.create(pk);
 
 		commercePriceListCommerceAccountGroupRel.setUuid(RandomTestUtil.randomString());
-
-		commercePriceListCommerceAccountGroupRel.setGroupId(RandomTestUtil.nextLong());
 
 		commercePriceListCommerceAccountGroupRel.setCompanyId(RandomTestUtil.nextLong());
 

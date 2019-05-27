@@ -67,14 +67,12 @@ public class CommercePriceListCommerceAccountGroupRelCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", commercePriceListCommerceAccountGroupRelId=");
 		sb.append(commercePriceListCommerceAccountGroupRelId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -111,7 +109,6 @@ public class CommercePriceListCommerceAccountGroupRelCacheModel
 		}
 
 		commercePriceListCommerceAccountGroupRelImpl.setCommercePriceListCommerceAccountGroupRelId(commercePriceListCommerceAccountGroupRelId);
-		commercePriceListCommerceAccountGroupRelImpl.setGroupId(groupId);
 		commercePriceListCommerceAccountGroupRelImpl.setCompanyId(companyId);
 		commercePriceListCommerceAccountGroupRelImpl.setUserId(userId);
 
@@ -161,8 +158,6 @@ public class CommercePriceListCommerceAccountGroupRelCacheModel
 
 		commercePriceListCommerceAccountGroupRelId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -190,8 +185,6 @@ public class CommercePriceListCommerceAccountGroupRelCacheModel
 
 		objectOutput.writeLong(commercePriceListCommerceAccountGroupRelId);
 
-		objectOutput.writeLong(groupId);
-
 		objectOutput.writeLong(companyId);
 
 		objectOutput.writeLong(userId);
@@ -216,7 +209,6 @@ public class CommercePriceListCommerceAccountGroupRelCacheModel
 
 	public String uuid;
 	public long commercePriceListCommerceAccountGroupRelId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

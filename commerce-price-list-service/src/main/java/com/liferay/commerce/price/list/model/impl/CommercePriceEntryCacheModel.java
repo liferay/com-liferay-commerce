@@ -67,7 +67,7 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -75,8 +75,6 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 		sb.append(externalReferenceCode);
 		sb.append(", commercePriceEntryId=");
 		sb.append(commercePriceEntryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -125,7 +123,6 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 		}
 
 		commercePriceEntryImpl.setCommercePriceEntryId(commercePriceEntryId);
-		commercePriceEntryImpl.setGroupId(groupId);
 		commercePriceEntryImpl.setCompanyId(companyId);
 		commercePriceEntryImpl.setUserId(userId);
 
@@ -184,8 +181,6 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 
 		commercePriceEntryId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -223,8 +218,6 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 
 		objectOutput.writeLong(commercePriceEntryId);
 
-		objectOutput.writeLong(groupId);
-
 		objectOutput.writeLong(companyId);
 
 		objectOutput.writeLong(userId);
@@ -259,7 +252,6 @@ public class CommercePriceEntryCacheModel implements CacheModel<CommercePriceEnt
 	public String uuid;
 	public String externalReferenceCode;
 	public long commercePriceEntryId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
