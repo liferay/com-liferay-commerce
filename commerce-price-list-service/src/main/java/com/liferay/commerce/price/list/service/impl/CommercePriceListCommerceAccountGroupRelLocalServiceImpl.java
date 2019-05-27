@@ -40,7 +40,6 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		long commercePriceListCommerceAccountGroupRelId =
 			counterLocalService.increment();
@@ -52,7 +51,6 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 
 		commercePriceListCommerceAccountGroupRel.setUuid(
 			serviceContext.getUuid());
-		commercePriceListCommerceAccountGroupRel.setGroupId(groupId);
 		commercePriceListCommerceAccountGroupRel.setCompanyId(
 			user.getCompanyId());
 		commercePriceListCommerceAccountGroupRel.setUserId(user.getUserId());
@@ -72,7 +70,8 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 
 		// Cache
 
-		commercePriceListLocalService.cleanPriceListCache(groupId);
+		commercePriceListLocalService.cleanPriceListCache(
+			serviceContext.getCompanyId());
 
 		return commercePriceListCommerceAccountGroupRelPersistence.update(
 			commercePriceListCommerceAccountGroupRel);
@@ -102,7 +101,7 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 		// Cache
 
 		commercePriceListLocalService.cleanPriceListCache(
-			commercePriceListCommerceAccountGroupRel.getGroupId());
+			commercePriceListCommerceAccountGroupRel.getCompanyId());
 
 		return commercePriceListCommerceAccountGroupRel;
 	}
