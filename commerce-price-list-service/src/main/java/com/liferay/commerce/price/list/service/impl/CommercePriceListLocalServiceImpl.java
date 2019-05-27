@@ -19,6 +19,7 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.exception.CommercePriceListCurrencyException;
 import com.liferay.commerce.price.list.exception.CommercePriceListDisplayDateException;
 import com.liferay.commerce.price.list.exception.CommercePriceListExpirationDateException;
+import com.liferay.commerce.price.list.exception.CommercePriceListParentPriceListGroupIdException;
 import com.liferay.commerce.price.list.exception.DuplicateCommercePriceListException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -80,30 +81,30 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		return addCommercePriceList(
-			commerceCurrencyId, parentCommercePriceListId, name, priority,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute, null,
-			neverExpire, serviceContext);
+		return commercePriceListLocalService.addCommercePriceList(
+			groupId, userId, commerceCurrencyId, parentCommercePriceListId,
+			name, priority, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, null, neverExpire, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
@@ -112,10 +113,9 @@ public class CommercePriceListLocalServiceImpl
 
 		// Commerce price list
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
-		validate(commerceCurrencyId);
+		validate(groupId, commerceCurrencyId, parentCommercePriceListId);
 
 		validateExternalReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
@@ -180,39 +180,40 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		return addCommercePriceList(
-			commerceCurrencyId, 0, name, priority, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, null, neverExpire,
-			serviceContext);
+		return commercePriceListLocalService.addCommercePriceList(
+			groupId, userId, commerceCurrencyId, 0, name, priority,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute, null,
+			neverExpire, serviceContext);
 	}
 
 	@Override
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			String externalReferenceCode, boolean neverExpire,
-			ServiceContext serviceContext)
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, String externalReferenceCode,
+			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		return addCommercePriceList(
-			commerceCurrencyId, 0, name, priority, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, externalReferenceCode,
-			neverExpire, serviceContext);
+		return commercePriceListLocalService.addCommercePriceList(
+			groupId, userId, commerceCurrencyId, 0, name, priority,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			externalReferenceCode, neverExpire, serviceContext);
 	}
 
 	@Override
@@ -222,8 +223,8 @@ public class CommercePriceListLocalServiceImpl
 	}
 
 	@Override
-	public void cleanPriceListCache(long groupId) {
-		MultiVMPoolUtil.removePortalCache("PRICE_LISTS_" + groupId);
+	public void cleanPriceListCache(long companyId) {
+		MultiVMPoolUtil.removePortalCache("PRICE_LISTS_" + companyId);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
@@ -283,10 +284,12 @@ public class CommercePriceListLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommercePriceLists(long groupId) throws PortalException {
+	public void deleteCommercePriceLists(long companyId)
+		throws PortalException {
+
 		List<CommercePriceList> commercePriceLists =
 			commercePriceListLocalService.getCommercePriceLists(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (CommercePriceList commercePriceList : commercePriceLists) {
 			commercePriceListLocalService.deleteCommercePriceList(
@@ -304,18 +307,19 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public Optional<CommercePriceList> getCommercePriceList(
-			long groupId, long commerceAccountId,
+			long[] groupIds, long companyId, long commerceAccountId,
 			long[] commerceAccountGroupIds)
 		throws PortalException {
 
-		Group group = groupLocalService.getGroup(groupId);
+		Company company = companyLocalService.getCompany(companyId);
 
 		String cacheKey =
 			commerceAccountId + StringPool.POUND +
 				StringUtil.merge(commerceAccountGroupIds);
 
 		PortalCache<String, Serializable> portalCache =
-			MultiVMPoolUtil.getPortalCache("PRICE_LISTS_" + groupId);
+			MultiVMPoolUtil.getPortalCache(
+				"PRICE_LISTS_" + company.getCompanyId());
 
 		boolean priceListCalculated = GetterUtil.getBoolean(
 			portalCache.get(cacheKey + "_calculated"));
@@ -328,7 +332,7 @@ public class CommercePriceListLocalServiceImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			group.getCompanyId(), groupId, commerceAccountId,
+			company.getCompanyId(), groupIds, commerceAccountId,
 			commerceAccountGroupIds);
 
 		Indexer<CommercePriceList> indexer =
@@ -360,34 +364,46 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public List<CommercePriceList> getCommercePriceLists(
-		long groupId, int start, int end) {
+		long companyId, int start, int end) {
 
-		return commercePriceListPersistence.findByGroupId(groupId, start, end);
+		return commercePriceListPersistence.findByCompanyId(
+			companyId, start, end);
 	}
 
 	@Override
 	public List<CommercePriceList> getCommercePriceLists(
-		long groupId, int status, int start, int end,
-		OrderByComparator<CommercePriceList> orderByComparator) {
+		long[] groupIds, long companyId, int start, int end) {
 
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return commercePriceListPersistence.findByG_NotS(
-				groupId, WorkflowConstants.STATUS_IN_TRASH, start, end,
-				orderByComparator);
-		}
-
-		return commercePriceListPersistence.findByG_S(
-			groupId, status, start, end, orderByComparator);
+		return commercePriceListPersistence.findByG_C(
+			groupIds, companyId, start, end);
 	}
 
 	@Override
-	public int getCommercePriceListsCount(long groupId, int status) {
+	public List<CommercePriceList> getCommercePriceLists(
+		long[] groupIds, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return commercePriceListPersistence.countByG_NotS(
-				groupId, WorkflowConstants.STATUS_IN_TRASH);
+			return commercePriceListPersistence.findByG_C_NotS(
+				groupIds, companyId, WorkflowConstants.STATUS_IN_TRASH, start,
+				end, orderByComparator);
 		}
 
-		return commercePriceListPersistence.countByG_S(groupId, status);
+		return commercePriceListPersistence.findByG_C_S(
+			groupIds, companyId, status, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommercePriceListsCount(
+		long[] groupIds, long companyId, int status) {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return commercePriceListPersistence.countByG_C_NotS(
+				groupIds, companyId, WorkflowConstants.STATUS_IN_TRASH);
+		}
+
+		return commercePriceListPersistence.countByG_C_S(
+			groupIds, companyId, status);
 	}
 
 	@Override
@@ -405,12 +421,12 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public BaseModelSearchResult<CommercePriceList> searchCommercePriceLists(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 
 		return searchCommercePriceLists(searchContext);
 	}
@@ -430,10 +446,13 @@ public class CommercePriceListLocalServiceImpl
 		// Commerce price list
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		CommercePriceList commercePriceList =
 			commercePriceListPersistence.findByPrimaryKey(commercePriceListId);
 
-		validate(commerceCurrencyId);
+		validate(
+			commercePriceList.getGroupId(), commerceCurrencyId,
+			parentCommercePriceListId);
 
 		Date displayDate = null;
 		Date expirationDate = null;
@@ -616,10 +635,11 @@ public class CommercePriceListLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId,
-			long parentCommercePriceListId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, long parentCommercePriceListId,
+			String name, double priority, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
@@ -653,7 +673,7 @@ public class CommercePriceListLocalServiceImpl
 					serviceContext.getCompanyId(), externalReferenceCode);
 
 			if (commercePriceList != null) {
-				return updateCommercePriceList(
+				return commercePriceListLocalService.updateCommercePriceList(
 					commercePriceList.getCommercePriceListId(),
 					commerceCurrencyId, parentCommercePriceListId, name,
 					priority, displayDateMonth, displayDateDay, displayDateYear,
@@ -665,35 +685,38 @@ public class CommercePriceListLocalServiceImpl
 
 		// Add
 
-		return addCommercePriceList(
-			commerceCurrencyId, parentCommercePriceListId, name, priority,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			externalReferenceCode, neverExpire, serviceContext);
+		return commercePriceListLocalService.addCommercePriceList(
+			groupId, userId, commerceCurrencyId, parentCommercePriceListId,
+			name, priority, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, externalReferenceCode, neverExpire,
+			serviceContext);
 	}
 
 	@Override
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId, String name,
-			double priority, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, String externalReferenceCode,
-			boolean neverExpire, ServiceContext serviceContext)
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			String externalReferenceCode, boolean neverExpire,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		return upsertCommercePriceList(
-			commercePriceListId, commerceCurrencyId, 0, name, priority,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			externalReferenceCode, neverExpire, serviceContext);
+		return commercePriceListLocalService.upsertCommercePriceList(
+			groupId, userId, commercePriceListId, commerceCurrencyId, 0, name,
+			priority, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, externalReferenceCode, neverExpire,
+			serviceContext);
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, long commerceAccountId,
+		long companyId, long[] groupIds, long commerceAccountId,
 		long[] commerceAccountGroupIds) {
 
 		SearchContext searchContext = new SearchContext();
@@ -709,7 +732,7 @@ public class CommercePriceListLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(0);
 		searchContext.setEnd(1);
-		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setGroupIds(groupIds);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
@@ -725,7 +748,7 @@ public class CommercePriceListLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int status, int start,
+		long companyId, long[] groupIds, String keywords, int status, int start,
 		int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
@@ -747,7 +770,7 @@ public class CommercePriceListLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setGroupIds(groupIds);
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -905,7 +928,23 @@ public class CommercePriceListLocalServiceImpl
 			serviceContext, workflowContext);
 	}
 
-	protected void validate(long commerceCurrencyId) throws PortalException {
+	protected void validate(
+			long groupId, long commerceCurrencyId,
+			long parentCommercePriceListId)
+		throws PortalException {
+
+		if (parentCommercePriceListId > 0) {
+			CommercePriceList commercePriceList =
+				commercePriceListLocalService.fetchCommercePriceList(
+					parentCommercePriceListId);
+
+			if ((commercePriceList != null) &&
+				(commercePriceList.getGroupId() != groupId)) {
+
+				throw new CommercePriceListParentPriceListGroupIdException();
+			}
+		}
+
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.fetchCommerceCurrency(
 				commerceCurrencyId);
