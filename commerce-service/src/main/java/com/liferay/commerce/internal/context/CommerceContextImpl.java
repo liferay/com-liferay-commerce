@@ -24,6 +24,7 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -35,6 +36,7 @@ import java.util.Optional;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceContextImpl implements CommerceContext {
 
@@ -85,6 +87,16 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
+	public CommerceCatalog getCommerceCatalog() {
+		return null;
+	}
+
+	@Override
+	public long getCommerceCatalogGroupId() throws PortalException {
+		return 0;
+	}
+
+	@Override
 	public CommerceCurrency getCommerceCurrency() throws PortalException {
 		if (_commerceCurrency != null) {
 			return _commerceCurrency;
@@ -120,7 +132,8 @@ public class CommerceContextImpl implements CommerceContext {
 
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				_groupId, commerceAccount.getCommerceAccountId(),
+				new long[] {getCommerceCatalogGroupId()}, 0L,
+				commerceAccount.getCommerceAccountId(),
 				getCommerceAccountGroupIds());
 
 		return _commercePriceList;
