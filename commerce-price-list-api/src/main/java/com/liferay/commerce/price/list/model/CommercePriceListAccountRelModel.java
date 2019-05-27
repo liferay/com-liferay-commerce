@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -44,7 +44,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommercePriceListAccountRelModel extends BaseModel<CommercePriceListAccountRel>,
-	ShardedModel, StagedGroupedModel {
+	ShardedModel, StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -96,22 +96,6 @@ public interface CommercePriceListAccountRelModel extends BaseModel<CommercePric
 	 */
 	public void setCommercePriceListAccountRelId(
 		long commercePriceListAccountRelId);
-
-	/**
-	 * Returns the group ID of this commerce price list account rel.
-	 *
-	 * @return the group ID of this commerce price list account rel
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce price list account rel.
-	 *
-	 * @param groupId the group ID of this commerce price list account rel
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce price list account rel.
@@ -257,7 +241,6 @@ public interface CommercePriceListAccountRelModel extends BaseModel<CommercePric
 	 *
 	 * @return the last publish date of this commerce price list account rel
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -265,7 +248,6 @@ public interface CommercePriceListAccountRelModel extends BaseModel<CommercePric
 	 *
 	 * @param lastPublishDate the last publish date of this commerce price list account rel
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override
