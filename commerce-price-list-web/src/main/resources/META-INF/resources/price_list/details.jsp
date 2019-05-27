@@ -20,9 +20,8 @@
 CommercePriceListDisplayContext commercePriceListDisplayContext = (CommercePriceListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommercePriceList commercePriceList = commercePriceListDisplayContext.getCommercePriceList();
-
+List<CommerceCatalog> commerceCatalogs = commercePriceListDisplayContext.getCommerceCatalogs();
 List<CommercePriceListAccountRel> commercePriceListAccountRels = commercePriceListDisplayContext.getCommercePriceListAccountRels();
-
 List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntryRels = commercePriceListDisplayContext.getCommercePriceListCommerceAccountGroupRels();
 %>
 
@@ -32,6 +31,7 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 />
 
 <liferay-ui:error exception="<%= CommercePriceListCurrencyException.class %>" message="please-select-a-valid-store-currency" />
+<liferay-ui:error exception="<%= CommercePriceListParentPriceListGroupIdException.class %>" message="please-select-a-valid-parent-price-list-for-the-selected-catalog" />
 
 <aui:model-context bean="<%= commercePriceList %>" model="<%= CommercePriceList.class %>" />
 
@@ -111,6 +111,24 @@ if (parentCommercePriceList != null) {
 </liferay-ui:search-container>
 
 <aui:button name="setParentCommercePriceList" value="select" />
+
+<h5 class="text-default"><liferay-ui:message key="catalog" /></h5>
+
+<c:if test="<%= commerceCatalogs.size() > 1 %>">
+	<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
+
+		<%
+		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+		%>
+
+			<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (commercePriceList == null) ? false : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogId() %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+</c:if>
 
 <h5 class="text-default"><liferay-ui:message key="account-groups" /></h5>
 
