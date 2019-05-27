@@ -90,7 +90,6 @@ public class CommerceTierPriceEntryLocalServiceImpl
 		// Commerce tier price entry
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		validate(0, commercePriceEntryId, minQuantity);
 
@@ -103,7 +102,6 @@ public class CommerceTierPriceEntryLocalServiceImpl
 			commerceTierPriceEntryPersistence.create(commerceTierPriceEntryId);
 
 		commerceTierPriceEntry.setUuid(serviceContext.getUuid());
-		commerceTierPriceEntry.setGroupId(groupId);
 		commerceTierPriceEntry.setCompanyId(user.getCompanyId());
 		commerceTierPriceEntry.setUserId(user.getUserId());
 		commerceTierPriceEntry.setUserName(user.getFullName());
@@ -194,10 +192,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 	@Override
 	public List<CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		long groupId, int start, int end) {
+		long companyId, int start, int end) {
 
-		return commerceTierPriceEntryPersistence.findByGroupId(
-			groupId, start, end);
+		return commerceTierPriceEntryPersistence.findByCompanyId(
+			companyId, start, end);
 	}
 
 	@Override
@@ -242,8 +240,8 @@ public class CommerceTierPriceEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getCommerceTierPriceEntriesCountByGroupId(long groupId) {
-		return commerceTierPriceEntryPersistence.countByGroupId(groupId);
+	public int getCommerceTierPriceEntriesCountByCompanyId(long companyId) {
+		return commerceTierPriceEntryPersistence.countByCompanyId(companyId);
 	}
 
 	@Override
@@ -263,13 +261,12 @@ public class CommerceTierPriceEntryLocalServiceImpl
 	@Override
 	public BaseModelSearchResult<CommerceTierPriceEntry>
 			searchCommerceTierPriceEntries(
-				long companyId, long groupId, long commercePriceEntryId,
-				String keywords, int start, int end, Sort sort)
+				long companyId, long commercePriceEntryId, String keywords,
+				int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, commercePriceEntryId, keywords, start, end,
-			sort);
+			companyId, commercePriceEntryId, keywords, start, end, sort);
 
 		return searchCommerceTierPriceEntries(searchContext);
 	}
@@ -416,8 +413,8 @@ public class CommerceTierPriceEntryLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, long commercePriceEntryId,
-		String keywords, int start, int end, Sort sort) {
+		long companyId, long commercePriceEntryId, String keywords, int start,
+		int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -436,7 +433,6 @@ public class CommerceTierPriceEntryLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
