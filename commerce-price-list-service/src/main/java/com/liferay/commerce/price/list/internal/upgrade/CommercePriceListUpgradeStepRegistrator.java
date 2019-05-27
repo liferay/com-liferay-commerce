@@ -16,6 +16,8 @@ package com.liferay.commerce.price.list.internal.upgrade;
 
 import com.liferay.commerce.price.list.internal.upgrade.v1_1_0.CommercePriceEntryUpgradeProcess;
 import com.liferay.commerce.price.list.internal.upgrade.v1_2_0.CommercePriceListAccountRelUpgradeProcess;
+import com.liferay.commerce.price.list.internal.upgrade.v1_3_0.CommercePriceListCommerceAccountGroupRelUpgradeProcess;
+import com.liferay.commerce.price.list.internal.upgrade.v1_3_0.CommerceTierPriceEntryUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -27,6 +29,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommercePriceListUpgradeStepRegistrator
@@ -47,6 +50,15 @@ public class CommercePriceListUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
 			new CommercePriceListAccountRelUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
+			new com.liferay.commerce.price.list.internal.upgrade.v1_3_0.
+				CommercePriceEntryUpgradeProcess(),
+			new com.liferay.commerce.price.list.internal.upgrade.v1_3_0.
+				CommercePriceListAccountRelUpgradeProcess(),
+			new CommercePriceListCommerceAccountGroupRelUpgradeProcess(),
+			new CommerceTierPriceEntryUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRICE LIST UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -57,6 +69,8 @@ public class CommercePriceListUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
 
 	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
+
+	private static final String _SCHEMA_VERSION_1_3_0 = "1.3.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePriceListUpgradeStepRegistrator.class);
