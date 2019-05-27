@@ -95,10 +95,10 @@ public class CommercePriceEntryServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getCommercePriceEntriesByGroupId(
-		long groupId, int start, int end)
+	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getCommercePriceEntriesByCompanyId(
+		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceEntryService.getCommercePriceEntriesByGroupId(groupId,
+		return _commercePriceEntryService.getCommercePriceEntriesByCompanyId(companyId,
 			start, end);
 	}
 
@@ -109,9 +109,9 @@ public class CommercePriceEntryServiceWrapper
 	}
 
 	@Override
-	public int getCommercePriceEntriesCountByGroupId(long groupId)
+	public int getCommercePriceEntriesCountByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceEntryService.getCommercePriceEntriesCountByGroupId(groupId);
+		return _commercePriceEntryService.getCommercePriceEntriesCountByCompanyId(companyId);
 	}
 
 	@Override
@@ -149,12 +149,11 @@ public class CommercePriceEntryServiceWrapper
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommercePriceEntry> searchCommercePriceEntries(
-		long companyId, long groupId, long commercePriceListId,
-		String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		long companyId, long commercePriceListId, String keywords, int start,
+		int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceEntryService.searchCommercePriceEntries(companyId,
-			groupId, commercePriceListId, keywords, start, end, sort);
+			commercePriceListId, keywords, start, end, sort);
 	}
 
 	@Override
@@ -170,10 +169,10 @@ public class CommercePriceEntryServiceWrapper
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceEntry updateExternalReferenceCode(
 		com.liferay.commerce.price.list.model.CommercePriceEntry commercePriceEntry,
-		long groupId, String externalReferenceCode)
+		String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commercePriceEntryService.updateExternalReferenceCode(commercePriceEntry,
-			groupId, externalReferenceCode);
+			externalReferenceCode);
 	}
 
 	@Override

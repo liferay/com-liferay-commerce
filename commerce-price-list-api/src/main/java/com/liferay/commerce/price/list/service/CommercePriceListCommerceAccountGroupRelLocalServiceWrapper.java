@@ -211,17 +211,17 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceWrapper
 	}
 
 	/**
-	* Returns the commerce price list commerce account group rel matching the UUID and group.
+	* Returns the commerce price list commerce account group rel with the matching UUID and company.
 	*
 	* @param uuid the commerce price list commerce account group rel's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce price list commerce account group rel, or <code>null</code> if a matching commerce price list commerce account group rel could not be found
 	*/
 	@Override
-	public com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel fetchCommercePriceListCommerceAccountGroupRelByUuidAndGroupId(
-		String uuid, long groupId) {
-		return _commercePriceListCommerceAccountGroupRelLocalService.fetchCommercePriceListCommerceAccountGroupRelByUuidAndGroupId(uuid,
-			groupId);
+	public com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel fetchCommercePriceListCommerceAccountGroupRelByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return _commercePriceListCommerceAccountGroupRelLocalService.fetchCommercePriceListCommerceAccountGroupRelByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	@Override
@@ -244,19 +244,19 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceWrapper
 	}
 
 	/**
-	* Returns the commerce price list commerce account group rel matching the UUID and group.
+	* Returns the commerce price list commerce account group rel with the matching UUID and company.
 	*
 	* @param uuid the commerce price list commerce account group rel's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce price list commerce account group rel
 	* @throws PortalException if a matching commerce price list commerce account group rel could not be found
 	*/
 	@Override
-	public com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel getCommercePriceListCommerceAccountGroupRelByUuidAndGroupId(
-		String uuid, long groupId)
+	public com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel getCommercePriceListCommerceAccountGroupRelByUuidAndCompanyId(
+		String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceListCommerceAccountGroupRelLocalService.getCommercePriceListCommerceAccountGroupRelByUuidAndGroupId(uuid,
-			groupId);
+		return _commercePriceListCommerceAccountGroupRelLocalService.getCommercePriceListCommerceAccountGroupRelByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	/**
@@ -289,38 +289,6 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceWrapper
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel> orderByComparator) {
 		return _commercePriceListCommerceAccountGroupRelLocalService.getCommercePriceListCommerceAccountGroupRels(commercePriceListId,
 			start, end, orderByComparator);
-	}
-
-	/**
-	* Returns all the commerce price list commerce account group rels matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce price list commerce account group rels
-	* @param companyId the primary key of the company
-	* @return the matching commerce price list commerce account group rels, or an empty list if no matches were found
-	*/
-	@Override
-	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel> getCommercePriceListCommerceAccountGroupRelsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return _commercePriceListCommerceAccountGroupRelLocalService.getCommercePriceListCommerceAccountGroupRelsByUuidAndCompanyId(uuid,
-			companyId);
-	}
-
-	/**
-	* Returns a range of commerce price list commerce account group rels matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce price list commerce account group rels
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of commerce price list commerce account group rels
-	* @param end the upper bound of the range of commerce price list commerce account group rels (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching commerce price list commerce account group rels, or an empty list if no matches were found
-	*/
-	@Override
-	public java.util.List<com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel> getCommercePriceListCommerceAccountGroupRelsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel> orderByComparator) {
-		return _commercePriceListCommerceAccountGroupRelLocalService.getCommercePriceListCommerceAccountGroupRelsByUuidAndCompanyId(uuid,
-			companyId, start, end, orderByComparator);
 	}
 
 	/**

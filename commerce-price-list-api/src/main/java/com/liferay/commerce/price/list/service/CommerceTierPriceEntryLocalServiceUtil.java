@@ -215,8 +215,8 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-		long groupId, int start, int end) {
-		return getService().fetchCommerceTierPriceEntries(groupId, start, end);
+		long companyId, int start, int end) {
+		return getService().fetchCommerceTierPriceEntries(companyId, start, end);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchCommerceTierPriceEntry(
@@ -239,16 +239,17 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce tier price entry matching the UUID and group.
+	* Returns the commerce tier price entry with the matching UUID and company.
 	*
 	* @param uuid the commerce tier price entry's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	*/
-	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchCommerceTierPriceEntryByUuidAndGroupId(
-		String uuid, long groupId) {
+	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry fetchCommerceTierPriceEntryByUuidAndCompanyId(
+		String uuid, long companyId) {
 		return getService()
-				   .fetchCommerceTierPriceEntryByUuidAndGroupId(uuid, groupId);
+				   .fetchCommerceTierPriceEntryByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry findClosestCommerceTierPriceEntry(
@@ -293,38 +294,6 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 	}
 
 	/**
-	* Returns all the commerce tier price entries matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce tier price entries
-	* @param companyId the primary key of the company
-	* @return the matching commerce tier price entries, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return getService()
-				   .getCommerceTierPriceEntriesByUuidAndCompanyId(uuid,
-			companyId);
-	}
-
-	/**
-	* Returns a range of commerce tier price entries matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce tier price entries
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of commerce tier price entries
-	* @param end the upper bound of the range of commerce tier price entries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching commerce tier price entries, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> getCommerceTierPriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> orderByComparator) {
-		return getService()
-				   .getCommerceTierPriceEntriesByUuidAndCompanyId(uuid,
-			companyId, start, end, orderByComparator);
-	}
-
-	/**
 	* Returns the number of commerce tier price entries.
 	*
 	* @return the number of commerce tier price entries
@@ -339,8 +308,10 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 				   .getCommerceTierPriceEntriesCount(commercePriceEntryId);
 	}
 
-	public static int getCommerceTierPriceEntriesCountByGroupId(long groupId) {
-		return getService().getCommerceTierPriceEntriesCountByGroupId(groupId);
+	public static int getCommerceTierPriceEntriesCountByCompanyId(
+		long companyId) {
+		return getService()
+				   .getCommerceTierPriceEntriesCountByCompanyId(companyId);
 	}
 
 	/**
@@ -357,18 +328,18 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce tier price entry matching the UUID and group.
+	* Returns the commerce tier price entry with the matching UUID and company.
 	*
 	* @param uuid the commerce tier price entry's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce tier price entry
 	* @throws PortalException if a matching commerce tier price entry could not be found
 	*/
-	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry getCommerceTierPriceEntryByUuidAndGroupId(
-		String uuid, long groupId)
+	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry getCommerceTierPriceEntryByUuidAndCompanyId(
+		String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceTierPriceEntryByUuidAndGroupId(uuid, groupId);
+				   .getCommerceTierPriceEntryByUuidAndCompanyId(uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -401,12 +372,11 @@ public class CommerceTierPriceEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> searchCommerceTierPriceEntries(
-		long companyId, long groupId, long commercePriceEntryId,
-		String keywords, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		long companyId, long commercePriceEntryId, String keywords, int start,
+		int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCommerceTierPriceEntries(companyId, groupId,
+				   .searchCommerceTierPriceEntries(companyId,
 			commercePriceEntryId, keywords, start, end, sort);
 	}
 
