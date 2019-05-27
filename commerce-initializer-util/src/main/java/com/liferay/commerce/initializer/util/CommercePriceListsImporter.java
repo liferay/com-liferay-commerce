@@ -18,6 +18,8 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -30,6 +32,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -151,18 +154,28 @@ public class CommercePriceListsImporter {
 
 		// Add Commerce Price List
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		String externalReferenceCode = StringBundler.concat(
 			String.valueOf(serviceContext.getScopeGroupId()), "_",
 			FriendlyURLNormalizerUtil.normalize(name));
 
 		_commercePriceListLocalService.upsertCommercePriceList(
-			0, commerceCurrency.getCommerceCurrencyId(), parentPriceListId,
-			name, priority, displayDateMonth, displayDateDay, displayDateYear,
+			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(), 0,
+			commerceCurrency.getCommerceCurrencyId(), parentPriceListId, name,
+			priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, externalReferenceCode, neverExpire,
 			serviceContext);
 	}
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
