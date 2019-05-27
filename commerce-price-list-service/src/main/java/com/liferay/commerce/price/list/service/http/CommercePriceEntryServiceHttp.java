@@ -293,16 +293,16 @@ public class CommercePriceEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getCommercePriceEntriesByGroupId(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end)
+	public static java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> getCommercePriceEntriesByCompanyId(
+		HttpPrincipal httpPrincipal, long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceEntryServiceUtil.class,
-					"getCommercePriceEntriesByGroupId",
-					_getCommercePriceEntriesByGroupIdParameterTypes7);
+					"getCommercePriceEntriesByCompanyId",
+					_getCommercePriceEntriesByCompanyIdParameterTypes7);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, start, end);
 
 			Object returnObj = null;
 
@@ -359,15 +359,15 @@ public class CommercePriceEntryServiceHttp {
 		}
 	}
 
-	public static int getCommercePriceEntriesCountByGroupId(
-		HttpPrincipal httpPrincipal, long groupId)
+	public static int getCommercePriceEntriesCountByCompanyId(
+		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceEntryServiceUtil.class,
-					"getCommercePriceEntriesCountByGroupId",
-					_getCommercePriceEntriesCountByGroupIdParameterTypes9);
+					"getCommercePriceEntriesCountByCompanyId",
+					_getCommercePriceEntriesCountByCompanyIdParameterTypes9);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -492,8 +492,8 @@ public class CommercePriceEntryServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.price.list.model.CommercePriceEntry> searchCommercePriceEntries(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		long commercePriceListId, String keywords, int start, int end,
+		HttpPrincipal httpPrincipal, long companyId, long commercePriceListId,
+		String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -502,8 +502,7 @@ public class CommercePriceEntryServiceHttp {
 					_searchCommercePriceEntriesParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, commercePriceListId, keywords, start,
-					end, sort);
+					companyId, commercePriceListId, keywords, start, end, sort);
 
 			Object returnObj = null;
 
@@ -565,7 +564,7 @@ public class CommercePriceEntryServiceHttp {
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry updateExternalReferenceCode(
 		HttpPrincipal httpPrincipal,
 		com.liferay.commerce.price.list.model.CommercePriceEntry commercePriceEntry,
-		long groupId, String externalReferenceCode)
+		String externalReferenceCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommercePriceEntryServiceUtil.class,
@@ -573,7 +572,7 @@ public class CommercePriceEntryServiceHttp {
 					_updateExternalReferenceCodeParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commercePriceEntry, groupId, externalReferenceCode);
+					commercePriceEntry, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -662,11 +661,11 @@ public class CommercePriceEntryServiceHttp {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommercePriceEntriesByGroupIdParameterTypes7 =
+	private static final Class<?>[] _getCommercePriceEntriesByCompanyIdParameterTypes7 =
 		new Class[] { long.class, int.class, int.class };
 	private static final Class<?>[] _getCommercePriceEntriesCountParameterTypes8 =
 		new Class[] { long.class };
-	private static final Class<?>[] _getCommercePriceEntriesCountByGroupIdParameterTypes9 =
+	private static final Class<?>[] _getCommercePriceEntriesCountByCompanyIdParameterTypes9 =
 		new Class[] { long.class };
 	private static final Class<?>[] _getInstanceCommercePriceEntriesParameterTypes10 =
 		new Class[] { long.class, int.class, int.class };
@@ -678,8 +677,8 @@ public class CommercePriceEntryServiceHttp {
 	private static final Class<?>[] _getInstanceCommercePriceEntriesCountParameterTypes12 =
 		new Class[] { long.class };
 	private static final Class<?>[] _searchCommercePriceEntriesParameterTypes13 = new Class[] {
-			long.class, long.class, long.class, String.class, int.class,
-			int.class, com.liferay.portal.kernel.search.Sort.class
+			long.class, long.class, String.class, int.class, int.class,
+			com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[] _updateCommercePriceEntryParameterTypes14 = new Class[] {
 			long.class, java.math.BigDecimal.class, java.math.BigDecimal.class,
@@ -688,7 +687,7 @@ public class CommercePriceEntryServiceHttp {
 	private static final Class<?>[] _updateExternalReferenceCodeParameterTypes15 =
 		new Class[] {
 			com.liferay.commerce.price.list.model.CommercePriceEntry.class,
-			long.class, String.class
+			String.class
 		};
 	private static final Class<?>[] _upsertCommercePriceEntryParameterTypes16 = new Class[] {
 			long.class, long.class, long.class, String.class,

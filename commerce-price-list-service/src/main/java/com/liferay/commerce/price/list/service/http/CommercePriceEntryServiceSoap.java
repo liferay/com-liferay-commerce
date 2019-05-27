@@ -182,11 +182,11 @@ public class CommercePriceEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap[] getCommercePriceEntriesByGroupId(
-		long groupId, int start, int end) throws RemoteException {
+	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap[] getCommercePriceEntriesByCompanyId(
+		long companyId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.price.list.model.CommercePriceEntry> returnValue =
-				CommercePriceEntryServiceUtil.getCommercePriceEntriesByGroupId(groupId,
+				CommercePriceEntryServiceUtil.getCommercePriceEntriesByCompanyId(companyId,
 					start, end);
 
 			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.toSoapModels(returnValue);
@@ -212,10 +212,10 @@ public class CommercePriceEntryServiceSoap {
 		}
 	}
 
-	public static int getCommercePriceEntriesCountByGroupId(long groupId)
+	public static int getCommercePriceEntriesCountByCompanyId(long companyId)
 		throws RemoteException {
 		try {
-			int returnValue = CommercePriceEntryServiceUtil.getCommercePriceEntriesCountByGroupId(groupId);
+			int returnValue = CommercePriceEntryServiceUtil.getCommercePriceEntriesCountByCompanyId(companyId);
 
 			return returnValue;
 		}
@@ -295,11 +295,11 @@ public class CommercePriceEntryServiceSoap {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap updateExternalReferenceCode(
 		com.liferay.commerce.price.list.model.CommercePriceEntrySoap commercePriceEntry,
-		long groupId, String externalReferenceCode) throws RemoteException {
+		String externalReferenceCode) throws RemoteException {
 		try {
 			com.liferay.commerce.price.list.model.CommercePriceEntry returnValue =
 				CommercePriceEntryServiceUtil.updateExternalReferenceCode(com.liferay.commerce.price.list.model.impl.CommercePriceEntryModelImpl.toModel(
-						commercePriceEntry), groupId, externalReferenceCode);
+						commercePriceEntry), externalReferenceCode);
 
 			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.toSoapModel(returnValue);
 		}

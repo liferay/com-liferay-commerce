@@ -235,16 +235,17 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce tier price entry matching the UUID and group.
+	 * Returns the commerce tier price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce tier price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	 */
 	@Override
-	public CommerceTierPriceEntry fetchCommerceTierPriceEntryByUuidAndGroupId(
-		String uuid, long groupId) {
-		return commerceTierPriceEntryPersistence.fetchByUUID_G(uuid, groupId);
+	public CommerceTierPriceEntry fetchCommerceTierPriceEntryByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return commerceTierPriceEntryPersistence.fetchByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
@@ -348,8 +349,6 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceTierPriceEntry>() {
 				@Override
 				public void performAction(
@@ -382,48 +381,18 @@ public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce tier price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce tier price entries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce tier price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceTierPriceEntry> getCommerceTierPriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return commerceTierPriceEntryPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce tier price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce tier price entries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce tier price entries
-	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce tier price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceTierPriceEntry> getCommerceTierPriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceTierPriceEntry> orderByComparator) {
-		return commerceTierPriceEntryPersistence.findByUuid_C(uuid, companyId,
-			start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce tier price entry matching the UUID and group.
+	 * Returns the commerce tier price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce tier price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce tier price entry
 	 * @throws PortalException if a matching commerce tier price entry could not be found
 	 */
 	@Override
-	public CommerceTierPriceEntry getCommerceTierPriceEntryByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
-		return commerceTierPriceEntryPersistence.findByUUID_G(uuid, groupId);
+	public CommerceTierPriceEntry getCommerceTierPriceEntryByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException {
+		return commerceTierPriceEntryPersistence.findByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**

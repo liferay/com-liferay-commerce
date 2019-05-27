@@ -91,15 +91,15 @@ public interface CommercePriceEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceEntry> getCommercePriceEntriesByGroupId(
-		long groupId, int start, int end) throws PortalException;
+	public List<CommercePriceEntry> getCommercePriceEntriesByCompanyId(
+		long companyId, int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommercePriceEntriesCount(long commercePriceListId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommercePriceEntriesCountByGroupId(long groupId)
+	public int getCommercePriceEntriesCountByCompanyId(long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -125,17 +125,16 @@ public interface CommercePriceEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommercePriceEntry> searchCommercePriceEntries(
-		long companyId, long groupId, long commercePriceListId,
-		String keywords, int start, int end, Sort sort)
-		throws PortalException;
+		long companyId, long commercePriceListId, String keywords, int start,
+		int end, Sort sort) throws PortalException;
 
 	public CommercePriceEntry updateCommercePriceEntry(
 		long commercePriceEntryId, BigDecimal price, BigDecimal promoPrice,
 		ServiceContext serviceContext) throws PortalException;
 
 	public CommercePriceEntry updateExternalReferenceCode(
-		CommercePriceEntry commercePriceEntry, long groupId,
-		String externalReferenceCode) throws PortalException;
+		CommercePriceEntry commercePriceEntry, String externalReferenceCode)
+		throws PortalException;
 
 	public CommercePriceEntry upsertCommercePriceEntry(
 		long commercePriceEntryId, long cpInstanceId, long commercePriceListId,

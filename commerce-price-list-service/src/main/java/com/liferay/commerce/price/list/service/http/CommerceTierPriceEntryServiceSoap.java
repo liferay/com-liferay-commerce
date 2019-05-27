@@ -134,10 +134,10 @@ public class CommerceTierPriceEntryServiceSoap {
 	}
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap[] fetchCommerceTierPriceEntries(
-		long groupId, int start, int end) throws RemoteException {
+		long companyId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.price.list.model.CommerceTierPriceEntry> returnValue =
-				CommerceTierPriceEntryServiceUtil.fetchCommerceTierPriceEntries(groupId,
+				CommerceTierPriceEntryServiceUtil.fetchCommerceTierPriceEntries(companyId,
 					start, end);
 
 			return com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap.toSoapModels(returnValue);
@@ -213,10 +213,10 @@ public class CommerceTierPriceEntryServiceSoap {
 		}
 	}
 
-	public static int getCommerceTierPriceEntriesCountByGroupId(long groupId)
-		throws RemoteException {
+	public static int getCommerceTierPriceEntriesCountByCompanyId(
+		long companyId) throws RemoteException {
 		try {
-			int returnValue = CommerceTierPriceEntryServiceUtil.getCommerceTierPriceEntriesCountByGroupId(groupId);
+			int returnValue = CommerceTierPriceEntryServiceUtil.getCommerceTierPriceEntriesCountByCompanyId(companyId);
 
 			return returnValue;
 		}
@@ -248,11 +248,11 @@ public class CommerceTierPriceEntryServiceSoap {
 
 	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap updateExternalReferenceCode(
 		com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap commerceTierPriceEntry,
-		long groupId, String externalReferenceCode) throws RemoteException {
+		String externalReferenceCode) throws RemoteException {
 		try {
 			com.liferay.commerce.price.list.model.CommerceTierPriceEntry returnValue =
 				CommerceTierPriceEntryServiceUtil.updateExternalReferenceCode(com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryModelImpl.toModel(
-						commerceTierPriceEntry), groupId, externalReferenceCode);
+						commerceTierPriceEntry), externalReferenceCode);
 
 			return com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap.toSoapModel(returnValue);
 		}

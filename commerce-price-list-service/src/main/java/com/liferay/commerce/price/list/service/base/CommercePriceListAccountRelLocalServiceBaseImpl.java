@@ -235,17 +235,17 @@ public abstract class CommercePriceListAccountRelLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel fetchCommercePriceListAccountRelByUuidAndGroupId(
-		String uuid, long groupId) {
-		return commercePriceListAccountRelPersistence.fetchByUUID_G(uuid,
-			groupId);
+	public CommercePriceListAccountRel fetchCommercePriceListAccountRelByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return commercePriceListAccountRelPersistence.fetchByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
@@ -336,8 +336,6 @@ public abstract class CommercePriceListAccountRelLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommercePriceListAccountRel>() {
 				@Override
 				public void performAction(
@@ -370,49 +368,18 @@ public abstract class CommercePriceListAccountRelLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommercePriceListAccountRel> getCommercePriceListAccountRelsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return commercePriceListAccountRelPersistence.findByUuid_C(uuid,
-			companyId);
-	}
-
-	/**
-	 * Returns a range of commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price list account rels
-	 * @param end the upper bound of the range of commerce price list account rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommercePriceListAccountRel> getCommercePriceListAccountRelsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommercePriceListAccountRel> orderByComparator) {
-		return commercePriceListAccountRelPersistence.findByUuid_C(uuid,
-			companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel
 	 * @throws PortalException if a matching commerce price list account rel could not be found
 	 */
 	@Override
-	public CommercePriceListAccountRel getCommercePriceListAccountRelByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
-		return commercePriceListAccountRelPersistence.findByUUID_G(uuid, groupId);
+	public CommercePriceListAccountRel getCommercePriceListAccountRelByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException {
+		return commercePriceListAccountRelPersistence.findByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
