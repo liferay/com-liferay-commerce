@@ -24,7 +24,6 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.currency.util.comparator.CommerceCurrencyPriorityComparator;
 import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
-import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
 import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
@@ -35,6 +34,8 @@ import com.liferay.commerce.price.list.util.comparator.CommercePriceListPriority
 import com.liferay.commerce.price.list.web.display.context.BaseCommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.Base64ItemSelectorReturnType;
@@ -46,7 +47,6 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -72,27 +72,27 @@ public class CommercePriceListDisplayContext
 	public CommercePriceListDisplayContext(
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceAccountService commerceAccountService,
-		CommerceCurrencyService commerceCurrencyService,
 		CommerceAccountGroupService commerceAccountGroupService,
+		CommerceCatalogService commerceCatalogService,
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListAccountRelService commercePriceListAccountRelService,
 		CommercePriceListCommerceAccountGroupRelService
 			commercePriceListCommerceAccountGroupRelService,
 		CommercePriceListService commercePriceListService,
-		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
 		_commerceAccountService = commerceAccountService;
-		_commerceCurrencyService = commerceCurrencyService;
 		_commerceAccountGroupService = commerceAccountGroupService;
+		_commerceCatalogService = commerceCatalogService;
+		_commerceCurrencyService = commerceCurrencyService;
 		_commercePriceListAccountRelService =
 			commercePriceListAccountRelService;
 		_commercePriceListCommerceAccountGroupRelService =
 			commercePriceListCommerceAccountGroupRelService;
 		_commercePriceListService = commercePriceListService;
 		_itemSelector = itemSelector;
-		_portletResourcePermission = portletResourcePermission;
 
 		setDefaultOrderByCol("priority");
 		setDefaultOrderByType("asc");
@@ -163,6 +163,15 @@ public class CommercePriceListDisplayContext
 		return itemSelectorURL.toString();
 	}
 
+	public List<CommerceCatalog> getCommerceCatalogs() throws PortalException {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return _commerceCatalogService.searchCommerceCatalogs(
+			themeDisplay.getCompanyId());
+	}
+
 	public List<CommerceCurrency> getCommerceCurrencies()
 		throws PortalException {
 
@@ -211,7 +220,7 @@ public class CommercePriceListDisplayContext
 
 		List<CommercePriceList> commercePriceLists = ListUtil.copy(
 			_commercePriceListService.getCommercePriceLists(
-				themeDisplay.getScopeGroupId(), WorkflowConstants.STATUS_ANY,
+				themeDisplay.getCompanyId(), WorkflowConstants.STATUS_ANY,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new CommercePriceListPriorityComparator(true)));
 
@@ -295,10 +304,9 @@ public class CommercePriceListDisplayContext
 			BaseModelSearchResult<CommercePriceList>
 				commercePriceListBaseModelSearchResult =
 					_commercePriceListService.searchCommercePriceLists(
-						themeDisplay.getCompanyId(),
-						themeDisplay.getScopeGroupId(), getKeywords(),
-						getStatus(), searchContainer.getStart(),
-						searchContainer.getEnd(), sort);
+						themeDisplay.getCompanyId(), getKeywords(), getStatus(),
+						searchContainer.getStart(), searchContainer.getEnd(),
+						sort);
 
 			searchContainer.setTotal(
 				commercePriceListBaseModelSearchResult.getLength());
@@ -307,13 +315,13 @@ public class CommercePriceListDisplayContext
 		}
 		else {
 			int total = _commercePriceListService.getCommercePriceListsCount(
-				themeDisplay.getScopeGroupId(), getStatus());
+				themeDisplay.getCompanyId(), getStatus());
 
 			searchContainer.setTotal(total);
 
 			List<CommercePriceList> results =
 				_commercePriceListService.getCommercePriceLists(
-					themeDisplay.getScopeGroupId(), getStatus(),
+					themeDisplay.getCompanyId(), getStatus(),
 					searchContainer.getStart(), searchContainer.getEnd(),
 					orderByComparator);
 
@@ -340,14 +348,18 @@ public class CommercePriceListDisplayContext
 		return _status;
 	}
 
-	public boolean hasManageCommercePriceListPermission() {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+	public boolean isSelectedCatalog(CommerceCatalog commerceCatalog)
+		throws PortalException {
 
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		CommercePriceList commercePriceList = getCommercePriceList();
+
+		if (commerceCatalog.getCommerceCatalogGroupId() ==
+				commercePriceList.getGroupId()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected long[] getCheckedcommerceAccountGroupIds()
@@ -387,6 +399,7 @@ public class CommercePriceListDisplayContext
 
 	private final CommerceAccountGroupService _commerceAccountGroupService;
 	private final CommerceAccountService _commerceAccountService;
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CommerceCurrencyService _commerceCurrencyService;
 	private final CommercePriceListAccountRelService
 		_commercePriceListAccountRelService;
@@ -394,7 +407,6 @@ public class CommercePriceListDisplayContext
 		_commercePriceListCommerceAccountGroupRelService;
 	private final CommercePriceListService _commercePriceListService;
 	private final ItemSelector _itemSelector;
-	private final PortletResourcePermission _portletResourcePermission;
 	private Integer _status;
 
 }

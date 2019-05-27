@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.price.list.web.display.context;
 
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.web.internal.servlet.taglib.ui.CommercePriceListScreenNavigationConstants;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
@@ -24,8 +25,11 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.PortletURL;
 
@@ -163,6 +167,16 @@ public abstract class BaseCommercePriceListDisplayContext<T> {
 
 	public abstract SearchContainer<T> getSearchContainer()
 		throws PortalException;
+
+	public boolean hasManageCommercePriceListPermission() {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+	}
 
 	public boolean isSearch() {
 		if (Validator.isNotNull(getKeywords())) {
