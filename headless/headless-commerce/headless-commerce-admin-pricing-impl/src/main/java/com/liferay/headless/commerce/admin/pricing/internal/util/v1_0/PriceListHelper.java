@@ -20,6 +20,8 @@ import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
 import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.core.util.DateConfig;
@@ -302,14 +304,21 @@ public class PriceListHelper {
 			commercePriceListId = 0L;
 		}
 
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.getCommerceCatalogs(
+				serviceContext.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			_commercePriceListService.upsertCommercePriceList(
-				commercePriceListId, commerceCurrencyId, name, priority,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, externalReferenceCode, neverExpire,
-				serviceContext);
+				commerceCatalog.getCommerceCatalogGroupId(),
+				currentUser.getUserId(), commercePriceListId,
+				commerceCurrencyId, name, priority, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				externalReferenceCode, neverExpire, serviceContext);
 
 		if (!active) {
 			Map<String, Serializable> workflowContext = new HashMap<>();
@@ -326,6 +335,9 @@ public class PriceListHelper {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		PriceListHelper.class);
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;

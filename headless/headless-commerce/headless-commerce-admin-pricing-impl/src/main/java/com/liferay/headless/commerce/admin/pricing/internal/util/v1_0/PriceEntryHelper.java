@@ -120,8 +120,11 @@ public class PriceEntryHelper {
 		CommercePriceEntry commercePriceEntry = getCommercePriceEntry(
 			id, companyId);
 
+		CommercePriceList commercePriceList =
+			commercePriceEntry.getCommercePriceList();
+
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commercePriceEntry.getGroupId());
+			commercePriceList.getGroupId());
 
 		_commercePriceEntryService.updateCommercePriceEntry(
 			commercePriceEntry.getCommercePriceEntryId(), priceEntry.getPrice(),

@@ -18,6 +18,8 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -27,6 +29,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Zoltán Takács
@@ -56,6 +59,12 @@ public class CommercePriceListTestUtil {
 		User user = UserLocalServiceUtil.getUserById(
 			serviceContext.getUserId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		DateElements displayDateElements = new DateElements(
 			displayDate, CalendarFactoryUtil.getCalendar(user.getTimeZone()));
 
@@ -68,6 +77,7 @@ public class CommercePriceListTestUtil {
 			expirationDate, defaultExpirationCalendar);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
+			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 			commerceCurrencyId, parentCommercePriceListId, name, priority,
 			displayDateElements.getMonth(), displayDateElements.getDay(),
 			displayDateElements.getYear(), displayDateElements.getHour(),
@@ -155,6 +165,12 @@ public class CommercePriceListTestUtil {
 		User user = UserLocalServiceUtil.getUserById(
 			serviceContext.getUserId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		DateElements displayDateElements = new DateElements(
 			displayDate, CalendarFactoryUtil.getCalendar(user.getTimeZone()));
 
@@ -167,6 +183,7 @@ public class CommercePriceListTestUtil {
 			expirationDate, defaultExpirationCalendar);
 
 		return CommercePriceListLocalServiceUtil.upsertCommercePriceList(
+			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 			commercePriceListId, commerceCurrencyId, parentCommercePriceListId,
 			name, priority, displayDateElements.getMonth(),
 			displayDateElements.getDay(), displayDateElements.getYear(),

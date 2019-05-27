@@ -20,6 +20,8 @@ import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelServiceUtil;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -29,6 +31,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -50,11 +53,18 @@ public class CommercePriceListTestUtil {
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
+			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
 			commerceCurrency.getCommerceCurrencyId(),
 			RandomTestUtil.randomString(), priority,
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
@@ -132,13 +142,16 @@ public class CommercePriceListTestUtil {
 			long groupId, long commerceAccountId, long userId)
 		throws Exception {
 
+		User user = UserLocalServiceUtil.getUser(userId);
+
 		long[] commerceAccountGroupIds = null;
 		/*CommerceAccountGroupLocalServiceUtil.
 			getCommerceAccountGroupIds(
 				groupId, commerceAccountId, userId);*/
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			groupId, commerceAccountId, commerceAccountGroupIds);
+			new long[] {groupId}, user.getUserId(), commerceAccountId,
+			commerceAccountGroupIds);
 	}
 
 }
