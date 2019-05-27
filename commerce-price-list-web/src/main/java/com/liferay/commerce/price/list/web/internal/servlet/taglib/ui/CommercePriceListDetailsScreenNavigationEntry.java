@@ -17,13 +17,13 @@ package com.liferay.commerce.price.list.web.internal.servlet.taglib.ui;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
-import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -31,7 +31,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -92,11 +91,12 @@ public class CommercePriceListDetailsScreenNavigationEntry
 			CommercePriceListDisplayContext commercePriceListDisplayContext =
 				new CommercePriceListDisplayContext(
 					_commercePriceListActionHelper, _commerceAccountService,
-					_commerceCurrencyService, _commerceAccountGroupService,
+					_commerceAccountGroupService, _commerceCatalogService,
+					_commerceCurrencyService,
 					_commercePriceListAccountRelService,
 					_commercePriceListCommerceAccountGroupRelService,
 					_commercePriceListService, httpServletRequest,
-					_itemSelector, _portletResourcePermission);
+					_itemSelector);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -121,6 +121,9 @@ public class CommercePriceListDetailsScreenNavigationEntry
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
+	private CommerceCatalogService _commerceCatalogService;
+
+	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
 
 	@Reference
@@ -142,11 +145,6 @@ public class CommercePriceListDetailsScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
-
-	@Reference(
-		target = "(resource.name=" + CommercePriceListConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.price.list.web)"

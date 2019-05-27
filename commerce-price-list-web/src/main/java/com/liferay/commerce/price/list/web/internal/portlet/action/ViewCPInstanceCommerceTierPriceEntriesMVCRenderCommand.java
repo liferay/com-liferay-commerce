@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.price.list.web.internal.portlet.action;
 
-import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.exception.NoSuchTierPriceEntryException;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CPInstanceCommerceTierPriceEntryDisplayContext;
@@ -24,7 +23,6 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -74,8 +72,7 @@ public class ViewCPInstanceCommerceTierPriceEntriesMVCRenderCommand
 				cpInstanceCommerceTierPriceEntryDisplayContext =
 					new CPInstanceCommerceTierPriceEntryDisplayContext(
 						_actionHelper, _commercePriceListActionHelper,
-						_commerceTierPriceEntryService, httpServletRequest,
-						_portletResourcePermission);
+						_commerceTierPriceEntryService, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -110,11 +107,6 @@ public class ViewCPInstanceCommerceTierPriceEntriesMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommercePriceListConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.price.list.web)"

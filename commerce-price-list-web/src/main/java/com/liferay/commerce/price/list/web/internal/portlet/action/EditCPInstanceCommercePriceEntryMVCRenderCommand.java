@@ -15,7 +15,6 @@
 package com.liferay.commerce.price.list.web.internal.portlet.action;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.price.list.constants.CommercePriceListConstants;
 import com.liferay.commerce.price.list.exception.NoSuchPriceEntryException;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CPInstanceCommercePriceEntryDisplayContext;
@@ -26,7 +25,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -77,8 +75,7 @@ public class EditCPInstanceCommercePriceEntryMVCRenderCommand
 					new CPInstanceCommercePriceEntryDisplayContext(
 						_actionHelper, _commercePriceEntryService,
 						_commercePriceFormatter, _commercePriceListActionHelper,
-						httpServletRequest, _itemSelector,
-						_portletResourcePermission);
+						httpServletRequest, _itemSelector);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -119,11 +116,6 @@ public class EditCPInstanceCommercePriceEntryMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommercePriceListConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.price.list.web)"
