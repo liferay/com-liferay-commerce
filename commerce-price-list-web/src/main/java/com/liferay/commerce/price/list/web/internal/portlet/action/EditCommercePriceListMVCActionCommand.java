@@ -16,6 +16,7 @@ package com.liferay.commerce.price.list.web.internal.portlet.action;
 
 import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.exception.CommercePriceListCurrencyException;
+import com.liferay.commerce.price.list.exception.CommercePriceListParentPriceListGroupIdException;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListAccountRel;
@@ -23,6 +24,8 @@ import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGro
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -40,6 +43,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -115,7 +119,10 @@ public class EditCommercePriceListMVCActionCommand
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof CommercePriceListCurrencyException) {
+			else if (e instanceof CommercePriceListCurrencyException ||
+					 e instanceof
+						 CommercePriceListParentPriceListGroupIdException) {
+
 				SessionErrors.add(actionRequest, e.getClass());
 
 				String redirect = ParamUtil.getString(
@@ -205,15 +212,36 @@ public class EditCommercePriceListMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommercePriceList.class.getName(), actionRequest);
 
-		CommercePriceList commercePriceList = null;
+		CommercePriceList commercePriceList;
 
 		if (commercePriceListId <= 0) {
+
+			// Commerce catalog
+
+			long commerceCatalogId = ParamUtil.getLong(
+				actionRequest, "commerceCatalogId");
+
+			CommerceCatalog commerceCatalog =
+				_commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
+
+			if (commerceCatalog == null) {
+				List<CommerceCatalog> commerceCatalogs =
+					_commerceCatalogService.getCommerceCatalogs(
+						_portal.getCompanyId(actionRequest), true);
+
+				commerceCatalog = commerceCatalogs.get(0);
+			}
+
+			// Commerce price list
+
 			commercePriceList = _commercePriceListService.addCommercePriceList(
-				commerceCurrencyId, parentCommercePriceListId, name, priority,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, serviceContext);
+				commerceCatalog.getCommerceCatalogGroupId(),
+				serviceContext.getUserId(), commerceCurrencyId,
+				parentCommercePriceListId, name, priority, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, serviceContext);
 		}
 		else {
 			commercePriceList =
@@ -321,6 +349,9 @@ public class EditCommercePriceListMVCActionCommand
 			}
 		}
 	}
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommercePriceListAccountRelService
