@@ -44,23 +44,23 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_C" return-type="CommerceCurrency" unique="true">
+		<finder name="C_C" return-type="CommerceCurrency" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="code" />
 		</finder>
-		<finder name="G_P" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_P" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="primary" />
 		</finder>
-		<finder name="G_A" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="G_P_A" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_P_A" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="primary" />
 			<finder-column name="active" />
 		</finder>
