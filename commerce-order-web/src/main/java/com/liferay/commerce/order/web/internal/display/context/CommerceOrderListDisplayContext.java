@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Field;
@@ -52,6 +53,7 @@ import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -89,11 +91,13 @@ public class CommerceOrderListDisplayContext {
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
+		GroupLocalService groupLocalService,
 		JSONFactory jsonFactory, RenderRequest renderRequest) {
 
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
+		_groupLocalService = groupLocalService;
 		_jsonFactory = jsonFactory;
 
 		_commerceOrderRequestHelper = new CommerceOrderRequestHelper(
@@ -130,6 +134,16 @@ public class CommerceOrderListDisplayContext {
 		}
 
 		return _availableOrderStatusKVPs;
+	}
+
+	public String getCommerceOrderChannelName(CommerceOrder commerceOrder) {
+		ThemeDisplay themeDisplay =
+			_commerceOrderRequestHelper.getThemeDisplay();
+
+		Group group =
+			_groupLocalService.fetchGroup(commerceOrder.getGroupId());
+
+		return group.getName(themeDisplay.getLocale());
 	}
 
 	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
@@ -415,8 +429,6 @@ public class CommerceOrderListDisplayContext {
 			"useSearchResultPermissionFilter", Boolean.FALSE);
 
 		searchContext.setCompanyId(_commerceOrderRequestHelper.getCompanyId());
-		searchContext.setGroupIds(
-			new long[] {_commerceOrderRequestHelper.getScopeGroupId()});
 		searchContext.setKeywords(_keywords);
 		searchContext.setStart(_searchContainer.getStart());
 		searchContext.setEnd(_searchContainer.getEnd());
@@ -564,6 +576,7 @@ public class CommerceOrderListDisplayContext {
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
+	private final GroupLocalService _groupLocalService;
 	private final JSONFactory _jsonFactory;
 	private final String _keywords;
 	private List<NavigationItem> _navigationItems;
