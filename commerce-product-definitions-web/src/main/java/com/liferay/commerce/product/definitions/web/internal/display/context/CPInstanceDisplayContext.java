@@ -105,11 +105,11 @@ public class CPInstanceDisplayContext
 			cpInstance.getJson());
 	}
 
-	public String formatPrice(long groupId, BigDecimal price)
+	public String formatPrice(long companyId, BigDecimal price)
 		throws PortalException {
 
 		return commercePriceFormatter.format(
-			groupId, price, cpRequestHelper.getLocale());
+			companyId, price, cpRequestHelper.getLocale());
 	}
 
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels()

@@ -222,7 +222,7 @@ public class CommerceOrderLocalServiceImpl
 		if (commerceCurrencyId <= 0) {
 			CommerceCurrency commerceCurrency =
 				_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-					serviceContext.getScopeGroupId());
+					serviceContext.getCompanyId());
 
 			if (commerceCurrency != null) {
 				commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();

@@ -15,15 +15,12 @@
 package com.liferay.commerce.channel.web.internal.portlet.action;
 
 import com.liferay.commerce.channel.web.internal.display.context.CommerceChannelDisplayContext;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -54,27 +51,17 @@ public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			renderRequest);
 
-			CommerceChannelDisplayContext commerceChannelDisplayContext =
-				new CommerceChannelDisplayContext(
-					_commerceChannelService, _commerceChannelTypeRegistry,
-					_commerceChannelTypeJSPContributorRegistry,
-					httpServletRequest, _portal, _portletResourcePermission);
+		CommerceChannelDisplayContext commerceChannelDisplayContext =
+			new CommerceChannelDisplayContext(
+				_commerceChannelService, _commerceChannelTypeRegistry,
+				_commerceChannelTypeJSPContributorRegistry,
+				_commerceCurrencyService, httpServletRequest, _portal);
 
-			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(renderRequest, pe.getClass());
-
-			return "/error.jsp";
-		}
-		catch (Exception e) {
-			throw new PortletException(e);
-		}
+		renderRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);
 
 		return "/details.jsp";
 	}
@@ -90,9 +77,9 @@ public class EditCommerceChannelMVCRenderCommand implements MVCRenderCommand {
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 
 	@Reference
-	private Portal _portal;
+	private CommerceCurrencyService _commerceCurrencyService;
 
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
+	@Reference
+	private Portal _portal;
 
 }

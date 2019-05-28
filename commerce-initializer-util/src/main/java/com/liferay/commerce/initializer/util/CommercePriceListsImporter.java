@@ -76,7 +76,7 @@ public class CommercePriceListsImporter {
 
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.getCommerceCurrency(
-				serviceContext.getScopeGroupId(), currencyCode);
+				serviceContext.getCompanyId(), currencyCode);
 
 		long parentPriceListId = 0;
 

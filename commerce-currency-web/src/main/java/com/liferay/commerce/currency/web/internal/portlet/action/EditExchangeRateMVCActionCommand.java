@@ -15,7 +15,7 @@
 package com.liferay.commerce.currency.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.currency.configuration.ExchangeRateProviderGroupServiceConfiguration;
+import com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration;
 import com.liferay.commerce.currency.constants.CommerceCurrencyExchangeRateConstants;
 import com.liferay.commerce.currency.exception.CommerceCurrencyCodeException;
 import com.liferay.commerce.currency.exception.CommerceCurrencyNameException;
@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactory;
@@ -110,8 +110,8 @@ public class EditExchangeRateMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "exchangeRateConfiguration--");
 
 		Settings settings = _settingsFactory.getSettings(
-			new GroupServiceSettingsLocator(
-				serviceContext.getScopeGroupId(),
+			new CompanyServiceSettingsLocator(
+				serviceContext.getCompanyId(),
 				CommerceCurrencyExchangeRateConstants.SERVICE_NAME));
 
 		ModifiableSettings modifiableSettings =
@@ -127,24 +127,22 @@ public class EditExchangeRateMVCActionCommand extends BaseMVCActionCommand {
 	protected void updateExchangeRates(ServiceContext serviceContext)
 		throws Exception {
 
-		ExchangeRateProviderGroupServiceConfiguration
-			exchangeRateProviderGroupServiceConfiguration =
-				_configurationProvider.getConfiguration(
-					ExchangeRateProviderGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						serviceContext.getScopeGroupId(),
-						CommerceCurrencyExchangeRateConstants.SERVICE_NAME));
+		CommerceCurrencyConfiguration commerceCurrencyConfiguration =
+			_configurationProvider.getConfiguration(
+				CommerceCurrencyConfiguration.class,
+				new CompanyServiceSettingsLocator(
+					serviceContext.getCompanyId(),
+					CommerceCurrencyExchangeRateConstants.SERVICE_NAME));
 
 		List<CommerceCurrency> commerceCurrencies =
 			_commerceCurrencyService.getCommerceCurrencies(
-				serviceContext.getScopeGroupId(), true, QueryUtil.ALL_POS,
+				serviceContext.getCompanyId(), true, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
 			_commerceCurrencyService.updateExchangeRate(
 				commerceCurrency.getCommerceCurrencyId(),
-				exchangeRateProviderGroupServiceConfiguration.
-					defaultExchangeRateProviderKey());
+				commerceCurrencyConfiguration.defaultExchangeRateProviderKey());
 		}
 	}
 

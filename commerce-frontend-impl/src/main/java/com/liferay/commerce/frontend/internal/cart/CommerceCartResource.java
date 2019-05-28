@@ -85,7 +85,7 @@ public class CommerceCartResource {
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
 			CommerceContext commerceContext = _commerceContextFactory.create(
-				commerceOrder.getGroupId(),
+				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
 				commerceOrder.getCommerceAccountId());
@@ -132,7 +132,7 @@ public class CommerceCartResource {
 				_commerceOrderService.getCommerceOrder(commerceOrderId);
 
 			CommerceContext commerceContext = _commerceContextFactory.create(
-				commerceOrder.getGroupId(),
+				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
 				commerceOrder.getCommerceAccountId());
@@ -182,7 +182,7 @@ public class CommerceCartResource {
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
 			CommerceContext commerceContext = _commerceContextFactory.create(
-				commerceOrder.getGroupId(),
+				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(),
 				commerceOrder.getCommerceAccountId());
@@ -240,7 +240,8 @@ public class CommerceCartResource {
 
 		try {
 			CommerceContext commerceContext = _commerceContextFactory.create(
-				groupId, _portal.getUserId(httpServletRequest), orderId,
+				_portal.getCompanyId(httpServletRequest), groupId,
+				_portal.getUserId(httpServletRequest), orderId,
 				commerceAccountId);
 
 			httpServletRequest.setAttribute(
@@ -268,7 +269,8 @@ public class CommerceCartResource {
 			}
 
 			commerceContext = _commerceContextFactory.create(
-				groupId, _portal.getUserId(httpServletRequest),
+				_portal.getCompanyId(httpServletRequest), groupId,
+				_portal.getUserId(httpServletRequest),
 				commerceOrder.getCommerceOrderId(), commerceAccountId);
 
 			httpServletRequest.setAttribute(

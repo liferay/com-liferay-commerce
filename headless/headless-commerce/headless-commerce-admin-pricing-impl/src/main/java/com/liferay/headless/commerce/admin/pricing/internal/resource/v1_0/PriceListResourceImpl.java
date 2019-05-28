@@ -100,7 +100,8 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 		throws Exception {
 
 		return _priceListHelper.upsertPriceList(
-			groupId, priceList, _user, contextAcceptLanguage);
+			contextCompany.getCompanyId(), priceList, _user,
+			contextAcceptLanguage);
 	}
 
 	@Reference
