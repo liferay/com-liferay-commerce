@@ -7,7 +7,6 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.frontend.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.payment.api", version: "1.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.service", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.service", version: "4.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.2.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
@@ -19,4 +18,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-frontend-taglib")
 	compileOnly project(":apps:commerce:commerce-product-api")
+	compileOnly project(":apps:commerce:commerce-product-service")
 }
