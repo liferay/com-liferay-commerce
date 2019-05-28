@@ -716,7 +716,7 @@ public class CPDefinitionsImporter {
 			String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
 
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, null, manufacturerPartNumber, true,
+			cpDefinitionId, cpDefinition.getGroupId(), sku, null, manufacturerPartNumber, true,
 			optionsJSON, cpDefinition.getWidth(), cpDefinition.getHeight(),
 			cpDefinition.getDepth(), cpDefinition.getWeight(),
 			BigDecimal.valueOf(price), BigDecimal.valueOf(promoPrice),
