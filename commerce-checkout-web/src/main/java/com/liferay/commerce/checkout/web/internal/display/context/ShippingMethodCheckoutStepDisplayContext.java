@@ -100,8 +100,8 @@ public class ShippingMethodCheckoutStepDisplayContext {
 		sb.append(" (+");
 		sb.append(
 			_commercePriceFormatter.format(
-				themeDisplay.getScopeGroupId(),
-				commerceShippingOption.getAmount(), themeDisplay.getLocale()));
+				themeDisplay.getCompanyId(), commerceShippingOption.getAmount(),
+				themeDisplay.getLocale()));
 		sb.append(CharPool.CLOSE_PARENTHESIS);
 
 		return sb.toString();

@@ -157,13 +157,13 @@ public class PriceListHelper {
 	}
 
 	public PriceList upsertPriceList(
-			long groupId, PriceList priceList, User user,
+			long companyId, PriceList priceList, User user,
 			AcceptLanguage acceptLanguage)
 		throws PortalException {
 
 		return _dtoMapper.modelToDTO(
 			_upsertPriceList(
-				groupId, priceList.getCommercePriceListId(),
+				companyId, priceList.getCommercePriceListId(),
 				priceList.getCurrency(), priceList.getName(),
 				priceList.getPriority(), priceList.getNeverExpire(),
 				priceList.getDisplayDate(), priceList.getExpirationDate(),
@@ -180,11 +180,12 @@ public class PriceListHelper {
 		return calendar;
 	}
 
-	private long _getCommerceCurrencyId(Long groupId, String currencyCode)
+	private long _getCommerceCurrencyId(Long companyId, String currencyCode)
 		throws PortalException {
 
 		CommerceCurrency commerceCurrency =
-			_commerceCurrencyService.getCommerceCurrency(groupId, currencyCode);
+			_commerceCurrencyService.getCommerceCurrency(
+				companyId, currencyCode);
 
 		return commerceCurrency.getCommerceCurrencyId();
 	}
@@ -197,9 +198,8 @@ public class PriceListHelper {
 
 		CommercePriceList commercePriceList = getPriceListById(id, company);
 
-		long groupId = commercePriceList.getGroupId();
-
-		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
+		long commerceCurrencyId = _getCommerceCurrencyId(
+			commercePriceList.getCompanyId(), currency);
 
 		if (neverExpire == null) {
 			neverExpire = Boolean.TRUE;
@@ -210,7 +210,7 @@ public class PriceListHelper {
 		}
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			groupId);
+			commercePriceList.getGroupId());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -243,13 +243,13 @@ public class PriceListHelper {
 	}
 
 	private CommercePriceList _upsertPriceList(
-			Long groupId, Long commercePriceListId, String currency,
+			Long companyId, Long commercePriceListId, String currency,
 			String name, Double priority, Boolean neverExpire, Date displayDate,
 			Date expirationDate, String externalReferenceCode, Boolean active,
 			User currentUser)
 		throws PortalException {
 
-		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
+		long commerceCurrencyId = _getCommerceCurrencyId(companyId, currency);
 
 		if (neverExpire == null) {
 			neverExpire = Boolean.TRUE;
@@ -260,7 +260,7 @@ public class PriceListHelper {
 		}
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			groupId);
+			companyId);
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());

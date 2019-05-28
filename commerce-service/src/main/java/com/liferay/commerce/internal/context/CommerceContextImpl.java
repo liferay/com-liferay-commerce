@@ -41,13 +41,14 @@ import java.util.Optional;
 public class CommerceContextImpl implements CommerceContext {
 
 	public CommerceContextImpl(
-		long groupId, long userId, long orderId, long commerceAccountId,
-		CommerceAccountService commerceAccountService,
+		long companyId, long groupId, long userId, long orderId,
+		long commerceAccountId, CommerceAccountService commerceAccountService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
 		CommercePriceListLocalService commercePriceListLocalService,
 		ConfigurationProvider configurationProvider) {
 
+		_companyId = companyId;
 		_groupId = groupId;
 		_userId = userId;
 		_orderId = orderId;
@@ -172,6 +173,7 @@ public class CommerceContextImpl implements CommerceContext {
 	private final CommerceOrderService _commerceOrderService;
 	private Optional<CommercePriceList> _commercePriceList;
 	private final CommercePriceListLocalService _commercePriceListLocalService;
+	private final long _companyId;
 	private final long _groupId;
 	private final long _orderId;
 	private final long _userId;

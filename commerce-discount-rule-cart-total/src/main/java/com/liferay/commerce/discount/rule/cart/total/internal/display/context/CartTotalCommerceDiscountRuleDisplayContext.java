@@ -104,7 +104,7 @@ public class CartTotalCommerceDiscountRuleDisplayContext {
 				WebKeys.THEME_DISPLAY);
 
 		return _commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyId());
 	}
 
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;

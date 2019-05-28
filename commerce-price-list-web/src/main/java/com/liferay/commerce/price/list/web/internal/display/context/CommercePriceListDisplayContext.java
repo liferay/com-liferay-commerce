@@ -180,7 +180,7 @@ public class CommercePriceListDisplayContext
 				WebKeys.THEME_DISPLAY);
 
 		return _commerceCurrencyService.getCommerceCurrencies(
-			themeDisplay.getScopeGroupId(), true, QueryUtil.ALL_POS,
+			themeDisplay.getCompanyId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new CommerceCurrencyPriorityComparator(true));
 	}
 

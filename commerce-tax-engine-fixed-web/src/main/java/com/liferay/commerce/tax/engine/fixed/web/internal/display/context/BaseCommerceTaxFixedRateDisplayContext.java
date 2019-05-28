@@ -63,7 +63,7 @@ public abstract class BaseCommerceTaxFixedRateDisplayContext<T> {
 
 		CommerceCurrency commerceCurrency =
 			commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				commerceTaxFixedRateRequestHelper.getScopeGroupId());
+				commerceTaxFixedRateRequestHelper.getCompanyId());
 
 		if (commerceCurrency != null) {
 			return commerceCurrency.getCode();
