@@ -198,7 +198,7 @@ public abstract class BaseCommerceShippingFixedOptionDisplayContext<T> {
 			WebKeys.THEME_DISPLAY);
 
 		return commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyId());
 	}
 
 	protected String getSelectedScreenNavigationCategoryKey() {

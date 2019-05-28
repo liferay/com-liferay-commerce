@@ -118,7 +118,7 @@ public class CommerceAccountClayTable
 		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
-			themeDisplay.getScopeGroupId(),
+			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 			_portal.getUserId(httpServletRequest), 0, 0);
 
 		return _commerceAccountService.getUserCommerceAccountsCount(
@@ -166,7 +166,7 @@ public class CommerceAccountClayTable
 		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
-			themeDisplay.getScopeGroupId(),
+			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 			_portal.getUserId(httpServletRequest), 0, 0);
 
 		List<CommerceAccount> commerceAccounts =

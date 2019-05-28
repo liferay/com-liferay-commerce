@@ -65,7 +65,7 @@ public class CPDefinitionShippingInfoDisplayContext
 
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				themeDisplay.getScopeGroupId());
+				themeDisplay.getCompanyId());
 
 		if (commerceCurrency == null) {
 			return StringPool.BLANK;

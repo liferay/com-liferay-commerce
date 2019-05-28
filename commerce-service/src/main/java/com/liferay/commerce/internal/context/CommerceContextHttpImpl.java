@@ -104,10 +104,9 @@ public class CommerceContextHttpImpl implements CommerceContext {
 			return _commerceCurrency;
 		}
 
-		long groupId = _portal.getScopeGroupId(_httpServletRequest);
-
 		_commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				_portal.getCompanyId(_httpServletRequest));
 
 		return _commerceCurrency;
 	}
@@ -131,8 +130,6 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		if (_commercePriceList != null) {
 			return _commercePriceList;
 		}
-
-		long groupId = _portal.getScopeGroupId(_httpServletRequest);
 
 		CommerceAccount commerceAccount = getCommerceAccount();
 

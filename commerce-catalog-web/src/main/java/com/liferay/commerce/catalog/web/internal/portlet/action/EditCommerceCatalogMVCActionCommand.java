@@ -98,23 +98,28 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 	protected CommerceCatalog updateCommerceCatalog(ActionRequest actionRequest)
 		throws Exception {
 
-		String catalogDefaultLanguageId = ParamUtil.getString(
-			actionRequest, "catalogDefaultLanguageId");
 		long commerceCatalogId = ParamUtil.getLong(
 			actionRequest, "commerceCatalogId");
+
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
+		String commerceCurrencyCode = ParamUtil.getString(
+			actionRequest, "commerceCurrencyCode");
+		String catalogDefaultLanguageId = ParamUtil.getString(
+			actionRequest, "catalogDefaultLanguageId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceCatalog.class.getName(), actionRequest);
 
 		if (commerceCatalogId <= 0) {
 			return _commerceCatalogService.addCommerceCatalog(
-				nameMap, catalogDefaultLanguageId, null, serviceContext);
+				nameMap, commerceCurrencyCode, catalogDefaultLanguageId, null,
+				serviceContext);
 		}
 
 		return _commerceCatalogService.updateCommerceCatalog(
-			commerceCatalogId, nameMap, catalogDefaultLanguageId);
+			commerceCatalogId, nameMap, commerceCurrencyCode,
+			catalogDefaultLanguageId);
 	}
 
 	@Reference
