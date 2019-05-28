@@ -16,13 +16,12 @@ package com.liferay.commerce.currency.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.currency.constants.CommerceCurrencyActionKeys;
-import com.liferay.commerce.currency.model.CommerceCurrencyConstants;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
@@ -44,6 +43,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -70,12 +70,12 @@ public class CurrenciesCommerceAdminModule implements CommerceAdminModule {
 	}
 
 	@Override
-	public boolean isVisible(long groupId) throws PortalException {
+	public boolean isVisible(long companyId) throws PortalException {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		return _portletResourcePermission.contains(
-			permissionChecker, groupId,
+		return PortalPermissionUtil.contains(
+			permissionChecker,
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 	}
 
@@ -99,11 +99,6 @@ public class CurrenciesCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceCurrencyConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.currency.web)"
