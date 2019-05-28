@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.channel.web.internal.display.context;
 
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.item.selector.criterion.SimpleSiteItemSelectorCriterion;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
@@ -26,7 +27,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,19 +47,19 @@ public class SiteCommerceChannelTypeDisplayContext
 	extends CommerceChannelDisplayContext {
 
 	public SiteCommerceChannelTypeDisplayContext(
-			CommerceChannelService commerceChannelService,
-			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
-			CommerceChannelTypeJSPContributorRegistry
-				commerceChannelTypeJSPContributorRegistry,
-			GroupLocalService groupLocalService,
-			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-			Portal portal, PortletResourcePermission portletResourcePermission)
-		throws PortalException {
+		CommerceChannelService commerceChannelService,
+		CommerceChannelTypeRegistry commerceChannelTypeRegistry,
+		CommerceChannelTypeJSPContributorRegistry
+			commerceChannelTypeJSPContributorRegistry,
+		CommerceCurrencyService commerceCurrencyService,
+		GroupLocalService groupLocalService,
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		Portal portal) {
 
 		super(
 			commerceChannelService, commerceChannelTypeRegistry,
-			commerceChannelTypeJSPContributorRegistry, httpServletRequest,
-			portal, portletResourcePermission);
+			commerceChannelTypeJSPContributorRegistry, commerceCurrencyService,
+			httpServletRequest, portal);
 
 		_groupLocalService = groupLocalService;
 		_itemSelector = itemSelector;

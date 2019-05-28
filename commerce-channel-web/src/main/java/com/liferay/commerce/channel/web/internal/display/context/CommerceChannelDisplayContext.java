@@ -15,6 +15,8 @@
 package com.liferay.commerce.channel.web.internal.display.context;
 
 import com.liferay.commerce.channel.web.display.context.BaseCommerceChannelSearchContainerDisplayContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelType;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
@@ -26,7 +28,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,18 +41,18 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class CommerceChannelDisplayContext
 	extends BaseCommerceChannelSearchContainerDisplayContext<CommerceChannel> {
 
 	public CommerceChannelDisplayContext(
-			CommerceChannelService commerceChannelService,
-			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
-			CommerceChannelTypeJSPContributorRegistry
-				commerceChannelTypeJSPContributorRegistry,
-			HttpServletRequest httpServletRequest, Portal portal,
-			PortletResourcePermission portletResourcePermission)
-		throws PortalException {
+		CommerceChannelService commerceChannelService,
+		CommerceChannelTypeRegistry commerceChannelTypeRegistry,
+		CommerceChannelTypeJSPContributorRegistry
+			commerceChannelTypeJSPContributorRegistry,
+		CommerceCurrencyService commerceCurrencyService,
+		HttpServletRequest httpServletRequest, Portal portal) {
 
 		super(httpServletRequest, CommerceChannel.class.getSimpleName());
 
@@ -61,8 +62,8 @@ public class CommerceChannelDisplayContext
 		_commerceChannelTypeRegistry = commerceChannelTypeRegistry;
 		_commerceChannelTypeJSPContributorRegistry =
 			commerceChannelTypeJSPContributorRegistry;
+		_commerceCurrencyService = commerceCurrencyService;
 		_portal = portal;
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public String getChannelURL(CommerceChannel commerceChannel)
@@ -114,6 +115,14 @@ public class CommerceChannelDisplayContext
 
 	public List<CommerceChannelType> getCommerceChannelTypes() {
 		return _commerceChannelTypeRegistry.getCommerceChannelTypes();
+	}
+
+	public List<CommerceCurrency> getCommerceCurrencies()
+		throws PortalException {
+
+		return _commerceCurrencyService.getCommerceCurrencies(
+			cpRequestHelper.getCompanyId(), true, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	@Override
@@ -173,7 +182,7 @@ public class CommerceChannelDisplayContext
 	private final CommerceChannelTypeJSPContributorRegistry
 		_commerceChannelTypeJSPContributorRegistry;
 	private final CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private final Portal _portal;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }
