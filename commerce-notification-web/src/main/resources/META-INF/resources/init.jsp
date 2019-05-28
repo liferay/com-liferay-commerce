@@ -27,7 +27,8 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.commerce.admin.constants.CommerceAdminPortletKeys" %><%@
+<%@ page import="com.liferay.commerce.account.model.CommerceAccountGroup" %><%@
+page import="com.liferay.commerce.admin.constants.CommerceAdminPortletKeys" %><%@
 page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
 page import="com.liferay.commerce.notification.constants.CommerceNotificationActionKeys" %><%@
 page import="com.liferay.commerce.notification.exception.CommerceNotificationTemplateFromException" %><%@
@@ -35,6 +36,7 @@ page import="com.liferay.commerce.notification.exception.CommerceNotificationTem
 page import="com.liferay.commerce.notification.exception.CommerceNotificationTemplateTypeException" %><%@
 page import="com.liferay.commerce.notification.model.CommerceNotificationQueueEntry" %><%@
 page import="com.liferay.commerce.notification.model.CommerceNotificationTemplate" %><%@
+page import="com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel" %><%@
 page import="com.liferay.commerce.notification.type.CommerceNotificationType" %><%@
 page import="com.liferay.commerce.notification.web.internal.admin.NotificationsCommerceAdminModule" %><%@
 page import="com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationQueueEntriesDisplayContext" %><%@
@@ -52,6 +54,7 @@ page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 page import="com.liferay.portal.kernel.util.PropsUtil" %><%@
+page import="com.liferay.portal.kernel.util.UnicodeFormatter" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%@ page import="java.util.ArrayList" %><%@
