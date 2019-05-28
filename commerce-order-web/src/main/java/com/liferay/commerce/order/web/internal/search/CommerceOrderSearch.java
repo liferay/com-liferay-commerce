@@ -50,6 +50,9 @@ public class CommerceOrderSearch extends SearchContainer<CommerceOrder> {
 			(CommerceOrderDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			CommerceOrderDisplayTerms.CHANNEL,
+			String.valueOf(commerceOrderDisplayTerms.getCommerceChannel()));
+		iteratorURL.setParameter(
 			CommerceOrderDisplayTerms.COMMERCE_ACCOUNT_ID,
 			String.valueOf(commerceOrderDisplayTerms.getCommerceAccountId()));
 		iteratorURL.setParameter(

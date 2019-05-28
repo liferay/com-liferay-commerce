@@ -23,6 +23,8 @@ import com.liferay.commerce.order.web.internal.search.CommerceOrderSearch;
 import com.liferay.commerce.order.web.internal.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.search.facet.NegatableSimpleFacet;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
@@ -88,12 +90,14 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceOrderListDisplayContext {
 
 	public CommerceOrderListDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
-		GroupLocalService groupLocalService,
-		JSONFactory jsonFactory, RenderRequest renderRequest) {
+		GroupLocalService groupLocalService, JSONFactory jsonFactory,
+		RenderRequest renderRequest) {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
@@ -136,14 +140,21 @@ public class CommerceOrderListDisplayContext {
 		return _availableOrderStatusKVPs;
 	}
 
-	public String getCommerceOrderChannelName(CommerceOrder commerceOrder) {
+	public String getCommerceChannelName(long groupId) {
 		ThemeDisplay themeDisplay =
 			_commerceOrderRequestHelper.getThemeDisplay();
 
-		Group group =
-			_groupLocalService.fetchGroup(commerceOrder.getGroupId());
+		Group group = _groupLocalService.fetchGroup(groupId);
 
 		return group.getName(themeDisplay.getLocale());
+	}
+
+	public List<CommerceChannel> getCommerceChannels() {
+		ThemeDisplay themeDisplay =
+			_commerceOrderRequestHelper.getThemeDisplay();
+
+		return _commerceChannelLocalService.getCommerceChannels(
+			themeDisplay.getCompanyId());
 	}
 
 	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
@@ -571,6 +582,7 @@ public class CommerceOrderListDisplayContext {
 
 	private List<KeyValuePair> _availableAdvanceStatusKVPs;
 	private List<KeyValuePair> _availableOrderStatusKVPs;
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final Format _commerceOrderDateFormatDateTime;
 	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;

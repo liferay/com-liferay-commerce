@@ -17,6 +17,7 @@ package com.liferay.commerce.order.web.internal.portlet;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderListDisplayContext;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -96,6 +97,7 @@ public class CommerceOrderPortlet extends MVCPortlet {
 				CommerceOrderListDisplayContext
 					commerceOrderListDisplayContext =
 						new CommerceOrderListDisplayContext(
+							_commerceChannelLocalService,
 							_commerceOrderLocalService,
 							_commerceOrderNoteService,
 							_commerceOrderPriceCalculation, _groupLocalService,
@@ -112,6 +114,9 @@ public class CommerceOrderPortlet extends MVCPortlet {
 			throw new PortletException(e);
 		}
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;

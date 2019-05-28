@@ -31,6 +31,8 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	public static final String ADVANCE_STATUS = "advanceStatus";
 
+	public static final String CHANNEL = "channel";
+
 	public static final String COMMERCE_ACCOUNT_ID = "commerceAccountId";
 
 	public static final String END_CREATE_DATE = "endCreateDate";
@@ -59,6 +61,7 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 		super(portletRequest);
 
 		_advanceStatus = ParamUtil.getString(portletRequest, ADVANCE_STATUS);
+		_commerceChannel = ParamUtil.getString(portletRequest, CHANNEL);
 		_commerceAccountId = ParamUtil.getLong(
 			portletRequest, COMMERCE_ACCOUNT_ID);
 		_endCreateDateDay = ParamUtil.getInteger(
@@ -84,6 +87,10 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	public long getCommerceAccountId() {
 		return _commerceAccountId;
+	}
+
+	public String getCommerceChannel() {
+		return _commerceChannel;
 	}
 
 	public Date getEndCreateDate() {
@@ -152,6 +159,7 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 
 	private final String _advanceStatus;
 	private final long _commerceAccountId;
+	private final String _commerceChannel;
 	private final int _endCreateDateDay;
 	private final int _endCreateDateMonth;
 	private final int _endCreateDateYear;

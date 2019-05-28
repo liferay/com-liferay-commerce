@@ -99,7 +99,7 @@ CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrder
 
 			<liferay-ui:search-container-column-text
 				name="channel"
-				value="<%= HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceOrderChannelName(commerceOrder)) %>"
+				value="<%= HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceChannelName(commerceOrder.getGroupId())) %>"
 			/>
 
 			<liferay-ui:search-container-column-jsp
