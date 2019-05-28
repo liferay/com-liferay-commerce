@@ -20,6 +20,7 @@
 CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceCatalog commerceCatalog = commerceCatalogDisplayContext.getCommerceCatalog();
+List<CommerceCurrency> commerceCurrencies = commerceCatalogDisplayContext.getCommerceCurrencies();
 
 boolean isViewOnly = false;
 
@@ -39,6 +40,20 @@ if (commerceCatalog != null) {
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
 				<aui:input bean="<%= commerceCatalog %>" disabled="<%= isViewOnly %>" model="<%= CommerceCatalog.class %>" name="name" required="<%= true %>" />
+
+				<aui:select disabled="<%= isViewOnly %>" label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+
+					<%
+					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
+					%>
+
+						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceCatalog == null) ? commerceCurrency.isPrimary() : (commerceCatalog.getCommerceCurrencyCode() == commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 
 				<aui:select disabled="<%= isViewOnly %>" helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="<%= true %>" title="language">
 
