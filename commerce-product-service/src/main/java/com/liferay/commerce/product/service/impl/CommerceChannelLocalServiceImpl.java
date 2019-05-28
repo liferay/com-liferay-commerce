@@ -35,7 +35,8 @@ public class CommerceChannelLocalServiceImpl
 	@Override
 	public CommerceChannel addCommerceChannel(
 			String name, String type, UnicodeProperties typeSettingsProperties,
-			String externalReferenceCode, ServiceContext serviceContext)
+			String commerceCurrencyCode, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -51,6 +52,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setName(name);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
+		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
 		commerceChannel.setExternalReferenceCode(externalReferenceCode);
 
 		commerceChannelPersistence.update(commerceChannel);
@@ -102,7 +104,8 @@ public class CommerceChannelLocalServiceImpl
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String type,
-			UnicodeProperties typeSettingsProperties)
+			UnicodeProperties typeSettingsProperties,
+			String commerceCurrencyCode)
 		throws PortalException {
 
 		CommerceChannel commerceChannel =
@@ -111,6 +114,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setName(name);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
+		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
 
 		commerceChannelPersistence.update(commerceChannel);
 

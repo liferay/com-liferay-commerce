@@ -31,12 +31,13 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 	@Override
 	public CommerceChannel addCommerceChannel(
 			String name, String type, UnicodeProperties typeSettingsProperties,
-			String externalReferenceCode, ServiceContext serviceContext)
+			String commerceCurrencyCode, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelLocalService.addCommerceChannel(
-			name, type, typeSettingsProperties, externalReferenceCode,
-			serviceContext);
+			name, type, typeSettingsProperties, commerceCurrencyCode,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -78,11 +79,13 @@ public class CommerceChannelServiceImpl extends CommerceChannelServiceBaseImpl {
 	@Override
 	public CommerceChannel updateCommerceChannel(
 			long commerceChannelId, String name, String type,
-			UnicodeProperties typeSettingsProperties)
+			UnicodeProperties typeSettingsProperties,
+			String commerceCurrencyCode)
 		throws PortalException {
 
 		return commerceChannelLocalService.updateCommerceChannel(
-			commerceChannelId, name, type, typeSettingsProperties);
+			commerceChannelId, name, type, typeSettingsProperties,
+			commerceCurrencyCode);
 	}
 
 }
