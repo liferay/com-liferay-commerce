@@ -1399,9 +1399,10 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product definition
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
+
+		long groupId = cpDefinition.getGroupId();
 
 		Date displayDate = null;
 		Date expirationDate = null;
