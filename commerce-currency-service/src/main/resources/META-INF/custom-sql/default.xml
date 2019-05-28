@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.commerce.currency.service.persistence.CommerceCurrencyFinder.getGroupIds">
+	<sql id="com.liferay.commerce.currency.service.persistence.CommerceCurrencyFinder.getCompanyIds">
 		<![CDATA[
 			SELECT
-				DISTINCT CommerceCurrency.groupId
+				DISTINCT CommerceCurrency.companyId
 			FROM
 				CommerceCurrency
 		]]>
