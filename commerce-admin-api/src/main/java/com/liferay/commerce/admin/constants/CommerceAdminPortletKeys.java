@@ -23,8 +23,4 @@ public class CommerceAdminPortletKeys {
 	public static final String COMMERCE_ADMIN =
 		"com_liferay_commerce_admin_web_internal_portlet_CommerceAdminPortlet";
 
-	public static final String COMMERCE_CONTEXT =
-		"com_liferay_commerce_support_web_internal_portlet_" +
-			"CommerceContextPortlet";
-
 }
