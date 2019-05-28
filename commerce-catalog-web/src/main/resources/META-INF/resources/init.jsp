@@ -26,6 +26,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.catalog.web.internal.display.context.CommerceCatalogDisplayContext" %><%@
+page import="com.liferay.commerce.currency.model.CommerceCurrency" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCatalogException" %><%@
 page import="com.liferay.commerce.product.model.CommerceCatalog" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
@@ -40,7 +41,8 @@ page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %><%@
 page import="com.liferay.taglib.search.ResultRow" %>
 
-<%@ page import="java.util.Locale" %><%@
+<%@ page import="java.util.List" %><%@
+page import="java.util.Locale" %><%@
 page import="java.util.Set" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
