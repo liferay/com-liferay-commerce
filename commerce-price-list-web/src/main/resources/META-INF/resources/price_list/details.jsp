@@ -112,9 +112,9 @@ if (parentCommercePriceList != null) {
 
 <aui:button name="setParentCommercePriceList" value="select" />
 
-<h5 class="text-default"><liferay-ui:message key="catalog" /></h5>
-
 <c:if test="<%= commerceCatalogs.size() > 1 %>">
+	<h5 class="text-default"><liferay-ui:message key="catalog" /></h5>
+
 	<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
 
 		<%
