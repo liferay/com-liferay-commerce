@@ -72,12 +72,6 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 
 		Locale locale = httpServletRequest.getLocale();
 
-		long commerceAccountId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("commerceAccountId"));
-
-		long groupId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("groupId"));
-
 		long cpDefinitionId = GetterUtil.getLong(
 			ddmDataProviderRequest.getParameter("cpDefinitionId"));
 

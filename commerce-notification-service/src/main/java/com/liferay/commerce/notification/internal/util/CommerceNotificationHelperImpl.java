@@ -187,17 +187,6 @@ public class CommerceNotificationHelperImpl
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
-
-		/*long[] userIds = _commerceAccountGroupHelper.getUserIds(
-			commerceNotificationTemplate.getGroupId(),
-			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			commerceAccountGroupIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		for (long userId : userIds) {
-			sendNotification(
-				commerceNotificationTemplate, commerceNotificationType, object,
-				userId);
-		}*/
 	}
 
 	protected void sendNotificationsToUserIds(
@@ -205,25 +194,6 @@ public class CommerceNotificationHelperImpl
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
-
-		for (long userId : userIds) {
-
-			/*long[] usercommerceAccountGroupIds =
-				_commerceAccountGroupLocalService.
-					getCommerceAccountGroupIds(
-						commerceNotificationTemplate.getGroupId(),
-						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-						userId);
-
-			if (ArrayUtil.containsAll(
-					usercommerceAccountGroupIds,
-					commerceAccountGroupIds)) {
-
-				sendNotification(
-					commerceNotificationTemplate, commerceNotificationType,
-					object, userId);
-			}*/
-		}
 	}
 
 	private static final Pattern _placeholderPattern = Pattern.compile(
