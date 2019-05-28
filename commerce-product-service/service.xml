@@ -21,6 +21,7 @@
 		<!-- Other fields -->
 
 		<column localized="true" name="name" type="String" />
+		<column name="commerceCurrencyCode" type="String" />
 		<column name="catalogDefaultLanguageId" type="String" />
 		<column name="system" type="boolean" />
 
@@ -64,6 +65,7 @@
 		<column name="name" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
+		<column name="commerceCurrencyCode" type="String" />
 
 		<!-- Order -->
 
