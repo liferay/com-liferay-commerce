@@ -44,12 +44,13 @@ public class CommerceCatalogServiceUtil {
 	 */
 	public static com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId, String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCatalog(nameMap, catalogDefaultLanguageId,
-			externalReferenceCode, serviceContext);
+				   .addCommerceCatalog(nameMap, commerceCurrencyCode,
+			catalogDefaultLanguageId, externalReferenceCode, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog deleteCommerceCatalog(
@@ -108,11 +109,11 @@ public class CommerceCatalogServiceUtil {
 	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
 		long commerceCatalogId,
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId)
+		String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceCatalog(commerceCatalogId, nameMap,
-			catalogDefaultLanguageId);
+			commerceCurrencyCode, catalogDefaultLanguageId);
 	}
 
 	public static CommerceCatalogService getService() {

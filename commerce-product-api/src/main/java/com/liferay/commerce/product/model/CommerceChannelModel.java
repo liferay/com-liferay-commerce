@@ -236,6 +236,21 @@ public interface CommerceChannelModel extends AuditedModel,
 	 */
 	public void setTypeSettings(String typeSettings);
 
+	/**
+	 * Returns the commerce currency code of this commerce channel.
+	 *
+	 * @return the commerce currency code of this commerce channel
+	 */
+	@AutoEscape
+	public String getCommerceCurrencyCode();
+
+	/**
+	 * Sets the commerce currency code of this commerce channel.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code of this commerce channel
+	 */
+	public void setCommerceCurrencyCode(String commerceCurrencyCode);
+
 	@Override
 	public boolean isNew();
 

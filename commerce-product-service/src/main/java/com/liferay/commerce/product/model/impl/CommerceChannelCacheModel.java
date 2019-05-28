@@ -65,7 +65,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -87,6 +87,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		sb.append(type);
 		sb.append(", typeSettings=");
 		sb.append(typeSettings);
+		sb.append(", commerceCurrencyCode=");
+		sb.append(commerceCurrencyCode);
 		sb.append("}");
 
 		return sb.toString();
@@ -149,6 +151,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			commerceChannelImpl.setTypeSettings(typeSettings);
 		}
 
+		if (commerceCurrencyCode == null) {
+			commerceChannelImpl.setCommerceCurrencyCode("");
+		}
+		else {
+			commerceChannelImpl.setCommerceCurrencyCode(commerceCurrencyCode);
+		}
+
 		commerceChannelImpl.resetOriginalValues();
 
 		return commerceChannelImpl;
@@ -169,6 +178,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		name = objectInput.readUTF();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
+		commerceCurrencyCode = objectInput.readUTF();
 	}
 
 	@Override
@@ -217,6 +227,13 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		else {
 			objectOutput.writeUTF(typeSettings);
 		}
+
+		if (commerceCurrencyCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commerceCurrencyCode);
+		}
 	}
 
 	public String externalReferenceCode;
@@ -229,4 +246,5 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public String name;
 	public String type;
 	public String typeSettings;
+	public String commerceCurrencyCode;
 }

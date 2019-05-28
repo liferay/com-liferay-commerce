@@ -86,6 +86,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
+			{ "commerceCurrencyCode", Types.VARCHAR },
 			{ "catalogDefaultLanguageId", Types.VARCHAR },
 			{ "system", Types.BOOLEAN }
 		};
@@ -100,11 +101,12 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("commerceCurrencyCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("catalogDefaultLanguageId", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("system", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceCatalog (externalReferenceCode VARCHAR(75) null,commerceCatalogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,catalogDefaultLanguageId VARCHAR(75) null,system BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceCatalog (externalReferenceCode VARCHAR(75) null,commerceCatalogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,commerceCurrencyCode VARCHAR(75) null,catalogDefaultLanguageId VARCHAR(75) null,system BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceCatalog";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceCatalog.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceCatalog.createDate DESC";
@@ -146,6 +148,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
+		model.setCommerceCurrencyCode(soapModel.getCommerceCurrencyCode());
 		model.setCatalogDefaultLanguageId(soapModel.getCatalogDefaultLanguageId());
 		model.setSystem(soapModel.isSystem());
 
@@ -221,6 +224,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 		attributes.put("catalogDefaultLanguageId", getCatalogDefaultLanguageId());
 		attributes.put("system", isSystem());
 
@@ -279,6 +283,13 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String commerceCurrencyCode = (String)attributes.get(
+				"commerceCurrencyCode");
+
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 
 		String catalogDefaultLanguageId = (String)attributes.get(
@@ -529,6 +540,22 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 	@JSON
 	@Override
+	public String getCommerceCurrencyCode() {
+		if (_commerceCurrencyCode == null) {
+			return "";
+		}
+		else {
+			return _commerceCurrencyCode;
+		}
+	}
+
+	@Override
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceCurrencyCode = commerceCurrencyCode;
+	}
+
+	@JSON
+	@Override
 	public String getCatalogDefaultLanguageId() {
 		if (_catalogDefaultLanguageId == null) {
 			return "";
@@ -672,6 +699,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		commerceCatalogImpl.setCreateDate(getCreateDate());
 		commerceCatalogImpl.setModifiedDate(getModifiedDate());
 		commerceCatalogImpl.setName(getName());
+		commerceCatalogImpl.setCommerceCurrencyCode(getCommerceCurrencyCode());
 		commerceCatalogImpl.setCatalogDefaultLanguageId(getCatalogDefaultLanguageId());
 		commerceCatalogImpl.setSystem(isSystem());
 
@@ -805,6 +833,15 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 			commerceCatalogCacheModel.name = null;
 		}
 
+		commerceCatalogCacheModel.commerceCurrencyCode = getCommerceCurrencyCode();
+
+		String commerceCurrencyCode = commerceCatalogCacheModel.commerceCurrencyCode;
+
+		if ((commerceCurrencyCode != null) &&
+				(commerceCurrencyCode.length() == 0)) {
+			commerceCatalogCacheModel.commerceCurrencyCode = null;
+		}
+
 		commerceCatalogCacheModel.catalogDefaultLanguageId = getCatalogDefaultLanguageId();
 
 		String catalogDefaultLanguageId = commerceCatalogCacheModel.catalogDefaultLanguageId;
@@ -821,7 +858,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -839,6 +876,8 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		sb.append(getModifiedDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", commerceCurrencyCode=");
+		sb.append(getCommerceCurrencyCode());
 		sb.append(", catalogDefaultLanguageId=");
 		sb.append(getCatalogDefaultLanguageId());
 		sb.append(", system=");
@@ -850,7 +889,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CommerceCatalog");
@@ -889,6 +928,10 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>commerceCurrencyCode</column-name><column-value><![CDATA[");
+		sb.append(getCommerceCurrencyCode());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>catalogDefaultLanguageId</column-name><column-value><![CDATA[");
 		sb.append(getCatalogDefaultLanguageId());
 		sb.append("]]></column-value></column>");
@@ -919,6 +962,7 @@ public class CommerceCatalogModelImpl extends BaseModelImpl<CommerceCatalog>
 	private boolean _setModifiedDate;
 	private String _name;
 	private String _nameCurrentLanguageId;
+	private String _commerceCurrencyCode;
 	private String _catalogDefaultLanguageId;
 	private boolean _system;
 	private boolean _originalSystem;

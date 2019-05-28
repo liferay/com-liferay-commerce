@@ -71,7 +71,8 @@ import java.util.Map;
 public class CommerceCatalogServiceSoap {
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap addCommerceCatalog(
 		String[] nameMapLanguageIds, String[] nameMapValues,
-		String catalogDefaultLanguageId, String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -79,8 +80,8 @@ public class CommerceCatalogServiceSoap {
 					nameMapValues);
 
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.addCommerceCatalog(nameMap,
-					catalogDefaultLanguageId, externalReferenceCode,
-					serviceContext);
+					commerceCurrencyCode, catalogDefaultLanguageId,
+					externalReferenceCode, serviceContext);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}
@@ -197,14 +198,14 @@ public class CommerceCatalogServiceSoap {
 
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap updateCommerceCatalog(
 		long commerceCatalogId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String catalogDefaultLanguageId)
-		throws RemoteException {
+		String[] nameMapValues, String commerceCurrencyCode,
+		String catalogDefaultLanguageId) throws RemoteException {
 		try {
 			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
 					nameMapValues);
 
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.updateCommerceCatalog(commerceCatalogId,
-					nameMap, catalogDefaultLanguageId);
+					nameMap, commerceCurrencyCode, catalogDefaultLanguageId);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}

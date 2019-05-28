@@ -49,23 +49,25 @@ public class CommerceCatalogLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId, boolean system,
-		String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		boolean system, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
-			catalogDefaultLanguageId, system, externalReferenceCode,
-			serviceContext);
+			commerceCurrencyCode, catalogDefaultLanguageId, system,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String defaultLanguageId, String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
-			defaultLanguageId, externalReferenceCode, serviceContext);
+			commerceCurrencyCode, catalogDefaultLanguageId,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -358,10 +360,10 @@ public class CommerceCatalogLocalServiceWrapper
 	public com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
 		long commerceCatalogId,
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId)
+		String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.updateCommerceCatalog(commerceCatalogId,
-			nameMap, catalogDefaultLanguageId);
+			nameMap, commerceCurrencyCode, catalogDefaultLanguageId);
 	}
 
 	@Override

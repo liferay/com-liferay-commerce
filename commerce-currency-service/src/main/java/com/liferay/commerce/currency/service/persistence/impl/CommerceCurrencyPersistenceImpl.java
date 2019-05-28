@@ -1482,84 +1482,87 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "commerceCurrency.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(commerceCurrency.uuid IS NULL OR commerceCurrency.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "commerceCurrency.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByGroupId",
+			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCurrencyModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceCurrency> findByCompanyId(long companyId) {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @return the range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByGroupId(long groupId, int start, int end) {
-		return findByGroupId(groupId, start, end, null);
+	public List<CommerceCurrency> findByCompanyId(long companyId, int start,
+		int end) {
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByGroupId(long groupId, int start,
+	public List<CommerceCurrency> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator<CommerceCurrency> orderByComparator) {
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1567,7 +1570,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByGroupId(long groupId, int start,
+	public List<CommerceCurrency> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -1577,12 +1580,12 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<CommerceCurrency> list = null;
@@ -1593,7 +1596,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCurrency commerceCurrency : list) {
-					if ((groupId != commerceCurrency.getGroupId())) {
+					if ((companyId != commerceCurrency.getCompanyId())) {
 						list = null;
 
 						break;
@@ -1615,7 +1618,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1637,7 +1640,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CommerceCurrency>)QueryUtil.list(q,
@@ -1670,18 +1673,18 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByGroupId_First(long groupId,
+	public CommerceCurrency findByCompanyId_First(long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByGroupId_First(groupId,
+		CommerceCurrency commerceCurrency = fetchByCompanyId_First(companyId,
 				orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -1692,8 +1695,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1701,16 +1704,16 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByGroupId_First(long groupId,
+	public CommerceCurrency fetchByCompanyId_First(long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		List<CommerceCurrency> list = findByGroupId(groupId, 0, 1,
+		List<CommerceCurrency> list = findByCompanyId(companyId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1721,18 +1724,18 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByGroupId_Last(long groupId,
+	public CommerceCurrency findByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByGroupId_Last(groupId,
+		CommerceCurrency commerceCurrency = fetchByCompanyId_Last(companyId,
 				orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -1743,8 +1746,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1752,23 +1755,23 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByGroupId_Last(long groupId,
+	public CommerceCurrency fetchByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCurrency> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
+		List<CommerceCurrency> list = findByCompanyId(companyId, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1778,17 +1781,17 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce currency
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
 	@Override
-	public CommerceCurrency[] findByGroupId_PrevAndNext(
-		long commerceCurrencyId, long groupId,
+	public CommerceCurrency[] findByCompanyId_PrevAndNext(
+		long commerceCurrencyId, long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
 		CommerceCurrency commerceCurrency = findByPrimaryKey(commerceCurrencyId);
@@ -1800,13 +1803,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			CommerceCurrency[] array = new CommerceCurrencyImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, commerceCurrency,
-					groupId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session, commerceCurrency,
+					companyId, orderByComparator, true);
 
 			array[1] = commerceCurrency;
 
-			array[2] = getByGroupId_PrevAndNext(session, commerceCurrency,
-					groupId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session, commerceCurrency,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -1818,8 +1821,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		}
 	}
 
-	protected CommerceCurrency getByGroupId_PrevAndNext(Session session,
-		CommerceCurrency commerceCurrency, long groupId,
+	protected CommerceCurrency getByCompanyId_PrevAndNext(Session session,
+		CommerceCurrency commerceCurrency, long companyId,
 		OrderByComparator<CommerceCurrency> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1834,7 +1837,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1904,7 +1907,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(commerceCurrency);
@@ -1925,29 +1928,29 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByGroupId(long groupId) {
-		for (CommerceCurrency commerceCurrency : findByGroupId(groupId,
+	public void removeByCompanyId(long companyId) {
+		for (CommerceCurrency commerceCurrency : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceCurrency);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1956,7 +1959,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1969,7 +1972,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1988,16 +1991,16 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "commerceCurrency.groupId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceCurrency.companyId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_C",
+			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
 			new String[] { Long.class.getName(), String.class.getName() },
 			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.CODE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
@@ -2009,9 +2012,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_C(long groupId, String code)
+	public CommerceCurrency findByC_C(long groupId, String code)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_C(groupId, code);
+		CommerceCurrency commerceCurrency = fetchByC_C(groupId, code);
 
 		if (commerceCurrency == null) {
 			StringBundler msg = new StringBundler(6);
@@ -2044,8 +2047,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_C(long groupId, String code) {
-		return fetchByG_C(groupId, code, true);
+	public CommerceCurrency fetchByC_C(long groupId, String code) {
+		return fetchByC_C(groupId, code, true);
 	}
 
 	/**
@@ -2057,14 +2060,14 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_C(long groupId, String code,
+	public CommerceCurrency fetchByC_C(long groupId, String code,
 		boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] { groupId, code };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_C,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_C,
 					finderArgs, this);
 		}
 
@@ -2082,20 +2085,20 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_C_GROUPID_2);
 
 			boolean bindCode = false;
 
 			if (code == null) {
-				query.append(_FINDER_COLUMN_G_C_CODE_1);
+				query.append(_FINDER_COLUMN_C_C_CODE_1);
 			}
 			else if (code.equals("")) {
-				query.append(_FINDER_COLUMN_G_C_CODE_3);
+				query.append(_FINDER_COLUMN_C_C_CODE_3);
 			}
 			else {
 				bindCode = true;
 
-				query.append(_FINDER_COLUMN_G_C_CODE_2);
+				query.append(_FINDER_COLUMN_C_C_CODE_2);
 			}
 
 			String sql = query.toString();
@@ -2118,7 +2121,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 				List<CommerceCurrency> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_C, finderArgs,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, finderArgs,
 						list);
 				}
 				else {
@@ -2130,7 +2133,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_C, finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, finderArgs);
 
 				throw processException(e);
 			}
@@ -2155,9 +2158,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the commerce currency that was removed
 	 */
 	@Override
-	public CommerceCurrency removeByG_C(long groupId, String code)
+	public CommerceCurrency removeByC_C(long groupId, String code)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = findByG_C(groupId, code);
+		CommerceCurrency commerceCurrency = findByC_C(groupId, code);
 
 		return remove(commerceCurrency);
 	}
@@ -2170,8 +2173,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByG_C(long groupId, String code) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C;
+	public int countByC_C(long groupId, String code) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
 
 		Object[] finderArgs = new Object[] { groupId, code };
 
@@ -2182,20 +2185,20 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_C_GROUPID_2);
 
 			boolean bindCode = false;
 
 			if (code == null) {
-				query.append(_FINDER_COLUMN_G_C_CODE_1);
+				query.append(_FINDER_COLUMN_C_C_CODE_1);
 			}
 			else if (code.equals("")) {
-				query.append(_FINDER_COLUMN_G_C_CODE_3);
+				query.append(_FINDER_COLUMN_C_C_CODE_3);
 			}
 			else {
 				bindCode = true;
 
-				query.append(_FINDER_COLUMN_G_C_CODE_2);
+				query.append(_FINDER_COLUMN_C_C_CODE_2);
 			}
 
 			String sql = query.toString();
@@ -2232,73 +2235,73 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_CODE_1 = "commerceCurrency.code IS NULL";
-	private static final String _FINDER_COLUMN_G_C_CODE_2 = "commerceCurrency.code = ?";
-	private static final String _FINDER_COLUMN_G_C_CODE_3 = "(commerceCurrency.code IS NULL OR commerceCurrency.code = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_C_C_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_CODE_1 = "commerceCurrency.code IS NULL";
+	private static final String _FINDER_COLUMN_C_C_CODE_2 = "commerceCurrency.code = ?";
+	private static final String _FINDER_COLUMN_C_C_CODE_3 = "(commerceCurrency.code IS NULL OR commerceCurrency.code = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_P",
+			"findByC_P",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_P",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_P",
 			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCurrencyModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIMARY_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_P",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_P",
 			new String[] { Long.class.getName(), Boolean.class.getName() });
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @return the matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P(long groupId, boolean primary) {
-		return findByG_P(groupId, primary, QueryUtil.ALL_POS,
+	public List<CommerceCurrency> findByC_P(long companyId, boolean primary) {
+		return findByC_P(companyId, primary, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @return the range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P(long companyId, boolean primary,
 		int start, int end) {
-		return findByG_P(groupId, primary, start, end, null);
+		return findByC_P(companyId, primary, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
@@ -2306,20 +2309,20 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P(long companyId, boolean primary,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		return findByG_P(groupId, primary, start, end, orderByComparator, true);
+		return findByC_P(companyId, primary, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
@@ -2328,7 +2331,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P(long companyId, boolean primary,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
@@ -2339,13 +2342,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P;
-			finderArgs = new Object[] { groupId, primary };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P;
+			finderArgs = new Object[] { companyId, primary };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P;
 			finderArgs = new Object[] {
-					groupId, primary,
+					companyId, primary,
 					
 					start, end, orderByComparator
 				};
@@ -2359,7 +2362,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCurrency commerceCurrency : list) {
-					if ((groupId != commerceCurrency.getGroupId()) ||
+					if ((companyId != commerceCurrency.getCompanyId()) ||
 							(primary != commerceCurrency.isPrimary())) {
 						list = null;
 
@@ -2382,9 +2385,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_PRIMARY_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2406,7 +2409,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -2441,20 +2444,20 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_P_First(long groupId, boolean primary,
+	public CommerceCurrency findByC_P_First(long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_P_First(groupId, primary,
-				orderByComparator);
+		CommerceCurrency commerceCurrency = fetchByC_P_First(companyId,
+				primary, orderByComparator);
 
 		if (commerceCurrency != null) {
 			return commerceCurrency;
@@ -2464,8 +2467,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -2476,17 +2479,17 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_P_First(long groupId, boolean primary,
+	public CommerceCurrency fetchByC_P_First(long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		List<CommerceCurrency> list = findByG_P(groupId, primary, 0, 1,
+		List<CommerceCurrency> list = findByC_P(companyId, primary, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2497,19 +2500,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_P_Last(long groupId, boolean primary,
+	public CommerceCurrency findByC_P_Last(long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_P_Last(groupId, primary,
+		CommerceCurrency commerceCurrency = fetchByC_P_Last(companyId, primary,
 				orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -2520,8 +2523,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -2532,23 +2535,23 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_P_Last(long groupId, boolean primary,
+	public CommerceCurrency fetchByC_P_Last(long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		int count = countByG_P(groupId, primary);
+		int count = countByC_P(companyId, primary);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCurrency> list = findByG_P(groupId, primary, count - 1,
+		List<CommerceCurrency> list = findByC_P(companyId, primary, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2559,18 +2562,18 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce currency
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
 	@Override
-	public CommerceCurrency[] findByG_P_PrevAndNext(long commerceCurrencyId,
-		long groupId, boolean primary,
+	public CommerceCurrency[] findByC_P_PrevAndNext(long commerceCurrencyId,
+		long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
 		CommerceCurrency commerceCurrency = findByPrimaryKey(commerceCurrencyId);
@@ -2582,13 +2585,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			CommerceCurrency[] array = new CommerceCurrencyImpl[3];
 
-			array[0] = getByG_P_PrevAndNext(session, commerceCurrency, groupId,
-					primary, orderByComparator, true);
+			array[0] = getByC_P_PrevAndNext(session, commerceCurrency,
+					companyId, primary, orderByComparator, true);
 
 			array[1] = commerceCurrency;
 
-			array[2] = getByG_P_PrevAndNext(session, commerceCurrency, groupId,
-					primary, orderByComparator, false);
+			array[2] = getByC_P_PrevAndNext(session, commerceCurrency,
+					companyId, primary, orderByComparator, false);
 
 			return array;
 		}
@@ -2600,8 +2603,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		}
 	}
 
-	protected CommerceCurrency getByG_P_PrevAndNext(Session session,
-		CommerceCurrency commerceCurrency, long groupId, boolean primary,
+	protected CommerceCurrency getByC_P_PrevAndNext(Session session,
+		CommerceCurrency commerceCurrency, long companyId, boolean primary,
 		OrderByComparator<CommerceCurrency> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2616,9 +2619,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_P_PRIMARY_2);
+		query.append(_FINDER_COLUMN_C_P_PRIMARY_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2688,7 +2691,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(primary);
 
@@ -2711,31 +2714,31 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; and primary = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; and primary = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 */
 	@Override
-	public void removeByG_P(long groupId, boolean primary) {
-		for (CommerceCurrency commerceCurrency : findByG_P(groupId, primary,
+	public void removeByC_P(long companyId, boolean primary) {
+		for (CommerceCurrency commerceCurrency : findByC_P(companyId, primary,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceCurrency);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByG_P(long groupId, boolean primary) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_P;
+	public int countByC_P(long companyId, boolean primary) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P;
 
-		Object[] finderArgs = new Object[] { groupId, primary };
+		Object[] finderArgs = new Object[] { companyId, primary };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2744,9 +2747,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_PRIMARY_2);
 
 			String sql = query.toString();
 
@@ -2759,7 +2762,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -2780,71 +2783,71 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_PRIMARY_2 = "commerceCurrency.primary = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "commerceCurrency.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_PRIMARY_2 = "commerceCurrency.primary = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_A",
+			"findByC_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_A",
 			new String[] { Long.class.getName(), Boolean.class.getName() },
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCurrencyModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.ACTIVE_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_A",
 			new String[] { Long.class.getName(), Boolean.class.getName() });
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63; and active = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_A(long groupId, boolean active) {
-		return findByG_A(groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<CommerceCurrency> findByC_A(long companyId, boolean active) {
+		return findByC_A(companyId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and active = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @return the range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_A(long groupId, boolean active,
+	public List<CommerceCurrency> findByC_A(long companyId, boolean active,
 		int start, int end) {
-		return findByG_A(groupId, active, start, end, null);
+		return findByC_A(companyId, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
@@ -2852,20 +2855,20 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_A(long groupId, boolean active,
+	public List<CommerceCurrency> findByC_A(long companyId, boolean active,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		return findByG_A(groupId, active, start, end, orderByComparator, true);
+		return findByC_A(companyId, active, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
@@ -2874,7 +2877,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_A(long groupId, boolean active,
+	public List<CommerceCurrency> findByC_A(long companyId, boolean active,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
@@ -2885,13 +2888,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A;
-			finderArgs = new Object[] { groupId, active };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A;
+			finderArgs = new Object[] { companyId, active };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A;
 			finderArgs = new Object[] {
-					groupId, active,
+					companyId, active,
 					
 					start, end, orderByComparator
 				};
@@ -2905,7 +2908,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCurrency commerceCurrency : list) {
-					if ((groupId != commerceCurrency.getGroupId()) ||
+					if ((companyId != commerceCurrency.getCompanyId()) ||
 							(active != commerceCurrency.isActive())) {
 						list = null;
 
@@ -2928,9 +2931,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2952,7 +2955,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(active);
 
@@ -2987,19 +2990,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_A_First(long groupId, boolean active,
+	public CommerceCurrency findByC_A_First(long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_A_First(groupId, active,
+		CommerceCurrency commerceCurrency = fetchByC_A_First(companyId, active,
 				orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -3010,8 +3013,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", active=");
 		msg.append(active);
@@ -3022,17 +3025,17 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_A_First(long groupId, boolean active,
+	public CommerceCurrency fetchByC_A_First(long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		List<CommerceCurrency> list = findByG_A(groupId, active, 0, 1,
+		List<CommerceCurrency> list = findByC_A(companyId, active, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3043,19 +3046,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_A_Last(long groupId, boolean active,
+	public CommerceCurrency findByC_A_Last(long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_A_Last(groupId, active,
+		CommerceCurrency commerceCurrency = fetchByC_A_Last(companyId, active,
 				orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -3066,8 +3069,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", active=");
 		msg.append(active);
@@ -3078,23 +3081,23 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_A_Last(long groupId, boolean active,
+	public CommerceCurrency fetchByC_A_Last(long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		int count = countByG_A(groupId, active);
+		int count = countByC_A(companyId, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCurrency> list = findByG_A(groupId, active, count - 1,
+		List<CommerceCurrency> list = findByC_A(companyId, active, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3105,18 +3108,18 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce currency
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
 	@Override
-	public CommerceCurrency[] findByG_A_PrevAndNext(long commerceCurrencyId,
-		long groupId, boolean active,
+	public CommerceCurrency[] findByC_A_PrevAndNext(long commerceCurrencyId,
+		long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
 		CommerceCurrency commerceCurrency = findByPrimaryKey(commerceCurrencyId);
@@ -3128,13 +3131,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			CommerceCurrency[] array = new CommerceCurrencyImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(session, commerceCurrency, groupId,
-					active, orderByComparator, true);
+			array[0] = getByC_A_PrevAndNext(session, commerceCurrency,
+					companyId, active, orderByComparator, true);
 
 			array[1] = commerceCurrency;
 
-			array[2] = getByG_A_PrevAndNext(session, commerceCurrency, groupId,
-					active, orderByComparator, false);
+			array[2] = getByC_A_PrevAndNext(session, commerceCurrency,
+					companyId, active, orderByComparator, false);
 
 			return array;
 		}
@@ -3146,8 +3149,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		}
 	}
 
-	protected CommerceCurrency getByG_A_PrevAndNext(Session session,
-		CommerceCurrency commerceCurrency, long groupId, boolean active,
+	protected CommerceCurrency getByC_A_PrevAndNext(Session session,
+		CommerceCurrency commerceCurrency, long companyId, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -3162,9 +3165,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -3234,7 +3237,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(active);
 
@@ -3257,31 +3260,31 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; and active = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 */
 	@Override
-	public void removeByG_A(long groupId, boolean active) {
-		for (CommerceCurrency commerceCurrency : findByG_A(groupId, active,
+	public void removeByC_A(long companyId, boolean active) {
+		for (CommerceCurrency commerceCurrency : findByC_A(companyId, active,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceCurrency);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and active = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByG_A(long groupId, boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
+	public int countByC_A(long companyId, boolean active) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_A;
 
-		Object[] finderArgs = new Object[] { groupId, active };
+		Object[] finderArgs = new Object[] { companyId, active };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3290,9 +3293,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 			String sql = query.toString();
 
@@ -3305,7 +3308,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(active);
 
@@ -3326,12 +3329,12 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "commerceCurrency.active = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "commerceCurrency.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "commerceCurrency.active = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_P_A",
+			"findByC_P_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName(),
@@ -3339,49 +3342,49 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_P_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_P_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()
 			},
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCurrencyModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIMARY_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.ACTIVE_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P_A = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_P_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_P_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()
 			});
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @return the matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P_A(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P_A(long companyId, boolean primary,
 		boolean active) {
-		return findByG_P_A(groupId, primary, active, QueryUtil.ALL_POS,
+		return findByC_P_A(companyId, primary, active, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
@@ -3389,19 +3392,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P_A(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P_A(long companyId, boolean primary,
 		boolean active, int start, int end) {
-		return findByG_P_A(groupId, primary, active, start, end, null);
+		return findByC_P_A(companyId, primary, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
@@ -3410,21 +3413,21 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P_A(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P_A(long companyId, boolean primary,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
-		return findByG_P_A(groupId, primary, active, start, end,
+		return findByC_P_A(companyId, primary, active, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceCurrencyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce currencies
@@ -3434,7 +3437,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
-	public List<CommerceCurrency> findByG_P_A(long groupId, boolean primary,
+	public List<CommerceCurrency> findByC_P_A(long companyId, boolean primary,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
@@ -3445,13 +3448,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A;
-			finderArgs = new Object[] { groupId, primary, active };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A;
+			finderArgs = new Object[] { companyId, primary, active };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_A;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P_A;
 			finderArgs = new Object[] {
-					groupId, primary, active,
+					companyId, primary, active,
 					
 					start, end, orderByComparator
 				};
@@ -3465,7 +3468,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCurrency commerceCurrency : list) {
-					if ((groupId != commerceCurrency.getGroupId()) ||
+					if ((companyId != commerceCurrency.getCompanyId()) ||
 							(primary != commerceCurrency.isPrimary()) ||
 							(active != commerceCurrency.isActive())) {
 						list = null;
@@ -3489,11 +3492,11 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_A_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_A_PRIMARY_2);
 
-			query.append(_FINDER_COLUMN_G_P_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_P_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3515,7 +3518,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -3552,9 +3555,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3562,10 +3565,10 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_P_A_First(long groupId, boolean primary,
+	public CommerceCurrency findByC_P_A_First(long companyId, boolean primary,
 		boolean active, OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_P_A_First(groupId,
+		CommerceCurrency commerceCurrency = fetchByC_P_A_First(companyId,
 				primary, active, orderByComparator);
 
 		if (commerceCurrency != null) {
@@ -3576,8 +3579,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -3591,19 +3594,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_P_A_First(long groupId, boolean primary,
+	public CommerceCurrency fetchByC_P_A_First(long companyId, boolean primary,
 		boolean active, OrderByComparator<CommerceCurrency> orderByComparator) {
-		List<CommerceCurrency> list = findByG_P_A(groupId, primary, active, 0,
-				1, orderByComparator);
+		List<CommerceCurrency> list = findByC_P_A(companyId, primary, active,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3613,9 +3616,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3623,11 +3626,11 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByG_P_A_Last(long groupId, boolean primary,
+	public CommerceCurrency findByC_P_A_Last(long companyId, boolean primary,
 		boolean active, OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByG_P_A_Last(groupId, primary,
-				active, orderByComparator);
+		CommerceCurrency commerceCurrency = fetchByC_P_A_Last(companyId,
+				primary, active, orderByComparator);
 
 		if (commerceCurrency != null) {
 			return commerceCurrency;
@@ -3637,8 +3640,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -3652,24 +3655,24 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByG_P_A_Last(long groupId, boolean primary,
+	public CommerceCurrency fetchByC_P_A_Last(long companyId, boolean primary,
 		boolean active, OrderByComparator<CommerceCurrency> orderByComparator) {
-		int count = countByG_P_A(groupId, primary, active);
+		int count = countByC_P_A(companyId, primary, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCurrency> list = findByG_P_A(groupId, primary, active,
+		List<CommerceCurrency> list = findByC_P_A(companyId, primary, active,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3680,10 +3683,10 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3691,8 +3694,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
 	@Override
-	public CommerceCurrency[] findByG_P_A_PrevAndNext(long commerceCurrencyId,
-		long groupId, boolean primary, boolean active,
+	public CommerceCurrency[] findByC_P_A_PrevAndNext(long commerceCurrencyId,
+		long companyId, boolean primary, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws NoSuchCurrencyException {
 		CommerceCurrency commerceCurrency = findByPrimaryKey(commerceCurrencyId);
@@ -3704,13 +3707,13 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			CommerceCurrency[] array = new CommerceCurrencyImpl[3];
 
-			array[0] = getByG_P_A_PrevAndNext(session, commerceCurrency,
-					groupId, primary, active, orderByComparator, true);
+			array[0] = getByC_P_A_PrevAndNext(session, commerceCurrency,
+					companyId, primary, active, orderByComparator, true);
 
 			array[1] = commerceCurrency;
 
-			array[2] = getByG_P_A_PrevAndNext(session, commerceCurrency,
-					groupId, primary, active, orderByComparator, false);
+			array[2] = getByC_P_A_PrevAndNext(session, commerceCurrency,
+					companyId, primary, active, orderByComparator, false);
 
 			return array;
 		}
@@ -3722,8 +3725,8 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		}
 	}
 
-	protected CommerceCurrency getByG_P_A_PrevAndNext(Session session,
-		CommerceCurrency commerceCurrency, long groupId, boolean primary,
+	protected CommerceCurrency getByC_P_A_PrevAndNext(Session session,
+		CommerceCurrency commerceCurrency, long companyId, boolean primary,
 		boolean active, OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -3739,11 +3742,11 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_P_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_P_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_P_A_PRIMARY_2);
+		query.append(_FINDER_COLUMN_C_P_A_PRIMARY_2);
 
-		query.append(_FINDER_COLUMN_G_P_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_P_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -3813,7 +3816,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(primary);
 
@@ -3838,33 +3841,33 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 */
 	@Override
-	public void removeByG_P_A(long groupId, boolean primary, boolean active) {
-		for (CommerceCurrency commerceCurrency : findByG_P_A(groupId, primary,
-				active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByC_P_A(long companyId, boolean primary, boolean active) {
+		for (CommerceCurrency commerceCurrency : findByC_P_A(companyId,
+				primary, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceCurrency);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByG_P_A(long groupId, boolean primary, boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_P_A;
+	public int countByC_P_A(long companyId, boolean primary, boolean active) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P_A;
 
-		Object[] finderArgs = new Object[] { groupId, primary, active };
+		Object[] finderArgs = new Object[] { companyId, primary, active };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3873,11 +3876,11 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_A_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_A_PRIMARY_2);
 
-			query.append(_FINDER_COLUMN_G_P_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_P_A_ACTIVE_2);
 
 			String sql = query.toString();
 
@@ -3890,7 +3893,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -3913,9 +3916,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_P_A_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_A_PRIMARY_2 = "commerceCurrency.primary = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_A_ACTIVE_2 = "commerceCurrency.active = ?";
+	private static final String _FINDER_COLUMN_C_P_A_COMPANYID_2 = "commerceCurrency.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_A_PRIMARY_2 = "commerceCurrency.primary = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_A_ACTIVE_2 = "commerceCurrency.active = ?";
 
 	public CommerceCurrencyPersistenceImpl() {
 		setModelClass(CommerceCurrency.class);
@@ -3958,7 +3961,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 				commerceCurrency.getUuid(), commerceCurrency.getGroupId()
 			}, commerceCurrency);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_C,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				commerceCurrency.getGroupId(), commerceCurrency.getCode()
 			}, commerceCurrency);
@@ -4052,9 +4055,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 				commerceCurrencyModelImpl.getCode()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_C, args, Long.valueOf(1),
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_C, args, Long.valueOf(1),
 			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_C, args,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C, args,
 			commerceCurrencyModelImpl, false);
 	}
 
@@ -4088,19 +4091,19 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 					commerceCurrencyModelImpl.getCode()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_C, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 		}
 
 		if ((commerceCurrencyModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_C.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
 					commerceCurrencyModelImpl.getOriginalGroupId(),
 					commerceCurrencyModelImpl.getOriginalCode()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_C, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 		}
 	}
 
@@ -4303,38 +4306,38 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
-			args = new Object[] { commerceCurrencyModelImpl.getGroupId() };
+			args = new Object[] { commerceCurrencyModelImpl.getCompanyId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 				args);
 
 			args = new Object[] {
-					commerceCurrencyModelImpl.getGroupId(),
+					commerceCurrencyModelImpl.getCompanyId(),
 					commerceCurrencyModelImpl.isPrimary()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P,
 				args);
 
 			args = new Object[] {
-					commerceCurrencyModelImpl.getGroupId(),
+					commerceCurrencyModelImpl.getCompanyId(),
 					commerceCurrencyModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 				args);
 
 			args = new Object[] {
-					commerceCurrencyModelImpl.getGroupId(),
+					commerceCurrencyModelImpl.getCompanyId(),
 					commerceCurrencyModelImpl.isPrimary(),
 					commerceCurrencyModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_A, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_A, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -4382,84 +4385,84 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			}
 
 			if ((commerceCurrencyModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						commerceCurrencyModelImpl.getOriginalGroupId()
+						commerceCurrencyModelImpl.getOriginalCompanyId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { commerceCurrencyModelImpl.getGroupId() };
+				args = new Object[] { commerceCurrencyModelImpl.getCompanyId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
 
 			if ((commerceCurrencyModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						commerceCurrencyModelImpl.getOriginalGroupId(),
+						commerceCurrencyModelImpl.getOriginalCompanyId(),
 						commerceCurrencyModelImpl.getOriginalPrimary()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P,
 					args);
 
 				args = new Object[] {
-						commerceCurrencyModelImpl.getGroupId(),
+						commerceCurrencyModelImpl.getCompanyId(),
 						commerceCurrencyModelImpl.isPrimary()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P,
 					args);
 			}
 
 			if ((commerceCurrencyModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						commerceCurrencyModelImpl.getOriginalGroupId(),
+						commerceCurrencyModelImpl.getOriginalCompanyId(),
 						commerceCurrencyModelImpl.getOriginalActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 					args);
 
 				args = new Object[] {
-						commerceCurrencyModelImpl.getGroupId(),
+						commerceCurrencyModelImpl.getCompanyId(),
 						commerceCurrencyModelImpl.isActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 					args);
 			}
 
 			if ((commerceCurrencyModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						commerceCurrencyModelImpl.getOriginalGroupId(),
+						commerceCurrencyModelImpl.getOriginalCompanyId(),
 						commerceCurrencyModelImpl.getOriginalPrimary(),
 						commerceCurrencyModelImpl.getOriginalActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A,
 					args);
 
 				args = new Object[] {
-						commerceCurrencyModelImpl.getGroupId(),
+						commerceCurrencyModelImpl.getCompanyId(),
 						commerceCurrencyModelImpl.isPrimary(),
 						commerceCurrencyModelImpl.isActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_A, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_A,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_A,
 					args);
 			}
 		}

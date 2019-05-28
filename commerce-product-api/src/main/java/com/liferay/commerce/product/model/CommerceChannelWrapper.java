@@ -68,6 +68,7 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		attributes.put("name", getName());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 
 		return attributes;
 	}
@@ -134,6 +135,13 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		if (typeSettings != null) {
 			setTypeSettings(typeSettings);
 		}
+
+		String commerceCurrencyCode = (String)attributes.get(
+				"commerceCurrencyCode");
+
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
+		}
 	}
 
 	@Override
@@ -154,6 +162,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public long getCommerceChannelId() {
 		return _commerceChannel.getCommerceChannelId();
+	}
+
+	/**
+	* Returns the commerce currency code of this commerce channel.
+	*
+	* @return the commerce currency code of this commerce channel
+	*/
+	@Override
+	public String getCommerceCurrencyCode() {
+		return _commerceChannel.getCommerceCurrencyCode();
 	}
 
 	/**
@@ -319,6 +337,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public void setCommerceChannelId(long commerceChannelId) {
 		_commerceChannel.setCommerceChannelId(commerceChannelId);
+	}
+
+	/**
+	* Sets the commerce currency code of this commerce channel.
+	*
+	* @param commerceCurrencyCode the commerce currency code of this commerce channel
+	*/
+	@Override
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
 	}
 
 	/**

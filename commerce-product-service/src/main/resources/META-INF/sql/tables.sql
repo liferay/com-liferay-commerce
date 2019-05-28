@@ -340,6 +340,7 @@ create table CommerceCatalog (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name STRING null,
+	commerceCurrencyCode VARCHAR(75) null,
 	catalogDefaultLanguageId VARCHAR(75) null,
 	system BOOLEAN
 );
@@ -354,7 +355,8 @@ create table CommerceChannel (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
-	typeSettings VARCHAR(75) null
+	typeSettings VARCHAR(75) null,
+	commerceCurrencyCode VARCHAR(75) null
 );
 
 create table CommerceChannelRel (

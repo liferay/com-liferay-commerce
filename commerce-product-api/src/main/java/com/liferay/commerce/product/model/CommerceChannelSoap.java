@@ -44,6 +44,7 @@ public class CommerceChannelSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
+		soapModel.setCommerceCurrencyCode(model.getCommerceCurrencyCode());
 
 		return soapModel;
 	}
@@ -178,6 +179,14 @@ public class CommerceChannelSoap implements Serializable {
 		_typeSettings = typeSettings;
 	}
 
+	public String getCommerceCurrencyCode() {
+		return _commerceCurrencyCode;
+	}
+
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceCurrencyCode = commerceCurrencyCode;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceChannelId;
 	private long _companyId;
@@ -188,4 +197,5 @@ public class CommerceChannelSoap implements Serializable {
 	private String _name;
 	private String _type;
 	private String _typeSettings;
+	private String _commerceCurrencyCode;
 }

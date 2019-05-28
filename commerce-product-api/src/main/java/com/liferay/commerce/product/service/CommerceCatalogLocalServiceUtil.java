@@ -56,23 +56,25 @@ public class CommerceCatalogLocalServiceUtil {
 
 	public static com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId, boolean system,
-		String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		boolean system, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCatalog(nameMap, catalogDefaultLanguageId,
-			system, externalReferenceCode, serviceContext);
+				   .addCommerceCatalog(nameMap, commerceCurrencyCode,
+			catalogDefaultLanguageId, system, externalReferenceCode,
+			serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
 		java.util.Map<java.util.Locale, String> nameMap,
-		String defaultLanguageId, String externalReferenceCode,
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCatalog(nameMap, defaultLanguageId,
-			externalReferenceCode, serviceContext);
+				   .addCommerceCatalog(nameMap, commerceCurrencyCode,
+			catalogDefaultLanguageId, externalReferenceCode, serviceContext);
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog addDefaultCommerceCatalog(
@@ -335,11 +337,11 @@ public class CommerceCatalogLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
 		long commerceCatalogId,
 		java.util.Map<java.util.Locale, String> nameMap,
-		String catalogDefaultLanguageId)
+		String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceCatalog(commerceCatalogId, nameMap,
-			catalogDefaultLanguageId);
+			commerceCurrencyCode, catalogDefaultLanguageId);
 	}
 
 	public static CommerceCatalogLocalService getService() {
