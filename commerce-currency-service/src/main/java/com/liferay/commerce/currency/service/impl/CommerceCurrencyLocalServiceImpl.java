@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.currency.service.impl;
 
-import com.liferay.commerce.currency.configuration.ExchangeRateProviderGroupServiceConfiguration;
+import com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration;
 import com.liferay.commerce.currency.configuration.RoundingTypeConfiguration;
 import com.liferay.commerce.currency.constants.CommerceCurrencyExchangeRateConstants;
 import com.liferay.commerce.currency.constants.RoundingTypeConstants;
@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -65,20 +65,20 @@ public class CommerceCurrencyLocalServiceImpl
 
 	@Override
 	public CommerceCurrency addCommerceCurrency(
-			String code, Map<Locale, String> nameMap, BigDecimal rate,
-			Map<Locale, String> formatPatternMap, int maxFractionDigits,
-			int minFractionDigits, String roundingMode, boolean primary,
-			double priority, boolean active, ServiceContext serviceContext)
+			long groupId, long userId, String code, Map<Locale, String> nameMap,
+			BigDecimal rate, Map<Locale, String> formatPatternMap,
+			int maxFractionDigits, int minFractionDigits, String roundingMode,
+			boolean primary, double priority, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
 		if (primary) {
 			rate = BigDecimal.ONE;
 		}
 
-		validate(0, groupId, code, nameMap, primary);
+		validate(0, serviceContext.getCompanyId(), code, nameMap, primary);
 
 		RoundingTypeConfiguration roundingTypeConfiguration =
 			_configurationProvider.getConfiguration(
@@ -125,8 +125,8 @@ public class CommerceCurrencyLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceCurrencies(long groupId) {
-		commerceCurrencyPersistence.removeByGroupId(groupId);
+	public void deleteCommerceCurrencies(long companyId) {
+		commerceCurrencyPersistence.removeByCompanyId(companyId);
 	}
 
 	@Override
@@ -149,51 +149,51 @@ public class CommerceCurrencyLocalServiceImpl
 	}
 
 	@Override
-	public CommerceCurrency fetchPrimaryCommerceCurrency(long groupId) {
-		return commerceCurrencyPersistence.fetchByG_P_A_First(
-			groupId, true, true, new CommerceCurrencyPriorityComparator());
+	public CommerceCurrency fetchPrimaryCommerceCurrency(long companyId) {
+		return commerceCurrencyPersistence.fetchByC_P_A_First(
+			companyId, true, true, new CommerceCurrencyPriorityComparator());
 	}
 
 	@Override
 	public List<CommerceCurrency> getCommerceCurrencies(
-		long groupId, boolean active) {
+		long companyId, boolean active) {
 
-		return commerceCurrencyPersistence.findByG_A(groupId, active);
+		return commerceCurrencyPersistence.findByC_A(companyId, active);
 	}
 
 	@Override
 	public List<CommerceCurrency> getCommerceCurrencies(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return commerceCurrencyPersistence.findByG_A(
-			groupId, active, start, end, orderByComparator);
+		return commerceCurrencyPersistence.findByC_A(
+			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceCurrency> getCommerceCurrencies(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return commerceCurrencyPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceCurrencyPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId) {
-		return commerceCurrencyPersistence.countByGroupId(groupId);
+	public int getCommerceCurrenciesCount(long companyId) {
+		return commerceCurrencyPersistence.countByCompanyId(companyId);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId, boolean active) {
-		return commerceCurrencyPersistence.countByG_A(groupId, active);
+	public int getCommerceCurrenciesCount(long companyId, boolean active) {
+		return commerceCurrencyPersistence.countByC_A(companyId, active);
 	}
 
 	@Override
-	public CommerceCurrency getCommerceCurrency(long groupId, String code)
+	public CommerceCurrency getCommerceCurrency(long companyId, String code)
 		throws NoSuchCurrencyException {
 
-		return commerceCurrencyPersistence.findByG_C(groupId, code);
+		return commerceCurrencyPersistence.findByC_C(companyId, code);
 	}
 
 	@Override
@@ -238,6 +238,7 @@ public class CommerceCurrencyLocalServiceImpl
 				roundingTypeConfiguration.roundingMode();
 
 			commerceCurrencyLocalService.addCommerceCurrency(
+				serviceContext.getScopeGroupId(), serviceContext.getUserId(),
 				code, nameMap, BigDecimal.ONE, formatPatternMap,
 				roundingTypeConfiguration.maximumFractionDigits(),
 				roundingTypeConfiguration.minimumFractionDigits(),
@@ -248,7 +249,7 @@ public class CommerceCurrencyLocalServiceImpl
 				_exchangeRateProviderRegistry.getExchangeRateProviderKeys()) {
 
 			_updateExchangeRates(
-				serviceContext.getScopeGroupId(), exchangeRateProviderKey);
+				serviceContext.getCompanyId(), exchangeRateProviderKey);
 
 			break;
 		}
@@ -276,7 +277,7 @@ public class CommerceCurrencyLocalServiceImpl
 			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
 
 		validate(
-			commerceCurrencyId, commerceCurrency.getGroupId(),
+			commerceCurrencyId, commerceCurrency.getCompanyId(),
 			commerceCurrency.getCode(), commerceCurrency.getNameMap(), primary);
 
 		commerceCurrency.setPrimary(primary);
@@ -304,7 +305,7 @@ public class CommerceCurrencyLocalServiceImpl
 
 		validate(
 			commerceCurrency.getCommerceCurrencyId(),
-			commerceCurrency.getGroupId(), code, nameMap, primary);
+			serviceContext.getCompanyId(), code, nameMap, primary);
 
 		RoundingTypeConfiguration roundingTypeConfiguration =
 			_configurationProvider.getConfiguration(
@@ -369,8 +370,9 @@ public class CommerceCurrencyLocalServiceImpl
 		CommerceCurrency commerceCurrency =
 			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
 
-		CommerceCurrency primaryCommerceCurrency = fetchPrimaryCommerceCurrency(
-			commerceCurrency.getGroupId());
+		CommerceCurrency primaryCommerceCurrency =
+			commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				commerceCurrency.getCompanyId());
 
 		if (primaryCommerceCurrency == null) {
 			return;
@@ -390,37 +392,34 @@ public class CommerceCurrencyLocalServiceImpl
 
 		commerceCurrency.setRate(exchangeRate);
 
-		updateCommerceCurrency(commerceCurrency);
+		commerceCurrencyLocalService.updateCommerceCurrency(commerceCurrency);
 	}
 
 	@Override
 	public void updateExchangeRates() throws PortalException {
-		long[] groupIds = ArrayUtil.toLongArray(
-			commerceCurrencyFinder.getGroupIds());
+		long[] companyIds = ArrayUtil.toLongArray(
+			commerceCurrencyFinder.getCompanyIds());
 
-		for (long groupId : groupIds) {
-			ExchangeRateProviderGroupServiceConfiguration
-				exchangeRateProviderGroupServiceConfiguration =
-					_configurationProvider.getConfiguration(
-						ExchangeRateProviderGroupServiceConfiguration.class,
-						new GroupServiceSettingsLocator(
-							groupId,
-							CommerceCurrencyExchangeRateConstants.
-								SERVICE_NAME));
+		for (long companyId : companyIds) {
+			CommerceCurrencyConfiguration commerceCurrencyConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceCurrencyConfiguration.class,
+					new CompanyServiceSettingsLocator(
+						companyId,
+						CommerceCurrencyExchangeRateConstants.SERVICE_NAME));
 
-			if (exchangeRateProviderGroupServiceConfiguration.autoUpdate()) {
-				String groupDefaultExchangeRateProviderKey =
-					exchangeRateProviderGroupServiceConfiguration.
+			if (commerceCurrencyConfiguration.enableAutoUpdate()) {
+				String defaultExchangeRateProviderKey =
+					commerceCurrencyConfiguration.
 						defaultExchangeRateProviderKey();
 
-				_updateExchangeRates(
-					groupId, groupDefaultExchangeRateProviderKey);
+				_updateExchangeRates(companyId, defaultExchangeRateProviderKey);
 			}
 		}
 	}
 
 	protected void validate(
-			long commerceCurrencyId, long groupId, String code,
+			long commerceCurrencyId, long companyId, String code,
 			Map<Locale, String> nameMap, boolean primary)
 		throws PortalException {
 
@@ -438,7 +437,7 @@ public class CommerceCurrencyLocalServiceImpl
 
 		if (primary) {
 			List<CommerceCurrency> commerceCurrencies =
-				commerceCurrencyPersistence.findByG_P(groupId, primary);
+				commerceCurrencyPersistence.findByC_P(companyId, primary);
 
 			for (CommerceCurrency commerceCurrency : commerceCurrencies) {
 				if (commerceCurrency.getCommerceCurrencyId() !=
@@ -453,14 +452,14 @@ public class CommerceCurrencyLocalServiceImpl
 	}
 
 	private void _updateExchangeRates(
-			long groupId, String exchangeRateProviderKey)
+			long companyId, String exchangeRateProviderKey)
 		throws PortalException {
 
-		List<CommerceCurrency> commerceCurrencies = getCommerceCurrencies(
-			groupId, true);
+		List<CommerceCurrency> commerceCurrencies =
+			commerceCurrencyLocalService.getCommerceCurrencies(companyId, true);
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-			updateExchangeRate(
+			commerceCurrencyLocalService.updateExchangeRate(
 				commerceCurrency.getCommerceCurrencyId(),
 				exchangeRateProviderKey);
 		}
