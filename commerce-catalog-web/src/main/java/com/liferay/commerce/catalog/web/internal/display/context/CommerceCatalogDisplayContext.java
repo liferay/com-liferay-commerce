@@ -15,18 +15,19 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPUtil;
-import com.liferay.item.selector.ItemSelector;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -43,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class CommerceCatalogDisplayContext
 	extends BaseCommerceCatalogSearchContainerDisplayContext<CommerceCatalog> {
@@ -52,8 +54,7 @@ public class CommerceCatalogDisplayContext
 			CommerceCatalogService commerceCatalogService,
 			ModelResourcePermission<CommerceCatalog>
 				commerceCatalogModelResourcePermission,
-			ItemSelector itemSelector, Portal portal,
-			PortletResourcePermission portletResourcePermission)
+			CommerceCurrencyService commerceCurrencyService, Portal portal)
 		throws PortalException {
 
 		super(httpServletRequest, CommerceCatalog.class.getSimpleName());
@@ -63,9 +64,8 @@ public class CommerceCatalogDisplayContext
 		_commerceCatalogService = commerceCatalogService;
 		_commerceCatalogModelResourcePermission =
 			commerceCatalogModelResourcePermission;
-		_itemSelector = itemSelector;
+		_commerceCurrencyService = commerceCurrencyService;
 		_portal = portal;
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public String getCatalogURL(CommerceCatalog commerceCatalog)
@@ -100,6 +100,14 @@ public class CommerceCatalogDisplayContext
 		}
 
 		return _commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
+	}
+
+	public List<CommerceCurrency> getCommerceCurrencies()
+		throws PortalException {
+
+		return _commerceCurrencyService.getCommerceCurrencies(
+			cpRequestHelper.getCompanyId(), true, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	@Override
@@ -187,8 +195,7 @@ public class CommerceCatalogDisplayContext
 	private final ModelResourcePermission<CommerceCatalog>
 		_commerceCatalogModelResourcePermission;
 	private final CommerceCatalogService _commerceCatalogService;
-	private final ItemSelector _itemSelector;
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private final Portal _portal;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }
