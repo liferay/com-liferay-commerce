@@ -101,14 +101,15 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpDefinitionId);
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, cpDefinition.getWidth(), cpDefinition.getHeight(),
-			cpDefinition.getDepth(), cpDefinition.getWeight(), BigDecimal.ZERO,
-			BigDecimal.ZERO, BigDecimal.ZERO, published, StringPool.BLANK,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, serviceContext);
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, cpDefinition.getWidth(),
+			cpDefinition.getHeight(), cpDefinition.getDepth(),
+			cpDefinition.getWeight(), BigDecimal.ZERO, BigDecimal.ZERO,
+			BigDecimal.ZERO, published, StringPool.BLANK, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -236,10 +237,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		throws PortalException {
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, width, height, depth, weight, price, promoPrice, cost,
-			published, externalReferenceCode, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, width, height, depth, weight, price, promoPrice,
+			cost, published, externalReferenceCode, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, false, false,
 			1, StringPool.BLANK, null, 0, serviceContext);
@@ -334,12 +335,12 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 			try {
 				addCPInstance(
-					cpDefinitionId, cpDefinition.getGroupId(), skuSB.toString(), StringPool.BLANK,
-					StringPool.BLANK, true, jsonArray.toString(),
-					cpDefinition.getWidth(), cpDefinition.getHeight(),
-					cpDefinition.getDepth(), cpDefinition.getWeight(),
-					BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, true,
-					cpDefinition.getDisplayDate(),
+					cpDefinitionId, cpDefinition.getGroupId(), skuSB.toString(),
+					StringPool.BLANK, StringPool.BLANK, true,
+					jsonArray.toString(), cpDefinition.getWidth(),
+					cpDefinition.getHeight(), cpDefinition.getDepth(),
+					cpDefinition.getWeight(), BigDecimal.ZERO, BigDecimal.ZERO,
+					BigDecimal.ZERO, true, cpDefinition.getDisplayDate(),
 					cpDefinition.getExpirationDate(), neverExpire,
 					serviceContext);
 			}
@@ -947,13 +948,13 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		if (cpInstance == null) {
 			cpInstance = addCPInstance(
-				cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
-				json, width, height, depth, weight, price, promoPrice, cost,
-				published, externalReferenceCode, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, serviceContext);
+				cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+				purchasable, json, width, height, depth, weight, price,
+				promoPrice, cost, published, externalReferenceCode,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
 		}
 		else {
 			cpInstance = updateCPInstance(
@@ -1008,9 +1009,9 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		}
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, width, height, depth, weight, price, promoPrice, cost,
-			published, StringPool.BLANK, displayDateMonth, displayDateDay,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, width, height, depth, weight, price, promoPrice,
+			cost, published, StringPool.BLANK, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,

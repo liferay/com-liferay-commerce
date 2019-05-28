@@ -716,14 +716,15 @@ public class CPDefinitionsImporter {
 			String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
 
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, cpDefinition.getGroupId(), sku, null, manufacturerPartNumber, true,
-			optionsJSON, cpDefinition.getWidth(), cpDefinition.getHeight(),
-			cpDefinition.getDepth(), cpDefinition.getWeight(),
-			BigDecimal.valueOf(price), BigDecimal.valueOf(promoPrice),
-			BigDecimal.valueOf(0), true, externalReferenceCode,
-			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
-			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
-			calendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true, serviceContext);
+			cpDefinitionId, cpDefinition.getGroupId(), sku, null,
+			manufacturerPartNumber, true, optionsJSON, cpDefinition.getWidth(),
+			cpDefinition.getHeight(), cpDefinition.getDepth(),
+			cpDefinition.getWeight(), BigDecimal.valueOf(price),
+			BigDecimal.valueOf(promoPrice), BigDecimal.valueOf(0), true,
+			externalReferenceCode, calendar.get(Calendar.MONTH),
+			calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.YEAR),
+			calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+			0, 0, 0, 0, 0, true, serviceContext);
 
 		_addWarehouseQuantities(
 			skuJSONObject, commerceWarehouseIds, serviceContext, cpInstance);

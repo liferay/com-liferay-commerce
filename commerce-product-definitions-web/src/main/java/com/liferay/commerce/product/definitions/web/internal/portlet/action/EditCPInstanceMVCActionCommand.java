@@ -229,8 +229,8 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPInstance.class.getName(), actionRequest);
 
-		CPDefinition cpDefinition =
-			_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
 
 		CPInstance cpInstance = null;
 
@@ -247,12 +247,12 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, "ddmFormValues");
 
 			cpInstance = _cpInstanceService.addCPInstance(
-				cpDefinitionId, cpDefinition.getGroupId(), sku, gtin, manufacturerPartNumber, purchasable,
-				ddmFormValues, published, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				serviceContext);
+				cpDefinitionId, cpDefinition.getGroupId(), sku, gtin,
+				manufacturerPartNumber, purchasable, ddmFormValues, published,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
 		}
 
 		return cpInstance;
