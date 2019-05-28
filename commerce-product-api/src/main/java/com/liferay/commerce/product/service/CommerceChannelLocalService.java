@@ -75,8 +75,9 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	public CommerceChannel addCommerceChannel(CommerceChannel commerceChannel);
 
 	public CommerceChannel addCommerceChannel(String name, String type,
-		UnicodeProperties typeSettingsProperties, String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new commerce channel with the primary key. Does not add the commerce channel to the database.
@@ -262,6 +263,6 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 		CommerceChannel commerceChannel);
 
 	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String type, UnicodeProperties typeSettingsProperties)
-		throws PortalException;
+		String name, String type, UnicodeProperties typeSettingsProperties,
+		String commerceCurrencyCode) throws PortalException;
 }

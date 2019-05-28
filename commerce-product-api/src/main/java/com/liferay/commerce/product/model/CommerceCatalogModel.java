@@ -295,6 +295,21 @@ public interface CommerceCatalogModel extends AuditedModel,
 	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
+	 * Returns the commerce currency code of this commerce catalog.
+	 *
+	 * @return the commerce currency code of this commerce catalog
+	 */
+	@AutoEscape
+	public String getCommerceCurrencyCode();
+
+	/**
+	 * Sets the commerce currency code of this commerce catalog.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code of this commerce catalog
+	 */
+	public void setCommerceCurrencyCode(String commerceCurrencyCode);
+
+	/**
 	 * Returns the catalog default language ID of this commerce catalog.
 	 *
 	 * @return the catalog default language ID of this commerce catalog

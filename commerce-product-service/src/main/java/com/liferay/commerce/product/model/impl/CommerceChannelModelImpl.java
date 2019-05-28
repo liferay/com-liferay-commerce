@@ -80,7 +80,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "type_", Types.VARCHAR },
-			{ "typeSettings", Types.VARCHAR }
+			{ "typeSettings", Types.VARCHAR },
+			{ "commerceCurrencyCode", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -95,9 +96,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("commerceCurrencyCode", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (externalReferenceCode VARCHAR(75) null,commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (externalReferenceCode VARCHAR(75) null,commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null,commerceCurrencyCode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceChannel";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceChannel.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceChannel.createDate DESC";
@@ -140,6 +142,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
+		model.setCommerceCurrencyCode(soapModel.getCommerceCurrencyCode());
 
 		return model;
 	}
@@ -215,6 +218,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		attributes.put("name", getName());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -283,6 +287,13 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 		if (typeSettings != null) {
 			setTypeSettings(typeSettings);
+		}
+
+		String commerceCurrencyCode = (String)attributes.get(
+				"commerceCurrencyCode");
+
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 	}
 
@@ -467,6 +478,22 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		_typeSettings = typeSettings;
 	}
 
+	@JSON
+	@Override
+	public String getCommerceCurrencyCode() {
+		if (_commerceCurrencyCode == null) {
+			return "";
+		}
+		else {
+			return _commerceCurrencyCode;
+		}
+	}
+
+	@Override
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceCurrencyCode = commerceCurrencyCode;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -508,6 +535,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		commerceChannelImpl.setName(getName());
 		commerceChannelImpl.setType(getType());
 		commerceChannelImpl.setTypeSettings(getTypeSettings());
+		commerceChannelImpl.setCommerceCurrencyCode(getCommerceCurrencyCode());
 
 		commerceChannelImpl.resetOriginalValues();
 
@@ -651,12 +679,21 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			commerceChannelCacheModel.typeSettings = null;
 		}
 
+		commerceChannelCacheModel.commerceCurrencyCode = getCommerceCurrencyCode();
+
+		String commerceCurrencyCode = commerceChannelCacheModel.commerceCurrencyCode;
+
+		if ((commerceCurrencyCode != null) &&
+				(commerceCurrencyCode.length() == 0)) {
+			commerceChannelCacheModel.commerceCurrencyCode = null;
+		}
+
 		return commerceChannelCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -678,6 +715,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getType());
 		sb.append(", typeSettings=");
 		sb.append(getTypeSettings());
+		sb.append(", commerceCurrencyCode=");
+		sb.append(getCommerceCurrencyCode());
 		sb.append("}");
 
 		return sb.toString();
@@ -685,7 +724,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CommerceChannel");
@@ -731,6 +770,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
 		sb.append(getTypeSettings());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>commerceCurrencyCode</column-name><column-value><![CDATA[");
+		sb.append(getCommerceCurrencyCode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -755,6 +798,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	private String _name;
 	private String _type;
 	private String _typeSettings;
+	private String _commerceCurrencyCode;
 	private long _columnBitmask;
 	private CommerceChannel _escapedModel;
 }

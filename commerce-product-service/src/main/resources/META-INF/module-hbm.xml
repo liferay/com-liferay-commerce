@@ -33,6 +33,7 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="commerceCurrencyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="catalogDefaultLanguageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="system" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
@@ -49,6 +50,7 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="type_" name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="commerceCurrencyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.commerce.product.model.impl.CommerceChannelRelImpl" table="CommerceChannelRel">
 		<id name="commerceChannelRelId" type="long">

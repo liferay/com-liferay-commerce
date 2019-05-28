@@ -48,16 +48,18 @@ public class CommerceCurrencyLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		String code, java.util.Map<java.util.Locale, String> nameMap,
+		long groupId, long userId, String code,
+		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
 		int maxFractionDigits, int minFractionDigits, String roundingMode,
 		boolean primary, double priority, boolean active,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCurrencyLocalService.addCommerceCurrency(code, nameMap,
-			rate, formatPatternMap, maxFractionDigits, minFractionDigits,
-			roundingMode, primary, priority, active, serviceContext);
+		return _commerceCurrencyLocalService.addCommerceCurrency(groupId,
+			userId, code, nameMap, rate, formatPatternMap, maxFractionDigits,
+			minFractionDigits, roundingMode, primary, priority, active,
+			serviceContext);
 	}
 
 	/**
@@ -73,8 +75,8 @@ public class CommerceCurrencyLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCommerceCurrencies(long groupId) {
-		_commerceCurrencyLocalService.deleteCommerceCurrencies(groupId);
+	public void deleteCommerceCurrencies(long companyId) {
+		_commerceCurrencyLocalService.deleteCommerceCurrencies(companyId);
 	}
 
 	/**
@@ -221,8 +223,8 @@ public class CommerceCurrencyLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency fetchPrimaryCommerceCurrency(
-		long groupId) {
-		return _commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
+		long companyId) {
+		return _commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(companyId);
 	}
 
 	@Override
@@ -249,24 +251,24 @@ public class CommerceCurrencyLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		long groupId, boolean active) {
-		return _commerceCurrencyLocalService.getCommerceCurrencies(groupId,
+		long companyId, boolean active) {
+		return _commerceCurrencyLocalService.getCommerceCurrencies(companyId,
 			active);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator) {
-		return _commerceCurrencyLocalService.getCommerceCurrencies(groupId,
+		return _commerceCurrencyLocalService.getCommerceCurrencies(companyId,
 			active, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator) {
-		return _commerceCurrencyLocalService.getCommerceCurrencies(groupId,
+		return _commerceCurrencyLocalService.getCommerceCurrencies(companyId,
 			start, end, orderByComparator);
 	}
 
@@ -313,13 +315,13 @@ public class CommerceCurrencyLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId) {
-		return _commerceCurrencyLocalService.getCommerceCurrenciesCount(groupId);
+	public int getCommerceCurrenciesCount(long companyId) {
+		return _commerceCurrencyLocalService.getCommerceCurrenciesCount(companyId);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId, boolean active) {
-		return _commerceCurrencyLocalService.getCommerceCurrenciesCount(groupId,
+	public int getCommerceCurrenciesCount(long companyId, boolean active) {
+		return _commerceCurrencyLocalService.getCommerceCurrenciesCount(companyId,
 			active);
 	}
 
@@ -339,9 +341,9 @@ public class CommerceCurrencyLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency(
-		long groupId, String code)
+		long companyId, String code)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-		return _commerceCurrencyLocalService.getCommerceCurrency(groupId, code);
+		return _commerceCurrencyLocalService.getCommerceCurrency(companyId, code);
 	}
 
 	/**

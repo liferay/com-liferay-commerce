@@ -43,7 +43,8 @@ public class CommerceCurrencyServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.currency.service.impl.CommerceCurrencyServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		String code, java.util.Map<java.util.Locale, String> nameMap,
+		long companyId, long userId, String code,
+		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
 		int maxFractionDigits, int minFractionDigits, String roundingMode,
@@ -51,9 +52,9 @@ public class CommerceCurrencyServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCurrency(code, nameMap, rate, formatPatternMap,
-			maxFractionDigits, minFractionDigits, roundingMode, primary,
-			priority, active, serviceContext);
+				   .addCommerceCurrency(companyId, userId, code, nameMap, rate,
+			formatPatternMap, maxFractionDigits, minFractionDigits,
+			roundingMode, primary, priority, active, serviceContext);
 	}
 
 	public static void deleteCommerceCurrency(long commerceCurrencyId)
@@ -62,36 +63,37 @@ public class CommerceCurrencyServiceUtil {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency fetchPrimaryCommerceCurrency(
-		long groupId)
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().fetchPrimaryCommerceCurrency(groupId);
+		return getService().fetchPrimaryCommerceCurrency(companyId);
 	}
 
 	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceCurrencies(groupId, active, start, end,
+				   .getCommerceCurrencies(companyId, active, start, end,
 			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceCurrencies(groupId, start, end, orderByComparator);
+				   .getCommerceCurrencies(companyId, start, end,
+			orderByComparator);
 	}
 
-	public static int getCommerceCurrenciesCount(long groupId)
+	public static int getCommerceCurrenciesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCurrenciesCount(groupId);
+		return getService().getCommerceCurrenciesCount(companyId);
 	}
 
-	public static int getCommerceCurrenciesCount(long groupId, boolean active)
+	public static int getCommerceCurrenciesCount(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCurrenciesCount(groupId, active);
+		return getService().getCommerceCurrenciesCount(companyId, active);
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency(
@@ -101,9 +103,9 @@ public class CommerceCurrencyServiceUtil {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency(
-		long groupId, String code)
+		long companyId, String code)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCurrency(groupId, code);
+		return getService().getCommerceCurrency(companyId, code);
 	}
 
 	/**
@@ -149,10 +151,9 @@ public class CommerceCurrencyServiceUtil {
 			.updateExchangeRate(commerceCurrencyId, exchangeRateProviderKey);
 	}
 
-	public static void updateExchangeRates(
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static void updateExchangeRates()
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().updateExchangeRates(serviceContext);
+		getService().updateExchangeRates();
 	}
 
 	public static CommerceCurrencyService getService() {
