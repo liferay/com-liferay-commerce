@@ -44,7 +44,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 	@Override
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -58,7 +58,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 			json, published, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
@@ -318,7 +318,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 	@Override
 	public CPInstance upsertCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -346,7 +346,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 		}
 
 		return cpInstanceLocalService.upsertCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 			json, width, height, depth, weight, price, promoPrice, cost,
 			published, externalReferenceCode, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,

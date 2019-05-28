@@ -21,6 +21,7 @@ import com.liferay.commerce.product.exception.CPInstanceSkuException;
 import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOptionRelException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -228,6 +229,9 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPInstance.class.getName(), actionRequest);
 
+		CPDefinition cpDefinition =
+			_cpDefinitionLocalService.getCPDefinition(cpDefinitionId);
+
 		CPInstance cpInstance = null;
 
 		if (cpInstanceId > 0) {
@@ -243,7 +247,7 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, "ddmFormValues");
 
 			cpInstance = _cpInstanceService.addCPInstance(
-				cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+				cpDefinitionId, cpDefinition.getGroupId(), sku, gtin, manufacturerPartNumber, purchasable,
 				ddmFormValues, published, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -318,6 +322,9 @@ public class EditCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
 			serviceContext);
 	}
+
+	@Reference
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;

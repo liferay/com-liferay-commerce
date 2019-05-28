@@ -87,7 +87,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -101,7 +101,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpDefinitionId);
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 			json, cpDefinition.getWidth(), cpDefinition.getHeight(),
 			cpDefinition.getDepth(), cpDefinition.getWeight(), BigDecimal.ZERO,
 			BigDecimal.ZERO, BigDecimal.ZERO, published, StringPool.BLANK,
@@ -114,7 +114,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -133,7 +133,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		// Commerce product instance
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		Date displayDate = null;
 		Date expirationDate = null;
@@ -224,7 +223,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -237,7 +236,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		throws PortalException {
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 			json, width, height, depth, weight, price, promoPrice, cost,
 			published, externalReferenceCode, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
@@ -335,7 +334,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 			try {
 				addCPInstance(
-					cpDefinitionId, skuSB.toString(), StringPool.BLANK,
+					cpDefinitionId, cpDefinition.getGroupId(), skuSB.toString(), StringPool.BLANK,
 					StringPool.BLANK, true, jsonArray.toString(),
 					cpDefinition.getWidth(), cpDefinition.getHeight(),
 					cpDefinition.getDepth(), cpDefinition.getWeight(),
@@ -931,7 +930,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public CPInstance upsertCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -948,7 +947,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		if (cpInstance == null) {
 			cpInstance = addCPInstance(
-				cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+				cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 				json, width, height, depth, weight, price, promoPrice, cost,
 				published, externalReferenceCode, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
@@ -971,7 +970,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	}
 
 	protected CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -1009,7 +1008,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		}
 
 		return cpInstanceLocalService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber, purchasable,
 			json, width, height, depth, weight, price, promoPrice, cost,
 			published, StringPool.BLANK, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,

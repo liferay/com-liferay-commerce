@@ -182,10 +182,12 @@ public class CPInstanceDisplayContext
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		CPDefinition cpDefinition = getCPDefinition();
+
 		int workflowDefinitionLinksCount =
 			WorkflowDefinitionLinkLocalServiceUtil.
 				getWorkflowDefinitionLinksCount(
-					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+					themeDisplay.getCompanyId(), cpDefinition.getGroupId(),
 					CPInstance.class.getName());
 
 		if (workflowDefinitionLinksCount == 0) {
@@ -256,7 +258,9 @@ public class CPInstanceDisplayContext
 			return searchContainer;
 		}
 
-		long cpDefinitionId = getCPDefinitionId();
+		CPDefinition cpDefinition = getCPDefinition();
+
+		long cpDefinitionId = cpDefinition.getCPDefinitionId();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -282,7 +286,7 @@ public class CPInstanceDisplayContext
 
 			BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPDefinitionInstances(
-					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+					themeDisplay.getCompanyId(), cpDefinition.getGroupId(),
 					cpDefinitionId, getKeywords(), getStatus(),
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 

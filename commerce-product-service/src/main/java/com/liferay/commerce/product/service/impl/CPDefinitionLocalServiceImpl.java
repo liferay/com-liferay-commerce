@@ -244,7 +244,7 @@ public class CPDefinitionLocalServiceImpl
 			cpInstanceServiceContext.setUserId(serviceContext.getUserId());
 
 			cpInstanceLocalService.addCPInstance(
-				cpDefinitionId, defaultSku, null, null, true, null, true,
+				cpDefinitionId, groupId, defaultSku, null, null, true, null, true,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
@@ -1399,6 +1399,7 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product definition
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		CPDefinition cpDefinition = cpDefinitionPersistence.findByPrimaryKey(
 			cpDefinitionId);
 
