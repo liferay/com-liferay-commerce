@@ -138,6 +138,8 @@ public class CommerceCatalogPersistenceTest {
 
 		newCommerceCatalog.setName(RandomTestUtil.randomString());
 
+		newCommerceCatalog.setCommerceCurrencyCode(RandomTestUtil.randomString());
+
 		newCommerceCatalog.setCatalogDefaultLanguageId(RandomTestUtil.randomString());
 
 		newCommerceCatalog.setSystem(RandomTestUtil.randomBoolean());
@@ -164,6 +166,8 @@ public class CommerceCatalogPersistenceTest {
 			Time.getShortTimestamp(newCommerceCatalog.getModifiedDate()));
 		Assert.assertEquals(existingCommerceCatalog.getName(),
 			newCommerceCatalog.getName());
+		Assert.assertEquals(existingCommerceCatalog.getCommerceCurrencyCode(),
+			newCommerceCatalog.getCommerceCurrencyCode());
 		Assert.assertEquals(existingCommerceCatalog.getCatalogDefaultLanguageId(),
 			newCommerceCatalog.getCatalogDefaultLanguageId());
 		Assert.assertEquals(existingCommerceCatalog.isSystem(),
@@ -220,8 +224,8 @@ public class CommerceCatalogPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceCatalog",
 			"externalReferenceCode", true, "commerceCatalogId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "name", true,
-			"catalogDefaultLanguageId", true, "system", true);
+			true, "modifiedDate", true, "name", true, "commerceCurrencyCode",
+			true, "catalogDefaultLanguageId", true, "system", true);
 	}
 
 	@Test
@@ -453,6 +457,8 @@ public class CommerceCatalogPersistenceTest {
 		commerceCatalog.setModifiedDate(RandomTestUtil.nextDate());
 
 		commerceCatalog.setName(RandomTestUtil.randomString());
+
+		commerceCatalog.setCommerceCurrencyCode(RandomTestUtil.randomString());
 
 		commerceCatalog.setCatalogDefaultLanguageId(RandomTestUtil.randomString());
 

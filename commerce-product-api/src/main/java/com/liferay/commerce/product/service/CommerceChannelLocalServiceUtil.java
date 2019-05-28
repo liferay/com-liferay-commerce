@@ -57,12 +57,12 @@ public class CommerceChannelLocalServiceUtil {
 	public static com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
 		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		String externalReferenceCode,
+		String commerceCurrencyCode, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .addCommerceChannel(name, type, typeSettingsProperties,
-			externalReferenceCode, serviceContext);
+			commerceCurrencyCode, externalReferenceCode, serviceContext);
 	}
 
 	/**
@@ -289,11 +289,12 @@ public class CommerceChannelLocalServiceUtil {
 
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
 		long commerceChannelId, String name, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .updateCommerceChannel(commerceChannelId, name, type,
-			typeSettingsProperties);
+			typeSettingsProperties, commerceCurrencyCode);
 	}
 
 	public static CommerceChannelLocalService getService() {

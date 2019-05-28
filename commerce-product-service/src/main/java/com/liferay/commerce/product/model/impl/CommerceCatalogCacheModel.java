@@ -65,7 +65,7 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -83,6 +83,8 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 		sb.append(modifiedDate);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", commerceCurrencyCode=");
+		sb.append(commerceCurrencyCode);
 		sb.append(", catalogDefaultLanguageId=");
 		sb.append(catalogDefaultLanguageId);
 		sb.append(", system=");
@@ -135,6 +137,13 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 			commerceCatalogImpl.setName(name);
 		}
 
+		if (commerceCurrencyCode == null) {
+			commerceCatalogImpl.setCommerceCurrencyCode("");
+		}
+		else {
+			commerceCatalogImpl.setCommerceCurrencyCode(commerceCurrencyCode);
+		}
+
 		if (catalogDefaultLanguageId == null) {
 			commerceCatalogImpl.setCatalogDefaultLanguageId("");
 		}
@@ -162,6 +171,7 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		name = objectInput.readUTF();
+		commerceCurrencyCode = objectInput.readUTF();
 		catalogDefaultLanguageId = objectInput.readUTF();
 
 		system = objectInput.readBoolean();
@@ -200,6 +210,13 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 			objectOutput.writeUTF(name);
 		}
 
+		if (commerceCurrencyCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commerceCurrencyCode);
+		}
+
 		if (catalogDefaultLanguageId == null) {
 			objectOutput.writeUTF("");
 		}
@@ -218,6 +235,7 @@ public class CommerceCatalogCacheModel implements CacheModel<CommerceCatalog>,
 	public long createDate;
 	public long modifiedDate;
 	public String name;
+	public String commerceCurrencyCode;
 	public String catalogDefaultLanguageId;
 	public boolean system;
 }

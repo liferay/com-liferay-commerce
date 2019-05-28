@@ -82,8 +82,8 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	public CommerceCurrency addCommerceCurrency(
 		CommerceCurrency commerceCurrency);
 
-	public CommerceCurrency addCommerceCurrency(String code,
-		Map<Locale, String> nameMap, BigDecimal rate,
+	public CommerceCurrency addCommerceCurrency(long groupId, long userId,
+		String code, Map<Locale, String> nameMap, BigDecimal rate,
 		Map<Locale, String> formatPatternMap, int maxFractionDigits,
 		int minFractionDigits, String roundingMode, boolean primary,
 		double priority, boolean active, ServiceContext serviceContext)
@@ -98,7 +98,7 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	@Transactional(enabled = false)
 	public CommerceCurrency createCommerceCurrency(long commerceCurrencyId);
 
-	public void deleteCommerceCurrencies(long groupId);
+	public void deleteCommerceCurrencies(long companyId);
 
 	/**
 	* Deletes the commerce currency from the database. Also notifies the appropriate model listeners.
@@ -209,7 +209,7 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 		long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency fetchPrimaryCommerceCurrency(long groupId);
+	public CommerceCurrency fetchPrimaryCommerceCurrency(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -229,16 +229,16 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	public List<CommerceCurrency> getCommerceCurrencies(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrencies(long groupId,
+	public List<CommerceCurrency> getCommerceCurrencies(long companyId,
 		boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrencies(long groupId,
+	public List<CommerceCurrency> getCommerceCurrencies(long companyId,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrencies(long groupId,
+	public List<CommerceCurrency> getCommerceCurrencies(long companyId,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator);
 
@@ -277,10 +277,10 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	public int getCommerceCurrenciesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCurrenciesCount(long groupId);
+	public int getCommerceCurrenciesCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCurrenciesCount(long groupId, boolean active);
+	public int getCommerceCurrenciesCount(long companyId, boolean active);
 
 	/**
 	* Returns the commerce currency with the primary key.
@@ -294,7 +294,7 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency getCommerceCurrency(long groupId, String code)
+	public CommerceCurrency getCommerceCurrency(long companyId, String code)
 		throws NoSuchCurrencyException;
 
 	/**

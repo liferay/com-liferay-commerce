@@ -142,6 +142,8 @@ public class CommerceChannelPersistenceTest {
 
 		newCommerceChannel.setTypeSettings(RandomTestUtil.randomString());
 
+		newCommerceChannel.setCommerceCurrencyCode(RandomTestUtil.randomString());
+
 		_commerceChannels.add(_persistence.update(newCommerceChannel));
 
 		CommerceChannel existingCommerceChannel = _persistence.findByPrimaryKey(newCommerceChannel.getPrimaryKey());
@@ -168,6 +170,8 @@ public class CommerceChannelPersistenceTest {
 			newCommerceChannel.getType());
 		Assert.assertEquals(existingCommerceChannel.getTypeSettings(),
 			newCommerceChannel.getTypeSettings());
+		Assert.assertEquals(existingCommerceChannel.getCommerceCurrencyCode(),
+			newCommerceChannel.getCommerceCurrencyCode());
 	}
 
 	@Test
@@ -213,7 +217,7 @@ public class CommerceChannelPersistenceTest {
 			"externalReferenceCode", true, "commerceChannelId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "name", true, "type", true,
-			"typeSettings", true);
+			"typeSettings", true, "commerceCurrencyCode", true);
 	}
 
 	@Test
@@ -449,6 +453,8 @@ public class CommerceChannelPersistenceTest {
 		commerceChannel.setType(RandomTestUtil.randomString());
 
 		commerceChannel.setTypeSettings(RandomTestUtil.randomString());
+
+		commerceChannel.setCommerceCurrencyCode(RandomTestUtil.randomString());
 
 		_commerceChannels.add(_persistence.update(commerceChannel));
 

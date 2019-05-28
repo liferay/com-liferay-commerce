@@ -37,11 +37,12 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
 		String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		String externalReferenceCode,
+		String commerceCurrencyCode, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelService.addCommerceChannel(name, type,
-			typeSettingsProperties, externalReferenceCode, serviceContext);
+			typeSettingsProperties, commerceCurrencyCode,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -91,10 +92,11 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
 		long commerceChannelId, String name, String type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelService.updateCommerceChannel(commerceChannelId,
-			name, type, typeSettingsProperties);
+			name, type, typeSettingsProperties, commerceCurrencyCode);
 	}
 
 	@Override

@@ -66,6 +66,7 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 		attributes.put("catalogDefaultLanguageId", getCatalogDefaultLanguageId());
 		attributes.put("system", isSystem());
 
@@ -121,6 +122,13 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String commerceCurrencyCode = (String)attributes.get(
+				"commerceCurrencyCode");
+
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 
 		String catalogDefaultLanguageId = (String)attributes.get(
@@ -182,6 +190,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public long getCommerceCatalogId() {
 		return _commerceCatalog.getCommerceCatalogId();
+	}
+
+	/**
+	* Returns the commerce currency code of this commerce catalog.
+	*
+	* @return the commerce currency code of this commerce catalog
+	*/
+	@Override
+	public String getCommerceCurrencyCode() {
+		return _commerceCatalog.getCommerceCurrencyCode();
 	}
 
 	/**
@@ -436,6 +454,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void setCommerceCatalogId(long commerceCatalogId) {
 		_commerceCatalog.setCommerceCatalogId(commerceCatalogId);
+	}
+
+	/**
+	* Sets the commerce currency code of this commerce catalog.
+	*
+	* @param commerceCurrencyCode the commerce currency code of this commerce catalog
+	*/
+	@Override
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
 	}
 
 	/**

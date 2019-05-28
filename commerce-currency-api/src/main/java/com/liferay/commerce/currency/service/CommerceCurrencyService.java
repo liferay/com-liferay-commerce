@@ -60,8 +60,8 @@ public interface CommerceCurrencyService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCurrencyServiceUtil} to access the commerce currency remote service. Add custom service methods to {@link com.liferay.commerce.currency.service.impl.CommerceCurrencyServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceCurrency addCommerceCurrency(String code,
-		Map<Locale, String> nameMap, BigDecimal rate,
+	public CommerceCurrency addCommerceCurrency(long companyId, long userId,
+		String code, Map<Locale, String> nameMap, BigDecimal rate,
 		Map<Locale, String> formatPatternMap, int maxFractionDigits,
 		int minFractionDigits, String roundingMode, boolean primary,
 		double priority, boolean active, ServiceContext serviceContext)
@@ -71,27 +71,27 @@ public interface CommerceCurrencyService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency fetchPrimaryCommerceCurrency(long groupId)
+	public CommerceCurrency fetchPrimaryCommerceCurrency(long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrencies(long groupId,
+	public List<CommerceCurrency> getCommerceCurrencies(long companyId,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrencies(long groupId,
+	public List<CommerceCurrency> getCommerceCurrencies(long companyId,
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCurrenciesCount(long groupId)
+	public int getCommerceCurrenciesCount(long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCurrenciesCount(long groupId, boolean active)
+	public int getCommerceCurrenciesCount(long companyId, boolean active)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -99,7 +99,7 @@ public interface CommerceCurrencyService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency getCommerceCurrency(long groupId, String code)
+	public CommerceCurrency getCommerceCurrency(long companyId, String code)
 		throws PortalException;
 
 	/**
@@ -125,6 +125,5 @@ public interface CommerceCurrencyService extends BaseService {
 	public void updateExchangeRate(long commerceCurrencyId,
 		String exchangeRateProviderKey) throws PortalException;
 
-	public void updateExchangeRates(ServiceContext serviceContext)
-		throws PortalException;
+	public void updateExchangeRates() throws PortalException;
 }

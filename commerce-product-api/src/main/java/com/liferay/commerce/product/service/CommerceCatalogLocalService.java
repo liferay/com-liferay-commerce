@@ -79,13 +79,14 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
-		String catalogDefaultLanguageId, boolean system,
-		String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException;
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		boolean system, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
-		String defaultLanguageId, String externalReferenceCode,
-		ServiceContext serviceContext) throws PortalException;
+		String commerceCurrencyCode, String catalogDefaultLanguageId,
+		String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 	public CommerceCatalog addDefaultCommerceCatalog(long companyId)
 		throws PortalException;
@@ -295,6 +296,6 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		Map<Locale, String> nameMap, String catalogDefaultLanguageId)
-		throws PortalException;
+		Map<Locale, String> nameMap, String commerceCurrencyCode,
+		String catalogDefaultLanguageId) throws PortalException;
 }

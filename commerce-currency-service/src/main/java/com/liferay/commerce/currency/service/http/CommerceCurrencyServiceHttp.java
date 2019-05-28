@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceCurrencyServiceHttp {
 	public static com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		HttpPrincipal httpPrincipal, String code,
+		HttpPrincipal httpPrincipal, long companyId, long userId, String code,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
@@ -68,10 +68,10 @@ public class CommerceCurrencyServiceHttp {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"addCommerceCurrency", _addCommerceCurrencyParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, code,
-					nameMap, rate, formatPatternMap, maxFractionDigits,
-					minFractionDigits, roundingMode, primary, priority, active,
-					serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, userId, code, nameMap, rate, formatPatternMap,
+					maxFractionDigits, minFractionDigits, roundingMode,
+					primary, priority, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -125,14 +125,14 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency fetchPrimaryCommerceCurrency(
-		HttpPrincipal httpPrincipal, long groupId)
+		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"fetchPrimaryCommerceCurrency",
 					_fetchPrimaryCommerceCurrencyParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -157,7 +157,7 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		HttpPrincipal httpPrincipal, long groupId, boolean active, int start,
+		HttpPrincipal httpPrincipal, long companyId, boolean active, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -166,8 +166,8 @@ public class CommerceCurrencyServiceHttp {
 					"getCommerceCurrencies",
 					_getCommerceCurrenciesParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					active, start, end, orderByComparator);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, active, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -192,7 +192,7 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrencies(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end,
+		HttpPrincipal httpPrincipal, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -200,8 +200,8 @@ public class CommerceCurrencyServiceHttp {
 					"getCommerceCurrencies",
 					_getCommerceCurrenciesParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					start, end, orderByComparator);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -226,14 +226,14 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static int getCommerceCurrenciesCount(HttpPrincipal httpPrincipal,
-		long groupId)
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"getCommerceCurrenciesCount",
 					_getCommerceCurrenciesCountParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -258,15 +258,15 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static int getCommerceCurrenciesCount(HttpPrincipal httpPrincipal,
-		long groupId, boolean active)
+		long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"getCommerceCurrenciesCount",
 					_getCommerceCurrenciesCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					active);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, active);
 
 			Object returnObj = null;
 
@@ -323,14 +323,14 @@ public class CommerceCurrencyServiceHttp {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrency(
-		HttpPrincipal httpPrincipal, long groupId, String code)
+		HttpPrincipal httpPrincipal, long companyId, String code)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"getCommerceCurrency", _getCommerceCurrencyParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					code);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, code);
 
 			Object returnObj = null;
 
@@ -487,15 +487,13 @@ public class CommerceCurrencyServiceHttp {
 		}
 	}
 
-	public static void updateExchangeRates(HttpPrincipal httpPrincipal,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static void updateExchangeRates(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"updateExchangeRates", _updateExchangeRatesParameterTypes13);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -517,9 +515,9 @@ public class CommerceCurrencyServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceCurrencyServiceHttp.class);
 	private static final Class<?>[] _addCommerceCurrencyParameterTypes0 = new Class[] {
-			String.class, java.util.Map.class, java.math.BigDecimal.class,
-			java.util.Map.class, int.class, int.class, String.class,
-			boolean.class, double.class, boolean.class,
+			long.class, long.class, String.class, java.util.Map.class,
+			java.math.BigDecimal.class, java.util.Map.class, int.class,
+			int.class, String.class, boolean.class, double.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceCurrencyParameterTypes1 = new Class[] {
@@ -563,6 +561,6 @@ public class CommerceCurrencyServiceHttp {
 			long.class, String.class
 		};
 	private static final Class<?>[] _updateExchangeRatesParameterTypes13 = new Class[] {
-			com.liferay.portal.kernel.service.ServiceContext.class
+			
 		};
 }
