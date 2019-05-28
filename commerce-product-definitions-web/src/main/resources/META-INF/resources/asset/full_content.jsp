@@ -54,7 +54,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 
 					<c:if test="<%= Validator.isNotNull(defaultImageThumbnailSrc) %>">
 						<div class="default-image">
-							<img src="<%= defaultImageThumbnailSrc %>">
+							<img src="<%= defaultImageThumbnailSrc %>" />
 						</div>
 					</c:if>
 

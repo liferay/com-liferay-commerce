@@ -31,7 +31,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 			%>
 
 			<c:if test="<%= Validator.isNotNull(img) %>">
-				<img class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" src="<%= img %>">
+				<img class="aspect-ratio-item-center-middle aspect-ratio-item-fluid" src="<%= img %>" />
 			</c:if>
 		</a>
 
