@@ -38,16 +38,17 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
-			String externalReferenceCode, ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String catalogDefaultLanguageId, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(), CPActionKeys.ADD_COMMERCE_CATALOG);
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			nameMap, catalogDefaultLanguageId, externalReferenceCode,
-			serviceContext);
+			nameMap, commerceCurrencyCode, catalogDefaultLanguageId,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -65,11 +66,16 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId)
 		throws PortalException {
 
-		_commerceCatalogModelResourcePermission.check(
-			getPermissionChecker(), commerceCatalogId, ActionKeys.VIEW);
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalog(
+				commerceCatalogId);
 
-		return commerceCatalogLocalService.fetchCommerceCatalog(
-			commerceCatalogId);
+		if (commerceCatalog != null) {
+			_commerceCatalogModelResourcePermission.check(
+				getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
+		}
+
+		return commerceCatalog;
 	}
 
 	@Override
@@ -131,14 +137,15 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, Map<Locale, String> nameMap,
-			String catalogDefaultLanguageId)
+			String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws PortalException {
 
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalogId, ActionKeys.UPDATE);
 
 		return commerceCatalogLocalService.updateCommerceCatalog(
-			commerceCatalogId, nameMap, catalogDefaultLanguageId);
+			commerceCatalogId, nameMap, commerceCurrencyCode,
+			catalogDefaultLanguageId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceCatalog>
