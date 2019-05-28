@@ -16,12 +16,10 @@ package com.liferay.commerce.currency.service.impl;
 
 import com.liferay.commerce.currency.constants.CommerceCurrencyActionKeys;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.model.CommerceCurrencyConstants;
 import com.liferay.commerce.currency.service.base.CommerceCurrencyServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.math.BigDecimal;
@@ -39,139 +37,128 @@ public class CommerceCurrencyServiceImpl
 
 	@Override
 	public CommerceCurrency addCommerceCurrency(
-			String code, Map<Locale, String> nameMap, BigDecimal rate,
+			long companyId, long userId, String code,
+			Map<Locale, String> nameMap, BigDecimal rate,
 			Map<Locale, String> formatPatternMap, int maxFractionDigits,
 			int minFractionDigits, String roundingMode, boolean primary,
 			double priority, boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.addCommerceCurrency(
-			code, nameMap, rate, formatPatternMap, maxFractionDigits,
-			minFractionDigits, roundingMode, primary, priority, active,
-			serviceContext);
+			companyId, userId, code, nameMap, rate, formatPatternMap,
+			maxFractionDigits, minFractionDigits, roundingMode, primary,
+			priority, active, serviceContext);
 	}
 
 	@Override
 	public void deleteCommerceCurrency(long commerceCurrencyId)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
-		commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrency);
+		commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrencyId);
 	}
 
 	@Override
-	public CommerceCurrency fetchPrimaryCommerceCurrency(long groupId)
+	public CommerceCurrency fetchPrimaryCommerceCurrency(long companyId)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
-		if (commerceCurrency != null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), commerceCurrency.getGroupId(),
-				CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
-		}
-
-		return commerceCurrency;
+		return commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+			companyId);
 	}
 
 	@Override
 	public List<CommerceCurrency> getCommerceCurrencies(
-			long groupId, boolean active, int start, int end,
+			long companyId, boolean active, int start, int end,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.getCommerceCurrencies(
-			groupId, active, start, end, orderByComparator);
+			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceCurrency> getCommerceCurrencies(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.getCommerceCurrencies(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
-
-		return commerceCurrencyLocalService.getCommerceCurrenciesCount(groupId);
-	}
-
-	@Override
-	public int getCommerceCurrenciesCount(long groupId, boolean active)
+	public int getCommerceCurrenciesCount(long companyId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.getCommerceCurrenciesCount(
-			groupId, active);
+			companyId);
+	}
+
+	@Override
+	public int getCommerceCurrenciesCount(long companyId, boolean active)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
+
+		return commerceCurrencyLocalService.getCommerceCurrenciesCount(
+			companyId, active);
 	}
 
 	@Override
 	public CommerceCurrency getCommerceCurrency(long commerceCurrencyId)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyLocalService.getCommerceCurrency(
-				commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
-		return commerceCurrency;
+		return commerceCurrencyLocalService.getCommerceCurrency(
+			commerceCurrencyId);
 	}
 
 	@Override
-	public CommerceCurrency getCommerceCurrency(long groupId, String code)
+	public CommerceCurrency getCommerceCurrency(long companyId, String code)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyLocalService.getCommerceCurrency(groupId, code);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
-		return commerceCurrency;
+		return commerceCurrencyLocalService.getCommerceCurrency(
+			companyId, code);
 	}
 
 	@Override
 	public CommerceCurrency setActive(long commerceCurrencyId, boolean active)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.setActive(
@@ -182,11 +169,8 @@ public class CommerceCurrencyServiceImpl
 	public CommerceCurrency setPrimary(long commerceCurrencyId, boolean primary)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.setPrimary(
@@ -202,17 +186,14 @@ public class CommerceCurrencyServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		return commerceCurrencyLocalService.updateCommerceCurrency(
-			commerceCurrency.getCommerceCurrencyId(), code, nameMap, rate,
-			formatPatternMap, maxFractionDigits, minFractionDigits,
-			roundingMode, primary, priority, active, serviceContext);
+			commerceCurrencyId, code, nameMap, rate, formatPatternMap,
+			maxFractionDigits, minFractionDigits, roundingMode, primary,
+			priority, active, serviceContext);
 	}
 
 	@Override
@@ -220,11 +201,8 @@ public class CommerceCurrencyServiceImpl
 			long commerceCurrencyId, String exchangeRateProviderKey)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
-			commerceCurrencyPersistence.findByPrimaryKey(commerceCurrencyId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceCurrency.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		commerceCurrencyLocalService.updateExchangeRate(
@@ -232,20 +210,12 @@ public class CommerceCurrencyServiceImpl
 	}
 
 	@Override
-	public void updateExchangeRates(ServiceContext serviceContext)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+	public void updateExchangeRates() throws PortalException {
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES);
 
 		commerceCurrencyLocalService.updateExchangeRates();
 	}
-
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceCurrencyServiceImpl.class, "_portletResourcePermission",
-				CommerceCurrencyConstants.RESOURCE_NAME);
 
 }
