@@ -16,7 +16,6 @@ package com.liferay.commerce.media.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.media.internal.display.context.CommerceMediaDefaultImageDisplayContext;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.document.library.kernel.service.DLAppService;
@@ -25,8 +24,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -52,6 +49,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	configurationPid = "com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration",
@@ -80,12 +78,8 @@ public class CommerceMediaDefaultImageAdminModule
 	}
 
 	@Override
-	public boolean isVisible(long groupId) {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		return _portletResourcePermission.contains(
-			permissionChecker, groupId, CPActionKeys.MANAGE_CATALOG);
+	public boolean isVisible(long companyId) {
+		return true;
 	}
 
 	@Override

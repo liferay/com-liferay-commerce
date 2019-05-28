@@ -16,14 +16,11 @@ package com.liferay.commerce.availability.estimate.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.availability.estimate.web.internal.display.context.CommerceAvailabilityEstimateDisplayContext;
-import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -74,13 +71,8 @@ public class AvailabilityEstimatesCommerceAdminModule
 	}
 
 	@Override
-	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		return _portletResourcePermission.contains(
-			permissionChecker, groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
+	public boolean isVisible(long companyId) throws PortalException {
+		return true;
 	}
 
 	@Override
