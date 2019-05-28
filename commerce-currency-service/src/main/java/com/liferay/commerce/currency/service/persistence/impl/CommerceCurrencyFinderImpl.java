@@ -30,17 +30,17 @@ import java.util.List;
 public class CommerceCurrencyFinderImpl
 	extends CommerceCurrencyFinderBaseImpl implements CommerceCurrencyFinder {
 
-	public static final String GET_GROUP_IDS =
-		CommerceCurrencyFinder.class.getName() + ".getGroupIds";
+	public static final String GET_COMPANY_IDS =
+		CommerceCurrencyFinder.class.getName() + ".getCompanyIds";
 
 	@Override
-	public List<Long> getGroupIds() {
+	public List<Long> getCompanyIds() {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), GET_GROUP_IDS);
+			String sql = _customSQL.get(getClass(), GET_COMPANY_IDS);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
