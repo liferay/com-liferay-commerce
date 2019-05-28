@@ -244,8 +244,8 @@ public class CPDefinitionLocalServiceImpl
 			cpInstanceServiceContext.setUserId(serviceContext.getUserId());
 
 			cpInstanceLocalService.addCPInstance(
-				cpDefinitionId, groupId, defaultSku, null, null, true, null, true,
-				displayDateMonth, displayDateDay, displayDateYear,
+				cpDefinitionId, groupId, defaultSku, null, null, true, null,
+				true, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, cpInstanceServiceContext);
