@@ -20,12 +20,13 @@
 CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceChannel commerceChannel = commerceChannelDisplayContext.getCommerceChannel();
-
 long commerceChannelId = commerceChannelDisplayContext.getCommerceChannelId();
 List<CommerceChannelType> commerceChannelTypes = commerceChannelDisplayContext.getCommerceChannelTypes();
+List<CommerceCurrency> commerceCurrencies = commerceChannelDisplayContext.getCommerceCurrencies();
 
 String name = BeanParamUtil.getString(commerceChannel, request, "name");
 String type = BeanParamUtil.getString(commerceChannel, request, "type");
+String commerceCurrencyCode = BeanParamUtil.getString(commerceChannel, request, "commerceCurrencyCode");
 
 String title = LanguageUtil.get(request, "add-channel");
 
@@ -70,6 +71,20 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 					%>
 
 						<aui:option label="<%= commerceChannelType.getLabel(locale) %>" selected="<%= (commerceChannel != null) && commerceChannelTypeKey.equals(type) %>" value="<%= commerceChannelTypeKey %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
+
+				<aui:select label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+
+					<%
+					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
+					%>
+
+						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceChannel == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
 
 					<%
 					}
@@ -125,6 +140,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, editChannelURL.toString(), 
 
 			portletURL.setParameter('name', name);
 			portletURL.setParameter('type', type);
+			portletURL.setParameter('commerceCurrencyCode', commerceCurrencyCode);
 
 			window.location.replace(portletURL.toString());
 		},
