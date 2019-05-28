@@ -37,7 +37,7 @@ public interface CommercePriceFormatter {
 			CommerceCurrency commerceCurrency, BigDecimal price, Locale locale)
 		throws PortalException;
 
-	public String format(long groupId, BigDecimal price, Locale locale)
+	public String format(long companyId, BigDecimal price, Locale locale)
 		throws PortalException;
 
 }
