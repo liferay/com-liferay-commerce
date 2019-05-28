@@ -14,27 +14,21 @@
 
 package com.liferay.commerce.currency.internal.configuration.definition;
 
-import com.liferay.commerce.currency.configuration.ExchangeRateProviderGroupServiceConfiguration;
-import com.liferay.commerce.currency.constants.CommerceCurrencyExchangeRateConstants;
-import com.liferay.portal.kernel.settings.definition.ConfigurationPidMapping;
+import com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration;
+import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(service = ConfigurationPidMapping.class)
-public class ExchangeRateProviderGroupServiceConfigurationPidMapping
-	implements ConfigurationPidMapping {
+@Component(service = ConfigurationBeanDeclaration.class)
+public class CommerceCurrencyConfigurationBeanDeclaration
+	implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
-		return ExchangeRateProviderGroupServiceConfiguration.class;
-	}
-
-	@Override
-	public String getConfigurationPid() {
-		return CommerceCurrencyExchangeRateConstants.SERVICE_NAME;
+		return CommerceCurrencyConfiguration.class;
 	}
 
 }
