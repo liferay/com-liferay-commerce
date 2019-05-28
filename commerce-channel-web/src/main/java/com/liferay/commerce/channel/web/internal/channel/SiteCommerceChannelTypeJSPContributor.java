@@ -15,14 +15,13 @@
 package com.liferay.commerce.channel.web.internal.channel;
 
 import com.liferay.commerce.channel.web.internal.display.context.SiteCommerceChannelTypeDisplayContext;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributor;
 import com.liferay.commerce.product.channel.CommerceChannelTypeJSPContributorRegistry;
 import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.Portal;
 
@@ -55,8 +54,8 @@ public class SiteCommerceChannelTypeJSPContributor
 				new SiteCommerceChannelTypeDisplayContext(
 					_commerceChannelService, _commerceChannelTypeRegistry,
 					_commerceChannelTypeJSPContributorRegistry,
-					_groupLocalService, httpServletRequest, _itemSelector,
-					_portal, _portletResourcePermission);
+					_commerceCurrencyService, _groupLocalService,
+					httpServletRequest, _itemSelector, _portal);
 
 		httpServletRequest.setAttribute(
 			"site.jsp-portletDisplayContext",
@@ -78,6 +77,9 @@ public class SiteCommerceChannelTypeJSPContributor
 	private CommerceChannelTypeRegistry _commerceChannelTypeRegistry;
 
 	@Reference
+	private CommerceCurrencyService _commerceCurrencyService;
+
+	@Reference
 	private GroupLocalService _groupLocalService;
 
 	@Reference
@@ -88,9 +90,6 @@ public class SiteCommerceChannelTypeJSPContributor
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.channel.web)"

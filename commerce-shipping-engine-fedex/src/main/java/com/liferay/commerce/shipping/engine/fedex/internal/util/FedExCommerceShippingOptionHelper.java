@@ -135,7 +135,8 @@ public class FedExCommerceShippingOptionHelper {
 		long groupId = _commerceOrder.getGroupId();
 
 		_commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(groupId);
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				_commerceOrder.getCompanyId());
 
 		if (_commerceCurrency == null) {
 			throw new CommerceShippingEngineException.MustSetPrimaryCurrency();
@@ -397,7 +398,7 @@ public class FedExCommerceShippingOptionHelper {
 
 		List<CommerceCurrency> commerceCurrencies =
 			_commerceCurrencyLocalService.getCommerceCurrencies(
-				_commerceOrder.getGroupId(), true);
+				_commerceOrder.getCompanyId(), true);
 
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
 			if (StringUtil.equalsIgnoreCase(code, commerceCurrency.getCode())) {

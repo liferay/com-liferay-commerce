@@ -151,7 +151,7 @@ public class CommerceDiscountDisplayContext {
 	public String getDefaultCommerceCurrencyCode() {
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				commerceDiscountRequestHelper.getScopeGroupId());
+				commerceDiscountRequestHelper.getCompanyId());
 
 		if (commerceCurrency == null) {
 			return StringPool.BLANK;
@@ -349,7 +349,7 @@ public class CommerceDiscountDisplayContext {
 	public BigDecimal round(BigDecimal value) {
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				commerceDiscountRequestHelper.getScopeGroupId());
+				commerceDiscountRequestHelper.getCompanyId());
 
 		if (commerceCurrency == null) {
 			return value;

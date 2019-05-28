@@ -105,6 +105,8 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String type = ParamUtil.getString(actionRequest, "type");
+		String commerceCurrencyCode = ParamUtil.getString(
+			actionRequest, "commerceCurrencyCode");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannel.class.getName(), actionRequest);
@@ -125,11 +127,13 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
-				name, type, typeSettingsProperties, null, serviceContext);
+				name, type, typeSettingsProperties, commerceCurrencyCode, null,
+				serviceContext);
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, name, type, typeSettingsProperties);
+			commerceChannelId, name, type, typeSettingsProperties,
+			commerceCurrencyCode);
 	}
 
 	@Reference
