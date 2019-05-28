@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.product.constants.CommerceCatalogConstants;
 import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -43,6 +45,7 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,9 +63,9 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String catalogDefaultLanguageId,
-			boolean system, String externalReferenceCode,
-			ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String catalogDefaultLanguageId, boolean system,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -77,6 +80,7 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setUserName(user.getFullName());
 
 		commerceCatalog.setNameMap(nameMap);
+		commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 		commerceCatalog.setSystem(system);
 		commerceCatalog.setExternalReferenceCode(externalReferenceCode);
@@ -102,13 +106,14 @@ public class CommerceCatalogLocalServiceImpl
 
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String defaultLanguageId,
-			String externalReferenceCode, ServiceContext serviceContext)
+			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String catalogDefaultLanguageId, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			nameMap, defaultLanguageId, false, externalReferenceCode,
-			serviceContext);
+			nameMap, commerceCurrencyCode, catalogDefaultLanguageId, false,
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -118,6 +123,10 @@ public class CommerceCatalogLocalServiceImpl
 		Company company = companyLocalService.getCompany(companyId);
 
 		User defaultUser = company.getDefaultUser();
+
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				companyId);
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -129,7 +138,8 @@ public class CommerceCatalogLocalServiceImpl
 			Collections.singletonMap(
 				LocaleUtil.fromLanguageId(defaultUser.getLanguageId()),
 				CommerceCatalogConstants.MASTER_COMMERCE_CATALOG),
-			defaultUser.getLanguageId(), true, null, serviceContext);
+			commerceCurrency.getCode(), defaultUser.getLanguageId(), true, null,
+			serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
@@ -240,7 +250,7 @@ public class CommerceCatalogLocalServiceImpl
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
 			long commerceCatalogId, Map<Locale, String> nameMap,
-			String catalogDefaultLanguageId)
+			String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
@@ -251,6 +261,7 @@ public class CommerceCatalogLocalServiceImpl
 		}
 
 		commerceCatalog.setNameMap(nameMap);
+		commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 
 		commerceCatalog = commerceCatalogPersistence.update(commerceCatalog);
@@ -346,5 +357,8 @@ public class CommerceCatalogLocalServiceImpl
 	private static final String[] _SELECTED_FIELD_NAMES = {
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
+
+	@ServiceReference(type = CommerceCurrencyLocalService.class)
+	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 }
