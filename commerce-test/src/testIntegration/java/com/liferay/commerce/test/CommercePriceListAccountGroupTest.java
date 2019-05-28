@@ -111,20 +111,20 @@ public class CommercePriceListAccountGroupTest {
 		throws Exception {
 
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
 			"I add a price list"
 		).and(
-			"I associate to the price list a account groups and a role segment"
+			"I associate to the price list an account groups and a role segment"
 		).and(
 			"The role segment's role is different from the one associated to " +
 				"the user"
 		).when(
 			"I try to get the price list"
 		).then(
-			"The price list should be returned only if all segments " +
+			"The price list should be returned only if all segments' " +
 				"requirements are met. In this specific case the result " +
 					"should be empty"
 		);
@@ -148,17 +148,17 @@ public class CommercePriceListAccountGroupTest {
 	@Test
 	public void testPriceListWithUserAndRoleAccountGroups() throws Exception {
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
 			"I add a price list"
 		).and(
-			"I associate to the price list a account groups and a role segment"
+			"I associate to the price list an account group and a role segment"
 		).when(
 			"I try to get the price list"
 		).then(
-			"The price list should be returned only if all segments " +
+			"The price list should be returned only if all segments' " +
 				"requirements are met"
 		);
 
@@ -196,14 +196,14 @@ public class CommercePriceListAccountGroupTest {
 		throws Exception {
 
 		frutillaRule.scenario(
-			"Add a price list with multiple account groupss"
+			"Add a price list with multiple account groups"
 		).given(
 			"A group and a user"
 		).and(
 			"I add a price list"
 		).and(
-			"I associate to the price list to a account groups, a role" +
-				" segment and an organization segment"
+			"I associate to the price list to an account group, a role " +
+				"segment and an organization segment"
 		).when(
 			"I try to get the price list"
 		).then(
