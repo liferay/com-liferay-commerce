@@ -19,9 +19,9 @@
 <%
 CommerceCurrenciesDisplayContext commerceCurrenciesDisplayContext = (CommerceCurrenciesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-ExchangeRateProviderGroupServiceConfiguration exchangeRateProviderGroupServiceConfiguration = commerceCurrenciesDisplayContext.getExchangeRateProviderGroupServiceConfiguration();
+CommerceCurrencyConfiguration commerceCurrencyConfiguration = commerceCurrenciesDisplayContext.getCommerceCurrencyConfiguration();
 
-boolean autoUpdate = exchangeRateProviderGroupServiceConfiguration.autoUpdate();
+boolean enableAutoUpdate = commerceCurrencyConfiguration.enableAutoUpdate();
 %>
 
 <c:if test="<%= commerceCurrenciesDisplayContext.hasManageCommerceCurrencyPermission() %>">
@@ -41,7 +41,7 @@ boolean autoUpdate = exchangeRateProviderGroupServiceConfiguration.autoUpdate();
 						for (String exchangeRateProviderKey : commerceCurrenciesDisplayContext.getExchangeRateProviderKeys()) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.get(request, exchangeRateProviderKey) %>" selected="<%= exchangeRateProviderKey.equals(exchangeRateProviderGroupServiceConfiguration.defaultExchangeRateProviderKey()) %>" value="<%= exchangeRateProviderKey %>" />
+							<aui:option label="<%= LanguageUtil.get(request, exchangeRateProviderKey) %>" selected="<%= exchangeRateProviderKey.equals(commerceCurrencyConfiguration.defaultExchangeRateProviderKey()) %>" value="<%= exchangeRateProviderKey %>" />
 
 						<%
 						}
@@ -49,7 +49,7 @@ boolean autoUpdate = exchangeRateProviderGroupServiceConfiguration.autoUpdate();
 
 					</aui:select>
 
-					<aui:input id="exchangeRateConfiguration--autoUpdate--" name="exchangeRateConfiguration--autoUpdate--" type="toggle-switch" value="<%= autoUpdate %>" />
+					<aui:input id="exchangeRateConfiguration--enableAutoUpdate--" name="exchangeRateConfiguration--enableAutoUpdate--" type="toggle-switch" value="<%= enableAutoUpdate %>" />
 				</aui:fieldset>
 			</aui:fieldset-group>
 
