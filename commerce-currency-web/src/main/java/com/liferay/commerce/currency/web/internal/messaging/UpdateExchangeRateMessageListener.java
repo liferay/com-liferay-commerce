@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.currency.web.internal.messaging;
 
+import com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
-import com.liferay.commerce.currency.web.internal.configuration.CommerceCurrencyConfiguration;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -39,7 +39,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	configurationPid = "com.liferay.commerce.currency.web.internal.configuration.CommerceCurrencyConfiguration",
+	configurationPid = "com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration",
 	immediate = true, service = UpdateExchangeRateMessageListener.class
 )
 public class UpdateExchangeRateMessageListener extends BaseMessageListener {
@@ -71,10 +71,6 @@ public class UpdateExchangeRateMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		if (!_commerceCurrencyConfiguration.enableAutoUpdate()) {
-			return;
-		}
-
 		_commerceCurrencyLocalService.updateExchangeRates();
 	}
 

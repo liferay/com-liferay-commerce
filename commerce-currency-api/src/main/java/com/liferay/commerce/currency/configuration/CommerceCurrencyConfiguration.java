@@ -16,25 +16,31 @@ package com.liferay.commerce.currency.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 /**
  * @author Alessio Antonio Rendina
  */
 @ExtendedObjectClassDefinition(
-	category = "pricing", scope = ExtendedObjectClassDefinition.Scope.GROUP
+	category = "pricing", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(
-	id = "com.liferay.commerce.currency.configuration.ExchangeRateProviderGroupServiceConfiguration",
+	id = "com.liferay.commerce.currency.configuration.CommerceCurrencyConfiguration",
 	localization = "content/Language",
-	name = "exchange-rate-provider-group-service-configuration-name"
+	name = "commerce-currency-configuration-name"
 )
-public interface ExchangeRateProviderGroupServiceConfiguration {
-
-	@Meta.AD(deflt = "false", name = "auto-update", required = false)
-	public boolean autoUpdate();
+public interface CommerceCurrencyConfiguration {
 
 	@Meta.AD(name = "default-exchange-rate-provider-key", required = false)
 	public String defaultExchangeRateProviderKey();
+
+	@Meta.AD(
+		deflt = StringPool.FALSE, name = "enable-auto-update", required = false
+	)
+	public boolean enableAutoUpdate();
+
+	@Meta.AD(deflt = "60", name = "update-interval", required = false)
+	public int updateInterval();
 
 }
