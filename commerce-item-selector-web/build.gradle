@@ -3,7 +3,6 @@ apply plugin: "com.liferay.lang.merger"
 dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "1.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.service", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
@@ -15,4 +14,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-item-selector-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
+	compileOnly project(":apps:commerce:commerce-product-service")
 }
