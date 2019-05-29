@@ -279,6 +279,14 @@ public class CommercePriceListPersistenceTest {
 	}
 
 	@Test
+	public void testCountByLtD_S() throws Exception {
+		_persistence.countByLtD_S(RandomTestUtil.nextDate(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByLtD_S(RandomTestUtil.nextDate(), 0);
+	}
+
+	@Test
 	public void testCountByG_C_S() throws Exception {
 		_persistence.countByG_C_S(RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
@@ -304,14 +312,6 @@ public class CommercePriceListPersistenceTest {
 	public void testCountByG_C_NotSArrayable() throws Exception {
 		_persistence.countByG_C_NotS(new long[] { RandomTestUtil.nextLong(), 0L },
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-	}
-
-	@Test
-	public void testCountByLtD_S() throws Exception {
-		_persistence.countByLtD_S(RandomTestUtil.nextDate(),
-			RandomTestUtil.nextInt());
-
-		_persistence.countByLtD_S(RandomTestUtil.nextDate(), 0);
 	}
 
 	@Test

@@ -34,7 +34,7 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPInstance addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		boolean published, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -42,8 +42,8 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpInstanceService.addCPInstance(cpDefinitionId, sku, gtin,
-			manufacturerPartNumber, purchasable, json, published,
+		return _cpInstanceService.addCPInstance(cpDefinitionId, groupId, sku,
+			gtin, manufacturerPartNumber, purchasable, json, published,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -208,7 +208,7 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPInstance upsertCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		double width, double height, double depth, double weight,
 		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -219,13 +219,14 @@ public class CPInstanceServiceWrapper implements CPInstanceService,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpInstanceService.upsertCPInstance(cpDefinitionId, sku, gtin,
-			manufacturerPartNumber, purchasable, json, width, height, depth,
-			weight, price, promoPrice, cost, published, externalReferenceCode,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, serviceContext);
+		return _cpInstanceService.upsertCPInstance(cpDefinitionId, groupId,
+			sku, gtin, manufacturerPartNumber, purchasable, json, width,
+			height, depth, weight, price, promoPrice, cost, published,
+			externalReferenceCode, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	@Override

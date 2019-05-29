@@ -106,6 +106,7 @@ create index IX_1198BFF9 on CommerceCatalog (companyId, externalReferenceCode[$C
 create index IX_3D14D2A7 on CommerceCatalog (companyId, system);
 
 create index IX_690E2FE3 on CommerceChannel (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+create index IX_E1ECD95 on CommerceChannel (siteGroupId);
 
 create unique index IX_3B0D3DC7 on CommerceChannelRel (classNameId, classPK, commerceChannelId);
 create index IX_48F8F6FC on CommerceChannelRel (commerceChannelId);

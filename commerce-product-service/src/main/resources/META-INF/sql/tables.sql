@@ -353,6 +353,7 @@ create table CommerceChannel (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
+	siteGroupId LONG,
 	type_ VARCHAR(75) null,
 	typeSettings VARCHAR(75) null,
 	commerceCurrencyCode VARCHAR(75) null

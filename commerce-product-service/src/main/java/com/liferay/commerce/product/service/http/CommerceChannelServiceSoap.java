@@ -137,5 +137,52 @@ public class CommerceChannelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CommerceChannelSoap[] searchCommerceChannels(
+		long companyId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceChannel> returnValue =
+				CommerceChannelServiceUtil.searchCommerceChannels(companyId);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelSoap[] searchCommerceChannels(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort) throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.product.model.CommerceChannel> returnValue =
+				CommerceChannelServiceUtil.searchCommerceChannels(companyId,
+					keywords, start, end, sort);
+
+			return com.liferay.commerce.product.model.CommerceChannelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int searchCommerceChannelsCount(long companyId,
+		String keywords) throws RemoteException {
+		try {
+			int returnValue = CommerceChannelServiceUtil.searchCommerceChannelsCount(companyId,
+					keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CommerceChannelServiceSoap.class);
 }

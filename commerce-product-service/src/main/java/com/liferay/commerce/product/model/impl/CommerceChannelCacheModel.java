@@ -65,7 +65,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -83,6 +83,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		sb.append(modifiedDate);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", siteGroupId=");
+		sb.append(siteGroupId);
 		sb.append(", type=");
 		sb.append(type);
 		sb.append(", typeSettings=");
@@ -137,6 +139,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			commerceChannelImpl.setName(name);
 		}
 
+		commerceChannelImpl.setSiteGroupId(siteGroupId);
+
 		if (type == null) {
 			commerceChannelImpl.setType("");
 		}
@@ -176,6 +180,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		name = objectInput.readUTF();
+
+		siteGroupId = objectInput.readLong();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
 		commerceCurrencyCode = objectInput.readUTF();
@@ -214,6 +220,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			objectOutput.writeUTF(name);
 		}
 
+		objectOutput.writeLong(siteGroupId);
+
 		if (type == null) {
 			objectOutput.writeUTF("");
 		}
@@ -244,6 +252,7 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public long createDate;
 	public long modifiedDate;
 	public String name;
+	public long siteGroupId;
 	public String type;
 	public String typeSettings;
 	public String commerceCurrencyCode;

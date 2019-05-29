@@ -42,6 +42,7 @@ public class CommerceChannelSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
+		soapModel.setSiteGroupId(model.getSiteGroupId());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setCommerceCurrencyCode(model.getCommerceCurrencyCode());
@@ -163,6 +164,14 @@ public class CommerceChannelSoap implements Serializable {
 		_name = name;
 	}
 
+	public long getSiteGroupId() {
+		return _siteGroupId;
+	}
+
+	public void setSiteGroupId(long siteGroupId) {
+		_siteGroupId = siteGroupId;
+	}
+
 	public String getType() {
 		return _type;
 	}
@@ -195,6 +204,7 @@ public class CommerceChannelSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private long _siteGroupId;
 	private String _type;
 	private String _typeSettings;
 	private String _commerceCurrencyCode;

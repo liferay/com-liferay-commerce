@@ -54,7 +54,8 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannel(
-		long commerceChannelId) {
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelService.fetchCommerceChannel(commerceChannelId);
 	}
 
@@ -87,6 +88,29 @@ public class CommerceChannelServiceWrapper implements CommerceChannelService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceChannelService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.searchCommerceChannels(companyId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.searchCommerceChannels(companyId,
+			keywords, start, end, sort);
+	}
+
+	@Override
+	public int searchCommerceChannelsCount(long companyId, String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelService.searchCommerceChannelsCount(companyId,
+			keywords);
 	}
 
 	@Override
