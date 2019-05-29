@@ -1,79 +1,79 @@
 .commerce-cart {
-  position: fixed;
-  top: calc(56px + 80px);
-  max-width: 500px;
-  background: #fff;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  transition: all ease 200ms;
-  display: flex;
-  flex-direction: column;
+background: #FFF;
+bottom: 0;
+display: flex;
+flex-direction: column;
+max-width: 500px;
+position: fixed;
+right: 0;
+top: calc(56px + 80px);
+transition: all ease 200ms;
+width: 100%;
 
-  &::before {
-    position: fixed;
-    content: '';
-    top: calc(56px + 80px);
-    background: rgba(42, 42, 42, 0.7);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: all ease 200ms 200ms;
-  }
+&::before {
+	background: rgba(42, 42, 42, 0.7);
+	bottom: 0;
+	content: '';
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: calc(56px + 80px);
+	transition: all ease 200ms 200ms;
+}
 
-  &:not(.is-open)::before {
-    opacity: 0;
-  }
+&:not(.is-open)::before {
+	opacity: 0;
+}
 
-  &:not(.is-open) {
-    transform: translateX(100%);
-  }
+&:not(.is-open) {
+	transform: translateX(100%);
+}
 
-  & &__close {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    background: #2A2A2A;
-    color: #fff;
+& &__close {
+	background: #2A2A2A;
+	bottom: 100%;
+	color: #FFF;
+	position: absolute;
+	right: 0;
 
-    &:hover {
-      color: #fff;
-    }
+	&:hover {
+	 color: #FFF;
+	}
 
-    &::before {
-      mix-blend-mode: color;
-    }
-  }
+	&::before {
+	 mix-blend-mode: color;
+	}
+}
 
-  &__top {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding: 10px 30px;
-    background-color: #2A2A2A;
-    color: #fff;
-    font-size: 16px;
-    justify-content: space-between;
-    position: relative;
+&__top {
+	align-items: center;
+	background-color: #2A2A2A;
+	color: #FFF;
+	display: flex;
+	font-size: 16px;
+	height: 60px;
+	justify-content: space-between;
+	padding: 10px 30px;
+	position: relative;
 
-    a,
-    a:hover {
-      color: currentColor;
-      text-decoration: underline;
-    }
-  }
+	a,
+	a:hover {
+	 color: currentColor;
+	 text-decoration: underline;
+	}
+}
 
-  &__content {
-    position: relative;
-    flex-grow: 1;
-    background: white;
-  }
+&__content {
+	background: white;
+	flex-grow: 1;
+	position: relative;
+}
 
-  &__footer {
-    background: white;
-    position: relative;
-    border-top: 1px solid #F2F2F2;
-  }
+&__footer {
+	background: white;
+	border-top: 1px solid #F2F2F2;
+	position: relative;
+}
 
 	&__totals {
 		align-items: baseline;
@@ -107,5 +107,5 @@
 				font-weight: bold;
 			}
 		}
-  }
+}
 }

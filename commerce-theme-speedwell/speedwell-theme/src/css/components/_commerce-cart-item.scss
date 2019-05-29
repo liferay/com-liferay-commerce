@@ -4,8 +4,6 @@
 
 	align-items: center;
 	border-bottom: 1px solid rgba(180,187,201,0.2);
-	padding: 10px;
-	position: relative;
 	display: grid;
 	font-size: 13px;
 	grid-gap: 10px;
@@ -13,6 +11,8 @@
 	grid-template-columns: $item-image-size 1fr 100px;
 	max-height: 140px;
 	overflow: hidden;
+	padding: 10px;
+	position: relative;
 	transition: max-height .2s ease-in, padding .1s ease-in;
 
 	&__image {
@@ -43,8 +43,8 @@
 	}
 
 	&__actions {
-		grid-area: actions;
 		display: flex;
+		grid-area: actions;
 	}
 
 	&__options {

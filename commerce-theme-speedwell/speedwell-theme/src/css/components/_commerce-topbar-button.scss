@@ -1,45 +1,45 @@
 .commerce-topbar-button {
-  align-items: center;
-  background-color: #fff;
-  border: 0;
-  color: currentColor;
-  cursor: pointer;
-  display: flex;
-  flex-shrink: 0;
-  font-size: 20px;
-  height: 80px;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  width: 80px;
-  transition: all ease 150ms;
+align-items: center;
+background-color: #FFF;
+border: 0;
+color: currentColor;
+cursor: pointer;
+display: flex;
+flex-shrink: 0;
+font-size: 20px;
+height: 80px;
+justify-content: center;
+margin: 0;
+padding: 0;
+position: relative;
+transition: all ease 150ms;
+width: 80px;
 
-  &__icon {
-    &--active {
-      display: none;
-    }
-  }
+&__icon {
+	&--active {
+	 display: none;
+	}
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
-    mix-blend-mode: difference;
-    transition: inherit;
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
+&::before {
+	background-color: white;
+	bottom: 0;
+	content: '';
+	left: 0;
+	mix-blend-mode: difference;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transform: scaleY(0);
+	transform-origin: bottom;
+	transition: inherit;
+}
 
-  &:hover {
-    color: black;
+&:hover {
+	color: black;
 
-    &::before {
-      transform: scaleY(1);
-    }
-  }
+	&::before {
+	 transform: scaleY(1);
+	}
+}
 }

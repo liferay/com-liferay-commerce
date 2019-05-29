@@ -5,6 +5,7 @@
 	<title>${the_title} - ${company_name}</title>
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
@@ -26,7 +27,7 @@
 		<div class="speedwell-frame__content">
 			<a name="speedwell-top"></a>
 
-			<div class="speedwell-content container-fluid">
+			<div class="container-fluid speedwell-content">
 				<#if selectable>
 					<@liferay_util["include"] page=content_include />
 				<#else>
@@ -45,6 +46,7 @@
 			<div class="speedwell-footer__menu">
 				<section>
 					<h2>COMPANY</h2>
+
 					<nav>
 						<a href="#">About us</a>
 						<a href="#">Work here</a>
@@ -52,15 +54,19 @@
 						<a href="#">Stories</a>
 					</nav>
 				</section>
+
 				<section>
 					<h2>Company</h2>
+
 					<nav>
 						<a href="#">About us</a>
 						<a href="#">Work here</a>
 					</nav>
 				</section>
+
 				<section>
 					<h2>Company</h2>
+
 					<nav>
 						<a href="#">About us</a>
 						<a href="#">Work here</a>
@@ -69,8 +75,10 @@
 						<a href="#">Stories</a>
 					</nav>
 				</section>
+
 				<section>
 					<h2>Company</h2>
+
 					<p>
 						Customer service and order hotline<br>
 						+44 20 3322 9915<br>
@@ -79,8 +87,10 @@
 					</p>
 				</section>
 			</div>
+
 			<div class="speedwell-footer__closing">
 				<img alt="${logo_description}" class="logo" src="${site_logo}" />
+
 				<nav>
 					<a href="#">Privacy Policy</a>
 					<a href="#">Terms and Conditions</a>

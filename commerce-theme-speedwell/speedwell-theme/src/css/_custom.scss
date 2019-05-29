@@ -1,9 +1,10 @@
 /* These inject tags are used for dynamically creating imports for themelet styles, you can place them where ever you like in this file. */
 
 /* inject:imports */
-/* endinject */
 
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+/* ---------- endinject ---------- */
+
+/* ---------- This file allows you to override default styles in one central location for easier upgrade and maintenance. ---------- */
 
 $color-theme: #30CFA1;
 
@@ -39,5 +40,5 @@ $color-theme: #30CFA1;
 @import './test';
 
 body {
-  font-family: 'Open Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
 }
