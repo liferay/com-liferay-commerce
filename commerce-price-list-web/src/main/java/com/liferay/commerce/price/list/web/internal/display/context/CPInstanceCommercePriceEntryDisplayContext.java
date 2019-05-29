@@ -17,6 +17,7 @@ package com.liferay.commerce.price.list.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
+import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -248,6 +250,12 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		searchContainer.setResults(results);
 
 		return searchContainer;
+	}
+
+	public boolean hasManageCommercePriceListPermission() {
+		return PortalPermissionUtil.contains(
+			cpRequestHelper.getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
 	protected long[] getCheckedCommercePriceListIds() throws PortalException {
