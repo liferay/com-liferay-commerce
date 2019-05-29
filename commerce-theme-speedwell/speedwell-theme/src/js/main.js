@@ -43,7 +43,6 @@ Liferay.on(
 				})
 			});
 		})
-		
 
 		let scrollThreshold = 100;
 		let lastKnownScrollPosition = 0;
