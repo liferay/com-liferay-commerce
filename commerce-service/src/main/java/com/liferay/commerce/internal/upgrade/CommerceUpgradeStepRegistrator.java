@@ -25,6 +25,9 @@ import com.liferay.commerce.internal.upgrade.v2_1_0.CPDAvailabilityEstimateUpgra
 import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceSubscriptionEntryUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceWarehouseItemUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v3_0_0.CommerceSubscriptionCycleEntryUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceAvailabilityEstimateUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceCountryUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceRegionUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -40,7 +43,6 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Rodrigo Guedes de Souza
  * @author Alec Sloan
- * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
@@ -83,8 +85,7 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 				CommerceAccountUpgradeProcess(
 					_commerceAccountLocalService,
 					_commerceAccountOrganizationRelLocalService,
-					_emailAddressLocalService, _organizationLocalService,
-					_userLocalService),
+					_emailAddressLocalService, _organizationLocalService),
 			new com.liferay.commerce.internal.upgrade.v2_2_0.
 				CommerceOrderUpgradeProcess(
 					_commerceAccountLocalService, _userLocalService));
@@ -101,10 +102,11 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 		registry.register(
 			_SCHEMA_VERSION_3_1_0, _SCHEMA_VERSION_3_2_0,
+			new CommerceAvailabilityEstimateUpgradeProcess(),
+			new CommerceCountryUpgradeProcess(),
+			new CommerceRegionUpgradeProcess(),
 			new com.liferay.commerce.internal.upgrade.v3_2_0.
-				CommerceOrderItemUpgradeProcess(),
-			new com.liferay.commerce.internal.upgrade.v3_2_0.
-				CommerceOrderUpgradeProcess());
+				CPDAvailabilityEstimateUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
