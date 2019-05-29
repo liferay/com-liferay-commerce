@@ -15,6 +15,8 @@
 package com.liferay.commerce.warehouse.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
+import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceWarehouseService;
@@ -23,7 +25,10 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -87,8 +92,28 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	}
 
 	@Override
-	public boolean isVisible(long companyId) throws PortalException {
-		return true;
+	public boolean isVisible(long groupId) throws PortalException {
+		CommerceShippingGroupServiceConfiguration
+			commerceShippingGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceShippingGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						groupId, CommerceConstants.SHIPPING_SERVICE_NAME));
+
+		String commerceShippingOriginLocatorKey =
+			commerceShippingGroupServiceConfiguration.
+				commerceShippingOriginLocatorKey();
+
+		if (commerceShippingOriginLocatorKey.equals("address")) {
+			return false;
+		}
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		return _portletResourcePermission.contains(
+			permissionChecker, groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_WAREHOUSES);
 	}
 
 	@Override

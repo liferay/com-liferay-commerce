@@ -70,7 +70,7 @@ public class CurrenciesCommerceAdminModule implements CommerceAdminModule {
 	}
 
 	@Override
-	public boolean isVisible(long companyId) throws PortalException {
+	public boolean isVisible(long groupId) throws PortalException {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
