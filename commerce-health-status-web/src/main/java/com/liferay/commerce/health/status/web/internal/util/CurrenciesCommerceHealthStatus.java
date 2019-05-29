@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -95,13 +93,12 @@ public class CurrenciesCommerceHealthStatus implements CommerceHealthStatus {
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
-		Group group = _groupLocalService.getGroup(groupId);
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
 
 		List<CommerceCurrency> commerceCurrencies =
 			_commerceCurrencyLocalService.getCommerceCurrencies(
-				group.getCompanyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null);
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		return !commerceCurrencies.isEmpty();
 	}
@@ -111,8 +108,5 @@ public class CurrenciesCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
-
-	@Reference
-	private GroupLocalService _groupLocalService;
 
 }

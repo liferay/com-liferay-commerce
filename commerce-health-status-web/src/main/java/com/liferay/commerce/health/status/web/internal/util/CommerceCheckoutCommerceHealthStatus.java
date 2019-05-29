@@ -63,7 +63,7 @@ public class CommerceCheckoutCommerceHealthStatus
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
-		if (isFixed(groupId)) {
+		if (isFixed(_portal.getCompanyId(httpServletRequest), groupId)) {
 			return;
 		}
 
@@ -139,7 +139,9 @@ public class CommerceCheckoutCommerceHealthStatus
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		long plid = _portal.getPlidFromPortletId(
 			groupId, CommercePortletKeys.COMMERCE_CHECKOUT);
 

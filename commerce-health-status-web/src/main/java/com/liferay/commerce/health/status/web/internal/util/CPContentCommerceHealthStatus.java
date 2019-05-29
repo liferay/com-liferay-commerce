@@ -58,7 +58,7 @@ public class CPContentCommerceHealthStatus implements CommerceHealthStatus {
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
-		if (isFixed(groupId)) {
+		if (isFixed(_portal.getCompanyId(httpServletRequest), groupId)) {
 			return;
 		}
 
@@ -124,7 +124,9 @@ public class CPContentCommerceHealthStatus implements CommerceHealthStatus {
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		long plid = _portal.getPlidFromPortletId(
 			groupId, CPPortletKeys.CP_CONTENT_WEB);
 
