@@ -67,8 +67,7 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
-			commerceCatalogLocalService.fetchCommerceCatalog(
-				commerceCatalogId);
+			commerceCatalogLocalService.fetchCommerceCatalog(commerceCatalogId);
 
 		if (commerceCatalog != null) {
 			_commerceCatalogModelResourcePermission.check(
