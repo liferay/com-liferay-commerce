@@ -643,254 +643,6 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "commerceCurrency.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "commerceCurrency.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(commerceCurrency.uuid IS NULL OR commerceCurrency.uuid = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() },
-			CommerceCurrencyModelImpl.UUID_COLUMN_BITMASK |
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	@Override
-	public CommerceCurrency findByUUID_G(String uuid, long groupId)
-		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByUUID_G(uuid, groupId);
-
-		if (commerceCurrency == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCurrencyException(msg.toString());
-		}
-
-		return commerceCurrency;
-	}
-
-	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	@Override
-	public CommerceCurrency fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	@Override
-	public CommerceCurrency fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-					finderArgs, this);
-		}
-
-		if (result instanceof CommerceCurrency) {
-			CommerceCurrency commerceCurrency = (CommerceCurrency)result;
-
-			if (!Objects.equals(uuid, commerceCurrency.getUuid()) ||
-					(groupId != commerceCurrency.getGroupId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<CommerceCurrency> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
-				}
-				else {
-					CommerceCurrency commerceCurrency = list.get(0);
-
-					result = commerceCurrency;
-
-					cacheResult(commerceCurrency);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CommerceCurrency)result;
-		}
-	}
-
-	/**
-	 * Removes the commerce currency where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce currency that was removed
-	 */
-	@Override
-	public CommerceCurrency removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = findByUUID_G(uuid, groupId);
-
-		return remove(commerceCurrency);
-	}
-
-	/**
-	 * Returns the number of commerce currencies where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce currencies
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
-
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "commerceCurrency.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "commerceCurrency.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(commerceCurrency.uuid IS NULL OR commerceCurrency.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "commerceCurrency.groupId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -1996,7 +1748,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCurrencyImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
 			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceCurrencyModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCurrencyModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCurrencyModelImpl.CODE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceCurrencyModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCurrencyModelImpl.FINDER_CACHE_ENABLED, Long.class,
@@ -2004,25 +1756,25 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency findByC_C(long groupId, String code)
+	public CommerceCurrency findByC_C(long companyId, String code)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = fetchByC_C(groupId, code);
+		CommerceCurrency commerceCurrency = fetchByC_C(companyId, code);
 
 		if (commerceCurrency == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(", code=");
 			msg.append(code);
@@ -2040,29 +1792,29 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByC_C(long groupId, String code) {
-		return fetchByC_C(groupId, code, true);
+	public CommerceCurrency fetchByC_C(long companyId, String code) {
+		return fetchByC_C(companyId, code, true);
 	}
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
-	public CommerceCurrency fetchByC_C(long groupId, String code,
+	public CommerceCurrency fetchByC_C(long companyId, String code,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, code };
+		Object[] finderArgs = new Object[] { companyId, code };
 
 		Object result = null;
 
@@ -2074,7 +1826,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if (result instanceof CommerceCurrency) {
 			CommerceCurrency commerceCurrency = (CommerceCurrency)result;
 
-			if ((groupId != commerceCurrency.getGroupId()) ||
+			if ((companyId != commerceCurrency.getCompanyId()) ||
 					!Objects.equals(code, commerceCurrency.getCode())) {
 				result = null;
 			}
@@ -2085,7 +1837,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_SELECT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_C_C_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 			boolean bindCode = false;
 
@@ -2112,7 +1864,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindCode) {
 					qPos.add(code);
@@ -2151,32 +1903,32 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	}
 
 	/**
-	 * Removes the commerce currency where groupId = &#63; and code = &#63; from the database.
+	 * Removes the commerce currency where companyId = &#63; and code = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the commerce currency that was removed
 	 */
 	@Override
-	public CommerceCurrency removeByC_C(long groupId, String code)
+	public CommerceCurrency removeByC_C(long companyId, String code)
 		throws NoSuchCurrencyException {
-		CommerceCurrency commerceCurrency = findByC_C(groupId, code);
+		CommerceCurrency commerceCurrency = findByC_C(companyId, code);
 
 		return remove(commerceCurrency);
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and code = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and code = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the number of matching commerce currencies
 	 */
 	@Override
-	public int countByC_C(long groupId, String code) {
+	public int countByC_C(long companyId, String code) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
 
-		Object[] finderArgs = new Object[] { groupId, code };
+		Object[] finderArgs = new Object[] { companyId, code };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2185,7 +1937,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 			query.append(_SQL_COUNT_COMMERCECURRENCY_WHERE);
 
-			query.append(_FINDER_COLUMN_C_C_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 			boolean bindCode = false;
 
@@ -2212,7 +1964,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindCode) {
 					qPos.add(code);
@@ -2235,7 +1987,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_C_GROUPID_2 = "commerceCurrency.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "commerceCurrency.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CODE_1 = "commerceCurrency.code IS NULL";
 	private static final String _FINDER_COLUMN_C_C_CODE_2 = "commerceCurrency.code = ?";
 	private static final String _FINDER_COLUMN_C_C_CODE_3 = "(commerceCurrency.code IS NULL OR commerceCurrency.code = '')";
@@ -3956,14 +3708,9 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 			CommerceCurrencyImpl.class, commerceCurrency.getPrimaryKey(),
 			commerceCurrency);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
-				commerceCurrency.getUuid(), commerceCurrency.getGroupId()
-			}, commerceCurrency);
-
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				commerceCurrency.getGroupId(), commerceCurrency.getCode()
+				commerceCurrency.getCompanyId(), commerceCurrency.getCode()
 			}, commerceCurrency);
 
 		commerceCurrency.resetOriginalValues();
@@ -4041,17 +3788,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 	protected void cacheUniqueFindersCache(
 		CommerceCurrencyModelImpl commerceCurrencyModelImpl) {
 		Object[] args = new Object[] {
-				commerceCurrencyModelImpl.getUuid(),
-				commerceCurrencyModelImpl.getGroupId()
-			};
-
-		finderCache.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
-			commerceCurrencyModelImpl, false);
-
-		args = new Object[] {
-				commerceCurrencyModelImpl.getGroupId(),
+				commerceCurrencyModelImpl.getCompanyId(),
 				commerceCurrencyModelImpl.getCode()
 			};
 
@@ -4066,28 +3803,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		boolean clearCurrent) {
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceCurrencyModelImpl.getUuid(),
-					commerceCurrencyModelImpl.getGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-		}
-
-		if ((commerceCurrencyModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceCurrencyModelImpl.getOriginalUuid(),
-					commerceCurrencyModelImpl.getOriginalGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-		}
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					commerceCurrencyModelImpl.getGroupId(),
+					commerceCurrencyModelImpl.getCompanyId(),
 					commerceCurrencyModelImpl.getCode()
 				};
 
@@ -4098,7 +3814,7 @@ public class CommerceCurrencyPersistenceImpl extends BasePersistenceImpl<Commerc
 		if ((commerceCurrencyModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					commerceCurrencyModelImpl.getOriginalGroupId(),
+					commerceCurrencyModelImpl.getOriginalCompanyId(),
 					commerceCurrencyModelImpl.getOriginalCode()
 				};
 

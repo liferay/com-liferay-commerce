@@ -70,7 +70,7 @@ import java.util.Map;
 @ProviderType
 public class CommerceCurrencyServiceSoap {
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap addCommerceCurrency(
-		long companyId, long userId, String code, String[] nameMapLanguageIds,
+		long userId, String code, String[] nameMapLanguageIds,
 		String[] nameMapValues, java.math.BigDecimal rate,
 		String[] formatPatternMapLanguageIds, String[] formatPatternMapValues,
 		int maxFractionDigits, int minFractionDigits, String roundingMode,
@@ -83,10 +83,10 @@ public class CommerceCurrencyServiceSoap {
 			Map<Locale, String> formatPatternMap = LocalizationUtil.getLocalizationMap(formatPatternMapLanguageIds,
 					formatPatternMapValues);
 
-			com.liferay.commerce.currency.model.CommerceCurrency returnValue = CommerceCurrencyServiceUtil.addCommerceCurrency(companyId,
-					userId, code, nameMap, rate, formatPatternMap,
-					maxFractionDigits, minFractionDigits, roundingMode,
-					primary, priority, active, serviceContext);
+			com.liferay.commerce.currency.model.CommerceCurrency returnValue = CommerceCurrencyServiceUtil.addCommerceCurrency(userId,
+					code, nameMap, rate, formatPatternMap, maxFractionDigits,
+					minFractionDigits, roundingMode, primary, priority, active,
+					serviceContext);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.toSoapModel(returnValue);
 		}

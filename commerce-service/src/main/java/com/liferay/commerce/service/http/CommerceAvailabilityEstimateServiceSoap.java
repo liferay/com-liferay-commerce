@@ -116,12 +116,12 @@ public class CommerceAvailabilityEstimateServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap[] getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> returnValue =
-				CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimates(groupId,
+				CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimates(companyId,
 					start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceAvailabilityEstimateSoap.toSoapModels(returnValue);
@@ -133,10 +133,10 @@ public class CommerceAvailabilityEstimateServiceSoap {
 		}
 	}
 
-	public static int getCommerceAvailabilityEstimatesCount(long groupId)
+	public static int getCommerceAvailabilityEstimatesCount(long companyId)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimatesCount(groupId);
+			int returnValue = CommerceAvailabilityEstimateServiceUtil.getCommerceAvailabilityEstimatesCount(companyId);
 
 			return returnValue;
 		}

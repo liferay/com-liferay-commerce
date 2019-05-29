@@ -66,14 +66,12 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", commerceAvailabilityEstimateId=");
 		sb.append(commerceAvailabilityEstimateId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -107,7 +105,6 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 		}
 
 		commerceAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
-		commerceAvailabilityEstimateImpl.setGroupId(groupId);
 		commerceAvailabilityEstimateImpl.setCompanyId(companyId);
 		commerceAvailabilityEstimateImpl.setUserId(userId);
 
@@ -161,8 +158,6 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 
 		commerceAvailabilityEstimateId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -186,8 +181,6 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 		}
 
 		objectOutput.writeLong(commerceAvailabilityEstimateId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -216,7 +209,6 @@ public class CommerceAvailabilityEstimateCacheModel implements CacheModel<Commer
 
 	public String uuid;
 	public long commerceAvailabilityEstimateId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

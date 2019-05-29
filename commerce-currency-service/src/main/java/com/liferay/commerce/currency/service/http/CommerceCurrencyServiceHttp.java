@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceCurrencyServiceHttp {
 	public static com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		HttpPrincipal httpPrincipal, long companyId, long userId, String code,
+		HttpPrincipal httpPrincipal, long userId, String code,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
@@ -68,10 +68,10 @@ public class CommerceCurrencyServiceHttp {
 			MethodKey methodKey = new MethodKey(CommerceCurrencyServiceUtil.class,
 					"addCommerceCurrency", _addCommerceCurrencyParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, userId, code, nameMap, rate, formatPatternMap,
-					maxFractionDigits, minFractionDigits, roundingMode,
-					primary, priority, active, serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					code, nameMap, rate, formatPatternMap, maxFractionDigits,
+					minFractionDigits, roundingMode, primary, priority, active,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -515,7 +515,7 @@ public class CommerceCurrencyServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceCurrencyServiceHttp.class);
 	private static final Class<?>[] _addCommerceCurrencyParameterTypes0 = new Class[] {
-			long.class, long.class, String.class, java.util.Map.class,
+			long.class, String.class, java.util.Map.class,
 			java.math.BigDecimal.class, java.util.Map.class, int.class,
 			int.class, String.class, boolean.class, double.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

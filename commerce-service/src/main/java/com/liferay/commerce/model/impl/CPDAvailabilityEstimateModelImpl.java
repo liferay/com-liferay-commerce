@@ -75,7 +75,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "CPDAvailabilityEstimateId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -90,7 +89,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPDAvailabilityEstimateId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -101,7 +99,7 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAvailabilityEstimateId LONG,CProductId LONG,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAvailabilityEstimateId LONG,CProductId LONG,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDAvailabilityEstimate";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpdAvailabilityEstimate.CPDAvailabilityEstimateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDAvailabilityEstimate.CPDAvailabilityEstimateId ASC";
@@ -120,9 +118,8 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	public static final long CPRODUCTID_COLUMN_BITMASK = 1L;
 	public static final long COMMERCEAVAILABILITYESTIMATEID_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long CPDAVAILABILITYESTIMATEID_COLUMN_BITMASK = 32L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+	public static final long CPDAVAILABILITYESTIMATEID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -140,7 +137,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 		model.setUuid(soapModel.getUuid());
 		model.setCPDAvailabilityEstimateId(soapModel.getCPDAvailabilityEstimateId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -217,7 +213,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		attributes.put("uuid", getUuid());
 		attributes.put("CPDAvailabilityEstimateId",
 			getCPDAvailabilityEstimateId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -247,12 +242,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 		if (CPDAvailabilityEstimateId != null) {
 			setCPDAvailabilityEstimateId(CPDAvailabilityEstimateId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -338,29 +327,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	@Override
 	public void setCPDAvailabilityEstimateId(long CPDAvailabilityEstimateId) {
 		_CPDAvailabilityEstimateId = CPDAvailabilityEstimateId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -554,7 +520,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 		cpdAvailabilityEstimateImpl.setUuid(getUuid());
 		cpdAvailabilityEstimateImpl.setCPDAvailabilityEstimateId(getCPDAvailabilityEstimateId());
-		cpdAvailabilityEstimateImpl.setGroupId(getGroupId());
 		cpdAvailabilityEstimateImpl.setCompanyId(getCompanyId());
 		cpdAvailabilityEstimateImpl.setUserId(getUserId());
 		cpdAvailabilityEstimateImpl.setUserName(getUserName());
@@ -627,10 +592,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 		cpdAvailabilityEstimateModelImpl._originalUuid = cpdAvailabilityEstimateModelImpl._uuid;
 
-		cpdAvailabilityEstimateModelImpl._originalGroupId = cpdAvailabilityEstimateModelImpl._groupId;
-
-		cpdAvailabilityEstimateModelImpl._setOriginalGroupId = false;
-
 		cpdAvailabilityEstimateModelImpl._originalCompanyId = cpdAvailabilityEstimateModelImpl._companyId;
 
 		cpdAvailabilityEstimateModelImpl._setOriginalCompanyId = false;
@@ -661,8 +622,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		}
 
 		cpdAvailabilityEstimateCacheModel.CPDAvailabilityEstimateId = getCPDAvailabilityEstimateId();
-
-		cpdAvailabilityEstimateCacheModel.groupId = getGroupId();
 
 		cpdAvailabilityEstimateCacheModel.companyId = getCompanyId();
 
@@ -712,14 +671,12 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", CPDAvailabilityEstimateId=");
 		sb.append(getCPDAvailabilityEstimateId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -743,7 +700,7 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CPDAvailabilityEstimate");
@@ -756,10 +713,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 		sb.append(
 			"<column><column-name>CPDAvailabilityEstimateId</column-name><column-value><![CDATA[");
 		sb.append(getCPDAvailabilityEstimateId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -806,9 +759,6 @@ public class CPDAvailabilityEstimateModelImpl extends BaseModelImpl<CPDAvailabil
 	private String _uuid;
 	private String _originalUuid;
 	private long _CPDAvailabilityEstimateId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

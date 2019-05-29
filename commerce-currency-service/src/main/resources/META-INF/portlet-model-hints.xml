@@ -4,7 +4,6 @@
 	<model name="com.liferay.commerce.currency.model.CommerceCurrency">
 		<field name="uuid" type="String" />
 		<field name="commerceCurrencyId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

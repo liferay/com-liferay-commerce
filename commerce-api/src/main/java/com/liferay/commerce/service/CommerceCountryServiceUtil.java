@@ -62,41 +62,43 @@ public class CommerceCountryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getBillingCommerceCountries(
-		long groupId, boolean billingAllowed, boolean active) {
+		long companyId, boolean billingAllowed, boolean active) {
 		return getService()
-				   .getBillingCommerceCountries(groupId, billingAllowed, active);
+				   .getBillingCommerceCountries(companyId, billingAllowed,
+			active);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getCommerceCountries(
-		long groupId, boolean active) {
-		return getService().getCommerceCountries(groupId, active);
+		long companyId, boolean active) {
+		return getService().getCommerceCountries(companyId, active);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getCommerceCountries(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceCountries(groupId, active, start, end,
+				   .getCommerceCountries(companyId, active, start, end,
 			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getCommerceCountries(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceCountries(groupId, start, end, orderByComparator);
+				   .getCommerceCountries(companyId, start, end,
+			orderByComparator);
 	}
 
-	public static int getCommerceCountriesCount(long groupId)
+	public static int getCommerceCountriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCountriesCount(groupId);
+		return getService().getCommerceCountriesCount(companyId);
 	}
 
-	public static int getCommerceCountriesCount(long groupId, boolean active)
+	public static int getCommerceCountriesCount(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCountriesCount(groupId, active);
+		return getService().getCommerceCountriesCount(companyId, active);
 	}
 
 	public static com.liferay.commerce.model.CommerceCountry getCommerceCountry(
@@ -115,23 +117,22 @@ public class CommerceCountryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getShippingCommerceCountries(
-		long groupId, boolean shippingAllowed, boolean active) {
+		long companyId, boolean shippingAllowed, boolean active) {
 		return getService()
-				   .getShippingCommerceCountries(groupId, shippingAllowed,
+				   .getShippingCommerceCountries(companyId, shippingAllowed,
 			active);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry> getWarehouseCommerceCountries(
-		long groupId, boolean all)
+		long companyId, boolean all)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getWarehouseCommerceCountries(groupId, all);
+		return getService().getWarehouseCommerceCountries(companyId, all);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceCountry> searchCommerceCountries(
-		long groupId,
 		com.liferay.portal.kernel.search.SearchContext searchContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().searchCommerceCountries(groupId, searchContext);
+		return getService().searchCommerceCountries(searchContext);
 	}
 
 	public static com.liferay.commerce.model.CommerceCountry setActive(

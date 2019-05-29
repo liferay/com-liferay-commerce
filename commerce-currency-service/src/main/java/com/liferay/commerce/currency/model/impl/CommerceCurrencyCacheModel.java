@@ -67,14 +67,12 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", commerceCurrencyId=");
 		sb.append(commerceCurrencyId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -124,7 +122,6 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 		}
 
 		commerceCurrencyImpl.setCommerceCurrencyId(commerceCurrencyId);
-		commerceCurrencyImpl.setGroupId(groupId);
 		commerceCurrencyImpl.setCompanyId(companyId);
 		commerceCurrencyImpl.setUserId(userId);
 
@@ -205,8 +202,6 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 
 		commerceCurrencyId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -242,8 +237,6 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 		}
 
 		objectOutput.writeLong(commerceCurrencyId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -303,7 +296,6 @@ public class CommerceCurrencyCacheModel implements CacheModel<CommerceCurrency>,
 
 	public String uuid;
 	public long commerceCurrencyId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

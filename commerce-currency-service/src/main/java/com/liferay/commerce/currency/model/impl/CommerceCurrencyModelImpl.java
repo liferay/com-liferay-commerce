@@ -84,7 +84,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "commerceCurrencyId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -107,7 +106,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCurrencyId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -126,7 +124,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceCurrency (uuid_ VARCHAR(75) null,commerceCurrencyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name STRING null,rate DECIMAL(30, 16) null,formatPattern STRING null,maxFractionDigits INTEGER,minFractionDigits INTEGER,roundingMode VARCHAR(75) null,primary_ BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceCurrency (uuid_ VARCHAR(75) null,commerceCurrencyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name STRING null,rate DECIMAL(30, 16) null,formatPattern STRING null,maxFractionDigits INTEGER,minFractionDigits INTEGER,roundingMode VARCHAR(75) null,primary_ BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceCurrency";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceCurrency.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceCurrency.priority ASC";
@@ -145,10 +143,9 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	public static final long ACTIVE_COLUMN_BITMASK = 1L;
 	public static final long CODE_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
-	public static final long PRIMARY_COLUMN_BITMASK = 16L;
-	public static final long UUID_COLUMN_BITMASK = 32L;
-	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long PRIMARY_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long PRIORITY_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -165,7 +162,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceCurrencyId(soapModel.getCommerceCurrencyId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -249,7 +245,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -285,12 +280,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 		if (commerceCurrencyId != null) {
 			setCommerceCurrencyId(commerceCurrencyId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -423,29 +412,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	@Override
 	public void setCommerceCurrencyId(long commerceCurrencyId) {
 		_commerceCurrencyId = commerceCurrencyId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -629,7 +595,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -654,7 +620,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -739,7 +705,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public void setFormatPattern(String formatPattern, Locale locale) {
-		setFormatPattern(formatPattern, locale, LocaleUtil.getSiteDefault());
+		setFormatPattern(formatPattern, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -766,7 +732,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public void setFormatPatternMap(Map<Locale, String> formatPatternMap) {
-		setFormatPatternMap(formatPatternMap, LocaleUtil.getSiteDefault());
+		setFormatPatternMap(formatPatternMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -961,7 +927,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -982,7 +948,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -1023,7 +989,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 		commerceCurrencyImpl.setUuid(getUuid());
 		commerceCurrencyImpl.setCommerceCurrencyId(getCommerceCurrencyId());
-		commerceCurrencyImpl.setGroupId(getGroupId());
 		commerceCurrencyImpl.setCompanyId(getCompanyId());
 		commerceCurrencyImpl.setUserId(getUserId());
 		commerceCurrencyImpl.setUserName(getUserName());
@@ -1110,10 +1075,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 		commerceCurrencyModelImpl._originalUuid = commerceCurrencyModelImpl._uuid;
 
-		commerceCurrencyModelImpl._originalGroupId = commerceCurrencyModelImpl._groupId;
-
-		commerceCurrencyModelImpl._setOriginalGroupId = false;
-
 		commerceCurrencyModelImpl._originalCompanyId = commerceCurrencyModelImpl._companyId;
 
 		commerceCurrencyModelImpl._setOriginalCompanyId = false;
@@ -1146,8 +1107,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 		}
 
 		commerceCurrencyCacheModel.commerceCurrencyId = getCommerceCurrencyId();
-
-		commerceCurrencyCacheModel.groupId = getGroupId();
 
 		commerceCurrencyCacheModel.companyId = getCompanyId();
 
@@ -1237,14 +1196,12 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", commerceCurrencyId=");
 		sb.append(getCommerceCurrencyId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -1284,7 +1241,7 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.currency.model.CommerceCurrency");
@@ -1297,10 +1254,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 		sb.append(
 			"<column><column-name>commerceCurrencyId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceCurrencyId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -1379,9 +1332,6 @@ public class CommerceCurrencyModelImpl extends BaseModelImpl<CommerceCurrency>
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceCurrencyId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

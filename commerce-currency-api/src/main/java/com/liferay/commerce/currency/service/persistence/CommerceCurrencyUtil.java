@@ -269,66 +269,6 @@ public class CommerceCurrencyUtil {
 	}
 
 	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce currency
-	* @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	*/
-	public static CommerceCurrency findByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-		return getPersistence().findByUUID_G(uuid, groupId);
-	}
-
-	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	*/
-	public static CommerceCurrency fetchByUUID_G(String uuid, long groupId) {
-		return getPersistence().fetchByUUID_G(uuid, groupId);
-	}
-
-	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	*/
-	public static CommerceCurrency fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache) {
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
-	}
-
-	/**
-	* Removes the commerce currency where uuid = &#63; and groupId = &#63; from the database.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the commerce currency that was removed
-	*/
-	public static CommerceCurrency removeByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-		return getPersistence().removeByUUID_G(uuid, groupId);
-	}
-
-	/**
-	* Returns the number of commerce currencies where uuid = &#63; and groupId = &#63;.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the number of matching commerce currencies
-	*/
-	public static int countByUUID_G(String uuid, long groupId) {
-		return getPersistence().countByUUID_G(uuid, groupId);
-	}
-
-	/**
 	* Returns all the commerce currencies where uuid = &#63; and companyId = &#63;.
 	*
 	* @param uuid the uuid
@@ -667,63 +607,63 @@ public class CommerceCurrencyUtil {
 	}
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the matching commerce currency
 	* @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	*/
-	public static CommerceCurrency findByC_C(long groupId, String code)
+	public static CommerceCurrency findByC_C(long companyId, String code)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-		return getPersistence().findByC_C(groupId, code);
+		return getPersistence().findByC_C(companyId, code);
 	}
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
-	public static CommerceCurrency fetchByC_C(long groupId, String code) {
-		return getPersistence().fetchByC_C(groupId, code);
+	public static CommerceCurrency fetchByC_C(long companyId, String code) {
+		return getPersistence().fetchByC_C(companyId, code);
 	}
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
-	public static CommerceCurrency fetchByC_C(long groupId, String code,
+	public static CommerceCurrency fetchByC_C(long companyId, String code,
 		boolean retrieveFromCache) {
-		return getPersistence().fetchByC_C(groupId, code, retrieveFromCache);
+		return getPersistence().fetchByC_C(companyId, code, retrieveFromCache);
 	}
 
 	/**
-	* Removes the commerce currency where groupId = &#63; and code = &#63; from the database.
+	* Removes the commerce currency where companyId = &#63; and code = &#63; from the database.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the commerce currency that was removed
 	*/
-	public static CommerceCurrency removeByC_C(long groupId, String code)
+	public static CommerceCurrency removeByC_C(long companyId, String code)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-		return getPersistence().removeByC_C(groupId, code);
+		return getPersistence().removeByC_C(companyId, code);
 	}
 
 	/**
-	* Returns the number of commerce currencies where groupId = &#63; and code = &#63;.
+	* Returns the number of commerce currencies where companyId = &#63; and code = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the number of matching commerce currencies
 	*/
-	public static int countByC_C(long groupId, String code) {
-		return getPersistence().countByC_C(groupId, code);
+	public static int countByC_C(long companyId, String code) {
+		return getPersistence().countByC_C(companyId, code);
 	}
 
 	/**

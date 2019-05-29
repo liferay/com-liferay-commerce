@@ -65,12 +65,10 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{CPTaxCategoryId=");
 		sb.append(CPTaxCategoryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -95,7 +93,6 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 		CPTaxCategoryImpl cpTaxCategoryImpl = new CPTaxCategoryImpl();
 
 		cpTaxCategoryImpl.setCPTaxCategoryId(CPTaxCategoryId);
-		cpTaxCategoryImpl.setGroupId(groupId);
 		cpTaxCategoryImpl.setCompanyId(companyId);
 		cpTaxCategoryImpl.setUserId(userId);
 
@@ -143,8 +140,6 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		CPTaxCategoryId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -159,8 +154,6 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(CPTaxCategoryId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -192,7 +185,6 @@ public class CPTaxCategoryCacheModel implements CacheModel<CPTaxCategory>,
 	}
 
 	public long CPTaxCategoryId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

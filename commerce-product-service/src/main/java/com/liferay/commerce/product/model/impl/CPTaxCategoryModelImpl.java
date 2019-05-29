@@ -79,7 +79,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 	public static final String TABLE_NAME = "CPTaxCategory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "CPTaxCategoryId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -92,7 +91,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	static {
 		TABLE_COLUMNS_MAP.put("CPTaxCategoryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -102,7 +100,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPTaxCategory (CPTaxCategoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table CPTaxCategory (CPTaxCategoryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table CPTaxCategory";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpTaxCategory.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPTaxCategory.createDate DESC";
@@ -118,7 +116,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.product.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPTaxCategory"),
 			true);
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long CREATEDATE_COLUMN_BITMASK = 2L;
 
 	/**
@@ -135,7 +133,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		CPTaxCategory model = new CPTaxCategoryImpl();
 
 		model.setCPTaxCategoryId(soapModel.getCPTaxCategoryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -208,7 +205,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -229,12 +225,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 		if (CPTaxCategoryId != null) {
 			setCPTaxCategoryId(CPTaxCategoryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -293,36 +283,25 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -459,7 +438,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -484,7 +463,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -558,7 +537,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public void setDescription(String description, Locale locale) {
-		setDescription(description, locale, LocaleUtil.getSiteDefault());
+		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -585,7 +564,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
-		setDescriptionMap(descriptionMap, LocaleUtil.getSiteDefault());
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -654,7 +633,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -675,7 +654,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -714,7 +693,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		CPTaxCategoryImpl cpTaxCategoryImpl = new CPTaxCategoryImpl();
 
 		cpTaxCategoryImpl.setCPTaxCategoryId(getCPTaxCategoryId());
-		cpTaxCategoryImpl.setGroupId(getGroupId());
 		cpTaxCategoryImpl.setCompanyId(getCompanyId());
 		cpTaxCategoryImpl.setUserId(getUserId());
 		cpTaxCategoryImpl.setUserName(getUserName());
@@ -785,9 +763,9 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 	public void resetOriginalValues() {
 		CPTaxCategoryModelImpl cpTaxCategoryModelImpl = this;
 
-		cpTaxCategoryModelImpl._originalGroupId = cpTaxCategoryModelImpl._groupId;
+		cpTaxCategoryModelImpl._originalCompanyId = cpTaxCategoryModelImpl._companyId;
 
-		cpTaxCategoryModelImpl._setOriginalGroupId = false;
+		cpTaxCategoryModelImpl._setOriginalCompanyId = false;
 
 		cpTaxCategoryModelImpl._setModifiedDate = false;
 
@@ -799,8 +777,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		CPTaxCategoryCacheModel cpTaxCategoryCacheModel = new CPTaxCategoryCacheModel();
 
 		cpTaxCategoryCacheModel.CPTaxCategoryId = getCPTaxCategoryId();
-
-		cpTaxCategoryCacheModel.groupId = getGroupId();
 
 		cpTaxCategoryCacheModel.companyId = getCompanyId();
 
@@ -853,12 +829,10 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{CPTaxCategoryId=");
 		sb.append(getCPTaxCategoryId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -880,7 +854,7 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPTaxCategory");
@@ -889,10 +863,6 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 		sb.append(
 			"<column><column-name>CPTaxCategoryId</column-name><column-value><![CDATA[");
 		sb.append(getCPTaxCategoryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -933,10 +903,9 @@ public class CPTaxCategoryModelImpl extends BaseModelImpl<CPTaxCategory>
 			CPTaxCategory.class, ModelWrapper.class
 		};
 	private long _CPTaxCategoryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

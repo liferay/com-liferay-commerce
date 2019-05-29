@@ -95,8 +95,8 @@ public class CPMeasurementUnitLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPMeasurementUnits(long groupId) {
-		_cpMeasurementUnitLocalService.deleteCPMeasurementUnits(groupId);
+	public void deleteCPMeasurementUnits(long companyId) {
+		_cpMeasurementUnitLocalService.deleteCPMeasurementUnits(companyId);
 	}
 
 	/**
@@ -217,8 +217,8 @@ public class CPMeasurementUnitLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-		long groupId, int type) {
-		return _cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(groupId,
+		long companyId, int type) {
+		return _cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(companyId,
 			type);
 	}
 
@@ -276,30 +276,30 @@ public class CPMeasurementUnitLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId);
+		long companyId) {
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(companyId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int type, int start, int end,
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId,
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(companyId,
 			type, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId,
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(companyId,
 			start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, String[] keys, int type) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId,
+		long companyId, String[] keys, int type) {
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnits(companyId,
 			keys, type);
 	}
 
@@ -346,13 +346,13 @@ public class CPMeasurementUnitLocalServiceWrapper
 	}
 
 	@Override
-	public int getCPMeasurementUnitsCount(long groupId) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(groupId);
+	public int getCPMeasurementUnitsCount(long companyId) {
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(companyId);
 	}
 
 	@Override
-	public int getCPMeasurementUnitsCount(long groupId, int type) {
-		return _cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(groupId,
+	public int getCPMeasurementUnitsCount(long companyId, int type) {
+		return _cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(companyId,
 			type);
 	}
 

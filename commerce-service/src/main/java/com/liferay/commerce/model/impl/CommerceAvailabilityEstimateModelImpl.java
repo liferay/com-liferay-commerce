@@ -82,7 +82,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "commerceAvailabilityEstimateId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -97,7 +96,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceAvailabilityEstimateId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -108,7 +106,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAvailabilityEstimate (uuid_ VARCHAR(75) null,commerceAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,priority DOUBLE,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAvailabilityEstimate (uuid_ VARCHAR(75) null,commerceAvailabilityEstimateId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,priority DOUBLE,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAvailabilityEstimate";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceAvailabilityEstimate.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAvailabilityEstimate.title ASC";
@@ -125,9 +123,8 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 				"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceAvailabilityEstimate"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long TITLE_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 2L;
+	public static final long TITLE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -145,7 +142,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceAvailabilityEstimateId(soapModel.getCommerceAvailabilityEstimateId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -222,7 +218,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -251,12 +246,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -342,29 +331,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 	public void setCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId) {
 		_commerceAvailabilityEstimateId = commerceAvailabilityEstimateId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -524,7 +490,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 	@Override
 	public void setTitle(String title, Locale locale) {
-		setTitle(title, locale, LocaleUtil.getSiteDefault());
+		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -549,7 +515,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
-		setTitleMap(titleMap, LocaleUtil.getSiteDefault());
+		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -633,7 +599,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -654,7 +620,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -684,7 +650,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 		commerceAvailabilityEstimateImpl.setUuid(getUuid());
 		commerceAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(getCommerceAvailabilityEstimateId());
-		commerceAvailabilityEstimateImpl.setGroupId(getGroupId());
 		commerceAvailabilityEstimateImpl.setCompanyId(getCompanyId());
 		commerceAvailabilityEstimateImpl.setUserId(getUserId());
 		commerceAvailabilityEstimateImpl.setUserName(getUserName());
@@ -757,10 +722,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 		commerceAvailabilityEstimateModelImpl._originalUuid = commerceAvailabilityEstimateModelImpl._uuid;
 
-		commerceAvailabilityEstimateModelImpl._originalGroupId = commerceAvailabilityEstimateModelImpl._groupId;
-
-		commerceAvailabilityEstimateModelImpl._setOriginalGroupId = false;
-
 		commerceAvailabilityEstimateModelImpl._originalCompanyId = commerceAvailabilityEstimateModelImpl._companyId;
 
 		commerceAvailabilityEstimateModelImpl._setOriginalCompanyId = false;
@@ -784,8 +745,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 		}
 
 		commerceAvailabilityEstimateCacheModel.commerceAvailabilityEstimateId = getCommerceAvailabilityEstimateId();
-
-		commerceAvailabilityEstimateCacheModel.groupId = getGroupId();
 
 		commerceAvailabilityEstimateCacheModel.companyId = getCompanyId();
 
@@ -841,14 +800,12 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", commerceAvailabilityEstimateId=");
 		sb.append(getCommerceAvailabilityEstimateId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -872,7 +829,7 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceAvailabilityEstimate");
@@ -885,10 +842,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 		sb.append(
 			"<column><column-name>commerceAvailabilityEstimateId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceAvailabilityEstimateId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -935,9 +888,6 @@ public class CommerceAvailabilityEstimateModelImpl extends BaseModelImpl<Commerc
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceAvailabilityEstimateId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -248,16 +248,17 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) {
-		return cpdAvailabilityEstimatePersistence.fetchByUUID_G(uuid, groupId);
+	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return cpdAvailabilityEstimatePersistence.fetchByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
@@ -348,8 +349,6 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPDAvailabilityEstimate>() {
 				@Override
 				public void performAction(
@@ -382,48 +381,18 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @return the matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPDAvailabilityEstimate> getCPDAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return cpdAvailabilityEstimatePersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cpd availability estimates
-	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPDAvailabilityEstimate> getCPDAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
-		return cpdAvailabilityEstimatePersistence.findByUuid_C(uuid, companyId,
-			start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate
 	 * @throws PortalException if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
-		return cpdAvailabilityEstimatePersistence.findByUUID_G(uuid, groupId);
+	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException {
+		return cpdAvailabilityEstimatePersistence.findByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**

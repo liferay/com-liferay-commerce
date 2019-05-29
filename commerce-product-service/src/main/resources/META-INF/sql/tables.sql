@@ -307,7 +307,6 @@ create table CPSpecificationOption (
 
 create table CPTaxCategory (
 	CPTaxCategoryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

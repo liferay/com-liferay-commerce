@@ -59,17 +59,17 @@ public class CommerceAvailabilityEstimateServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimates(groupId,
+		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimates(companyId,
 			start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceAvailabilityEstimatesCount(long groupId)
+	public int getCommerceAvailabilityEstimatesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimatesCount(groupId);
+		return _commerceAvailabilityEstimateService.getCommerceAvailabilityEstimatesCount(companyId);
 	}
 
 	/**

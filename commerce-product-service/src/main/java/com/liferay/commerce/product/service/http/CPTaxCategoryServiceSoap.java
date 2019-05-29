@@ -105,10 +105,10 @@ public class CPTaxCategoryServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPTaxCategorySoap[] getCPTaxCategories(
-		long groupId) throws RemoteException {
+		long companyId) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPTaxCategory> returnValue =
-				CPTaxCategoryServiceUtil.getCPTaxCategories(groupId);
+				CPTaxCategoryServiceUtil.getCPTaxCategories(companyId);
 
 			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModels(returnValue);
 		}
@@ -120,12 +120,12 @@ public class CPTaxCategoryServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPTaxCategorySoap[] getCPTaxCategories(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPTaxCategory> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.product.model.CPTaxCategory> returnValue =
-				CPTaxCategoryServiceUtil.getCPTaxCategories(groupId, start,
+				CPTaxCategoryServiceUtil.getCPTaxCategories(companyId, start,
 					end, orderByComparator);
 
 			return com.liferay.commerce.product.model.CPTaxCategorySoap.toSoapModels(returnValue);
@@ -137,10 +137,10 @@ public class CPTaxCategoryServiceSoap {
 		}
 	}
 
-	public static int getCPTaxCategoriesCount(long groupId)
+	public static int getCPTaxCategoriesCount(long companyId)
 		throws RemoteException {
 		try {
-			int returnValue = CPTaxCategoryServiceUtil.getCPTaxCategoriesCount(groupId);
+			int returnValue = CPTaxCategoryServiceUtil.getCPTaxCategoriesCount(companyId);
 
 			return returnValue;
 		}

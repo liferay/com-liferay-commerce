@@ -75,7 +75,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "commerceRegionId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -93,7 +92,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceRegionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -107,7 +105,7 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceRegion (uuid_ VARCHAR(75) null,commerceRegionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceCountryId LONG,name VARCHAR(75) null,code_ VARCHAR(75) null,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceRegion (uuid_ VARCHAR(75) null,commerceRegionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceCountryId LONG,name VARCHAR(75) null,code_ VARCHAR(75) null,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceRegion";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceRegion.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceRegion.priority ASC";
@@ -127,9 +125,8 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 	public static final long CODE_COLUMN_BITMASK = 2L;
 	public static final long COMMERCECOUNTRYID_COLUMN_BITMASK = 4L;
 	public static final long COMPANYID_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long UUID_COLUMN_BITMASK = 32L;
-	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long PRIORITY_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -146,7 +143,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceRegionId(soapModel.getCommerceRegionId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -224,7 +220,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceRegionId", getCommerceRegionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -255,12 +250,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 		if (commerceRegionId != null) {
 			setCommerceRegionId(commerceRegionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -363,29 +352,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 	@Override
 	public void setCommerceRegionId(long commerceRegionId) {
 		_commerceRegionId = commerceRegionId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -639,7 +605,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 		commerceRegionImpl.setUuid(getUuid());
 		commerceRegionImpl.setCommerceRegionId(getCommerceRegionId());
-		commerceRegionImpl.setGroupId(getGroupId());
 		commerceRegionImpl.setCompanyId(getCompanyId());
 		commerceRegionImpl.setUserId(getUserId());
 		commerceRegionImpl.setUserName(getUserName());
@@ -721,10 +686,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 		commerceRegionModelImpl._originalUuid = commerceRegionModelImpl._uuid;
 
-		commerceRegionModelImpl._originalGroupId = commerceRegionModelImpl._groupId;
-
-		commerceRegionModelImpl._setOriginalGroupId = false;
-
 		commerceRegionModelImpl._originalCompanyId = commerceRegionModelImpl._companyId;
 
 		commerceRegionModelImpl._setOriginalCompanyId = false;
@@ -757,8 +718,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 		}
 
 		commerceRegionCacheModel.commerceRegionId = getCommerceRegionId();
-
-		commerceRegionCacheModel.groupId = getGroupId();
 
 		commerceRegionCacheModel.companyId = getCompanyId();
 
@@ -826,14 +785,12 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", commerceRegionId=");
 		sb.append(getCommerceRegionId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -863,7 +820,7 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceRegion");
@@ -876,10 +833,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 		sb.append(
 			"<column><column-name>commerceRegionId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceRegionId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -938,9 +891,6 @@ public class CommerceRegionModelImpl extends BaseModelImpl<CommerceRegion>
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceRegionId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

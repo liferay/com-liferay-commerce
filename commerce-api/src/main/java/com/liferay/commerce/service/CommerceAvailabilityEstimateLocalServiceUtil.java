@@ -104,9 +104,9 @@ public class CommerceAvailabilityEstimateLocalServiceUtil {
 				   .deleteCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
 	}
 
-	public static void deleteCommerceAvailabilityEstimates(long groupId)
+	public static void deleteCommerceAvailabilityEstimates(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCommerceAvailabilityEstimates(groupId);
+		getService().deleteCommerceAvailabilityEstimates(companyId);
 	}
 
 	/**
@@ -203,17 +203,17 @@ public class CommerceAvailabilityEstimateLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce availability estimate matching the UUID and group.
+	* Returns the commerce availability estimate with the matching UUID and company.
 	*
 	* @param uuid the commerce availability estimate's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce availability estimate, or <code>null</code> if a matching commerce availability estimate could not be found
 	*/
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimate fetchCommerceAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) {
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimate fetchCommerceAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId) {
 		return getService()
-				   .fetchCommerceAvailabilityEstimateByUuidAndGroupId(uuid,
-			groupId);
+				   .fetchCommerceAvailabilityEstimateByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
@@ -235,19 +235,19 @@ public class CommerceAvailabilityEstimateLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce availability estimate matching the UUID and group.
+	* Returns the commerce availability estimate with the matching UUID and company.
 	*
 	* @param uuid the commerce availability estimate's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce availability estimate
 	* @throws PortalException if a matching commerce availability estimate could not be found
 	*/
-	public static com.liferay.commerce.model.CommerceAvailabilityEstimate getCommerceAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId)
+	public static com.liferay.commerce.model.CommerceAvailabilityEstimate getCommerceAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceAvailabilityEstimateByUuidAndGroupId(uuid,
-			groupId);
+				   .getCommerceAvailabilityEstimateByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	/**
@@ -267,43 +267,11 @@ public class CommerceAvailabilityEstimateLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator) {
 		return getService()
-				   .getCommerceAvailabilityEstimates(groupId, start, end,
+				   .getCommerceAvailabilityEstimates(companyId, start, end,
 			orderByComparator);
-	}
-
-	/**
-	* Returns all the commerce availability estimates matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce availability estimates
-	* @param companyId the primary key of the company
-	* @return the matching commerce availability estimates, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return getService()
-				   .getCommerceAvailabilityEstimatesByUuidAndCompanyId(uuid,
-			companyId);
-	}
-
-	/**
-	* Returns a range of commerce availability estimates matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce availability estimates
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of commerce availability estimates
-	* @param end the upper bound of the range of commerce availability estimates (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching commerce availability estimates, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.model.CommerceAvailabilityEstimate> getCommerceAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceAvailabilityEstimate> orderByComparator) {
-		return getService()
-				   .getCommerceAvailabilityEstimatesByUuidAndCompanyId(uuid,
-			companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -315,8 +283,8 @@ public class CommerceAvailabilityEstimateLocalServiceUtil {
 		return getService().getCommerceAvailabilityEstimatesCount();
 	}
 
-	public static int getCommerceAvailabilityEstimatesCount(long groupId) {
-		return getService().getCommerceAvailabilityEstimatesCount(groupId);
+	public static int getCommerceAvailabilityEstimatesCount(long companyId) {
+		return getService().getCommerceAvailabilityEstimatesCount(companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(

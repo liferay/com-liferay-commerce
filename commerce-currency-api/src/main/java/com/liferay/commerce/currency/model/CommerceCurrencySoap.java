@@ -38,7 +38,6 @@ public class CommerceCurrencySoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setCommerceCurrencyId(model.getCommerceCurrencyId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -123,14 +122,6 @@ public class CommerceCurrencySoap implements Serializable {
 
 	public void setCommerceCurrencyId(long commerceCurrencyId) {
 		_commerceCurrencyId = commerceCurrencyId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -271,7 +262,6 @@ public class CommerceCurrencySoap implements Serializable {
 
 	private String _uuid;
 	private long _commerceCurrencyId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

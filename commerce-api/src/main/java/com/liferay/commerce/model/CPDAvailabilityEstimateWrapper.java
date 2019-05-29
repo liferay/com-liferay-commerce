@@ -64,7 +64,6 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 		attributes.put("uuid", getUuid());
 		attributes.put("CPDAvailabilityEstimateId",
 			getCPDAvailabilityEstimateId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -91,12 +90,6 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 
 		if (CPDAvailabilityEstimateId != null) {
 			setCPDAvailabilityEstimateId(CPDAvailabilityEstimateId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -218,16 +211,6 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cpdAvailabilityEstimate.getExpandoBridge();
-	}
-
-	/**
-	* Returns the group ID of this cpd availability estimate.
-	*
-	* @return the group ID of this cpd availability estimate
-	*/
-	@Override
-	public long getGroupId() {
-		return _cpdAvailabilityEstimate.getGroupId();
 	}
 
 	/**
@@ -400,16 +383,6 @@ public class CPDAvailabilityEstimateWrapper implements CPDAvailabilityEstimate,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cpdAvailabilityEstimate.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the group ID of this cpd availability estimate.
-	*
-	* @param groupId the group ID of this cpd availability estimate
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_cpdAvailabilityEstimate.setGroupId(groupId);
 	}
 
 	/**

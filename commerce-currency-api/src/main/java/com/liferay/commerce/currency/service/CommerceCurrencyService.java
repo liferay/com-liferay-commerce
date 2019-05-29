@@ -60,8 +60,8 @@ public interface CommerceCurrencyService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCurrencyServiceUtil} to access the commerce currency remote service. Add custom service methods to {@link com.liferay.commerce.currency.service.impl.CommerceCurrencyServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceCurrency addCommerceCurrency(long companyId, long userId,
-		String code, Map<Locale, String> nameMap, BigDecimal rate,
+	public CommerceCurrency addCommerceCurrency(long userId, String code,
+		Map<Locale, String> nameMap, BigDecimal rate,
 		Map<Locale, String> formatPatternMap, int maxFractionDigits,
 		int minFractionDigits, String roundingMode, boolean primary,
 		double priority, boolean active, ServiceContext serviceContext)
