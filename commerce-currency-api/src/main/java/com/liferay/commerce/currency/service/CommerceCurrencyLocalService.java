@@ -82,8 +82,8 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	public CommerceCurrency addCommerceCurrency(
 		CommerceCurrency commerceCurrency);
 
-	public CommerceCurrency addCommerceCurrency(long groupId, long userId,
-		String code, Map<Locale, String> nameMap, BigDecimal rate,
+	public CommerceCurrency addCommerceCurrency(long userId, String code,
+		Map<Locale, String> nameMap, BigDecimal rate,
 		Map<Locale, String> formatPatternMap, int maxFractionDigits,
 		int minFractionDigits, String roundingMode, boolean primary,
 		double priority, boolean active, ServiceContext serviceContext)
@@ -198,15 +198,15 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 	public CommerceCurrency fetchCommerceCurrency(long commerceCurrencyId);
 
 	/**
-	* Returns the commerce currency matching the UUID and group.
+	* Returns the commerce currency with the matching UUID and company.
 	*
 	* @param uuid the commerce currency's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency fetchCommerceCurrencyByUuidAndGroupId(String uuid,
-		long groupId);
+	public CommerceCurrency fetchCommerceCurrencyByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCurrency fetchPrimaryCommerceCurrency(long companyId);
@@ -243,32 +243,6 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 		OrderByComparator<CommerceCurrency> orderByComparator);
 
 	/**
-	* Returns all the commerce currencies matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce currencies
-	* @param companyId the primary key of the company
-	* @return the matching commerce currencies, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrenciesByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	* Returns a range of commerce currencies matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce currencies
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of commerce currencies
-	* @param end the upper bound of the range of commerce currencies (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching commerce currencies, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCurrency> getCommerceCurrenciesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceCurrency> orderByComparator);
-
-	/**
 	* Returns the number of commerce currencies.
 	*
 	* @return the number of commerce currencies
@@ -298,16 +272,16 @@ public interface CommerceCurrencyLocalService extends BaseLocalService,
 		throws NoSuchCurrencyException;
 
 	/**
-	* Returns the commerce currency matching the UUID and group.
+	* Returns the commerce currency with the matching UUID and company.
 	*
 	* @param uuid the commerce currency's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce currency
 	* @throws PortalException if a matching commerce currency could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCurrency getCommerceCurrencyByUuidAndGroupId(String uuid,
-		long groupId) throws PortalException;
+	public CommerceCurrency getCommerceCurrencyByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

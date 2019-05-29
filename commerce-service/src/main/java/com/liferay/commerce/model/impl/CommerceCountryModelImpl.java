@@ -82,7 +82,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "commerceCountryId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -104,7 +103,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCountryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -122,7 +120,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceCountry";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceCountry.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceCountry.priority ASC";
@@ -141,12 +139,11 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	public static final long ACTIVE_COLUMN_BITMASK = 1L;
 	public static final long BILLINGALLOWED_COLUMN_BITMASK = 2L;
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
-	public static final long NUMERICISOCODE_COLUMN_BITMASK = 16L;
-	public static final long SHIPPINGALLOWED_COLUMN_BITMASK = 32L;
-	public static final long TWOLETTERSISOCODE_COLUMN_BITMASK = 64L;
-	public static final long UUID_COLUMN_BITMASK = 128L;
-	public static final long PRIORITY_COLUMN_BITMASK = 256L;
+	public static final long NUMERICISOCODE_COLUMN_BITMASK = 8L;
+	public static final long SHIPPINGALLOWED_COLUMN_BITMASK = 16L;
+	public static final long TWOLETTERSISOCODE_COLUMN_BITMASK = 32L;
+	public static final long UUID_COLUMN_BITMASK = 64L;
+	public static final long PRIORITY_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -163,7 +160,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceCountryId(soapModel.getCommerceCountryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -246,7 +242,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceCountryId", getCommerceCountryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -281,12 +276,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		if (commerceCountryId != null) {
 			setCommerceCountryId(commerceCountryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -414,29 +403,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	@Override
 	public void setCommerceCountryId(long commerceCountryId) {
 		_commerceCountryId = commerceCountryId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -594,7 +560,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -619,7 +585,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -874,7 +840,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -895,7 +861,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -925,7 +891,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		commerceCountryImpl.setUuid(getUuid());
 		commerceCountryImpl.setCommerceCountryId(getCommerceCountryId());
-		commerceCountryImpl.setGroupId(getGroupId());
 		commerceCountryImpl.setCompanyId(getCompanyId());
 		commerceCountryImpl.setUserId(getUserId());
 		commerceCountryImpl.setUserName(getUserName());
@@ -1011,10 +976,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 		commerceCountryModelImpl._originalUuid = commerceCountryModelImpl._uuid;
 
-		commerceCountryModelImpl._originalGroupId = commerceCountryModelImpl._groupId;
-
-		commerceCountryModelImpl._setOriginalGroupId = false;
-
 		commerceCountryModelImpl._originalCompanyId = commerceCountryModelImpl._companyId;
 
 		commerceCountryModelImpl._setOriginalCompanyId = false;
@@ -1055,8 +1016,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 		}
 
 		commerceCountryCacheModel.commerceCountryId = getCommerceCountryId();
-
-		commerceCountryCacheModel.groupId = getGroupId();
 
 		commerceCountryCacheModel.companyId = getCompanyId();
 
@@ -1139,14 +1098,12 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", commerceCountryId=");
 		sb.append(getCommerceCountryId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -1184,7 +1141,7 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.model.CommerceCountry");
@@ -1197,10 +1154,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 		sb.append(
 			"<column><column-name>commerceCountryId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceCountryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -1275,9 +1228,6 @@ public class CommerceCountryModelImpl extends BaseModelImpl<CommerceCountry>
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceCountryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

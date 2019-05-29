@@ -251,17 +251,17 @@ public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce availability estimate matching the UUID and group.
+	 * Returns the commerce availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the commerce availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce availability estimate, or <code>null</code> if a matching commerce availability estimate could not be found
 	 */
 	@Override
-	public CommerceAvailabilityEstimate fetchCommerceAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) {
-		return commerceAvailabilityEstimatePersistence.fetchByUUID_G(uuid,
-			groupId);
+	public CommerceAvailabilityEstimate fetchCommerceAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return commerceAvailabilityEstimatePersistence.fetchByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
@@ -352,8 +352,6 @@ public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceAvailabilityEstimate>() {
 				@Override
 				public void performAction(
@@ -386,50 +384,18 @@ public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce availability estimates
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return commerceAvailabilityEstimatePersistence.findByUuid_C(uuid,
-			companyId);
-	}
-
-	/**
-	 * Returns a range of commerce availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce availability estimates
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce availability estimates
-	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimatesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
-		return commerceAvailabilityEstimatePersistence.findByUuid_C(uuid,
-			companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce availability estimate matching the UUID and group.
+	 * Returns the commerce availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the commerce availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce availability estimate
 	 * @throws PortalException if a matching commerce availability estimate could not be found
 	 */
 	@Override
-	public CommerceAvailabilityEstimate getCommerceAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
-		return commerceAvailabilityEstimatePersistence.findByUUID_G(uuid,
-			groupId);
+	public CommerceAvailabilityEstimate getCommerceAvailabilityEstimateByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException {
+		return commerceAvailabilityEstimatePersistence.findByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**

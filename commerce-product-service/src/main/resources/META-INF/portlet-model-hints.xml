@@ -451,7 +451,6 @@
 	</model>
 	<model name="com.liferay.commerce.product.model.CPTaxCategory">
 		<field name="CPTaxCategoryId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

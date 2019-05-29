@@ -1,7 +1,6 @@
 create table CPDAvailabilityEstimate (
 	uuid_ VARCHAR(75) null,
 	CPDAvailabilityEstimateId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -76,7 +75,6 @@ create table CommerceAddressRestriction (
 create table CommerceAvailabilityEstimate (
 	uuid_ VARCHAR(75) null,
 	commerceAvailabilityEstimateId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -90,7 +88,6 @@ create table CommerceAvailabilityEstimate (
 create table CommerceCountry (
 	uuid_ VARCHAR(75) null,
 	commerceCountryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -215,7 +212,6 @@ create table CommerceOrderPayment (
 create table CommerceRegion (
 	uuid_ VARCHAR(75) null,
 	commerceRegionId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

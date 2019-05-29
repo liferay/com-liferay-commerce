@@ -66,16 +66,17 @@ public interface CPTaxCategoryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPTaxCategory> getCPTaxCategories(long groupId)
+	public List<CPTaxCategory> getCPTaxCategories(long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPTaxCategory> getCPTaxCategories(long groupId, int start,
+	public List<CPTaxCategory> getCPTaxCategories(long companyId, int start,
 		int end, OrderByComparator<CPTaxCategory> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPTaxCategoriesCount(long groupId) throws PortalException;
+	public int getCPTaxCategoriesCount(long companyId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPTaxCategory getCPTaxCategory(long cpTaxCategoryId)

@@ -55,7 +55,7 @@ public class CommerceCurrencyLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		long groupId, long userId, String code,
+		long userId, String code,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
@@ -64,7 +64,7 @@ public class CommerceCurrencyLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCurrency(groupId, userId, code, nameMap, rate,
+				   .addCommerceCurrency(userId, code, nameMap, rate,
 			formatPatternMap, maxFractionDigits, minFractionDigits,
 			roundingMode, primary, priority, active, serviceContext);
 	}
@@ -201,15 +201,16 @@ public class CommerceCurrencyLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce currency matching the UUID and group.
+	* Returns the commerce currency with the matching UUID and company.
 	*
 	* @param uuid the commerce currency's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
-	public static com.liferay.commerce.currency.model.CommerceCurrency fetchCommerceCurrencyByUuidAndGroupId(
-		String uuid, long groupId) {
-		return getService().fetchCommerceCurrencyByUuidAndGroupId(uuid, groupId);
+	public static com.liferay.commerce.currency.model.CommerceCurrency fetchCommerceCurrencyByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return getService()
+				   .fetchCommerceCurrencyByUuidAndCompanyId(uuid, companyId);
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrency fetchPrimaryCommerceCurrency(
@@ -259,37 +260,6 @@ public class CommerceCurrencyLocalServiceUtil {
 	}
 
 	/**
-	* Returns all the commerce currencies matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce currencies
-	* @param companyId the primary key of the company
-	* @return the matching commerce currencies, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrenciesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return getService()
-				   .getCommerceCurrenciesByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	* Returns a range of commerce currencies matching the UUID and company.
-	*
-	* @param uuid the UUID of the commerce currencies
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of commerce currencies
-	* @param end the upper bound of the range of commerce currencies (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching commerce currencies, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.commerce.currency.model.CommerceCurrency> getCommerceCurrenciesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.currency.model.CommerceCurrency> orderByComparator) {
-		return getService()
-				   .getCommerceCurrenciesByUuidAndCompanyId(uuid, companyId,
-			start, end, orderByComparator);
-	}
-
-	/**
 	* Returns the number of commerce currencies.
 	*
 	* @return the number of commerce currencies
@@ -326,17 +296,18 @@ public class CommerceCurrencyLocalServiceUtil {
 	}
 
 	/**
-	* Returns the commerce currency matching the UUID and group.
+	* Returns the commerce currency with the matching UUID and company.
 	*
 	* @param uuid the commerce currency's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching commerce currency
 	* @throws PortalException if a matching commerce currency could not be found
 	*/
-	public static com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrencyByUuidAndGroupId(
-		String uuid, long groupId)
+	public static com.liferay.commerce.currency.model.CommerceCurrency getCommerceCurrencyByUuidAndCompanyId(
+		String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCurrencyByUuidAndGroupId(uuid, groupId);
+		return getService()
+				   .getCommerceCurrencyByUuidAndCompanyId(uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(

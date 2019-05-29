@@ -108,11 +108,11 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getBillingCommerceCountries(
-		long groupId, boolean billingAllowed, boolean active)
+		long companyId, boolean billingAllowed, boolean active)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getBillingCommerceCountries(groupId,
+				CommerceCountryServiceUtil.getBillingCommerceCountries(companyId,
 					billingAllowed, active);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);
@@ -125,10 +125,11 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getCommerceCountries(
-		long groupId, boolean active) throws RemoteException {
+		long companyId, boolean active) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getCommerceCountries(groupId, active);
+				CommerceCountryServiceUtil.getCommerceCountries(companyId,
+					active);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);
 		}
@@ -140,12 +141,12 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getCommerceCountries(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getCommerceCountries(groupId,
+				CommerceCountryServiceUtil.getCommerceCountries(companyId,
 					active, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);
@@ -158,13 +159,13 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getCommerceCountries(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceCountry> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getCommerceCountries(groupId, start,
-					end, orderByComparator);
+				CommerceCountryServiceUtil.getCommerceCountries(companyId,
+					start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);
 		}
@@ -175,10 +176,10 @@ public class CommerceCountryServiceSoap {
 		}
 	}
 
-	public static int getCommerceCountriesCount(long groupId)
+	public static int getCommerceCountriesCount(long companyId)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceCountryServiceUtil.getCommerceCountriesCount(groupId);
+			int returnValue = CommerceCountryServiceUtil.getCommerceCountriesCount(companyId);
 
 			return returnValue;
 		}
@@ -189,10 +190,10 @@ public class CommerceCountryServiceSoap {
 		}
 	}
 
-	public static int getCommerceCountriesCount(long groupId, boolean active)
+	public static int getCommerceCountriesCount(long companyId, boolean active)
 		throws RemoteException {
 		try {
-			int returnValue = CommerceCountryServiceUtil.getCommerceCountriesCount(groupId,
+			int returnValue = CommerceCountryServiceUtil.getCommerceCountriesCount(companyId,
 					active);
 
 			return returnValue;
@@ -219,11 +220,11 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getShippingCommerceCountries(
-		long groupId, boolean shippingAllowed, boolean active)
+		long companyId, boolean shippingAllowed, boolean active)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getShippingCommerceCountries(groupId,
+				CommerceCountryServiceUtil.getShippingCommerceCountries(companyId,
 					shippingAllowed, active);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);
@@ -236,10 +237,10 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[] getWarehouseCommerceCountries(
-		long groupId, boolean all) throws RemoteException {
+		long companyId, boolean all) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceCountry> returnValue =
-				CommerceCountryServiceUtil.getWarehouseCommerceCountries(groupId,
+				CommerceCountryServiceUtil.getWarehouseCommerceCountries(companyId,
 					all);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(returnValue);

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -44,7 +44,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityEstimate>,
-	ShardedModel, StagedGroupedModel {
+	ShardedModel, StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -95,22 +95,6 @@ public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityE
 	 * @param CPDAvailabilityEstimateId the cpd availability estimate ID of this cpd availability estimate
 	 */
 	public void setCPDAvailabilityEstimateId(long CPDAvailabilityEstimateId);
-
-	/**
-	 * Returns the group ID of this cpd availability estimate.
-	 *
-	 * @return the group ID of this cpd availability estimate
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this cpd availability estimate.
-	 *
-	 * @param groupId the group ID of this cpd availability estimate
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this cpd availability estimate.
@@ -243,7 +227,6 @@ public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityE
 	 *
 	 * @return the last publish date of this cpd availability estimate
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -251,7 +234,6 @@ public interface CPDAvailabilityEstimateModel extends BaseModel<CPDAvailabilityE
 	 *
 	 * @param lastPublishDate the last publish date of this cpd availability estimate
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override

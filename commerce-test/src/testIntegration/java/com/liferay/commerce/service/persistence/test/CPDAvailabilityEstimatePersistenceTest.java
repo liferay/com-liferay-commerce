@@ -56,7 +56,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -126,8 +125,6 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 		newCPDAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
-		newCPDAvailabilityEstimate.setGroupId(RandomTestUtil.nextLong());
-
 		newCPDAvailabilityEstimate.setCompanyId(RandomTestUtil.nextLong());
 
 		newCPDAvailabilityEstimate.setUserId(RandomTestUtil.nextLong());
@@ -153,8 +150,6 @@ public class CPDAvailabilityEstimatePersistenceTest {
 			newCPDAvailabilityEstimate.getUuid());
 		Assert.assertEquals(existingCPDAvailabilityEstimate.getCPDAvailabilityEstimateId(),
 			newCPDAvailabilityEstimate.getCPDAvailabilityEstimateId());
-		Assert.assertEquals(existingCPDAvailabilityEstimate.getGroupId(),
-			newCPDAvailabilityEstimate.getGroupId());
 		Assert.assertEquals(existingCPDAvailabilityEstimate.getCompanyId(),
 			newCPDAvailabilityEstimate.getCompanyId());
 		Assert.assertEquals(existingCPDAvailabilityEstimate.getUserId(),
@@ -184,15 +179,6 @@ public class CPDAvailabilityEstimatePersistenceTest {
 		_persistence.countByUuid("null");
 
 		_persistence.countByUuid((String)null);
-	}
-
-	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
 	}
 
 	@Test
@@ -244,9 +230,9 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 	protected OrderByComparator<CPDAvailabilityEstimate> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPDAvailabilityEstimate",
-			"uuid", true, "CPDAvailabilityEstimateId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commerceAvailabilityEstimateId", true,
+			"uuid", true, "CPDAvailabilityEstimateId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceAvailabilityEstimateId", true,
 			"CProductId", true, "lastPublishDate", true);
 	}
 
@@ -463,15 +449,6 @@ public class CPDAvailabilityEstimatePersistenceTest {
 
 		CPDAvailabilityEstimate existingCPDAvailabilityEstimate = _persistence.findByPrimaryKey(newCPDAvailabilityEstimate.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
-				existingCPDAvailabilityEstimate.getUuid(),
-				ReflectionTestUtil.invoke(existingCPDAvailabilityEstimate,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPDAvailabilityEstimate.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPDAvailabilityEstimate,
-				"getOriginalGroupId", new Class<?>[0]));
-
 		Assert.assertEquals(Long.valueOf(
 				existingCPDAvailabilityEstimate.getCProductId()),
 			ReflectionTestUtil.<Long>invoke(existingCPDAvailabilityEstimate,
@@ -485,8 +462,6 @@ public class CPDAvailabilityEstimatePersistenceTest {
 		CPDAvailabilityEstimate cpdAvailabilityEstimate = _persistence.create(pk);
 
 		cpdAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
-
-		cpdAvailabilityEstimate.setGroupId(RandomTestUtil.nextLong());
 
 		cpdAvailabilityEstimate.setCompanyId(RandomTestUtil.nextLong());
 

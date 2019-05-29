@@ -99,8 +99,8 @@ public class CPMeasurementUnitLocalServiceUtil {
 		return getService().deleteCPMeasurementUnit(CPMeasurementUnitId);
 	}
 
-	public static void deleteCPMeasurementUnits(long groupId) {
-		getService().deleteCPMeasurementUnits(groupId);
+	public static void deleteCPMeasurementUnits(long companyId) {
+		getService().deleteCPMeasurementUnits(companyId);
 	}
 
 	/**
@@ -208,8 +208,8 @@ public class CPMeasurementUnitLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-		long groupId, int type) {
-		return getService().fetchPrimaryCPMeasurementUnit(groupId, type);
+		long companyId, int type) {
+		return getService().fetchPrimaryCPMeasurementUnit(companyId, type);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
@@ -260,28 +260,29 @@ public class CPMeasurementUnitLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId) {
-		return getService().getCPMeasurementUnits(groupId);
+		long companyId) {
+		return getService().getCPMeasurementUnits(companyId);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int type, int start, int end,
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
 		return getService()
-				   .getCPMeasurementUnits(groupId, type, start, end,
+				   .getCPMeasurementUnits(companyId, type, start, end,
 			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPMeasurementUnit> orderByComparator) {
 		return getService()
-				   .getCPMeasurementUnits(groupId, start, end, orderByComparator);
+				   .getCPMeasurementUnits(companyId, start, end,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, String[] keys, int type) {
-		return getService().getCPMeasurementUnits(groupId, keys, type);
+		long companyId, String[] keys, int type) {
+		return getService().getCPMeasurementUnits(companyId, keys, type);
 	}
 
 	/**
@@ -324,12 +325,12 @@ public class CPMeasurementUnitLocalServiceUtil {
 		return getService().getCPMeasurementUnitsCount();
 	}
 
-	public static int getCPMeasurementUnitsCount(long groupId) {
-		return getService().getCPMeasurementUnitsCount(groupId);
+	public static int getCPMeasurementUnitsCount(long companyId) {
+		return getService().getCPMeasurementUnitsCount(companyId);
 	}
 
-	public static int getCPMeasurementUnitsCount(long groupId, int type) {
-		return getService().getCPMeasurementUnitsCount(groupId, type);
+	public static int getCPMeasurementUnitsCount(long companyId, int type) {
+		return getService().getCPMeasurementUnitsCount(companyId, type);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(

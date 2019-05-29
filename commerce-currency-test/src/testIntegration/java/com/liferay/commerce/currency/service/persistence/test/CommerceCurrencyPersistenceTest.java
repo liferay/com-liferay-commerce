@@ -129,8 +129,6 @@ public class CommerceCurrencyPersistenceTest {
 
 		newCommerceCurrency.setUuid(RandomTestUtil.randomString());
 
-		newCommerceCurrency.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceCurrency.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceCurrency.setUserId(RandomTestUtil.nextLong());
@@ -171,8 +169,6 @@ public class CommerceCurrencyPersistenceTest {
 			newCommerceCurrency.getUuid());
 		Assert.assertEquals(existingCommerceCurrency.getCommerceCurrencyId(),
 			newCommerceCurrency.getCommerceCurrencyId());
-		Assert.assertEquals(existingCommerceCurrency.getGroupId(),
-			newCommerceCurrency.getGroupId());
 		Assert.assertEquals(existingCommerceCurrency.getCompanyId(),
 			newCommerceCurrency.getCompanyId());
 		Assert.assertEquals(existingCommerceCurrency.getUserId(),
@@ -217,15 +213,6 @@ public class CommerceCurrencyPersistenceTest {
 		_persistence.countByUuid("null");
 
 		_persistence.countByUuid((String)null);
-	}
-
-	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
 	}
 
 	@Test
@@ -302,12 +289,12 @@ public class CommerceCurrencyPersistenceTest {
 
 	protected OrderByComparator<CommerceCurrency> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CommerceCurrency", "uuid",
-			true, "commerceCurrencyId", true, "groupId", true, "companyId",
-			true, "userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "code", true, "name", true, "rate", true,
-			"formatPattern", true, "maxFractionDigits", true,
-			"minFractionDigits", true, "roundingMode", true, "primary", true,
-			"priority", true, "active", true, "lastPublishDate", true);
+			true, "commerceCurrencyId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"code", true, "name", true, "rate", true, "formatPattern", true,
+			"maxFractionDigits", true, "minFractionDigits", true,
+			"roundingMode", true, "primary", true, "priority", true, "active",
+			true, "lastPublishDate", true);
 	}
 
 	@Test
@@ -512,16 +499,10 @@ public class CommerceCurrencyPersistenceTest {
 
 		CommerceCurrency existingCommerceCurrency = _persistence.findByPrimaryKey(newCommerceCurrency.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingCommerceCurrency.getUuid(),
-				ReflectionTestUtil.invoke(existingCommerceCurrency,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(existingCommerceCurrency.getGroupId()),
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceCurrency.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(existingCommerceCurrency,
-				"getOriginalGroupId", new Class<?>[0]));
-
-		Assert.assertEquals(Long.valueOf(existingCommerceCurrency.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCommerceCurrency,
-				"getOriginalGroupId", new Class<?>[0]));
+				"getOriginalCompanyId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(existingCommerceCurrency.getCode(),
 				ReflectionTestUtil.invoke(existingCommerceCurrency,
 					"getOriginalCode", new Class<?>[0])));
@@ -533,8 +514,6 @@ public class CommerceCurrencyPersistenceTest {
 		CommerceCurrency commerceCurrency = _persistence.create(pk);
 
 		commerceCurrency.setUuid(RandomTestUtil.randomString());
-
-		commerceCurrency.setGroupId(RandomTestUtil.nextLong());
 
 		commerceCurrency.setCompanyId(RandomTestUtil.nextLong());
 

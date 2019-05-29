@@ -64,7 +64,6 @@ public class CommerceCurrencyWrapper implements CommerceCurrency,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -97,12 +96,6 @@ public class CommerceCurrencyWrapper implements CommerceCurrency,
 
 		if (commerceCurrencyId != null) {
 			setCommerceCurrencyId(commerceCurrencyId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -351,16 +344,6 @@ public class CommerceCurrencyWrapper implements CommerceCurrency,
 	@Override
 	public Map<java.util.Locale, String> getFormatPatternMap() {
 		return _commerceCurrency.getFormatPatternMap();
-	}
-
-	/**
-	* Returns the group ID of this commerce currency.
-	*
-	* @return the group ID of this commerce currency
-	*/
-	@Override
-	public long getGroupId() {
-		return _commerceCurrency.getGroupId();
 	}
 
 	/**
@@ -774,16 +757,6 @@ public class CommerceCurrencyWrapper implements CommerceCurrency,
 		Map<java.util.Locale, String> formatPatternMap,
 		java.util.Locale defaultLocale) {
 		_commerceCurrency.setFormatPatternMap(formatPatternMap, defaultLocale);
-	}
-
-	/**
-	* Sets the group ID of this commerce currency.
-	*
-	* @param groupId the group ID of this commerce currency
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceCurrency.setGroupId(groupId);
 	}
 
 	/**

@@ -1484,85 +1484,87 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpMeasurementUnit.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpMeasurementUnit.uuid IS NULL OR cpMeasurementUnit.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpMeasurementUnit.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] { Long.class.getName() },
-			CPMeasurementUnitModelImpl.GROUPID_COLUMN_BITMASK |
+			CPMeasurementUnitModelImpl.COMPANYID_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CPMeasurementUnit> findByCompanyId(long companyId) {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @return the range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByGroupId(long groupId, int start,
+	public List<CPMeasurementUnit> findByCompanyId(long companyId, int start,
 		int end) {
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByGroupId(long groupId, int start,
+	public List<CPMeasurementUnit> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1570,7 +1572,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByGroupId(long groupId, int start,
+	public List<CPMeasurementUnit> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator<CPMeasurementUnit> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -1580,12 +1582,12 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<CPMeasurementUnit> list = null;
@@ -1596,7 +1598,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPMeasurementUnit cpMeasurementUnit : list) {
-					if ((groupId != cpMeasurementUnit.getGroupId())) {
+					if ((companyId != cpMeasurementUnit.getCompanyId())) {
 						list = null;
 
 						break;
@@ -1618,7 +1620,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1640,7 +1642,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CPMeasurementUnit>)QueryUtil.list(q,
@@ -1673,18 +1675,18 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByGroupId_First(long groupId,
+	public CPMeasurementUnit findByCompanyId_First(long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByGroupId_First(groupId,
+		CPMeasurementUnit cpMeasurementUnit = fetchByCompanyId_First(companyId,
 				orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -1695,8 +1697,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1704,16 +1706,16 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByGroupId_First(long groupId,
+	public CPMeasurementUnit fetchByCompanyId_First(long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		List<CPMeasurementUnit> list = findByGroupId(groupId, 0, 1,
+		List<CPMeasurementUnit> list = findByCompanyId(companyId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1724,18 +1726,18 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByGroupId_Last(long groupId,
+	public CPMeasurementUnit findByCompanyId_Last(long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByGroupId_Last(groupId,
+		CPMeasurementUnit cpMeasurementUnit = fetchByCompanyId_Last(companyId,
 				orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -1746,8 +1748,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1755,23 +1757,23 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByGroupId_Last(long groupId,
+	public CPMeasurementUnit fetchByCompanyId_Last(long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPMeasurementUnit> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
+		List<CPMeasurementUnit> list = findByCompanyId(companyId, count - 1,
+				count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1781,17 +1783,17 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
 	@Override
-	public CPMeasurementUnit[] findByGroupId_PrevAndNext(
-		long CPMeasurementUnitId, long groupId,
+	public CPMeasurementUnit[] findByCompanyId_PrevAndNext(
+		long CPMeasurementUnitId, long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
 		CPMeasurementUnit cpMeasurementUnit = findByPrimaryKey(CPMeasurementUnitId);
@@ -1803,13 +1805,13 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			CPMeasurementUnit[] array = new CPMeasurementUnitImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, cpMeasurementUnit,
-					groupId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session, cpMeasurementUnit,
+					companyId, orderByComparator, true);
 
 			array[1] = cpMeasurementUnit;
 
-			array[2] = getByGroupId_PrevAndNext(session, cpMeasurementUnit,
-					groupId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session, cpMeasurementUnit,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -1821,8 +1823,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		}
 	}
 
-	protected CPMeasurementUnit getByGroupId_PrevAndNext(Session session,
-		CPMeasurementUnit cpMeasurementUnit, long groupId,
+	protected CPMeasurementUnit getByCompanyId_PrevAndNext(Session session,
+		CPMeasurementUnit cpMeasurementUnit, long companyId,
 		OrderByComparator<CPMeasurementUnit> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1837,7 +1839,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1907,7 +1909,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(cpMeasurementUnit);
@@ -1928,29 +1930,29 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByGroupId(long groupId) {
-		for (CPMeasurementUnit cpMeasurementUnit : findByGroupId(groupId,
+	public void removeByCompanyId(long companyId) {
+		for (CPMeasurementUnit cpMeasurementUnit : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpMeasurementUnit);
 		}
 	}
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching cp measurement units
 	 */
 	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { groupId };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1959,7 +1961,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_COUNT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1972,7 +1974,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1991,70 +1993,70 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "cpMeasurementUnit.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "cpMeasurementUnit.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_T",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_T",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_T",
 			new String[] { Long.class.getName(), Integer.class.getName() },
-			CPMeasurementUnitModelImpl.GROUPID_COLUMN_BITMASK |
+			CPMeasurementUnitModelImpl.COMPANYID_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.TYPE_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_T",
 			new String[] { Long.class.getName(), Integer.class.getName() });
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @return the matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_T(long groupId, int type) {
-		return findByG_T(groupId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+	public List<CPMeasurementUnit> findByC_T(long companyId, int type) {
+		return findByC_T(companyId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @return the range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_T(long groupId, int type, int start,
-		int end) {
-		return findByG_T(groupId, type, start, end, null);
+	public List<CPMeasurementUnit> findByC_T(long companyId, int type,
+		int start, int end) {
+		return findByC_T(companyId, type, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
@@ -2062,19 +2064,20 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_T(long groupId, int type, int start,
-		int end, OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		return findByG_T(groupId, type, start, end, orderByComparator, true);
+	public List<CPMeasurementUnit> findByC_T(long companyId, int type,
+		int start, int end,
+		OrderByComparator<CPMeasurementUnit> orderByComparator) {
+		return findByC_T(companyId, type, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
@@ -2083,8 +2086,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_T(long groupId, int type, int start,
-		int end, OrderByComparator<CPMeasurementUnit> orderByComparator,
+	public List<CPMeasurementUnit> findByC_T(long companyId, int type,
+		int start, int end,
+		OrderByComparator<CPMeasurementUnit> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2093,13 +2097,13 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T;
-			finderArgs = new Object[] { groupId, type };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T;
+			finderArgs = new Object[] { companyId, type };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_T;
 			finderArgs = new Object[] {
-					groupId, type,
+					companyId, type,
 					
 					start, end, orderByComparator
 				};
@@ -2113,7 +2117,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPMeasurementUnit cpMeasurementUnit : list) {
-					if ((groupId != cpMeasurementUnit.getGroupId()) ||
+					if ((companyId != cpMeasurementUnit.getCompanyId()) ||
 							(type != cpMeasurementUnit.getType())) {
 						list = null;
 
@@ -2136,9 +2140,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2160,7 +2164,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(type);
 
@@ -2195,19 +2199,19 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByG_T_First(long groupId, int type,
+	public CPMeasurementUnit findByC_T_First(long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByG_T_First(groupId, type,
+		CPMeasurementUnit cpMeasurementUnit = fetchByC_T_First(companyId, type,
 				orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -2218,8 +2222,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -2230,17 +2234,17 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_T_First(long groupId, int type,
+	public CPMeasurementUnit fetchByC_T_First(long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		List<CPMeasurementUnit> list = findByG_T(groupId, type, 0, 1,
+		List<CPMeasurementUnit> list = findByC_T(companyId, type, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2251,19 +2255,19 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByG_T_Last(long groupId, int type,
+	public CPMeasurementUnit findByC_T_Last(long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByG_T_Last(groupId, type,
+		CPMeasurementUnit cpMeasurementUnit = fetchByC_T_Last(companyId, type,
 				orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -2274,8 +2278,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", type=");
 		msg.append(type);
@@ -2286,23 +2290,23 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_T_Last(long groupId, int type,
+	public CPMeasurementUnit fetchByC_T_Last(long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		int count = countByG_T(groupId, type);
+		int count = countByC_T(companyId, type);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPMeasurementUnit> list = findByG_T(groupId, type, count - 1,
+		List<CPMeasurementUnit> list = findByC_T(companyId, type, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2313,18 +2317,18 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
 	@Override
-	public CPMeasurementUnit[] findByG_T_PrevAndNext(long CPMeasurementUnitId,
-		long groupId, int type,
+	public CPMeasurementUnit[] findByC_T_PrevAndNext(long CPMeasurementUnitId,
+		long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
 		CPMeasurementUnit cpMeasurementUnit = findByPrimaryKey(CPMeasurementUnitId);
@@ -2336,13 +2340,13 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			CPMeasurementUnit[] array = new CPMeasurementUnitImpl[3];
 
-			array[0] = getByG_T_PrevAndNext(session, cpMeasurementUnit,
-					groupId, type, orderByComparator, true);
+			array[0] = getByC_T_PrevAndNext(session, cpMeasurementUnit,
+					companyId, type, orderByComparator, true);
 
 			array[1] = cpMeasurementUnit;
 
-			array[2] = getByG_T_PrevAndNext(session, cpMeasurementUnit,
-					groupId, type, orderByComparator, false);
+			array[2] = getByC_T_PrevAndNext(session, cpMeasurementUnit,
+					companyId, type, orderByComparator, false);
 
 			return array;
 		}
@@ -2354,8 +2358,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		}
 	}
 
-	protected CPMeasurementUnit getByG_T_PrevAndNext(Session session,
-		CPMeasurementUnit cpMeasurementUnit, long groupId, int type,
+	protected CPMeasurementUnit getByC_T_PrevAndNext(Session session,
+		CPMeasurementUnit cpMeasurementUnit, long companyId, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2370,9 +2374,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-		query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_T_TYPE_2);
+		query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2442,7 +2446,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(type);
 
@@ -2465,31 +2469,31 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; and type = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 */
 	@Override
-	public void removeByG_T(long groupId, int type) {
-		for (CPMeasurementUnit cpMeasurementUnit : findByG_T(groupId, type,
+	public void removeByC_T(long companyId, int type) {
+		for (CPMeasurementUnit cpMeasurementUnit : findByC_T(companyId, type,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpMeasurementUnit);
 		}
 	}
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
 	@Override
-	public int countByG_T(long groupId, int type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_T;
+	public int countByC_T(long companyId, int type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_T;
 
-		Object[] finderArgs = new Object[] { groupId, type };
+		Object[] finderArgs = new Object[] { companyId, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2498,9 +2502,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_COUNT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_T_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_T_TYPE_2);
 
 			String sql = query.toString();
 
@@ -2513,7 +2517,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(type);
 
@@ -2534,48 +2538,48 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_T_GROUPID_2 = "cpMeasurementUnit.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_T_TYPE_2 = "cpMeasurementUnit.type = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_K_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_C_T_COMPANYID_2 = "cpMeasurementUnit.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_T_TYPE_2 = "cpMeasurementUnit.type = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_K_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_K_T",
+			"fetchByC_K_T",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Integer.class.getName()
 			},
-			CPMeasurementUnitModelImpl.GROUPID_COLUMN_BITMASK |
+			CPMeasurementUnitModelImpl.COMPANYID_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.KEY_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.TYPE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_K_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_K_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_K_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_K_T",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Integer.class.getName()
 			});
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or throws a {@link NoSuchCPMeasurementUnitException} if it could not be found.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or throws a {@link NoSuchCPMeasurementUnitException} if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByG_K_T(long groupId, String key, int type)
+	public CPMeasurementUnit findByC_K_T(long companyId, String key, int type)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByG_K_T(groupId, key, type);
+		CPMeasurementUnit cpMeasurementUnit = fetchByC_K_T(companyId, key, type);
 
 		if (cpMeasurementUnit == null) {
 			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(", key=");
 			msg.append(key);
@@ -2596,43 +2600,43 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_K_T(long groupId, String key, int type) {
-		return fetchByG_K_T(groupId, key, type, true);
+	public CPMeasurementUnit fetchByC_K_T(long companyId, String key, int type) {
+		return fetchByC_K_T(companyId, key, type, true);
 	}
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_K_T(long groupId, String key, int type,
+	public CPMeasurementUnit fetchByC_K_T(long companyId, String key, int type,
 		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, key, type };
+		Object[] finderArgs = new Object[] { companyId, key, type };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_K_T,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_K_T,
 					finderArgs, this);
 		}
 
 		if (result instanceof CPMeasurementUnit) {
 			CPMeasurementUnit cpMeasurementUnit = (CPMeasurementUnit)result;
 
-			if ((groupId != cpMeasurementUnit.getGroupId()) ||
+			if ((companyId != cpMeasurementUnit.getCompanyId()) ||
 					!Objects.equals(key, cpMeasurementUnit.getKey()) ||
 					(type != cpMeasurementUnit.getType())) {
 				result = null;
@@ -2644,23 +2648,23 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_K_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_K_T_COMPANYID_2);
 
 			boolean bindKey = false;
 
 			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_T_KEY_1);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_1);
 			}
 			else if (key.equals("")) {
-				query.append(_FINDER_COLUMN_G_K_T_KEY_3);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_3);
 			}
 			else {
 				bindKey = true;
 
-				query.append(_FINDER_COLUMN_G_K_T_KEY_2);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_2);
 			}
 
-			query.append(_FINDER_COLUMN_G_K_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_K_T_TYPE_2);
 
 			String sql = query.toString();
 
@@ -2673,7 +2677,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindKey) {
 					qPos.add(StringUtil.toLowerCase(key));
@@ -2684,7 +2688,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 				List<CPMeasurementUnit> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_K_T,
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_K_T,
 						finderArgs, list);
 				}
 				else {
@@ -2696,7 +2700,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K_T, finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K_T, finderArgs);
 
 				throw processException(e);
 			}
@@ -2714,34 +2718,34 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Removes the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; from the database.
+	 * Removes the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the cp measurement unit that was removed
 	 */
 	@Override
-	public CPMeasurementUnit removeByG_K_T(long groupId, String key, int type)
+	public CPMeasurementUnit removeByC_K_T(long companyId, String key, int type)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = findByG_K_T(groupId, key, type);
+		CPMeasurementUnit cpMeasurementUnit = findByC_K_T(companyId, key, type);
 
 		return remove(cpMeasurementUnit);
 	}
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and key = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and key = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
 	@Override
-	public int countByG_K_T(long groupId, String key, int type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_K_T;
+	public int countByC_K_T(long companyId, String key, int type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_K_T;
 
-		Object[] finderArgs = new Object[] { groupId, key, type };
+		Object[] finderArgs = new Object[] { companyId, key, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2750,23 +2754,23 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_COUNT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_K_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_K_T_COMPANYID_2);
 
 			boolean bindKey = false;
 
 			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_T_KEY_1);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_1);
 			}
 			else if (key.equals("")) {
-				query.append(_FINDER_COLUMN_G_K_T_KEY_3);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_3);
 			}
 			else {
 				bindKey = true;
 
-				query.append(_FINDER_COLUMN_G_K_T_KEY_2);
+				query.append(_FINDER_COLUMN_C_K_T_KEY_2);
 			}
 
-			query.append(_FINDER_COLUMN_G_K_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_K_T_TYPE_2);
 
 			String sql = query.toString();
 
@@ -2779,7 +2783,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindKey) {
 					qPos.add(StringUtil.toLowerCase(key));
@@ -2804,15 +2808,15 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_K_T_GROUPID_2 = "cpMeasurementUnit.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_K_T_KEY_1 = "cpMeasurementUnit.key IS NULL AND ";
-	private static final String _FINDER_COLUMN_G_K_T_KEY_2 = "lower(cpMeasurementUnit.key) = ? AND ";
-	private static final String _FINDER_COLUMN_G_K_T_KEY_3 = "(cpMeasurementUnit.key IS NULL OR cpMeasurementUnit.key = '') AND ";
-	private static final String _FINDER_COLUMN_G_K_T_TYPE_2 = "cpMeasurementUnit.type = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_C_K_T_COMPANYID_2 = "cpMeasurementUnit.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_K_T_KEY_1 = "cpMeasurementUnit.key IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_K_T_KEY_2 = "lower(cpMeasurementUnit.key) = ? AND ";
+	private static final String _FINDER_COLUMN_C_K_T_KEY_3 = "(cpMeasurementUnit.key IS NULL OR cpMeasurementUnit.key = '') AND ";
+	private static final String _FINDER_COLUMN_C_K_T_TYPE_2 = "cpMeasurementUnit.type = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_P_T",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_P_T",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Integer.class.getName(),
@@ -2820,49 +2824,49 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED,
 			CPMeasurementUnitImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_P_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_P_T",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Integer.class.getName()
 			},
-			CPMeasurementUnitModelImpl.GROUPID_COLUMN_BITMASK |
+			CPMeasurementUnitModelImpl.COMPANYID_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.PRIMARY_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.TYPE_COLUMN_BITMASK |
 			CPMeasurementUnitModelImpl.PRIORITY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_P_T = new FinderPath(CPMeasurementUnitModelImpl.ENTITY_CACHE_ENABLED,
 			CPMeasurementUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_P_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_P_T",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Integer.class.getName()
 			});
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @return the matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_P_T(long groupId, boolean primary,
+	public List<CPMeasurementUnit> findByC_P_T(long companyId, boolean primary,
 		int type) {
-		return findByG_P_T(groupId, primary, type, QueryUtil.ALL_POS,
+		return findByC_P_T(companyId, primary, type, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
@@ -2870,19 +2874,19 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_P_T(long groupId, boolean primary,
+	public List<CPMeasurementUnit> findByC_P_T(long companyId, boolean primary,
 		int type, int start, int end) {
-		return findByG_P_T(groupId, primary, type, start, end, null);
+		return findByC_P_T(companyId, primary, type, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
@@ -2891,21 +2895,21 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_P_T(long groupId, boolean primary,
+	public List<CPMeasurementUnit> findByC_P_T(long companyId, boolean primary,
 		int type, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		return findByG_P_T(groupId, primary, type, start, end,
+		return findByC_P_T(companyId, primary, type, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPMeasurementUnitModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
@@ -2915,7 +2919,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @return the ordered range of matching cp measurement units
 	 */
 	@Override
-	public List<CPMeasurementUnit> findByG_P_T(long groupId, boolean primary,
+	public List<CPMeasurementUnit> findByC_P_T(long companyId, boolean primary,
 		int type, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator,
 		boolean retrieveFromCache) {
@@ -2926,13 +2930,13 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T;
-			finderArgs = new Object[] { groupId, primary, type };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T;
+			finderArgs = new Object[] { companyId, primary, type };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_T;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P_T;
 			finderArgs = new Object[] {
-					groupId, primary, type,
+					companyId, primary, type,
 					
 					start, end, orderByComparator
 				};
@@ -2946,7 +2950,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPMeasurementUnit cpMeasurementUnit : list) {
-					if ((groupId != cpMeasurementUnit.getGroupId()) ||
+					if ((companyId != cpMeasurementUnit.getCompanyId()) ||
 							(primary != cpMeasurementUnit.isPrimary()) ||
 							(type != cpMeasurementUnit.getType())) {
 						list = null;
@@ -2970,11 +2974,11 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_T_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_T_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_T_PRIMARY_2);
 
-			query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_P_T_TYPE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2996,7 +3000,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -3033,9 +3037,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3043,10 +3047,10 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByG_P_T_First(long groupId, boolean primary,
+	public CPMeasurementUnit findByC_P_T_First(long companyId, boolean primary,
 		int type, OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByG_P_T_First(groupId,
+		CPMeasurementUnit cpMeasurementUnit = fetchByC_P_T_First(companyId,
 				primary, type, orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -3057,8 +3061,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -3072,18 +3076,19 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_P_T_First(long groupId, boolean primary,
-		int type, OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		List<CPMeasurementUnit> list = findByG_P_T(groupId, primary, type, 0,
+	public CPMeasurementUnit fetchByC_P_T_First(long companyId,
+		boolean primary, int type,
+		OrderByComparator<CPMeasurementUnit> orderByComparator) {
+		List<CPMeasurementUnit> list = findByC_P_T(companyId, primary, type, 0,
 				1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3094,9 +3099,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3104,10 +3109,10 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit findByG_P_T_Last(long groupId, boolean primary,
+	public CPMeasurementUnit findByC_P_T_Last(long companyId, boolean primary,
 		int type, OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
-		CPMeasurementUnit cpMeasurementUnit = fetchByG_P_T_Last(groupId,
+		CPMeasurementUnit cpMeasurementUnit = fetchByC_P_T_Last(companyId,
 				primary, type, orderByComparator);
 
 		if (cpMeasurementUnit != null) {
@@ -3118,8 +3123,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", primary=");
 		msg.append(primary);
@@ -3133,24 +3138,24 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	@Override
-	public CPMeasurementUnit fetchByG_P_T_Last(long groupId, boolean primary,
+	public CPMeasurementUnit fetchByC_P_T_Last(long companyId, boolean primary,
 		int type, OrderByComparator<CPMeasurementUnit> orderByComparator) {
-		int count = countByG_P_T(groupId, primary, type);
+		int count = countByC_P_T(companyId, primary, type);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPMeasurementUnit> list = findByG_P_T(groupId, primary, type,
+		List<CPMeasurementUnit> list = findByC_P_T(companyId, primary, type,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3161,10 +3166,10 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3172,8 +3177,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
 	@Override
-	public CPMeasurementUnit[] findByG_P_T_PrevAndNext(
-		long CPMeasurementUnitId, long groupId, boolean primary, int type,
+	public CPMeasurementUnit[] findByC_P_T_PrevAndNext(
+		long CPMeasurementUnitId, long companyId, boolean primary, int type,
 		OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws NoSuchCPMeasurementUnitException {
 		CPMeasurementUnit cpMeasurementUnit = findByPrimaryKey(CPMeasurementUnitId);
@@ -3185,13 +3190,13 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			CPMeasurementUnit[] array = new CPMeasurementUnitImpl[3];
 
-			array[0] = getByG_P_T_PrevAndNext(session, cpMeasurementUnit,
-					groupId, primary, type, orderByComparator, true);
+			array[0] = getByC_P_T_PrevAndNext(session, cpMeasurementUnit,
+					companyId, primary, type, orderByComparator, true);
 
 			array[1] = cpMeasurementUnit;
 
-			array[2] = getByG_P_T_PrevAndNext(session, cpMeasurementUnit,
-					groupId, primary, type, orderByComparator, false);
+			array[2] = getByC_P_T_PrevAndNext(session, cpMeasurementUnit,
+					companyId, primary, type, orderByComparator, false);
 
 			return array;
 		}
@@ -3203,8 +3208,8 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		}
 	}
 
-	protected CPMeasurementUnit getByG_P_T_PrevAndNext(Session session,
-		CPMeasurementUnit cpMeasurementUnit, long groupId, boolean primary,
+	protected CPMeasurementUnit getByC_P_T_PrevAndNext(Session session,
+		CPMeasurementUnit cpMeasurementUnit, long companyId, boolean primary,
 		int type, OrderByComparator<CPMeasurementUnit> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -3220,11 +3225,11 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		query.append(_SQL_SELECT_CPMEASUREMENTUNIT_WHERE);
 
-		query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_P_T_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_P_T_PRIMARY_2);
+		query.append(_FINDER_COLUMN_C_P_T_PRIMARY_2);
 
-		query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
+		query.append(_FINDER_COLUMN_C_P_T_TYPE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -3294,7 +3299,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(primary);
 
@@ -3319,33 +3324,33 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 	}
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 */
 	@Override
-	public void removeByG_P_T(long groupId, boolean primary, int type) {
-		for (CPMeasurementUnit cpMeasurementUnit : findByG_P_T(groupId,
+	public void removeByC_P_T(long companyId, boolean primary, int type) {
+		for (CPMeasurementUnit cpMeasurementUnit : findByC_P_T(companyId,
 				primary, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(cpMeasurementUnit);
 		}
 	}
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
 	@Override
-	public int countByG_P_T(long groupId, boolean primary, int type) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_P_T;
+	public int countByC_P_T(long companyId, boolean primary, int type) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P_T;
 
-		Object[] finderArgs = new Object[] { groupId, primary, type };
+		Object[] finderArgs = new Object[] { companyId, primary, type };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3354,11 +3359,11 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 			query.append(_SQL_COUNT_CPMEASUREMENTUNIT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_P_T_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_P_T_PRIMARY_2);
+			query.append(_FINDER_COLUMN_C_P_T_PRIMARY_2);
 
-			query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
+			query.append(_FINDER_COLUMN_C_P_T_TYPE_2);
 
 			String sql = query.toString();
 
@@ -3371,7 +3376,7 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(primary);
 
@@ -3394,9 +3399,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_P_T_GROUPID_2 = "cpMeasurementUnit.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_T_PRIMARY_2 = "cpMeasurementUnit.primary = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_T_TYPE_2 = "cpMeasurementUnit.type = ?";
+	private static final String _FINDER_COLUMN_C_P_T_COMPANYID_2 = "cpMeasurementUnit.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_T_PRIMARY_2 = "cpMeasurementUnit.primary = ? AND ";
+	private static final String _FINDER_COLUMN_C_P_T_TYPE_2 = "cpMeasurementUnit.type = ?";
 
 	public CPMeasurementUnitPersistenceImpl() {
 		setModelClass(CPMeasurementUnit.class);
@@ -3439,9 +3444,9 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 				cpMeasurementUnit.getUuid(), cpMeasurementUnit.getGroupId()
 			}, cpMeasurementUnit);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K_T,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K_T,
 			new Object[] {
-				cpMeasurementUnit.getGroupId(), cpMeasurementUnit.getKey(),
+				cpMeasurementUnit.getCompanyId(), cpMeasurementUnit.getKey(),
 				cpMeasurementUnit.getType()
 			}, cpMeasurementUnit);
 
@@ -3530,14 +3535,14 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 			cpMeasurementUnitModelImpl, false);
 
 		args = new Object[] {
-				cpMeasurementUnitModelImpl.getGroupId(),
+				cpMeasurementUnitModelImpl.getCompanyId(),
 				cpMeasurementUnitModelImpl.getKey(),
 				cpMeasurementUnitModelImpl.getType()
 			};
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_K_T, args,
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_K_T, args,
 			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K_T, args,
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K_T, args,
 			cpMeasurementUnitModelImpl, false);
 	}
 
@@ -3567,25 +3572,25 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					cpMeasurementUnitModelImpl.getGroupId(),
+					cpMeasurementUnitModelImpl.getCompanyId(),
 					cpMeasurementUnitModelImpl.getKey(),
 					cpMeasurementUnitModelImpl.getType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K_T, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K_T, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_K_T, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K_T, args);
 		}
 
 		if ((cpMeasurementUnitModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_K_T.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_C_K_T.getColumnBitmask()) != 0) {
 			Object[] args = new Object[] {
-					cpMeasurementUnitModelImpl.getOriginalGroupId(),
+					cpMeasurementUnitModelImpl.getOriginalCompanyId(),
 					cpMeasurementUnitModelImpl.getOriginalKey(),
 					cpMeasurementUnitModelImpl.getOriginalType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K_T, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K_T, args);
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_K_T, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K_T, args);
 		}
 	}
 
@@ -3789,29 +3794,29 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
-			args = new Object[] { cpMeasurementUnitModelImpl.getGroupId() };
+			args = new Object[] { cpMeasurementUnitModelImpl.getCompanyId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 				args);
 
 			args = new Object[] {
-					cpMeasurementUnitModelImpl.getGroupId(),
+					cpMeasurementUnitModelImpl.getCompanyId(),
 					cpMeasurementUnitModelImpl.getType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_T, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_T, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T,
 				args);
 
 			args = new Object[] {
-					cpMeasurementUnitModelImpl.getGroupId(),
+					cpMeasurementUnitModelImpl.getCompanyId(),
 					cpMeasurementUnitModelImpl.isPrimary(),
 					cpMeasurementUnitModelImpl.getType()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_T, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_T, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -3859,63 +3864,63 @@ public class CPMeasurementUnitPersistenceImpl extends BasePersistenceImpl<CPMeas
 			}
 
 			if ((cpMeasurementUnitModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpMeasurementUnitModelImpl.getOriginalGroupId()
+						cpMeasurementUnitModelImpl.getOriginalCompanyId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { cpMeasurementUnitModelImpl.getGroupId() };
+				args = new Object[] { cpMeasurementUnitModelImpl.getCompanyId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 			}
 
 			if ((cpMeasurementUnitModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpMeasurementUnitModelImpl.getOriginalGroupId(),
+						cpMeasurementUnitModelImpl.getOriginalCompanyId(),
 						cpMeasurementUnitModelImpl.getOriginalType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T,
 					args);
 
 				args = new Object[] {
-						cpMeasurementUnitModelImpl.getGroupId(),
+						cpMeasurementUnitModelImpl.getCompanyId(),
 						cpMeasurementUnitModelImpl.getType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_T,
 					args);
 			}
 
 			if ((cpMeasurementUnitModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						cpMeasurementUnitModelImpl.getOriginalGroupId(),
+						cpMeasurementUnitModelImpl.getOriginalCompanyId(),
 						cpMeasurementUnitModelImpl.getOriginalPrimary(),
 						cpMeasurementUnitModelImpl.getOriginalType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T,
 					args);
 
 				args = new Object[] {
-						cpMeasurementUnitModelImpl.getGroupId(),
+						cpMeasurementUnitModelImpl.getCompanyId(),
 						cpMeasurementUnitModelImpl.isPrimary(),
 						cpMeasurementUnitModelImpl.getType()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_P_T, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_T,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_P_T, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_P_T,
 					args);
 			}
 		}

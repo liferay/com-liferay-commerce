@@ -35,7 +35,6 @@ public class CPTaxCategorySoap implements Serializable {
 		CPTaxCategorySoap soapModel = new CPTaxCategorySoap();
 
 		soapModel.setCPTaxCategoryId(model.getCPTaxCategoryId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -103,14 +102,6 @@ public class CPTaxCategorySoap implements Serializable {
 		_CPTaxCategoryId = CPTaxCategoryId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -168,7 +159,6 @@ public class CPTaxCategorySoap implements Serializable {
 	}
 
 	private long _CPTaxCategoryId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

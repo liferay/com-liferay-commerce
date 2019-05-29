@@ -174,56 +174,6 @@ public interface CommerceCurrencyPersistence extends BasePersistence<CommerceCur
 	public int countByUuid(String uuid);
 
 	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce currency
-	* @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	*/
-	public CommerceCurrency findByUUID_G(String uuid, long groupId)
-		throws NoSuchCurrencyException;
-
-	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	*/
-	public CommerceCurrency fetchByUUID_G(String uuid, long groupId);
-
-	/**
-	* Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	*/
-	public CommerceCurrency fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the commerce currency where uuid = &#63; and groupId = &#63; from the database.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the commerce currency that was removed
-	*/
-	public CommerceCurrency removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCurrencyException;
-
-	/**
-	* Returns the number of commerce currencies where uuid = &#63; and groupId = &#63;.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the number of matching commerce currencies
-	*/
-	public int countByUUID_G(String uuid, long groupId);
-
-	/**
 	* Returns all the commerce currencies where uuid = &#63; and companyId = &#63;.
 	*
 	* @param uuid the uuid
@@ -500,54 +450,54 @@ public interface CommerceCurrencyPersistence extends BasePersistence<CommerceCur
 	public int countByCompanyId(long companyId);
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or throws a {@link NoSuchCurrencyException} if it could not be found.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the matching commerce currency
 	* @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	*/
-	public CommerceCurrency findByC_C(long groupId, String code)
+	public CommerceCurrency findByC_C(long companyId, String code)
 		throws NoSuchCurrencyException;
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
-	public CommerceCurrency fetchByC_C(long groupId, String code);
+	public CommerceCurrency fetchByC_C(long companyId, String code);
 
 	/**
-	* Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	*/
-	public CommerceCurrency fetchByC_C(long groupId, String code,
+	public CommerceCurrency fetchByC_C(long companyId, String code,
 		boolean retrieveFromCache);
 
 	/**
-	* Removes the commerce currency where groupId = &#63; and code = &#63; from the database.
+	* Removes the commerce currency where companyId = &#63; and code = &#63; from the database.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the commerce currency that was removed
 	*/
-	public CommerceCurrency removeByC_C(long groupId, String code)
+	public CommerceCurrency removeByC_C(long companyId, String code)
 		throws NoSuchCurrencyException;
 
 	/**
-	* Returns the number of commerce currencies where groupId = &#63; and code = &#63;.
+	* Returns the number of commerce currencies where companyId = &#63; and code = &#63;.
 	*
-	* @param groupId the group ID
+	* @param companyId the company ID
 	* @param code the code
 	* @return the number of matching commerce currencies
 	*/
-	public int countByC_C(long groupId, String code);
+	public int countByC_C(long companyId, String code);
 
 	/**
 	* Returns all the commerce currencies where companyId = &#63; and primary = &#63;.

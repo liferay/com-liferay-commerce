@@ -43,7 +43,7 @@ public class CommerceCurrencyServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.currency.service.impl.CommerceCurrencyServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.currency.model.CommerceCurrency addCommerceCurrency(
-		long companyId, long userId, String code,
+		long userId, String code,
 		java.util.Map<java.util.Locale, String> nameMap,
 		java.math.BigDecimal rate,
 		java.util.Map<java.util.Locale, String> formatPatternMap,
@@ -52,7 +52,7 @@ public class CommerceCurrencyServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceCurrency(companyId, userId, code, nameMap, rate,
+				   .addCommerceCurrency(userId, code, nameMap, rate,
 			formatPatternMap, maxFractionDigits, minFractionDigits,
 			roundingMode, primary, priority, active, serviceContext);
 	}

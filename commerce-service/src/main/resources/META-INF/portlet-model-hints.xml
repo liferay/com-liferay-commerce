@@ -53,7 +53,6 @@
 	<model name="com.liferay.commerce.model.CommerceAvailabilityEstimate">
 		<field name="uuid" type="String" />
 		<field name="commerceAvailabilityEstimateId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -70,7 +69,6 @@
 	<model name="com.liferay.commerce.model.CommerceCountry">
 		<field name="uuid" type="String" />
 		<field name="commerceCountryId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -205,7 +203,6 @@
 	<model name="com.liferay.commerce.model.CommerceRegion">
 		<field name="uuid" type="String" />
 		<field name="commerceRegionId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -346,7 +343,6 @@
 	<model name="com.liferay.commerce.model.CPDAvailabilityEstimate">
 		<field name="uuid" type="String" />
 		<field name="CPDAvailabilityEstimateId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
