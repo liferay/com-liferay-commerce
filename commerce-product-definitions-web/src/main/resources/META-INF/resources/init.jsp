@@ -33,7 +33,6 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.asset.kernel.model.AssetRenderer" %><%@
 page import="com.liferay.commerce.account.model.CommerceAccountGroup" %><%@
-page import="com.liferay.commerce.account.model.CommerceAccountGroupRel" %><%@
 page import="com.liferay.commerce.media.CommerceMediaResolverUtil" %><%@
 page import="com.liferay.commerce.product.constants.CPActionKeys" %><%@
 page import="com.liferay.commerce.product.constants.CPConstants" %><%@
