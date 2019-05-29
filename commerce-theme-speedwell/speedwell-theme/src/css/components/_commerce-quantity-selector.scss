@@ -11,7 +11,9 @@
 	&__select {
 		background: white;
 		border: 2px solid rgba(180,187,201,0.25);
+
 		// color: $color-fg;
+
 		font-family: Roboto;
 		font-size: 12px;
 		height: 30px;
@@ -31,7 +33,9 @@
 	}
 
 	&__btn {
+
 		// color: $color-fg-alt;
+
 		cursor: pointer;
 		font-size: 14px;
 		font-weight: bold;
@@ -41,7 +45,6 @@
 		-webkit-appearance: none;
 		background: transparent;
 		border: 0;
-
 
 		&:hover {
 			color: currentColor;

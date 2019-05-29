@@ -98,8 +98,8 @@
 }
 
 .portlet-topper {
-	position: absolute;
 	display: none;
+	position: absolute;
 }
 
 .portlet-topper-toolbar {
@@ -138,10 +138,10 @@
 		// @include minium-panel-title;
 
 		display: block;
-		max-width: 100%;
-		font-weight: 600;
 		font-size: 14px;
+		font-weight: 600;
 		line-height: normal;
+		max-width: 100%;
 		text-transform: uppercase;
 	}
 

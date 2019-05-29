@@ -5,12 +5,14 @@
 				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#kebab-vertical" />
 			</svg>
 		</button>
+
 		<div class="speedwell-main-menu__link-wrapper">
 			<button class="commerce-topbar-button js-toggle-main-menu">
 				<svg class="commerce-icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
 				</svg>
 			</button>
+
 			<div class="speedwell-main-menu__links">
 				<@site_navigation_menu_main default_preferences=freeMarkerPortletPreferences.getPreferences("portletSetupPortletDecoratorId", "barebone") />
 			</div>
@@ -41,6 +43,7 @@
 						</svg>
 					</div>
 					<@liferay_commerce_ui["search-bar"] id="search-bar" />
+
 					<button class="commerce-topbar-button js-toggle-search">
 						<svg class="commerce-icon commerce-topbar-button__icon">
 							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
@@ -57,7 +60,7 @@
 		<div class="speedwell-account">
 			<button class="commerce-topbar-button js-toggle-account">
 				<svg class="commerce-icon" viewBox="0 0 100 100">
-					<rect fill="currentColor" x="5" y="5" width="90" height="90" rx="10" ry="10" />
+					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
 				</svg>
 			</button>
 
@@ -65,6 +68,7 @@
 				<div class="speedwell-account__title">
 					Sign in
 				</div>
+
 				<div class="speedwell-account__content">
 					<p>Lorem ipsum</p>
 				</div>
@@ -75,5 +79,4 @@
 			<@liferay_commerce_ui["mini-cart"] />
 		</div>
 	</div>
-
 </div>

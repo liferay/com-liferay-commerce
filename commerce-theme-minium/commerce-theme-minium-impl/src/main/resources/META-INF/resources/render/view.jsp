@@ -261,14 +261,12 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 						}
 						%>
 
+						<%
+						for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
+							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
+						%>
 
-					<%
-					for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-						List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
-					%>
-
-						<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
-						
+							<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
 
 								<%
 								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
@@ -286,14 +284,13 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 								}
 								%>
 
+							</c:if>
 
-						</c:if>
+						<%
+						}
+						%>
 
-					<%
-					}
-					%>
 					</dl>
-
 				</div>
 			</div>
 		</div>

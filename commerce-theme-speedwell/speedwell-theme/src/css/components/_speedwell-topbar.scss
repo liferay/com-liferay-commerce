@@ -1,34 +1,34 @@
 .speedwell-topbar {
-  align-items: center;
-  background-color: #fff;
-  display: flex;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 56px;
-  z-index: 100;
+align-items: center;
+background-color: #FFF;
+display: flex;
+left: 0;
+position: fixed;
+right: 0;
+top: 56px;
+z-index: 100;
 
-  @media (max-width: 767px) {
-    top: 48px;
-  }
+@media (max-width: 767px) {
+	top: 48px;
+}
 
-  &__menu {
-    flex: 1 1 50%;
-  }
+&__menu {
+	flex: 1 1 50%;
+}
 
-  &__logo {
-    flex: 1 1 200px;
-    justify-content: center;
-    display: flex;
-  }
+&__logo {
+	display: flex;
+	flex: 1 1 200px;
+	justify-content: center;
+}
 
-  &__actions {
-    flex: 1 1 50%;
-    display: flex;
-    justify-content: flex-end;
-  }
+&__actions {
+	display: flex;
+	flex: 1 1 50%;
+	justify-content: flex-end;
+}
 
-  &__search {
-    // position: absolute;
-  }
+&__search {
+	// position: absolute;
+}
 }
