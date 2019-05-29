@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.service.base.CPTaxCategoryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -39,8 +37,8 @@ public class CPTaxCategoryServiceImpl extends CPTaxCategoryServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
 		return cpTaxCategoryLocalService.addCPTaxCategory(
@@ -51,62 +49,56 @@ public class CPTaxCategoryServiceImpl extends CPTaxCategoryServiceBaseImpl {
 	public void deleteCPTaxCategory(long cpTaxCategoryId)
 		throws PortalException {
 
-		CPTaxCategory cpTaxCategory =
-			cpTaxCategoryLocalService.getCPTaxCategory(cpTaxCategoryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpTaxCategory.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
-		cpTaxCategoryLocalService.deleteCPTaxCategory(cpTaxCategory);
+		cpTaxCategoryLocalService.deleteCPTaxCategory(cpTaxCategoryId);
 	}
 
 	@Override
-	public List<CPTaxCategory> getCPTaxCategories(long groupId)
+	public List<CPTaxCategory> getCPTaxCategories(long companyId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
-		return cpTaxCategoryLocalService.getCPTaxCategories(groupId);
+		return cpTaxCategoryLocalService.getCPTaxCategories(companyId);
 	}
 
 	@Override
 	public List<CPTaxCategory> getCPTaxCategories(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CPTaxCategory> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
 		return cpTaxCategoryLocalService.getCPTaxCategories(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPTaxCategoriesCount(long groupId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+	public int getCPTaxCategoriesCount(long companyId) throws PortalException {
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
-		return cpTaxCategoryLocalService.getCPTaxCategoriesCount(groupId);
+		return cpTaxCategoryLocalService.getCPTaxCategoriesCount(companyId);
 	}
 
 	@Override
 	public CPTaxCategory getCPTaxCategory(long cpTaxCategoryId)
 		throws PortalException {
 
-		CPTaxCategory cpTaxCategory =
-			cpTaxCategoryLocalService.getCPTaxCategory(cpTaxCategoryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpTaxCategory.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
-		return cpTaxCategory;
+		return cpTaxCategoryLocalService.getCPTaxCategory(cpTaxCategoryId);
 	}
 
 	@Override
@@ -115,21 +107,12 @@ public class CPTaxCategoryServiceImpl extends CPTaxCategoryServiceBaseImpl {
 			Map<Locale, String> descriptionMap)
 		throws PortalException {
 
-		CPTaxCategory cpTaxCategory =
-			cpTaxCategoryLocalService.getCPTaxCategory(cpTaxCategoryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpTaxCategory.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 
 		return cpTaxCategoryLocalService.updateCPTaxCategory(
 			cpTaxCategoryId, nameMap, descriptionMap);
 	}
-
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPTaxCategoryServiceImpl.class, "_portletResourcePermission",
-				CPConstants.RESOURCE_NAME);
 
 }

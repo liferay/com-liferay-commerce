@@ -182,7 +182,6 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		long cpdAvailabilityEstimateId = counterLocalService.increment();
 
@@ -191,7 +190,6 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 				cpdAvailabilityEstimateId);
 
 		cpdAvailabilityEstimate.setUuid(serviceContext.getUuid());
-		cpdAvailabilityEstimate.setGroupId(groupId);
 		cpdAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		cpdAvailabilityEstimate.setUserId(user.getUserId());
 		cpdAvailabilityEstimate.setUserName(user.getFullName());

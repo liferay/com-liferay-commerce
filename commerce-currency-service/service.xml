@@ -10,10 +10,6 @@
 
 		<column name="commerceCurrencyId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -48,7 +44,7 @@
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="C_C" return-type="CommerceCurrency" unique="true">
-			<finder-column name="groupId" />
+			<finder-column name="companyId" />
 			<finder-column name="code" />
 		</finder>
 		<finder name="C_P" return-type="Collection">

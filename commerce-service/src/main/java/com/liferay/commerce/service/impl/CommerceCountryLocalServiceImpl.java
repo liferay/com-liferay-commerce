@@ -77,7 +77,6 @@ public class CommerceCountryLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		validate(nameMap, twoLettersISOCode, threeLettersISOCode);
 
@@ -87,7 +86,6 @@ public class CommerceCountryLocalServiceImpl
 			commerceCountryId);
 
 		commerceCountry.setUuid(serviceContext.getUuid());
-		commerceCountry.setGroupId(groupId);
 		commerceCountry.setCompanyId(user.getCompanyId());
 		commerceCountry.setUserId(user.getUserId());
 		commerceCountry.setUserName(user.getFullName());
@@ -107,9 +105,9 @@ public class CommerceCountryLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceCountries(long groupId) throws PortalException {
+	public void deleteCommerceCountries(long companyId) throws PortalException {
 		List<CommerceCountry> commerceCountries =
-			commerceCountryPersistence.findByGroupId(groupId);
+			commerceCountryPersistence.findByCompanyId(companyId);
 
 		for (CommerceCountry commerceCountry : commerceCountries) {
 			commerceCountryLocalService.deleteCommerceCountry(commerceCountry);
@@ -159,77 +157,77 @@ public class CommerceCountryLocalServiceImpl
 
 	@Override
 	public CommerceCountry fetchCommerceCountry(
-			long groupId, int numericISOCode)
+			long companyId, int numericISOCode)
 		throws PortalException {
 
-		return commerceCountryPersistence.fetchByG_N(groupId, numericISOCode);
+		return commerceCountryPersistence.fetchByC_N(companyId, numericISOCode);
 	}
 
 	@Override
 	public List<CommerceCountry> getBillingCommerceCountries(
-		long groupId, boolean billingAllowed, boolean active) {
+		long companyId, boolean billingAllowed, boolean active) {
 
-		return commerceCountryPersistence.findByG_B_A(
-			groupId, billingAllowed, active);
+		return commerceCountryPersistence.findByC_B_A(
+			companyId, billingAllowed, active);
 	}
 
 	@Override
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, boolean active) {
+		long companyId, boolean active) {
 
-		return commerceCountryPersistence.findByG_A(groupId, active);
+		return commerceCountryPersistence.findByC_A(companyId, active);
 	}
 
 	@Override
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return commerceCountryPersistence.findByG_A(
-			groupId, active, start, end, orderByComparator);
+		return commerceCountryPersistence.findByC_A(
+			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return commerceCountryPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceCountryPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceCountriesCount(long groupId) {
-		return commerceCountryPersistence.countByGroupId(groupId);
+	public int getCommerceCountriesCount(long companyId) {
+		return commerceCountryPersistence.countByCompanyId(companyId);
 	}
 
 	@Override
-	public int getCommerceCountriesCount(long groupId, boolean active) {
-		return commerceCountryPersistence.countByG_A(groupId, active);
+	public int getCommerceCountriesCount(long companyId, boolean active) {
+		return commerceCountryPersistence.countByC_A(companyId, active);
 	}
 
 	@Override
 	public CommerceCountry getCommerceCountry(
-			long groupId, String twoLettersISOCode)
+			long companyId, String twoLettersISOCode)
 		throws PortalException {
 
-		return commerceCountryPersistence.findByG_Tw(
-			groupId, twoLettersISOCode);
+		return commerceCountryPersistence.findByC_Tw(
+			companyId, twoLettersISOCode);
 	}
 
 	@Override
 	public List<CommerceCountry> getShippingCommerceCountries(
-		long groupId, boolean shippingAllowed, boolean active) {
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		return commerceCountryPersistence.findByG_S_A(
-			groupId, shippingAllowed, active);
+		return commerceCountryPersistence.findByC_S_A(
+			companyId, shippingAllowed, active);
 	}
 
 	@Override
 	public List<CommerceCountry> getWarehouseCommerceCountries(
-		long groupId, boolean all) {
+		long companyId, boolean all) {
 
-		return commerceCountryFinder.findByCommerceWarehouses(groupId, all);
+		return commerceCountryFinder.findByCommerceWarehouses(companyId, all);
 	}
 
 	@Override

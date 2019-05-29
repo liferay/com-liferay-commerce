@@ -40,7 +40,6 @@ public class CommerceAvailabilityEstimateLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		long commerceAvailabilityEstimateId = counterLocalService.increment();
 
@@ -49,7 +48,6 @@ public class CommerceAvailabilityEstimateLocalServiceImpl
 				commerceAvailabilityEstimateId);
 
 		commerceAvailabilityEstimate.setUuid(serviceContext.getUuid());
-		commerceAvailabilityEstimate.setGroupId(groupId);
 		commerceAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		commerceAvailabilityEstimate.setUserId(user.getUserId());
 		commerceAvailabilityEstimate.setUserName(user.getFullName());
@@ -95,11 +93,11 @@ public class CommerceAvailabilityEstimateLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceAvailabilityEstimates(long groupId)
+	public void deleteCommerceAvailabilityEstimates(long companyId)
 		throws PortalException {
 
 		List<CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
-			commerceAvailabilityEstimatePersistence.findByGroupId(groupId);
+			commerceAvailabilityEstimatePersistence.findByCompanyId(companyId);
 
 		for (CommerceAvailabilityEstimate commerceAvailabilityEstimate :
 				commerceAvailabilityEstimates) {
@@ -112,16 +110,17 @@ public class CommerceAvailabilityEstimateLocalServiceImpl
 
 	@Override
 	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
 
-		return commerceAvailabilityEstimatePersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceAvailabilityEstimatePersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceAvailabilityEstimatesCount(long groupId) {
-		return commerceAvailabilityEstimatePersistence.countByGroupId(groupId);
+	public int getCommerceAvailabilityEstimatesCount(long companyId) {
+		return commerceAvailabilityEstimatePersistence.countByCompanyId(
+			companyId);
 	}
 
 	@Override
