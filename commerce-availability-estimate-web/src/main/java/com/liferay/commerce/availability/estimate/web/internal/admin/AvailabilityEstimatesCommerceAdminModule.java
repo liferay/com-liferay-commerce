@@ -16,12 +16,14 @@ package com.liferay.commerce.availability.estimate.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.availability.estimate.web.internal.display.context.CommerceAvailabilityEstimateDisplayContext;
-import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -71,8 +73,13 @@ public class AvailabilityEstimatesCommerceAdminModule
 	}
 
 	@Override
-	public boolean isVisible(long companyId) throws PortalException {
-		return true;
+	public boolean isVisible(long groupId) throws PortalException {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		return PortalPermissionUtil.contains(
+			permissionChecker,
+			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 	}
 
 	@Override
@@ -83,8 +90,8 @@ public class AvailabilityEstimatesCommerceAdminModule
 		CommerceAvailabilityEstimateDisplayContext
 			commerceAvailabilityEstimateDisplayContext =
 				new CommerceAvailabilityEstimateDisplayContext(
-					_commerceAvailabilityEstimateService,
-					_portletResourcePermission, renderRequest, renderResponse);
+					_commerceAvailabilityEstimateService, renderRequest,
+					renderResponse);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -109,11 +116,6 @@ public class AvailabilityEstimatesCommerceAdminModule
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.availability.estimate.web)"
