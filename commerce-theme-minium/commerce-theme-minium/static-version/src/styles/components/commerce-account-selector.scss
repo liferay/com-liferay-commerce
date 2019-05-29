@@ -14,15 +14,15 @@
 	}
 
 	&__image {
-		grid-area: image;
-		position: relative;
-		height: 40px;
 		border-radius: 50%;
+		grid-area: image;
+		height: 40px;
 		overflow: hidden;
+		position: relative;
 
 		img {
-			width: 100%;
 			height: auto;
+			width: 100%;
 		}
 
 		&:empty {
