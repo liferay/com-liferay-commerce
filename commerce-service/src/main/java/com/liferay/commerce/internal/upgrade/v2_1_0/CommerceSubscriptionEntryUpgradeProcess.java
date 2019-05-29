@@ -14,17 +14,16 @@
 
 package com.liferay.commerce.internal.upgrade.v2_1_0;
 
+import com.liferay.commerce.internal.upgrade.base.BaseCommerceServiceUpgradeProcess;
 import com.liferay.commerce.model.impl.CommerceSubscriptionEntryModelImpl;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.db.IndexMetadata;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 
 import java.sql.DatabaseMetaData;
@@ -38,7 +37,8 @@ import java.util.Objects;
 /**
  * @author Ethan Bustad
  */
-public class CommerceSubscriptionEntryUpgradeProcess extends UpgradeProcess {
+public class CommerceSubscriptionEntryUpgradeProcess
+	extends BaseCommerceServiceUpgradeProcess {
 
 	public CommerceSubscriptionEntryUpgradeProcess(
 		CPDefinitionLocalService cpDefinitionLocalService,
@@ -50,11 +50,11 @@ public class CommerceSubscriptionEntryUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_addColumn(
+		addColumn(
 			CommerceSubscriptionEntryModelImpl.class,
 			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CPInstanceUUID",
 			"VARCHAR(75)");
-		_addColumn(
+		addColumn(
 			CommerceSubscriptionEntryModelImpl.class,
 			CommerceSubscriptionEntryModelImpl.TABLE_NAME, "CProductId",
 			"LONG");
@@ -101,33 +101,6 @@ public class CommerceSubscriptionEntryUpgradeProcess extends UpgradeProcess {
 
 		runSQL(
 			"alter table CommerceSubscriptionEntry drop column CPInstanceId");
-	}
-
-	private void _addColumn(
-			Class<?> entityClass, String tableName, String columnName,
-			String columnType)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Adding column %s to table %s", columnName, tableName));
-		}
-
-		if (!hasColumn(tableName, columnName)) {
-			alter(
-				entityClass,
-				new AlterTableAddColumn(
-					columnName + StringPool.SPACE + columnType));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already exists on table %s", columnName,
-						tableName));
-			}
-		}
 	}
 
 	private void _addIndexes(String tableName) throws Exception {

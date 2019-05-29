@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.EmailAddressLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ListUtil;
 
@@ -48,15 +47,13 @@ public class CommerceAccountUpgradeProcess extends UpgradeProcess {
 		CommerceAccountOrganizationRelLocalService
 			commerceAccountOrganizationRelLocalService,
 		EmailAddressLocalService emailAddressLocalService,
-		OrganizationLocalService organizationLocalService,
-		UserLocalService userLocalService) {
+		OrganizationLocalService organizationLocalService) {
 
 		_commerceAccountLocalService = commerceAccountLocalService;
 		_commerceAccountOrganizationRelLocalService =
 			commerceAccountOrganizationRelLocalService;
 		_emailAddressLocalService = emailAddressLocalService;
 		_organizationLocalService = organizationLocalService;
-		_userLocalService = userLocalService;
 	}
 
 	@Override
@@ -194,6 +191,5 @@ public class CommerceAccountUpgradeProcess extends UpgradeProcess {
 		_commerceAccountOrganizationRelLocalService;
 	private final EmailAddressLocalService _emailAddressLocalService;
 	private final OrganizationLocalService _organizationLocalService;
-	private final UserLocalService _userLocalService;
 
 }
