@@ -130,8 +130,6 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 					httpServletRequest.getParameterMap());
 		}
 
-		long siteGroupId = ParamUtil.getLong(actionRequest, "siteGroupId");
-
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
 				name, type, typeSettingsProperties, commerceCurrencyCode, null,
