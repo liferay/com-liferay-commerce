@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.currency.internal.upgrade;
 
+import com.liferay.commerce.currency.internal.upgrade.v1_1_0.CommerceCurrencyUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.DummyUpgradeProcess;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -36,7 +36,7 @@ public class CommerceCurrencyUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
-			new DummyUpgradeProcess());
+			new CommerceCurrencyUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE CURRENCY UPGRADE STEP REGISTRATOR FINISHED");
