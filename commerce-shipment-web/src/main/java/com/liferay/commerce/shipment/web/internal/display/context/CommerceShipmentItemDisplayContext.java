@@ -105,7 +105,7 @@ public class CommerceShipmentItemDisplayContext
 
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getShippingCommerceCountries(
-			cpRequestHelper.getScopeGroupId(), true, true);
+			cpRequestHelper.getCompanyId(), true, true);
 	}
 
 	public List<CommerceRegion> getCommerceRegions() throws PortalException {

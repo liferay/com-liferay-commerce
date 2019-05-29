@@ -107,7 +107,7 @@ public class CommerceWarehousesImporter {
 
 		CommerceCountry commerceCountry =
 			_commerceCountryLocalService.fetchCommerceCountry(
-				serviceContext.getScopeGroupId(), countryNumericISOCode);
+				serviceContext.getCompanyId(), countryNumericISOCode);
 
 		String regionCode = jsonObject.getString("Region");
 

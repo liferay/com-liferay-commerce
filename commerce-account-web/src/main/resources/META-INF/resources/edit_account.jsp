@@ -170,7 +170,7 @@ if (commerceAddress != null) {
 					Liferay.Service(
 						'/commerce.commercecountry/get-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							active: true
 						},
 						callback

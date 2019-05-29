@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -47,11 +47,9 @@ public class CPMeasurementUnitsDisplayContext {
 
 	public CPMeasurementUnitsDisplayContext(
 		CPMeasurementUnitService cpMeasurementUnitService,
-		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		_cpMeasurementUnitService = cpMeasurementUnitService;
-		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -150,7 +148,7 @@ public class CPMeasurementUnitsDisplayContext {
 
 		_primaryCPMeasurementUnit =
 			_cpMeasurementUnitService.fetchPrimaryCPMeasurementUnit(
-				themeDisplay.getScopeGroupId(), getType());
+				themeDisplay.getCompanyId(), getType());
 
 		return _primaryCPMeasurementUnit;
 	}
@@ -183,11 +181,11 @@ public class CPMeasurementUnitsDisplayContext {
 		_searchContainer.setRowChecker(getRowChecker());
 
 		int total = _cpMeasurementUnitService.getCPMeasurementUnitsCount(
-			themeDisplay.getScopeGroupId(), getType());
+			themeDisplay.getCompanyId(), getType());
 
 		List<CPMeasurementUnit> results =
 			_cpMeasurementUnitService.getCPMeasurementUnits(
-				themeDisplay.getScopeGroupId(), getType(),
+				themeDisplay.getCompanyId(), getType(),
 				_searchContainer.getStart(), _searchContainer.getEnd(),
 				orderByComparator);
 
@@ -208,8 +206,8 @@ public class CPMeasurementUnitsDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 	}
 
@@ -247,7 +245,6 @@ public class CPMeasurementUnitsDisplayContext {
 
 	private CPMeasurementUnit _cpMeasurementUnit;
 	private final CPMeasurementUnitService _cpMeasurementUnitService;
-	private final PortletResourcePermission _portletResourcePermission;
 	private CPMeasurementUnit _primaryCPMeasurementUnit;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;

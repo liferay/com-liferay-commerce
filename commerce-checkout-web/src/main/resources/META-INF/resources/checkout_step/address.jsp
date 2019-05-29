@@ -278,7 +278,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 					Liferay.Service(
 						'/commerce.commercecountry/<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionMethodName() %>',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionColumnName() %>: true,
 							active: true
 						},

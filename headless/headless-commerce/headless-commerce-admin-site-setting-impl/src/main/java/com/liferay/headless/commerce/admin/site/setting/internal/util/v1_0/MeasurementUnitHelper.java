@@ -55,7 +55,7 @@ public class MeasurementUnitHelper {
 	}
 
 	public Page<MeasurementUnit> getMeasurementUnits(
-			Long groupId, Integer type, Pagination pagination)
+			Long companyId, Integer type, Pagination pagination)
 		throws PortalException {
 
 		List<CPMeasurementUnit> cpMeasurementUnits;
@@ -64,20 +64,20 @@ public class MeasurementUnitHelper {
 		if (type == null) {
 			cpMeasurementUnits =
 				_cpMeasurementUnitService.getCPMeasurementUnits(
-					groupId, pagination.getStartPosition(),
+					companyId, pagination.getStartPosition(),
 					pagination.getEndPosition(), null);
 
 			count = _cpMeasurementUnitService.getCPMeasurementUnitsCount(
-				groupId);
+				companyId);
 		}
 		else {
 			cpMeasurementUnits =
 				_cpMeasurementUnitService.getCPMeasurementUnits(
-					groupId, type, pagination.getStartPosition(),
+					companyId, type, pagination.getStartPosition(),
 					pagination.getEndPosition(), null);
 
 			count = _cpMeasurementUnitService.getCPMeasurementUnitsCount(
-				groupId, type);
+				companyId, type);
 		}
 
 		List<MeasurementUnit> measurementUnits = new ArrayList<>();

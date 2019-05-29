@@ -85,7 +85,7 @@ public class CommerceWarehousesDisplayContext {
 
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryService.getWarehouseCommerceCountries(
-				_cpRequestHelper.getScopeGroupId(), true);
+				_cpRequestHelper.getCompanyId(), true);
 
 		List<ManagementBarFilterItem> managementBarFilterItems =
 			new ArrayList<>(commerceCountries.size() + 2);

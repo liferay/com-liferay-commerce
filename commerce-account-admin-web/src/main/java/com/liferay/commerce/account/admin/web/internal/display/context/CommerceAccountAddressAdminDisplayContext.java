@@ -118,7 +118,7 @@ public class CommerceAccountAddressAdminDisplayContext
 
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getCommerceCountries(
-			commerceAccountAdminRequestHelper.getScopeGroupId(), true);
+			commerceAccountAdminRequestHelper.getCompanyId(), true);
 	}
 
 	public long getCommerceCountryId() throws PortalException {

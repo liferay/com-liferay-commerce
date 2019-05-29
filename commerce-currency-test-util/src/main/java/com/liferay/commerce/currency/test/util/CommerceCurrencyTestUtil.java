@@ -53,7 +53,7 @@ public class CommerceCurrencyTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return CommerceCurrencyLocalServiceUtil.addCommerceCurrency(
-			serviceContext.getScopeGroupId(), serviceContext.getUserId(), code,
+			serviceContext.getUserId(), code,
 			RandomTestUtil.randomLocaleStringMap(), BigDecimal.ONE,
 			formatPatternMap, 2, 2, "", false, RandomTestUtil.randomDouble(),
 			true, serviceContext);

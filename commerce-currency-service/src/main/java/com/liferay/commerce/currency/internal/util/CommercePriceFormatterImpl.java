@@ -21,7 +21,6 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.math.BigDecimal;
@@ -114,11 +113,8 @@ public class CommercePriceFormatterImpl implements CommercePriceFormatter {
 			formatPattern = commerceCurrency.getFormatPattern(locale);
 
 			if (Validator.isNull(formatPattern)) {
-				Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
-					commerceCurrency.getGroupId());
-
 				formatPattern = commerceCurrency.getFormatPattern(
-					siteDefaultLocale);
+					commerceCurrency.getDefaultLanguageId());
 			}
 
 			maxFractionDigits = commerceCurrency.getMaxFractionDigits();
@@ -139,9 +135,6 @@ public class CommercePriceFormatterImpl implements CommercePriceFormatter {
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
-
-	@Reference
-	private Portal _portal;
 
 	private volatile RoundingTypeConfiguration _roundingTypeConfiguration;
 

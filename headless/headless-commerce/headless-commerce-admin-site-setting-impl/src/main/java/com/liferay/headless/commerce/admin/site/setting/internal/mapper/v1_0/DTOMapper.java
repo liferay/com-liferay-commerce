@@ -44,8 +44,6 @@ public class DTOMapper {
 
 		availabilityEstimate.setId(
 			commerceAvailabilityEstimate.getCommerceAvailabilityEstimateId());
-		availabilityEstimate.setGroupId(
-			commerceAvailabilityEstimate.getGroupId());
 		availabilityEstimate.setPriority(
 			commerceAvailabilityEstimate.getPriority());
 		availabilityEstimate.setTitle(
@@ -111,7 +109,6 @@ public class DTOMapper {
 
 		taxCategory.setDescription(
 			LanguageUtils.getLanguageIdMap(cpTaxCategory.getDescriptionMap()));
-		taxCategory.setGroupId(cpTaxCategory.getGroupId());
 		taxCategory.setId(cpTaxCategory.getCPTaxCategoryId());
 		taxCategory.setName(
 			LanguageUtils.getLanguageIdMap(cpTaxCategory.getNameMap()));

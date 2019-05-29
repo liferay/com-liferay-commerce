@@ -273,7 +273,7 @@ public class CPDefinitionsImporter {
 
 		List<CPTaxCategory> cpTaxCategories =
 			_cpTaxCategoryLocalService.getCPTaxCategories(
-				serviceContext.getScopeGroupId());
+				serviceContext.getCompanyId());
 
 		for (CPTaxCategory cpTaxCategory : cpTaxCategories) {
 			if (taxCategory.equals(
@@ -739,7 +739,7 @@ public class CPDefinitionsImporter {
 		List<CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
 			_commerceAvailabilityEstimateLocalService.
 				getCommerceAvailabilityEstimates(
-					serviceContext.getScopeGroupId(), QueryUtil.ALL_POS,
+					serviceContext.getCompanyId(), QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS,
 					new CommerceAvailabilityEstimatePriorityComparator(true));
 

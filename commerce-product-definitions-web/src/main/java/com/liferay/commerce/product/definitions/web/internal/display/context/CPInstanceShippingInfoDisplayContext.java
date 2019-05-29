@@ -64,7 +64,7 @@ public class CPInstanceShippingInfoDisplayContext
 
 		CPMeasurementUnit cpMeasurementUnit =
 			_cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(
-				themeDisplay.getScopeGroupId(), type);
+				themeDisplay.getCompanyId(), type);
 
 		if (cpMeasurementUnit != null) {
 			return cpMeasurementUnit.getName(themeDisplay.getLanguageId());
