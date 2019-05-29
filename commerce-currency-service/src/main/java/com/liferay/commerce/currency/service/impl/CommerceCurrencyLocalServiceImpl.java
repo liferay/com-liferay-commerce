@@ -65,7 +65,7 @@ public class CommerceCurrencyLocalServiceImpl
 
 	@Override
 	public CommerceCurrency addCommerceCurrency(
-			long groupId, long userId, String code, Map<Locale, String> nameMap,
+			long userId, String code, Map<Locale, String> nameMap,
 			BigDecimal rate, Map<Locale, String> formatPatternMap,
 			int maxFractionDigits, int minFractionDigits, String roundingMode,
 			boolean primary, double priority, boolean active,
@@ -104,7 +104,6 @@ public class CommerceCurrencyLocalServiceImpl
 			commerceCurrencyId);
 
 		commerceCurrency.setUuid(serviceContext.getUuid());
-		commerceCurrency.setGroupId(groupId);
 		commerceCurrency.setCompanyId(user.getCompanyId());
 		commerceCurrency.setUserId(user.getUserId());
 		commerceCurrency.setUserName(user.getFullName());
@@ -238,8 +237,8 @@ public class CommerceCurrencyLocalServiceImpl
 				roundingTypeConfiguration.roundingMode();
 
 			commerceCurrencyLocalService.addCommerceCurrency(
-				serviceContext.getScopeGroupId(), serviceContext.getUserId(),
-				code, nameMap, BigDecimal.ONE, formatPatternMap,
+				serviceContext.getUserId(), code, nameMap, BigDecimal.ONE,
+				formatPatternMap,
 				roundingTypeConfiguration.maximumFractionDigits(),
 				roundingTypeConfiguration.minimumFractionDigits(),
 				roundingMode.name(), primary, priority, true, serviceContext);
