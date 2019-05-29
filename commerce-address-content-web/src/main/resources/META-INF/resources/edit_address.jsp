@@ -126,7 +126,7 @@ CommerceAccount commerceAccount = commerceAddressDisplayContext.getCommerceAccou
 					Liferay.Service(
 						'/commerce.commercecountry/get-billing-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							billingAllowed: true,
 							active: true
 						},

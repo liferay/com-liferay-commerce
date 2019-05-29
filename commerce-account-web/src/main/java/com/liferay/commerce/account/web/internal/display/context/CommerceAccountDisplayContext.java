@@ -109,7 +109,7 @@ public class CommerceAccountDisplayContext {
 
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getCommerceCountries(
-			_commerceAccountRequestHelper.getScopeGroupId(), true);
+			_commerceAccountRequestHelper.getCompanyId(), true);
 	}
 
 	public List<CommerceRegion> getCommerceRegions(long commerceCountryId) {

@@ -92,7 +92,7 @@ long commerceRegionId = BeanParamUtil.getLong(shippingAddress, request, "commerc
 					Liferay.Service(
 						'/commerce.commercecountry/get-shipping-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							shippingAllowed: true,
 							active: true
 						},

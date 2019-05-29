@@ -444,7 +444,7 @@ public class FedExCommerceShippingOptionHelper {
 
 		List<CPMeasurementUnit> cpMeasurementUnits =
 			_cpMeasurementUnitLocalService.getCPMeasurementUnits(
-				_commerceOrder.getGroupId(), keys, type);
+				_commerceOrder.getCompanyId(), keys, type);
 
 		if (cpMeasurementUnits.isEmpty()) {
 			throw new CommerceShippingEngineException.MustSetMeasurementUnit(

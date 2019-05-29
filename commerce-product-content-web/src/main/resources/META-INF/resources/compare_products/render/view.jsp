@@ -97,7 +97,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 			</tr>
 
 			<%
-			String dimensionCPMeasurementUnitName = cpCompareContentHelper.getDimensionCPMeasurementUnitName(scopeGroupId, locale);
+			String dimensionCPMeasurementUnitName = cpCompareContentHelper.getDimensionCPMeasurementUnitName(company.getCompanyId(), locale);
 
 			if (Validator.isNotNull(dimensionCPMeasurementUnitName)) {
 				dimensionCPMeasurementUnitName = StringPool.OPEN_PARENTHESIS + dimensionCPMeasurementUnitName + StringPool.CLOSE_PARENTHESIS;

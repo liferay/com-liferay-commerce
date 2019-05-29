@@ -62,7 +62,7 @@ public class CPDefinitionTaxCategoryDisplayContext
 				WebKeys.THEME_DISPLAY);
 
 		return _cpTaxCategoryService.getCPTaxCategories(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyId());
 	}
 
 	private final CPTaxCategoryService _cpTaxCategoryService;

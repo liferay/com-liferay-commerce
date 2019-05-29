@@ -132,7 +132,7 @@ public class CommerceAddressDisplayContext {
 				WebKeys.THEME_DISPLAY);
 
 		return _commerceCountryService.getCommerceCountries(
-			themeDisplay.getScopeGroupId(), true);
+			themeDisplay.getCompanyId(), true);
 	}
 
 	public long getCommerceCountryId() throws PortalException {

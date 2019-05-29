@@ -76,10 +76,11 @@ public class FixCommerceHealthStatusIssueMVCActionCommand
 
 				Thread.sleep(2000);
 
-				long groupId = _portal.getScopeGroupId(httpServletRequest);
-
 				jsonObject.put(
-					"success", commerceHealthStatus.isFixed(groupId));
+					"success",
+					commerceHealthStatus.isFixed(
+						_portal.getCompanyId(httpServletRequest),
+						_portal.getScopeGroupId(httpServletRequest)));
 			}
 		}
 		catch (Exception e) {

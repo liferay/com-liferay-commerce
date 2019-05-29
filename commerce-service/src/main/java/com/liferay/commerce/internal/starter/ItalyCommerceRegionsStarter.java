@@ -40,11 +40,11 @@ public class ItalyCommerceRegionsStarter implements CommerceRegionsStarter {
 
 	public static final int ITALY_NUMERIC_ISO_CODE = 380;
 
-	public CommerceCountry getCommerceCountry(long groupId)
+	public CommerceCountry getCommerceCountry(long companyId)
 		throws PortalException {
 
 		return _commerceCountryLocalService.fetchCommerceCountry(
-			groupId, ITALY_NUMERIC_ISO_CODE);
+			companyId, ITALY_NUMERIC_ISO_CODE);
 	}
 
 	public JSONArray getCommerceRegionsJSONArray() throws Exception {
@@ -61,7 +61,7 @@ public class ItalyCommerceRegionsStarter implements CommerceRegionsStarter {
 	@Override
 	public void start(ServiceContext serviceContext) throws Exception {
 		CommerceCountry commerceCountry = getCommerceCountry(
-			serviceContext.getScopeGroupId());
+			serviceContext.getCompanyId());
 
 		if (commerceCountry == null) {
 			return;

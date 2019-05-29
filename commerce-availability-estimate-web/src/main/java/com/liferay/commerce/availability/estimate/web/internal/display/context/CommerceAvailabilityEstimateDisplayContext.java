@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -42,12 +42,10 @@ public class CommerceAvailabilityEstimateDisplayContext {
 
 	public CommerceAvailabilityEstimateDisplayContext(
 		CommerceAvailabilityEstimateService commerceAvailabilityEstimateService,
-		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		_commerceAvailabilityEstimateService =
 			commerceAvailabilityEstimateService;
-		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -126,12 +124,12 @@ public class CommerceAvailabilityEstimateDisplayContext {
 		int total =
 			_commerceAvailabilityEstimateService.
 				getCommerceAvailabilityEstimatesCount(
-					themeDisplay.getScopeGroupId());
+					themeDisplay.getCompanyId());
 
 		List<CommerceAvailabilityEstimate> results =
 			_commerceAvailabilityEstimateService.
 				getCommerceAvailabilityEstimates(
-					themeDisplay.getScopeGroupId(), _searchContainer.getStart(),
+					themeDisplay.getCompanyId(), _searchContainer.getStart(),
 					_searchContainer.getEnd(), orderByComparator);
 
 		_searchContainer.setTotal(total);
@@ -144,8 +142,8 @@ public class CommerceAvailabilityEstimateDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 	}
 
@@ -160,7 +158,6 @@ public class CommerceAvailabilityEstimateDisplayContext {
 	private CommerceAvailabilityEstimate _commerceAvailabilityEstimate;
 	private final CommerceAvailabilityEstimateService
 		_commerceAvailabilityEstimateService;
-	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
 	private RowChecker _rowChecker;

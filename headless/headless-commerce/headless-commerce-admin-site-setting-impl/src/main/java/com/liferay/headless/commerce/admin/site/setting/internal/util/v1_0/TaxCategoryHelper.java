@@ -47,15 +47,15 @@ public class TaxCategoryHelper {
 	}
 
 	public Page<TaxCategory> getTaxCategories(
-			Long groupId, Pagination pagination)
+			Long companyId, Pagination pagination)
 		throws PortalException {
 
 		List<CPTaxCategory> cpTaxCategories =
 			_cpTaxCategoryService.getCPTaxCategories(
-				groupId, pagination.getStartPosition(),
+				companyId, pagination.getStartPosition(),
 				pagination.getEndPosition(), null);
 
-		int count = _cpTaxCategoryService.getCPTaxCategoriesCount(groupId);
+		int count = _cpTaxCategoryService.getCPTaxCategoriesCount(companyId);
 
 		List<TaxCategory> taxCategories = new ArrayList<>();
 

@@ -58,12 +58,12 @@ public class AddressResource {
 	@Path("/address/billing-countries")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBillingCommerceCountries(
-		@QueryParam("groupId") long groupId,
+		@QueryParam("companyId") long companyId,
 		@Context ThemeDisplay themeDisplay) {
 
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryService.getBillingCommerceCountries(
-				groupId, true, true);
+				companyId, true, true);
 
 		return _getCommerceCountries(
 			commerceCountries, themeDisplay.getLanguageId());
@@ -136,12 +136,12 @@ public class AddressResource {
 	@Path("/address/shipping-countries")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getShippingCommerceCountries(
-		@QueryParam("groupId") long groupId,
+		@QueryParam("companyId") long companyId,
 		@Context ThemeDisplay themeDisplay) {
 
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryService.getShippingCommerceCountries(
-				groupId, true, true);
+				companyId, true, true);
 
 		return _getCommerceCountries(
 			commerceCountries, themeDisplay.getLanguageId());

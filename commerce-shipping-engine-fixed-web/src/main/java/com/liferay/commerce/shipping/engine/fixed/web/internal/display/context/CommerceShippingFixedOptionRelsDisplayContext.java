@@ -88,7 +88,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 			WebKeys.THEME_DISPLAY);
 
 		return _commerceCountryService.getCommerceCountries(
-			themeDisplay.getScopeGroupId(), true);
+			themeDisplay.getCompanyId(), true);
 	}
 
 	public long getCommerceCountryId() throws PortalException {
@@ -185,7 +185,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 
 		CPMeasurementUnit cpMeasurementUnit =
 			_cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(
-				themeDisplay.getScopeGroupId(), type);
+				themeDisplay.getCompanyId(), type);
 
 		if (cpMeasurementUnit != null) {
 			return cpMeasurementUnit.getName(themeDisplay.getLanguageId());

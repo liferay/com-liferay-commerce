@@ -196,7 +196,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 					Liferay.Service(
 						'/commerce.commercecountry/get-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							active: true
 						},
 						callback

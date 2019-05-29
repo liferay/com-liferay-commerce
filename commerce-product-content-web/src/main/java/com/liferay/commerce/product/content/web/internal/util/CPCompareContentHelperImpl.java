@@ -243,11 +243,11 @@ public class CPCompareContentHelperImpl implements CPCompareContentHelper {
 
 	@Override
 	public String getDimensionCPMeasurementUnitName(
-		long groupId, Locale locale) {
+		long companyId, Locale locale) {
 
 		CPMeasurementUnit cpMeasurementUnit =
 			_cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(
-				groupId, CPMeasurementUnitConstants.TYPE_DIMENSION);
+				companyId, CPMeasurementUnitConstants.TYPE_DIMENSION);
 
 		if (cpMeasurementUnit == null) {
 			return StringPool.BLANK;

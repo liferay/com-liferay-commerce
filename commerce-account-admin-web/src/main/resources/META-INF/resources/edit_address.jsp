@@ -122,7 +122,7 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 					Liferay.Service(
 						'/commerce.commercecountry/get-billing-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							billingAllowed: true,
 							active: true
 						},
