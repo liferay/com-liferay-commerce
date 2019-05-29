@@ -20,7 +20,7 @@
 CPDefinitionAccountGroupDisplayContext cpDefinitionAccountGroupDisplayContext = (CPDefinitionAccountGroupDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 long cpDefinitionId = cpDefinitionAccountGroupDisplayContext.getCPDefinitionId();
-List<CommerceAccountGroupRel> commerceAccountGroups = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroups();
+List<CommerceAccountGroup> commerceAccountGroups = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroups();
 long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroupRelCommerceAccountGroupIds();
 %>
 
