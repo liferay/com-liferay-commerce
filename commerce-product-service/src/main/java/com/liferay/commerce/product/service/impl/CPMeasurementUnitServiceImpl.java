@@ -15,13 +15,11 @@
 package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.base.CPMeasurementUnitServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -42,8 +40,8 @@ public class CPMeasurementUnitServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.addCPMeasurementUnit(
@@ -54,93 +52,89 @@ public class CPMeasurementUnitServiceImpl
 	public void deleteCPMeasurementUnit(long cpMeasurementUnitId)
 		throws PortalException {
 
-		CPMeasurementUnit cpMeasurementUnit =
-			cpMeasurementUnitPersistence.findByPrimaryKey(cpMeasurementUnitId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpMeasurementUnit.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		cpMeasurementUnitLocalService.deleteCPMeasurementUnit(
-			cpMeasurementUnit);
+			cpMeasurementUnitId);
 	}
 
 	@Override
 	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-			long groupId, int type)
+			long companyId, int type)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.fetchPrimaryCPMeasurementUnit(
-			groupId, type);
+			companyId, type);
 	}
 
 	@Override
 	public CPMeasurementUnit getCPMeasurementUnit(long cpMeasurementUnitId)
 		throws PortalException {
 
-		CPMeasurementUnit cpMeasurementUnit =
-			cpMeasurementUnitLocalService.getCPMeasurementUnit(
-				cpMeasurementUnitId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpMeasurementUnit.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
-		return cpMeasurementUnit;
+		return cpMeasurementUnitLocalService.getCPMeasurementUnit(
+			cpMeasurementUnitId);
 	}
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-			long groupId, int type, int start, int end,
+			long companyId, int type, int start, int end,
 			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.getCPMeasurementUnits(
-			groupId, type, start, end, orderByComparator);
+			companyId, type, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.getCPMeasurementUnits(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPMeasurementUnitsCount(long groupId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
-
-		return cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(
-			groupId);
-	}
-
-	@Override
-	public int getCPMeasurementUnitsCount(long groupId, int type)
+	public int getCPMeasurementUnitsCount(long companyId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(
-			groupId, type);
+			companyId);
+	}
+
+	@Override
+	public int getCPMeasurementUnitsCount(long companyId, int type)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
+
+		return cpMeasurementUnitLocalService.getCPMeasurementUnitsCount(
+			companyId, type);
 	}
 
 	@Override
@@ -148,11 +142,8 @@ public class CPMeasurementUnitServiceImpl
 			long cpMeasurementUnitId, boolean primary)
 		throws PortalException {
 
-		CPMeasurementUnit cpMeasurementUnit =
-			cpMeasurementUnitPersistence.findByPrimaryKey(cpMeasurementUnitId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpMeasurementUnit.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.setPrimary(
@@ -166,22 +157,13 @@ public class CPMeasurementUnitServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPMeasurementUnit cpMeasurementUnit =
-			cpMeasurementUnitPersistence.findByPrimaryKey(cpMeasurementUnitId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpMeasurementUnit.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 
 		return cpMeasurementUnitLocalService.updateCPMeasurementUnit(
 			cpMeasurementUnitId, nameMap, key, rate, primary, priority, type,
 			serviceContext);
 	}
-
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPMeasurementUnitServiceImpl.class,
-				"_portletResourcePermission", CPConstants.RESOURCE_NAME);
 
 }

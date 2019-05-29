@@ -43,7 +43,6 @@ public class CPTaxCategoryLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		validate(nameMap);
 
@@ -52,7 +51,6 @@ public class CPTaxCategoryLocalServiceImpl
 		CPTaxCategory cpTaxCategory = cpTaxCategoryPersistence.create(
 			cpTaxCategoryId);
 
-		cpTaxCategory.setGroupId(groupId);
 		cpTaxCategory.setCompanyId(user.getCompanyId());
 		cpTaxCategory.setUserId(user.getUserId());
 		cpTaxCategory.setUserName(user.getFullName());
@@ -65,8 +63,8 @@ public class CPTaxCategoryLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPTaxCategories(long groupId) {
-		cpTaxCategoryPersistence.removeByGroupId(groupId);
+	public void deleteCPTaxCategories(long companyId) {
+		cpTaxCategoryPersistence.removeByCompanyId(companyId);
 	}
 
 	@Override
@@ -97,22 +95,22 @@ public class CPTaxCategoryLocalServiceImpl
 	}
 
 	@Override
-	public List<CPTaxCategory> getCPTaxCategories(long groupId) {
-		return cpTaxCategoryPersistence.findByGroupId(groupId);
+	public List<CPTaxCategory> getCPTaxCategories(long companyId) {
+		return cpTaxCategoryPersistence.findByCompanyId(companyId);
 	}
 
 	@Override
 	public List<CPTaxCategory> getCPTaxCategories(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator) {
 
-		return cpTaxCategoryPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return cpTaxCategoryPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPTaxCategoriesCount(long groupId) {
-		return cpTaxCategoryPersistence.countByGroupId(groupId);
+	public int getCPTaxCategoriesCount(long companyId) {
+		return cpTaxCategoryPersistence.countByCompanyId(companyId);
 	}
 
 	@Override
