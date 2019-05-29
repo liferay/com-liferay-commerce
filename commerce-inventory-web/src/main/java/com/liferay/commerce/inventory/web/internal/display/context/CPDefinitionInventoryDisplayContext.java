@@ -70,7 +70,8 @@ public class CPDefinitionInventoryDisplayContext
 
 		return _commerceAvailabilityEstimateService.
 			getCommerceAvailabilityEstimates(
-				getScopeGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS,
 				new CommerceAvailabilityEstimatePriorityComparator(true));
 	}
 

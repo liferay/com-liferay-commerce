@@ -74,14 +74,13 @@ public class CommerceTaxFixedRateAddressRelsDisplayContext
 		throws PortalException {
 
 		return _cpTaxCategoryService.getCPTaxCategories(
-			commerceTaxFixedRateRequestHelper.getScopeGroupId(),
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new CPTaxCategoryCreateDateComparator());
+			commerceTaxFixedRateRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, new CPTaxCategoryCreateDateComparator());
 	}
 
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getCommerceCountries(
-			commerceTaxFixedRateRequestHelper.getScopeGroupId(), true);
+			commerceTaxFixedRateRequestHelper.getCompanyId(), true);
 	}
 
 	public long getCommerceCountryId() throws PortalException {

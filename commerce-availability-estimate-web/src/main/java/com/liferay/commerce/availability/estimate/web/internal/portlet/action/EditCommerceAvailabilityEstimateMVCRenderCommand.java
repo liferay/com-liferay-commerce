@@ -16,13 +16,11 @@ package com.liferay.commerce.availability.estimate.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.availability.estimate.web.internal.display.context.CommerceAvailabilityEstimateDisplayContext;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.exception.NoSuchAvailabilityEstimateException;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -65,8 +63,7 @@ public class EditCommerceAvailabilityEstimateMVCRenderCommand
 			CommerceAvailabilityEstimateDisplayContext
 				commerceAvailabilityEstimateDisplayContext =
 					new CommerceAvailabilityEstimateDisplayContext(
-						_commerceAvailabilityEstimateService,
-						_portletResourcePermission, renderRequest,
+						_commerceAvailabilityEstimateService, renderRequest,
 						renderResponse);
 
 			renderRequest.setAttribute(
@@ -102,11 +99,6 @@ public class EditCommerceAvailabilityEstimateMVCRenderCommand
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.availability.estimate.web)"

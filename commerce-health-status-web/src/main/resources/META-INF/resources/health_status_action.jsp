@@ -27,7 +27,7 @@ String fixIssueButton = "fixIssueButton" + row.getRowId();
 %>
 
 <c:if test="<%= commerceHealthStatusDisplayContext.hasManageCommerceHealthStatusPermission() %>">
-	<aui:button disabled="<%= commerceHealthStatus.isFixed(themeDisplay.getScopeGroupId()) %>" name="<%= fixIssueButton %>" value="fix-issue" />
+	<aui:button disabled="<%= commerceHealthStatus.isFixed(company.getCompanyId(), themeDisplay.getScopeGroupId()) %>" name="<%= fixIssueButton %>" value="fix-issue" />
 
 	<aui:script use="aui-io-request,aui-parse-content,liferay-notification">
 		A.one('#<portlet:namespace /><%= fixIssueButton %>').on(

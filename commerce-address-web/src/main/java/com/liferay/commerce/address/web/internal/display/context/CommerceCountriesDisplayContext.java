@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -50,12 +49,9 @@ public class CommerceCountriesDisplayContext
 	public CommerceCountriesDisplayContext(
 		ActionHelper actionHelper,
 		CommerceCountryService commerceCountryService,
-		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		super(
-			actionHelper, portletResourcePermission, renderRequest,
-			renderResponse);
+		super(actionHelper, renderRequest, renderResponse);
 
 		_commerceCountryService = commerceCountryService;
 	}
@@ -115,7 +111,7 @@ public class CommerceCountriesDisplayContext
 			BaseModelSearchResult<CommerceCountry>
 				commerceCountryBaseModelSearchResult =
 					_commerceCountryService.searchCommerceCountries(
-						themeDisplay.getScopeGroupId(), searchContext);
+						searchContext);
 
 			total = commerceCountryBaseModelSearchResult.getLength();
 			results = commerceCountryBaseModelSearchResult.getBaseModels();
@@ -123,18 +119,18 @@ public class CommerceCountriesDisplayContext
 		else {
 			if (active == null) {
 				total = _commerceCountryService.getCommerceCountriesCount(
-					themeDisplay.getScopeGroupId());
+					themeDisplay.getCompanyId());
 
 				results = _commerceCountryService.getCommerceCountries(
-					themeDisplay.getScopeGroupId(), searchContainer.getStart(),
+					themeDisplay.getCompanyId(), searchContainer.getStart(),
 					searchContainer.getEnd(), orderByComparator);
 			}
 			else {
 				total = _commerceCountryService.getCommerceCountriesCount(
-					themeDisplay.getScopeGroupId(), active);
+					themeDisplay.getCompanyId(), active);
 
 				results = _commerceCountryService.getCommerceCountries(
-					themeDisplay.getScopeGroupId(), active,
+					themeDisplay.getCompanyId(), active,
 					searchContainer.getStart(), searchContainer.getEnd(),
 					orderByComparator);
 			}

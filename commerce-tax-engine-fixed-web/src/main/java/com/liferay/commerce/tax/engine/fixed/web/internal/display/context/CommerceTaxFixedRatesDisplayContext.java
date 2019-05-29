@@ -89,12 +89,12 @@ public class CommerceTaxFixedRatesDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 
 		int total = _cpTaxCategoryService.getCPTaxCategoriesCount(
-			commerceTaxFixedRateRequestHelper.getScopeGroupId());
+			commerceTaxFixedRateRequestHelper.getCompanyId());
 
 		searchContainer.setTotal(total);
 
 		List<CPTaxCategory> results = _cpTaxCategoryService.getCPTaxCategories(
-			commerceTaxFixedRateRequestHelper.getScopeGroupId(),
+			commerceTaxFixedRateRequestHelper.getCompanyId(),
 			searchContainer.getStart(), searchContainer.getEnd(),
 			orderByComparator);
 

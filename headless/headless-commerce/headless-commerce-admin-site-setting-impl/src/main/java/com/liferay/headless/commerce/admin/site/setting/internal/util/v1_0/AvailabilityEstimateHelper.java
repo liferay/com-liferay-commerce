@@ -59,18 +59,18 @@ public class AvailabilityEstimateHelper {
 	}
 
 	public Page<AvailabilityEstimate> getAvailabilityEstimates(
-			Long groupId, Pagination pagination)
+			Long companyId, Pagination pagination)
 		throws PortalException {
 
 		List<CommerceAvailabilityEstimate> commerceAvailabilityEstimates =
 			_commerceAvailabilityEstimateService.
 				getCommerceAvailabilityEstimates(
-					groupId, pagination.getStartPosition(),
+					companyId, pagination.getStartPosition(),
 					pagination.getEndPosition(), null);
 
 		int count =
 			_commerceAvailabilityEstimateService.
-				getCommerceAvailabilityEstimatesCount(groupId);
+				getCommerceAvailabilityEstimatesCount(companyId);
 
 		List<AvailabilityEstimate> availabilityEstimates = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class AvailabilityEstimateHelper {
 				getCommerceAvailabilityEstimate(id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commerceAvailabilityEstimate.getGroupId(), new long[0], user, true);
+			0L, new long[0], user, true);
 
 		return _commerceAvailabilityEstimateService.
 			updateCommerceAvailabilityEstimate(

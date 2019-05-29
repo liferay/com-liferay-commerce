@@ -148,7 +148,7 @@ if (commerceAddress != null) {
 					Liferay.Service(
 						'/commerce.commercecountry/get-shipping-commerce-countries',
 						{
-							groupId: <%= scopeGroupId %>,
+							companyId: <%= company.getCompanyId() %>,
 							shippingAllowed: true,
 							active: true
 						},

@@ -99,14 +99,13 @@ public class CommerceCountryItemSelectorViewDisplayContext
 
 		List<CommerceCountry> results =
 			_commerceCountryService.getCommerceCountries(
-				themeDisplay.getScopeGroupId(), true,
-				searchContainer.getStart(), searchContainer.getEnd(),
-				orderByComparator);
+				themeDisplay.getCompanyId(), true, searchContainer.getStart(),
+				searchContainer.getEnd(), orderByComparator);
 
 		searchContainer.setResults(results);
 
 		int total = _commerceCountryService.getCommerceCountriesCount(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyId());
 
 		searchContainer.setTotal(total);
 

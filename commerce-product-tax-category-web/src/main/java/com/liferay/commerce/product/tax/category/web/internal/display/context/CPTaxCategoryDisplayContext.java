@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -45,13 +45,11 @@ public class CPTaxCategoryDisplayContext {
 
 	public CPTaxCategoryDisplayContext(
 		CommerceTaxMethodService commerceTaxMethodService,
-		CPTaxCategoryService cpTaxCategoryService,
-		PortletResourcePermission portletResourcePermission,
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+		CPTaxCategoryService cpTaxCategoryService, RenderRequest renderRequest,
+		RenderResponse renderResponse) {
 
 		_commerceTaxMethodService = commerceTaxMethodService;
 		_cpTaxCategoryService = cpTaxCategoryService;
-		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -155,10 +153,10 @@ public class CPTaxCategoryDisplayContext {
 		_searchContainer.setRowChecker(getRowChecker());
 
 		int total = _cpTaxCategoryService.getCPTaxCategoriesCount(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyId());
 
 		List<CPTaxCategory> results = _cpTaxCategoryService.getCPTaxCategories(
-			themeDisplay.getScopeGroupId(), _searchContainer.getStart(),
+			themeDisplay.getCompanyId(), _searchContainer.getStart(),
 			_searchContainer.getEnd(), orderByComparator);
 
 		_searchContainer.setTotal(total);
@@ -171,8 +169,8 @@ public class CPTaxCategoryDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES);
 	}
 
@@ -208,7 +206,6 @@ public class CPTaxCategoryDisplayContext {
 	private final CommerceTaxMethodService _commerceTaxMethodService;
 	private CPTaxCategory _cpTaxCategory;
 	private final CPTaxCategoryService _cpTaxCategoryService;
-	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
 	private RowChecker _rowChecker;

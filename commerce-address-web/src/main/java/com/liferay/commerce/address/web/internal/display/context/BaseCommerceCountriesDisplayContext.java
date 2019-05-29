@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,12 +38,10 @@ import javax.portlet.RenderResponse;
 public abstract class BaseCommerceCountriesDisplayContext<T> {
 
 	public BaseCommerceCountriesDisplayContext(
-		ActionHelper actionHelper,
-		PortletResourcePermission portletResourcePermission,
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+		ActionHelper actionHelper, RenderRequest renderRequest,
+		RenderResponse renderResponse) {
 
 		this.actionHelper = actionHelper;
-		this.portletResourcePermission = portletResourcePermission;
 		this.renderRequest = renderRequest;
 		this.renderResponse = renderResponse;
 
@@ -56,7 +54,9 @@ public abstract class BaseCommerceCountriesDisplayContext<T> {
 			return _commerceCountry;
 		}
 
-		return actionHelper.getCommerceCountry(renderRequest);
+		_commerceCountry = actionHelper.getCommerceCountry(renderRequest);
+
+		return _commerceCountry;
 	}
 
 	public long getCommerceCountryId() throws PortalException {
@@ -131,9 +131,8 @@ public abstract class BaseCommerceCountriesDisplayContext<T> {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			actionId);
+		return PortalPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), actionId);
 	}
 
 	public void setDefaultOrderByCol(String defaultOrderByCol) {
@@ -149,7 +148,6 @@ public abstract class BaseCommerceCountriesDisplayContext<T> {
 	}
 
 	protected final ActionHelper actionHelper;
-	protected final PortletResourcePermission portletResourcePermission;
 	protected final RenderRequest renderRequest;
 	protected final RenderResponse renderResponse;
 	protected SearchContainer<T> searchContainer;

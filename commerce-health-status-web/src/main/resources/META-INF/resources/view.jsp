@@ -52,7 +52,7 @@ CommerceHealthStatusDisplayContext commerceHealthStatusDisplayContext = (Commerc
 					String iconSpinnerCssClass = "hide icon-spinner icon-spin commerce-health-status-check-row-icon-spinner" + row.getRowId();
 					String iconTimesCssClass = "commerce-health-status-check-row-icon-times" + row.getRowId() + StringPool.SPACE;
 
-					if (commerceHealthStatus.isFixed(themeDisplay.getScopeGroupId())) {
+					if (commerceHealthStatus.isFixed(company.getCompanyId(), themeDisplay.getScopeGroupId())) {
 						iconTimesCssClass += "hide";
 					}
 					else {
