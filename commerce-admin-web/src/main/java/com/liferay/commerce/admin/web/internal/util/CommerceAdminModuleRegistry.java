@@ -42,7 +42,7 @@ public class CommerceAdminModuleRegistry {
 			new TreeMap<>();
 
 		try {
-			commerceAdminModules = getCommerceAdminModules(-1);
+			commerceAdminModules = getCommerceAdminModules(-1, -1);
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
@@ -54,7 +54,7 @@ public class CommerceAdminModuleRegistry {
 	}
 
 	public NavigableMap<String, CommerceAdminModule> getCommerceAdminModules(
-			long companyId)
+			long companyId, long groupId)
 		throws PortalException {
 
 		NavigableMap<String, CommerceAdminModule> commerceAdminModules =
@@ -64,7 +64,9 @@ public class CommerceAdminModuleRegistry {
 			CommerceAdminModule commerceAdminModule =
 				_commerceAdminModuleServiceTrackerMap.getService(key);
 
-			if ((companyId < 0) || commerceAdminModule.isVisible(companyId)) {
+			if ((companyId < 0) || (groupId < 0) ||
+				commerceAdminModule.isVisible(groupId)) {
+
 				commerceAdminModules.put(key, commerceAdminModule);
 			}
 		}
