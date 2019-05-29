@@ -12,40 +12,50 @@
  * details.
  */
 
-package com.liferay.commerce.product.internal.model.listener;
+package com.liferay.commerce.internal.model.listener;
 
-import com.liferay.commerce.product.service.CPDefinitionLocalService;
-import com.liferay.portal.kernel.exception.ModelListenerException;
+import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
+import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.ModelListener;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = ModelListener.class)
-public class GroupModelListener extends BaseModelListener<Group> {
+public class CompanyModelListener extends BaseModelListener<Company> {
 
 	@Override
-	public void onBeforeRemove(Group group) throws ModelListenerException {
+	public void onBeforeRemove(Company company) {
 		try {
-			_cpDefinitionLocalService.deleteCPDefinitions(group.getGroupId());
+			_commerceAvailabilityEstimateLocalService.
+				deleteCommerceAvailabilityEstimates(company.getCompanyId());
+
+			_commerceCountryLocalService.deleteCommerceCountries(
+				company.getCompanyId());
 		}
 		catch (PortalException pe) {
-			_log.error(pe, pe);
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe, pe);
+			}
 		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		GroupModelListener.class);
+		CompanyModelListener.class);
 
 	@Reference
-	private CPDefinitionLocalService _cpDefinitionLocalService;
+	private CommerceAvailabilityEstimateLocalService
+		_commerceAvailabilityEstimateLocalService;
+
+	@Reference
+	private CommerceCountryLocalService _commerceCountryLocalService;
 
 }

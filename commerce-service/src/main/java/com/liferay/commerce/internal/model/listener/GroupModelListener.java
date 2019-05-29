@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.internal.model.listener;
 
-import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
-import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceWarehouseLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -41,9 +39,6 @@ public class GroupModelListener extends BaseModelListener<Group> {
 		try {
 			long groupId = group.getGroupId();
 
-			_commerceAvailabilityEstimateLocalService.
-				deleteCommerceAvailabilityEstimates(groupId);
-			_commerceCountryLocalService.deleteCommerceCountries(groupId);
 			_commerceOrderLocalService.deleteCommerceOrders(groupId);
 			_commerceWarehouseLocalService.deleteCommerceWarehouse(groupId);
 		}
@@ -56,13 +51,6 @@ public class GroupModelListener extends BaseModelListener<Group> {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		GroupModelListener.class);
-
-	@Reference
-	private CommerceAvailabilityEstimateLocalService
-		_commerceAvailabilityEstimateLocalService;
-
-	@Reference
-	private CommerceCountryLocalService _commerceCountryLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
