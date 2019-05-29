@@ -128,10 +128,6 @@
 
 		<column name="commerceAvailabilityEstimateId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -154,8 +150,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CommerceCountry" remote-service="true" uuid="true">
@@ -163,10 +159,6 @@
 		<!-- PK fields -->
 
 		<column name="commerceCountryId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -197,28 +189,28 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_Tw" return-type="CommerceCountry" unique="true">
-			<finder-column name="groupId" />
+		<finder name="C_Tw" return-type="CommerceCountry" unique="true">
+			<finder-column name="companyId" />
 			<finder-column name="twoLettersISOCode" />
 		</finder>
-		<finder name="G_N" return-type="CommerceCountry" unique="true">
-			<finder-column name="groupId" />
+		<finder name="C_N" return-type="CommerceCountry" unique="true">
+			<finder-column name="companyId" />
 			<finder-column name="numericISOCode" />
 		</finder>
-		<finder name="G_A" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="G_B_A" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_B_A" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="billingAllowed" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="G_S_A" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_S_A" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="shippingAllowed" />
 			<finder-column name="active" />
 		</finder>
@@ -483,10 +475,6 @@
 		<!-- PK fields -->
 
 		<column name="commerceRegionId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -846,10 +834,6 @@
 		<!-- PK fields -->
 
 		<column name="CPDAvailabilityEstimateId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 

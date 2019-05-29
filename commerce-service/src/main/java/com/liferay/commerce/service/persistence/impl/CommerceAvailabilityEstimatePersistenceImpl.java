@@ -644,6 +644,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 		return count.intValue();
 	}
 
+<<<<<<< HEAD
 	private static final String _FINDER_COLUMN_UUID_UUID_2 =
 		"commerceAvailabilityEstimate.uuid = ?";
 
@@ -906,6 +907,35 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
+=======
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "commerceAvailabilityEstimate.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "commerceAvailabilityEstimate.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(commerceAvailabilityEstimate.uuid IS NULL OR commerceAvailabilityEstimate.uuid = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAvailabilityEstimateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C =
+		new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAvailabilityEstimateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid_C",
+			new String[] { String.class.getName(), Long.class.getName() },
+			CommerceAvailabilityEstimateModelImpl.UUID_COLUMN_BITMASK |
+			CommerceAvailabilityEstimateModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceAvailabilityEstimateModelImpl.TITLE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByUuid_C",
+			new String[] { String.class.getName(), Long.class.getName() });
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 	/**
 	 * Returns all the commerce availability estimates where uuid = &#63; and companyId = &#63;.
@@ -1498,6 +1528,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 		return count.intValue();
 	}
 
+<<<<<<< HEAD
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 =
 		"commerceAvailabilityEstimate.uuid = ? AND ";
 
@@ -1510,67 +1541,115 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	private FinderPath _finderPathWithPaginationFindByGroupId;
 	private FinderPath _finderPathWithoutPaginationFindByGroupId;
 	private FinderPath _finderPathCountByGroupId;
+=======
+	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "commerceAvailabilityEstimate.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "commerceAvailabilityEstimate.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(commerceAvailabilityEstimate.uuid IS NULL OR commerceAvailabilityEstimate.uuid = '') AND ";
+	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "commerceAvailabilityEstimate.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAvailabilityEstimateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAvailabilityEstimateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
+			new String[] { Long.class.getName() },
+			CommerceAvailabilityEstimateModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceAvailabilityEstimateModelImpl.TITLE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCompanyId", new String[] { Long.class.getName() });
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 	/**
-	 * Returns all the commerce availability estimates where groupId = &#63;.
+	 * Returns all the commerce availability estimates where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce availability estimates
 	 */
 	@Override
+<<<<<<< HEAD
 	public List<CommerceAvailabilityEstimate> findByGroupId(long groupId) {
 		return findByGroupId(
 			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+=======
+	public List<CommerceAvailabilityEstimate> findByCompanyId(long companyId) {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 	}
 
 	/**
-	 * Returns a range of all the commerce availability estimates where groupId = &#63;.
+	 * Returns a range of all the commerce availability estimates where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @return the range of matching commerce availability estimates
 	 */
 	@Override
+<<<<<<< HEAD
 	public List<CommerceAvailabilityEstimate> findByGroupId(
 		long groupId, int start, int end) {
 
 		return findByGroupId(groupId, start, end, null);
+=======
+	public List<CommerceAvailabilityEstimate> findByCompanyId(long companyId,
+		int start, int end) {
+		return findByCompanyId(companyId, start, end, null);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce availability estimates where groupId = &#63;.
+	 * Returns an ordered range of all the commerce availability estimates where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce availability estimates
 	 */
 	@Override
+<<<<<<< HEAD
 	public List<CommerceAvailabilityEstimate> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
 
 		return findByGroupId(groupId, start, end, orderByComparator, true);
+=======
+	public List<CommerceAvailabilityEstimate> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce availability estimates where groupId = &#63;.
+	 * Returns an ordered range of all the commerce availability estimates where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1578,8 +1657,13 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	 * @return the ordered range of matching commerce availability estimates
 	 */
 	@Override
+<<<<<<< HEAD
 	public List<CommerceAvailabilityEstimate> findByGroupId(
 		long groupId, int start, int end,
+=======
+	public List<CommerceAvailabilityEstimate> findByCompanyId(long companyId,
+		int start, int end,
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -1591,12 +1675,21 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
+<<<<<<< HEAD
 			finderPath = _finderPathWithoutPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId};
 		}
 		else {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
+=======
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		}
 
 		List<CommerceAvailabilityEstimate> list = null;
@@ -1606,12 +1699,17 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
+<<<<<<< HEAD
 				for (CommerceAvailabilityEstimate commerceAvailabilityEstimate :
 						list) {
 
 					if ((groupId !=
 							commerceAvailabilityEstimate.getGroupId())) {
 
+=======
+				for (CommerceAvailabilityEstimate commerceAvailabilityEstimate : list) {
+					if ((companyId != commerceAvailabilityEstimate.getCompanyId())) {
+>>>>>>> COMMERCE-1309 Refactor groupId column
 						list = null;
 
 						break;
@@ -1633,7 +1731,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEAVAILABILITYESTIMATE_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -1655,7 +1753,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CommerceAvailabilityEstimate>)QueryUtil.list(
@@ -1688,14 +1786,15 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce availability estimate in the ordered set where groupId = &#63;.
+	 * Returns the first commerce availability estimate in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce availability estimate
 	 * @throws NoSuchAvailabilityEstimateException if a matching commerce availability estimate could not be found
 	 */
 	@Override
+<<<<<<< HEAD
 	public CommerceAvailabilityEstimate findByGroupId_First(
 			long groupId,
 			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
@@ -1703,6 +1802,13 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			fetchByGroupId_First(groupId, orderByComparator);
+=======
+	public CommerceAvailabilityEstimate findByCompanyId_First(long companyId,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
+		throws NoSuchAvailabilityEstimateException {
+		CommerceAvailabilityEstimate commerceAvailabilityEstimate = fetchByCompanyId_First(companyId,
+				orderByComparator);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		if (commerceAvailabilityEstimate != null) {
 			return commerceAvailabilityEstimate;
@@ -1712,8 +1818,8 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1721,19 +1827,26 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce availability estimate in the ordered set where groupId = &#63;.
+	 * Returns the first commerce availability estimate in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce availability estimate, or <code>null</code> if a matching commerce availability estimate could not be found
 	 */
 	@Override
+<<<<<<< HEAD
 	public CommerceAvailabilityEstimate fetchByGroupId_First(
 		long groupId,
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
 
 		List<CommerceAvailabilityEstimate> list = findByGroupId(
 			groupId, 0, 1, orderByComparator);
+=======
+	public CommerceAvailabilityEstimate fetchByCompanyId_First(long companyId,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
+		List<CommerceAvailabilityEstimate> list = findByCompanyId(companyId, 0,
+				1, orderByComparator);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1743,14 +1856,15 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce availability estimate in the ordered set where groupId = &#63;.
+	 * Returns the last commerce availability estimate in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce availability estimate
 	 * @throws NoSuchAvailabilityEstimateException if a matching commerce availability estimate could not be found
 	 */
 	@Override
+<<<<<<< HEAD
 	public CommerceAvailabilityEstimate findByGroupId_Last(
 			long groupId,
 			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
@@ -1758,6 +1872,13 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
 			fetchByGroupId_Last(groupId, orderByComparator);
+=======
+	public CommerceAvailabilityEstimate findByCompanyId_Last(long companyId,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
+		throws NoSuchAvailabilityEstimateException {
+		CommerceAvailabilityEstimate commerceAvailabilityEstimate = fetchByCompanyId_Last(companyId,
+				orderByComparator);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		if (commerceAvailabilityEstimate != null) {
 			return commerceAvailabilityEstimate;
@@ -1767,8 +1888,8 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1776,25 +1897,36 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce availability estimate in the ordered set where groupId = &#63;.
+	 * Returns the last commerce availability estimate in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce availability estimate, or <code>null</code> if a matching commerce availability estimate could not be found
 	 */
 	@Override
+<<<<<<< HEAD
 	public CommerceAvailabilityEstimate fetchByGroupId_Last(
 		long groupId,
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
 
 		int count = countByGroupId(groupId);
+=======
+	public CommerceAvailabilityEstimate fetchByCompanyId_Last(long companyId,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator) {
+		int count = countByCompanyId(companyId);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		if (count == 0) {
 			return null;
 		}
 
+<<<<<<< HEAD
 		List<CommerceAvailabilityEstimate> list = findByGroupId(
 			groupId, count - 1, count, orderByComparator);
+=======
+		List<CommerceAvailabilityEstimate> list = findByCompanyId(companyId,
+				count - 1, count, orderByComparator);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1804,18 +1936,24 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce availability estimates before and after the current commerce availability estimate in the ordered set where groupId = &#63;.
+	 * Returns the commerce availability estimates before and after the current commerce availability estimate in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceAvailabilityEstimateId the primary key of the current commerce availability estimate
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce availability estimate
 	 * @throws NoSuchAvailabilityEstimateException if a commerce availability estimate with the primary key could not be found
 	 */
 	@Override
+<<<<<<< HEAD
 	public CommerceAvailabilityEstimate[] findByGroupId_PrevAndNext(
 			long commerceAvailabilityEstimateId, long groupId,
 			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
+=======
+	public CommerceAvailabilityEstimate[] findByCompanyId_PrevAndNext(
+		long commerceAvailabilityEstimateId, long companyId,
+		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		throws NoSuchAvailabilityEstimateException {
 
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
@@ -1829,6 +1967,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			CommerceAvailabilityEstimate[] array =
 				new CommerceAvailabilityEstimateImpl[3];
 
+<<<<<<< HEAD
 			array[0] = getByGroupId_PrevAndNext(
 				session, commerceAvailabilityEstimate, groupId,
 				orderByComparator, true);
@@ -1838,6 +1977,17 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			array[2] = getByGroupId_PrevAndNext(
 				session, commerceAvailabilityEstimate, groupId,
 				orderByComparator, false);
+=======
+			array[0] = getByCompanyId_PrevAndNext(session,
+					commerceAvailabilityEstimate, companyId, orderByComparator,
+					true);
+
+			array[1] = commerceAvailabilityEstimate;
+
+			array[2] = getByCompanyId_PrevAndNext(session,
+					commerceAvailabilityEstimate, companyId, orderByComparator,
+					false);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 			return array;
 		}
@@ -1849,9 +1999,14 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 		}
 	}
 
-	protected CommerceAvailabilityEstimate getByGroupId_PrevAndNext(
+	protected CommerceAvailabilityEstimate getByCompanyId_PrevAndNext(
 		Session session,
+<<<<<<< HEAD
 		CommerceAvailabilityEstimate commerceAvailabilityEstimate, long groupId,
+=======
+		CommerceAvailabilityEstimate commerceAvailabilityEstimate,
+		long companyId,
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		OrderByComparator<CommerceAvailabilityEstimate> orderByComparator,
 		boolean previous) {
 
@@ -1868,7 +2023,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEAVAILABILITYESTIMATE_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -1939,7 +2094,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -1961,31 +2116,44 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce availability estimates where groupId = &#63; from the database.
+	 * Removes all the commerce availability estimates where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
+<<<<<<< HEAD
 	public void removeByGroupId(long groupId) {
 		for (CommerceAvailabilityEstimate commerceAvailabilityEstimate :
 				findByGroupId(
 					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
+=======
+	public void removeByCompanyId(long companyId) {
+		for (CommerceAvailabilityEstimate commerceAvailabilityEstimate : findByCompanyId(
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+>>>>>>> COMMERCE-1309 Refactor groupId column
 			remove(commerceAvailabilityEstimate);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce availability estimates where groupId = &#63;.
+	 * Returns the number of commerce availability estimates where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce availability estimates
 	 */
 	@Override
+<<<<<<< HEAD
 	public int countByGroupId(long groupId) {
 		FinderPath finderPath = _finderPathCountByGroupId;
 
 		Object[] finderArgs = new Object[] {groupId};
+=======
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
+
+		Object[] finderArgs = new Object[] { companyId };
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1994,7 +2162,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEAVAILABILITYESTIMATE_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -2007,7 +2175,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -2026,8 +2194,12 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 		return count.intValue();
 	}
 
+<<<<<<< HEAD
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
 		"commerceAvailabilityEstimate.groupId = ?";
+=======
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceAvailabilityEstimate.companyId = ?";
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 	public CommerceAvailabilityEstimatePersistenceImpl() {
 		setModelClass(CommerceAvailabilityEstimate.class);
@@ -2066,6 +2238,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			commerceAvailabilityEstimate.getPrimaryKey(),
 			commerceAvailabilityEstimate);
 
+<<<<<<< HEAD
 		finderCache.putResult(
 			_finderPathFetchByUUID_G,
 			new Object[] {
@@ -2074,6 +2247,8 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			},
 			commerceAvailabilityEstimate);
 
+=======
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		commerceAvailabilityEstimate.resetOriginalValues();
 	}
 
@@ -2136,10 +2311,13 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+<<<<<<< HEAD
 
 		clearUniqueFindersCache(
 			(CommerceAvailabilityEstimateModelImpl)commerceAvailabilityEstimate,
 			true);
+=======
+>>>>>>> COMMERCE-1309 Refactor groupId column
 	}
 
 	@Override
@@ -2156,6 +2334,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				CommerceAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceAvailabilityEstimateImpl.class,
 				commerceAvailabilityEstimate.getPrimaryKey());
+<<<<<<< HEAD
 
 			clearUniqueFindersCache(
 				(CommerceAvailabilityEstimateModelImpl)
@@ -2205,6 +2384,8 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 
 			finderCache.removeResult(_finderPathCountByUUID_G, args);
 			finderCache.removeResult(_finderPathFetchByUUID_G, args);
+=======
+>>>>>>> COMMERCE-1309 Refactor groupId column
 		}
 	}
 
@@ -2436,12 +2617,21 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				_finderPathWithoutPaginationFindByUuid_C, args);
 
 			args = new Object[] {
+<<<<<<< HEAD
 				commerceAvailabilityEstimateModelImpl.getGroupId()
 			};
 
 			finderCache.removeResult(_finderPathCountByGroupId, args);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByGroupId, args);
+=======
+					commerceAvailabilityEstimateModelImpl.getCompanyId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+				args);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -2493,6 +2683,7 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			}
 
 			if ((commerceAvailabilityEstimateModelImpl.getColumnBitmask() &
+<<<<<<< HEAD
 				 _finderPathWithoutPaginationFindByGroupId.
 					 getColumnBitmask()) != 0) {
 
@@ -2511,6 +2702,24 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				finderCache.removeResult(_finderPathCountByGroupId, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByGroupId, args);
+=======
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceAvailabilityEstimateModelImpl.getOriginalCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+
+				args = new Object[] {
+						commerceAvailabilityEstimateModelImpl.getCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+>>>>>>> COMMERCE-1309 Refactor groupId column
 			}
 		}
 
@@ -2519,9 +2728,6 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			CommerceAvailabilityEstimateImpl.class,
 			commerceAvailabilityEstimate.getPrimaryKey(),
 			commerceAvailabilityEstimate, false);
-
-		clearUniqueFindersCache(commerceAvailabilityEstimateModelImpl, false);
-		cacheUniqueFindersCache(commerceAvailabilityEstimateModelImpl);
 
 		commerceAvailabilityEstimate.resetOriginalValues();
 

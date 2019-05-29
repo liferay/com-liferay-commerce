@@ -47,13 +47,12 @@ public class CPMeasurementUnitLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		if (primary) {
 			rate = 1;
 		}
 
-		validate(0, groupId, key, primary, type);
+		validate(0, serviceContext.getCompanyId(), key, primary, type);
 
 		long cpMeasurementUnitId = counterLocalService.increment();
 
@@ -61,7 +60,7 @@ public class CPMeasurementUnitLocalServiceImpl
 			cpMeasurementUnitPersistence.create(cpMeasurementUnitId);
 
 		cpMeasurementUnit.setUuid(serviceContext.getUuid());
-		cpMeasurementUnit.setGroupId(groupId);
+		cpMeasurementUnit.setGroupId(serviceContext.getScopeGroupId());
 		cpMeasurementUnit.setCompanyId(user.getCompanyId());
 		cpMeasurementUnit.setUserId(user.getUserId());
 		cpMeasurementUnit.setUserName(user.getFullName());
@@ -97,51 +96,51 @@ public class CPMeasurementUnitLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPMeasurementUnits(long groupId) {
-		cpMeasurementUnitPersistence.removeByGroupId(groupId);
+	public void deleteCPMeasurementUnits(long companyId) {
+		cpMeasurementUnitPersistence.removeByCompanyId(companyId);
 	}
 
 	@Override
 	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-		long groupId, int type) {
+		long companyId, int type) {
 
-		return cpMeasurementUnitPersistence.fetchByG_P_T_First(
-			groupId, true, type, new CPMeasurementUnitPriorityComparator());
+		return cpMeasurementUnitPersistence.fetchByC_P_T_First(
+			companyId, true, type, new CPMeasurementUnitPriorityComparator());
 	}
 
 	@Override
-	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId) {
-		return cpMeasurementUnitPersistence.findByGroupId(groupId);
+	public List<CPMeasurementUnit> getCPMeasurementUnits(long companyId) {
+		return cpMeasurementUnitPersistence.findByCompanyId(companyId);
 	}
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int type, int start, int end,
+		long companyId, int type, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
 
-		return cpMeasurementUnitPersistence.findByG_T(
-			groupId, type, start, end, orderByComparator);
+		return cpMeasurementUnitPersistence.findByC_T(
+			companyId, type, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator) {
 
-		return cpMeasurementUnitPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return cpMeasurementUnitPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, String[] keys, int type) {
+		long companyId, String[] keys, int type) {
 
 		List<CPMeasurementUnit> cpMeasurementUnits = new ArrayList<>(
 			keys.length);
 
 		for (String key : keys) {
 			CPMeasurementUnit cpMeasurementUnit =
-				cpMeasurementUnitPersistence.fetchByG_K_T(groupId, key, type);
+				cpMeasurementUnitPersistence.fetchByC_K_T(companyId, key, type);
 
 			if (cpMeasurementUnit != null) {
 				cpMeasurementUnits.add(cpMeasurementUnit);
@@ -152,13 +151,13 @@ public class CPMeasurementUnitLocalServiceImpl
 	}
 
 	@Override
-	public int getCPMeasurementUnitsCount(long groupId) {
-		return cpMeasurementUnitPersistence.countByGroupId(groupId);
+	public int getCPMeasurementUnitsCount(long companyId) {
+		return cpMeasurementUnitPersistence.countByCompanyId(companyId);
 	}
 
 	@Override
-	public int getCPMeasurementUnitsCount(long groupId, int type) {
-		return cpMeasurementUnitPersistence.countByG_T(groupId, type);
+	public int getCPMeasurementUnitsCount(long companyId, int type) {
+		return cpMeasurementUnitPersistence.countByC_T(companyId, type);
 	}
 
 	@Override
@@ -201,7 +200,7 @@ public class CPMeasurementUnitLocalServiceImpl
 			cpMeasurementUnitPersistence.findByPrimaryKey(cpMeasurementUnitId);
 
 		validate(
-			cpMeasurementUnitId, cpMeasurementUnit.getGroupId(),
+			cpMeasurementUnitId, cpMeasurementUnit.getCompanyId(),
 			cpMeasurementUnit.getKey(), primary, cpMeasurementUnit.getType());
 
 		cpMeasurementUnit.setPrimary(primary);
@@ -227,7 +226,7 @@ public class CPMeasurementUnitLocalServiceImpl
 
 		validate(
 			cpMeasurementUnit.getCPMeasurementUnitId(),
-			cpMeasurementUnit.getGroupId(), key, primary, type);
+			serviceContext.getCompanyId(), key, primary, type);
 
 		cpMeasurementUnit.setNameMap(nameMap);
 		cpMeasurementUnit.setKey(key);
@@ -242,12 +241,12 @@ public class CPMeasurementUnitLocalServiceImpl
 	}
 
 	protected void validate(
-			long cpMeasurementUnitId, long groupId, String key, boolean primary,
-			int type)
+			long cpMeasurementUnitId, long companyId, String key,
+			boolean primary, int type)
 		throws PortalException {
 
 		CPMeasurementUnit cpMeasurementUnit =
-			cpMeasurementUnitPersistence.fetchByG_K_T(groupId, key, type);
+			cpMeasurementUnitPersistence.fetchByC_K_T(companyId, key, type);
 
 		if ((cpMeasurementUnit != null) &&
 			(cpMeasurementUnit.getCPMeasurementUnitId() !=
@@ -258,8 +257,8 @@ public class CPMeasurementUnitLocalServiceImpl
 
 		if (primary) {
 			List<CPMeasurementUnit> cpMeasurementUnits =
-				cpMeasurementUnitPersistence.findByG_P_T(
-					groupId, primary, type);
+				cpMeasurementUnitPersistence.findByC_P_T(
+					companyId, primary, type);
 
 			for (CPMeasurementUnit curCPMeasurementUnit : cpMeasurementUnits) {
 				if (curCPMeasurementUnit.getCPMeasurementUnitId() !=
@@ -282,7 +281,7 @@ public class CPMeasurementUnitLocalServiceImpl
 
 		nameMap.put(serviceContext.getLocale(), name);
 
-		addCPMeasurementUnit(
+		cpMeasurementUnitLocalService.addCPMeasurementUnit(
 			nameMap, key, rate, primary, priority, type, serviceContext);
 	}
 

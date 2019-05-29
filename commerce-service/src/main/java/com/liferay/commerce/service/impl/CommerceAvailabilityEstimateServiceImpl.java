@@ -15,13 +15,11 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.base.CommerceAvailabilityEstimateServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -40,8 +38,8 @@ public class CommerceAvailabilityEstimateServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
 		return commerceAvailabilityEstimateLocalService.
@@ -53,12 +51,8 @@ public class CommerceAvailabilityEstimateServiceImpl
 			long commerceAvailabilityEstimateId)
 		throws PortalException {
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
-			commerceAvailabilityEstimatePersistence.findByPrimaryKey(
-				commerceAvailabilityEstimateId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceAvailabilityEstimate.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
 		commerceAvailabilityEstimateLocalService.
@@ -70,42 +64,39 @@ public class CommerceAvailabilityEstimateServiceImpl
 			long commerceAvailabilityEstimateId)
 		throws PortalException {
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
-			commerceAvailabilityEstimateLocalService.
-				getCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceAvailabilityEstimate.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
-		return commerceAvailabilityEstimate;
+		return commerceAvailabilityEstimateLocalService.
+			getCommerceAvailabilityEstimate(commerceAvailabilityEstimateId);
 	}
 
 	@Override
 	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
 		return commerceAvailabilityEstimateLocalService.
 			getCommerceAvailabilityEstimates(
-				groupId, start, end, orderByComparator);
+				companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceAvailabilityEstimatesCount(long groupId)
+	public int getCommerceAvailabilityEstimatesCount(long companyId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
 		return commerceAvailabilityEstimateLocalService.
-			getCommerceAvailabilityEstimatesCount(groupId);
+			getCommerceAvailabilityEstimatesCount(companyId);
 	}
 
 	@Override
@@ -114,12 +105,8 @@ public class CommerceAvailabilityEstimateServiceImpl
 			double priority, ServiceContext serviceContext)
 		throws PortalException {
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
-			commerceAvailabilityEstimatePersistence.findByPrimaryKey(
-				commerceAvailabilityEstimateId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceAvailabilityEstimate.getGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES);
 
 		return commerceAvailabilityEstimateLocalService.
@@ -127,11 +114,5 @@ public class CommerceAvailabilityEstimateServiceImpl
 				commerceAvailabilityEstimateId, titleMap, priority,
 				serviceContext);
 	}
-
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceAvailabilityEstimateServiceImpl.class,
-				"_portletResourcePermission", CommerceConstants.RESOURCE_NAME);
 
 }

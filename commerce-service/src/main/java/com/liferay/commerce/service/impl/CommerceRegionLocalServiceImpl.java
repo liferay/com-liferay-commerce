@@ -43,9 +43,10 @@ public class CommerceRegionLocalServiceImpl
 			boolean active, ServiceContext serviceContext)
 		throws PortalException {
 
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
 		CommerceCountry commerceCountry =
 			commerceCountryPersistence.findByPrimaryKey(commerceCountryId);
-		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		validate(name);
 
@@ -55,11 +56,11 @@ public class CommerceRegionLocalServiceImpl
 			commerceRegionId);
 
 		commerceRegion.setUuid(serviceContext.getUuid());
-		commerceRegion.setGroupId(commerceCountry.getGroupId());
 		commerceRegion.setCompanyId(user.getCompanyId());
 		commerceRegion.setUserId(user.getUserId());
 		commerceRegion.setUserName(user.getFullName());
-		commerceRegion.setCommerceCountryId(commerceCountryId);
+		commerceRegion.setCommerceCountryId(
+			commerceCountry.getCommerceCountryId());
 		commerceRegion.setName(name);
 		commerceRegion.setCode(code);
 		commerceRegion.setPriority(priority);
