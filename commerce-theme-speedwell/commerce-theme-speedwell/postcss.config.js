@@ -3,9 +3,9 @@ module.exports = {
 		'autoprefixer': {
 			grid: true,
 			browsers: [
-			"last 2 version",
-			"> 1%",
-			"IE 11"
+				"last 2 version",
+				"> 1%",
+				"IE 11"
 			]
 		}
 	}
