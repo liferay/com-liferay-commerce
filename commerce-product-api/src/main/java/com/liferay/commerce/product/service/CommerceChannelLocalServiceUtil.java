@@ -81,9 +81,11 @@ public class CommerceChannelLocalServiceUtil {
 	*
 	* @param commerceChannel the commerce channel
 	* @return the commerce channel that was removed
+	* @throws PortalException
 	*/
 	public static com.liferay.commerce.product.model.CommerceChannel deleteCommerceChannel(
-		com.liferay.commerce.product.model.CommerceChannel commerceChannel) {
+		com.liferay.commerce.product.model.CommerceChannel commerceChannel)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteCommerceChannel(commerceChannel);
 	}
 
@@ -100,7 +102,8 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().deleteCommerceChannel(commerceChannelId);
 	}
 
-	public static void deleteCommerceChannels(long companyId) {
+	public static void deleteCommerceChannels(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteCommerceChannels(companyId);
 	}
 
@@ -196,6 +199,11 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().fetchCommerceChannel(commerceChannelId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelByGroupId(
+		long siteGroupId) {
+		return getService().fetchCommerceChannelByGroupId(siteGroupId);
+	}
+
 	/**
 	* Returns the commerce channel with the matching external reference code and company.
 	*
@@ -225,6 +233,17 @@ public class CommerceChannelLocalServiceUtil {
 		long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCommerceChannel(commerceChannelId);
+	}
+
+	public static com.liferay.portal.kernel.model.Group getCommerceChannelGroup(
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannelGroup(commerceChannelId);
+	}
+
+	public static long getCommerceChannelGroupIdBySiteGroupId(long siteGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannelGroupIdBySiteGroupId(siteGroupId);
 	}
 
 	/**
@@ -274,6 +293,26 @@ public class CommerceChannelLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceChannels(companyId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceChannels(companyId, keywords, start, end, sort);
+	}
+
+	public static int searchCommerceChannelsCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceChannelsCount(companyId, keywords);
 	}
 
 	/**

@@ -23,6 +23,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
+		<field name="siteGroupId" type="long" />
 		<field name="type" type="String" />
 		<field name="typeSettings" type="String" />
 		<field name="commerceCurrencyCode" type="String" />

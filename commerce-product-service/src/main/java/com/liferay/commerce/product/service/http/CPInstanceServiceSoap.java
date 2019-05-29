@@ -66,7 +66,7 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CPInstanceServiceSoap {
 	public static com.liferay.commerce.product.model.CPInstanceSoap addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		boolean published, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -76,8 +76,8 @@ public class CPInstanceServiceSoap {
 		throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.addCPInstance(cpDefinitionId,
-					sku, gtin, manufacturerPartNumber, purchasable, json,
-					published, displayDateMonth, displayDateDay,
+					groupId, sku, gtin, manufacturerPartNumber, purchasable,
+					json, published, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					expirationDateMonth, expirationDateDay, expirationDateYear,
 					expirationDateHour, expirationDateMinute, neverExpire,
@@ -305,7 +305,7 @@ public class CPInstanceServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstanceSoap upsertCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		double width, double height, double depth, double weight,
 		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -318,9 +318,9 @@ public class CPInstanceServiceSoap {
 		throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CPInstance returnValue = CPInstanceServiceUtil.upsertCPInstance(cpDefinitionId,
-					sku, gtin, manufacturerPartNumber, purchasable, json,
-					width, height, depth, weight, price, promoPrice, cost,
-					published, externalReferenceCode, displayDateMonth,
+					groupId, sku, gtin, manufacturerPartNumber, purchasable,
+					json, width, height, depth, weight, price, promoPrice,
+					cost, published, externalReferenceCode, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,

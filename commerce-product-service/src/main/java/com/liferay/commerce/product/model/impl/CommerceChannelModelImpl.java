@@ -79,6 +79,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
+			{ "siteGroupId", Types.BIGINT },
 			{ "type_", Types.VARCHAR },
 			{ "typeSettings", Types.VARCHAR },
 			{ "commerceCurrencyCode", Types.VARCHAR }
@@ -94,12 +95,13 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("siteGroupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("typeSettings", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCurrencyCode", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (externalReferenceCode VARCHAR(75) null,commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null,commerceCurrencyCode VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceChannel (externalReferenceCode VARCHAR(75) null,commerceChannelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,siteGroupId LONG,type_ VARCHAR(75) null,typeSettings VARCHAR(75) null,commerceCurrencyCode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceChannel";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceChannel.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceChannel.createDate DESC";
@@ -117,7 +119,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static final long SITEGROUPID_COLUMN_BITMASK = 4L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -140,6 +143,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
+		model.setSiteGroupId(soapModel.getSiteGroupId());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 		model.setCommerceCurrencyCode(soapModel.getCommerceCurrencyCode());
@@ -216,6 +220,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
+		attributes.put("siteGroupId", getSiteGroupId());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
@@ -275,6 +280,12 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 		if (name != null) {
 			setName(name);
+		}
+
+		Long siteGroupId = (Long)attributes.get("siteGroupId");
+
+		if (siteGroupId != null) {
+			setSiteGroupId(siteGroupId);
 		}
 
 		String type = (String)attributes.get("type");
@@ -448,6 +459,29 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@JSON
 	@Override
+	public long getSiteGroupId() {
+		return _siteGroupId;
+	}
+
+	@Override
+	public void setSiteGroupId(long siteGroupId) {
+		_columnBitmask |= SITEGROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalSiteGroupId) {
+			_setOriginalSiteGroupId = true;
+
+			_originalSiteGroupId = _siteGroupId;
+		}
+
+		_siteGroupId = siteGroupId;
+	}
+
+	public long getOriginalSiteGroupId() {
+		return _originalSiteGroupId;
+	}
+
+	@JSON
+	@Override
 	public String getType() {
 		if (_type == null) {
 			return "";
@@ -533,6 +567,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		commerceChannelImpl.setCreateDate(getCreateDate());
 		commerceChannelImpl.setModifiedDate(getModifiedDate());
 		commerceChannelImpl.setName(getName());
+		commerceChannelImpl.setSiteGroupId(getSiteGroupId());
 		commerceChannelImpl.setType(getType());
 		commerceChannelImpl.setTypeSettings(getTypeSettings());
 		commerceChannelImpl.setCommerceCurrencyCode(getCommerceCurrencyCode());
@@ -607,6 +642,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 		commerceChannelModelImpl._setModifiedDate = false;
 
+		commerceChannelModelImpl._originalSiteGroupId = commerceChannelModelImpl._siteGroupId;
+
+		commerceChannelModelImpl._setOriginalSiteGroupId = false;
+
 		commerceChannelModelImpl._columnBitmask = 0;
 	}
 
@@ -663,6 +702,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 			commerceChannelCacheModel.name = null;
 		}
 
+		commerceChannelCacheModel.siteGroupId = getSiteGroupId();
+
 		commerceChannelCacheModel.type = getType();
 
 		String type = commerceChannelCacheModel.type;
@@ -693,7 +734,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -711,6 +752,8 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getModifiedDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", siteGroupId=");
+		sb.append(getSiteGroupId());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", typeSettings=");
@@ -724,7 +767,7 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CommerceChannel");
@@ -763,6 +806,10 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>siteGroupId</column-name><column-value><![CDATA[");
+		sb.append(getSiteGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
@@ -796,6 +843,9 @@ public class CommerceChannelModelImpl extends BaseModelImpl<CommerceChannel>
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private String _name;
+	private long _siteGroupId;
+	private long _originalSiteGroupId;
+	private boolean _setOriginalSiteGroupId;
 	private String _type;
 	private String _typeSettings;
 	private String _commerceCurrencyCode;

@@ -60,7 +60,8 @@ public class CommerceChannelServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannel(
-		long commerceChannelId) {
+		long commerceChannelId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCommerceChannel(commerceChannelId);
 	}
 
@@ -89,6 +90,26 @@ public class CommerceChannelServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceChannels(companyId);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CommerceChannel> searchCommerceChannels(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCommerceChannels(companyId, keywords, start, end, sort);
+	}
+
+	public static int searchCommerceChannelsCount(long companyId,
+		String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().searchCommerceChannelsCount(companyId, keywords);
 	}
 
 	public static com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(

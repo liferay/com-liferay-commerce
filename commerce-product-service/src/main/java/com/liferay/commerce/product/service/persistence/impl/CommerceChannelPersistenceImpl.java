@@ -28,9 +28,11 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.CompanyProvider;
@@ -540,6 +542,318 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 	}
 
 	/**
+	 * Returns all the commerce channels that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the matching commerce channels that the user has permission to view
+	 */
+	@Override
+	public List<CommerceChannel> filterFindByCompanyId(long companyId) {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce channels that the user has permission to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceChannelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of commerce channels
+	 * @param end the upper bound of the range of commerce channels (not inclusive)
+	 * @return the range of matching commerce channels that the user has permission to view
+	 */
+	@Override
+	public List<CommerceChannel> filterFindByCompanyId(long companyId,
+		int start, int end) {
+		return filterFindByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce channels that the user has permissions to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceChannelModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of commerce channels
+	 * @param end the upper bound of the range of commerce channels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce channels that the user has permission to view
+	 */
+	@Override
+	public List<CommerceChannel> filterFindByCompanyId(long companyId,
+		int start, int end, OrderByComparator<CommerceChannel> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceChannelModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceChannelModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceChannel.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CommerceChannelImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CommerceChannelImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (List<CommerceChannel>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the commerce channels before and after the current commerce channel in the ordered set of commerce channels that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param commerceChannelId the primary key of the current commerce channel
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce channel
+	 * @throws NoSuchChannelException if a commerce channel with the primary key could not be found
+	 */
+	@Override
+	public CommerceChannel[] filterFindByCompanyId_PrevAndNext(
+		long commerceChannelId, long companyId,
+		OrderByComparator<CommerceChannel> orderByComparator)
+		throws NoSuchChannelException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId_PrevAndNext(commerceChannelId, companyId,
+				orderByComparator);
+		}
+
+		CommerceChannel commerceChannel = findByPrimaryKey(commerceChannelId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceChannel[] array = new CommerceChannelImpl[3];
+
+			array[0] = filterGetByCompanyId_PrevAndNext(session,
+					commerceChannel, companyId, orderByComparator, true);
+
+			array[1] = commerceChannel;
+
+			array[2] = filterGetByCompanyId_PrevAndNext(session,
+					commerceChannel, companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceChannel filterGetByCompanyId_PrevAndNext(
+		Session session, CommerceChannel commerceChannel, long companyId,
+		OrderByComparator<CommerceChannel> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceChannelModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceChannelModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceChannel.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CommerceChannelImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CommerceChannelImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceChannel);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceChannel> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the commerce channels where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -603,7 +917,265 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 		return count.intValue();
 	}
 
+	/**
+	 * Returns the number of commerce channels that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the number of matching commerce channels that the user has permission to view
+	 */
+	@Override
+	public int filterCountByCompanyId(long companyId) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByCompanyId(companyId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCECHANNEL_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceChannel.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceChannel.companyId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_SITEGROUPID = new FinderPath(CommerceChannelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceChannelModelImpl.FINDER_CACHE_ENABLED,
+			CommerceChannelImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchBySiteGroupId", new String[] { Long.class.getName() },
+			CommerceChannelModelImpl.SITEGROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_SITEGROUPID = new FinderPath(CommerceChannelModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceChannelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySiteGroupId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the commerce channel where siteGroupId = &#63; or throws a {@link NoSuchChannelException} if it could not be found.
+	 *
+	 * @param siteGroupId the site group ID
+	 * @return the matching commerce channel
+	 * @throws NoSuchChannelException if a matching commerce channel could not be found
+	 */
+	@Override
+	public CommerceChannel findBySiteGroupId(long siteGroupId)
+		throws NoSuchChannelException {
+		CommerceChannel commerceChannel = fetchBySiteGroupId(siteGroupId);
+
+		if (commerceChannel == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("siteGroupId=");
+			msg.append(siteGroupId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchChannelException(msg.toString());
+		}
+
+		return commerceChannel;
+	}
+
+	/**
+	 * Returns the commerce channel where siteGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param siteGroupId the site group ID
+	 * @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
+	 */
+	@Override
+	public CommerceChannel fetchBySiteGroupId(long siteGroupId) {
+		return fetchBySiteGroupId(siteGroupId, true);
+	}
+
+	/**
+	 * Returns the commerce channel where siteGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param siteGroupId the site group ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
+	 */
+	@Override
+	public CommerceChannel fetchBySiteGroupId(long siteGroupId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { siteGroupId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_SITEGROUPID,
+					finderArgs, this);
+		}
+
+		if (result instanceof CommerceChannel) {
+			CommerceChannel commerceChannel = (CommerceChannel)result;
+
+			if ((siteGroupId != commerceChannel.getSiteGroupId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_COMMERCECHANNEL_WHERE);
+
+			query.append(_FINDER_COLUMN_SITEGROUPID_SITEGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(siteGroupId);
+
+				List<CommerceChannel> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_SITEGROUPID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"CommerceChannelPersistenceImpl.fetchBySiteGroupId(long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CommerceChannel commerceChannel = list.get(0);
+
+					result = commerceChannel;
+
+					cacheResult(commerceChannel);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_SITEGROUPID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceChannel)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce channel where siteGroupId = &#63; from the database.
+	 *
+	 * @param siteGroupId the site group ID
+	 * @return the commerce channel that was removed
+	 */
+	@Override
+	public CommerceChannel removeBySiteGroupId(long siteGroupId)
+		throws NoSuchChannelException {
+		CommerceChannel commerceChannel = findBySiteGroupId(siteGroupId);
+
+		return remove(commerceChannel);
+	}
+
+	/**
+	 * Returns the number of commerce channels where siteGroupId = &#63;.
+	 *
+	 * @param siteGroupId the site group ID
+	 * @return the number of matching commerce channels
+	 */
+	@Override
+	public int countBySiteGroupId(long siteGroupId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_SITEGROUPID;
+
+		Object[] finderArgs = new Object[] { siteGroupId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCECHANNEL_WHERE);
+
+			query.append(_FINDER_COLUMN_SITEGROUPID_SITEGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(siteGroupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_SITEGROUPID_SITEGROUPID_2 = "commerceChannel.siteGroupId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceChannelModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceChannelModelImpl.FINDER_CACHE_ENABLED,
 			CommerceChannelImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -901,6 +1473,9 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 			CommerceChannelImpl.class, commerceChannel.getPrimaryKey(),
 			commerceChannel);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_SITEGROUPID,
+			new Object[] { commerceChannel.getSiteGroupId() }, commerceChannel);
+
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_ERC,
 			new Object[] {
 				commerceChannel.getCompanyId(),
@@ -980,7 +1555,14 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 
 	protected void cacheUniqueFindersCache(
 		CommerceChannelModelImpl commerceChannelModelImpl) {
-		Object[] args = new Object[] {
+		Object[] args = new Object[] { commerceChannelModelImpl.getSiteGroupId() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_SITEGROUPID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_SITEGROUPID, args,
+			commerceChannelModelImpl, false);
+
+		args = new Object[] {
 				commerceChannelModelImpl.getCompanyId(),
 				commerceChannelModelImpl.getExternalReferenceCode()
 			};
@@ -993,6 +1575,25 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 
 	protected void clearUniqueFindersCache(
 		CommerceChannelModelImpl commerceChannelModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					commerceChannelModelImpl.getSiteGroupId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SITEGROUPID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_SITEGROUPID, args);
+		}
+
+		if ((commerceChannelModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_SITEGROUPID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					commerceChannelModelImpl.getOriginalSiteGroupId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SITEGROUPID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_SITEGROUPID, args);
+		}
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
 					commerceChannelModelImpl.getCompanyId(),
@@ -1646,7 +2247,17 @@ public class CommerceChannelPersistenceImpl extends BasePersistenceImpl<Commerce
 	private static final String _SQL_SELECT_COMMERCECHANNEL_WHERE = "SELECT commerceChannel FROM CommerceChannel commerceChannel WHERE ";
 	private static final String _SQL_COUNT_COMMERCECHANNEL = "SELECT COUNT(commerceChannel) FROM CommerceChannel commerceChannel";
 	private static final String _SQL_COUNT_COMMERCECHANNEL_WHERE = "SELECT COUNT(commerceChannel) FROM CommerceChannel commerceChannel WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "commerceChannel.commerceChannelId";
+	private static final String _FILTER_SQL_SELECT_COMMERCECHANNEL_WHERE = "SELECT DISTINCT {commerceChannel.*} FROM CommerceChannel commerceChannel WHERE ";
+	private static final String _FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {CommerceChannel.*} FROM (SELECT DISTINCT commerceChannel.commerceChannelId FROM CommerceChannel commerceChannel WHERE ";
+	private static final String _FILTER_SQL_SELECT_COMMERCECHANNEL_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN CommerceChannel ON TEMP_TABLE.commerceChannelId = CommerceChannel.commerceChannelId";
+	private static final String _FILTER_SQL_COUNT_COMMERCECHANNEL_WHERE = "SELECT COUNT(DISTINCT commerceChannel.commerceChannelId) AS COUNT_VALUE FROM CommerceChannel commerceChannel WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "commerceChannel";
+	private static final String _FILTER_ENTITY_TABLE = "CommerceChannel";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceChannel.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "CommerceChannel.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceChannel exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceChannel exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CommerceChannelPersistenceImpl.class);

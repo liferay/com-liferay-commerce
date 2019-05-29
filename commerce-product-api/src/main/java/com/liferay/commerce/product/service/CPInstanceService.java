@@ -61,12 +61,12 @@ public interface CPInstanceService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPInstanceServiceUtil} to access the cp instance remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CPInstanceServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CPInstance addCPInstance(long cpDefinitionId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		String json, boolean published, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
+	public CPInstance addCPInstance(long cpDefinitionId, long groupId,
+		String sku, String gtin, String manufacturerPartNumber,
+		boolean purchasable, String json, boolean published,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 
@@ -150,14 +150,14 @@ public interface CPInstanceService extends BaseService {
 		long maxSubscriptionCycles, ServiceContext serviceContext)
 		throws PortalException;
 
-	public CPInstance upsertCPInstance(long cpDefinitionId, String sku,
-		String gtin, String manufacturerPartNumber, boolean purchasable,
-		String json, double width, double height, double depth, double weight,
-		BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
-		boolean published, String externalReferenceCode, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
+	public CPInstance upsertCPInstance(long cpDefinitionId, long groupId,
+		String sku, String gtin, String manufacturerPartNumber,
+		boolean purchasable, String json, double width, double height,
+		double depth, double weight, BigDecimal price, BigDecimal promoPrice,
+		BigDecimal cost, boolean published, String externalReferenceCode,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 }

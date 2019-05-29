@@ -138,6 +138,8 @@ public class CommerceChannelPersistenceTest {
 
 		newCommerceChannel.setName(RandomTestUtil.randomString());
 
+		newCommerceChannel.setSiteGroupId(RandomTestUtil.nextLong());
+
 		newCommerceChannel.setType(RandomTestUtil.randomString());
 
 		newCommerceChannel.setTypeSettings(RandomTestUtil.randomString());
@@ -166,6 +168,8 @@ public class CommerceChannelPersistenceTest {
 			Time.getShortTimestamp(newCommerceChannel.getModifiedDate()));
 		Assert.assertEquals(existingCommerceChannel.getName(),
 			newCommerceChannel.getName());
+		Assert.assertEquals(existingCommerceChannel.getSiteGroupId(),
+			newCommerceChannel.getSiteGroupId());
 		Assert.assertEquals(existingCommerceChannel.getType(),
 			newCommerceChannel.getType());
 		Assert.assertEquals(existingCommerceChannel.getTypeSettings(),
@@ -179,6 +183,13 @@ public class CommerceChannelPersistenceTest {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
 		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountBySiteGroupId() throws Exception {
+		_persistence.countBySiteGroupId(RandomTestUtil.nextLong());
+
+		_persistence.countBySiteGroupId(0L);
 	}
 
 	@Test
@@ -216,8 +227,8 @@ public class CommerceChannelPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceChannel",
 			"externalReferenceCode", true, "commerceChannelId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "name", true, "type", true,
-			"typeSettings", true, "commerceCurrencyCode", true);
+			true, "modifiedDate", true, "name", true, "siteGroupId", true,
+			"type", true, "typeSettings", true, "commerceCurrencyCode", true);
 	}
 
 	@Test
@@ -422,6 +433,11 @@ public class CommerceChannelPersistenceTest {
 
 		CommerceChannel existingCommerceChannel = _persistence.findByPrimaryKey(newCommerceChannel.getPrimaryKey());
 
+		Assert.assertEquals(Long.valueOf(
+				existingCommerceChannel.getSiteGroupId()),
+			ReflectionTestUtil.<Long>invoke(existingCommerceChannel,
+				"getOriginalSiteGroupId", new Class<?>[0]));
+
 		Assert.assertEquals(Long.valueOf(existingCommerceChannel.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(existingCommerceChannel,
 				"getOriginalCompanyId", new Class<?>[0]));
@@ -449,6 +465,8 @@ public class CommerceChannelPersistenceTest {
 		commerceChannel.setModifiedDate(RandomTestUtil.nextDate());
 
 		commerceChannel.setName(RandomTestUtil.randomString());
+
+		commerceChannel.setSiteGroupId(RandomTestUtil.nextLong());
 
 		commerceChannel.setType(RandomTestUtil.randomString());
 

@@ -24,10 +24,12 @@ import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -74,6 +76,7 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceChannel addCommerceChannel(CommerceChannel commerceChannel);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceChannel addCommerceChannel(String name, String type,
 		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode,
 		String externalReferenceCode, ServiceContext serviceContext)
@@ -93,11 +96,12 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	*
 	* @param commerceChannel the commerce channel
 	* @return the commerce channel that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceChannel deleteCommerceChannel(
-		CommerceChannel commerceChannel);
+		CommerceChannel commerceChannel) throws PortalException;
 
 	/**
 	* Deletes the commerce channel with the primary key from the database. Also notifies the appropriate model listeners.
@@ -110,7 +114,8 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	public CommerceChannel deleteCommerceChannel(long commerceChannelId)
 		throws PortalException;
 
-	public void deleteCommerceChannels(long companyId);
+	public void deleteCommerceChannels(long companyId)
+		throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -187,6 +192,9 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceChannel fetchCommerceChannel(long commerceChannelId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceChannel fetchCommerceChannelByGroupId(long siteGroupId);
+
 	/**
 	* Returns the commerce channel with the matching external reference code and company.
 	*
@@ -210,6 +218,14 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceChannel getCommerceChannel(long commerceChannelId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Group getCommerceChannelGroup(long commerceChannelId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getCommerceChannelGroupIdBySiteGroupId(long siteGroupId)
 		throws PortalException;
 
 	/**
@@ -250,6 +266,19 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannel> searchCommerceChannels(long companyId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannel> searchCommerceChannels(long companyId,
+		String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCommerceChannelsCount(long companyId, String keywords)
 		throws PortalException;
 
 	/**

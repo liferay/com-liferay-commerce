@@ -906,6 +906,150 @@ public interface CommercePriceListPersistence extends BasePersistence<CommercePr
 	public int countByG_C(long[] groupIds, long companyId);
 
 	/**
+	* Returns all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @return the matching commerce price lists
+	*/
+	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
+		int status);
+
+	/**
+	* Returns a range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param start the lower bound of the range of commerce price lists
+	* @param end the upper bound of the range of commerce price lists (not inclusive)
+	* @return the range of matching commerce price lists
+	*/
+	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
+		int status, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param start the lower bound of the range of commerce price lists
+	* @param end the upper bound of the range of commerce price lists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce price lists
+	*/
+	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
+		int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param start the lower bound of the range of commerce price lists
+	* @param end the upper bound of the range of commerce price lists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce price lists
+	*/
+	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
+		int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce price list
+	* @throws NoSuchPriceListException if a matching commerce price list could not be found
+	*/
+	public CommercePriceList findByLtD_S_First(Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException;
+
+	/**
+	* Returns the first commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	*/
+	public CommercePriceList fetchByLtD_S_First(Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
+
+	/**
+	* Returns the last commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce price list
+	* @throws NoSuchPriceListException if a matching commerce price list could not be found
+	*/
+	public CommercePriceList findByLtD_S_Last(Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException;
+
+	/**
+	* Returns the last commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	*/
+	public CommercePriceList fetchByLtD_S_Last(Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
+
+	/**
+	* Returns the commerce price lists before and after the current commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param commercePriceListId the primary key of the current commerce price list
+	* @param displayDate the display date
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce price list
+	* @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
+	*/
+	public CommercePriceList[] findByLtD_S_PrevAndNext(
+		long commercePriceListId, Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException;
+
+	/**
+	* Removes all the commerce price lists where displayDate &lt; &#63; and status = &#63; from the database.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	*/
+	public void removeByLtD_S(Date displayDate, int status);
+
+	/**
+	* Returns the number of commerce price lists where displayDate &lt; &#63; and status = &#63;.
+	*
+	* @param displayDate the display date
+	* @param status the status
+	* @return the number of matching commerce price lists
+	*/
+	public int countByLtD_S(Date displayDate, int status);
+
+	/**
 	* Returns all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
@@ -1386,150 +1530,6 @@ public interface CommercePriceListPersistence extends BasePersistence<CommercePr
 	* @return the number of matching commerce price lists
 	*/
 	public int countByG_C_NotS(long[] groupIds, long companyId, int status);
-
-	/**
-	* Returns all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @return the matching commerce price lists
-	*/
-	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
-		int status);
-
-	/**
-	* Returns a range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param start the lower bound of the range of commerce price lists
-	* @param end the upper bound of the range of commerce price lists (not inclusive)
-	* @return the range of matching commerce price lists
-	*/
-	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
-		int status, int start, int end);
-
-	/**
-	* Returns an ordered range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param start the lower bound of the range of commerce price lists
-	* @param end the upper bound of the range of commerce price lists (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce price lists
-	*/
-	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
-		int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the commerce price lists where displayDate &lt; &#63; and status = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommercePriceListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param start the lower bound of the range of commerce price lists
-	* @param end the upper bound of the range of commerce price lists (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce price lists
-	*/
-	public java.util.List<CommercePriceList> findByLtD_S(Date displayDate,
-		int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator,
-		boolean retrieveFromCache);
-
-	/**
-	* Returns the first commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce price list
-	* @throws NoSuchPriceListException if a matching commerce price list could not be found
-	*/
-	public CommercePriceList findByLtD_S_First(Date displayDate, int status,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException;
-
-	/**
-	* Returns the first commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	*/
-	public CommercePriceList fetchByLtD_S_First(Date displayDate, int status,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
-
-	/**
-	* Returns the last commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce price list
-	* @throws NoSuchPriceListException if a matching commerce price list could not be found
-	*/
-	public CommercePriceList findByLtD_S_Last(Date displayDate, int status,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException;
-
-	/**
-	* Returns the last commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	*/
-	public CommercePriceList fetchByLtD_S_Last(Date displayDate, int status,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator);
-
-	/**
-	* Returns the commerce price lists before and after the current commerce price list in the ordered set where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param commercePriceListId the primary key of the current commerce price list
-	* @param displayDate the display date
-	* @param status the status
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce price list
-	* @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
-	*/
-	public CommercePriceList[] findByLtD_S_PrevAndNext(
-		long commercePriceListId, Date displayDate, int status,
-		com.liferay.portal.kernel.util.OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException;
-
-	/**
-	* Removes all the commerce price lists where displayDate &lt; &#63; and status = &#63; from the database.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	*/
-	public void removeByLtD_S(Date displayDate, int status);
-
-	/**
-	* Returns the number of commerce price lists where displayDate &lt; &#63; and status = &#63;.
-	*
-	* @param displayDate the display date
-	* @param status the status
-	* @return the number of matching commerce price lists
-	*/
-	public int countByLtD_S(Date displayDate, int status);
 
 	/**
 	* Returns the commerce price list where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchPriceListException} if it could not be found.

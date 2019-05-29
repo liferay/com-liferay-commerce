@@ -66,6 +66,7 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
+		attributes.put("siteGroupId", getSiteGroupId());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
@@ -122,6 +123,12 @@ public class CommerceChannelWrapper implements CommerceChannel,
 
 		if (name != null) {
 			setName(name);
+		}
+
+		Long siteGroupId = (Long)attributes.get("siteGroupId");
+
+		if (siteGroupId != null) {
+			setSiteGroupId(siteGroupId);
 		}
 
 		String type = (String)attributes.get("type");
@@ -242,6 +249,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _commerceChannel.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the site group ID of this commerce channel.
+	*
+	* @return the site group ID of this commerce channel
+	*/
+	@Override
+	public long getSiteGroupId() {
+		return _commerceChannel.getSiteGroupId();
 	}
 
 	/**
@@ -433,6 +450,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_commerceChannel.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the site group ID of this commerce channel.
+	*
+	* @param siteGroupId the site group ID of this commerce channel
+	*/
+	@Override
+	public void setSiteGroupId(long siteGroupId) {
+		_commerceChannel.setSiteGroupId(siteGroupId);
 	}
 
 	/**

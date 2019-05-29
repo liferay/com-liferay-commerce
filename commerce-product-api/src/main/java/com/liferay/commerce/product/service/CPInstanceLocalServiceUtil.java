@@ -55,7 +55,7 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		boolean published, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -64,7 +64,7 @@ public class CPInstanceLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCPInstance(cpDefinitionId, sku, gtin,
+				   .addCPInstance(cpDefinitionId, groupId, sku, gtin,
 			manufacturerPartNumber, purchasable, json, published,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -73,7 +73,7 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		double width, double height, double depth, double weight,
 		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -89,7 +89,7 @@ public class CPInstanceLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCPInstance(cpDefinitionId, sku, gtin,
+				   .addCPInstance(cpDefinitionId, groupId, sku, gtin,
 			manufacturerPartNumber, purchasable, json, width, height, depth,
 			weight, price, promoPrice, cost, published, externalReferenceCode,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
@@ -102,7 +102,7 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance addCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		double width, double height, double depth, double weight,
 		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -114,7 +114,7 @@ public class CPInstanceLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCPInstance(cpDefinitionId, sku, gtin,
+				   .addCPInstance(cpDefinitionId, groupId, sku, gtin,
 			manufacturerPartNumber, purchasable, json, width, height, depth,
 			weight, price, promoPrice, cost, published, externalReferenceCode,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
@@ -608,7 +608,7 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance upsertCPInstance(
-		long cpDefinitionId, String sku, String gtin,
+		long cpDefinitionId, long groupId, String sku, String gtin,
 		String manufacturerPartNumber, boolean purchasable, String json,
 		double width, double height, double depth, double weight,
 		java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -620,7 +620,7 @@ public class CPInstanceLocalServiceUtil {
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .upsertCPInstance(cpDefinitionId, sku, gtin,
+				   .upsertCPInstance(cpDefinitionId, groupId, sku, gtin,
 			manufacturerPartNumber, purchasable, json, width, height, depth,
 			weight, price, promoPrice, cost, published, externalReferenceCode,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
