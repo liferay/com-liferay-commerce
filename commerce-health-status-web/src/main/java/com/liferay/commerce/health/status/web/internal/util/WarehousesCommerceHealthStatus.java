@@ -86,7 +86,9 @@ public class WarehousesCommerceHealthStatus implements CommerceHealthStatus {
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		List<CommerceWarehouse> commerceWarehouses =
 			_commerceWarehouseLocalService.getCommerceWarehouses(groupId);
 

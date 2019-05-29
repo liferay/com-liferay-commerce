@@ -22,9 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -102,11 +100,11 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
-		Group group = _groupLocalService.getGroup(groupId);
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
 
 		Role role = _roleLocalService.fetchRole(
-			group.getCompanyId(),
+			companyId,
 			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
 
 		if (role != null) {
@@ -125,9 +123,6 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 
 	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
-
-	@Reference
-	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private RoleLocalService _roleLocalService;

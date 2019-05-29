@@ -59,7 +59,7 @@ public class CPCompareContentCommerceHealthStatus
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
-		if (isFixed(groupId)) {
+		if (isFixed(_portal.getCompanyId(httpServletRequest), groupId)) {
 			return;
 		}
 
@@ -125,7 +125,9 @@ public class CPCompareContentCommerceHealthStatus
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		long plid = _portal.getPlidFromPortletId(
 			groupId, CPPortletKeys.CP_COMPARE_CONTENT_WEB);
 

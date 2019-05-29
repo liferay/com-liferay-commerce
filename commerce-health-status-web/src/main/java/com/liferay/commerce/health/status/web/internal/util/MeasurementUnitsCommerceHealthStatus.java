@@ -86,9 +86,11 @@ public class MeasurementUnitsCommerceHealthStatus
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		List<CPMeasurementUnit> cpMeasurementUnits =
-			_cpMeasurementUnitLocalService.getCPMeasurementUnits(groupId);
+			_cpMeasurementUnitLocalService.getCPMeasurementUnits(companyId);
 
 		return !cpMeasurementUnits.isEmpty();
 	}

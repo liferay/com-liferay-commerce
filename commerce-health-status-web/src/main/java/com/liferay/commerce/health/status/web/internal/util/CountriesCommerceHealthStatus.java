@@ -92,10 +92,12 @@ public class CountriesCommerceHealthStatus implements CommerceHealthStatus {
 	}
 
 	@Override
-	public boolean isFixed(long groupId) throws PortalException {
+	public boolean isFixed(long companyId, long groupId)
+		throws PortalException {
+
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryLocalService.getCommerceCountries(
-				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		return !commerceCountries.isEmpty();
 	}
