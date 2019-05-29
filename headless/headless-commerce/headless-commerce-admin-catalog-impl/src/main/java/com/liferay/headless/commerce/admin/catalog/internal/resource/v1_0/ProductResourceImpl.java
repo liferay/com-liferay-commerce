@@ -403,8 +403,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		if (skus != null) {
 			for (Sku sku : skus) {
 				SkuUtil.upsertCPInstance(
-					_cpInstanceService, sku, cpDefinition.getCPDefinitionId(),
-					serviceContext);
+					_cpInstanceService, sku, cpDefinition, serviceContext);
 			}
 		}
 

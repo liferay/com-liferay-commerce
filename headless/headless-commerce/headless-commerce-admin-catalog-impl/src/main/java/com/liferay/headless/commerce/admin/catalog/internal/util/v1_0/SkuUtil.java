@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.util.v1_0;
 
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
@@ -32,8 +33,8 @@ import java.util.Calendar;
 public class SkuUtil {
 
 	public static CPInstance upsertCPInstance(
-			CPInstanceService cpInstanceService, Sku sku, long cpDefinitionId,
-			ServiceContext serviceContext)
+			CPInstanceService cpInstanceService, Sku sku,
+			CPDefinition cpDefinition, ServiceContext serviceContext)
 		throws PortalException {
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
@@ -59,8 +60,8 @@ public class SkuUtil {
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		return cpInstanceService.upsertCPInstance(
-			cpDefinitionId, sku.getSku(), sku.getGtin(),
-			sku.getManufacturerPartNumber(),
+			cpDefinition.getCPDefinitionId(), cpDefinition.getGroupId(),
+			sku.getSku(), sku.getGtin(), sku.getManufacturerPartNumber(),
 			GetterUtil.get(sku.getPurchasable(), false),
 			GetterUtil.getString(sku.getOptions()),
 			GetterUtil.get(sku.getWidth(), 0.0),

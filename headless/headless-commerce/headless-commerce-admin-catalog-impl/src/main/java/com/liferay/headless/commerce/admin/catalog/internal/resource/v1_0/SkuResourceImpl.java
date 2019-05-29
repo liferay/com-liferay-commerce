@@ -309,7 +309,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 		throws Exception {
 
 		CPInstance cpInstance = SkuUtil.upsertCPInstance(
-			_cpInstanceService, sku, cpDefinition.getCPDefinitionId(),
+			_cpInstanceService, sku, cpDefinition,
 			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
 
 		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
