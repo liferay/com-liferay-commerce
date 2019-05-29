@@ -62,8 +62,6 @@ public class CommerceChannelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		validate(siteGroupId);
-
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long commerceChannelId = counterLocalService.increment();
@@ -75,7 +73,6 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setUserId(user.getUserId());
 		commerceChannel.setUserName(user.getFullName());
 		commerceChannel.setName(name);
-		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
@@ -235,7 +232,6 @@ public class CommerceChannelLocalServiceImpl
 			commerceChannelPersistence.findByPrimaryKey(commerceChannelId);
 
 		commerceChannel.setName(name);
-		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
 		commerceChannel.setCommerceCurrencyCode(commerceCurrencyCode);
