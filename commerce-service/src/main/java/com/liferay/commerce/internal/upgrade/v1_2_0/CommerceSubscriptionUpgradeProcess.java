@@ -14,18 +14,16 @@
 
 package com.liferay.commerce.internal.upgrade.v1_2_0;
 
+import com.liferay.commerce.internal.upgrade.base.BaseCommerceServiceUpgradeProcess;
 import com.liferay.commerce.model.impl.CommerceOrderItemImpl;
 import com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
+public class CommerceSubscriptionUpgradeProcess
+	extends BaseCommerceServiceUpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -37,39 +35,9 @@ public class CommerceSubscriptionUpgradeProcess extends UpgradeProcess {
 			runSQLTemplateString(template, false, false);
 		}
 
-		_addColumn(
+		addColumn(
 			CommerceOrderItemImpl.class, CommerceOrderItemImpl.TABLE_NAME,
 			"subscription", "BOOLEAN");
 	}
-
-	private void _addColumn(
-			Class<?> tableClass, String tableName, String columnName,
-			String columnType)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Adding column %s to table %s", columnName, tableName));
-		}
-
-		if (!hasColumn(tableName, columnName)) {
-			alter(
-				tableClass,
-				new AlterTableAddColumn(
-					columnName + StringPool.SPACE + columnType));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already exists on table %s", columnName,
-						tableName));
-			}
-		}
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceSubscriptionUpgradeProcess.class);
 
 }
