@@ -15,6 +15,8 @@
 package com.liferay.commerce.product.internal.model.listener;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CPTaxCategoryLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
@@ -56,11 +58,12 @@ public class CompanyModelListener extends BaseModelListener<Company> {
 	@Override
 	public void onBeforeRemove(Company company) {
 		try {
-			_commerceCatalogLocalService.deleteCommerceCatalogs(
-				company.getCompanyId());
+			long companyId = company.getCompanyId();
 
-			_commerceChannelLocalService.deleteCommerceChannels(
-				company.getCompanyId());
+			_commerceCatalogLocalService.deleteCommerceCatalogs(companyId);
+			_commerceChannelLocalService.deleteCommerceChannels(companyId);
+			_cpMeasurementUnitLocalService.deleteCPMeasurementUnits(companyId);
+			_cpTaxCategoryLocalService.deleteCPTaxCategories(companyId);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -75,5 +78,11 @@ public class CompanyModelListener extends BaseModelListener<Company> {
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CPMeasurementUnitLocalService _cpMeasurementUnitLocalService;
+
+	@Reference
+	private CPTaxCategoryLocalService _cpTaxCategoryLocalService;
 
 }
