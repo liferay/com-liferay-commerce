@@ -7,12 +7,16 @@
 		<permissions>
 			<supports>
 				<action-key>ADD_COMMERCE_CATALOG</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES</action-key>
 				<action-key>VIEW_COMMERCE_CATALOGS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
 				<action-key>ADD_COMMERCE_CATALOG</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS</action-key>
+				<action-key>MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES</action-key>
 				<action-key>VIEW_COMMERCE_CATALOGS</action-key>
 			</guest-unsupported>
 		</permissions>
@@ -37,10 +41,8 @@
 				<action-key>MANAGE_CATALOG</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_IMAGES</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES</action-key>
 				<action-key>PERMISSIONS</action-key>
 				<action-key>VIEW_COMMERCE_PRODUCT_RULES</action-key>
 				<action-key>VIEW_PRICE</action-key>
@@ -59,10 +61,8 @@
 				<action-key>MANAGE_CATALOG</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_IMAGES</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES</action-key>
 				<action-key>PERMISSIONS</action-key>
 			</guest-unsupported>
 		</permissions>
