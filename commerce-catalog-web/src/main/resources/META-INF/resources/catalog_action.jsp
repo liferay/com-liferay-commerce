@@ -38,7 +38,7 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 		url="<%= commerceCatalogDisplayContext.getCatalogURL(commerceCatalog) %>"
 	/>
 
-	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.DELETE) %>">
+	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.DELETE) && !commerceCatalog.isSystem() %>">
 		<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
