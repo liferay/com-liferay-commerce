@@ -41,7 +41,7 @@
 		"clay",
 		"metal"
 	],
-	"license": "BSD",
+	"license": "BSD-3-Clause",
 	"main": "lib/MiniumProductGallery.js",
 	"name": "clay-badge",
 	"repository": "https://github.com/liferay/clay/tree/master/packages/clay-badge",

@@ -304,7 +304,7 @@ info:
         name: Commerce Team
     description: Liferay Commerce Admin Site Setting API
     license:
-        name: GNU Lesser General Public License 2.1
+        name: GNU Lesser General Public License 2.1 or later
         url: https://www.gnu.org/licenses/lgpl-2.1.html
     title: Liferay Commerce Admin Site Setting API
     version: v1.0

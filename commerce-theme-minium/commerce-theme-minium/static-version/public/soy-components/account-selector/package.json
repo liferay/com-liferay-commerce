@@ -40,7 +40,7 @@
 		"clay",
 		"metal"
 	],
-	"license": "BSD",
+	"license": "BSD-3-Clause",
 	"main": "lib/AccountSelector.js",
 	"name": "commerce-account-selector",
 	"scripts": {
