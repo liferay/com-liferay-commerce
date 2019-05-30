@@ -30,6 +30,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
@@ -198,8 +199,8 @@ public class CategoryCPFriendlyURLScreenNavigationEntry
 
 				titleMapAsXML =
 					_cpFriendlyURLEntryLocalService.getUrlTitleMapAsXML(
-						assetCategory.getGroupId(), classNameId, categoryId,
-						defaultLanguageId);
+						GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+						categoryId, defaultLanguageId);
 
 				CPDisplayLayout cpDisplayLayout =
 					_cpDisplayLayoutLocalService.fetchCPDisplayLayout(
