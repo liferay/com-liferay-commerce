@@ -78,6 +78,21 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
+
+		if (commerceCatalog != null) {
+			PortalPermissionUtil.check(
+				getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
+		}
+
+		return commerceCatalog;
+	}
+
+	@Override
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException {
 

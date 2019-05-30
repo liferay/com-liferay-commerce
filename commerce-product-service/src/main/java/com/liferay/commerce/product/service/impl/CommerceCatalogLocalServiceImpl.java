@@ -192,6 +192,19 @@ public class CommerceCatalogLocalServiceImpl
 	}
 
 	@Override
+	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId) {
+		Group group = groupPersistence.fetchByPrimaryKey(groupId);
+
+		if (group.getClassNameId() == classNameLocalService.getClassNameId(
+				CommerceCatalog.class)) {
+
+			return fetchCommerceCatalog(group.getClassPK());
+		}
+
+		return null;
+	}
+
+	@Override
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException {
 
