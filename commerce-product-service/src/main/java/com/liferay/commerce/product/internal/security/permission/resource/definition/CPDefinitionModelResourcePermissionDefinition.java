@@ -19,7 +19,6 @@ import com.liferay.commerce.product.internal.security.permission.resource.CPDefi
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionLogic;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -65,11 +64,8 @@ public class CPDefinitionModelResourcePermissionDefinition
 
 		modelResourcePermissionLogicConsumer.accept(
 			new CPDefinitionModelResourcePermissionLogic(
-				_portletResourcePermission, _configurationProvider));
+				_portletResourcePermission));
 	}
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;

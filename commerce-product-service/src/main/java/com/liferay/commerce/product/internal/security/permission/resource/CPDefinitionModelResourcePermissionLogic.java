@@ -17,7 +17,6 @@ package com.liferay.commerce.product.internal.security.permission.resource;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionLogic;
@@ -32,11 +31,9 @@ public class CPDefinitionModelResourcePermissionLogic
 	implements ModelResourcePermissionLogic<CPDefinition> {
 
 	public CPDefinitionModelResourcePermissionLogic(
-		PortletResourcePermission portletResourcePermission,
-		ConfigurationProvider configurationProvider) {
+		PortletResourcePermission portletResourcePermission) {
 
 		_portletResourcePermission = portletResourcePermission;
-		_configurationProvider = configurationProvider;
 	}
 
 	@Override
@@ -63,7 +60,6 @@ public class CPDefinitionModelResourcePermissionLogic
 		return true;
 	}
 
-	private final ConfigurationProvider _configurationProvider;
 	private final PortletResourcePermission _portletResourcePermission;
 
 }
