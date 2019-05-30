@@ -32,6 +32,7 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 
 <liferay-ui:error exception="<%= CommercePriceListCurrencyException.class %>" message="please-select-a-valid-store-currency" />
 <liferay-ui:error exception="<%= CommercePriceListParentPriceListGroupIdException.class %>" message="please-select-a-valid-parent-price-list-for-the-selected-catalog" />
+<liferay-ui:error exception="<%= NoSuchCatalogException.class %>" message="please-select-a-valid-catalog" />
 
 <aui:model-context bean="<%= commercePriceList %>" model="<%= CommercePriceList.class %>" />
 
@@ -112,23 +113,21 @@ if (parentCommercePriceList != null) {
 
 <aui:button name="setParentCommercePriceList" value="select" />
 
-<c:if test="<%= commerceCatalogs.size() > 1 %>">
-	<h5 class="text-default"><liferay-ui:message key="catalog" /></h5>
+<h5 class="text-default"><liferay-ui:message key="catalog" /></h5>
 
-	<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
+<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogGroupId" required="<%= true %>" showEmptyOption="<%= true %>">
 
-		<%
-		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-		%>
+	<%
+	for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+	%>
 
-			<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (commercePriceList == null) ? false : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogId() %>" />
+		<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (commercePriceList == null) ? (commerceCatalogs.size() == 1) : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogGroupId() %>" />
 
-		<%
-		}
-		%>
+	<%
+	}
+	%>
 
-	</aui:select>
-</c:if>
+</aui:select>
 
 <h5 class="text-default"><liferay-ui:message key="account-groups" /></h5>
 
