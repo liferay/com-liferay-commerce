@@ -71,7 +71,7 @@ pageContext.setAttribute("searchURL", searchURL);
 		</liferay-frontend:management-bar-action-buttons>
 	</liferay-frontend:management-bar>
 
-	<div class="container form-group-autofit <%= showFilter ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />filterSettings">
+	<div class="container form-group-autofit panel p-2 <%= showFilter ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />filterSettings">
 		<div class="form-group-item">
 			<label for="<portlet:namespace /><%= CommerceOrderDisplayTerms.START_CREATE_DATE %>">
 				<liferay-ui:message key="from" />
@@ -164,7 +164,7 @@ pageContext.setAttribute("searchURL", searchURL);
 			</div>
 		</c:if>
 
-		<div class="form-group-item">
+		<div class="form-group-item mt-auto">
 			<aui:button cssClass="btn-outline-borderless btn-outline-primary" type="submit" value="apply-filters" />
 		</div>
 	</div>
