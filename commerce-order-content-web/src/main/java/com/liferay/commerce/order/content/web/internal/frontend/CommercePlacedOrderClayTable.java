@@ -26,6 +26,7 @@ import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.Order;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -104,9 +105,12 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
+		long channelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		return _commerceOrderService.getPlacedCommerceOrdersCount(
-			themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
-			filter.getKeywords());
+			channelGroupId, orderFilter.getAccountId(), filter.getKeywords());
 	}
 
 	@Override
@@ -151,9 +155,13 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
+		long channelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPlacedCommerceOrders(
-				themeDisplay.getScopeGroupId(), orderFilter.getAccountId(),
+				channelGroupId, orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 
@@ -168,6 +176,9 @@ public class CommercePlacedOrderClayTable
 
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
