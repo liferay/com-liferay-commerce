@@ -67,6 +67,18 @@ if (commerceChannel != null) {
 
 				</aui:select>
 
+				<%
+				CommerceChannelTypeJSPContributor commerceChannelTypeJSPContributor = commerceChannelDisplayContext.getCommerceChannelTypeJSPContributor(type);
+				%>
+
+				<c:if test="<%= commerceChannelTypeJSPContributor != null %>">
+
+					<%
+					commerceChannelTypeJSPContributor.render(commerceChannelId, request, response);
+					%>
+
+				</c:if>
+
 				<aui:select label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
 
 					<%
@@ -80,18 +92,6 @@ if (commerceChannel != null) {
 					%>
 
 				</aui:select>
-
-				<%
-				CommerceChannelTypeJSPContributor commerceChannelTypeJSPContributor = commerceChannelDisplayContext.getCommerceChannelTypeJSPContributor(type);
-				%>
-
-				<c:if test="<%= commerceChannelTypeJSPContributor != null %>">
-
-					<%
-					commerceChannelTypeJSPContributor.render(commerceChannelId, request, response);
-					%>
-
-				</c:if>
 
 				<liferay-ui:error-marker
 					key="<%= WebKeys.ERROR_SECTION %>"
