@@ -22,6 +22,53 @@
 	<import class="com.liferay.commerce.product.model.CPRuleUserSegmentRel" />
 	<import class="com.liferay.commerce.product.model.CPSpecificationOption" />
 	<import class="com.liferay.commerce.product.model.CPTaxCategory" />
+<<<<<<< HEAD
+=======
+	<class name="com.liferay.commerce.product.model.impl.CommerceCatalogImpl" table="CommerceCatalog">
+		<id name="commerceCatalogId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="externalReferenceCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="commerceCurrencyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="catalogDefaultLanguageId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="system" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.commerce.product.model.impl.CommerceChannelImpl" table="CommerceChannel">
+		<id name="commerceChannelId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="externalReferenceCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="siteGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="type_" name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="commerceCurrencyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.commerce.product.model.impl.CommerceChannelRelImpl" table="CommerceChannelRel">
+		<id name="commerceChannelRelId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceChannelId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+>>>>>>> COMMERCE-1309 Refactor parameters to match constructor
 	<class name="com.liferay.commerce.product.model.impl.CPAttachmentFileEntryImpl" table="CPAttachmentFileEntry">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="CPAttachmentFileEntryId" type="long">
 			<generator class="assigned" />

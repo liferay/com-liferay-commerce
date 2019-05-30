@@ -72,9 +72,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem);
 
-	public CommerceInventoryWarehouseItem addCommerceWarehouseItem(
-		long commerceWarehouseId, String sku, int quantity, long userId)
-		throws PortalException;
+(??)	@Indexable(type = IndexableType.REINDEX)
+(??)	public CommerceChannel addCommerceChannel(String name, String type,
+(??)		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode,
+(??)		String externalReferenceCode, ServiceContext serviceContext)
+(??)		throws PortalException;
 
 	public CommerceInventoryWarehouseItem addStockQuantity(
 		long commerceWarehouseItemId, int quantity)
@@ -278,6 +280,7 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem);
 
-	public CommerceInventoryWarehouseItem updateCommerceWarehouseItem(
-		long commerceWarehouseItemId, int quantity) throws PortalException;
+(??)	public CommerceChannel updateCommerceChannel(long commerceChannelId,
+(??)		String name, String type, UnicodeProperties typeSettingsProperties,
+(??)		String commerceCurrencyCode) throws PortalException;
 }

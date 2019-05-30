@@ -288,44 +288,6 @@ create table CPOptionValue (
 	lastPublishDate DATE null
 );
 
-create table CPRule (
-	CPRuleId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	active_ BOOLEAN,
-	type_ VARCHAR(75) null,
-	typeSettings TEXT null
-);
-
-create table CPRuleAssetCategoryRel (
-	CPRuleAssetCategoryRelId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	CPRuleId LONG,
-	assetCategoryId LONG
-);
-
-create table CPRuleUserSegmentRel (
-	CPRuleUserSegmentRelId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	CPRuleId LONG,
-	commerceUserSegmentEntryId LONG
-);
-
 create table CPSpecificationOption (
 	uuid_ VARCHAR(75) null,
 	CPSpecificationOptionId LONG not null primary key,
@@ -345,7 +307,6 @@ create table CPSpecificationOption (
 
 create table CPTaxCategory (
 	CPTaxCategoryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -367,4 +328,45 @@ create table CProduct (
 	modifiedDate DATE null,
 	publishedCPDefinitionId LONG,
 	latestVersion INTEGER
+);
+
+create table CommerceCatalog (
+	externalReferenceCode VARCHAR(75) null,
+	commerceCatalogId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name STRING null,
+	commerceCurrencyCode VARCHAR(75) null,
+	catalogDefaultLanguageId VARCHAR(75) null,
+	system BOOLEAN
+);
+
+create table CommerceChannel (
+	externalReferenceCode VARCHAR(75) null,
+	commerceChannelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	siteGroupId LONG,
+	name VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	typeSettings VARCHAR(75) null,
+	commerceCurrencyCode VARCHAR(75) null
+);
+
+create table CommerceChannelRel (
+	commerceChannelRelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	commerceChannelId LONG
 );

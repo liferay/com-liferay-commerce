@@ -43,11 +43,12 @@ public class CPOptionValueSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCPOptionId(model.getCPOptionId());
+(??)
 		soapModel.setName(model.getName());
-		soapModel.setPriority(model.getPriority());
-		soapModel.setKey(model.getKey());
-		soapModel.setLastPublishDate(model.getLastPublishDate());
+(??)		soapModel.setSiteGroupId(model.getSiteGroupId());
+(??)		soapModel.setType(model.getType());
+(??)		soapModel.setTypeSettings(model.getTypeSettings());
+(??)		soapModel.setCommerceCurrencyCode(model.getCommerceCurrencyCode());
 
 		return soapModel;
 	}
@@ -173,12 +174,10 @@ public class CPOptionValueSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCPOptionId() {
-		return _CPOptionId;
+(??)
 	}
 
-	public void setCPOptionId(long CPOptionId) {
-		_CPOptionId = CPOptionId;
+(??)
 	}
 
 	public String getName() {
@@ -189,14 +188,14 @@ public class CPOptionValueSoap implements Serializable {
 		_name = name;
 	}
 
-	public double getPriority() {
-		return _priority;
-	}
-
-	public void setPriority(double priority) {
-		_priority = priority;
-	}
-
+(??)	public long getSiteGroupId() {
+(??)		return _siteGroupId;
+(??)	}
+(??)
+(??)	public void setSiteGroupId(long siteGroupId) {
+(??)		_siteGroupId = siteGroupId;
+(??)	}
+(??)
 	public String getKey() {
 		return _key;
 	}
@@ -222,10 +221,10 @@ public class CPOptionValueSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _CPOptionId;
+(??)
 	private String _name;
-	private double _priority;
-	private String _key;
-	private Date _lastPublishDate;
-
+(??)	private long _siteGroupId;
+(??)	private String _type;
+(??)	private String _typeSettings;
+(??)	private String _commerceCurrencyCode;
 }

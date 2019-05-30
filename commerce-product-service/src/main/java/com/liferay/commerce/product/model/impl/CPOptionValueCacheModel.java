@@ -85,16 +85,17 @@ public class CPOptionValueCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", CPOptionId=");
-		sb.append(CPOptionId);
+(??)
 		sb.append(", name=");
 		sb.append(name);
-		sb.append(", priority=");
-		sb.append(priority);
-		sb.append(", key=");
-		sb.append(key);
-		sb.append(", lastPublishDate=");
-		sb.append(lastPublishDate);
+(??)		sb.append(", siteGroupId=");
+(??)		sb.append(siteGroupId);
+(??)		sb.append(", type=");
+(??)		sb.append(type);
+(??)		sb.append(", typeSettings=");
+(??)		sb.append(typeSettings);
+(??)		sb.append(", commerceCurrencyCode=");
+(??)		sb.append(commerceCurrencyCode);
 		sb.append("}");
 
 		return sb.toString();
@@ -144,7 +145,7 @@ public class CPOptionValueCacheModel
 			cpOptionValueImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		cpOptionValueImpl.setCPOptionId(CPOptionId);
+(??)
 
 		if (name == null) {
 			cpOptionValueImpl.setName("");
@@ -153,8 +154,8 @@ public class CPOptionValueCacheModel
 			cpOptionValueImpl.setName(name);
 		}
 
-		cpOptionValueImpl.setPriority(priority);
-
+(??)		commerceChannelImpl.setSiteGroupId(siteGroupId);
+(??)
 		if (key == null) {
 			cpOptionValueImpl.setKey("");
 		}
@@ -191,11 +192,11 @@ public class CPOptionValueCacheModel
 		modifiedDate = objectInput.readLong();
 
 		CPOptionId = objectInput.readLong();
-		name = objectInput.readUTF();
 
-		priority = objectInput.readDouble();
-		key = objectInput.readUTF();
-		lastPublishDate = objectInput.readLong();
+(??)		siteGroupId = objectInput.readLong();
+(??)		type = objectInput.readUTF();
+(??)		typeSettings = objectInput.readUTF();
+(??)		commerceCurrencyCode = objectInput.readUTF();
 	}
 
 	@Override
@@ -232,7 +233,7 @@ public class CPOptionValueCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(CPOptionId);
+(??)
 
 		if (name == null) {
 			objectOutput.writeUTF("");
@@ -241,8 +242,8 @@ public class CPOptionValueCacheModel
 			objectOutput.writeUTF(name);
 		}
 
-		objectOutput.writeDouble(priority);
-
+(??)		objectOutput.writeLong(siteGroupId);
+(??)
 		if (key == null) {
 			objectOutput.writeUTF("");
 		}
@@ -262,10 +263,10 @@ public class CPOptionValueCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long CPOptionId;
+(??)
 	public String name;
-	public double priority;
-	public String key;
-	public long lastPublishDate;
-
+(??)	public long siteGroupId;
+(??)	public String type;
+(??)	public String typeSettings;
+(??)	public String commerceCurrencyCode;
 }
