@@ -24,8 +24,7 @@ import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGro
 import com.liferay.commerce.price.list.service.CommercePriceListAccountRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -38,12 +37,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -121,7 +118,8 @@ public class EditCommercePriceListMVCActionCommand
 			}
 			else if (e instanceof CommercePriceListCurrencyException ||
 					 e instanceof
-						 CommercePriceListParentPriceListGroupIdException) {
+						 CommercePriceListParentPriceListGroupIdException ||
+					 e instanceof NoSuchCatalogException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
@@ -165,10 +163,10 @@ public class EditCommercePriceListMVCActionCommand
 
 		long parentCommercePriceListId = ParamUtil.getLong(
 			actionRequest, "parentCommercePriceListId");
-
 		long commerceCurrencyId = ParamUtil.getLong(
 			actionRequest, "commerceCurrencyId");
-
+		long commerceCatalogGroupId = ParamUtil.getLong(
+			actionRequest, "commerceCatalogGroupId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
 
@@ -215,33 +213,13 @@ public class EditCommercePriceListMVCActionCommand
 		CommercePriceList commercePriceList;
 
 		if (commercePriceListId <= 0) {
-
-			// Commerce catalog
-
-			long commerceCatalogId = ParamUtil.getLong(
-				actionRequest, "commerceCatalogId");
-
-			CommerceCatalog commerceCatalog =
-				_commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
-
-			if (commerceCatalog == null) {
-				List<CommerceCatalog> commerceCatalogs =
-					_commerceCatalogService.getCommerceCatalogs(
-						_portal.getCompanyId(actionRequest), true);
-
-				commerceCatalog = commerceCatalogs.get(0);
-			}
-
-			// Commerce price list
-
 			commercePriceList = _commercePriceListService.addCommercePriceList(
-				commerceCatalog.getCommerceCatalogGroupId(),
-				serviceContext.getUserId(), commerceCurrencyId,
-				parentCommercePriceListId, name, priority, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, serviceContext);
+				commerceCatalogGroupId, serviceContext.getUserId(),
+				commerceCurrencyId, parentCommercePriceListId, name, priority,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, serviceContext);
 		}
 		else {
 			commercePriceList =
@@ -351,9 +329,6 @@ public class EditCommercePriceListMVCActionCommand
 	}
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
 	private CommercePriceListAccountRelService
 		_commercePriceListAccountRelService;
 
@@ -363,8 +338,5 @@ public class EditCommercePriceListMVCActionCommand
 
 	@Reference
 	private CommercePriceListService _commercePriceListService;
-
-	@Reference
-	private Portal _portal;
 
 }

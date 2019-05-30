@@ -56,6 +56,7 @@ page import="com.liferay.commerce.price.list.web.internal.servlet.taglib.ui.Comm
 page import="com.liferay.commerce.product.constants.CPPortletKeys" %><%@
 page import="com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCPInstanceException" %><%@
+page import="com.liferay.commerce.product.exception.NoSuchCatalogException" %><%@
 page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.product.model.CommerceCatalog" %><%@
