@@ -29,12 +29,11 @@ import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
 import com.liferay.commerce.product.exception.CPFriendlyURLEntryException;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
+import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstanceConstants;
-import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.TrashedModel;
@@ -209,7 +208,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 					 t instanceof CPDefinitionMetaDescriptionException ||
 					 t instanceof CPDefinitionMetaKeywordsException ||
 					 t instanceof CPDefinitionMetaTitleException ||
-					 t instanceof CPFriendlyURLEntryException) {
+					 t instanceof CPFriendlyURLEntryException ||
+					 t instanceof NoSuchCatalogException) {
 
 				SessionErrors.add(actionRequest, t.getClass(), t);
 
@@ -372,6 +372,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
+		long commerceCatalogGroupId = ParamUtil.getLong(
+			actionRequest, "commerceCatalogGroupId");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "nameMapAsXML");
 		Map<Locale, String> shortDescriptionMap =
@@ -438,31 +440,14 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 		if (cpDefinitionId <= 0) {
 
-			// Commerce catalog
-
-			long commerceCatalogId = ParamUtil.getLong(
-				actionRequest, "commerceCatalogId");
-
-			CommerceCatalog commerceCatalog =
-				_commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
-
-			if (commerceCatalog == null) {
-				List<CommerceCatalog> commerceCatalogs =
-					_commerceCatalogService.getCommerceCatalogs(
-						_portal.getCompanyId(actionRequest), true);
-
-				commerceCatalog = commerceCatalogs.get(0);
-			}
-
 			// Add commerce product definition
 
 			cpDefinition = _cpDefinitionService.addCPDefinition(
-				commerceCatalog.getCommerceCatalogGroupId(),
-				serviceContext.getUserId(), nameMap, shortDescriptionMap,
-				descriptionMap, urlTitleMap, metaTitleMap, metaDescriptionMap,
-				metaKeywordsMap, productTypeName, true, true, false, false, 0D,
-				0D, 0D, 0D, 0D, 0L, false, false, null, published,
-				displayDateMonth, displayDateDay, displayDateYear,
+				commerceCatalogGroupId, serviceContext.getUserId(), nameMap,
+				shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
+				metaDescriptionMap, metaKeywordsMap, productTypeName, true,
+				true, false, false, 0D, 0D, 0D, 0D, 0D, 0L, false, false, null,
+				published, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire,
@@ -592,9 +577,6 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
-
-	@Reference
-	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommerceChannelRelService _commerceChannelRelService;
