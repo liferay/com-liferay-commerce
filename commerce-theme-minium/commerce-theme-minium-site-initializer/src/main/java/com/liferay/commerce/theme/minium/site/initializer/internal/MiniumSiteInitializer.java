@@ -50,7 +50,6 @@ import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
@@ -324,19 +323,11 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		Group group = serviceContext.getScopeGroup();
 
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				group.getName(serviceContext.getLanguageId()),
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCatalog.getCommerceCurrencyCode(), StringPool.BLANK,
-				serviceContext);
-
-		_commerceChannelRelLocalService.addCommerceChannelRel(
-			CommerceCatalog.class.getName(),
-			commerceCatalog.getCommerceCatalogId(),
-			commerceChannel.getCommerceChannelId(), serviceContext);
-
-		return commerceChannel;
+		return _commerceChannelLocalService.addCommerceChannel(
+			group.getGroupId(), group.getName(serviceContext.getLanguageId()),
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+			commerceCatalog.getCommerceCurrencyCode(), StringPool.BLANK,
+			serviceContext);
 	}
 
 	protected void createRoles(ServiceContext serviceContext) throws Exception {
@@ -552,10 +543,13 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_log.info("Importing asset categories...");
 		}
 
+		Group group = serviceContext.getScopeGroup();
+
 		JSONArray jsonArray = _getJSONArray("categories.json");
 
 		_assetCategoriesImporter.importAssetCategories(
-			jsonArray, _COMMERCE_VOCABULARY,
+			jsonArray,
+			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
@@ -713,6 +707,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		Group group = serviceContext.getScopeGroup();
+
 		JSONArray jsonArray = _getJSONArray("products.json");
 
 		long[] commerceInventoryWarehouseIds = ListUtil.toLongArray(
@@ -721,8 +717,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		return _cpDefinitionsImporter.importCPDefinitions(
-			jsonArray, _COMMERCE_VOCABULARY, catalogGroupId, commerceChannelId,
-			commerceInventoryWarehouseIds,
+			jsonArray,
+			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
+			catalogGroupId, commerceChannelId, commerceInventoryWarehouseIds,
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
@@ -931,7 +928,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 	}
 
-	private static final String _COMMERCE_VOCABULARY = "Commerce";
+	private static final String _COMMERCE_VOCABULARY = "Commerce_";
 
 	private static final String _MINIUM_THEME_ID = "minium_WAR_miniumtheme";
 
@@ -958,9 +955,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
-
-	@Reference
-	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
