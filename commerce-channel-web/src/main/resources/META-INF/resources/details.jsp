@@ -33,6 +33,9 @@ boolean isViewOnly = false;
 if (commerceChannel != null) {
 	isViewOnly = !commerceChannelDisplayContext.hasPermission(commerceChannelId, ActionKeys.UPDATE);
 }
+
+portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(backURL);
 %>
 
 <portlet:actionURL name="editCommerceChannel" var="editCommerceChannelActionURL" />
@@ -126,6 +129,7 @@ if (commerceChannel != null) {
 
 			var name = A.one('#<portlet:namespace />name').val();
 			var type = A.one('#<portlet:namespace />type').val();
+			var commerceCurrencyCode = A.one('#<portlet:namespace />commerceCurrencyCode').val();
 
 			var portletURL = new Liferay.PortletURL.createURL('<%= currentURLObj %>');
 
