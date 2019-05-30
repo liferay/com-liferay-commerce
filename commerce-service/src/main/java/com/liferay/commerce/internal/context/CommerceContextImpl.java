@@ -105,7 +105,7 @@ public class CommerceContextImpl implements CommerceContext {
 
 		_commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_groupId);
+				_companyId);
 
 		return _commerceCurrency;
 	}
@@ -133,7 +133,7 @@ public class CommerceContextImpl implements CommerceContext {
 
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				new long[] {getCommerceCatalogGroupId()}, 0L,
+				new long[] {getCommerceCatalogGroupId()}, _companyId,
 				commerceAccount.getCommerceAccountId(),
 				getCommerceAccountGroupIds());
 
