@@ -276,12 +276,12 @@ public class CommerceOrderContentDisplayContext {
 
 		if (isOpenOrderContentPortlet()) {
 			_commerceOrders = _commerceOrderService.getPendingCommerceOrders(
-				_cpRequestHelper.getScopeGroupId(), getCommerceAccountId(),
+				_cpRequestHelper.getChannelGroupId(), getCommerceAccountId(),
 				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		else {
 			_commerceOrders = _commerceOrderService.getPlacedCommerceOrders(
-				_cpRequestHelper.getScopeGroupId(), getCommerceAccountId(),
+				_cpRequestHelper.getChannelGroupId(), getCommerceAccountId(),
 				keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 
