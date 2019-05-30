@@ -607,25 +607,24 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-			long companyId, long groupId, long cpDefinitionId, String keywords,
-			int status, int start, int end, Sort sort)
+			long companyId, long cpDefinitionId, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, cpDefinitionId, keywords, status, start, end,
-			sort);
+			companyId, cpDefinitionId, keywords, status, start, end, sort);
 
 		return searchCPInstances(searchContext);
 	}
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, keywords, status, start, end, sort);
 
 		return searchCPInstances(searchContext);
 	}
@@ -1019,8 +1018,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, long cpDefinitionId, String keywords,
-		int status, int start, int end, Sort sort) {
+		long companyId, long cpDefinitionId, String keywords, int status,
+		int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -1044,7 +1043,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -1063,8 +1061,8 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int status, int start,
-		int end, Sort sort) {
+		long companyId, String keywords, int status, int start, int end,
+		Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -1083,7 +1081,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
