@@ -214,34 +214,42 @@ public class CommerceCurrencyLocalServiceImpl
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			String code = jsonObject.getString("code");
-			String name = jsonObject.getString("name");
-			boolean primary = jsonObject.getBoolean("primary");
-			double priority = jsonObject.getDouble("priority");
-			String symbol = jsonObject.getString("symbol");
 
-			RoundingTypeConfiguration roundingTypeConfiguration =
-				_configurationProvider.getConfiguration(
-					RoundingTypeConfiguration.class,
-					new SystemSettingsLocator(
-						RoundingTypeConstants.SERVICE_NAME));
+			CommerceCurrency commerceCurrency =
+				commerceCurrencyPersistence.fetchByC_C(
+					serviceContext.getCompanyId(), code);
 
-			Map<Locale, String> nameMap = new HashMap<>();
-			Map<Locale, String> formatPatternMap = new HashMap<>();
+			if (commerceCurrency == null) {
+				String name = jsonObject.getString("name");
+				boolean primary = jsonObject.getBoolean("primary");
+				double priority = jsonObject.getDouble("priority");
+				String symbol = jsonObject.getString("symbol");
 
-			nameMap.put(serviceContext.getLocale(), name);
-			formatPatternMap.put(
-				serviceContext.getLocale(),
-				symbol + CommerceCurrencyConstants.DEFAULT_FORMAT_PATTERN);
+				RoundingTypeConfiguration roundingTypeConfiguration =
+					_configurationProvider.getConfiguration(
+						RoundingTypeConfiguration.class,
+						new SystemSettingsLocator(
+							RoundingTypeConstants.SERVICE_NAME));
 
-			RoundingMode roundingMode =
-				roundingTypeConfiguration.roundingMode();
+				Map<Locale, String> nameMap = new HashMap<>();
+				Map<Locale, String> formatPatternMap = new HashMap<>();
 
-			commerceCurrencyLocalService.addCommerceCurrency(
-				serviceContext.getUserId(), code, nameMap, BigDecimal.ONE,
-				formatPatternMap,
-				roundingTypeConfiguration.maximumFractionDigits(),
-				roundingTypeConfiguration.minimumFractionDigits(),
-				roundingMode.name(), primary, priority, true, serviceContext);
+				nameMap.put(serviceContext.getLocale(), name);
+				formatPatternMap.put(
+					serviceContext.getLocale(),
+					symbol + CommerceCurrencyConstants.DEFAULT_FORMAT_PATTERN);
+
+				RoundingMode roundingMode =
+					roundingTypeConfiguration.roundingMode();
+
+				commerceCurrencyLocalService.addCommerceCurrency(
+					serviceContext.getUserId(), code, nameMap, BigDecimal.ONE,
+					formatPatternMap,
+					roundingTypeConfiguration.maximumFractionDigits(),
+					roundingTypeConfiguration.minimumFractionDigits(),
+					roundingMode.name(), primary, priority, true,
+					serviceContext);
+			}
 		}
 
 		for (String exchangeRateProviderKey :

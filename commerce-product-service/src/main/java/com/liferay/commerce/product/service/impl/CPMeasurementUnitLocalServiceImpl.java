@@ -281,8 +281,14 @@ public class CPMeasurementUnitLocalServiceImpl
 
 		nameMap.put(serviceContext.getLocale(), name);
 
-		cpMeasurementUnitLocalService.addCPMeasurementUnit(
-			nameMap, key, rate, primary, priority, type, serviceContext);
+		CPMeasurementUnit cpMeasurementUnit =
+			cpMeasurementUnitPersistence.fetchByC_K_T(
+				serviceContext.getCompanyId(), key, type);
+
+		if (cpMeasurementUnit == null) {
+			cpMeasurementUnitLocalService.addCPMeasurementUnit(
+				nameMap, key, rate, primary, priority, type, serviceContext);
+		}
 	}
 
 }
