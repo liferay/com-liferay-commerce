@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.initializer.breccia.internal;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.initializer.util.AssetCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
@@ -24,7 +25,13 @@ import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -160,6 +167,41 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
+	private CommerceCatalog _createCatalog(ServiceContext serviceContext)
+		throws Exception {
+
+		Group group = serviceContext.getScopeGroup();
+
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				serviceContext.getCompanyId());
+
+		return _commerceCatalogLocalService.addCommerceCatalog(
+			group.getNameMap(), commerceCurrency.getCode(),
+			serviceContext.getLanguageId(), StringPool.BLANK, serviceContext);
+	}
+
+	private CommerceChannel _createChannel(
+			CommerceCatalog commerceCatalog, ServiceContext serviceContext)
+		throws Exception {
+
+		Group group = serviceContext.getScopeGroup();
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.addCommerceChannel(
+				group.getName(serviceContext.getLanguageId()),
+				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+				commerceCatalog.getCommerceCurrencyCode(), StringPool.BLANK,
+				serviceContext);
+
+		_commerceChannelRelLocalService.addCommerceChannelRel(
+			CommerceCatalog.class.getName(),
+			commerceCatalog.getCommerceCatalogId(),
+			commerceChannel.getCommerceChannelId(), serviceContext);
+
+		return commerceChannel;
+	}
+
 	private String _getJSON(String name) throws IOException {
 		return StringUtil.read(
 			BrecciaSiteInitializer.class.getClassLoader(),
@@ -254,7 +296,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	}
 
 	private void _importCPDefinitions(
-			List<CommerceInventoryWarehouse> commerceWarehouses,
+			long catalogGroupId, long commerceChannelId,
+			List<CommerceInventoryWarehouse> commerceInventoryWarehouses,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -264,13 +307,14 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("products.json");
 
-		long[] commerceWarehouseIds = ListUtil.toLongArray(
-			commerceWarehouses,
+		long[] commerceInventoryWarehouseIds = ListUtil.toLongArray(
+			commerceInventoryWarehouses,
 			CommerceInventoryWarehouse.
 				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		_cpDefinitionsImporter.importCPDefinitions(
-			jsonArray, _COMMERCE_VOCABULARY, commerceWarehouseIds,
+			jsonArray, _COMMERCE_VOCABULARY, catalogGroupId, commerceChannelId,
+			commerceInventoryWarehouseIds,
 			BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
 			serviceContext.getUserId());
@@ -579,10 +623,19 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		_importCPOptions(serviceContext);
 		_importCPSpecificationOptions(serviceContext);
 
-		List<CommerceInventoryWarehouse> commerceWarehouses =
+		CommerceCatalog commerceCatalog = _createCatalog(serviceContext);
+
+		long catalogGroupId = commerceCatalog.getCommerceCatalogGroupId();
+
+		CommerceChannel commerceChannel = _createChannel(
+			commerceCatalog, serviceContext);
+
+		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
 			_importCommerceWarehouses(serviceContext);
 
-		_importCPDefinitions(commerceWarehouses, serviceContext);
+		_importCPDefinitions(
+			catalogGroupId, commerceChannel.getCommerceChannelId(),
+			commerceInventoryWarehouses, serviceContext);
 
 		_importJournalArticles(serviceContext);
 		_importPortletSettings(serviceContext);
@@ -675,6 +728,15 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private AssetCategoriesImporter _assetCategoriesImporter;
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
