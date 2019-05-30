@@ -25,6 +25,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -368,6 +369,10 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			return commerceOrder;
 		}
 
+		long channelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		if (commerceAccountId != CommerceAccountConstants.GUEST_ACCOUNT_ID) {
 			HttpServletRequest httpServletRequest = themeDisplay.getRequest();
 
@@ -377,11 +382,11 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				_getCookieName(commerceAccountId));
 
 			commerceOrder = _commerceOrderService.fetchCommerceOrder(
-				commerceOrderUuid, themeDisplay.getScopeGroupId());
+				commerceOrderUuid, channelGroupId);
 
 			if (commerceOrder == null) {
 				commerceOrder = _commerceOrderService.fetchCommerceOrder(
-					commerceAccountId, themeDisplay.getScopeGroupId(),
+					commerceAccountId, channelGroupId,
 					CommerceOrderConstants.ORDER_STATUS_OPEN);
 			}
 
@@ -402,7 +407,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		if (Validator.isNotNull(commerceOrderUuid)) {
 			commerceOrder =
 				_commerceOrderLocalService.fetchCommerceOrderByUuidAndGroupId(
-					commerceOrderUuid, themeDisplay.getScopeGroupId());
+					commerceOrderUuid, channelGroupId);
 
 			if (commerceOrder != null) {
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
@@ -497,6 +502,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 	private static final ThreadLocal<CommerceOrder>
 		_commerceOrderUuidThreadLocal = new CentralizedThreadLocal<>(
 			CommerceOrderHttpHelperImpl.class.getName());
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
