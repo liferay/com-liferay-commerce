@@ -62,6 +62,7 @@
 
 		<!-- Other fields -->
 
+		<column name="siteGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="type" type="String" />
 		<column name="typeSettings" type="String" />
@@ -77,6 +78,9 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="SiteGroupId" return-type="CommerceChannel">
+			<finder-column name="siteGroupId" />
 		</finder>
 
 		<!-- References -->
