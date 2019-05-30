@@ -202,35 +202,27 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-			long companyId, long groupId, long cpDefinitionId, String keywords,
-			int status, int start, int end, Sort sort)
+			long companyId, long cpDefinitionId, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException {
 
 		if (cpDefinitionId > 0) {
 			_cpDefinitionModelResourcePermission.check(
 				getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 		}
-		else {
-			_portletResourcePermission.check(
-				getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-		}
 
 		return cpInstanceLocalService.searchCPDefinitionInstances(
-			companyId, groupId, cpDefinitionId, keywords, status, start, end,
-			sort);
+			companyId, cpDefinitionId, keywords, status, start, end, sort);
 	}
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
 		return cpInstanceLocalService.searchCPInstances(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, keywords, status, start, end, sort);
 	}
 
 	@Override
