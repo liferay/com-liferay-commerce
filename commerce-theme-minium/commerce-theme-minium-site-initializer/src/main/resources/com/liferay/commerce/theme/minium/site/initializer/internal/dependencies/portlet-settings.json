@@ -11,6 +11,14 @@
 		}
 	},
 	{
+		"instanceId": "minium",
+		"layoutFriendlyURL": "/catalog",
+		"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet",
+		"portletPreferences": {
+			"searchScope": "everything"
+		}
+	},
+	{
 		"instanceId": "catalog",
 		"layoutFriendlyURL": "/catalog",
 		"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet",
