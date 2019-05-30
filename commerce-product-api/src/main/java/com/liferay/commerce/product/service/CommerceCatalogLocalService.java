@@ -201,6 +201,9 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId);
+
 	/**
 	* Returns the commerce catalog with the matching external reference code and company.
 	*

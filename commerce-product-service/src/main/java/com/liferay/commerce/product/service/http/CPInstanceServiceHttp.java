@@ -422,8 +422,8 @@ public class CPInstanceServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPDefinitionInstances(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		long cpDefinitionId, String keywords, int status, int start, int end,
+		HttpPrincipal httpPrincipal, long companyId, long cpDefinitionId,
+		String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -432,8 +432,8 @@ public class CPInstanceServiceHttp {
 					_searchCPDefinitionInstancesParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, cpDefinitionId, keywords, status,
-					start, end, sort);
+					companyId, cpDefinitionId, keywords, status, start, end,
+					sort);
 
 			Object returnObj = null;
 
@@ -458,8 +458,8 @@ public class CPInstanceServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
-		HttpPrincipal httpPrincipal, long companyId, long groupId,
-		String keywords, int status, int start, int end,
+		HttpPrincipal httpPrincipal, long companyId, String keywords,
+		int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -467,7 +467,7 @@ public class CPInstanceServiceHttp {
 					"searchCPInstances", _searchCPInstancesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, keywords, status, start, end, sort);
+					companyId, keywords, status, start, end, sort);
 
 			Object returnObj = null;
 
@@ -732,12 +732,12 @@ public class CPInstanceServiceHttp {
 		};
 	private static final Class<?>[] _searchCPDefinitionInstancesParameterTypes11 =
 		new Class[] {
-			long.class, long.class, long.class, String.class, int.class,
-			int.class, int.class, com.liferay.portal.kernel.search.Sort.class
-		};
-	private static final Class<?>[] _searchCPInstancesParameterTypes12 = new Class[] {
 			long.class, long.class, String.class, int.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
+		};
+	private static final Class<?>[] _searchCPInstancesParameterTypes12 = new Class[] {
+			long.class, String.class, int.class, int.class, int.class,
+			com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[] _updateCPInstanceParameterTypes13 = new Class[] {
 			long.class, String.class, String.class, String.class, boolean.class,

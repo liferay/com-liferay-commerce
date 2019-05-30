@@ -225,6 +225,12 @@ public class CommerceCatalogLocalServiceWrapper
 		return _commerceCatalogLocalService.fetchCommerceCatalog(commerceCatalogId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalogByGroupId(
+		long groupId) {
+		return _commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
+	}
+
 	/**
 	* Returns the commerce catalog with the matching external reference code and company.
 	*

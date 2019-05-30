@@ -65,6 +65,12 @@ public class CommerceCatalogServiceUtil {
 		return getService().fetchCommerceCatalog(commerceCatalogId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalogByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().fetchCommerceCatalogByGroupId(groupId);
+	}
+
 	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
 		long commerceCatalogId)
 		throws com.liferay.portal.kernel.exception.PortalException {
