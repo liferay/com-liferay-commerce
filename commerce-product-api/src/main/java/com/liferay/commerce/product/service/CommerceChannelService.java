@@ -57,10 +57,10 @@ public interface CommerceChannelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceChannelServiceUtil} to access the commerce channel remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceChannel addCommerceChannel(String name, String type,
-		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode,
-		String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException;
+	public CommerceChannel addCommerceChannel(long siteGroupId, String name,
+		String type, UnicodeProperties typeSettingsProperties,
+		String commerceCurrencyCode, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceChannel deleteCommerceChannel(long commerceChannelId)
 		throws PortalException;
@@ -102,6 +102,7 @@ public interface CommerceChannelService extends BaseService {
 		throws PortalException;
 
 	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String type, UnicodeProperties typeSettingsProperties,
-		String commerceCurrencyCode) throws PortalException;
+		long siteGroupId, String name, String type,
+		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode)
+		throws PortalException;
 }

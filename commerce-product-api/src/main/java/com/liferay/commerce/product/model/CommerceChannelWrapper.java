@@ -65,8 +65,8 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
 		attributes.put("siteGroupId", getSiteGroupId());
+		attributes.put("name", getName());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
 		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
@@ -119,16 +119,16 @@ public class CommerceChannelWrapper implements CommerceChannel,
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
-
-		if (name != null) {
-			setName(name);
-		}
-
 		Long siteGroupId = (Long)attributes.get("siteGroupId");
 
 		if (siteGroupId != null) {
 			setSiteGroupId(siteGroupId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
 		}
 
 		String type = (String)attributes.get("type");
