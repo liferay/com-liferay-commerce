@@ -98,6 +98,12 @@ public class CPDefinitionsDisplayContext
 		_portletResourcePermission = portletResourcePermission;
 	}
 
+	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId)
+		throws PortalException {
+
+		return _commerceCatalogService.fetchCommerceCatalogByGroupId(groupId);
+	}
+
 	public String getCategorySelectorURL(String eventName) throws Exception {
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			httpServletRequest, AssetCategory.class.getName(),
