@@ -15,7 +15,6 @@
 package com.liferay.commerce.theme.minium.site.initializer.internal;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
-import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
@@ -110,7 +109,6 @@ import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
 
-import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -202,14 +200,14 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importCPSpecificationOptions(catalogGroupId, serviceContext);
 
-			List<CommerceInventoryWarehouse> commerceWarehouses =
+			List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
 				_importCommerceWarehouses(serviceContext);
 
 			_importCPOptions(catalogGroupId, serviceContext);
 
 			List<CPDefinition> cpDefinitions = _importCPDefinitions(
 				catalogGroupId, commerceChannel.getCommerceChannelId(),
-				commerceWarehouses, serviceContext);
+				commerceInventoryWarehouses, serviceContext);
 
 			_importRelatedProducts(cpDefinitions, serviceContext);
 
@@ -317,8 +315,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		return _commerceCatalogLocalService.addCommerceCatalog(
 			group.getNameMap(), commerceCurrency.getCode(),
-			serviceContext.getLanguageId(), true, StringPool.BLANK,
-			serviceContext);
+			serviceContext.getLanguageId(), StringPool.BLANK, serviceContext);
 	}
 
 	protected CommerceChannel createChannel(
@@ -712,20 +709,20 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	private List<CPDefinition> _importCPDefinitions(
 			long catalogGroupId, long commerceChannelId,
-			List<CommerceWarehouse> commerceWarehouses,
+			List<CommerceInventoryWarehouse> commerceInventoryWarehouses,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		JSONArray jsonArray = _getJSONArray("products.json");
 
-		long[] commerceWarehouseIds = ListUtil.toLongArray(
-			commerceWarehouses,
+		long[] commerceInventoryWarehouseIds = ListUtil.toLongArray(
+			commerceInventoryWarehouses,
 			CommerceInventoryWarehouse.
 				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		return _cpDefinitionsImporter.importCPDefinitions(
 			jsonArray, _COMMERCE_VOCABULARY, catalogGroupId, commerceChannelId,
-			commerceWarehouseIds,
+			commerceInventoryWarehouseIds,
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
@@ -948,9 +945,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private BlogsImporter _blogsImporter;
 
 	@Reference
-	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
-
-	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
 
 	@Reference
@@ -999,9 +993,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceWarehousesImporter _commerceWarehousesImporter;
-
-	@Reference
-	private ConfigurationAdmin _configurationAdmin;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
