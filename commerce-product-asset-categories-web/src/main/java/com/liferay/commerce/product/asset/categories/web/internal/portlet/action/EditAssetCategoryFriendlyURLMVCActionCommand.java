@@ -21,6 +21,7 @@ import com.liferay.commerce.product.service.CPDisplayLayoutLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -80,7 +81,7 @@ public class EditAssetCategoryFriendlyURLMVCActionCommand
 		urlTitleMap = _getUniqueUrlTitles(assetCategory, urlTitleMap);
 
 		_cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-			serviceContext.getScopeGroupId(), serviceContext.getCompanyId(),
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, serviceContext.getCompanyId(),
 			AssetCategory.class, categoryId, urlTitleMap);
 	}
 
@@ -106,7 +107,7 @@ public class EditAssetCategoryFriendlyURLMVCActionCommand
 			String languageId = LanguageUtil.getLanguageId(locale);
 
 			urlTitle = _cpFriendlyURLEntryLocalService.buildUrlTitle(
-				assetCategory.getGroupId(), classNameId,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 				assetCategory.getCategoryId(), languageId, urlTitle);
 
 			newUrlTitleMap.put(locale, urlTitle);

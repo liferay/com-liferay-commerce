@@ -30,6 +30,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -224,8 +225,8 @@ public class CPAssetCategoriesNavigationDisplayContext {
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-				assetCategory.getGroupId(), classNameId, categoryId, languageId,
-				true);
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId, categoryId,
+				languageId, true);
 
 		if (cpFriendlyURLEntry == null) {
 			String defaultLanguageId = LanguageUtil.getLanguageId(
@@ -237,8 +238,8 @@ public class CPAssetCategoriesNavigationDisplayContext {
 
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					assetCategory.getGroupId(), classNameId, categoryId,
-					defaultLanguageId, true);
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					categoryId, defaultLanguageId, true);
 
 			if (cpFriendlyURLEntry == null) {
 				return StringPool.BLANK;

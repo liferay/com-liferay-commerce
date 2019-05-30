@@ -25,6 +25,7 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
@@ -139,7 +140,7 @@ public class AssetCategoriesImporter {
 
 		List<CPFriendlyURLEntry> cpFriendlyURLEntries =
 			_cpFriendlyURLEntryLocalService.getCPFriendlyURLEntries(
-				serviceContext.getScopeGroupId(), classNameId,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 				assetCategory.getCategoryId());
 
 		if (cpFriendlyURLEntries.isEmpty()) {
@@ -147,9 +148,9 @@ public class AssetCategoriesImporter {
 				assetCategory);
 
 			_cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-				serviceContext.getScopeGroupId(), serviceContext.getCompanyId(),
-				AssetCategory.class, assetCategory.getCategoryId(),
-				urlTitleMap);
+				GroupConstants.DEFAULT_LIVE_GROUP_ID,
+				serviceContext.getCompanyId(), AssetCategory.class,
+				assetCategory.getCategoryId(), urlTitleMap);
 		}
 
 		// Commerce product attachment file entry
@@ -212,7 +213,7 @@ public class AssetCategoriesImporter {
 			String languageId = LocaleUtil.toLanguageId(titleEntry.getKey());
 
 			String urlTitle = _cpFriendlyURLEntryLocalService.buildUrlTitle(
-				assetCategory.getGroupId(), classNameId,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 				assetCategory.getCategoryId(), languageId,
 				titleEntry.getValue());
 

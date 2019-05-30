@@ -217,15 +217,7 @@ public class CPSearchResultsPortlet
 
 		queryConfig.setHighlightEnabled(false);
 
-		searchContext.setGroupIds(new long[] {themeDisplay.getScopeGroupId()});
 		searchContext.setSorts(SortFactoryUtil.create(Field.NAME, false));
-
-		portletSharedSearchSettings.addCondition(
-			new BooleanClauseImpl<Query>(
-				new TermQueryImpl(
-					Field.GROUP_ID,
-					String.valueOf(themeDisplay.getScopeGroupId())),
-				BooleanClauseOccur.MUST));
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
