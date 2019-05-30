@@ -55,6 +55,7 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 			<liferay-ui:error exception="<%= CPDefinitionMetaDescriptionException.class %>" message="the-meta-description-is-too-long" />
 			<liferay-ui:error exception="<%= CPDefinitionMetaKeywordsException.class %>" message="the-meta-keywords-are-too-long" />
 			<liferay-ui:error exception="<%= CPDefinitionMetaTitleException.class %>" message="the-meta-title-is-too-long" />
+			<liferay-ui:error exception="<%= NoSuchCatalogException.class %>" message="please-select-a-valid-catalog" />
 
 			<liferay-ui:error exception="<%= CPFriendlyURLEntryException.class %>">
 
@@ -71,21 +72,19 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 				</liferay-frontend:info-bar>
 			</c:if>
 
-			<c:if test="<%= commerceCatalogs.size() > 1 %>">
-				<aui:select disabled="<%= cpDefinition != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
+			<aui:select disabled="<%= cpDefinition != null %>" label="catalog" name="commerceCatalogGroupId" required="<%= true %>" showEmptyOption="<%= true %>">
 
-					<%
-					for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-					%>
+				<%
+				for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+				%>
 
-						<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (cpDefinition == null) ? false : cpDefinitionsDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogId() %>" />
+					<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (cpDefinition == null) ? (commerceCatalogs.size() == 1) : cpDefinitionsDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogGroupId() %>" />
 
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-				</aui:select>
-			</c:if>
+			</aui:select>
 
 			<aui:input autoFocus="<%= true %>" label="name" localized="<%= true %>" name="nameMapAsXML" type="text">
 				<aui:validator name="required" />
