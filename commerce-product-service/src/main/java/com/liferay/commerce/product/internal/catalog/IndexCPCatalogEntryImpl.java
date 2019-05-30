@@ -48,6 +48,11 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	}
 
 	@Override
+	public long getCommerceCatalogGroupId() {
+		return GetterUtil.getLong(_document.get(Field.GROUP_ID));
+	}
+
+	@Override
 	public long getCPDefinitionId() {
 		return GetterUtil.getLong(_document.get(Field.ENTRY_CLASS_PK));
 	}

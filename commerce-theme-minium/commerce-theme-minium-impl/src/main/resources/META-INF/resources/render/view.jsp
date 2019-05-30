@@ -233,7 +233,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 <%
 List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
-List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(scopeGroupId);
+List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(cpCatalogEntry.getCommerceCatalogGroupId());
 List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 %>
 

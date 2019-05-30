@@ -21,6 +21,8 @@ import java.util.List;
  */
 public interface CPCatalogEntry {
 
+	public long getCommerceCatalogGroupId();
+
 	public long getCPDefinitionId();
 
 	public long getCProductId();
