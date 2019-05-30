@@ -209,7 +209,7 @@
 			ON
 				CIWarehouseGroupRel.commerceWarehouseId = CIWarehouseItem.commerceWarehouseId
 			WHERE
-				(CIWarehouse.companyId = ?) AND
+				(CIWarehouseItem.companyId = ?) AND
 				(CIWarehouseGroupRel.groupId = ?) AND
 				(CIWarehouseItem.sku = ?)
 		]]>

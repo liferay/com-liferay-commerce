@@ -31,6 +31,7 @@ import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutFriendlyURLComposite;
 import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
@@ -79,7 +80,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-				groupId, classNameId, languageId, urlTitle);
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId, languageId,
+				urlTitle);
 
 		if (cpFriendlyURLEntry == null) {
 			Locale siteDefaultLocale = _portal.getSiteDefaultLocale(groupId);
@@ -89,7 +91,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					groupId, classNameId, siteDefaultLanguageId, urlTitle);
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					siteDefaultLanguageId, urlTitle);
 		}
 
 		if (cpFriendlyURLEntry == null) {
@@ -99,8 +102,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		if (!cpFriendlyURLEntry.isMain()) {
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					groupId, classNameId, cpFriendlyURLEntry.getClassPK(),
-					languageId, true);
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					cpFriendlyURLEntry.getClassPK(), languageId, true);
 		}
 
 		CProduct cProduct = _cProductLocalService.getCProduct(
@@ -194,7 +197,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-				groupId, classNameId, languageId, urlTitle);
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId, languageId,
+				urlTitle);
 
 		if (cpFriendlyURLEntry == null) {
 			Locale siteDefaultLocale = _portal.getSiteDefaultLocale(groupId);
@@ -204,7 +208,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					groupId, classNameId, siteDefaultLanguageId, urlTitle);
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					siteDefaultLanguageId, urlTitle);
 		}
 
 		if (cpFriendlyURLEntry == null) {
@@ -214,8 +219,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		if (!cpFriendlyURLEntry.isMain()) {
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					groupId, classNameId, cpFriendlyURLEntry.getClassPK(),
-					languageId, true);
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					cpFriendlyURLEntry.getClassPK(), languageId, true);
 		}
 
 		CProduct cProduct = _cProductLocalService.getCProduct(

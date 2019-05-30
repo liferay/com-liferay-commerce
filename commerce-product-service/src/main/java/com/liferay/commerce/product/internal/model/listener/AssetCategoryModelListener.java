@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ModelListener;
 
 import org.osgi.service.component.annotations.Component;
@@ -41,9 +42,9 @@ public class AssetCategoryModelListener
 
 		try {
 			_cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-				assetCategory.getGroupId(), assetCategory.getCompanyId(),
-				AssetCategory.class, assetCategory.getCategoryId(),
-				assetCategory.getTitleMap());
+				GroupConstants.DEFAULT_LIVE_GROUP_ID,
+				assetCategory.getCompanyId(), AssetCategory.class,
+				assetCategory.getCategoryId(), assetCategory.getTitleMap());
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

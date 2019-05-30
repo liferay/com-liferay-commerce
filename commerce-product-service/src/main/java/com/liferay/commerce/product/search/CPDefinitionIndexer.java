@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
@@ -276,7 +277,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		Map<String, String> languageIdToUrlTitleMap =
 			_cpFriendlyURLEntryLocalService.getLanguageIdToUrlTitleMap(
-				cpDefinition.getGroupId(), classNameId,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 				cpDefinition.getCPDefinitionId());
 
 		for (String languageId : languageIds) {
@@ -360,8 +361,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		document.addNumber(
 			FIELD_CHANNEL_IDS, ArrayUtil.toLongArray(channelIds));
-		document.addNumber(
-			FIELD_CHANNEL_NAMES, ArrayUtil.toStringArray(channelNames));
 
 		List<String> optionNames = new ArrayList<>();
 		List<Long> optionIds = new ArrayList<>();

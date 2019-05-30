@@ -54,6 +54,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
@@ -261,8 +262,8 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-			groupId, serviceContext.getCompanyId(), CProduct.class,
-			cProduct.getCProductId(), urlTitleMap);
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, serviceContext.getCompanyId(),
+			CProduct.class, cProduct.getCProductId(), urlTitleMap);
 
 		// Asset
 
@@ -611,7 +612,7 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product friendly URL entries
 
 		cpFriendlyURLEntryLocalService.deleteCPFriendlyURLEntries(
-			cpDefinition.getGroupId(), CProduct.class,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, CProduct.class,
 			cpDefinition.getCProductId());
 
 		// Commerce product display layout
@@ -1088,7 +1089,7 @@ public class CPDefinitionLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(CProduct.class);
 
 		return cpFriendlyURLEntryLocalService.getUrlTitleMap(
-			cpDefinition.getGroupId(), classNameId,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 			cpDefinition.getCProductId());
 	}
 
@@ -1106,7 +1107,7 @@ public class CPDefinitionLocalServiceImpl
 		String defaultLanguageId = LanguageUtil.getLanguageId(defaultLocale);
 
 		return cpFriendlyURLEntryLocalService.getUrlTitleMapAsXML(
-			cpDefinition.getGroupId(), classNameId,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 			cpDefinition.getCProductId(), defaultLanguageId);
 	}
 
@@ -1484,8 +1485,8 @@ public class CPDefinitionLocalServiceImpl
 		// Commerce product friendly URL entries
 
 		cpFriendlyURLEntryLocalService.addCPFriendlyURLEntries(
-			groupId, serviceContext.getCompanyId(), CProduct.class,
-			cpDefinition.getCProductId(), urlTitleMap);
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, serviceContext.getCompanyId(),
+			CProduct.class, cpDefinition.getCProductId(), urlTitleMap);
 
 		// Asset
 
@@ -2276,7 +2277,7 @@ public class CPDefinitionLocalServiceImpl
 					titleEntry.getKey());
 
 				urlTitle = cpFriendlyURLEntryLocalService.buildUrlTitle(
-					cpDefinition.getGroupId(), classNameId,
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
 					cpDefinition.getCProductId(), languageId, urlTitle);
 
 				newUrlTitleMap.put(titleEntry.getKey(), urlTitle);

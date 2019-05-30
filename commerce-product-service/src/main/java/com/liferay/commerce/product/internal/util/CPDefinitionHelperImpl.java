@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -152,13 +153,14 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 
 		CPFriendlyURLEntry cpFriendlyURLEntry =
 			_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-				themeDisplay.getScopeGroupId(), classNameId, cProductId,
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId, cProductId,
 				themeDisplay.getLanguageId(), true);
 
 		if (cpFriendlyURLEntry == null) {
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
-					themeDisplay.getScopeGroupId(), classNameId, cProductId,
+					GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+					cProductId,
 					LocaleUtil.toLanguageId(
 						themeDisplay.getSiteDefaultLocale()),
 					true);
