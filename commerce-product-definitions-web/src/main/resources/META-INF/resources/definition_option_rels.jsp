@@ -24,6 +24,7 @@ long cpDefinitionId = cpDefinitionOptionRelDisplayContext.getCPDefinitionId();
 
 <c:if test="<%= cpDefinitionOptionRelDisplayContext.hasViewPermission() %>">
 	<portlet:resourceURL id="cpDefinitionOptionRels" var="cpDefinitionOptionsURL">
+		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 	</portlet:resourceURL>
 
 	<liferay-portlet:renderURL var="cpDefinitionOptionRelURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
