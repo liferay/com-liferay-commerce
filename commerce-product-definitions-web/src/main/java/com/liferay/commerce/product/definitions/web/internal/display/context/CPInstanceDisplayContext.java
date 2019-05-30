@@ -286,9 +286,9 @@ public class CPInstanceDisplayContext
 
 			BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPDefinitionInstances(
-					themeDisplay.getCompanyId(), cpDefinition.getGroupId(),
-					cpDefinitionId, getKeywords(), getStatus(),
-					searchContainer.getStart(), searchContainer.getEnd(), sort);
+					themeDisplay.getCompanyId(), cpDefinitionId, getKeywords(),
+					getStatus(), searchContainer.getStart(),
+					searchContainer.getEnd(), sort);
 
 			searchContainer.setTotal(
 				cpInstanceBaseModelSearchResult.getLength());
