@@ -31,7 +31,6 @@ import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -187,19 +186,11 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 		Group group = serviceContext.getScopeGroup();
 
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				group.getName(serviceContext.getLanguageId()),
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCatalog.getCommerceCurrencyCode(), StringPool.BLANK,
-				serviceContext);
-
-		_commerceChannelRelLocalService.addCommerceChannelRel(
-			CommerceCatalog.class.getName(),
-			commerceCatalog.getCommerceCatalogId(),
-			commerceChannel.getCommerceChannelId(), serviceContext);
-
-		return commerceChannel;
+		return _commerceChannelLocalService.addCommerceChannel(
+			group.getGroupId(), group.getName(serviceContext.getLanguageId()),
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+			commerceCatalog.getCommerceCurrencyCode(), StringPool.BLANK,
+			serviceContext);
 	}
 
 	private String _getJSON(String name) throws IOException {
@@ -253,6 +244,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			_log.info("Importing asset categories...");
 		}
 
+		Group group = serviceContext.getScopeGroup();
+
 		ClassLoader classLoader = BrecciaSiteInitializer.class.getClassLoader();
 
 		String json = StringUtil.read(
@@ -261,9 +254,10 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _jsonFactory.createJSONArray(json);
 
 		_assetCategoriesImporter.importAssetCategories(
-			jsonArray, _COMMERCE_VOCABULARY, classLoader,
-			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
-			serviceContext.getUserId(), true);
+			jsonArray,
+			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
+			classLoader, _DEPENDENCIES_PATH + "images/",
+			serviceContext.getScopeGroupId(), serviceContext.getUserId(), true);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Asset categories successfully imported");
@@ -305,6 +299,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			_log.info("Importing commerce product definitions...");
 		}
 
+		Group group = serviceContext.getScopeGroup();
+
 		JSONArray jsonArray = _getJSONArray("products.json");
 
 		long[] commerceInventoryWarehouseIds = ListUtil.toLongArray(
@@ -313,8 +309,9 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		_cpDefinitionsImporter.importCPDefinitions(
-			jsonArray, _COMMERCE_VOCABULARY, catalogGroupId, commerceChannelId,
-			commerceInventoryWarehouseIds,
+			jsonArray,
+			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
+			catalogGroupId, commerceChannelId, commerceInventoryWarehouseIds,
 			BrecciaSiteInitializer.class.getClassLoader(),
 			_DEPENDENCIES_PATH + "images/", serviceContext.getScopeGroupId(),
 			serviceContext.getUserId());
@@ -714,7 +711,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	private static final String _BRECCIA_THEME_ID =
 		"breccia_WAR_commercebrecciatheme";
 
-	private static final String _COMMERCE_VOCABULARY = "Commerce";
+	private static final String _COMMERCE_VOCABULARY = "Commerce_";
 
 	private static final String _DEPENDENCIES_PATH =
 		"com/liferay/commerce/initializer/breccia/internal/dependencies/";
@@ -734,9 +731,6 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
-
-	@Reference
-	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
