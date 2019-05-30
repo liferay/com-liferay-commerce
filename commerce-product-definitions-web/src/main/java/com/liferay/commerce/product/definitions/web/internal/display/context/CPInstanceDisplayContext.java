@@ -260,7 +260,7 @@ public class CPInstanceDisplayContext
 
 		CPDefinition cpDefinition = getCPDefinition();
 
-		long cpDefinitionId = cpDefinition.getCPDefinitionId();
+		long cpDefinitionId = getCPDefinitionId();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
