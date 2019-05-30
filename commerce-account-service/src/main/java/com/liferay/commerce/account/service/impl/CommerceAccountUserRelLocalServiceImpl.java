@@ -183,11 +183,12 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 		if (commerceAccount.isPersonalAccount()) {
 			CommerceAccountUserRel commerceAccountUserRel =
-				commerceAccountUserRelPersistence.findByCommerceAccountId_First(
-					commerceAccountId, null);
+				commerceAccountUserRelPersistence.
+					fetchByCommerceAccountId_First(commerceAccountId, null);
 
-			if (commerceAccountUserRel.getCommerceAccountUserId() ==
-					commerceAccountUserId) {
+			if ((commerceAccountUserRel == null) &&
+				(commerceAccountUserRel.getCommerceAccountUserId() ==
+					commerceAccountUserId)) {
 
 				throw new CommerceAccountTypeException();
 			}
