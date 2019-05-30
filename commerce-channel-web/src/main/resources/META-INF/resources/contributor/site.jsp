@@ -136,8 +136,6 @@ if (commerceChannel != null) {
 				var link = A.one("[data-rowid="+searchContainer.getData()+"]")
 
 				if (link !== null) {
-					var rowId = link.attr('data-rowId');
-
 					var tr = link.ancestor('tr');
 
 					searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
