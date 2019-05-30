@@ -22,8 +22,7 @@ import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupR
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -44,7 +43,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.math.BigDecimal;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
@@ -117,7 +115,9 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Throwable t) {
-			if (t instanceof CommerceDiscountCouponCodeException) {
+			if (t instanceof CommerceDiscountCouponCodeException ||
+				t instanceof NoSuchCatalogException) {
+
 				hideDefaultErrorMessage(actionRequest);
 
 				SessionErrors.add(actionRequest, t.getClass());
@@ -167,6 +167,8 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		long commerceDiscountId = ParamUtil.getLong(
 			actionRequest, "commerceDiscountId");
 
+		long commerceCatalogGroupId = ParamUtil.getLong(
+			actionRequest, "commerceCatalogGroupId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String target = ParamUtil.getString(actionRequest, "target");
 		boolean useCouponCode = ParamUtil.getBoolean(
@@ -229,30 +231,10 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		CommerceDiscount commerceDiscount = null;
 
 		if (commerceDiscountId <= 0) {
-
-			// Commerce catalog
-
-			long commerceCatalogId = ParamUtil.getLong(
-				actionRequest, "commerceCatalogId");
-
-			CommerceCatalog commerceCatalog =
-				_commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
-
-			if (commerceCatalog == null) {
-				List<CommerceCatalog> commerceCatalogs =
-					_commerceCatalogService.getCommerceCatalogs(
-						_portal.getCompanyId(actionRequest), true);
-
-				commerceCatalog = commerceCatalogs.get(0);
-			}
-
-			// Commerce discount
-
 			commerceDiscount = _commerceDiscountService.addCommerceDiscount(
-				commerceCatalog.getCommerceCatalogGroupId(),
-				serviceContext.getUserId(), title, target, useCouponCode,
-				couponCode, usePercentage, maximumDiscountAmount, level1,
-				level2, level3, level4,
+				commerceCatalogGroupId, serviceContext.getUserId(), title,
+				target, useCouponCode, couponCode, usePercentage,
+				maximumDiscountAmount, level1, level2, level3, level4,
 				CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, active,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
@@ -320,9 +302,6 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 	private static final TransactionConfig _transactionConfig =
 		TransactionConfig.Factory.create(
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
-
-	@Reference
-	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommerceDiscountCommerceAccountGroupRelService
