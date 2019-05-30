@@ -81,10 +81,10 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", name=");
-		sb.append(name);
 		sb.append(", siteGroupId=");
 		sb.append(siteGroupId);
+		sb.append(", name=");
+		sb.append(name);
 		sb.append(", type=");
 		sb.append(type);
 		sb.append(", typeSettings=");
@@ -132,14 +132,14 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 			commerceChannelImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		commerceChannelImpl.setSiteGroupId(siteGroupId);
+
 		if (name == null) {
 			commerceChannelImpl.setName("");
 		}
 		else {
 			commerceChannelImpl.setName(name);
 		}
-
-		commerceChannelImpl.setSiteGroupId(siteGroupId);
 
 		if (type == null) {
 			commerceChannelImpl.setType("");
@@ -179,9 +179,9 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		name = objectInput.readUTF();
 
 		siteGroupId = objectInput.readLong();
+		name = objectInput.readUTF();
 		type = objectInput.readUTF();
 		typeSettings = objectInput.readUTF();
 		commerceCurrencyCode = objectInput.readUTF();
@@ -213,14 +213,14 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		objectOutput.writeLong(siteGroupId);
+
 		if (name == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(name);
 		}
-
-		objectOutput.writeLong(siteGroupId);
 
 		if (type == null) {
 			objectOutput.writeUTF("");
@@ -251,8 +251,8 @@ public class CommerceChannelCacheModel implements CacheModel<CommerceChannel>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String name;
 	public long siteGroupId;
+	public String name;
 	public String type;
 	public String typeSettings;
 	public String commerceCurrencyCode;

@@ -44,17 +44,16 @@ public class SiteCommerceChannelTypeDisplayContext
 	extends CommerceChannelDisplayContext {
 
 	public SiteCommerceChannelTypeDisplayContext(
-			ModelResourcePermission<CommerceChannel>
-				commerceChannelModelResourcePermission,
-			CommerceChannelService commerceChannelService,
-			CommerceChannelTypeRegistry commerceChannelTypeRegistry,
-			CommerceChannelTypeJSPContributorRegistry
-				commerceChannelTypeJSPContributorRegistry,
-			CommerceCurrencyService commerceCurrencyService,
-			GroupLocalService groupLocalService,
-			HttpServletRequest httpServletRequest, ItemSelector itemSelector,
-			Portal portal)
-		throws PortalException {
+		ModelResourcePermission<CommerceChannel>
+			commerceChannelModelResourcePermission,
+		CommerceChannelService commerceChannelService,
+		CommerceChannelTypeRegistry commerceChannelTypeRegistry,
+		CommerceChannelTypeJSPContributorRegistry
+			commerceChannelTypeJSPContributorRegistry,
+		CommerceCurrencyService commerceCurrencyService,
+		GroupLocalService groupLocalService,
+		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
+		Portal portal) {
 
 		super(
 			commerceChannelModelResourcePermission, commerceChannelService,

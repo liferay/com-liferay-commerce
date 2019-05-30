@@ -77,10 +77,10 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	public CommerceChannel addCommerceChannel(CommerceChannel commerceChannel);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceChannel addCommerceChannel(String name, String type,
-		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode,
-		String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException;
+	public CommerceChannel addCommerceChannel(long siteGroupId, String name,
+		String type, UnicodeProperties typeSettingsProperties,
+		String commerceCurrencyCode, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce channel with the primary key. Does not add the commerce channel to the database.
@@ -292,6 +292,7 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 		CommerceChannel commerceChannel);
 
 	public CommerceChannel updateCommerceChannel(long commerceChannelId,
-		String name, String type, UnicodeProperties typeSettingsProperties,
-		String commerceCurrencyCode) throws PortalException;
+		long siteGroupId, String name, String type,
+		UnicodeProperties typeSettingsProperties, String commerceCurrencyCode)
+		throws PortalException;
 }

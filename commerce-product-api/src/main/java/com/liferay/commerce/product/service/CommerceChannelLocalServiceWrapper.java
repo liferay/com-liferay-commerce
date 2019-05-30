@@ -48,13 +48,13 @@ public class CommerceChannelLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel addCommerceChannel(
-		String name, String type,
+		long siteGroupId, String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		String commerceCurrencyCode, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceChannelLocalService.addCommerceChannel(name, type,
-			typeSettingsProperties, commerceCurrencyCode,
+		return _commerceChannelLocalService.addCommerceChannel(siteGroupId,
+			name, type, typeSettingsProperties, commerceCurrencyCode,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -350,12 +350,13 @@ public class CommerceChannelLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannel updateCommerceChannel(
-		long commerceChannelId, String name, String type,
+		long commerceChannelId, long siteGroupId, String name, String type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceChannelLocalService.updateCommerceChannel(commerceChannelId,
-			name, type, typeSettingsProperties, commerceCurrencyCode);
+			siteGroupId, name, type, typeSettingsProperties,
+			commerceCurrencyCode);
 	}
 
 	@Override

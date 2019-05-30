@@ -41,6 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -104,6 +105,7 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		long commerceChannelId = ParamUtil.getLong(
 			actionRequest, "commerceChannelId");
 
+		long siteGroupId = ParamUtil.getLong(actionRequest, "siteGroupId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String type = ParamUtil.getString(actionRequest, "type");
 		String commerceCurrencyCode = ParamUtil.getString(
@@ -132,12 +134,12 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceChannelId <= 0) {
 			return _commerceChannelService.addCommerceChannel(
-				name, type, typeSettingsProperties, commerceCurrencyCode, null,
-				serviceContext);
+				siteGroupId, name, type, typeSettingsProperties,
+				commerceCurrencyCode, null, serviceContext);
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			commerceChannelId, name, type, typeSettingsProperties,
+			siteGroupId, commerceChannelId, name, type, typeSettingsProperties,
 			commerceCurrencyCode);
 	}
 

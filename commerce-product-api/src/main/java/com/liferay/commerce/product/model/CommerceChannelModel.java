@@ -192,6 +192,20 @@ public interface CommerceChannelModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the site group ID of this commerce channel.
+	 *
+	 * @return the site group ID of this commerce channel
+	 */
+	public long getSiteGroupId();
+
+	/**
+	 * Sets the site group ID of this commerce channel.
+	 *
+	 * @param siteGroupId the site group ID of this commerce channel
+	 */
+	public void setSiteGroupId(long siteGroupId);
+
+	/**
 	 * Returns the name of this commerce channel.
 	 *
 	 * @return the name of this commerce channel
@@ -205,20 +219,6 @@ public interface CommerceChannelModel extends AuditedModel,
 	 * @param name the name of this commerce channel
 	 */
 	public void setName(String name);
-
-	/**
-	 * Returns the site group ID of this commerce channel.
-	 *
-	 * @return the site group ID of this commerce channel
-	 */
-	public long getSiteGroupId();
-
-	/**
-	 * Sets the site group ID of this commerce channel.
-	 *
-	 * @param siteGroupId the site group ID of this commerce channel
-	 */
-	public void setSiteGroupId(long siteGroupId);
 
 	/**
 	 * Returns the type of this commerce channel.
