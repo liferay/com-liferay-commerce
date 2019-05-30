@@ -217,6 +217,11 @@ public class CommerceCatalogLocalServiceUtil {
 		return getService().fetchCommerceCatalog(commerceCatalogId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalogByGroupId(
+		long groupId) {
+		return getService().fetchCommerceCatalogByGroupId(groupId);
+	}
+
 	/**
 	* Returns the commerce catalog with the matching external reference code and company.
 	*

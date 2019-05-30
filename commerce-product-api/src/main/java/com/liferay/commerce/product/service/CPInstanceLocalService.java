@@ -404,12 +404,12 @@ public interface CPInstanceLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-		long companyId, long groupId, long cpDefinitionId, String keywords,
-		int status, int start, int end, Sort sort) throws PortalException;
+		long companyId, long cpDefinitionId, String keywords, int status,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPInstances(long companyId,
-		long groupId, String keywords, int status, int start, int end, Sort sort)
+		String keywords, int status, int start, int end, Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
