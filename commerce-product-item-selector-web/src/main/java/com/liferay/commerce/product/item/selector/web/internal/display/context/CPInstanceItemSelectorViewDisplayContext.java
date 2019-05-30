@@ -78,33 +78,21 @@ public class CPInstanceItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(rowChecker);
 
-		int total;
-		List<CPInstance> results;
+		Sort sort = CPItemSelectorViewUtil.getCPInstanceSort(
+			getOrderByCol(), getOrderByType());
 
-		if (isSearch()) {
-			Sort sort = CPItemSelectorViewUtil.getCPInstanceSort(
-				getOrderByCol(), getOrderByType());
+		BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
+			_cpInstanceService.searchCPInstances(
+				cpRequestHelper.getCompanyId(), getKeywords(),
+				WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(),
+				searchContainer.getEnd(), sort);
 
-			BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
-				_cpInstanceService.searchCPInstances(
-					cpRequestHelper.getCompanyId(), getScopeGroupId(),
-					getKeywords(), WorkflowConstants.STATUS_APPROVED,
-					searchContainer.getStart(), searchContainer.getEnd(), sort);
+		List<CPInstance> cpInstances =
+			cpInstanceBaseModelSearchResult.getBaseModels();
+		int totalCPInstances = cpInstanceBaseModelSearchResult.getLength();
 
-			total = cpInstanceBaseModelSearchResult.getLength();
-			results = cpInstanceBaseModelSearchResult.getBaseModels();
-		}
-		else {
-			total = _cpInstanceService.getCPInstancesCount(
-				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED);
-			results = _cpInstanceService.getCPInstances(
-				getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
-				searchContainer.getStart(), searchContainer.getEnd(),
-				orderByComparator);
-		}
-
-		searchContainer.setTotal(total);
-		searchContainer.setResults(results);
+		searchContainer.setResults(cpInstances);
+		searchContainer.setTotal(totalCPInstances);
 
 		return searchContainer;
 	}
