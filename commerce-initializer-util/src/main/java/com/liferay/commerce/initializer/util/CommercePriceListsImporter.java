@@ -18,7 +18,6 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -32,7 +31,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -44,7 +42,8 @@ import org.osgi.service.component.annotations.Reference;
 public class CommercePriceListsImporter {
 
 	public void importCommercePriceLists(
-			JSONArray jsonArray, long scopeGroupId, long userId)
+			long catalogGroupId, JSONArray jsonArray, long scopeGroupId,
+			long userId)
 		throws PortalException {
 
 		User user = _userLocalService.getUser(userId);
@@ -58,12 +57,14 @@ public class CommercePriceListsImporter {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			_importCommercePriceList(jsonObject, serviceContext);
+			_importCommercePriceList(
+				catalogGroupId, jsonObject, serviceContext);
 		}
 	}
 
 	private void _importCommercePriceList(
-			JSONObject jsonObject, ServiceContext serviceContext)
+			long catalogGroupId, JSONObject jsonObject,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		String currencyCode = jsonObject.getString("CurrencyCode");
@@ -154,18 +155,12 @@ public class CommercePriceListsImporter {
 
 		// Add Commerce Price List
 
-		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogLocalService.getCommerceCatalogs(
-				serviceContext.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
-
 		String externalReferenceCode = StringBundler.concat(
 			String.valueOf(serviceContext.getScopeGroupId()), "_",
 			FriendlyURLNormalizerUtil.normalize(name));
 
 		_commercePriceListLocalService.upsertCommercePriceList(
-			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(), 0,
+			catalogGroupId, user.getUserId(), 0,
 			commerceCurrency.getCommerceCurrencyId(), parentPriceListId, name,
 			priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,

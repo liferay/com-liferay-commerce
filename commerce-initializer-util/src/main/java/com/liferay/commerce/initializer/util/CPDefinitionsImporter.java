@@ -36,7 +36,6 @@ import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CPTaxCategory;
-import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
@@ -47,7 +46,7 @@ import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.product.service.CPTaxCategoryLocalService;
-import com.liferay.commerce.product.service.CommerceCatalogLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
@@ -95,6 +94,7 @@ public class CPDefinitionsImporter {
 
 	public void importCPDefinitions(
 			File cpDefinitionsFile, String assetVocabularyName,
+			long catalogGroupId, long commerceChannelId,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
@@ -125,8 +125,9 @@ public class CPDefinitionsImporter {
 			}
 
 			_importCPDefinition(
-				jsonObject, assetVocabularyName, commerceWarehouseIds,
-				classLoader, imageDependenciesPath, serviceContext);
+				jsonObject, assetVocabularyName, catalogGroupId,
+				commerceChannelId, commerceWarehouseIds, classLoader,
+				imageDependenciesPath, serviceContext);
 
 			importCount += 1;
 		}
@@ -140,6 +141,7 @@ public class CPDefinitionsImporter {
 
 	public List<CPDefinition> importCPDefinitions(
 			JSONArray jsonArray, String assetVocabularyName,
+			long catalogGroupId, long commerceChannelId,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
@@ -152,8 +154,9 @@ public class CPDefinitionsImporter {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			CPDefinition cpDefinition = _importCPDefinition(
-				jsonObject, assetVocabularyName, commerceWarehouseIds,
-				classLoader, imageDependenciesPath, serviceContext);
+				jsonObject, assetVocabularyName, catalogGroupId,
+				commerceChannelId, commerceWarehouseIds, classLoader,
+				imageDependenciesPath, serviceContext);
 
 			cpDefinitions.add(cpDefinition);
 		}
@@ -176,21 +179,15 @@ public class CPDefinitionsImporter {
 	}
 
 	private CPDefinition _addCPDefinition(
-			String name, String shortDescription, String description,
-			String externalReferenceCode, String sku, String taxCategory,
-			long width, long height, long depth, long weight,
-			long[] assetCategoryIds, ServiceContext serviceContext)
+			long catalogGroupId, String name, String shortDescription,
+			String description, String externalReferenceCode, String sku,
+			String taxCategory, long width, long height, long depth,
+			long weight, long[] assetCategoryIds, ServiceContext serviceContext)
 		throws PortalException {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 
 		User user = _userLocalService.getUser(serviceContext.getUserId());
-
-		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogLocalService.getCommerceCatalogs(
-				user.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			user.getTimeZone());
@@ -233,15 +230,15 @@ public class CPDefinitionsImporter {
 			locale, description);
 
 		return _cpDefinitionLocalService.addCPDefinition(
-			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
-			nameMap, shortDescriptionMap, descriptionMap, nameMap, null, null,
-			null, "simple", true, true, false, false, 0D, width, height, depth,
-			weight, _getCPTaxCategoryId(taxCategory, serviceContext), false,
-			false, null, true, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, true, sku, false, 0, null,
-			null, 0L, externalReferenceCode, serviceContext);
+			catalogGroupId, user.getUserId(), nameMap, shortDescriptionMap,
+			descriptionMap, nameMap, null, null, null, "simple", true, true,
+			false, false, 0D, width, height, depth, weight,
+			_getCPTaxCategoryId(taxCategory, serviceContext), false, false,
+			null, true, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, true, sku, false, 0, null, null, 0L,
+			externalReferenceCode, serviceContext);
 	}
 
 	private void _addWarehouseQuantities(
@@ -295,6 +292,7 @@ public class CPDefinitionsImporter {
 
 	private CPDefinition _importCPDefinition(
 			JSONObject jsonObject, String assetVocabularyName,
+			long catalogGroupId, long commerceChannelId,
 			long[] commerceWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, ServiceContext serviceContext)
 		throws Exception {
@@ -308,7 +306,7 @@ public class CPDefinitionsImporter {
 		if (categoriesJSONArray != null) {
 			assetCategories = _assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
-				imageDependenciesPath, serviceContext.getScopeGroupId(),
+				imageDependenciesPath, catalogGroupId,
 				serviceContext.getUserId());
 		}
 
@@ -335,9 +333,9 @@ public class CPDefinitionsImporter {
 		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			name, shortDescription, description, externalReferenceCode, sku,
-			taxCategory, width, height, length, weight, assetCategoryIds,
-			serviceContext);
+			catalogGroupId, name, shortDescription, description,
+			externalReferenceCode, sku, taxCategory, width, height, length,
+			weight, assetCategoryIds, serviceContext);
 
 		serviceContext.setWorkflowAction(originalWorkflowAction);
 
@@ -381,8 +379,9 @@ public class CPDefinitionsImporter {
 				JSONObject skuJSONObject = skusJSONArray.getJSONObject(i);
 
 				_importCPInstance(
-					cpDefinition.getCPDefinitionId(), skuJSONObject,
-					commerceWarehouseIds, calendar, serviceContext);
+					catalogGroupId, cpDefinition.getCPDefinitionId(),
+					skuJSONObject, commerceWarehouseIds, calendar,
+					serviceContext);
 			}
 		}
 		else {
@@ -426,7 +425,7 @@ public class CPDefinitionsImporter {
 				cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
 
 				String cpInstaceExternalReferenceCode = StringBundler.concat(
-					String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
+					String.valueOf(catalogGroupId), "_", sku);
 
 				cpInstance.setExternalReferenceCode(
 					cpInstaceExternalReferenceCode);
@@ -487,8 +486,8 @@ public class CPDefinitionsImporter {
 		if (Validator.isNotNull(image)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				cpDefinition, classLoader, imageDependenciesPath, image, 0,
-				CPAttachmentFileEntryConstants.TYPE_IMAGE,
-				serviceContext.getScopeGroupId(), serviceContext.getUserId());
+				CPAttachmentFileEntryConstants.TYPE_IMAGE, catalogGroupId,
+				serviceContext.getUserId());
 		}
 
 		JSONArray imagesJSONArray = jsonObject.getJSONArray("Images");
@@ -498,8 +497,7 @@ public class CPDefinitionsImporter {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 					cpDefinition, classLoader, imageDependenciesPath,
 					imagesJSONArray.getString(i), i,
-					CPAttachmentFileEntryConstants.TYPE_IMAGE,
-					serviceContext.getScopeGroupId(),
+					CPAttachmentFileEntryConstants.TYPE_IMAGE, catalogGroupId,
 					serviceContext.getUserId());
 			}
 		}
@@ -511,8 +509,8 @@ public class CPDefinitionsImporter {
 		if (Validator.isNotNull(attachment)) {
 			_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 				cpDefinition, classLoader, imageDependenciesPath, attachment, 0,
-				CPAttachmentFileEntryConstants.TYPE_OTHER,
-				serviceContext.getScopeGroupId(), serviceContext.getUserId());
+				CPAttachmentFileEntryConstants.TYPE_OTHER, catalogGroupId,
+				serviceContext.getUserId());
 		}
 
 		JSONArray attachmentsJSONArray = jsonObject.getJSONArray("Attachments");
@@ -522,8 +520,7 @@ public class CPDefinitionsImporter {
 				_cpAttachmentFileEntryCreator.addCPAttachmentFileEntry(
 					cpDefinition, classLoader, imageDependenciesPath,
 					attachmentsJSONArray.getString(i), i,
-					CPAttachmentFileEntryConstants.TYPE_OTHER,
-					serviceContext.getScopeGroupId(),
+					CPAttachmentFileEntryConstants.TYPE_OTHER, catalogGroupId,
 					serviceContext.getUserId());
 			}
 		}
@@ -532,6 +529,12 @@ public class CPDefinitionsImporter {
 			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
 			WorkflowConstants.STATUS_APPROVED, serviceContext,
 			new HashMap<String, Serializable>());
+
+		// Commerce product channel
+
+		_commerceChannelRelLocalService.addCommerceChannelRel(
+			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
+			commerceChannelId, serviceContext);
 
 		return cpDefinition;
 	}
@@ -635,7 +638,7 @@ public class CPDefinitionsImporter {
 	}
 
 	private CPInstance _importCPInstance(
-			long cpDefinitionId, JSONObject skuJSONObject,
+			long catalogGroupId, long cpDefinitionId, JSONObject skuJSONObject,
 			long[] commerceWarehouseIds, Calendar calendar,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -659,7 +662,7 @@ public class CPDefinitionsImporter {
 				String key = optionsJSONObject.getString("key");
 
 				CPOption cpOption = _cpOptionLocalService.fetchCPOption(
-					serviceContext.getScopeGroupId(), key);
+					catalogGroupId, key);
 
 				if (cpOption == null) {
 					continue;
@@ -713,7 +716,7 @@ public class CPDefinitionsImporter {
 			cpDefinitionId);
 
 		String externalReferenceCode = StringBundler.concat(
-			String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
+			String.valueOf(catalogGroupId), "_", sku);
 
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
 			cpDefinitionId, cpDefinition.getGroupId(), sku, null,
@@ -786,7 +789,7 @@ public class CPDefinitionsImporter {
 		_commerceAvailabilityEstimateLocalService;
 
 	@Reference
-	private CommerceCatalogLocalService _commerceCatalogLocalService;
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceInventoryWarehouseItemLocalService

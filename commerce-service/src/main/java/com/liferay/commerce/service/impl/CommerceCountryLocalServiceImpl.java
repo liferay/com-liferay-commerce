@@ -246,31 +246,38 @@ public class CommerceCountryLocalServiceImpl
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			String name = jsonObject.getString("name");
 			int numericISOCode = jsonObject.getInt("numericISOCode");
-			double priority = jsonObject.getDouble("priority");
-			String threeLettersISOCode = jsonObject.getString(
-				"threeLettersISOCode");
-			String twoLettersISOCode = jsonObject.getString(
-				"twoLettersISOCode");
 
-			String localizedName = LanguageUtil.get(
-				serviceContext.getLocale(), "country." + name);
+			CommerceCountry commerceCountry =
+				commerceCountryLocalService.fetchCommerceCountry(
+					serviceContext.getCompanyId(), numericISOCode);
 
-			Map<Locale, String> nameMap = new HashMap<>();
+			if (commerceCountry == null) {
+				String name = jsonObject.getString("name");
+				double priority = jsonObject.getDouble("priority");
+				String threeLettersISOCode = jsonObject.getString(
+					"threeLettersISOCode");
+				String twoLettersISOCode = jsonObject.getString(
+					"twoLettersISOCode");
 
-			nameMap.put(serviceContext.getLocale(), localizedName);
+				String localizedName = LanguageUtil.get(
+					serviceContext.getLocale(), "country." + name);
 
-			commerceCountryLocalService.addCommerceCountry(
-				nameMap, true, true, twoLettersISOCode, threeLettersISOCode,
-				numericISOCode, false, priority, true, serviceContext);
+				Map<Locale, String> nameMap = new HashMap<>();
 
-			CommerceRegionsStarter commerceRegionsStarter =
-				_commerceRegionsStarterRegistry.getCommerceRegionsStarter(
-					String.valueOf(numericISOCode));
+				nameMap.put(serviceContext.getLocale(), localizedName);
 
-			if (commerceRegionsStarter != null) {
-				commerceRegionsStarter.start(serviceContext);
+				commerceCountryLocalService.addCommerceCountry(
+					nameMap, true, true, twoLettersISOCode, threeLettersISOCode,
+					numericISOCode, false, priority, true, serviceContext);
+
+				CommerceRegionsStarter commerceRegionsStarter =
+					_commerceRegionsStarterRegistry.getCommerceRegionsStarter(
+						String.valueOf(numericISOCode));
+
+				if (commerceRegionsStarter != null) {
+					commerceRegionsStarter.start(serviceContext);
+				}
 			}
 		}
 
