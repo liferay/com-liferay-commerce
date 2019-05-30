@@ -45,6 +45,7 @@ page import="com.liferay.commerce.discount.web.internal.display.context.Commerce
 page import="com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountRelDisplayContext" %><%@
 page import="com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountRuleDisplayContext" %><%@
 page import="com.liferay.commerce.discount.web.internal.servlet.taglib.ui.CommerceDiscountScreenNavigationConstants" %><%@
+page import="com.liferay.commerce.product.exception.NoSuchCatalogException" %><%@
 page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.product.model.CommerceCatalog" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@

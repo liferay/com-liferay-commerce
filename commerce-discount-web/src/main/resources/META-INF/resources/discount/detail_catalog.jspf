@@ -18,18 +18,18 @@
 List<CommerceCatalog> commerceCatalogs = commerceDiscountDisplayContext.getCommerceCatalogs();
 %>
 
-<c:if test="<%= commerceCatalogs.size() > 1 %>">
-	<aui:select disabled="<%= commerceDiscount != null %>" label="catalog" name="commerceCatalogId" required="<%= true %>" showEmptyOption="<%= true %>">
+<liferay-ui:error exception="<%= NoSuchCatalogException.class %>" message="please-select-a-valid-catalog" />
 
-		<%
-		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-		%>
+<aui:select disabled="<%= commerceDiscount != null %>" label="catalog" name="commerceCatalogGroupId" required="<%= true %>" showEmptyOption="<%= true %>">
 
-			<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (commerceDiscount == null) ? false : commerceDiscountDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogId() %>" />
+	<%
+	for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+	%>
 
-		<%
-		}
-		%>
+		<aui:option label="<%= commerceCatalog.getName(locale) %>" selected="<%= (commerceDiscount == null) ? (commerceCatalogs.size() == 1) : commerceDiscountDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogGroupId() %>" />
 
-	</aui:select>
-</c:if>
+	<%
+	}
+	%>
+
+</aui:select>
