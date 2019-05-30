@@ -57,7 +57,8 @@ public class CommerceChannelLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceChannel addCommerceChannel(
-			String name, String type, UnicodeProperties typeSettingsProperties,
+			long siteGroupId, String name, String type,
+			UnicodeProperties typeSettingsProperties,
 			String commerceCurrencyCode, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -72,6 +73,7 @@ public class CommerceChannelLocalServiceImpl
 		commerceChannel.setCompanyId(user.getCompanyId());
 		commerceChannel.setUserId(user.getUserId());
 		commerceChannel.setUserName(user.getFullName());
+		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setName(name);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
@@ -223,7 +225,7 @@ public class CommerceChannelLocalServiceImpl
 
 	@Override
 	public CommerceChannel updateCommerceChannel(
-			long commerceChannelId, String name, String type,
+			long commerceChannelId, long siteGroupId, String name, String type,
 			UnicodeProperties typeSettingsProperties,
 			String commerceCurrencyCode)
 		throws PortalException {
@@ -231,6 +233,7 @@ public class CommerceChannelLocalServiceImpl
 		CommerceChannel commerceChannel =
 			commerceChannelPersistence.findByPrimaryKey(commerceChannelId);
 
+		commerceChannel.setSiteGroupId(siteGroupId);
 		commerceChannel.setName(name);
 		commerceChannel.setType(type);
 		commerceChannel.setTypeSettingsProperties(typeSettingsProperties);
