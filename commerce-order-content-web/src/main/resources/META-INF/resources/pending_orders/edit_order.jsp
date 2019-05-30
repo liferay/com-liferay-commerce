@@ -411,3 +411,25 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		);
 	}
 </aui:script>
+
+
+<%
+    String dynamicMenuRootElementId = renderResponse.getNamespace() + "-dynamic-menu-root";
+%>
+
+<div class="dynamic-menu-wrapper" id="<%= dynamicMenuRootElementId %>">
+    <div class="inline-item my-5 p-5 w-100">
+        <span aria-hidden="true" class="loading-animation"></span>
+    </div>
+</div>
+
+<aui:script require="commerce-order-content-web@1.0.0/js/index.es as DynamicMenu">
+    DynamicMenu.default(
+        '<%= dynamicMenuRootElementId %>',
+        {
+            assetsPath: '<%= PortalUtil.getPathContext(request) + "/assets" %>',
+            namespace: '<portlet:namespace/>',
+            spritemap: '<%= themeDisplay.getPathThemeImages() + "/lexicon/icons.svg" %>'
+        }
+    );
+</aui:script>

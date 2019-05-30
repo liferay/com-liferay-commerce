@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box
+}
+
+.dynamic-menu {
+  position: fixed;
+  left: 100%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(0);
+  transition: transform .1s ease-in;
+
+  &.open {
+    transform: translateX(-100%);
+  }
+  
+  &__tiles {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    padding: 10px;
+    background-color: #32333D;
+    height: 100%;
+    display: grid;
+    grid-gap: 20px;
+    align-content: center;
+  }
+
+  &__nav-icon {
+    position: relative;
+    padding: 10px;
+    color: white;
+    font-size: 25px;
+    border-radius: 8px; 
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #212126;
+      z-index: -1;
+      transform: scale3d(0, 0, 0);
+      border-radius: 50%;
+      opacity: 0;
+      transition: 
+        transform .15s ease-in,
+        border-radius .1s ease-in,
+        opacity .1s ease-in
+    }
+
+    &:hover,
+    &--active {
+      &::before {
+        transform: scale3d(1, 1, 1);
+        border-radius: 8px;
+        opacity: 1;
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &--active {
+      // color: $color-theme
+    }
+  }
+}
+
+.dynamic-menu-content {
+  width: 320px;
+  height: 100%;
+  background: white;
+  position: relative;
+
+  &__close {
+    cursor: pointer;
+    z-index: 999;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px
+  }
+
+  &__board {
+    padding: 60px 20px 20px;
+  }
+}
