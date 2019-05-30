@@ -83,7 +83,7 @@ public class CommerceShipmentDisplayContext
 
 	public List<CommerceOrder> getCommerceOrders() throws PortalException {
 		return _commerceOrderService.getCommerceOrders(
-			cpRequestHelper.getScopeGroupId(),
+			cpRequestHelper.getChannelGroupId(),
 			CommerceShipmentConstants.ALLOWED_ORDER_STATUSES);
 	}
 
@@ -214,17 +214,17 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all") && (shipmentStatus != null)) {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getScopeGroupId(), shipmentStatus);
+				cpRequestHelper.getChannelGroupId(), shipmentStatus);
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getScopeGroupId(), shipmentStatus,
+				cpRequestHelper.getChannelGroupId(), shipmentStatus,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
 		else {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getScopeGroupId());
+				cpRequestHelper.getChannelGroupId());
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getScopeGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getChannelGroupId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 
