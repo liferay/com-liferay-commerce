@@ -2,7 +2,6 @@ Bundle-Name: Liferay Commerce Product Service
 Bundle-SymbolicName: com.liferay.commerce.product.service
 Bundle-Version: 2.1.5
 Export-Package:\
-	com.liferay.commerce.product.display.context.util,\
 	com.liferay.commerce.product.search
 Import-Package:\
 	com.liferay.asset.kernel.model;version="[1.5.0,3.0.0)",\
