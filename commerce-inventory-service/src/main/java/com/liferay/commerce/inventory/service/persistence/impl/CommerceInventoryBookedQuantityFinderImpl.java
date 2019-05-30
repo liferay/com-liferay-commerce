@@ -34,7 +34,8 @@ public class CommerceInventoryBookedQuantityFinderImpl
 	implements CommerceInventoryBookedQuantityFinder {
 
 	public static final String FIND_OLD_TEMP_BOOKED_QUANTITIES =
-		"findOldTempBookedQuantities";
+		CommerceInventoryBookedQuantityFinder.class.getName() +
+			".findOldTempBookedQuantities";
 
 	@Override
 	public List<CommerceInventoryBookedQuantity> findOldTempBookedQuantities() {

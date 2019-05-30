@@ -36,7 +36,7 @@ public class CommerceInventoryAuditFinderImpl
 	implements CommerceInventoryAuditFinder {
 
 	public static final String FIND_OLD_INVENTORY_AUDIT =
-		"findOldInventoryAudit";
+		CommerceInventoryAuditFinder.class.getName() + ".findOldInventoryAudit";
 
 	@Override
 	public List<CommerceInventoryAudit> findOldInventoryAudit(Date olderThan) {
