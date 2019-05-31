@@ -231,12 +231,28 @@ public class CPOptionPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
 	public void testCountByG_K() throws Exception {
 		_persistence.countByG_K(RandomTestUtil.nextLong(), "");
 
 		_persistence.countByG_K(0L, "null");
 
 		_persistence.countByG_K(0L, (String)null);
+	}
+
+	@Test
+	public void testCountByC_K() throws Exception {
+		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_K(0L, "null");
+
+		_persistence.countByC_K(0L, (String)null);
 	}
 
 	@Test
@@ -489,6 +505,13 @@ public class CPOptionPersistenceTest {
 		Assert.assertEquals(Long.valueOf(existingCPOption.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPOption,
 				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(existingCPOption.getKey(),
+				ReflectionTestUtil.invoke(existingCPOption, "getOriginalKey",
+					new Class<?>[0])));
+
+		Assert.assertEquals(Long.valueOf(existingCPOption.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCPOption,
+				"getOriginalCompanyId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(existingCPOption.getKey(),
 				ReflectionTestUtil.invoke(existingCPOption, "getOriginalKey",
 					new Class<?>[0])));

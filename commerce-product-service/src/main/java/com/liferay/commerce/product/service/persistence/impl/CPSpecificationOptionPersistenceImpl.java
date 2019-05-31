@@ -3290,6 +3290,254 @@ public class CPSpecificationOptionPersistenceImpl extends BasePersistenceImpl<CP
 	private static final String _FINDER_COLUMN_G_K_KEY_1 = "cpSpecificationOption.key IS NULL";
 	private static final String _FINDER_COLUMN_G_K_KEY_2 = "cpSpecificationOption.key = ?";
 	private static final String _FINDER_COLUMN_G_K_KEY_3 = "(cpSpecificationOption.key IS NULL OR cpSpecificationOption.key = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_K = new FinderPath(CPSpecificationOptionModelImpl.ENTITY_CACHE_ENABLED,
+			CPSpecificationOptionModelImpl.FINDER_CACHE_ENABLED,
+			CPSpecificationOptionImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_K",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CPSpecificationOptionModelImpl.COMPANYID_COLUMN_BITMASK |
+			CPSpecificationOptionModelImpl.KEY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_K = new FinderPath(CPSpecificationOptionModelImpl.ENTITY_CACHE_ENABLED,
+			CPSpecificationOptionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_K",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the cp specification option where companyId = &#63; and key = &#63; or throws a {@link NoSuchCPSpecificationOptionException} if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param key the key
+	 * @return the matching cp specification option
+	 * @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
+	 */
+	@Override
+	public CPSpecificationOption findByC_K(long companyId, String key)
+		throws NoSuchCPSpecificationOptionException {
+		CPSpecificationOption cpSpecificationOption = fetchByC_K(companyId, key);
+
+		if (cpSpecificationOption == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", key=");
+			msg.append(key);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPSpecificationOptionException(msg.toString());
+		}
+
+		return cpSpecificationOption;
+	}
+
+	/**
+	 * Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param key the key
+	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	 */
+	@Override
+	public CPSpecificationOption fetchByC_K(long companyId, String key) {
+		return fetchByC_K(companyId, key, true);
+	}
+
+	/**
+	 * Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param key the key
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	 */
+	@Override
+	public CPSpecificationOption fetchByC_K(long companyId, String key,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { companyId, key };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_K,
+					finderArgs, this);
+		}
+
+		if (result instanceof CPSpecificationOption) {
+			CPSpecificationOption cpSpecificationOption = (CPSpecificationOption)result;
+
+			if ((companyId != cpSpecificationOption.getCompanyId()) ||
+					!Objects.equals(key, cpSpecificationOption.getKey())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_CPSPECIFICATIONOPTION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else if (key.equals("")) {
+				query.append(_FINDER_COLUMN_C_K_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_C_K_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				List<CPSpecificationOption> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_C_K, finderArgs,
+						list);
+				}
+				else {
+					CPSpecificationOption cpSpecificationOption = list.get(0);
+
+					result = cpSpecificationOption;
+
+					cacheResult(cpSpecificationOption);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPSpecificationOption)result;
+		}
+	}
+
+	/**
+	 * Removes the cp specification option where companyId = &#63; and key = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param key the key
+	 * @return the cp specification option that was removed
+	 */
+	@Override
+	public CPSpecificationOption removeByC_K(long companyId, String key)
+		throws NoSuchCPSpecificationOptionException {
+		CPSpecificationOption cpSpecificationOption = findByC_K(companyId, key);
+
+		return remove(cpSpecificationOption);
+	}
+
+	/**
+	 * Returns the number of cp specification options where companyId = &#63; and key = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param key the key
+	 * @return the number of matching cp specification options
+	 */
+	@Override
+	public int countByC_K(long companyId, String key) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_K;
+
+		Object[] finderArgs = new Object[] { companyId, key };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CPSPECIFICATIONOPTION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else if (key.equals("")) {
+				query.append(_FINDER_COLUMN_C_K_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_C_K_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_K_COMPANYID_2 = "cpSpecificationOption.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_K_KEY_1 = "cpSpecificationOption.key IS NULL";
+	private static final String _FINDER_COLUMN_C_K_KEY_2 = "cpSpecificationOption.key = ?";
+	private static final String _FINDER_COLUMN_C_K_KEY_3 = "(cpSpecificationOption.key IS NULL OR cpSpecificationOption.key = '')";
 
 	public CPSpecificationOptionPersistenceImpl() {
 		setModelClass(CPSpecificationOption.class);
@@ -3334,6 +3582,12 @@ public class CPSpecificationOptionPersistenceImpl extends BasePersistenceImpl<CP
 		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K,
 			new Object[] {
 				cpSpecificationOption.getGroupId(),
+				cpSpecificationOption.getKey()
+			}, cpSpecificationOption);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K,
+			new Object[] {
+				cpSpecificationOption.getCompanyId(),
 				cpSpecificationOption.getKey()
 			}, cpSpecificationOption);
 
@@ -3432,6 +3686,16 @@ public class CPSpecificationOptionPersistenceImpl extends BasePersistenceImpl<CP
 			false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K, args,
 			cpSpecificationOptionModelImpl, false);
+
+		args = new Object[] {
+				cpSpecificationOptionModelImpl.getCompanyId(),
+				cpSpecificationOptionModelImpl.getKey()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_C_K, args, Long.valueOf(1),
+			false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K, args,
+			cpSpecificationOptionModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -3477,6 +3741,27 @@ public class CPSpecificationOptionPersistenceImpl extends BasePersistenceImpl<CP
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					cpSpecificationOptionModelImpl.getCompanyId(),
+					cpSpecificationOptionModelImpl.getKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_K, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K, args);
+		}
+
+		if ((cpSpecificationOptionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_K.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					cpSpecificationOptionModelImpl.getOriginalCompanyId(),
+					cpSpecificationOptionModelImpl.getOriginalKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_K, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_K, args);
 		}
 	}
 

@@ -226,9 +226,16 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPOption fetchCPOption(
+		long companyId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionLocalService.fetchCPOption(companyId, key);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPOption fetchCPOptionByCatalogGroupId(
 		long groupId, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.fetchCPOption(groupId, key);
+		return _cpOptionLocalService.fetchCPOptionByCatalogGroupId(groupId, key);
 	}
 
 	/**
@@ -279,9 +286,16 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPOption getCPOption(
+		long companyId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionLocalService.getCPOption(companyId, key);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPOption getCPOptionByCatalogGroupId(
 		long groupId, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.getCPOption(groupId, key);
+		return _cpOptionLocalService.getCPOptionByCatalogGroupId(groupId, key);
 	}
 
 	/**
@@ -318,16 +332,31 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptions(
-		long groupId, int start, int end) {
-		return _cpOptionLocalService.getCPOptions(groupId, start, end);
+		long companyId, int start, int end) {
+		return _cpOptionLocalService.getCPOptions(companyId, start, end);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptions(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator) {
+		return _cpOptionLocalService.getCPOptions(companyId, start, end,
+			orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByCatalogGroupId(
+		long groupId, int start, int end) {
+		return _cpOptionLocalService.getCPOptionsByCatalogGroupId(groupId,
+			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator) {
-		return _cpOptionLocalService.getCPOptions(groupId, start, end,
-			orderByComparator);
+		return _cpOptionLocalService.getCPOptionsByCatalogGroupId(groupId,
+			start, end, orderByComparator);
 	}
 
 	/**
@@ -373,8 +402,13 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 	}
 
 	@Override
-	public int getCPOptionsCount(long groupId) {
-		return _cpOptionLocalService.getCPOptionsCount(groupId);
+	public int getCPOptionsCount(long companyId) {
+		return _cpOptionLocalService.getCPOptionsCount(companyId);
+	}
+
+	@Override
+	public int getCPOptionsCountByCatalogGroupId(long groupId) {
+		return _cpOptionLocalService.getCPOptionsCountByCatalogGroupId(groupId);
 	}
 
 	@Override
@@ -413,11 +447,11 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPOption> searchCPOptions(
-		long companyId, long groupId, String keywords, int start, int end,
+		long companyId, String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.searchCPOptions(companyId, groupId,
-			keywords, start, end, sort);
+		return _cpOptionLocalService.searchCPOptions(companyId, keywords,
+			start, end, sort);
 	}
 
 	@Override
