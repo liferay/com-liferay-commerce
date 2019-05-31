@@ -103,6 +103,15 @@ public class CommerceRegionServiceImpl extends CommerceRegionServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceRegion> getCommerceRegions(
+			long companyId, String countryTwoLettersISOCode, boolean active)
+		throws PortalException {
+
+		return commerceRegionLocalService.getCommerceRegions(
+			companyId, countryTwoLettersISOCode, active);
+	}
+
+	@Override
 	public int getCommerceRegionsCount(long commerceCountryId)
 		throws PortalException {
 
