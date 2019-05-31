@@ -1,78 +1,78 @@
 .speedwell-main-menu {
-&__link-wrapper {
-	align-items: center;
-	animation: main-menu-enter ease-out 200ms;
-	background-color: #2A2A2A;
-	bottom: 0;
-	color: #FFF;
-	display: flex;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 200;
+	&__link-wrapper {
+		align-items: center;
+		animation: main-menu-enter ease-out 200ms;
+		background-color: #2A2A2A;
+		bottom: 0;
+		color: #FFF;
+		display: flex;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 200;
 
-	.commerce-topbar-button {
-	 background: #2A2A2A;
-	 color: #FFF;
+		.commerce-topbar-button {
+			background: #2A2A2A;
+			color: #FFF;
 
-	 &::before {
+			&::before {
+				display: none;
+			}
+		}
+	}
+
+	&:not(.is-open) &__link-wrapper {
 		display: none;
-	 }
 	}
-}
 
-&:not(.is-open) &__link-wrapper {
-	display: none;
-}
+	&__links {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		padding-right: 80px;
+		width: 100%;
 
-&__links {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	padding-right: 80px;
-	width: 100%;
-
-	@media (max-width: 767px) {
-	 position: fixed;
-	 top: 120px;
-	 left: 0;
-	 right: 0;
-	 bottom: 0;
-	 background: #2A2A2A;
-	 padding-right: 0;
+		@media (max-width: 767px) {
+			background: #2A2A2A;
+			bottom: 0;
+			left: 0;
+			padding-right: 0;
+			position: fixed;
+			right: 0;
+			top: 120px;
+		}
 	}
-}
 
-.portlet-content-editable {
-	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
-}
+	.portlet-content-editable {
+		box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
 
-&::before {
-	background: rgba(42, 42, 42, 0.7);
-	bottom: 0;
-	content: '';
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: calc(56px + 80px);
-	transition: all ease 200ms;
-}
+	&::before {
+		background: rgba(42, 42, 42, 0.7);
+		bottom: 0;
+		content: '';
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: calc(56px + 80px);
+		transition: all ease 200ms;
+	}
 
-&:not(.is-open)::before {
-	opacity: 0;
-	pointer-events: none;
-}
+	&:not(.is-open)::before {
+		opacity: 0;
+		pointer-events: none;
+	}
 }
 
 @keyframes main-menu-enter {
-from {
-	opacity: 0;
-	transform: translateX(-100%)
-}
+	from {
+		opacity: 0;
+		transform: translateX(-100%)
+	}
 
-to {
-	opacity: 1;
-	transform: translateX(0)
-}
+	to {
+		opacity: 1;
+		transform: translateX(0)
+	}
 }

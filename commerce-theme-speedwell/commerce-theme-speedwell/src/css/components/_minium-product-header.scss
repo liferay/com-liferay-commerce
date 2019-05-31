@@ -1,14 +1,14 @@
 .minium-product-header {
-margin-top: 40px;
+	margin-top: 40px;
 
-&__tagline,
-&__subtitle {
-	display: none;
-}
+	&__tagline,
+	&__subtitle {
+		display: none;
+	}
 
-&__title {
-	font-size: 36px;
-	font-weight: 300;
-	line-height: 60px;
-}
+	&__title {
+		font-size: 36px;
+		font-weight: 300;
+		line-height: 60px;
+	}
 }

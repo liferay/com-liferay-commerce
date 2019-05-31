@@ -1,79 +1,79 @@
 .commerce-cart {
-background: #FFF;
-bottom: 0;
-display: flex;
-flex-direction: column;
-max-width: 500px;
-position: fixed;
-right: 0;
-top: calc(56px + 80px);
-transition: all ease 200ms;
-width: 100%;
-
-&::before {
-	background: rgba(42, 42, 42, 0.7);
+	background: #FFF;
 	bottom: 0;
-	content: '';
-	left: 0;
+	display: flex;
+	flex-direction: column;
+	max-width: 500px;
 	position: fixed;
 	right: 0;
 	top: calc(56px + 80px);
-	transition: all ease 200ms 200ms;
-}
-
-&:not(.is-open)::before {
-	opacity: 0;
-}
-
-&:not(.is-open) {
-	transform: translateX(100%);
-}
-
-& &__close {
-	background: #2A2A2A;
-	bottom: 100%;
-	color: #FFF;
-	position: absolute;
-	right: 0;
-
-	&:hover {
-	 color: #FFF;
-	}
+	transition: all ease 200ms;
+	width: 100%;
 
 	&::before {
-	 mix-blend-mode: color;
+		background: rgba(42, 42, 42, 0.7);
+		bottom: 0;
+		content: '';
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: calc(56px + 80px);
+		transition: all ease 200ms 200ms;
 	}
-}
 
-&__top {
-	align-items: center;
-	background-color: #2A2A2A;
-	color: #FFF;
-	display: flex;
-	font-size: 16px;
-	height: 60px;
-	justify-content: space-between;
-	padding: 10px 30px;
-	position: relative;
-
-	a,
-	a:hover {
-	 color: currentColor;
-	 text-decoration: underline;
+	&:not(.is-open)::before {
+		opacity: 0;
 	}
-}
 
-&__content {
-	background: white;
-	flex-grow: 1;
-	position: relative;
-}
+	&:not(.is-open) {
+		transform: translateX(100%);
+	}
 
-&__footer {
-	background: white;
-	border-top: 1px solid #F2F2F2;
-	position: relative;
-}
+	& &__close {
+		background: #2A2A2A;
+		bottom: 100%;
+		color: #FFF;
+		position: absolute;
+		right: 0;
+
+		&:hover {
+		color: #FFF;
+		}
+
+		&::before {
+		mix-blend-mode: color;
+		}
+	}
+
+	&__top {
+		align-items: center;
+		background-color: #2A2A2A;
+		color: #FFF;
+		display: flex;
+		font-size: 16px;
+		height: 60px;
+		justify-content: space-between;
+		padding: 10px 30px;
+		position: relative;
+
+		a,
+		a:hover {
+		color: currentColor;
+		text-decoration: underline;
+		}
+	}
+
+	&__content {
+		background: white;
+		flex-grow: 1;
+		position: relative;
+	}
+
+	&__footer {
+		background: white;
+		border-top: 1px solid #F2F2F2;
+		position: relative;
+	}
 
 	&__totals {
 		align-items: baseline;
@@ -107,5 +107,5 @@ width: 100%;
 				font-weight: bold;
 			}
 		}
-}
+	}
 }

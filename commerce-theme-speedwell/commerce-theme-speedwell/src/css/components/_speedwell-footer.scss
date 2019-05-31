@@ -1,88 +1,88 @@
 .speedwell-footer {
-font-size: 12px;
-font-weight: 600;
-letter-spacing: 1px;
-line-height: 15px;
-
-&__info {
-	border-bottom: 5px solid #F2F2F2;
-	padding: 20px;
-	text-align: center;
-}
-
-&__menu {
-	border-bottom: 1px solid #F2F2F2;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	line-height: 25px;
-	margin: 0 20px;
-	padding: 40px calc((100vw - 1240px) / 2);
-
-	section {
-	 margin-bottom: 20px;
-	}
-
-	h2 {
-	 font-size: 14px;
-	 padding-bottom: 20px;
-	 margin-bottom: 20px;
-	 position: relative;
-
-	 &::after {
-		background: currentColor;
-		bottom: 0;
-		content: '';
-		display: block;
-		height: 2px;
-		left: 0;
-		position: absolute;
-		width: 40px;
-	 }
-	}
-
-	nav {
-	 display: flex;
-	 flex-direction: column;
-
-	 a,
-	 a:hover {
-		color: currentColor;
-	 }
-	}
-}
-
-&__closing {
-	display: flex;
-	flex-wrap: wrap;
 	font-size: 12px;
-	line-height: 25px;
-	margin: 0 20px;
-	padding: 20px calc((100vw - 1240px) / 2);
+	font-weight: 600;
+	letter-spacing: 1px;
+	line-height: 15px;
 
-	.logo {
-	 height: 30px;
+	&__info {
+		border-bottom: 5px solid #F2F2F2;
+		padding: 20px;
+		text-align: center;
 	}
 
-	nav {
-	 display: flex;
-	 margin-left: auto;
+	&__menu {
+		border-bottom: 1px solid #F2F2F2;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		line-height: 25px;
+		margin: 0 20px;
+		padding: 40px calc((100vw - 1240px) / 2);
 
-	 a {
-		color: currentColor;
-		padding: 0 10px;
-		position: relative;
-	 }
+		section {
+			margin-bottom: 20px;
+		}
 
-	 a + a::before {
-		background: currentColor;
-		content: '';
-		height: 10px;
-		left: -1px;
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		width: 2px;
-	 }
+		h2 {
+			font-size: 14px;
+			margin-bottom: 20px;
+			padding-bottom: 20px;
+			position: relative;
+
+			&::after {
+				background: currentColor;
+				bottom: 0;
+				content: '';
+				display: block;
+				height: 2px;
+				left: 0;
+				position: absolute;
+				width: 40px;
+			}
+		}
+
+		nav {
+			display: flex;
+			flex-direction: column;
+
+			a,
+			a:hover {
+				color: currentColor;
+			}
+		}
 	}
-}
+
+	&__closing {
+		display: flex;
+		flex-wrap: wrap;
+		font-size: 12px;
+		line-height: 25px;
+		margin: 0 20px;
+		padding: 20px calc((100vw - 1240px) / 2);
+
+		.logo {
+			height: 30px;
+		}
+
+		nav {
+			display: flex;
+			margin-left: auto;
+
+			a {
+				color: currentColor;
+				padding: 0 10px;
+				position: relative;
+			}
+
+			a + a::before {
+				background: currentColor;
+				content: '';
+				height: 10px;
+				left: -1px;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 2px;
+			}
+		}
+	}
 }
