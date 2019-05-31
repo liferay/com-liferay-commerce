@@ -50,7 +50,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 <aui:form action="<%= editCommerceNotificationTemplateActionURL %>" cssClass="container-fluid-1280" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCommerceNotificationTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceNotificationTemplate == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="addcommerceAccountGroupIds" type="hidden" value="" />
+	<aui:input name="addCommerceAccountGroupIds" type="hidden" value="" />
 	<aui:input name="commerceNotificationTemplateId" type="hidden" value="<%= (commerceNotificationTemplate == null) ? 0 : commerceNotificationTemplate.getCommerceNotificationTemplateId() %>" />
 	<aui:input name="deleteCommerceNotificationTemplateCommerceAccountGroupRelIds" type="hidden" value="" />
 
