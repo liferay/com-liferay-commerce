@@ -19,9 +19,6 @@ import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.CommerceSubscriptionContentDisplayContext;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.Portal;
@@ -71,30 +68,22 @@ public class CommerceSubscriptionContentPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			renderRequest);
 
-			CommerceSubscriptionContentDisplayContext
-				commerceSubscriptionContentDisplayContext =
-					new CommerceSubscriptionContentDisplayContext(
-						_cpDefinitionHelper, _cpInstanceHelper,
-						_commerceSubscriptionEntryService,
-						_configurationProvider, httpServletRequest);
+		CommerceSubscriptionContentDisplayContext
+			commerceSubscriptionContentDisplayContext =
+				new CommerceSubscriptionContentDisplayContext(
+					_cpDefinitionHelper, _cpInstanceHelper,
+					_commerceSubscriptionEntryService, _configurationProvider,
+					httpServletRequest);
 
-			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				commerceSubscriptionContentDisplayContext);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
+		httpServletRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
+			commerceSubscriptionContentDisplayContext);
 
 		super.render(renderRequest, renderResponse);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceSubscriptionContentPortlet.class);
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;

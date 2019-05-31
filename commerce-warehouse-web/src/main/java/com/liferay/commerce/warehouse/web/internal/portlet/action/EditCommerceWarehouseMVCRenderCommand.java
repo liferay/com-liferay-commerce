@@ -17,6 +17,8 @@ package com.liferay.commerce.warehouse.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchWarehouseException;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -40,6 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -66,6 +69,7 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 
 			CommerceWarehousesDisplayContext commerceWarehousesDisplayContext =
 				new CommerceWarehousesDisplayContext(
+					_commerceChannelRelService, _commerceChannelService,
 					_commerceCountryService, _commerceWarehouseLocalService,
 					httpServletRequest);
 
@@ -90,6 +94,12 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 
 		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;
 	}
+
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
