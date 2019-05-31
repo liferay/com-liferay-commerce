@@ -24,6 +24,8 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.product.model.CommerceChannelRel;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule;
@@ -34,10 +36,15 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.transaction.TransactionConfig;
+import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -47,6 +54,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -97,7 +105,11 @@ public class EditCommerceWarehouseMVCActionCommand
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				updateCommerceWarehouse(actionRequest);
+				Callable<Object> commerceInventoryWarehouseCallable =
+					new CommerceInventoryWarehouseCallable(actionRequest);
+
+				TransactionInvokerUtil.invoke(
+					_transactionConfig, commerceInventoryWarehouseCallable);
 			}
 			else if (cmd.equals("geolocate")) {
 				geolocateCommerceWarehouse(actionRequest);
@@ -106,36 +118,33 @@ public class EditCommerceWarehouseMVCActionCommand
 				setActive(actionRequest);
 			}
 		}
-		catch (Exception e) {
-			if (e instanceof CommerceGeocoderException) {
+		catch (Throwable t) {
+			if (t instanceof CommerceGeocoderException) {
 				hideDefaultErrorMessage(actionRequest);
 
-				SessionErrors.add(actionRequest, e.getClass(), e.getMessage());
+				SessionErrors.add(actionRequest, t.getClass(), t.getMessage());
 
 				actionResponse.setRenderParameter(
 					"commerceAdminModuleKey",
 					WarehousesCommerceAdminModule.KEY);
 			}
-			else if (e instanceof NoSuchWarehouseException ||
-					 e instanceof PrincipalException) {
+			else if (t instanceof NoSuchWarehouseException ||
+					 t instanceof PrincipalException) {
 
-				SessionErrors.add(actionRequest, e.getClass());
+				SessionErrors.add(actionRequest, t.getClass());
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof CommerceInventoryWarehouseActiveException ||
-					 e instanceof CommerceInventoryWarehouseNameException) {
+			else if (t instanceof CommerceInventoryWarehouseActiveException ||
+					 t instanceof CommerceInventoryWarehouseNameException) {
 
 				hideDefaultErrorMessage(actionRequest);
 				hideDefaultSuccessMessage(actionRequest);
 
-				SessionErrors.add(actionRequest, e.getClass());
+				SessionErrors.add(actionRequest, t.getClass());
 
 				actionResponse.setRenderParameter(
 					"mvcRenderCommandName", "editCommerceWarehouse");
-			}
-			else {
-				throw e;
 			}
 		}
 	}
@@ -172,6 +181,28 @@ public class EditCommerceWarehouseMVCActionCommand
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
 		_commerceWarehouseService.setActive(commerceWarehouseId, active);
+	}
+
+	protected void updateChannels(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceWarehouseId");
+
+		long[] commerceChannelIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceChannelRel.class.getName(), actionRequest);
+
+		_commerceChannelRelService.deleteCommerceChannelRels(
+			CommerceInventoryWarehouse.class.getName(), commerceWarehouseId);
+
+		for (long commerceChannelId : commerceChannelIds) {
+			_commerceChannelRelService.addCommerceChannelRel(
+				CommerceInventoryWarehouse.class.getName(), commerceWarehouseId,
+				commerceChannelId, serviceContext);
+		}
 	}
 
 	protected CommerceInventoryWarehouse updateCommerceWarehouse(
@@ -235,6 +266,13 @@ public class EditCommerceWarehouseMVCActionCommand
 			commerceCountryId, regionCode);
 	}
 
+	private static final TransactionConfig _transactionConfig =
+		TransactionConfig.Factory.create(
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
+
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
 
@@ -249,5 +287,26 @@ public class EditCommerceWarehouseMVCActionCommand
 
 	@Reference
 	private Portal _portal;
+
+	private class CommerceInventoryWarehouseCallable
+		implements Callable<Object> {
+
+		@Override
+		public Object call() throws Exception {
+			updateCommerceWarehouse(_actionRequest);
+			updateChannels(_actionRequest);
+
+			return null;
+		}
+
+		private CommerceInventoryWarehouseCallable(
+			ActionRequest actionRequest) {
+
+			_actionRequest = actionRequest;
+		}
+
+		private final ActionRequest _actionRequest;
+
+	}
 
 }
