@@ -262,9 +262,17 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 		int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptions(long groupId,
-		int start, int end,
+	public List<CPSpecificationOption> getCPSpecificationOptions(
+		long companyId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CPSpecificationOption> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPSpecificationOptionsByCatalogGroupIdCount(long groupId);
 
 	/**
 	* Returns all the cp specification options matching the UUID and company.
@@ -301,9 +309,6 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	public int getCPSpecificationOptionsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPSpecificationOptionsCount(long groupId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		PortletDataContext portletDataContext);
 
@@ -327,8 +332,8 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPSpecificationOption> searchCPSpecificationOptions(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, Sort sort) throws PortalException;
+		long companyId, Boolean facetable, String keywords, int start, int end,
+		Sort sort) throws PortalException;
 
 	public CPSpecificationOption updateCPOptionCategoryId(
 		long cpSpecificationOptionId, long cpOptionCategoryId)

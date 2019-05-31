@@ -237,15 +237,30 @@ public class CPOptionCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		long groupId, int start, int end) {
-		return getService().getCPOptionCategories(groupId, start, end);
+		long companyId, int start, int end) {
+		return getService().getCPOptionCategories(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator) {
+		return getService()
+				   .getCPOptionCategories(companyId, start, end,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end) {
+		return getService()
+				   .getCPOptionCategoriesByCatalogGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator) {
 		return getService()
-				   .getCPOptionCategories(groupId, start, end, orderByComparator);
+				   .getCPOptionCategoriesByCatalogGroupId(groupId, start, end,
+			orderByComparator);
 	}
 
 	/**
@@ -288,8 +303,12 @@ public class CPOptionCategoryLocalServiceUtil {
 		return getService().getCPOptionCategoriesCount();
 	}
 
-	public static int getCPOptionCategoriesCount(long groupId) {
-		return getService().getCPOptionCategoriesCount(groupId);
+	public static int getCPOptionCategoriesCount(long companyId) {
+		return getService().getCPOptionCategoriesCount(companyId);
+	}
+
+	public static int getCPOptionCategoriesCountByCatalogGroupId(long groupId) {
+		return getService().getCPOptionCategoriesCountByCatalogGroupId(groupId);
 	}
 
 	/**

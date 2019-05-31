@@ -249,16 +249,31 @@ public class CPOptionCategoryLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		long groupId, int start, int end) {
-		return _cpOptionCategoryLocalService.getCPOptionCategories(groupId,
+		long companyId, int start, int end) {
+		return _cpOptionCategoryLocalService.getCPOptionCategories(companyId,
 			start, end);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator) {
+		return _cpOptionCategoryLocalService.getCPOptionCategories(companyId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end) {
+		return _cpOptionCategoryLocalService.getCPOptionCategoriesByCatalogGroupId(groupId,
+			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator) {
-		return _cpOptionCategoryLocalService.getCPOptionCategories(groupId,
+		return _cpOptionCategoryLocalService.getCPOptionCategoriesByCatalogGroupId(groupId,
 			start, end, orderByComparator);
 	}
 
@@ -305,8 +320,13 @@ public class CPOptionCategoryLocalServiceWrapper
 	}
 
 	@Override
-	public int getCPOptionCategoriesCount(long groupId) {
-		return _cpOptionCategoryLocalService.getCPOptionCategoriesCount(groupId);
+	public int getCPOptionCategoriesCount(long companyId) {
+		return _cpOptionCategoryLocalService.getCPOptionCategoriesCount(companyId);
+	}
+
+	@Override
+	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId) {
+		return _cpOptionCategoryLocalService.getCPOptionCategoriesCountByCatalogGroupId(groupId);
 	}
 
 	/**

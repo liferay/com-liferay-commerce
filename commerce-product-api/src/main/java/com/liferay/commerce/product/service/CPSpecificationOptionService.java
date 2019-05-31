@@ -73,8 +73,14 @@ public interface CPSpecificationOptionService extends BaseService {
 		long cpSpecificationOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptions(long groupId,
-		int start, int end,
+	public List<CPSpecificationOption> getCPSpecificationOptions(
+		long companyId, int start, int end,
+		OrderByComparator<CPSpecificationOption> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator)
 		throws PortalException;
 
@@ -91,8 +97,8 @@ public interface CPSpecificationOptionService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPSpecificationOption> searchCPSpecificationOptions(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, Sort sort) throws PortalException;
+		long companyId, Boolean facetable, String keywords, int start, int end,
+		Sort sort) throws PortalException;
 
 	public CPSpecificationOption updateCPSpecificationOption(
 		long cpSpecificationOptionId, long cpOptionCategoryId,

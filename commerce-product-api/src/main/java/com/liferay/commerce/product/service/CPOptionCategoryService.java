@@ -70,17 +70,31 @@ public interface CPOptionCategoryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
+	public List<CPOptionCategory> getCPOptionCategories(long companyId,
 		int start, int end) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
+	public List<CPOptionCategory> getCPOptionCategories(long companyId,
 		int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCount(long groupId)
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CPOptionCategory> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionCategoriesCount(long companyId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

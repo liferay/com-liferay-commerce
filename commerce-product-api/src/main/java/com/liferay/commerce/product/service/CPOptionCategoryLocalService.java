@@ -225,12 +225,21 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public List<CPOptionCategory> getCPOptionCategories(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
+	public List<CPOptionCategory> getCPOptionCategories(long companyId,
 		int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long groupId,
+	public List<CPOptionCategory> getCPOptionCategories(long companyId,
 		int start, int end,
+		OrderByComparator<CPOptionCategory> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator);
 
 	/**
@@ -268,7 +277,10 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public int getCPOptionCategoriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCount(long groupId);
+	public int getCPOptionCategoriesCount(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId);
 
 	/**
 	* Returns the cp option category with the primary key.
