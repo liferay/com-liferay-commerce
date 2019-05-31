@@ -86,7 +86,8 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		portletURL.setParameter(
 			"commerceCountryId",
 			String.valueOf(
-				commerceWarehousesDisplayContext.getCommerceCountryId()));
+				commerceWarehousesDisplayContext.
+					getCommerceCountryTwoLettersIsoCode()));
 
 		return portletURL;
 	}
