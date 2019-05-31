@@ -182,12 +182,10 @@ public class CPInstanceDisplayContext
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		CPDefinition cpDefinition = getCPDefinition();
-
 		int workflowDefinitionLinksCount =
 			WorkflowDefinitionLinkLocalServiceUtil.
 				getWorkflowDefinitionLinksCount(
-					themeDisplay.getCompanyId(), cpDefinition.getGroupId(),
+					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
 					CPInstance.class.getName());
 
 		if (workflowDefinitionLinksCount == 0) {
