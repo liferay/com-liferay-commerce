@@ -39,7 +39,7 @@ import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -68,8 +68,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		CPSubscriptionTypeJSPContributorRegistry
 			cpSubscriptionTypeJSPContributorRegistry,
 		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry,
-		HttpServletRequest httpServletRequest,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest) {
 
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
 		_configurationProvider = configurationProvider;
@@ -77,7 +76,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 			cpSubscriptionTypeJSPContributorRegistry;
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
 		_httpServletRequest = httpServletRequest;
-		_portletResourcePermission = portletResourcePermission;
 
 		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
 
@@ -387,11 +385,9 @@ public class CommerceSubscriptionEntryDisplayContext {
 			commerceSubscriptionBaseModelSearchResult =
 				_commerceSubscriptionEntryService.
 					searchCommerceSubscriptionEntries(
-						_cpRequestHelper.getCompanyId(),
-						_cpRequestHelper.getScopeGroupId(),
-						maxSubscriptionCycles, subscriptionStatus,
-						getKeywords(), searchContainer.getStart(),
-						searchContainer.getEnd(),
+						_cpRequestHelper.getCompanyId(), maxSubscriptionCycles,
+						subscriptionStatus, getKeywords(),
+						searchContainer.getStart(), searchContainer.getEnd(),
 						CommerceSubscriptionEntryPortletUtil.
 							getCommerceSubscriptionEntrySort(
 								orderByCol, orderByType));
@@ -407,9 +403,8 @@ public class CommerceSubscriptionEntryDisplayContext {
 	}
 
 	public boolean hasManageCommerceSubscriptionEntryPermission() {
-		return _portletResourcePermission.contains(
+		return PortalPermissionUtil.contains(
 			_cpRequestHelper.getPermissionChecker(),
-			_cpRequestHelper.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 	}
 
@@ -432,7 +427,6 @@ public class CommerceSubscriptionEntryDisplayContext {
 	private String _orderByType;
 	private final String _portalPreferenceNamespace;
 	private final PortalPreferences _portalPreferences;
-	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;
 	private SearchContainer<CommerceSubscriptionEntry> _searchContainer;
 	private final ThemeDisplay _themeDisplay;
