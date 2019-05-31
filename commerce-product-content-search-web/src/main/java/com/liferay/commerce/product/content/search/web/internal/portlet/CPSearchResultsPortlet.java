@@ -210,8 +210,7 @@ public class CPSearchResultsPortlet
 		SearchContext searchContext =
 			portletSharedSearchSettings.getSearchContext();
 
-		searchContext.setAttribute(
-			CPField.PUBLISHED, Boolean.TRUE);
+		searchContext.setAttribute(CPField.PUBLISHED, Boolean.TRUE);
 
 		QueryConfig queryConfig = portletSharedSearchSettings.getQueryConfig();
 

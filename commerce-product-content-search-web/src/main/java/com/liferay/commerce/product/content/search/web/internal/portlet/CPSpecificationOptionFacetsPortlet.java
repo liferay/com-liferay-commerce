@@ -209,8 +209,7 @@ public class CPSpecificationOptionFacetsPortlet
 
 		QueryConfig queryConfig = new QueryConfig();
 
-		queryConfig.addSelectedFieldNames(
-			CPField.SPECIFICATION_NAMES);
+		queryConfig.addSelectedFieldNames(CPField.SPECIFICATION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);

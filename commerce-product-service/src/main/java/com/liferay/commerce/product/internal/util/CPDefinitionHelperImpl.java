@@ -128,8 +128,7 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 		CPDefinitionSearcher cpDefinitionSearcher = new CPDefinitionSearcher(
 			cpQuery);
 
-		searchContext.setAttribute(
-			CPField.PUBLISHED, Boolean.TRUE);
+		searchContext.setAttribute(CPField.PUBLISHED, Boolean.TRUE);
 
 		searchContext.setEnd(end);
 		searchContext.setGroupIds(new long[] {groupId});

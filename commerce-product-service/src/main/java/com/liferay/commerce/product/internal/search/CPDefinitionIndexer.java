@@ -271,7 +271,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 					CPField.META_KEYWORDS, languageId),
 				metaKeywords);
 			document.addText(
-				LocalizationUtil.getLocalizedName(CPField.META_TITLE, languageId),
+				LocalizationUtil.getLocalizedName(
+					CPField.META_TITLE, languageId),
 				metaTitle);
 			document.addText(
 				LocalizationUtil.getLocalizedName(
@@ -376,7 +377,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		CProduct cProduct = cpDefinition.getCProduct();
 
 		document.addKeyword(
-			CPField.EXTERNAL_REFERENCE_CODE, cProduct.getExternalReferenceCode());
+			CPField.EXTERNAL_REFERENCE_CODE,
+			cProduct.getExternalReferenceCode());
 
 		document.addKeyword(
 			CPField.IS_IGNORE_SKU_COMBINATIONS,
@@ -386,7 +388,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		document.addText(
 			CPField.OPTION_NAMES, ArrayUtil.toStringArray(optionNames));
-		document.addNumber(CPField.OPTION_IDS, ArrayUtil.toLongArray(optionIds));
+		document.addNumber(
+			CPField.OPTION_IDS, ArrayUtil.toLongArray(optionIds));
 
 		String[] skus = _cpInstanceLocalService.getSKUs(
 			cpDefinition.getCPDefinitionId());

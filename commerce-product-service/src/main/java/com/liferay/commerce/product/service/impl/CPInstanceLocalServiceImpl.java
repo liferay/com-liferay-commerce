@@ -1031,11 +1031,9 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.STATUS, status);
+		attributes.put(CPField.CP_DEFINITION_ID, cpDefinitionId);
 		attributes.put(
-			CPField.CP_DEFINITION_ID, cpDefinitionId);
-		attributes.put(
-			CPField.CP_DEFINITION_STATUS,
-			WorkflowConstants.STATUS_ANY);
+			CPField.CP_DEFINITION_STATUS, WorkflowConstants.STATUS_ANY);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);

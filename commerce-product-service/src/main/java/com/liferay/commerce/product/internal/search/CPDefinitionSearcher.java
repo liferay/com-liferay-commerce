@@ -49,12 +49,9 @@ public class CPDefinitionSearcher extends BaseSearcher {
 
 		setDefaultSelectedFieldNames(
 			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID, Field.NAME,
-			Field.DESCRIPTION, Field.URL,
-			CPField.DEFAULT_IMAGE_FILE_URL,
-			CPField.DEPTH, CPField.HEIGHT,
-			CPField.IS_IGNORE_SKU_COMBINATIONS,
-			CPField.PRODUCT_TYPE_NAME,
-			CPField.DEFAULT_IMAGE_FILE_URL);
+			Field.DESCRIPTION, Field.URL, CPField.DEFAULT_IMAGE_FILE_URL,
+			CPField.DEPTH, CPField.HEIGHT, CPField.IS_IGNORE_SKU_COMBINATIONS,
+			CPField.PRODUCT_TYPE_NAME, CPField.DEFAULT_IMAGE_FILE_URL);
 	}
 
 	@Override

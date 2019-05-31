@@ -204,8 +204,7 @@ public class CPOptionFacetsPortlet
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
-		queryConfig.addSelectedFieldNames(
-			CPField.OPTION_NAMES);
+		queryConfig.addSelectedFieldNames(CPField.OPTION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
