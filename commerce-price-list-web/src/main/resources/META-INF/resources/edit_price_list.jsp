@@ -31,7 +31,7 @@ long parentCommercePriceListId = commercePriceListDisplayContext.getParentCommer
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="addCommerceAccountIds" type="hidden" value="" />
-	<aui:input name="addcommerceAccountGroupIds" type="hidden" value="" />
+	<aui:input name="addCommerceAccountGroupIds" type="hidden" value="" />
 	<aui:input name="commercePriceListId" type="hidden" value="<%= commercePriceListId %>" />
 	<aui:input name="deleteCommercePriceListAccountRelIds" type="hidden" value="" />
 	<aui:input name="deleteCommercePriceListCommerceAccountGroupRelIds" type="hidden" value="" />

@@ -129,11 +129,11 @@ public class CommercePriceListDisplayContext
 			requestBackedPortletURLFactory, "accountGroupsSelectItem",
 			commerceAccountGroupItemSelectorCriterion);
 
-		String checkedcommerceAccountGroupIds = StringUtil.merge(
+		String checkedCommerceAccountGroupIds = StringUtil.merge(
 			getCheckedcommerceAccountGroupIds());
 
 		itemSelectorURL.setParameter(
-			"checkedcommerceAccountGroupIds", checkedcommerceAccountGroupIds);
+			"checkedCommerceAccountGroupIds", checkedCommerceAccountGroupIds);
 
 		return itemSelectorURL.toString();
 	}
