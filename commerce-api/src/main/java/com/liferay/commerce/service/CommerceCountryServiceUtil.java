@@ -107,6 +107,12 @@ public class CommerceCountryServiceUtil {
 		return getService().getCommerceCountry(commerceCountryId);
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+		long companyId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceCountry(companyId, twoLettersISOCode);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

@@ -258,6 +258,11 @@ public interface CommerceRegionLocalService extends BaseLocalService,
 	public List<CommerceRegion> getCommerceRegions(long commerceCountryId,
 		int start, int end, OrderByComparator<CommerceRegion> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceRegion> getCommerceRegions(long companyId,
+		String countryTwoLettersISOCode, boolean active)
+		throws PortalException;
+
 	/**
 	* Returns the number of commerce regions.
 	*

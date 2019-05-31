@@ -82,6 +82,14 @@ public class CommerceRegionServiceWrapper implements CommerceRegionService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceRegion> getCommerceRegions(
+		long companyId, String countryTwoLettersISOCode, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceRegionService.getCommerceRegions(companyId,
+			countryTwoLettersISOCode, active);
+	}
+
+	@Override
 	public int getCommerceRegionsCount(long commerceCountryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceRegionService.getCommerceRegionsCount(commerceCountryId);
