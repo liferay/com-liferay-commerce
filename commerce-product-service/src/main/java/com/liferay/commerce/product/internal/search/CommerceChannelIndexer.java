@@ -12,16 +12,19 @@
  * details.
  */
 
-package com.liferay.commerce.product.search;
+package com.liferay.commerce.product.internal.search;
 
 import com.liferay.commerce.product.constants.CPField;
-import com.liferay.commerce.product.model.CPOptionValue;
-import com.liferay.commerce.product.service.CPOptionValueLocalService;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriterHelper;
@@ -30,7 +33,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Locale;
 
@@ -41,18 +44,18 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
+ * @author Alec Sloan
  */
 @Component(immediate = true, service = Indexer.class)
-public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
+public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 
-	public static final String CLASS_NAME = CPOptionValue.class.getName();
+	public static final String CLASS_NAME = CommerceChannel.class.getName();
 
-	public CPOptionValueIndexer() {
+	public CommerceChannelIndexer() {
 		setDefaultSelectedFieldNames(
-			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
-			Field.SCOPE_GROUP_ID, Field.UID, CPField.CP_OPTION_ID, CPField.KEY);
+			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID);
+		setFilterSearch(true);
+		setPermissionAware(true);
 	}
 
 	@Override
@@ -65,57 +68,62 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		long cpOptionId = GetterUtil.getLong(
-			searchContext.getAttribute(CPField.CP_OPTION_ID));
+		contextBooleanFilter.addRequiredTerm(
+			Field.COMPANY_ID, searchContext.getCompanyId());
 
-		if (cpOptionId > 0) {
-			contextBooleanFilter.addRequiredTerm(
-				CPField.CP_OPTION_ID, cpOptionId);
+		String channelId = GetterUtil.getString(
+			searchContext.getAttribute(Field.ENTRY_CLASS_PK));
+
+		if (!Validator.isBlank(channelId)) {
+			contextBooleanFilter.addTerm(
+				Field.ENTRY_CLASS_PK, channelId, BooleanClauseOccur.MUST);
+		}
+
+		String channelName = GetterUtil.getString(
+			searchContext.getAttribute(Field.NAME));
+
+		if (!Validator.isBlank(channelName)) {
+			contextBooleanFilter.addTerm(
+				Field.NAME, channelName, BooleanClauseOccur.MUST);
 		}
 	}
 
 	@Override
-	protected void doDelete(CPOptionValue cpOptionValue) throws Exception {
-		deleteDocument(
-			cpOptionValue.getCompanyId(), cpOptionValue.getCPOptionValueId());
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, BooleanFilter fullQueryBooleanFilter,
+			SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
+		addSearchTerm(searchQuery, searchContext, Field.NAME, false);
 	}
 
 	@Override
-	protected Document doGetDocument(CPOptionValue cpOptionValue)
+	protected void doDelete(CommerceChannel commerceChannel) throws Exception {
+		deleteDocument(
+			commerceChannel.getCompanyId(),
+			commerceChannel.getCommerceChannelId());
+	}
+
+	@Override
+	protected Document doGetDocument(CommerceChannel commerceChannel)
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing option value " + cpOptionValue);
+			_log.debug("Indexing commerce channel " + commerceChannel);
 		}
 
-		Document document = getBaseModelDocument(CLASS_NAME, cpOptionValue);
+		Document document = getBaseModelDocument(CLASS_NAME, commerceChannel);
 
-		String cpOptionValueDefaultLanguageId =
-			LocalizationUtil.getDefaultLanguageId(cpOptionValue.getName());
+		document.addKeyword(Field.NAME, commerceChannel.getName());
 
-		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
-			cpOptionValue.getName());
+		Group group = _commerceChannelLocalService.getCommerceChannelGroup(
+			commerceChannel.getCommerceChannelId());
 
-		for (String languageId : languageIds) {
-			String name = cpOptionValue.getName(languageId);
-
-			if (languageId.equals(cpOptionValueDefaultLanguageId)) {
-				document.addText(Field.NAME, name);
-				document.addText("defaultLanguageId", languageId);
-			}
-
-			document.addText(
-				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
-				name);
-			document.addNumber(Field.PRIORITY, cpOptionValue.getPriority());
-			document.addText(CPField.KEY, cpOptionValue.getKey());
-			document.addText(Field.CONTENT, name);
-			document.addNumber(
-				CPField.CP_OPTION_ID, cpOptionValue.getCPOptionId());
-		}
+		document.addKeyword(CPField.CHANNEL_GROUP_ID, group.getGroupId());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + cpOptionValue + " indexed successfully");
+			_log.debug("Document " + commerceChannel + " indexed successfully");
 		}
 
 		return document;
@@ -127,7 +135,7 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		Summary summary = createSummary(
-			document, Field.NAME, Field.DESCRIPTION);
+			document, Field.ENTRY_CLASS_PK, Field.NAME);
 
 		summary.setMaxContentLength(200);
 
@@ -135,42 +143,42 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 	}
 
 	@Override
-	protected void doReindex(CPOptionValue cpOptionValue) throws Exception {
+	protected void doReindex(CommerceChannel commerceChannel) throws Exception {
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpOptionValue.getCompanyId(),
-			getDocument(cpOptionValue), isCommitImmediately());
+			getSearchEngineId(), commerceChannel.getCompanyId(),
+			getDocument(commerceChannel), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		doReindex(_cpOptionValueLocalService.getCPOptionValue(classPK));
+		doReindex(_commerceChannelLocalService.getCommerceChannel(classPK));
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexCPOptionValues(companyId);
+		reindexCommerceChannels(companyId);
 	}
 
-	protected void reindexCPOptionValues(long companyId)
+	protected void reindexCommerceChannels(long companyId)
 		throws PortalException {
 
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			_cpOptionValueLocalService.getIndexableActionableDynamicQuery();
+			_commerceChannelLocalService.getIndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			(CPOptionValue cpOptionValue) -> {
+			(CommerceChannel commerceChannel) -> {
 				try {
 					indexableActionableDynamicQuery.addDocuments(
-						getDocument(cpOptionValue));
+						getDocument(commerceChannel));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to index commerce product option " +
-								cpOptionValue.getCPOptionValueId(),
+							"Unable to index commerce channel " +
+								commerceChannel.getCommerceChannelId(),
 							pe);
 					}
 				}
@@ -181,10 +189,10 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPOptionValueIndexer.class);
+		CommerceChannelIndexer.class);
 
 	@Reference
-	private CPOptionValueLocalService _cpOptionValueLocalService;
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private IndexWriterHelper _indexWriterHelper;
