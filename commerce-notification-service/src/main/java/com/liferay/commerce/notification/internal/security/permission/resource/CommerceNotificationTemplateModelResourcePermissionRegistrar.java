@@ -63,7 +63,8 @@ public class CommerceNotificationTemplateModelResourcePermissionRegistrar {
 					consumer.accept(
 						new StagedModelPermissionLogic<>(
 							_stagingPermission,
-							CommerceAdminPortletKeys.COMMERCE_ADMIN,
+							CommerceAdminPortletKeys.
+								COMMERCE_ADMIN_GROUP_INSTANCE,
 							CommerceNotificationTemplate::
 								getCommerceNotificationTemplateId));
 				}),
