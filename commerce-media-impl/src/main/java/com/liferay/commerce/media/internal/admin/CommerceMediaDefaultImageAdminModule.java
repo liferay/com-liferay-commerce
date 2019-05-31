@@ -15,6 +15,7 @@
 package com.liferay.commerce.media.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.media.internal.display.context.CommerceMediaDefaultImageDisplayContext;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
@@ -78,6 +79,11 @@ public class CommerceMediaDefaultImageAdminModule
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		return null;
+	}
+
+	@Override
+	public int getType() {
+		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_GROUP_INSTANCE;
 	}
 
 	@Override
