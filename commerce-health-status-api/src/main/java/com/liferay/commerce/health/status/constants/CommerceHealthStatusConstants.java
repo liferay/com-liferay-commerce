@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.health.status.web.internal.constants;
+package com.liferay.commerce.health.status.constants;
 
 /**
  * @author Alessio Antonio Rendina
@@ -39,6 +39,10 @@ public class CommerceHealthStatusConstants {
 
 	public static final String COMMERCE_CHECKOUT_COMMERCE_HEALTH_STATUS_KEY =
 		"commerce.checkout.commerce.health.status.key";
+
+	public static final int COMMERCE_HEALTH_STATUS_TYPE_GROUP_INSTANCE = 1;
+
+	public static final int COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE = 0;
 
 	public static final String
 		COMMERCE_WISH_LIST_CONTENT_COMMERCE_HEALTH_STATUS_DESCRIPTION =
