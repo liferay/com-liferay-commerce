@@ -89,10 +89,18 @@ public class CPOptionServiceImpl extends CPOptionServiceBaseImpl {
 	}
 
 	@Override
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
 		throws PortalException {
 
-		CPOption cpOption = cpOptionLocalService.fetchCPOption(groupId, key);
+		return cpOptionLocalService.fetchCPOption(companyId, key);
+	}
+
+	@Override
+	public CPOption fetchCPOptionByCatalogGroupId(long groupId, String key)
+		throws PortalException {
+
+		CPOption cpOption = cpOptionLocalService.fetchCPOptionByCatalogGroupId(
+			groupId, key);
 
 		if (cpOption != null) {
 			_portletResourcePermission.check(
