@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
@@ -57,21 +58,11 @@ public class CPSpecificationOptionIndexer
 	public static final String CLASS_NAME =
 		CPSpecificationOption.class.getName();
 
-	public static final String FIELD_CP_OPTION_CATEGORY_ID =
-		"cpOptionCategoryId";
-
-	public static final String FIELD_CP_OPTION_CATEGORY_TITLE =
-		"cpOptionCategoryTitle";
-
-	public static final String FIELD_FACETABLE = "facetable";
-
-	public static final String FIELD_KEY = "key";
-
 	public CPSpecificationOptionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			Field.TITLE, Field.UID, FIELD_KEY);
+			Field.TITLE, Field.UID, CPField.KEY);
 	}
 
 	@Override
@@ -86,11 +77,11 @@ public class CPSpecificationOptionIndexer
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
 
-		if (attributes.containsKey(FIELD_FACETABLE)) {
+		if (attributes.containsKey(CPField.FACETABLE)) {
 			boolean facetable = GetterUtil.getBoolean(
-				attributes.get(FIELD_FACETABLE));
+				attributes.get(CPField.FACETABLE));
 
-			contextBooleanFilter.addRequiredTerm(FIELD_FACETABLE, facetable);
+			contextBooleanFilter.addRequiredTerm(CPField.FACETABLE, facetable);
 		}
 	}
 
@@ -101,15 +92,15 @@ public class CPSpecificationOptionIndexer
 		throws Exception {
 
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_CP_OPTION_CATEGORY_ID, false);
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_ID, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_CP_OPTION_CATEGORY_TITLE, false);
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, FIELD_CP_OPTION_CATEGORY_TITLE, false);
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
-		addSearchTerm(searchQuery, searchContext, FIELD_KEY, false);
+		addSearchTerm(searchQuery, searchContext, CPField.KEY, false);
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.TITLE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
@@ -173,17 +164,17 @@ public class CPSpecificationOptionIndexer
 			if (cpOptionCategory != null) {
 				document.addText(
 					LocalizationUtil.getLocalizedName(
-						FIELD_CP_OPTION_CATEGORY_TITLE, languageId),
+						CPField.CP_OPTION_CATEGORY_TITLE, languageId),
 					cpOptionCategory.getTitle(languageId));
 
 				document.addKeyword(
-					FIELD_CP_OPTION_CATEGORY_ID,
+					CPField.CP_OPTION_CATEGORY_ID,
 					cpOptionCategory.getCPOptionCategoryId());
 			}
 
 			document.addKeyword(
-				FIELD_FACETABLE, cpSpecificationOption.isFacetable());
-			document.addText(FIELD_KEY, cpSpecificationOption.getKey());
+				CPField.FACETABLE, cpSpecificationOption.isFacetable());
+			document.addText(CPField.KEY, cpSpecificationOption.getKey());
 			document.addText(Field.CONTENT, title);
 		}
 

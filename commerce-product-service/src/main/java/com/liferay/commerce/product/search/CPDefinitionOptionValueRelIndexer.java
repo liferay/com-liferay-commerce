@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -52,16 +53,11 @@ public class CPDefinitionOptionValueRelIndexer
 	public static final String CLASS_NAME =
 		CPDefinitionOptionValueRel.class.getName();
 
-	public static final String FIELD_CP_DEFINITION_OPTION_REL_ID =
-		"CPDefinitionOptionRelId";
-
-	public static final String FIELD_KEY = "key";
-
 	public CPDefinitionOptionValueRelIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
-			Field.SCOPE_GROUP_ID, Field.UID, FIELD_KEY);
+			Field.SCOPE_GROUP_ID, Field.UID, CPField.KEY);
 	}
 
 	@Override
@@ -75,11 +71,11 @@ public class CPDefinitionOptionValueRelIndexer
 		throws Exception {
 
 		long cpDefinitionOptionRelId = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_CP_DEFINITION_OPTION_REL_ID));
+			searchContext.getAttribute(CPField.CP_DEFINITION_OPTION_REL_ID));
 
 		if (cpDefinitionOptionRelId > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_CP_DEFINITION_OPTION_REL_ID, cpDefinitionOptionRelId);
+				CPField.CP_DEFINITION_OPTION_REL_ID, cpDefinitionOptionRelId);
 		}
 	}
 
@@ -90,7 +86,7 @@ public class CPDefinitionOptionValueRelIndexer
 		throws Exception {
 
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
-		addSearchTerm(searchQuery, searchContext, FIELD_KEY, false);
+		addSearchTerm(searchQuery, searchContext, CPField.KEY, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 
@@ -150,14 +146,14 @@ public class CPDefinitionOptionValueRelIndexer
 				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
 				name);
 
-			document.addText(FIELD_KEY, cpDefinitionOptionValueRel.getKey());
+			document.addText(CPField.KEY, cpDefinitionOptionValueRel.getKey());
 			document.addText(Field.CONTENT, name);
 		}
 
 		document.addNumber(
 			Field.PRIORITY, cpDefinitionOptionValueRel.getPriority());
 		document.addKeyword(
-			FIELD_CP_DEFINITION_OPTION_REL_ID,
+			CPField.CP_DEFINITION_OPTION_REL_ID,
 			cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
 		if (_log.isDebugEnabled()) {
@@ -174,7 +170,7 @@ public class CPDefinitionOptionValueRelIndexer
 		Document document, Locale locale, String snippet,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		Summary summary = createSummary(document, Field.NAME, FIELD_KEY);
+		Summary summary = createSummary(document, Field.NAME, CPField.KEY);
 
 		summary.setMaxContentLength(200);
 

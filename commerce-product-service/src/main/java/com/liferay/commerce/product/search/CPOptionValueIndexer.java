@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionValueLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -47,15 +48,11 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 
 	public static final String CLASS_NAME = CPOptionValue.class.getName();
 
-	public static final String FIELD_CP_OPTION_ID = "CPOptionId";
-
-	public static final String FIELD_KEY = "key";
-
 	public CPOptionValueIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
-			Field.SCOPE_GROUP_ID, Field.UID, FIELD_CP_OPTION_ID, FIELD_KEY);
+			Field.SCOPE_GROUP_ID, Field.UID, CPField.CP_OPTION_ID, CPField.KEY);
 	}
 
 	@Override
@@ -69,11 +66,11 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 		throws Exception {
 
 		long cpOptionId = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_CP_OPTION_ID));
+			searchContext.getAttribute(CPField.CP_OPTION_ID));
 
 		if (cpOptionId > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_CP_OPTION_ID, cpOptionId);
+				CPField.CP_OPTION_ID, cpOptionId);
 		}
 	}
 
@@ -111,10 +108,10 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
 				name);
 			document.addNumber(Field.PRIORITY, cpOptionValue.getPriority());
-			document.addText(FIELD_KEY, cpOptionValue.getKey());
+			document.addText(CPField.KEY, cpOptionValue.getKey());
 			document.addText(Field.CONTENT, name);
 			document.addNumber(
-				FIELD_CP_OPTION_ID, cpOptionValue.getCPOptionId());
+				CPField.CP_OPTION_ID, cpOptionValue.getCPOptionId());
 		}
 
 		if (_log.isDebugEnabled()) {

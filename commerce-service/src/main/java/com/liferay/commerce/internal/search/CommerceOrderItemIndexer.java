@@ -15,7 +15,7 @@
 package com.liferay.commerce.internal.search;
 
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.product.search.CPInstanceIndexer;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -56,7 +56,7 @@ public class CommerceOrderItemIndexer extends BaseIndexer<CommerceOrderItem> {
 
 	public static final String FIELD_QUANTITY = "quantity";
 
-	public static final String FIELD_SKU = CPInstanceIndexer.FIELD_SKU;
+	public static final String FIELD_SKU = CPField.SKU;
 
 	public static final String FIELD_UNIT_PRICE = "unitPrice";
 

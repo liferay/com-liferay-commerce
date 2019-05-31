@@ -22,5 +22,4 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-notification-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
-	compileOnly project(":apps:commerce:commerce-product-service")
 }

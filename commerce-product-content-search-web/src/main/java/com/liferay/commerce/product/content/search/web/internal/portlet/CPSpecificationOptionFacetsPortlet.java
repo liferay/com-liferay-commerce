@@ -15,11 +15,11 @@
 package com.liferay.commerce.product.content.search.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSpecificationOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -203,14 +203,14 @@ public class CPSpecificationOptionFacetsPortlet
 
 		Facet facet = new SimpleFacet(searchContext);
 
-		facet.setFieldName(CPDefinitionIndexer.FIELD_SPECIFICATION_NAMES);
+		facet.setFieldName(CPField.SPECIFICATION_NAMES);
 
 		searchContext.addFacet(facet);
 
 		QueryConfig queryConfig = new QueryConfig();
 
 		queryConfig.addSelectedFieldNames(
-			CPDefinitionIndexer.FIELD_SPECIFICATION_NAMES);
+			CPField.SPECIFICATION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);

@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.product.item.selector.web.internal.util;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPSpecificationOption;
-import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.util.comparator.CPDefinitionDisplayDateComparator;
 import com.liferay.commerce.product.util.comparator.CPDefinitionModifiedDateComparator;
 import com.liferay.commerce.product.util.comparator.CPDefinitionNameComparator;
@@ -136,7 +136,7 @@ public class CPItemSelectorViewUtil {
 		}
 		else if (orderByCol.equals("sku")) {
 			sort = SortFactoryUtil.create(
-				CPInstanceIndexer.FIELD_SKU, Sort.STRING_TYPE, orderByAsc);
+				CPField.SKU, Sort.STRING_TYPE, orderByAsc);
 		}
 
 		return sort;
