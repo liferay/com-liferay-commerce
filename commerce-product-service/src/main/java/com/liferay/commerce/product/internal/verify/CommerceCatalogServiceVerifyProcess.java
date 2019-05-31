@@ -14,13 +14,17 @@
 
 package com.liferay.commerce.product.internal.verify;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -44,6 +48,28 @@ public class CommerceCatalogServiceVerifyProcess extends VerifyProcess {
 		verifyMasterCommerceCatalog();
 	}
 
+	protected void verifyCommerceCurrencies(Company company) throws Exception {
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				company.getCompanyId());
+
+		if (commerceCurrency != null) {
+			return;
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCompanyId(company.getCompanyId());
+		serviceContext.setLanguageId(
+			LocaleUtil.toLanguageId(company.getLocale()));
+
+		User defaultUser = company.getDefaultUser();
+
+		serviceContext.setUserId(defaultUser.getUserId());
+
+		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
+	}
+
 	protected void verifyMasterCommerceCatalog() {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			List<Company> companies = _companyLocalService.getCompanies();
@@ -54,13 +80,15 @@ public class CommerceCatalogServiceVerifyProcess extends VerifyProcess {
 						company.getCompanyId(), true);
 
 				if (commerceCatalogs.isEmpty()) {
+					verifyCommerceCurrencies(company);
+
 					_commerceCatalogLocalService.addDefaultCommerceCatalog(
 						company.getCompanyId());
 				}
 			}
 		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -69,6 +97,9 @@ public class CommerceCatalogServiceVerifyProcess extends VerifyProcess {
 
 	@Reference
 	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Reference
+	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
 	private CompanyLocalService _companyLocalService;
