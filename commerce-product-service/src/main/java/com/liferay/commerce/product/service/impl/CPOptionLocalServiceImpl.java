@@ -155,14 +155,28 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
+		throws PortalException {
+
+		return cpOptionPersistence.fetchByC_K(companyId, key);
+	}
+
+	@Override
+	public CPOption fetchCPOptionByCatalogGroupId(long groupId, String key)
 		throws PortalException {
 
 		return cpOptionPersistence.fetchByG_K(groupId, key);
 	}
 
 	@Override
-	public CPOption getCPOption(long groupId, String key)
+	public CPOption getCPOption(long companyId, String key)
+		throws PortalException {
+
+		return cpOptionPersistence.findByC_K(companyId, key);
+	}
+
+	@Override
+	public CPOption getCPOptionByCatalogGroupId(long groupId, String key)
 		throws PortalException {
 
 		return cpOptionPersistence.findByG_K(groupId, key);
