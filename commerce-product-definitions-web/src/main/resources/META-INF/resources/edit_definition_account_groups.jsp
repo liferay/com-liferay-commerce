@@ -24,34 +24,43 @@ List<CommerceAccountGroup> commerceAccountGroups = cpDefinitionAccountGroupDispl
 long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroupRelCommerceAccountGroupIds();
 %>
 
-<portlet:actionURL name="editProductDefinition" var="editProductDefinitionAccountGroupActionURL" />
+<c:choose>
+	<c:when test="<%= commerceAccountGroups.isEmpty() %>">
+		<div class="alert alert-info">
+			<liferay-ui:message key="there-are-no-account-groups" />
+		</div>
+	</c:when>
+	<c:otherwise>
+		<portlet:actionURL name="editProductDefinition" var="editProductDefinitionAccountGroupActionURL" />
 
-<aui:form action="<%= editProductDefinitionAccountGroupActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateAccountGroups" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
+		<aui:form action="<%= editProductDefinitionAccountGroupActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateAccountGroups" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
 
-	<div class="lfr-form-content">
-		<aui:fieldset-group markupView="lexicon">
-			<aui:fieldset>
+			<div class="lfr-form-content">
+				<aui:fieldset-group markupView="lexicon">
+					<aui:fieldset>
 
-				<%
-				for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroups) {
-				%>
+						<%
+						for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroups) {
+						%>
 
-					<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name="commerceAccountGroupIds" type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
+							<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name="commerceAccountGroupIds" type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
 
-				<%
-				}
-				%>
+						<%
+						}
+						%>
 
-			</aui:fieldset>
-		</aui:fieldset-group>
+					</aui:fieldset>
+				</aui:fieldset-group>
 
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" type="submit" />
+				<aui:button-row>
+					<aui:button cssClass="btn-lg" type="submit" />
 
-			<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
-		</aui:button-row>
-	</div>
-</aui:form>
+					<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
+				</aui:button-row>
+			</div>
+		</aui:form>
+	</c:otherwise>
+</c:choose>

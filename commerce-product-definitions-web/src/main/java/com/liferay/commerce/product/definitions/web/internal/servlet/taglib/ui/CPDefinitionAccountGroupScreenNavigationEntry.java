@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.product.constants.CPConstants;
@@ -28,7 +27,6 @@ import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -44,7 +42,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -103,15 +100,6 @@ public class CPDefinitionAccountGroupScreenNavigationEntry
 		boolean hasViewCPDefinitionPermission = false;
 
 		try {
-			List<CommerceAccountGroup> commerceAccountGroups =
-				_commerceAccountGroupService.getCommerceAccountGroups(
-					user.getCompanyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null);
-
-			if (commerceAccountGroups.isEmpty()) {
-				return false;
-			}
-
 			hasViewCPDefinitionPermission =
 				_cpDefinitionModelResourcePermission.contains(
 					permissionChecker, cpDefinition, ActionKeys.VIEW);
