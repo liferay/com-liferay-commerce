@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = "javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN,
+	property = "javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
 	service = CustomAttributesDisplay.class
 )
 public class CommerceNotificationTemplateCustomAttributesDisplay

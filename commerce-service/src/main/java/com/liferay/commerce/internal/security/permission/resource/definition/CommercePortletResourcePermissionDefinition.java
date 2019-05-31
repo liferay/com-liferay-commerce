@@ -39,7 +39,8 @@ public class CommercePortletResourcePermissionDefinition
 
 		return new PortletResourcePermissionLogic[] {
 			new StagedPortletPermissionLogic(
-				_stagingPermission, CommerceAdminPortletKeys.COMMERCE_ADMIN)
+				_stagingPermission,
+				CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE)
 		};
 	}
 
