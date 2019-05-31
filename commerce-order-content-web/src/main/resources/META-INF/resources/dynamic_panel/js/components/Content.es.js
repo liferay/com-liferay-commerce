@@ -8,7 +8,12 @@ function Content(props) {
 	const getContent = useCallback(
 		() =>
 			fetch(props.url)
-				.then(res => res.text())
+				.then(res => {
+					if(res.status !== 200) {
+						throw new Error(`Request failed with statusCode: ${res.status}`);
+					}
+					res.text()
+				})
                 .then(content => injectHtml(wrapper.current, content))
                 .catch(err => props.onError(err)),
 		[props.url]

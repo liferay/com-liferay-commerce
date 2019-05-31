@@ -1,7 +1,7 @@
 .dynamic-panel {
   position: fixed;
   left: 100%;
-  top: 0;
+  top: 70px;
   bottom: 0;
   transform: translateX(0);
   transition: transform .1s ease-in;
@@ -29,8 +29,8 @@
     color: white;
     font-size: 25px;
     border-radius: 8px; 
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -93,3 +93,14 @@
   }
 }
 
+body.with-dynamic-panel {
+  .minium-frame__content {
+    padding-right: 70px;
+  }
+}
+
+body.signed-in {
+  .dynamic-panel {
+    top: $liferay-topbar-size + 70px
+  }
+}
