@@ -1044,6 +1044,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="key" />
 		</finder>
+		<finder name="C_K" return-type="CPSpecificationOption" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="key" />
+		</finder>
 
 		<!-- References -->
 
