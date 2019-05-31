@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DynamicMenu from './DynamicMenu';
+import DynamicPanel from './DynamicPanel.es';
 
 const props = {
     elements : [
@@ -24,6 +24,6 @@ const props = {
 }
 
 ReactDOM.render(
-    <DynamicMenu {...props} />,
+    <DynamicPanel {...props} />,
     document.getElementById('root')
 );

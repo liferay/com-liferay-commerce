@@ -414,18 +414,18 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 
 
 <%
-    String dynamicMenuRootElementId = renderResponse.getNamespace() + "-dynamic-menu-root";
+    String dynamicPanelRootElementId = renderResponse.getNamespace() + "-dynamic-panel-root";
 %>
 
-<div class="dynamic-menu-wrapper" id="<%= dynamicMenuRootElementId %>">
+<div class="dynamic-panel-wrapper" id="<%= dynamicPanelRootElementId %>">
     <div class="inline-item my-5 p-5 w-100">
         <span aria-hidden="true" class="loading-animation"></span>
     </div>
 </div>
 
-<aui:script require="commerce-order-content-web@1.0.0/js/index.es as DynamicMenu">
-    DynamicMenu.default(
-        '<%= dynamicMenuRootElementId %>',
+<aui:script require="commerce-order-content-web@1.0.13/dynamic_panel/js/index.es as DynamicPanel">
+    DynamicPanel.default(
+        '<%= dynamicPanelRootElementId %>',
         {
             assetsPath: '<%= PortalUtil.getPathContext(request) + "/assets" %>',
             namespace: '<portlet:namespace/>',

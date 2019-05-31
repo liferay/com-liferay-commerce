@@ -1,13 +1,4 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  box-sizing: border-box
-}
-
-.dynamic-menu {
+.dynamic-panel {
   position: fixed;
   left: 100%;
   top: 0;
@@ -64,6 +55,7 @@ body {
         opacity .1s ease-in
     }
 
+
     &:hover,
     &--active {
       &::before {
@@ -76,16 +68,16 @@ body {
     &:hover,
     &:focus,
     &--active {
-      // color: $color-theme
+      color: $color-theme
     }
   }
-}
 
-.dynamic-menu-content {
-  width: 320px;
-  height: 100%;
-  background: white;
-  position: relative;
+  &__content {
+    width: 320px;
+    height: 100%;
+    background: white;
+    position: relative;
+  }
 
   &__close {
     cursor: pointer;
@@ -100,3 +92,4 @@ body {
     padding: 60px 20px 20px;
   }
 }
+

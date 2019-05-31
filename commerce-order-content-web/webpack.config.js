@@ -8,13 +8,13 @@ module.exports = {
 			use: ['babel-loader']
 		}]
 	},
-	entry: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_menu/js/index.es.js'),
+	entry: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/js/index.es.js'),
 	mode: 'production',
 	resolve: {
 		extensions: ['*', '.js', '.jsx'],
 	},
 	output: {
-		path: path.resolve('./classes/META-INF/resources/dynamic_menu/js'),
-		filename: 'dynamicMenu.js'
+		path: path.resolve('./classes/META-INF/resources/dynamic_panel/js'),
+		filename: 'dynamicPanel.js'
 	}
 };
