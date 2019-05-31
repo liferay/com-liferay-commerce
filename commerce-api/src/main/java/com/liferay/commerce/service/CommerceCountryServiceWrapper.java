@@ -105,6 +105,14 @@ public class CommerceCountryServiceWrapper implements CommerceCountryService,
 		return _commerceCountryService.getCommerceCountry(commerceCountryId);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+		long companyId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceCountryService.getCommerceCountry(companyId,
+			twoLettersISOCode);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

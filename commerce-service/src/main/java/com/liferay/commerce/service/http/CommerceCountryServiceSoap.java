@@ -252,6 +252,21 @@ public class CommerceCountryServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceCountrySoap getCommerceCountry(
+		long companyId, String twoLettersISOCode) throws RemoteException {
+		try {
+			com.liferay.commerce.model.CommerceCountry returnValue = CommerceCountryServiceUtil.getCommerceCountry(companyId,
+					twoLettersISOCode);
+
+			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceCountrySoap setActive(
 		long commerceCountryId, boolean active) throws RemoteException {
 		try {

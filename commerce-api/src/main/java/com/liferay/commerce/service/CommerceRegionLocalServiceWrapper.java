@@ -300,6 +300,14 @@ public class CommerceRegionLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceRegion> getCommerceRegions(
+		long companyId, String countryTwoLettersISOCode, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceRegionLocalService.getCommerceRegions(companyId,
+			countryTwoLettersISOCode, active);
+	}
+
 	/**
 	* Returns the number of commerce regions.
 	*

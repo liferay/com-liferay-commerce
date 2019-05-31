@@ -101,6 +101,10 @@ public interface CommerceCountryService extends BaseService {
 	public CommerceCountry getCommerceCountry(long commerceCountryId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCountry getCommerceCountry(long companyId,
+		String twoLettersISOCode) throws PortalException;
+
 	/**
 	* Returns the OSGi service identifier.
 	*
