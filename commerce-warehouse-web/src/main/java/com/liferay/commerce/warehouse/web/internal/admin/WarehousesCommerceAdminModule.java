@@ -15,8 +15,7 @@
 package com.liferay.commerce.warehouse.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
-import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
@@ -24,11 +23,9 @@ import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWareh
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -93,22 +90,12 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	}
 
 	@Override
+	public int getType() {
+		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_VIRTUAL_INSTANCE;
+	}
+
+	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		CommerceShippingGroupServiceConfiguration
-			commerceShippingGroupServiceConfiguration =
-				_configurationProvider.getConfiguration(
-					CommerceShippingGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						groupId, CommerceConstants.SHIPPING_SERVICE_NAME));
-
-		String commerceShippingOriginLocatorKey =
-			commerceShippingGroupServiceConfiguration.
-				commerceShippingOriginLocatorKey();
-
-		if (commerceShippingOriginLocatorKey.equals("address")) {
-			return false;
-		}
-
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
@@ -161,9 +148,6 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	@Reference
 	private CommerceInventoryWarehouseLocalService
 		_commerceWarehouseLocalService;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
