@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN,
+		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
 		"mvc.command.name=editCommercePaymentMethodGroupRel"
 	},
 	service = MVCActionCommand.class
@@ -210,7 +210,8 @@ public class EditCommercePaymentMethodGroupRelMVCActionCommand
 		String mvcRenderCommandName) {
 
 		PortletURL portletURL = _portal.getControlPanelPortletURL(
-			actionRequest, CommerceAdminPortletKeys.COMMERCE_ADMIN,
+			actionRequest,
+			CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcRenderCommandName", mvcRenderCommandName);

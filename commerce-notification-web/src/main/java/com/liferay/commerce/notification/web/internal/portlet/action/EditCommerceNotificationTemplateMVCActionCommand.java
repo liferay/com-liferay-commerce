@@ -50,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN,
+		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
 		"mvc.command.name=editCommerceNotificationTemplate"
 	},
 	service = MVCActionCommand.class
@@ -186,8 +186,8 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 			CommerceNotificationTemplate commerceNotificationTemplate)
 		throws PortalException {
 
-		long[] addcommerceAccountGroupIds = ParamUtil.getLongValues(
-			actionRequest, "addcommerceAccountGroupIds");
+		long[] addCommerceAccountGroupIds = ParamUtil.getLongValues(
+			actionRequest, "addCommerceAccountGroupIds");
 
 		long[] deleteCommerceNotificationTemplateCommerceAccountGroupRelIds =
 			ParamUtil.getLongValues(
@@ -207,20 +207,20 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 			}
 		}
 
-		if (addcommerceAccountGroupIds.length > 0) {
+		if (addCommerceAccountGroupIds.length > 0) {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceNotificationTemplateCommerceAccountGroupRel.class.
 					getName(),
 				actionRequest);
 
-			for (long addcommerceAccountGroupId : addcommerceAccountGroupIds) {
+			for (long addCommerceAccountGroupId : addCommerceAccountGroupIds) {
 				CommerceNotificationTemplateCommerceAccountGroupRel
 					commerceNotificationTemplateCommerceAccountGroupRel =
 						_commerceNotificationTemplateCommerceAccountGroupRelService.
 							fetchCommerceNotificationTemplateCommerceAccountGroupRel(
 								commerceNotificationTemplate.
 									getCommerceNotificationTemplateId(),
-								addcommerceAccountGroupId);
+								addCommerceAccountGroupId);
 
 				if (commerceNotificationTemplateCommerceAccountGroupRel ==
 						null) {
@@ -229,7 +229,7 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 						addCommerceNotificationTemplateCommerceAccountGroupRel(
 							commerceNotificationTemplate.
 								getCommerceNotificationTemplateId(),
-							addcommerceAccountGroupId, serviceContext);
+							addCommerceAccountGroupId, serviceContext);
 				}
 			}
 		}
