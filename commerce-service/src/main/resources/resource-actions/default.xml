@@ -8,12 +8,14 @@
 			<supports>
 				<action-key>MANAGE_COMMERCE_AVAILABILITY_ESTIMATES</action-key>
 				<action-key>MANAGE_COMMERCE_COUNTRIES</action-key>
+				<action-key>MANAGE_COMMERCE_SUBSCRIPTIONS</action-key>
 			</supports>
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
 				<action-key>MANAGE_COMMERCE_AVAILABILITY_ESTIMATES</action-key>
 				<action-key>MANAGE_COMMERCE_COUNTRIES</action-key>
+				<action-key>MANAGE_COMMERCE_SUBSCRIPTIONS</action-key>
 			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
@@ -37,7 +39,6 @@
 				<action-key>MANAGE_COMMERCE_PRODUCT_DEFINITION_INVENTORY</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPPING_METHODS</action-key>
-				<action-key>MANAGE_COMMERCE_SUBSCRIPTIONS</action-key>
 				<action-key>MANAGE_COMMERCE_TAX_METHODS</action-key>
 			</supports>
 			<site-member-defaults />
