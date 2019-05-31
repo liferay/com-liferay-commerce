@@ -692,14 +692,19 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="SubscriptionStatus" return-type="Collection">
 			<finder-column name="subscriptionStatus" />
 		</finder>
-		<finder name="G_U" return-type="Collection">
+		<finder name="C_U" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_C_U" return-type="Collection">
 			<finder-column name="groupId" />
+			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
 		<finder name="C_C_C" return-type="CommerceSubscriptionEntry" unique="true">
