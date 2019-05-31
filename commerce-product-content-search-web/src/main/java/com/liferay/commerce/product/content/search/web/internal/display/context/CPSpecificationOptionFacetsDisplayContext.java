@@ -55,7 +55,7 @@ public class CPSpecificationOptionFacetsDisplayContext {
 				getCPSpecificationOptionKeyFromIndexFieldName(fieldName);
 
 		return _cpSpecificationOptionLocalService.fetchCPSpecificationOption(
-			PortalUtil.getScopeGroupId(_renderRequest), key);
+			PortalUtil.getCompanyId(_renderRequest), key);
 	}
 
 	public String getCPSpecificationOptionKey(String fieldName)
