@@ -242,19 +242,15 @@ public class CPSpecificationOptionLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(
-			CPField.CP_OPTION_CATEGORY_ID, keywords);
-		attributes.put(
-			CPField.CP_OPTION_CATEGORY_TITLE,
-			keywords);
+		attributes.put(CPField.CP_OPTION_CATEGORY_ID, keywords);
+		attributes.put(CPField.CP_OPTION_CATEGORY_TITLE, keywords);
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.TITLE, keywords);
 
 		if (facetable != null) {
-			attributes.put(
-				CPField.FACETABLE, facetable);
+			attributes.put(CPField.FACETABLE, facetable);
 		}
 
 		attributes.put(CPField.KEY, keywords);

@@ -54,8 +54,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public long getCProductId() {
-		return GetterUtil.getLong(
-			_document.get(CPField.PRODUCT_ID));
+		return GetterUtil.getLong(_document.get(CPField.PRODUCT_ID));
 	}
 
 	@Override
@@ -89,8 +88,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public double getDepth() {
-		return GetterUtil.getDouble(
-			_document.get(CPField.DEPTH));
+		return GetterUtil.getDouble(_document.get(CPField.DEPTH));
 	}
 
 	@Override
@@ -105,14 +103,12 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public double getHeight() {
-		return GetterUtil.getDouble(
-			_document.get(CPField.HEIGHT));
+		return GetterUtil.getDouble(_document.get(CPField.HEIGHT));
 	}
 
 	@Override
 	public String getMetaDescription(String languageId) {
-		return _document.get(
-			_locale, CPField.META_DESCRIPTION);
+		return _document.get(_locale, CPField.META_DESCRIPTION);
 	}
 
 	@Override
@@ -137,8 +133,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public String getShortDescription() {
-		return _document.get(
-			_locale, CPField.SHORT_DESCRIPTION);
+		return _document.get(_locale, CPField.SHORT_DESCRIPTION);
 	}
 
 	@Override
@@ -149,8 +144,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	@Override
 	public boolean isIgnoreSKUCombinations() {
 		return GetterUtil.getBoolean(
-			_document.get(
-				CPField.IS_IGNORE_SKU_COMBINATIONS));
+			_document.get(CPField.IS_IGNORE_SKU_COMBINATIONS));
 	}
 
 	private final CPDefinitionLocalService _cpDefinitionLocalService;

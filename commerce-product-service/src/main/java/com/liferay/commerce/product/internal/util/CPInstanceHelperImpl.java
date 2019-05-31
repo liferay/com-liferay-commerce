@@ -127,11 +127,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(
-			CPField.RELATED_ENTITY_CLASS_NAME_ID,
-			cpDefinitionClassNameId);
-		attributes.put(
-			CPField.RELATED_ENTITY_CLASS_PK,
-			cpDefinitionId);
+			CPField.RELATED_ENTITY_CLASS_NAME_ID, cpDefinitionClassNameId);
+		attributes.put(CPField.RELATED_ENTITY_CLASS_PK, cpDefinitionId);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(Field.TYPE, type);
 
@@ -281,8 +278,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(
-			CPField.CP_DEFINITION_ID, cpDefinitionId);
+		attributes.put(CPField.CP_DEFINITION_ID, cpDefinitionId);
 		attributes.put(CPField.PUBLISHED, Boolean.TRUE);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
@@ -352,8 +348,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(
-			CPField.CP_DEFINITION_ID, cpDefinitionId);
+		attributes.put(CPField.CP_DEFINITION_ID, cpDefinitionId);
 		attributes.put(CPField.PUBLISHED, Boolean.TRUE);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 

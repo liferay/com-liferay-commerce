@@ -196,9 +196,7 @@ public class CPDefinitionsFacetsMVCResourceCommand
 					themeDisplay.getLocale(),
 					WorkflowConstants.getStatusLabel(status));
 			}
-			else if (fieldName.equals(
-						CPField.PRODUCT_TYPE_NAME)) {
-
+			else if (fieldName.equals(CPField.PRODUCT_TYPE_NAME)) {
 				String productTypeName = termCollector.getTerm();
 
 				CPType cpType = _cpTypeServicesTracker.getCPType(

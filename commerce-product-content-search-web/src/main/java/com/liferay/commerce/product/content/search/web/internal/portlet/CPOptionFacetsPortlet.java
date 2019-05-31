@@ -185,8 +185,7 @@ public class CPOptionFacetsPortlet
 
 		queryConfig.setLocale(themeDisplay.getLocale());
 
-		searchContext.setAttribute(
-			CPField.PUBLISHED, Boolean.TRUE);
+		searchContext.setAttribute(CPField.PUBLISHED, Boolean.TRUE);
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
@@ -241,8 +240,7 @@ public class CPOptionFacetsPortlet
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
-		queryConfig.addSelectedFieldNames(
-			CPField.OPTION_NAMES);
+		queryConfig.addSelectedFieldNames(CPField.OPTION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
