@@ -15,6 +15,7 @@
 package com.liferay.commerce.wish.list.web.internal.health.status;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -112,6 +113,12 @@ public class WishListContentCommerceHealthStatus
 
 		return LanguageUtil.get(
 			resourceBundle, "wish-list-content-health-status-name");
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_GROUP_INSTANCE;
 	}
 
 	@Override
