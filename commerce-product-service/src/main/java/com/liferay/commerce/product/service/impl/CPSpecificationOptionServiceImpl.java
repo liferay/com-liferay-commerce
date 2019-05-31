@@ -86,43 +86,47 @@ public class CPSpecificationOptionServiceImpl
 
 	@Override
 	public List<CPSpecificationOption> getCPSpecificationOptions(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CPSpecificationOption> orderByComparator)
+		throws PortalException {
+
+		return cpSpecificationOptionLocalService.getCPSpecificationOptions(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPSpecificationOption>
+			getCPSpecificationOptionsByCatalogGroupId(
+				long groupId, int start, int end,
+				OrderByComparator<CPSpecificationOption> orderByComparator)
 		throws PortalException {
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
 
-		return cpSpecificationOptionLocalService.getCPSpecificationOptions(
-			groupId, start, end, orderByComparator);
+		return cpSpecificationOptionLocalService.
+			getCPSpecificationOptionsByCatalogGroupId(
+				groupId, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPSpecificationOptionsCount(long groupId)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
-
-		return cpSpecificationOptionLocalService.getCPSpecificationOptionsCount(
-			groupId);
+		return cpSpecificationOptionLocalService.
+			getCPSpecificationOptionsCount();
 	}
 
 	@Override
 	public BaseModelSearchResult<CPSpecificationOption>
 			searchCPSpecificationOptions(
-				long companyId, long groupId, Boolean facetable,
-				String keywords, int start, int end, Sort sort)
+				long companyId, Boolean facetable, String keywords, int start,
+				int end, Sort sort)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
-
 		return cpSpecificationOptionLocalService.searchCPSpecificationOptions(
-			companyId, groupId, facetable, keywords, start, end, sort);
+			companyId, facetable, keywords, start, end, sort);
 	}
 
 	@Override
