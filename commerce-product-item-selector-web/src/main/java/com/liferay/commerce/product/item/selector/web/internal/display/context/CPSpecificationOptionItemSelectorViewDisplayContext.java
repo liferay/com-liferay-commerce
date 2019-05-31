@@ -80,9 +80,9 @@ public class CPSpecificationOptionItemSelectorViewDisplayContext
 			BaseModelSearchResult<CPSpecificationOption>
 				cpSpecificationOptionBaseModelSearchResult =
 					_cpSpecificationOptionService.searchCPSpecificationOptions(
-						cpRequestHelper.getCompanyId(), getScopeGroupId(), null,
-						getKeywords(), searchContainer.getStart(),
-						searchContainer.getEnd(), sort);
+						cpRequestHelper.getCompanyId(), null, getKeywords(),
+						searchContainer.getStart(), searchContainer.getEnd(),
+						sort);
 
 			total = cpSpecificationOptionBaseModelSearchResult.getLength();
 			results =
@@ -91,9 +91,9 @@ public class CPSpecificationOptionItemSelectorViewDisplayContext
 		else {
 			total =
 				_cpSpecificationOptionService.getCPSpecificationOptionsCount(
-					getScopeGroupId());
+					cpRequestHelper.getCompanyId());
 			results = _cpSpecificationOptionService.getCPSpecificationOptions(
-				getScopeGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 
