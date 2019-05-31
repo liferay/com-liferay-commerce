@@ -21,8 +21,8 @@ CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWar
 
 CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
 
-long commerceCountryId = BeanParamUtil.getLong(commerceWarehouse, request, "commerceCountryId");
-long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "commerceRegionId");
+String countryTwoLettersISOCode = BeanParamUtil.getString(commerceWarehouse, request, "countryTwoLettersISOCode");
+String commerceRegionCode = BeanParamUtil.getString(commerceWarehouse, request, "commerceRegionCode");
 %>
 
 <liferay-ui:error-marker
@@ -40,9 +40,9 @@ long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "comme
 
 		<aui:input name="street3" />
 
-		<aui:select label="country" name="commerceCountryId" />
+		<aui:select label="country" name="countryTwoLettersISOCode" />
 
-		<aui:select label="region" name="commerceRegionId" />
+		<aui:select label="region" name="commerceRegionCode" />
 	</div>
 
 	<div class="col-md-6">
@@ -56,7 +56,7 @@ long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "comme
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: '<portlet:namespace />commerceCountryId',
+				select: '<portlet:namespace />countryTwoLettersISOCode',
 				selectData: function(callback) {
 					Liferay.Service(
 						'/commerce.commercecountry/get-commerce-countries',
@@ -68,25 +68,26 @@ long commerceRegionId = BeanParamUtil.getLong(commerceWarehouse, request, "comme
 					);
 				},
 				selectDesc: 'nameCurrentValue',
-				selectId: 'commerceCountryId',
+				selectId: 'twoLettersISOCode',
 				selectSort: '<%= true %>',
-				selectVal: '<%= commerceCountryId %>'
+				selectVal: '<%= HtmlUtil.escape(countryTwoLettersISOCode) %>'
 			},
 			{
-				select: '<portlet:namespace />commerceRegionId',
+				select: '<portlet:namespace />commerceRegionCode',
 				selectData: function(callback, selectKey) {
 					Liferay.Service(
 						'/commerce.commerceregion/get-commerce-regions',
 						{
-							commerceCountryId: Number(selectKey),
+							companyId: <%= company.getCompanyId() %>,
+							countryTwoLettersISOCode: selectKey,
 							active: true
 						},
 						callback
 					);
 				},
 				selectDesc: 'name',
-				selectId: 'commerceRegionId',
-				selectVal: '<%= commerceRegionId %>'
+				selectId: 'code',
+				selectVal: '<%= HtmlUtil.escape(commerceRegionCode) %>'
 			}
 		]
 	);

@@ -31,6 +31,7 @@ page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouse
 page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException" %><%@
 page import="com.liferay.commerce.inventory.model.CommerceInventoryWarehouse" %><%@
 page import="com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem" %><%@
+page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule" %><%@
 page import="com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehouseItemsDisplayContext" %><%@
