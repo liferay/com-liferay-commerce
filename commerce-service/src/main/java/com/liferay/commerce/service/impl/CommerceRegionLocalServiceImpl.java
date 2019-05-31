@@ -144,6 +144,19 @@ public class CommerceRegionLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceRegion> getCommerceRegions(
+			long companyId, String countryTwoLettersISOCode, boolean active)
+		throws PortalException {
+
+		CommerceCountry commerceCountry =
+			commerceCountryLocalService.getCommerceCountry(
+				companyId, countryTwoLettersISOCode);
+
+		return commerceRegionPersistence.findByC_A(
+			commerceCountry.getCommerceCountryId(), active);
+	}
+
+	@Override
 	public int getCommerceRegionsCount(long commerceCountryId) {
 		return commerceRegionPersistence.countByCommerceCountryId(
 			commerceCountryId);

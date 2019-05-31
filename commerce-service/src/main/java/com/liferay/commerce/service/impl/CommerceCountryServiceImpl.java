@@ -144,6 +144,19 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceCountry getCommerceCountry(
+			long companyId, String twoLettersISOCode)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
+
+		return commerceCountryLocalService.getCommerceCountry(
+			companyId, twoLettersISOCode);
+	}
+
+	@Override
 	public List<CommerceCountry> getShippingCommerceCountries(
 		long companyId, boolean shippingAllowed, boolean active) {
 
