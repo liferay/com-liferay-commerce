@@ -19,7 +19,6 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
@@ -43,7 +42,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -102,14 +100,6 @@ public class CPDefinitionChannelScreenNavigationEntry
 		boolean hasViewCPDefinitionPermission = false;
 
 		try {
-			List<CommerceChannel> commerceChannels =
-				_commerceChannelService.getCommerceChannels(
-					user.getCompanyId());
-
-			if (commerceChannels.isEmpty()) {
-				return false;
-			}
-
 			hasViewCPDefinitionPermission =
 				_cpDefinitionModelResourcePermission.contains(
 					permissionChecker, cpDefinition, ActionKeys.VIEW);
