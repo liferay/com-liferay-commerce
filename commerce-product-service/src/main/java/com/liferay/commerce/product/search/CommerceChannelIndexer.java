@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -49,9 +50,6 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 
 	public static final String CLASS_NAME = CommerceChannel.class.getName();
-
-	public static final String FIELD_CATALOG_GROUP_ID =
-		"commerceChannelGroupId";
 
 	public CommerceChannelIndexer() {
 		setDefaultSelectedFieldNames(
@@ -122,7 +120,7 @@ public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 		Group group = _commerceChannelLocalService.getCommerceChannelGroup(
 			commerceChannel.getCommerceChannelId());
 
-		document.addKeyword(FIELD_CATALOG_GROUP_ID, group.getGroupId());
+		document.addKeyword(CPField.CHANNEL_GROUP_ID, group.getGroupId());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + commerceChannel + " indexed successfully");
