@@ -47,27 +47,27 @@ public class CPOptionFacetsDisplayContext {
 		_locale = _renderRequest.getLocale();
 	}
 
-	public CPOption getCPOption(long groupId, String fieldName)
+	public CPOption getCPOption(long companyId, String fieldName)
 		throws PortalException {
 
 		String cpOptionKey =
 			CPOptionFacetsUtil.getCPOptionKeyFromIndexFieldName(fieldName);
 
-		return _cpOptionLocalService.fetchCPOption(groupId, cpOptionKey);
+		return _cpOptionLocalService.fetchCPOption(companyId, cpOptionKey);
 	}
 
-	public String getCPOptionKey(long groupId, String fieldName)
+	public String getCPOptionKey(long companyId, String fieldName)
 		throws PortalException {
 
-		CPOption cpOption = getCPOption(groupId, fieldName);
+		CPOption cpOption = getCPOption(companyId, fieldName);
 
 		return cpOption.getKey();
 	}
 
-	public String getCPOptionName(long groupId, String fieldName)
+	public String getCPOptionName(long companyId, String fieldName)
 		throws PortalException {
 
-		CPOption cpOption = getCPOption(groupId, fieldName);
+		CPOption cpOption = getCPOption(companyId, fieldName);
 
 		String name = StringPool.BLANK;
 
@@ -83,10 +83,10 @@ public class CPOptionFacetsDisplayContext {
 	}
 
 	public boolean isCPOptionValueSelected(
-			long groupId, String fieldName, String fieldValue)
+			long companyId, String fieldName, String fieldValue)
 		throws PortalException {
 
-		CPOption cpOption = getCPOption(groupId, fieldName);
+		CPOption cpOption = getCPOption(companyId, fieldName);
 
 		Optional<String[]> parameterValuesOptional =
 			_portletSharedSearchResponse.getParameterValues(
