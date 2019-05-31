@@ -67,13 +67,23 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
+		long companyId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
+	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceSubscriptionEntriesCount(long companyId, long userId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceSubscriptionEntriesCount(long companyId,
+		long groupId, long userId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -81,6 +91,12 @@ public interface CommerceSubscriptionEntryService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
+		long companyId, Long maxSubscriptionCycles, Integer subscriptionStatus,
+		String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(

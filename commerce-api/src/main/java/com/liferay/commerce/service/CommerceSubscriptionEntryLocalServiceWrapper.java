@@ -255,10 +255,18 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
+		long companyId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(groupId,
+		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(companyId,
 			userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator) {
+		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntries(companyId,
+			groupId, userId, start, end, orderByComparator);
 	}
 
 	/**
@@ -304,9 +312,16 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId) {
-		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesCount(groupId,
+	public int getCommerceSubscriptionEntriesCount(long companyId, long userId) {
+		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesCount(companyId,
 			userId);
+	}
+
+	@Override
+	public int getCommerceSubscriptionEntriesCount(long companyId,
+		long groupId, long userId) {
+		return _commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntriesCount(companyId,
+			groupId, userId);
 	}
 
 	@Override
@@ -377,6 +392,17 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 		long commerceSubscriptionEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceSubscriptionEntryLocalService.incrementCommerceSubscriptionEntryCycle(commerceSubscriptionEntryId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.model.CommerceSubscriptionEntry> searchCommerceSubscriptionEntries(
+		long companyId, Long maxSubscriptionCycles, Integer subscriptionStatus,
+		String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceSubscriptionEntryLocalService.searchCommerceSubscriptionEntries(companyId,
+			maxSubscriptionCycles, subscriptionStatus, keywords, start, end,
+			sort);
 	}
 
 	@Override
