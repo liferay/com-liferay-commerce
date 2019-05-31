@@ -141,18 +141,18 @@ public class CPSpecificationOptionDisplayContext
 		if (!isSearch() && (facetable == null) && (orderByComparator != null)) {
 			total =
 				_cpSpecificationOptionService.getCPSpecificationOptionsCount(
-					getScopeGroupId());
+					cpRequestHelper.getCompanyId());
 
 			results = _cpSpecificationOptionService.getCPSpecificationOptions(
-				getScopeGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 		else {
 			BaseModelSearchResult<CPSpecificationOption>
 				cpSpecificationOptionBaseModelSearchResult =
 					_cpSpecificationOptionService.searchCPSpecificationOptions(
-						cpRequestHelper.getCompanyId(), getScopeGroupId(),
-						facetable, getKeywords(), searchContainer.getStart(),
+						cpRequestHelper.getCompanyId(), facetable,
+						getKeywords(), searchContainer.getStart(),
 						searchContainer.getEnd(), sort);
 
 			total = cpSpecificationOptionBaseModelSearchResult.getLength();

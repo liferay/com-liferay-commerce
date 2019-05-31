@@ -166,15 +166,25 @@ public class CPSpecificationOptionLocalServiceImpl
 
 	@Override
 	public List<CPSpecificationOption> getCPSpecificationOptions(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator) {
+
+		return cpSpecificationOptionPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPSpecificationOption>
+		getCPSpecificationOptionsByCatalogGroupId(
+			long groupId, int start, int end,
+			OrderByComparator<CPSpecificationOption> orderByComparator) {
 
 		return cpSpecificationOptionPersistence.findByGroupId(
 			groupId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPSpecificationOptionsCount(long groupId) {
+	public int getCPSpecificationOptionsByCatalogGroupIdCount(long groupId) {
 		return cpSpecificationOptionPersistence.countByGroupId(groupId);
 	}
 
@@ -195,12 +205,12 @@ public class CPSpecificationOptionLocalServiceImpl
 	@Override
 	public BaseModelSearchResult<CPSpecificationOption>
 			searchCPSpecificationOptions(
-				long companyId, long groupId, Boolean facetable,
-				String keywords, int start, int end, Sort sort)
+				long companyId, Boolean facetable, String keywords, int start,
+				int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, facetable, keywords, start, end, sort);
+			companyId, facetable, keywords, start, end, sort);
 
 		return searchCPSpecificationOptions(searchContext);
 	}
@@ -252,8 +262,8 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, Sort sort) {
+		long companyId, Boolean facetable, String keywords, int start, int end,
+		Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -286,7 +296,6 @@ public class CPSpecificationOptionLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
