@@ -48,12 +48,11 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceSubscriptionContentDisplayContext {
 
 	public CommerceSubscriptionContentDisplayContext(
-			CPDefinitionHelper cpDefinitionHelper,
-			CPInstanceHelper cpInstanceHelper,
-			CommerceSubscriptionEntryService commerceSubscriptionEntryService,
-			ConfigurationProvider configurationProvider,
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
+		CPDefinitionHelper cpDefinitionHelper,
+		CPInstanceHelper cpInstanceHelper,
+		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
+		ConfigurationProvider configurationProvider,
+		HttpServletRequest httpServletRequest) {
 
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
@@ -156,6 +155,7 @@ public class CommerceSubscriptionContentDisplayContext {
 
 		List<CommerceSubscriptionEntry> results =
 			_commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
+				_cpRequestHelper.getCompanyId(),
 				_cpRequestHelper.getScopeGroupId(),
 				_cpRequestHelper.getUserId(), _searchContainer.getStart(),
 				_searchContainer.getEnd(), orderByComparator);
@@ -165,6 +165,7 @@ public class CommerceSubscriptionContentDisplayContext {
 		int total =
 			_commerceSubscriptionEntryService.
 				getCommerceSubscriptionEntriesCount(
+					_cpRequestHelper.getCompanyId(),
 					_cpRequestHelper.getScopeGroupId(),
 					_cpRequestHelper.getUserId());
 
