@@ -79,6 +79,25 @@ public class CPOptionCategoryServiceImpl
 
 	@Override
 	public List<CPOptionCategory> getCPOptionCategories(
+			long companyId, int start, int end)
+		throws PortalException {
+
+		return cpOptionCategoryLocalService.getCPOptionCategories(
+			companyId, start, end);
+	}
+
+	@Override
+	public List<CPOptionCategory> getCPOptionCategories(
+			long companyId, int start, int end,
+			OrderByComparator<CPOptionCategory> orderByComparator)
+		throws PortalException {
+
+		return cpOptionCategoryLocalService.getCPOptionCategories(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 			long groupId, int start, int end)
 		throws PortalException {
 
@@ -86,12 +105,12 @@ public class CPOptionCategoryServiceImpl
 			getPermissionChecker(), groupId,
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
 
-		return cpOptionCategoryLocalService.getCPOptionCategories(
-			groupId, start, end);
+		return cpOptionCategoryLocalService.
+			getCPOptionCategoriesByCatalogGroupId(groupId, start, end);
 	}
 
 	@Override
-	public List<CPOptionCategory> getCPOptionCategories(
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 			long groupId, int start, int end,
 			OrderByComparator<CPOptionCategory> orderByComparator)
 		throws PortalException {
@@ -100,12 +119,23 @@ public class CPOptionCategoryServiceImpl
 			getPermissionChecker(), groupId,
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
 
-		return cpOptionCategoryLocalService.getCPOptionCategories(
-			groupId, start, end, orderByComparator);
+		return cpOptionCategoryLocalService.
+			getCPOptionCategoriesByCatalogGroupId(
+				groupId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPOptionCategoriesCount(long groupId) throws PortalException {
+	public int getCPOptionCategoriesCount(long companyId)
+		throws PortalException {
+
+		return cpOptionCategoryLocalService.getCPOptionCategoriesCount(
+			companyId);
+	}
+
+	@Override
+	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
+		throws PortalException {
+
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
