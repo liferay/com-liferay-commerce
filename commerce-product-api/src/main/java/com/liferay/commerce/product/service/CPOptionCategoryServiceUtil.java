@@ -65,22 +65,44 @@ public class CPOptionCategoryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		long groupId, int start, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPOptionCategories(groupId, start, end);
+		return getService().getCPOptionCategories(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCPOptionCategories(companyId, start, end,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCPOptionCategoriesByCatalogGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCPOptionCategories(groupId, start, end, orderByComparator);
+				   .getCPOptionCategoriesByCatalogGroupId(groupId, start, end,
+			orderByComparator);
 	}
 
-	public static int getCPOptionCategoriesCount(long groupId)
+	public static int getCPOptionCategoriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPOptionCategoriesCount(groupId);
+		return getService().getCPOptionCategoriesCount(companyId);
+	}
+
+	public static int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCPOptionCategoriesCountByCatalogGroupId(groupId);
 	}
 
 	public static com.liferay.commerce.product.model.CPOptionCategory getCPOptionCategory(

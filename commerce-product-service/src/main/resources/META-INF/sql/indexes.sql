@@ -91,6 +91,7 @@ create index IX_17FEC609 on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], companyId)
 create unique index IX_1D633ACB on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_421ED80 on CPSpecificationOption (CPOptionCategoryId);
+create index IX_135028D7 on CPSpecificationOption (companyId);
 create unique index IX_1E01842D on CPSpecificationOption (groupId, key_[$COLUMN_LENGTH:75$]);
 create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], groupId);

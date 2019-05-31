@@ -273,11 +273,25 @@ public class CPSpecificationOptionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPSpecificationOption> getCPSpecificationOptions(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSpecificationOption> orderByComparator) {
+		return getService()
+				   .getCPSpecificationOptions(companyId, start, end,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSpecificationOption> orderByComparator) {
 		return getService()
-				   .getCPSpecificationOptions(groupId, start, end,
-			orderByComparator);
+				   .getCPSpecificationOptionsByCatalogGroupId(groupId, start,
+			end, orderByComparator);
+	}
+
+	public static int getCPSpecificationOptionsByCatalogGroupIdCount(
+		long groupId) {
+		return getService()
+				   .getCPSpecificationOptionsByCatalogGroupIdCount(groupId);
 	}
 
 	/**
@@ -320,10 +334,6 @@ public class CPSpecificationOptionLocalServiceUtil {
 		return getService().getCPSpecificationOptionsCount();
 	}
 
-	public static int getCPSpecificationOptionsCount(long groupId) {
-		return getService().getCPSpecificationOptionsCount(groupId);
-	}
-
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		com.liferay.exportimport.kernel.lar.PortletDataContext portletDataContext) {
 		return getService().getExportActionableDynamicQuery(portletDataContext);
@@ -354,11 +364,11 @@ public class CPSpecificationOptionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSpecificationOption> searchCPSpecificationOptions(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		long companyId, Boolean facetable, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCPSpecificationOptions(companyId, groupId, facetable,
+				   .searchCPSpecificationOptions(companyId, facetable,
 			keywords, start, end, sort);
 	}
 

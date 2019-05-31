@@ -61,10 +61,19 @@ public class CPSpecificationOptionServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPSpecificationOption> getCPSpecificationOptions(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSpecificationOption> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpSpecificationOptionService.getCPSpecificationOptions(companyId,
+			start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPSpecificationOption> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpSpecificationOptionService.getCPSpecificationOptions(groupId,
+		return _cpSpecificationOptionService.getCPSpecificationOptionsByCatalogGroupId(groupId,
 			start, end, orderByComparator);
 	}
 
@@ -86,11 +95,11 @@ public class CPSpecificationOptionServiceWrapper
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPSpecificationOption> searchCPSpecificationOptions(
-		long companyId, long groupId, Boolean facetable, String keywords,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		long companyId, Boolean facetable, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpSpecificationOptionService.searchCPSpecificationOptions(companyId,
-			groupId, facetable, keywords, start, end, sort);
+			facetable, keywords, start, end, sort);
 	}
 
 	@Override

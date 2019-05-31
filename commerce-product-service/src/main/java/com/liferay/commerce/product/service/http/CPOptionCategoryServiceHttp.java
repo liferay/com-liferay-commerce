@@ -154,12 +154,79 @@ public class CPOptionCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		HttpPrincipal httpPrincipal, long groupId, int start, int end)
+		HttpPrincipal httpPrincipal, long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
 					"getCPOptionCategories",
 					_getCPOptionCategoriesParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPOptionCategory>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
+		HttpPrincipal httpPrincipal, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
+					"getCPOptionCategories",
+					_getCPOptionCategoriesParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.product.model.CPOptionCategory>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
+		HttpPrincipal httpPrincipal, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
+					"getCPOptionCategoriesByCatalogGroupId",
+					_getCPOptionCategoriesByCatalogGroupIdParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end);
@@ -186,14 +253,14 @@ public class CPOptionCategoryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
+	public static java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		HttpPrincipal httpPrincipal, long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
-					"getCPOptionCategories",
-					_getCPOptionCategoriesParameterTypes4);
+					"getCPOptionCategoriesByCatalogGroupId",
+					_getCPOptionCategoriesByCatalogGroupIdParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end, orderByComparator);
@@ -221,12 +288,44 @@ public class CPOptionCategoryServiceHttp {
 	}
 
 	public static int getCPOptionCategoriesCount(HttpPrincipal httpPrincipal,
-		long groupId)
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
 					"getCPOptionCategoriesCount",
-					_getCPOptionCategoriesCountParameterTypes5);
+					_getCPOptionCategoriesCountParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getCPOptionCategoriesCountByCatalogGroupId(
+		HttpPrincipal httpPrincipal, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
+					"getCPOptionCategoriesCountByCatalogGroupId",
+					_getCPOptionCategoriesCountByCatalogGroupIdParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -257,7 +356,7 @@ public class CPOptionCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
-					"getCPOptionCategory", _getCPOptionCategoryParameterTypes6);
+					"getCPOptionCategory", _getCPOptionCategoryParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpOptionCategoryId);
@@ -294,7 +393,7 @@ public class CPOptionCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CPOptionCategoryServiceUtil.class,
 					"updateCPOptionCategory",
-					_updateCPOptionCategoryParameterTypes7);
+					_updateCPOptionCategoryParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					cpOptionCategoryId, titleMap, descriptionMap, priority,
@@ -340,13 +439,22 @@ public class CPOptionCategoryServiceHttp {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCPOptionCategoriesCountParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getCPOptionCategoriesByCatalogGroupIdParameterTypes5 =
+		new Class[] { long.class, int.class, int.class };
+	private static final Class<?>[] _getCPOptionCategoriesByCatalogGroupIdParameterTypes6 =
+		new Class[] {
+			long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCPOptionCategoriesCountParameterTypes7 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCPOptionCategoryParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getCPOptionCategoriesCountByCatalogGroupIdParameterTypes8 =
+		new Class[] { long.class };
+	private static final Class<?>[] _getCPOptionCategoryParameterTypes9 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateCPOptionCategoryParameterTypes7 = new Class[] {
+	private static final Class<?>[] _updateCPOptionCategoryParameterTypes10 = new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class, double.class,
 			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
