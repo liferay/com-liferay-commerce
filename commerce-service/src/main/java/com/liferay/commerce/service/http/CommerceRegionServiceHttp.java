@@ -178,46 +178,13 @@ public class CommerceRegionServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceRegion> getCommerceRegions(
-		HttpPrincipal httpPrincipal, long companyId,
-		String countryTwoLettersISOCode, boolean active)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceRegionServiceUtil.class,
-					"getCommerceRegions", _getCommerceRegionsParameterTypes4);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, countryTwoLettersISOCode, active);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.commerce.model.CommerceRegion>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.commerce.model.CommerceRegion> getCommerceRegions(
 		HttpPrincipal httpPrincipal, long commerceCountryId, boolean active,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceRegion> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceRegionServiceUtil.class,
-					"getCommerceRegions", _getCommerceRegionsParameterTypes5);
+					"getCommerceRegions", _getCommerceRegionsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceCountryId, active, start, end, orderByComparator);
@@ -251,10 +218,43 @@ public class CommerceRegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceRegionServiceUtil.class,
-					"getCommerceRegions", _getCommerceRegionsParameterTypes6);
+					"getCommerceRegions", _getCommerceRegionsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceCountryId, start, end, orderByComparator);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.commerce.model.CommerceRegion>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceRegion> getCommerceRegions(
+		HttpPrincipal httpPrincipal, long companyId,
+		String countryTwoLettersISOCode, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceRegionServiceUtil.class,
+					"getCommerceRegions", _getCommerceRegionsParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, countryTwoLettersISOCode, active);
 
 			Object returnObj = null;
 
@@ -427,15 +427,15 @@ public class CommerceRegionServiceHttp {
 			long.class, boolean.class
 		};
 	private static final Class<?>[] _getCommerceRegionsParameterTypes4 = new Class[] {
-			long.class, String.class, boolean.class
-		};
-	private static final Class<?>[] _getCommerceRegionsParameterTypes5 = new Class[] {
 			long.class, boolean.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceRegionsParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getCommerceRegionsParameterTypes5 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getCommerceRegionsParameterTypes6 = new Class[] {
+			long.class, String.class, boolean.class
 		};
 	private static final Class<?>[] _getCommerceRegionsCountParameterTypes7 = new Class[] {
 			long.class

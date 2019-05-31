@@ -512,6 +512,165 @@ public class CPSpecificationOptionUtil {
 	}
 
 	/**
+	* Returns all the cp specification options where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the matching cp specification options
+	*/
+	public static List<CPSpecificationOption> findByGroupId(long groupId) {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	/**
+	* Returns a range of all the cp specification options where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cp specification options
+	* @param end the upper bound of the range of cp specification options (not inclusive)
+	* @return the range of matching cp specification options
+	*/
+	public static List<CPSpecificationOption> findByGroupId(long groupId,
+		int start, int end) {
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the cp specification options where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cp specification options
+	* @param end the upper bound of the range of cp specification options (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching cp specification options
+	*/
+	public static List<CPSpecificationOption> findByGroupId(long groupId,
+		int start, int end,
+		OrderByComparator<CPSpecificationOption> orderByComparator) {
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the cp specification options where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of cp specification options
+	* @param end the upper bound of the range of cp specification options (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching cp specification options
+	*/
+	public static List<CPSpecificationOption> findByGroupId(long groupId,
+		int start, int end,
+		OrderByComparator<CPSpecificationOption> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first cp specification option in the ordered set where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp specification option
+	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption findByGroupId_First(long groupId,
+		OrderByComparator<CPSpecificationOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+	}
+
+	/**
+	* Returns the first cp specification option in the ordered set where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByGroupId_First(long groupId,
+		OrderByComparator<CPSpecificationOption> orderByComparator) {
+		return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+	}
+
+	/**
+	* Returns the last cp specification option in the ordered set where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp specification option
+	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption findByGroupId_Last(long groupId,
+		OrderByComparator<CPSpecificationOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+	}
+
+	/**
+	* Returns the last cp specification option in the ordered set where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByGroupId_Last(long groupId,
+		OrderByComparator<CPSpecificationOption> orderByComparator) {
+		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+	}
+
+	/**
+	* Returns the cp specification options before and after the current cp specification option in the ordered set where groupId = &#63;.
+	*
+	* @param CPSpecificationOptionId the primary key of the current cp specification option
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next cp specification option
+	* @throws NoSuchCPSpecificationOptionException if a cp specification option with the primary key could not be found
+	*/
+	public static CPSpecificationOption[] findByGroupId_PrevAndNext(
+		long CPSpecificationOptionId, long groupId,
+		OrderByComparator<CPSpecificationOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(CPSpecificationOptionId, groupId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the cp specification options where groupId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	*/
+	public static void removeByGroupId(long groupId) {
+		getPersistence().removeByGroupId(groupId);
+	}
+
+	/**
+	* Returns the number of cp specification options where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the number of matching cp specification options
+	*/
+	public static int countByGroupId(long groupId) {
+		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
 	* Returns all the cp specification options where companyId = &#63;.
 	*
 	* @param companyId the company ID
@@ -672,165 +831,6 @@ public class CPSpecificationOptionUtil {
 	*/
 	public static int countByCompanyId(long companyId) {
 		return getPersistence().countByCompanyId(companyId);
-	}
-
-	/**
-	* Returns all the cp specification options where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the matching cp specification options
-	*/
-	public static List<CPSpecificationOption> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
-	}
-
-	/**
-	* Returns a range of all the cp specification options where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of cp specification options
-	* @param end the upper bound of the range of cp specification options (not inclusive)
-	* @return the range of matching cp specification options
-	*/
-	public static List<CPSpecificationOption> findByGroupId(long groupId,
-		int start, int end) {
-		return getPersistence().findByGroupId(groupId, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the cp specification options where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of cp specification options
-	* @param end the upper bound of the range of cp specification options (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching cp specification options
-	*/
-	public static List<CPSpecificationOption> findByGroupId(long groupId,
-		int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator) {
-		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the cp specification options where groupId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPSpecificationOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of cp specification options
-	* @param end the upper bound of the range of cp specification options (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching cp specification options
-	*/
-	public static List<CPSpecificationOption> findByGroupId(long groupId,
-		int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByGroupId(groupId, start, end, orderByComparator,
-			retrieveFromCache);
-	}
-
-	/**
-	* Returns the first cp specification option in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching cp specification option
-	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
-	*/
-	public static CPSpecificationOption findByGroupId_First(long groupId,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
-		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the first cp specification option in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
-	*/
-	public static CPSpecificationOption fetchByGroupId_First(long groupId,
-		OrderByComparator<CPSpecificationOption> orderByComparator) {
-		return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the last cp specification option in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching cp specification option
-	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
-	*/
-	public static CPSpecificationOption findByGroupId_Last(long groupId,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
-		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the last cp specification option in the ordered set where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
-	*/
-	public static CPSpecificationOption fetchByGroupId_Last(long groupId,
-		OrderByComparator<CPSpecificationOption> orderByComparator) {
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the cp specification options before and after the current cp specification option in the ordered set where groupId = &#63;.
-	*
-	* @param CPSpecificationOptionId the primary key of the current cp specification option
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next cp specification option
-	* @throws NoSuchCPSpecificationOptionException if a cp specification option with the primary key could not be found
-	*/
-	public static CPSpecificationOption[] findByGroupId_PrevAndNext(
-		long CPSpecificationOptionId, long groupId,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
-		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
-		return getPersistence()
-				   .findByGroupId_PrevAndNext(CPSpecificationOptionId, groupId,
-			orderByComparator);
-	}
-
-	/**
-	* Removes all the cp specification options where groupId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	*/
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
-	}
-
-	/**
-	* Returns the number of cp specification options where groupId = &#63;.
-	*
-	* @param groupId the group ID
-	* @return the number of matching cp specification options
-	*/
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
 	}
 
 	/**
@@ -1065,6 +1065,66 @@ public class CPSpecificationOptionUtil {
 	*/
 	public static int countByG_K(long groupId, String key) {
 		return getPersistence().countByG_K(groupId, key);
+	}
+
+	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or throws a {@link NoSuchCPSpecificationOptionException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the matching cp specification option
+	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption findByC_K(long companyId, String key)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().findByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByC_K(long companyId, String key) {
+		return getPersistence().fetchByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByC_K(long companyId, String key,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByC_K(companyId, key, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp specification option where companyId = &#63; and key = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the cp specification option that was removed
+	*/
+	public static CPSpecificationOption removeByC_K(long companyId, String key)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().removeByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the number of cp specification options where companyId = &#63; and key = &#63;.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the number of matching cp specification options
+	*/
+	public static int countByC_K(long companyId, String key) {
+		return getPersistence().countByC_K(companyId, key);
 	}
 
 	/**

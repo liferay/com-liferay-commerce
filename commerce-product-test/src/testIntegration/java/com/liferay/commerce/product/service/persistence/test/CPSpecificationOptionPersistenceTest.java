@@ -217,17 +217,17 @@ public class CPSpecificationOptionPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCompanyId() throws Exception {
-		_persistence.countByCompanyId(RandomTestUtil.nextLong());
-
-		_persistence.countByCompanyId(0L);
-	}
-
-	@Test
 	public void testCountByGroupId() throws Exception {
 		_persistence.countByGroupId(RandomTestUtil.nextLong());
 
 		_persistence.countByGroupId(0L);
+	}
+
+	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
@@ -244,6 +244,15 @@ public class CPSpecificationOptionPersistenceTest {
 		_persistence.countByG_K(0L, "null");
 
 		_persistence.countByG_K(0L, (String)null);
+	}
+
+	@Test
+	public void testCountByC_K() throws Exception {
+		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_K(0L, "null");
+
+		_persistence.countByC_K(0L, (String)null);
 	}
 
 	@Test
@@ -499,6 +508,15 @@ public class CPSpecificationOptionPersistenceTest {
 				existingCPSpecificationOption.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
 				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCPSpecificationOption.getKey(),
+				ReflectionTestUtil.invoke(existingCPSpecificationOption,
+					"getOriginalKey", new Class<?>[0])));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCPSpecificationOption.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
+				"getOriginalCompanyId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(
 				existingCPSpecificationOption.getKey(),
 				ReflectionTestUtil.invoke(existingCPSpecificationOption,

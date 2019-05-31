@@ -75,19 +75,32 @@ public interface CPOptionService extends BaseService {
 	public CPOption fetchCPOption(long cpOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOption fetchCPOptionByCatalogGroupId(long groupId, String key)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption getCPOption(long cpOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end,
+	public List<CPOption> getCPOptions(long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCount(long groupId) throws PortalException;
+	public List<CPOption> getCPOptionsByCatalogGroupId(long groupId, int start,
+		int end, OrderByComparator<CPOption> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionsCount(long companyId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionsCountByCatalogGroupId(long groupId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -98,7 +111,7 @@ public interface CPOptionService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPOption> searchCPOptions(long companyId,
-		long groupId, String keywords, int start, int end, Sort sort)
+		String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	public CPOption updateCPOption(long cpOptionId,
