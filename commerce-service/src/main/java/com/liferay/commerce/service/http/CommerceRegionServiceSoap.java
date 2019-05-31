@@ -126,23 +126,6 @@ public class CommerceRegionServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceRegionSoap[] getCommerceRegions(
-		long companyId, String countryTwoLettersISOCode, boolean active)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceRegion> returnValue =
-				CommerceRegionServiceUtil.getCommerceRegions(companyId,
-					countryTwoLettersISOCode, active);
-
-			return com.liferay.commerce.model.CommerceRegionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.model.CommerceRegionSoap[] getCommerceRegions(
 		long commerceCountryId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceRegion> orderByComparator)
 		throws RemoteException {
@@ -168,6 +151,23 @@ public class CommerceRegionServiceSoap {
 			java.util.List<com.liferay.commerce.model.CommerceRegion> returnValue =
 				CommerceRegionServiceUtil.getCommerceRegions(commerceCountryId,
 					start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceRegionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceRegionSoap[] getCommerceRegions(
+		long companyId, String countryTwoLettersISOCode, boolean active)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceRegion> returnValue =
+				CommerceRegionServiceUtil.getCommerceRegions(companyId,
+					countryTwoLettersISOCode, active);
 
 			return com.liferay.commerce.model.CommerceRegionSoap.toSoapModels(returnValue);
 		}

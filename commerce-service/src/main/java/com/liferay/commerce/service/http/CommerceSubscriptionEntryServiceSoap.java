@@ -92,12 +92,12 @@ public class CommerceSubscriptionEntryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[] getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
+		long companyId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> returnValue =
-				CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntries(groupId,
+				CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntries(companyId,
 					userId, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModels(returnValue);
@@ -109,11 +109,44 @@ public class CommerceSubscriptionEntryServiceSoap {
 		}
 	}
 
-	public static int getCommerceSubscriptionEntriesCount(long groupId,
+	public static com.liferay.commerce.model.CommerceSubscriptionEntrySoap[] getCommerceSubscriptionEntries(
+		long companyId, long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceSubscriptionEntry> orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry> returnValue =
+				CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntries(companyId,
+					groupId, userId, start, end, orderByComparator);
+
+			return com.liferay.commerce.model.CommerceSubscriptionEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceSubscriptionEntriesCount(long companyId,
 		long userId) throws RemoteException {
 		try {
-			int returnValue = CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntriesCount(groupId,
+			int returnValue = CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntriesCount(companyId,
 					userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceSubscriptionEntriesCount(long companyId,
+		long groupId, long userId) throws RemoteException {
+		try {
+			int returnValue = CommerceSubscriptionEntryServiceUtil.getCommerceSubscriptionEntriesCount(companyId,
+					groupId, userId);
 
 			return returnValue;
 		}
