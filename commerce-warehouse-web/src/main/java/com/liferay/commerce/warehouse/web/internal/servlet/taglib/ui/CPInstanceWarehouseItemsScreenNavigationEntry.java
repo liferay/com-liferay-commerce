@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
@@ -28,7 +27,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -100,8 +98,7 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 					new CommerceWarehouseItemsDisplayContext(
 						_commerceWarehouseItemLocalService,
 						_commerceWarehouseLocalService, _configurationProvider,
-						_cpInstanceService, httpServletRequest, _portal,
-						_portletResourcePermission);
+						_cpInstanceService, httpServletRequest, _portal);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -138,11 +135,6 @@ public class CPInstanceWarehouseItemsScreenNavigationEntry
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.warehouse.web)"

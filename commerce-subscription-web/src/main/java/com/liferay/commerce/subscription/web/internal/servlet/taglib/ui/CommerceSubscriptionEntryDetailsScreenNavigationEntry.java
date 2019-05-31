@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.subscription.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -25,7 +24,6 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -90,8 +88,7 @@ public class CommerceSubscriptionEntryDetailsScreenNavigationEntry
 				new CommerceSubscriptionEntryDisplayContext(
 					_commerceSubscriptionEntryService, _configurationProvider,
 					_cpSubscriptionTypeJSPContributorRegistry,
-					_cpSubscriptionTypeRegistry, httpServletRequest,
-					_portletResourcePermission);
+					_cpSubscriptionTypeRegistry, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -117,11 +114,6 @@ public class CommerceSubscriptionEntryDetailsScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
-
-	@Reference(
-		target = "(resource.name=" + CommerceConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.subscription.web)"
