@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.product.search;
+package com.liferay.commerce.product.internal.search;
 
 import com.liferay.commerce.product.constants.CPField;
-import com.liferay.commerce.product.model.CPOptionCategory;
-import com.liferay.commerce.product.model.CPSpecificationOption;
-import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
-import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
+import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -36,11 +34,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.Serializable;
-
 import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -49,20 +44,20 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Marco Leo
  */
 @Component(immediate = true, service = Indexer.class)
-public class CPSpecificationOptionIndexer
-	extends BaseIndexer<CPSpecificationOption> {
+public class CPDefinitionOptionValueRelIndexer
+	extends BaseIndexer<CPDefinitionOptionValueRel> {
 
 	public static final String CLASS_NAME =
-		CPSpecificationOption.class.getName();
+		CPDefinitionOptionValueRel.class.getName();
 
-	public CPSpecificationOptionIndexer() {
+	public CPDefinitionOptionValueRelIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			Field.TITLE, Field.UID, CPField.KEY);
+			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
+			Field.SCOPE_GROUP_ID, Field.UID, CPField.KEY);
 	}
 
 	@Override
@@ -75,13 +70,12 @@ public class CPSpecificationOptionIndexer
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		Map<String, Serializable> attributes = searchContext.getAttributes();
+		long cpDefinitionOptionRelId = GetterUtil.getLong(
+			searchContext.getAttribute(CPField.CP_DEFINITION_OPTION_REL_ID));
 
-		if (attributes.containsKey(CPField.FACETABLE)) {
-			boolean facetable = GetterUtil.getBoolean(
-				attributes.get(CPField.FACETABLE));
-
-			contextBooleanFilter.addRequiredTerm(CPField.FACETABLE, facetable);
+		if (cpDefinitionOptionRelId > 0) {
+			contextBooleanFilter.addRequiredTerm(
+				CPField.CP_DEFINITION_OPTION_REL_ID, cpDefinitionOptionRelId);
 		}
 	}
 
@@ -91,18 +85,9 @@ public class CPSpecificationOptionIndexer
 			SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(
-			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_ID, false);
-		addSearchTerm(
-			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
-		addSearchLocalizedTerm(
-			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
-		addSearchLocalizedTerm(
-			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(searchQuery, searchContext, CPField.KEY, false);
-		addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
-		addSearchLocalizedTerm(searchQuery, searchContext, Field.TITLE, false);
+		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 
 		LinkedHashMap<String, Object> params =
@@ -118,69 +103,63 @@ public class CPSpecificationOptionIndexer
 	}
 
 	@Override
-	protected void doDelete(CPSpecificationOption cpSpecificationOption)
+	protected void doDelete(
+			CPDefinitionOptionValueRel cpDefinitionOptionValueRel)
 		throws Exception {
 
 		deleteDocument(
-			cpSpecificationOption.getCompanyId(),
-			cpSpecificationOption.getCPSpecificationOptionId());
+			cpDefinitionOptionValueRel.getCompanyId(),
+			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
 	}
 
 	@Override
 	protected Document doGetDocument(
-			CPSpecificationOption cpSpecificationOption)
+			CPDefinitionOptionValueRel cpDefinitionOptionValueRel)
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Indexing specification option " + cpSpecificationOption);
+				"Indexing definition option rel " + cpDefinitionOptionValueRel);
 		}
 
 		Document document = getBaseModelDocument(
-			CLASS_NAME, cpSpecificationOption);
+			CLASS_NAME, cpDefinitionOptionValueRel);
 
-		CPOptionCategory cpOptionCategory =
-			_cpOptionCategoryLocalService.fetchCPOptionCategory(
-				cpSpecificationOption.getCPOptionCategoryId());
+		String cpDefinitionOptionValueRelDefaultLanguageId =
+			LocalizationUtil.getDefaultLanguageId(
+				cpDefinitionOptionValueRel.getName());
 
 		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
-			cpSpecificationOption.getTitle());
+			cpDefinitionOptionValueRel.getName());
 
 		for (String languageId : languageIds) {
-			String title = cpSpecificationOption.getTitle(languageId);
+			String name = cpDefinitionOptionValueRel.getName(languageId);
 
-			document.addText(
-				LocalizationUtil.getLocalizedName(Field.TITLE, languageId),
-				title);
+			if (languageId.equals(
+					cpDefinitionOptionValueRelDefaultLanguageId)) {
 
-			String description = cpSpecificationOption.getDescription(
-				languageId);
-
-			document.addText(
-				LocalizationUtil.getLocalizedName(
-					Field.DESCRIPTION, languageId),
-				description);
-
-			if (cpOptionCategory != null) {
-				document.addText(
-					LocalizationUtil.getLocalizedName(
-						CPField.CP_OPTION_CATEGORY_TITLE, languageId),
-					cpOptionCategory.getTitle(languageId));
-
-				document.addKeyword(
-					CPField.CP_OPTION_CATEGORY_ID,
-					cpOptionCategory.getCPOptionCategoryId());
+				document.addText(Field.NAME, name);
+				document.addText("defaultLanguageId", languageId);
 			}
 
-			document.addKeyword(
-				CPField.FACETABLE, cpSpecificationOption.isFacetable());
-			document.addText(CPField.KEY, cpSpecificationOption.getKey());
-			document.addText(Field.CONTENT, title);
+			document.addText(
+				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
+				name);
+
+			document.addText(CPField.KEY, cpDefinitionOptionValueRel.getKey());
+			document.addText(Field.CONTENT, name);
 		}
+
+		document.addNumber(
+			Field.PRIORITY, cpDefinitionOptionValueRel.getPriority());
+		document.addKeyword(
+			CPField.CP_DEFINITION_OPTION_REL_ID,
+			cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Document " + cpSpecificationOption + " indexed successfully");
+				"Document " + cpDefinitionOptionValueRel +
+					" indexed successfully");
 		}
 
 		return document;
@@ -191,8 +170,7 @@ public class CPSpecificationOptionIndexer
 		Document document, Locale locale, String snippet,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		Summary summary = createSummary(
-			document, Field.TITLE, Field.DESCRIPTION);
+		Summary summary = createSummary(document, Field.NAME, CPField.KEY);
 
 		summary.setMaxContentLength(200);
 
@@ -200,54 +178,54 @@ public class CPSpecificationOptionIndexer
 	}
 
 	@Override
-	protected void doReindex(CPSpecificationOption cpSpecificationOption)
+	protected void doReindex(
+			CPDefinitionOptionValueRel cpDefinitionOptionValueRel)
 		throws Exception {
 
-		Document document = getDocument(cpSpecificationOption);
+		Document document = getDocument(cpDefinitionOptionValueRel);
 
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpSpecificationOption.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpDefinitionOptionValueRel.getCompanyId(),
+			document, isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPSpecificationOption cpSpecificationOption =
-			_cpSpecificationOptionLocalService.getCPSpecificationOption(
-				classPK);
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
+			_cpDefinitionOptionValueRelLocalService.
+				getCPDefinitionOptionValueRel(classPK);
 
-		doReindex(cpSpecificationOption);
+		doReindex(cpDefinitionOptionValueRel);
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexCPSpecificationOptions(companyId);
+		reindexCPDefinitionOptionValueRels(companyId);
 	}
 
-	protected void reindexCPSpecificationOptions(long companyId)
+	protected void reindexCPDefinitionOptionValueRels(long companyId)
 		throws PortalException {
 
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			_cpSpecificationOptionLocalService.
+			_cpDefinitionOptionValueRelLocalService.
 				getIndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			(CPSpecificationOption cpSpecificationOption) -> {
+			(CPDefinitionOptionValueRel cpDefinitionOptionValueRel) -> {
 				try {
-					Document document = getDocument(cpSpecificationOption);
+					Document document = getDocument(cpDefinitionOptionValueRel);
 
 					indexableActionableDynamicQuery.addDocuments(document);
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to index commerce product specification " +
-								"option " +
-									cpSpecificationOption.
-										getCPSpecificationOptionId(),
+							"Unable to index definition option rel " +
+								cpDefinitionOptionValueRel.
+									getCPDefinitionOptionValueRelId(),
 							pe);
 					}
 				}
@@ -258,14 +236,11 @@ public class CPSpecificationOptionIndexer
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPSpecificationOptionIndexer.class);
+		CPDefinitionOptionValueRelIndexer.class);
 
 	@Reference
-	private CPOptionCategoryLocalService _cpOptionCategoryLocalService;
-
-	@Reference
-	private CPSpecificationOptionLocalService
-		_cpSpecificationOptionLocalService;
+	private CPDefinitionOptionValueRelLocalService
+		_cpDefinitionOptionValueRelLocalService;
 
 	@Reference
 	private IndexWriterHelper _indexWriterHelper;
