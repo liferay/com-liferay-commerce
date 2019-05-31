@@ -169,12 +169,28 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public List<CPOption> getCPOptions(long groupId, int start, int end) {
-		return cpOptionPersistence.findByGroupId(groupId, start, end);
+	public List<CPOption> getCPOptions(long companyId, int start, int end) {
+		return cpOptionPersistence.findByCompanyId(companyId, start, end);
 	}
 
 	@Override
 	public List<CPOption> getCPOptions(
+		long companyId, int start, int end,
+		OrderByComparator<CPOption> orderByComparator) {
+
+		return cpOptionPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPOption> getCPOptionsByCatalogGroupId(
+		long groupId, int start, int end) {
+
+		return cpOptionPersistence.findByGroupId(groupId, start, end);
+	}
+
+	@Override
+	public List<CPOption> getCPOptionsByCatalogGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator) {
 
@@ -183,7 +199,12 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public int getCPOptionsCount(long groupId) {
+	public int getCPOptionsCount(long companyId) {
+		return cpOptionPersistence.countByCompanyId(companyId);
+	}
+
+	@Override
+	public int getCPOptionsCountByCatalogGroupId(long groupId) {
 		return cpOptionPersistence.countByGroupId(groupId);
 	}
 
@@ -202,12 +223,11 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPOption> searchCPOptions(
-			long companyId, long groupId, String keywords, int start, int end,
-			Sort sort)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, keywords, start, end, sort);
+			companyId, keywords, start, end, sort);
 
 		return searchCPOptions(searchContext);
 	}
@@ -308,8 +328,7 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String keywords, int start, int end,
-		Sort sort) {
+		long companyId, String keywords, int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -331,7 +350,6 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
