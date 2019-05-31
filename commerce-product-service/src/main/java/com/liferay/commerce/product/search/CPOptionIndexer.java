@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionLocalService;
@@ -53,17 +54,10 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 
 	public static final String CLASS_NAME = CPOption.class.getName();
 
-	public static final String FIELD_DDM_FORM_FIELD_TYPE_NAME =
-		"DDMFormFieldTypeName";
-
-	public static final String FIELD_KEY = "key";
-
-	public static final String FIELD_OPTION_VALUE_NAME = "optionValueName";
-
 	public CPOptionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.MODIFIED_DATE, Field.NAME, Field.UID, FIELD_KEY);
+			Field.MODIFIED_DATE, Field.NAME, Field.UID, CPField.KEY);
 		setFilterSearch(true);
 		setPermissionAware(true);
 	}
@@ -82,11 +76,11 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
-		addSearchTerm(searchQuery, searchContext, FIELD_KEY, false);
+		addSearchTerm(searchQuery, searchContext, CPField.KEY, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_OPTION_VALUE_NAME, false);
+			searchQuery, searchContext, CPField.OPTION_VALUE_NAME, false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, FIELD_OPTION_VALUE_NAME, false);
+			searchQuery, searchContext, CPField.OPTION_VALUE_NAME, false);
 		addSearchTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
@@ -139,7 +133,7 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 
 			if (languageId.equals(cpOptionDefaultLanguageId)) {
 				document.addText(Field.DESCRIPTION, description);
-				document.addText(FIELD_OPTION_VALUE_NAME, cpOptionValueNames);
+				document.addText(CPField.OPTION_VALUE_NAME, cpOptionValueNames);
 				document.addText(Field.NAME, name);
 				document.addText("defaultLanguageId", languageId);
 			}
@@ -152,16 +146,16 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 					Field.DESCRIPTION, languageId),
 				description);
 
-			document.addText(FIELD_KEY, cpOption.getKey());
+			document.addText(CPField.KEY, cpOption.getKey());
 			document.addText(Field.CONTENT, name);
 
 			document.addText(
 				LocalizationUtil.getLocalizedName(
-					FIELD_OPTION_VALUE_NAME, languageId),
+					CPField.OPTION_VALUE_NAME, languageId),
 				cpOptionValueNames);
 
 			document.addText(
-				FIELD_DDM_FORM_FIELD_TYPE_NAME,
+				CPField.DDM_FORM_FIELD_TYPE_NAME,
 				cpOption.getDDMFormFieldTypeName());
 		}
 

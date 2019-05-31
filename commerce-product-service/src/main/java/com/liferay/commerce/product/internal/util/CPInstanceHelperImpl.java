@@ -19,6 +19,7 @@ import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.internal.catalog.CPSkuImpl;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
@@ -26,8 +27,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.search.CPAttachmentFileEntryIndexer;
-import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
@@ -128,10 +127,10 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(
-			CPAttachmentFileEntryIndexer.FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+			CPField.RELATED_ENTITY_CLASS_NAME_ID,
 			cpDefinitionClassNameId);
 		attributes.put(
-			CPAttachmentFileEntryIndexer.FIELD_RELATED_ENTITY_CLASS_PK,
+			CPField.RELATED_ENTITY_CLASS_PK,
 			cpDefinitionId);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(Field.TYPE, type);
@@ -283,8 +282,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(
-			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
-		attributes.put(CPInstanceIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+			CPField.CP_DEFINITION_ID, cpDefinitionId);
+		attributes.put(CPField.PUBLISHED, Boolean.TRUE);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
 		List<String> optionsKeys = new ArrayList<>();
@@ -354,8 +353,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(
-			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
-		attributes.put(CPInstanceIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+			CPField.CP_DEFINITION_ID, cpDefinitionId);
+		attributes.put(CPField.PUBLISHED, Boolean.TRUE);
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
 		List<String> optionsKeys = new ArrayList<>();

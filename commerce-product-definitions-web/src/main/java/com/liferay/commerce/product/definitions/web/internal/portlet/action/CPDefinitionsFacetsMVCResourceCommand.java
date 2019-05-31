@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.commerce.product.service.CPOptionService;
@@ -197,7 +197,7 @@ public class CPDefinitionsFacetsMVCResourceCommand
 					WorkflowConstants.getStatusLabel(status));
 			}
 			else if (fieldName.equals(
-						CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME)) {
+						CPField.PRODUCT_TYPE_NAME)) {
 
 				String productTypeName = termCollector.getTerm();
 
@@ -206,7 +206,7 @@ public class CPDefinitionsFacetsMVCResourceCommand
 
 				label = cpType.getLabel(themeDisplay.getLocale());
 			}
-			else if (fieldName.equals(CPDefinitionIndexer.FIELD_OPTION_NAMES)) {
+			else if (fieldName.equals(CPField.OPTION_NAMES)) {
 				String optionKey = termCollector.getTerm();
 
 				CPOption cpOption = _cpOptionService.fetchCPOption(

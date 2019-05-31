@@ -17,6 +17,7 @@ package com.liferay.commerce.product.search;
 import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -90,61 +91,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	public static final String CLASS_NAME = CPDefinition.class.getName();
 
-	public static final String FIELD_ACCOUNT_GROUP_FILTER_ENABLED =
-		"accountGroupFilterEnabled";
-
-	public static final String FIELD_CHANNEL_FILTER_ENABLED =
-		"channelFilterEnabled";
-
-	public static final String FIELD_CHANNEL_GROUP_IDS = "channelGroupIds";
-
-	public static final String FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID =
-		"defaultImageFileEntryId";
-
-	public static final String FIELD_DEFAULT_IMAGE_FILE_URL =
-		"defaultImageFileUrl";
-
-	public static final String FIELD_DEPTH = "depth";
-
-	public static final String FIELD_DISPLAY_DATE = "displayDate";
-
-	public static final String FIELD_EXTERNAL_REFERENCE_CODE =
-		"externalReferenceCode";
-
-	public static final String FIELD_HEIGHT = "height";
-
-	public static final String FIELD_IS_IGNORE_SKU_COMBINATIONS =
-		"isIgnoreSKUCombinations";
-
-	public static final String FIELD_META_DESCRIPTION = "metaDescription";
-
-	public static final String FIELD_META_KEYWORDS = "metaKeywords";
-
-	public static final String FIELD_META_TITLE = "metaTitle";
-
-	public static final String FIELD_OPTION_IDS = "optionsIds";
-
-	public static final String FIELD_OPTION_NAMES = "optionsNames";
-
-	public static final String FIELD_PRODUCT_ID = "cpProductId";
-
-	public static final String FIELD_PRODUCT_TYPE_NAME = "productTypeName";
-
-	public static final String FIELD_PUBLISHED = "published";
-
-	public static final String FIELD_SHORT_DESCRIPTION = "shortDescription";
-
-	public static final String FIELD_SKUS = "skus";
-
-	public static final String FIELD_SPECIFICATION_IDS =
-		"specificationOptionsIds";
-
-	public static final String FIELD_SPECIFICATION_NAMES =
-		"specificationOptionsNames";
-
-	public static final String FIELD_SPECIFICATION_VALUES_NAMES =
-		"specificationOptionsValuesNames";
-
 	public CPDefinitionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
@@ -184,11 +130,11 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
 
-		if (attributes.containsKey(FIELD_PUBLISHED)) {
+		if (attributes.containsKey(CPField.PUBLISHED)) {
 			boolean published = GetterUtil.getBoolean(
-				attributes.get(FIELD_PUBLISHED));
+				attributes.get(CPField.PUBLISHED));
 
-			contextBooleanFilter.addRequiredTerm(FIELD_PUBLISHED, published);
+			contextBooleanFilter.addRequiredTerm(CPField.PUBLISHED, published);
 		}
 
 		contextBooleanFilter.addRequiredTerm(Field.HIDDEN, false);
@@ -227,23 +173,23 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			BooleanFilter channelFilterEnableBooleanFiler = new BooleanFilter();
 
 			channelFilterEnableBooleanFiler.addTerm(
-				FIELD_CHANNEL_FILTER_ENABLED, Boolean.TRUE.toString(),
+				CPField.CHANNEL_FILTER_ENABLED, Boolean.TRUE.toString(),
 				BooleanClauseOccur.MUST);
 
 			if (commerceChannelId > 0) {
 				channelFilterEnableBooleanFiler.addTerm(
-					FIELD_CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId),
+					CPField.CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId),
 					BooleanClauseOccur.MUST);
 			}
 			else {
 				channelFilterEnableBooleanFiler.addTerm(
-					FIELD_CHANNEL_GROUP_IDS, "-1", BooleanClauseOccur.MUST);
+					CPField.CHANNEL_GROUP_IDS, "-1", BooleanClauseOccur.MUST);
 			}
 
 			channelBooleanFiler.add(
 				channelFilterEnableBooleanFiler, BooleanClauseOccur.SHOULD);
 			channelBooleanFiler.addTerm(
-				FIELD_CHANNEL_FILTER_ENABLED, Boolean.FALSE.toString(),
+				CPField.CHANNEL_FILTER_ENABLED, Boolean.FALSE.toString(),
 				BooleanClauseOccur.SHOULD);
 
 			contextBooleanFilter.add(
@@ -258,7 +204,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				new BooleanFilter();
 
 			accountGroupsFilteEnableBooleanFilter.addTerm(
-				FIELD_ACCOUNT_GROUP_FILTER_ENABLED, Boolean.TRUE.toString(),
+				CPField.ACCOUNT_GROUP_FILTER_ENABLED, Boolean.TRUE.toString(),
 				BooleanClauseOccur.MUST);
 
 			if ((commerceAccountGroupIds != null) &&
@@ -288,7 +234,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				accountGroupsFilteEnableBooleanFilter,
 				BooleanClauseOccur.SHOULD);
 			accountGroupsBooleanFilter.addTerm(
-				FIELD_ACCOUNT_GROUP_FILTER_ENABLED, Boolean.FALSE.toString(),
+				CPField.ACCOUNT_GROUP_FILTER_ENABLED, Boolean.FALSE.toString(),
 				BooleanClauseOccur.SHOULD);
 
 			contextBooleanFilter.add(
@@ -315,13 +261,13 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, FIELD_SHORT_DESCRIPTION, false);
+			searchQuery, searchContext, CPField.SHORT_DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
-		addSearchTerm(searchQuery, searchContext, FIELD_SKUS, false);
+		addSearchTerm(searchQuery, searchContext, CPField.SKUS, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_EXTERNAL_REFERENCE_CODE, false);
+			searchQuery, searchContext, CPField.EXTERNAL_REFERENCE_CODE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 
 		LinkedHashMap<String, Object> params =
@@ -382,10 +328,10 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				document.addText(Field.DESCRIPTION, description);
 				document.addText(Field.NAME, name);
 				document.addText(Field.URL, urlTitle);
-				document.addText(FIELD_META_DESCRIPTION, metaDescription);
-				document.addText(FIELD_META_KEYWORDS, metaKeywords);
-				document.addText(FIELD_META_TITLE, metaTitle);
-				document.addText(FIELD_SHORT_DESCRIPTION, shortDescription);
+				document.addText(CPField.META_DESCRIPTION, metaDescription);
+				document.addText(CPField.META_KEYWORDS, metaKeywords);
+				document.addText(CPField.META_TITLE, metaTitle);
+				document.addText(CPField.SHORT_DESCRIPTION, shortDescription);
 				document.addText("defaultLanguageId", languageId);
 			}
 
@@ -401,18 +347,18 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				urlTitle);
 			document.addText(
 				LocalizationUtil.getLocalizedName(
-					FIELD_META_DESCRIPTION, languageId),
+					CPField.META_DESCRIPTION, languageId),
 				metaDescription);
 			document.addText(
 				LocalizationUtil.getLocalizedName(
-					FIELD_META_KEYWORDS, languageId),
+					CPField.META_KEYWORDS, languageId),
 				metaKeywords);
 			document.addText(
-				LocalizationUtil.getLocalizedName(FIELD_META_TITLE, languageId),
+				LocalizationUtil.getLocalizedName(CPField.META_TITLE, languageId),
 				metaTitle);
 			document.addText(
 				LocalizationUtil.getLocalizedName(
-					FIELD_SHORT_DESCRIPTION, languageId),
+					CPField.SHORT_DESCRIPTION, languageId),
 				shortDescription);
 
 			document.addText(Field.CONTENT, description);
@@ -427,7 +373,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			Field.URL,
 			languageIdToUrlTitleMap.get(cpDefinitionDefaultLanguageId));
 		document.addText(
-			FIELD_SHORT_DESCRIPTION,
+			CPField.SHORT_DESCRIPTION,
 			cpDefinition.getShortDescription(cpDefinitionDefaultLanguageId));
 
 		List<Long> channelGroupIds = new ArrayList<>();
@@ -445,7 +391,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		}
 
 		document.addNumber(
-			FIELD_CHANNEL_GROUP_IDS, ArrayUtil.toLongArray(channelGroupIds));
+			CPField.CHANNEL_GROUP_IDS, ArrayUtil.toLongArray(channelGroupIds));
 
 		List<CommerceAccountGroupRel> commerceAccountGroupRels =
 			_commerceAccountGroupRelService.getCommerceAccountGroupRels(
@@ -529,40 +475,40 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		}
 
 		document.addKeyword(
-			FIELD_PRODUCT_TYPE_NAME, cpDefinition.getProductTypeName());
-		document.addKeyword(FIELD_PUBLISHED, cpDefinition.isPublished());
+			CPField.PRODUCT_TYPE_NAME, cpDefinition.getProductTypeName());
+		document.addKeyword(CPField.PUBLISHED, cpDefinition.isPublished());
 		document.addDateSortable(
-			FIELD_DISPLAY_DATE, cpDefinition.getDisplayDate());
+			CPField.DISPLAY_DATE, cpDefinition.getDisplayDate());
 
-		document.addNumber(FIELD_DEPTH, cpDefinition.getDepth());
-		document.addNumber(FIELD_HEIGHT, cpDefinition.getHeight());
+		document.addNumber(CPField.DEPTH, cpDefinition.getDepth());
+		document.addNumber(CPField.HEIGHT, cpDefinition.getHeight());
 
 		CProduct cProduct = cpDefinition.getCProduct();
 
 		document.addKeyword(
-			FIELD_EXTERNAL_REFERENCE_CODE, cProduct.getExternalReferenceCode());
+			CPField.EXTERNAL_REFERENCE_CODE, cProduct.getExternalReferenceCode());
 
 		document.addKeyword(
-			FIELD_ACCOUNT_GROUP_FILTER_ENABLED,
+			CPField.ACCOUNT_GROUP_FILTER_ENABLED,
 			cpDefinition.isAccountGroupFilterEnabled());
 		document.addKeyword(
-			FIELD_CHANNEL_FILTER_ENABLED,
+			CPField.CHANNEL_FILTER_ENABLED,
 			cpDefinition.isChannelFilterEnabled());
 
 		document.addKeyword(
-			FIELD_IS_IGNORE_SKU_COMBINATIONS,
+			CPField.IS_IGNORE_SKU_COMBINATIONS,
 			cpDefinition.isIgnoreSKUCombinations());
 
-		document.addKeyword(FIELD_PRODUCT_ID, cpDefinition.getCProductId());
+		document.addKeyword(CPField.PRODUCT_ID, cpDefinition.getCProductId());
 
 		document.addText(
-			FIELD_OPTION_NAMES, ArrayUtil.toStringArray(optionNames));
-		document.addNumber(FIELD_OPTION_IDS, ArrayUtil.toLongArray(optionIds));
+			CPField.OPTION_NAMES, ArrayUtil.toStringArray(optionNames));
+		document.addNumber(CPField.OPTION_IDS, ArrayUtil.toLongArray(optionIds));
 
 		String[] skus = _cpInstanceLocalService.getSKUs(
 			cpDefinition.getCPDefinitionId());
 
-		document.addText(FIELD_SKUS, skus);
+		document.addText(CPField.SKUS, skus);
 
 		List<String> specificationOptionNames = new ArrayList<>();
 		List<Long> specificationOptionIds = new ArrayList<>();
@@ -639,13 +585,13 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		}
 
 		document.addText(
-			FIELD_SPECIFICATION_NAMES,
+			CPField.SPECIFICATION_NAMES,
 			ArrayUtil.toStringArray(specificationOptionNames));
 		document.addNumber(
-			FIELD_SPECIFICATION_IDS,
+			CPField.SPECIFICATION_IDS,
 			ArrayUtil.toLongArray(specificationOptionIds));
 		document.addText(
-			FIELD_SPECIFICATION_VALUES_NAMES,
+			CPField.SPECIFICATION_VALUES_NAMES,
 			ArrayUtil.toStringArray(specificationOptionValuesNames));
 
 		List<String> types = _cpDefinitionLinkTypeRegistry.getTypes();
@@ -669,7 +615,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		if (cpAttachmentFileEntry != null) {
 			document.addNumber(
-				FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID,
+				CPField.DEFAULT_IMAGE_FILE_ENTRY_ID,
 				cpAttachmentFileEntry.getFileEntryId());
 
 			cpAttachmentFileEntryId =
@@ -681,12 +627,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				cpDefinition.getCompanyId());
 
 			document.addKeyword(
-				FIELD_DEFAULT_IMAGE_FILE_URL,
+				CPField.DEFAULT_IMAGE_FILE_URL,
 				_commerceMediaResolver.getDefaultUrl(company.getGroupId()));
 		}
 		else {
 			document.addKeyword(
-				FIELD_DEFAULT_IMAGE_FILE_URL,
+				CPField.DEFAULT_IMAGE_FILE_URL,
 				_commerceMediaResolver.getUrl(
 					cpAttachmentFileEntryId, false, false, false));
 		}

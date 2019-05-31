@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -48,9 +49,6 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 
 	public static final String CLASS_NAME = CommerceCatalog.class.getName();
-
-	public static final String FIELD_CATALOG_DEFAULT_LANGUAGE_ID =
-		"catalogDefaultLanguageId";
 
 	public CommerceCatalogIndexer() {
 		setDefaultSelectedFieldNames(
@@ -116,12 +114,11 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 
 		Document document = getBaseModelDocument(CLASS_NAME, commerceCatalog);
 
+		document.addKeyword(Field.GROUP_ID, commerceCatalog.getGroupId());
 		document.addKeyword(Field.NAME, commerceCatalog.getName());
 		document.addKeyword(
-			FIELD_CATALOG_DEFAULT_LANGUAGE_ID,
+			CPField.CATALOG_DEFAULT_LANGUAGE_ID,
 			commerceCatalog.getCatalogDefaultLanguageId());
-
-		document.addKeyword(Field.GROUP_ID, commerceCatalog.getGroupId());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + commerceCatalog + " indexed successfully");

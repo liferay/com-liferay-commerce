@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.exception.CPOptionKeyException;
 import com.liferay.commerce.product.model.CPOption;
-import com.liferay.commerce.product.search.CPOptionIndexer;
 import com.liferay.commerce.product.service.base.CPOptionLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -256,7 +256,7 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(CPOptionIndexer.FIELD_KEY, keywords);
+		attributes.put(CPField.KEY, keywords);
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);

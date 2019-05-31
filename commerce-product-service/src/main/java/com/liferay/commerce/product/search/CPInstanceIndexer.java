@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -61,27 +62,11 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 
 	public static final String CLASS_NAME = CPInstance.class.getName();
 
-	public static final String FIELD_CP_DEFINITION_ID = "CPDefinitionId";
-
-	public static final String FIELD_CP_DEFINITION_STATUS =
-		"CPDefinitionStatus";
-
-	public static final String FIELD_DISPLAY_DATE = "displayDate";
-
-	public static final String FIELD_EXTERNAL_REFERENCE_CODE =
-		"externalReferenceCode";
-
-	public static final String FIELD_PUBLISHED = "published";
-
-	public static final String FIELD_PURCHASABLE = "purchasable";
-
-	public static final String FIELD_SKU = "sku";
-
 	public CPInstanceIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			FIELD_SKU, Field.UID);
+			CPField.SKU, Field.UID);
 	}
 
 	@Override
@@ -103,44 +88,44 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		}
 
 		long cpDefinitionId = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_CP_DEFINITION_ID));
+			searchContext.getAttribute(CPField.CP_DEFINITION_ID));
 
 		if (cpDefinitionId > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_CP_DEFINITION_ID, cpDefinitionId);
+				CPField.CP_DEFINITION_ID, cpDefinitionId);
 		}
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
 
-		if (attributes.containsKey(FIELD_CP_DEFINITION_STATUS)) {
+		if (attributes.containsKey(CPField.CP_DEFINITION_STATUS)) {
 			int cpDefinitionStatus = GetterUtil.getInteger(
-				attributes.get(FIELD_CP_DEFINITION_STATUS));
+				attributes.get(CPField.CP_DEFINITION_STATUS));
 
 			if (cpDefinitionStatus == WorkflowConstants.STATUS_ANY) {
 				contextBooleanFilter.addRangeTerm(
-					FIELD_CP_DEFINITION_STATUS,
+					CPField.CP_DEFINITION_STATUS,
 					WorkflowConstants.STATUS_APPROVED,
 					WorkflowConstants.STATUS_SCHEDULED);
 			}
 			else {
 				contextBooleanFilter.addRequiredTerm(
-					FIELD_CP_DEFINITION_STATUS, cpDefinitionStatus);
+					CPField.CP_DEFINITION_STATUS, cpDefinitionStatus);
 			}
 		}
 
-		if (attributes.containsKey(FIELD_PUBLISHED)) {
+		if (attributes.containsKey(CPField.PUBLISHED)) {
 			boolean published = GetterUtil.getBoolean(
-				attributes.get(FIELD_PUBLISHED));
+				attributes.get(CPField.PUBLISHED));
 
-			contextBooleanFilter.addRequiredTerm(FIELD_PUBLISHED, published);
+			contextBooleanFilter.addRequiredTerm(CPField.PUBLISHED, published);
 		}
 
-		if (attributes.containsKey(FIELD_PURCHASABLE)) {
+		if (attributes.containsKey(CPField.PURCHASABLE)) {
 			boolean purchasable = GetterUtil.getBoolean(
-				attributes.get(FIELD_PURCHASABLE));
+				attributes.get(CPField.PURCHASABLE));
 
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_PURCHASABLE, purchasable);
+				CPField.PURCHASABLE, purchasable);
 		}
 
 		String[] fieldNames = (String[])searchContext.getAttribute("OPTIONS");
@@ -167,10 +152,10 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(searchQuery, searchContext, Field.NAME, false);
-		addSearchTerm(searchQuery, searchContext, FIELD_SKU, false);
+		addSearchTerm(searchQuery, searchContext, CPField.SKU, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_EXTERNAL_REFERENCE_CODE, false);
+			searchQuery, searchContext, CPField.EXTERNAL_REFERENCE_CODE, false);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
@@ -222,21 +207,21 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		document.addText(Field.NAME, cpDefinition.getName());
 
 		document.addText(
-			FIELD_EXTERNAL_REFERENCE_CODE,
+			CPField.EXTERNAL_REFERENCE_CODE,
 			cpInstance.getExternalReferenceCode());
 
 		document.addText(Field.CONTENT, cpInstance.getSku());
 		document.addDateSortable(
-			FIELD_DISPLAY_DATE, cpInstance.getDisplayDate());
-		document.addTextSortable(FIELD_SKU, cpInstance.getSku());
+			CPField.DISPLAY_DATE, cpInstance.getDisplayDate());
+		document.addTextSortable(CPField.SKU, cpInstance.getSku());
 		document.addKeyword(
-			FIELD_CP_DEFINITION_ID, cpInstance.getCPDefinitionId());
+			CPField.CP_DEFINITION_ID, cpInstance.getCPDefinitionId());
 		document.addKeyword(
-			FIELD_CP_DEFINITION_STATUS, cpDefinition.getStatus());
-		document.addKeyword(FIELD_PUBLISHED, cpInstance.isPublished());
-		document.addKeyword(FIELD_PURCHASABLE, cpInstance.isPurchasable());
+			CPField.CP_DEFINITION_STATUS, cpDefinition.getStatus());
+		document.addKeyword(CPField.PUBLISHED, cpInstance.isPublished());
+		document.addKeyword(CPField.PURCHASABLE, cpInstance.isPurchasable());
 		document.addKeyword(
-			FIELD_EXTERNAL_REFERENCE_CODE,
+			CPField.EXTERNAL_REFERENCE_CODE,
 			cpInstance.getExternalReferenceCode());
 
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
@@ -298,7 +283,7 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		Document document, Locale locale, String snippet,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		Summary summary = createSummary(document, FIELD_SKU, Field.CONTENT);
+		Summary summary = createSummary(document, CPField.SKU, Field.CONTENT);
 
 		summary.setMaxContentLength(200);
 
