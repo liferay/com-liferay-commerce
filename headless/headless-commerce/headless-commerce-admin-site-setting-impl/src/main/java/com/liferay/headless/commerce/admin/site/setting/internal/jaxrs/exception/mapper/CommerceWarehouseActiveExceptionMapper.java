@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.jaxrs.exception.mapper;
 
-import com.liferay.commerce.exception.CommerceWarehouseActiveException;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException;
 import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 
 import javax.ws.rs.core.Response;
@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Component;
 )
 @Provider
 public class CommerceWarehouseActiveExceptionMapper
-	extends BaseExceptionMapper<CommerceWarehouseActiveException> {
+	extends BaseExceptionMapper<CommerceInventoryWarehouseActiveException> {
 
 	@Override
 	public String getErrorDescription() {
