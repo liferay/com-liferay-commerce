@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.search;
+package com.liferay.commerce.product.internal.search;
 
 import com.liferay.commerce.product.constants.CPField;
-import com.liferay.commerce.product.model.CPOption;
-import com.liferay.commerce.product.model.CPOptionValue;
-import com.liferay.commerce.product.service.CPOptionLocalService;
+import com.liferay.commerce.product.model.CPOptionCategory;
+import com.liferay.commerce.product.model.CPSpecificationOption;
+import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
+import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -35,10 +36,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -47,17 +49,19 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = Indexer.class)
-public class CPOptionIndexer extends BaseIndexer<CPOption> {
+public class CPSpecificationOptionIndexer
+	extends BaseIndexer<CPSpecificationOption> {
 
-	public static final String CLASS_NAME = CPOption.class.getName();
+	public static final String CLASS_NAME =
+		CPSpecificationOption.class.getName();
 
-	public CPOptionIndexer() {
+	public CPSpecificationOptionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.MODIFIED_DATE, Field.NAME, Field.UID, CPField.KEY);
+			Field.MODIFIED_DATE, Field.TITLE, Field.UID, CPField.KEY);
 		setFilterSearch(true);
 		setPermissionAware(true);
 	}
@@ -68,21 +72,38 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 	}
 
 	@Override
+	public void postProcessContextBooleanFilter(
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
+		throws Exception {
+
+		Map<String, Serializable> attributes = searchContext.getAttributes();
+
+		if (attributes.containsKey(CPField.FACETABLE)) {
+			boolean facetable = GetterUtil.getBoolean(
+				attributes.get(CPField.FACETABLE));
+
+			contextBooleanFilter.addRequiredTerm(CPField.FACETABLE, facetable);
+		}
+	}
+
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, BooleanFilter fullQueryBooleanFilter,
 			SearchContext searchContext)
 		throws Exception {
 
+		addSearchTerm(
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_ID, false);
+		addSearchTerm(
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
+		addSearchLocalizedTerm(
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(searchQuery, searchContext, CPField.KEY, false);
-		addSearchTerm(
-			searchQuery, searchContext, CPField.OPTION_VALUE_NAME, false);
-		addSearchLocalizedTerm(
-			searchQuery, searchContext, CPField.OPTION_VALUE_NAME, false);
-		addSearchTerm(searchQuery, searchContext, Field.NAME, false);
-		addSearchLocalizedTerm(searchQuery, searchContext, Field.NAME, false);
+		addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
+		addSearchLocalizedTerm(searchQuery, searchContext, Field.TITLE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 
 		LinkedHashMap<String, Object> params =
@@ -98,69 +119,69 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 	}
 
 	@Override
-	protected void doDelete(CPOption cpOption) throws Exception {
-		deleteDocument(cpOption.getCompanyId(), cpOption.getCPOptionId());
+	protected void doDelete(CPSpecificationOption cpSpecificationOption)
+		throws Exception {
+
+		deleteDocument(
+			cpSpecificationOption.getCompanyId(),
+			cpSpecificationOption.getCPSpecificationOptionId());
 	}
 
 	@Override
-	protected Document doGetDocument(CPOption cpOption) throws Exception {
+	protected Document doGetDocument(
+			CPSpecificationOption cpSpecificationOption)
+		throws Exception {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing option " + cpOption);
+			_log.debug(
+				"Indexing specification option " + cpSpecificationOption);
 		}
 
-		Document document = getBaseModelDocument(CLASS_NAME, cpOption);
+		Document document = getBaseModelDocument(
+			CLASS_NAME, cpSpecificationOption);
 
-		List<CPOptionValue> cpOptionValues = cpOption.getCPOptionValues();
-
-		String cpOptionDefaultLanguageId =
-			LocalizationUtil.getDefaultLanguageId(cpOption.getName());
+		CPOptionCategory cpOptionCategory =
+			_cpOptionCategoryLocalService.fetchCPOptionCategory(
+				cpSpecificationOption.getCPOptionCategoryId());
 
 		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
-			cpOption.getName());
+			cpSpecificationOption.getTitle());
 
 		for (String languageId : languageIds) {
-			String description = cpOption.getDescription(languageId);
-			String name = cpOption.getName(languageId);
-
-			List<String> cpOptionValueNamesList = new ArrayList<>();
-
-			for (CPOptionValue cpOptionValue : cpOptionValues) {
-				cpOptionValueNamesList.add(cpOptionValue.getName(languageId));
-			}
-
-			String[] cpOptionValueNames = cpOptionValueNamesList.toArray(
-				new String[0]);
-
-			if (languageId.equals(cpOptionDefaultLanguageId)) {
-				document.addText(Field.DESCRIPTION, description);
-				document.addText(CPField.OPTION_VALUE_NAME, cpOptionValueNames);
-				document.addText(Field.NAME, name);
-				document.addText("defaultLanguageId", languageId);
-			}
+			String title = cpSpecificationOption.getTitle(languageId);
 
 			document.addText(
-				LocalizationUtil.getLocalizedName(Field.NAME, languageId),
-				name);
+				LocalizationUtil.getLocalizedName(Field.TITLE, languageId),
+				title);
+
+			String description = cpSpecificationOption.getDescription(
+				languageId);
+
 			document.addText(
 				LocalizationUtil.getLocalizedName(
 					Field.DESCRIPTION, languageId),
 				description);
 
-			document.addText(CPField.KEY, cpOption.getKey());
-			document.addText(Field.CONTENT, name);
+			if (cpOptionCategory != null) {
+				document.addText(
+					LocalizationUtil.getLocalizedName(
+						CPField.CP_OPTION_CATEGORY_TITLE, languageId),
+					cpOptionCategory.getTitle(languageId));
 
-			document.addText(
-				LocalizationUtil.getLocalizedName(
-					CPField.OPTION_VALUE_NAME, languageId),
-				cpOptionValueNames);
+				document.addKeyword(
+					CPField.CP_OPTION_CATEGORY_ID,
+					cpOptionCategory.getCPOptionCategoryId());
+			}
 
-			document.addText(
-				CPField.DDM_FORM_FIELD_TYPE_NAME,
-				cpOption.getDDMFormFieldTypeName());
+			document.addKeyword(
+				CPField.FACETABLE, cpSpecificationOption.isFacetable());
+			document.addText(CPField.KEY, cpSpecificationOption.getKey());
+			document.addText(Field.CONTENT, title);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + cpOption + " indexed successfully");
+			_log.debug(
+				"Document " + cpSpecificationOption + " indexed successfully");
 		}
 
 		return document;
@@ -172,7 +193,7 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		Summary summary = createSummary(
-			document, Field.NAME, Field.DESCRIPTION);
+			document, Field.TITLE, Field.DESCRIPTION);
 
 		summary.setMaxContentLength(200);
 
@@ -180,40 +201,49 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 	}
 
 	@Override
-	protected void doReindex(CPOption cpOption) throws Exception {
+	protected void doReindex(CPSpecificationOption cpSpecificationOption)
+		throws Exception {
+
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpOption.getCompanyId(), getDocument(cpOption),
-			isCommitImmediately());
+			getSearchEngineId(), cpSpecificationOption.getCompanyId(),
+			getDocument(cpSpecificationOption), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		doReindex(_cpOptionLocalService.getCPOption(classPK));
+		doReindex(
+			_cpSpecificationOptionLocalService.getCPSpecificationOption(
+				classPK));
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexCPOptions(companyId);
+		reindexCPSpecificationOptions(companyId);
 	}
 
-	protected void reindexCPOptions(long companyId) throws PortalException {
+	protected void reindexCPSpecificationOptions(long companyId)
+		throws PortalException {
+
 		final IndexableActionableDynamicQuery indexableActionableDynamicQuery =
-			_cpOptionLocalService.getIndexableActionableDynamicQuery();
+			_cpSpecificationOptionLocalService.
+				getIndexableActionableDynamicQuery();
 
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
-			(CPOption cpOption) -> {
+			(CPSpecificationOption cpSpecificationOption) -> {
 				try {
 					indexableActionableDynamicQuery.addDocuments(
-						getDocument(cpOption));
+						getDocument(cpSpecificationOption));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to index commerce product option " +
-								cpOption.getCPOptionId(),
+							"Unable to index commerce product specification " +
+								"option " +
+									cpSpecificationOption.
+										getCPSpecificationOptionId(),
 							pe);
 					}
 				}
@@ -224,10 +254,14 @@ public class CPOptionIndexer extends BaseIndexer<CPOption> {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPOptionIndexer.class);
+		CPSpecificationOptionIndexer.class);
 
 	@Reference
-	private CPOptionLocalService _cpOptionLocalService;
+	private CPOptionCategoryLocalService _cpOptionCategoryLocalService;
+
+	@Reference
+	private CPSpecificationOptionLocalService
+		_cpSpecificationOptionLocalService;
 
 	@Reference
 	private IndexWriterHelper _indexWriterHelper;

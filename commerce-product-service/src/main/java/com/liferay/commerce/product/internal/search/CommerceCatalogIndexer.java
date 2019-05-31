@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.product.search;
+package com.liferay.commerce.product.internal.search;
 
 import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CommerceCatalog;
