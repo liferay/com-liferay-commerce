@@ -12,16 +12,15 @@
  * details.
  */
 
-package com.liferay.commerce.shipping.web.admin;
+package com.liferay.commerce.health.status.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.service.CommerceShippingMethodLocalService;
-import com.liferay.commerce.service.CommerceShippingMethodService;
-import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodsDisplayContext;
-import com.liferay.commerce.util.CommerceShippingEngineRegistry;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.web.internal.display.context.CommerceHealthStatusDisplayContext;
+import com.liferay.commerce.health.status.web.internal.util.CommerceHealthStatusRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -49,24 +48,24 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
-	property = "commerce.admin.module.key=" + ShippingMethodsCommerceAdminModule.KEY,
+	property = "commerce.admin.module.key=" + GroupInstanceHealthCheckCommerceAdminModule.KEY,
 	service = CommerceAdminModule.class
 )
-public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
+public class GroupInstanceHealthCheckCommerceAdminModule
+	implements CommerceAdminModule {
 
-	public static final String KEY = "shipping-methods";
+	public static final String KEY = "group-instance-health-check";
 
 	@Override
 	public String getLabel(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, "shipping-methods");
+		return LanguageUtil.get(resourceBundle, "health-check");
 	}
 
 	@Override
@@ -88,7 +87,7 @@ public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 
 		return _portletResourcePermission.contains(
 			permissionChecker, groupId,
-			CommerceActionKeys.MANAGE_COMMERCE_SHIPPING_METHODS);
+			CommerceActionKeys.MANAGE_COMMERCE_HEALTH_STATUS);
 	}
 
 	@Override
@@ -96,16 +95,16 @@ public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
 
-		CommerceShippingMethodsDisplayContext
-			commerceShippingMethodsDisplayContext =
-				new CommerceShippingMethodsDisplayContext(
-					_commerceShippingEngineRegistry,
-					_commerceShippingMethodService, _portletResourcePermission,
-					renderRequest, renderResponse);
+		CommerceHealthStatusDisplayContext commerceHealthStatusDisplayContext =
+			new CommerceHealthStatusDisplayContext(
+				_commerceHealthStatusRegistry, _portletResourcePermission,
+				renderRequest, renderResponse,
+				CommerceHealthStatusConstants.
+					COMMERCE_HEALTH_STATUS_TYPE_GROUP_INSTANCE);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceShippingMethodsDisplayContext);
+			commerceHealthStatusDisplayContext);
 
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
@@ -114,18 +113,11 @@ public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
-			"/view_shipping_methods.jsp");
+			"/view.jsp");
 	}
 
 	@Reference
-	private CommerceShippingEngineRegistry _commerceShippingEngineRegistry;
-
-	@Reference
-	private CommerceShippingMethodLocalService
-		_commerceShippingMethodLocalService;
-
-	@Reference
-	private CommerceShippingMethodService _commerceShippingMethodService;
+	private CommerceHealthStatusRegistry _commerceHealthStatusRegistry;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
@@ -139,7 +131,7 @@ public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.shipping.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.health.status.web)"
 	)
 	private ServletContext _servletContext;
 

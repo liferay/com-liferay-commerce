@@ -15,6 +15,7 @@
 package com.liferay.commerce.shipping.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingSettingsDisplayContext;
 import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
@@ -67,6 +68,11 @@ public class ShippingSettingsCommerceAdminModule
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		return null;
+	}
+
+	@Override
+	public int getType() {
+		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_GROUP_INSTANCE;
 	}
 
 	@Override

@@ -15,8 +15,10 @@
 package com.liferay.commerce.health.status.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
+import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.commerce.health.status.web.internal.display.context.CommerceHealthStatusDisplayContext;
 import com.liferay.commerce.health.status.web.internal.util.CommerceHealthStatusRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -50,19 +52,20 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.admin.module.key=" + HealthCheckCommerceAdminModule.KEY,
+	property = "commerce.admin.module.key=" + VirtualInstanceHealthCheckCommerceAdminModule.KEY,
 	service = CommerceAdminModule.class
 )
-public class HealthCheckCommerceAdminModule implements CommerceAdminModule {
+public class VirtualInstanceHealthCheckCommerceAdminModule
+	implements CommerceAdminModule {
 
-	public static final String KEY = "health-check";
+	public static final String KEY = "virtual-instance-health-check";
 
 	@Override
 	public String getLabel(Locale locale) {
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, KEY);
+		return LanguageUtil.get(resourceBundle, "health-check");
 	}
 
 	@Override
@@ -70,6 +73,11 @@ public class HealthCheckCommerceAdminModule implements CommerceAdminModule {
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		return null;
+	}
+
+	@Override
+	public int getType() {
+		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override
@@ -90,7 +98,9 @@ public class HealthCheckCommerceAdminModule implements CommerceAdminModule {
 		CommerceHealthStatusDisplayContext commerceHealthStatusDisplayContext =
 			new CommerceHealthStatusDisplayContext(
 				_commerceHealthStatusRegistry, _portletResourcePermission,
-				renderRequest, renderResponse);
+				renderRequest, renderResponse,
+				CommerceHealthStatusConstants.
+					COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
