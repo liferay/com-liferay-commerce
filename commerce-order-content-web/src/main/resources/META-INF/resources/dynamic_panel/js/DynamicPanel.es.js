@@ -10,16 +10,7 @@ class DynamicPanel extends Component {
 		this.state = {
 			current: props.current || null
 		};
-		this.initializeLiferayListener();
 		document.querySelector('body').classList.add('with-dynamic-panel');
-	}
-
-	initializeLiferayListener() {
-		if(window.Liferay) {
-			window.Liferay.on('openCustomPageOnDynamicPanel', ({ url, slug }) => {
-				this.openCustomPage(url,slug)
-			})
-		}
 	}
 
 	setCurrentBySlug(slug = null) {

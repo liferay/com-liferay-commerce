@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Menu, {
     MenuElement
-} from '../Menu.es';
+} from '../../../src/main/resources/META-INF/resources/dynamic_panel/js/components/Menu.es';
 
 const mock = {
   active: 'comments',
@@ -25,7 +25,7 @@ const mock = {
 }
 
 it('renders without crashing', () => {
-  shallow(<Menu />);
+  shallow(<Menu {...mock}/>);
 });
 
 describe('Menu items handling', () => {

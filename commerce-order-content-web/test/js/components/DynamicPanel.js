@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import DynamicPanel from './DynamicPanel.es';
-import Menu from './components/Menu.es';
+import DynamicPanel from '../../../src/main/resources/META-INF/resources/dynamic_panel/js/DynamicPanel.es';
+import Menu from '../../../src/main/resources/META-INF/resources/dynamic_panel/js/components/Menu.es';
 
 const mock = {
   elements : [

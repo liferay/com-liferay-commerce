@@ -450,6 +450,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	}
 
     window.dynamicPanel = DynamicPanel.default(
+		'testId',
         '<%= dynamicPanelRootElementId %>',
         props
     );

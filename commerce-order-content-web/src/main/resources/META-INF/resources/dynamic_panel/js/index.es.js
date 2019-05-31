@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import DynamicPanel from './DynamicPanel.es';
 
-export default function(id, props) {
+export default function(componentId, id, props) {
 	const portletFrame = window.document.getElementById(id);
 	let instance = null;
 	ReactDOM.render(
@@ -14,6 +14,9 @@ export default function(id, props) {
 			{...props}
 		/>,
 		portletFrame
-	);
+  );
+  if(window.Liferay) {
+    window.Liferay.component(componentId, instance);
+  }
 	return instance
 }
