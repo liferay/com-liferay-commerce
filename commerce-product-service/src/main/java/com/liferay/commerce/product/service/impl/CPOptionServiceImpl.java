@@ -116,36 +116,43 @@ public class CPOptionServiceImpl extends CPOptionServiceBaseImpl {
 
 	@Override
 	public List<CPOption> getCPOptions(
+			long companyId, int start, int end,
+			OrderByComparator<CPOption> orderByComparator)
+		throws PortalException {
+
+		return cpOptionLocalService.getCPOptions(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPOption> getCPOptionsByCatalogGroupId(
 			long groupId, int start, int end,
 			OrderByComparator<CPOption> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
-		return cpOptionLocalService.getCPOptions(
+		return cpOptionLocalService.getCPOptionsByCatalogGroupId(
 			groupId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPOptionsCount(long groupId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+	public int getCPOptionsCount(long companyId) throws PortalException {
+		return cpOptionLocalService.getCPOptionsCount(companyId);
+	}
 
-		return cpOptionLocalService.getCPOptionsCount(groupId);
+	@Override
+	public int getCPOptionsCountByCatalogGroupId(long groupId)
+		throws PortalException {
+
+		return cpOptionLocalService.getCPOptionsCountByCatalogGroupId(groupId);
 	}
 
 	@Override
 	public BaseModelSearchResult<CPOption> searchCPOptions(
-			long companyId, long groupId, String keywords, int start, int end,
-			Sort sort)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
 		return cpOptionLocalService.searchCPOptions(
-			companyId, groupId, keywords, start, end, sort);
+			companyId, keywords, start, end, sort);
 	}
 
 	@Override

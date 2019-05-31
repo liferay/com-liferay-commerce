@@ -77,17 +77,17 @@ public class CPOptionItemSelectorViewDisplayContext
 
 			BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
 				_cpOptionService.searchCPOptions(
-					cpRequestHelper.getCompanyId(), getScopeGroupId(),
-					getKeywords(), searchContainer.getStart(),
-					searchContainer.getEnd(), sort);
+					cpRequestHelper.getCompanyId(), getKeywords(),
+					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 			total = cpOptionBaseModelSearchResult.getLength();
 			results = cpOptionBaseModelSearchResult.getBaseModels();
 		}
 		else {
-			total = _cpOptionService.getCPOptionsCount(getScopeGroupId());
+			total = _cpOptionService.getCPOptionsCount(
+				cpRequestHelper.getCompanyId());
 			results = _cpOptionService.getCPOptions(
-				getScopeGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 
