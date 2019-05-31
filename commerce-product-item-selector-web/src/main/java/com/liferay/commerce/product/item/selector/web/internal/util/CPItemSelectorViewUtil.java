@@ -135,8 +135,7 @@ public class CPItemSelectorViewUtil {
 		}
 		else if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPField.DISPLAY_DATE + "_Number_sortable",
-				reverse);
+				CPField.DISPLAY_DATE + "_Number_sortable", reverse);
 		}
 		else if (orderByCol.equals("sku")) {
 			sort = SortFactoryUtil.create(

@@ -236,8 +236,7 @@ public class CPSearchResultsPortlet
 		searchContext.setEntryClassNames(
 			new String[] {CPDefinition.class.getName()});
 
-		searchContext.setAttribute(
-			CPField.PUBLISHED, Boolean.TRUE);
+		searchContext.setAttribute(CPField.PUBLISHED, Boolean.TRUE);
 
 		if (commerceChannel != null) {
 			searchContext.setAttribute(

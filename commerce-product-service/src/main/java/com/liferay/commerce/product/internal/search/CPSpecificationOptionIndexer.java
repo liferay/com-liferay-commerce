@@ -95,9 +95,11 @@ public class CPSpecificationOptionIndexer
 		addSearchTerm(
 			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_ID, false);
 		addSearchTerm(
-			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE,
+			false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE, false);
+			searchQuery, searchContext, CPField.CP_OPTION_CATEGORY_TITLE,
+			false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
