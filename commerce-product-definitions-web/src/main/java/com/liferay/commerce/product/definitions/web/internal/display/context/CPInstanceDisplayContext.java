@@ -258,8 +258,6 @@ public class CPInstanceDisplayContext
 			return searchContainer;
 		}
 
-		CPDefinition cpDefinition = getCPDefinition();
-
 		long cpDefinitionId = getCPDefinitionId();
 
 		ThemeDisplay themeDisplay =
