@@ -68,8 +68,8 @@ public class CPOptionsMVCResourceCommand extends BaseMVCResourceCommand {
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
 		List<CPOption> cpOptions = _cpOptionService.getCPOptions(
-			themeDisplay.getScopeGroupId(), QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, new CPOptionNameComparator(true));
+			themeDisplay.getCompanyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new CPOptionNameComparator(true));
 
 		for (CPOption cpOption : cpOptions) {
 			JSONObject jsonObject = _jsonFactory.createJSONObject();
