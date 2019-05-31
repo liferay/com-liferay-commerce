@@ -95,8 +95,6 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
 			cpDefinitionId);
 
-		themeDisplay.setScopeGroupId(cpDefinition.getGroupId());
-
 		return _getFriendlyURL(cpDefinition.getCProductId(), themeDisplay);
 	}
 
