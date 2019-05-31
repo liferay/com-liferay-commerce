@@ -11,6 +11,7 @@ $color-theme: #30CFA1;
 @import './components/commerce-button';
 @import './components/commerce-cart';
 @import './components/commerce-cart-item';
+@import './components/commerce-compare-table';
 @import './components/commerce-icon';
 @import './components/commerce-list';
 @import './components/commerce-loader';
@@ -20,9 +21,11 @@ $color-theme: #30CFA1;
 @import './components/commerce-topbar-button';
 @import './components/main-link';
 @import './components/minium-card';
+@import './components/minium-frame';
 @import './components/minium-product-gallery';
 @import './components/minium-product-header';
 @import './components/minium-product-tiles';
+@import './components/minium-products-compare';
 @import './components/pagination-bar';
 @import './components/product-detail';
 @import './components/specification-list';
@@ -40,5 +43,5 @@ $color-theme: #30CFA1;
 @import './test';
 
 body {
-font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }

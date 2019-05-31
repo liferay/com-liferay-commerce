@@ -1,74 +1,74 @@
 .speedwell-search {
-display: flex;
-width: 80px;
-
-&__bar-wrapper {
-	bottom: 0;
-	left: 0;
-	overflow: hidden;
-	pointer-events: none;
-	position: absolute;
-	right: 160px;
-	top: 0;
-}
-
-&__bar {
-	align-items: center;
-	animation: search-bar-enter ease-in-out 800ms forwards;
-	background-color: #2A2A2A;
-	color: #FFF;
 	display: flex;
-	pointer-events: all;
-	transform: translateX(calc(100% - 80px));
-	will-change: transform;
+	width: 80px;
 
-	.commerce-topbar-button {
-	 background-color: inherit;
+	&__bar-wrapper {
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		pointer-events: none;
+		position: absolute;
+		right: 160px;
+		top: 0;
+	}
 
-	 &:hover {
-		color: inherit;
-	 }
+	&__bar {
+		align-items: center;
+		animation: search-bar-enter ease-in-out 800ms forwards;
+		background-color: #2A2A2A;
+		color: #FFF;
+		display: flex;
+		pointer-events: all;
+		transform: translateX(calc(100% - 80px));
+		will-change: transform;
 
-	 &::before {
-		mix-blend-mode: color;
-	 }
+		.commerce-topbar-button {
+			background-color: inherit;
+
+			&:hover {
+				color: inherit;
+			}
+
+			&::before {
+				mix-blend-mode: color;
+			}
+		}
+	}
+
+	&:not(.is-open) &__bar {
+		display: none;
+	}
+
+	&__results {
+		background: rgba(42, 42, 42, 0.7);
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: calc(56px + 80px);
+		transition: all ease 200ms 600ms;
+	}
+
+	&:not(.is-open) &__results {
+		opacity: 0;
+		pointer-events: none;
+		transition-delay: 0ms;
 	}
 }
 
-&:not(.is-open) &__bar {
-	display: none;
-}
-
-&__results {
-	background: rgba(42, 42, 42, 0.7);
-	bottom: 0;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: calc(56px + 80px);
-	transition: all ease 200ms 600ms;
-}
-
-&:not(.is-open) &__results {
-	opacity: 0;
-	pointer-events: none;
-	transition-delay: 0ms;
-}
-}
-
 @keyframes search-bar-enter {
-0% {
-	opacity: 0;
-	transform: translateX(calc(100% - 80px));
-}
+	0% {
+		opacity: 0;
+		transform: translateX(calc(100% - 80px));
+	}
 
-40% {
-	opacity: 1;
-	transform: translateX(calc(100% - 80px));
-}
+	40% {
+		opacity: 1;
+		transform: translateX(calc(100% - 80px));
+	}
 
-to {
-	opacity: 1;
-	transform: translateX(0);
-}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
