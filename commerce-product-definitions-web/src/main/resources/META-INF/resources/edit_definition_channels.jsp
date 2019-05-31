@@ -24,34 +24,43 @@ List<CommerceChannel> commerceChannels = cpDefinitionChannelDisplayContext.getCo
 long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannelRelCommerceChannelIds();
 %>
 
-<portlet:actionURL name="editProductDefinition" var="editProductDefinitionChannelActionURL" />
+<c:choose>
+	<c:when test="<%= commerceChannels.isEmpty() %>">
+		<div class="alert alert-info">
+			<liferay-ui:message key="there-are-no-channels" />
+		</div>
+	</c:when>
+	<c:otherwise>
+		<portlet:actionURL name="editProductDefinition" var="editProductDefinitionChannelActionURL" />
 
-<aui:form action="<%= editProductDefinitionChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateChannels" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
+		<aui:form action="<%= editProductDefinitionChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateChannels" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
 
-	<div class="lfr-form-content">
-		<aui:fieldset-group markupView="lexicon">
-			<aui:fieldset>
+			<div class="lfr-form-content">
+				<aui:fieldset-group markupView="lexicon">
+					<aui:fieldset>
 
-				<%
-				for (CommerceChannel commerceChannel : commerceChannels) {
-				%>
+						<%
+						for (CommerceChannel commerceChannel : commerceChannels) {
+						%>
 
-					<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" label="<%= commerceChannel.getName() %>" name="commerceChannelIds" type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
+							<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" label="<%= commerceChannel.getName() %>" name="commerceChannelIds" type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
 
-				<%
-				}
-				%>
+						<%
+						}
+						%>
 
-			</aui:fieldset>
-		</aui:fieldset-group>
+					</aui:fieldset>
+				</aui:fieldset-group>
 
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" type="submit" />
+				<aui:button-row>
+					<aui:button cssClass="btn-lg" type="submit" />
 
-			<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
-		</aui:button-row>
-	</div>
-</aui:form>
+					<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
+				</aui:button-row>
+			</div>
+		</aui:form>
+	</c:otherwise>
+</c:choose>
