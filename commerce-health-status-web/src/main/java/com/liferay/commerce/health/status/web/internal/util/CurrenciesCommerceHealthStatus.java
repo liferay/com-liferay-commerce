@@ -17,7 +17,7 @@ package com.liferay.commerce.health.status.web.internal.util;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -90,6 +90,12 @@ public class CurrenciesCommerceHealthStatus implements CommerceHealthStatus {
 			resourceBundle,
 			CommerceHealthStatusConstants.
 				CURRENCIES_COMMERCE_HEALTH_STATUS_KEY);
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override

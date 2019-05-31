@@ -15,7 +15,7 @@
 package com.liferay.commerce.health.status.web.internal.util;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -89,6 +89,12 @@ public class CountriesCommerceHealthStatus implements CommerceHealthStatus {
 		return LanguageUtil.get(
 			resourceBundle,
 			CommerceHealthStatusConstants.COUNTRIES_COMMERCE_HEALTH_STATUS_KEY);
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override

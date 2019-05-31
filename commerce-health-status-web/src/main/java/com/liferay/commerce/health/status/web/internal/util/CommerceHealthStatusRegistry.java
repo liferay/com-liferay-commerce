@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
@@ -63,7 +62,7 @@ public class CommerceHealthStatusRegistry {
 		return commerceHealthStatusServiceWrapper.getService();
 	}
 
-	public List<CommerceHealthStatus> getCommerceHealthStatuses() {
+	public List<CommerceHealthStatus> getCommerceHealthStatuses(int type) {
 		List<CommerceHealthStatus> commerceHealthStatuses = new ArrayList<>();
 
 		List<ServiceWrapper<CommerceHealthStatus>>
@@ -78,15 +77,15 @@ public class CommerceHealthStatusRegistry {
 				commerceHealthStatusServiceWrapper :
 					commerceHealthStatusServiceWrappers) {
 
-			commerceHealthStatuses.add(
-				commerceHealthStatusServiceWrapper.getService());
+			CommerceHealthStatus commerceHealthStatus =
+				commerceHealthStatusServiceWrapper.getService();
+
+			if (type == commerceHealthStatus.getType()) {
+				commerceHealthStatuses.add(commerceHealthStatus);
+			}
 		}
 
 		return Collections.unmodifiableList(commerceHealthStatuses);
-	}
-
-	public Set<String> getCommerceHealthStatusKeys() {
-		return _commerceHealthStatusRegistryMap.keySet();
 	}
 
 	@Activate
