@@ -91,11 +91,11 @@ public class CPDefinitionOptionRelIndexer
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.CONTENT, false);
 		addSearchTerm(
-			searchQuery, searchContext, CPField.DEFINITION_OPTION_VALUE_REL_NAME,
-			false);
+			searchQuery, searchContext,
+			CPField.DEFINITION_OPTION_VALUE_REL_NAME, false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, CPField.DEFINITION_OPTION_VALUE_REL_NAME,
-			false);
+			searchQuery, searchContext,
+			CPField.DEFINITION_OPTION_VALUE_REL_NAME, false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);

@@ -71,8 +71,9 @@ public class CPAttachmentFileEntryIndexer
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			CPField.RELATED_ENTITY_CLASS_NAME_ID, CPField.RELATED_ENTITY_CLASS_PK,
-			CPField.RELATED_ENTITY_CLASS_PK, CPField.FILE_ENTRY_ID);
+			CPField.RELATED_ENTITY_CLASS_NAME_ID,
+			CPField.RELATED_ENTITY_CLASS_PK, CPField.RELATED_ENTITY_CLASS_PK,
+			CPField.FILE_ENTRY_ID);
 	}
 
 	@Override
@@ -209,7 +210,8 @@ public class CPAttachmentFileEntryIndexer
 			CPField.RELATED_ENTITY_CLASS_NAME_ID,
 			cpAttachmentFileEntry.getClassNameId());
 		document.addNumber(
-			CPField.RELATED_ENTITY_CLASS_PK, cpAttachmentFileEntry.getClassPK());
+			CPField.RELATED_ENTITY_CLASS_PK,
+			cpAttachmentFileEntry.getClassPK());
 		document.addNumber(
 			CPField.FILE_ENTRY_ID, cpAttachmentFileEntry.getFileEntryId());
 

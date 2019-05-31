@@ -90,9 +90,7 @@ public class CPDefinitionsPortletUtil {
 
 		if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPField.DISPLAY_DATE +
-					"_Number_sortable",
-				reverse);
+				CPField.DISPLAY_DATE + "_Number_sortable", reverse);
 		}
 		else if (orderByCol.equals("modified-date")) {
 			sort = SortFactoryUtil.create(
@@ -268,8 +266,7 @@ public class CPDefinitionsPortletUtil {
 
 		if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPField.DISPLAY_DATE + "_Number_sortable",
-				reverse);
+				CPField.DISPLAY_DATE + "_Number_sortable", reverse);
 		}
 		else if (orderByCol.equals("modified-date")) {
 			sort = SortFactoryUtil.create(
@@ -346,8 +343,7 @@ public class CPDefinitionsPortletUtil {
 		}
 		else if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPField.DISPLAY_DATE + "_Number_sortable",
-				reverse);
+				CPField.DISPLAY_DATE + "_Number_sortable", reverse);
 		}
 		else if (orderByCol.equals("sku")) {
 			sort = SortFactoryUtil.create(
