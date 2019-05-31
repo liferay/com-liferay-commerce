@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.exception.CPSpecificationOptionKeyException;
 import com.liferay.commerce.product.exception.CPSpecificationOptionTitleException;
 import com.liferay.commerce.product.model.CPSpecificationOption;
-import com.liferay.commerce.product.search.CPSpecificationOptionIndexer;
 import com.liferay.commerce.product.service.base.CPSpecificationOptionLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -243,9 +243,9 @@ public class CPSpecificationOptionLocalServiceImpl
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(
-			CPSpecificationOptionIndexer.FIELD_CP_OPTION_CATEGORY_ID, keywords);
+			CPField.CP_OPTION_CATEGORY_ID, keywords);
 		attributes.put(
-			CPSpecificationOptionIndexer.FIELD_CP_OPTION_CATEGORY_TITLE,
+			CPField.CP_OPTION_CATEGORY_TITLE,
 			keywords);
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.DESCRIPTION, keywords);
@@ -254,10 +254,10 @@ public class CPSpecificationOptionLocalServiceImpl
 
 		if (facetable != null) {
 			attributes.put(
-				CPSpecificationOptionIndexer.FIELD_FACETABLE, facetable);
+				CPField.FACETABLE, facetable);
 		}
 
-		attributes.put(CPSpecificationOptionIndexer.FIELD_KEY, keywords);
+		attributes.put(CPField.KEY, keywords);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);

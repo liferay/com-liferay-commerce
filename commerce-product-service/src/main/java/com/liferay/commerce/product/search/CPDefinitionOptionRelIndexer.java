@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
@@ -55,11 +56,6 @@ public class CPDefinitionOptionRelIndexer
 	public static final String CLASS_NAME =
 		CPDefinitionOptionRel.class.getName();
 
-	public static final String FIELD_CP_DEFINITION_ID = "CPDefinitionId";
-
-	public static final String FIELD_DEFINITION_OPTION_VALUE_REL_NAME =
-		"definitionOptionValueRelName";
-
 	public CPDefinitionOptionRelIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
@@ -78,11 +74,11 @@ public class CPDefinitionOptionRelIndexer
 		throws Exception {
 
 		long cpDefinitionId = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_CP_DEFINITION_ID));
+			searchContext.getAttribute(CPField.CP_DEFINITION_ID));
 
 		if (cpDefinitionId > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_CP_DEFINITION_ID, cpDefinitionId);
+				CPField.CP_DEFINITION_ID, cpDefinitionId);
 		}
 	}
 
@@ -95,10 +91,10 @@ public class CPDefinitionOptionRelIndexer
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.CONTENT, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_DEFINITION_OPTION_VALUE_REL_NAME,
+			searchQuery, searchContext, CPField.DEFINITION_OPTION_VALUE_REL_NAME,
 			false);
 		addSearchLocalizedTerm(
-			searchQuery, searchContext, FIELD_DEFINITION_OPTION_VALUE_REL_NAME,
+			searchQuery, searchContext, CPField.DEFINITION_OPTION_VALUE_REL_NAME,
 			false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
@@ -170,7 +166,7 @@ public class CPDefinitionOptionRelIndexer
 
 			if (languageId.equals(cpDefinitionOptionRelDefaultLanguageId)) {
 				document.addText(
-					FIELD_DEFINITION_OPTION_VALUE_REL_NAME,
+					CPField.DEFINITION_OPTION_VALUE_REL_NAME,
 					cpDefinitionOptionValueRelNames);
 				document.addText(Field.DESCRIPTION, description);
 				document.addText(Field.NAME, name);
@@ -188,12 +184,12 @@ public class CPDefinitionOptionRelIndexer
 			document.addText(Field.CONTENT, name);
 
 			document.addKeyword(
-				FIELD_CP_DEFINITION_ID,
+				CPField.CP_DEFINITION_ID,
 				cpDefinitionOptionRel.getCPDefinitionId());
 
 			document.addText(
 				LocalizationUtil.getLocalizedName(
-					FIELD_DEFINITION_OPTION_VALUE_REL_NAME, languageId),
+					CPField.DEFINITION_OPTION_VALUE_REL_NAME, languageId),
 				cpDefinitionOptionValueRelNames);
 		}
 
