@@ -16,7 +16,7 @@ package com.liferay.commerce.health.status.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.admin.HealthCheckCommerceAdminModule;
+import com.liferay.commerce.health.status.web.internal.admin.GroupInstanceHealthCheckCommerceAdminModule;
 import com.liferay.commerce.health.status.web.internal.util.CommerceHealthStatusRegistry;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -37,23 +37,25 @@ public class CommerceHealthStatusDisplayContext {
 	public CommerceHealthStatusDisplayContext(
 		CommerceHealthStatusRegistry commerceHealthStatusRegistry,
 		PortletResourcePermission portletResourcePermission,
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+		RenderRequest renderRequest, RenderResponse renderResponse, int type) {
 
 		_commerceHealthStatusRegistry = commerceHealthStatusRegistry;
 		_portletResourcePermission = portletResourcePermission;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
+		_type = type;
 	}
 
 	public List<CommerceHealthStatus> getCommerceHealthStatuses() {
-		return _commerceHealthStatusRegistry.getCommerceHealthStatuses();
+		return _commerceHealthStatusRegistry.getCommerceHealthStatuses(_type);
 	}
 
 	public PortletURL getPortletURL() {
 		PortletURL portletURL = _renderResponse.createRenderURL();
 
 		portletURL.setParameter(
-			"commerceAdminModuleKey", HealthCheckCommerceAdminModule.KEY);
+			"commerceAdminModuleKey",
+			GroupInstanceHealthCheckCommerceAdminModule.KEY);
 
 		return portletURL;
 	}
@@ -88,5 +90,6 @@ public class CommerceHealthStatusDisplayContext {
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
 	private SearchContainer<CommerceHealthStatus> _searchContainer;
+	private final int _type;
 
 }
