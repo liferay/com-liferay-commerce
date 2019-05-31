@@ -430,23 +430,26 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 			{
 				icon: 'favorites',
 				url: 'http://localhost:4000/api/text/list',
-				pageName: 'Comments'
+				pageName: 'Comments',
+				slug: 'comments'
 			},
 			{
 				icon: 'print',
 				url: 'http://localhost:4000/api/text/print',
-				pageName: 'Edit'
+				pageName: 'Edit',
+				slug: 'edit'
 			},
 			{
 				icon: 'search',
 				url: 'http://localhost:4000/api/text/search',
-				pageName: 'Changelog'
+				pageName: 'Changelog',
+				slug: 'changelog'
 			}
 		],
 		spritemap: '<%= themeDisplay.getPathThemeImages() + "/commerce-icons.svg" %>'
 	}
 
-    DynamicPanel.default(
+    window.dynamicPanel = DynamicPanel.default(
         '<%= dynamicPanelRootElementId %>',
         props
     );

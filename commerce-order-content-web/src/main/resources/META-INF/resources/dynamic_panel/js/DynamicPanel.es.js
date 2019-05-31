@@ -38,6 +38,9 @@ class DynamicPanel extends Component {
 	}
 
 	onError(message) {
+		this.setState({
+			current: null
+		})
 		return this.props.onError
 			? this.props.onError(message)
 			: console.error(message);
@@ -67,18 +70,14 @@ class DynamicPanel extends Component {
 						spritemap={this.props.spritemap}
 						elements={this.props.elements}
 						selectBySlug={slug => this.setCurrentBySlug(slug)}
-						active={
-							this.props.currentSlug || (this.state.current && this.state.current.slug)
-						}
+						active={this.state.current && this.state.current.slug}
 					/>
 				)}
 				<Content
-					url={this.props.currentUrl || (this.state.current && this.state.current.url)}
+					url={this.state.current && this.state.current.url}
 					onError={msg => this.onError(msg)}
 					close={() => this.setCurrentBySlug()}
-					closeIcon={
-						<Icon spritemap={this.props.spritemap} symbol="close" />
-					}
+					closeIcon={<Icon spritemap={this.props.spritemap} symbol="close" />}
 				/>
 			</div>
 		);

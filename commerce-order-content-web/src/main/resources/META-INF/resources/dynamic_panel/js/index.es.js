@@ -5,6 +5,15 @@ import DynamicPanel from './DynamicPanel.es';
 
 export default function(id, props) {
 	const portletFrame = window.document.getElementById(id);
-
-	ReactDOM.render(<DynamicPanel {...props} />, portletFrame);
+	let instance = null;
+	ReactDOM.render(
+		<DynamicPanel 
+			ref={(dynamicPanel) => {
+				instance = dynamicPanel
+			}} 
+			{...props}
+		/>,
+		portletFrame
+	);
+	return instance
 }
