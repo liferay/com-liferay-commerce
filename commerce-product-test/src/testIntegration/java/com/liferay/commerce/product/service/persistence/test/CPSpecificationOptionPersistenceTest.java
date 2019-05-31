@@ -247,6 +247,15 @@ public class CPSpecificationOptionPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_K() throws Exception {
+		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_K(0L, "null");
+
+		_persistence.countByC_K(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CPSpecificationOption newCPSpecificationOption = addCPSpecificationOption();
 
@@ -499,6 +508,15 @@ public class CPSpecificationOptionPersistenceTest {
 				existingCPSpecificationOption.getGroupId()),
 			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
 				"getOriginalGroupId", new Class<?>[0]));
+		Assert.assertTrue(Objects.equals(
+				existingCPSpecificationOption.getKey(),
+				ReflectionTestUtil.invoke(existingCPSpecificationOption,
+					"getOriginalKey", new Class<?>[0])));
+
+		Assert.assertEquals(Long.valueOf(
+				existingCPSpecificationOption.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
+				"getOriginalCompanyId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(
 				existingCPSpecificationOption.getKey(),
 				ReflectionTestUtil.invoke(existingCPSpecificationOption,

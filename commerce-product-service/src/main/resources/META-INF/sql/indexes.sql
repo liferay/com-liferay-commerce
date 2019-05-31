@@ -75,6 +75,7 @@ create index IX_E244DBED on CPMeasurementUnit (uuid_[$COLUMN_LENGTH:75$], compan
 create unique index IX_753D79AF on CPMeasurementUnit (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_25450C9D on CPOption (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+create unique index IX_BDFC3674 on CPOption (companyId, key_[$COLUMN_LENGTH:75$]);
 create unique index IX_5DD6FB76 on CPOption (groupId, key_[$COLUMN_LENGTH:75$]);
 create index IX_C565E27C on CPOption (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_BABCD7FE on CPOption (uuid_[$COLUMN_LENGTH:75$], groupId);
@@ -91,7 +92,7 @@ create index IX_17FEC609 on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], companyId)
 create unique index IX_1D633ACB on CPOptionValue (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_421ED80 on CPSpecificationOption (CPOptionCategoryId);
-create index IX_135028D7 on CPSpecificationOption (companyId);
+create unique index IX_1DA76D6B on CPSpecificationOption (companyId, key_[$COLUMN_LENGTH:75$]);
 create unique index IX_1E01842D on CPSpecificationOption (groupId, key_[$COLUMN_LENGTH:75$]);
 create index IX_5B218A65 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_FFE36627 on CPSpecificationOption (uuid_[$COLUMN_LENGTH:75$], groupId);

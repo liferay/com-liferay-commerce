@@ -207,7 +207,11 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public CPOption fetchCPOption(long CPOptionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOption fetchCPOptionByCatalogGroupId(long groupId, String key)
 		throws PortalException;
 
 	/**
@@ -245,7 +249,11 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public CPOption getCPOption(long CPOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption getCPOption(long groupId, String key)
+	public CPOption getCPOption(long companyId, String key)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPOption getCPOptionByCatalogGroupId(long groupId, String key)
 		throws PortalException;
 
 	/**
@@ -275,11 +283,19 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public List<CPOption> getCPOptions(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end);
+	public List<CPOption> getCPOptions(long companyId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end,
+	public List<CPOption> getCPOptions(long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPOption> getCPOptionsByCatalogGroupId(long groupId, int start,
+		int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPOption> getCPOptionsByCatalogGroupId(long groupId, int start,
+		int end, OrderByComparator<CPOption> orderByComparator);
 
 	/**
 	* Returns all the cp options matching the UUID and company.
@@ -316,7 +332,10 @@ public interface CPOptionLocalService extends BaseLocalService,
 	public int getCPOptionsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCount(long groupId);
+	public int getCPOptionsCount(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPOptionsCountByCatalogGroupId(long groupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -342,7 +361,7 @@ public interface CPOptionLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPOption> searchCPOptions(long companyId,
-		long groupId, String keywords, int start, int end, Sort sort)
+		String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	public CPOption setFacetable(long cpOptionId, boolean facetable)

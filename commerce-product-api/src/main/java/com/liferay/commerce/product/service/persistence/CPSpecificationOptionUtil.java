@@ -1068,6 +1068,66 @@ public class CPSpecificationOptionUtil {
 	}
 
 	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or throws a {@link NoSuchCPSpecificationOptionException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the matching cp specification option
+	* @throws NoSuchCPSpecificationOptionException if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption findByC_K(long companyId, String key)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().findByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByC_K(long companyId, String key) {
+		return getPersistence().fetchByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the cp specification option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
+	*/
+	public static CPSpecificationOption fetchByC_K(long companyId, String key,
+		boolean retrieveFromCache) {
+		return getPersistence().fetchByC_K(companyId, key, retrieveFromCache);
+	}
+
+	/**
+	* Removes the cp specification option where companyId = &#63; and key = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the cp specification option that was removed
+	*/
+	public static CPSpecificationOption removeByC_K(long companyId, String key)
+		throws com.liferay.commerce.product.exception.NoSuchCPSpecificationOptionException {
+		return getPersistence().removeByC_K(companyId, key);
+	}
+
+	/**
+	* Returns the number of cp specification options where companyId = &#63; and key = &#63;.
+	*
+	* @param companyId the company ID
+	* @param key the key
+	* @return the number of matching cp specification options
+	*/
+	public static int countByC_K(long companyId, String key) {
+		return getPersistence().countByC_K(companyId, key);
+	}
+
+	/**
 	* Caches the cp specification option in the entity cache if it is enabled.
 	*
 	* @param cpSpecificationOption the cp specification option
