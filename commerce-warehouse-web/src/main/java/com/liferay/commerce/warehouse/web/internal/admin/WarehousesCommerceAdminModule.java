@@ -18,7 +18,6 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
-import com.liferay.commerce.inventory.constants.CommerceInventoryConstants;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
@@ -28,7 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -112,9 +111,8 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		return _portletResourcePermission.contains(
-			permissionChecker, groupId,
-			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+		return PortalPermissionUtil.contains(
+			permissionChecker, CommerceInventoryActionKeys.MANAGE_INVENTORY);
 	}
 
 	@Override
@@ -171,11 +169,6 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(
-		target = "(resource.name=" + CommerceInventoryConstants.RESOURCE_NAME + ")"
-	)
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.warehouse.web)"
