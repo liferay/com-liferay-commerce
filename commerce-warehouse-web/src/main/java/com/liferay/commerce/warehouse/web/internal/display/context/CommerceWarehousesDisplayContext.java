@@ -18,10 +18,15 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelRel;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.commerce.warehouse.web.internal.admin.WarehousesCommerceAdminModule;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -32,6 +37,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
@@ -41,18 +47,47 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class CommerceWarehousesDisplayContext {
 
 	public CommerceWarehousesDisplayContext(
+		CommerceChannelRelService commerceChannelRelService,
+		CommerceChannelService commerceChannelService,
 		CommerceCountryService commerceCountryService,
 		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		HttpServletRequest httpServletRequest) {
 
+		_commerceChannelRelService = commerceChannelRelService;
+		_commerceChannelService = commerceChannelService;
 		_commerceCountryService = commerceCountryService;
 		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+	}
+
+	public long[] getCommerceChannelRelCommerceChannelIds()
+		throws PortalException {
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			getCommerceWarehouse();
+
+		List<CommerceChannelRel> commerceChannelRels =
+			_commerceChannelRelService.getCommerceChannelRels(
+				commerceInventoryWarehouse.getModelClassName(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		Stream<CommerceChannelRel> stream = commerceChannelRels.stream();
+
+		return stream.mapToLong(
+			CommerceChannelRel::getCommerceChannelId
+		).toArray();
+	}
+
+	public List<CommerceChannel> getCommerceChannels() throws PortalException {
+		return _commerceChannelService.getCommerceChannels(
+			_cpRequestHelper.getCompanyId());
 	}
 
 	public CommerceCountry getCommerceCountry(
@@ -301,6 +336,8 @@ public class CommerceWarehousesDisplayContext {
 		return false;
 	}
 
+	private final CommerceChannelRelService _commerceChannelRelService;
+	private final CommerceChannelService _commerceChannelService;
 	private final CommerceCountryService _commerceCountryService;
 	private CommerceInventoryWarehouse _commerceWarehouse;
 	private final CommerceInventoryWarehouseLocalService
