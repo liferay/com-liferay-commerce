@@ -18,6 +18,8 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -131,6 +133,7 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		if (commerceWarehousesDisplayContext == null) {
 			commerceWarehousesDisplayContext =
 				new CommerceWarehousesDisplayContext(
+					_commerceChannelRelService, _commerceChannelService,
 					_commerceCountryService, _commerceWarehouseLocalService,
 					httpServletRequest);
 
@@ -141,6 +144,12 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 
 		return commerceWarehousesDisplayContext;
 	}
+
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
