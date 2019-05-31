@@ -15,7 +15,7 @@
 package com.liferay.commerce.health.status.web.internal.util;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -83,6 +83,12 @@ public class MeasurementUnitsCommerceHealthStatus
 			resourceBundle,
 			CommerceHealthStatusConstants.
 				MEASUREMENT_UNITS_COMMERCE_HEALTH_STATUS_KEY);
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override

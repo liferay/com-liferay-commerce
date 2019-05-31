@@ -17,7 +17,7 @@ package com.liferay.commerce.health.status.web.internal.util;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -97,6 +97,12 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 		return LanguageUtil.get(
 			resourceBundle,
 			CommerceHealthStatusConstants.ACCOUNTS_COMMERCE_HEALTH_STATUS_KEY);
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override
