@@ -253,45 +253,45 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		if (commerceDiscount != null) {
-			updatecommerceDiscountCommerceAccountGroupRels(
+			updateCommerceDiscountCommerceAccountGroupRels(
 				actionRequest, commerceDiscount);
 		}
 
 		return commerceDiscount;
 	}
 
-	protected void updatecommerceDiscountCommerceAccountGroupRels(
+	protected void updateCommerceDiscountCommerceAccountGroupRels(
 			ActionRequest actionRequest, CommerceDiscount commerceDiscount)
 		throws PortalException {
 
-		long[] addcommerceAccountGroupIds = ParamUtil.getLongValues(
-			actionRequest, "addcommerceAccountGroupIds");
+		long[] addCommerceAccountGroupIds = ParamUtil.getLongValues(
+			actionRequest, "addCommerceAccountGroupIds");
 
-		long[] deletecommerceDiscountCommerceAccountGroupRelIds =
+		long[] deleteCommerceDiscountCommerceAccountGroupRelIds =
 			ParamUtil.getLongValues(
 				actionRequest,
-				"deletecommerceDiscountCommerceAccountGroupRelIds");
+				"deleteCommerceDiscountCommerceAccountGroupRelIds");
 
-		if (deletecommerceDiscountCommerceAccountGroupRelIds.length > 0) {
-			for (long deletecommerceDiscountCommerceAccountGroupRelId :
-					deletecommerceDiscountCommerceAccountGroupRelIds) {
+		if (deleteCommerceDiscountCommerceAccountGroupRelIds.length > 0) {
+			for (long deleteCommerceDiscountCommerceAccountGroupRelId :
+					deleteCommerceDiscountCommerceAccountGroupRelIds) {
 
 				_commerceDiscountCommerceAccountGroupRelService.
 					deleteCommerceDiscountCommerceAccountGroupRel(
-						deletecommerceDiscountCommerceAccountGroupRelId);
+						deleteCommerceDiscountCommerceAccountGroupRelId);
 			}
 		}
 
-		if (addcommerceAccountGroupIds.length > 0) {
+		if (addCommerceAccountGroupIds.length > 0) {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceDiscountCommerceAccountGroupRel.class.getName(),
 				actionRequest);
 
-			for (long addcommerceAccountGroupId : addcommerceAccountGroupIds) {
+			for (long addCommerceAccountGroupId : addCommerceAccountGroupIds) {
 				_commerceDiscountCommerceAccountGroupRelService.
 					addCommerceDiscountCommerceAccountGroupRel(
 						commerceDiscount.getCommerceDiscountId(),
-						addcommerceAccountGroupId, serviceContext);
+						addCommerceAccountGroupId, serviceContext);
 			}
 		}
 	}

@@ -307,7 +307,7 @@ if (parentCommercePriceList != null) {
 
 <aui:script>
 	var <portlet:namespace />addCommerceAccountIds = [];
-	var <portlet:namespace />addcommerceAccountGroupIds = [];
+	var <portlet:namespace />addCommerceAccountGroupIds = [];
 	var <portlet:namespace />deleteCommercePriceListAccountRelIds = [];
 	var <portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds = [];
 
@@ -356,9 +356,9 @@ if (parentCommercePriceList != null) {
 
 		A.Array.removeItem(<portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds, item.commerceAccountGroupId);
 
-		<portlet:namespace />addcommerceAccountGroupIds.push(item.commerceAccountGroupId);
+		<portlet:namespace />addCommerceAccountGroupIds.push(item.commerceAccountGroupId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds.join(',');
 
 		searchContainer.addRow(rowColumns, item.commerceAccountGroupId);
@@ -369,11 +369,11 @@ if (parentCommercePriceList != null) {
 	function <portlet:namespace />deleteCommercePriceListCommerceAccountGroupRel(commercePriceListAccountGroupEntryRelId) {
 		var A = AUI();
 
-		A.Array.removeItem(<portlet:namespace />addcommerceAccountGroupIds, commercePriceListAccountGroupEntryRelId);
+		A.Array.removeItem(<portlet:namespace />addCommerceAccountGroupIds, commercePriceListAccountGroupEntryRelId);
 
 		<portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds.push(commercePriceListAccountGroupEntryRelId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommercePriceListCommerceAccountGroupRelIds.join(',');
 	}
 

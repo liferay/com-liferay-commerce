@@ -287,8 +287,8 @@ public class EditCommercePriceListMVCActionCommand
 			ActionRequest actionRequest, CommercePriceList commercePriceList)
 		throws PortalException {
 
-		long[] addcommerceAccountGroupIds = ParamUtil.getLongValues(
-			actionRequest, "addcommerceAccountGroupIds");
+		long[] addCommerceAccountGroupIds = ParamUtil.getLongValues(
+			actionRequest, "addCommerceAccountGroupIds");
 
 		long[] deleteCommercePriceListCommerceAccountGroupRelIds =
 			ParamUtil.getLongValues(
@@ -305,24 +305,24 @@ public class EditCommercePriceListMVCActionCommand
 			}
 		}
 
-		if (addcommerceAccountGroupIds.length > 0) {
+		if (addCommerceAccountGroupIds.length > 0) {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommercePriceListCommerceAccountGroupRel.class.getName(),
 				actionRequest);
 
-			for (long addcommerceAccountGroupId : addcommerceAccountGroupIds) {
+			for (long addCommerceAccountGroupId : addCommerceAccountGroupIds) {
 				CommercePriceListCommerceAccountGroupRel
 					commercePriceListAccountGroupEntryRel =
 						_commercePriceListCommerceAccountGroupRelService.
 							fetchCommercePriceListCommerceAccountGroupRel(
 								commercePriceList.getCommercePriceListId(),
-								addcommerceAccountGroupId);
+								addCommerceAccountGroupId);
 
 				if (commercePriceListAccountGroupEntryRel == null) {
 					_commercePriceListCommerceAccountGroupRelService.
 						addCommercePriceListCommerceAccountGroupRel(
 							commercePriceList.getCommercePriceListId(),
-							addcommerceAccountGroupId, 0, serviceContext);
+							addCommerceAccountGroupId, 0, serviceContext);
 				}
 			}
 		}
