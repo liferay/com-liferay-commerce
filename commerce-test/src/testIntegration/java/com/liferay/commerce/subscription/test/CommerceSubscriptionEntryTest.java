@@ -99,7 +99,8 @@ public class CommerceSubscriptionEntryTest {
 		int commerceSubscriptionEntriesCount =
 			_commerceSubscriptionEntryLocalService.
 				getCommerceSubscriptionEntriesCount(
-					_group.getGroupId(), _user.getUserId());
+					_group.getCompanyId(), _group.getGroupId(),
+					_user.getUserId());
 
 		Assert.assertEquals(1, commerceSubscriptionEntriesCount);
 	}
@@ -267,8 +268,8 @@ public class CommerceSubscriptionEntryTest {
 		List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
 			_commerceSubscriptionEntryLocalService.
 				getCommerceSubscriptionEntries(
-					groupId, _user.getUserId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS,
+					_group.getCompanyId(), _group.getGroupId(),
+					_user.getUserId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 					new CommerceSubscriptionEntryCreateDateComparator());
 
 		if (cpDefinitionSubscriptionEnabled && cpInstanceSubscriptionEnabled) {
