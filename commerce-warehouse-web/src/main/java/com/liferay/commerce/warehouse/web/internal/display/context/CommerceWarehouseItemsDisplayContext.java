@@ -29,7 +29,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -57,15 +56,13 @@ public class CommerceWarehouseItemsDisplayContext {
 		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
 		ConfigurationProvider configurationProvider,
 		CPInstanceService cpInstanceService,
-		HttpServletRequest httpServletRequest, Portal portal,
-		PortletResourcePermission portletResourcePermission) {
+		HttpServletRequest httpServletRequest, Portal portal) {
 
 		_commerceWarehouseItemLocalService = commerceWarehouseItemLocalService;
 		_commerceWarehouseLocalService = commerceWarehouseLocalService;
 		_configurationProvider = configurationProvider;
 		_cpInstanceService = cpInstanceService;
 		_portal = portal;
-		_portletResourcePermission = portletResourcePermission;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 	}
@@ -200,6 +197,5 @@ public class CommerceWarehouseItemsDisplayContext {
 	private final CPInstanceService _cpInstanceService;
 	private final CPRequestHelper _cpRequestHelper;
 	private final Portal _portal;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }
