@@ -189,19 +189,10 @@ public class EditCommerceWarehouseMVCActionCommand
 		String street3 = ParamUtil.getString(actionRequest, "street3");
 		String city = ParamUtil.getString(actionRequest, "city");
 		String zip = ParamUtil.getString(actionRequest, "zip");
-
-		long commerceRegionId = ParamUtil.getLong(
-			actionRequest, "commerceRegionId");
-
-		long commerceCountryId = ParamUtil.getLong(
-			actionRequest, "commerceCountryId");
-
-		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.getCommerceCountry(commerceCountryId);
-
-		CommerceRegion commerceRegion =
-			_commerceRegionLocalService.getCommerceRegion(commerceRegionId);
-
+		String commerceRegionCode = ParamUtil.getString(
+			actionRequest, "commerceRegionCode");
+		String commerceCountryCode = ParamUtil.getString(
+			actionRequest, "countryTwoLettersISOCode");
 		double latitude = ParamUtil.getDouble(actionRequest, "latitude");
 		double longitude = ParamUtil.getDouble(actionRequest, "longitude");
 
@@ -214,17 +205,15 @@ public class EditCommerceWarehouseMVCActionCommand
 			commerceWarehouse =
 				_commerceWarehouseService.addCommerceWarehouseAndGroupRel(
 					name, description, active, street1, street2, street3, city,
-					zip, commerceRegion.getCode(),
-					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
-					serviceContext);
+					zip, commerceRegionCode, commerceCountryCode, latitude,
+					longitude, serviceContext);
 		}
 		else {
 			commerceWarehouse =
 				_commerceWarehouseService.updateCommerceWarehouse(
 					commerceWarehouseId, name, description, active, street1,
-					street2, street3, city, zip, commerceRegion.getCode(),
-					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
-					serviceContext);
+					street2, street3, city, zip, commerceRegionCode,
+					commerceCountryCode, latitude, longitude, serviceContext);
 		}
 
 		return commerceWarehouse;
