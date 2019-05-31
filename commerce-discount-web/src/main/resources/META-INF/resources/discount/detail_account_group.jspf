@@ -68,7 +68,7 @@ List<CommerceDiscountCommerceAccountGroupRel> commerceDiscountCommerceAccountGro
 					eventName: 'accountGroupSelectItem',
 					on: {
 						selectedItemChange: function(event) {
-							var <portlet:namespace />addcommerceAccountGroupIds = [];
+							var <portlet:namespace />addCommerceAccountGroupIds = [];
 
 							var selectedItems = event.newVal;
 
@@ -95,8 +95,8 @@ List<CommerceDiscountCommerceAccountGroupRel> commerceDiscountCommerceAccountGro
 </aui:script>
 
 <aui:script>
-	var <portlet:namespace />addcommerceAccountGroupIds = [];
-	var <portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds = [];
+	var <portlet:namespace />addCommerceAccountGroupIds = [];
+	var <portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds = [];
 
 	function <portlet:namespace />addCommerceAccountGroup(item) {
 		var A = AUI();
@@ -108,27 +108,27 @@ List<CommerceDiscountCommerceAccountGroupRel> commerceDiscountCommerceAccountGro
 		rowColumns.push(item.name);
 		rowColumns.push('<a class="float-right modify-link" data-rowId="' + item.commerceAccountGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeCommerceAccountGroupIcon) %></a>');
 
-		A.Array.removeItem(<portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds, item.commerceAccountGroupId);
+		A.Array.removeItem(<portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds, item.commerceAccountGroupId);
 
-		<portlet:namespace />addcommerceAccountGroupIds.push(item.commerceAccountGroupId);
+		<portlet:namespace />addCommerceAccountGroupIds.push(item.commerceAccountGroupId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds.value = <portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds.join(',');
 
 		searchContainer.addRow(rowColumns, item.commerceAccountGroupId);
 
 		searchContainer.updateDataStore();
 	}
 
-	function <portlet:namespace />deletecommerceDiscountCommerceAccountGroupRel(commerceDiscountCommerceAccountGroupRelId) {
+	function <portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRel(commerceDiscountCommerceAccountGroupRelId) {
 		var A = AUI();
 
-		A.Array.removeItem(<portlet:namespace />addcommerceAccountGroupIds, commerceDiscountCommerceAccountGroupRelId);
+		A.Array.removeItem(<portlet:namespace />addCommerceAccountGroupIds, commerceDiscountCommerceAccountGroupRelId);
 
-		<portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds.push(commerceDiscountCommerceAccountGroupRelId);
+		<portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds.push(commerceDiscountCommerceAccountGroupRelId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds.value = <portlet:namespace />deletecommerceDiscountCommerceAccountGroupRelIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRelIds.join(',');
 	}
 </aui:script>
 
@@ -150,7 +150,7 @@ List<CommerceDiscountCommerceAccountGroupRel> commerceDiscountCommerceAccountGro
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 
-			<portlet:namespace />deletecommerceDiscountCommerceAccountGroupRel(rowId);
+			<portlet:namespace />deleteCommerceDiscountCommerceAccountGroupRel(rowId);
 		},
 		'.modify-link'
 	);

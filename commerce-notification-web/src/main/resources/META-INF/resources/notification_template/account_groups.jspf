@@ -105,7 +105,7 @@ List<CommerceNotificationTemplateCommerceAccountGroupRel> commerceNotificationTe
 </aui:script>
 
 <aui:script>
-	var <portlet:namespace />addcommerceAccountGroupIds = [];
+	var <portlet:namespace />addCommerceAccountGroupIds = [];
 	var <portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds = [];
 
 	function <portlet:namespace />addCommerceNotificationTemplateCommerceAccountGroupRel(item) {
@@ -120,9 +120,9 @@ List<CommerceNotificationTemplateCommerceAccountGroupRel> commerceNotificationTe
 
 		A.Array.removeItem(<portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds, item.commerceAccountGroupId);
 
-		<portlet:namespace />addcommerceAccountGroupIds.push(item.commerceAccountGroupId);
+		<portlet:namespace />addCommerceAccountGroupIds.push(item.commerceAccountGroupId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.join(',');
 
 		searchContainer.addRow(rowColumns, item.commerceAccountGroupId);
@@ -133,11 +133,11 @@ List<CommerceNotificationTemplateCommerceAccountGroupRel> commerceNotificationTe
 	function <portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRel(commerceNotificationTemplateCommerceAccountGroupRelId) {
 		var A = AUI();
 
-		A.Array.removeItem(<portlet:namespace />addcommerceAccountGroupIds, commerceNotificationTemplateCommerceAccountGroupRelId);
+		A.Array.removeItem(<portlet:namespace />addCommerceAccountGroupIds, commerceNotificationTemplateCommerceAccountGroupRelId);
 
 		<portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.push(commerceNotificationTemplateCommerceAccountGroupRelId);
 
-		document.<portlet:namespace />fm.<portlet:namespace />addcommerceAccountGroupIds.value = <portlet:namespace />addcommerceAccountGroupIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />addCommerceAccountGroupIds.value = <portlet:namespace />addCommerceAccountGroupIds.join(',');
 		document.<portlet:namespace />fm.<portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.value = <portlet:namespace />deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.join(',');
 	}
 </aui:script>
