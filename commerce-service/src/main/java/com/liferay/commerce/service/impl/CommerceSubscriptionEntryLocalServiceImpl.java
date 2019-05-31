@@ -31,6 +31,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.base.CommerceSubscriptionEntryLocalServiceBaseImpl;
@@ -71,7 +72,6 @@ import java.util.Map;
 public class CommerceSubscriptionEntryLocalServiceImpl
 	extends CommerceSubscriptionEntryLocalServiceBaseImpl {
 
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long cpInstanceId, long commerceOrderItemId,
@@ -84,9 +84,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
 
-		return addCommerceSubscriptionEntry(
-			cpInstance.getCPInstanceUuid(), cpDefinition.getCProductId(),
-			commerceOrderItemId, serviceContext);
+		return commerceSubscriptionEntryLocalService.
+			addCommerceSubscriptionEntry(
+				cpInstance.getCPInstanceUuid(), cpDefinition.getCProductId(),
+				commerceOrderItemId, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -97,6 +98,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		throws PortalException {
 
 		CPSubscriptionInfo cpSubscriptionInfo = null;
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		CPInstance cpInstance = _cpInstanceLocalService.fetchCProductInstance(
 			cProductId, cpInstanceUuid);
@@ -115,6 +118,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		validateCPSubscriptionType(cpSubscriptionType);
 
+		long groupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				serviceContext.getScopeGroupId());
+
 		long commerceSubscriptionEntryId = counterLocalService.increment();
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
@@ -122,10 +129,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 				commerceSubscriptionEntryId);
 
 		commerceSubscriptionEntry.setUuid(serviceContext.getUuid());
-		commerceSubscriptionEntry.setGroupId(serviceContext.getScopeGroupId());
-
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
+		commerceSubscriptionEntry.setGroupId(groupId);
 		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
 		commerceSubscriptionEntry.setUserId(user.getUserId());
 		commerceSubscriptionEntry.setUserName(user.getFullName());
@@ -185,16 +189,36 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 	@Override
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
+		long companyId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		return commerceSubscriptionEntryPersistence.findByG_U(
-			groupId, userId, start, end, orderByComparator);
+		return commerceSubscriptionEntryPersistence.findByC_U(
+			companyId, userId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId) {
-		return commerceSubscriptionEntryPersistence.countByG_U(groupId, userId);
+	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		return commerceSubscriptionEntryPersistence.findByG_C_U(
+			groupId, companyId, userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceSubscriptionEntriesCount(
+		long companyId, long userId) {
+
+		return commerceSubscriptionEntryPersistence.countByC_U(
+			companyId, userId);
+	}
+
+	@Override
+	public int getCommerceSubscriptionEntriesCount(
+		long companyId, long groupId, long userId) {
+
+		return commerceSubscriptionEntryPersistence.countByG_C_U(
+			groupId, companyId, userId);
 	}
 
 	@Override
@@ -273,6 +297,21 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		SearchContext searchContext = buildSearchContext(
 			companyId, groupId, maxSubscriptionCycles, subscriptionStatus,
+			keywords, start, end, sort);
+
+		return searchCommerceSubscriptionEntries(searchContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			searchCommerceSubscriptionEntries(
+				long companyId, Long maxSubscriptionCycles,
+				Integer subscriptionStatus, String keywords, int start, int end,
+				Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, null, maxSubscriptionCycles, subscriptionStatus,
 			keywords, start, end, sort);
 
 		return searchCommerceSubscriptionEntries(searchContext);
@@ -390,7 +429,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, Long maxSubscriptionCycles,
+		long companyId, Long groupId, Long maxSubscriptionCycles,
 		Integer subscriptionStatus, String keywords, int start, int end,
 		Sort sort) {
 
@@ -426,7 +465,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
+
+		if (groupId != null) {
+			searchContext.setGroupIds(new long[] {groupId});
+		}
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -532,6 +574,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	private static final String[] _SELECTED_FIELD_NAMES = {
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
 	};
+
+	@ServiceReference(type = CommerceChannelLocalService.class)
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@ServiceReference(type = CommerceNotificationHelper.class)
 	private CommerceNotificationHelper _commerceNotificationHelper;
