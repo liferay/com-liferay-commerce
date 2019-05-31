@@ -76,12 +76,12 @@ public class CPOptionCategoryDisplayContext
 
 		searchContainer.setTotal(total);
 
-		List<CPOptionCategory> results =
+		List<CPOptionCategory> cpOptionCategories =
 			_cpOptionCategoryService.getCPOptionCategories(
-				getScopeGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 
-		searchContainer.setResults(results);
+		searchContainer.setResults(cpOptionCategories);
 
 		return searchContainer;
 	}

@@ -147,13 +147,30 @@ public class CPOptionCategoryLocalServiceImpl
 
 	@Override
 	public List<CPOptionCategory> getCPOptionCategories(
+		long companyId, int start, int end) {
+
+		return cpOptionCategoryPersistence.findByCompanyId(
+			companyId, start, end);
+	}
+
+	@Override
+	public List<CPOptionCategory> getCPOptionCategories(
+		long companyId, int start, int end,
+		OrderByComparator<CPOptionCategory> orderByComparator) {
+
+		return cpOptionCategoryPersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		long groupId, int start, int end) {
 
 		return cpOptionCategoryPersistence.findByGroupId(groupId, start, end);
 	}
 
 	@Override
-	public List<CPOptionCategory> getCPOptionCategories(
+	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator) {
 
@@ -162,7 +179,12 @@ public class CPOptionCategoryLocalServiceImpl
 	}
 
 	@Override
-	public int getCPOptionCategoriesCount(long groupId) {
+	public int getCPOptionCategoriesCount(long companyId) {
+		return cpOptionCategoryPersistence.countByCompanyId(companyId);
+	}
+
+	@Override
+	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId) {
 		return cpOptionCategoryPersistence.countByGroupId(groupId);
 	}
 
