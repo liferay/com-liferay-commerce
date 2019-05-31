@@ -424,12 +424,31 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 </div>
 
 <aui:script require="commerce-order-content-web@1.0.13/dynamic_panel/js/index.es as DynamicPanel">
+
+	var props = {
+		elements : [
+			{
+				icon: 'favorites',
+				url: 'http://localhost:4000/api/text/list',
+				pageName: 'Comments'
+			},
+			{
+				icon: 'print',
+				url: 'http://localhost:4000/api/text/print',
+				pageName: 'Edit'
+			},
+			{
+				icon: 'search',
+				url: 'http://localhost:4000/api/text/search',
+				pageName: 'Changelog'
+			}
+		],
+		spritemap: '<%= themeDisplay.getPathThemeImages() + "/commerce-icons.svg" %>'
+	}
+
     DynamicPanel.default(
         '<%= dynamicPanelRootElementId %>',
-        {
-            assetsPath: '<%= PortalUtil.getPathContext(request) + "/assets" %>',
-            namespace: '<portlet:namespace/>',
-            spritemap: '<%= themeDisplay.getPathThemeImages() + "/lexicon/icons.svg" %>'
-        }
+        props
     );
+
 </aui:script>
