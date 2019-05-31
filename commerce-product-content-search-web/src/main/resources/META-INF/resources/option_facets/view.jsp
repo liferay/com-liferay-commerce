@@ -26,6 +26,8 @@
 CPOptionFacetsDisplayContext cpOptionFacetsDisplayContext = (CPOptionFacetsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 List<Facet> facets = cpOptionFacetsDisplayContext.getFacets();
+
+long companyId = company.getCompanyId();
 %>
 
 <c:choose>
@@ -45,10 +47,10 @@ List<Facet> facets = cpOptionFacetsDisplayContext.getFacets();
 				cssClass="search-facet"
 				markupView="lexicon"
 				persistState="<%= true %>"
-				title="<%= cpOptionFacetsDisplayContext.getCPOptionName(scopeGroupId, facet.getFieldName()) %>"
+				title="<%= cpOptionFacetsDisplayContext.getCPOptionName(companyId, facet.getFieldName()) %>"
 			>
 				<aui:form method="post" name='<%= "assetEntriesFacetForm_" + facet.getFieldName() %>'>
-					<aui:input cssClass="facet-parameter-name" name="facet-parameter-name" type="hidden" value="<%= cpOptionFacetsDisplayContext.getCPOptionKey(scopeGroupId, facet.getFieldName()) %>" />
+					<aui:input cssClass="facet-parameter-name" name="facet-parameter-name" type="hidden" value="<%= cpOptionFacetsDisplayContext.getCPOptionKey(companyId, facet.getFieldName()) %>" />
 
 					<aui:fieldset>
 						<ul class="asset-type list-unstyled">
@@ -70,7 +72,7 @@ List<Facet> facets = cpOptionFacetsDisplayContext.getFacets();
 									name="<portlet:namespace />term_<%= facet.getFieldName() + i %>"
 									onChange="Liferay.Search.FacetUtil.changeSelection(event);"
 									type="checkbox"
-									<%= cpOptionFacetsDisplayContext.isCPOptionValueSelected(scopeGroupId, facet.getFieldName(), termCollector.getTerm()) ? "checked" : "" %>
+									<%= cpOptionFacetsDisplayContext.isCPOptionValueSelected(companyId, facet.getFieldName(), termCollector.getTerm()) ? "checked" : "" %>
 								/>
 
 								<span class="term-name">
