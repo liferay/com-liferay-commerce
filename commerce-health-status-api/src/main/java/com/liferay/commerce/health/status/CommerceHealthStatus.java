@@ -34,6 +34,8 @@ public interface CommerceHealthStatus {
 
 	public String getName(Locale locale);
 
+	public int getType();
+
 	public boolean isFixed(long companyId, long groupId) throws PortalException;
 
 }

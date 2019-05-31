@@ -15,7 +15,7 @@
 package com.liferay.commerce.health.status.web.internal.util;
 
 import com.liferay.commerce.health.status.CommerceHealthStatus;
-import com.liferay.commerce.health.status.web.internal.constants.CommerceHealthStatusConstants;
+import com.liferay.commerce.health.status.constants.CommerceHealthStatusConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -122,6 +122,12 @@ public class CPCompareContentCommerceHealthStatus
 			resourceBundle,
 			CommerceHealthStatusConstants.
 				CP_COMPARE_CONTENT_COMMERCE_HEALTH_STATUS_KEY);
+	}
+
+	@Override
+	public int getType() {
+		return CommerceHealthStatusConstants.
+			COMMERCE_HEALTH_STATUS_TYPE_GROUP_INSTANCE;
 	}
 
 	@Override
