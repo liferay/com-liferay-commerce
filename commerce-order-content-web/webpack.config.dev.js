@@ -1,22 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	devServer: {
-		compress: false,
-		contentBase: path.join(__dirname, 'dev-build'),
-		open: true,
-		openPage: 'o/segments-web/',
-		port: 9000,
-		proxy: {
-			'**': 'http://0.0.0.0:8080'
-		},
-		publicPath: '/o/segments-web/'
-	},
-	entry: {
-		'index.dev': path.resolve(__dirname, 'src', 'main', 'resources', 'META-INF', 'resources', 'js', 'index.dev.es.js')
-	},
+	entry:
+		path.join(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/js/index.dev.es.js'),
 	mode: 'development',
 	module: {
 		rules: [
@@ -26,42 +14,40 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader'
-					},
-					{
-						loader: 'liferay-lang-key-dev-loader',
-						options: {
-							path: '../segments-lang/src/main/resources/content/Language.properties'
-						}
 					}
 				]
 			},
 			{
 				test: /\.(scss|css)$/,
 				use: [
-					{loader: 'style-loader'},
-					{loader: 'css-loader'},
-					{loader: 'sass-loader'}
+					{ loader: 'style-loader' },
+					{ loader: 'css-loader' },
+					{ loader: 'sass-loader' }
 				]
 			}
 		]
 	},
 	output: {
 		filename: `[name].js`,
-		library: 'oDataParser',
-		libraryTarget: 'window',
-		path: path.resolve(__dirname, 'dev-build')
+		path: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build')
 	},
 	plugins: [
+		// new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
-			appMountId: 'app',
-			template: require('html-webpack-template')
-		}),
-		new webpack.NormalModuleReplacementPlugin(
-			/\.\.\/libs\/odata-parser/,
-			'../libs/ODataParser.es.js'
-		),
+			template: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build/index.html')
+		})
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.svg']
-	}
+	},
+
+	devServer: {
+		compress: false,
+		contentBase: path.join(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build'),
+		open: true,
+		port: 9000,
+		// proxy: {
+		// 	'**': 'http://0.0.0.0:8080'
+		// }
+	},
 };

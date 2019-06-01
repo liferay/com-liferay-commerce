@@ -8,7 +8,8 @@ class DynamicPanel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			current: props.current || null
+			current: props.current || null,
+			content: null
 		};
 		document.querySelector('body').classList.add('with-dynamic-panel');
 	}
@@ -23,15 +24,16 @@ class DynamicPanel extends Component {
 			  }
 			: null;
 
-		this.setState({
-			current
-		});
+		return this._getContent(current.url)
+			.then(
+				() => this.setState({
+					current
+				})
+			);
 	}
 
 	onError(message) {
-		this.setState({
-			current: null
-		})
+		this._reset();
 		return this.props.onError
 			? this.props.onError(message)
 			: console.error(message);
@@ -41,19 +43,49 @@ class DynamicPanel extends Component {
 		if(!url) {
 			return false
 		}
+		return this._getContent(url)
+			.then(
+				() => this.setState({
+					current: {
+						slug,
+						url
+					}
+				})
+			);
+	}
+
+	close() {
+		this._reset();
+	}
+
+	_reset() {
 		this.setState({
-			current: {
-				slug,
-				url
-			}
-		});
+			current: null,
+			content: null
+		})
+	}
+
+	_getContent(url) {
+		return fetch(url)
+			.then(res => {
+				if(res.status !== 200) {
+					throw new Error(`Request failed with statusCode: ${res.status}`);
+				}
+				return res.text()
+			})
+			.then(content => {
+				return this.setState({
+					content
+				})
+			})
+			.catch(err => this.onError(err))
 	}
 
 	render() {
 		return (
 			<div
 				className={`dynamic-panel${
-					this.state.current !== null ? ' open' : ''
+					this.state.content ? ' open' : ''
 				}`}
 			>
 				{this.props.elements && (
@@ -65,9 +97,8 @@ class DynamicPanel extends Component {
 					/>
 				)}
 				<Content
-					url={this.state.current && this.state.current.url}
-					onError={msg => this.onError(msg)}
-					close={() => this.setCurrentBySlug()}
+					content={this.state.content}
+					close={() => this.close()}
 					closeIcon={<Icon spritemap={this.props.spritemap} symbol="close" />}
 				/>
 			</div>
