@@ -17,13 +17,16 @@ package com.liferay.commerce.tax.web.internal.display.context;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.tax.CommerceTaxEngine;
+import com.liferay.commerce.tax.configuration.CommerceTaxByAddressTypeConfiguration;
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.service.CommerceTaxMethodService;
 import com.liferay.commerce.tax.util.comparator.CommerceTaxMethodNameComparator;
 import com.liferay.commerce.util.CommerceTaxEngineRegistry;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -166,6 +169,22 @@ public class CommerceTaxMethodsDisplayContext {
 		return _portletResourcePermission.contains(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_TAX_METHODS);
+	}
+
+	public boolean isTaxAppliedToShippingAddress() throws PortalException {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		CommerceTaxByAddressTypeConfiguration
+			commerceTaxByAddressTypeConfiguration =
+				ConfigurationProviderUtil.getConfiguration(
+					CommerceTaxByAddressTypeConfiguration.class,
+					new GroupServiceSettingsLocator(
+						themeDisplay.getScopeGroupId(),
+						CommerceTaxByAddressTypeConfiguration.class.getName()));
+
+		return commerceTaxByAddressTypeConfiguration.
+			taxAppliedToShippingAddress();
 	}
 
 	protected List<CommerceTaxMethod> addDefaultCommerceTaxMethods(

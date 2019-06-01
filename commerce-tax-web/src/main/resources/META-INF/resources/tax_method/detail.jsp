@@ -24,6 +24,8 @@ CommerceTaxMethodsDisplayContext commerceTaxMethodsDisplayContext = (CommerceTax
 CommerceTaxMethod commerceTaxMethod = commerceTaxMethodsDisplayContext.getCommerceTaxMethod();
 
 long commerceTaxMethodId = commerceTaxMethod.getCommerceTaxMethodId();
+
+String engineKey = commerceTaxMethod.getEngineKey();
 %>
 
 <portlet:actionURL name="editCommerceTaxMethod" var="editCommerceTaxMethodActionURL" />
@@ -48,6 +50,10 @@ long commerceTaxMethodId = commerceTaxMethod.getCommerceTaxMethodId();
 				<aui:input checked="<%= (commerceTaxMethod == null) ? false : commerceTaxMethod.getPercentage() %>" name="percentage" type="toggle-switch" />
 
 				<aui:input checked="<%= (commerceTaxMethod == null) ? false : commerceTaxMethod.isActive() %>" name="active" type="toggle-switch" />
+
+				<c:if test='<%= engineKey.equals("by-address") %>'>
+					<aui:input labelOff="billing-address" labelOn="shipping-address" name="apply-tax-to" type="toggle-switch" value="<%= commerceTaxMethodsDisplayContext.isTaxAppliedToShippingAddress() %>" />
+				</c:if>
 			</aui:fieldset>
 		</aui:fieldset-group>
 	</div>

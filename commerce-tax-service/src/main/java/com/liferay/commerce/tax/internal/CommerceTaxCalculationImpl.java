@@ -27,12 +27,15 @@ import com.liferay.commerce.tax.CommerceTaxCalculateRequest;
 import com.liferay.commerce.tax.CommerceTaxCalculation;
 import com.liferay.commerce.tax.CommerceTaxEngine;
 import com.liferay.commerce.tax.CommerceTaxValue;
+import com.liferay.commerce.tax.configuration.CommerceTaxByAddressTypeConfiguration;
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.service.CommerceTaxMethodLocalService;
 import com.liferay.commerce.util.CommerceTaxEngineRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 
 import java.math.BigDecimal;
 
@@ -65,10 +68,18 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
+			long commerceAddressId = commerceOrder.getBillingAddressId();
+
+			if (isTaxAppliedToShippingAddress(
+					commerceContext.getSiteGroupId())) {
+
+				commerceAddressId = commerceOrder.getShippingAddressId();
+			}
+
 			List<CommerceTaxValue> commerceTaxValues = getCommerceTaxValues(
 				commerceOrder.getGroupId(), commerceOrderItem.getCPInstanceId(),
-				commerceOrder.getBillingAddressId(),
-				commerceOrderItem.getFinalPrice(), commerceContext);
+				commerceAddressId, commerceOrderItem.getFinalPrice(),
+				commerceContext);
 
 			for (CommerceTaxValue commerceTaxValue : commerceTaxValues) {
 				CommerceTaxValue aggregatedCommerceTaxValue = null;
@@ -169,6 +180,21 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 
 		return _commerceMoneyFactory.create(
 			commerceContext.getCommerceCurrency(), taxAmount);
+	}
+
+	protected boolean isTaxAppliedToShippingAddress(long groupId)
+		throws PortalException {
+
+		CommerceTaxByAddressTypeConfiguration
+			commerceTaxByAddressTypeConfiguration =
+				ConfigurationProviderUtil.getConfiguration(
+					CommerceTaxByAddressTypeConfiguration.class,
+					new GroupServiceSettingsLocator(
+						groupId,
+						CommerceTaxByAddressTypeConfiguration.class.getName()));
+
+		return commerceTaxByAddressTypeConfiguration.
+			taxAppliedToShippingAddress();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

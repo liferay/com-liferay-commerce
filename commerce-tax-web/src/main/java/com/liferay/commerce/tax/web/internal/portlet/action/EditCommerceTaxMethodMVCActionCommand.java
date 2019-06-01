@@ -17,6 +17,7 @@ package com.liferay.commerce.tax.web.internal.portlet.action;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.CommerceTaxMethodNameException;
 import com.liferay.commerce.tax.CommerceTaxEngine;
+import com.liferay.commerce.tax.configuration.CommerceTaxByAddressTypeConfiguration;
 import com.liferay.commerce.tax.exception.NoSuchTaxMethodException;
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.service.CommerceTaxMethodService;
@@ -28,6 +29,10 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.settings.ModifiableSettings;
+import com.liferay.portal.kernel.settings.Settings;
+import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -35,6 +40,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -44,6 +51,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+import javax.portlet.ValidatorException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -209,7 +217,7 @@ public class EditCommerceTaxMethodMVCActionCommand
 
 	protected CommerceTaxMethod updateCommerceTaxMethod(
 			ActionRequest actionRequest)
-		throws PortalException {
+		throws IOException, PortalException, ValidatorException {
 
 		long commerceTaxMethodId = ParamUtil.getLong(
 			actionRequest, "commerceTaxMethodId");
@@ -239,6 +247,24 @@ public class EditCommerceTaxMethodMVCActionCommand
 					active);
 		}
 
+		if (engineKey.equals("by-address")) {
+			boolean applyToShipping = ParamUtil.getBoolean(
+				actionRequest, "apply-tax-to");
+
+			Settings settings = _settingsFactory.getSettings(
+				new GroupServiceSettingsLocator(
+					_portal.getScopeGroupId(actionRequest),
+					CommerceTaxByAddressTypeConfiguration.class.getName()));
+
+			ModifiableSettings modifiableSettings =
+				settings.getModifiableSettings();
+
+			modifiableSettings.setValue(
+				"taxAppliedToShippingAddress", String.valueOf(applyToShipping));
+
+			modifiableSettings.store();
+		}
+
 		return commerceTaxMethod;
 	}
 
@@ -250,5 +276,8 @@ public class EditCommerceTaxMethodMVCActionCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private SettingsFactory _settingsFactory;
 
 }
