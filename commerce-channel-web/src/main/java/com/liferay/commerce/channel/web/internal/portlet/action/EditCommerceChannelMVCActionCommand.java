@@ -139,7 +139,7 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		return _commerceChannelService.updateCommerceChannel(
-			siteGroupId, commerceChannelId, name, type, typeSettingsProperties,
+			commerceChannelId, siteGroupId, name, type, typeSettingsProperties,
 			commerceCurrencyCode);
 	}
 
