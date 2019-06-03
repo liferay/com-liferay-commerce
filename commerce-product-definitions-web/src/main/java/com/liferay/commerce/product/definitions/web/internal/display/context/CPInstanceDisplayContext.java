@@ -184,6 +184,10 @@ public class CPInstanceDisplayContext
 
 		CPDefinition cpDefinition = getCPDefinition();
 
+		if (cpDefinition == null) {
+			return managementBarFilterItems;
+		}
+
 		int workflowDefinitionLinksCount =
 			WorkflowDefinitionLinkLocalServiceUtil.
 				getWorkflowDefinitionLinksCount(
