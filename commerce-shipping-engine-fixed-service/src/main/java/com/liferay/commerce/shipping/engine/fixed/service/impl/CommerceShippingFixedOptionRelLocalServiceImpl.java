@@ -34,7 +34,7 @@ public class CommerceShippingFixedOptionRelLocalServiceImpl
 	@Override
 	public CommerceShippingFixedOptionRel addCommerceShippingFixedOptionRel(
 			long commerceShippingMethodId, long commerceShippingFixedOptionId,
-			long commerceWarehouseId, long commerceCountryId,
+			long commerceInventoryWarehouseId, long commerceCountryId,
 			long commerceRegionId, String zip, double weightFrom,
 			double weightTo, BigDecimal fixedPrice,
 			BigDecimal rateUnitWeightPrice, double ratePercentage,
@@ -58,8 +58,8 @@ public class CommerceShippingFixedOptionRelLocalServiceImpl
 			commerceShippingMethodId);
 		commerceShippingFixedOptionRel.setCommerceShippingFixedOptionId(
 			commerceShippingFixedOptionId);
-		commerceShippingFixedOptionRel.setCommerceWarehouseId(
-			commerceWarehouseId);
+		commerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceShippingFixedOptionRel.setCommerceCountryId(commerceCountryId);
 		commerceShippingFixedOptionRel.setCommerceRegionId(commerceRegionId);
 		commerceShippingFixedOptionRel.setZip(zip);
@@ -157,9 +157,10 @@ public class CommerceShippingFixedOptionRelLocalServiceImpl
 
 	@Override
 	public CommerceShippingFixedOptionRel updateCommerceShippingFixedOptionRel(
-			long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-			long commerceCountryId, long commerceRegionId, String zip,
-			double weightFrom, double weightTo, BigDecimal fixedPrice,
+			long commerceShippingFixedOptionRelId,
+			long commerceInventoryWarehouseId, long commerceCountryId,
+			long commerceRegionId, String zip, double weightFrom,
+			double weightTo, BigDecimal fixedPrice,
 			BigDecimal rateUnitWeightPrice, double ratePercentage)
 		throws PortalException {
 
@@ -167,8 +168,8 @@ public class CommerceShippingFixedOptionRelLocalServiceImpl
 			commerceShippingFixedOptionRelPersistence.findByPrimaryKey(
 				commerceShippingFixedOptionRelId);
 
-		commerceShippingFixedOptionRel.setCommerceWarehouseId(
-			commerceWarehouseId);
+		commerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceShippingFixedOptionRel.setCommerceCountryId(commerceCountryId);
 		commerceShippingFixedOptionRel.setCommerceRegionId(commerceRegionId);
 		commerceShippingFixedOptionRel.setZip(zip);

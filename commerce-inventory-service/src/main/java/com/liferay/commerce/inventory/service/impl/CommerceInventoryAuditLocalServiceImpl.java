@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Luca Pellizzon
@@ -29,38 +28,30 @@ public class CommerceInventoryAuditLocalServiceImpl
 	extends CommerceInventoryAuditLocalServiceBaseImpl {
 
 	@Override
-	public CommerceInventoryAudit addCommerceInventoryItemEntry(
-			String description, String sku, int quantity, long userId)
+	public CommerceInventoryAudit addCommerceInventoryAudit(
+			long userId, String sku, int quantity, String description)
 		throws PortalException {
 
 		User user = userLocalService.getUser(userId);
 
-		long commerceInventoryItemEntryId = counterLocalService.increment();
+		long commerceInventoryAuditId = counterLocalService.increment();
 
-		CommerceInventoryAudit commerceInventoryItemEntry =
-			commerceInventoryAuditPersistence.create(
-				commerceInventoryItemEntryId);
+		CommerceInventoryAudit commerceInventoryAudit =
+			commerceInventoryAuditPersistence.create(commerceInventoryAuditId);
 
-		commerceInventoryItemEntry.setCompanyId(user.getCompanyId());
-		commerceInventoryItemEntry.setUserId(user.getUserId());
-		commerceInventoryItemEntry.setUserName(user.getFullName());
-		commerceInventoryItemEntry.setSku(sku);
-		commerceInventoryItemEntry.setDescription(description);
-		commerceInventoryItemEntry.setQuantity(quantity);
+		commerceInventoryAudit.setCompanyId(user.getCompanyId());
+		commerceInventoryAudit.setUserId(user.getUserId());
+		commerceInventoryAudit.setUserName(user.getFullName());
+		commerceInventoryAudit.setSku(sku);
+		commerceInventoryAudit.setDescription(description);
+		commerceInventoryAudit.setQuantity(quantity);
 
-		return commerceInventoryItemEntry;
+		return commerceInventoryAuditPersistence.update(commerceInventoryAudit);
 	}
 
 	@Override
-	public void removeOldCommerceInventoryAudit(Date olderThan) {
-		List<CommerceInventoryAudit> oldInventoryAudit =
-			commerceInventoryAuditFinder.findOldInventoryAudit(olderThan);
-
-		for (CommerceInventoryAudit commerceInventoryAudit :
-				oldInventoryAudit) {
-
-			commerceInventoryAuditPersistence.remove(commerceInventoryAudit);
-		}
+	public void checkCommerceInventoryAudit(Date date) {
+		commerceInventoryAuditPersistence.removeByLtCreateDate(date);
 	}
 
 }

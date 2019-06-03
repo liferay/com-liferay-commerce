@@ -40,7 +40,7 @@ public class CommerceShippingFixedOptionRelServiceImpl
 	@Override
 	public CommerceShippingFixedOptionRel addCommerceShippingFixedOptionRel(
 			long commerceShippingMethodId, long commerceShippingFixedOptionId,
-			long commerceWarehouseId, long commerceCountryId,
+			long commerceInventoryWarehouseId, long commerceCountryId,
 			long commerceRegionId, String zip, double weightFrom,
 			double weightTo, BigDecimal fixedPrice,
 			BigDecimal rateUnitWeightPrice, double ratePercentage,
@@ -54,9 +54,9 @@ public class CommerceShippingFixedOptionRelServiceImpl
 		return commerceShippingFixedOptionRelLocalService.
 			addCommerceShippingFixedOptionRel(
 				commerceShippingMethodId, commerceShippingFixedOptionId,
-				commerceWarehouseId, commerceCountryId, commerceRegionId, zip,
-				weightFrom, weightTo, fixedPrice, rateUnitWeightPrice,
-				ratePercentage, serviceContext);
+				commerceInventoryWarehouseId, commerceCountryId,
+				commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+				rateUnitWeightPrice, ratePercentage, serviceContext);
 	}
 
 	@Override
@@ -132,9 +132,10 @@ public class CommerceShippingFixedOptionRelServiceImpl
 
 	@Override
 	public CommerceShippingFixedOptionRel updateCommerceShippingFixedOptionRel(
-			long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-			long commerceCountryId, long commerceRegionId, String zip,
-			double weightFrom, double weightTo, BigDecimal fixedPrice,
+			long commerceShippingFixedOptionRelId,
+			long commerceInventoryWarehouseId, long commerceCountryId,
+			long commerceRegionId, String zip, double weightFrom,
+			double weightTo, BigDecimal fixedPrice,
 			BigDecimal rateUnitWeightPrice, double ratePercentage)
 		throws PortalException {
 
@@ -149,7 +150,7 @@ public class CommerceShippingFixedOptionRelServiceImpl
 
 		return commerceShippingFixedOptionRelLocalService.
 			updateCommerceShippingFixedOptionRel(
-				commerceShippingFixedOptionRelId, commerceWarehouseId,
+				commerceShippingFixedOptionRelId, commerceInventoryWarehouseId,
 				commerceCountryId, commerceRegionId, zip, weightFrom, weightTo,
 				fixedPrice, rateUnitWeightPrice, ratePercentage);
 	}

@@ -1,216 +1,89 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditFinder.findOldInventoryAudit">
-		<![CDATA[
-			SELECT
-				CIAudit.*
-			FROM
-				CIAudit
-			WHERE
-				CIAudit.createDate < ?
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryBookedQuantityFinder.findOldTempBookedQuantities">
-		<![CDATA[
-			SELECT
-				CIBookedQuantity.*
-			FROM
-				CIBookedQuantity
-			WHERE
-				CIBookedQuantity.expireDate < NOW()
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryReplenishmentItemFinder.findByGroupAndSku">
-		<![CDATA[
-			SELECT
-				CIReplenishmentItem.*
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			INNER JOIN
-				CIReplenishmentItem
-			ON
-				CIReplenishmentItem.commerceWarehouseId = CIWarehouse.CIWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(CIReplenishmentItem.sku = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.countByG_A">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT commerceWarehouseId) AS COUNT_VALUE
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(CIWarehouse.active = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.countByG_A_C">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT commerceWarehouseId) AS COUNT_VALUE
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(CIWarehouse.active = ?) AND
-				(CIWarehouse.countryTwoLettersISOCode = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.countByG_N_D_S_C_Z_C">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT commerceWarehouseId) AS COUNT_VALUE
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(
-					(LOWER(CIWarehouse.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(CIWarehouse.description LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(LOWER(CIWarehouse.street1) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CIWarehouse.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CIWarehouse.street3) LIKE ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(LOWER(CIWarehouse.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(LOWER(CIWarehouse.zip) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(CIWarehouse.countryTwoLettersISOCode = ?) [$ALL$]
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findByG_N_D_S_C_Z_C">
-		<![CDATA[
-			SELECT
-				{CIWarehouse.*}
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(
-					(LOWER(CIWarehouse.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(CIWarehouse.description LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(
-						(LOWER(CIWarehouse.street1) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CIWarehouse.street2) LIKE ? [$AND_OR_NULL_CHECK$]) OR
-						(LOWER(CIWarehouse.street3) LIKE ? [$AND_OR_NULL_CHECK$])
-					) [$AND_OR_CONNECTOR$]
-					(LOWER(CIWarehouse.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(LOWER(CIWarehouse.zip) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND
-				(CIWarehouse.countryTwoLettersISOCode = ?) [$ALL$]
-			ORDER BY
-				CIWarehouse.name ASC
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findWarehousesByGroupId">
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findByG_S">
 		<![CDATA[
 			SELECT
 				CIWarehouse.*
 			FROM
 				CIWarehouse
 			INNER JOIN
-				CIWarehouseGroupRel
+				CommerceChannelRel
 			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findWarehousesByGroupIdAndActive">
-		<![CDATA[
-			SELECT
-				CIWarehouse.*
-			FROM
-				CIWarehouse
+				CIWarehouse.CIWarehouseId = CommerceChannelRel.classPK
 			INNER JOIN
-				CIWarehouseGroupRel
+				CommerceChannel
 			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(CIWarehouse.active = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findWarehousesByGroupIdAndActiveAndCountryISOCode">
-		<![CDATA[
-			SELECT
-				CIWarehouse.*
-			FROM
-				CIWarehouse
+				CommerceChannelRel.commerceChannelId = CommerceChannel.commerceChannelId
 			INNER JOIN
-				CIWarehouseGroupRel
+				Group_
 			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
-			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
-				(CIWarehouse.active = ?) AND
-				(CIWarehouse.countryTwoLettersISOCode = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findWarehousesByGroupIdAndSku">
-		<![CDATA[
-			SELECT
-				CIWarehouse.*
-			FROM
-				CIWarehouse
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouse.CIWarehouseId = CIWarehouseGroupRel.commerceWarehouseId
+				CommerceChannel.commerceChannelId = Group_.classPK
 			INNER JOIN
 				CIWarehouseItem
 			ON
-				CIWarehouseItem.commerceWarehouseId = CIWarehouse.CIWarehouseId
+				CIWarehouseItem.commerceInventoryWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
-				(CIWarehouse.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
+				(Group_.groupId = ?) AND
 				(CIWarehouseItem.sku = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.findStockQuantityByGroupIdAndSku">
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findByC_G_A">
+		<![CDATA[
+			SELECT
+				CIWarehouse.*
+			FROM
+				CIWarehouse
+			INNER JOIN
+				CommerceChannelRel
+			ON
+				CIWarehouse.CIWarehouseId = CommerceChannelRel.classPK
+			INNER JOIN
+				CommerceChannel
+			ON
+				CommerceChannelRel.commerceChannelId = CommerceChannel.commerceChannelId
+			INNER JOIN
+				Group_
+			ON
+				CommerceChannel.commerceChannelId = Group_.classPK
+			WHERE
+				(CIWarehouse.companyId = ?) AND
+				(Group_.groupId = ?) AND
+				(CIWarehouse.active = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_S">
+		<![CDATA[
+			SELECT
+				SUM(CIWarehouseItem.quantity) AS SUM_VALUE
+			FROM
+				CIWarehouseItem
+			WHERE
+				(CIWarehouseItem.companyId = ?) AND
+				(CIWarehouseItem.sku = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_G_S">
 		<![CDATA[
 			SELECT
 				SUM(CIWarehouseItem.quantity) AS SUM_VALUE
 			FROM
 				CIWarehouseItem
 			INNER JOIN
-				CIWarehouseGroupRel
+				CommerceChannelRel
 			ON
-				CIWarehouseGroupRel.commerceWarehouseId = CIWarehouseItem.commerceWarehouseId
+				CIWarehouse.CIWarehouseId = CommerceChannelRel.classPK
+			INNER JOIN
+				CommerceChannel
+			ON
+				CommerceChannelRel.commerceChannelId = CommerceChannel.commerceChannelId
+			INNER JOIN
+				Group_
+			ON
+				CommerceChannel.commerceChannelId = Group_.classPK
 			WHERE
 				(CIWarehouseItem.companyId = ?) AND
-				(CIWarehouseGroupRel.groupId = ?) AND
+				(Group_.groupId = ?) AND
 				(CIWarehouseItem.sku = ?)
 		]]>
 	</sql>

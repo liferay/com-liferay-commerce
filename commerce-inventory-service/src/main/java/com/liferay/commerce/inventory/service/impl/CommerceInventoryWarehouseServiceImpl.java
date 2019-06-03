@@ -18,20 +18,25 @@ import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 public class CommerceInventoryWarehouseServiceImpl
 	extends CommerceInventoryWarehouseServiceBaseImpl {
 
 	@Override
-	public CommerceInventoryWarehouse addCommerceWarehouse(
+	public CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			String name, String description, boolean active, String street1,
 			String street2, String street3, String city, String zip,
 			String commerceRegionCode, String commerceCountryCode,
@@ -41,152 +46,193 @@ public class CommerceInventoryWarehouseServiceImpl
 		PortalPermissionUtil.check(
 			getPermissionChecker(), CommerceInventoryActionKeys.ADD_WAREHOUSE);
 
-		return commerceInventoryWarehouseLocalService.addCommerceWarehouse(
-			name, description, active, street1, street2, street3, city, zip,
-			commerceRegionCode, commerceCountryCode, latitude, longitude,
-			serviceContext);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse addCommerceWarehouseAndGroupRel(
-			String name, String description, boolean active, String street1,
-			String street2, String street3, String city, String zip,
-			String commerceRegionCode, String commerceCountryCode,
-			double latitude, double longitude, ServiceContext serviceContext)
-		throws PortalException {
-
-		PortalPermissionUtil.check(
-			getPermissionChecker(), CommerceInventoryActionKeys.ADD_WAREHOUSE);
-
-		CommerceInventoryWarehouse commerceWarehouse = addCommerceWarehouse(
-			name, description, active, street1, street2, street3, city, zip,
-			commerceRegionCode, commerceCountryCode, latitude, longitude,
-			serviceContext);
-
-		commerceInventoryWarehouseGroupRelLocalService.
-			addCommerceWarehouseGroupRel(
-				commerceWarehouse.getCommerceInventoryWarehouseId(), false,
+		return commerceInventoryWarehouseLocalService.
+			addCommerceInventoryWarehouse(
+				name, description, active, street1, street2, street3, city, zip,
+				commerceRegionCode, commerceCountryCode, latitude, longitude,
 				serviceContext);
-
-		return commerceWarehouse;
 	}
 
 	@Override
-	public CommerceInventoryWarehouse deleteCommerceWarehouse(
-			long commerceWarehouseId)
+	public CommerceInventoryWarehouse deleteCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId)
 		throws PortalException {
 
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(), commerceWarehouseId, ActionKeys.DELETE);
+		_commerceInventoryWarehouseModelResourcePermission.check(
+			getPermissionChecker(), commerceInventoryWarehouseId,
+			ActionKeys.DELETE);
 
 		return commerceInventoryWarehouseLocalService.
-			deleteCommerceInventoryWarehouse(commerceWarehouseId);
+			deleteCommerceInventoryWarehouse(commerceInventoryWarehouseId);
 	}
 
 	@Override
-	public CommerceInventoryWarehouse fetchDefaultCommerceWarehouse(
-			long groupId)
+	public CommerceInventoryWarehouse geolocateCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId, double latitude,
+			double longitude)
 		throws PortalException {
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			commerceInventoryWarehouseLocalService.
-				fetchDefaultCommerceWarehouse(groupId);
-
-		if (commerceWarehouse != null) {
-			_warehouseModelResourcePermission.check(
-				getPermissionChecker(),
-				commerceWarehouse.getCommerceInventoryWarehouseId(),
-				ActionKeys.VIEW);
-		}
-
-		return commerceWarehouse;
-	}
-
-	@Override
-	public CommerceInventoryWarehouse geolocateCommerceWarehouse(
-			long commerceWarehouseId, double latitude, double longitude)
-		throws PortalException {
-
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(), commerceWarehouseId, ActionKeys.UPDATE);
+		_commerceInventoryWarehouseModelResourcePermission.check(
+			getPermissionChecker(), commerceInventoryWarehouseId,
+			ActionKeys.UPDATE);
 
 		return commerceInventoryWarehouseLocalService.
-			geolocateCommerceWarehouse(
-				commerceWarehouseId, latitude, longitude);
+			geolocateCommerceInventoryWarehouse(
+				commerceInventoryWarehouseId, latitude, longitude);
 	}
 
 	@Override
-	public CommerceInventoryWarehouse getCommerceWarehouse(
-			long commerceWarehouseId)
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId)
 		throws PortalException {
 
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(), commerceWarehouseId, ActionKeys.UPDATE);
+		_commerceInventoryWarehouseModelResourcePermission.check(
+			getPermissionChecker(), commerceInventoryWarehouseId,
+			ActionKeys.UPDATE);
 
 		return commerceInventoryWarehouseLocalService.
-			getCommerceInventoryWarehouse(commerceWarehouseId);
+			getCommerceInventoryWarehouse(commerceInventoryWarehouseId);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			long companyId, boolean active, String commerceCountryCode,
+			int start, int end,
+			OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehouses(
+				companyId, active, commerceCountryCode, start, end,
+				orderByComparator);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			long companyId, int start, int end,
+			OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehouses(
+				companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			long companyId, long groupId, boolean active)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), CommerceInventoryActionKeys.ADD_WAREHOUSE);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehouses(companyId, groupId, active);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehousesCount(long companyId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehousesCount(companyId);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehousesCount(
+			long companyId, boolean active, String commerceCountryCode)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehousesCount(
+				companyId, active, commerceCountryCode);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> searchCommerceInventoryWarehouses(
+			long companyId, Boolean active, String commerceCountryCode,
+			String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			searchCommerceInventoryWarehouses(
+				companyId, active, commerceCountryCode, keywords, start, end,
+				sort);
+	}
+
+	@Override
+	public int searchCommerceInventoryWarehousesCount(
+			long companyId, Boolean active, String commerceCountryCode,
+			String keywords)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			searchCommerceInventoryWarehousesCount(
+				companyId, active, commerceCountryCode, keywords);
 	}
 
 	@Override
 	public CommerceInventoryWarehouse setActive(
-			long commerceWarehouseId, boolean active)
+			long commerceInventoryWarehouseId, boolean active)
 		throws PortalException {
 
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(), commerceWarehouseId, ActionKeys.UPDATE);
+		_commerceInventoryWarehouseModelResourcePermission.check(
+			getPermissionChecker(), commerceInventoryWarehouseId,
+			ActionKeys.UPDATE);
 
 		return commerceInventoryWarehouseLocalService.setActive(
-			commerceWarehouseId, active);
+			commerceInventoryWarehouseId, active);
 	}
 
 	@Override
-	public CommerceInventoryWarehouse updateCommerceWarehouse(
-			long commerceWarehouseId, String name, String description,
+	public CommerceInventoryWarehouse updateCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId, String name, String description,
 			boolean active, String street1, String street2, String street3,
 			String city, String zip, String commerceRegionCode,
 			String commerceCountryCode, double latitude, double longitude,
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(), commerceWarehouseId, ActionKeys.UPDATE);
-
-		return commerceInventoryWarehouseLocalService.updateCommerceWarehouse(
-			commerceWarehouseId, name, description, active, street1, street2,
-			street3, city, zip, commerceRegionCode, commerceCountryCode,
-			latitude, longitude, serviceContext);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse updateDefaultCommerceWarehouse(
-			String name, String street1, String street2, String street3,
-			String city, String zip, String commerceRegionCode,
-			String commerceCountryCode, double latitude, double longitude,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		CommerceInventoryWarehouse defaultCommerceWarehouse =
-			commerceInventoryWarehouseLocalService.getDefaultCommerceWarehouse(
-				serviceContext.getScopeGroupId());
-
-		_warehouseModelResourcePermission.check(
-			getPermissionChecker(),
-			defaultCommerceWarehouse.getCommerceInventoryWarehouseId(),
+		_commerceInventoryWarehouseModelResourcePermission.check(
+			getPermissionChecker(), commerceInventoryWarehouseId,
 			ActionKeys.UPDATE);
 
-		return commerceInventoryWarehouseLocalService.updateCommerceWarehouse(
-			defaultCommerceWarehouse.getCommerceInventoryWarehouseId(), name,
-			defaultCommerceWarehouse.getDescription(),
-			defaultCommerceWarehouse.isActive(), street1, street2, street3,
-			city, zip, commerceRegionCode, commerceCountryCode, latitude,
-			longitude, serviceContext);
+		return commerceInventoryWarehouseLocalService.
+			updateCommerceInventoryWarehouse(
+				commerceInventoryWarehouseId, name, description, active,
+				street1, street2, street3, city, zip, commerceRegionCode,
+				commerceCountryCode, latitude, longitude, serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CommerceInventoryWarehouse>
-		_warehouseModelResourcePermission =
+		_commerceInventoryWarehouseModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CommerceInventoryWarehouseServiceImpl.class,
-				"_warehouseModelResourcePermission",
+				"_commerceInventoryWarehouseModelResourcePermission",
 				CommerceInventoryWarehouse.class);
 
 }

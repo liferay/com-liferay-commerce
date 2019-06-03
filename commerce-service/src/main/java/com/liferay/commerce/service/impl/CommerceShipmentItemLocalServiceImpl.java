@@ -53,7 +53,7 @@ public class CommerceShipmentItemLocalServiceImpl
 	@Override
 	public CommerceShipmentItem addCommerceShipmentItem(
 			long commerceShipmentId, long commerceOrderItemId,
-			long commerceWarehouseId, int quantity,
+			long commerceInventoryWarehouseId, int quantity,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -66,7 +66,9 @@ public class CommerceShipmentItemLocalServiceImpl
 			commerceOrderItemLocalService.getCommerceOrderItem(
 				commerceOrderItemId);
 
-		validate(commerceOrderItem, commerceWarehouseId, quantity, quantity);
+		validate(
+			commerceOrderItem, commerceInventoryWarehouseId, quantity,
+			quantity);
 
 		long commerceShipmentItemId = counterLocalService.increment();
 
@@ -79,7 +81,8 @@ public class CommerceShipmentItemLocalServiceImpl
 		commerceShipmentItem.setUserName(user.getFullName());
 		commerceShipmentItem.setCommerceShipmentId(commerceShipmentId);
 		commerceShipmentItem.setCommerceOrderItemId(commerceOrderItemId);
-		commerceShipmentItem.setCommerceWarehouseId(commerceWarehouseId);
+		commerceShipmentItem.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceShipmentItem.setQuantity(quantity);
 
 		commerceShipmentItem = commerceShipmentItemPersistence.update(
@@ -216,8 +219,9 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceShipmentItem.getCommerceOrderItemId());
 
 		validate(
-			commerceOrderItem, commerceShipmentItem.getCommerceWarehouseId(),
-			quantity, newQuantity);
+			commerceOrderItem,
+			commerceShipmentItem.getCommerceInventoryWarehouseId(), quantity,
+			newQuantity);
 
 		commerceOrderItemLocalService.incrementShippedQuantity(
 			commerceOrderItem.getCommerceOrderItemId(), newQuantity);
@@ -232,27 +236,28 @@ public class CommerceShipmentItemLocalServiceImpl
 	}
 
 	protected void validate(
-			CommerceOrderItem commerceOrderItem, long commerceWarehouseId,
-			int quantity, int newQuantity)
+			CommerceOrderItem commerceOrderItem,
+			long commerceInventoryWarehouseId, int quantity, int newQuantity)
 		throws PortalException {
 
 		int availableQuantity =
 			commerceOrderItem.getQuantity() -
 				commerceOrderItem.getShippedQuantity();
 
-		int commerceWarehouseQuantity =
-			commerceOrderItemLocalService.getCommerceWarehouseItemQuantity(
-				commerceOrderItem.getCommerceOrderItemId(),
-				commerceWarehouseId);
+		int commerceInventoryWarehouseQuantity =
+			commerceOrderItemLocalService.
+				getCommerceInventoryWarehouseItemQuantity(
+					commerceOrderItem.getCommerceOrderItemId(),
+					commerceInventoryWarehouseId);
 
 		if ((quantity <= 0) || (newQuantity > availableQuantity) ||
-			(newQuantity > commerceWarehouseQuantity)) {
+			(newQuantity > commerceInventoryWarehouseQuantity)) {
 
 			throw new CommerceShipmentItemQuantityException();
 		}
 	}
 
-	private CommerceInventoryWarehouseItem _fetchCommerceWarehouseItem(
+	private CommerceInventoryWarehouseItem _fetchCommerceInventoryWarehouseItem(
 			long commerceShipmentItemId, String sku)
 		throws PortalException {
 
@@ -261,8 +266,8 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceShipmentItemId);
 
 		return _commerceInventoryWarehouseItemLocalService.
-			fetchCommerceWarehouseItem(
-				commerceShipmentItem.getCommerceWarehouseId(), sku);
+			fetchCommerceInventoryWarehouseItem(
+				commerceShipmentItem.getCommerceInventoryWarehouseId(), sku);
 	}
 
 	private void _updateStockQuantity(
@@ -275,11 +280,11 @@ public class CommerceShipmentItemLocalServiceImpl
 
 		CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
-		CommerceInventoryWarehouseItem commerceWarehouseItem =
-			_fetchCommerceWarehouseItem(
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_fetchCommerceInventoryWarehouseItem(
 				commerceShipmentItemId, cpInstance.getSku());
 
-		if (commerceWarehouseItem == null) {
+		if (commerceInventoryWarehouseItem == null) {
 			return;
 		}
 
@@ -300,9 +305,9 @@ public class CommerceShipmentItemLocalServiceImpl
 		context.put("ShipmentItemId", String.valueOf(commerceShipmentItemId));
 
 		_commerceInventoryEngine.consumeQuantity(
-			commerceShipmentItem.getUserId(), commerceShipmentItem.getGroupId(),
+			commerceShipmentItem.getUserId(),
+			commerceShipmentItem.getCommerceInventoryWarehouseId(),
 			commerceOrderItem.getSku(), commerceShipmentItem.getQuantity(),
-			commerceShipmentItem.getCommerceWarehouseId(),
 			commerceOrderItem.getBookedQuantityId(), context);
 
 		TransactionCommitCallbackUtil.registerCallback(
