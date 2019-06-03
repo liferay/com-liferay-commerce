@@ -53,24 +53,27 @@ public class DTOMapper {
 		return availabilityEstimate;
 	}
 
-	public Warehouse modelToDTO(CommerceInventoryWarehouse commerceWarehouse) {
+	public Warehouse modelToDTO(
+		CommerceInventoryWarehouse commerceInventoryWarehouse) {
+
 		Warehouse warehouse = new Warehouse();
 
-		if (commerceWarehouse == null) {
+		if (commerceInventoryWarehouse == null) {
 			return warehouse;
 		}
 
-		warehouse.setActive(commerceWarehouse.isActive());
-		warehouse.setCity(commerceWarehouse.getCity());
-		warehouse.setDescription(commerceWarehouse.getDescription());
-		warehouse.setId(commerceWarehouse.getCommerceInventoryWarehouseId());
-		warehouse.setLatitude(commerceWarehouse.getLatitude());
-		warehouse.setLongitude(commerceWarehouse.getLongitude());
-		warehouse.setName(commerceWarehouse.getName());
-		warehouse.setStreet1(commerceWarehouse.getStreet1());
-		warehouse.setStreet2(commerceWarehouse.getStreet2());
-		warehouse.setStreet3(commerceWarehouse.getStreet3());
-		warehouse.setZip(commerceWarehouse.getZip());
+		warehouse.setActive(commerceInventoryWarehouse.isActive());
+		warehouse.setCity(commerceInventoryWarehouse.getCity());
+		warehouse.setDescription(commerceInventoryWarehouse.getDescription());
+		warehouse.setId(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
+		warehouse.setLatitude(commerceInventoryWarehouse.getLatitude());
+		warehouse.setLongitude(commerceInventoryWarehouse.getLongitude());
+		warehouse.setName(commerceInventoryWarehouse.getName());
+		warehouse.setStreet1(commerceInventoryWarehouse.getStreet1());
+		warehouse.setStreet2(commerceInventoryWarehouse.getStreet2());
+		warehouse.setStreet3(commerceInventoryWarehouse.getStreet3());
+		warehouse.setZip(commerceInventoryWarehouse.getZip());
 
 		return warehouse;
 	}

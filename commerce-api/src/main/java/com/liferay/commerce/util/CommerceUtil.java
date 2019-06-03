@@ -16,10 +16,10 @@ package com.liferay.commerce.util;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
-import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseCityComparator;
-import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseItemQuantityComparator;
-import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseItemWarehouseNameComparator;
-import com.liferay.commerce.inventory.util.comparator.CommerceWarehouseNameComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceInventoryWarehouseCityComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceInventoryWarehouseItemQuantityComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceInventoryWarehouseItemWarehouseNameComparator;
+import com.liferay.commerce.inventory.util.comparator.CommerceInventoryWarehouseNameComparator;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceCountry;
@@ -147,6 +147,79 @@ public class CommerceUtil {
 		return sort;
 	}
 
+	public static OrderByComparator<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemOrderByComparator(
+			String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator =
+			null;
+
+		if (orderByCol.equals("name")) {
+			orderByComparator =
+				new CommerceInventoryWarehouseItemWarehouseNameComparator(
+					orderByAsc);
+		}
+		else if (orderByCol.equals("quantity")) {
+			orderByComparator =
+				new CommerceInventoryWarehouseItemQuantityComparator(
+					orderByAsc);
+		}
+
+		return orderByComparator;
+	}
+
+	public static OrderByComparator<CommerceInventoryWarehouse>
+		getCommerceInventoryWarehouseOrderByComparator(
+			String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator = null;
+
+		if (orderByCol.equals("city")) {
+			orderByComparator = new CommerceInventoryWarehouseCityComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("name")) {
+			orderByComparator = new CommerceInventoryWarehouseNameComparator(
+				orderByAsc);
+		}
+
+		return orderByComparator;
+	}
+
+	public static Sort getCommerceInventoryWarehouseSort(
+		String orderByCol, String orderByType) {
+
+		boolean reverse = true;
+
+		if (orderByType.equals("asc")) {
+			reverse = false;
+		}
+
+		Sort sort = null;
+
+		if (orderByCol.equals("city")) {
+			sort = SortFactoryUtil.create("city", Sort.STRING_TYPE, reverse);
+		}
+		else if (orderByCol.equals("name")) {
+			sort = SortFactoryUtil.create(
+				Field.NAME, Sort.STRING_TYPE, reverse);
+		}
+
+		return sort;
+	}
+
 	public static Sort[] getCommerceOrderSorts(
 		String orderByCol, String orderByType) {
 
@@ -202,53 +275,6 @@ public class CommerceUtil {
 		else if (orderByCol.equals("priority")) {
 			orderByComparator = new CommerceRegionPriorityComparator(
 				orderByAsc);
-		}
-
-		return orderByComparator;
-	}
-
-	public static OrderByComparator<CommerceInventoryWarehouseItem>
-		getCommerceWarehouseItemOrderByComparator(
-			String orderByCol, String orderByType) {
-
-		boolean orderByAsc = false;
-
-		if (orderByType.equals("asc")) {
-			orderByAsc = true;
-		}
-
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator =
-			null;
-
-		if (orderByCol.equals("name")) {
-			orderByComparator =
-				new CommerceWarehouseItemWarehouseNameComparator(orderByAsc);
-		}
-		else if (orderByCol.equals("quantity")) {
-			orderByComparator = new CommerceWarehouseItemQuantityComparator(
-				orderByAsc);
-		}
-
-		return orderByComparator;
-	}
-
-	public static OrderByComparator<CommerceInventoryWarehouse>
-		getCommerceWarehouseOrderByComparator(
-			String orderByCol, String orderByType) {
-
-		boolean orderByAsc = false;
-
-		if (orderByType.equals("asc")) {
-			orderByAsc = true;
-		}
-
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator = null;
-
-		if (orderByCol.equals("city")) {
-			orderByComparator = new CommerceWarehouseCityComparator(orderByAsc);
-		}
-		else if (orderByCol.equals("name")) {
-			orderByComparator = new CommerceWarehouseNameComparator(orderByAsc);
 		}
 
 		return orderByComparator;

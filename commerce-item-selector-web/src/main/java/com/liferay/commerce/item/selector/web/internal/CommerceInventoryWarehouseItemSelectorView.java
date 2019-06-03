@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.item.selector.web.internal;
 
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
-import com.liferay.commerce.item.selector.criterion.CommerceWarehouseItemSelectorCriterion;
-import com.liferay.commerce.item.selector.web.internal.display.context.CommerceWarehouseItemSelectorViewDisplayContext;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.item.selector.criterion.CommerceInventoryWarehouseItemSelectorCriterion;
+import com.liferay.commerce.item.selector.web.internal.display.context.CommerceInventoryWarehouseItemSelectorViewDisplayContext;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
@@ -46,16 +46,18 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = ItemSelectorView.class)
-public class CommerceWarehouseItemSelectorView
-	implements ItemSelectorView<CommerceWarehouseItemSelectorCriterion> {
+public class CommerceInventoryWarehouseItemSelectorView
+	implements ItemSelectorView
+		<CommerceInventoryWarehouseItemSelectorCriterion> {
 
 	@Override
-	public Class<CommerceWarehouseItemSelectorCriterion>
+	public Class<CommerceInventoryWarehouseItemSelectorCriterion>
 		getItemSelectorCriterionClass() {
 
-		return CommerceWarehouseItemSelectorCriterion.class;
+		return CommerceInventoryWarehouseItemSelectorCriterion.class;
 	}
 
 	public ServletContext getServletContext() {
@@ -85,24 +87,24 @@ public class CommerceWarehouseItemSelectorView
 	@Override
 	public void renderHTML(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			CommerceWarehouseItemSelectorCriterion
-				commerceWarehouseItemSelectorCriterion,
+			CommerceInventoryWarehouseItemSelectorCriterion
+				commerceInventoryWarehouseItemSelectorCriterion,
 			PortletURL portletURL, String itemSelectedEventName, boolean search)
 		throws IOException, ServletException {
 
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)servletRequest;
 
-		CommerceWarehouseItemSelectorViewDisplayContext
-			commerceWarehouseItemSelectorViewDisplayContext =
-				new CommerceWarehouseItemSelectorViewDisplayContext(
-					_commerceCountryService, _commerceWarehouseLocalService,
+		CommerceInventoryWarehouseItemSelectorViewDisplayContext
+			commerceInventoryWarehouseItemSelectorViewDisplayContext =
+				new CommerceInventoryWarehouseItemSelectorViewDisplayContext(
+					_commerceCountryService, _commerceInventoryWarehouseService,
 					httpServletRequest, portletURL, itemSelectedEventName,
 					search);
 
 		servletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
-			commerceWarehouseItemSelectorViewDisplayContext);
+			commerceInventoryWarehouseItemSelectorViewDisplayContext);
 
 		ServletContext servletContext = getServletContext();
 
@@ -123,8 +125,8 @@ public class CommerceWarehouseItemSelectorView
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.item.selector.web)"

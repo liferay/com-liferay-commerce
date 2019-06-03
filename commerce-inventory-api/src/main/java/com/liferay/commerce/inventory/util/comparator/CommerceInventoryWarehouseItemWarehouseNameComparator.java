@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 /**
  * @author Luca Pellizzon
  */
-public class CommerceWarehouseItemWarehouseNameComparator
+public class CommerceInventoryWarehouseItemWarehouseNameComparator
 	extends OrderByComparator<CommerceInventoryWarehouseItem> {
 
 	public static final String ORDER_BY_ASC =
@@ -37,27 +37,31 @@ public class CommerceWarehouseItemWarehouseNameComparator
 		"CommerceInventoryWarehouse.name"
 	};
 
-	public CommerceWarehouseItemWarehouseNameComparator() {
+	public CommerceInventoryWarehouseItemWarehouseNameComparator() {
 		this(false);
 	}
 
-	public CommerceWarehouseItemWarehouseNameComparator(boolean ascending) {
+	public CommerceInventoryWarehouseItemWarehouseNameComparator(
+		boolean ascending) {
+
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(
-		CommerceInventoryWarehouseItem commerceWarehouseItem1,
-		CommerceInventoryWarehouseItem commerceWarehouseItem2) {
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem1,
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem2) {
 
 		try {
-			CommerceInventoryWarehouse commerceWarehouse1 =
-				commerceWarehouseItem1.getCommerceWarehouse();
-			CommerceInventoryWarehouse commerceWarehouse2 =
-				commerceWarehouseItem2.getCommerceWarehouse();
+			CommerceInventoryWarehouse commerceInventoryWarehouse1 =
+				commerceInventoryWarehouseItem1.getCommerceInventoryWarehouse();
+			CommerceInventoryWarehouse commerceInventoryWarehouse2 =
+				commerceInventoryWarehouseItem2.getCommerceInventoryWarehouse();
 
-			String name1 = StringUtil.toLowerCase(commerceWarehouse1.getName());
-			String name2 = StringUtil.toLowerCase(commerceWarehouse2.getName());
+			String name1 = StringUtil.toLowerCase(
+				commerceInventoryWarehouse1.getName());
+			String name2 = StringUtil.toLowerCase(
+				commerceInventoryWarehouse2.getName());
 
 			int value = name1.compareTo(name2);
 

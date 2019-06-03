@@ -17,11 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehousesDisplayContext commerceInventoryWarehousesDisplayContext = (CommerceInventoryWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CommerceInventoryWarehouse commerceWarehouse = (CommerceInventoryWarehouse)row.getObject();
+CommerceInventoryWarehouse commerceInventoryWarehouse = (CommerceInventoryWarehouse)row.getObject();
 %>
 
 <liferay-ui:icon-menu
@@ -31,11 +31,11 @@ CommerceInventoryWarehouse commerceWarehouse = (CommerceInventoryWarehouse)row.g
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commerceWarehousesDisplayContext.hasManageCommerceWarehousePermission() %>">
+	<c:if test="<%= commerceInventoryWarehousesDisplayContext.hasManageCommerceInventoryWarehousePermission() %>">
 		<portlet:renderURL var="editURL">
-			<portlet:param name="mvcRenderCommandName" value="editCommerceWarehouse" />
+			<portlet:param name="mvcRenderCommandName" value="editCommerceInventoryWarehouse" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
+			<portlet:param name="commerceInventoryWarehouseId" value="<%= String.valueOf(commerceInventoryWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -43,10 +43,10 @@ CommerceInventoryWarehouse commerceWarehouse = (CommerceInventoryWarehouse)row.g
 			url="<%= editURL %>"
 		/>
 
-		<portlet:actionURL name="editCommerceWarehouse" var="geolocateURL">
+		<portlet:actionURL name="editCommerceInventoryWarehouse" var="geolocateURL">
 			<portlet:param name="<%= Constants.CMD %>" value="geolocate" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
+			<portlet:param name="commerceInventoryWarehouseId" value="<%= String.valueOf(commerceInventoryWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
@@ -54,22 +54,22 @@ CommerceInventoryWarehouse commerceWarehouse = (CommerceInventoryWarehouse)row.g
 			url="<%= geolocateURL %>"
 		/>
 
-		<portlet:actionURL name="editCommerceWarehouse" var="setActiveURL">
+		<portlet:actionURL name="editCommerceInventoryWarehouse" var="setActiveURL">
 			<portlet:param name="<%= Constants.CMD %>" value="setActive" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
-			<portlet:param name="active" value="<%= String.valueOf(!commerceWarehouse.isActive()) %>" />
+			<portlet:param name="commerceInventoryWarehouseId" value="<%= String.valueOf(commerceInventoryWarehouse.getCommerceInventoryWarehouseId()) %>" />
+			<portlet:param name="active" value="<%= String.valueOf(!commerceInventoryWarehouse.isActive()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon
-			message='<%= commerceWarehouse.isActive() ? "deactivate" : "activate" %>'
+			message='<%= commerceInventoryWarehouse.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
 
-		<portlet:actionURL name="editCommerceWarehouse" var="deleteURL">
+		<portlet:actionURL name="editCommerceInventoryWarehouse" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceWarehouseId" value="<%= String.valueOf(commerceWarehouse.getCommerceInventoryWarehouseId()) %>" />
+			<portlet:param name="commerceInventoryWarehouseId" value="<%= String.valueOf(commerceInventoryWarehouse.getCommerceInventoryWarehouseId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete

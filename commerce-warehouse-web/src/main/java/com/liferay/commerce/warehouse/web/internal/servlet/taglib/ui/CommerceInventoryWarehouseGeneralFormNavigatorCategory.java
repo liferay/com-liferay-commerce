@@ -28,18 +28,18 @@ import org.osgi.service.component.annotations.Component;
 	property = "form.navigator.category.order:Integer=10",
 	service = FormNavigatorCategory.class
 )
-public class CommerceWarehouseGeneralFormNavigatorCategory
+public class CommerceInventoryWarehouseGeneralFormNavigatorCategory
 	implements FormNavigatorCategory {
 
 	@Override
 	public String getFormNavigatorId() {
-		return CommerceWarehouseFormNavigatorConstants.
+		return CommerceInventoryWarehouseFormNavigatorConstants.
 			FORM_NAVIGATOR_ID_COMMERCE_WAREHOUSE;
 	}
 
 	@Override
 	public String getKey() {
-		return CommerceWarehouseFormNavigatorConstants.
+		return CommerceInventoryWarehouseFormNavigatorConstants.
 			CATEGORY_KEY_COMMERCE_WAREHOUSE_GENERAL;
 	}
 

@@ -14,37 +14,37 @@
 
 package com.liferay.commerce.inventory.util.comparator;
 
-import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Luca Pellizzon
  */
-public class CommerceWarehouseItemQuantityComparator
-	extends OrderByComparator<CommerceInventoryWarehouseItem> {
+public class CommerceInventoryWarehouseNameComparator
+	extends OrderByComparator<CommerceInventoryWarehouse> {
 
-	public static final String ORDER_BY_ASC = "CIWarehouseItem.quantity ASC";
+	public static final String ORDER_BY_ASC = "name ASC";
 
-	public static final String ORDER_BY_DESC = "CIWarehouseItem.quantity DESC";
+	public static final String ORDER_BY_DESC = "name DESC";
 
-	public static final String[] ORDER_BY_FIELDS = {"quantity"};
+	public static final String[] ORDER_BY_FIELDS = {"name"};
 
-	public CommerceWarehouseItemQuantityComparator() {
-		this(false);
-	}
-
-	public CommerceWarehouseItemQuantityComparator(boolean ascending) {
+	public CommerceInventoryWarehouseNameComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(
-		CommerceInventoryWarehouseItem commerceWarehouseItem1,
-		CommerceInventoryWarehouseItem commerceWarehouseItem2) {
+		CommerceInventoryWarehouse commerceInventoryWarehouse1,
+		CommerceInventoryWarehouse commerceInventoryWarehouse2) {
 
-		int value = Integer.compare(
-			commerceWarehouseItem1.getQuantity(),
-			commerceWarehouseItem2.getQuantity());
+		String name1 = StringUtil.toLowerCase(
+			commerceInventoryWarehouse1.getName());
+		String name2 = StringUtil.toLowerCase(
+			commerceInventoryWarehouse2.getName());
+
+		int value = name1.compareTo(name2);
 
 		if (_ascending) {
 			return value;

@@ -60,34 +60,39 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_VIRTUAL_INSTANCE,
-		"mvc.command.name=editCommerceWarehouse"
+		"mvc.command.name=editCommerceInventoryWarehouse"
 	},
 	service = MVCActionCommand.class
 )
-public class EditCommerceWarehouseMVCActionCommand
+public class EditCommerceInventoryWarehouseMVCActionCommand
 	extends BaseMVCActionCommand {
 
-	protected void deleteCommerceWarehouses(ActionRequest actionRequest)
+	protected void deleteCommerceInventoryWarehouses(
+			ActionRequest actionRequest)
 		throws PortalException {
 
-		long[] deleteCommerceWarehouseIds = null;
+		long[] deleteCommerceInventoryWarehouseIds;
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId > 0) {
-			deleteCommerceWarehouseIds = new long[] {commerceWarehouseId};
+		if (commerceInventoryWarehouseId > 0) {
+			deleteCommerceInventoryWarehouseIds = new long[] {
+				commerceInventoryWarehouseId
+			};
 		}
 		else {
-			deleteCommerceWarehouseIds = StringUtil.split(
+			deleteCommerceInventoryWarehouseIds = StringUtil.split(
 				ParamUtil.getString(
-					actionRequest, "deleteCommerceWarehouseIds"),
+					actionRequest, "deleteCommerceInventoryWarehouseIds"),
 				0L);
 		}
 
-		for (long deleteCommerceWarehouseId : deleteCommerceWarehouseIds) {
-			_commerceWarehouseService.deleteCommerceWarehouse(
-				deleteCommerceWarehouseId);
+		for (long deleteCommerceInventoryWarehouseId :
+				deleteCommerceInventoryWarehouseIds) {
+
+			_commerceInventoryWarehouseService.deleteCommerceInventoryWarehouse(
+				deleteCommerceInventoryWarehouseId);
 		}
 	}
 
@@ -100,7 +105,7 @@ public class EditCommerceWarehouseMVCActionCommand
 
 		try {
 			if (cmd.equals(Constants.DELETE)) {
-				deleteCommerceWarehouses(actionRequest);
+				deleteCommerceInventoryWarehouses(actionRequest);
 			}
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
@@ -112,7 +117,7 @@ public class EditCommerceWarehouseMVCActionCommand
 					_transactionConfig, commerceInventoryWarehouseCallable);
 			}
 			else if (cmd.equals("geolocate")) {
-				geolocateCommerceWarehouse(actionRequest);
+				geolocateCommerceInventoryWarehouse(actionRequest);
 			}
 			else if (cmd.equals("setActive")) {
 				setActive(actionRequest);
@@ -144,43 +149,48 @@ public class EditCommerceWarehouseMVCActionCommand
 				SessionErrors.add(actionRequest, t.getClass());
 
 				actionResponse.setRenderParameter(
-					"mvcRenderCommandName", "editCommerceWarehouse");
+					"mvcRenderCommandName", "editCommerceInventoryWarehouse");
 			}
 		}
 	}
 
-	protected void geolocateCommerceWarehouse(ActionRequest actionRequest)
+	protected void geolocateCommerceInventoryWarehouse(
+			ActionRequest actionRequest)
 		throws PortalException {
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseService.getCommerceWarehouse(commerceWarehouseId);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				commerceInventoryWarehouseId);
 
 		CommerceCountry commerceCountry = _getCommerceCountry(
 			_portal.getScopeGroupId(actionRequest),
-			commerceWarehouse.getCountryTwoLettersISOCode());
+			commerceInventoryWarehouse.getCountryTwoLettersISOCode());
 
 		CommerceRegion commerceRegion = _getCommerceRegion(
 			commerceCountry.getCommerceCountryId(),
-			commerceWarehouse.getCommerceRegionCode());
+			commerceInventoryWarehouse.getCommerceRegionCode());
 
 		double[] coordinates = _commerceGeocoder.getCoordinates(
-			commerceWarehouse.getStreet1(), commerceWarehouse.getCity(),
-			commerceWarehouse.getZip(), commerceRegion, commerceCountry);
+			commerceInventoryWarehouse.getStreet1(),
+			commerceInventoryWarehouse.getCity(),
+			commerceInventoryWarehouse.getZip(), commerceRegion,
+			commerceCountry);
 
-		_commerceWarehouseService.geolocateCommerceWarehouse(
-			commerceWarehouseId, coordinates[0], coordinates[1]);
+		_commerceInventoryWarehouseService.geolocateCommerceInventoryWarehouse(
+			commerceInventoryWarehouseId, coordinates[0], coordinates[1]);
 	}
 
 	protected void setActive(ActionRequest actionRequest) throws Exception {
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
 
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		_commerceWarehouseService.setActive(commerceWarehouseId, active);
+		_commerceInventoryWarehouseService.setActive(
+			commerceInventoryWarehouseId, active);
 	}
 
 	protected void updateChannels(ActionRequest actionRequest)
@@ -205,12 +215,12 @@ public class EditCommerceWarehouseMVCActionCommand
 		}
 	}
 
-	protected CommerceInventoryWarehouse updateCommerceWarehouse(
+	protected CommerceInventoryWarehouse updateCommerceInventoryWarehouse(
 			ActionRequest actionRequest)
 		throws PortalException {
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
@@ -230,24 +240,27 @@ public class EditCommerceWarehouseMVCActionCommand
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceInventoryWarehouse.class.getName(), actionRequest);
 
-		CommerceInventoryWarehouse commerceWarehouse = null;
+		CommerceInventoryWarehouse commerceInventoryWarehouse = null;
 
-		if (commerceWarehouseId <= 0) {
-			commerceWarehouse =
-				_commerceWarehouseService.addCommerceWarehouseAndGroupRel(
-					name, description, active, street1, street2, street3, city,
-					zip, commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
+		if (commerceInventoryWarehouseId <= 0) {
+			commerceInventoryWarehouse =
+				_commerceInventoryWarehouseService.
+					addCommerceInventoryWarehouse(
+						name, description, active, street1, street2, street3,
+						city, zip, commerceRegionCode, commerceCountryCode,
+						latitude, longitude, serviceContext);
 		}
 		else {
-			commerceWarehouse =
-				_commerceWarehouseService.updateCommerceWarehouse(
-					commerceWarehouseId, name, description, active, street1,
-					street2, street3, city, zip, commerceRegionCode,
-					commerceCountryCode, latitude, longitude, serviceContext);
+			commerceInventoryWarehouse =
+				_commerceInventoryWarehouseService.
+					updateCommerceInventoryWarehouse(
+						commerceInventoryWarehouseId, name, description, active,
+						street1, street2, street3, city, zip,
+						commerceRegionCode, commerceCountryCode, latitude,
+						longitude, serviceContext);
 		}
 
-		return commerceWarehouse;
+		return commerceInventoryWarehouse;
 	}
 
 	private CommerceCountry _getCommerceCountry(
@@ -280,10 +293,11 @@ public class EditCommerceWarehouseMVCActionCommand
 	private CommerceGeocoder _commerceGeocoder;
 
 	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference
-	private CommerceInventoryWarehouseService _commerceWarehouseService;
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private Portal _portal;

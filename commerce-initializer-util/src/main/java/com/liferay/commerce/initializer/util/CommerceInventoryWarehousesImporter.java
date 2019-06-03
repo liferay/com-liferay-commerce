@@ -14,26 +14,18 @@
 
 package com.liferay.commerce.initializer.util;
 
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
-import com.liferay.commerce.model.CommerceShippingOriginLocator;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
-import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
-import com.liferay.portal.kernel.settings.ModifiableSettings;
-import com.liferay.portal.kernel.settings.Settings;
-import com.liferay.portal.kernel.settings.SettingsFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,10 +38,10 @@ import org.osgi.service.component.annotations.Reference;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-@Component(service = CommerceWarehousesImporter.class)
-public class CommerceWarehousesImporter {
+@Component(service = CommerceInventoryWarehousesImporter.class)
+public class CommerceInventoryWarehousesImporter {
 
-	public List<CommerceInventoryWarehouse> importCommerceWarehouses(
+	public List<CommerceInventoryWarehouse> importCommerceInventoryWarehouses(
 			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws Exception {
 
@@ -59,31 +51,19 @@ public class CommerceWarehousesImporter {
 			return Collections.emptyList();
 		}
 
-		List<CommerceInventoryWarehouse> commerceWarehouses = new ArrayList<>(
-			jsonArray.length());
+		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
+			new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			CommerceInventoryWarehouse commerceWarehouse =
-				_importCommerceWarehouse(jsonObject, serviceContext);
+			CommerceInventoryWarehouse commerceInventoryWarehouse =
+				_importCommerceInventoryWarehouse(jsonObject, serviceContext);
 
-			commerceWarehouses.add(commerceWarehouse);
+			commerceInventoryWarehouses.add(commerceInventoryWarehouse);
 		}
 
-		_updateCommerceShippingGroupServiceConfiguration(serviceContext);
-
-		return commerceWarehouses;
-	}
-
-	public CommerceInventoryWarehouse importDefaultCommerceWarehouse(
-			long scopeGroupId, long userId)
-		throws PortalException {
-
-		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
-
-		return _commerceWarehouseLocalService.importDefaultCommerceWarehouse(
-			serviceContext);
+		return commerceInventoryWarehouses;
 	}
 
 	protected ServiceContext getServiceContext(long scopeGroupId, long userId)
@@ -100,7 +80,7 @@ public class CommerceWarehousesImporter {
 		return serviceContext;
 	}
 
-	private CommerceInventoryWarehouse _importCommerceWarehouse(
+	private CommerceInventoryWarehouse _importCommerceInventoryWarehouse(
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -127,66 +107,23 @@ public class CommerceWarehousesImporter {
 		double latitude = jsonObject.getDouble("Latitude");
 		double longitude = jsonObject.getDouble("Longitude");
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseLocalService.addCommerceWarehouse(
+		return _commerceInventoryWarehouseLocalService.
+			addCommerceInventoryWarehouse(
 				name, description, active, street1, street2, street3, city, zip,
 				commerceRegion.getCode(),
 				commerceCountry.getTwoLettersISOCode(), latitude, longitude,
 				serviceContext);
-
-		_commerceWarehouseGroupRelLocalService.addCommerceWarehouseGroupRel(
-			commerceWarehouse.getCommerceInventoryWarehouseId(), false,
-			serviceContext);
-
-		return commerceWarehouse;
-	}
-
-	private void _updateCommerceShippingGroupServiceConfiguration(
-			ServiceContext serviceContext)
-		throws Exception {
-
-		CommerceShippingOriginLocator commerceShippingOriginLocator =
-			_commerceShippingOriginLocatorRegistry.
-				getCommerceShippingOriginLocator("warehouse");
-
-		if (commerceShippingOriginLocator == null) {
-			return;
-		}
-
-		Settings settings = _settingsFactory.getSettings(
-			new GroupServiceSettingsLocator(
-				serviceContext.getScopeGroupId(),
-				CommerceConstants.SHIPPING_SERVICE_NAME));
-
-		ModifiableSettings modifiableSettings =
-			settings.getModifiableSettings();
-
-		modifiableSettings.setValue(
-			"commerceShippingOriginLocatorKey", "warehouse");
-
-		modifiableSettings.store();
 	}
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
 
 	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
-
-	@Reference
-	private CommerceShippingOriginLocatorRegistry
-		_commerceShippingOriginLocatorRegistry;
-
-	@Reference
-	private CommerceInventoryWarehouseGroupRelLocalService
-		_commerceWarehouseGroupRelLocalService;
-
-	@Reference
 	private CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+		_commerceInventoryWarehouseLocalService;
 
 	@Reference
-	private SettingsFactory _settingsFactory;
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
