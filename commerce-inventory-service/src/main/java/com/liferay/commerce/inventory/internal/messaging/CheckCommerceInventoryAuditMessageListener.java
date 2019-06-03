@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.inventory.internal.messaging;
 
-import com.liferay.commerce.inventory.configuration.CommerceInventorySystemConfiguration;
+import com.liferay.commerce.inventory.internal.configuration.CommerceInventorySystemConfiguration;
 import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -39,6 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	configurationPid = "com.liferay.commerce.inventory.configuration.CommerceInventorySystemConfiguration",
@@ -53,13 +54,13 @@ public class CheckCommerceInventoryAuditMessageListener
 
 		String className = clazz.getName();
 
-		_commerceSubscriptionConfiguration =
+		_commerceInventorySystemConfiguration =
 			ConfigurableUtil.createConfigurable(
 				CommerceInventorySystemConfiguration.class, properties);
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			_commerceSubscriptionConfiguration.
+			_commerceInventorySystemConfiguration.
 				checkCommerceInventoryAuditQuantityInterval(),
 			TimeUnit.MINUTE);
 
@@ -78,14 +79,13 @@ public class CheckCommerceInventoryAuditMessageListener
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		int deleteAuditMonthInterval =
-			_commerceSubscriptionConfiguration.deleteAuditMonthInterval();
+			_commerceInventorySystemConfiguration.deleteAuditMonthInterval();
 
 		Date date = new Date(
 			System.currentTimeMillis() -
 				(deleteAuditMonthInterval * Time.MONTH));
 
-		_commerceInventoryAuditLocalService.removeOldCommerceInventoryAudit(
-			date);
+		_commerceInventoryAuditLocalService.checkCommerceInventoryAudit(date);
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
@@ -98,7 +98,7 @@ public class CheckCommerceInventoryAuditMessageListener
 		_commerceInventoryAuditLocalService;
 
 	private CommerceInventorySystemConfiguration
-		_commerceSubscriptionConfiguration;
+		_commerceInventorySystemConfiguration;
 
 	@Reference
 	private SchedulerEngineHelper _schedulerEngineHelper;
