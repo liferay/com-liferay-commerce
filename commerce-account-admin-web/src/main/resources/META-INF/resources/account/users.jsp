@@ -106,7 +106,7 @@ PortletURL portletURL = commerceAccountUserRelAdminDisplayContext.getPortletURL(
 						cssClass="important table-cell-content"
 						href="<%= commerceAccountUserRelAdminDisplayContext.getEditUserURL(accountUser.getUserId()) %>"
 						name="name"
-						value="<%= HtmlUtil.escape(user.getFullName()) %>"
+						value="<%= HtmlUtil.escape(accountUser.getFullName()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text

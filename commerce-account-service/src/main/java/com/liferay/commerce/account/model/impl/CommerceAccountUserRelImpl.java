@@ -48,7 +48,8 @@ public class CommerceAccountUserRelImpl extends CommerceAccountUserRelBaseImpl {
 				getCommerceAccountId());
 
 		return UserGroupRoleLocalServiceUtil.getUserGroupRoles(
-			getUserId(), commerceAccount.getCommerceAccountGroupId());
+			getCommerceAccountUserId(),
+			commerceAccount.getCommerceAccountGroupId());
 	}
 
 }
