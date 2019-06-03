@@ -157,11 +157,12 @@ public class CommerceOrderHttpHelperImplTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		_commerceWarehouse = CommerceTestUtil.addCommerceWarehouse(
-			_group.getGroupId());
+		_commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			_commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), _commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
@@ -183,11 +184,11 @@ public class CommerceOrderHttpHelperImplTest {
 	@Inject
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
+	@DeleteAfterTestRun
+	private CommerceInventoryWarehouse _commerceInventoryWarehouse;
+
 	@Inject
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
-
-	@DeleteAfterTestRun
-	private CommerceInventoryWarehouse _commerceWarehouse;
 
 	@DeleteAfterTestRun
 	private Group _group;

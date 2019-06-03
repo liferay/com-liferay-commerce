@@ -82,26 +82,28 @@ public class CommerceInventoryEngineTest {
 
 	@After
 	public void tearDown() throws Exception {
-		if (_commerceWarehouseItem1 != null) {
-			CommerceInventoryWarehouse commerceWarehouse =
-				_commerceWarehouseItem1.getCommerceWarehouse();
+		if (_commerceInventoryWarehouseItem1 != null) {
+			CommerceInventoryWarehouse commerceInventoryWarehouse =
+				_commerceInventoryWarehouseItem1.
+					getCommerceInventoryWarehouse();
 
 			CommerceCountry commerceCountry =
 				_commerceCountryLocalService.getCommerceCountry(
-					_group.getGroupId(),
-					commerceWarehouse.getCountryTwoLettersISOCode());
+					_group.getCompanyId(),
+					commerceInventoryWarehouse.getCountryTwoLettersISOCode());
 
 			_commerceCountryLocalService.deleteCommerceCountry(commerceCountry);
 		}
 
-		if (_commerceWarehouseItem2 != null) {
-			CommerceInventoryWarehouse commerceWarehouse =
-				_commerceWarehouseItem2.getCommerceWarehouse();
+		if (_commerceInventoryWarehouseItem2 != null) {
+			CommerceInventoryWarehouse commerceInventoryWarehouse =
+				_commerceInventoryWarehouseItem2.
+					getCommerceInventoryWarehouse();
 
 			CommerceCountry commerceCountry =
 				_commerceCountryLocalService.getCommerceCountry(
-					_group.getGroupId(),
-					commerceWarehouse.getCountryTwoLettersISOCode());
+					_group.getCompanyId(),
+					commerceInventoryWarehouse.getCountryTwoLettersISOCode());
 
 			_commerceCountryLocalService.deleteCommerceCountry(commerceCountry);
 		}
@@ -109,8 +111,8 @@ public class CommerceInventoryEngineTest {
 
 	@Test(expected = NoSuchInventoryBookedQuantityException.class)
 	public void testConsumeQuantity() throws Exception {
-		_commerceWarehouseItem1 =
-			CommerceInventoryTestUtil.addCommerceWarehouseItem(
+		_commerceInventoryWarehouseItem1 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_cpInstance1.getSku(), 10, _serviceContext);
 
 		int bookQuantity = 5;
@@ -124,12 +126,13 @@ public class CommerceInventoryEngineTest {
 			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
 
 		Assert.assertEquals(
-			_commerceWarehouseItem1.getQuantity() - bookQuantity,
+			_commerceInventoryWarehouseItem1.getQuantity() - bookQuantity,
 			stockQuantity);
 
 		_commerceInventoryEngine.consumeQuantity(
-			_user.getUserId(), _group.getGroupId(), _cpInstance1.getSku(),
-			bookQuantity, _commerceWarehouseItem1.getCommerceWarehouseId(),
+			_user.getUserId(),
+			_commerceInventoryWarehouseItem1.getCommerceInventoryWarehouseId(),
+			_cpInstance1.getSku(), bookQuantity,
 			commerceBookedQuantity.getCommerceInventoryBookedQuantityId(),
 			Collections.emptyMap());
 
@@ -137,7 +140,7 @@ public class CommerceInventoryEngineTest {
 			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
 
 		Assert.assertEquals(
-			_commerceWarehouseItem1.getQuantity() - bookQuantity,
+			_commerceInventoryWarehouseItem1.getQuantity() - bookQuantity,
 			stockQuantity);
 
 		_commerceBookedQuantityLocalService.getCommerceInventoryBookedQuantity(
@@ -146,12 +149,12 @@ public class CommerceInventoryEngineTest {
 
 	@Test
 	public void testGetStockQuantities() throws Exception {
-		_commerceWarehouseItem1 =
-			CommerceInventoryTestUtil.addCommerceWarehouseItem(
+		_commerceInventoryWarehouseItem1 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_cpInstance1.getSku(), 10, _serviceContext);
 
-		_commerceWarehouseItem2 =
-			CommerceInventoryTestUtil.addCommerceWarehouseItem(
+		_commerceInventoryWarehouseItem2 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_cpInstance2.getSku(), 15, _serviceContext);
 
 		List<String> skuList = new ArrayList<>();
@@ -171,13 +174,13 @@ public class CommerceInventoryEngineTest {
 
 			if (Objects.equals(sku, _cpInstance1.getSku())) {
 				Assert.assertEquals(
-					_commerceWarehouseItem1.getQuantity(),
+					_commerceInventoryWarehouseItem1.getQuantity(),
 					stockQuantities.get(sku));
 			}
 
 			if (Objects.equals(sku, _cpInstance2.getSku())) {
 				Assert.assertEquals(
-					_commerceWarehouseItem2.getQuantity(),
+					_commerceInventoryWarehouseItem2.getQuantity(),
 					stockQuantities.get(sku));
 			}
 		}
@@ -185,15 +188,15 @@ public class CommerceInventoryEngineTest {
 
 	@Test
 	public void testGetStockQuantity() throws Exception {
-		_commerceWarehouseItem1 =
-			CommerceInventoryTestUtil.addCommerceWarehouseItem(
+		_commerceInventoryWarehouseItem1 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_cpInstance1.getSku(), 10, _serviceContext);
 
 		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
 			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
 
 		Assert.assertEquals(
-			_commerceWarehouseItem1.getQuantity(), stockQuantity);
+			_commerceInventoryWarehouseItem1.getQuantity(), stockQuantity);
 	}
 
 	private CPInstance _randomCPInstanceSku() throws Exception {
@@ -214,8 +217,8 @@ public class CommerceInventoryEngineTest {
 	@Inject
 	private CommerceInventoryEngine _commerceInventoryEngine;
 
-	private CommerceInventoryWarehouseItem _commerceWarehouseItem1;
-	private CommerceInventoryWarehouseItem _commerceWarehouseItem2;
+	private CommerceInventoryWarehouseItem _commerceInventoryWarehouseItem1;
+	private CommerceInventoryWarehouseItem _commerceInventoryWarehouseItem2;
 	private CPInstance _cpInstance1;
 	private CPInstance _cpInstance2;
 

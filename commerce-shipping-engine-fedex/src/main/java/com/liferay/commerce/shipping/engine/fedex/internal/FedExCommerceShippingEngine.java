@@ -27,8 +27,8 @@ import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.service.CommerceAddressRestrictionLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fedex.internal.util.FedExCommerceShippingOptionHelper;
+import com.liferay.commerce.shipping.origin.locator.CommerceShippingOriginLocator;
 import com.liferay.commerce.util.CommerceShippingHelper;
-import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -43,6 +43,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
@@ -85,8 +86,7 @@ public class FedExCommerceShippingEngine implements CommerceShippingEngine {
 						commerceContext, commerceOrder,
 						_commerceCurrencyLocalService,
 						_commerceProductPriceCalculation,
-						_commerceShippingHelper,
-						_commerceShippingOriginLocatorRegistry,
+						_commerceShippingHelper, _commerceShippingOriginLocator,
 						_cpMeasurementUnitLocalService, _configurationProvider,
 						_getResourceBundle(locale));
 
@@ -150,8 +150,7 @@ public class FedExCommerceShippingEngine implements CommerceShippingEngine {
 		_commerceShippingMethodLocalService;
 
 	@Reference
-	private CommerceShippingOriginLocatorRegistry
-		_commerceShippingOriginLocatorRegistry;
+	private CommerceShippingOriginLocator _commerceShippingOriginLocator;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

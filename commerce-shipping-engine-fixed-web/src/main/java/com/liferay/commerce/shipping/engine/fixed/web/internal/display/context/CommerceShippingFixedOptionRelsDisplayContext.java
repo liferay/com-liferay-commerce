@@ -16,7 +16,7 @@ package com.liferay.commerce.shipping.engine.fixed.web.internal.display.context;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
@@ -59,7 +59,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		CommerceRegionService commerceRegionService,
 		CommerceShippingMethodService commerceShippingMethodService,
 		CommerceShippingFixedOptionService commerceShippingFixedOptionService,
-		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
 		CommerceShippingFixedOptionRelService
 			commerceShippingFixedOptionRelService,
 		CPMeasurementUnitLocalService cpMeasurementUnitLocalService,
@@ -74,7 +74,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		_commerceRegionService = commerceRegionService;
 		_commerceShippingFixedOptionService =
 			commerceShippingFixedOptionService;
-		_commerceWarehouseLocalService = commerceWarehouseLocalService;
+		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
 		_commerceShippingFixedOptionRelService =
 			commerceShippingFixedOptionRelService;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
@@ -102,6 +102,18 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		}
 
 		return commerceCountryId;
+	}
+
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses()
+		throws PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return _commerceInventoryWarehouseService.
+			getCommerceInventoryWarehouses(
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				true);
 	}
 
 	public long getCommerceRegionId() throws PortalException {
@@ -162,18 +174,6 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 			getCommerceShippingFixedOptions(
 				getCommerceShippingMethodId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
-	}
-
-	public List<CommerceInventoryWarehouse> getCommerceWarehouses()
-		throws PortalException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		return _commerceWarehouseLocalService.
-			getCommerceWarehousesByGroupIdAndActive(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				true);
 	}
 
 	public String getCPMeasurementUnitName(int type) {
@@ -251,13 +251,13 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 	}
 
 	private final CommerceCountryService _commerceCountryService;
+	private final CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 	private final CommerceRegionService _commerceRegionService;
 	private final CommerceShippingFixedOptionRelService
 		_commerceShippingFixedOptionRelService;
 	private final CommerceShippingFixedOptionService
 		_commerceShippingFixedOptionService;
-	private final CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
 	private final CPMeasurementUnitLocalService _cpMeasurementUnitLocalService;
 
 }

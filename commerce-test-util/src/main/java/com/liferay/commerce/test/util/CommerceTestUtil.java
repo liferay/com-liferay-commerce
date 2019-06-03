@@ -115,11 +115,11 @@ public class CommerceTestUtil {
 
 		CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
-		CommerceInventoryWarehouse commerceWarehouse = addCommerceWarehouse(
-			groupId);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			addCommerceInventoryWarehouse(groupId);
 
-		addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, userId);
+		addCommerceInventoryWarehouseItem(
+			userId, commerceInventoryWarehouse, cpInstance.getSku(), 10);
 
 		addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -157,6 +157,60 @@ public class CommerceTestUtil {
 			commerceShippingFixedOption.getAmount());
 
 		return CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
+	}
+
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+			long groupId)
+		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		CommerceCountry commerceCountry = _setUpCountry(serviceContext);
+
+		CommerceRegion commerceRegion = _setUpRegion(
+			commerceCountry, serviceContext);
+
+		return CommerceInventoryWarehouseLocalServiceUtil.
+			addCommerceInventoryWarehouse(
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				true, RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				commerceRegion.getCode(),
+				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
+				serviceContext);
+	}
+
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+			long groupId, String name)
+		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		return CommerceInventoryWarehouseLocalServiceUtil.
+			addCommerceInventoryWarehouse(
+				name, RandomTestUtil.randomString(), true,
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), null, null,
+				RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
+				serviceContext);
+	}
+
+	public static CommerceInventoryWarehouseItem
+			addCommerceInventoryWarehouseItem(
+				long userId,
+				CommerceInventoryWarehouse commerceInventoryWarehouse,
+				String sku, int quantity)
+		throws Exception {
+
+		return CommerceInventoryWarehouseItemLocalServiceUtil.
+			addCommerceInventoryWarehouseItem(
+				userId,
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				sku, quantity);
 	}
 
 	public static CommerceOrderItem addCommerceOrderItem(
@@ -247,54 +301,6 @@ public class CommerceTestUtil {
 			serviceContext);
 	}
 
-	public static CommerceInventoryWarehouse addCommerceWarehouse(long groupId)
-		throws PortalException {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		CommerceCountry commerceCountry = _setUpCountry(
-			groupId, serviceContext);
-
-		CommerceRegion commerceRegion = _setUpRegion(
-			commerceCountry, serviceContext);
-
-		return CommerceInventoryWarehouseLocalServiceUtil.addCommerceWarehouse(
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), commerceRegion.getCode(),
-			commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-			serviceContext);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceWarehouse(
-			long groupId, String name)
-		throws Exception {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		return CommerceInventoryWarehouseLocalServiceUtil.addCommerceWarehouse(
-			name, RandomTestUtil.randomString(), true,
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), null, null,
-			RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
-			serviceContext);
-	}
-
-	public static CommerceInventoryWarehouseItem addCommerceWarehouseItem(
-			CommerceInventoryWarehouse commerceWarehouse, String sku,
-			int quantity, long userId)
-		throws Exception {
-
-		return CommerceInventoryWarehouseItemLocalServiceUtil.
-			addCommerceWarehouseItem(
-				commerceWarehouse.getCommerceInventoryWarehouseId(), sku,
-				quantity, userId);
-	}
-
 	public static CommerceAddress addUserCommerceAddress(
 			long groupId, long userId)
 		throws Exception {
@@ -302,8 +308,7 @@ public class CommerceTestUtil {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
 
-		CommerceCountry commerceCountry = _setUpCountry(
-			groupId, serviceContext);
+		CommerceCountry commerceCountry = _setUpCountry(serviceContext);
 
 		CommerceRegion commerceRegion = _setUpRegion(
 			commerceCountry, serviceContext);
@@ -334,12 +339,12 @@ public class CommerceTestUtil {
 			serviceContext);
 	}
 
-	private static CommerceCountry _setUpCountry(
-			long groupId, ServiceContext serviceContext)
+	private static CommerceCountry _setUpCountry(ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceCountry commerceCountry =
-			CommerceCountryLocalServiceUtil.fetchCommerceCountry(groupId, 000);
+			CommerceCountryLocalServiceUtil.fetchCommerceCountry(
+				serviceContext.getCompanyId(), 000);
 
 		if (commerceCountry == null) {
 			commerceCountry =

@@ -63,8 +63,8 @@ public class CommerceShippingHelperTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_commerceWarehouse = CommerceTestUtil.addCommerceWarehouse(
-			_group.getGroupId());
+		_commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 	}
 
 	@Test
@@ -174,9 +174,9 @@ public class CommerceShippingHelperTest {
 
 		cpInstance.setPrice(price);
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			_commerceWarehouse, cpInstance.getSku(), 10,
-			cpInstance.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			cpInstance.getUserId(), _commerceInventoryWarehouse,
+			cpInstance.getSku(), 10);
 	}
 
 	private static void _addCPDefinitionProperties(CPInstance cpInstance)
@@ -206,7 +206,7 @@ public class CommerceShippingHelperTest {
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 	}
 
-	private static CommerceInventoryWarehouse _commerceWarehouse;
+	private static CommerceInventoryWarehouse _commerceInventoryWarehouse;
 
 	@Inject
 	private static CPDefinitionLocalService _cpDefinitionLocalService;
