@@ -307,7 +307,7 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 
 		@Override
 		public Object call() throws Exception {
-			updateCommerceWarehouse(_actionRequest);
+			updateCommerceInventoryWarehouse(_actionRequest);
 			updateChannels(_actionRequest);
 
 			return null;

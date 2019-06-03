@@ -69,7 +69,7 @@ public class EditCommerceInventoryWarehouseMVCRenderCommand
 				_portal.getHttpServletResponse(renderResponse);
 
 			CommerceInventoryWarehousesDisplayContext
-					commerceInventoryWarehousesDisplayContext =
+				commerceInventoryWarehousesDisplayContext =
 					new CommerceInventoryWarehousesDisplayContext(
 						_commerceChannelRelService, _commerceChannelService,
 						_commerceCountryService,
