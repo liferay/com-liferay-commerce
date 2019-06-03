@@ -53,9 +53,9 @@ portletDisplay.setURLBack(backURL);
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" disabled="<%= isViewOnly %>" name="name" required="<%= true %>" value="<%= name %>" />
+				<aui:input autoFocus="<%= true %>" disabled="<%= isViewOnly %>" name="name" value="<%= name %>" />
 
-				<aui:select label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+				<aui:select label="currency" name="commerceCurrencyCode" title="currency">
 
 					<%
 					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
