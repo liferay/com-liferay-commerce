@@ -22,6 +22,8 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceInventoryWarehouseItemFinder {
-	public int findStockQuantityByGroupIdAndSku(long companyId, long groupId,
+	public int countStockQuantityByC_G_S(long companyId, long groupId,
 		String sku);
+
+	public int countStockQuantityByC_S(long companyId, String sku);
 }

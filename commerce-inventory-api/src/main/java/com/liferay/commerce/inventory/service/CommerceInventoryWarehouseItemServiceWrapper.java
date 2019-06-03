@@ -34,6 +34,30 @@ public class CommerceInventoryWarehouseItemServiceWrapper
 		_commerceInventoryWarehouseItemService = commerceInventoryWarehouseItemService;
 	}
 
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+		long userId, long commerceInventoryWarehouseId, String sku, int quantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemService.addCommerceInventoryWarehouseItem(userId,
+			commerceInventoryWarehouseId, sku, quantity);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
+		long commerceInventoryWarehouseId, String sku)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemService.fetchCommerceInventoryWarehouseItem(commerceInventoryWarehouseId,
+			sku);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceInventoryWarehouseItems(
+		long commerceInventoryWarehouseId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemService.getCommerceInventoryWarehouseItems(commerceInventoryWarehouseId,
+			start, end);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -42,6 +66,22 @@ public class CommerceInventoryWarehouseItemServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceInventoryWarehouseItemService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
+		long commerceInventoryWarehouseItemId, int quantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemService.updateCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId,
+			quantity);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+		long userId, long commerceInventoryWarehouseId, String sku, int quantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemService.upsertCommerceInventoryWarehouseItem(userId,
+			commerceInventoryWarehouseId, sku, quantity);
 	}
 
 	@Override

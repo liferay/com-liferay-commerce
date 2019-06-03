@@ -244,6 +244,14 @@ public class CommerceOrderItemLocalServiceUtil {
 				   .getAvailableForShipmentCommerceOrderItems(commerceOrderId);
 	}
 
+	public static int getCommerceInventoryWarehouseItemQuantity(
+		long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .getCommerceInventoryWarehouseItemQuantity(commerceOrderItemId,
+			commerceInventoryWarehouseId);
+	}
+
 	/**
 	* Returns the commerce order item with the primary key.
 	*
@@ -316,14 +324,6 @@ public class CommerceOrderItemLocalServiceUtil {
 
 	public static int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return getService().getCommerceOrderItemsQuantity(commerceOrderId);
-	}
-
-	public static int getCommerceWarehouseItemQuantity(
-		long commerceOrderItemId, long commerceWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCommerceWarehouseItemQuantity(commerceOrderItemId,
-			commerceWarehouseId);
 	}
 
 	public static int getCPInstanceQuantity(long cpInstanceId, int orderStatus) {

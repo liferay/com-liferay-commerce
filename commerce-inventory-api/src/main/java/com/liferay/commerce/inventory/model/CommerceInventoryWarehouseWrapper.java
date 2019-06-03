@@ -251,6 +251,11 @@ public class CommerceInventoryWarehouseWrapper
 		return _commerceInventoryWarehouse.getCommerceInventoryWarehouseId();
 	}
 
+	@Override
+	public java.util.List<CommerceInventoryWarehouseItem> getCommerceInventoryWarehouseItems() {
+		return _commerceInventoryWarehouse.getCommerceInventoryWarehouseItems();
+	}
+
 	/**
 	* Returns the commerce region code of this commerce inventory warehouse.
 	*

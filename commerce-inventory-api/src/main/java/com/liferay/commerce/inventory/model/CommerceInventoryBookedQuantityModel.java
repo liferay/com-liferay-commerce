@@ -207,18 +207,18 @@ public interface CommerceInventoryBookedQuantityModel extends AuditedModel,
 	public void setQuantity(int quantity);
 
 	/**
-	 * Returns the expire date of this commerce inventory booked quantity.
+	 * Returns the expiration date of this commerce inventory booked quantity.
 	 *
-	 * @return the expire date of this commerce inventory booked quantity
+	 * @return the expiration date of this commerce inventory booked quantity
 	 */
-	public Date getExpireDate();
+	public Date getExpirationDate();
 
 	/**
-	 * Sets the expire date of this commerce inventory booked quantity.
+	 * Sets the expiration date of this commerce inventory booked quantity.
 	 *
-	 * @param expireDate the expire date of this commerce inventory booked quantity
+	 * @param expirationDate the expiration date of this commerce inventory booked quantity
 	 */
-	public void setExpireDate(Date expireDate);
+	public void setExpirationDate(Date expirationDate);
 
 	/**
 	 * Returns the booked note of this commerce inventory booked quantity.

@@ -40,13 +40,14 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+
+import java.sql.Timestamp;
 
 import java.util.Collections;
 import java.util.Date;
@@ -94,88 +95,134 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_SKU = new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryAuditImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchBysku", new String[] { String.class.getName() },
+			CommerceInventoryAuditImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySku",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryAuditImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySku",
+			new String[] { String.class.getName() },
 			CommerceInventoryAuditModelImpl.SKU_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SKU = new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBysku",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySku",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns the commerce inventory audit where sku = &#63; or throws a {@link NoSuchInventoryAuditException} if it could not be found.
+	 * Returns all the commerce inventory audits where sku = &#63;.
 	 *
 	 * @param sku the sku
-	 * @return the matching commerce inventory audit
-	 * @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	 * @return the matching commerce inventory audits
 	 */
 	@Override
-	public CommerceInventoryAudit findBysku(String sku)
-		throws NoSuchInventoryAuditException {
-		CommerceInventoryAudit commerceInventoryAudit = fetchBysku(sku);
+	public List<CommerceInventoryAudit> findBySku(String sku) {
+		return findBySku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
 
-		if (commerceInventoryAudit == null) {
-			StringBundler msg = new StringBundler(4);
+	/**
+	 * Returns a range of all the commerce inventory audits where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @return the range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findBySku(String sku, int start, int end) {
+		return findBySku(sku, start, end, null);
+	}
 
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+	/**
+	 * Returns an ordered range of all the commerce inventory audits where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findBySku(String sku, int start,
+		int end, OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return findBySku(sku, start, end, orderByComparator, true);
+	}
 
-			msg.append("sku=");
-			msg.append(sku);
+	/**
+	 * Returns an ordered range of all the commerce inventory audits where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findBySku(String sku, int start,
+		int end, OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
 
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchInventoryAuditException(msg.toString());
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU;
+			finderArgs = new Object[] { sku };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SKU;
+			finderArgs = new Object[] { sku, start, end, orderByComparator };
 		}
 
-		return commerceInventoryAudit;
-	}
-
-	/**
-	 * Returns the commerce inventory audit where sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param sku the sku
-	 * @return the matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
-	 */
-	@Override
-	public CommerceInventoryAudit fetchBysku(String sku) {
-		return fetchBysku(sku, true);
-	}
-
-	/**
-	 * Returns the commerce inventory audit where sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param sku the sku
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
-	 */
-	@Override
-	public CommerceInventoryAudit fetchBysku(String sku,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { sku };
-
-		Object result = null;
+		List<CommerceInventoryAudit> list = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_SKU,
+			list = (List<CommerceInventoryAudit>)finderCache.getResult(finderPath,
 					finderArgs, this);
-		}
 
-		if (result instanceof CommerceInventoryAudit) {
-			CommerceInventoryAudit commerceInventoryAudit = (CommerceInventoryAudit)result;
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceInventoryAudit commerceInventoryAudit : list) {
+					if (!Objects.equals(sku, commerceInventoryAudit.getSku())) {
+						list = null;
 
-			if (!Objects.equals(sku, commerceInventoryAudit.getSku())) {
-				result = null;
+						break;
+					}
+				}
 			}
 		}
 
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE);
 
@@ -193,6 +240,15 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 				query.append(_FINDER_COLUMN_SKU_SKU_2);
 			}
 
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
+			}
+
 			String sql = query.toString();
 
 			Session session = null;
@@ -208,33 +264,25 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 					qPos.add(sku);
 				}
 
-				List<CommerceInventoryAudit> list = q.list();
+				if (!pagination) {
+					list = (List<CommerceInventoryAudit>)QueryUtil.list(q,
+							getDialect(), start, end, false);
 
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_SKU, finderArgs,
-						list);
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
 				}
 				else {
-					if (list.size() > 1) {
-						Collections.sort(list, Collections.reverseOrder());
-
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"CommerceInventoryAuditPersistenceImpl.fetchBysku(String, boolean) with parameters (" +
-								StringUtil.merge(finderArgs) +
-								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-						}
-					}
-
-					CommerceInventoryAudit commerceInventoryAudit = list.get(0);
-
-					result = commerceInventoryAudit;
-
-					cacheResult(commerceInventoryAudit);
+					list = (List<CommerceInventoryAudit>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_SKU, finderArgs);
+				finderCache.removeResult(finderPath, finderArgs);
 
 				throw processException(e);
 			}
@@ -243,26 +291,290 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 			}
 		}
 
-		if (result instanceof List<?>) {
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce inventory audit in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit findBySku_First(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = fetchBySku_First(sku,
+				orderByComparator);
+
+		if (commerceInventoryAudit != null) {
+			return commerceInventoryAudit;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("sku=");
+		msg.append(sku);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryAuditException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce inventory audit in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit fetchBySku_First(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		List<CommerceInventoryAudit> list = findBySku(sku, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce inventory audit in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit findBySku_Last(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = fetchBySku_Last(sku,
+				orderByComparator);
+
+		if (commerceInventoryAudit != null) {
+			return commerceInventoryAudit;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("sku=");
+		msg.append(sku);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryAuditException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce inventory audit in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit fetchBySku_Last(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		int count = countBySku(sku);
+
+		if (count == 0) {
 			return null;
 		}
+
+		List<CommerceInventoryAudit> list = findBySku(sku, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce inventory audits before and after the current commerce inventory audit in the ordered set where sku = &#63;.
+	 *
+	 * @param commerceInventoryAuditId the primary key of the current commerce inventory audit
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a commerce inventory audit with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit[] findBySku_PrevAndNext(
+		long commerceInventoryAuditId, String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = findByPrimaryKey(commerceInventoryAuditId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryAudit[] array = new CommerceInventoryAuditImpl[3];
+
+			array[0] = getBySku_PrevAndNext(session, commerceInventoryAudit,
+					sku, orderByComparator, true);
+
+			array[1] = commerceInventoryAudit;
+
+			array[2] = getBySku_PrevAndNext(session, commerceInventoryAudit,
+					sku, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryAudit getBySku_PrevAndNext(Session session,
+		CommerceInventoryAudit commerceInventoryAudit, String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
 		else {
-			return (CommerceInventoryAudit)result;
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE);
+
+		boolean bindSku = false;
+
+		if (sku == null) {
+			query.append(_FINDER_COLUMN_SKU_SKU_1);
+		}
+		else if (sku.equals("")) {
+			query.append(_FINDER_COLUMN_SKU_SKU_3);
+		}
+		else {
+			bindSku = true;
+
+			query.append(_FINDER_COLUMN_SKU_SKU_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindSku) {
+			qPos.add(sku);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryAudit);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryAudit> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
 	/**
-	 * Removes the commerce inventory audit where sku = &#63; from the database.
+	 * Removes all the commerce inventory audits where sku = &#63; from the database.
 	 *
 	 * @param sku the sku
-	 * @return the commerce inventory audit that was removed
 	 */
 	@Override
-	public CommerceInventoryAudit removeBysku(String sku)
-		throws NoSuchInventoryAuditException {
-		CommerceInventoryAudit commerceInventoryAudit = findBysku(sku);
-
-		return remove(commerceInventoryAudit);
+	public void removeBySku(String sku) {
+		for (CommerceInventoryAudit commerceInventoryAudit : findBySku(sku,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(commerceInventoryAudit);
+		}
 	}
 
 	/**
@@ -272,7 +584,7 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 	 * @return the number of matching commerce inventory audits
 	 */
 	@Override
-	public int countBysku(String sku) {
+	public int countBySku(String sku) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SKU;
 
 		Object[] finderArgs = new Object[] { sku };
@@ -333,6 +645,545 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 	private static final String _FINDER_COLUMN_SKU_SKU_1 = "commerceInventoryAudit.sku IS NULL";
 	private static final String _FINDER_COLUMN_SKU_SKU_2 = "commerceInventoryAudit.sku = ?";
 	private static final String _FINDER_COLUMN_SKU_SKU_3 = "(commerceInventoryAudit.sku IS NULL OR commerceInventoryAudit.sku = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LTCREATEDATE =
+		new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryAuditImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByLtCreateDate",
+			new String[] {
+				Date.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTCREATEDATE =
+		new FinderPath(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryAuditModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtCreateDate",
+			new String[] { Date.class.getName() });
+
+	/**
+	 * Returns all the commerce inventory audits where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @return the matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findByLtCreateDate(Date createDate) {
+		return findByLtCreateDate(createDate, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory audits where createDate &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @return the range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findByLtCreateDate(Date createDate,
+		int start, int end) {
+		return findByLtCreateDate(createDate, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory audits where createDate &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findByLtCreateDate(Date createDate,
+		int start, int end,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return findByLtCreateDate(createDate, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory audits where createDate &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param createDate the create date
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory audits
+	 */
+	@Override
+	public List<CommerceInventoryAudit> findByLtCreateDate(Date createDate,
+		int start, int end,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_LTCREATEDATE;
+		finderArgs = new Object[] {
+				_getTime(createDate),
+				
+				start, end, orderByComparator
+			};
+
+		List<CommerceInventoryAudit> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceInventoryAudit>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceInventoryAudit commerceInventoryAudit : list) {
+					if ((createDate.getTime() <= commerceInventoryAudit.getCreateDate()
+																		   .getTime())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE);
+
+			boolean bindCreateDate = false;
+
+			if (createDate == null) {
+				query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_1);
+			}
+			else {
+				bindCreateDate = true;
+
+				query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCreateDate) {
+					qPos.add(new Timestamp(createDate.getTime()));
+				}
+
+				if (!pagination) {
+					list = (List<CommerceInventoryAudit>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceInventoryAudit>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit findByLtCreateDate_First(Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = fetchByLtCreateDate_First(createDate,
+				orderByComparator);
+
+		if (commerceInventoryAudit != null) {
+			return commerceInventoryAudit;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("createDate=");
+		msg.append(createDate);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryAuditException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit fetchByLtCreateDate_First(Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		List<CommerceInventoryAudit> list = findByLtCreateDate(createDate, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit findByLtCreateDate_Last(Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = fetchByLtCreateDate_Last(createDate,
+				orderByComparator);
+
+		if (commerceInventoryAudit != null) {
+			return commerceInventoryAudit;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("createDate=");
+		msg.append(createDate);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryAuditException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit fetchByLtCreateDate_Last(Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		int count = countByLtCreateDate(createDate);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceInventoryAudit> list = findByLtCreateDate(createDate,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce inventory audits before and after the current commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	 *
+	 * @param commerceInventoryAuditId the primary key of the current commerce inventory audit
+	 * @param createDate the create date
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory audit
+	 * @throws NoSuchInventoryAuditException if a commerce inventory audit with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryAudit[] findByLtCreateDate_PrevAndNext(
+		long commerceInventoryAuditId, Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws NoSuchInventoryAuditException {
+		CommerceInventoryAudit commerceInventoryAudit = findByPrimaryKey(commerceInventoryAuditId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryAudit[] array = new CommerceInventoryAuditImpl[3];
+
+			array[0] = getByLtCreateDate_PrevAndNext(session,
+					commerceInventoryAudit, createDate, orderByComparator, true);
+
+			array[1] = commerceInventoryAudit;
+
+			array[2] = getByLtCreateDate_PrevAndNext(session,
+					commerceInventoryAudit, createDate, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryAudit getByLtCreateDate_PrevAndNext(
+		Session session, CommerceInventoryAudit commerceInventoryAudit,
+		Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE);
+
+		boolean bindCreateDate = false;
+
+		if (createDate == null) {
+			query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_1);
+		}
+		else {
+			bindCreateDate = true;
+
+			query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindCreateDate) {
+			qPos.add(new Timestamp(createDate.getTime()));
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryAudit);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryAudit> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce inventory audits where createDate &lt; &#63; from the database.
+	 *
+	 * @param createDate the create date
+	 */
+	@Override
+	public void removeByLtCreateDate(Date createDate) {
+		for (CommerceInventoryAudit commerceInventoryAudit : findByLtCreateDate(
+				createDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(commerceInventoryAudit);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce inventory audits where createDate &lt; &#63;.
+	 *
+	 * @param createDate the create date
+	 * @return the number of matching commerce inventory audits
+	 */
+	@Override
+	public int countByLtCreateDate(Date createDate) {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTCREATEDATE;
+
+		Object[] finderArgs = new Object[] { _getTime(createDate) };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEINVENTORYAUDIT_WHERE);
+
+			boolean bindCreateDate = false;
+
+			if (createDate == null) {
+				query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_1);
+			}
+			else {
+				bindCreateDate = true;
+
+				query.append(_FINDER_COLUMN_LTCREATEDATE_CREATEDATE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCreateDate) {
+					qPos.add(new Timestamp(createDate.getTime()));
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LTCREATEDATE_CREATEDATE_1 = "commerceInventoryAudit.createDate IS NULL";
+	private static final String _FINDER_COLUMN_LTCREATEDATE_CREATEDATE_2 = "commerceInventoryAudit.createDate < ?";
 
 	public CommerceInventoryAuditPersistenceImpl() {
 		setModelClass(CommerceInventoryAudit.class);
@@ -366,10 +1217,6 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 		entityCache.putResult(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryAuditImpl.class,
 			commerceInventoryAudit.getPrimaryKey(), commerceInventoryAudit);
-
-		finderCache.putResult(FINDER_PATH_FETCH_BY_SKU,
-			new Object[] { commerceInventoryAudit.getSku() },
-			commerceInventoryAudit);
 
 		commerceInventoryAudit.resetOriginalValues();
 	}
@@ -426,9 +1273,6 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		clearUniqueFindersCache((CommerceInventoryAuditModelImpl)commerceInventoryAudit,
-			true);
 	}
 
 	@Override
@@ -440,42 +1284,6 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 			entityCache.removeResult(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceInventoryAuditImpl.class,
 				commerceInventoryAudit.getPrimaryKey());
-
-			clearUniqueFindersCache((CommerceInventoryAuditModelImpl)commerceInventoryAudit,
-				true);
-		}
-	}
-
-	protected void cacheUniqueFindersCache(
-		CommerceInventoryAuditModelImpl commerceInventoryAuditModelImpl) {
-		Object[] args = new Object[] { commerceInventoryAuditModelImpl.getSku() };
-
-		finderCache.putResult(FINDER_PATH_COUNT_BY_SKU, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_SKU, args,
-			commerceInventoryAuditModelImpl, false);
-	}
-
-	protected void clearUniqueFindersCache(
-		CommerceInventoryAuditModelImpl commerceInventoryAuditModelImpl,
-		boolean clearCurrent) {
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					commerceInventoryAuditModelImpl.getSku()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_SKU, args);
-		}
-
-		if ((commerceInventoryAuditModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_SKU.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceInventoryAuditModelImpl.getOriginalSku()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_SKU, args);
 		}
 	}
 
@@ -656,18 +1464,42 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 		}
 		else
 		 if (isNew) {
+			Object[] args = new Object[] {
+					commerceInventoryAuditModelImpl.getSku()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
+		}
+
+		else {
+			if ((commerceInventoryAuditModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceInventoryAuditModelImpl.getOriginalSku()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
+					args);
+
+				args = new Object[] { commerceInventoryAuditModelImpl.getSku() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
+					args);
+			}
 		}
 
 		entityCache.putResult(CommerceInventoryAuditModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryAuditImpl.class,
 			commerceInventoryAudit.getPrimaryKey(), commerceInventoryAudit,
 			false);
-
-		clearUniqueFindersCache(commerceInventoryAuditModelImpl, false);
-		cacheUniqueFindersCache(commerceInventoryAuditModelImpl);
 
 		commerceInventoryAudit.resetOriginalValues();
 
@@ -1086,6 +1918,15 @@ public class CommerceInventoryAuditPersistenceImpl extends BasePersistenceImpl<C
 	protected EntityCache entityCache;
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
+
+	private Long _getTime(Date date) {
+		if (date == null) {
+			return null;
+		}
+
+		return date.getTime();
+	}
+
 	private static final String _SQL_SELECT_COMMERCEINVENTORYAUDIT = "SELECT commerceInventoryAudit FROM CommerceInventoryAudit commerceInventoryAudit";
 	private static final String _SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE_PKS_IN = "SELECT commerceInventoryAudit FROM CommerceInventoryAudit commerceInventoryAudit WHERE CIAuditId IN (";
 	private static final String _SQL_SELECT_COMMERCEINVENTORYAUDIT_WHERE = "SELECT commerceInventoryAudit FROM CommerceInventoryAudit commerceInventoryAudit WHERE ";

@@ -69,7 +69,7 @@ public class CommerceInventoryBookedQuantityWrapper
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("sku", getSku());
 		attributes.put("quantity", getQuantity());
-		attributes.put("expireDate", getExpireDate());
+		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("bookedNote", getBookedNote());
 
 		return attributes;
@@ -126,10 +126,10 @@ public class CommerceInventoryBookedQuantityWrapper
 			setQuantity(quantity);
 		}
 
-		Date expireDate = (Date)attributes.get("expireDate");
+		Date expirationDate = (Date)attributes.get("expirationDate");
 
-		if (expireDate != null) {
-			setExpireDate(expireDate);
+		if (expirationDate != null) {
+			setExpirationDate(expirationDate);
 		}
 
 		String bookedNote = (String)attributes.get("bookedNote");
@@ -196,13 +196,13 @@ public class CommerceInventoryBookedQuantityWrapper
 	}
 
 	/**
-	* Returns the expire date of this commerce inventory booked quantity.
+	* Returns the expiration date of this commerce inventory booked quantity.
 	*
-	* @return the expire date of this commerce inventory booked quantity
+	* @return the expiration date of this commerce inventory booked quantity
 	*/
 	@Override
-	public Date getExpireDate() {
-		return _commerceInventoryBookedQuantity.getExpireDate();
+	public Date getExpirationDate() {
+		return _commerceInventoryBookedQuantity.getExpirationDate();
 	}
 
 	/**
@@ -368,13 +368,13 @@ public class CommerceInventoryBookedQuantityWrapper
 	}
 
 	/**
-	* Sets the expire date of this commerce inventory booked quantity.
+	* Sets the expiration date of this commerce inventory booked quantity.
 	*
-	* @param expireDate the expire date of this commerce inventory booked quantity
+	* @param expirationDate the expiration date of this commerce inventory booked quantity
 	*/
 	@Override
-	public void setExpireDate(Date expireDate) {
-		_commerceInventoryBookedQuantity.setExpireDate(expireDate);
+	public void setExpirationDate(Date expirationDate) {
+		_commerceInventoryBookedQuantity.setExpirationDate(expirationDate);
 	}
 
 	/**

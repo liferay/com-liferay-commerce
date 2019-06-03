@@ -43,7 +43,7 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setSku(model.getSku());
 		soapModel.setQuantity(model.getQuantity());
-		soapModel.setExpireDate(model.getExpireDate());
+		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setBookedNote(model.getBookedNote());
 
 		return soapModel;
@@ -165,12 +165,12 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 		_quantity = quantity;
 	}
 
-	public Date getExpireDate() {
-		return _expireDate;
+	public Date getExpirationDate() {
+		return _expirationDate;
 	}
 
-	public void setExpireDate(Date expireDate) {
-		_expireDate = expireDate;
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
 	}
 
 	public String getBookedNote() {
@@ -189,6 +189,6 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 	private Date _modifiedDate;
 	private String _sku;
 	private int _quantity;
-	private Date _expireDate;
+	private Date _expirationDate;
 	private String _bookedNote;
 }

@@ -78,7 +78,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "sku", Types.VARCHAR },
 			{ "quantity", Types.INTEGER },
-			{ "expireDate", Types.TIMESTAMP },
+			{ "expirationDate", Types.TIMESTAMP },
 			{ "bookedNote", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -92,11 +92,11 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("sku", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
-		TABLE_COLUMNS_MAP.put("expireDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("bookedNote", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CIBookedQuantity (CIBookedQuantityId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,sku VARCHAR(75) null,quantity INTEGER,expireDate DATE null,bookedNote VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CIBookedQuantity (CIBookedQuantityId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,sku VARCHAR(75) null,quantity INTEGER,expirationDate DATE null,bookedNote VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table CIBookedQuantity";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceInventoryBookedQuantity.commerceInventoryBookedQuantityId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CIBookedQuantity.CIBookedQuantityId ASC";
@@ -112,7 +112,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.inventory.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity"),
 			true);
-	public static final long EXPIREDATE_COLUMN_BITMASK = 1L;
+	public static final long EXPIRATIONDATE_COLUMN_BITMASK = 1L;
 	public static final long SKU_COLUMN_BITMASK = 2L;
 	public static final long COMMERCEINVENTORYBOOKEDQUANTITYID_COLUMN_BITMASK = 4L;
 
@@ -138,7 +138,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setSku(soapModel.getSku());
 		model.setQuantity(soapModel.getQuantity());
-		model.setExpireDate(soapModel.getExpireDate());
+		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setBookedNote(soapModel.getBookedNote());
 
 		return model;
@@ -214,7 +214,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("sku", getSku());
 		attributes.put("quantity", getQuantity());
-		attributes.put("expireDate", getExpireDate());
+		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("bookedNote", getBookedNote());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
@@ -274,10 +274,10 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 			setQuantity(quantity);
 		}
 
-		Date expireDate = (Date)attributes.get("expireDate");
+		Date expirationDate = (Date)attributes.get("expirationDate");
 
-		if (expireDate != null) {
-			setExpireDate(expireDate);
+		if (expirationDate != null) {
+			setExpirationDate(expirationDate);
 		}
 
 		String bookedNote = (String)attributes.get("bookedNote");
@@ -420,23 +420,23 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 
 	@JSON
 	@Override
-	public Date getExpireDate() {
-		return _expireDate;
+	public Date getExpirationDate() {
+		return _expirationDate;
 	}
 
 	@Override
-	public void setExpireDate(Date expireDate) {
-		_columnBitmask |= EXPIREDATE_COLUMN_BITMASK;
+	public void setExpirationDate(Date expirationDate) {
+		_columnBitmask |= EXPIRATIONDATE_COLUMN_BITMASK;
 
-		if (_originalExpireDate == null) {
-			_originalExpireDate = _expireDate;
+		if (_originalExpirationDate == null) {
+			_originalExpirationDate = _expirationDate;
 		}
 
-		_expireDate = expireDate;
+		_expirationDate = expirationDate;
 	}
 
-	public Date getOriginalExpireDate() {
-		return _originalExpireDate;
+	public Date getOriginalExpirationDate() {
+		return _originalExpirationDate;
 	}
 
 	@JSON
@@ -494,7 +494,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		commerceInventoryBookedQuantityImpl.setModifiedDate(getModifiedDate());
 		commerceInventoryBookedQuantityImpl.setSku(getSku());
 		commerceInventoryBookedQuantityImpl.setQuantity(getQuantity());
-		commerceInventoryBookedQuantityImpl.setExpireDate(getExpireDate());
+		commerceInventoryBookedQuantityImpl.setExpirationDate(getExpirationDate());
 		commerceInventoryBookedQuantityImpl.setBookedNote(getBookedNote());
 
 		commerceInventoryBookedQuantityImpl.resetOriginalValues();
@@ -564,7 +564,7 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 
 		commerceInventoryBookedQuantityModelImpl._originalSku = commerceInventoryBookedQuantityModelImpl._sku;
 
-		commerceInventoryBookedQuantityModelImpl._originalExpireDate = commerceInventoryBookedQuantityModelImpl._expireDate;
+		commerceInventoryBookedQuantityModelImpl._originalExpirationDate = commerceInventoryBookedQuantityModelImpl._expirationDate;
 
 		commerceInventoryBookedQuantityModelImpl._columnBitmask = 0;
 	}
@@ -616,13 +616,13 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 
 		commerceInventoryBookedQuantityCacheModel.quantity = getQuantity();
 
-		Date expireDate = getExpireDate();
+		Date expirationDate = getExpirationDate();
 
-		if (expireDate != null) {
-			commerceInventoryBookedQuantityCacheModel.expireDate = expireDate.getTime();
+		if (expirationDate != null) {
+			commerceInventoryBookedQuantityCacheModel.expirationDate = expirationDate.getTime();
 		}
 		else {
-			commerceInventoryBookedQuantityCacheModel.expireDate = Long.MIN_VALUE;
+			commerceInventoryBookedQuantityCacheModel.expirationDate = Long.MIN_VALUE;
 		}
 
 		commerceInventoryBookedQuantityCacheModel.bookedNote = getBookedNote();
@@ -656,8 +656,8 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		sb.append(getSku());
 		sb.append(", quantity=");
 		sb.append(getQuantity());
-		sb.append(", expireDate=");
-		sb.append(getExpireDate());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
 		sb.append(", bookedNote=");
 		sb.append(getBookedNote());
 		sb.append("}");
@@ -707,8 +707,8 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 		sb.append(getQuantity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>expireDate</column-name><column-value><![CDATA[");
-		sb.append(getExpireDate());
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bookedNote</column-name><column-value><![CDATA[");
@@ -734,8 +734,8 @@ public class CommerceInventoryBookedQuantityModelImpl extends BaseModelImpl<Comm
 	private String _sku;
 	private String _originalSku;
 	private int _quantity;
-	private Date _expireDate;
-	private Date _originalExpireDate;
+	private Date _expirationDate;
+	private Date _originalExpirationDate;
 	private String _bookedNote;
 	private long _columnBitmask;
 	private CommerceInventoryBookedQuantity _escapedModel;

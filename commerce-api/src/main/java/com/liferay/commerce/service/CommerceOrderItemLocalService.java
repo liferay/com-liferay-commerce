@@ -222,6 +222,11 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 	public List<CommerceOrderItem> getAvailableForShipmentCommerceOrderItems(
 		long commerceOrderId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemQuantity(
+		long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws PortalException;
+
 	/**
 	* Returns the commerce order item with the primary key.
 	*
@@ -278,10 +283,6 @@ public interface CommerceOrderItemLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderItemsQuantity(long commerceOrderId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPInstanceQuantity(long cpInstanceId, int orderStatus);

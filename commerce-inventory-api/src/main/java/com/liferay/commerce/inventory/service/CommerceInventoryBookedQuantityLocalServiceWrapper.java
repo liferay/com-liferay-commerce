@@ -36,11 +36,11 @@ public class CommerceInventoryBookedQuantityLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity addCommerceBookedQuantity(
-		long userId, String sku, int quantity, java.util.Date expireDate,
+		long userId, String sku, int quantity, java.util.Date expirationDate,
 		java.util.Map<String, String> context)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceInventoryBookedQuantityLocalService.addCommerceBookedQuantity(userId,
-			sku, quantity, expireDate, context);
+			sku, quantity, expirationDate, context);
 	}
 
 	/**
@@ -53,6 +53,11 @@ public class CommerceInventoryBookedQuantityLocalServiceWrapper
 	public com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity addCommerceInventoryBookedQuantity(
 		com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity commerceInventoryBookedQuantity) {
 		return _commerceInventoryBookedQuantityLocalService.addCommerceInventoryBookedQuantity(commerceInventoryBookedQuantity);
+	}
+
+	@Override
+	public void checkCommerceInventoryBookedQuantities() {
+		_commerceInventoryBookedQuantityLocalService.checkCommerceInventoryBookedQuantities();
 	}
 
 	@Override
@@ -275,16 +280,6 @@ public class CommerceInventoryBookedQuantityLocalServiceWrapper
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceInventoryBookedQuantityLocalService.getPersistedModel(primaryKeyObj);
-	}
-
-	@Override
-	public void removeAllCommerceBookedQuantities() {
-		_commerceInventoryBookedQuantityLocalService.removeAllCommerceBookedQuantities();
-	}
-
-	@Override
-	public void removeOldTemporaryBookedQuantities() {
-		_commerceInventoryBookedQuantityLocalService.removeOldTemporaryBookedQuantities();
 	}
 
 	/**

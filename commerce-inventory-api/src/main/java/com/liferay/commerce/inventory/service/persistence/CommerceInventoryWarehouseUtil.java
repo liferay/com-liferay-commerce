@@ -117,566 +117,572 @@ public class CommerceInventoryWarehouseUtil {
 	}
 
 	/**
-	* Returns all the commerce inventory warehouses where active = &#63;.
+	* Returns all the commerce inventory warehouses where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @return the matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByactive(boolean active) {
-		return getPersistence().findByactive(active);
+	public static List<CommerceInventoryWarehouse> findByCompanyId(
+		long companyId) {
+		return getPersistence().findByCompanyId(companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouses where active = &#63;.
+	* Returns a range of all the commerce inventory warehouses where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @return the range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByactive(
-		boolean active, int start, int end) {
-		return getPersistence().findByactive(active, start, end);
+	public static List<CommerceInventoryWarehouse> findByCompanyId(
+		long companyId, int start, int end) {
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses where active = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByactive(
-		boolean active, int start, int end,
+	public static List<CommerceInventoryWarehouse> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .findByactive(active, start, end, orderByComparator);
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses where active = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByactive(
-		boolean active, int start, int end,
+	public static List<CommerceInventoryWarehouse> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByactive(active, start, end, orderByComparator,
+				   .findByCompanyId(companyId, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where active = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findByactive_First(
-		boolean active,
+	public static CommerceInventoryWarehouse findByCompanyId_First(
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
-		return getPersistence().findByactive_First(active, orderByComparator);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where active = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchByactive_First(
-		boolean active,
+	public static CommerceInventoryWarehouse fetchByCompanyId_First(
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return getPersistence().fetchByactive_First(active, orderByComparator);
+		return getPersistence()
+				   .fetchByCompanyId_First(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where active = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findByactive_Last(boolean active,
+	public static CommerceInventoryWarehouse findByCompanyId_Last(
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
-		return getPersistence().findByactive_Last(active, orderByComparator);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where active = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchByactive_Last(
-		boolean active,
+	public static CommerceInventoryWarehouse fetchByCompanyId_Last(
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return getPersistence().fetchByactive_Last(active, orderByComparator);
+		return getPersistence()
+				   .fetchByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where active = &#63;.
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63;.
 	*
 	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	* @param active the active
+	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	*/
-	public static CommerceInventoryWarehouse[] findByactive_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
+	public static CommerceInventoryWarehouse[] findByCompanyId_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findByactive_PrevAndNext(commerceInventoryWarehouseId,
-			active, orderByComparator);
+				   .findByCompanyId_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, orderByComparator);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouses that the user has permission to view where active = &#63;.
+	* Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @return the matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByactive(
-		boolean active) {
-		return getPersistence().filterFindByactive(active);
+	public static List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId) {
+		return getPersistence().filterFindByCompanyId(companyId);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouses that the user has permission to view where active = &#63;.
+	* Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @return the range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByactive(
-		boolean active, int start, int end) {
-		return getPersistence().filterFindByactive(active, start, end);
+	public static List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId, int start, int end) {
+		return getPersistence().filterFindByCompanyId(companyId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where active = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByactive(
+	public static List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return getPersistence()
+				   .filterFindByCompanyId(companyId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63;.
+	*
+	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	* @param companyId the company ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce inventory warehouse
+	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	*/
+	public static CommerceInventoryWarehouse[] filterFindByCompanyId_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
+		return getPersistence()
+				   .filterFindByCompanyId_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce inventory warehouses where companyId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	*/
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	/**
+	* Returns the number of commerce inventory warehouses where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching commerce inventory warehouses
+	*/
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
+	}
+
+	/**
+	* Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching commerce inventory warehouses that the user has permission to view
+	*/
+	public static int filterCountByCompanyId(long companyId) {
+		return getPersistence().filterCountByCompanyId(companyId);
+	}
+
+	/**
+	* Returns all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @return the matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active) {
+		return getPersistence().findByC_A(companyId, active);
+	}
+
+	/**
+	* Returns a range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @return the range of matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active, int start, int end) {
+		return getPersistence().findByC_A(companyId, active, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A(long companyId,
 		boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .filterFindByactive(active, start, end, orderByComparator);
+				   .findByC_A(companyId, active, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where active = &#63;.
-	*
-	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	* @param active the active
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce inventory warehouse
-	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
-	*/
-	public static CommerceInventoryWarehouse[] filterFindByactive_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
-		return getPersistence()
-				   .filterFindByactive_PrevAndNext(commerceInventoryWarehouseId,
-			active, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce inventory warehouses where active = &#63; from the database.
-	*
-	* @param active the active
-	*/
-	public static void removeByactive(boolean active) {
-		getPersistence().removeByactive(active);
-	}
-
-	/**
-	* Returns the number of commerce inventory warehouses where active = &#63;.
-	*
-	* @param active the active
-	* @return the number of matching commerce inventory warehouses
-	*/
-	public static int countByactive(boolean active) {
-		return getPersistence().countByactive(active);
-	}
-
-	/**
-	* Returns the number of commerce inventory warehouses that the user has permission to view where active = &#63;.
-	*
-	* @param active the active
-	* @return the number of matching commerce inventory warehouses that the user has permission to view
-	*/
-	public static int filterCountByactive(boolean active) {
-		return getPersistence().filterCountByactive(active);
-	}
-
-	/**
-	* Returns all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
-	*
-	* @param countryTwoLettersISOCode the country two letters iso code
-	* @return the matching commerce inventory warehouses
-	*/
-	public static List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return getPersistence()
-				   .findBycountryTwoLettersISOCode(countryTwoLettersISOCode);
-	}
-
-	/**
-	* Returns a range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
-	* @param start the lower bound of the range of commerce inventory warehouses
-	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	* @return the range of matching commerce inventory warehouses
-	*/
-	public static List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end) {
-		return getPersistence()
-				   .findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param countryTwoLettersISOCode the country two letters iso code
-	* @param start the lower bound of the range of commerce inventory warehouses
-	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce inventory warehouses
-	*/
-	public static List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return getPersistence()
-				   .findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
+	public static List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end, orderByComparator, retrieveFromCache);
+				   .findByC_A(companyId, active, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findBycountryTwoLettersISOCode_First(
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse findByC_A_First(long companyId,
+		boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findBycountryTwoLettersISOCode_First(countryTwoLettersISOCode,
-			orderByComparator);
+				   .findByC_A_First(companyId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchBycountryTwoLettersISOCode_First(
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse fetchByC_A_First(long companyId,
+		boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .fetchBycountryTwoLettersISOCode_First(countryTwoLettersISOCode,
-			orderByComparator);
+				   .fetchByC_A_First(companyId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findBycountryTwoLettersISOCode_Last(
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse findByC_A_Last(long companyId,
+		boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findBycountryTwoLettersISOCode_Last(countryTwoLettersISOCode,
-			orderByComparator);
+				   .findByC_A_Last(companyId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchBycountryTwoLettersISOCode_Last(
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse fetchByC_A_Last(long companyId,
+		boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .fetchBycountryTwoLettersISOCode_Last(countryTwoLettersISOCode,
-			orderByComparator);
+				   .fetchByC_A_Last(companyId, active, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
 	*
 	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	*/
-	public static CommerceInventoryWarehouse[] findBycountryTwoLettersISOCode_PrevAndNext(
-		long commerceInventoryWarehouseId, String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse[] findByC_A_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findBycountryTwoLettersISOCode_PrevAndNext(commerceInventoryWarehouseId,
-			countryTwoLettersISOCode, orderByComparator);
+				   .findByC_A_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	* Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @return the matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return getPersistence()
-				   .filterFindBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+	public static List<CommerceInventoryWarehouse> filterFindByC_A(
+		long companyId, boolean active) {
+		return getPersistence().filterFindByC_A(companyId, active);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	* Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @return the range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end) {
-		return getPersistence()
-				   .filterFindBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end);
+	public static List<CommerceInventoryWarehouse> filterFindByC_A(
+		long companyId, boolean active, int start, int end) {
+		return getPersistence().filterFindByC_A(companyId, active, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where countryTwoLettersISOCode = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and active = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
+	public static List<CommerceInventoryWarehouse> filterFindByC_A(
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .filterFindBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end, orderByComparator);
+				   .filterFindByC_A(companyId, active, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
 	*
 	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	*/
-	public static CommerceInventoryWarehouse[] filterFindBycountryTwoLettersISOCode_PrevAndNext(
-		long commerceInventoryWarehouseId, String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse[] filterFindByC_A_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .filterFindBycountryTwoLettersISOCode_PrevAndNext(commerceInventoryWarehouseId,
-			countryTwoLettersISOCode, orderByComparator);
+				   .filterFindByC_A_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce inventory warehouses where countryTwoLettersISOCode = &#63; from the database.
+	* Removes all the commerce inventory warehouses where companyId = &#63; and active = &#63; from the database.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	*/
-	public static void removeBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		getPersistence()
-			.removeBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+	public static void removeByC_A(long companyId, boolean active) {
+		getPersistence().removeByC_A(companyId, active);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
+	* Returns the number of commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @return the number of matching commerce inventory warehouses
 	*/
-	public static int countBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return getPersistence()
-				   .countBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+	public static int countByC_A(long companyId, boolean active) {
+		return getPersistence().countByC_A(companyId, active);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	* Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
 	*
-	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param companyId the company ID
+	* @param active the active
 	* @return the number of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static int filterCountBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return getPersistence()
-				   .filterCountBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+	public static int filterCountByC_A(long companyId, boolean active) {
+		return getPersistence().filterCountByC_A(companyId, active);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @return the matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByA_C(boolean active,
+	public static List<CommerceInventoryWarehouse> findByC_C(long companyId,
 		String countryTwoLettersISOCode) {
-		return getPersistence().findByA_C(active, countryTwoLettersISOCode);
+		return getPersistence().findByC_C(companyId, countryTwoLettersISOCode);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns a range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @return the range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByA_C(boolean active,
+	public static List<CommerceInventoryWarehouse> findByC_C(long companyId,
 		String countryTwoLettersISOCode, int start, int end) {
 		return getPersistence()
-				   .findByA_C(active, countryTwoLettersISOCode, start, end);
+				   .findByC_C(companyId, countryTwoLettersISOCode, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByA_C(boolean active,
+	public static List<CommerceInventoryWarehouse> findByC_C(long companyId,
 		String countryTwoLettersISOCode, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .findByA_C(active, countryTwoLettersISOCode, start, end,
+				   .findByC_C(companyId, countryTwoLettersISOCode, start, end,
 			orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param active the active
+	* @param companyId the company ID
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
@@ -684,141 +690,434 @@ public class CommerceInventoryWarehouseUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce inventory warehouses
 	*/
-	public static List<CommerceInventoryWarehouse> findByA_C(boolean active,
+	public static List<CommerceInventoryWarehouse> findByC_C(long companyId,
 		String countryTwoLettersISOCode, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByA_C(active, countryTwoLettersISOCode, start, end,
+				   .findByC_C(companyId, countryTwoLettersISOCode, start, end,
 			orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory warehouse
+	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	*/
+	public static CommerceInventoryWarehouse findByC_C_First(long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
+		return getPersistence()
+				   .findByC_C_First(companyId, countryTwoLettersISOCode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	*/
+	public static CommerceInventoryWarehouse fetchByC_C_First(long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_C_First(companyId, countryTwoLettersISOCode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory warehouse
+	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	*/
+	public static CommerceInventoryWarehouse findByC_C_Last(long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
+		return getPersistence()
+				   .findByC_C_Last(companyId, countryTwoLettersISOCode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	*/
+	public static CommerceInventoryWarehouse fetchByC_C_Last(long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return getPersistence()
+				   .fetchByC_C_Last(companyId, countryTwoLettersISOCode,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce inventory warehouse
+	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	*/
+	public static CommerceInventoryWarehouse[] findByC_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
+		return getPersistence()
+				   .findByC_C_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, countryTwoLettersISOCode, orderByComparator);
+	}
+
+	/**
+	* Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @return the matching commerce inventory warehouses that the user has permission to view
+	*/
+	public static List<CommerceInventoryWarehouse> filterFindByC_C(
+		long companyId, String countryTwoLettersISOCode) {
+		return getPersistence()
+				   .filterFindByC_C(companyId, countryTwoLettersISOCode);
+	}
+
+	/**
+	* Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @return the range of matching commerce inventory warehouses that the user has permission to view
+	*/
+	public static List<CommerceInventoryWarehouse> filterFindByC_C(
+		long companyId, String countryTwoLettersISOCode, int start, int end) {
+		return getPersistence()
+				   .filterFindByC_C(companyId, countryTwoLettersISOCode, start,
+			end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce inventory warehouses that the user has permission to view
+	*/
+	public static List<CommerceInventoryWarehouse> filterFindByC_C(
+		long companyId, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return getPersistence()
+				   .filterFindByC_C(companyId, countryTwoLettersISOCode, start,
+			end, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce inventory warehouse
+	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	*/
+	public static CommerceInventoryWarehouse[] filterFindByC_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
+		return getPersistence()
+				   .filterFindByC_C_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, countryTwoLettersISOCode, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	*/
+	public static void removeByC_C(long companyId,
+		String countryTwoLettersISOCode) {
+		getPersistence().removeByC_C(companyId, countryTwoLettersISOCode);
+	}
+
+	/**
+	* Returns the number of commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @return the number of matching commerce inventory warehouses
+	*/
+	public static int countByC_C(long companyId, String countryTwoLettersISOCode) {
+		return getPersistence().countByC_C(companyId, countryTwoLettersISOCode);
+	}
+
+	/**
+	* Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @return the number of matching commerce inventory warehouses that the user has permission to view
+	*/
+	public static int filterCountByC_C(long companyId,
+		String countryTwoLettersISOCode) {
+		return getPersistence()
+				   .filterCountByC_C(companyId, countryTwoLettersISOCode);
+	}
+
+	/**
+	* Returns all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @return the matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode) {
+		return getPersistence()
+				   .findByC_A_C(companyId, active, countryTwoLettersISOCode);
+	}
+
+	/**
+	* Returns a range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @return the range of matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end) {
+		return getPersistence()
+				   .findByC_A_C(companyId, active, countryTwoLettersISOCode,
+			start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return getPersistence()
+				   .findByC_A_C(companyId, active, countryTwoLettersISOCode,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param active the active
+	* @param countryTwoLettersISOCode the country two letters iso code
+	* @param start the lower bound of the range of commerce inventory warehouses
+	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce inventory warehouses
+	*/
+	public static List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByC_A_C(companyId, active, countryTwoLettersISOCode,
+			start, end, orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findByA_C_First(boolean active,
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse findByC_A_C_First(long companyId,
+		boolean active, String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findByA_C_First(active, countryTwoLettersISOCode,
-			orderByComparator);
+				   .findByC_A_C_First(companyId, active,
+			countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchByA_C_First(boolean active,
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse fetchByC_A_C_First(
+		long companyId, boolean active, String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .fetchByA_C_First(active, countryTwoLettersISOCode,
-			orderByComparator);
+				   .fetchByC_A_C_First(companyId, active,
+			countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse findByA_C_Last(boolean active,
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse findByC_A_C_Last(long companyId,
+		boolean active, String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findByA_C_Last(active, countryTwoLettersISOCode,
-			orderByComparator);
+				   .findByC_A_C_Last(companyId, active,
+			countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	*/
-	public static CommerceInventoryWarehouse fetchByA_C_Last(boolean active,
-		String countryTwoLettersISOCode,
+	public static CommerceInventoryWarehouse fetchByC_A_C_Last(long companyId,
+		boolean active, String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .fetchByA_C_Last(active, countryTwoLettersISOCode,
-			orderByComparator);
+				   .fetchByC_A_C_Last(companyId, active,
+			countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	*/
-	public static CommerceInventoryWarehouse[] findByA_C_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
+	public static CommerceInventoryWarehouse[] findByC_A_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .findByA_C_PrevAndNext(commerceInventoryWarehouseId, active,
-			countryTwoLettersISOCode, orderByComparator);
+				   .findByC_A_C_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, active, countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @return the matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByA_C(
-		boolean active, String countryTwoLettersISOCode) {
-		return getPersistence().filterFindByA_C(active, countryTwoLettersISOCode);
+	public static List<CommerceInventoryWarehouse> filterFindByC_A_C(
+		long companyId, boolean active, String countryTwoLettersISOCode) {
+		return getPersistence()
+				   .filterFindByC_A_C(companyId, active,
+			countryTwoLettersISOCode);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param start the lower bound of the range of commerce inventory warehouses
 	* @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	* @return the range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByA_C(
-		boolean active, String countryTwoLettersISOCode, int start, int end) {
+	public static List<CommerceInventoryWarehouse> filterFindByC_A_C(
+		long companyId, boolean active, String countryTwoLettersISOCode,
+		int start, int end) {
 		return getPersistence()
-				   .filterFindByA_C(active, countryTwoLettersISOCode, start, end);
+				   .filterFindByC_A_C(companyId, active,
+			countryTwoLettersISOCode, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param start the lower bound of the range of commerce inventory warehouses
@@ -826,67 +1125,76 @@ public class CommerceInventoryWarehouseUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static List<CommerceInventoryWarehouse> filterFindByA_C(
-		boolean active, String countryTwoLettersISOCode, int start, int end,
+	public static List<CommerceInventoryWarehouse> filterFindByC_A_C(
+		long companyId, boolean active, String countryTwoLettersISOCode,
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
 		return getPersistence()
-				   .filterFindByA_C(active, countryTwoLettersISOCode, start,
-			end, orderByComparator);
+				   .filterFindByC_A_C(companyId, active,
+			countryTwoLettersISOCode, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
 	* @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory warehouse
 	* @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	*/
-	public static CommerceInventoryWarehouse[] filterFindByA_C_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
+	public static CommerceInventoryWarehouse[] filterFindByC_A_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException {
 		return getPersistence()
-				   .filterFindByA_C_PrevAndNext(commerceInventoryWarehouseId,
-			active, countryTwoLettersISOCode, orderByComparator);
+				   .filterFindByC_A_C_PrevAndNext(commerceInventoryWarehouseId,
+			companyId, active, countryTwoLettersISOCode, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63; from the database.
+	* Removes all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63; from the database.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	*/
-	public static void removeByA_C(boolean active,
+	public static void removeByC_A_C(long companyId, boolean active,
 		String countryTwoLettersISOCode) {
-		getPersistence().removeByA_C(active, countryTwoLettersISOCode);
+		getPersistence()
+			.removeByC_A_C(companyId, active, countryTwoLettersISOCode);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the number of commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @return the number of matching commerce inventory warehouses
 	*/
-	public static int countByA_C(boolean active, String countryTwoLettersISOCode) {
-		return getPersistence().countByA_C(active, countryTwoLettersISOCode);
+	public static int countByC_A_C(long companyId, boolean active,
+		String countryTwoLettersISOCode) {
+		return getPersistence()
+				   .countByC_A_C(companyId, active, countryTwoLettersISOCode);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	* Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	*
+	* @param companyId the company ID
 	* @param active the active
 	* @param countryTwoLettersISOCode the country two letters iso code
 	* @return the number of matching commerce inventory warehouses that the user has permission to view
 	*/
-	public static int filterCountByA_C(boolean active,
+	public static int filterCountByC_A_C(long companyId, boolean active,
 		String countryTwoLettersISOCode) {
 		return getPersistence()
-				   .filterCountByA_C(active, countryTwoLettersISOCode);
+				   .filterCountByC_A_C(companyId, active,
+			countryTwoLettersISOCode);
 	}
 
 	/**

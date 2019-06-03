@@ -101,19 +101,6 @@ public class CommerceShippingEngineException extends PortalException {
 
 	}
 
-	public static class MustSetShippingOriginLocator
-		extends CommerceShippingEngineException {
-
-		public MustSetShippingOriginLocator(
-			String commerceShippingOriginLocatorKey) {
-
-			super(
-				"Unable to get shipping origin locator \"" +
-					commerceShippingOriginLocatorKey + "\"");
-		}
-
-	}
-
 	public static class ServerError extends CommerceShippingEngineException {
 
 		public ServerError(List<KeyValuePair> errorKVPs) {

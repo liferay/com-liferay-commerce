@@ -76,7 +76,7 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "commerceWarehouseId", Types.BIGINT },
+			{ "commerceInventoryWarehouseId", Types.BIGINT },
 			{ "sku", Types.VARCHAR },
 			{ "availabilityDate", Types.TIMESTAMP },
 			{ "quantity", Types.INTEGER }
@@ -90,13 +90,13 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("commerceWarehouseId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceInventoryWarehouseId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("sku", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("availabilityDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CIReplenishmentItem (CIReplenishmentItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceWarehouseId LONG,sku VARCHAR(75) null,availabilityDate DATE null,quantity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CIReplenishmentItem (CIReplenishmentItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceInventoryWarehouseId LONG,sku VARCHAR(75) null,availabilityDate DATE null,quantity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CIReplenishmentItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceInventoryReplenishmentItem.commerceInventoryReplenishmentItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CIReplenishmentItem.CIReplenishmentItemId ASC";
@@ -113,7 +113,7 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 				"value.object.column.bitmask.enabled.com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem"),
 			true);
 	public static final long AVAILABILITYDATE_COLUMN_BITMASK = 1L;
-	public static final long COMMERCEWAREHOUSEID_COLUMN_BITMASK = 2L;
+	public static final long COMMERCEINVENTORYWAREHOUSEID_COLUMN_BITMASK = 2L;
 	public static final long SKU_COLUMN_BITMASK = 4L;
 	public static final long COMMERCEINVENTORYREPLENISHMENTITEMID_COLUMN_BITMASK =
 		8L;
@@ -138,7 +138,7 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCommerceWarehouseId(soapModel.getCommerceWarehouseId());
+		model.setCommerceInventoryWarehouseId(soapModel.getCommerceInventoryWarehouseId());
 		model.setSku(soapModel.getSku());
 		model.setAvailabilityDate(soapModel.getAvailabilityDate());
 		model.setQuantity(soapModel.getQuantity());
@@ -214,7 +214,8 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
+		attributes.put("commerceInventoryWarehouseId",
+			getCommerceInventoryWarehouseId());
 		attributes.put("sku", getSku());
 		attributes.put("availabilityDate", getAvailabilityDate());
 		attributes.put("quantity", getQuantity());
@@ -264,10 +265,11 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commerceWarehouseId = (Long)attributes.get("commerceWarehouseId");
+		Long commerceInventoryWarehouseId = (Long)attributes.get(
+				"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId != null) {
-			setCommerceWarehouseId(commerceWarehouseId);
+		if (commerceInventoryWarehouseId != null) {
+			setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 		}
 
 		String sku = (String)attributes.get("sku");
@@ -385,25 +387,26 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 
 	@JSON
 	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
 	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_columnBitmask |= COMMERCEWAREHOUSEID_COLUMN_BITMASK;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_columnBitmask |= COMMERCEINVENTORYWAREHOUSEID_COLUMN_BITMASK;
 
-		if (!_setOriginalCommerceWarehouseId) {
-			_setOriginalCommerceWarehouseId = true;
+		if (!_setOriginalCommerceInventoryWarehouseId) {
+			_setOriginalCommerceInventoryWarehouseId = true;
 
-			_originalCommerceWarehouseId = _commerceWarehouseId;
+			_originalCommerceInventoryWarehouseId = _commerceInventoryWarehouseId;
 		}
 
-		_commerceWarehouseId = commerceWarehouseId;
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
-	public long getOriginalCommerceWarehouseId() {
-		return _originalCommerceWarehouseId;
+	public long getOriginalCommerceInventoryWarehouseId() {
+		return _originalCommerceInventoryWarehouseId;
 	}
 
 	@JSON
@@ -502,7 +505,7 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		commerceInventoryReplenishmentItemImpl.setUserName(getUserName());
 		commerceInventoryReplenishmentItemImpl.setCreateDate(getCreateDate());
 		commerceInventoryReplenishmentItemImpl.setModifiedDate(getModifiedDate());
-		commerceInventoryReplenishmentItemImpl.setCommerceWarehouseId(getCommerceWarehouseId());
+		commerceInventoryReplenishmentItemImpl.setCommerceInventoryWarehouseId(getCommerceInventoryWarehouseId());
 		commerceInventoryReplenishmentItemImpl.setSku(getSku());
 		commerceInventoryReplenishmentItemImpl.setAvailabilityDate(getAvailabilityDate());
 		commerceInventoryReplenishmentItemImpl.setQuantity(getQuantity());
@@ -572,9 +575,9 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 
 		commerceInventoryReplenishmentItemModelImpl._setModifiedDate = false;
 
-		commerceInventoryReplenishmentItemModelImpl._originalCommerceWarehouseId = commerceInventoryReplenishmentItemModelImpl._commerceWarehouseId;
+		commerceInventoryReplenishmentItemModelImpl._originalCommerceInventoryWarehouseId = commerceInventoryReplenishmentItemModelImpl._commerceInventoryWarehouseId;
 
-		commerceInventoryReplenishmentItemModelImpl._setOriginalCommerceWarehouseId = false;
+		commerceInventoryReplenishmentItemModelImpl._setOriginalCommerceInventoryWarehouseId = false;
 
 		commerceInventoryReplenishmentItemModelImpl._originalSku = commerceInventoryReplenishmentItemModelImpl._sku;
 
@@ -620,7 +623,7 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 			commerceInventoryReplenishmentItemCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commerceInventoryReplenishmentItemCacheModel.commerceWarehouseId = getCommerceWarehouseId();
+		commerceInventoryReplenishmentItemCacheModel.commerceInventoryWarehouseId = getCommerceInventoryWarehouseId();
 
 		commerceInventoryReplenishmentItemCacheModel.sku = getSku();
 
@@ -660,8 +663,8 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", commerceWarehouseId=");
-		sb.append(getCommerceWarehouseId());
+		sb.append(", commerceInventoryWarehouseId=");
+		sb.append(getCommerceInventoryWarehouseId());
 		sb.append(", sku=");
 		sb.append(getSku());
 		sb.append(", availabilityDate=");
@@ -707,8 +710,8 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>commerceWarehouseId</column-name><column-value><![CDATA[");
-		sb.append(getCommerceWarehouseId());
+			"<column><column-name>commerceInventoryWarehouseId</column-name><column-value><![CDATA[");
+		sb.append(getCommerceInventoryWarehouseId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sku</column-name><column-value><![CDATA[");
@@ -739,9 +742,9 @@ public class CommerceInventoryReplenishmentItemModelImpl extends BaseModelImpl<C
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _commerceWarehouseId;
-	private long _originalCommerceWarehouseId;
-	private boolean _setOriginalCommerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
+	private long _originalCommerceInventoryWarehouseId;
+	private boolean _setOriginalCommerceInventoryWarehouseId;
 	private String _sku;
 	private String _originalSku;
 	private Date _availabilityDate;

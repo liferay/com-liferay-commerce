@@ -57,6 +57,6 @@ public interface CommerceInventoryWarehouseItem
 			}
 		};
 
-	public CommerceInventoryWarehouse getCommerceWarehouse()
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
 }

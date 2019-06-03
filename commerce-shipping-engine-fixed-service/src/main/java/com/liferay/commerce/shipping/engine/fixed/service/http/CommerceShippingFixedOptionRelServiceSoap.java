@@ -67,7 +67,7 @@ import java.rmi.RemoteException;
 public class CommerceShippingFixedOptionRelServiceSoap {
 	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap addCommerceShippingFixedOptionRel(
 		long commerceShippingMethodId, long commerceShippingFixedOptionId,
-		long commerceWarehouseId, long commerceCountryId,
+		long commerceInventoryWarehouseId, long commerceCountryId,
 		long commerceRegionId, String zip, double weightFrom, double weightTo,
 		java.math.BigDecimal fixedPrice,
 		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage,
@@ -76,10 +76,10 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 		try {
 			com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel returnValue =
 				CommerceShippingFixedOptionRelServiceUtil.addCommerceShippingFixedOptionRel(commerceShippingMethodId,
-					commerceShippingFixedOptionId, commerceWarehouseId,
-					commerceCountryId, commerceRegionId, zip, weightFrom,
-					weightTo, fixedPrice, rateUnitWeightPrice, ratePercentage,
-					serviceContext);
+					commerceShippingFixedOptionId,
+					commerceInventoryWarehouseId, commerceCountryId,
+					commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+					rateUnitWeightPrice, ratePercentage, serviceContext);
 
 			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
 		}
@@ -150,17 +150,18 @@ public class CommerceShippingFixedOptionRelServiceSoap {
 	}
 
 	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap updateCommerceShippingFixedOptionRel(
-		long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-		long commerceCountryId, long commerceRegionId, String zip,
-		double weightFrom, double weightTo, java.math.BigDecimal fixedPrice,
+		long commerceShippingFixedOptionRelId,
+		long commerceInventoryWarehouseId, long commerceCountryId,
+		long commerceRegionId, String zip, double weightFrom, double weightTo,
+		java.math.BigDecimal fixedPrice,
 		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage)
 		throws RemoteException {
 		try {
 			com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel returnValue =
 				CommerceShippingFixedOptionRelServiceUtil.updateCommerceShippingFixedOptionRel(commerceShippingFixedOptionRelId,
-					commerceWarehouseId, commerceCountryId, commerceRegionId,
-					zip, weightFrom, weightTo, fixedPrice, rateUnitWeightPrice,
-					ratePercentage);
+					commerceInventoryWarehouseId, commerceCountryId,
+					commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+					rateUnitWeightPrice, ratePercentage);
 
 			return com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRelSoap.toSoapModel(returnValue);
 		}

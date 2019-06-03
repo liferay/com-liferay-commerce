@@ -58,8 +58,8 @@ public interface CommerceShipmentItemService extends BaseService {
 	 */
 	public CommerceShipmentItem addCommerceShipmentItem(
 		long commerceShipmentId, long commerceOrderItemId,
-		long commerceWarehouseId, int quantity, ServiceContext serviceContext)
-		throws PortalException;
+		long commerceInventoryWarehouseId, int quantity,
+		ServiceContext serviceContext) throws PortalException;
 
 	public void deleteCommerceShipmentItem(long commerceShipmentItemId)
 		throws PortalException;

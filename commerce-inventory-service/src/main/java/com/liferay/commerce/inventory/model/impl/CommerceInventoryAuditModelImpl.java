@@ -110,8 +110,9 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.inventory.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.inventory.model.CommerceInventoryAudit"),
 			true);
-	public static final long SKU_COLUMN_BITMASK = 1L;
-	public static final long COMMERCEINVENTORYAUDITID_COLUMN_BITMASK = 2L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 1L;
+	public static final long SKU_COLUMN_BITMASK = 2L;
+	public static final long COMMERCEINVENTORYAUDITID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -348,7 +349,17 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 
 	@Override
 	public void setCreateDate(Date createDate) {
+		_columnBitmask |= CREATEDATE_COLUMN_BITMASK;
+
+		if (_originalCreateDate == null) {
+			_originalCreateDate = _createDate;
+		}
+
 		_createDate = createDate;
+	}
+
+	public Date getOriginalCreateDate() {
+		return _originalCreateDate;
 	}
 
 	@JSON
@@ -523,6 +534,8 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 	public void resetOriginalValues() {
 		CommerceInventoryAuditModelImpl commerceInventoryAuditModelImpl = this;
 
+		commerceInventoryAuditModelImpl._originalCreateDate = commerceInventoryAuditModelImpl._createDate;
+
 		commerceInventoryAuditModelImpl._setModifiedDate = false;
 
 		commerceInventoryAuditModelImpl._originalSku = commerceInventoryAuditModelImpl._sku;
@@ -673,6 +686,7 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private Date _originalCreateDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private String _sku;

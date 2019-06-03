@@ -215,28 +215,38 @@ public class CommerceInventoryWarehousePersistenceTest {
 	}
 
 	@Test
-	public void testCountByactive() throws Exception {
-		_persistence.countByactive(RandomTestUtil.randomBoolean());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByactive(RandomTestUtil.randomBoolean());
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
-	public void testCountBycountryTwoLettersISOCode() throws Exception {
-		_persistence.countBycountryTwoLettersISOCode("");
+	public void testCountByC_A() throws Exception {
+		_persistence.countByC_A(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean());
 
-		_persistence.countBycountryTwoLettersISOCode("null");
-
-		_persistence.countBycountryTwoLettersISOCode((String)null);
+		_persistence.countByC_A(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
-	public void testCountByA_C() throws Exception {
-		_persistence.countByA_C(RandomTestUtil.randomBoolean(), "");
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByA_C(RandomTestUtil.randomBoolean(), "null");
+		_persistence.countByC_C(0L, "null");
 
-		_persistence.countByA_C(RandomTestUtil.randomBoolean(), (String)null);
+		_persistence.countByC_C(0L, (String)null);
+	}
+
+	@Test
+	public void testCountByC_A_C() throws Exception {
+		_persistence.countByC_A_C(RandomTestUtil.nextLong(),
+			RandomTestUtil.randomBoolean(), "");
+
+		_persistence.countByC_A_C(0L, RandomTestUtil.randomBoolean(), "null");
+
+		_persistence.countByC_A_C(0L, RandomTestUtil.randomBoolean(),
+			(String)null);
 	}
 
 	@Test

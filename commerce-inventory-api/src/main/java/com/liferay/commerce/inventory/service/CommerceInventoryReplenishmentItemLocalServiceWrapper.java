@@ -46,15 +46,6 @@ public class CommerceInventoryReplenishmentItemLocalServiceWrapper
 		return _commerceInventoryReplenishmentItemLocalService.addCommerceInventoryReplenishmentItem(commerceInventoryReplenishmentItem);
 	}
 
-	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem addCommerceReplenishmentItem(
-		long commerceWarehouseId, long userId, String sku,
-		java.util.Date availabilityDate, int quantity)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryReplenishmentItemLocalService.addCommerceReplenishmentItem(commerceWarehouseId,
-			userId, sku, availabilityDate, quantity);
-	}
-
 	/**
 	* Creates a new commerce inventory replenishment item with the primary key. Does not add the commerce inventory replenishment item to the database.
 	*
@@ -240,27 +231,6 @@ public class CommerceInventoryReplenishmentItemLocalServiceWrapper
 	@Override
 	public int getCommerceInventoryReplenishmentItemsCount() {
 		return _commerceInventoryReplenishmentItemLocalService.getCommerceInventoryReplenishmentItemsCount();
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItems(
-		String sku) {
-		return _commerceInventoryReplenishmentItemLocalService.getCommerceReplenishmentItems(sku);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsByGroupIdAndSku(
-		long companyId, long groupId, String sku) {
-		return _commerceInventoryReplenishmentItemLocalService.getCommerceReplenishmentItemsByGroupIdAndSku(companyId,
-			groupId, sku);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsOrderedByAvailabilityDate(
-		String sku,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> orderByComparator) {
-		return _commerceInventoryReplenishmentItemLocalService.getCommerceReplenishmentItemsOrderedByAvailabilityDate(sku,
-			orderByComparator);
 	}
 
 	@Override

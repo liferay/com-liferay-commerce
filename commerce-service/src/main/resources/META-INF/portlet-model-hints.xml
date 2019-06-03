@@ -250,7 +250,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceShipmentId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
-		<field name="commerceWarehouseId" type="long" />
+		<field name="commerceInventoryWarehouseId" type="long" />
 		<field name="quantity" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceShippingMethod">

@@ -57,7 +57,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CommerceShippingFixedOptionRelServiceHttp {
 	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel addCommerceShippingFixedOptionRel(
 		HttpPrincipal httpPrincipal, long commerceShippingMethodId,
-		long commerceShippingFixedOptionId, long commerceWarehouseId,
+		long commerceShippingFixedOptionId, long commerceInventoryWarehouseId,
 		long commerceCountryId, long commerceRegionId, String zip,
 		double weightFrom, double weightTo, java.math.BigDecimal fixedPrice,
 		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage,
@@ -70,9 +70,9 @@ public class CommerceShippingFixedOptionRelServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceShippingMethodId, commerceShippingFixedOptionId,
-					commerceWarehouseId, commerceCountryId, commerceRegionId,
-					zip, weightFrom, weightTo, fixedPrice, rateUnitWeightPrice,
-					ratePercentage, serviceContext);
+					commerceInventoryWarehouseId, commerceCountryId,
+					commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+					rateUnitWeightPrice, ratePercentage, serviceContext);
 
 			Object returnObj = null;
 
@@ -228,7 +228,7 @@ public class CommerceShippingFixedOptionRelServiceHttp {
 
 	public static com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel updateCommerceShippingFixedOptionRel(
 		HttpPrincipal httpPrincipal, long commerceShippingFixedOptionRelId,
-		long commerceWarehouseId, long commerceCountryId,
+		long commerceInventoryWarehouseId, long commerceCountryId,
 		long commerceRegionId, String zip, double weightFrom, double weightTo,
 		java.math.BigDecimal fixedPrice,
 		java.math.BigDecimal rateUnitWeightPrice, double ratePercentage)
@@ -239,9 +239,10 @@ public class CommerceShippingFixedOptionRelServiceHttp {
 					_updateCommerceShippingFixedOptionRelParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceShippingFixedOptionRelId, commerceWarehouseId,
-					commerceCountryId, commerceRegionId, zip, weightFrom,
-					weightTo, fixedPrice, rateUnitWeightPrice, ratePercentage);
+					commerceShippingFixedOptionRelId,
+					commerceInventoryWarehouseId, commerceCountryId,
+					commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+					rateUnitWeightPrice, ratePercentage);
 
 			Object returnObj = null;
 

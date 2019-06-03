@@ -60,6 +60,9 @@ public interface CommerceShippingFixedOptionRel
 	public com.liferay.commerce.model.CommerceCountry getCommerceCountry()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceInventoryWarehouse()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public com.liferay.commerce.model.CommerceRegion getCommerceRegion()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
@@ -67,8 +70,5 @@ public interface CommerceShippingFixedOptionRel
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.model.CommerceShippingMethod getCommerceShippingMethod()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
 }

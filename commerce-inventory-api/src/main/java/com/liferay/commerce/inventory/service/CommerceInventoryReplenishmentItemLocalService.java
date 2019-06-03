@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,10 +70,6 @@ public interface CommerceInventoryReplenishmentItemLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceInventoryReplenishmentItem addCommerceInventoryReplenishmentItem(
 		CommerceInventoryReplenishmentItem commerceInventoryReplenishmentItem);
-
-	public CommerceInventoryReplenishmentItem addCommerceReplenishmentItem(
-		long commerceWarehouseId, long userId, String sku,
-		Date availabilityDate, int quantity) throws PortalException;
 
 	/**
 	* Creates a new commerce inventory replenishment item with the primary key. Does not add the commerce inventory replenishment item to the database.
@@ -219,19 +214,6 @@ public interface CommerceInventoryReplenishmentItemLocalService
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceInventoryReplenishmentItemsCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryReplenishmentItem> getCommerceReplenishmentItems(
-		String sku);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsByGroupIdAndSku(
-		long companyId, long groupId, String sku);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsOrderedByAvailabilityDate(
-		String sku,
-		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

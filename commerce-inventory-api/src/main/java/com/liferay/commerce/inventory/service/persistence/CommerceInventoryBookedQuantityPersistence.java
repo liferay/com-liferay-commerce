@@ -50,7 +50,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param sku the sku
 	* @return the matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findBysku(String sku);
+	public java.util.List<CommerceInventoryBookedQuantity> findBySku(String sku);
 
 	/**
 	* Returns a range of all the commerce inventory booked quantities where sku = &#63;.
@@ -64,7 +64,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	* @return the range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findBysku(
+	public java.util.List<CommerceInventoryBookedQuantity> findBySku(
 		String sku, int start, int end);
 
 	/**
@@ -80,7 +80,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findBysku(
+	public java.util.List<CommerceInventoryBookedQuantity> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
@@ -98,7 +98,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findBysku(
+	public java.util.List<CommerceInventoryBookedQuantity> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
 		boolean retrieveFromCache);
@@ -111,7 +111,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @return the first matching commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity findBysku_First(String sku,
+	public CommerceInventoryBookedQuantity findBySku_First(String sku,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
 
@@ -122,7 +122,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity fetchBysku_First(String sku,
+	public CommerceInventoryBookedQuantity fetchBySku_First(String sku,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
 	/**
@@ -133,7 +133,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @return the last matching commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity findBysku_Last(String sku,
+	public CommerceInventoryBookedQuantity findBySku_Last(String sku,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
 
@@ -144,7 +144,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity fetchBysku_Last(String sku,
+	public CommerceInventoryBookedQuantity fetchBySku_Last(String sku,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
 	/**
@@ -156,7 +156,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @return the previous, current, and next commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a commerce inventory booked quantity with the primary key could not be found
 	*/
-	public CommerceInventoryBookedQuantity[] findBysku_PrevAndNext(
+	public CommerceInventoryBookedQuantity[] findBySku_PrevAndNext(
 		long commerceInventoryBookedQuantityId, String sku,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
@@ -166,7 +166,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	*
 	* @param sku the sku
 	*/
-	public void removeBysku(String sku);
+	public void removeBySku(String sku);
 
 	/**
 	* Returns the number of commerce inventory booked quantities where sku = &#63;.
@@ -174,144 +174,144 @@ public interface CommerceInventoryBookedQuantityPersistence
 	* @param sku the sku
 	* @return the number of matching commerce inventory booked quantities
 	*/
-	public int countBysku(String sku);
+	public int countBySku(String sku);
 
 	/**
-	* Returns all the commerce inventory booked quantities where expireDate = &#63;.
+	* Returns all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @return the matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate);
+	public java.util.List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate);
 
 	/**
-	* Returns a range of all the commerce inventory booked quantities where expireDate = &#63;.
+	* Returns a range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param start the lower bound of the range of commerce inventory booked quantities
 	* @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	* @return the range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end);
+	public java.util.List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end);
 
 	/**
-	* Returns an ordered range of all the commerce inventory booked quantities where expireDate = &#63;.
+	* Returns an ordered range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param start the lower bound of the range of commerce inventory booked quantities
 	* @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end,
+	public java.util.List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the commerce inventory booked quantities where expireDate = &#63;.
+	* Returns an ordered range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param start the lower bound of the range of commerce inventory booked quantities
 	* @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching commerce inventory booked quantities
 	*/
-	public java.util.List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end,
+	public java.util.List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	* Returns the first commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity findByexpireDate_First(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity findByLtExpirationDate_First(
+		Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
 
 	/**
-	* Returns the first commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	* Returns the first commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity fetchByexpireDate_First(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity fetchByLtExpirationDate_First(
+		Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
 	/**
-	* Returns the last commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	* Returns the last commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity findByexpireDate_Last(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity findByLtExpirationDate_Last(
+		Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
 
 	/**
-	* Returns the last commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	* Returns the last commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	*/
-	public CommerceInventoryBookedQuantity fetchByexpireDate_Last(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity fetchByLtExpirationDate_Last(
+		Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator);
 
 	/**
-	* Returns the commerce inventory booked quantities before and after the current commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	* Returns the commerce inventory booked quantities before and after the current commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	*
 	* @param commerceInventoryBookedQuantityId the primary key of the current commerce inventory booked quantity
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next commerce inventory booked quantity
 	* @throws NoSuchInventoryBookedQuantityException if a commerce inventory booked quantity with the primary key could not be found
 	*/
-	public CommerceInventoryBookedQuantity[] findByexpireDate_PrevAndNext(
-		long commerceInventoryBookedQuantityId, Date expireDate,
+	public CommerceInventoryBookedQuantity[] findByLtExpirationDate_PrevAndNext(
+		long commerceInventoryBookedQuantityId, Date expirationDate,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException;
 
 	/**
-	* Removes all the commerce inventory booked quantities where expireDate = &#63; from the database.
+	* Removes all the commerce inventory booked quantities where expirationDate &lt; &#63; from the database.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	*/
-	public void removeByexpireDate(Date expireDate);
+	public void removeByLtExpirationDate(Date expirationDate);
 
 	/**
-	* Returns the number of commerce inventory booked quantities where expireDate = &#63;.
+	* Returns the number of commerce inventory booked quantities where expirationDate &lt; &#63;.
 	*
-	* @param expireDate the expire date
+	* @param expirationDate the expiration date
 	* @return the number of matching commerce inventory booked quantities
 	*/
-	public int countByexpireDate(Date expireDate);
+	public int countByLtExpirationDate(Date expirationDate);
 
 	/**
 	* Caches the commerce inventory booked quantity in the entity cache if it is enabled.

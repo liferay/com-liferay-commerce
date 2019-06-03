@@ -136,7 +136,7 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 
 		newCommerceInventoryBookedQuantity.setQuantity(RandomTestUtil.nextInt());
 
-		newCommerceInventoryBookedQuantity.setExpireDate(RandomTestUtil.nextDate());
+		newCommerceInventoryBookedQuantity.setExpirationDate(RandomTestUtil.nextDate());
 
 		newCommerceInventoryBookedQuantity.setBookedNote(RandomTestUtil.randomString());
 
@@ -166,27 +166,27 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getQuantity(),
 			newCommerceInventoryBookedQuantity.getQuantity());
 		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceInventoryBookedQuantity.getExpireDate()),
+				existingCommerceInventoryBookedQuantity.getExpirationDate()),
 			Time.getShortTimestamp(
-				newCommerceInventoryBookedQuantity.getExpireDate()));
+				newCommerceInventoryBookedQuantity.getExpirationDate()));
 		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getBookedNote(),
 			newCommerceInventoryBookedQuantity.getBookedNote());
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
 	}
 
 	@Test
-	public void testCountByexpireDate() throws Exception {
-		_persistence.countByexpireDate(RandomTestUtil.nextDate());
+	public void testCountByLtExpirationDate() throws Exception {
+		_persistence.countByLtExpirationDate(RandomTestUtil.nextDate());
 
-		_persistence.countByexpireDate(RandomTestUtil.nextDate());
+		_persistence.countByLtExpirationDate(RandomTestUtil.nextDate());
 	}
 
 	@Test
@@ -216,8 +216,8 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CIBookedQuantity",
 			"commerceInventoryBookedQuantityId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "sku", true, "quantity", true, "expireDate",
-			true, "bookedNote", true);
+			"modifiedDate", true, "sku", true, "quantity", true,
+			"expirationDate", true, "bookedNote", true);
 	}
 
 	@Test
@@ -450,7 +450,7 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 
 		commerceInventoryBookedQuantity.setQuantity(RandomTestUtil.nextInt());
 
-		commerceInventoryBookedQuantity.setExpireDate(RandomTestUtil.nextDate());
+		commerceInventoryBookedQuantity.setExpirationDate(RandomTestUtil.nextDate());
 
 		commerceInventoryBookedQuantity.setBookedNote(RandomTestUtil.randomString());
 

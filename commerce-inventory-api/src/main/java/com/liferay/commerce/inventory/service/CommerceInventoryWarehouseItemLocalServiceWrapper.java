@@ -47,19 +47,11 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addCommerceWarehouseItem(
-		long commerceWarehouseId, String sku, int quantity, long userId)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+		long userId, long commerceInventoryWarehouseId, String sku, int quantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.addCommerceWarehouseItem(commerceWarehouseId,
-			sku, quantity, userId);
-	}
-
-	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addStockQuantity(
-		long commerceWarehouseItemId, int quantity)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return _commerceInventoryWarehouseItemLocalService.addStockQuantity(commerceWarehouseItemId,
-			quantity);
+		return _commerceInventoryWarehouseItemLocalService.addCommerceInventoryWarehouseItem(userId,
+			commerceInventoryWarehouseId, sku, quantity);
 	}
 
 	/**
@@ -101,8 +93,9 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCommerceWarehouseItems(long commerceWarehouseId) {
-		_commerceInventoryWarehouseItemLocalService.deleteCommerceWarehouseItems(commerceWarehouseId);
+	public void deleteCommerceInventoryWarehouseItems(
+		long commerceInventoryWarehouseId) {
+		_commerceInventoryWarehouseItemLocalService.deleteCommerceInventoryWarehouseItems(commerceInventoryWarehouseId);
 	}
 
 	/**
@@ -208,9 +201,9 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, String sku) {
-		return _commerceInventoryWarehouseItemLocalService.fetchCommerceWarehouseItem(commerceWarehouseId,
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
+		long commerceInventoryWarehouseId, String sku) {
+		return _commerceInventoryWarehouseItemLocalService.fetchCommerceInventoryWarehouseItem(commerceInventoryWarehouseId,
 			sku);
 	}
 
@@ -251,6 +244,13 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceInventoryWarehouseItems(
+		long commerceInventoryWarehouseId, int start, int end) {
+		return _commerceInventoryWarehouseItemLocalService.getCommerceInventoryWarehouseItems(commerceInventoryWarehouseId,
+			start, end);
+	}
+
 	/**
 	* Returns the number of commerce inventory warehouse items.
 	*
@@ -259,31 +259,6 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	@Override
 	public int getCommerceInventoryWarehouseItemsCount() {
 		return _commerceInventoryWarehouseItemLocalService.getCommerceInventoryWarehouseItemsCount();
-	}
-
-	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem getCommerceWarehouseItem(
-		long commerceWarehouseId, String sku)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItem(commerceWarehouseId,
-			sku);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceWarehouseItems(
-		String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItems(sku);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceWarehouseItemsByCommerceWarehouseId(
-		long commerceWarehouseId) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItemsByCommerceWarehouseId(commerceWarehouseId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemsCount(String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItemsCount(sku);
 	}
 
 	@Override
@@ -309,18 +284,15 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public int getStockQuantityByGroupIdAndSku(long companyId, long groupId,
-		String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getStockQuantityByGroupIdAndSku(companyId,
+	public int getStockQuantity(long companyId, long groupId, String sku) {
+		return _commerceInventoryWarehouseItemLocalService.getStockQuantity(companyId,
 			groupId, sku);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem removeStockQuantity(
-		long commerceWarehouseItemId, int quantity)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.removeStockQuantity(commerceWarehouseItemId,
-			quantity);
+	public int getStockQuantity(long companyId, String sku) {
+		return _commerceInventoryWarehouseItemLocalService.getStockQuantity(companyId,
+			sku);
 	}
 
 	/**
@@ -336,11 +308,19 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem updateCommerceWarehouseItem(
-		long commerceWarehouseItemId, int quantity)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
+		long commerceInventoryWarehouseItemId, int quantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.updateCommerceWarehouseItem(commerceWarehouseItemId,
+		return _commerceInventoryWarehouseItemLocalService.updateCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId,
 			quantity);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+		long userId, long commerceInventoryWarehouseId, String sku, int quantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItemLocalService.upsertCommerceInventoryWarehouseItem(userId,
+			commerceInventoryWarehouseId, sku, quantity);
 	}
 
 	@Override

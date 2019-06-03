@@ -161,6 +161,18 @@ public class CommerceChannelWrapper implements CommerceChannel,
 		return _commerceChannel.compareTo(commerceChannel);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.model.Group getCommerceChannelGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannel.getCommerceChannelGroup();
+	}
+
+	@Override
+	public long getCommerceChannelGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannel.getCommerceChannelGroupId();
+	}
+
 	/**
 	* Returns the commerce channel ID of this commerce channel.
 	*
