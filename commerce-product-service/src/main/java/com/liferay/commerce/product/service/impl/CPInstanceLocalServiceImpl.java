@@ -509,7 +509,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Override
 	public int getCPDefinitionInstancesCount(long cpDefinitionId, int status) {
 		if (status == WorkflowConstants.STATUS_ANY) {
-			cpInstanceFinder.countByC_NotCST_NotST(
+			return cpInstanceFinder.countByC_NotCST_NotST(
 				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH,
 				WorkflowConstants.STATUS_IN_TRASH);
 		}
