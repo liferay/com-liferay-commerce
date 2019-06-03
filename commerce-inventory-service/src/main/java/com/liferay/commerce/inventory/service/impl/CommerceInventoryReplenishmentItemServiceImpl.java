@@ -17,26 +17,8 @@ package com.liferay.commerce.inventory.service.impl;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryReplenishmentItemServiceBaseImpl;
 
 /**
- * The implementation of the commerce inventory replenishment item remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Luca Pellizzon
- * @see CommerceInventoryReplenishmentItemServiceBaseImpl
- * @see com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemServiceUtil
  */
 public class CommerceInventoryReplenishmentItemServiceImpl
 	extends CommerceInventoryReplenishmentItemServiceBaseImpl {
-
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemServiceUtil} to access the commerce inventory replenishment item remote service.
-	 */
-
 }

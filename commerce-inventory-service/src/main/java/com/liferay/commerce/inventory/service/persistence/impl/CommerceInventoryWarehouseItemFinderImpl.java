@@ -27,17 +27,61 @@ import java.util.Iterator;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 public class CommerceInventoryWarehouseItemFinderImpl
 	extends CommerceInventoryWarehouseItemFinderBaseImpl
 	implements CommerceInventoryWarehouseItemFinder {
 
-	public static final String GET_STOCK_QUANTITY =
+	public static final String COUNT_STOCK_QUANTITY_BY_C_S =
 		CommerceInventoryWarehouseItemFinder.class.getName() +
-			".findStockQuantityByGroupIdAndSku";
+			".countStockQuantityByC_S";
+
+	public static final String COUNT_STOCK_QUANTITY_BY_C_G_S =
+		CommerceInventoryWarehouseItemFinder.class.getName() +
+			".countStockQuantityByC_G_S";
 
 	@Override
-	public int findStockQuantityByGroupIdAndSku(
+	public int countStockQuantityByC_S(long companyId, String sku) {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(
+				getClass(), COUNT_STOCK_QUANTITY_BY_C_S);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(_SUM_VALUE, Type.INTEGER);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(sku);
+
+			Iterator<Integer> itr = q.iterate();
+
+			if (itr.hasNext()) {
+				Integer sum = itr.next();
+
+				if (sum != null) {
+					return sum.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public int countStockQuantityByC_G_S(
 		long companyId, long groupId, String sku) {
 
 		Session session = null;
@@ -45,7 +89,8 @@ public class CommerceInventoryWarehouseItemFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), GET_STOCK_QUANTITY);
+			String sql = _customSQL.get(
+				getClass(), COUNT_STOCK_QUANTITY_BY_C_G_S);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 

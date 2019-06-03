@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.commerce.service.persistence.CommerceCountryFinder.findByCommerceWarehouses">
+	<sql id="com.liferay.commerce.service.persistence.CommerceCountryFinder.findByCommerceInventoryWarehouses">
 		<![CDATA[
 			SELECT
 				{CommerceCountry.*}
@@ -11,12 +11,8 @@
 				CIWarehouse
 			ON
 				CIWarehouse.countryTwoLettersISOCode = CommerceCountry.twoLettersISOCode
-			INNER JOIN
-				CIWarehouseGroupRel
-			ON
-				CIWarehouseGroupRel.commerceWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
-				(CIWarehouseGroupRel.groupId = ?) [$ALL$]
+				(CIWarehouse.companyId = ?) [$ALL$]
 			ORDER BY
 				CommerceCountry.priority
 		]]>

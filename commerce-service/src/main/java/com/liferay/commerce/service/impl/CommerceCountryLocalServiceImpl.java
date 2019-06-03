@@ -227,7 +227,8 @@ public class CommerceCountryLocalServiceImpl
 	public List<CommerceCountry> getWarehouseCommerceCountries(
 		long companyId, boolean all) {
 
-		return commerceCountryFinder.findByCommerceWarehouses(companyId, all);
+		return commerceCountryFinder.findByCommerceInventoryWarehouses(
+			companyId, all);
 	}
 
 	@Override

@@ -18,10 +18,8 @@ import com.liferay.commerce.inventory.exception.NoSuchInventoryBookedQuantityExc
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryBookedQuantityLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +33,7 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 
 	@Override
 	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
-			long userId, String sku, int quantity, Date expireDate,
+			long userId, String sku, int quantity, Date expirationDate,
 			Map<String, String> context)
 		throws PortalException {
 
@@ -52,31 +50,22 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 		commerceBookedQuantity.setUserName(user.getFullName());
 		commerceBookedQuantity.setSku(sku);
 		commerceBookedQuantity.setQuantity(quantity);
-		commerceBookedQuantity.setExpireDate(expireDate);
+		commerceBookedQuantity.setExpirationDate(expirationDate);
 
-		String description = "Book Quantity ";
+		String description =
+			"Book Quantity " + JSONFactoryUtil.serialize(context);
 
-		try {
-			ByteArrayOutputStream byteArrayOutputStream =
-				new ByteArrayOutputStream();
-
-			ObjectOutputStream oos = new ObjectOutputStream(
-				byteArrayOutputStream);
-
-			oos.writeObject(context);
-			oos.close();
-
-			description += byteArrayOutputStream.toString();
-		}
-		catch (Exception e) {
-			throw new PortalException(e.getMessage());
-		}
-
-		commerceInventoryAuditLocalService.addCommerceInventoryItemEntry(
-			description, sku, quantity, userId);
+		commerceInventoryAuditLocalService.addCommerceInventoryAudit(
+			userId, sku, quantity, description);
 
 		return commerceInventoryBookedQuantityPersistence.update(
 			commerceBookedQuantity);
+	}
+
+	@Override
+	public void checkCommerceInventoryBookedQuantities() {
+		commerceInventoryBookedQuantityPersistence.removeByLtExpirationDate(
+			new Date());
 	}
 
 	@Override
@@ -106,7 +95,7 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 	public int getCommerceBookedQuantity(String sku) {
 		List<CommerceInventoryBookedQuantity>
 			commerceInventoryBookedQuantities =
-				commerceInventoryBookedQuantityPersistence.findBysku(sku);
+				commerceInventoryBookedQuantityPersistence.findBySku(sku);
 
 		int resultQuantity = 0;
 
@@ -117,24 +106,6 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 		}
 
 		return resultQuantity;
-	}
-
-	@Override
-	public void removeAllCommerceBookedQuantities() {
-		commerceInventoryBookedQuantityPersistence.removeAll();
-	}
-
-	@Override
-	public void removeOldTemporaryBookedQuantities() {
-		List<CommerceInventoryBookedQuantity> oldTempBookedQuantities =
-			commerceInventoryBookedQuantityFinder.findOldTempBookedQuantities();
-
-		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity :
-				oldTempBookedQuantities) {
-
-			commerceInventoryBookedQuantityPersistence.remove(
-				commerceInventoryBookedQuantity);
-		}
 	}
 
 }

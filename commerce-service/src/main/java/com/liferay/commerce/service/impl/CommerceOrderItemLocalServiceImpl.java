@@ -277,6 +277,28 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
+	public int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws PortalException {
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
+
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
+				fetchCommerceInventoryWarehouseItem(
+					commerceInventoryWarehouseId, cpInstance.getSku());
+
+		if (commerceInventoryWarehouseItem == null) {
+			return 0;
+		}
+
+		return commerceInventoryWarehouseItem.getQuantity();
+	}
+
+	@Override
 	public List<CommerceOrderItem> getCommerceOrderItems(
 		long commerceOrderId, int start, int end) {
 
@@ -320,28 +342,6 @@ public class CommerceOrderItemLocalServiceImpl
 	public int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return commerceOrderItemFinder.getCommerceOrderItemsQuantity(
 			commerceOrderId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws PortalException {
-
-		CommerceOrderItem commerceOrderItem =
-			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
-
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
-
-		CommerceInventoryWarehouseItem commerceWarehouseItem =
-			_commerceInventoryWarehouseItemLocalService.
-				fetchCommerceWarehouseItem(
-					commerceWarehouseId, cpInstance.getSku());
-
-		if (commerceWarehouseItem == null) {
-			return 0;
-		}
-
-		return commerceWarehouseItem.getQuantity();
 	}
 
 	@Override

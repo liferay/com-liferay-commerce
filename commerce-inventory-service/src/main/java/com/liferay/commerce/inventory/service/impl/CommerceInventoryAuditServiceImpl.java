@@ -17,26 +17,8 @@ package com.liferay.commerce.inventory.service.impl;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryAuditServiceBaseImpl;
 
 /**
- * The implementation of the commerce inventory audit remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.inventory.service.CommerceInventoryAuditService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Luca Pellizzon
- * @see CommerceInventoryAuditServiceBaseImpl
- * @see com.liferay.commerce.inventory.service.CommerceInventoryAuditServiceUtil
  */
 public class CommerceInventoryAuditServiceImpl
 	extends CommerceInventoryAuditServiceBaseImpl {
-
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link com.liferay.commerce.inventory.service.CommerceInventoryAuditServiceUtil} to access the commerce inventory audit remote service.
-	 */
-
 }

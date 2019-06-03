@@ -16,15 +16,33 @@ package com.liferay.commerce.product.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 
 	public CommerceChannelImpl() {
+	}
+
+	@Override
+	public Group getCommerceChannelGroup() throws PortalException {
+		return CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
+			getCommerceChannelId());
+	}
+
+	@Override
+	public long getCommerceChannelGroupId() throws PortalException {
+		Group group = CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
+			getCommerceChannelId());
+
+		return group.getGroupId();
 	}
 
 	@Override
