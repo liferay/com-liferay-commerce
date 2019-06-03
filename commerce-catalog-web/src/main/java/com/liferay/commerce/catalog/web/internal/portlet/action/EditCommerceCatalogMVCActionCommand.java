@@ -15,6 +15,8 @@
 package com.liferay.commerce.catalog.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
+import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -26,6 +28,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Locale;
 import java.util.Map;
@@ -88,10 +91,23 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 				updateCommerceCatalog(actionRequest);
 			}
 		}
-		catch (PrincipalException pe) {
-			SessionErrors.add(actionRequest, pe.getClass());
+		catch (Exception e) {
+			if (e instanceof CommerceCatalogSystemException) {
+				hideDefaultErrorMessage(actionRequest);
 
-			actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+				SessionErrors.add(actionRequest, e.getClass());
+
+				String redirect = _portal.getCurrentURL(actionRequest);
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
+			else if (e instanceof NoSuchCatalogException ||
+					 e instanceof PrincipalException) {
+
+				SessionErrors.add(actionRequest, e.getClass());
+
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+			}
 		}
 	}
 
@@ -124,5 +140,8 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
+
+	@Reference
+	private Portal _portal;
 
 }
