@@ -79,6 +79,32 @@ public abstract class BaseCommerceServiceUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
+	protected void renameColumn(
+			Class<?> tableClass, String tableName, String oldColumnName,
+			String newColumnName)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Renaming column %s to table %s", oldColumnName,
+					tableName));
+		}
+
+		if (!hasColumn(tableName, newColumnName)) {
+			alter(
+				tableClass, new AlterColumnName(oldColumnName, newColumnName));
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					String.format(
+						"Column %s already exists on table %s", newColumnName,
+						tableName));
+			}
+		}
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		BaseCommerceServiceUpgradeProcess.class);
 
