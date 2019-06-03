@@ -21,6 +21,7 @@ import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.Portal;
@@ -40,8 +41,9 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 	public CommerceContext create(HttpServletRequest httpServletRequest) {
 		return new CommerceContextHttpImpl(
 			httpServletRequest, _commerceAccountHelper,
-			_commerceCurrencyLocalService, _commerceOrderHttpHelper,
-			_commercePriceListLocalService, _configurationProvider, _portal);
+			_commerceChannelLocalService, _commerceCurrencyLocalService,
+			_commerceOrderHttpHelper, _commercePriceListLocalService,
+			_configurationProvider, _portal);
 	}
 
 	@Override
@@ -51,9 +53,9 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 		return new CommerceContextImpl(
 			companyId, groupId, userId, orderId, commerceAccountId,
-			_commerceAccountService, _commerceCurrencyLocalService,
-			_commerceOrderService, _commercePriceListLocalService,
-			_configurationProvider);
+			_commerceAccountService, _commerceChannelLocalService,
+			_commerceCurrencyLocalService, _commerceOrderService,
+			_commercePriceListLocalService, _configurationProvider);
 	}
 
 	@Reference
@@ -61,6 +63,9 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;

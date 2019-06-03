@@ -26,6 +26,8 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -46,6 +48,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	public CommerceContextHttpImpl(
 		HttpServletRequest httpServletRequest,
 		CommerceAccountHelper commerceAccountHelper,
+		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommercePriceListLocalService commercePriceListLocalService,
@@ -53,6 +56,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 		_httpServletRequest = httpServletRequest;
 		_commerceAccountHelper = commerceAccountHelper;
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commercePriceListLocalService = commercePriceListLocalService;
@@ -104,9 +108,21 @@ public class CommerceContextHttpImpl implements CommerceContext {
 			return _commerceCurrency;
 		}
 
-		_commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_portal.getCompanyId(_httpServletRequest));
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+				_portal.getScopeGroupId(_httpServletRequest));
+
+		if (commerceChannel == null) {
+			_commerceCurrency =
+				_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+					_portal.getCompanyId(_httpServletRequest));
+		}
+		else {
+			_commerceCurrency =
+				_commerceCurrencyLocalService.getCommerceCurrency(
+					_portal.getCompanyId(_httpServletRequest),
+					commerceChannel.getCommerceCurrencyCode());
+		}
 
 		return _commerceCurrency;
 	}
@@ -173,6 +189,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	private CommerceAccountGroupServiceConfiguration
 		_commerceAccountGroupServiceConfiguration;
 	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private CommerceOrder _commerceOrder;
