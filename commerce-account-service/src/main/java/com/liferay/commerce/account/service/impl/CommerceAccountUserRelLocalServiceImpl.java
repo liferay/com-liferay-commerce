@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.List;
 
@@ -77,6 +78,20 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 				commerceAccountUserRelLocalService.addCommerceAccountUserRel(
 					commerceAccountId, user.getUserId(), serviceContext);
+
+				if (!ArrayUtil.contains(
+						user.getGroupIds(), group.getGroupId())) {
+
+					userLocalService.addGroupUsers(
+						group.getGroupId(), new long[] {userId});
+				}
+
+				if (!ArrayUtil.contains(
+						user.getGroupIds(), serviceContext.getScopeGroupId())) {
+
+					userLocalService.addGroupUsers(
+						serviceContext.getScopeGroupId(), new long[] {userId});
+				}
 
 				if (roleIds != null) {
 					userGroupRoleLocalService.addUserGroupRoles(
