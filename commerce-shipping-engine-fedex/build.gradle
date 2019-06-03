@@ -15,4 +15,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-currency-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:commerce-service")
+	compileOnly project(":apps:commerce:commerce-shipping-origin-locator")
 }
