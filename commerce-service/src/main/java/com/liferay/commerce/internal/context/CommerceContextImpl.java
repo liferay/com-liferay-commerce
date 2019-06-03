@@ -25,6 +25,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -43,6 +45,7 @@ public class CommerceContextImpl implements CommerceContext {
 	public CommerceContextImpl(
 		long companyId, long groupId, long userId, long orderId,
 		long commerceAccountId, CommerceAccountService commerceAccountService,
+		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderService commerceOrderService,
 		CommercePriceListLocalService commercePriceListLocalService,
@@ -54,6 +57,7 @@ public class CommerceContextImpl implements CommerceContext {
 		_orderId = orderId;
 		_commerceAccountId = commerceAccountId;
 		_commerceAccountService = commerceAccountService;
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderService = commerceOrderService;
 		_commercePriceListLocalService = commercePriceListLocalService;
@@ -103,9 +107,20 @@ public class CommerceContextImpl implements CommerceContext {
 			return _commerceCurrency;
 		}
 
-		_commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				_companyId);
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+				_groupId);
+
+		if (commerceChannel == null) {
+			_commerceCurrency =
+				_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+					_companyId);
+		}
+		else {
+			_commerceCurrency =
+				_commerceCurrencyLocalService.getCommerceCurrency(
+					_companyId, commerceChannel.getCommerceCurrencyCode());
+		}
 
 		return _commerceCurrency;
 	}
@@ -167,6 +182,7 @@ public class CommerceContextImpl implements CommerceContext {
 		_commerceAccountGroupServiceConfiguration;
 	private final long _commerceAccountId;
 	private final CommerceAccountService _commerceAccountService;
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private CommerceOrder _commerceOrder;
