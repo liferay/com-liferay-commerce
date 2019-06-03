@@ -3,7 +3,6 @@ import Component from 'metal-component';
 import template from './MiniumActionsMenu.soy';
 
 class MiniumActionsMenu extends Component {
-
 	_handleToggle(e) {
 		const actions = this.refs.actions;
 		const row = e.target.closest('tr');

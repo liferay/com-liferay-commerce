@@ -1,3 +1,18 @@
+.commerce-table-wrapper.selectable-rows {
+	tbody tr {
+		cursor: pointer;
+
+		td {
+			background-color: white;
+			transition: background-color .1s ease-in;
+		}
+
+		&:hover td {
+			background-color: $border-color !important;
+		}
+	}
+}
+
 .table {
 	background-color: transparent;
 	border-collapse: initial;

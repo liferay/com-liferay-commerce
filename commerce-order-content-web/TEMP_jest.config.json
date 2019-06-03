@@ -1,0 +1,1 @@
+{"coverageDirectory":"build/coverage","globals":{"Liferay":{}},"modulePathIgnorePatterns":["/__fixtures__/","/build/","/classes/"],"setupFilesAfterEnv":["./setupTests.js"],"testMatch":["**/test/**/*.js"],"testResultsProcessor":"liferay-jest-junit-reporter","testURL":"http://localhost","verbose":true}

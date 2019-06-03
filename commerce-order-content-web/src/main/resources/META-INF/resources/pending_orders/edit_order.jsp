@@ -449,10 +449,29 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 		spritemap: '<%= themeDisplay.getPathThemeImages() + "/commerce-icons.svg" %>'
 	}
 
-    window.dynamicPanel = DynamicPanel.default(
-		'testId',
+    DynamicPanel.default(
+		'dynamicPanel',
         '<%= dynamicPanelRootElementId %>',
         props
     );
+
+
+    Promise.all([
+        Liferay.componentReady('commercePendingOrderItemsCommerceTable'),
+        Liferay.componentReady('dynamicPanel')
+    ])
+		.then(([table, panel]) => {
+			table.elementValue_.classList.add('selectable-rows');
+			table.elementValue_.addEventListener('click', (e) => {
+				var tbody = e.target.closest('tbody');
+				var dropdownAction = e.target.closest('.dropdown-action');
+				if(!dropdownAction && tbody) {
+					var itemIndex = e.target.closest('tr').rowIndex - 1;
+					var orderItemId = table.items[itemIndex].orderItemId;
+					panel.openCustomPage('/editOrder/' + orderItemId, 'edit')
+				}
+			});
+		})
+
 
 </aui:script>

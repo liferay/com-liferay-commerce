@@ -6,7 +6,7 @@ import DynamicPanel from './DynamicPanel.es';
 export default function(componentId, id, props) {
 	const portletFrame = window.document.getElementById(id);
 	let instance = null;
-	ReactDOM.render(
+ 	ReactDOM.render(
 		<DynamicPanel 
 			ref={(dynamicPanel) => {
 				instance = dynamicPanel
@@ -15,7 +15,7 @@ export default function(componentId, id, props) {
 		/>,
 		portletFrame
   );
-  if(window.Liferay) {
+  if(window.Liferay && !window.Liferay.component(componentId)) {
     window.Liferay.component(componentId, instance);
   }
 	return instance
