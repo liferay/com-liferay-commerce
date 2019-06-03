@@ -9,9 +9,15 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field localized="true" name="name" type="String" />
-		<field name="commerceCurrencyCode" type="String" />
-		<field name="catalogDefaultLanguageId" type="String" />
+		<field localized="true" name="name" type="String">
+			<validator name="required" />
+		</field>
+		<field name="commerceCurrencyCode" type="String">
+			<validator name="required" />
+		</field>
+		<field name="catalogDefaultLanguageId" type="String">
+			<validator name="required" />
+		</field>
 		<field name="system" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.product.model.CommerceChannel">

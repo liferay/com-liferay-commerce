@@ -42,9 +42,9 @@ portletDisplay.setURLBack(backURL);
 	<div class="lfr-form-content">
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input bean="<%= commerceCatalog %>" disabled="<%= isViewOnly %>" model="<%= CommerceCatalog.class %>" name="name" required="<%= true %>" />
+				<aui:input bean="<%= commerceCatalog %>" disabled="<%= isViewOnly %>" model="<%= CommerceCatalog.class %>" name="name" />
 
-				<aui:select disabled="<%= isViewOnly %>" label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+				<aui:select disabled="<%= isViewOnly %>" label="currency" name="commerceCurrencyCode" title="currency">
 
 					<%
 					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
@@ -58,7 +58,7 @@ portletDisplay.setURLBack(backURL);
 
 				</aui:select>
 
-				<aui:select disabled="<%= isViewOnly %>" helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="<%= true %>" title="language">
+				<aui:select disabled="<%= isViewOnly %>" helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" title="language">
 
 					<%
 					String catalogDefaultLanguageId = themeDisplay.getLanguageId();
