@@ -33,18 +33,18 @@ import org.osgi.service.component.annotations.Reference;
 	property = "form.navigator.entry.order:Integer=20",
 	service = FormNavigatorEntry.class
 )
-public class CommerceWarehouseGeolocationFormNavigatorEntry
+public class CommerceInventoryWarehouseGeolocationFormNavigatorEntry
 	extends BaseJSPFormNavigatorEntry<CommerceInventoryWarehouse> {
 
 	@Override
 	public String getCategoryKey() {
-		return CommerceWarehouseFormNavigatorConstants.
+		return CommerceInventoryWarehouseFormNavigatorConstants.
 			CATEGORY_KEY_COMMERCE_WAREHOUSE_GENERAL;
 	}
 
 	@Override
 	public String getFormNavigatorId() {
-		return CommerceWarehouseFormNavigatorConstants.
+		return CommerceInventoryWarehouseFormNavigatorConstants.
 			FORM_NAVIGATOR_ID_COMMERCE_WAREHOUSE;
 	}
 

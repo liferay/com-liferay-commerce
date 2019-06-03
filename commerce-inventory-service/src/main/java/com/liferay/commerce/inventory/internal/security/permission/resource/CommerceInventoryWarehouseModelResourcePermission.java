@@ -15,7 +15,7 @@
 package com.liferay.commerce.inventory.internal.security.permission.resource;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.permission.CommerceWarehousePermission;
+import com.liferay.commerce.inventory.permission.CommerceInventoryWarehousePermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -32,47 +32,49 @@ import org.osgi.service.component.annotations.Reference;
 	property = "model.class.name=com.liferay.commerce.inventory.model.CommerceInventoryWarehouse",
 	service = ModelResourcePermission.class
 )
-public class CommerceWarehouseModelResourcePermission
+public class CommerceInventoryWarehouseModelResourcePermission
 	implements ModelResourcePermission<CommerceInventoryWarehouse> {
 
 	@Override
 	public void check(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException {
 
-		commerceWarehousePermission.check(
-			permissionChecker, commerceWarehouse, actionId);
+		commerceInventoryWarehousePermission.check(
+			permissionChecker, commerceInventoryWarehouse, actionId);
 	}
 
 	@Override
 	public void check(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
-			String actionId)
+			PermissionChecker permissionChecker,
+			long commerceInventoryWarehouseId, String actionId)
 		throws PortalException {
 
-		commerceWarehousePermission.check(
-			permissionChecker, commerceWarehouseId, actionId);
+		commerceInventoryWarehousePermission.check(
+			permissionChecker, commerceInventoryWarehouseId, actionId);
 	}
 
 	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException {
 
-		return commerceWarehousePermission.contains(
-			permissionChecker, commerceWarehouse, actionId);
+		return commerceInventoryWarehousePermission.contains(
+			permissionChecker, commerceInventoryWarehouse, actionId);
 	}
 
 	@Override
 	public boolean contains(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
-			String actionId)
+			PermissionChecker permissionChecker,
+			long commerceInventoryWarehouseId, String actionId)
 		throws PortalException {
 
-		return commerceWarehousePermission.contains(
-			permissionChecker, commerceWarehouseId, actionId);
+		return commerceInventoryWarehousePermission.contains(
+			permissionChecker, commerceInventoryWarehouseId, actionId);
 	}
 
 	@Override
@@ -86,6 +88,7 @@ public class CommerceWarehouseModelResourcePermission
 	}
 
 	@Reference
-	protected CommerceWarehousePermission commerceWarehousePermission;
+	protected CommerceInventoryWarehousePermission
+		commerceInventoryWarehousePermission;
 
 }

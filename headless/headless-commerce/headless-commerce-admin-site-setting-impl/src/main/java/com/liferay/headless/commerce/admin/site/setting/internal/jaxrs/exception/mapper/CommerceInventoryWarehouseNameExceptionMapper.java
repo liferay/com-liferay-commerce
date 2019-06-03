@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.jaxrs.exception.mapper;
 
-import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException;
+import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException;
 import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 
 import javax.ws.rs.core.Response;
@@ -30,17 +30,17 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"osgi.jaxrs.application.select=(osgi.jaxrs.name=Liferay.Headless.Commerce.Admin.Site.Setting)",
 		"osgi.jaxrs.extension=true",
-		"osgi.jaxrs.name=Liferay.Headless.Commerce.Admin.Site.Setting.CommerceWarehouseActiveException"
+		"osgi.jaxrs.name=Liferay.Headless.Commerce.Admin.Site.Setting.CommerceInventoryWarehouseNameException"
 	},
 	service = ExceptionMapper.class
 )
 @Provider
-public class CommerceWarehouseActiveExceptionMapper
-	extends BaseExceptionMapper<CommerceInventoryWarehouseActiveException> {
+public class CommerceInventoryWarehouseNameExceptionMapper
+	extends BaseExceptionMapper<CommerceInventoryWarehouseNameException> {
 
 	@Override
 	public String getErrorDescription() {
-		return "Cannot activate warehouse without latitude and longitude";
+		return "Invalid warehouse name";
 	}
 
 	@Override

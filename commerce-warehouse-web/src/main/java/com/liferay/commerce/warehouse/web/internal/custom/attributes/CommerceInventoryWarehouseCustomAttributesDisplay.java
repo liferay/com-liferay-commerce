@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Component;
 	property = "javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
 	service = CustomAttributesDisplay.class
 )
-public class CommerceWarehouseCustomAttributesDisplay
+public class CommerceInventoryWarehouseCustomAttributesDisplay
 	extends BaseCustomAttributesDisplay {
 
 	@Override

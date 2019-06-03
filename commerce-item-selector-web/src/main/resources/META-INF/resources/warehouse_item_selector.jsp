@@ -17,12 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehouseItemSelectorViewDisplayContext commerceWarehouseItemSelectorViewDisplayContext = (CommerceWarehouseItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehouseItemSelectorViewDisplayContext commerceInventoryWarehouseItemSelectorViewDisplayContext = (CommerceInventoryWarehouseItemSelectorViewDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-long commerceCountryId = commerceWarehouseItemSelectorViewDisplayContext.getCommerceCountryId();
-String itemSelectedEventName = commerceWarehouseItemSelectorViewDisplayContext.getItemSelectedEventName();
-List<ManagementBarFilterItem> managementBarFilterItems = commerceWarehouseItemSelectorViewDisplayContext.getManagementBarFilterItems();
-PortletURL portletURL = commerceWarehouseItemSelectorViewDisplayContext.getPortletURL();
+long commerceCountryId = commerceInventoryWarehouseItemSelectorViewDisplayContext.getCommerceCountryId();
+String itemSelectedEventName = commerceInventoryWarehouseItemSelectorViewDisplayContext.getItemSelectedEventName();
+List<ManagementBarFilterItem> managementBarFilterItems = commerceInventoryWarehouseItemSelectorViewDisplayContext.getManagementBarFilterItems();
+PortletURL portletURL = commerceInventoryWarehouseItemSelectorViewDisplayContext.getPortletURL();
 
 String managementBarFilterValue = null;
 
@@ -37,7 +37,7 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 
 <liferay-frontend:management-bar
 	includeCheckBox="<%= true %>"
-	searchContainerId="commerceWarehouses"
+	searchContainerId="commerceInventoryWarehouses"
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-filter
@@ -47,10 +47,10 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 		/>
 
 		<liferay-frontend:management-bar-sort
-			orderByCol="<%= commerceWarehouseItemSelectorViewDisplayContext.getOrderByCol() %>"
-			orderByType="<%= commerceWarehouseItemSelectorViewDisplayContext.getOrderByType() %>"
+			orderByCol="<%= commerceInventoryWarehouseItemSelectorViewDisplayContext.getOrderByCol() %>"
+			orderByType="<%= commerceInventoryWarehouseItemSelectorViewDisplayContext.getOrderByType() %>"
 			orderColumns='<%= new String[] {"city", "name"} %>'
-			portletURL="<%= commerceWarehouseItemSelectorViewDisplayContext.getPortletURL() %>"
+			portletURL="<%= commerceInventoryWarehouseItemSelectorViewDisplayContext.getPortletURL() %>"
 		/>
 	</liferay-frontend:management-bar-filters>
 
@@ -63,15 +63,15 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 	</liferay-frontend:management-bar-buttons>
 </liferay-frontend:management-bar>
 
-<div class="container-fluid-1280" id="<portlet:namespace />commerceWarehouseSelectorWrapper">
+<div class="container-fluid-1280" id="<portlet:namespace />commerceInventoryWarehouseSelectorWrapper">
 	<liferay-ui:search-container
-		id="commerceWarehouses"
-		searchContainer="<%= commerceWarehouseItemSelectorViewDisplayContext.getSearchContainer() %>"
+		id="commerceInventoryWarehouses"
+		searchContainer="<%= commerceInventoryWarehouseItemSelectorViewDisplayContext.getSearchContainer() %>"
 	>
 		<liferay-ui:search-container-row
-			className="com.liferay.commerce.inventory.model.CommerceWarehouse"
-			keyProperty="commerceWarehouseId"
-			modelVar="commerceWarehouse"
+			className="com.liferay.commerce.inventory.model.CommerceInventoryWarehouse"
+			keyProperty="commerceInventoryWarehouseId"
+			modelVar="commerceInventoryWarehouse"
 		>
 			<liferay-ui:search-container-column-text
 				cssClass="table-cell-content"
@@ -91,9 +91,9 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 </div>
 
 <aui:script use="liferay-search-container">
-	var commerceWarehouseSelectorWrapper = A.one("#<portlet:namespace />commerceWarehouseSelectorWrapper");
+	var commerceInventoryWarehouseSelectorWrapper = A.one("#<portlet:namespace />commerceInventoryWarehouseSelectorWrapper");
 
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceWarehouses');
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />commerceInventoryWarehouses');
 
 	searchContainer.on(
 		'rowToggled',
@@ -101,7 +101,7 @@ for (ManagementBarFilterItem managementBarFilterItem : managementBarFilterItems)
 			Liferay.Util.getOpener().Liferay.fire(
 				'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
 				{
-					data: Liferay.Util.listCheckedExcept(commerceWarehouseSelectorWrapper, '<portlet:namespace />allRowIds')
+					data: Liferay.Util.listCheckedExcept(commerceInventoryWarehouseSelectorWrapper, '<portlet:namespace />allRowIds')
 				}
 			);
 		}

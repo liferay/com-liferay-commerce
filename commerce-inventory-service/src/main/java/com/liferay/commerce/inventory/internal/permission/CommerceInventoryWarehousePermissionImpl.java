@@ -15,7 +15,7 @@
 package com.liferay.commerce.inventory.internal.permission;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.permission.CommerceWarehousePermission;
+import com.liferay.commerce.inventory.permission.CommerceInventoryWarehousePermission;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -28,45 +28,54 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Luca Pellizzon
  */
-@Component(immediate = true, service = CommerceWarehousePermission.class)
-public class CommerceWarehousePermissionImpl
-	implements CommerceWarehousePermission {
+@Component(
+	immediate = true, service = CommerceInventoryWarehousePermission.class
+)
+public class CommerceInventoryWarehousePermissionImpl
+	implements CommerceInventoryWarehousePermission {
 
 	@Override
 	public void check(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, commerceWarehouse, actionId)) {
+		if (!contains(
+				permissionChecker, commerceInventoryWarehouse, actionId)) {
+
 			throw new PrincipalException.MustHavePermission(
 				permissionChecker, CommerceInventoryWarehouse.class.getName(),
-				commerceWarehouse.getCommerceInventoryWarehouseId(), actionId);
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				actionId);
 		}
 	}
 
 	@Override
 	public void check(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
-			String actionId)
+			PermissionChecker permissionChecker,
+			long commerceInventoryWarehouseId, String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, commerceWarehouseId, actionId)) {
+		if (!contains(
+				permissionChecker, commerceInventoryWarehouseId, actionId)) {
+
 			throw new PrincipalException.MustHavePermission(
 				permissionChecker, CommerceInventoryWarehouse.class.getName(),
-				commerceWarehouseId, actionId);
+				commerceInventoryWarehouseId, actionId);
 		}
 	}
 
 	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException {
 
 		if (contains(
 				permissionChecker,
-				commerceWarehouse.getCommerceInventoryWarehouseId(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 				actionId)) {
 
 			return true;
@@ -77,19 +86,20 @@ public class CommerceWarehousePermissionImpl
 
 	@Override
 	public boolean contains(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
-			String actionId)
+			PermissionChecker permissionChecker,
+			long commerceInventoryWarehouseId, String actionId)
 		throws PortalException {
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseLocalService.getCommerceInventoryWarehouse(
-				commerceWarehouseId);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouse(commerceInventoryWarehouseId);
 
-		if (commerceWarehouse == null) {
+		if (commerceInventoryWarehouse == null) {
 			return false;
 		}
 
-		return _contains(permissionChecker, commerceWarehouse, actionId);
+		return _contains(
+			permissionChecker, commerceInventoryWarehouse, actionId);
 	}
 
 	@Override
@@ -102,8 +112,11 @@ public class CommerceWarehousePermissionImpl
 			return false;
 		}
 
-		for (long commerceWarehouseId : commerceAccountIds) {
-			if (!contains(permissionChecker, commerceWarehouseId, actionId)) {
+		for (long commerceInventoryWarehouseId : commerceAccountIds) {
+			if (!contains(
+					permissionChecker, commerceInventoryWarehouseId,
+					actionId)) {
+
 				return false;
 			}
 		}
@@ -113,11 +126,12 @@ public class CommerceWarehousePermissionImpl
 
 	private boolean _contains(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException {
 
 		if (permissionChecker.isCompanyAdmin(
-				commerceWarehouse.getCompanyId()) ||
+				commerceInventoryWarehouse.getCompanyId()) ||
 			permissionChecker.isOmniadmin()) {
 
 			return true;
@@ -125,11 +139,12 @@ public class CommerceWarehousePermissionImpl
 
 		return permissionChecker.hasPermission(
 			null, CommerceInventoryWarehouse.class.getName(),
-			commerceWarehouse.getCommerceInventoryWarehouseId(), actionId);
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			actionId);
 	}
 
 	@Reference
 	private CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+		_commerceInventoryWarehouseLocalService;
 
 }

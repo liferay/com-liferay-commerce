@@ -16,11 +16,11 @@ package com.liferay.commerce.warehouse.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchWarehouseException;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
+import com.liferay.commerce.warehouse.web.internal.display.context.CommerceInventoryWarehousesDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -47,11 +47,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	property = {
 		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_VIRTUAL_INSTANCE,
-		"mvc.command.name=editCommerceWarehouse"
+		"mvc.command.name=editCommerceInventoryWarehouse"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
+public class EditCommerceInventoryWarehouseMVCRenderCommand
+	implements MVCRenderCommand {
 
 	@Override
 	public String render(
@@ -67,15 +68,16 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 			HttpServletResponse httpServletResponse =
 				_portal.getHttpServletResponse(renderResponse);
 
-			CommerceWarehousesDisplayContext commerceWarehousesDisplayContext =
-				new CommerceWarehousesDisplayContext(
-					_commerceChannelRelService, _commerceChannelService,
-					_commerceCountryService, _commerceWarehouseLocalService,
-					httpServletRequest);
+			CommerceInventoryWarehousesDisplayContext
+					commerceInventoryWarehousesDisplayContext =
+					new CommerceInventoryWarehousesDisplayContext(
+						_commerceChannelRelService, _commerceChannelService,
+						_commerceCountryService,
+						_commerceInventoryWarehouseService, httpServletRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				commerceWarehousesDisplayContext);
+				commerceInventoryWarehousesDisplayContext);
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
@@ -105,8 +107,8 @@ public class EditCommerceWarehouseMVCRenderCommand implements MVCRenderCommand {
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference
 	private Portal _portal;

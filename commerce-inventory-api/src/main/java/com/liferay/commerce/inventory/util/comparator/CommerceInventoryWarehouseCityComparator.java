@@ -21,28 +21,34 @@ import com.liferay.portal.kernel.util.StringUtil;
 /**
  * @author Luca Pellizzon
  */
-public class CommerceWarehouseNameComparator
+public class CommerceInventoryWarehouseCityComparator
 	extends OrderByComparator<CommerceInventoryWarehouse> {
 
-	public static final String ORDER_BY_ASC = "name ASC";
+	public static final String ORDER_BY_ASC = "CIWarehouse.city ASC";
 
-	public static final String ORDER_BY_DESC = "name DESC";
+	public static final String ORDER_BY_DESC = "CIWarehouse.city DESC";
 
-	public static final String[] ORDER_BY_FIELDS = {"name"};
+	public static final String[] ORDER_BY_FIELDS = {"city"};
 
-	public CommerceWarehouseNameComparator(boolean ascending) {
+	public CommerceInventoryWarehouseCityComparator() {
+		this(false);
+	}
+
+	public CommerceInventoryWarehouseCityComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(
-		CommerceInventoryWarehouse commerceWarehouse1,
-		CommerceInventoryWarehouse commerceWarehouse2) {
+		CommerceInventoryWarehouse commerceInventoryWarehouse1,
+		CommerceInventoryWarehouse commerceInventoryWarehouse2) {
 
-		String name1 = StringUtil.toLowerCase(commerceWarehouse1.getName());
-		String name2 = StringUtil.toLowerCase(commerceWarehouse2.getName());
+		String city1 = StringUtil.toLowerCase(
+			commerceInventoryWarehouse1.getCity());
+		String city2 = StringUtil.toLowerCase(
+			commerceInventoryWarehouse2.getCity());
 
-		int value = name1.compareTo(name2);
+		int value = city1.compareTo(city2);
 
 		if (_ascending) {
 			return value;

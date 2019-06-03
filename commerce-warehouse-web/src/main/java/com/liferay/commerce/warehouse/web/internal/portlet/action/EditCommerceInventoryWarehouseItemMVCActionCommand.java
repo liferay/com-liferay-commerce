@@ -16,17 +16,16 @@ package com.liferay.commerce.warehouse.web.internal.portlet.action;
 
 import com.liferay.commerce.exception.NoSuchWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -42,11 +41,11 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + CPPortletKeys.CP_DEFINITIONS,
-		"mvc.command.name=editCommerceWarehouseItem"
+		"mvc.command.name=editCommerceInventoryWarehouseItem"
 	},
 	service = MVCActionCommand.class
 )
-public class EditCommerceWarehouseItemMVCActionCommand
+public class EditCommerceInventoryWarehouseItemMVCActionCommand
 	extends BaseMVCActionCommand {
 
 	@Override
@@ -58,7 +57,7 @@ public class EditCommerceWarehouseItemMVCActionCommand
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateCommerceWarehouseItem(actionRequest);
+				updateCommerceInventoryWarehouseItem(actionRequest);
 			}
 		}
 		catch (Exception e) {
@@ -75,40 +74,42 @@ public class EditCommerceWarehouseItemMVCActionCommand
 		}
 	}
 
-	protected CommerceInventoryWarehouseItem updateCommerceWarehouseItem(
-			ActionRequest actionRequest)
+	protected CommerceInventoryWarehouseItem
+			updateCommerceInventoryWarehouseItem(ActionRequest actionRequest)
 		throws PortalException {
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
-		long commerceWarehouseItemId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseItemId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
+		long commerceInventoryWarehouseItemId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseItemId");
 		String sku = ParamUtil.getString(actionRequest, "sku");
 
 		int quantity = ParamUtil.getInteger(actionRequest, "quantity");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceInventoryWarehouseItem.class.getName(), actionRequest);
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem;
 
-		CommerceInventoryWarehouseItem commerceWarehouseItem = null;
-
-		if (commerceWarehouseItemId > 0) {
-			commerceWarehouseItem =
-				_commerceWarehouseItemLocalService.updateCommerceWarehouseItem(
-					commerceWarehouseItemId, quantity);
+		if (commerceInventoryWarehouseItemId > 0) {
+			commerceInventoryWarehouseItem =
+				_commerceInventoryWarehouseItemService.
+					updateCommerceInventoryWarehouseItem(
+						commerceInventoryWarehouseItemId, quantity);
 		}
 		else {
-			commerceWarehouseItem =
-				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
-					commerceWarehouseId, sku, quantity,
-					serviceContext.getUserId());
+			commerceInventoryWarehouseItem =
+				_commerceInventoryWarehouseItemService.
+					addCommerceInventoryWarehouseItem(
+						_portal.getUserId(actionRequest),
+						commerceInventoryWarehouseId, sku, quantity);
 		}
 
-		return commerceWarehouseItem;
+		return commerceInventoryWarehouseItem;
 	}
 
 	@Reference
-	private CommerceInventoryWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
+	private CommerceInventoryWarehouseItemService
+		_commerceInventoryWarehouseItemService;
+
+	@Reference
+	private Portal _portal;
 
 }

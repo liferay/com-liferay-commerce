@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.inventory.configuration;
+package com.liferay.commerce.inventory.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -25,16 +25,11 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 	category = "inventory", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(
-	id = "com.liferay.commerce.inventory.configuration.CommerceInventorySystemConfiguration",
+	id = "com.liferay.commerce.inventory.internal.configuration.CommerceInventorySystemConfiguration",
 	localization = "content/Language",
 	name = "commerce-inventory-system-configuration-name"
 )
 public interface CommerceInventorySystemConfiguration {
-
-	@Meta.AD(
-		deflt = "default", name = "inventory-engine-method", required = false
-	)
-	public String commerceInventoryEngineMethod();
 
 	@Meta.AD(
 		deflt = "60", name = "check-temporary-booked-quantity-interval",

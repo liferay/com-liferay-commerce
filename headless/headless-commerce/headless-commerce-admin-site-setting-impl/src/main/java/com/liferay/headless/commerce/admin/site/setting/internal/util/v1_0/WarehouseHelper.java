@@ -40,14 +40,15 @@ import org.osgi.service.component.annotations.Reference;
 public class WarehouseHelper {
 
 	public void deleteWarehouse(Long id) throws PortalException {
-		_commerceWarehouseService.deleteCommerceWarehouse(id);
+		_commerceInventoryWarehouseService.deleteCommerceInventoryWarehouse(id);
 	}
 
 	public Warehouse getWarehouse(Long id) throws PortalException {
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseService.getCommerceWarehouse(id);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				id);
 
-		return _dtoMapper.modelToDTO(commerceWarehouse);
+		return _dtoMapper.modelToDTO(commerceInventoryWarehouse);
 	}
 
 	public Page<Warehouse> getWarehouses(
@@ -56,32 +57,32 @@ public class WarehouseHelper {
 
 		return null;
 		/*
-				List<CommerceWarehouse> commerceWarehouses;
+				List<CommerceInventoryWarehouse> commerceInventoryWarehouses;
 				int count;
 
 				if (active == null) {
-					commerceWarehouses =
-						_commerceWarehouseService.getCommerceWarehouses(
+					commerceInventoryWarehouses =
+						_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
 							groupId, pagination.getStartPosition(),
 							pagination.getEndPosition(), null);
 
-					count = _commerceWarehouseService.getCommerceWarehousesCount(
+					count = _commerceInventoryWarehouseService.getCommerceInventoryWarehousesCount(
 						groupId);
 				}
 				else {
-					commerceWarehouses =
-						_commerceWarehouseService.getCommerceWarehouses(
+					commerceInventoryWarehouses =
+						_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
 							groupId, active, pagination.getStartPosition(),
 							pagination.getEndPosition(), null);
 
-					count = _commerceWarehouseService.getCommerceWarehousesCount(
+					count = _commerceInventoryWarehouseService.getCommerceInventoryWarehousesCount(
 						groupId, active);
 				}
 
 				List<Warehouse> availabilityEstimates = new ArrayList<>();
 
-				for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
-					availabilityEstimates.add(_dtoMapper.modelToDTO(commerceWarehouse));
+				for (CommerceInventoryWarehouse commerceInventoryWarehouse : commerceInventoryWarehouses) {
+					availabilityEstimates.add(_dtoMapper.modelToDTO(commerceInventoryWarehouse));
 				}
 
 				return Page.of(availabilityEstimates, pagination, count);
@@ -93,32 +94,44 @@ public class WarehouseHelper {
 			Long id, Warehouse warehouse, User user)
 		throws PortalException {
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseService.getCommerceWarehouse(id);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				id);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			0, new long[0], user, true);
 
-		return _commerceWarehouseService.updateCommerceWarehouse(
-			commerceWarehouse.getCommerceInventoryWarehouseId(),
-			warehouse.getName(),
-			GetterUtil.get(
-				warehouse.getDescription(), commerceWarehouse.getDescription()),
-			GetterUtil.get(warehouse.getActive(), commerceWarehouse.isActive()),
-			GetterUtil.get(
-				warehouse.getStreet1(), commerceWarehouse.getStreet1()),
-			GetterUtil.get(
-				warehouse.getStreet2(), commerceWarehouse.getStreet2()),
-			GetterUtil.get(
-				warehouse.getStreet3(), commerceWarehouse.getStreet3()),
-			GetterUtil.get(warehouse.getCity(), commerceWarehouse.getCity()),
-			GetterUtil.get(warehouse.getZip(), commerceWarehouse.getZip()),
-			null, null,
-			GetterUtil.get(
-				warehouse.getLatitude(), commerceWarehouse.getLatitude()),
-			GetterUtil.get(
-				warehouse.getLongitude(), commerceWarehouse.getLongitude()),
-			serviceContext);
+		return _commerceInventoryWarehouseService.
+			updateCommerceInventoryWarehouse(
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				warehouse.getName(),
+				GetterUtil.get(
+					warehouse.getDescription(),
+					commerceInventoryWarehouse.getDescription()),
+				GetterUtil.get(
+					warehouse.getActive(),
+					commerceInventoryWarehouse.isActive()),
+				GetterUtil.get(
+					warehouse.getStreet1(),
+					commerceInventoryWarehouse.getStreet1()),
+				GetterUtil.get(
+					warehouse.getStreet2(),
+					commerceInventoryWarehouse.getStreet2()),
+				GetterUtil.get(
+					warehouse.getStreet3(),
+					commerceInventoryWarehouse.getStreet3()),
+				GetterUtil.get(
+					warehouse.getCity(), commerceInventoryWarehouse.getCity()),
+				GetterUtil.get(
+					warehouse.getZip(), commerceInventoryWarehouse.getZip()),
+				null, null,
+				GetterUtil.get(
+					warehouse.getLatitude(),
+					commerceInventoryWarehouse.getLatitude()),
+				GetterUtil.get(
+					warehouse.getLongitude(),
+					commerceInventoryWarehouse.getLongitude()),
+				serviceContext);
 	}
 
 	public Warehouse upsertWarehouse(
@@ -126,10 +139,10 @@ public class WarehouseHelper {
 		throws PortalException {
 
 		try {
-			CommerceInventoryWarehouse commerceWarehouse = updateWarehouse(
-				warehouse.getId(), warehouse, user);
+			CommerceInventoryWarehouse commerceInventoryWarehouse =
+				updateWarehouse(warehouse.getId(), warehouse, user);
 
-			return _dtoMapper.modelToDTO(commerceWarehouse);
+			return _dtoMapper.modelToDTO(commerceInventoryWarehouse);
 		}
 		catch (NoSuchWarehouseException nswe) {
 			if (_log.isDebugEnabled()) {
@@ -142,8 +155,8 @@ public class WarehouseHelper {
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			groupId, new long[0], user, true);
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			_commerceWarehouseService.addCommerceWarehouseAndGroupRel(
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.addCommerceInventoryWarehouse(
 				warehouse.getName(), warehouse.getDescription(),
 				GetterUtil.get(warehouse.getActive(), false),
 				warehouse.getStreet1(), warehouse.getStreet2(),
@@ -151,14 +164,15 @@ public class WarehouseHelper {
 				"", "", GetterUtil.get(warehouse.getLatitude(), 0D),
 				GetterUtil.get(warehouse.getLongitude(), 0D), serviceContext);
 
-		return _dtoMapper.modelToDTO(commerceWarehouse);
+		return _dtoMapper.modelToDTO(commerceInventoryWarehouse);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		WarehouseHelper.class);
 
 	@Reference
-	private CommerceInventoryWarehouseService _commerceWarehouseService;
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference
 	private DTOMapper _dtoMapper;

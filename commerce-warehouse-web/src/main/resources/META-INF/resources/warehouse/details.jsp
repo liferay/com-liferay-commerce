@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehousesDisplayContext commerceInventoryWarehousesDisplayContext = (CommerceInventoryWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
+CommerceInventoryWarehouse commerceInventoryWarehouse = commerceInventoryWarehousesDisplayContext.getCommerceInventoryWarehouse();
 %>
 
 <liferay-ui:error-marker
@@ -30,12 +30,12 @@ CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.
 <liferay-ui:error exception="<%= CommerceInventoryWarehouseActiveException.class %>" message="please-add-geolocation-information-to-the-warehouse-to-activate" />
 <liferay-ui:error exception="<%= CommerceInventoryWarehouseNameException.class %>" message="please-enter-a-valid-name" />
 
-<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
+<aui:model-context bean="<%= commerceInventoryWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
 
 <aui:fieldset>
 	<aui:input name="name" />
 
 	<aui:input name="description" />
 
-	<aui:input checked="<%= (commerceWarehouse == null) ? false : commerceWarehouse.isActive() %>" name="active" type="toggle-switch" />
+	<aui:input checked="<%= (commerceInventoryWarehouse == null) ? false : commerceInventoryWarehouse.isActive() %>" name="active" type="toggle-switch" />
 </aui:fieldset>

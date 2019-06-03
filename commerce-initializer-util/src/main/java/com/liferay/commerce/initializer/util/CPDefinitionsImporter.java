@@ -95,7 +95,7 @@ public class CPDefinitionsImporter {
 	public void importCPDefinitions(
 			File cpDefinitionsFile, String assetVocabularyName,
 			long catalogGroupId, long commerceChannelId,
-			long[] commerceWarehouseIds, ClassLoader classLoader,
+			long[] commerceInventoryWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
 
@@ -126,7 +126,7 @@ public class CPDefinitionsImporter {
 
 			_importCPDefinition(
 				jsonObject, assetVocabularyName, catalogGroupId,
-				commerceChannelId, commerceWarehouseIds, classLoader,
+				commerceChannelId, commerceInventoryWarehouseIds, classLoader,
 				imageDependenciesPath, serviceContext);
 
 			importCount += 1;
@@ -142,7 +142,7 @@ public class CPDefinitionsImporter {
 	public List<CPDefinition> importCPDefinitions(
 			JSONArray jsonArray, String assetVocabularyName,
 			long catalogGroupId, long commerceChannelId,
-			long[] commerceWarehouseIds, ClassLoader classLoader,
+			long[] commerceInventoryWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, long scopeGroupId, long userId)
 		throws Exception {
 
@@ -155,7 +155,7 @@ public class CPDefinitionsImporter {
 
 			CPDefinition cpDefinition = _importCPDefinition(
 				jsonObject, assetVocabularyName, catalogGroupId,
-				commerceChannelId, commerceWarehouseIds, classLoader,
+				commerceChannelId, commerceInventoryWarehouseIds, classLoader,
 				imageDependenciesPath, serviceContext);
 
 			cpDefinitions.add(cpDefinition);
@@ -242,20 +242,23 @@ public class CPDefinitionsImporter {
 	}
 
 	private void _addWarehouseQuantities(
-			JSONObject skuJSONObject, long[] commerceWarehouseIds,
+			JSONObject skuJSONObject, long[] commerceInventoryWarehouseIds,
 			ServiceContext serviceContext, CPInstance cpInstance)
 		throws PortalException {
 
-		for (int i = 0; i < commerceWarehouseIds.length; i++) {
-			long commerceWarehouseId = commerceWarehouseIds[i];
+		for (int i = 0; i < commerceInventoryWarehouseIds.length; i++) {
+			long commerceInventoryWarehouseId =
+				commerceInventoryWarehouseIds[i];
 
 			int quantity = skuJSONObject.getInt(
 				"Warehouse" + String.valueOf(i + 1));
 
 			if (quantity > 0) {
-				_commerceWarehouseItemLocalService.addCommerceWarehouseItem(
-					commerceWarehouseId, cpInstance.getSku(), quantity,
-					serviceContext.getUserId());
+				_commerceInventoryWarehouseItemLocalService.
+					addCommerceInventoryWarehouseItem(
+						serviceContext.getUserId(),
+						commerceInventoryWarehouseId, cpInstance.getSku(),
+						quantity);
 			}
 		}
 	}
@@ -293,7 +296,7 @@ public class CPDefinitionsImporter {
 	private CPDefinition _importCPDefinition(
 			JSONObject jsonObject, String assetVocabularyName,
 			long catalogGroupId, long commerceChannelId,
-			long[] commerceWarehouseIds, ClassLoader classLoader,
+			long[] commerceInventoryWarehouseIds, ClassLoader classLoader,
 			String imageDependenciesPath, ServiceContext serviceContext)
 		throws Exception {
 
@@ -380,7 +383,7 @@ public class CPDefinitionsImporter {
 
 				_importCPInstance(
 					catalogGroupId, cpDefinition.getCPDefinitionId(),
-					skuJSONObject, commerceWarehouseIds, calendar,
+					skuJSONObject, commerceInventoryWarehouseIds, calendar,
 					serviceContext);
 			}
 		}
@@ -435,7 +438,7 @@ public class CPDefinitionsImporter {
 				// Commerce warehouse items
 
 				_addWarehouseQuantities(
-					jsonObject, commerceWarehouseIds, serviceContext,
+					jsonObject, commerceInventoryWarehouseIds, serviceContext,
 					cpInstance);
 			}
 		}
@@ -639,7 +642,7 @@ public class CPDefinitionsImporter {
 
 	private CPInstance _importCPInstance(
 			long catalogGroupId, long cpDefinitionId, JSONObject skuJSONObject,
-			long[] commerceWarehouseIds, Calendar calendar,
+			long[] commerceInventoryWarehouseIds, Calendar calendar,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -730,7 +733,8 @@ public class CPDefinitionsImporter {
 			0, 0, 0, 0, 0, true, serviceContext);
 
 		_addWarehouseQuantities(
-			skuJSONObject, commerceWarehouseIds, serviceContext, cpInstance);
+			skuJSONObject, commerceInventoryWarehouseIds, serviceContext,
+			cpInstance);
 
 		return cpInstance;
 	}
@@ -793,7 +797,7 @@ public class CPDefinitionsImporter {
 
 	@Reference
 	private CommerceInventoryWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
+		_commerceInventoryWarehouseItemLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryCreator _cpAttachmentFileEntryCreator;

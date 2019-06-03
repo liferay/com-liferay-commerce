@@ -15,8 +15,8 @@
 package com.liferay.commerce.item.selector.web.internal.display.context;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
-import com.liferay.commerce.item.selector.web.internal.search.CommerceWarehouseChecker;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.item.selector.web.internal.search.CommerceInventoryWarehouseChecker;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.util.CommerceUtil;
@@ -44,20 +44,20 @@ import javax.servlet.http.HttpServletRequest;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-public class CommerceWarehouseItemSelectorViewDisplayContext
+public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 	extends BaseCommerceItemSelectorViewDisplayContext
 		<CommerceInventoryWarehouse> {
 
-	public CommerceWarehouseItemSelectorViewDisplayContext(
+	public CommerceInventoryWarehouseItemSelectorViewDisplayContext(
 		CommerceCountryService commerceCountryService,
-		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
 		HttpServletRequest httpServletRequest, PortletURL portletURL,
 		String itemSelectedEventName, boolean search) {
 
 		super(httpServletRequest, portletURL, itemSelectedEventName);
 
 		_commerceCountryService = commerceCountryService;
-		_commerceWarehouseLocalService = commerceWarehouseLocalService;
+		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
 		_search = search;
 	}
 
@@ -139,43 +139,52 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 		String orderByType = getOrderByType();
 
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator =
-			CommerceUtil.getCommerceWarehouseOrderByComparator(
+			CommerceUtil.getCommerceInventoryWarehouseOrderByComparator(
 				orderByCol, orderByType);
 
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByComparator(orderByComparator);
 		searchContainer.setOrderByType(orderByType);
 		searchContainer.setRowChecker(
-			new CommerceWarehouseChecker(
+			new CommerceInventoryWarehouseChecker(
 				cpRequestHelper.getRenderResponse(),
-				getCheckedCommerceWarehouseIds(),
-				getDisabledCommerceWarehouseIds()));
+				getCheckedCommerceInventoryWarehouseIds(),
+				getDisabledCommerceInventoryWarehouseIds()));
 		searchContainer.setSearch(_search);
 
 		int total = 0;
 		List<CommerceInventoryWarehouse> results = Collections.emptyList();
 
 		if (searchContainer.isSearch() && (commerceCountry != null)) {
-			total = _commerceWarehouseLocalService.searchCount(
-				cpRequestHelper.getCompanyId(),
-				cpRequestHelper.getScopeGroupId(), getKeywords(), false,
-				commerceCountry.getTwoLettersISOCode());
-			results = _commerceWarehouseLocalService.search(
-				cpRequestHelper.getCompanyId(),
-				cpRequestHelper.getScopeGroupId(), getKeywords(), false,
-				commerceCountry.getTwoLettersISOCode(),
-				searchContainer.getStart(), searchContainer.getEnd(),
-				searchContainer.getOrderByComparator());
+			total =
+				_commerceInventoryWarehouseService.
+					searchCommerceInventoryWarehousesCount(
+						cpRequestHelper.getCompanyId(), true,
+						commerceCountry.getTwoLettersISOCode(), getKeywords());
+
+			results =
+				_commerceInventoryWarehouseService.
+					searchCommerceInventoryWarehouses(
+						cpRequestHelper.getCompanyId(), true,
+						commerceCountry.getTwoLettersISOCode(), getKeywords(),
+						searchContainer.getStart(), searchContainer.getEnd(),
+						CommerceUtil.getCommerceInventoryWarehouseSort(
+							orderByCol, orderByType));
 		}
 		else if (commerceCountry != null) {
-			total = _commerceWarehouseLocalService.getCommerceWarehousesCount(
-				cpRequestHelper.getCompanyId(),
-				cpRequestHelper.getScopeGroupId(), true,
-				commerceCountry.getTwoLettersISOCode());
-			results = _commerceWarehouseLocalService.getCommerceWarehouses(
-				cpRequestHelper.getCompanyId(),
-				cpRequestHelper.getScopeGroupId(), true,
-				commerceCountry.getTwoLettersISOCode());
+			total =
+				_commerceInventoryWarehouseService.
+					getCommerceInventoryWarehousesCount(
+						cpRequestHelper.getCompanyId(), true,
+						commerceCountry.getTwoLettersISOCode());
+
+			results =
+				_commerceInventoryWarehouseService.
+					getCommerceInventoryWarehouses(
+						cpRequestHelper.getCompanyId(), true,
+						commerceCountry.getTwoLettersISOCode(),
+						searchContainer.getStart(), searchContainer.getEnd(),
+						orderByComparator);
 		}
 
 		searchContainer.setTotal(total);
@@ -184,14 +193,16 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 		return searchContainer;
 	}
 
-	protected long[] getCheckedCommerceWarehouseIds() {
+	protected long[] getCheckedCommerceInventoryWarehouseIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(), "checkedCommerceWarehouseIds");
+			cpRequestHelper.getRenderRequest(),
+			"checkedCommerceInventoryWarehouseIds");
 	}
 
-	protected long[] getDisabledCommerceWarehouseIds() {
+	protected long[] getDisabledCommerceInventoryWarehouseIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(), "disabledCommerceWarehouseIds");
+			cpRequestHelper.getRenderRequest(),
+			"disabledCommerceInventoryWarehouseIds");
 	}
 
 	protected ManagementBarFilterItem getManagementBarFilterItem(
@@ -216,8 +227,8 @@ public class CommerceWarehouseItemSelectorViewDisplayContext
 	}
 
 	private final CommerceCountryService _commerceCountryService;
-	private final CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+	private final CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 	private final boolean _search;
 
 }

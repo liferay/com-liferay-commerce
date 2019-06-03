@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehousesDisplayContext commerceInventoryWarehousesDisplayContext = (CommerceInventoryWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.getCommerceWarehouse();
+CommerceInventoryWarehouse commerceInventoryWarehouse = commerceInventoryWarehousesDisplayContext.getCommerceInventoryWarehouse();
 %>
 
 <liferay-ui:error-marker
@@ -27,11 +27,11 @@ CommerceInventoryWarehouse commerceWarehouse = commerceWarehousesDisplayContext.
 	value="custom-fields"
 />
 
-<aui:model-context bean="<%= commerceWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
+<aui:model-context bean="<%= commerceInventoryWarehouse %>" model="<%= CommerceInventoryWarehouse.class %>" />
 
 <liferay-expando:custom-attribute-list
 	className="<%= CommerceInventoryWarehouse.class.getName() %>"
-	classPK="<%= (commerceWarehouse != null) ? commerceWarehouse.getCommerceInventoryWarehouseId() : 0 %>"
+	classPK="<%= (commerceInventoryWarehouse != null) ? commerceInventoryWarehouse.getCommerceInventoryWarehouseId() : 0 %>"
 	editable="<%= true %>"
 	label="<%= true %>"
 />

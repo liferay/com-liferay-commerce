@@ -21,31 +21,33 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 /**
  * @author Alessio Antonio Rendina
  */
-public interface CommerceWarehousePermission {
+public interface CommerceInventoryWarehousePermission {
 
 	public void check(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
+			String actionId)
 		throws PortalException;
 
 	public void check(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
+			PermissionChecker permissionChecker,
+			long commerceInventoryWarehouseId, String actionId)
+		throws PortalException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker,
+			CommerceInventoryWarehouse commerceInventoryWarehouse,
 			String actionId)
 		throws PortalException;
 
 	public boolean contains(
 			PermissionChecker permissionChecker,
-			CommerceInventoryWarehouse commerceWarehouse, String actionId)
+			long commerceInventoryWarehouseId, String actionId)
 		throws PortalException;
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long commerceWarehouseId,
-			String actionId)
-		throws PortalException;
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long[] commerceWarehouseIds,
-			String actionId)
+			PermissionChecker permissionChecker,
+			long[] commerceInventoryWarehouseIds, String actionId)
 		throws PortalException;
 
 }
