@@ -16,25 +16,31 @@ package com.liferay.commerce.inventory.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
+import java.util.List;
+
 /**
- * The extended model implementation for the CommerceInventoryWarehouse service. Represents a row in the &quot;CIWarehouse&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouse} interface.
- * </p>
- *
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceInventoryWarehouseImpl
 	extends CommerceInventoryWarehouseBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce inventory warehouse model instance should use the {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouse} interface instead.
-	 */
 	public CommerceInventoryWarehouseImpl() {
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItems() {
+
+		return CommerceInventoryWarehouseItemLocalServiceUtil.
+			getCommerceInventoryWarehouseItems(
+				getCommerceInventoryWarehouseId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 	}
 
 	@Override

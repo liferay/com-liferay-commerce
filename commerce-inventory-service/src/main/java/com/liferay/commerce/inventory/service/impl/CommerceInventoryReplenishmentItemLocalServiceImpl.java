@@ -14,73 +14,11 @@
 
 package com.liferay.commerce.inventory.service.impl;
 
-import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryReplenishmentItemLocalServiceBaseImpl;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.util.OrderByComparator;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author Luca Pellizzon
  */
 public class CommerceInventoryReplenishmentItemLocalServiceImpl
 	extends CommerceInventoryReplenishmentItemLocalServiceBaseImpl {
-
-	@Override
-	public CommerceInventoryReplenishmentItem addCommerceReplenishmentItem(
-			long commerceWarehouseId, long userId, String sku,
-			Date availabilityDate, int quantity)
-		throws PortalException {
-
-		User user = userLocalService.getUser(userId);
-
-		long commerceReplenishmentItemId = counterLocalService.increment();
-
-		CommerceInventoryReplenishmentItem commerceReplenishmentItem =
-			commerceInventoryReplenishmentItemPersistence.create(
-				commerceReplenishmentItemId);
-
-		commerceReplenishmentItem.setCompanyId(user.getCompanyId());
-		commerceReplenishmentItem.setUserId(user.getUserId());
-		commerceReplenishmentItem.setUserName(user.getFullName());
-		commerceReplenishmentItem.setCommerceWarehouseId(commerceWarehouseId);
-		commerceReplenishmentItem.setSku(sku);
-		commerceReplenishmentItem.setAvailabilityDate(availabilityDate);
-		commerceReplenishmentItem.setQuantity(quantity);
-
-		return commerceInventoryReplenishmentItemPersistence.updateImpl(
-			commerceReplenishmentItem);
-	}
-
-	@Override
-	public List<CommerceInventoryReplenishmentItem>
-		getCommerceReplenishmentItems(String sku) {
-
-		return commerceInventoryReplenishmentItemPersistence.findBysku(sku);
-	}
-
-	@Override
-	public List<CommerceInventoryReplenishmentItem>
-		getCommerceReplenishmentItemsByGroupIdAndSku(
-			long companyId, long groupId, String sku) {
-
-		return commerceInventoryReplenishmentItemFinder.findByGroupAndSku(
-			companyId, groupId, sku);
-	}
-
-	@Override
-	public List<CommerceInventoryReplenishmentItem>
-		getCommerceReplenishmentItemsOrderedByAvailabilityDate(
-			String sku,
-			OrderByComparator<CommerceInventoryReplenishmentItem>
-				orderByComparator) {
-
-		return commerceInventoryReplenishmentItemPersistence.findBysku(
-			sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, orderByComparator);
-	}
-
 }

@@ -14,34 +14,52 @@
 
 package com.liferay.commerce.inventory.service.impl;
 
-import com.liferay.commerce.inventory.constants.CommerceInventoryConstants;
 import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException;
 import com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException;
-import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException;
+import com.liferay.commerce.inventory.internal.search.CommerceInventoryWarehouseIndexer;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseGroupRel;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
+import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 public class CommerceInventoryWarehouseLocalServiceImpl
 	extends CommerceInventoryWarehouseLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public CommerceInventoryWarehouse addCommerceWarehouse(
+	public CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			String name, String description, boolean active, String street1,
 			String street2, String street3, String city, String zip,
 			String commerceRegionCode, String commerceCountryCode,
@@ -52,226 +70,211 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 
 		validate(name, active, latitude, longitude);
 
-		long commerceWarehouseId = counterLocalService.increment();
+		long commerceInventoryWarehouseId = counterLocalService.increment();
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			commerceInventoryWarehousePersistence.create(commerceWarehouseId);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			commerceInventoryWarehousePersistence.create(
+				commerceInventoryWarehouseId);
 
-		commerceWarehouse.setCompanyId(user.getCompanyId());
-		commerceWarehouse.setUserId(user.getUserId());
-		commerceWarehouse.setUserName(user.getFullName());
-		commerceWarehouse.setName(name);
-		commerceWarehouse.setDescription(description);
-		commerceWarehouse.setActive(active);
-		commerceWarehouse.setStreet1(street1);
-		commerceWarehouse.setStreet2(street2);
-		commerceWarehouse.setStreet3(street3);
-		commerceWarehouse.setCity(city);
-		commerceWarehouse.setZip(zip);
-		commerceWarehouse.setCommerceRegionCode(commerceRegionCode);
-		commerceWarehouse.setCountryTwoLettersISOCode(commerceCountryCode);
-		commerceWarehouse.setLatitude(latitude);
-		commerceWarehouse.setLongitude(longitude);
-		commerceWarehouse.setExpandoBridgeAttributes(serviceContext);
+		commerceInventoryWarehouse.setCompanyId(user.getCompanyId());
+		commerceInventoryWarehouse.setUserId(user.getUserId());
+		commerceInventoryWarehouse.setUserName(user.getFullName());
+		commerceInventoryWarehouse.setName(name);
+		commerceInventoryWarehouse.setDescription(description);
+		commerceInventoryWarehouse.setActive(active);
+		commerceInventoryWarehouse.setStreet1(street1);
+		commerceInventoryWarehouse.setStreet2(street2);
+		commerceInventoryWarehouse.setStreet3(street3);
+		commerceInventoryWarehouse.setCity(city);
+		commerceInventoryWarehouse.setZip(zip);
+		commerceInventoryWarehouse.setCommerceRegionCode(commerceRegionCode);
+		commerceInventoryWarehouse.setCountryTwoLettersISOCode(
+			commerceCountryCode);
+		commerceInventoryWarehouse.setLatitude(latitude);
+		commerceInventoryWarehouse.setLongitude(longitude);
+		commerceInventoryWarehouse.setExpandoBridgeAttributes(serviceContext);
 
-		commerceInventoryWarehousePersistence.update(commerceWarehouse);
+		commerceInventoryWarehousePersistence.update(
+			commerceInventoryWarehouse);
 
 		// Resources
 
 		resourceLocalService.addResources(
 			user.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
 			user.getUserId(), CommerceInventoryWarehouse.class.getName(),
-			commerceWarehouse.getCommerceInventoryWarehouseId(), false, false,
-			false);
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(), false,
+			false, false);
 
-		return commerceWarehouse;
+		return commerceInventoryWarehouse;
 	}
 
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public CommerceInventoryWarehouse deleteCommerceWarehouse(
-			CommerceInventoryWarehouse commerceWarehouse)
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
+	public CommerceInventoryWarehouse deleteCommerceInventoryWarehouse(
+			CommerceInventoryWarehouse commerceInventoryWarehouse)
 		throws PortalException {
 
-		commerceInventoryWarehousePersistence.remove(commerceWarehouse);
+		commerceInventoryWarehousePersistence.remove(
+			commerceInventoryWarehouse);
 
 		// Commerce warehouse items
 
-		commerceInventoryWarehouseItemLocalService.deleteCommerceWarehouseItems(
-			commerceWarehouse.getCommerceInventoryWarehouseId());
+		commerceInventoryWarehouseItemLocalService.
+			deleteCommerceInventoryWarehouseItems(
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		// Expando
 
 		expandoRowLocalService.deleteRows(
-			commerceWarehouse.getCommerceInventoryWarehouseId());
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		// Resources
 
 		resourceLocalService.deleteResource(
-			commerceWarehouse, ResourceConstants.SCOPE_INDIVIDUAL);
+			commerceInventoryWarehouse, ResourceConstants.SCOPE_INDIVIDUAL);
 
-		return commerceWarehouse;
-	}
-
-	@Override
-	public CommerceInventoryWarehouse fetchDefaultCommerceWarehouse(
-		long groupId) {
-
-		long commerceWarehouseId =
-			commerceInventoryWarehouseGroupRelLocalService.
-				getPrimaryCommerceWarehouseId(groupId);
-
-		return commerceInventoryWarehousePersistence.fetchByPrimaryKey(
-			commerceWarehouseId);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse geolocateCommerceWarehouse(
-			long commerceWarehouseId, double latitude, double longitude)
-		throws PortalException {
-
-		CommerceInventoryWarehouse commerceWarehouse =
-			commerceInventoryWarehousePersistence.findByPrimaryKey(
-				commerceWarehouseId);
-
-		commerceWarehouse.setLatitude(latitude);
-		commerceWarehouse.setLongitude(longitude);
-
-		return commerceInventoryWarehousePersistence.update(commerceWarehouse);
-	}
-
-	@Override
-	public List<CommerceInventoryWarehouse> getCommerceWarehouses(
-		long companyId, long groupId, boolean active,
-		String commerceCountryCode) {
-
-		return commerceInventoryWarehouseFinder.
-			findWarehousesByGroupIdAndActiveAndCountryISOCode(
-				companyId, groupId, active, commerceCountryCode);
-	}
-
-	@Override
-	public List<CommerceInventoryWarehouse> getCommerceWarehousesByGroupId(
-		long companyId, long groupId) {
-
-		return commerceInventoryWarehouseFinder.findWarehousesByGroupId(
-			companyId, groupId);
-	}
-
-	@Override
-	public List<CommerceInventoryWarehouse>
-		getCommerceWarehousesByGroupIdAndActive(
-			long companyId, long groupId, boolean active) {
-
-		return commerceInventoryWarehouseFinder.
-			findWarehousesByGroupIdAndActive(companyId, groupId, active);
-	}
-
-	@Override
-	public List<CommerceInventoryWarehouse>
-		getCommerceWarehousesByGroupIdAndSku(
-			long companyId, long groupId, String sku) {
-
-		return commerceInventoryWarehouseFinder.findWarehousesByGroupIdAndSku(
-			companyId, groupId, sku);
-	}
-
-	@Override
-	public int getCommerceWarehousesCount(
-		long companyId, long groupId, boolean active) {
-
-		return commerceInventoryWarehouseFinder.countByG_A(
-			companyId, groupId, active);
-	}
-
-	@Override
-	public int getCommerceWarehousesCount(
-		long companyId, long groupId, boolean active,
-		String commerceCountryCode) {
-
-		if (commerceCountryCode != null) {
-			return commerceInventoryWarehouseFinder.countByG_A_C(
-				companyId, groupId, active, commerceCountryCode);
-		}
-
-		return getCommerceWarehousesCount(companyId, groupId, active);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse getDefaultCommerceWarehouse(long groupId)
-		throws NoSuchInventoryWarehouseException {
-
-		long commerceWarehouseId =
-			commerceInventoryWarehouseGroupRelLocalService.
-				getPrimaryCommerceWarehouseId(groupId);
-
-		return commerceInventoryWarehousePersistence.findByPrimaryKey(
-			commerceWarehouseId);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse importDefaultCommerceWarehouse(
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		List<CommerceInventoryWarehouseGroupRel> commerceWarehouseGroupRels =
-			commerceInventoryWarehouseGroupRelPersistence.findByG_P(
-				serviceContext.getScopeGroupId(), true);
-
-		if (commerceWarehouseGroupRels.isEmpty()) {
-			return _addDefaultCommerceWarehouse(
-				CommerceInventoryConstants.DEFAULT_WAREHOUSE_NAME, null, null,
-				null, null, null, "", "", -1, -1, serviceContext);
-		}
-
-		CommerceInventoryWarehouseGroupRel commerceWarehouseGroupRel =
-			commerceWarehouseGroupRels.get(0);
-
-		return commerceInventoryWarehouseLocalService.
-			getCommerceInventoryWarehouse(
-				commerceWarehouseGroupRel.getCommerceWarehouseId());
-	}
-
-	@Override
-	public List<CommerceInventoryWarehouse> search(
-		long companyId, long groupId, String keywords, Boolean active,
-		String commerceCountryCode, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-
-		return commerceInventoryWarehouseFinder.findByKeywords(
-			companyId, groupId, keywords, active, commerceCountryCode, start,
-			end, orderByComparator);
-	}
-
-	@Override
-	public int searchCount(
-		long companyId, long groupId, String keywords, Boolean active,
-		String commerceCountryCode) {
-
-		return commerceInventoryWarehouseFinder.countByKeywords(
-			companyId, groupId, keywords, active, commerceCountryCode);
-	}
-
-	@Override
-	public CommerceInventoryWarehouse setActive(
-			long commerceWarehouseId, boolean active)
-		throws PortalException {
-
-		CommerceInventoryWarehouse commerceWarehouse =
-			commerceInventoryWarehousePersistence.findByPrimaryKey(
-				commerceWarehouseId);
-
-		commerceWarehouse.setActive(active);
-
-		commerceInventoryWarehousePersistence.update(commerceWarehouse);
-
-		return commerceWarehouse;
+		return commerceInventoryWarehouse;
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public CommerceInventoryWarehouse updateCommerceWarehouse(
-			long commerceWarehouseId, String name, String description,
+	public CommerceInventoryWarehouse geolocateCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId, double latitude,
+			double longitude)
+		throws PortalException {
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			commerceInventoryWarehousePersistence.findByPrimaryKey(
+				commerceInventoryWarehouseId);
+
+		commerceInventoryWarehouse.setLatitude(latitude);
+		commerceInventoryWarehouse.setLongitude(longitude);
+
+		return commerceInventoryWarehousePersistence.update(
+			commerceInventoryWarehouse);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId) {
+
+		return commerceInventoryWarehousePersistence.findByCompanyId(companyId);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, boolean active, String commerceCountryCode, int start,
+		int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+
+		return commerceInventoryWarehousePersistence.findByC_A_C(
+			companyId, active, commerceCountryCode, start, end,
+			orderByComparator);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+
+		return commerceInventoryWarehousePersistence.findByCompanyId(
+			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, long groupId, boolean active) {
+
+		return commerceInventoryWarehouseFinder.findByC_G_A(
+			companyId, groupId, active);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long groupId, String sku) {
+
+		return commerceInventoryWarehouseFinder.findByG_S(groupId, sku);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehousesCount(long companyId) {
+		return commerceInventoryWarehousePersistence.countByCompanyId(
+			companyId);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehousesCount(
+		long companyId, boolean active) {
+
+		return commerceInventoryWarehousePersistence.countByC_A(
+			companyId, active);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehousesCount(
+		long companyId, boolean active, String commerceCountryCode) {
+
+		if (Validator.isNotNull(commerceCountryCode)) {
+			return commerceInventoryWarehousePersistence.countByC_A_C(
+				companyId, active, commerceCountryCode);
+		}
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehousesCount(companyId, active);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> searchCommerceInventoryWarehouses(
+			long companyId, Boolean active, String commerceCountryCode,
+			String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, active, commerceCountryCode, keywords, start, end, sort);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceInventoryWarehouses(searchContext);
+	}
+
+	@Override
+	public int searchCommerceInventoryWarehousesCount(
+			long companyId, Boolean active, String commerceCountryCode,
+			String keywords)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, active, commerceCountryCode, keywords, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+
+		searchContext.setKeywords(keywords);
+
+		return searchCommerceInventoryWarehousesCount(searchContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceInventoryWarehouse setActive(
+			long commerceInventoryWarehouseId, boolean active)
+		throws PortalException {
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			commerceInventoryWarehousePersistence.findByPrimaryKey(
+				commerceInventoryWarehouseId);
+
+		commerceInventoryWarehouse.setActive(active);
+
+		commerceInventoryWarehousePersistence.update(
+			commerceInventoryWarehouse);
+
+		return commerceInventoryWarehouse;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceInventoryWarehouse updateCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId, String name, String description,
 			boolean active, String street1, String street2, String street3,
 			String city, String zip, String commerceRegionCode,
 			String commerceCountryCode, double latitude, double longitude,
@@ -280,27 +283,152 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 
 		validate(name, active, latitude, longitude);
 
-		CommerceInventoryWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			commerceInventoryWarehousePersistence.findByPrimaryKey(
-				commerceWarehouseId);
+				commerceInventoryWarehouseId);
 
-		commerceWarehouse.setName(name);
-		commerceWarehouse.setDescription(description);
-		commerceWarehouse.setActive(active);
-		commerceWarehouse.setStreet1(street1);
-		commerceWarehouse.setStreet2(street2);
-		commerceWarehouse.setStreet3(street3);
-		commerceWarehouse.setCity(city);
-		commerceWarehouse.setZip(zip);
-		commerceWarehouse.setCommerceRegionCode(commerceRegionCode);
-		commerceWarehouse.setCountryTwoLettersISOCode(commerceCountryCode);
-		commerceWarehouse.setLatitude(latitude);
-		commerceWarehouse.setLongitude(longitude);
-		commerceWarehouse.setExpandoBridgeAttributes(serviceContext);
+		commerceInventoryWarehouse.setName(name);
+		commerceInventoryWarehouse.setDescription(description);
+		commerceInventoryWarehouse.setActive(active);
+		commerceInventoryWarehouse.setStreet1(street1);
+		commerceInventoryWarehouse.setStreet2(street2);
+		commerceInventoryWarehouse.setStreet3(street3);
+		commerceInventoryWarehouse.setCity(city);
+		commerceInventoryWarehouse.setZip(zip);
+		commerceInventoryWarehouse.setCommerceRegionCode(commerceRegionCode);
+		commerceInventoryWarehouse.setCountryTwoLettersISOCode(
+			commerceCountryCode);
+		commerceInventoryWarehouse.setLatitude(latitude);
+		commerceInventoryWarehouse.setLongitude(longitude);
+		commerceInventoryWarehouse.setExpandoBridgeAttributes(serviceContext);
 
-		commerceInventoryWarehousePersistence.update(commerceWarehouse);
+		commerceInventoryWarehousePersistence.update(
+			commerceInventoryWarehouse);
 
-		return commerceWarehouse;
+		return commerceInventoryWarehouse;
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, Boolean active, String commerceCountryCode,
+		String keywords, int start, int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+
+		params.put("keywords", keywords);
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
+		attributes.put(Field.NAME, keywords);
+		attributes.put(Field.DESCRIPTION, keywords);
+		attributes.put(CommerceInventoryWarehouseIndexer.FIELD_CITY, keywords);
+		attributes.put(
+			CommerceInventoryWarehouseIndexer.FIELD_STREET_1, keywords);
+		attributes.put(CommerceInventoryWarehouseIndexer.FIELD_ZIP, keywords);
+		attributes.put("params", params);
+
+		if (active != null) {
+			attributes.put(
+				CommerceInventoryWarehouseIndexer.FIELD_ACTIVE, active);
+		}
+
+		if (Validator.isNotNull(commerceCountryCode)) {
+			attributes.put(
+				CommerceInventoryWarehouseIndexer.
+					FIELD_COUNTRY_TWO_LETTERS_ISO_CODE,
+				commerceCountryCode);
+		}
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
+	}
+
+	protected List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			Hits hits)
+		throws PortalException {
+
+		List<Document> documents = hits.toList();
+
+		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
+			new ArrayList<>(documents.size());
+
+		for (Document document : documents) {
+			long commerceInventoryWarehouseId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			CommerceInventoryWarehouse commerceInventoryWarehouse =
+				commerceInventoryWarehouseLocalService.
+					fetchCommerceInventoryWarehouse(
+						commerceInventoryWarehouseId);
+
+			if (commerceInventoryWarehouse == null) {
+				commerceInventoryWarehouses = null;
+
+				Indexer<CommerceInventoryWarehouse> indexer =
+					IndexerRegistryUtil.getIndexer(
+						CommerceInventoryWarehouse.class);
+
+				long companyId = GetterUtil.getLong(
+					document.get(Field.COMPANY_ID));
+
+				indexer.delete(companyId, document.getUID());
+			}
+			else if (commerceInventoryWarehouses != null) {
+				commerceInventoryWarehouses.add(commerceInventoryWarehouse);
+			}
+		}
+
+		return commerceInventoryWarehouses;
+	}
+
+	protected List<CommerceInventoryWarehouse>
+			searchCommerceInventoryWarehouses(SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceInventoryWarehouse> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(
+				CommerceInventoryWarehouse.class);
+
+		for (int i = 0; i < 10; i++) {
+			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
+
+			List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
+				getCommerceInventoryWarehouses(hits);
+
+			if (commerceInventoryWarehouses != null) {
+				return commerceInventoryWarehouses;
+			}
+		}
+
+		throw new SearchException(
+			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected int searchCommerceInventoryWarehousesCount(
+			SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CommerceInventoryWarehouse> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(
+				CommerceInventoryWarehouse.class);
+
+		return GetterUtil.getInteger(indexer.searchCount(searchContext));
 	}
 
 	protected void validate(
@@ -316,44 +444,8 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 		}
 	}
 
-	private CommerceInventoryWarehouse _addDefaultCommerceWarehouse(
-			String name, String street1, String street2, String street3,
-			String city, String zip, String commerceRegionCode,
-			String commerceCountryCode, double latitude, double longitude,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		User user = userLocalService.getUser(serviceContext.getUserId());
-
-		validate(name, true, latitude, longitude);
-
-		long commerceWarehouseId = counterLocalService.increment();
-
-		CommerceInventoryWarehouse commerceWarehouse =
-			commerceInventoryWarehousePersistence.create(commerceWarehouseId);
-
-		commerceWarehouse.setCompanyId(user.getCompanyId());
-		commerceWarehouse.setUserId(user.getUserId());
-		commerceWarehouse.setUserName(user.getFullName());
-		commerceWarehouse.setName(name);
-		commerceWarehouse.setActive(true);
-		commerceWarehouse.setStreet1(street1);
-		commerceWarehouse.setStreet2(street2);
-		commerceWarehouse.setStreet3(street3);
-		commerceWarehouse.setCity(city);
-		commerceWarehouse.setZip(zip);
-		commerceWarehouse.setCommerceRegionCode(commerceRegionCode);
-		commerceWarehouse.setCountryTwoLettersISOCode(commerceCountryCode);
-		commerceWarehouse.setLatitude(latitude);
-		commerceWarehouse.setLongitude(longitude);
-
-		commerceInventoryWarehousePersistence.update(commerceWarehouse);
-
-		commerceInventoryWarehouseGroupRelLocalService.
-			addCommerceWarehouseGroupRel(
-				commerceWarehouseId, true, serviceContext);
-
-		return commerceWarehouse;
-	}
+	private static final String[] _SELECTED_FIELD_NAMES = {
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
+	};
 
 }

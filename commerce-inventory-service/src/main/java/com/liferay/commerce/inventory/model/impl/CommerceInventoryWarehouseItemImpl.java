@@ -21,32 +21,21 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalSer
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * The extended model implementation for the CommerceInventoryWarehouseItem service. Represents a row in the &quot;CIWarehouseItem&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem} interface.
- * </p>
- *
  * @author Luca Pellizzon
  */
 @ProviderType
 public class CommerceInventoryWarehouseItemImpl
 	extends CommerceInventoryWarehouseItemBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce inventory warehouse item model instance should use the {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem} interface instead.
-	 */
 	public CommerceInventoryWarehouseItemImpl() {
 	}
 
 	@Override
-	public CommerceInventoryWarehouse getCommerceWarehouse()
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse()
 		throws PortalException {
 
 		return CommerceInventoryWarehouseLocalServiceUtil.
-			getCommerceInventoryWarehouse(getCommerceWarehouseId());
+			getCommerceInventoryWarehouse(getCommerceInventoryWarehouseId());
 	}
 
 }
