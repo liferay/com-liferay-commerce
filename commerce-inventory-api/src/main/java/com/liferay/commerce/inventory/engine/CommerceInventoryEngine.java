@@ -23,67 +23,33 @@ import java.util.Map;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceInventoryEngine {
 
-	/**
-	 * @param userId
-	 * @param groupId
-	 * @param sku
-	 * @param quantity
-	 * @param warehouseId
-	 * @param bookedQuantityId
-	 * @param context
-	 * @throws PortalException
-	 */
 	public void consumeQuantity(
-			long userId, long groupId, String sku, int quantity,
-			long warehouseId, long bookedQuantityId,
-			Map<String, String> context)
+			long userId, long commerceInventoryWarehouseId, String sku,
+			int quantity, long bookedQuantityId, Map<String, String> context)
 		throws PortalException;
 
-	/**
-	 * @param groupId
-	 * @param sku
-	 * @param quantity
-	 * @param warehouseId
-	 * @throws PortalException
-	 */
 	public void decreaseStockQuantity(
-			long groupId, String sku, int quantity, long warehouseId)
+			long commerceInventoryWarehouseId, String sku, int quantity)
 		throws PortalException;
 
-	/**
-	 * @param companyId
-	 * @param groupId
-	 * @param skus
-	 * @return Map<sku, quantity> of a list of skus
-	 * @throws PortalException
-	 */
 	public Map<String, Integer> getStockQuantities(
 			long companyId, long groupId, List<String> skus)
 		throws PortalException;
 
-	/**
-	 * @param companyId
-	 * @param groupId
-	 * @param sku
-	 * @return stock quantity for the given sku
-	 * @throws PortalException
-	 */
 	public int getStockQuantity(long companyId, long groupId, String sku)
 		throws PortalException;
 
-	/**
-	 * @param groupId
-	 * @param sku
-	 * @param quantity
-	 * @param warehouseId
-	 * @throws PortalException
-	 */
+	public int getStockQuantity(long companyId, String sku)
+		throws PortalException;
+
 	public void increaseStockQuantity(
-			long groupId, String sku, int quantity, long warehouseId)
+			long userId, long commerceInventoryWarehouseId, String sku,
+			int quantity)
 		throws PortalException;
 
 }

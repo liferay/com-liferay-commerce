@@ -14,20 +14,18 @@
 
 package com.liferay.commerce.inventory.internal.engine;
 
-import com.liferay.commerce.inventory.constants.CommerceInventoryConstants;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
-import com.liferay.commerce.inventory.internal.configuration.CommerceInventoryConfigurationHelper;
-import com.liferay.commerce.inventory.method.CommerceInventoryMethod;
-import com.liferay.commerce.inventory.method.CommerceInventoryMethodRegistry;
+import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,153 +34,135 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = CommerceInventoryEngine.class)
 public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 
 	@Override
 	@Transactional(
-		propagation = Propagation.REQUIRED, readOnly = false,
-		rollbackFor = Exception.class
+		propagation = Propagation.REQUIRED, rollbackFor = Exception.class
 	)
 	public void consumeQuantity(
-			long userId, long groupId, String sku, int quantity,
-			long warehouseId, long bookedQuantityId,
-			Map<String, String> context)
+			long userId, long commerceInventoryWarehouseId, String sku,
+			int quantity, long bookedQuantityId, Map<String, String> context)
 		throws PortalException {
 
-		String commerceInventoryEngineMethodKey =
-			CommerceInventoryConfigurationHelper.
-				getCommerceInventoryEngineMethodKey(
-					groupId, _configurationProvider);
+		if (bookedQuantityId > 0) {
+			CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+				_commerceBookedQuantityLocalService.
+					getCommerceInventoryBookedQuantity(bookedQuantityId);
 
-		CommerceInventoryMethod commerceInventoryMethod =
-			_getCommerceInventoryMethod(commerceInventoryEngineMethodKey);
+			_commerceBookedQuantityLocalService.consumeCommerceBookedQuantity(
+				commerceInventoryBookedQuantity.
+					getCommerceInventoryBookedQuantityId(),
+				quantity);
 
-		commerceInventoryMethod.consumeQuantity(
-			groupId, sku, quantity, warehouseId, bookedQuantityId);
-
-		String description = "Consume Quantity: ";
-
-		try {
-			ByteArrayOutputStream byteArrayOutputStream =
-				new ByteArrayOutputStream();
-
-			ObjectOutputStream oos = new ObjectOutputStream(
-				byteArrayOutputStream);
-
-			oos.writeObject(context);
-			oos.close();
-
-			description += byteArrayOutputStream.toString();
-		}
-		catch (Exception e) {
-			throw new PortalException(e.getMessage());
+			decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
 		}
 
-		_commerceInventoryAuditLocalService.addCommerceInventoryItemEntry(
-			description, sku, quantity, userId);
+		decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
+
+		String description =
+			"Consume Quantity: " + JSONFactoryUtil.serialize(context);
+
+		_commerceInventoryAuditLocalService.addCommerceInventoryAudit(
+			userId, sku, quantity, description);
 	}
 
 	@Override
+	@Transactional(
+		propagation = Propagation.REQUIRED, rollbackFor = Exception.class
+	)
 	public void decreaseStockQuantity(
-			long groupId, String sku, int quantity, long warehouseId)
+			long commerceInventoryWarehouseId, String sku, int quantity)
 		throws PortalException {
 
-		String commerceInventoryEngineMethodKey =
-			CommerceInventoryConfigurationHelper.
-				getCommerceInventoryEngineMethodKey(
-					groupId, _configurationProvider);
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
+				fetchCommerceInventoryWarehouseItem(
+					commerceInventoryWarehouseId, sku);
 
-		CommerceInventoryMethod commerceInventoryMethod =
-			_getCommerceInventoryMethod(commerceInventoryEngineMethodKey);
-
-		if (commerceInventoryMethod == null) {
-			commerceInventoryMethod = _getCommerceInventoryMethod(
-				CommerceInventoryConstants.DEFAULT_METHOD_NAME);
-		}
-
-		commerceInventoryMethod.decreaseStockQuantity(
-			sku, quantity, warehouseId);
+		_commerceInventoryWarehouseItemLocalService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId(),
+				commerceInventoryWarehouseItem.getQuantity() - quantity);
 	}
 
 	@Override
 	public Map<String, Integer> getStockQuantities(
-			long companyId, long groupId, List<String> skus)
-		throws PortalException {
+		long companyId, long groupId, List<String> skus) {
 
-		String commerceInventoryEngineMethodKey =
-			CommerceInventoryConfigurationHelper.
-				getCommerceInventoryEngineMethodKey(
-					groupId, _configurationProvider);
+		Map<String, Integer> results = new HashMap<>();
 
-		CommerceInventoryMethod commerceInventoryMethod =
-			_getCommerceInventoryMethod(commerceInventoryEngineMethodKey);
+		for (String sku : skus) {
+			int stockQuantity = getStockQuantity(companyId, groupId, sku);
 
-		if (commerceInventoryMethod == null) {
-			commerceInventoryMethod = _getCommerceInventoryMethod(
-				CommerceInventoryConstants.DEFAULT_METHOD_NAME);
+			results.put(sku, stockQuantity);
 		}
 
-		return commerceInventoryMethod.getStockQuantities(
-			companyId, groupId, skus);
+		return results;
 	}
 
 	@Override
-	public int getStockQuantity(long companyId, long groupId, String sku)
-		throws PortalException {
+	public int getStockQuantity(long companyId, long groupId, String sku) {
+		int stockQuantity =
+			_commerceInventoryWarehouseItemLocalService.getStockQuantity(
+				companyId, groupId, sku);
 
-		String commerceInventoryEngineMethodKey =
-			CommerceInventoryConfigurationHelper.
-				getCommerceInventoryEngineMethodKey(
-					groupId, _configurationProvider);
+		int commerceBookedQuantity =
+			_commerceBookedQuantityLocalService.getCommerceBookedQuantity(sku);
 
-		CommerceInventoryMethod commerceInventoryMethod =
-			_getCommerceInventoryMethod(commerceInventoryEngineMethodKey);
-
-		if (commerceInventoryMethod == null) {
-			commerceInventoryMethod = _getCommerceInventoryMethod(
-				CommerceInventoryConstants.DEFAULT_METHOD_NAME);
-		}
-
-		return commerceInventoryMethod.getStockQuantity(
-			companyId, groupId, sku);
+		return stockQuantity - commerceBookedQuantity;
 	}
 
 	@Override
+	public int getStockQuantity(long companyId, String sku) {
+		int stockQuantity =
+			_commerceInventoryWarehouseItemLocalService.getStockQuantity(
+				companyId, sku);
+
+		int commerceBookedQuantity =
+			_commerceBookedQuantityLocalService.getCommerceBookedQuantity(sku);
+
+		return stockQuantity - commerceBookedQuantity;
+	}
+
+	@Override
+	@Transactional(
+		propagation = Propagation.REQUIRED, rollbackFor = Exception.class
+	)
 	public void increaseStockQuantity(
-			long groupId, String sku, int quantity, long warehouseId)
+			long userId, long commerceInventoryWarehouseId, String sku,
+			int quantity)
 		throws PortalException {
 
-		String commerceInventoryEngineMethodKey =
-			CommerceInventoryConfigurationHelper.
-				getCommerceInventoryEngineMethodKey(
-					groupId, _configurationProvider);
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
+				fetchCommerceInventoryWarehouseItem(
+					commerceInventoryWarehouseId, sku);
 
-		CommerceInventoryMethod commerceInventoryMethod =
-			_getCommerceInventoryMethod(commerceInventoryEngineMethodKey);
+		_commerceInventoryWarehouseItemLocalService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId(),
+				commerceInventoryWarehouseItem.getQuantity() + quantity);
 
-		if (commerceInventoryMethod == null) {
-			commerceInventoryMethod = _getCommerceInventoryMethod(
-				CommerceInventoryConstants.DEFAULT_METHOD_NAME);
-		}
-
-		commerceInventoryMethod.increaseStockQuantity(
-			sku, quantity, warehouseId);
+		_commerceInventoryAuditLocalService.addCommerceInventoryAudit(
+			userId, sku, quantity, "Increase Quantity");
 	}
 
-	private CommerceInventoryMethod _getCommerceInventoryMethod(String key) {
-		return _commerceInventoryMethodRegistry.getCommerceInventoryMethod(key);
-	}
+	@Reference
+	private CommerceInventoryBookedQuantityLocalService
+		_commerceBookedQuantityLocalService;
 
 	@Reference
 	private CommerceInventoryAuditLocalService
 		_commerceInventoryAuditLocalService;
 
 	@Reference
-	private CommerceInventoryMethodRegistry _commerceInventoryMethodRegistry;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceInventoryWarehouseItemLocalService;
 
 }
