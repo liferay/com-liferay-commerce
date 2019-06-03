@@ -18,6 +18,7 @@ import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
@@ -29,6 +30,7 @@ import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.math.BigDecimal;
 
@@ -120,21 +122,9 @@ public class CommerceCheckoutStepHelper {
 		}
 
 		if (commercePaymentMethods.size() == 1) {
-			CommercePaymentMethod commercePaymentMethod =
-				commercePaymentMethods.get(0);
-
-			if (!Objects.equals(
-					commerceOrder.getCommercePaymentMethodKey(),
-					commercePaymentMethod.getKey())) {
-
-				commerceOrder =
-					_commerceOrderService.updateCommercePaymentMethodKey(
-						commerceOrder.getCommerceOrderId(),
-						commercePaymentMethod.getKey());
-			}
-
-			httpServletRequest.setAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
+			_onlyOnePaymentMethod(
+				httpServletRequest, commerceOrder,
+				commercePaymentMethods.get(0));
 
 			return false;
 		}
@@ -163,6 +153,32 @@ public class CommerceCheckoutStepHelper {
 		}
 
 		return false;
+	}
+
+	private void _onlyOnePaymentMethod(
+			HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
+			CommercePaymentMethod commercePaymentMethod)
+		throws PortalException {
+
+		CommerceAddress commerceAddress = commerceOrder.getBillingAddress();
+
+		if (commerceAddress == null) {
+			commerceAddress = commerceOrder.getShippingAddress();
+		}
+
+		if (!Objects.equals(
+				commerceOrder.getCommercePaymentMethodKey(),
+				commercePaymentMethod.getKey()) &&
+			Validator.isNotNull(commerceAddress)) {
+
+			commerceOrder =
+				_commerceOrderService.updateCommercePaymentMethodKey(
+					commerceOrder.getCommerceOrderId(),
+					commercePaymentMethod.getKey());
+		}
+
+		httpServletRequest.setAttribute(
+			CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 	}
 
 	@Reference
