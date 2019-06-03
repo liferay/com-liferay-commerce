@@ -126,16 +126,16 @@ public class OrderStockManagementTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 4;
 
-		CommerceInventoryWarehouseItem commerceWarehouseItem =
-			CommerceTestUtil.addCommerceWarehouseItem(
-				commerceWarehouse, cpInstance.getSku(), quantity,
-				_user.getUserId());
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			CommerceTestUtil.addCommerceInventoryWarehouseItem(
+				_user.getUserId(), commerceInventoryWarehouse,
+				cpInstance.getSku(), quantity);
 
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
@@ -146,29 +146,30 @@ public class OrderStockManagementTest {
 			commerceOrderItem.toString(), orderedQuantity,
 			commerceOrderItem.getQuantity());
 
-		commerceWarehouseItem =
-			_commerceWarehouseItemLocalService.
+		commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
 				getCommerceInventoryWarehouseItem(
-					commerceWarehouseItem.
+					commerceInventoryWarehouseItem.
 						getCommerceInventoryWarehouseItemId());
 
 		Assert.assertEquals(
-			commerceWarehouseItem.toString(), quantity,
-			commerceWarehouseItem.getQuantity());
+			commerceInventoryWarehouseItem.toString(), quantity,
+			commerceInventoryWarehouseItem.getQuantity());
 
 		CommerceShipmentTestUtil.createOrderShipment(
 			_group.getGroupId(), commerceOrder.getCommerceOrderId(),
-			commerceWarehouse.getCommerceInventoryWarehouseId());
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
-		commerceWarehouseItem =
-			_commerceWarehouseItemLocalService.
+		commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemLocalService.
 				getCommerceInventoryWarehouseItem(
-					commerceWarehouseItem.
+					commerceInventoryWarehouseItem.
 						getCommerceInventoryWarehouseItemId());
 
 		Assert.assertEquals(
-			commerceWarehouseItem.toString(), quantity - orderedQuantity,
-			commerceWarehouseItem.getQuantity());
+			commerceInventoryWarehouseItem.toString(),
+			quantity - orderedQuantity,
+			commerceInventoryWarehouseItem.getQuantity());
 	}
 
 	@Test
@@ -191,11 +192,12 @@ public class OrderStockManagementTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		int orderedQuantity = 2;
 
@@ -258,11 +260,12 @@ public class OrderStockManagementTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -296,11 +299,12 @@ public class OrderStockManagementTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder1.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -316,7 +320,7 @@ public class OrderStockManagementTest {
 
 	@Inject
 	private CommerceInventoryWarehouseItemLocalService
-		_commerceWarehouseItemLocalService;
+		_commerceInventoryWarehouseItemLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;

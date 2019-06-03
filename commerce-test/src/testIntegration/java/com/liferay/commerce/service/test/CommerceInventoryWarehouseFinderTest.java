@@ -57,18 +57,19 @@ public class CommerceInventoryWarehouseFinderTest {
 			CPTestUtil.addCPInstance(groupId), CPTestUtil.addCPInstance(groupId)
 		};
 
-		_addCommerceWarehouse("Commerce Warehouse 1", 50, 40, 60);
-		_addCommerceWarehouse("Commerce Warehouse 2", 20, 10);
-		_addCommerceWarehouse("Commerce Warehouse 3", 0, 0, 100);
-		_addCommerceWarehouse("Commerce Warehouse 4", 100, 10);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 1", 50, 40, 60);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 2", 20, 10);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 3", 0, 0, 100);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 4", 100, 10);
 	}
 
-	private CommerceInventoryWarehouse _addCommerceWarehouse(
+	private CommerceInventoryWarehouse _addCommerceInventoryWarehouse(
 			String name, int... quantities)
 		throws Exception {
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId(), name);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId(), name);
 
 		for (int i = 0; i < quantities.length; i++) {
 			int quantity = quantities[i];
@@ -79,12 +80,12 @@ public class CommerceInventoryWarehouseFinderTest {
 
 			CPInstance cpInstance = _cpInstances[i];
 
-			CommerceTestUtil.addCommerceWarehouseItem(
-				commerceWarehouse, cpInstance.getSku(), quantity,
-				commerceWarehouse.getUserId());
+			CommerceTestUtil.addCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouse.getUserId(),
+				commerceInventoryWarehouse, cpInstance.getSku(), quantity);
 		}
 
-		return commerceWarehouse;
+		return commerceInventoryWarehouse;
 	}
 
 	private CPInstance[] _cpInstances;

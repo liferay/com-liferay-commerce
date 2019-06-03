@@ -102,19 +102,19 @@ public class CommerceOrderDiscountTest {
 
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstanceDiscount.getSku(), quantity,
-			_user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse,
+			cpInstanceDiscount.getSku(), quantity);
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstancePlain.getSku(), quantity,
-			_user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse,
+			cpInstancePlain.getSku(), quantity);
 
 		CommerceDiscount commerceDiscount1 =
 			CommerceDiscountTestUtil.addFixedCommerceDiscount(
@@ -200,19 +200,19 @@ public class CommerceOrderDiscountTest {
 
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstanceDiscount.getSku(), quantity,
-			_user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse,
+			cpInstanceDiscount.getSku(), quantity);
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstancePlain.getSku(), quantity,
-			_user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse,
+			cpInstancePlain.getSku(), quantity);
 
 		CommerceDiscount commerceDiscount1 =
 			CommerceDiscountTestUtil.addFixedCommerceDiscount(

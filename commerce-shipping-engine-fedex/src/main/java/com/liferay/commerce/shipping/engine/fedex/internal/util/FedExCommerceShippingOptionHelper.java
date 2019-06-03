@@ -45,8 +45,6 @@ import com.fedex.ws.rate.v22.WebAuthenticationDetail;
 import com.fedex.ws.rate.v22.Weight;
 import com.fedex.ws.rate.v22.WeightUnits;
 
-import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -58,7 +56,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingOption;
-import com.liferay.commerce.model.CommerceShippingOriginLocator;
 import com.liferay.commerce.model.Dimensions;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -68,8 +65,8 @@ import com.liferay.commerce.product.model.CPMeasurementUnitConstants;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.shipping.engine.fedex.internal.configuration.FedExCommerceShippingEngineGroupServiceConfiguration;
 import com.liferay.commerce.shipping.engine.fedex.internal.constants.FedExCommerceShippingEngineConstants;
+import com.liferay.commerce.shipping.origin.locator.CommerceShippingOriginLocator;
 import com.liferay.commerce.util.CommerceShippingHelper;
-import com.liferay.commerce.util.CommerceShippingOriginLocatorRegistry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -101,6 +98,7 @@ import org.apache.axis.types.PositiveInteger;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 public class FedExCommerceShippingOptionHelper {
 
@@ -117,8 +115,7 @@ public class FedExCommerceShippingOptionHelper {
 			CommerceCurrencyLocalService commerceCurrencyLocalService,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShippingHelper commerceShippingHelper,
-			CommerceShippingOriginLocatorRegistry
-				commerceShippingOriginLocatorRegistry,
+			CommerceShippingOriginLocator commerceShippingOriginLocator,
 			CPMeasurementUnitLocalService cpMeasurementUnitLocalService,
 			ConfigurationProvider configurationProvider,
 			ResourceBundle resourceBundle)
@@ -129,6 +126,7 @@ public class FedExCommerceShippingOptionHelper {
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShippingHelper = commerceShippingHelper;
+		_commerceShippingOriginLocator = commerceShippingOriginLocator;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;
 		_resourceBundle = resourceBundle;
 
@@ -158,27 +156,6 @@ public class FedExCommerceShippingOptionHelper {
 
 		if (_shippingAddress == null) {
 			throw new CommerceShippingEngineException.MustSetShippingAddress();
-		}
-
-		CommerceShippingGroupServiceConfiguration
-			commerceShippingGroupServiceConfiguration =
-				configurationProvider.getConfiguration(
-					CommerceShippingGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						groupId, CommerceConstants.SHIPPING_SERVICE_NAME));
-
-		String commerceShippingOriginLocatorKey =
-			commerceShippingGroupServiceConfiguration.
-				commerceShippingOriginLocatorKey();
-
-		_commerceShippingOriginLocator =
-			commerceShippingOriginLocatorRegistry.
-				getCommerceShippingOriginLocator(
-					commerceShippingOriginLocatorKey);
-
-		if (_commerceShippingOriginLocator == null) {
-			throw new CommerceShippingEngineException.
-				MustSetShippingOriginLocator(commerceShippingOriginLocatorKey);
 		}
 
 		_fedExCommerceShippingEngineGroupServiceConfiguration =

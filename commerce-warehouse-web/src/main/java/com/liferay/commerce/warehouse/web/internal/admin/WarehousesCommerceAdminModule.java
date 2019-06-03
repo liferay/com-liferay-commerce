@@ -20,8 +20,10 @@ import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
+import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.service.CommerceCountryService;
-import com.liferay.commerce.warehouse.web.internal.display.context.CommerceWarehousesDisplayContext;
+import com.liferay.commerce.warehouse.web.internal.display.context.CommerceInventoryWarehousesDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -76,8 +78,10 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
 
-		CommerceWarehousesDisplayContext commerceWarehousesDisplayContext =
-			setCommerceWarehousesDisplayContext(httpServletRequest);
+		CommerceInventoryWarehousesDisplayContext
+			commerceInventoryWarehousesDisplayContext =
+				setCommerceInventoryWarehousesDisplayContext(
+					httpServletRequest);
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -85,7 +89,7 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		portletURL.setParameter(
 			"commerceCountryId",
 			String.valueOf(
-				commerceWarehousesDisplayContext.
+				commerceInventoryWarehousesDisplayContext.
 					getCommerceCountryTwoLettersIsoCode()));
 
 		return portletURL;
@@ -115,34 +119,36 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 		HttpServletResponse httpServletResponse =
 			_portal.getHttpServletResponse(renderResponse);
 
-		setCommerceWarehousesDisplayContext(httpServletRequest);
+		setCommerceInventoryWarehousesDisplayContext(httpServletRequest);
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/view.jsp");
 	}
 
-	protected CommerceWarehousesDisplayContext
-		setCommerceWarehousesDisplayContext(
+	protected CommerceInventoryWarehousesDisplayContext
+		setCommerceInventoryWarehousesDisplayContext(
 			HttpServletRequest httpServletRequest) {
 
-		CommerceWarehousesDisplayContext commerceWarehousesDisplayContext =
-			(CommerceWarehousesDisplayContext)httpServletRequest.getAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT);
+		CommerceInventoryWarehousesDisplayContext
+			commerceInventoryWarehousesDisplayContext =
+				(CommerceInventoryWarehousesDisplayContext)
+					httpServletRequest.getAttribute(
+						WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-		if (commerceWarehousesDisplayContext == null) {
-			commerceWarehousesDisplayContext =
-				new CommerceWarehousesDisplayContext(
+		if (commerceInventoryWarehousesDisplayContext == null) {
+			commerceInventoryWarehousesDisplayContext =
+				new CommerceInventoryWarehousesDisplayContext(
 					_commerceChannelRelService, _commerceChannelService,
-					_commerceCountryService, _commerceWarehouseLocalService,
+					_commerceCountryService, _commerceInventoryWarehouseService,
 					httpServletRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				commerceWarehousesDisplayContext);
+				commerceInventoryWarehousesDisplayContext);
 		}
 
-		return commerceWarehousesDisplayContext;
+		return commerceInventoryWarehousesDisplayContext;
 	}
 
 	@Reference
@@ -155,8 +161,8 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
-	private CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
