@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.inventory.internal.messaging;
 
-import com.liferay.commerce.inventory.configuration.CommerceInventorySystemConfiguration;
+import com.liferay.commerce.inventory.internal.configuration.CommerceInventorySystemConfiguration;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -52,13 +52,14 @@ public class CheckCommerceInventoryBookedQuantityMessageListener
 
 		String className = clazz.getName();
 
-		CommerceInventorySystemConfiguration commerceSubscriptionConfiguration =
-			ConfigurableUtil.createConfigurable(
-				CommerceInventorySystemConfiguration.class, properties);
+		CommerceInventorySystemConfiguration
+			commerceInventorySystemConfiguration =
+				ConfigurableUtil.createConfigurable(
+					CommerceInventorySystemConfiguration.class, properties);
 
 		Trigger trigger = _triggerFactory.createTrigger(
 			className, className, null, null,
-			commerceSubscriptionConfiguration.
+			commerceInventorySystemConfiguration.
 				checkCommerceInventoryTemporaryBookedQuantityInterval(),
 			TimeUnit.MINUTE);
 
@@ -77,7 +78,7 @@ public class CheckCommerceInventoryBookedQuantityMessageListener
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		_commerceInventoryBookedQuantityLocalService.
-			removeOldTemporaryBookedQuantities();
+			checkCommerceInventoryBookedQuantities();
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
