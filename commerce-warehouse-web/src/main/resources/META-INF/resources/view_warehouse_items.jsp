@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehouseItemsDisplayContext commerceWarehouseItemsDisplayContext = (CommerceWarehouseItemsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehouseItemsDisplayContext commerceInventoryWarehouseItemsDisplayContext = (CommerceInventoryWarehouseItemsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-String backURL = commerceWarehouseItemsDisplayContext.getBackURL();
+String backURL = commerceInventoryWarehouseItemsDisplayContext.getBackURL();
 
 if (Validator.isNotNull(backURL)) {
 	portletDisplay.setShowBackIcon(true);
@@ -27,28 +27,28 @@ if (Validator.isNotNull(backURL)) {
 }
 %>
 
-<c:if test="<%= commerceWarehouseItemsDisplayContext.hasManageCommerceWarehousePermission() %>">
+<c:if test="<%= commerceInventoryWarehouseItemsDisplayContext.hasManageCommerceInventoryWarehousePermission() %>">
 
 	<%
-	List<CommerceInventoryWarehouse> commerceWarehouses = commerceWarehouseItemsDisplayContext.getCommerceWarehouses();
-	CPInstance cpInstance = commerceWarehouseItemsDisplayContext.getCPInstance();
+	List<CommerceInventoryWarehouse> commerceInventoryWarehouses = commerceInventoryWarehouseItemsDisplayContext.getCommerceInventoryWarehouses();
+	CPInstance cpInstance = commerceInventoryWarehouseItemsDisplayContext.getCPInstance();
 	%>
 
 	<div class="container-fluid-1280">
 		<c:choose>
-			<c:when test="<%= commerceWarehouses.isEmpty() %>">
+			<c:when test="<%= commerceInventoryWarehouses.isEmpty() %>">
 				<div class="alert alert-info">
 					<liferay-ui:message key="there-are-no-active-warehouses" />
 				</div>
 			</c:when>
 			<c:otherwise>
-				<portlet:actionURL name="editCommerceWarehouseItem" var="updateCommerceWarehouseItemURL" />
+				<portlet:actionURL name="editCommerceInventoryWarehouseItem" var="updateCommerceInventoryWarehouseItemURL" />
 
-				<aui:form action="<%= updateCommerceWarehouseItemURL %>" method="post" name="fm">
+				<aui:form action="<%= updateCommerceInventoryWarehouseItemURL %>" method="post" name="fm">
 					<aui:input name="<%= Constants.CMD %>" type="hidden" />
 					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-					<aui:input name="commerceWarehouseId" type="hidden" />
-					<aui:input name="commerceWarehouseItemId" type="hidden" />
+					<aui:input name="commerceInventoryWarehouseId" type="hidden" />
+					<aui:input name="commerceInventoryWarehouseItemId" type="hidden" />
 					<aui:input name="sku" type="hidden" value="<%= cpInstance.getSku() %>" />
 
 					<table class="show-quick-actions-on-hover table table-autofit table-list table-responsive-lg">
@@ -63,29 +63,29 @@ if (Validator.isNotNull(backURL)) {
 						<tbody>
 
 							<%
-							for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
-								CommerceInventoryWarehouseItem commerceWarehouseItem = commerceWarehouseItemsDisplayContext.getCommerceWarehouseItem(commerceWarehouse);
+							for (CommerceInventoryWarehouse commerceInventoryWarehouse : commerceInventoryWarehouses) {
+								CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = commerceInventoryWarehouseItemsDisplayContext.getCommerceInventoryWarehouseItem(commerceInventoryWarehouse);
 
-								long commerceWarehouseItemId = 0;
+								long commerceInventoryWarehouseItemId = 0;
 
-								if (commerceWarehouseItem != null) {
-									commerceWarehouseItemId = commerceWarehouseItem.getCommerceInventoryWarehouseItemId();
+								if (commerceInventoryWarehouseItem != null) {
+									commerceInventoryWarehouseItemId = commerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId();
 								}
 
-								int curIndex = commerceWarehouses.indexOf(commerceWarehouse);
+								int curIndex = commerceInventoryWarehouses.indexOf(commerceInventoryWarehouse);
 							%>
 
-								<aui:model-context bean="<%= commerceWarehouseItem %>" model="<%= CommerceInventoryWarehouseItem.class %>" />
+								<aui:model-context bean="<%= commerceInventoryWarehouseItem %>" model="<%= CommerceInventoryWarehouseItem.class %>" />
 
 								<tr>
 									<td>
-										<%= HtmlUtil.escape(commerceWarehouse.getName()) %>
+										<%= HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>
 									</td>
 									<td>
-										<aui:input id='<%= "commerceWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
+										<aui:input id='<%= "commerceInventoryWarehouseItemQuantity" + curIndex %>' label="" name="quantity" wrapperCssClass="m-0" />
 									</td>
 									<td class="text-center">
-										<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceWarehouseItemsDisplayContext.getUpdateCommerceWarehouseItemTaglibOnClick(commerceWarehouse.getCommerceInventoryWarehouseId(), commerceWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
+										<aui:button cssClass="btn btn-primary" name='<%= "saveButton" + curIndex %>' onClick="<%= commerceInventoryWarehouseItemsDisplayContext.getUpdateCommerceInventoryWarehouseItemTaglibOnClick(commerceInventoryWarehouse.getCommerceInventoryWarehouseId(), commerceInventoryWarehouseItemId, curIndex) %>" primary="<%= true %>" value="save" />
 									</td>
 								</tr>
 
@@ -101,20 +101,20 @@ if (Validator.isNotNull(backURL)) {
 	</div>
 
 	<aui:script>
-		function <portlet:namespace/>updateCommerceWarehouseItem(commerceWarehouseId, commerceWarehouseItemId, index) {
+		function <portlet:namespace/>updateCommerceInventoryWarehouseItem(commerceInventoryWarehouseId, commerceInventoryWarehouseItemId, index) {
 			var form = $(document.<portlet:namespace />fm);
 
-			if (commerceWarehouseItemId > 0) {
+			if (commerceInventoryWarehouseItemId > 0) {
 				form.fm('<%= Constants.CMD %>').val('<%= Constants.UPDATE %>');
 			}
 			else {
 				form.fm('<%= Constants.CMD %>').val('<%= Constants.ADD %>');
 			}
 
-			form.fm('commerceWarehouseId').val(commerceWarehouseId);
-			form.fm('commerceWarehouseItemId').val(commerceWarehouseItemId);
+			form.fm('commerceInventoryWarehouseId').val(commerceInventoryWarehouseId);
+			form.fm('commerceInventoryWarehouseItemId').val(commerceInventoryWarehouseItemId);
 
-			var quantityInputId = '#<portlet:namespace />commerceWarehouseItemQuantity' + index;
+			var quantityInputId = '#<portlet:namespace />commerceInventoryWarehouseItemQuantity' + index;
 
 			var quantityInput = $(quantityInputId);
 
@@ -125,7 +125,7 @@ if (Validator.isNotNull(backURL)) {
 	</aui:script>
 
 	<aui:script>
-		var quantityPrefix = "<portlet:namespace />commerceWarehouseItemQuantity";
+		var quantityPrefix = "<portlet:namespace />commerceInventoryWarehouseItemQuantity";
 		var enterKeyCode = 13;
 
 		$('input[id^=' + quantityPrefix + ']').on(

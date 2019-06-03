@@ -21,7 +21,7 @@ import com.liferay.commerce.initializer.util.CPDefinitionsImporter;
 import com.liferay.commerce.initializer.util.CPOptionCategoriesImporter;
 import com.liferay.commerce.initializer.util.CPOptionsImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
-import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
+import com.liferay.commerce.initializer.util.CommerceInventoryWarehousesImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.product.importer.CPFileImporter;
@@ -264,29 +264,27 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private List<CommerceInventoryWarehouse> _importCommerceWarehouses(
+	private List<CommerceInventoryWarehouse> _importCommerceInventoryWarehouses(
 			ServiceContext serviceContext)
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing commerce warehouses...");
+			_log.info("Importing commerce inventory warehouses...");
 		}
-
-		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		JSONArray jsonArray = _getJSONArray("warehouses.json");
 
-		List<CommerceInventoryWarehouse> commerceWarehouses =
-			_commerceWarehousesImporter.importCommerceWarehouses(
-				jsonArray, serviceContext.getScopeGroupId(),
-				serviceContext.getUserId());
+		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
+			_commerceInventoryWarehousesImporter.
+				importCommerceInventoryWarehouses(
+					jsonArray, serviceContext.getScopeGroupId(),
+					serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Commerce warehouses successfully imported");
+			_log.info("Commerce inventory warehouses successfully imported");
 		}
 
-		return commerceWarehouses;
+		return commerceInventoryWarehouses;
 	}
 
 	private void _importCPDefinitions(
@@ -628,7 +626,7 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 			commerceCatalog, serviceContext);
 
 		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
-			_importCommerceWarehouses(serviceContext);
+			_importCommerceInventoryWarehouses(serviceContext);
 
 		_importCPDefinitions(
 			catalogGroupId, commerceChannel.getCommerceChannelId(),
@@ -739,7 +737,8 @@ public class BrecciaSiteInitializer implements SiteInitializer {
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
-	private CommerceWarehousesImporter _commerceWarehousesImporter;
+	private CommerceInventoryWarehousesImporter
+		_commerceInventoryWarehousesImporter;
 
 	@Reference
 	private CPDefinitionsImporter _cpDefinitionsImporter;

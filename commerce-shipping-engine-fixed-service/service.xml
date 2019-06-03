@@ -64,7 +64,7 @@
 
 		<column name="commerceShippingMethodId" type="long" />
 		<column name="commerceShippingFixedOptionId" type="long" />
-		<column name="commerceWarehouseId" type="long" />
+		<column name="commerceInventoryWarehouseId" type="long" />
 		<column name="commerceCountryId" type="long" />
 		<column name="commerceRegionId" type="long" />
 		<column name="zip" type="String" />

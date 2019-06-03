@@ -25,39 +25,40 @@ import javax.portlet.PortletResponse;
 /**
  * @author Andrea Di Giorgi
  */
-public class CommerceWarehouseChecker extends EmptyOnClickRowChecker {
+public class CommerceInventoryWarehouseChecker extends EmptyOnClickRowChecker {
 
-	public CommerceWarehouseChecker(
-		PortletResponse portletResponse, long[] checkedCommerceWarehouseIds,
-		long[] disabledCommerceWarehouseIds) {
+	public CommerceInventoryWarehouseChecker(
+		PortletResponse portletResponse,
+		long[] checkedCommerceInventoryWarehouseIds,
+		long[] disabledCommerceInventoryWarehouseIds) {
 
 		super(portletResponse);
 
-		_checkedCommerceWarehouseIds = SetUtil.fromArray(
-			checkedCommerceWarehouseIds);
-		_disabledCommerceWarehouseIds = SetUtil.fromArray(
-			disabledCommerceWarehouseIds);
+		_checkedCommerceInventoryWarehouseIds = SetUtil.fromArray(
+			checkedCommerceInventoryWarehouseIds);
+		_disabledCommerceInventoryWarehouseIds = SetUtil.fromArray(
+			disabledCommerceInventoryWarehouseIds);
 	}
 
 	@Override
 	public boolean isChecked(Object obj) {
-		CommerceInventoryWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			(CommerceInventoryWarehouse)obj;
 
-		return _checkedCommerceWarehouseIds.contains(
-			commerceWarehouse.getCommerceInventoryWarehouseId());
+		return _checkedCommerceInventoryWarehouseIds.contains(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 	}
 
 	@Override
 	public boolean isDisabled(Object obj) {
-		CommerceInventoryWarehouse commerceWarehouse =
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			(CommerceInventoryWarehouse)obj;
 
-		return _disabledCommerceWarehouseIds.contains(
-			commerceWarehouse.getCommerceInventoryWarehouseId());
+		return _disabledCommerceInventoryWarehouseIds.contains(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 	}
 
-	private final Set<Long> _checkedCommerceWarehouseIds;
-	private final Set<Long> _disabledCommerceWarehouseIds;
+	private final Set<Long> _checkedCommerceInventoryWarehouseIds;
+	private final Set<Long> _disabledCommerceInventoryWarehouseIds;
 
 }

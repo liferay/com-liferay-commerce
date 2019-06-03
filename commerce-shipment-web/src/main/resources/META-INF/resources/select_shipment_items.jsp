@@ -24,7 +24,7 @@ CommerceShipmentDisplayContext commerceShipmentDisplayContext = (CommerceShipmen
 CommerceShipment commerceShipment = commerceShipmentDisplayContext.getCommerceShipment();
 long commerceShipmentId = commerceShipmentDisplayContext.getCommerceShipmentId();
 List<CommerceOrderItem> commerceOrderItems = commerceShipmentDisplayContext.getCommerceOrderItems(commerceOrderId);
-List<CommerceInventoryWarehouse> commerceWarehouses = commerceShipmentDisplayContext.getCommerceWarehouses();
+List<CommerceInventoryWarehouse> commerceInventoryWarehouses = commerceShipmentDisplayContext.getCommerceInventoryWarehouses();
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(shipmentsURL);
@@ -51,7 +51,7 @@ portletDisplay.setURLBack(shipmentsURL);
 					<liferay-ui:message key="there-are-no-available-items-to-ship-in-the-selected-order" />
 				</div>
 			</c:when>
-			<c:when test="<%= commerceWarehouses.isEmpty() %>">
+			<c:when test="<%= commerceInventoryWarehouses.isEmpty() %>">
 				<div class="alert alert-info">
 					<liferay-ui:message key="there-are-no-active-warehouses" />
 				</div>
@@ -64,10 +64,10 @@ portletDisplay.setURLBack(shipmentsURL);
 							<th class="text-center"><liferay-ui:message key="ordered-quantity" /></th>
 
 							<%
-							for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
+							for (CommerceInventoryWarehouse commerceInventoryWarehouse : commerceInventoryWarehouses) {
 							%>
 
-								<th><%= HtmlUtil.escape(commerceWarehouse.getName()) %></th>
+								<th><%= HtmlUtil.escape(commerceInventoryWarehouse.getName()) %></th>
 
 							<%
 							}
@@ -94,13 +94,13 @@ portletDisplay.setURLBack(shipmentsURL);
 								</td>
 
 								<%
-								for (CommerceInventoryWarehouse commerceWarehouse : commerceWarehouses) {
+								for (CommerceInventoryWarehouse commerceInventoryWarehouse : commerceInventoryWarehouses) {
 									int maxQuantityAllowed;
 
-									int commerceWarehouseItemQuantity = commerceShipmentDisplayContext.getCommerceWarehouseItemQuantity(commerceOrderItem.getCommerceOrderItemId(), commerceWarehouse.getCommerceInventoryWarehouseId());
+									int commerceInventoryWarehouseItemQuantity = commerceShipmentDisplayContext.getCommerceInventoryWarehouseItemQuantity(commerceOrderItem.getCommerceOrderItemId(), commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
-									if (remainedQuantity > commerceWarehouseItemQuantity) {
-										maxQuantityAllowed = commerceWarehouseItemQuantity;
+									if (remainedQuantity > commerceInventoryWarehouseItemQuantity) {
+										maxQuantityAllowed = commerceInventoryWarehouseItemQuantity;
 									}
 									else {
 										maxQuantityAllowed = remainedQuantity;
@@ -108,9 +108,9 @@ portletDisplay.setURLBack(shipmentsURL);
 								%>
 
 									<td>
-										<aui:input name='<%= commerceOrderItem.getCommerceOrderItemId() + "_warehouse" %>' type="hidden" value="<%= commerceWarehouse.getCommerceInventoryWarehouseId() %>" />
+										<aui:input name='<%= commerceOrderItem.getCommerceOrderItemId() + "_warehouse" %>' type="hidden" value="<%= commerceInventoryWarehouse.getCommerceInventoryWarehouseId() %>" />
 
-										<aui:input label="" name='<%= commerceOrderItem.getCommerceOrderItemId() + "_" + commerceWarehouse.getCommerceInventoryWarehouseId() + "_quantity" %>' placeholder='<%= LanguageUtil.format(request, "x-available", commerceWarehouseItemQuantity, false) %>' title="" type="number" wrapperCssClass="m-0">
+										<aui:input label="" name='<%= commerceOrderItem.getCommerceOrderItemId() + "_" + commerceInventoryWarehouse.getCommerceInventoryWarehouseId() + "_quantity" %>' placeholder='<%= LanguageUtil.format(request, "x-available", commerceInventoryWarehouseItemQuantity, false) %>' title="" type="number" wrapperCssClass="m-0">
 											<aui:validator name="max"><%= maxQuantityAllowed %></aui:validator>
 											<aui:validator name="min">0</aui:validator>
 											<aui:validator name="number" />
@@ -133,7 +133,7 @@ portletDisplay.setURLBack(shipmentsURL);
 		</c:choose>
 
 		<aui:button-row>
-			<aui:button cssClass="btn-lg" disabled="<%= commerceOrderItems.isEmpty() || commerceWarehouses.isEmpty() %>" name="saveButton" type="submit" value="save" />
+			<aui:button cssClass="btn-lg" disabled="<%= commerceOrderItems.isEmpty() || commerceInventoryWarehouses.isEmpty() %>" name="saveButton" type="submit" value="save" />
 
 			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
 		</aui:button-row>

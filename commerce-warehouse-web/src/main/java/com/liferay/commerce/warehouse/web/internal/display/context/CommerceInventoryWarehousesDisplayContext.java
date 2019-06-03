@@ -15,7 +15,7 @@
 package com.liferay.commerce.warehouse.web.internal.display.context;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -49,19 +49,19 @@ import javax.servlet.http.HttpServletRequest;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-public class CommerceWarehousesDisplayContext {
+public class CommerceInventoryWarehousesDisplayContext {
 
 	public CommerceWarehousesDisplayContext(
 		CommerceChannelRelService commerceChannelRelService,
 		CommerceChannelService commerceChannelService,
 		CommerceCountryService commerceCountryService,
-		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
 		HttpServletRequest httpServletRequest) {
 
 		_commerceChannelRelService = commerceChannelRelService;
 		_commerceChannelService = commerceChannelService;
 		_commerceCountryService = commerceCountryService;
-		_commerceWarehouseLocalService = commerceWarehouseLocalService;
+		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 	}
@@ -70,7 +70,7 @@ public class CommerceWarehousesDisplayContext {
 		throws PortalException {
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			getCommerceWarehouse();
+			getCommerceInventoryWarehouse();
 
 		List<CommerceChannelRel> commerceChannelRels =
 			_commerceChannelRelService.getCommerceChannelRels(
@@ -103,23 +103,24 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getRenderRequest(), "countryTwoLettersISOCode");
 	}
 
-	public CommerceInventoryWarehouse getCommerceWarehouse()
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse()
 		throws PortalException {
 
-		if (_commerceWarehouse != null) {
-			return _commerceWarehouse;
+		if (_commerceInventoryWarehouse != null) {
+			return _commerceInventoryWarehouse;
 		}
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			_cpRequestHelper.getRenderRequest(), "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			_cpRequestHelper.getRenderRequest(),
+			"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId > 0) {
-			_commerceWarehouse =
-				_commerceWarehouseLocalService.getCommerceInventoryWarehouse(
-					commerceWarehouseId);
+		if (commerceInventoryWarehouseId > 0) {
+			_commerceInventoryWarehouse =
+				_commerceInventoryWarehouseService.
+					getCommerceInventoryWarehouse(commerceInventoryWarehouseId);
 		}
 
-		return _commerceWarehouse;
+		return _commerceInventoryWarehouse;
 	}
 
 	public List<ManagementBarFilterItem> getManagementBarFilterItems()
@@ -227,7 +228,7 @@ public class CommerceWarehousesDisplayContext {
 			_cpRequestHelper.getRenderRequest(), getPortletURL(), null,
 			emptyResultsMessage);
 
-		if (!search && hasManageCommerceWarehousePermission()) {
+		if (!search && hasManageCommerceInventoryWarehousePermission()) {
 			_searchContainer.setEmptyResultsMessageCssClass(
 				"taglib-empty-result-message-header-has-plus-btn");
 		}
@@ -236,7 +237,7 @@ public class CommerceWarehousesDisplayContext {
 		String orderByType = getOrderByType();
 
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator =
-			CommerceUtil.getCommerceWarehouseOrderByComparator(
+			CommerceUtil.getCommerceInventoryWarehouseOrderByComparator(
 				orderByCol, orderByType);
 
 		_searchContainer.setOrderByCol(orderByCol);
@@ -245,38 +246,62 @@ public class CommerceWarehousesDisplayContext {
 		_searchContainer.setSearch(search);
 
 		List<CommerceInventoryWarehouse> results;
+		int total;
 
 		if (_searchContainer.isSearch() && (commerceCountry != null)) {
-			results = _commerceWarehouseLocalService.search(
-				_cpRequestHelper.getCompanyId(),
-				_cpRequestHelper.getScopeGroupId(), getKeywords(), active,
-				commerceCountry.getTwoLettersISOCode(),
-				_searchContainer.getStart(), _searchContainer.getEnd(),
-				orderByComparator);
+			results =
+				_commerceInventoryWarehouseService.
+					searchCommerceInventoryWarehouses(
+						_cpRequestHelper.getCompanyId(), active,
+						commerceCountry.getTwoLettersISOCode(), getKeywords(),
+						_searchContainer.getStart(), _searchContainer.getEnd(),
+						CommerceUtil.getCommerceInventoryWarehouseSort(
+							orderByCol, orderByType));
+
+			total =
+				_commerceInventoryWarehouseService.
+					searchCommerceInventoryWarehousesCount(
+						_cpRequestHelper.getCompanyId(), active,
+						commerceCountryTwoLettersIsoCode, getKeywords());
 		}
 		else {
 			if (active == null) {
 				results =
-					_commerceWarehouseLocalService.
-						getCommerceWarehousesByGroupId(
+					_commerceInventoryWarehouseService.
+						getCommerceInventoryWarehouses(
 							_cpRequestHelper.getCompanyId(),
-							_cpRequestHelper.getScopeGroupId());
+							_searchContainer.getStart(),
+							_searchContainer.getEnd(), orderByComparator);
+
+				total =
+					_commerceInventoryWarehouseService.
+						getCommerceInventoryWarehousesCount(
+							_cpRequestHelper.getCompanyId());
 			}
 			else {
-				results = _commerceWarehouseLocalService.getCommerceWarehouses(
-					_cpRequestHelper.getCompanyId(),
-					_cpRequestHelper.getScopeGroupId(), active,
-					commerceCountry.getTwoLettersISOCode());
+				results =
+					_commerceInventoryWarehouseService.
+						getCommerceInventoryWarehouses(
+							_cpRequestHelper.getCompanyId(), active,
+							commerceCountry.getTwoLettersISOCode(),
+							_searchContainer.getStart(),
+							_searchContainer.getEnd(), orderByComparator);
+
+				total =
+					_commerceInventoryWarehouseService.
+						getCommerceInventoryWarehousesCount(
+							_cpRequestHelper.getCompanyId(), active,
+							commerceCountry.getTwoLettersISOCode());
 			}
 		}
 
-		_searchContainer.setTotal(results.size());
 		_searchContainer.setResults(results);
+		_searchContainer.setTotal(total);
 
 		return _searchContainer;
 	}
 
-	public boolean hasManageCommerceWarehousePermission() {
+	public boolean hasManageCommerceInventoryWarehousePermission() {
 		return true;
 	}
 
@@ -339,9 +364,9 @@ public class CommerceWarehousesDisplayContext {
 	private final CommerceChannelRelService _commerceChannelRelService;
 	private final CommerceChannelService _commerceChannelService;
 	private final CommerceCountryService _commerceCountryService;
-	private CommerceInventoryWarehouse _commerceWarehouse;
-	private final CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
+	private CommerceInventoryWarehouse _commerceInventoryWarehouse;
+	private final CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 	private final CPRequestHelper _cpRequestHelper;
 	private String _keywords;
 	private SearchContainer<CommerceInventoryWarehouse> _searchContainer;

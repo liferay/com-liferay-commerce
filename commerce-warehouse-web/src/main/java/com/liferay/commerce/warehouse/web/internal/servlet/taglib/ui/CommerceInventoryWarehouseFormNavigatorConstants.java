@@ -12,13 +12,17 @@
  * details.
  */
 
-package com.liferay.commerce.item.selector.criterion;
-
-import com.liferay.item.selector.BaseItemSelectorCriterion;
+package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
 /**
  * @author Andrea Di Giorgi
  */
-public class CommerceWarehouseItemSelectorCriterion
-	extends BaseItemSelectorCriterion {
+public class CommerceInventoryWarehouseFormNavigatorConstants {
+
+	public static final String CATEGORY_KEY_COMMERCE_WAREHOUSE_GENERAL =
+		"general";
+
+	public static final String FORM_NAVIGATOR_ID_COMMERCE_WAREHOUSE =
+		"commerce.warehouse.form";
+
 }

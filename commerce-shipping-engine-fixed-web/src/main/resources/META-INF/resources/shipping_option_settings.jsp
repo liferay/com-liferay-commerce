@@ -102,14 +102,14 @@ boolean manageCommerceShippingMethodsPermission = commerceShippingFixedOptionRel
 					CommerceRegion commerceRegion = commerceShippingFixedOptionRel.getCommerceRegion();
 					CommerceShippingFixedOption commerceShippingFixedOption = commerceShippingFixedOptionRel.getCommerceShippingFixedOption();
 					CommerceShippingMethod commerceShippingMethod = commerceShippingFixedOptionRel.getCommerceShippingMethod();
-					CommerceInventoryWarehouse commerceWarehouse = commerceShippingFixedOptionRel.getCommerceWarehouse();
+					CommerceInventoryWarehouse commerceInventoryWarehouse = commerceShippingFixedOptionRel.getCommerceInventoryWarehouse();
 					%>
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="warehouse"
 					>
-						<%= (commerceWarehouse == null) ? StringPool.STAR : HtmlUtil.escape(commerceWarehouse.getName()) %>
+						<%= (commerceInventoryWarehouse == null) ? StringPool.STAR : HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text

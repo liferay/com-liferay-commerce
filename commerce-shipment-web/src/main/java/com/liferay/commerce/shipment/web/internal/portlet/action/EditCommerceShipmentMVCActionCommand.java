@@ -73,20 +73,22 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "commerceOrderItemId");
 
 		for (long commerceOrderItemId : commerceOrderItemIds) {
-			long[] commerceWarehouseIds = ParamUtil.getLongValues(
+			long[] commerceInventoryWarehouseIds = ParamUtil.getLongValues(
 				actionRequest, commerceOrderItemId + "_warehouse");
 
-			for (long commerceWarehouseId : commerceWarehouseIds) {
+			for (long commerceInventoryWarehouseId :
+					commerceInventoryWarehouseIds) {
+
 				int quantity = ParamUtil.getInteger(
 					actionRequest,
 					StringBundler.concat(
 						commerceOrderItemId, StringPool.UNDERLINE,
-						commerceWarehouseId, "_quantity"));
+						commerceInventoryWarehouseId, "_quantity"));
 
 				if (quantity > 0) {
 					_commerceShipmentItemService.addCommerceShipmentItem(
 						commerceShipmentId, commerceOrderItemId,
-						commerceWarehouseId, quantity, serviceContext);
+						commerceInventoryWarehouseId, quantity, serviceContext);
 				}
 			}
 		}

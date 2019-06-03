@@ -25,18 +25,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
-page import="com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration" %><%@
 page import="com.liferay.commerce.exception.CommerceShippingMethodNameException" %><%@
-page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseActiveException" %><%@
-page import="com.liferay.commerce.inventory.exception.CommerceInventoryWarehouseNameException" %><%@
 page import="com.liferay.commerce.model.CommerceAddressRestriction" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceShippingMethod" %><%@
-page import="com.liferay.commerce.model.CommerceShippingOriginLocator" %><%@
 page import="com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdminModule" %><%@
 page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodRestrictionsDisplayContext" %><%@
 page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodsDisplayContext" %><%@
-page import="com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingSettingsDisplayContext" %><%@
 page import="com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
