@@ -14,11 +14,9 @@
 
 package com.liferay.commerce.shipment.web.internal.display.context;
 
-import com.liferay.commerce.configuration.CommerceShippingGroupServiceConfiguration;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
@@ -27,12 +25,11 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -55,8 +52,7 @@ public class CommerceShipmentDisplayContext
 		CommerceOrderItemService commerceOrderItemService,
 		CommerceOrderService commerceOrderService,
 		CommerceShipmentService commerceShipmentService,
-		CommerceInventoryWarehouseLocalService commerceWarehouseLocalService,
-		ConfigurationProvider configurationProvider,
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
 		PortletResourcePermission portletResourcePermission) {
 
 		super(
@@ -66,8 +62,31 @@ public class CommerceShipmentDisplayContext
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderService = commerceOrderService;
 		_commerceShipmentService = commerceShipmentService;
-		_commerceWarehouseLocalService = commerceWarehouseLocalService;
-		_configurationProvider = configurationProvider;
+		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
+	}
+
+	public int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws PortalException {
+
+		return _commerceOrderItemService.
+			getCommerceInventoryWarehouseItemQuantity(
+				commerceOrderItemId, commerceInventoryWarehouseId);
+	}
+
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses()
+		throws PortalException {
+
+		if (_commerceInventoryWarehouses != null) {
+			return _commerceInventoryWarehouses;
+		}
+
+		_commerceInventoryWarehouses =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
+				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
+
+		return _commerceInventoryWarehouses;
 	}
 
 	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId)
@@ -91,57 +110,6 @@ public class CommerceShipmentDisplayContext
 		return LanguageUtil.get(
 			cpRequestHelper.getLocale(),
 			CommerceShipmentConstants.getShipmentStatusLabel(status));
-	}
-
-	public int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws PortalException {
-
-		return _commerceOrderItemService.getCommerceWarehouseItemQuantity(
-			commerceOrderItemId, commerceWarehouseId);
-	}
-
-	public List<CommerceInventoryWarehouse> getCommerceWarehouses()
-		throws PortalException {
-
-		if (_commerceWarehouses != null) {
-			return _commerceWarehouses;
-		}
-
-		CommerceShippingGroupServiceConfiguration
-			commerceShippingGroupServiceConfiguration =
-				_configurationProvider.getConfiguration(
-					CommerceShippingGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						cpRequestHelper.getScopeGroupId(),
-						CommerceConstants.SHIPPING_SERVICE_NAME));
-
-		String commerceShippingOriginLocatorKey =
-			commerceShippingGroupServiceConfiguration.
-				commerceShippingOriginLocatorKey();
-
-		if (commerceShippingOriginLocatorKey.equals("address")) {
-			CommerceInventoryWarehouse commerceWarehouse =
-				_commerceWarehouseLocalService.fetchDefaultCommerceWarehouse(
-					cpRequestHelper.getScopeGroupId());
-
-			if (commerceWarehouse == null) {
-				_commerceWarehouses = Collections.emptyList();
-			}
-			else {
-				_commerceWarehouses = Collections.singletonList(
-					commerceWarehouse);
-			}
-
-			return _commerceWarehouses;
-		}
-
-		_commerceWarehouses =
-			_commerceWarehouseLocalService.getCommerceWarehousesByGroupId(
-				cpRequestHelper.getCompanyId(),
-				cpRequestHelper.getScopeGroupId());
-
-		return _commerceWarehouses;
 	}
 
 	public String getNavigation() {
@@ -234,12 +202,11 @@ public class CommerceShipmentDisplayContext
 		return searchContainer;
 	}
 
+	private List<CommerceInventoryWarehouse> _commerceInventoryWarehouses;
+	private final CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 	private final CommerceOrderItemService _commerceOrderItemService;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommerceShipmentService _commerceShipmentService;
-	private final CommerceInventoryWarehouseLocalService
-		_commerceWarehouseLocalService;
-	private List<CommerceInventoryWarehouse> _commerceWarehouses;
-	private final ConfigurationProvider _configurationProvider;
 
 }

@@ -16,7 +16,6 @@ package com.liferay.commerce.inventory.test.util;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalServiceUtil;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 import com.liferay.commerce.model.CommerceCountry;
@@ -42,16 +41,7 @@ public class CommerceInventoryTestUtil {
 			RandomTestUtil.nextInt(), false, 0, true, serviceContext);
 	}
 
-	public static CommerceRegion addCommerceRegion(
-			long commerceCountryId, ServiceContext serviceContext)
-		throws PortalException {
-
-		return CommerceRegionLocalServiceUtil.addCommerceRegion(
-			commerceCountryId, RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), 0, true, serviceContext);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceWarehouseAndGroupRel(
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -60,8 +50,8 @@ public class CommerceInventoryTestUtil {
 		CommerceRegion commerceRegion = addCommerceRegion(
 			commerceCountry.getCommerceCountryId(), serviceContext);
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceInventoryWarehouseLocalServiceUtil.addCommerceWarehouse(
+		return CommerceInventoryWarehouseLocalServiceUtil.
+			addCommerceInventoryWarehouse(
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				true, RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
@@ -70,26 +60,30 @@ public class CommerceInventoryTestUtil {
 				commerceCountry.getTwoLettersISOCode(),
 				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(),
 				serviceContext);
-
-		CommerceInventoryWarehouseGroupRelLocalServiceUtil.
-			addCommerceWarehouseGroupRel(
-				commerceWarehouse.getCommerceInventoryWarehouseId(), false,
-				serviceContext);
-
-		return commerceWarehouse;
 	}
 
-	public static CommerceInventoryWarehouseItem addCommerceWarehouseItem(
-			String sku, int quantity, ServiceContext serviceContext)
+	public static CommerceInventoryWarehouseItem
+			addCommerceInventoryWarehouseItem(
+				String sku, int quantity, ServiceContext serviceContext)
 		throws Exception {
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			addCommerceWarehouseAndGroupRel(serviceContext);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			addCommerceInventoryWarehouse(serviceContext);
 
 		return CommerceInventoryWarehouseItemLocalServiceUtil.
-			addCommerceWarehouseItem(
-				commerceWarehouse.getCommerceInventoryWarehouseId(), sku,
-				quantity, serviceContext.getUserId());
+			addCommerceInventoryWarehouseItem(
+				serviceContext.getUserId(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				sku, quantity);
+	}
+
+	public static CommerceRegion addCommerceRegion(
+			long commerceCountryId, ServiceContext serviceContext)
+		throws PortalException {
+
+		return CommerceRegionLocalServiceUtil.addCommerceRegion(
+			commerceCountryId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), 0, true, serviceContext);
 	}
 
 }

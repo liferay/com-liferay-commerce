@@ -21,9 +21,9 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
@@ -157,11 +157,12 @@ public class CommerceOrderHttpHelperImplTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		_commerceWarehouse = CommerceTestUtil.addCommerceWarehouse(
-			_group.getGroupId());
+		_commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			_commerceWarehouse, cpInstance.getCPInstanceId(), 10);
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), _commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
@@ -183,11 +184,11 @@ public class CommerceOrderHttpHelperImplTest {
 	@Inject
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
+	@DeleteAfterTestRun
+	private CommerceInventoryWarehouse _commerceInventoryWarehouse;
+
 	@Inject
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
-
-	@DeleteAfterTestRun
-	private CommerceWarehouse _commerceWarehouse;
 
 	@DeleteAfterTestRun
 	private Group _group;

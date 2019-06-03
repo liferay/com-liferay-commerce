@@ -119,11 +119,12 @@ public class CommercePaymentEngineTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -181,11 +182,12 @@ public class CommercePaymentEngineTest {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
-		CommerceInventoryWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getSku(), 10, _user.getUserId());
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			10);
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),

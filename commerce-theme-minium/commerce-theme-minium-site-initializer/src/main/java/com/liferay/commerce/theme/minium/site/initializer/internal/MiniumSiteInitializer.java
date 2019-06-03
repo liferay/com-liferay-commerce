@@ -26,10 +26,10 @@ import com.liferay.commerce.initializer.util.CPOptionsImporter;
 import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceAccountsImporter;
 import com.liferay.commerce.initializer.util.CommerceDiscountsImporter;
+import com.liferay.commerce.initializer.util.CommerceInventoryWarehousesImporter;
 import com.liferay.commerce.initializer.util.CommercePriceEntriesImporter;
 import com.liferay.commerce.initializer.util.CommercePriceListsImporter;
 import com.liferay.commerce.initializer.util.CommerceUsersImporter;
-import com.liferay.commerce.initializer.util.CommerceWarehousesImporter;
 import com.liferay.commerce.initializer.util.DDMFormImporter;
 import com.liferay.commerce.initializer.util.DLImporter;
 import com.liferay.commerce.initializer.util.JournalArticleImporter;
@@ -200,7 +200,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_importCPSpecificationOptions(catalogGroupId, serviceContext);
 
 			List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
-				_importCommerceWarehouses(serviceContext);
+				_importCommerceInventoryWarehouses(serviceContext);
 
 			_importCPOptions(catalogGroupId, serviceContext);
 
@@ -283,8 +283,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		_commerceCountryLocalService.importDefaultCountries(serviceContext);
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
-		_commerceWarehousesImporter.importDefaultCommerceWarehouse(
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 		_cpMeasurementUnitLocalService.importDefaultValues(serviceContext);
 
 		_commerceAccountRoleHelper.checkCommerceAccountRoles(serviceContext);
@@ -616,6 +614,18 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
+	private List<CommerceInventoryWarehouse> _importCommerceInventoryWarehouses(
+			ServiceContext serviceContext)
+		throws Exception {
+
+		JSONArray jsonArray = _getJSONArray("warehouses.json");
+
+		return _commerceInventoryWarehousesImporter.
+			importCommerceInventoryWarehouses(
+				jsonArray, serviceContext.getScopeGroupId(),
+				serviceContext.getUserId());
+	}
+
 	private void _importCommerceOrganizations(ServiceContext serviceContext)
 		throws Exception {
 
@@ -688,17 +698,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		if (_log.isInfoEnabled()) {
 			_log.info("Commerce Users successfully imported");
 		}
-	}
-
-	private List<CommerceInventoryWarehouse> _importCommerceWarehouses(
-			ServiceContext serviceContext)
-		throws Exception {
-
-		JSONArray jsonArray = _getJSONArray("warehouses.json");
-
-		return _commerceWarehousesImporter.importCommerceWarehouses(
-			jsonArray, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
 	}
 
 	private List<CPDefinition> _importCPDefinitions(
@@ -966,6 +965,10 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private CommerceDiscountsImporter _commerceDiscountsImporter;
 
 	@Reference
+	private CommerceInventoryWarehousesImporter
+		_commerceInventoryWarehousesImporter;
+
+	@Reference
 	private CommercePriceEntriesImporter _commercePriceEntriesImporter;
 
 	@Reference
@@ -984,9 +987,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceUsersImporter _commerceUsersImporter;
-
-	@Reference
-	private CommerceWarehousesImporter _commerceWarehousesImporter;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;

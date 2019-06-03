@@ -15,28 +15,21 @@
 package com.liferay.commerce.service.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-import com.liferay.commerce.model.CommerceWarehouse;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.service.CommerceWarehouseLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -44,7 +37,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class CommerceWarehouseFinderTest {
+public class CommerceInventoryWarehouseFinderTest {
 
 	@ClassRule
 	@Rule
@@ -64,25 +57,19 @@ public class CommerceWarehouseFinderTest {
 			CPTestUtil.addCPInstance(groupId), CPTestUtil.addCPInstance(groupId)
 		};
 
-		_addCommerceWarehouse("Commerce Warehouse 1", 50, 40, 60);
-		_addCommerceWarehouse("Commerce Warehouse 2", 20, 10);
-		_addCommerceWarehouse("Commerce Warehouse 3", 0, 0, 100);
-		_addCommerceWarehouse("Commerce Warehouse 4", 100, 10);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 1", 50, 40, 60);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 2", 20, 10);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 3", 0, 0, 100);
+		_addCommerceInventoryWarehouse("Commerce Warehouse 4", 100, 10);
 	}
 
-	@Test
-	public void testFindByCPInstance() {
-		_testFindByCPInstance(
-			_cpInstances[0], "Commerce Warehouse 1", "Commerce Warehouse 2",
-			"Commerce Warehouse 4");
-	}
-
-	private CommerceWarehouse _addCommerceWarehouse(
+	private CommerceInventoryWarehouse _addCommerceInventoryWarehouse(
 			String name, int... quantities)
 		throws Exception {
 
-		CommerceWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId(), name);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId(), name);
 
 		for (int i = 0; i < quantities.length; i++) {
 			int quantity = quantities[i];
@@ -93,31 +80,12 @@ public class CommerceWarehouseFinderTest {
 
 			CPInstance cpInstance = _cpInstances[i];
 
-			CommerceTestUtil.addCommerceWarehouseItem(
-				commerceWarehouse, cpInstance.getCPInstanceId(), quantity);
+			CommerceTestUtil.addCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouse.getUserId(),
+				commerceInventoryWarehouse, cpInstance.getSku(), quantity);
 		}
 
-		return commerceWarehouse;
-	}
-
-	private void _testFindByCPInstance(
-		CPInstance cpInstance, String... expectedCommerceWarehouseNames) {
-
-		List<CommerceWarehouse> commerceWarehouses =
-			CommerceWarehouseLocalServiceUtil.getCommerceWarehouses(
-				cpInstance.getCPInstanceId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
-
-		Assert.assertEquals(
-			commerceWarehouses.toString(),
-			expectedCommerceWarehouseNames.length, commerceWarehouses.size());
-
-		for (CommerceWarehouse commerceWarehouse : commerceWarehouses) {
-			Assert.assertTrue(
-				ArrayUtil.contains(
-					expectedCommerceWarehouseNames,
-					commerceWarehouse.getName()));
-		}
+		return commerceInventoryWarehouse;
 	}
 
 	private CPInstance[] _cpInstances;

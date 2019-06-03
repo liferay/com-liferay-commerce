@@ -18,7 +18,6 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
-import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodsDisplayContext;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
@@ -119,10 +118,6 @@ public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private CommerceShippingEngineRegistry _commerceShippingEngineRegistry;
-
-	@Reference
-	private CommerceShippingMethodLocalService
-		_commerceShippingMethodLocalService;
 
 	@Reference
 	private CommerceShippingMethodService _commerceShippingMethodService;

@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CommerceInventoryWarehousesDisplayContext {
 
-	public CommerceWarehousesDisplayContext(
+	public CommerceInventoryWarehousesDisplayContext(
 		CommerceChannelRelService commerceChannelRelService,
 		CommerceChannelService commerceChannelService,
 		CommerceCountryService commerceCountryService,

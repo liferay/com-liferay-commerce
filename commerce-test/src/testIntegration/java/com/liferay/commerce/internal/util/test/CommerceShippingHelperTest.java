@@ -17,8 +17,8 @@ package com.liferay.commerce.internal.util.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.model.Dimensions;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -63,8 +63,8 @@ public class CommerceShippingHelperTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_commerceWarehouse = CommerceTestUtil.addCommerceWarehouse(
-			_group.getGroupId());
+		_commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 	}
 
 	@Test
@@ -174,8 +174,9 @@ public class CommerceShippingHelperTest {
 
 		cpInstance.setPrice(price);
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			_commerceWarehouse, cpInstance.getCPInstanceId(), 10);
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			cpInstance.getUserId(), _commerceInventoryWarehouse,
+			cpInstance.getSku(), 10);
 	}
 
 	private static void _addCPDefinitionProperties(CPInstance cpInstance)
@@ -205,7 +206,7 @@ public class CommerceShippingHelperTest {
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 	}
 
-	private static CommerceWarehouse _commerceWarehouse;
+	private static CommerceInventoryWarehouse _commerceInventoryWarehouse;
 
 	@Inject
 	private static CPDefinitionLocalService _cpDefinitionLocalService;

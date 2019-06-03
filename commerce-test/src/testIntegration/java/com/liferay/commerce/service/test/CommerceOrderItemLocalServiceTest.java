@@ -21,9 +21,9 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceWarehouse;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
@@ -98,11 +98,12 @@ public class CommerceOrderItemLocalServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		CommerceWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			2);
 
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
@@ -169,14 +170,15 @@ public class CommerceOrderItemLocalServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		CommerceWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
 		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			2);
 
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
@@ -229,11 +231,12 @@ public class CommerceOrderItemLocalServiceTest {
 			_user.getUserId(), cpInstance.getCPInstanceId(),
 			WorkflowConstants.STATUS_DRAFT, serviceContext, null);
 
-		CommerceWarehouse commerceWarehouse =
-			CommerceTestUtil.addCommerceWarehouse(_group.getGroupId());
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
 
-		CommerceTestUtil.addCommerceWarehouseItem(
-			commerceWarehouse, cpInstance.getCPInstanceId(), 2);
+		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
+			2);
 
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
