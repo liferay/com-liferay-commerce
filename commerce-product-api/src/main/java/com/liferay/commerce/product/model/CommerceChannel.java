@@ -55,6 +55,12 @@ public interface CommerceChannel extends CommerceChannelModel, PersistedModel {
 			}
 		};
 
+	public com.liferay.portal.kernel.model.Group getCommerceChannelGroup()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public long getCommerceChannelGroupId()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(

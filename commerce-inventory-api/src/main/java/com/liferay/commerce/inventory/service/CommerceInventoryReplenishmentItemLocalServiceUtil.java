@@ -55,15 +55,6 @@ public class CommerceInventoryReplenishmentItemLocalServiceUtil {
 				   .addCommerceInventoryReplenishmentItem(commerceInventoryReplenishmentItem);
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem addCommerceReplenishmentItem(
-		long commerceWarehouseId, long userId, String sku,
-		java.util.Date availabilityDate, int quantity)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceReplenishmentItem(commerceWarehouseId, userId,
-			sku, availabilityDate, quantity);
-	}
-
 	/**
 	* Creates a new commerce inventory replenishment item with the primary key. Does not add the commerce inventory replenishment item to the database.
 	*
@@ -236,26 +227,6 @@ public class CommerceInventoryReplenishmentItemLocalServiceUtil {
 	*/
 	public static int getCommerceInventoryReplenishmentItemsCount() {
 		return getService().getCommerceInventoryReplenishmentItemsCount();
-	}
-
-	public static java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItems(
-		String sku) {
-		return getService().getCommerceReplenishmentItems(sku);
-	}
-
-	public static java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsByGroupIdAndSku(
-		long companyId, long groupId, String sku) {
-		return getService()
-				   .getCommerceReplenishmentItemsByGroupIdAndSku(companyId,
-			groupId, sku);
-	}
-
-	public static java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> getCommerceReplenishmentItemsOrderedByAvailabilityDate(
-		String sku,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem> orderByComparator) {
-		return getService()
-				   .getCommerceReplenishmentItemsOrderedByAvailabilityDate(sku,
-			orderByComparator);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

@@ -251,7 +251,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="commerceShipmentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceOrderItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="commerceWarehouseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceInventoryWarehouseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.commerce.model.impl.CommerceShippingMethodImpl" table="CommerceShippingMethod">

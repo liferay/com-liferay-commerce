@@ -41,7 +41,7 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceWarehouseId(model.getCommerceWarehouseId());
+		soapModel.setCommerceInventoryWarehouseId(model.getCommerceInventoryWarehouseId());
 		soapModel.setSku(model.getSku());
 		soapModel.setQuantity(model.getQuantity());
 		soapModel.setReservedQuantity(model.getReservedQuantity());
@@ -149,12 +149,13 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	public String getSku() {
@@ -187,7 +188,7 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private String _sku;
 	private int _quantity;
 	private int _reservedQuantity;

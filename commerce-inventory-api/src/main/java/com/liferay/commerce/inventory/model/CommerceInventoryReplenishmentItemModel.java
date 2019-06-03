@@ -178,18 +178,19 @@ public interface CommerceInventoryReplenishmentItemModel extends AuditedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the commerce warehouse ID of this commerce inventory replenishment item.
+	 * Returns the commerce inventory warehouse ID of this commerce inventory replenishment item.
 	 *
-	 * @return the commerce warehouse ID of this commerce inventory replenishment item
+	 * @return the commerce inventory warehouse ID of this commerce inventory replenishment item
 	 */
-	public long getCommerceWarehouseId();
+	public long getCommerceInventoryWarehouseId();
 
 	/**
-	 * Sets the commerce warehouse ID of this commerce inventory replenishment item.
+	 * Sets the commerce inventory warehouse ID of this commerce inventory replenishment item.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID of this commerce inventory replenishment item
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce inventory replenishment item
 	 */
-	public void setCommerceWarehouseId(long commerceWarehouseId);
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId);
 
 	/**
 	 * Returns the sku of this commerce inventory replenishment item.

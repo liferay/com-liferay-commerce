@@ -80,8 +80,8 @@ public class CommerceInventoryWarehouseItemCacheModel implements CacheModel<Comm
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", commerceWarehouseId=");
-		sb.append(commerceWarehouseId);
+		sb.append(", commerceInventoryWarehouseId=");
+		sb.append(commerceInventoryWarehouseId);
 		sb.append(", sku=");
 		sb.append(sku);
 		sb.append(", quantity=");
@@ -124,7 +124,7 @@ public class CommerceInventoryWarehouseItemCacheModel implements CacheModel<Comm
 					modifiedDate));
 		}
 
-		commerceInventoryWarehouseItemImpl.setCommerceWarehouseId(commerceWarehouseId);
+		commerceInventoryWarehouseItemImpl.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 
 		if (sku == null) {
 			commerceInventoryWarehouseItemImpl.setSku("");
@@ -152,7 +152,7 @@ public class CommerceInventoryWarehouseItemCacheModel implements CacheModel<Comm
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceWarehouseId = objectInput.readLong();
+		commerceInventoryWarehouseId = objectInput.readLong();
 		sku = objectInput.readUTF();
 
 		quantity = objectInput.readInt();
@@ -179,7 +179,7 @@ public class CommerceInventoryWarehouseItemCacheModel implements CacheModel<Comm
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(commerceWarehouseId);
+		objectOutput.writeLong(commerceInventoryWarehouseId);
 
 		if (sku == null) {
 			objectOutput.writeUTF("");
@@ -199,7 +199,7 @@ public class CommerceInventoryWarehouseItemCacheModel implements CacheModel<Comm
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long commerceWarehouseId;
+	public long commerceInventoryWarehouseId;
 	public String sku;
 	public int quantity;
 	public int reservedQuantity;

@@ -100,7 +100,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBysku",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySku",
 			new String[] {
 				String.class.getName(),
 				
@@ -110,13 +110,13 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBysku",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySku",
 			new String[] { String.class.getName() },
 			CommerceInventoryBookedQuantityModelImpl.SKU_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SKU = new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBysku", new String[] { String.class.getName() });
+			"countBySku", new String[] { String.class.getName() });
 
 	/**
 	 * Returns all the commerce inventory booked quantities where sku = &#63;.
@@ -125,8 +125,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findBysku(String sku) {
-		return findBysku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceInventoryBookedQuantity> findBySku(String sku) {
+		return findBySku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -142,9 +142,9 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findBysku(String sku,
+	public List<CommerceInventoryBookedQuantity> findBySku(String sku,
 		int start, int end) {
-		return findBysku(sku, start, end, null);
+		return findBySku(sku, start, end, null);
 	}
 
 	/**
@@ -161,10 +161,10 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findBysku(String sku,
+	public List<CommerceInventoryBookedQuantity> findBySku(String sku,
 		int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		return findBysku(sku, start, end, orderByComparator, true);
+		return findBySku(sku, start, end, orderByComparator, true);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findBysku(String sku,
+	public List<CommerceInventoryBookedQuantity> findBySku(String sku,
 		int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
 		boolean retrieveFromCache) {
@@ -309,10 +309,10 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity findBysku_First(String sku,
+	public CommerceInventoryBookedQuantity findBySku_First(String sku,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchBysku_First(sku,
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchBySku_First(sku,
 				orderByComparator);
 
 		if (commerceInventoryBookedQuantity != null) {
@@ -339,9 +339,9 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the first matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity fetchBysku_First(String sku,
+	public CommerceInventoryBookedQuantity fetchBySku_First(String sku,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		List<CommerceInventoryBookedQuantity> list = findBysku(sku, 0, 1,
+		List<CommerceInventoryBookedQuantity> list = findBySku(sku, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -360,10 +360,10 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity findBysku_Last(String sku,
+	public CommerceInventoryBookedQuantity findBySku_Last(String sku,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchBysku_Last(sku,
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchBySku_Last(sku,
 				orderByComparator);
 
 		if (commerceInventoryBookedQuantity != null) {
@@ -390,15 +390,15 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the last matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity fetchBysku_Last(String sku,
+	public CommerceInventoryBookedQuantity fetchBySku_Last(String sku,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		int count = countBysku(sku);
+		int count = countBySku(sku);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryBookedQuantity> list = findBysku(sku, count - 1,
+		List<CommerceInventoryBookedQuantity> list = findBySku(sku, count - 1,
 				count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -418,7 +418,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @throws NoSuchInventoryBookedQuantityException if a commerce inventory booked quantity with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity[] findBysku_PrevAndNext(
+	public CommerceInventoryBookedQuantity[] findBySku_PrevAndNext(
 		long commerceInventoryBookedQuantityId, String sku,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
@@ -431,13 +431,13 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 			CommerceInventoryBookedQuantity[] array = new CommerceInventoryBookedQuantityImpl[3];
 
-			array[0] = getBysku_PrevAndNext(session,
+			array[0] = getBySku_PrevAndNext(session,
 					commerceInventoryBookedQuantity, sku, orderByComparator,
 					true);
 
 			array[1] = commerceInventoryBookedQuantity;
 
-			array[2] = getBysku_PrevAndNext(session,
+			array[2] = getBySku_PrevAndNext(session,
 					commerceInventoryBookedQuantity, sku, orderByComparator,
 					false);
 
@@ -451,7 +451,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryBookedQuantity getBysku_PrevAndNext(
+	protected CommerceInventoryBookedQuantity getBySku_PrevAndNext(
 		Session session,
 		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity,
 		String sku,
@@ -580,8 +580,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @param sku the sku
 	 */
 	@Override
-	public void removeBysku(String sku) {
-		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity : findBysku(
+	public void removeBySku(String sku) {
+		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity : findBySku(
 				sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceInventoryBookedQuantity);
 		}
@@ -594,7 +594,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the number of matching commerce inventory booked quantities
 	 */
 	@Override
-	public int countBysku(String sku) {
+	public int countBySku(String sku) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SKU;
 
 		Object[] finderArgs = new Object[] { sku };
@@ -655,88 +655,83 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	private static final String _FINDER_COLUMN_SKU_SKU_1 = "commerceInventoryBookedQuantity.sku IS NULL";
 	private static final String _FINDER_COLUMN_SKU_SKU_2 = "commerceInventoryBookedQuantity.sku = ?";
 	private static final String _FINDER_COLUMN_SKU_SKU_3 = "(commerceInventoryBookedQuantity.sku IS NULL OR commerceInventoryBookedQuantity.sku = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_EXPIREDATE =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LTEXPIRATIONDATE =
 		new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByexpireDate",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByLtExpirationDate",
 			new String[] {
 				Date.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTEXPIRATIONDATE =
 		new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryBookedQuantityImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByexpireDate",
-			new String[] { Date.class.getName() },
-			CommerceInventoryBookedQuantityModelImpl.EXPIREDATE_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_EXPIREDATE = new FinderPath(CommerceInventoryBookedQuantityModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryBookedQuantityModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByexpireDate", new String[] { Date.class.getName() });
+			Long.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"countByLtExpirationDate", new String[] { Date.class.getName() });
 
 	/**
-	 * Returns all the commerce inventory booked quantities where expireDate = &#63;.
+	 * Returns all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @return the matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate) {
-		return findByexpireDate(expireDate, QueryUtil.ALL_POS,
+	public List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate) {
+		return findByLtExpirationDate(expirationDate, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory booked quantities where expireDate = &#63;.
+	 * Returns a range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @return the range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end) {
-		return findByexpireDate(expireDate, start, end, null);
+	public List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end) {
+		return findByLtExpirationDate(expirationDate, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory booked quantities where expireDate = &#63;.
+	 * Returns an ordered range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end,
+	public List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		return findByexpireDate(expireDate, start, end, orderByComparator, true);
+		return findByLtExpirationDate(expirationDate, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory booked quantities where expireDate = &#63;.
+	 * Returns an ordered range of all the commerce inventory booked quantities where expirationDate &lt; &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryBookedQuantityModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -744,28 +739,20 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
-	public List<CommerceInventoryBookedQuantity> findByexpireDate(
-		Date expireDate, int start, int end,
+	public List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
+		Date expirationDate, int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE;
-			finderArgs = new Object[] { _getTime(expireDate) };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_EXPIREDATE;
-			finderArgs = new Object[] {
-					_getTime(expireDate),
-					
-					start, end, orderByComparator
-				};
-		}
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_LTEXPIRATIONDATE;
+		finderArgs = new Object[] {
+				_getTime(expirationDate),
+				
+				start, end, orderByComparator
+			};
 
 		List<CommerceInventoryBookedQuantity> list = null;
 
@@ -775,8 +762,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity : list) {
-					if (!Objects.equals(expireDate,
-								commerceInventoryBookedQuantity.getExpireDate())) {
+					if ((expirationDate.getTime() <= commerceInventoryBookedQuantity.getExpirationDate()
+																						.getTime())) {
 						list = null;
 
 						break;
@@ -798,15 +785,15 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYBOOKEDQUANTITY_WHERE);
 
-			boolean bindExpireDate = false;
+			boolean bindExpirationDate = false;
 
-			if (expireDate == null) {
-				query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_1);
+			if (expirationDate == null) {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 			}
 			else {
-				bindExpireDate = true;
+				bindExpirationDate = true;
 
-				query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_2);
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 			}
 
 			if (orderByComparator != null) {
@@ -829,8 +816,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindExpireDate) {
-					qPos.add(new Timestamp(expireDate.getTime()));
+				if (bindExpirationDate) {
+					qPos.add(new Timestamp(expirationDate.getTime()));
 				}
 
 				if (!pagination) {
@@ -864,19 +851,19 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	 * Returns the first commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory booked quantity
 	 * @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity findByexpireDate_First(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity findByLtExpirationDate_First(
+		Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchByexpireDate_First(expireDate,
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchByLtExpirationDate_First(expirationDate,
 				orderByComparator);
 
 		if (commerceInventoryBookedQuantity != null) {
@@ -887,8 +874,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("expireDate=");
-		msg.append(expireDate);
+		msg.append("expirationDate=");
+		msg.append(expirationDate);
 
 		msg.append("}");
 
@@ -896,17 +883,17 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	 * Returns the first commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity fetchByexpireDate_First(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity fetchByLtExpirationDate_First(
+		Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		List<CommerceInventoryBookedQuantity> list = findByexpireDate(expireDate,
+		List<CommerceInventoryBookedQuantity> list = findByLtExpirationDate(expirationDate,
 				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -917,19 +904,19 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	 * Returns the last commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory booked quantity
 	 * @throws NoSuchInventoryBookedQuantityException if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity findByexpireDate_Last(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity findByLtExpirationDate_Last(
+		Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchByexpireDate_Last(expireDate,
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = fetchByLtExpirationDate_Last(expirationDate,
 				orderByComparator);
 
 		if (commerceInventoryBookedQuantity != null) {
@@ -940,8 +927,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("expireDate=");
-		msg.append(expireDate);
+		msg.append("expirationDate=");
+		msg.append(expirationDate);
 
 		msg.append("}");
 
@@ -949,23 +936,23 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	 * Returns the last commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory booked quantity, or <code>null</code> if a matching commerce inventory booked quantity could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity fetchByexpireDate_Last(
-		Date expireDate,
+	public CommerceInventoryBookedQuantity fetchByLtExpirationDate_Last(
+		Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator) {
-		int count = countByexpireDate(expireDate);
+		int count = countByLtExpirationDate(expirationDate);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryBookedQuantity> list = findByexpireDate(expireDate,
+		List<CommerceInventoryBookedQuantity> list = findByLtExpirationDate(expirationDate,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -976,17 +963,17 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory booked quantities before and after the current commerce inventory booked quantity in the ordered set where expireDate = &#63;.
+	 * Returns the commerce inventory booked quantities before and after the current commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
 	 *
 	 * @param commerceInventoryBookedQuantityId the primary key of the current commerce inventory booked quantity
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory booked quantity
 	 * @throws NoSuchInventoryBookedQuantityException if a commerce inventory booked quantity with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryBookedQuantity[] findByexpireDate_PrevAndNext(
-		long commerceInventoryBookedQuantityId, Date expireDate,
+	public CommerceInventoryBookedQuantity[] findByLtExpirationDate_PrevAndNext(
+		long commerceInventoryBookedQuantityId, Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator)
 		throws NoSuchInventoryBookedQuantityException {
 		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = findByPrimaryKey(commerceInventoryBookedQuantityId);
@@ -998,14 +985,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 			CommerceInventoryBookedQuantity[] array = new CommerceInventoryBookedQuantityImpl[3];
 
-			array[0] = getByexpireDate_PrevAndNext(session,
-					commerceInventoryBookedQuantity, expireDate,
+			array[0] = getByLtExpirationDate_PrevAndNext(session,
+					commerceInventoryBookedQuantity, expirationDate,
 					orderByComparator, true);
 
 			array[1] = commerceInventoryBookedQuantity;
 
-			array[2] = getByexpireDate_PrevAndNext(session,
-					commerceInventoryBookedQuantity, expireDate,
+			array[2] = getByLtExpirationDate_PrevAndNext(session,
+					commerceInventoryBookedQuantity, expirationDate,
 					orderByComparator, false);
 
 			return array;
@@ -1018,10 +1005,10 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryBookedQuantity getByexpireDate_PrevAndNext(
+	protected CommerceInventoryBookedQuantity getByLtExpirationDate_PrevAndNext(
 		Session session,
 		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity,
-		Date expireDate,
+		Date expirationDate,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1037,15 +1024,15 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEINVENTORYBOOKEDQUANTITY_WHERE);
 
-		boolean bindExpireDate = false;
+		boolean bindExpirationDate = false;
 
-		if (expireDate == null) {
-			query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_1);
+		if (expirationDate == null) {
+			query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 		}
 		else {
-			bindExpireDate = true;
+			bindExpirationDate = true;
 
-			query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_2);
+			query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -1116,8 +1103,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindExpireDate) {
-			qPos.add(new Timestamp(expireDate.getTime()));
+		if (bindExpirationDate) {
+			qPos.add(new Timestamp(expirationDate.getTime()));
 		}
 
 		if (orderByComparator != null) {
@@ -1139,29 +1126,29 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce inventory booked quantities where expireDate = &#63; from the database.
+	 * Removes all the commerce inventory booked quantities where expirationDate &lt; &#63; from the database.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 */
 	@Override
-	public void removeByexpireDate(Date expireDate) {
-		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity : findByexpireDate(
-				expireDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByLtExpirationDate(Date expirationDate) {
+		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity : findByLtExpirationDate(
+				expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceInventoryBookedQuantity);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce inventory booked quantities where expireDate = &#63;.
+	 * Returns the number of commerce inventory booked quantities where expirationDate &lt; &#63;.
 	 *
-	 * @param expireDate the expire date
+	 * @param expirationDate the expiration date
 	 * @return the number of matching commerce inventory booked quantities
 	 */
 	@Override
-	public int countByexpireDate(Date expireDate) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_EXPIREDATE;
+	public int countByLtExpirationDate(Date expirationDate) {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_LTEXPIRATIONDATE;
 
-		Object[] finderArgs = new Object[] { _getTime(expireDate) };
+		Object[] finderArgs = new Object[] { _getTime(expirationDate) };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1170,15 +1157,15 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEINVENTORYBOOKEDQUANTITY_WHERE);
 
-			boolean bindExpireDate = false;
+			boolean bindExpirationDate = false;
 
-			if (expireDate == null) {
-				query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_1);
+			if (expirationDate == null) {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
 			}
 			else {
-				bindExpireDate = true;
+				bindExpirationDate = true;
 
-				query.append(_FINDER_COLUMN_EXPIREDATE_EXPIREDATE_2);
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
 			}
 
 			String sql = query.toString();
@@ -1192,8 +1179,8 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindExpireDate) {
-					qPos.add(new Timestamp(expireDate.getTime()));
+				if (bindExpirationDate) {
+					qPos.add(new Timestamp(expirationDate.getTime()));
 				}
 
 				count = (Long)q.uniqueResult();
@@ -1213,8 +1200,10 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_EXPIREDATE_EXPIREDATE_1 = "commerceInventoryBookedQuantity.expireDate IS NULL";
-	private static final String _FINDER_COLUMN_EXPIREDATE_EXPIREDATE_2 = "commerceInventoryBookedQuantity.expireDate = ?";
+	private static final String _FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1 =
+		"commerceInventoryBookedQuantity.expirationDate IS NULL";
+	private static final String _FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2 =
+		"commerceInventoryBookedQuantity.expirationDate < ?";
 
 	public CommerceInventoryBookedQuantityPersistenceImpl() {
 		setModelClass(CommerceInventoryBookedQuantity.class);
@@ -1512,14 +1501,6 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
 				args);
 
-			args = new Object[] {
-					commerceInventoryBookedQuantityModelImpl.getExpireDate()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_EXPIREDATE, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE,
-				args);
-
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -1542,25 +1523,6 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
-					args);
-			}
-
-			if ((commerceInventoryBookedQuantityModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceInventoryBookedQuantityModelImpl.getOriginalExpireDate()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_EXPIREDATE, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE,
-					args);
-
-				args = new Object[] {
-						commerceInventoryBookedQuantityModelImpl.getExpireDate()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_EXPIREDATE, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXPIREDATE,
 					args);
 			}
 		}

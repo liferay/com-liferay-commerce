@@ -73,7 +73,8 @@ public class CommerceShippingFixedOptionRelWrapper
 		attributes.put("commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("commerceShippingFixedOptionId",
 			getCommerceShippingFixedOptionId());
-		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
+		attributes.put("commerceInventoryWarehouseId",
+			getCommerceInventoryWarehouseId());
 		attributes.put("commerceCountryId", getCommerceCountryId());
 		attributes.put("commerceRegionId", getCommerceRegionId());
 		attributes.put("zip", getZip());
@@ -145,10 +146,11 @@ public class CommerceShippingFixedOptionRelWrapper
 			setCommerceShippingFixedOptionId(commerceShippingFixedOptionId);
 		}
 
-		Long commerceWarehouseId = (Long)attributes.get("commerceWarehouseId");
+		Long commerceInventoryWarehouseId = (Long)attributes.get(
+				"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId != null) {
-			setCommerceWarehouseId(commerceWarehouseId);
+		if (commerceInventoryWarehouseId != null) {
+			setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 		}
 
 		Long commerceCountryId = (Long)attributes.get("commerceCountryId");
@@ -229,6 +231,22 @@ public class CommerceShippingFixedOptionRelWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceInventoryWarehouse()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceShippingFixedOptionRel.getCommerceInventoryWarehouse();
+	}
+
+	/**
+	* Returns the commerce inventory warehouse ID of this commerce shipping fixed option rel.
+	*
+	* @return the commerce inventory warehouse ID of this commerce shipping fixed option rel
+	*/
+	@Override
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceShippingFixedOptionRel.getCommerceInventoryWarehouseId();
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceRegion getCommerceRegion()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceShippingFixedOptionRel.getCommerceRegion();
@@ -284,22 +302,6 @@ public class CommerceShippingFixedOptionRelWrapper
 	@Override
 	public long getCommerceShippingMethodId() {
 		return _commerceShippingFixedOptionRel.getCommerceShippingMethodId();
-	}
-
-	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse getCommerceWarehouse()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceShippingFixedOptionRel.getCommerceWarehouse();
-	}
-
-	/**
-	* Returns the commerce warehouse ID of this commerce shipping fixed option rel.
-	*
-	* @return the commerce warehouse ID of this commerce shipping fixed option rel
-	*/
-	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceShippingFixedOptionRel.getCommerceWarehouseId();
 	}
 
 	/**
@@ -493,6 +495,17 @@ public class CommerceShippingFixedOptionRelWrapper
 	}
 
 	/**
+	* Sets the commerce inventory warehouse ID of this commerce shipping fixed option rel.
+	*
+	* @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce shipping fixed option rel
+	*/
+	@Override
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+	}
+
+	/**
 	* Sets the commerce region ID of this commerce shipping fixed option rel.
 	*
 	* @param commerceRegionId the commerce region ID of this commerce shipping fixed option rel
@@ -532,16 +545,6 @@ public class CommerceShippingFixedOptionRelWrapper
 	@Override
 	public void setCommerceShippingMethodId(long commerceShippingMethodId) {
 		_commerceShippingFixedOptionRel.setCommerceShippingMethodId(commerceShippingMethodId);
-	}
-
-	/**
-	* Sets the commerce warehouse ID of this commerce shipping fixed option rel.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce shipping fixed option rel
-	*/
-	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceShippingFixedOptionRel.setCommerceWarehouseId(commerceWarehouseId);
 	}
 
 	/**

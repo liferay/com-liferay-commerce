@@ -72,9 +72,10 @@ public interface CommerceInventoryAuditLocalService extends BaseLocalService,
 	public CommerceInventoryAudit addCommerceInventoryAudit(
 		CommerceInventoryAudit commerceInventoryAudit);
 
-	public CommerceInventoryAudit addCommerceInventoryItemEntry(
-		String description, String sku, int quantity, long userId)
-		throws PortalException;
+	public CommerceInventoryAudit addCommerceInventoryAudit(long userId,
+		String sku, int quantity, String description) throws PortalException;
+
+	public void checkCommerceInventoryAudit(Date date);
 
 	/**
 	* Creates a new commerce inventory audit with the primary key. Does not add the commerce inventory audit to the database.
@@ -234,8 +235,6 @@ public interface CommerceInventoryAuditLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
-
-	public void removeOldCommerceInventoryAudit(Date olderThan);
 
 	/**
 	* Updates the commerce inventory audit in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -67,7 +67,8 @@ public class CommerceInventoryReplenishmentItemWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
+		attributes.put("commerceInventoryWarehouseId",
+			getCommerceInventoryWarehouseId());
 		attributes.put("sku", getSku());
 		attributes.put("availabilityDate", getAvailabilityDate());
 		attributes.put("quantity", getQuantity());
@@ -114,10 +115,11 @@ public class CommerceInventoryReplenishmentItemWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commerceWarehouseId = (Long)attributes.get("commerceWarehouseId");
+		Long commerceInventoryWarehouseId = (Long)attributes.get(
+				"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId != null) {
-			setCommerceWarehouseId(commerceWarehouseId);
+		if (commerceInventoryWarehouseId != null) {
+			setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 		}
 
 		String sku = (String)attributes.get("sku");
@@ -171,13 +173,13 @@ public class CommerceInventoryReplenishmentItemWrapper
 	}
 
 	/**
-	* Returns the commerce warehouse ID of this commerce inventory replenishment item.
+	* Returns the commerce inventory warehouse ID of this commerce inventory replenishment item.
 	*
-	* @return the commerce warehouse ID of this commerce inventory replenishment item
+	* @return the commerce inventory warehouse ID of this commerce inventory replenishment item
 	*/
 	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceInventoryReplenishmentItem.getCommerceWarehouseId();
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryReplenishmentItem.getCommerceInventoryWarehouseId();
 	}
 
 	/**
@@ -332,13 +334,14 @@ public class CommerceInventoryReplenishmentItemWrapper
 	}
 
 	/**
-	* Sets the commerce warehouse ID of this commerce inventory replenishment item.
+	* Sets the commerce inventory warehouse ID of this commerce inventory replenishment item.
 	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce inventory replenishment item
+	* @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce inventory replenishment item
 	*/
 	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceInventoryReplenishmentItem.setCommerceWarehouseId(commerceWarehouseId);
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceInventoryReplenishmentItem.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 	}
 
 	/**

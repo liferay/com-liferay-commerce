@@ -64,7 +64,7 @@ public interface CommerceInventoryBookedQuantityLocalService
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryBookedQuantityLocalServiceUtil} to access the commerce inventory booked quantity local service. Add custom service methods to {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
-		long userId, String sku, int quantity, Date expireDate,
+		long userId, String sku, int quantity, Date expirationDate,
 		Map<String, String> context) throws PortalException;
 
 	/**
@@ -76,6 +76,8 @@ public interface CommerceInventoryBookedQuantityLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceInventoryBookedQuantity addCommerceInventoryBookedQuantity(
 		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity);
+
+	public void checkCommerceInventoryBookedQuantities();
 
 	public CommerceInventoryBookedQuantity consumeCommerceBookedQuantity(
 		long commerceBookedQuantityId, int quantity)
@@ -242,10 +244,6 @@ public interface CommerceInventoryBookedQuantityLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
-
-	public void removeAllCommerceBookedQuantities();
-
-	public void removeOldTemporaryBookedQuantities();
 
 	/**
 	* Updates the commerce inventory booked quantity in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

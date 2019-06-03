@@ -16,7 +16,6 @@ package com.liferay.commerce.inventory.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -26,11 +25,14 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -74,11 +76,12 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 		CommerceInventoryWarehouse commerceInventoryWarehouse);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceInventoryWarehouse addCommerceWarehouse(String name,
-		String description, boolean active, String street1, String street2,
-		String street3, String city, String zip, String commerceRegionCode,
-		String commerceCountryCode, double latitude, double longitude,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+		String name, String description, boolean active, String street1,
+		String street2, String street3, String city, String zip,
+		String commerceRegionCode, String commerceCountryCode, double latitude,
+		double longitude, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new commerce inventory warehouse with the primary key. Does not add the commerce inventory warehouse to the database.
@@ -95,10 +98,13 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	*
 	* @param commerceInventoryWarehouse the commerce inventory warehouse
 	* @return the commerce inventory warehouse that was removed
+	* @throws PortalException
 	*/
 	@Indexable(type = IndexableType.DELETE)
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceInventoryWarehouse deleteCommerceInventoryWarehouse(
-		CommerceInventoryWarehouse commerceInventoryWarehouse);
+		CommerceInventoryWarehouse commerceInventoryWarehouse)
+		throws PortalException;
 
 	/**
 	* Deletes the commerce inventory warehouse with the primary key from the database. Also notifies the appropriate model listeners.
@@ -110,10 +116,6 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceInventoryWarehouse deleteCommerceInventoryWarehouse(
 		long commerceInventoryWarehouseId) throws PortalException;
-
-	@Indexable(type = IndexableType.DELETE)
-	public CommerceInventoryWarehouse deleteCommerceWarehouse(
-		CommerceInventoryWarehouse commerceWarehouse) throws PortalException;
 
 	/**
 	* @throws PortalException
@@ -202,12 +204,9 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	public CommerceInventoryWarehouse fetchCommerceInventoryWarehouseByReferenceCode(
 		long companyId, String externalReferenceCode);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceInventoryWarehouse fetchDefaultCommerceWarehouse(
-		long groupId);
-
-	public CommerceInventoryWarehouse geolocateCommerceWarehouse(
-		long commerceWarehouseId, double latitude, double longitude)
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceInventoryWarehouse geolocateCommerceInventoryWarehouse(
+		long commerceInventoryWarehouseId, double latitude, double longitude)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -239,6 +238,28 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, boolean active, String commerceCountryCode, int start,
+		int end, OrderByComparator<CommerceInventoryWarehouse> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, long groupId, boolean active);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long groupId, String sku);
+
 	/**
 	* Returns the number of commerce inventory warehouses.
 	*
@@ -248,32 +269,15 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	public int getCommerceInventoryWarehousesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryWarehouse> getCommerceWarehouses(
-		long companyId, long groupId, boolean active, String commerceCountryCode);
+	public int getCommerceInventoryWarehousesCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryWarehouse> getCommerceWarehousesByGroupId(
-		long companyId, long groupId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryWarehouse> getCommerceWarehousesByGroupIdAndActive(
-		long companyId, long groupId, boolean active);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryWarehouse> getCommerceWarehousesByGroupIdAndSku(
-		long companyId, long groupId, String sku);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehousesCount(long companyId, long groupId,
+	public int getCommerceInventoryWarehousesCount(long companyId,
 		boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehousesCount(long companyId, long groupId,
+	public int getCommerceInventoryWarehousesCount(long companyId,
 		boolean active, String commerceCountryCode);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceInventoryWarehouse getDefaultCommerceWarehouse(long groupId)
-		throws NoSuchInventoryWarehouseException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -290,21 +294,21 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	public CommerceInventoryWarehouse importDefaultCommerceWarehouse(
-		ServiceContext serviceContext) throws PortalException;
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> searchCommerceInventoryWarehouses(
+		long companyId, Boolean active, String commerceCountryCode,
+		String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceInventoryWarehouse> search(long companyId,
-		long groupId, String keywords, Boolean active,
-		String commerceCountryCode, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator);
+	public int searchCommerceInventoryWarehousesCount(long companyId,
+		Boolean active, String commerceCountryCode, String keywords)
+		throws PortalException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int searchCount(long companyId, long groupId, String keywords,
-		Boolean active, String commerceCountryCode);
-
-	public CommerceInventoryWarehouse setActive(long commerceWarehouseId,
-		boolean active) throws PortalException;
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceInventoryWarehouse setActive(
+		long commerceInventoryWarehouseId, boolean active)
+		throws PortalException;
 
 	/**
 	* Updates the commerce inventory warehouse in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
@@ -317,8 +321,8 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 		CommerceInventoryWarehouse commerceInventoryWarehouse);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceInventoryWarehouse updateCommerceWarehouse(
-		long commerceWarehouseId, String name, String description,
+	public CommerceInventoryWarehouse updateCommerceInventoryWarehouse(
+		long commerceInventoryWarehouseId, String name, String description,
 		boolean active, String street1, String street2, String street3,
 		String city, String zip, String commerceRegionCode,
 		String commerceCountryCode, double latitude, double longitude,

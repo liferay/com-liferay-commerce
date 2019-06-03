@@ -46,7 +46,7 @@ public class CommerceShippingFixedOptionRelSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceShippingMethodId(model.getCommerceShippingMethodId());
 		soapModel.setCommerceShippingFixedOptionId(model.getCommerceShippingFixedOptionId());
-		soapModel.setCommerceWarehouseId(model.getCommerceWarehouseId());
+		soapModel.setCommerceInventoryWarehouseId(model.getCommerceInventoryWarehouseId());
 		soapModel.setCommerceCountryId(model.getCommerceCountryId());
 		soapModel.setCommerceRegionId(model.getCommerceRegionId());
 		soapModel.setZip(model.getZip());
@@ -184,12 +184,13 @@ public class CommerceShippingFixedOptionRelSoap implements Serializable {
 		_commerceShippingFixedOptionId = commerceShippingFixedOptionId;
 	}
 
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	public long getCommerceCountryId() {
@@ -265,7 +266,7 @@ public class CommerceShippingFixedOptionRelSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _commerceShippingMethodId;
 	private long _commerceShippingFixedOptionId;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private long _commerceCountryId;
 	private long _commerceRegionId;
 	private String _zip;

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -56,7 +55,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -168,12 +166,19 @@ public class CommerceInventoryAuditPersistenceTest {
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
+	}
+
+	@Test
+	public void testCountByLtCreateDate() throws Exception {
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
+
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
 	}
 
 	@Test
@@ -409,20 +414,6 @@ public class CommerceInventoryAuditPersistenceTest {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
-	}
-
-	@Test
-	public void testResetOriginalValues() throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
-
-		_persistence.clearCache();
-
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.findByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
-
-		Assert.assertTrue(Objects.equals(
-				existingCommerceInventoryAudit.getSku(),
-				ReflectionTestUtil.invoke(existingCommerceInventoryAudit,
-					"getOriginalSku", new Class<?>[0])));
 	}
 
 	protected CommerceInventoryAudit addCommerceInventoryAudit()

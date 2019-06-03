@@ -84,8 +84,8 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		sb.append(sku);
 		sb.append(", quantity=");
 		sb.append(quantity);
-		sb.append(", expireDate=");
-		sb.append(expireDate);
+		sb.append(", expirationDate=");
+		sb.append(expirationDate);
 		sb.append(", bookedNote=");
 		sb.append(bookedNote);
 		sb.append("}");
@@ -133,12 +133,12 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 
 		commerceInventoryBookedQuantityImpl.setQuantity(quantity);
 
-		if (expireDate == Long.MIN_VALUE) {
-			commerceInventoryBookedQuantityImpl.setExpireDate(null);
+		if (expirationDate == Long.MIN_VALUE) {
+			commerceInventoryBookedQuantityImpl.setExpirationDate(null);
 		}
 		else {
-			commerceInventoryBookedQuantityImpl.setExpireDate(new Date(
-					expireDate));
+			commerceInventoryBookedQuantityImpl.setExpirationDate(new Date(
+					expirationDate));
 		}
 
 		if (bookedNote == null) {
@@ -166,7 +166,7 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		sku = objectInput.readUTF();
 
 		quantity = objectInput.readInt();
-		expireDate = objectInput.readLong();
+		expirationDate = objectInput.readLong();
 		bookedNote = objectInput.readUTF();
 	}
 
@@ -197,7 +197,7 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		}
 
 		objectOutput.writeInt(quantity);
-		objectOutput.writeLong(expireDate);
+		objectOutput.writeLong(expirationDate);
 
 		if (bookedNote == null) {
 			objectOutput.writeUTF("");
@@ -215,6 +215,6 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 	public long modifiedDate;
 	public String sku;
 	public int quantity;
-	public long expireDate;
+	public long expirationDate;
 	public String bookedNote;
 }

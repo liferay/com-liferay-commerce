@@ -67,7 +67,8 @@ public class CommerceInventoryWarehouseItemWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
+		attributes.put("commerceInventoryWarehouseId",
+			getCommerceInventoryWarehouseId());
 		attributes.put("sku", getSku());
 		attributes.put("quantity", getQuantity());
 		attributes.put("reservedQuantity", getReservedQuantity());
@@ -114,10 +115,11 @@ public class CommerceInventoryWarehouseItemWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commerceWarehouseId = (Long)attributes.get("commerceWarehouseId");
+		Long commerceInventoryWarehouseId = (Long)attributes.get(
+				"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId != null) {
-			setCommerceWarehouseId(commerceWarehouseId);
+		if (commerceInventoryWarehouseId != null) {
+			setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 		}
 
 		String sku = (String)attributes.get("sku");
@@ -150,6 +152,22 @@ public class CommerceInventoryWarehouseItemWrapper
 		return _commerceInventoryWarehouseItem.compareTo(commerceInventoryWarehouseItem);
 	}
 
+	@Override
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceInventoryWarehouseItem.getCommerceInventoryWarehouse();
+	}
+
+	/**
+	* Returns the commerce inventory warehouse ID of this commerce inventory warehouse item.
+	*
+	* @return the commerce inventory warehouse ID of this commerce inventory warehouse item
+	*/
+	@Override
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseItem.getCommerceInventoryWarehouseId();
+	}
+
 	/**
 	* Returns the commerce inventory warehouse item ID of this commerce inventory warehouse item.
 	*
@@ -158,22 +176,6 @@ public class CommerceInventoryWarehouseItemWrapper
 	@Override
 	public long getCommerceInventoryWarehouseItemId() {
 		return _commerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId();
-	}
-
-	@Override
-	public CommerceInventoryWarehouse getCommerceWarehouse()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItem.getCommerceWarehouse();
-	}
-
-	/**
-	* Returns the commerce warehouse ID of this commerce inventory warehouse item.
-	*
-	* @return the commerce warehouse ID of this commerce inventory warehouse item
-	*/
-	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceInventoryWarehouseItem.getCommerceWarehouseId();
 	}
 
 	/**
@@ -317,6 +319,17 @@ public class CommerceInventoryWarehouseItemWrapper
 	}
 
 	/**
+	* Sets the commerce inventory warehouse ID of this commerce inventory warehouse item.
+	*
+	* @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce inventory warehouse item
+	*/
+	@Override
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+	}
+
+	/**
 	* Sets the commerce inventory warehouse item ID of this commerce inventory warehouse item.
 	*
 	* @param commerceInventoryWarehouseItemId the commerce inventory warehouse item ID of this commerce inventory warehouse item
@@ -325,16 +338,6 @@ public class CommerceInventoryWarehouseItemWrapper
 	public void setCommerceInventoryWarehouseItemId(
 		long commerceInventoryWarehouseItemId) {
 		_commerceInventoryWarehouseItem.setCommerceInventoryWarehouseItemId(commerceInventoryWarehouseItemId);
-	}
-
-	/**
-	* Sets the commerce warehouse ID of this commerce inventory warehouse item.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce inventory warehouse item
-	*/
-	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceInventoryWarehouseItem.setCommerceWarehouseId(commerceWarehouseId);
 	}
 
 	/**

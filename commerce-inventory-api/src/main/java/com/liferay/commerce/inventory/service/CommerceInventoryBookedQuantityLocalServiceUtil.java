@@ -43,12 +43,12 @@ public class CommerceInventoryBookedQuantityLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity addCommerceBookedQuantity(
-		long userId, String sku, int quantity, java.util.Date expireDate,
+		long userId, String sku, int quantity, java.util.Date expirationDate,
 		java.util.Map<String, String> context)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
 				   .addCommerceBookedQuantity(userId, sku, quantity,
-			expireDate, context);
+			expirationDate, context);
 	}
 
 	/**
@@ -61,6 +61,10 @@ public class CommerceInventoryBookedQuantityLocalServiceUtil {
 		com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity commerceInventoryBookedQuantity) {
 		return getService()
 				   .addCommerceInventoryBookedQuantity(commerceInventoryBookedQuantity);
+	}
+
+	public static void checkCommerceInventoryBookedQuantities() {
+		getService().checkCommerceInventoryBookedQuantities();
 	}
 
 	public static com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity consumeCommerceBookedQuantity(
@@ -266,14 +270,6 @@ public class CommerceInventoryBookedQuantityLocalServiceUtil {
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getPersistedModel(primaryKeyObj);
-	}
-
-	public static void removeAllCommerceBookedQuantities() {
-		getService().removeAllCommerceBookedQuantities();
-	}
-
-	public static void removeOldTemporaryBookedQuantities() {
-		getService().removeOldTemporaryBookedQuantities();
 	}
 
 	/**

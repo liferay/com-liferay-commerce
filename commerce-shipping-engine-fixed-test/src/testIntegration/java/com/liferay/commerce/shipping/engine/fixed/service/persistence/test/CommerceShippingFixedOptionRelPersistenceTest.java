@@ -141,7 +141,7 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 
 		newCommerceShippingFixedOptionRel.setCommerceShippingFixedOptionId(RandomTestUtil.nextLong());
 
-		newCommerceShippingFixedOptionRel.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		newCommerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		newCommerceShippingFixedOptionRel.setCommerceCountryId(RandomTestUtil.nextLong());
 
@@ -188,8 +188,8 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 			newCommerceShippingFixedOptionRel.getCommerceShippingMethodId());
 		Assert.assertEquals(existingCommerceShippingFixedOptionRel.getCommerceShippingFixedOptionId(),
 			newCommerceShippingFixedOptionRel.getCommerceShippingFixedOptionId());
-		Assert.assertEquals(existingCommerceShippingFixedOptionRel.getCommerceWarehouseId(),
-			newCommerceShippingFixedOptionRel.getCommerceWarehouseId());
+		Assert.assertEquals(existingCommerceShippingFixedOptionRel.getCommerceInventoryWarehouseId(),
+			newCommerceShippingFixedOptionRel.getCommerceInventoryWarehouseId());
 		Assert.assertEquals(existingCommerceShippingFixedOptionRel.getCommerceCountryId(),
 			newCommerceShippingFixedOptionRel.getCommerceCountryId());
 		Assert.assertEquals(existingCommerceShippingFixedOptionRel.getCommerceRegionId(),
@@ -251,10 +251,11 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 			"commerceShippingFixedOptionRelId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "commerceShippingMethodId", true,
-			"commerceShippingFixedOptionId", true, "commerceWarehouseId", true,
-			"commerceCountryId", true, "commerceRegionId", true, "zip", true,
-			"weightFrom", true, "weightTo", true, "fixedPrice", true,
-			"rateUnitWeightPrice", true, "ratePercentage", true);
+			"commerceShippingFixedOptionId", true,
+			"commerceInventoryWarehouseId", true, "commerceCountryId", true,
+			"commerceRegionId", true, "zip", true, "weightFrom", true,
+			"weightTo", true, "fixedPrice", true, "rateUnitWeightPrice", true,
+			"ratePercentage", true);
 	}
 
 	@Test
@@ -489,7 +490,7 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 
 		commerceShippingFixedOptionRel.setCommerceShippingFixedOptionId(RandomTestUtil.nextLong());
 
-		commerceShippingFixedOptionRel.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		commerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		commerceShippingFixedOptionRel.setCommerceCountryId(RandomTestUtil.nextLong());
 

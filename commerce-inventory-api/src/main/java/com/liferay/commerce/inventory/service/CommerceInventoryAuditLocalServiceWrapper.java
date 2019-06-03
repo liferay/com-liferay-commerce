@@ -47,11 +47,16 @@ public class CommerceInventoryAuditLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryAudit addCommerceInventoryItemEntry(
-		String description, String sku, int quantity, long userId)
+	public com.liferay.commerce.inventory.model.CommerceInventoryAudit addCommerceInventoryAudit(
+		long userId, String sku, int quantity, String description)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryAuditLocalService.addCommerceInventoryItemEntry(description,
-			sku, quantity, userId);
+		return _commerceInventoryAuditLocalService.addCommerceInventoryAudit(userId,
+			sku, quantity, description);
+	}
+
+	@Override
+	public void checkCommerceInventoryAudit(java.util.Date date) {
+		_commerceInventoryAuditLocalService.checkCommerceInventoryAudit(date);
 	}
 
 	/**
@@ -261,11 +266,6 @@ public class CommerceInventoryAuditLocalServiceWrapper
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceInventoryAuditLocalService.getPersistedModel(primaryKeyObj);
-	}
-
-	@Override
-	public void removeOldCommerceInventoryAudit(java.util.Date olderThan) {
-		_commerceInventoryAuditLocalService.removeOldCommerceInventoryAudit(olderThan);
 	}
 
 	/**

@@ -57,5 +57,7 @@ public interface CommerceInventoryWarehouse
 			}
 		};
 
+	public java.util.List<CommerceInventoryWarehouseItem> getCommerceInventoryWarehouseItems();
+
 	public boolean isGeolocated();
 }

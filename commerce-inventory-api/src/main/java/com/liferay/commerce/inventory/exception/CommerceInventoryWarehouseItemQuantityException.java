@@ -12,16 +12,34 @@
  * details.
  */
 
-package com.liferay.commerce.service.persistence;
+package com.liferay.commerce.inventory.exception;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
- * @author Alessio Antonio Rendina
- * @generated
+ * @author Luca Pellizzon
  */
 @ProviderType
-public interface CommerceCountryFinder {
-	public java.util.List<com.liferay.commerce.model.CommerceCountry> findByCommerceInventoryWarehouses(
-		long companyId, boolean all);
+public class CommerceInventoryWarehouseItemQuantityException
+	extends PortalException {
+
+	public CommerceInventoryWarehouseItemQuantityException() {
+	}
+
+	public CommerceInventoryWarehouseItemQuantityException(String msg) {
+		super(msg);
+	}
+
+	public CommerceInventoryWarehouseItemQuantityException(
+		String msg, Throwable cause) {
+
+		super(msg, cause);
+	}
+
+	public CommerceInventoryWarehouseItemQuantityException(Throwable cause) {
+		super(cause);
+	}
+
 }

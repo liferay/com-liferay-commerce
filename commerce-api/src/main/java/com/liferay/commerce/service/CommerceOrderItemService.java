@@ -82,6 +82,11 @@ public interface CommerceOrderItemService extends BaseService {
 		long commerceOrderId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemQuantity(
+		long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceOrderItem getCommerceOrderItem(long commerceOrderItemId)
 		throws PortalException;
 
@@ -96,10 +101,6 @@ public interface CommerceOrderItemService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

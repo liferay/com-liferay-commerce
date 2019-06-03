@@ -32,7 +32,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="commerceShippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceShippingFixedOptionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="commerceWarehouseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceInventoryWarehouseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceCountryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="commerceRegionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="zip" type="com.liferay.portal.dao.orm.hibernate.StringType" />

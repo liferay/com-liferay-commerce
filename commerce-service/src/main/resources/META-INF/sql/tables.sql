@@ -255,7 +255,7 @@ create table CommerceShipmentItem (
 	modifiedDate DATE null,
 	commerceShipmentId LONG,
 	commerceOrderItemId LONG,
-	commerceWarehouseId LONG,
+	commerceInventoryWarehouseId LONG,
 	quantity INTEGER
 );
 

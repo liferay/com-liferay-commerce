@@ -57,7 +57,8 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CommerceShipmentItemServiceHttp {
 	public static com.liferay.commerce.model.CommerceShipmentItem addCommerceShipmentItem(
 		HttpPrincipal httpPrincipal, long commerceShipmentId,
-		long commerceOrderItemId, long commerceWarehouseId, int quantity,
+		long commerceOrderItemId, long commerceInventoryWarehouseId,
+		int quantity,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -67,7 +68,7 @@ public class CommerceShipmentItemServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceShipmentId, commerceOrderItemId,
-					commerceWarehouseId, quantity, serviceContext);
+					commerceInventoryWarehouseId, quantity, serviceContext);
 
 			Object returnObj = null;
 

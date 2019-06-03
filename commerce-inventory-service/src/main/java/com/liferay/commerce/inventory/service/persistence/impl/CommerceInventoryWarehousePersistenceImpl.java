@@ -98,975 +98,88 @@ public class CommerceInventoryWarehousePersistenceImpl
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+		new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByactive",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
-				Boolean.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByactive",
-			new String[] { Boolean.class.getName() },
-			CommerceInventoryWarehouseModelImpl.ACTIVE_COLUMN_BITMASK |
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
+			new String[] { Long.class.getName() },
+			CommerceInventoryWarehouseModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceInventoryWarehouseModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ACTIVE = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByactive", new String[] { Boolean.class.getName() });
+			"countByCompanyId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the commerce inventory warehouses where active = &#63;.
+	 * Returns all the commerce inventory warehouses where companyId = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @return the matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findByactive(boolean active) {
-		return findByactive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce inventory warehouses where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce inventory warehouses
-	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	 * @return the range of matching commerce inventory warehouses
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> findByactive(boolean active,
-		int start, int end) {
-		return findByactive(active, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce inventory warehouses
-	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce inventory warehouses
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> findByactive(boolean active,
-		int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return findByactive(active, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce inventory warehouses
-	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce inventory warehouses
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> findByactive(boolean active,
-		int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE;
-			finderArgs = new Object[] { active };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ACTIVE;
-			finderArgs = new Object[] { active, start, end, orderByComparator };
-		}
-
-		List<CommerceInventoryWarehouse> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceInventoryWarehouse commerceInventoryWarehouse : list) {
-					if ((active != commerceInventoryWarehouse.isActive())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				if (!pagination) {
-					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
-							getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
-							getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce inventory warehouse
-	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse findByactive_First(boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
-		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByactive_First(active,
-				orderByComparator);
-
-		if (commerceInventoryWarehouse != null) {
-			return commerceInventoryWarehouse;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("active=");
-		msg.append(active);
-
-		msg.append("}");
-
-		throw new NoSuchInventoryWarehouseException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse fetchByactive_First(boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		List<CommerceInventoryWarehouse> list = findByactive(active, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce inventory warehouse
-	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse findByactive_Last(boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
-		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByactive_Last(active,
-				orderByComparator);
-
-		if (commerceInventoryWarehouse != null) {
-			return commerceInventoryWarehouse;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("active=");
-		msg.append(active);
-
-		msg.append("}");
-
-		throw new NoSuchInventoryWarehouseException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where active = &#63;.
-	 *
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse fetchByactive_Last(boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		int count = countByactive(active);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceInventoryWarehouse> list = findByactive(active, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where active = &#63;.
-	 *
-	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce inventory warehouse
-	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse[] findByactive_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
-		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
-
-			array[0] = getByactive_PrevAndNext(session,
-					commerceInventoryWarehouse, active, orderByComparator, true);
-
-			array[1] = commerceInventoryWarehouse;
-
-			array[2] = getByactive_PrevAndNext(session,
-					commerceInventoryWarehouse, active, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceInventoryWarehouse getByactive_PrevAndNext(
-		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
-		boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-
-		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(active);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CommerceInventoryWarehouse> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Returns all the commerce inventory warehouses that the user has permission to view where active = &#63;.
-	 *
-	 * @param active the active
-	 * @return the matching commerce inventory warehouses that the user has permission to view
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> filterFindByactive(boolean active) {
-		return filterFindByactive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+	public List<CommerceInventoryWarehouse> findByCompanyId(long companyId) {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where active = &#63;.
+	 * Returns a range of all the commerce inventory warehouses where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce inventory warehouses
-	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	 * @return the range of matching commerce inventory warehouses that the user has permission to view
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> filterFindByactive(boolean active,
-		int start, int end) {
-		return filterFindByactive(active, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce inventory warehouses
-	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce inventory warehouses that the user has permission to view
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> filterFindByactive(boolean active,
-		int start, int end,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByactive(active, start, end, orderByComparator);
-		}
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(3 +
-					(orderByComparator.getOrderByFields().length * 2));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
-		}
-
-		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2_SQL);
-
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
-		}
-
-		if (orderByComparator != null) {
-			if (getDB().isSupportsInlineDistinct()) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator, true);
-			}
-			else {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
-					orderByComparator, true);
-			}
-		}
-		else {
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
-			}
-			else {
-				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
-			}
-		}
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceInventoryWarehouse.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			if (getDB().isSupportsInlineDistinct()) {
-				q.addEntity(_FILTER_ENTITY_ALIAS,
-					CommerceInventoryWarehouseImpl.class);
-			}
-			else {
-				q.addEntity(_FILTER_ENTITY_TABLE,
-					CommerceInventoryWarehouseImpl.class);
-			}
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(active);
-
-			return (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
-				getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where active = &#63;.
-	 *
-	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce inventory warehouse
-	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
-	 */
-	@Override
-	public CommerceInventoryWarehouse[] filterFindByactive_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
-		throws NoSuchInventoryWarehouseException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByactive_PrevAndNext(commerceInventoryWarehouseId,
-				active, orderByComparator);
-		}
-
-		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
-
-			array[0] = filterGetByactive_PrevAndNext(session,
-					commerceInventoryWarehouse, active, orderByComparator, true);
-
-			array[1] = commerceInventoryWarehouse;
-
-			array[2] = filterGetByactive_PrevAndNext(session,
-					commerceInventoryWarehouse, active, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceInventoryWarehouse filterGetByactive_PrevAndNext(
-		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
-		boolean active,
-		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(5 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		if (getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-		}
-		else {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
-		}
-
-		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2_SQL);
-
-		if (!getDB().isSupportsInlineDistinct()) {
-			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
-				}
-				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
-				}
-
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				if (getDB().isSupportsInlineDistinct()) {
-					query.append(_ORDER_BY_ENTITY_ALIAS);
-				}
-				else {
-					query.append(_ORDER_BY_ENTITY_TABLE);
-				}
-
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
-			}
-			else {
-				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
-			}
-		}
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceInventoryWarehouse.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		if (getDB().isSupportsInlineDistinct()) {
-			q.addEntity(_FILTER_ENTITY_ALIAS,
-				CommerceInventoryWarehouseImpl.class);
-		}
-		else {
-			q.addEntity(_FILTER_ENTITY_TABLE,
-				CommerceInventoryWarehouseImpl.class);
-		}
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(active);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CommerceInventoryWarehouse> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce inventory warehouses where active = &#63; from the database.
-	 *
-	 * @param active the active
-	 */
-	@Override
-	public void removeByactive(boolean active) {
-		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByactive(
-				active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(commerceInventoryWarehouse);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce inventory warehouses where active = &#63;.
-	 *
-	 * @param active the active
-	 * @return the number of matching commerce inventory warehouses
-	 */
-	@Override
-	public int countByactive(boolean active) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ACTIVE;
-
-		Object[] finderArgs = new Object[] { active };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Returns the number of commerce inventory warehouses that the user has permission to view where active = &#63;.
-	 *
-	 * @param active the active
-	 * @return the number of matching commerce inventory warehouses that the user has permission to view
-	 */
-	@Override
-	public int filterCountByactive(boolean active) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByactive(active);
-		}
-
-		StringBundler query = new StringBundler(2);
-
-		query.append(_FILTER_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
-
-		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2_SQL);
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CommerceInventoryWarehouse.class.getName(),
-				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSynchronizedSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(active);
-
-			Long count = (Long)q.uniqueResult();
-
-			return count.intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "commerceInventoryWarehouse.active = ?";
-	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2_SQL = "commerceInventoryWarehouse.active_ = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE =
-		new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findBycountryTwoLettersISOCode",
-			new String[] {
-				String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE =
-		new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findBycountryTwoLettersISOCode",
-			new String[] { String.class.getName() },
-			CommerceInventoryWarehouseModelImpl.COUNTRYTWOLETTERSISOCODE_COLUMN_BITMASK |
-			CommerceInventoryWarehouseModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COUNTRYTWOLETTERSISOCODE =
-		new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBycountryTwoLettersISOCode",
-			new String[] { String.class.getName() });
-
-	/**
-	 * Returns all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
-	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
-	 * @return the matching commerce inventory warehouses
-	 */
-	@Override
-	public List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @return the range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end) {
-		return findBycountryTwoLettersISOCode(countryTwoLettersISOCode, start,
-			end, null);
+	public List<CommerceInventoryWarehouse> findByCompanyId(long companyId,
+		int start, int end) {
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
+	public List<CommerceInventoryWarehouse> findByCompanyId(long companyId,
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return findBycountryTwoLettersISOCode(countryTwoLettersISOCode, start,
-			end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1074,8 +187,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
+	public List<CommerceInventoryWarehouse> findByCompanyId(long companyId,
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -1085,16 +198,12 @@ public class CommerceInventoryWarehousePersistenceImpl
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE;
-			finderArgs = new Object[] { countryTwoLettersISOCode };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE;
-			finderArgs = new Object[] {
-					countryTwoLettersISOCode,
-					
-					start, end, orderByComparator
-				};
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+			finderArgs = new Object[] { companyId, start, end, orderByComparator };
 		}
 
 		List<CommerceInventoryWarehouse> list = null;
@@ -1105,8 +214,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceInventoryWarehouse commerceInventoryWarehouse : list) {
-					if (!Objects.equals(countryTwoLettersISOCode,
-								commerceInventoryWarehouse.getCountryTwoLettersISOCode())) {
+					if ((companyId != commerceInventoryWarehouse.getCompanyId())) {
 						list = null;
 
 						break;
@@ -1128,19 +236,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-			boolean bindCountryTwoLettersISOCode = false;
-
-			if (countryTwoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-			}
-			else if (countryTwoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-			}
-			else {
-				bindCountryTwoLettersISOCode = true;
-
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-			}
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1162,9 +258,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCountryTwoLettersISOCode) {
-					qPos.add(countryTwoLettersISOCode);
-				}
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
@@ -1197,19 +291,18 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse findBycountryTwoLettersISOCode_First(
-		String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse findByCompanyId_First(long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchBycountryTwoLettersISOCode_First(countryTwoLettersISOCode,
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByCompanyId_First(companyId,
 				orderByComparator);
 
 		if (commerceInventoryWarehouse != null) {
@@ -1220,8 +313,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("countryTwoLettersISOCode=");
-		msg.append(countryTwoLettersISOCode);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1229,18 +322,17 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse fetchBycountryTwoLettersISOCode_First(
-		String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse fetchByCompanyId_First(long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		List<CommerceInventoryWarehouse> list = findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-				0, 1, orderByComparator);
+		List<CommerceInventoryWarehouse> list = findByCompanyId(companyId, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1250,19 +342,18 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse findBycountryTwoLettersISOCode_Last(
-		String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse findByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchBycountryTwoLettersISOCode_Last(countryTwoLettersISOCode,
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByCompanyId_Last(companyId,
 				orderByComparator);
 
 		if (commerceInventoryWarehouse != null) {
@@ -1273,8 +364,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("countryTwoLettersISOCode=");
-		msg.append(countryTwoLettersISOCode);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1282,23 +373,22 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse fetchBycountryTwoLettersISOCode_Last(
-		String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse fetchByCompanyId_Last(long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		int count = countBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryWarehouse> list = findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
+		List<CommerceInventoryWarehouse> list = findByCompanyId(companyId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1309,17 +399,17 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where countryTwoLettersISOCode = &#63;.
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse[] findBycountryTwoLettersISOCode_PrevAndNext(
-		long commerceInventoryWarehouseId, String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse[] findByCompanyId_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
 		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
@@ -1331,15 +421,15 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
 
-			array[0] = getBycountryTwoLettersISOCode_PrevAndNext(session,
-					commerceInventoryWarehouse, countryTwoLettersISOCode,
-					orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, orderByComparator,
+					true);
 
 			array[1] = commerceInventoryWarehouse;
 
-			array[2] = getBycountryTwoLettersISOCode_PrevAndNext(session,
-					commerceInventoryWarehouse, countryTwoLettersISOCode,
-					orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -1351,9 +441,9 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouse getBycountryTwoLettersISOCode_PrevAndNext(
+	protected CommerceInventoryWarehouse getByCompanyId_PrevAndNext(
 		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
-		String countryTwoLettersISOCode,
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1369,19 +459,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-		boolean bindCountryTwoLettersISOCode = false;
-
-		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-		}
-		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-		}
-		else {
-			bindCountryTwoLettersISOCode = true;
-
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-		}
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1451,9 +529,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindCountryTwoLettersISOCode) {
-			qPos.add(countryTwoLettersISOCode);
-		}
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
@@ -1474,57 +550,55 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns all the commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	 * Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @return the matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		return filterFindBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId) {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @return the range of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end) {
-		return filterFindBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-			start, end, null);
+	public List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId, int start, int end) {
+		return filterFindByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode, int start, int end,
+	public List<CommerceInventoryWarehouse> filterFindByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findBycountryTwoLettersISOCode(countryTwoLettersISOCode,
-				start, end, orderByComparator);
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
 		}
 
 		StringBundler query = null;
@@ -1544,19 +618,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		boolean bindCountryTwoLettersISOCode = false;
-
-		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-		}
-		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-		}
-		else {
-			bindCountryTwoLettersISOCode = true;
-
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-		}
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
@@ -1603,9 +665,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (bindCountryTwoLettersISOCode) {
-				qPos.add(countryTwoLettersISOCode);
-			}
+			qPos.add(companyId);
 
 			return (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
 				getDialect(), start, end);
@@ -1619,22 +679,22 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	 *
 	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse[] filterFindBycountryTwoLettersISOCode_PrevAndNext(
-		long commerceInventoryWarehouseId, String countryTwoLettersISOCode,
+	public CommerceInventoryWarehouse[] filterFindByCompanyId_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findBycountryTwoLettersISOCode_PrevAndNext(commerceInventoryWarehouseId,
-				countryTwoLettersISOCode, orderByComparator);
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId_PrevAndNext(commerceInventoryWarehouseId,
+				companyId, orderByComparator);
 		}
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
@@ -1646,15 +706,15 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
 
-			array[0] = filterGetBycountryTwoLettersISOCode_PrevAndNext(session,
-					commerceInventoryWarehouse, countryTwoLettersISOCode,
-					orderByComparator, true);
+			array[0] = filterGetByCompanyId_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, orderByComparator,
+					true);
 
 			array[1] = commerceInventoryWarehouse;
 
-			array[2] = filterGetBycountryTwoLettersISOCode_PrevAndNext(session,
-					commerceInventoryWarehouse, countryTwoLettersISOCode,
-					orderByComparator, false);
+			array[2] = filterGetByCompanyId_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -1666,9 +726,9 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouse filterGetBycountryTwoLettersISOCode_PrevAndNext(
+	protected CommerceInventoryWarehouse filterGetByCompanyId_PrevAndNext(
 		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
-		String countryTwoLettersISOCode,
+		long companyId,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1689,19 +749,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		boolean bindCountryTwoLettersISOCode = false;
-
-		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-		}
-		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-		}
-		else {
-			bindCountryTwoLettersISOCode = true;
-
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-		}
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
@@ -1803,9 +851,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindCountryTwoLettersISOCode) {
-			qPos.add(countryTwoLettersISOCode);
-		}
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
@@ -1826,31 +872,29 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce inventory warehouses where countryTwoLettersISOCode = &#63; from the database.
+	 * Removes all the commerce inventory warehouses where companyId = &#63; from the database.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findBycountryTwoLettersISOCode(
-				countryTwoLettersISOCode, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null)) {
+	public void removeByCompanyId(long companyId) {
+		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByCompanyId(
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(commerceInventoryWarehouse);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouses where countryTwoLettersISOCode = &#63;.
+	 * Returns the number of commerce inventory warehouses where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @return the number of matching commerce inventory warehouses
 	 */
 	@Override
-	public int countBycountryTwoLettersISOCode(String countryTwoLettersISOCode) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COUNTRYTWOLETTERSISOCODE;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-		Object[] finderArgs = new Object[] { countryTwoLettersISOCode };
+		Object[] finderArgs = new Object[] { companyId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1859,19 +903,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-			boolean bindCountryTwoLettersISOCode = false;
-
-			if (countryTwoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-			}
-			else if (countryTwoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-			}
-			else {
-				bindCountryTwoLettersISOCode = true;
-
-				query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-			}
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1884,9 +916,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindCountryTwoLettersISOCode) {
-					qPos.add(countryTwoLettersISOCode);
-				}
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1906,35 +936,22 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouses that the user has permission to view where countryTwoLettersISOCode = &#63;.
+	 * Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param companyId the company ID
 	 * @return the number of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public int filterCountBycountryTwoLettersISOCode(
-		String countryTwoLettersISOCode) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countBycountryTwoLettersISOCode(countryTwoLettersISOCode);
+	public int filterCountByCompanyId(long companyId) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByCompanyId(companyId);
 		}
 
 		StringBundler query = new StringBundler(2);
 
 		query.append(_FILTER_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-		boolean bindCountryTwoLettersISOCode = false;
-
-		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1);
-		}
-		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3);
-		}
-		else {
-			bindCountryTwoLettersISOCode = true;
-
-			query.append(_FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2);
-		}
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				CommerceInventoryWarehouse.class.getName(),
@@ -1952,9 +969,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (bindCountryTwoLettersISOCode) {
-				qPos.add(countryTwoLettersISOCode);
-			}
+			qPos.add(companyId);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -1968,100 +983,94 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	private static final String _FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_1 =
-		"commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL";
-	private static final String _FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_2 =
-		"commerceInventoryWarehouse.countryTwoLettersISOCode = ?";
-	private static final String _FINDER_COLUMN_COUNTRYTWOLETTERSISOCODE_COUNTRYTWOLETTERSISOCODE_3 =
-		"(commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL OR commerceInventoryWarehouse.countryTwoLettersISOCode = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceInventoryWarehouse.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByA_C",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_A",
 			new String[] {
-				Boolean.class.getName(), String.class.getName(),
+				Long.class.getName(), Boolean.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryWarehouseImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByA_C",
-			new String[] { Boolean.class.getName(), String.class.getName() },
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() },
+			CommerceInventoryWarehouseModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceInventoryWarehouseModelImpl.ACTIVE_COLUMN_BITMASK |
-			CommerceInventoryWarehouseModelImpl.COUNTRYTWOLETTERSISOCODE_COLUMN_BITMASK |
 			CommerceInventoryWarehouseModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByA_C",
-			new String[] { Boolean.class.getName(), String.class.getName() });
+			"countByC_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
 
 	/**
-	 * Returns all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
-	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @return the matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findByA_C(boolean active,
-		String countryTwoLettersISOCode) {
-		return findByA_C(active, countryTwoLettersISOCode, QueryUtil.ALL_POS,
+	public List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active) {
+		return findByC_A(companyId, active, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns a range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
-	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @return the range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findByA_C(boolean active,
-		String countryTwoLettersISOCode, int start, int end) {
-		return findByA_C(active, countryTwoLettersISOCode, start, end, null);
+	public List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active, int start, int end) {
+		return findByC_A(companyId, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
-	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findByA_C(boolean active,
-		String countryTwoLettersISOCode, int start, int end,
+	public List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		return findByA_C(active, countryTwoLettersISOCode, start, end,
-			orderByComparator, true);
+		return findByC_A(companyId, active, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
-	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -2069,8 +1078,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> findByA_C(boolean active,
-		String countryTwoLettersISOCode, int start, int end,
+	public List<CommerceInventoryWarehouse> findByC_A(long companyId,
+		boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -2080,13 +1089,13 @@ public class CommerceInventoryWarehousePersistenceImpl
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C;
-			finderArgs = new Object[] { active, countryTwoLettersISOCode };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A;
+			finderArgs = new Object[] { companyId, active };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_A_C;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A;
 			finderArgs = new Object[] {
-					active, countryTwoLettersISOCode,
+					companyId, active,
 					
 					start, end, orderByComparator
 				};
@@ -2100,7 +1109,952 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceInventoryWarehouse commerceInventoryWarehouse : list) {
-					if ((active != commerceInventoryWarehouse.isActive()) ||
+					if ((companyId != commerceInventoryWarehouse.getCompanyId()) ||
+							(active != commerceInventoryWarehouse.isActive())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				if (!pagination) {
+					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse findByC_A_First(long companyId,
+		boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_A_First(companyId,
+				active, orderByComparator);
+
+		if (commerceInventoryWarehouse != null) {
+			return commerceInventoryWarehouse;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryWarehouseException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse fetchByC_A_First(long companyId,
+		boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		List<CommerceInventoryWarehouse> list = findByC_A(companyId, active, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse findByC_A_Last(long companyId,
+		boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_A_Last(companyId,
+				active, orderByComparator);
+
+		if (commerceInventoryWarehouse != null) {
+			return commerceInventoryWarehouse;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryWarehouseException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse fetchByC_A_Last(long companyId,
+		boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		int count = countByC_A(companyId, active);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceInventoryWarehouse> list = findByC_A(companyId, active,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse[] findByC_A_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
+
+			array[0] = getByC_A_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					orderByComparator, true);
+
+			array[1] = commerceInventoryWarehouse;
+
+			array[2] = getByC_A_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryWarehouse getByC_A_PrevAndNext(Session session,
+		CommerceInventoryWarehouse commerceInventoryWarehouse, long companyId,
+		boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryWarehouse> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @return the matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A(long companyId,
+		boolean active) {
+		return filterFindByC_A(companyId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @return the range of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A(long companyId,
+		boolean active, int start, int end) {
+		return filterFindByC_A(companyId, active, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A(long companyId,
+		boolean active, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_A(companyId, active, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2_SQL);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS,
+					CommerceInventoryWarehouseImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE,
+					CommerceInventoryWarehouseImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(active);
+
+			return (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+				getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse[] filterFindByC_A_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_A_PrevAndNext(commerceInventoryWarehouseId,
+				companyId, active, orderByComparator);
+		}
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
+
+			array[0] = filterGetByC_A_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					orderByComparator, true);
+
+			array[1] = commerceInventoryWarehouse;
+
+			array[2] = filterGetByC_A_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryWarehouse filterGetByC_A_PrevAndNext(
+		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
+		long companyId, boolean active,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2_SQL);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS,
+				CommerceInventoryWarehouseImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE,
+				CommerceInventoryWarehouseImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryWarehouse> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce inventory warehouses where companyId = &#63; and active = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 */
+	@Override
+	public void removeByC_A(long companyId, boolean active) {
+		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByC_A(
+				companyId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(commerceInventoryWarehouse);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouses where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @return the number of matching commerce inventory warehouses
+	 */
+	@Override
+	public int countByC_A(long companyId, boolean active) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_A;
+
+		Object[] finderArgs = new Object[] { companyId, active };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @return the number of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public int filterCountByC_A(long companyId, boolean active) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByC_A(companyId, active);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2_SQL);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(active);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "commerceInventoryWarehouse.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "commerceInventoryWarehouse.active = ?";
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2_SQL = "commerceInventoryWarehouse.active_ = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_C",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
+			new String[] { Long.class.getName(), String.class.getName() },
+			CommerceInventoryWarehouseModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceInventoryWarehouseModelImpl.COUNTRYTWOLETTERSISOCODE_COLUMN_BITMASK |
+			CommerceInventoryWarehouseModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByC_C",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @return the matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_C(long companyId,
+		String countryTwoLettersISOCode) {
+		return findByC_C(companyId, countryTwoLettersISOCode,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @return the range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_C(long companyId,
+		String countryTwoLettersISOCode, int start, int end) {
+		return findByC_C(companyId, countryTwoLettersISOCode, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_C(long companyId,
+		String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return findByC_C(companyId, countryTwoLettersISOCode, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_C(long companyId,
+		String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C;
+			finderArgs = new Object[] { companyId, countryTwoLettersISOCode };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C;
+			finderArgs = new Object[] {
+					companyId, countryTwoLettersISOCode,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceInventoryWarehouse> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceInventoryWarehouse commerceInventoryWarehouse : list) {
+					if ((companyId != commerceInventoryWarehouse.getCompanyId()) ||
 							!Objects.equals(countryTwoLettersISOCode,
 								commerceInventoryWarehouse.getCountryTwoLettersISOCode())) {
 						list = null;
@@ -2124,20 +2078,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-			query.append(_FINDER_COLUMN_A_C_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 			boolean bindCountryTwoLettersISOCode = false;
 
 			if (countryTwoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
 			}
 			else if (countryTwoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
 			}
 			else {
 				bindCountryTwoLettersISOCode = true;
 
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
 			}
 
 			if (orderByComparator != null) {
@@ -2160,7 +2114,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(active);
+				qPos.add(companyId);
 
 				if (bindCountryTwoLettersISOCode) {
 					qPos.add(countryTwoLettersISOCode);
@@ -2197,20 +2151,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse findByA_C_First(boolean active,
+	public CommerceInventoryWarehouse findByC_C_First(long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByA_C_First(active,
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_C_First(companyId,
 				countryTwoLettersISOCode, orderByComparator);
 
 		if (commerceInventoryWarehouse != null) {
@@ -2221,8 +2175,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("active=");
-		msg.append(active);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", countryTwoLettersISOCode=");
 		msg.append(countryTwoLettersISOCode);
@@ -2233,18 +2187,18 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse fetchByA_C_First(boolean active,
+	public CommerceInventoryWarehouse fetchByC_C_First(long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		List<CommerceInventoryWarehouse> list = findByA_C(active,
+		List<CommerceInventoryWarehouse> list = findByC_C(companyId,
 				countryTwoLettersISOCode, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2255,20 +2209,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse findByA_C_Last(boolean active,
+	public CommerceInventoryWarehouse findByC_C_Last(long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByA_C_Last(active,
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_C_Last(companyId,
 				countryTwoLettersISOCode, orderByComparator);
 
 		if (commerceInventoryWarehouse != null) {
@@ -2279,8 +2233,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("active=");
-		msg.append(active);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", countryTwoLettersISOCode=");
 		msg.append(countryTwoLettersISOCode);
@@ -2291,24 +2245,24 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse fetchByA_C_Last(boolean active,
+	public CommerceInventoryWarehouse fetchByC_C_Last(long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		int count = countByA_C(active, countryTwoLettersISOCode);
+		int count = countByC_C(companyId, countryTwoLettersISOCode);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryWarehouse> list = findByA_C(active,
+		List<CommerceInventoryWarehouse> list = findByC_C(companyId,
 				countryTwoLettersISOCode, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -2319,18 +2273,18 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
 	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse[] findByA_C_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
+	public CommerceInventoryWarehouse[] findByC_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
@@ -2343,14 +2297,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
 
-			array[0] = getByA_C_PrevAndNext(session,
-					commerceInventoryWarehouse, active,
+			array[0] = getByC_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId,
 					countryTwoLettersISOCode, orderByComparator, true);
 
 			array[1] = commerceInventoryWarehouse;
 
-			array[2] = getByA_C_PrevAndNext(session,
-					commerceInventoryWarehouse, active,
+			array[2] = getByC_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId,
 					countryTwoLettersISOCode, orderByComparator, false);
 
 			return array;
@@ -2363,8 +2317,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouse getByA_C_PrevAndNext(Session session,
-		CommerceInventoryWarehouse commerceInventoryWarehouse, boolean active,
+	protected CommerceInventoryWarehouse getByC_C_PrevAndNext(Session session,
+		CommerceInventoryWarehouse commerceInventoryWarehouse, long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean previous) {
@@ -2381,20 +2335,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-		query.append(_FINDER_COLUMN_A_C_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 		boolean bindCountryTwoLettersISOCode = false;
 
 		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
 		}
 		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
 		}
 		else {
 			bindCountryTwoLettersISOCode = true;
 
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -2465,7 +2419,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(active);
+		qPos.add(companyId);
 
 		if (bindCountryTwoLettersISOCode) {
 			qPos.add(countryTwoLettersISOCode);
@@ -2490,47 +2444,47 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns all the commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @return the matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindByA_C(boolean active,
+	public List<CommerceInventoryWarehouse> filterFindByC_C(long companyId,
 		String countryTwoLettersISOCode) {
-		return filterFindByA_C(active, countryTwoLettersISOCode,
+		return filterFindByC_C(companyId, countryTwoLettersISOCode,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @return the range of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindByA_C(boolean active,
+	public List<CommerceInventoryWarehouse> filterFindByC_C(long companyId,
 		String countryTwoLettersISOCode, int start, int end) {
-		return filterFindByA_C(active, countryTwoLettersISOCode, start, end,
+		return filterFindByC_C(companyId, countryTwoLettersISOCode, start, end,
 			null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
@@ -2538,11 +2492,11 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public List<CommerceInventoryWarehouse> filterFindByA_C(boolean active,
+	public List<CommerceInventoryWarehouse> filterFindByC_C(long companyId,
 		String countryTwoLettersISOCode, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByA_C(active, countryTwoLettersISOCode, start, end,
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_C(companyId, countryTwoLettersISOCode, start, end,
 				orderByComparator);
 		}
 
@@ -2563,20 +2517,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_A_C_ACTIVE_2_SQL);
+		query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 		boolean bindCountryTwoLettersISOCode = false;
 
 		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
 		}
 		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
 		}
 		else {
 			bindCountryTwoLettersISOCode = true;
 
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -2624,7 +2578,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(active);
+			qPos.add(companyId);
 
 			if (bindCountryTwoLettersISOCode) {
 				qPos.add(countryTwoLettersISOCode);
@@ -2642,24 +2596,24 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
 	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
-	 * @param active the active
+	 * @param companyId the company ID
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory warehouse
 	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouse[] filterFindByA_C_PrevAndNext(
-		long commerceInventoryWarehouseId, boolean active,
+	public CommerceInventoryWarehouse[] filterFindByC_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId,
 		String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
 		throws NoSuchInventoryWarehouseException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByA_C_PrevAndNext(commerceInventoryWarehouseId, active,
-				countryTwoLettersISOCode, orderByComparator);
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_C_PrevAndNext(commerceInventoryWarehouseId,
+				companyId, countryTwoLettersISOCode, orderByComparator);
 		}
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
@@ -2671,14 +2625,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
 
-			array[0] = filterGetByA_C_PrevAndNext(session,
-					commerceInventoryWarehouse, active,
+			array[0] = filterGetByC_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId,
 					countryTwoLettersISOCode, orderByComparator, true);
 
 			array[1] = commerceInventoryWarehouse;
 
-			array[2] = filterGetByA_C_PrevAndNext(session,
-					commerceInventoryWarehouse, active,
+			array[2] = filterGetByC_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId,
 					countryTwoLettersISOCode, orderByComparator, false);
 
 			return array;
@@ -2691,9 +2645,9 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouse filterGetByA_C_PrevAndNext(
+	protected CommerceInventoryWarehouse filterGetByC_C_PrevAndNext(
 		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
-		boolean active, String countryTwoLettersISOCode,
+		long companyId, String countryTwoLettersISOCode,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -2714,20 +2668,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_A_C_ACTIVE_2_SQL);
+		query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
 		boolean bindCountryTwoLettersISOCode = false;
 
 		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
 		}
 		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
 		}
 		else {
 			bindCountryTwoLettersISOCode = true;
 
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
 		}
 
 		if (!getDB().isSupportsInlineDistinct()) {
@@ -2830,6 +2784,712 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
+		qPos.add(companyId);
+
+		if (bindCountryTwoLettersISOCode) {
+			qPos.add(countryTwoLettersISOCode);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryWarehouse> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 */
+	@Override
+	public void removeByC_C(long companyId, String countryTwoLettersISOCode) {
+		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByC_C(
+				companyId, countryTwoLettersISOCode, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(commerceInventoryWarehouse);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouses where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @return the number of matching commerce inventory warehouses
+	 */
+	@Override
+	public int countByC_C(long companyId, String countryTwoLettersISOCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
+
+		Object[] finderArgs = new Object[] { companyId, countryTwoLettersISOCode };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
+
+			boolean bindCountryTwoLettersISOCode = false;
+
+			if (countryTwoLettersISOCode == null) {
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
+			}
+			else if (countryTwoLettersISOCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
+			}
+			else {
+				bindCountryTwoLettersISOCode = true;
+
+				query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindCountryTwoLettersISOCode) {
+					qPos.add(countryTwoLettersISOCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @return the number of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public int filterCountByC_C(long companyId, String countryTwoLettersISOCode) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByC_C(companyId, countryTwoLettersISOCode);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
+
+		boolean bindCountryTwoLettersISOCode = false;
+
+		if (countryTwoLettersISOCode == null) {
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1);
+		}
+		else if (countryTwoLettersISOCode.equals("")) {
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3);
+		}
+		else {
+			bindCountryTwoLettersISOCode = true;
+
+			query.append(_FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			if (bindCountryTwoLettersISOCode) {
+				qPos.add(countryTwoLettersISOCode);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_C_C_COMPANYID_2 = "commerceInventoryWarehouse.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_1 = "commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL";
+	private static final String _FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_2 = "commerceInventoryWarehouse.countryTwoLettersISOCode = ?";
+	private static final String _FINDER_COLUMN_C_C_COUNTRYTWOLETTERSISOCODE_3 = "(commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL OR commerceInventoryWarehouse.countryTwoLettersISOCode = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_A_C",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_A_C",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName()
+			},
+			CommerceInventoryWarehouseModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceInventoryWarehouseModelImpl.ACTIVE_COLUMN_BITMASK |
+			CommerceInventoryWarehouseModelImpl.COUNTRYTWOLETTERSISOCODE_COLUMN_BITMASK |
+			CommerceInventoryWarehouseModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_A_C = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByC_A_C",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName()
+			});
+
+	/**
+	 * Returns all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @return the matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode) {
+		return findByC_A_C(companyId, active, countryTwoLettersISOCode,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @return the range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end) {
+		return findByC_A_C(companyId, active, countryTwoLettersISOCode, start,
+			end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		return findByC_A_C(companyId, active, countryTwoLettersISOCode, start,
+			end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory warehouses
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> findByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C;
+			finderArgs = new Object[] {
+					companyId, active, countryTwoLettersISOCode
+				};
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_A_C;
+			finderArgs = new Object[] {
+					companyId, active, countryTwoLettersISOCode,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceInventoryWarehouse> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceInventoryWarehouse commerceInventoryWarehouse : list) {
+					if ((companyId != commerceInventoryWarehouse.getCompanyId()) ||
+							(active != commerceInventoryWarehouse.isActive()) ||
+							!Objects.equals(countryTwoLettersISOCode,
+								commerceInventoryWarehouse.getCountryTwoLettersISOCode())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2);
+
+			boolean bindCountryTwoLettersISOCode = false;
+
+			if (countryTwoLettersISOCode == null) {
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
+			}
+			else if (countryTwoLettersISOCode.equals("")) {
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
+			}
+			else {
+				bindCountryTwoLettersISOCode = true;
+
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				if (bindCountryTwoLettersISOCode) {
+					qPos.add(countryTwoLettersISOCode);
+				}
+
+				if (!pagination) {
+					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse findByC_A_C_First(long companyId,
+		boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_A_C_First(companyId,
+				active, countryTwoLettersISOCode, orderByComparator);
+
+		if (commerceInventoryWarehouse != null) {
+			return commerceInventoryWarehouse;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append(", countryTwoLettersISOCode=");
+		msg.append(countryTwoLettersISOCode);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryWarehouseException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse fetchByC_A_C_First(long companyId,
+		boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		List<CommerceInventoryWarehouse> list = findByC_A_C(companyId, active,
+				countryTwoLettersISOCode, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse findByC_A_C_Last(long companyId,
+		boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = fetchByC_A_C_Last(companyId,
+				active, countryTwoLettersISOCode, orderByComparator);
+
+		if (commerceInventoryWarehouse != null) {
+			return commerceInventoryWarehouse;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", active=");
+		msg.append(active);
+
+		msg.append(", countryTwoLettersISOCode=");
+		msg.append(countryTwoLettersISOCode);
+
+		msg.append("}");
+
+		throw new NoSuchInventoryWarehouseException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse fetchByC_A_C_Last(long companyId,
+		boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		int count = countByC_A_C(companyId, active, countryTwoLettersISOCode);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceInventoryWarehouse> list = findByC_A_C(companyId, active,
+				countryTwoLettersISOCode, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse[] findByC_A_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
+
+			array[0] = getByC_A_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					countryTwoLettersISOCode, orderByComparator, true);
+
+			array[1] = commerceInventoryWarehouse;
+
+			array[2] = getByC_A_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					countryTwoLettersISOCode, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryWarehouse getByC_A_C_PrevAndNext(
+		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
+		long companyId, boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2);
+
+		boolean bindCountryTwoLettersISOCode = false;
+
+		if (countryTwoLettersISOCode == null) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
+		}
+		else if (countryTwoLettersISOCode.equals("")) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
+		}
+		else {
+			bindCountryTwoLettersISOCode = true;
+
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
 		qPos.add(active);
 
 		if (bindCountryTwoLettersISOCode) {
@@ -2855,54 +3515,439 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63; from the database.
+	 * Returns all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @return the matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode) {
+		return filterFindByC_A_C(companyId, active, countryTwoLettersISOCode,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @return the range of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end) {
+		return filterFindByC_A_C(companyId, active, countryTwoLettersISOCode,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouses that the user has permissions to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param start the lower bound of the range of commerce inventory warehouses
+	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouses that the user has permission to view
+	 */
+	@Override
+	public List<CommerceInventoryWarehouse> filterFindByC_A_C(long companyId,
+		boolean active, String countryTwoLettersISOCode, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_A_C(companyId, active, countryTwoLettersISOCode,
+				start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(6);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2_SQL);
+
+		boolean bindCountryTwoLettersISOCode = false;
+
+		if (countryTwoLettersISOCode == null) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
+		}
+		else if (countryTwoLettersISOCode.equals("")) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
+		}
+		else {
+			bindCountryTwoLettersISOCode = true;
+
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS,
+					CommerceInventoryWarehouseImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE,
+					CommerceInventoryWarehouseImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(active);
+
+			if (bindCountryTwoLettersISOCode) {
+				qPos.add(countryTwoLettersISOCode);
+			}
+
+			return (List<CommerceInventoryWarehouse>)QueryUtil.list(q,
+				getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the commerce inventory warehouses before and after the current commerce inventory warehouse in the ordered set of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the primary key of the current commerce inventory warehouse
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param countryTwoLettersISOCode the country two letters iso code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse
+	 * @throws NoSuchInventoryWarehouseException if a commerce inventory warehouse with the primary key could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouse[] filterFindByC_A_C_PrevAndNext(
+		long commerceInventoryWarehouseId, long companyId, boolean active,
+		String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
+		throws NoSuchInventoryWarehouseException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByC_A_C_PrevAndNext(commerceInventoryWarehouseId,
+				companyId, active, countryTwoLettersISOCode, orderByComparator);
+		}
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse = findByPrimaryKey(commerceInventoryWarehouseId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceInventoryWarehouse[] array = new CommerceInventoryWarehouseImpl[3];
+
+			array[0] = filterGetByC_A_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					countryTwoLettersISOCode, orderByComparator, true);
+
+			array[1] = commerceInventoryWarehouse;
+
+			array[2] = filterGetByC_A_C_PrevAndNext(session,
+					commerceInventoryWarehouse, companyId, active,
+					countryTwoLettersISOCode, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceInventoryWarehouse filterGetByC_A_C_PrevAndNext(
+		Session session, CommerceInventoryWarehouse commerceInventoryWarehouse,
+		long companyId, boolean active, String countryTwoLettersISOCode,
+		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(7 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(6);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2_SQL);
+
+		boolean bindCountryTwoLettersISOCode = false;
+
+		if (countryTwoLettersISOCode == null) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
+		}
+		else if (countryTwoLettersISOCode.equals("")) {
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
+		}
+		else {
+			bindCountryTwoLettersISOCode = true;
+
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEINVENTORYWAREHOUSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceInventoryWarehouseModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceInventoryWarehouse.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS,
+				CommerceInventoryWarehouseImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE,
+				CommerceInventoryWarehouseImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(active);
+
+		if (bindCountryTwoLettersISOCode) {
+			qPos.add(countryTwoLettersISOCode);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouse);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CommerceInventoryWarehouse> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 */
 	@Override
-	public void removeByA_C(boolean active, String countryTwoLettersISOCode) {
-		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByA_C(
-				active, countryTwoLettersISOCode, QueryUtil.ALL_POS,
+	public void removeByC_A_C(long companyId, boolean active,
+		String countryTwoLettersISOCode) {
+		for (CommerceInventoryWarehouse commerceInventoryWarehouse : findByC_A_C(
+				companyId, active, countryTwoLettersISOCode, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(commerceInventoryWarehouse);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouses where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the number of commerce inventory warehouses where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @return the number of matching commerce inventory warehouses
 	 */
 	@Override
-	public int countByA_C(boolean active, String countryTwoLettersISOCode) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_C;
+	public int countByC_A_C(long companyId, boolean active,
+		String countryTwoLettersISOCode) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_A_C;
 
-		Object[] finderArgs = new Object[] { active, countryTwoLettersISOCode };
+		Object[] finderArgs = new Object[] {
+				companyId, active, countryTwoLettersISOCode
+			};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-			query.append(_FINDER_COLUMN_A_C_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2);
 
 			boolean bindCountryTwoLettersISOCode = false;
 
 			if (countryTwoLettersISOCode == null) {
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
 			}
 			else if (countryTwoLettersISOCode.equals("")) {
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
 			}
 			else {
 				bindCountryTwoLettersISOCode = true;
 
-				query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+				query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
 			}
 
 			String sql = query.toString();
@@ -2915,6 +3960,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				qPos.add(active);
 
@@ -2940,36 +3987,40 @@ public class CommerceInventoryWarehousePersistenceImpl
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouses that the user has permission to view where active = &#63; and countryTwoLettersISOCode = &#63;.
+	 * Returns the number of commerce inventory warehouses that the user has permission to view where companyId = &#63; and active = &#63; and countryTwoLettersISOCode = &#63;.
 	 *
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param countryTwoLettersISOCode the country two letters iso code
 	 * @return the number of matching commerce inventory warehouses that the user has permission to view
 	 */
 	@Override
-	public int filterCountByA_C(boolean active, String countryTwoLettersISOCode) {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByA_C(active, countryTwoLettersISOCode);
+	public int filterCountByC_A_C(long companyId, boolean active,
+		String countryTwoLettersISOCode) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByC_A_C(companyId, active, countryTwoLettersISOCode);
 		}
 
-		StringBundler query = new StringBundler(3);
+		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_COMMERCEINVENTORYWAREHOUSE_WHERE);
 
-		query.append(_FINDER_COLUMN_A_C_ACTIVE_2_SQL);
+		query.append(_FINDER_COLUMN_C_A_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_C_ACTIVE_2_SQL);
 
 		boolean bindCountryTwoLettersISOCode = false;
 
 		if (countryTwoLettersISOCode == null) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1);
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1);
 		}
 		else if (countryTwoLettersISOCode.equals("")) {
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3);
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3);
 		}
 		else {
 			bindCountryTwoLettersISOCode = true;
 
-			query.append(_FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2);
+			query.append(_FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2);
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -2987,6 +4038,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
 
 			qPos.add(active);
 
@@ -3006,11 +4059,12 @@ public class CommerceInventoryWarehousePersistenceImpl
 		}
 	}
 
-	private static final String _FINDER_COLUMN_A_C_ACTIVE_2 = "commerceInventoryWarehouse.active = ? AND ";
-	private static final String _FINDER_COLUMN_A_C_ACTIVE_2_SQL = "commerceInventoryWarehouse.active_ = ? AND ";
-	private static final String _FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_1 = "commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL";
-	private static final String _FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_2 = "commerceInventoryWarehouse.countryTwoLettersISOCode = ?";
-	private static final String _FINDER_COLUMN_A_C_COUNTRYTWOLETTERSISOCODE_3 = "(commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL OR commerceInventoryWarehouse.countryTwoLettersISOCode = '')";
+	private static final String _FINDER_COLUMN_C_A_C_COMPANYID_2 = "commerceInventoryWarehouse.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_C_ACTIVE_2 = "commerceInventoryWarehouse.active = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_C_ACTIVE_2_SQL = "commerceInventoryWarehouse.active_ = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_1 = "commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL";
+	private static final String _FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_2 = "commerceInventoryWarehouse.countryTwoLettersISOCode = ?";
+	private static final String _FINDER_COLUMN_C_A_C_COUNTRYTWOLETTERSISOCODE_3 = "(commerceInventoryWarehouse.countryTwoLettersISOCode IS NULL OR commerceInventoryWarehouse.countryTwoLettersISOCode = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceInventoryWarehouseModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseModelImpl.FINDER_CACHE_ENABLED,
 			CommerceInventoryWarehouseImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -3612,29 +4666,39 @@ public class CommerceInventoryWarehousePersistenceImpl
 		else
 		 if (isNew) {
 			Object[] args = new Object[] {
+					commerceInventoryWarehouseModelImpl.getCompanyId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+				args);
+
+			args = new Object[] {
+					commerceInventoryWarehouseModelImpl.getCompanyId(),
 					commerceInventoryWarehouseModelImpl.isActive()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 				args);
 
 			args = new Object[] {
+					commerceInventoryWarehouseModelImpl.getCompanyId(),
 					commerceInventoryWarehouseModelImpl.getCountryTwoLettersISOCode()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COUNTRYTWOLETTERSISOCODE,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
 				args);
 
 			args = new Object[] {
+					commerceInventoryWarehouseModelImpl.getCompanyId(),
 					commerceInventoryWarehouseModelImpl.isActive(),
 					commerceInventoryWarehouseModelImpl.getCountryTwoLettersISOCode()
 				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -3644,63 +4708,86 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		else {
 			if ((commerceInventoryWarehouseModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getOriginalCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+
+				args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getCompanyId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((commerceInventoryWarehouseModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getOriginalCompanyId(),
 						commerceInventoryWarehouseModelImpl.getOriginalActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 					args);
 
 				args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getCompanyId(),
 						commerceInventoryWarehouseModelImpl.isActive()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_ACTIVE, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ACTIVE,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A,
 					args);
 			}
 
 			if ((commerceInventoryWarehouseModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getOriginalCompanyId(),
 						commerceInventoryWarehouseModelImpl.getOriginalCountryTwoLettersISOCode()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COUNTRYTWOLETTERSISOCODE,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
 					args);
 
 				args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getCompanyId(),
 						commerceInventoryWarehouseModelImpl.getCountryTwoLettersISOCode()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COUNTRYTWOLETTERSISOCODE,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRYTWOLETTERSISOCODE,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
 					args);
 			}
 
 			if ((commerceInventoryWarehouseModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getOriginalCompanyId(),
 						commerceInventoryWarehouseModelImpl.getOriginalActive(),
 						commerceInventoryWarehouseModelImpl.getOriginalCountryTwoLettersISOCode()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C,
 					args);
 
 				args = new Object[] {
+						commerceInventoryWarehouseModelImpl.getCompanyId(),
 						commerceInventoryWarehouseModelImpl.isActive(),
 						commerceInventoryWarehouseModelImpl.getCountryTwoLettersISOCode()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_A_C, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_A_C,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_C_A_C, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_A_C,
 					args);
 			}
 		}

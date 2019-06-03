@@ -68,7 +68,8 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceShipmentId", getCommerceShipmentId());
 		attributes.put("commerceOrderItemId", getCommerceOrderItemId());
-		attributes.put("commerceWarehouseId", getCommerceWarehouseId());
+		attributes.put("commerceInventoryWarehouseId",
+			getCommerceInventoryWarehouseId());
 		attributes.put("quantity", getQuantity());
 
 		return attributes;
@@ -131,10 +132,11 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 			setCommerceOrderItemId(commerceOrderItemId);
 		}
 
-		Long commerceWarehouseId = (Long)attributes.get("commerceWarehouseId");
+		Long commerceInventoryWarehouseId = (Long)attributes.get(
+				"commerceInventoryWarehouseId");
 
-		if (commerceWarehouseId != null) {
-			setCommerceWarehouseId(commerceWarehouseId);
+		if (commerceInventoryWarehouseId != null) {
+			setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
 		}
 
 		Integer quantity = (Integer)attributes.get("quantity");
@@ -157,6 +159,16 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public CommerceOrderItem fetchCommerceOrderItem() {
 		return _commerceShipmentItem.fetchCommerceOrderItem();
+	}
+
+	/**
+	* Returns the commerce inventory warehouse ID of this commerce shipment item.
+	*
+	* @return the commerce inventory warehouse ID of this commerce shipment item
+	*/
+	@Override
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceShipmentItem.getCommerceInventoryWarehouseId();
 	}
 
 	/**
@@ -193,16 +205,6 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public long getCommerceShipmentItemId() {
 		return _commerceShipmentItem.getCommerceShipmentItemId();
-	}
-
-	/**
-	* Returns the commerce warehouse ID of this commerce shipment item.
-	*
-	* @return the commerce warehouse ID of this commerce shipment item
-	*/
-	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceShipmentItem.getCommerceWarehouseId();
 	}
 
 	/**
@@ -336,6 +338,17 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	}
 
 	/**
+	* Sets the commerce inventory warehouse ID of this commerce shipment item.
+	*
+	* @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce shipment item
+	*/
+	@Override
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+		_commerceShipmentItem.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+	}
+
+	/**
 	* Sets the commerce order item ID of this commerce shipment item.
 	*
 	* @param commerceOrderItemId the commerce order item ID of this commerce shipment item
@@ -363,16 +376,6 @@ public class CommerceShipmentItemWrapper implements CommerceShipmentItem,
 	@Override
 	public void setCommerceShipmentItemId(long commerceShipmentItemId) {
 		_commerceShipmentItem.setCommerceShipmentItemId(commerceShipmentItemId);
-	}
-
-	/**
-	* Sets the commerce warehouse ID of this commerce shipment item.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID of this commerce shipment item
-	*/
-	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceShipmentItem.setCommerceWarehouseId(commerceWarehouseId);
 	}
 
 	/**

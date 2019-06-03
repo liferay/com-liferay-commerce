@@ -27,6 +27,7 @@ import org.osgi.framework.FrameworkUtil;
 
 import org.osgi.util.tracker.ServiceTracker;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -115,48 +116,149 @@ public class CommerceInventoryAuditUtil {
 	}
 
 	/**
-	* Returns the commerce inventory audit where sku = &#63; or throws a {@link NoSuchInventoryAuditException} if it could not be found.
+	* Returns all the commerce inventory audits where sku = &#63;.
 	*
 	* @param sku the sku
-	* @return the matching commerce inventory audit
+	* @return the matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findBySku(String sku) {
+		return getPersistence().findBySku(sku);
+	}
+
+	/**
+	* Returns a range of all the commerce inventory audits where sku = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param sku the sku
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @return the range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findBySku(String sku, int start,
+		int end) {
+		return getPersistence().findBySku(sku, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory audits where sku = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param sku the sku
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findBySku(String sku, int start,
+		int end, OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence().findBySku(sku, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory audits where sku = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param sku the sku
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findBySku(String sku, int start,
+		int end, OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findBySku(sku, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce inventory audit in the ordered set where sku = &#63;.
+	*
+	* @param sku the sku
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory audit
 	* @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
 	*/
-	public static CommerceInventoryAudit findBysku(String sku)
+	public static CommerceInventoryAudit findBySku_First(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
-		return getPersistence().findBysku(sku);
+		return getPersistence().findBySku_First(sku, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory audit where sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the first commerce inventory audit in the ordered set where sku = &#63;.
 	*
 	* @param sku the sku
-	* @return the matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
 	*/
-	public static CommerceInventoryAudit fetchBysku(String sku) {
-		return getPersistence().fetchBysku(sku);
+	public static CommerceInventoryAudit fetchBySku_First(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence().fetchBySku_First(sku, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory audit where sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the last commerce inventory audit in the ordered set where sku = &#63;.
 	*
 	* @param sku the sku
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory audit
+	* @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
 	*/
-	public static CommerceInventoryAudit fetchBysku(String sku,
-		boolean retrieveFromCache) {
-		return getPersistence().fetchBysku(sku, retrieveFromCache);
-	}
-
-	/**
-	* Removes the commerce inventory audit where sku = &#63; from the database.
-	*
-	* @param sku the sku
-	* @return the commerce inventory audit that was removed
-	*/
-	public static CommerceInventoryAudit removeBysku(String sku)
+	public static CommerceInventoryAudit findBySku_Last(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
 		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
-		return getPersistence().removeBysku(sku);
+		return getPersistence().findBySku_Last(sku, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce inventory audit in the ordered set where sku = &#63;.
+	*
+	* @param sku the sku
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	*/
+	public static CommerceInventoryAudit fetchBySku_Last(String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence().fetchBySku_Last(sku, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce inventory audits before and after the current commerce inventory audit in the ordered set where sku = &#63;.
+	*
+	* @param commerceInventoryAuditId the primary key of the current commerce inventory audit
+	* @param sku the sku
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce inventory audit
+	* @throws NoSuchInventoryAuditException if a commerce inventory audit with the primary key could not be found
+	*/
+	public static CommerceInventoryAudit[] findBySku_PrevAndNext(
+		long commerceInventoryAuditId, String sku,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
+		return getPersistence()
+				   .findBySku_PrevAndNext(commerceInventoryAuditId, sku,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce inventory audits where sku = &#63; from the database.
+	*
+	* @param sku the sku
+	*/
+	public static void removeBySku(String sku) {
+		getPersistence().removeBySku(sku);
 	}
 
 	/**
@@ -165,8 +267,176 @@ public class CommerceInventoryAuditUtil {
 	* @param sku the sku
 	* @return the number of matching commerce inventory audits
 	*/
-	public static int countBysku(String sku) {
-		return getPersistence().countBysku(sku);
+	public static int countBySku(String sku) {
+		return getPersistence().countBySku(sku);
+	}
+
+	/**
+	* Returns all the commerce inventory audits where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @return the matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findByLtCreateDate(
+		Date createDate) {
+		return getPersistence().findByLtCreateDate(createDate);
+	}
+
+	/**
+	* Returns a range of all the commerce inventory audits where createDate &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param createDate the create date
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @return the range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findByLtCreateDate(
+		Date createDate, int start, int end) {
+		return getPersistence().findByLtCreateDate(createDate, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory audits where createDate &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param createDate the create date
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findByLtCreateDate(
+		Date createDate, int start, int end,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence()
+				   .findByLtCreateDate(createDate, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the commerce inventory audits where createDate &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param createDate the create date
+	* @param start the lower bound of the range of commerce inventory audits
+	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce inventory audits
+	*/
+	public static List<CommerceInventoryAudit> findByLtCreateDate(
+		Date createDate, int start, int end,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByLtCreateDate(createDate, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory audit
+	* @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	*/
+	public static CommerceInventoryAudit findByLtCreateDate_First(
+		Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
+		return getPersistence()
+				   .findByLtCreateDate_First(createDate, orderByComparator);
+	}
+
+	/**
+	* Returns the first commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	*/
+	public static CommerceInventoryAudit fetchByLtCreateDate_First(
+		Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence()
+				   .fetchByLtCreateDate_First(createDate, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory audit
+	* @throws NoSuchInventoryAuditException if a matching commerce inventory audit could not be found
+	*/
+	public static CommerceInventoryAudit findByLtCreateDate_Last(
+		Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
+		return getPersistence()
+				   .findByLtCreateDate_Last(createDate, orderByComparator);
+	}
+
+	/**
+	* Returns the last commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce inventory audit, or <code>null</code> if a matching commerce inventory audit could not be found
+	*/
+	public static CommerceInventoryAudit fetchByLtCreateDate_Last(
+		Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator) {
+		return getPersistence()
+				   .fetchByLtCreateDate_Last(createDate, orderByComparator);
+	}
+
+	/**
+	* Returns the commerce inventory audits before and after the current commerce inventory audit in the ordered set where createDate &lt; &#63;.
+	*
+	* @param commerceInventoryAuditId the primary key of the current commerce inventory audit
+	* @param createDate the create date
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next commerce inventory audit
+	* @throws NoSuchInventoryAuditException if a commerce inventory audit with the primary key could not be found
+	*/
+	public static CommerceInventoryAudit[] findByLtCreateDate_PrevAndNext(
+		long commerceInventoryAuditId, Date createDate,
+		OrderByComparator<CommerceInventoryAudit> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException {
+		return getPersistence()
+				   .findByLtCreateDate_PrevAndNext(commerceInventoryAuditId,
+			createDate, orderByComparator);
+	}
+
+	/**
+	* Removes all the commerce inventory audits where createDate &lt; &#63; from the database.
+	*
+	* @param createDate the create date
+	*/
+	public static void removeByLtCreateDate(Date createDate) {
+		getPersistence().removeByLtCreateDate(createDate);
+	}
+
+	/**
+	* Returns the number of commerce inventory audits where createDate &lt; &#63;.
+	*
+	* @param createDate the create date
+	* @return the number of matching commerce inventory audits
+	*/
+	public static int countByLtCreateDate(Date createDate) {
+		return getPersistence().countByLtCreateDate(createDate);
 	}
 
 	/**

@@ -134,7 +134,7 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 		newCommerceInventoryWarehouseItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceInventoryWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		newCommerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		newCommerceInventoryWarehouseItem.setSku(RandomTestUtil.randomString());
 
@@ -163,8 +163,8 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 				existingCommerceInventoryWarehouseItem.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryWarehouseItem.getModifiedDate()));
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getCommerceWarehouseId(),
-			newCommerceInventoryWarehouseItem.getCommerceWarehouseId());
+		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseId(),
+			newCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseId());
 		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getSku(),
 			newCommerceInventoryWarehouseItem.getSku());
 		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getQuantity(),
@@ -174,19 +174,20 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCommerceWarehouseId() throws Exception {
-		_persistence.countByCommerceWarehouseId(RandomTestUtil.nextLong());
+	public void testCountByCommerceInventoryWarehouseId()
+		throws Exception {
+		_persistence.countByCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
-		_persistence.countByCommerceWarehouseId(0L);
+		_persistence.countByCommerceInventoryWarehouseId(0L);
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
 	}
 
 	@Test
@@ -225,8 +226,8 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CIWarehouseItem",
 			"commerceInventoryWarehouseItemId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWarehouseId", true, "sku", true,
-			"quantity", true, "reservedQuantity", true);
+			"modifiedDate", true, "commerceInventoryWarehouseId", true, "sku",
+			true, "quantity", true, "reservedQuantity", true);
 	}
 
 	@Test
@@ -448,10 +449,10 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.findByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
 
 		Assert.assertEquals(Long.valueOf(
-				existingCommerceInventoryWarehouseItem.getCommerceWarehouseId()),
+				existingCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceInventoryWarehouseItem,
-				"getOriginalCommerceWarehouseId", new Class<?>[0]));
+				"getOriginalCommerceInventoryWarehouseId", new Class<?>[0]));
 		Assert.assertTrue(Objects.equals(
 				existingCommerceInventoryWarehouseItem.getSku(),
 				ReflectionTestUtil.invoke(
@@ -475,7 +476,7 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 		commerceInventoryWarehouseItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceInventoryWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		commerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		commerceInventoryWarehouseItem.setSku(RandomTestUtil.randomString());
 

@@ -254,6 +254,14 @@ public class CommerceOrderItemLocalServiceWrapper
 		return _commerceOrderItemLocalService.getAvailableForShipmentCommerceOrderItems(commerceOrderId);
 	}
 
+	@Override
+	public int getCommerceInventoryWarehouseItemQuantity(
+		long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItemLocalService.getCommerceInventoryWarehouseItemQuantity(commerceOrderItemId,
+			commerceInventoryWarehouseId);
+	}
+
 	/**
 	* Returns the commerce order item with the primary key.
 	*
@@ -333,14 +341,6 @@ public class CommerceOrderItemLocalServiceWrapper
 	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return _commerceOrderItemLocalService.getCommerceOrderItemsQuantity(commerceOrderId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemLocalService.getCommerceWarehouseItemQuantity(commerceOrderItemId,
-			commerceWarehouseId);
 	}
 
 	@Override

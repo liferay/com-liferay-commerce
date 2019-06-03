@@ -82,6 +82,14 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	}
 
 	@Override
+	public int getCommerceInventoryWarehouseItemQuantity(
+		long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceOrderItemService.getCommerceInventoryWarehouseItemQuantity(commerceOrderItemId,
+			commerceInventoryWarehouseId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem getCommerceOrderItem(
 		long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -106,14 +114,6 @@ public class CommerceOrderItemServiceWrapper implements CommerceOrderItemService
 	public int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceOrderItemService.getCommerceOrderItemsQuantity(commerceOrderId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemQuantity(long commerceOrderItemId,
-		long commerceWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.getCommerceWarehouseItemQuantity(commerceOrderItemId,
-			commerceWarehouseId);
 	}
 
 	/**

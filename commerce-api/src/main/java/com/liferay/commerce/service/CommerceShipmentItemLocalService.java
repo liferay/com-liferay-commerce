@@ -77,8 +77,8 @@ public interface CommerceShipmentItemLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceShipmentItem addCommerceShipmentItem(
 		long commerceShipmentId, long commerceOrderItemId,
-		long commerceWarehouseId, int quantity, ServiceContext serviceContext)
-		throws PortalException;
+		long commerceInventoryWarehouseId, int quantity,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce shipment item with the primary key. Does not add the commerce shipment item to the database.

@@ -136,7 +136,7 @@ public class CommerceInventoryReplenishmentItemPersistenceTest {
 
 		newCommerceInventoryReplenishmentItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommerceInventoryReplenishmentItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		newCommerceInventoryReplenishmentItem.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		newCommerceInventoryReplenishmentItem.setSku(RandomTestUtil.randomString());
 
@@ -166,8 +166,8 @@ public class CommerceInventoryReplenishmentItemPersistenceTest {
 				existingCommerceInventoryReplenishmentItem.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryReplenishmentItem.getModifiedDate()));
-		Assert.assertEquals(existingCommerceInventoryReplenishmentItem.getCommerceWarehouseId(),
-			newCommerceInventoryReplenishmentItem.getCommerceWarehouseId());
+		Assert.assertEquals(existingCommerceInventoryReplenishmentItem.getCommerceInventoryWarehouseId(),
+			newCommerceInventoryReplenishmentItem.getCommerceInventoryWarehouseId());
 		Assert.assertEquals(existingCommerceInventoryReplenishmentItem.getSku(),
 			newCommerceInventoryReplenishmentItem.getSku());
 		Assert.assertEquals(Time.getShortTimestamp(
@@ -179,26 +179,27 @@ public class CommerceInventoryReplenishmentItemPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCommerceWarehouseId() throws Exception {
-		_persistence.countByCommerceWarehouseId(RandomTestUtil.nextLong());
+	public void testCountByCommerceInventoryWarehouseId()
+		throws Exception {
+		_persistence.countByCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
-		_persistence.countByCommerceWarehouseId(0L);
+		_persistence.countByCommerceInventoryWarehouseId(0L);
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
 	}
 
 	@Test
-	public void testCountByavailabilityDate() throws Exception {
-		_persistence.countByavailabilityDate(RandomTestUtil.nextDate());
+	public void testCountByAvailabilityDate() throws Exception {
+		_persistence.countByAvailabilityDate(RandomTestUtil.nextDate());
 
-		_persistence.countByavailabilityDate(RandomTestUtil.nextDate());
+		_persistence.countByAvailabilityDate(RandomTestUtil.nextDate());
 	}
 
 	@Test
@@ -239,8 +240,8 @@ public class CommerceInventoryReplenishmentItemPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CIReplenishmentItem",
 			"commerceInventoryReplenishmentItemId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWarehouseId", true, "sku", true,
-			"availabilityDate", true, "quantity", true);
+			"modifiedDate", true, "commerceInventoryWarehouseId", true, "sku",
+			true, "availabilityDate", true, "quantity", true);
 	}
 
 	@Test
@@ -480,7 +481,7 @@ public class CommerceInventoryReplenishmentItemPersistenceTest {
 
 		commerceInventoryReplenishmentItem.setModifiedDate(RandomTestUtil.nextDate());
 
-		commerceInventoryReplenishmentItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		commerceInventoryReplenishmentItem.setCommerceInventoryWarehouseId(RandomTestUtil.nextLong());
 
 		commerceInventoryReplenishmentItem.setSku(RandomTestUtil.randomString());
 
