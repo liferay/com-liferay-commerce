@@ -18,6 +18,14 @@
 	&:hover {
 		border-color: black;
 		box-shadow: 4px 4px 0 0 black;
+
+		.commerce-compare-table & {
+			box-shadow: 0 0 0 0 black;
+		}
+	}
+
+	.commerce-compare-table & {
+		border: 0;
 	}
 
 	&:focus {

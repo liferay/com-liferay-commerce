@@ -1,16 +1,13 @@
 .commerce-compare-table {
+	border: 1px solid #E7E7E7;
 	border-collapse: collapse;
 	line-height: 1.1;
 	width: 100%;
 
 	tbody td {
-		border-right: 2px solid #F8F8F9;
+		border-right: 1px solid #E7E7E7;
 		padding: 15px;
 		vertical-align: baseline;
-
-		&:last-child {
-			border-right: none
-		}
 	}
 
 	tbody tr {
@@ -27,6 +24,7 @@
 	}
 
 	&__separator {
+		border: 1px solid #E7E7E7;
 		font-weight: 800;
 	}
 
@@ -43,7 +41,16 @@
 		text-align: center;
 	}
 
+	&__card {
+		border: 1px solid #E7E7E7;
+
+		& + & {
+			// border-left: 0;
+		}
+	}
+
 	td {
+		padding: 0;
 		width: 20%;
 
 		&:first-of-type {
