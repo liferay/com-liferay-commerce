@@ -87,14 +87,12 @@ public class CommerceChannelDisplayContext
 			httpServletRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
+		portletURL.setParameter("backURL", portletURL.toString());
+
 		portletURL.setParameter(
 			"commerceChannelId",
 			String.valueOf(commerceChannel.getCommerceChannelId()));
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
-
-		String backURL = _portal.getCurrentURL(httpServletRequest);
-
-		portletURL.setParameter("backURL", backURL);
 
 		return portletURL.toString();
 	}
