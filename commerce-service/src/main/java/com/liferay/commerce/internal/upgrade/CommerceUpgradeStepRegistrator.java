@@ -26,6 +26,7 @@ import com.liferay.commerce.internal.upgrade.v2_1_0.CommerceSubscriptionEntryUpg
 import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceAvailabilityEstimateUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceCountryUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceRegionUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v4_0_0.CommerceShipmentItemUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -107,7 +108,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 		registry.register(
 			_SCHEMA_VERSION_3_2_0, _SCHEMA_VERSION_4_0_0,
 			new com.liferay.commerce.internal.upgrade.v4_0_0.
-				CommerceOrderItemUpgradeProcess());
+				CommerceOrderItemUpgradeProcess(),
+			new CommerceShipmentItemUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
