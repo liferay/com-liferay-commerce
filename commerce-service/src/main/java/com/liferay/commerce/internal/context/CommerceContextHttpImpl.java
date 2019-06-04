@@ -25,7 +25,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -93,13 +92,15 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	}
 
 	@Override
-	public CommerceCatalog getCommerceCatalog() {
-		return null;
+	public CommerceChannel getCommerceChannel() throws PortalException {
+		return _commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			getSiteGroupId());
 	}
 
 	@Override
-	public long getCommerceCatalogGroupId() throws PortalException {
-		return 0;
+	public long getCommerceChannelGroupId() throws PortalException {
+		return _commerceChannelLocalService.
+			getCommerceChannelGroupIdBySiteGroupId(getSiteGroupId());
 	}
 
 	@Override
@@ -155,7 +156,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 		_commercePriceList =
 			_commercePriceListLocalService.getCommercePriceList(
-				new long[] {getCommerceCatalogGroupId()},
+				new long[] {getCommerceChannelGroupId()},
 				_portal.getCompanyId(_httpServletRequest),
 				commerceAccount.getCommerceAccountId(),
 				getCommerceAccountGroupIds());
