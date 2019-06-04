@@ -68,11 +68,15 @@ public class ShippingMethodCheckoutStepDisplayContext {
 	public List<CommerceShippingMethod> getCommerceShippingMethods()
 		throws PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		CommerceAddress shippingAddress = _commerceOrder.getShippingAddress();
 
 		return _commerceShippingMethodLocalService.getCommerceShippingMethods(
-			_commerceOrder.getGroupId(), shippingAddress.getCommerceCountryId(),
-			true);
+			themeDisplay.getScopeGroupId(),
+			shippingAddress.getCommerceCountryId(), true);
 	}
 
 	public String getCommerceShippingOptionKey(
