@@ -24,7 +24,10 @@ import com.liferay.commerce.discount.target.CommerceDiscountTarget;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -44,7 +47,6 @@ import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
-import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -57,6 +59,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.ToLongFunction;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -82,6 +85,8 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 
 	public static final String FIELD_COUPON_CODE = "couponCode";
 
+	public static final String FIELD_GROUP_IDS = "groupIds";
+
 	public static final String FIELD_TARGET_TYPE = "targetType";
 
 	public static final String FIELD_USE_COUPON_CODE = "useCouponCode";
@@ -89,8 +94,7 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 	public CommerceDiscountIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
-			Field.SCOPE_GROUP_ID, Field.UID);
+			Field.MODIFIED_DATE, Field.NAME, Field.UID);
 		setFilterSearch(true);
 	}
 
@@ -300,18 +304,43 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 						commerceDiscount.getCommerceDiscountId(),
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		Stream<CommerceDiscountCommerceAccountGroupRel> stream =
-			commerceDiscountCommerceAccountGroupRels.stream();
+		Stream<CommerceDiscountCommerceAccountGroupRel>
+			commerceDiscountCommerceAccountGroupRelStream =
+				commerceDiscountCommerceAccountGroupRels.stream();
 
-		LongStream longStream = stream.mapToLong(
-			CommerceDiscountCommerceAccountGroupRel::getCommerceAccountGroupId);
+		LongStream commerceAccountGroupIdStream =
+			commerceDiscountCommerceAccountGroupRelStream.mapToLong(
+				CommerceDiscountCommerceAccountGroupRel::
+					getCommerceAccountGroupId);
 
-		long[] commerceAccountGroupIds = longStream.toArray();
+		long[] commerceAccountGroupIds = commerceAccountGroupIdStream.toArray();
 
 		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
 		document.addNumber(
 			"commerceAccountGroupIds_required_matches",
 			commerceAccountGroupIds.length);
+
+		List<CommerceChannel> commerceChannels = new ArrayList<>();
+
+		List<CommerceChannelRel> commerceChannelRels =
+			_commerceChannelRelLocalService.getCommerceChannelRels(
+				commerceDiscount.getModelClassName(),
+				commerceDiscount.getCommerceDiscountId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
+
+		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
+			commerceChannels.add(commerceChannelRel.getCommerceChannel());
+		}
+
+		Stream<CommerceChannel> commerceChannelStream =
+			commerceChannels.stream();
+
+		LongStream commerceChannelGroupIdStream =
+			commerceChannelStream.mapToLong(
+				_getCommerceChannelToLongFunction());
+
+		document.addNumber(
+			FIELD_GROUP_IDS, commerceChannelGroupIdStream.toArray());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -434,11 +463,31 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 		_commerceDiscountProductTargets.remove(commerceDiscountProductTarget);
 	}
 
+	private ToLongFunction<CommerceChannel>
+		_getCommerceChannelToLongFunction() {
+
+		return new ToLongFunction<CommerceChannel>() {
+
+			@Override
+			public long applyAsLong(CommerceChannel commerceChannel) {
+				try {
+					return commerceChannel.getCommerceChannelGroupId();
+				}
+				catch (PortalException pe) {
+					_log.error(pe, pe);
+
+					return 0;
+				}
+			}
+
+		};
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceDiscountIndexer.class);
 
 	@Reference
-	private ClassNameLocalService _classNameLocalService;
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceDiscountCommerceAccountGroupRelLocalService
