@@ -27,6 +27,7 @@ import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.math.BigDecimal;
 
@@ -73,7 +74,7 @@ public class CommerceCheckoutStepHelper {
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
 		if (_commercePaymentEngine.getCommercePaymentMethodGroupRelsCount(
-				commerceOrder.getGroupId()) < 1) {
+				_portal.getScopeGroupId(httpServletRequest)) < 1) {
 
 			return false;
 		}
@@ -138,7 +139,7 @@ public class CommerceCheckoutStepHelper {
 		}
 
 		if (_commerceShippingMethodLocalService.getCommerceShippingMethodsCount(
-				commerceOrder.getGroupId(), true) > 0) {
+				_portal.getScopeGroupId(httpServletRequest), true) > 0) {
 
 			return true;
 		}
@@ -161,5 +162,8 @@ public class CommerceCheckoutStepHelper {
 	@Reference
 	private CommerceShippingMethodLocalService
 		_commerceShippingMethodLocalService;
+
+	@Reference
+	private Portal _portal;
 
 }

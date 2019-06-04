@@ -188,7 +188,7 @@ public class ByWeightCommerceShippingEngine implements CommerceShippingEngine {
 		CommerceAddress commerceAddress = commerceOrder.getShippingAddress();
 
 		List<CommerceShippingFixedOption> commerceShippingFixedOptions =
-			_getCommerceShippingFixedOptions(commerceOrder.getGroupId());
+			_getCommerceShippingFixedOptions(commerceContext.getSiteGroupId());
 
 		for (CommerceShippingFixedOption commerceShippingFixedOption :
 				commerceShippingFixedOptions) {
