@@ -71,7 +71,8 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
+			commerceOrder.getCompanyId(),
+			commerceContext.getCommerceChannelGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -92,7 +93,8 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
+			commerceOrder.getCompanyId(),
+			commerceContext.getCommerceChannelGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -113,7 +115,8 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
+			commerceOrder.getCompanyId(),
+			commerceContext.getCommerceChannelGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -141,7 +144,8 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			cpInstance.getCompanyId(), cpInstance.getGroupId(),
+			cpInstance.getCompanyId(),
+			commerceContext.getCommerceChannelGroupId(),
 			cpInstance.getCPDefinitionId(), cpInstanceId, 0,
 			commerceContext.getCommerceAccountGroupIds(), couponCode,
 			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
@@ -165,6 +169,8 @@ public class CommerceDiscountCalculationImpl
 		attributes.put(
 			CommerceDiscountIndexer.FIELD_TARGET_TYPE,
 			commerceDiscountTargetType.toString());
+		attributes.put(
+			CommerceDiscountIndexer.FIELD_GROUP_IDS, new long[] {groupId});
 		attributes.put("commerceAccountGroupIds", commerceAccountGroupIds);
 		attributes.put("commerceOrderId", commerceOrderId);
 		attributes.put("cpDefinitionId", cpDefinitionId);
@@ -175,7 +181,6 @@ public class CommerceDiscountCalculationImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(QueryUtil.ALL_POS);
 		searchContext.setEnd(QueryUtil.ALL_POS);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 

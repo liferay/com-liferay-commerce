@@ -45,7 +45,6 @@ public class DTOMapper {
 		discount.setCouponCode(commerceDiscount.getCouponCode());
 		discount.setDisplayDate(commerceDiscount.getDisplayDate());
 		discount.setExpirationDate(commerceDiscount.getExpirationDate());
-		discount.setGroupId(commerceDiscount.getGroupId());
 		discount.setId(commerceDiscount.getCommerceDiscountId());
 		discount.setLimitationTimes(commerceDiscount.getLimitationTimes());
 		discount.setLimitationType(commerceDiscount.getLimitationType());

@@ -23,7 +23,8 @@ import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountRelDisplayContext;
 import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -112,7 +113,8 @@ public class CommerceDiscountCategoriesScreenNavigationEntry
 
 		CommerceDiscountRelDisplayContext commerceDiscountRelDisplayContext =
 			new CommerceDiscountRelDisplayContext(
-				_commerceCatalogService, _commerceCurrencyLocalService,
+				_commerceChannelRelService, _commerceChannelService,
+				_commerceCurrencyLocalService,
 				_commerceDiscountModelResourcePermission,
 				_commerceDiscountRelService, _commerceDiscountService,
 				_commerceDiscountTargetRegistry,
@@ -128,7 +130,10 @@ public class CommerceDiscountCategoriesScreenNavigationEntry
 	}
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;

@@ -72,6 +72,10 @@ public class CommerceInventoryWarehousesDisplayContext {
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			getCommerceInventoryWarehouse();
 
+		if (commerceInventoryWarehouse == null) {
+			return new long[0];
+		}
+
 		List<CommerceChannelRel> commerceChannelRels =
 			_commerceChannelRelService.getCommerceChannelRels(
 				commerceInventoryWarehouse.getModelClassName(),

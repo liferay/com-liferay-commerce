@@ -25,7 +25,8 @@ import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.web.internal.display.context.CommerceDiscountRuleDisplayContext;
 import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -65,7 +66,8 @@ public class EditCommerceDiscountRuleMVCRenderCommand
 
 		CommerceDiscountRuleDisplayContext commerceDiscountRuleDisplayContext =
 			new CommerceDiscountRuleDisplayContext(
-				_commerceCatalogService, _commerceCurrencyLocalService,
+				_commerceChannelRelService, _commerceChannelService,
+				_commerceCurrencyLocalService,
 				_commerceDiscountModelResourcePermission,
 				_commerceDiscountRuleService,
 				_commerceDiscountRuleTypeJSPContributorRegistry,
@@ -82,7 +84,10 @@ public class EditCommerceDiscountRuleMVCRenderCommand
 	}
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
