@@ -21,8 +21,12 @@ import java.math.BigDecimal;
  */
 public class CommerceTaxCalculateRequest {
 
-	public long getCommerceAddressId() {
-		return _commerceAddressId;
+	public long getCommerceBillingAddressId() {
+		return _commerceBillingAddressId;
+	}
+
+	public long getCommerceShippingAddressId() {
+		return _commerceShippingAddressId;
 	}
 
 	public long getCommerceTaxMethodId() {
@@ -45,8 +49,12 @@ public class CommerceTaxCalculateRequest {
 		return _percentage;
 	}
 
-	public void setCommerceAddressId(long commerceAddressId) {
-		_commerceAddressId = commerceAddressId;
+	public void setCommerceBillingAddressId(long commerceBillingAddressId) {
+		_commerceBillingAddressId = commerceBillingAddressId;
+	}
+
+	public void setCommerceShippingAddressId(long commerceShippingAddressId) {
+		_commerceShippingAddressId = commerceShippingAddressId;
 	}
 
 	public void setCommerceTaxMethodId(long commerceTaxMethodId) {
@@ -69,7 +77,8 @@ public class CommerceTaxCalculateRequest {
 		_taxCategoryId = taxCategoryId;
 	}
 
-	private long _commerceAddressId;
+	private long _commerceBillingAddressId;
+	private long _commerceShippingAddressId;
 	private long _commerceTaxMethodId;
 	private boolean _percentage;
 	private BigDecimal _price;
