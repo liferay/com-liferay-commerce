@@ -23,8 +23,6 @@ import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGrou
 import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -35,7 +33,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import java.math.BigDecimal;
 
 import java.util.Calendar;
-import java.util.List;
 
 /**
  * @author Luca Pellizzon
@@ -47,14 +44,12 @@ public class CommerceDiscountTestUtil {
 				CommerceDiscount commerceDiscount, long userId)
 		throws Exception {
 
-		long groupId = commerceDiscount.getGroupId();
-
 		CommerceAccountGroup commerceAccountGroup = null; /*
 			CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
-				groupId, userId);*/
+				userId);*/
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
+			ServiceContextTestUtil.getServiceContext();
 
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
@@ -115,20 +110,13 @@ public class CommerceDiscountTestUtil {
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
 
-		List<CommerceCatalog> commerceCatalogs =
-			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
-				serviceContext.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
-
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
 		CommerceDiscount commerceDiscount =
 			CommerceDiscountLocalServiceUtil.addCommerceDiscount(
-				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
-				RandomTestUtil.randomString(), target, false, null, false,
-				BigDecimal.ZERO, discount, BigDecimal.ZERO, BigDecimal.ZERO,
-				BigDecimal.ZERO,
+				user.getUserId(), RandomTestUtil.randomString(), target, false,
+				null, false, BigDecimal.ZERO, discount, BigDecimal.ZERO,
+				BigDecimal.ZERO, BigDecimal.ZERO,
 				CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, true,
 				calendar.get(Calendar.MONTH),
 				calendar.get(Calendar.DAY_OF_MONTH),
@@ -160,21 +148,14 @@ public class CommerceDiscountTestUtil {
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
 
-		List<CommerceCatalog> commerceCatalogs =
-			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
-				serviceContext.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
-
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
 		CommerceDiscount commerceDiscount =
 			CommerceDiscountLocalServiceUtil.addCommerceDiscount(
-				commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
-				RandomTestUtil.randomString(), target, false, null, true,
-				BigDecimal.valueOf(10000), level1, level2, level3, level4,
-				CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, true,
-				calendar.get(Calendar.MONTH),
+				user.getUserId(), RandomTestUtil.randomString(), target, false,
+				null, true, BigDecimal.valueOf(10000), level1, level2, level3,
+				level4, CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0,
+				true, calendar.get(Calendar.MONTH),
 				calendar.get(Calendar.DAY_OF_MONTH),
 				calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
 				calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),
@@ -192,8 +173,7 @@ public class CommerceDiscountTestUtil {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(
-				commerceDiscount.getGroupId());
+			ServiceContextTestUtil.getServiceContext();
 
 		for (long id : targetIds) {
 			CommerceDiscountRelLocalServiceUtil.addCommerceDiscountRel(
@@ -207,8 +187,7 @@ public class CommerceDiscountTestUtil {
 		throws Exception {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(
-				commerceDiscount.getGroupId());
+			ServiceContextTestUtil.getServiceContext();
 
 		for (long id : targetIds) {
 			CommerceDiscountRelLocalServiceUtil.addCommerceDiscountRel(

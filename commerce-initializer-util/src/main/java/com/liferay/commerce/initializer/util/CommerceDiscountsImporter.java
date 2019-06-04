@@ -20,7 +20,6 @@ import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalService;
-import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
@@ -45,8 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceDiscountsImporter {
 
 	public void importCommerceDiscounts(
-			long catalogGroupId, JSONArray jsonArray, long scopeGroupId,
-			long userId)
+			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws Exception {
 
 		User user = _userLocalService.getUser(userId);
@@ -60,13 +58,12 @@ public class CommerceDiscountsImporter {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			_importCommerceDiscount(catalogGroupId, jsonObject, serviceContext);
+			_importCommerceDiscount(jsonObject, serviceContext);
 		}
 	}
 
 	private CommerceDiscount _addCommerceDiscount(
-			long catalogGroupId, JSONObject jsonObject,
-			ServiceContext serviceContext)
+			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Add Commerce Discount
@@ -83,7 +80,7 @@ public class CommerceDiscountsImporter {
 		boolean active = jsonObject.getBoolean("active");
 
 		return _commerceDiscountLocalService.addCommerceDiscount(
-			catalogGroupId, serviceContext.getUserId(), title,
+			serviceContext.getUserId(), title,
 			CommerceDiscountConstants.TARGET_CATEGORIES, useCouponCode,
 			couponCode, usePercentage, maximumDiscountAmount, level1,
 			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
@@ -92,16 +89,15 @@ public class CommerceDiscountsImporter {
 	}
 
 	private void _importCommerceDiscount(
-			long catalogGroupId, JSONObject jsonObject,
-			ServiceContext serviceContext)
+			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceDiscount commerceDiscount = _addCommerceDiscount(
-			catalogGroupId, jsonObject, serviceContext);
+			jsonObject, serviceContext);
 
-		JSONArray jsonArray = jsonObject.getJSONArray("categories");
+		JSONArray categories = jsonObject.getJSONArray("categories");
 
-		if (jsonArray.length() > 0) {
+		if (categories.length() > 0) {
 			DynamicQuery dynamicQuery =
 				_assetCategoryLocalService.dynamicQuery();
 
@@ -112,8 +108,8 @@ public class CommerceDiscountsImporter {
 				_assetCategoryLocalService.dynamicQuery(
 					dynamicQuery.add(criterion));
 
-			for (int i = 0; i < jsonArray.length(); i++) {
-				String category = jsonArray.getString(i);
+			for (int i = 0; i < categories.length(); i++) {
+				String category = categories.getString(i);
 
 				for (AssetCategory assetCategory : assetCategories) {
 					String name = assetCategory.getName();
@@ -133,9 +129,6 @@ public class CommerceDiscountsImporter {
 
 	@Reference
 	private AssetCategoryLocalService _assetCategoryLocalService;
-
-	@Reference
-	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceDiscountLocalService _commerceDiscountLocalService;

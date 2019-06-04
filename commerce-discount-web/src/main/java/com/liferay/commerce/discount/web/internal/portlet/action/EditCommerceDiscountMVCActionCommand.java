@@ -23,6 +23,8 @@ import com.liferay.commerce.discount.model.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelService;
 import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.commerce.product.exception.NoSuchCatalogException;
+import com.liferay.commerce.product.model.CommerceChannelRel;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -160,6 +162,28 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		return portletURL.toString();
 	}
 
+	protected void updateChannels(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceDiscountId = ParamUtil.getLong(
+			actionRequest, "commerceDiscountId");
+
+		long[] commerceChannelIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceChannelRel.class.getName(), actionRequest);
+
+		_commerceChannelRelService.deleteCommerceChannelRels(
+			CommerceDiscount.class.getName(), commerceDiscountId);
+
+		for (long commerceChannelId : commerceChannelIds) {
+			_commerceChannelRelService.addCommerceChannelRel(
+				CommerceDiscount.class.getName(), commerceDiscountId,
+				commerceChannelId, serviceContext);
+		}
+	}
+
 	protected CommerceDiscount updateCommerceDiscount(
 			ActionRequest actionRequest)
 		throws Exception {
@@ -167,8 +191,6 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		long commerceDiscountId = ParamUtil.getLong(
 			actionRequest, "commerceDiscountId");
 
-		long commerceCatalogGroupId = ParamUtil.getLong(
-			actionRequest, "commerceCatalogGroupId");
 		String title = ParamUtil.getString(actionRequest, "title");
 		String target = ParamUtil.getString(actionRequest, "target");
 		boolean useCouponCode = ParamUtil.getBoolean(
@@ -232,9 +254,9 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceDiscountId <= 0) {
 			commerceDiscount = _commerceDiscountService.addCommerceDiscount(
-				commerceCatalogGroupId, serviceContext.getUserId(), title,
-				target, useCouponCode, couponCode, usePercentage,
-				maximumDiscountAmount, level1, level2, level3, level4,
+				serviceContext.getUserId(), title, target, useCouponCode,
+				couponCode, usePercentage, maximumDiscountAmount, level1,
+				level2, level3, level4,
 				CommerceDiscountConstants.LIMITATION_TYPE_UNLIMITED, 0, active,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
@@ -304,6 +326,9 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
 	private CommerceDiscountCommerceAccountGroupRelService
 		_commerceDiscountCommerceAccountGroupRelService;
 
@@ -318,7 +343,12 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 
 		@Override
 		public CommerceDiscount call() throws Exception {
-			return updateCommerceDiscount(_actionRequest);
+			CommerceDiscount commerceDiscount = updateCommerceDiscount(
+				_actionRequest);
+
+			updateChannels(_actionRequest);
+
+			return commerceDiscount;
 		}
 
 		private CommerceDiscountCallable(ActionRequest actionRequest) {

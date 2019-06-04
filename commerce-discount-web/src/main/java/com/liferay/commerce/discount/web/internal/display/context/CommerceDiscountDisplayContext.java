@@ -26,8 +26,10 @@ import com.liferay.commerce.discount.target.CommerceDiscountTargetRegistry;
 import com.liferay.commerce.discount.util.comparator.CommerceDiscountCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.commerce.discount.web.internal.display.context.util.CommerceDiscountRequestHelper;
 import com.liferay.commerce.discount.web.internal.util.CommerceDiscountPortletUtil;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelRel;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -71,7 +73,8 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceDiscountDisplayContext {
 
 	public CommerceDiscountDisplayContext(
-		CommerceCatalogService commerceCatalogService,
+		CommerceChannelRelService commerceChannelRelService,
+		CommerceChannelService commerceChannelService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		ModelResourcePermission<CommerceDiscount>
 			commerceDiscountModelResourcePermission,
@@ -81,7 +84,8 @@ public class CommerceDiscountDisplayContext {
 			commerceDiscountCommerceAccountGroupRelService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
 
-		_commerceCatalogService = commerceCatalogService;
+		_commerceChannelRelService = commerceChannelRelService;
+		_commerceChannelService = commerceChannelService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceDiscountModelResourcePermission =
 			commerceDiscountModelResourcePermission;
@@ -98,8 +102,30 @@ public class CommerceDiscountDisplayContext {
 			httpServletRequest);
 	}
 
-	public List<CommerceCatalog> getCommerceCatalogs() throws PortalException {
-		return _commerceCatalogService.searchCommerceCatalogs(
+	public long[] getCommerceChannelRelCommerceChannelIds()
+		throws PortalException {
+
+		CommerceDiscount commerceDiscount = getCommerceDiscount();
+
+		if (commerceDiscount == null) {
+			return new long[0];
+		}
+
+		List<CommerceChannelRel> commerceChannelRels =
+			_commerceChannelRelService.getCommerceChannelRels(
+				commerceDiscount.getModelClassName(),
+				commerceDiscount.getCommerceDiscountId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
+
+		Stream<CommerceChannelRel> stream = commerceChannelRels.stream();
+
+		return stream.mapToLong(
+			CommerceChannelRel::getCommerceChannelId
+		).toArray();
+	}
+
+	public List<CommerceChannel> getCommerceChannels() throws PortalException {
+		return _commerceChannelService.getCommerceChannels(
 			commerceDiscountRequestHelper.getCompanyId());
 	}
 
@@ -281,34 +307,18 @@ public class CommerceDiscountDisplayContext {
 			new EmptyOnClickRowChecker(
 				commerceDiscountRequestHelper.getLiferayPortletResponse()));
 
-		if (isSearch()) {
-			Sort sort = CommerceDiscountPortletUtil.getCommerceDiscountSort(
-				_searchContainer.getOrderByCol(),
-				_searchContainer.getOrderByType());
+		Sort sort = CommerceDiscountPortletUtil.getCommerceDiscountSort(
+			_searchContainer.getOrderByCol(),
+			_searchContainer.getOrderByType());
 
-			BaseModelSearchResult<CommerceDiscount> baseModelSearchResult =
-				_commerceDiscountService.searchCommerceDiscounts(
-					commerceDiscountRequestHelper.getCompanyId(), getKeywords(),
-					WorkflowConstants.STATUS_ANY, _searchContainer.getStart(),
-					_searchContainer.getEnd(), sort);
+		BaseModelSearchResult<CommerceDiscount> baseModelSearchResult =
+			_commerceDiscountService.searchCommerceDiscounts(
+				commerceDiscountRequestHelper.getCompanyId(), getKeywords(),
+				WorkflowConstants.STATUS_ANY, _searchContainer.getStart(),
+				_searchContainer.getEnd(), sort);
 
-			_searchContainer.setTotal(baseModelSearchResult.getLength());
-			_searchContainer.setResults(baseModelSearchResult.getBaseModels());
-		}
-		else {
-			int total = _commerceDiscountService.getCommerceDiscountsCount(
-				commerceDiscountRequestHelper.getCompanyId());
-
-			_searchContainer.setTotal(total);
-
-			List<CommerceDiscount> results =
-				_commerceDiscountService.getCommerceDiscounts(
-					commerceDiscountRequestHelper.getCompanyId(),
-					_searchContainer.getStart(), _searchContainer.getEnd(),
-					orderByComparator);
-
-			_searchContainer.setResults(results);
-		}
+		_searchContainer.setTotal(baseModelSearchResult.getLength());
+		_searchContainer.setResults(baseModelSearchResult.getBaseModels());
 
 		return _searchContainer;
 	}
@@ -330,20 +340,6 @@ public class CommerceDiscountDisplayContext {
 	public boolean hasPermission(String actionId) {
 		return PortalPermissionUtil.contains(
 			commerceDiscountRequestHelper.getPermissionChecker(), actionId);
-	}
-
-	public boolean isSelectedCatalog(CommerceCatalog commerceCatalog)
-		throws PortalException {
-
-		CommerceDiscount commerceDiscount = getCommerceDiscount();
-
-		if (commerceCatalog.getCommerceCatalogGroupId() ==
-				commerceDiscount.getGroupId()) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	public BigDecimal round(BigDecimal value) {
@@ -445,7 +441,8 @@ public class CommerceDiscountDisplayContext {
 	protected final ItemSelector itemSelector;
 	protected final PortalPreferences portalPreferences;
 
-	private final CommerceCatalogService _commerceCatalogService;
+	private final CommerceChannelRelService _commerceChannelRelService;
+	private final CommerceChannelService _commerceChannelService;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;
 	private CommerceDiscount _commerceDiscount;
 	private final CommerceDiscountCommerceAccountGroupRelService
