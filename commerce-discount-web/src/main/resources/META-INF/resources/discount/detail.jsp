@@ -77,8 +77,8 @@ if ((commerceDiscount != null) && (commerceDiscount.getExpirationDate() != null)
 				</aui:select>
 			</aui:fieldset>
 
-			<aui:fieldset collapsible="<%= true %>" label="catalog">
-				<%@ include file="/discount/detail_catalog.jspf" %>
+			<aui:fieldset collapsible="<%= true %>" label="channels">
+				<%@ include file="/discount/detail_channels.jspf" %>
 			</aui:fieldset>
 
 			<aui:fieldset collapsible="<%= true %>" label="account-group">
