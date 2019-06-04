@@ -20,7 +20,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
-import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -38,7 +38,7 @@ public class TestCommerceContext implements CommerceContext {
 		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
 
 		_commerceCurrency = commerceCurrency;
-		_commerceCatalog = null;
+		_commerceChannel = null;
 		_contextUser = contextUser;
 		_contextGroup = contextGroup;
 		_commerceAccount = commerceAccount;
@@ -56,17 +56,17 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
-	public CommerceCatalog getCommerceCatalog() {
-		return _commerceCatalog;
+	public CommerceChannel getCommerceChannel() {
+		return _commerceChannel;
 	}
 
 	@Override
-	public long getCommerceCatalogGroupId() throws PortalException {
-		if (_commerceCatalog == null) {
+	public long getCommerceChannelGroupId() throws PortalException {
+		if (_commerceChannel == null) {
 			return 0;
 		}
 
-		return _commerceCatalog.getCommerceCatalogGroupId();
+		return _commerceChannel.getCommerceChannelGroupId();
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class TestCommerceContext implements CommerceContext {
 		}
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			new long[] {getCommerceCatalogGroupId()},
+			new long[] {getCommerceChannelGroupId()},
 			_contextUser.getCompanyId(),
 			_commerceAccount.getCommerceAccountId(),
 			getCommerceAccountGroupIds());
@@ -110,7 +110,7 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	private final CommerceAccount _commerceAccount;
-	private final CommerceCatalog _commerceCatalog;
+	private final CommerceChannel _commerceChannel;
 	private final CommerceCurrency _commerceCurrency;
 	private final CommerceOrder _commerceOrder;
 	private final Group _contextGroup;

@@ -18,7 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.list.model.CommercePriceList;
-import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.io.Serializable;
@@ -35,9 +35,9 @@ public interface CommerceContext extends Serializable {
 
 	public long[] getCommerceAccountGroupIds();
 
-	public CommerceCatalog getCommerceCatalog();
+	public CommerceChannel getCommerceChannel() throws PortalException;
 
-	public long getCommerceCatalogGroupId() throws PortalException;
+	public long getCommerceChannelGroupId() throws PortalException;
 
 	public CommerceCurrency getCommerceCurrency() throws PortalException;
 
