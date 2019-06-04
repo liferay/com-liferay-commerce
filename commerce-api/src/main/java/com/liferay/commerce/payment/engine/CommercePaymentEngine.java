@@ -81,8 +81,19 @@ public interface CommercePaymentEngine {
 	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws Exception;
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), this method is being replaced
+	 */
+	@Deprecated
 	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
 			long commerceOrderId)
+		throws PortalException;
+
+	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
+			long groupId, long commerceOrderId)
 		throws PortalException;
 
 	/**

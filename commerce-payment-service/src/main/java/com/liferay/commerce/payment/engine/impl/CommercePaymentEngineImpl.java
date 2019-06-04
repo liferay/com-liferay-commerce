@@ -278,6 +278,13 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		return commercePaymentMethod.getPaymentType();
 	}
 
+	/**
+	 * @param commerceOrderId
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), this method is being replaced
+	 */
+	@Deprecated
 	@Override
 	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
 			long commerceOrderId)
@@ -307,6 +314,36 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			_commercePaymentMethodGroupRelLocalService.
 				getCommercePaymentMethodGroupRels(
 					commerceOrder.getGroupId(), true),
+			subscriptionOrder);
+	}
+
+	@Override
+	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
+			long groupId, long commerceOrderId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		boolean subscriptionOrder = commerceOrder.isSubscriptionOrder();
+
+		CommerceAddress commerceAddress = commerceOrder.getBillingAddress();
+
+		if (commerceAddress == null) {
+			commerceAddress = commerceOrder.getShippingAddress();
+		}
+
+		if (commerceAddress != null) {
+			return _getCommercePaymentMethodsList(
+				_commercePaymentMethodGroupRelLocalService.
+					getCommercePaymentMethodGroupRels(
+						groupId, commerceAddress.getCommerceCountryId(), true),
+				subscriptionOrder);
+		}
+
+		return _getCommercePaymentMethodsList(
+			_commercePaymentMethodGroupRelLocalService.
+				getCommercePaymentMethodGroupRels(groupId, true),
 			subscriptionOrder);
 	}
 
