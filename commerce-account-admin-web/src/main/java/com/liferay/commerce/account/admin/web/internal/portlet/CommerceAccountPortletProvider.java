@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.portlet.BasePortletProvider;
 import com.liferay.portal.kernel.portlet.EditPortletProvider;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
-import com.liferay.portal.kernel.portlet.ViewPortletProvider;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -40,11 +39,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = "model.class.name=com.liferay.commerce.account.model.CommerceAccount",
-	service = {EditPortletProvider.class, ViewPortletProvider.class}
+	service = EditPortletProvider.class
 )
 public class CommerceAccountPortletProvider
-	extends BasePortletProvider
-	implements EditPortletProvider, ViewPortletProvider {
+	extends BasePortletProvider implements EditPortletProvider {
 
 	@Override
 	public String getPortletName() {
