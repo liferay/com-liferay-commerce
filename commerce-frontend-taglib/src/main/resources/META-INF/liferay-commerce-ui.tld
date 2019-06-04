@@ -86,7 +86,6 @@
 		</attribute>
 	</tag>
 	<tag>
-<<<<<<< HEAD
 		<name>gallery</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.GalleryTag</tag-class>
 		<body-content>empty</body-content>
@@ -97,40 +96,6 @@
 		</attribute>
 		<attribute>
 			<name>id</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>commerce-datalist</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceDatalistTag</tag-class>
-=======
-		<name>datalist</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.DatalistTag</tag-class>
->>>>>>> COMMERCE-1181 magic connectors
-		<body-content>empty</body-content>
-		<attribute>
-			<name>id</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>name</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>label</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>multiselect</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>additionalClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

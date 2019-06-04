@@ -24,7 +24,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 
 <span class="accounts-filter"></span>
 
-<aui:script require="commerce-frontend-taglib@2.0.1/datalist/SmartDatalist.es as SmartDatalist">
+<aui:script require="commerce-frontend-taglib@2.1.1/datalist/Datalist.es as Datalist">
 
 	var filterInitialized = false;
 
@@ -76,7 +76,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 	);
 
 	function initializeFilters(tableInstance) {
-		const ordersAccounts = new SmartDatalist.default(
+		const ordersAccounts = new Datalist.default(
 			{
 				additionalClasses: 'mb-4 d-block',
 				name: 'accountId',
