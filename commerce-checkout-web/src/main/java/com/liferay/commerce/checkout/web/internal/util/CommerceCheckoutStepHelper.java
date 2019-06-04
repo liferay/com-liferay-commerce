@@ -96,6 +96,7 @@ public class CommerceCheckoutStepHelper {
 
 		List<CommercePaymentMethod> commercePaymentMethods =
 			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
+				commerceContext.getSiteGroupId(),
 				commerceOrder.getCommerceOrderId());
 
 		if (commercePaymentMethods.isEmpty()) {
