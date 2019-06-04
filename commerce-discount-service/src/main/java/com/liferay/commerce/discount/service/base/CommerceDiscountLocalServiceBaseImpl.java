@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Disjunction;
@@ -241,16 +240,17 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	 */
 	@Override
-	public CommerceDiscount fetchCommerceDiscountByUuidAndGroupId(String uuid,
-		long groupId) {
-		return commerceDiscountPersistence.fetchByUUID_G(uuid, groupId);
+	public CommerceDiscount fetchCommerceDiscountByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return commerceDiscountPersistence.fetchByUuid_C_First(uuid, companyId,
+			null);
 	}
 
 	/**
@@ -335,26 +335,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 					Criterion modifiedDateCriterion = portletDataContext.getDateRangeCriteria(
 							"modifiedDate");
 
-					if (modifiedDateCriterion != null) {
-						Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
-
-						conjunction.add(modifiedDateCriterion);
-
-						Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
-
-						disjunction.add(RestrictionsFactoryUtil.gtProperty(
-								"modifiedDate", "lastPublishDate"));
-
-						Property lastPublishDateProperty = PropertyFactoryUtil.forName(
-								"lastPublishDate");
-
-						disjunction.add(lastPublishDateProperty.isNull());
-
-						conjunction.add(disjunction);
-
-						modifiedDateCriterion = conjunction;
-					}
-
 					Criterion statusDateCriterion = portletDataContext.getDateRangeCriteria(
 							"statusDate");
 
@@ -386,8 +366,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceDiscount>() {
 				@Override
 				public void performAction(CommerceDiscount commerceDiscount)
@@ -418,48 +396,18 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return commerceDiscountPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce discounts
-	 * @param end the upper bound of the range of commerce discounts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator) {
-		return commerceDiscountPersistence.findByUuid_C(uuid, companyId, start,
-			end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount
 	 * @throws PortalException if a matching commerce discount could not be found
 	 */
 	@Override
-	public CommerceDiscount getCommerceDiscountByUuidAndGroupId(String uuid,
-		long groupId) throws PortalException {
-		return commerceDiscountPersistence.findByUUID_G(uuid, groupId);
+	public CommerceDiscount getCommerceDiscountByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException {
+		return commerceDiscountPersistence.findByUuid_C_First(uuid, companyId,
+			null);
 	}
 
 	/**

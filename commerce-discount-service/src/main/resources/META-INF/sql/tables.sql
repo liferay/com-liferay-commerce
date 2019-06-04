@@ -12,7 +12,6 @@ create table CDiscountCAccountGroupRel (
 create table CommerceDiscount (
 	uuid_ VARCHAR(75) null,
 	commerceDiscountId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
