@@ -428,25 +428,25 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 	var props = {
 		elements : [
 			{
-				icon: 'favorites',
+				icon: 'comments',
 				url: 'http://localhost:4000/api/text/list',
 				pageName: 'Comments',
 				slug: 'comments'
 			},
 			{
-				icon: 'print',
+				icon: 'edit-and-type',
 				url: 'http://localhost:4000/api/text/print',
 				pageName: 'Edit',
 				slug: 'edit'
 			},
 			{
-				icon: 'search',
+				icon: 'changelog',
 				url: 'http://localhost:4000/api/text/search',
 				pageName: 'Changelog',
 				slug: 'changelog'
 			}
 		],
-		spritemap: '<%= themeDisplay.getPathThemeImages() + "/commerce-icons.svg" %>'
+		spritemap: '<%= themeDisplay.getPathThemeImages() + "/commerce-icons.svg" %>?v=askh'
 	}
 
     DynamicPanel.default(

@@ -13,7 +13,7 @@ const props = {
           slug: 'comments'
         },
         {
-          icon: 'print',
+          icon: 'edit-and-type',
           url: 'http://localhost:4000/api/text/print',
           pageName: 'Edit',
           slug: 'edit'

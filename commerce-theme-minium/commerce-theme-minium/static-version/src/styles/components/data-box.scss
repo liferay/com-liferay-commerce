@@ -2,15 +2,36 @@
 	margin: -10px -10px 10px;
     padding: 20px;
 	background-color: transparent;
-	transition: background-color .1s ease-in;
 	border-radius: 8px;
+	transition: background-color .1s ease-in;
 
 	.panel-body {
 		background-color: transparent;
 	}
 
 	&:last-of-type {
-		margin-bottom: 0;
+		margin-bottom: -10px;
+	}
+
+	&:focus, 
+	&:hover {
+		cursor: pointer;
+		background-color: $color-border !important;
+	}
+
+	&--active {
+		background-color: $color-border !important;
+
+		.data-box__action {
+			opacity: 0;
+			transform: translateX(10%) !important;
+			pointer-events: none
+		}
+	}
+	
+	&__body {
+		line-height: 1.2;
+		padding: 0 !important; 
 	}
 
 	&__action {
@@ -20,22 +41,7 @@
 		display: inline-block;
 
 		transition: 
-			transform .1s ease-in,
+			transform .3s ease-in,
 			opacity .1s ease-in;
-	}
-
-	&--active {
-		background-color: $color-border !important;
-
-		.data-box__action {
-			opacity: 0;
-			transform: translateX(10%);
-			pointer-events: none
-		}
-	}
-	
-	&__body {
-		line-height: 1.2;
-		padding: 0 !important; 
 	}
 }
