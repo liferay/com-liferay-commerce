@@ -10,10 +10,6 @@
 
 		<column name="commerceDiscountId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -55,10 +51,6 @@
 		<!-- Finder methods -->
 
 		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="G_C" return-type="Collection">
-			<finder-column arrayable-operator="OR" name="groupId" />
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="C_C" return-type="Collection">
