@@ -193,7 +193,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importBlogsEntries(serviceContext);
 
-			_importCommerceDiscounts(catalogGroupId, serviceContext);
+			_importCommerceDiscounts(serviceContext);
 
 			_importCPOptionCategories(catalogGroupId, serviceContext);
 
@@ -595,8 +595,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		}
 	}
 
-	private void _importCommerceDiscounts(
-			long catalogGroupId, ServiceContext serviceContext)
+	private void _importCommerceDiscounts(ServiceContext serviceContext)
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
@@ -606,7 +605,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("discounts.json");
 
 		_commerceDiscountsImporter.importCommerceDiscounts(
-			catalogGroupId, jsonArray, serviceContext.getScopeGroupId(),
+			jsonArray, serviceContext.getScopeGroupId(),
 			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {

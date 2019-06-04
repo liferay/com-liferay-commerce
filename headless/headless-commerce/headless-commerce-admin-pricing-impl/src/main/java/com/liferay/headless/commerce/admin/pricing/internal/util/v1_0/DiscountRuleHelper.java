@@ -105,7 +105,7 @@ public class DiscountRuleHelper {
 			_commerceDiscountService.getCommerceDiscount(commerceDiscountId);
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commerceDiscount.getGroupId(), new long[0], user, true);
+			0L, new long[0], user, true);
 
 		CommerceDiscountRule commerceDiscountRule =
 			_commerceDiscountRuleService.addCommerceDiscountRule(
