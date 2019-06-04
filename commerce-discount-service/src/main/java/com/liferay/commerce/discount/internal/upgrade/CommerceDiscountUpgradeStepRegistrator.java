@@ -17,6 +17,7 @@ package com.liferay.commerce.discount.internal.upgrade;
 import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountCommerceAccountGroupRelUpgradeProcess;
 import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountRelUpgradeProcess;
 import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountRuleUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountUpgradeProcess;
 import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountUsageEntryUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -42,6 +43,7 @@ public class CommerceDiscountUpgradeStepRegistrator
 			new CommerceDiscountCommerceAccountGroupRelUpgradeProcess(),
 			new CommerceDiscountRelUpgradeProcess(),
 			new CommerceDiscountRuleUpgradeProcess(),
+			new CommerceDiscountUpgradeProcess(),
 			new CommerceDiscountUsageEntryUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
