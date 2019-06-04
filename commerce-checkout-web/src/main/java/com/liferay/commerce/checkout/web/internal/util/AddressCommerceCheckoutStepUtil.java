@@ -100,7 +100,8 @@ public class AddressCommerceCheckoutStepUtil {
 
 		boolean newAddress = ParamUtil.getBoolean(actionRequest, "newAddress");
 
-		long commerceAddressId = ParamUtil.getLong(actionRequest, paramName);
+		long commerceAddressId = ParamUtil.getLong(
+			actionRequest, "commerceAddress");
 
 		if (newAddress) {
 			CommerceAddress commerceAddress = addCommerceAddress(
@@ -118,32 +119,22 @@ public class AddressCommerceCheckoutStepUtil {
 
 		if (Objects.equals(
 				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME,
-				paramName) &&
-			useAsBilling) {
+				paramName)) {
+
+			if (!useAsBilling &&
+				(commerceAddressId == commerceOrder.getBillingAddressId())) {
+
+				commerceOrder.setBillingAddressId(0);
+			}
 
 			return updateCommerceOrderAddress(
-				commerceOrder, commerceAddressId, commerceAddressId,
-				commerceContext);
+				commerceOrder, commerceOrder.getBillingAddressId(),
+				commerceAddressId, commerceContext);
 		}
-
-		if (Objects.equals(
-				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME,
-				paramName) &&
-			!useAsBilling) {
-
-			return updateCommerceOrderAddress(
-				commerceOrder, 0, commerceAddressId, commerceContext);
-		}
-
-		CommerceAddress billingAddress = commerceOrder.getBillingAddress();
-		long shippingAddressId = commerceOrder.getShippingAddressId();
 
 		if (Objects.equals(
 				CommerceCheckoutWebKeys.BILLING_ADDRESS_PARAM_NAME,
-				paramName) &&
-			((billingAddress == null) ||
-			 Objects.equals(
-				 billingAddress.getCommerceAddressId(), shippingAddressId))) {
+				paramName)) {
 
 			return updateCommerceOrderAddress(
 				commerceOrder, commerceAddressId,
