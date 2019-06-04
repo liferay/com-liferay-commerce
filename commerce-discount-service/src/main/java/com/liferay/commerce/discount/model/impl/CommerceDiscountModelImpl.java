@@ -79,7 +79,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "commerceDiscountId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -112,7 +111,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceDiscountId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -141,7 +139,7 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceDiscount (uuid_ VARCHAR(75) null,commerceDiscountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceDiscount (uuid_ VARCHAR(75) null,commerceDiscountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscount";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceDiscount.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceDiscount.createDate DESC";
@@ -161,10 +159,9 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 	public static final long COUPONCODE_COLUMN_BITMASK = 2L;
 	public static final long DISPLAYDATE_COLUMN_BITMASK = 4L;
 	public static final long EXPIRATIONDATE_COLUMN_BITMASK = 8L;
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
-	public static final long STATUS_COLUMN_BITMASK = 32L;
-	public static final long UUID_COLUMN_BITMASK = 64L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
+	public static final long STATUS_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -181,7 +178,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceDiscountId(soapModel.getCommerceDiscountId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -275,7 +271,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceDiscountId", getCommerceDiscountId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -321,12 +316,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 		if (commerceDiscountId != null) {
 			setCommerceDiscountId(commerceDiscountId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -520,29 +509,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 	@Override
 	public void setCommerceDiscountId(long commerceDiscountId) {
 		_commerceDiscountId = commerceDiscountId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -1092,7 +1058,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 		commerceDiscountImpl.setUuid(getUuid());
 		commerceDiscountImpl.setCommerceDiscountId(getCommerceDiscountId());
-		commerceDiscountImpl.setGroupId(getGroupId());
 		commerceDiscountImpl.setCompanyId(getCompanyId());
 		commerceDiscountImpl.setUserId(getUserId());
 		commerceDiscountImpl.setUserName(getUserName());
@@ -1184,10 +1149,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 		commerceDiscountModelImpl._originalUuid = commerceDiscountModelImpl._uuid;
 
-		commerceDiscountModelImpl._originalGroupId = commerceDiscountModelImpl._groupId;
-
-		commerceDiscountModelImpl._setOriginalGroupId = false;
-
 		commerceDiscountModelImpl._originalCompanyId = commerceDiscountModelImpl._companyId;
 
 		commerceDiscountModelImpl._setOriginalCompanyId = false;
@@ -1220,8 +1181,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 		}
 
 		commerceDiscountCacheModel.commerceDiscountId = getCommerceDiscountId();
-
-		commerceDiscountCacheModel.groupId = getGroupId();
 
 		commerceDiscountCacheModel.companyId = getCompanyId();
 
@@ -1358,14 +1317,12 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", commerceDiscountId=");
 		sb.append(getCommerceDiscountId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -1425,7 +1382,7 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.discount.model.CommerceDiscount");
@@ -1438,10 +1395,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 		sb.append(
 			"<column><column-name>commerceDiscountId</column-name><column-value><![CDATA[");
 		sb.append(getCommerceDiscountId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -1560,9 +1513,6 @@ public class CommerceDiscountModelImpl extends BaseModelImpl<CommerceDiscount>
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceDiscountId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

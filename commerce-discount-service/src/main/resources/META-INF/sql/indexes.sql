@@ -2,12 +2,9 @@ create index IX_F7FFBCCA on CDiscountCAccountGroupRel (commerceAccountGroupId);
 create index IX_1CA5EFB9 on CDiscountCAccountGroupRel (commerceDiscountId);
 
 create index IX_E063D0AD on CommerceDiscount (companyId, couponCode[$COLUMN_LENGTH:75$]);
-create index IX_18BF52A4 on CommerceDiscount (companyId, groupId);
 create index IX_122C15C4 on CommerceDiscount (displayDate, status);
 create index IX_2FBF0739 on CommerceDiscount (expirationDate, status);
-create index IX_F9F19660 on CommerceDiscount (groupId, companyId);
 create index IX_687F1796 on CommerceDiscount (uuid_[$COLUMN_LENGTH:75$], companyId);
-create unique index IX_CF48B98 on CommerceDiscount (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_6B4EEC38 on CommerceDiscountRel (classNameId, classPK);
 create index IX_DDFDEF40 on CommerceDiscountRel (commerceDiscountId, classNameId);

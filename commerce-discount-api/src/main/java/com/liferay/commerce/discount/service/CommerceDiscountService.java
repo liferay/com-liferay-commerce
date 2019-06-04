@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.math.BigDecimal;
 
@@ -60,8 +59,8 @@ public interface CommerceDiscountService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountServiceUtil} to access the commerce discount remote service. Add custom service methods to {@link com.liferay.commerce.discount.service.impl.CommerceDiscountServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceDiscount addCommerceDiscount(long groupId, long userId,
-		String title, String target, boolean useCouponCode, String couponCode,
+	public CommerceDiscount addCommerceDiscount(long userId, String title,
+		String target, boolean useCouponCode, String couponCode,
 		boolean usePercentage, BigDecimal maximumDiscountAmount,
 		BigDecimal level1, BigDecimal level2, BigDecimal level3,
 		BigDecimal level4, String limitationType, int limitationTimes,
@@ -84,17 +83,7 @@ public interface CommerceDiscountService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceDiscount> getCommerceDiscounts(long companyId,
-		int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscounts(long companyId,
 		String couponCode) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long companyId)
-		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceDiscountsCount(long companyId, String couponCode)
