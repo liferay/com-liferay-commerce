@@ -74,7 +74,7 @@ public class FixedCommerceShippingEngine implements CommerceShippingEngine {
 
 		try {
 			commerceShippingOptions = _getCommerceShippingOptions(
-				commerceOrder, locale);
+				commerceContext.getSiteGroupId(), commerceOrder, locale);
 		}
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
@@ -117,7 +117,7 @@ public class FixedCommerceShippingEngine implements CommerceShippingEngine {
 	}
 
 	private List<CommerceShippingOption> _getCommerceShippingOptions(
-			CommerceOrder commerceOrder, Locale locale)
+			long groupId, CommerceOrder commerceOrder, Locale locale)
 		throws PortalException {
 
 		List<CommerceShippingOption> commerceShippingOptions =
@@ -126,7 +126,7 @@ public class FixedCommerceShippingEngine implements CommerceShippingEngine {
 		CommerceAddress commerceAddress = commerceOrder.getShippingAddress();
 
 		List<CommerceShippingFixedOption> commerceShippingFixedOptions =
-			_getCommerceShippingFixedOptions(commerceOrder.getGroupId());
+			_getCommerceShippingFixedOptions(groupId);
 
 		for (CommerceShippingFixedOption commerceShippingFixedOption :
 				commerceShippingFixedOptions) {
