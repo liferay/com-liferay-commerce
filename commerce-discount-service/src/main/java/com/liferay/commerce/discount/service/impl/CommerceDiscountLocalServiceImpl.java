@@ -19,6 +19,7 @@ import com.liferay.commerce.discount.exception.CommerceDiscountDisplayDateExcept
 import com.liferay.commerce.discount.exception.CommerceDiscountExpirationDateException;
 import com.liferay.commerce.discount.exception.CommerceDiscountTargetException;
 import com.liferay.commerce.discount.exception.CommerceDiscountTitleException;
+import com.liferay.commerce.discount.internal.search.CommerceDiscountIndexer;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.base.CommerceDiscountLocalServiceBaseImpl;
 import com.liferay.commerce.discount.target.CommerceDiscountTarget;
@@ -46,7 +47,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -74,8 +74,8 @@ public class CommerceDiscountLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceDiscount addCommerceDiscount(
-			long groupId, long userId, String title, String target,
-			boolean useCouponCode, String couponCode, boolean usePercentage,
+			long userId, String title, String target, boolean useCouponCode,
+			String couponCode, boolean usePercentage,
 			BigDecimal maximumDiscountAmount, BigDecimal level1,
 			BigDecimal level2, BigDecimal level3, BigDecimal level4,
 			String limitationType, int limitationTimes, boolean active,
@@ -116,7 +116,6 @@ public class CommerceDiscountLocalServiceImpl
 			commerceDiscountId);
 
 		commerceDiscount.setUuid(serviceContext.getUuid());
-		commerceDiscount.setGroupId(groupId);
 		commerceDiscount.setCompanyId(user.getCompanyId());
 		commerceDiscount.setUserId(user.getUserId());
 		commerceDiscount.setUserName(user.getFullName());
@@ -208,7 +207,7 @@ public class CommerceDiscountLocalServiceImpl
 		// Workflow
 
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			commerceDiscount.getCompanyId(), commerceDiscount.getGroupId(),
+			commerceDiscount.getCompanyId(), 0L,
 			CommerceDiscount.class.getName(),
 			commerceDiscount.getCommerceDiscountId());
 
@@ -245,22 +244,8 @@ public class CommerceDiscountLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceDiscount> getCommerceDiscounts(
-		long[] groupIds, long companyId, int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator) {
-
-		return commerceDiscountPersistence.findByG_C(
-			groupIds, companyId, start, end, orderByComparator);
-	}
-
-	@Override
 	public int getCommerceDiscountsCount(long companyId, String couponCode) {
 		return commerceDiscountPersistence.countByC_C(companyId, couponCode);
-	}
-
-	@Override
-	public int getCommerceDiscountsCount(long[] groupIds, long companyId) {
-		return commerceDiscountPersistence.countByG_C(groupIds, companyId);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -450,6 +435,7 @@ public class CommerceDiscountLocalServiceImpl
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.TITLE, keywords);
 		attributes.put(Field.STATUS, status);
+		attributes.put(CommerceDiscountIndexer.FIELD_GROUP_IDS, groupIds);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);
@@ -457,7 +443,6 @@ public class CommerceDiscountLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(groupIds);
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -489,7 +474,6 @@ public class CommerceDiscountLocalServiceImpl
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setCommand(Constants.UPDATE);
-			serviceContext.setScopeGroupId(commerceDiscount.getGroupId());
 
 			commerceDiscountLocalService.updateStatus(
 				userId, commerceDiscount.getCommerceDiscountId(),
@@ -519,7 +503,6 @@ public class CommerceDiscountLocalServiceImpl
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setCommand(Constants.UPDATE);
-				serviceContext.setScopeGroupId(commerceDiscount.getGroupId());
 
 				commerceDiscountLocalService.updateStatus(
 					userId, commerceDiscount.getCommerceDiscountId(),
@@ -571,8 +554,8 @@ public class CommerceDiscountLocalServiceImpl
 		Map<String, Serializable> workflowContext = new HashMap<>();
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			commerceDiscount.getCompanyId(), commerceDiscount.getGroupId(),
-			userId, CommerceDiscount.class.getName(),
+			commerceDiscount.getCompanyId(), 0L, userId,
+			CommerceDiscount.class.getName(),
 			commerceDiscount.getCommerceDiscountId(), commerceDiscount,
 			serviceContext, workflowContext);
 	}
