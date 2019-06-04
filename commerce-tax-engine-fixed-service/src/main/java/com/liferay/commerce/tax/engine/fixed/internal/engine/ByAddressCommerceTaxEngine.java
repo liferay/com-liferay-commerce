@@ -20,10 +20,16 @@ import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.tax.CommerceTaxCalculateRequest;
 import com.liferay.commerce.tax.CommerceTaxEngine;
 import com.liferay.commerce.tax.CommerceTaxValue;
+import com.liferay.commerce.tax.engine.fixed.configuration.CommerceTaxByAddressTypeConfiguration;
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.math.BigDecimal;
@@ -57,9 +63,19 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 		long commerceRegionId = 0;
 		String zip = StringPool.BLANK;
 
+		long commerceAddressId =
+			commerceTaxCalculateRequest.getCommerceBillingAddressId();
+
+		if (isTaxAppliedToShippingAddress(
+				commerceTaxCalculateRequest.getSiteGroupId())) {
+
+			commerceAddressId =
+				commerceTaxCalculateRequest.getCommerceShippingAddressId();
+		}
+
 		CommerceAddress commerceAddress =
 			_commerceAddressLocalService.fetchCommerceAddress(
-				commerceTaxCalculateRequest.getCommerceAddressId());
+				commerceAddressId);
 
 		if (commerceAddress != null) {
 			commerceCountryId = commerceAddress.getCommerceCountryId();
@@ -110,12 +126,36 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 		return LanguageUtil.get(resourceBundle, KEY);
 	}
 
+	protected boolean isTaxAppliedToShippingAddress(long groupId) {
+		try {
+			CommerceTaxByAddressTypeConfiguration
+				commerceTaxByAddressTypeConfiguration =
+					ConfigurationProviderUtil.getConfiguration(
+						CommerceTaxByAddressTypeConfiguration.class,
+						new GroupServiceSettingsLocator(
+							groupId,
+							CommerceTaxByAddressTypeConfiguration.class.
+								getName()));
+
+			return commerceTaxByAddressTypeConfiguration.
+				taxAppliedToShippingAddress();
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			return false;
+		}
+	}
+
 	private ResourceBundle _getResourceBundle(Locale locale) {
 		return ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 	}
 
 	private static final BigDecimal _ONE_HUNDRED = BigDecimal.valueOf(100);
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ByAddressCommerceTaxEngine.class);
 
 	@Reference
 	private CommerceAddressLocalService _commerceAddressLocalService;

@@ -68,6 +68,7 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 			List<CommerceTaxValue> commerceTaxValues = getCommerceTaxValues(
 				commerceOrder.getGroupId(), commerceOrderItem.getCPInstanceId(),
 				commerceOrder.getBillingAddressId(),
+				commerceOrder.getShippingAddressId(),
 				commerceOrderItem.getFinalPrice(), commerceContext);
 
 			for (CommerceTaxValue commerceTaxValue : commerceTaxValues) {
@@ -96,8 +97,9 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 
 	@Override
 	public List<CommerceTaxValue> getCommerceTaxValues(
-			long groupId, long cpInstanceId, long commerceAddressId,
-			BigDecimal amount, CommerceContext commerceContext)
+			long groupId, long cpInstanceId, long commerceBillingAddressId,
+			long commerceShippingAddressId, BigDecimal amount,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		List<CommerceTaxValue> commerceTaxValues = new ArrayList<>();
@@ -116,7 +118,10 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 		CommerceTaxCalculateRequest commerceTaxCalculateRequest =
 			new CommerceTaxCalculateRequest();
 
-		commerceTaxCalculateRequest.setCommerceAddressId(commerceAddressId);
+		commerceTaxCalculateRequest.setCommerceBillingAddressId(
+			commerceBillingAddressId);
+		commerceTaxCalculateRequest.setCommerceShippingAddressId(
+			commerceShippingAddressId);
 		commerceTaxCalculateRequest.setPrice(amount);
 		commerceTaxCalculateRequest.setSiteGroupId(groupId);
 		commerceTaxCalculateRequest.setTaxCategoryId(
