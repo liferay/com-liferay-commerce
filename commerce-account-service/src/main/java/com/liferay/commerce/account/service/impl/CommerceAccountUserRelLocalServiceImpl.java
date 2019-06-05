@@ -135,6 +135,12 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 			commerceAccountUserRelPersistence.remove(commerceAccountUserRelPK);
 		}
+
+		CommerceAccount commerceAccount =
+			commerceAccountLocalService.getCommerceAccount(commerceAccountId);
+
+		userGroupRoleLocalService.deleteUserGroupRoles(
+			userIds, commerceAccount.getCommerceAccountGroupId());
 	}
 
 	@Override
