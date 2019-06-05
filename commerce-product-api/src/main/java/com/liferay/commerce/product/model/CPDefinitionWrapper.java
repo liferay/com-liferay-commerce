@@ -962,39 +962,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 		return _cpDefinition.getTelcoOrElectronics();
 	}
 
-	/**
-	* Returns the trash entry created when this cp definition was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp definition.
-	*
-	* @return the trash entry created when this cp definition was moved to the Recycle Bin
-	*/
-	@Override
-	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinition.getTrashEntry();
-	}
-
-	/**
-	* Returns the class primary key of the trash entry for this cp definition.
-	*
-	* @return the class primary key of the trash entry for this cp definition
-	*/
-	@Override
-	public long getTrashEntryClassPK() {
-		return _cpDefinition.getTrashEntryClassPK();
-	}
-
-	/**
-	* Returns the trash handler for this cp definition.
-	*
-	* @return the trash handler for this cp definition
-	* @deprecated As of 7.0.0, with no direct replacement
-	*/
-	@Deprecated
-	@Override
-	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
-		return _cpDefinition.getTrashHandler();
-	}
-
 	@Override
 	public String getURL(String languageId) {
 		return _cpDefinition.getURL(languageId);
@@ -1178,36 +1145,6 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public boolean isIncomplete() {
 		return _cpDefinition.isIncomplete();
-	}
-
-	/**
-	* Returns <code>true</code> if this cp definition is in the Recycle Bin.
-	*
-	* @return <code>true</code> if this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isInTrash() {
-		return _cpDefinition.isInTrash();
-	}
-
-	/**
-	* Returns <code>true</code> if the parent of this cp definition is in the Recycle Bin.
-	*
-	* @return <code>true</code> if the parent of this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	*/
-	@Override
-	public boolean isInTrashContainer() {
-		return _cpDefinition.isInTrashContainer();
-	}
-
-	@Override
-	public boolean isInTrashExplicitly() {
-		return _cpDefinition.isInTrashExplicitly();
-	}
-
-	@Override
-	public boolean isInTrashImplicitly() {
-		return _cpDefinition.isInTrashImplicitly();
 	}
 
 	@Override

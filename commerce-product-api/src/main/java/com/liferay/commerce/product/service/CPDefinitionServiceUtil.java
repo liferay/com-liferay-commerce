@@ -189,17 +189,6 @@ public class CPDefinitionServiceUtil {
 		return getService().getUrlTitleMapAsXML(cpDefinitionId);
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinition moveCPDefinitionToTrash(
-		long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().moveCPDefinitionToTrash(cpDefinitionId);
-	}
-
-	public static void restoreCPDefinitionFromTrash(long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().restoreCPDefinitionFromTrash(cpDefinitionId);
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
 		long companyId, String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
