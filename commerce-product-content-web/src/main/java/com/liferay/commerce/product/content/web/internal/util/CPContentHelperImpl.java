@@ -161,8 +161,12 @@ public class CPContentHelperImpl implements CPContentHelper {
 			long productId = ParamUtil.getLong(httpServletRequest, "productId");
 
 			try {
-				CProduct cProduct = _cProductLocalService.getCProduct(
+				CProduct cProduct = _cProductLocalService.fetchCProduct(
 					productId);
+
+				if (cProduct == null) {
+					return null;
+				}
 
 				cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
 					cProduct.getPublishedCPDefinitionId(),
