@@ -15,7 +15,6 @@
 package com.liferay.commerce.product.definitions.web.portlet.action;
 
 import com.liferay.commerce.product.constants.CPWebKeys;
-import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
@@ -125,11 +124,6 @@ public class ActionHelper {
 			portletRequest, "cpDefinitionId");
 
 		cpDefinition = _validateCPDefinition(cpDefinitionId);
-
-		if ((cpDefinition != null) && cpDefinition.isInTrash()) {
-			throw new NoSuchCPDefinitionException(
-				"{cpDefinitionId=" + cpDefinitionId + "}");
-		}
 
 		if (cpDefinition != null) {
 			portletRequest.setAttribute(CPWebKeys.CP_DEFINITION, cpDefinition);

@@ -36,7 +36,6 @@ import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.TrashedModel;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -45,7 +44,6 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
@@ -59,8 +57,6 @@ import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.trash.kernel.service.TrashEntryService;
-import com.liferay.trash.kernel.util.TrashUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -89,8 +85,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
-	protected void deleteCPDefinitions(
-			ActionRequest actionRequest, boolean moveToTrash)
+	protected void deleteCPDefinitions(ActionRequest actionRequest)
 		throws Exception {
 
 		long[] deleteCPDefinitionIds = null;
@@ -107,28 +102,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				0L);
 		}
 
-		List<TrashedModel> trashedModels = new ArrayList<>();
-
 		for (long deleteCPDefinitionId : deleteCPDefinitionIds) {
-			if (moveToTrash) {
-				CPDefinition cpDefinition =
-					_cpDefinitionService.moveCPDefinitionToTrash(
-						deleteCPDefinitionId);
-
-				trashedModels.add(cpDefinition);
-			}
-			else {
-				_cpDefinitionService.deleteCPDefinition(deleteCPDefinitionId);
-			}
-		}
-
-		if (moveToTrash && !trashedModels.isEmpty()) {
-			TrashUtil.addTrashSessionMessages(actionRequest, trashedModels);
-
-			SessionMessages.add(
-				actionRequest,
-				_portal.getPortletId(actionRequest) +
-					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+			_cpDefinitionService.deleteCPDefinition(deleteCPDefinitionId);
 		}
 	}
 
@@ -150,10 +125,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCPDefinitions(actionRequest, false);
-			}
-			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
-				deleteCPDefinitions(actionRequest, true);
+				deleteCPDefinitions(actionRequest);
 			}
 			else if (cmd.equals("updateCategorization")) {
 				CPDefinition cpDefinition = updateCategorization(actionRequest);
@@ -190,9 +162,6 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			}
 			else if (cmd.equals("updateTaxCategoryInfo")) {
 				updateTaxCategoryInfo(actionRequest);
-			}
-			else if (cmd.equals(Constants.RESTORE)) {
-				restoreTrashEntries(actionRequest);
 			}
 		}
 		catch (Throwable t) {
@@ -296,17 +265,6 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			"screenNavigationCategoryKey", screenNavigationCategoryKey);
 
 		return portletURL.toString();
-	}
-
-	protected void restoreTrashEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long[] restoreTrashEntryIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "restoreTrashEntryIds"), 0L);
-
-		for (long restoreTrashEntryId : restoreTrashEntryIds) {
-			_trashEntryService.restoreEntry(restoreTrashEntryId);
-		}
 	}
 
 	protected void updateAccountGroups(ActionRequest actionRequest)
@@ -586,9 +544,6 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference
-	private TrashEntryService _trashEntryService;
 
 	private class CPDefinitionAccountGroupsCallable
 		implements Callable<Object> {
