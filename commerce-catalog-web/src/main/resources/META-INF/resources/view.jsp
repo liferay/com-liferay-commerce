@@ -59,10 +59,12 @@ portletURL.setParameter("searchContainerId", "commerceCatalogs");
 						/>
 
 						<liferay-ui:search-container-column-date
+							name="create-date"
 							property="createDate"
 						/>
 
 						<liferay-ui:search-container-column-date
+							name="modified-date"
 							property="modifiedDate"
 						/>
 
