@@ -209,7 +209,7 @@
 		<reference entity="DLFileEntry" package-path="com.liferay.portlet.documentlibrary" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CPDefinition" remote-service="true" trash-enabled="true" uuid="true">
+	<entity local-service="true" name="CPDefinition" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -293,10 +293,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="G_NotS" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column comparator="!=" name="status" />
-		</finder>
 		<finder name="C_S" return-type="Collection">
 			<finder-column name="CProductId" />
 			<finder-column name="status" />
@@ -314,7 +310,6 @@
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetLink" package-path="com.liferay.portlet.asset" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
-		<reference entity="TrashEntry" package-path="com.liferay.portlet.trash" />
 	</entity>
 	<entity local-service="true" name="CPDefinitionLink" remote-service="true" uuid="true">
 
@@ -659,7 +654,7 @@
 			<finder-column name="main" />
 		</finder>
 	</entity>
-	<entity external-reference-code="true" local-service="true" name="CPInstance" remote-service="true" trash-enabled="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CPInstance" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -730,10 +725,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="G_NotST" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column comparator="!=" name="status" />
-		</finder>
 		<finder name="C_C" return-type="CPInstance" unique="true">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="CPInstanceUuid" />
@@ -745,10 +736,6 @@
 		<finder name="C_ST" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="status" />
-		</finder>
-		<finder name="C_NotST" return-type="Collection">
-			<finder-column name="CPDefinitionId" />
-			<finder-column comparator="!=" name="status" />
 		</finder>
 		<finder name="LtD_S" return-type="Collection">
 			<finder-column comparator="&lt;" name="displayDate" />
