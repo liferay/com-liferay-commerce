@@ -278,28 +278,6 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 	}
 
 	@Override
-	public CPDefinition moveCPDefinitionToTrash(long cpDefinitionId)
-		throws PortalException {
-
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.DELETE);
-
-		return cpDefinitionLocalService.moveCPDefinitionToTrash(
-			getUserId(), cpDefinitionId);
-	}
-
-	@Override
-	public void restoreCPDefinitionFromTrash(long cpDefinitionId)
-		throws PortalException {
-
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.DELETE);
-
-		cpDefinitionLocalService.restoreCPDefinitionFromTrash(
-			getUserId(), cpDefinitionId);
-	}
-
-	@Override
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
 			long companyId, String keywords, int status, int start, int end,
 			Sort sort)

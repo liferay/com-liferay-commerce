@@ -494,28 +494,13 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		long cpDefinitionId, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator) {
 
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return cpInstanceFinder.findByC_NotCST_NotST(
-				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH,
-				WorkflowConstants.STATUS_IN_TRASH, start, end,
-				orderByComparator);
-		}
-
-		return cpInstanceFinder.findByC_NotCST_ST(
-			cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH, status, start,
-			end, orderByComparator);
+		return cpInstancePersistence.findByC_ST(
+			cpDefinitionId, status, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPDefinitionInstancesCount(long cpDefinitionId, int status) {
-		if (status == WorkflowConstants.STATUS_ANY) {
-			cpInstanceFinder.countByC_NotCST_NotST(
-				cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH,
-				WorkflowConstants.STATUS_IN_TRASH);
-		}
-
-		return cpInstanceFinder.countByC_NotCST_ST(
-			cpDefinitionId, WorkflowConstants.STATUS_IN_TRASH, status);
+		return cpInstancePersistence.countByC_ST(cpDefinitionId, status);
 	}
 
 	@Override
@@ -540,12 +525,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			OrderByComparator<CPInstance> orderByComparator)
 		throws PortalException {
 
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return cpInstancePersistence.findByG_NotST(
-				groupId, WorkflowConstants.STATUS_IN_TRASH, start, end,
-				orderByComparator);
-		}
-
 		return cpInstancePersistence.findByG_ST(
 			groupId, status, start, end, orderByComparator);
 	}
@@ -553,11 +532,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Override
 	public int getCPInstancesCount(long groupId, int status)
 		throws PortalException {
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return cpInstancePersistence.countByG_NotST(
-				groupId, WorkflowConstants.STATUS_IN_TRASH);
-		}
 
 		return cpInstancePersistence.countByG_ST(groupId, status);
 	}
