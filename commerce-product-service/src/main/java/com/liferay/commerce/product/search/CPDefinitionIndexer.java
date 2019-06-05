@@ -174,11 +174,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			contextBooleanFilter.add(
 				statusesTermsFilter, BooleanClauseOccur.MUST);
 		}
-		else {
-			contextBooleanFilter.addTerm(
-				Field.STATUS, String.valueOf(WorkflowConstants.STATUS_IN_TRASH),
-				BooleanClauseOccur.MUST_NOT);
-		}
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
 
