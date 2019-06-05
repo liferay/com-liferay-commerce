@@ -87,7 +87,9 @@ public class UserRolesModalTag extends ComponentRendererTag {
 
 			for (Role role : roles) {
 				availableRoles.add(
-					new AccountRole(role.getRoleId(), role.getName()));
+					new AccountRole(
+						role.getRoleId(),
+						role.getTitle(themeDisplay.getLocale())));
 			}
 
 			putValue("roles", availableRoles);
