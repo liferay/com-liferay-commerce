@@ -24,6 +24,7 @@ import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPInstanceUpgradePro
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CProductUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_4_0.CPDefinitionSpecificationOptionValueUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_5_0.CProductExternalReferenceCodeUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_6_0.CPDefinitionTrashEntriesUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceCatalogUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceChannelUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
@@ -78,7 +79,8 @@ public class CommerceProductUpgradeStepRegistrator
 		registry.register(
 			_SCHEMA_VERSION_1_5_0, _SCHEMA_VERSION_1_6_0,
 			new CommerceChannelUpgradeProcess(),
-			new CommerceCatalogUpgradeProcess(_groupLocalService));
+			new CommerceCatalogUpgradeProcess(_groupLocalService),
+			new CPDefinitionTrashEntriesUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
