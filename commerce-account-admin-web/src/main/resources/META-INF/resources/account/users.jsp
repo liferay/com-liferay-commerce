@@ -78,6 +78,7 @@ PortletURL portletURL = commerceAccountUserRelAdminDisplayContext.getPortletURL(
 		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountId %>" />
 			<aui:input name="deleteCommerceAccountUserRelIds" type="hidden" />
 
 			<liferay-ui:search-container
@@ -88,7 +89,7 @@ PortletURL portletURL = commerceAccountUserRelAdminDisplayContext.getPortletURL(
 				<liferay-ui:search-container-row
 					className="com.liferay.commerce.account.model.CommerceAccountUserRel"
 					cssClass="entry-display-style"
-					keyProperty="commerceAccountUserRelId"
+					keyProperty="commerceAccountUserId"
 					modelVar="commerceAccountUserRel"
 				>
 
