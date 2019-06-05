@@ -21,6 +21,7 @@
 	]>}
 	{@param? description: string}
 	{@param? compareState: [
+		checkboxVisible: bool,
 		compareAvailable: bool,
 		inCompare: bool
 	]}
@@ -62,7 +63,7 @@
 							'checkboxCompareUpdated': $_handleCheckboxCompareUpdate
 						]/}
 						{param productId: $productId /}
-						{param checkboxVisible: true /}
+						{param checkboxVisible: $compareState.checkboxVisible /}
 						{param compareAvailable: $compareState.compareAvailable /}
 						{param inCompare: $compareState.inCompare /}
 						{param labelVisible: false /}

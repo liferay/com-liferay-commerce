@@ -195,8 +195,9 @@ public class CommerceCatalogLocalServiceImpl
 	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId) {
 		Group group = groupPersistence.fetchByPrimaryKey(groupId);
 
-		if (group.getClassNameId() == classNameLocalService.getClassNameId(
-				CommerceCatalog.class)) {
+		if ((group != null) &&
+			(group.getClassNameId() == classNameLocalService.getClassNameId(
+				CommerceCatalog.class))) {
 
 			return fetchCommerceCatalog(group.getClassPK());
 		}
