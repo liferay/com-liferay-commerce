@@ -72,7 +72,7 @@
 			INNER JOIN
 				CommerceChannelRel
 			ON
-				CIWarehouse.CIWarehouseId = CommerceChannelRel.classPK
+				CIWarehouseItem.commerceInventoryWarehouseId = CommerceChannelRel.classPK
 			INNER JOIN
 				CommerceChannel
 			ON

@@ -71,8 +71,6 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 			HttpServletRequest httpServletRequest, int start, int end)
 		throws Exception {
 
-		long groupId = _portal.getScopeGroupId(httpServletRequest);
-
 		CPCatalogEntry cpCatalogEntry =
 			(CPCatalogEntry)httpServletRequest.getAttribute(
 				CPWebKeys.CP_CATALOG_ENTRY);
@@ -102,12 +100,12 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(_portal.getCompanyId(httpServletRequest));
-		searchContext.setGroupIds(new long[] {groupId});
 
 		searchContext.setKeywords(StringPool.STAR);
 
 		return _cpDefinitionHelper.search(
-			groupId, searchContext, new CPQuery(), start, end);
+			_portal.getScopeGroupId(httpServletRequest), searchContext,
+			new CPQuery(), start, end);
 	}
 
 	@Activate

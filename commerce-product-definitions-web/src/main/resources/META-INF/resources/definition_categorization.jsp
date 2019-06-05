@@ -20,7 +20,6 @@
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CPDefinition cpDefinition = cpDefinitionsDisplayContext.getCPDefinition();
-
 long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
 %>
 
@@ -43,6 +42,7 @@ long cpDefinitionId = cpDefinitionsDisplayContext.getCPDefinitionId();
 				<liferay-asset:asset-categories-selector
 					className="<%= CPDefinition.class.getName() %>"
 					classPK="<%= cpDefinitionId %>"
+					groupIds="<%= new long[] {company.getGroupId()} %>"
 				/>
 			</aui:field-wrapper>
 

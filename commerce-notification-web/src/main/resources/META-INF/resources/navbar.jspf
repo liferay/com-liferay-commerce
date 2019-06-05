@@ -14,12 +14,12 @@
  */
 --%>
 
-<liferay-portlet:renderURL portletName="<%= CommerceAdminPortletKeys.COMMERCE_ADMIN %>" varImpl="viewNotificationQueueEntriesURL">
+<liferay-portlet:renderURL portletName="<%= CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE %>" varImpl="viewNotificationQueueEntriesURL">
 	<portlet:param name="commerceAdminModuleKey" value="<%= commerceAdminModuleKey %>" />
 	<portlet:param name="notificationNavigationItem" value="view-all-notification-queue-entries" />
 </liferay-portlet:renderURL>
 
-<liferay-portlet:renderURL portletName="<%= CommerceAdminPortletKeys.COMMERCE_ADMIN %>" varImpl="viewNotificationTemplatesURL">
+<liferay-portlet:renderURL portletName="<%= CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE %>" varImpl="viewNotificationTemplatesURL">
 	<portlet:param name="mvcRenderCommandName" value="viewCommerceNotificationTemplates" />
 	<portlet:param name="commerceAdminModuleKey" value="<%= commerceAdminModuleKey %>" />
 	<portlet:param name="notificationNavigationItem" value="view-all-notification-templates" />

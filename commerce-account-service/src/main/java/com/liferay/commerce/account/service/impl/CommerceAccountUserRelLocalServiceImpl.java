@@ -201,7 +201,7 @@ public class CommerceAccountUserRelLocalServiceImpl
 				commerceAccountUserRelPersistence.
 					fetchByCommerceAccountId_First(commerceAccountId, null);
 
-			if ((commerceAccountUserRel == null) &&
+			if ((commerceAccountUserRel != null) &&
 				(commerceAccountUserRel.getCommerceAccountUserId() ==
 					commerceAccountUserId)) {
 

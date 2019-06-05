@@ -64,6 +64,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -73,6 +74,7 @@ import com.liferay.portal.kernel.model.ThemeSetting;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
@@ -543,6 +545,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		Group group = serviceContext.getScopeGroup();
 
+		Company company = _companyLocalService.getCompany(
+			serviceContext.getCompanyId());
+
 		JSONArray jsonArray = _getJSONArray("categories.json");
 
 		_assetCategoriesImporter.importAssetCategories(
@@ -550,7 +555,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+			company.getGroupId(), serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Asset categories successfully imported");
@@ -986,6 +991,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private CommerceUsersImporter _commerceUsersImporter;
+
+	@Reference
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
