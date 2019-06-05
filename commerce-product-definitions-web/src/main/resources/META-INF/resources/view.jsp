@@ -42,14 +42,6 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 		<liferay-util:param name="searchContainerId" value="cpDefinitions" />
 	</liferay-util:include>
 
-	<portlet:actionURL name="editProductDefinition" var="restoreTrashEntriesURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
-	</portlet:actionURL>
-
-	<liferay-trash:undo
-		portletURL="<%= restoreTrashEntriesURL %>"
-	/>
-
 	<div class="product-definitions-container" id="<portlet:namespace />productDefinitionsContainer">
 		<div class="closed container-fluid-1280 sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
 			<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" id="cpDefinitionInfoPanel" var="sidebarPanelURL" />

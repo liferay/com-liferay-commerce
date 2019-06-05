@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.trash.TrashRenderer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -52,7 +51,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alessio Antonio Rendina
  */
 public class CPDefinitionAssetRenderer
-	extends BaseJSPAssetRenderer<CPDefinition> implements TrashRenderer {
+	extends BaseJSPAssetRenderer<CPDefinition> {
 
 	public CPDefinitionAssetRenderer(
 		CPDefinition cpDefinition,
@@ -101,14 +100,6 @@ public class CPDefinitionAssetRenderer
 	}
 
 	@Override
-	public String getPortletId() {
-		AssetRendererFactory<CPDefinition> assetRendererFactory =
-			getAssetRendererFactory();
-
-		return assetRendererFactory.getPortletId();
-	}
-
-	@Override
 	public int getStatus() {
 		return _cpDefinition.getStatus();
 	}
@@ -142,11 +133,6 @@ public class CPDefinitionAssetRenderer
 		String languageId = LanguageUtil.getLanguageId(locale);
 
 		return _cpDefinition.getName(languageId);
-	}
-
-	@Override
-	public String getType() {
-		return CPDefinitionAssetRendererFactory.TYPE;
 	}
 
 	@Override

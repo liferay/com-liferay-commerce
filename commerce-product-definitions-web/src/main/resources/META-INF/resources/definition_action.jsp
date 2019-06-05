@@ -67,14 +67,13 @@ else {
 
 	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission(cpDefinition.getCPDefinitionId()) %>">
 		<portlet:actionURL name="editProductDefinition" var="deleteURL">
-			<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
 			label="<%= true %>"
-			trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
