@@ -296,32 +296,6 @@ public class CPDefinitionServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPDefinitionSoap moveCPDefinitionToTrash(
-		long cpDefinitionId) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.moveCPDefinitionToTrash(cpDefinitionId);
-
-			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void restoreCPDefinitionFromTrash(long cpDefinitionId)
-		throws RemoteException {
-		try {
-			CPDefinitionServiceUtil.restoreCPDefinitionFromTrash(cpDefinitionId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinition(
 		long cpDefinitionId, String[] nameMapLanguageIds,
 		String[] nameMapValues, String[] shortDescriptionMapLanguageIds,

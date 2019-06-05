@@ -151,12 +151,6 @@ public interface CPDefinitionService extends BaseService {
 	public String getUrlTitleMapAsXML(long cpDefinitionId)
 		throws PortalException;
 
-	public CPDefinition moveCPDefinitionToTrash(long cpDefinitionId)
-		throws PortalException;
-
-	public void restoreCPDefinitionFromTrash(long cpDefinitionId)
-		throws PortalException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
 		long companyId, String keywords, int status, int start, int end,

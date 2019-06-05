@@ -440,47 +440,6 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public void maintainVersionThreshold(long cProductId)
 		throws PortalException;
 
-	public void moveCPDefinitionsToTrash(long groupId, long userId)
-		throws PortalException;
-
-	/**
-	* Moves the commerce product definition to the recycle bin.
-	*
-	* @param userId the primary key of the user moving the commerce product
-	definition
-	* @param cpDefinition the commerce product definition to be moved
-	* @return the moved commerce product definition
-	*/
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition moveCPDefinitionToTrash(long userId,
-		CPDefinition cpDefinition) throws PortalException;
-
-	/**
-	* Moves the commerce product definition with the ID to the recycle bin.
-	*
-	* @param userId the primary key of the user moving the commerce product
-	definition
-	* @param cpDefinitionId the primary key of the commerce product definition
-	to be moved
-	* @return the moved commerce product definition
-	*/
-	public CPDefinition moveCPDefinitionToTrash(long userId, long cpDefinitionId)
-		throws PortalException;
-
-	/**
-	* Restores the commerce product definition with the ID from the recycle
-	* bin.
-	*
-	* @param userId the primary key of the user restoring the commerce product
-	definition
-	* @param cpDefinitionId the primary key of the commerce product definition
-	to be restored
-	* @return the restored commerce product definition from the recycle bin
-	*/
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition restoreCPDefinitionFromTrash(long userId,
-		long cpDefinitionId) throws PortalException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
 		long companyId, String keywords, int status, int start, int end,

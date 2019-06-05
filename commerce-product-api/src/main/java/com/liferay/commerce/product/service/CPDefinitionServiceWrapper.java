@@ -192,19 +192,6 @@ public class CPDefinitionServiceWrapper implements CPDefinitionService,
 	}
 
 	@Override
-	public com.liferay.commerce.product.model.CPDefinition moveCPDefinitionToTrash(
-		long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionService.moveCPDefinitionToTrash(cpDefinitionId);
-	}
-
-	@Override
-	public void restoreCPDefinitionFromTrash(long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpDefinitionService.restoreCPDefinitionFromTrash(cpDefinitionId);
-	}
-
-	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
 		long companyId, String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)

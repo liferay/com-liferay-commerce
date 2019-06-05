@@ -533,57 +533,6 @@ public class CPDefinitionLocalServiceUtil {
 		getService().maintainVersionThreshold(cProductId);
 	}
 
-	public static void moveCPDefinitionsToTrash(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().moveCPDefinitionsToTrash(groupId, userId);
-	}
-
-	/**
-	* Moves the commerce product definition to the recycle bin.
-	*
-	* @param userId the primary key of the user moving the commerce product
-	definition
-	* @param cpDefinition the commerce product definition to be moved
-	* @return the moved commerce product definition
-	*/
-	public static com.liferay.commerce.product.model.CPDefinition moveCPDefinitionToTrash(
-		long userId,
-		com.liferay.commerce.product.model.CPDefinition cpDefinition)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().moveCPDefinitionToTrash(userId, cpDefinition);
-	}
-
-	/**
-	* Moves the commerce product definition with the ID to the recycle bin.
-	*
-	* @param userId the primary key of the user moving the commerce product
-	definition
-	* @param cpDefinitionId the primary key of the commerce product definition
-	to be moved
-	* @return the moved commerce product definition
-	*/
-	public static com.liferay.commerce.product.model.CPDefinition moveCPDefinitionToTrash(
-		long userId, long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().moveCPDefinitionToTrash(userId, cpDefinitionId);
-	}
-
-	/**
-	* Restores the commerce product definition with the ID from the recycle
-	* bin.
-	*
-	* @param userId the primary key of the user restoring the commerce product
-	definition
-	* @param cpDefinitionId the primary key of the commerce product definition
-	to be restored
-	* @return the restored commerce product definition from the recycle bin
-	*/
-	public static com.liferay.commerce.product.model.CPDefinition restoreCPDefinitionFromTrash(
-		long userId, long cpDefinitionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().restoreCPDefinitionFromTrash(userId, cpDefinitionId);
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
 		long companyId, String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
