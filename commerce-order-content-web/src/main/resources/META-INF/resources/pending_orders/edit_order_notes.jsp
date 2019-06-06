@@ -30,11 +30,12 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 </portlet:actionURL>
 
 <div class="b2b-portlet-content-header">
-	<div class="row">
-		<div class="col">
-			<div class="commerce-typo__section-title">
-				<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>
-			</div>
+	<div class="autofit-float autofit-row header-title-bar">
+		<div class="autofit-col autofit-col-expand">
+			<liferay-ui:header
+				backURL="<%= redirect %>"
+				title='<%= LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId()) %>'
+			/>
 		</div>
 	</div>
 </div>
