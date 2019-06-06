@@ -105,7 +105,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 							request.setAttribute("order_notes.jsp-taglibLinkCssClass", "link-outline link-outline-borderless link-outline-secondary lfr-icon-item-reverse");
 							%>
 
-							<liferay-util:include page="/order_notes.jsp" servletContext="<%= application %>" />
+							<liferay-util:include page="/pending_orders/order_notes.jsp" servletContext="<%= application %>" />
 						</dd>
 					</dl>
 				</div>

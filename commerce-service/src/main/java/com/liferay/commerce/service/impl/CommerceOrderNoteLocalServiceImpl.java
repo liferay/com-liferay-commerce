@@ -192,6 +192,10 @@ public class CommerceOrderNoteLocalServiceImpl
 			long companyId, String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
+
 		CommerceOrderNote commerceOrderNote =
 			commerceOrderNotePersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);

@@ -25,11 +25,11 @@ String taglibIconCssClass = StringPool.BLANK;
 
 String taglibMessage = "notes";
 
+int commerceOrderNotesCount = commerceOrderContentDisplayContext.getCommerceOrderNotesCount(commerceOrder);
+
 boolean showLabel = GetterUtil.getBoolean(request.getAttribute("order_notes.jsp-showLabel"));
 
 if (!showLabel) {
-	int commerceOrderNotesCount = commerceOrderContentDisplayContext.getCommerceOrderNotesCount(commerceOrder);
-
 	if (commerceOrderNotesCount <= 0) {
 		taglibIconCssClass = "no-notes";
 	}
@@ -46,21 +46,22 @@ else {
 }
 %>
 
-<portlet:renderURL var="viewCommerceOrderNotesURL">
-	<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderNotes" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name='<%= PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL" %>' value="<%= currentURL %>" />
-	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-</portlet:renderURL>
+<c:if test="<%= commerceOrderNotesCount > 0 %>">
+	<portlet:renderURL var="viewCommerceOrderNotesURL">
+		<portlet:param name="mvcRenderCommandName" value="viewCommerceOrderNotes" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+	</portlet:renderURL>
 
-<liferay-ui:icon
-	cssClass="notes-icon"
-	icon="forms"
-	iconCssClass="<%= taglibIconCssClass %>"
-	label=""
-	linkCssClass=""
-	markupView="lexicon"
-	message="<%= taglibMessage %>"
-	method="get"
-	url="<%= viewCommerceOrderNotesURL %>"
-/>
+	<liferay-ui:icon
+		cssClass="notes-icon"
+		icon="forms"
+		iconCssClass="<%= taglibIconCssClass %>"
+		label=""
+		linkCssClass=""
+		markupView="lexicon"
+		message="<%= taglibMessage %>"
+		method="get"
+		url="<%= viewCommerceOrderNotesURL %>"
+	/>
+</c:if>
