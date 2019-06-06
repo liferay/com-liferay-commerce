@@ -208,7 +208,7 @@ public class CommerceInventoryAuditPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CIAudit",
 			"commerceInventoryAuditId", true, "companyId", true, "userId",
 			true, "userName", true, "createDate", true, "modifiedDate", true,
-			"sku", true, "description", true, "quantity", true);
+			"sku", true, "quantity", true);
 	}
 
 	@Test

@@ -77,7 +77,7 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "sku", Types.VARCHAR },
-			{ "description", Types.VARCHAR },
+			{ "description", Types.CLOB },
 			{ "quantity", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
@@ -90,11 +90,11 @@ public class CommerceInventoryAuditModelImpl extends BaseModelImpl<CommerceInven
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("sku", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("description", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CIAudit (CIAuditId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,sku VARCHAR(75) null,description VARCHAR(75) null,quantity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CIAudit (CIAuditId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,sku VARCHAR(75) null,description TEXT null,quantity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CIAudit";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceInventoryAudit.commerceInventoryAuditId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CIAudit.CIAuditId ASC";

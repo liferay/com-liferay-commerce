@@ -22,9 +22,9 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceInventoryWarehouseFinder {
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findByC_G_A(
-		long companyId, long groupId, boolean active);
-
 	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findByG_S(
 		long groupId, String sku);
+
+	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findByC_G_A(
+		long companyId, long groupId, boolean active);
 }
