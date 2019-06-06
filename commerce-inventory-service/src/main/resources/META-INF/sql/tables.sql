@@ -6,7 +6,7 @@ create table CIAudit (
 	createDate DATE null,
 	modifiedDate DATE null,
 	sku VARCHAR(75) null,
-	description VARCHAR(75) null,
+	description TEXT null,
 	quantity INTEGER
 );
 
