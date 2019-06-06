@@ -6,6 +6,34 @@ definition {
 		);
 	}
 
+	macro addNewAccountGroupsEntry {
+		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL", value1 = "${entryName}");
+
+		Button.clickSave();
+
+		CommerceNavigator.gotoEntry(entryName = "${entryName}");
+
+		CommerceEntry.gotoNestedMenu(nestedMenu = "Criteria");
+
+		Click(locator1 = "Button#PLUS");
+
+		Select(locator1 = "Select#TYPE", value1 = "${criteriaType}");
+
+		if ("${criteriaType}" == "Roles") {
+			Click(
+				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON",
+				key_roleType = "${roleType}"
+			);
+		}
+		else {
+			Click(locator1 = "Button#SELECT");
+		}
+
+		CommerceItemSelector.selectEntry(entryName = "${criterionEntryName}");
+
+		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+	}
+
 	macro addNewAvailabilityEstimatesEntry {
 		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryName}");
 	}
@@ -117,34 +145,6 @@ definition {
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
 	}
 
-	macro addNewAccountGroupsEntry {
-		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL", value1 = "${entryName}");
-
-		Button.clickSave();
-
-		CommerceNavigator.gotoEntry(entryName = "${entryName}");
-
-		CommerceEntry.gotoNestedMenu(nestedMenu = "Criteria");
-
-		Click(locator1 = "Button#PLUS");
-
-		Select(locator1 = "Select#TYPE", value1 = "${criteriaType}");
-
-		if ("${criteriaType}" == "Roles") {
-			Click(
-				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON",
-				key_roleType = "${roleType}"
-			);
-		}
-		else {
-			Click(locator1 = "Button#SELECT");
-		}
-
-		CommerceItemSelector.selectEntry(entryName = "${criterionEntryName}");
-
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
-	}
-
 	macro addNewWeightUnit {
 		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
 
@@ -202,27 +202,6 @@ definition {
 		CommerceEntry.selectAssociatedOptionsValue(optionValue = "${optionValue}");
 	}
 
-	macro createNewCurrenciesEntry {
-		ProductMenu.gotoPortlet(
-			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Settings"
-		);
-
-		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
-
-		Click(locator1 = "Button#PLUS");
-
-		CommerceEntry.addNewCurrenciesEntry(
-			code = "${code}",
-			entryName = "${entryName}"
-		);
-
-		Button.clickSave();
-
-		AssertElementPresent(locator1 = "Message#SUCCESS");
-	}
-
 	macro createNewAccountGroup {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
@@ -237,6 +216,27 @@ definition {
 			criterionEntryName = "${criterionEntryName}",
 			entryName = "${entryName}",
 			roleType = "${roleType}"
+		);
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
+	macro createNewCurrenciesEntry {
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Site Administration",
+			portlet = "Settings"
+		);
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewCurrenciesEntry(
+			code = "${code}",
+			entryName = "${entryName}"
 		);
 
 		Button.clickSave();

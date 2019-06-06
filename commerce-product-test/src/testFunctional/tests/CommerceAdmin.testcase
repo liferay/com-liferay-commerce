@@ -38,6 +38,71 @@ definition {
 	}
 
 	@ignore = "true"
+	test CreateNewAccountGroupByOrganizations {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByOrganizations";
+
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Users and Organizations"
+		);
+
+		Organization.addCP(orgName = "Commerce Organization", orgType = "Organization");
+
+		CommerceEntry.createNewAccountGroup(
+			criteriaType = "Organizations",
+			criterionEntryName = "Commerce Organization",
+			entryName = "Account groups"
+		);
+	}
+
+	@ignore = "true"
+	test CreateNewAccountGroupByRegularRole {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByRegularRole";
+
+		CommerceEntry.createNewAccountGroup(
+			criteriaType = "Roles",
+			criterionEntryName = "User",
+			entryName = "Account groups",
+			roleType = "Regular Role"
+		);
+	}
+
+	@ignore = "true"
+	test CreateNewAccountGroupByUserGroups {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUserGroups";
+
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "User Groups"
+		);
+
+		UserGroup.addCP(userGroupName = "Commerce UserGroup");
+
+		CommerceEntry.createNewAccountGroup(
+			criteriaType = "User Groups",
+			criterionEntryName = "Commerce UserGroup",
+			entryName = "Account groups"
+		);
+	}
+
+	@ignore = "true"
+	test CreateNewAccountGroupByUsers {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUsers";
+
+		CommerceEntry.createNewAccountGroup(
+			criteriaType = "Users",
+			criterionEntryName = "Commerce User",
+			entryName = "Account groups"
+		);
+	}
+
+	@ignore = "true"
 	test CreateNewAvailabilityEstimate {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAvailabilityEstimate";
@@ -228,70 +293,5 @@ definition {
 		Button.clickPublish();
 
 		AssertElementPresent(locator1 = "Message#SUCCESS");
-	}
-
-	@ignore = "true"
-	test CreateNewAccountGroupByOrganizations {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByOrganizations";
-
-		ProductMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "Users and Organizations"
-		);
-
-		Organization.addCP(orgName = "Commerce Organization", orgType = "Organization");
-
-		CommerceEntry.createNewAccountGroup(
-			criteriaType = "Organizations",
-			criterionEntryName = "Commerce Organization",
-			entryName = "Account groups"
-		);
-	}
-
-	@ignore = "true"
-	test CreateNewAccountGroupByRegularRole {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByRegularRole";
-
-		CommerceEntry.createNewAccountGroup(
-			criteriaType = "Roles",
-			criterionEntryName = "User",
-			entryName = "Account groups",
-			roleType = "Regular Role"
-		);
-	}
-
-	@ignore = "true"
-	test CreateNewAccountGroupByUserGroups {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUserGroups";
-
-		ProductMenu.gotoPortlet(
-			category = "Users",
-			panel = "Control Panel",
-			portlet = "User Groups"
-		);
-
-		UserGroup.addCP(userGroupName = "Commerce UserGroup");
-
-		CommerceEntry.createNewAccountGroup(
-			criteriaType = "User Groups",
-			criterionEntryName = "Commerce UserGroup",
-			entryName = "Account groups"
-		);
-	}
-
-	@ignore = "true"
-	test CreateNewAccountGroupByUsers {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAccountGroupByUsers";
-
-		CommerceEntry.createNewAccountGroup(
-			criteriaType = "Users",
-			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
 	}
 }
