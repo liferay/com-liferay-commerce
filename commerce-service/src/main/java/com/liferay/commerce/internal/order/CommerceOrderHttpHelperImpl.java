@@ -86,9 +86,13 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
+		long channelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		if (commerceAccount != null) {
 			commerceOrder = _commerceOrderService.addCommerceOrder(
-				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
+				themeDisplay.getUserId(), channelGroupId,
 				commerceAccount.getCommerceAccountId(), commerceCurrencyId);
 		}
 

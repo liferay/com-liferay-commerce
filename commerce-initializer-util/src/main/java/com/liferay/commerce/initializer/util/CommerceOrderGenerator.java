@@ -130,7 +130,7 @@ public class CommerceOrderGenerator {
 
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
-				groupId, commerceAccountUserRel.getCommerceAccountUserId(),
+				commerceAccountUserRel.getCommerceAccountUserId(), groupId,
 				commerceAccountUserRel.getCommerceAccountId());
 
 		// Commerce order items
