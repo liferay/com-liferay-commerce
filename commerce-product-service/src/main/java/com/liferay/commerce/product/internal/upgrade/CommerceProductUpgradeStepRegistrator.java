@@ -80,7 +80,7 @@ public class CommerceProductUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_5_0, _SCHEMA_VERSION_1_6_0,
 			new CommerceChannelUpgradeProcess(),
 			new CommerceCatalogUpgradeProcess(_groupLocalService),
-			new CPDefinitionTrashEntriesUpgradeProcess());
+			new CPDefinitionTrashEntriesUpgradeProcess(_classNameLocalService));
 
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
