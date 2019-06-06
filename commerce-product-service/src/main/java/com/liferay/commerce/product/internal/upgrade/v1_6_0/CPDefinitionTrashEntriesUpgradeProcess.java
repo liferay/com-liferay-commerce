@@ -16,7 +16,7 @@ package com.liferay.commerce.product.internal.upgrade.v1_6_0;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
@@ -24,26 +24,34 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
  */
 public class CPDefinitionTrashEntriesUpgradeProcess extends UpgradeProcess {
 
+	public CPDefinitionTrashEntriesUpgradeProcess(
+		ClassNameLocalService classNameLocalService) {
+
+		_classNameLocalService = classNameLocalService;
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 
-		//CPDefinition
+		// CPDefinition
 
-		String template = "DELETE FROM trashentry WHERE classNameId = '%s';";
+		String template = "DELETE FROM TrashEntry WHERE classNameId = '%s';";
 
-		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
+		long classNameId = _classNameLocalService.getClassNameId(
 			CPDefinition.class.getName());
 
 		runSQLTemplateString(
 			String.format(template, classNameId), false, false);
 
-		//CPInstance
+		// CPInstance
 
-		classNameId = ClassNameLocalServiceUtil.getClassNameId(
+		classNameId = _classNameLocalService.getClassNameId(
 			CPInstance.class.getName());
 
 		runSQLTemplateString(
 			String.format(template, classNameId), false, false);
 	}
+
+	private final ClassNameLocalService _classNameLocalService;
 
 }
