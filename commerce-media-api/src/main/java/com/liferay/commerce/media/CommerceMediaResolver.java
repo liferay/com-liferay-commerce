@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceMediaResolver {
