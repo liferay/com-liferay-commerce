@@ -83,7 +83,7 @@ public class CommerceMediaDefaultImageAdminModule
 
 	@Override
 	public int getType() {
-		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_GROUP_INSTANCE;
+		return CommerceAdminConstants.COMMERCE_ADMIN_TYPE_VIRTUAL_INSTANCE;
 	}
 
 	@Override

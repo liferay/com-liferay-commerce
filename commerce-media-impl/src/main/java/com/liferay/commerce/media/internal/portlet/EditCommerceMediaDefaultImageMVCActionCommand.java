@@ -15,16 +15,16 @@
 package com.liferay.commerce.media.internal.portlet;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.constants.CommerceMediaConstants;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactory;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.Portal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
+		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_VIRTUAL_INSTANCE,
 		"mvc.command.name=editCommerceMediaDefaultImage"
 	},
 	service = MVCActionCommand.class
@@ -51,13 +51,11 @@ public class EditCommerceMediaDefaultImageMVCActionCommand
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		Company company = _portal.getCompany(actionRequest);
 
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
-				themeDisplay.getScopeGroupId(),
-				CommerceMediaDefaultImageConfiguration.class.getName()));
+				company.getGroupId(), CommerceMediaConstants.SERVICE_NAME));
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
@@ -72,6 +70,9 @@ public class EditCommerceMediaDefaultImageMVCActionCommand
 
 		sendRedirect(actionRequest, actionResponse, redirect);
 	}
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private SettingsFactory _settingsFactory;

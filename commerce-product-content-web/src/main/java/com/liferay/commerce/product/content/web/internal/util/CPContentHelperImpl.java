@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -321,9 +322,11 @@ public class CPContentHelperImpl implements CPContentHelper {
 		}
 
 		if (cpMedias.isEmpty()) {
+			Company company = themeDisplay.getCompany();
+
 			FileEntry fileEntry = FileEntryUtil.fetchByPrimaryKey(
 				_catalogCommerceMediaDefaultImage.getDefaultCatalogFileEntryId(
-					themeDisplay.getScopeGroupId()));
+					company.getGroupId()));
 
 			if (fileEntry != null) {
 				cpMedias.add(new CPMediaImpl(fileEntry, themeDisplay));
