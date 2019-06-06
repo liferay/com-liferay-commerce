@@ -27,7 +27,7 @@ public class CommerceShipmentItemUpgradeProcess
 	protected void doUpgrade() throws Exception {
 		renameColumn(
 			CommerceShipmentItemImpl.class, CommerceShipmentItemImpl.TABLE_NAME,
-			"commerceWarehouseId", "commerceInventoryWarehouseId");
+			"commerceWarehouseId", "commerceInventoryWarehouseId LONG");
 	}
 
 }
