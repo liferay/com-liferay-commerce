@@ -4,9 +4,7 @@ definition {
 		for (var optionValues : list "${optionValuesList}") {
 			Click(locator1 = "Button#PLUS");
 
-			CommerceEntry.uploadCatalogEntrySingleImage(
-				uploadFileName = "Commerce_${optionValues}.jpg"
-			);
+			CommerceEntry.uploadCatalogEntrySingleImage(uploadFileName = "Commerce_${optionValues}.jpg");
 
 			CommerceEntry.selectAssociatedOptionsValue(optionValue = "${optionValues}");
 

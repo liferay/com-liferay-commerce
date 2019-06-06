@@ -3,12 +3,13 @@ definition {
 	macro addFullDescriptionViaAlloyEditor {
 		AlloyEditor.typeEditor(
 			content = "${entryFullDescription}",
-			editor = "description"
-		);
+			editor = "description");
 	}
 
 	macro addNewAccountGroupsEntry {
-		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL",
+			value1 = "${entryName}");
 
 		Button.clickSave();
 
@@ -18,13 +19,14 @@ definition {
 
 		Click(locator1 = "Button#PLUS");
 
-		Select(locator1 = "Select#TYPE", value1 = "${criteriaType}");
+		Select(
+			locator1 = "Select#TYPE",
+			value1 = "${criteriaType}");
 
 		if ("${criteriaType}" == "Roles") {
 			Click(
-				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON",
-				key_roleType = "${roleType}"
-			);
+				key_roleType = "${roleType}",
+				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON");
 		}
 		else {
 			Click(locator1 = "Button#SELECT");
@@ -32,25 +34,37 @@ definition {
 
 		CommerceItemSelector.selectEntry(entryName = "${criterionEntryName}");
 
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+		Click(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 	}
 
 	macro addNewAvailabilityEstimatesEntry {
-		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#TITLE_FIELD",
+			value1 = "${entryName}");
 	}
 
 	macro addNewCountriesEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#BILLING_ALLOWED_CHECKBOX");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#SHIPPING_ALLOWED_CHECKBOX");
 
-		Type(locator1 = "CommerceEntry#TWO_LETTERS_ISO_CODE_FIELD", value1 = "NC");
+		Type(
+			locator1 = "CommerceEntry#TWO_LETTERS_ISO_CODE_FIELD",
+			value1 = "NC");
 
-		Type(locator1 = "CommerceEntry#THREE_LETTERS_ISO_CODE_FIELD", value1 = "NCO");
+		Type(
+			locator1 = "CommerceEntry#THREE_LETTERS_ISO_CODE_FIELD",
+			value1 = "NCO");
 
-		Type(locator1 = "CommerceEntry#NUMERIC_ISO_CODE_FIELD", value1 = "001");
+		Type(
+			locator1 = "CommerceEntry#NUMERIC_ISO_CODE_FIELD",
+			value1 = "001");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#SUBJECT_TO_VAT_CHECKBOX");
 
@@ -58,9 +72,13 @@ definition {
 	}
 
 	macro addNewCurrenciesEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Type(locator1 = "CommerceEntry#CODE_FIELD", value1 = "${code}");
+		Type(
+			locator1 = "CommerceEntry#CODE_FIELD",
+			value1 = "${code}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
 
@@ -68,104 +86,129 @@ definition {
 	}
 
 	macro addNewDimensionUnit {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Type(locator1 = "CommerceEntry#KEY_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#KEY_FIELD",
+			value1 = "${entryName}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
 	}
 
 	macro addNewDiscountsEntry {
-		Type(locator1 = "CommerceEntry#TITLE_FIELD", value1 = "${entryTitle}");
+		Type(
+			locator1 = "CommerceEntry#TITLE_FIELD",
+			value1 = "${entryTitle}");
 
 		Select(
 			locator1 = "CommerceEntry#DISCOUNT_TARGET_SELECT",
-			value1 = "${discountTarget}"
-		);
+			value1 = "${discountTarget}");
 
 		Click(locator1 = "Button#SELECT");
 
 		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+		Click(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 
 		Type(
 			locator1 = "CommerceEntry#MAXIMUM_DISCOUNT_AMOUNT_FIELD",
-			value1 = "${maximumDiscountAmount}"
-		);
+			value1 = "${maximumDiscountAmount}");
 
 		Type(
 			locator1 = "CommerceEntry#DISCOUNT_LEVEL_1_FIELD",
-			value1 = "${discountLevel}"
-		);
+			value1 = "${discountLevel}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
 	}
 
 	macro addNewNotificationTemplate {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Type(locator1 = "TextArea#DESCRIPTION", value1 = "${entryName} Description");
+		Type(
+			locator1 = "TextArea#DESCRIPTION",
+			value1 = "${entryName} Description");
 
 		Click(locator1 = "Button#SELECT");
 
 		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+		Click(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 
 		Type(
 			locator1 = "CommerceEntry#NOTIFICATION_TEMPLATE_FROM_ADDRESS_FIELD",
-			value1 = "${fromAddress}"
-		);
+			value1 = "${fromAddress}");
 
 		Type(
 			locator1 = "CommerceEntry#NOTIFICATION_TEMPLATE_FROM_NAME_FIELD",
-			value1 = "${fromName}"
-		);
+			value1 = "${fromName}");
 
-		Select(locator1 = "Select#TYPE", value1 = "${notificationType}");
+		Select(
+			locator1 = "Select#TYPE",
+			value1 = "${notificationType}");
 	}
 
 	macro addNewPriceListsEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Select(locator1 = "CommerceEntry#CURRENCY_SELECT", value1 = "${currencyCode}");
+		Select(
+			locator1 = "CommerceEntry#CURRENCY_SELECT",
+			value1 = "${currencyCode}");
 
 		Click(locator1 = "CommerceEntry#ACCOUNT_GROUPS_RELS_SELECT");
 
 		CommerceItemSelector.selectEntry(entryName = "${accountGroupName}");
 
-		Click(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+		Click(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 	}
 
 	macro addNewRegionsEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Type(locator1 = "CommerceEntry#CODE_FIELD", value1 = "${code}");
+		Type(
+			locator1 = "CommerceEntry#CODE_FIELD",
+			value1 = "${code}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#ACTIVE_CHECKBOX");
 	}
 
 	macro addNewWeightUnit {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
 
-		Type(locator1 = "CommerceEntry#KEY_FIELD", value1 = "${entryName}");
+		Type(
+			locator1 = "CommerceEntry#KEY_FIELD",
+			value1 = "${entryName}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#PRIMARY_CHECKBOX");
 	}
 
 	macro addOptionsEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${optionName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${optionName}");
 
 		Type(
 			locator1 = "CommerceEntry#DESCRIPTION_FIELD",
-			value1 = "${optionDescription}"
-		);
+			value1 = "${optionDescription}");
 
 		Select(
 			locator1 = "CommerceEntry#FIELD_TYPE_SELECT",
-			value1 = "${optionFieldType}"
-		);
+			value1 = "${optionFieldType}");
 
 		Check.checkToggleSwitch(locator1 = "CommerceEntry#FACETABLE_CHECKBOX");
 
@@ -175,30 +218,37 @@ definition {
 	}
 
 	macro addOptionValue {
-		Type(locator1 = "CommerceEntry#MODAL_NAME_FIELD", value1 = "${valueName}");
+		Type(
+			locator1 = "CommerceEntry#MODAL_NAME_FIELD",
+			value1 = "${valueName}");
 
-		Type(locator1 = "CommerceEntry#PRIORITY_FIELD", value1 = "${valuePriority}");
+		Type(
+			locator1 = "CommerceEntry#PRIORITY_FIELD",
+			value1 = "${valuePriority}");
 	}
 
 	macro addPricingEntry {
-		Type(locator1 = "CommerceEntry#PRICE_FIELD", value1 = "${price}");
+		Type(
+			locator1 = "CommerceEntry#PRICE_FIELD",
+			value1 = "${price}");
 	}
 
 	macro addProductsEntry {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${productName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${productName}");
 
 		Type(
 			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
-			value1 = "${productShortDescription}"
-		);
+			value1 = "${productShortDescription}");
 
-		CommerceEntry.addFullDescriptionViaAlloyEditor(
-			entryFullDescription = "${productFullDescription}"
-		);
+		CommerceEntry.addFullDescriptionViaAlloyEditor(entryFullDescription = "${productFullDescription}");
 	}
 
 	macro addSKUsEntry {
-		Type(locator1 = "CommerceEntry#SKU_FIELD", value1 = "${productSKU}");
+		Type(
+			locator1 = "CommerceEntry#SKU_FIELD",
+			value1 = "${productSKU}");
 
 		CommerceEntry.selectAssociatedOptionsValue(optionValue = "${optionValue}");
 	}
@@ -207,8 +257,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Account groupss"
-		);
+			portlet = "Account groupss");
 
 		Click(locator1 = "Button#PLUS");
 
@@ -216,8 +265,7 @@ definition {
 			criteriaType = "${criteriaType}",
 			criterionEntryName = "${criterionEntryName}",
 			entryName = "${entryName}",
-			roleType = "${roleType}"
-		);
+			roleType = "${roleType}");
 
 		Button.clickSave();
 
@@ -228,8 +276,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
 
@@ -237,8 +284,7 @@ definition {
 
 		CommerceEntry.addNewCurrenciesEntry(
 			code = "${code}",
-			entryName = "${entryName}"
-		);
+			entryName = "${entryName}");
 
 		Button.clickSave();
 
@@ -246,44 +292,40 @@ definition {
 	}
 
 	macro editEntryFullDescription {
-		CommerceEntry.addFullDescriptionViaAlloyEditor(
-			entryFullDescription = "${newEntryFullDescription}"
-		);
+		CommerceEntry.addFullDescriptionViaAlloyEditor(entryFullDescription = "${newEntryFullDescription}");
 	}
 
 	macro editEntryName {
-		Type(locator1 = "CommerceEntry#NAME_FIELD", value1 = "${newEntryName}");
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${newEntryName}");
 	}
 
 	macro editEntryShortDescription {
 		Type(
 			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
-			value1 = "${newEntryShortDescription}"
-		);
+			value1 = "${newEntryShortDescription}");
 	}
 
 	macro gotoBreadcrumb {
 		Click(
+			key_breadcrumb = "${breadcrumb}",
 			locator1 = "CommerceEntry#BREADCRUMBS",
-			value1 = "${breadcrumb}",
-			key_breadcrumb = "${breadcrumb}"
-		);
+			value1 = "${breadcrumb}");
 	}
 
 	macro gotoMenuTab {
 		AssertClick(
+			key_menuTab = "${menuTab}",
 			locator1 = "CommerceEntry#MENU_TAB",
-			value1 = "${menuTab}",
-			key_menuTab = "${menuTab}"
-		);
+			value1 = "${menuTab}");
 	}
 
 	macro gotoNestedMenu {
 		AssertClick(
+			key_nestedMenu = "${nestedMenu}",
 			locator1 = "CommerceEntry#NESTED_MENU",
-			value1 = "${nestedMenu}",
-			key_nestedMenu = "${nestedMenu}"
-		);
+			value1 = "${nestedMenu}");
 	}
 
 	macro publishEntry {
@@ -294,10 +336,9 @@ definition {
 		}
 		else {
 			AssertTextEquals(
+				key_status = "${status}",
 				locator1 = "CommerceEntry#WORKFLOW_STATUS",
-				value1 = "${status}",
-				key_status = "${status}"
-			);
+				value1 = "${status}");
 		}
 
 		Pause(locator1 = "3000");
@@ -319,10 +360,9 @@ definition {
 		}
 		else {
 			AssertTextEquals(
+				key_status = "${status}",
 				locator1 = "CommerceEntry#WORKFLOW_STATUS",
-				value1 = "${status}",
-				key_status = "${status}"
-			);
+				value1 = "${status}");
 		}
 
 		Pause(locator1 = "3000");
@@ -331,42 +371,37 @@ definition {
 	macro selectAssociatedOptionsValue {
 		if (IsElementNotPresent(locator1 = "CommerceEntry#ACCORDION")) {
 			Click(
-				locator1 = "CommerceEntry#ACCORDION_TITLE",
-				key_accordionTitle = "Options"
-			);
+				key_accordionTitle = "Options",
+				locator1 = "CommerceEntry#ACCORDION_TITLE");
 		}
 
 		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_SELECT")) {
 			Click(locator1 = "CommerceEntry#OPTION_SELECT");
 
 			Click(
-				locator1 = "CommerceEntry#OPTIONS_SELECT_LIST",
-				key_selectValue = "${optionValue}"
-			);
+				key_selectValue = "${optionValue}",
+				locator1 = "CommerceEntry#OPTIONS_SELECT_LIST");
 		}
 
 		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "checkbox_multiple", key_optionValue = "${optionValue}")) {
 			Click(
-				locator1 = "CommerceEntry#OPTION_VALUE",
 				key_optionType = "checkbox_multiple",
-				key_optionValue = "${optionValue}"
-			);
+				key_optionValue = "${optionValue}",
+				locator1 = "CommerceEntry#OPTION_VALUE");
 		}
 
 		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "radio", key_optionValue = "${optionValue}")) {
 			Click(
-				locator1 = "CommerceEntry#OPTION_VALUE",
 				key_optionType = "radio",
-				key_optionValue = "${optionValue}"
-			);
+				key_optionValue = "${optionValue}",
+				locator1 = "CommerceEntry#OPTION_VALUE");
 		}
 	}
 
 	macro uploadCatalogEntrySingleImage {
 		AssertClick(
 			locator1 = "CommerceEntry#PRODUCT_IMAGE_SELECT_FILE",
-			value1 = "Select File"
-		);
+			value1 = "Select File");
 
 		CommerceItemSelector.uploadSingleFile(uploadFileName = "${uploadFileName}");
 	}
@@ -374,36 +409,30 @@ definition {
 	macro viewCatalogEntry {
 		AssertTextEquals(
 			locator1 = "CommerceEntry#NAME_FIELD",
-			value1 = "${productName}"
-		);
+			value1 = "${productName}");
 
 		AssertTextEquals(
 			locator1 = "CommerceEntry#SHORT_DESCRIPTION_FIELD",
-			value1 = "${productShortDescription}"
-		);
+			value1 = "${productShortDescription}");
 
 		AssertTextEquals(
 			locator1 = "CommerceEntry#FULL_DESCRIPTION_FIELD",
-			value1 = "${productFullDescription}"
-		);
+			value1 = "${productFullDescription}");
 
 		AssertTextEquals(
+			key_productName = "${productName}",
 			locator1 = "CommerceEntry#SEO_FRIENDLYURL",
-			value1 = "${productName}",
-			key_productName = "${productName}"
-		);
+			value1 = "${productName}");
 	}
 
 	macro viewOptionsEntry {
 		AssertTextEquals(
 			locator1 = "CommerceEntry#NAME_FIELD",
-			value1 = "${optionName}"
-		);
+			value1 = "${optionName}");
 
 		AssertTextEquals(
 			locator1 = "CommerceEntry#DESCRIPTION_FIELD",
-			value1 = "${optionDescription}"
-		);
+			value1 = "${optionDescription}");
 	}
 
 }
