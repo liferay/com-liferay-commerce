@@ -14,15 +14,13 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "Users and Organizations"
-		);
+			portlet = "Users and Organizations");
 
 		User.addCP(
 			userEmailAddress = "commerceuser@liferay.com",
 			userFirstName = "Commerce",
 			userLastName = "User",
-			userScreenName = "commerce"
-		);
+			userScreenName = "commerce");
 	}
 
 	tearDown {
@@ -46,16 +44,16 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "Users and Organizations"
-		);
+			portlet = "Users and Organizations");
 
-		Organization.addCP(orgName = "Commerce Organization", orgType = "Organization");
+		Organization.addCP(
+			orgName = "Commerce Organization",
+			orgType = "Organization");
 
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Organizations",
 			criterionEntryName = "Commerce Organization",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 	}
 
 	@ignore = "true"
@@ -67,8 +65,7 @@ definition {
 			criteriaType = "Roles",
 			criterionEntryName = "User",
 			entryName = "Account groups",
-			roleType = "Regular Role"
-		);
+			roleType = "Regular Role");
 	}
 
 	@ignore = "true"
@@ -79,16 +76,14 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "User Groups"
-		);
+			portlet = "User Groups");
 
 		UserGroup.addCP(userGroupName = "Commerce UserGroup");
 
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "User Groups",
 			criterionEntryName = "Commerce UserGroup",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 	}
 
 	@ignore = "true"
@@ -99,8 +94,7 @@ definition {
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 	}
 
 	@ignore = "true"
@@ -111,16 +105,13 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
 
 		Click(locator1 = "Button#PLUS");
 
-		CommerceEntry.addNewAvailabilityEstimatesEntry(
-			entryName = "New Availability Estimate"
-		);
+		CommerceEntry.addNewAvailabilityEstimatesEntry(entryName = "New Availability Estimate");
 
 		Button.clickSave();
 
@@ -135,8 +126,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Countries");
 
@@ -152,7 +142,9 @@ definition {
 
 		Click(locator1 = "Button#PLUS");
 
-		CommerceEntry.addNewRegionsEntry(code = "NRE", entryName = "New Region");
+		CommerceEntry.addNewRegionsEntry(
+			code = "NRE",
+			entryName = "New Region");
 
 		Button.clickSave();
 
@@ -161,7 +153,9 @@ definition {
 
 	@ignore = "true"
 	test CreateNewCurrency {
-		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
+		CommerceEntry.createNewCurrenciesEntry(
+			code = "NCU",
+			entryName = "New Currency");
 	}
 
 	@ignore = "true"
@@ -172,24 +166,21 @@ definition {
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Discounts"
-		);
+			portlet = "Discounts");
 
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewDiscountsEntry(
+			accountGroup = "Account groups",
 			discountLevel = "15",
 			discountTarget = "Apply to Product",
 			entryTitle = "New Discount",
-			maximumDiscountAmount = "10",
-			accountGroup = "Account groups"
-		);
+			maximumDiscountAmount = "10");
 
 		Button.clickPublish();
 
@@ -204,8 +195,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Measurement Units");
 
@@ -236,14 +226,12 @@ definition {
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notificatios");
 
@@ -252,12 +240,11 @@ definition {
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewNotificationTemplate(
+			accountGroup = "Account groups",
 			entryName = "New Notification Template",
 			fromAddress = "test@liferay.com",
 			fromName = "Test Test",
-			notificationType = "Order Placed",
-			accountGroup = "Account groups"
-		);
+			notificationType = "Order Placed");
 
 		Button.clickSave();
 
@@ -269,27 +256,26 @@ definition {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewPriceList";
 
-		CommerceEntry.createNewCurrenciesEntry(code = "NCU", entryName = "New Currency");
+		CommerceEntry.createNewCurrenciesEntry(
+			code = "NCU",
+			entryName = "New Currency");
 
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Price Lists"
-		);
+			portlet = "Price Lists");
 
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewPriceListsEntry(
+			accountGroupName = "Account groups",
 			currencyCode = "NCU",
-			entryName = "New Price List",
-			accountGroupName = "Account groups"
-		);
+			entryName = "New Price List");
 
 		Button.clickPublish();
 
