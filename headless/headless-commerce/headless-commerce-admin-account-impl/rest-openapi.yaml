@@ -65,7 +65,6 @@ components:
                     items:
                         $ref: '#/components/schemas/Address'
                     type: array
-
                 emailAddresses:
                     items:
                         format: email
