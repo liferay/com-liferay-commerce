@@ -7,7 +7,7 @@
 		<permissions>
 			<supports>
 				<action-key>ADD_ACCOUNT</action-key>
-				<action-key>ADD_COMMERCE_ACCOUNT_GROUP</action-key>
+				<action-key>ADD_ACCOUNT_GROUP</action-key>
 				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
 				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
 				<action-key>VIEW_COMMERCE_ACCOUNT_GROUPS</action-key>
@@ -16,7 +16,7 @@
 			<guest-defaults />
 			<guest-unsupported>
 				<action-key>ADD_ACCOUNT</action-key>
-				<action-key>ADD_COMMERCE_ACCOUNT_GROUP</action-key>
+				<action-key>ADD_ACCOUNT_GROUP</action-key>
 				<action-key>MANAGE_ALL_ACCOUNTS</action-key>
 				<action-key>MANAGE_AVAILABLE_ACCOUNTS</action-key>
 				<action-key>VIEW_COMMERCE_ACCOUNT_GROUPS</action-key>
