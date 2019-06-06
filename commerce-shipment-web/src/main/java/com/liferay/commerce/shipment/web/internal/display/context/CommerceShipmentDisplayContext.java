@@ -172,7 +172,6 @@ public class CommerceShipmentDisplayContext
 		searchContainer.setOrderByCol(getOrderByCol());
 		searchContainer.setOrderByComparator(orderByComparator);
 		searchContainer.setOrderByType(getOrderByType());
-		searchContainer.setRowChecker(getRowChecker());
 
 		int total;
 		List<CommerceShipment> results;
