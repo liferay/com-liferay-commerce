@@ -66,11 +66,11 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CommerceOrderServiceSoap {
 	public static com.liferay.commerce.model.CommerceOrderSoap addCommerceOrder(
-		long groupId, long userId, long commerceAccountId,
+		long userId, long groupId, long commerceAccountId,
 		long commerceCurrencyId) throws RemoteException {
 		try {
-			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.addCommerceOrder(groupId,
-					userId, commerceAccountId, commerceCurrencyId);
+			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.addCommerceOrder(userId,
+					groupId, commerceAccountId, commerceCurrencyId);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(returnValue);
 		}
@@ -722,19 +722,20 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap upsertCommerceOrder(
-		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
-		long shippingAddressId, String commercePaymentMethodKey,
-		long commerceShippingMethodId, String shippingOptionName,
-		String purchaseOrderNumber, java.math.BigDecimal subtotal,
-		java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
-		int paymentStatus, int orderStatus, String advanceStatus,
-		String externalReferenceCode,
+		long userId, long groupId, long commerceAccountId,
+		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
+		java.math.BigDecimal total, int paymentStatus, int orderStatus,
+		String advanceStatus, String externalReferenceCode,
 		com.liferay.commerce.context.CommerceContext commerceContext,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.upsertCommerceOrder(commerceAccountId,
-					commerceCurrencyId, billingAddressId, shippingAddressId,
+			com.liferay.commerce.model.CommerceOrder returnValue = CommerceOrderServiceUtil.upsertCommerceOrder(userId,
+					groupId, commerceAccountId, commerceCurrencyId,
+					billingAddressId, shippingAddressId,
 					commercePaymentMethodKey, commerceShippingMethodId,
 					shippingOptionName, purchaseOrderNumber, subtotal,
 					shippingAmount, total, paymentStatus, orderStatus,

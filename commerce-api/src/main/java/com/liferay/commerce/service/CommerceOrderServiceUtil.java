@@ -43,11 +43,11 @@ public class CommerceOrderServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.service.impl.CommerceOrderServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-		long groupId, long userId, long commerceAccountId,
+		long userId, long groupId, long commerceAccountId,
 		long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceOrder(groupId, userId, commerceAccountId,
+				   .addCommerceOrder(userId, groupId, commerceAccountId,
 			commerceCurrencyId);
 	}
 
@@ -368,23 +368,23 @@ public class CommerceOrderServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
-		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
-		long shippingAddressId, String commercePaymentMethodKey,
-		long commerceShippingMethodId, String shippingOptionName,
-		String purchaseOrderNumber, java.math.BigDecimal subtotal,
-		java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
-		int paymentStatus, int orderStatus, String advanceStatus,
-		String externalReferenceCode,
+		long userId, long groupId, long commerceAccountId,
+		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
+		String commercePaymentMethodKey, long commerceShippingMethodId,
+		String shippingOptionName, String purchaseOrderNumber,
+		java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
+		java.math.BigDecimal total, int paymentStatus, int orderStatus,
+		String advanceStatus, String externalReferenceCode,
 		com.liferay.commerce.context.CommerceContext commerceContext,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .upsertCommerceOrder(commerceAccountId, commerceCurrencyId,
-			billingAddressId, shippingAddressId, commercePaymentMethodKey,
-			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
-			subtotal, shippingAmount, total, paymentStatus, orderStatus,
-			advanceStatus, externalReferenceCode, commerceContext,
-			serviceContext);
+				   .upsertCommerceOrder(userId, groupId, commerceAccountId,
+			commerceCurrencyId, billingAddressId, shippingAddressId,
+			commercePaymentMethodKey, commerceShippingMethodId,
+			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
+			total, paymentStatus, orderStatus, advanceStatus,
+			externalReferenceCode, commerceContext, serviceContext);
 	}
 
 	public static CommerceOrderService getService() {
