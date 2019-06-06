@@ -50,7 +50,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public CommerceOrder addCommerceOrder(
-			long groupId, long userId, long commerceAccountId,
+			long userId, long groupId, long commerceAccountId,
 			long commerceCurrencyId)
 		throws PortalException {
 
@@ -59,7 +59,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
 		return commerceOrderLocalService.addCommerceOrder(
-			groupId, userId, commerceAccountId, commerceCurrencyId);
+			userId, groupId, commerceAccountId, commerceCurrencyId);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
 		return commerceOrderLocalService.addCommerceOrder(
-			groupId, getUserId(), commerceAccountId, commerceCurrencyId,
+			getUserId(), groupId, commerceAccountId, commerceCurrencyId,
 			shippingAddressId, purchaseOrderNumber);
 	}
 
@@ -88,7 +88,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
 
 		return commerceOrderLocalService.addCommerceOrder(
-			groupId, getUserId(), commerceAccountId, shippingAddressId,
+			getUserId(), groupId, commerceAccountId, shippingAddressId,
 			purchaseOrderNumber);
 	}
 
@@ -632,14 +632,14 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public CommerceOrder upsertCommerceOrder(
-			long commerceAccountId, long commerceCurrencyId,
-			long billingAddressId, long shippingAddressId,
-			String commercePaymentMethodKey, long commerceShippingMethodId,
-			String shippingOptionName, String purchaseOrderNumber,
-			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-			int paymentStatus, int orderStatus, String advanceStatus,
-			String externalReferenceCode, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long userId, long groupId, long commerceAccountId,
+			long commerceCurrencyId, long billingAddressId,
+			long shippingAddressId, String commercePaymentMethodKey,
+			long commerceShippingMethodId, String shippingOptionName,
+			String purchaseOrderNumber, BigDecimal subtotal,
+			BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
+			int orderStatus, String advanceStatus, String externalReferenceCode,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrder commerceOrder =
@@ -657,8 +657,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		}
 
 		return commerceOrderLocalService.upsertCommerceOrder(
-			commerceAccountId, commerceCurrencyId, billingAddressId,
-			shippingAddressId, commercePaymentMethodKey,
+			userId, groupId, commerceAccountId, commerceCurrencyId,
+			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
 			advanceStatus, externalReferenceCode, commerceContext,
