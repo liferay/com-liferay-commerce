@@ -30,7 +30,6 @@ import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.math.BigDecimal;
 
@@ -122,9 +121,12 @@ public class CommerceCheckoutStepHelper {
 		}
 
 		if (commercePaymentMethods.size() == 1) {
-			_onlyOnePaymentMethod(
+			CommercePaymentMethod commercePaymentMethod =
+				commercePaymentMethods.get(0);
+
+			_updateCommerceOrder(
 				httpServletRequest, commerceOrder,
-				commercePaymentMethods.get(0));
+				commercePaymentMethod.getKey());
 
 			return false;
 		}
@@ -155,9 +157,9 @@ public class CommerceCheckoutStepHelper {
 		return false;
 	}
 
-	private void _onlyOnePaymentMethod(
+	private void _updateCommerceOrder(
 			HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
-			CommercePaymentMethod commercePaymentMethod)
+			String commercePaymentMethodKey)
 		throws PortalException {
 
 		CommerceAddress commerceAddress = commerceOrder.getBillingAddress();
@@ -166,16 +168,18 @@ public class CommerceCheckoutStepHelper {
 			commerceAddress = commerceOrder.getShippingAddress();
 		}
 
-		if (!Objects.equals(
-				commerceOrder.getCommercePaymentMethodKey(),
-				commercePaymentMethod.getKey()) &&
-			Validator.isNotNull(commerceAddress)) {
-
-			commerceOrder =
-				_commerceOrderService.updateCommercePaymentMethodKey(
-					commerceOrder.getCommerceOrderId(),
-					commercePaymentMethod.getKey());
+		if (commerceAddress == null) {
+			return;
 		}
+
+		if (commercePaymentMethodKey.equals(
+				commerceOrder.getCommercePaymentMethodKey())) {
+
+			return;
+		}
+
+		commerceOrder = _commerceOrderService.updateCommercePaymentMethodKey(
+			commerceOrder.getCommerceOrderId(), commercePaymentMethodKey);
 
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
