@@ -24,6 +24,7 @@ import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
@@ -71,15 +72,13 @@ public class CommerceMediaDefaultImageDisplayContext {
 	}
 
 	public long getDefaultFileEntryId() throws PortalException {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		Company company = _cpRequestHelper.getCompany();
 
 		CommerceMediaDefaultImageConfiguration
 			commerceMediaDefaultImageConfiguration =
 				_configurationProvider.getGroupConfiguration(
 					CommerceMediaDefaultImageConfiguration.class,
-					themeDisplay.getSiteGroupId());
+					company.getGroupId());
 
 		return commerceMediaDefaultImageConfiguration.defaultFileEntryId();
 	}

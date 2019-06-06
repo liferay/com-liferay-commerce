@@ -16,7 +16,6 @@ package com.liferay.commerce.media.internal;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
@@ -34,12 +33,13 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
@@ -68,6 +68,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(service = CommerceMediaResolver.class)
 public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
@@ -151,10 +152,12 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 				return _html.escape(sb.toString());
 			}
 
-			long groupId = GetterUtil.getLong(
-				httpSession.getAttribute(WebKeys.VISITED_GROUP_ID_RECENT));
+			long companyId = GetterUtil.getLong(
+				httpSession.getAttribute(WebKeys.COMPANY_ID));
 
-			return getDefaultUrl(groupId);
+			Company company = _companyLocalService.getCompany(companyId);
+
+			return getDefaultUrl(company.getGroupId());
 		}
 
 		Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
@@ -203,23 +206,34 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
+			long companyId = ParamUtil.getLong(httpServletRequest, "companyId");
 
-			if (groupId == 0) {
+			Company company = _companyLocalService.fetchCompany(companyId);
+
+			if (company == null) {
 				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 
 				return;
 			}
 
-			sendDefaultMediaBytes(
-				httpServletRequest, httpServletResponse, contentDisposition,
-				groupId);
+			try {
+				sendDefaultMediaBytes(
+					company.getGroupId(), httpServletRequest,
+					httpServletResponse, contentDisposition);
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+
+				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+				return;
+			}
 
 			return;
 		}
 
 		long groupId = getGroupId(
-			pathArray[0], GetterUtil.getLong(pathArray[1]), httpServletRequest);
+			pathArray[0], GetterUtil.getLong(pathArray[1]));
 
 		if (groupId == 0) {
 			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -232,8 +246,8 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 			if (fileEntry == null) {
 				sendDefaultMediaBytes(
-					httpServletRequest, httpServletResponse, contentDisposition,
-					groupId);
+					groupId, httpServletRequest, httpServletResponse,
+					contentDisposition);
 
 				return;
 			}
@@ -285,10 +299,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		}
 	}
 
-	protected long getGroupId(
-		String mediaType, long primaryKey,
-		HttpServletRequest httpServletRequest) {
-
+	protected long getGroupId(String mediaType, long primaryKey) {
 		if (mediaType.equals("asset-categories")) {
 			AssetCategory assetCategory =
 				_assetCategoryLocalService.fetchCategory(primaryKey);
@@ -314,7 +325,10 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 						cProduct.getPublishedCPDefinitionId(),
 						ActionKeys.VIEW)) {
 
-					return cProduct.getGroupId();
+					Company company = _companyLocalService.getCompany(
+						cProduct.getCompanyId());
+
+					return company.getGroupId();
 				}
 			}
 			catch (PortalException pe) {
@@ -326,9 +340,8 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	}
 
 	protected void sendDefaultMediaBytes(
-			HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse, String contentDisposition,
-			long groupId)
+			long groupId, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, String contentDisposition)
 		throws IOException {
 
 		try {
@@ -337,9 +350,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 					ConfigurationProviderUtil.getConfiguration(
 						CommerceMediaDefaultImageConfiguration.class,
 						new GroupServiceSettingsLocator(
-							groupId,
-							CommerceMediaDefaultImageConfiguration.class.
-								getName()));
+							groupId, CommerceMediaConstants.SERVICE_NAME));
 
 			FileEntry fileEntry = getFileEntry(
 				commerceMediaDefaultImageConfiguration.defaultFileEntryId());
@@ -409,7 +420,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	private AssetCategoryLocalService _assetCategoryLocalService;
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryLocalService
@@ -444,8 +455,5 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private Portal _portal;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
