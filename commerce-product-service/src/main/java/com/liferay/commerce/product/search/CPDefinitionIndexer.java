@@ -15,7 +15,6 @@
 package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.media.CommerceMediaResolver;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -39,8 +38,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.GroupConstants;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -52,9 +51,8 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
-import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -551,10 +549,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		}
 
 		if (cpAttachmentFileEntryId == 0) {
+			Company company = _companyLocalService.getCompany(
+				cpDefinition.getCompanyId());
+
 			document.addKeyword(
 				FIELD_DEFAULT_IMAGE_FILE_URL,
-				_commerceMediaResolver.getDefaultUrl(
-					cpDefinition.getGroupId()));
+				_commerceMediaResolver.getDefaultUrl(company.getGroupId()));
 		}
 		else {
 			document.addKeyword(
@@ -677,7 +677,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
-	private ConfigurationProvider _configurationProvider;
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CPDefinitionLinkLocalService _cpDefinitionLinkLocalService;
@@ -695,12 +695,6 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
-	private GroupLocalService _groupLocalService;
-
-	@Reference
 	private IndexWriterHelper _indexWriterHelper;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 }

@@ -435,13 +435,18 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			String mimeType = MimeTypesUtil.getContentType(file);
 
+			Group catalogGroup = _groupLocalService.getGroup(catalogGroupId);
+
+			Company company = _companyLocalService.getCompany(
+				catalogGroup.getCompanyId());
+
 			FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
-				catalogGroupId, serviceContext.getUserId(),
+				company.getGroupId(), serviceContext.getUserId(),
 				MiniumSiteInitializer.class.getName(), file.getName(), file,
 				mimeType);
 
 			_commerceCatalogDefaultImage.updateDefaultCatalogFileEntryId(
-				catalogGroupId, fileEntry.getFileEntryId());
+				company.getGroupId(), fileEntry.getFileEntryId());
 		}
 		finally {
 			if (file != null) {
