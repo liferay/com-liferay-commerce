@@ -97,7 +97,7 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public CommerceOrder addCommerceOrder(
-			long groupId, long userId, long commerceAccountId)
+			long userId, long groupId, long commerceAccountId)
 		throws PortalException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -113,15 +113,15 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return commerceOrderLocalService.addCommerceOrder(
-			commerceAccountId, 0, 0, 0, null, 0, null, null, BigDecimal.ZERO,
-			BigDecimal.ZERO, BigDecimal.ZERO,
+			userId, groupId, commerceAccountId, 0, 0, 0, null, 0, null, null,
+			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
 
 	@Override
 	public CommerceOrder addCommerceOrder(
-			long groupId, long userId, long commerceAccountId,
+			long userId, long groupId, long commerceAccountId,
 			long commerceCurrencyId)
 		throws PortalException {
 
@@ -138,77 +138,25 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return commerceOrderLocalService.addCommerceOrder(
-			commerceAccountId, commerceCurrencyId, 0, 0, null, 0, null, null,
-			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+			userId, groupId, commerceAccountId, commerceCurrencyId, 0, 0, null,
+			0, null, null, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
-	}
-
-	@Override
-	public CommerceOrder addCommerceOrder(
-			long groupId, long userId, long commerceAccountId,
-			long commerceCurrencyId, long shippingAddressId,
-			String purchaseOrderNumber)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setUserId(userId);
-
-		if (hasWorkflowDefinition(
-				groupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
-
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
-		}
-
-		return commerceOrderLocalService.addCommerceOrder(
-			commerceAccountId, commerceCurrencyId, 0, shippingAddressId, null,
-			0, null, purchaseOrderNumber, BigDecimal.ZERO, BigDecimal.ZERO,
-			BigDecimal.ZERO, CommerceOrderConstants.PAYMENT_STATUS_PENDING,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
-	}
-
-	@Override
-	public CommerceOrder addCommerceOrder(
-			long groupId, long userId, long commerceAccountId,
-			long shippingAddressId, String purchaseOrderNumber)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setUserId(userId);
-
-		if (hasWorkflowDefinition(
-				groupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
-
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
-		}
-
-		return commerceOrderLocalService.addCommerceOrder(
-			commerceAccountId, 0, 0, shippingAddressId, null, 0, null,
-			purchaseOrderNumber, BigDecimal.ZERO, BigDecimal.ZERO,
-			BigDecimal.ZERO, CommerceOrderConstants.PAYMENT_STATUS_PENDING,
 			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder addCommerceOrder(
-			long commerceAccountId, long commerceCurrencyId,
-			long billingAddressId, long shippingAddressId,
-			String commercePaymentMethodKey, long commerceShippingMethodId,
-			String shippingOptionName, String purchaseOrderNumber,
-			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-			int paymentStatus, int orderStatus, ServiceContext serviceContext)
+			long userId, long groupId, long commerceAccountId,
+			long commerceCurrencyId, long billingAddressId,
+			long shippingAddressId, String commercePaymentMethodKey,
+			long commerceShippingMethodId, String shippingOptionName,
+			String purchaseOrderNumber, BigDecimal subtotal,
+			BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
+			int orderStatus, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce order
-
-		long userId = serviceContext.getUserId();
 
 		User user = userLocalService.getUser(userId);
 
@@ -227,10 +175,6 @@ public class CommerceOrderLocalServiceImpl
 				commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
 			}
 		}
-
-		long groupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				serviceContext.getScopeGroupId());
 
 		long commerceOrderId = counterLocalService.increment();
 
@@ -267,6 +211,58 @@ public class CommerceOrderLocalServiceImpl
 
 		return startWorkflowInstance(
 			user.getUserId(), commerceOrder, serviceContext);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long userId, long groupId, long commerceAccountId,
+			long commerceCurrencyId, long shippingAddressId,
+			String purchaseOrderNumber)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
+
+		if (hasWorkflowDefinition(
+				groupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+		}
+
+		return commerceOrderLocalService.addCommerceOrder(
+			userId, groupId, commerceAccountId, commerceCurrencyId, 0,
+			shippingAddressId, null, 0, null, purchaseOrderNumber,
+			BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+			CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long userId, long groupId, long commerceAccountId,
+			long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
+
+		if (hasWorkflowDefinition(
+				groupId, CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+		}
+
+		return commerceOrderLocalService.addCommerceOrder(
+			userId, groupId, commerceAccountId, 0, 0, shippingAddressId, null,
+			0, null, purchaseOrderNumber, BigDecimal.ZERO, BigDecimal.ZERO,
+			BigDecimal.ZERO, CommerceOrderConstants.PAYMENT_STATUS_PENDING,
+			CommerceOrderConstants.ORDER_STATUS_OPEN, serviceContext);
 	}
 
 	@Override
@@ -750,6 +746,7 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceOrder newCommerceOrder =
 			commerceOrderLocalService.addCommerceOrder(
+				userId, commerceOrder.getGroupId(),
 				commerceOrder.getCommerceAccountId(),
 				commerceOrder.getCommerceCurrencyId(), billingAddressId,
 				shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
@@ -1173,14 +1170,14 @@ public class CommerceOrderLocalServiceImpl
 
 	@Override
 	public CommerceOrder upsertCommerceOrder(
-			long commerceAccountId, long commerceCurrencyId,
-			long billingAddressId, long shippingAddressId,
-			String commercePaymentMethodKey, long commerceShippingMethodId,
-			String shippingOptionName, String purchaseOrderNumber,
-			BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-			int paymentStatus, int orderStatus, String advanceStatus,
-			String externalReferenceCode, CommerceContext commerceContext,
-			ServiceContext serviceContext)
+			long userId, long groupId, long commerceAccountId,
+			long commerceCurrencyId, long billingAddressId,
+			long shippingAddressId, String commercePaymentMethodKey,
+			long commerceShippingMethodId, String shippingOptionName,
+			String purchaseOrderNumber, BigDecimal subtotal,
+			BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
+			int orderStatus, String advanceStatus, String externalReferenceCode,
+			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Update
@@ -1204,8 +1201,8 @@ public class CommerceOrderLocalServiceImpl
 		// Add
 
 		return commerceOrderLocalService.addCommerceOrder(
-			commerceAccountId, commerceCurrencyId, billingAddressId,
-			shippingAddressId, commercePaymentMethodKey,
+			userId, groupId, commerceAccountId, commerceCurrencyId,
+			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
 			serviceContext);
