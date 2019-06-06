@@ -27,34 +27,30 @@ public class CommerceShippingFixedOptionRelUpgradeProcess
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_renameColumn(
-			CommerceShippingFixedOptionRelImpl.class,
-			CommerceShippingFixedOptionRelImpl.TABLE_NAME,
-			"commerceWarehouseId", "commerceInventoryWarehouseId");
-	}
-
-	private void _renameColumn(
-			Class<?> tableClass, String tableName, String oldColumnName,
-			String newColumnName)
-		throws Exception {
-
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				String.format(
-					"Renaming column %s to table %s", oldColumnName,
-					tableName));
+					"Renaming column %s to table %s", "commerceWarehouseId",
+					CommerceShippingFixedOptionRelImpl.TABLE_NAME));
 		}
 
-		if (!hasColumn(tableName, newColumnName)) {
+		if (!hasColumn(
+				CommerceShippingFixedOptionRelImpl.TABLE_NAME,
+				"commerceInventoryWarehouseId")) {
+
 			alter(
-				tableClass, new AlterColumnName(oldColumnName, newColumnName));
+				CommerceShippingFixedOptionRelImpl.class,
+				new AlterColumnName(
+					"commerceWarehouseId",
+					"commerceInventoryWarehouseId LONG"));
 		}
 		else {
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					String.format(
-						"Column %s already exists on table %s", newColumnName,
-						tableName));
+						"Column %s already exists on table %s",
+						"commerceInventoryWarehouseId",
+						CommerceShippingFixedOptionRelImpl.TABLE_NAME));
 			}
 		}
 	}
