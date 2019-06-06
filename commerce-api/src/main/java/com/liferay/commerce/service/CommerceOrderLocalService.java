@@ -81,30 +81,31 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder addCommerceOrder(CommerceOrder commerceOrder);
 
-	public CommerceOrder addCommerceOrder(long groupId, long userId,
+	public CommerceOrder addCommerceOrder(long userId, long groupId,
 		long commerceAccountId) throws PortalException;
 
-	public CommerceOrder addCommerceOrder(long groupId, long userId,
+	public CommerceOrder addCommerceOrder(long userId, long groupId,
 		long commerceAccountId, long commerceCurrencyId)
 		throws PortalException;
 
-	public CommerceOrder addCommerceOrder(long groupId, long userId,
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder addCommerceOrder(long userId, long groupId,
+		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
+		long shippingAddressId, String commercePaymentMethodKey,
+		long commerceShippingMethodId, String shippingOptionName,
+		String purchaseOrderNumber, BigDecimal subtotal,
+		BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
+		int orderStatus, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceOrder addCommerceOrder(long userId, long groupId,
 		long commerceAccountId, long commerceCurrencyId,
 		long shippingAddressId, String purchaseOrderNumber)
 		throws PortalException;
 
-	public CommerceOrder addCommerceOrder(long groupId, long userId,
+	public CommerceOrder addCommerceOrder(long userId, long groupId,
 		long commerceAccountId, long shippingAddressId,
 		String purchaseOrderNumber) throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CommerceOrder addCommerceOrder(long commerceAccountId,
-		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
-		String commercePaymentMethodKey, long commerceShippingMethodId,
-		String shippingOptionName, String purchaseOrderNumber,
-		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-		int paymentStatus, int orderStatus, ServiceContext serviceContext)
-		throws PortalException;
 
 	public CommerceOrder applyCouponCode(long commerceOrderId,
 		String couponCode, CommerceContext commerceContext)
@@ -515,12 +516,13 @@ public interface CommerceOrderLocalService extends BaseLocalService,
 	public CommerceOrder updateUser(long commerceOrderId, long userId)
 		throws PortalException;
 
-	public CommerceOrder upsertCommerceOrder(long commerceAccountId,
-		long commerceCurrencyId, long billingAddressId, long shippingAddressId,
-		String commercePaymentMethodKey, long commerceShippingMethodId,
-		String shippingOptionName, String purchaseOrderNumber,
-		BigDecimal subtotal, BigDecimal shippingAmount, BigDecimal total,
-		int paymentStatus, int orderStatus, String advanceStatus,
-		String externalReferenceCode, CommerceContext commerceContext,
-		ServiceContext serviceContext) throws PortalException;
+	public CommerceOrder upsertCommerceOrder(long userId, long groupId,
+		long commerceAccountId, long commerceCurrencyId, long billingAddressId,
+		long shippingAddressId, String commercePaymentMethodKey,
+		long commerceShippingMethodId, String shippingOptionName,
+		String purchaseOrderNumber, BigDecimal subtotal,
+		BigDecimal shippingAmount, BigDecimal total, int paymentStatus,
+		int orderStatus, String advanceStatus, String externalReferenceCode,
+		CommerceContext commerceContext, ServiceContext serviceContext)
+		throws PortalException;
 }
