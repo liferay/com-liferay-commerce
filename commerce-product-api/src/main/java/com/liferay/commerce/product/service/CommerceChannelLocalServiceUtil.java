@@ -236,6 +236,12 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().getCommerceChannel(commerceChannelId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceChannel getCommerceChannelByOrderGroupId(
+		long orderGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceChannelByOrderGroupId(orderGroupId);
+	}
+
 	public static com.liferay.portal.kernel.model.Group getCommerceChannelGroup(
 		long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {

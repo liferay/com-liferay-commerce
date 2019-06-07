@@ -221,6 +221,10 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceChannel getCommerceChannelByOrderGroupId(long orderGroupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Group getCommerceChannelGroup(long commerceChannelId)
 		throws PortalException;
 
