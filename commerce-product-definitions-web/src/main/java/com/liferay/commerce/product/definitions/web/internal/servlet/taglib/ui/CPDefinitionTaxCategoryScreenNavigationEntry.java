@@ -22,7 +22,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPTaxCategoryService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -120,9 +119,9 @@ public class CPDefinitionTaxCategoryScreenNavigationEntry
 			cpDefinitionTaxCategoryDisplayContext =
 				new CPDefinitionTaxCategoryDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionHelper, _cpDefinitionModelResourcePermission,
-					_cpDefinitionService, _itemSelector,
-					_portletResourcePermission, _cpTaxCategoryService);
+					_cpDefinitionModelResourcePermission, _cpDefinitionService,
+					_itemSelector, _portletResourcePermission,
+					_cpTaxCategoryService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -141,9 +140,6 @@ public class CPDefinitionTaxCategoryScreenNavigationEntry
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"

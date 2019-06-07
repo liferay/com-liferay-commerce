@@ -21,7 +21,6 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 
 CPDefinition cpDefinition = cpDefinitionsDisplayContext.getCPDefinition();
 PortletURL portletURL = cpDefinitionsDisplayContext.getEditProductDefinitionURL();
-String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
 boolean approvedCPInstance = cpDefinitionsDisplayContext.hasApprovedCPInstance(cpDefinition);
 
 String title = LanguageUtil.get(request, "add-product");
