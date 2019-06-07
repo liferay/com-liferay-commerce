@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,36 +90,48 @@ public class CommerceInventoryWarehousesImporter {
 
 		// Commerce inventory warehouse
 
-		int countryNumericISOCode = jsonObject.getInt("Country");
-
-		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.fetchCommerceCountry(
-				serviceContext.getCompanyId(), countryNumericISOCode);
-
-		String regionCode = jsonObject.getString("Region");
-
-		CommerceRegion commerceRegion =
-			_commerceRegionLocalService.getCommerceRegion(
-				commerceCountry.getCommerceCountryId(), regionCode);
-
-		String name = jsonObject.getString("Name");
-		String description = jsonObject.getString("Description");
-		boolean active = jsonObject.getBoolean("Active", true);
-		String street1 = jsonObject.getString("Street1");
-		String street2 = jsonObject.getString("Street2");
-		String street3 = jsonObject.getString("Street3");
-		String city = jsonObject.getString("City");
-		String zip = jsonObject.getString("Zip");
-		double latitude = jsonObject.getDouble("Latitude");
-		double longitude = jsonObject.getDouble("Longitude");
+		String externalReferenceCode = jsonObject.getString(
+			"ExternalReferenceCode");
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			_commerceInventoryWarehouseLocalService.
-				addCommerceInventoryWarehouse(
-					name, description, active, street1, street2, street3, city,
-					zip, commerceRegion.getCode(),
-					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
-					serviceContext);
+				fetchCommerceInventoryWarehouseByReferenceCode(
+					serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (Validator.isNotNull(externalReferenceCode) &&
+			(commerceInventoryWarehouse != null)) {
+
+			int countryNumericISOCode = jsonObject.getInt("Country");
+
+			CommerceCountry commerceCountry =
+				_commerceCountryLocalService.fetchCommerceCountry(
+					serviceContext.getCompanyId(), countryNumericISOCode);
+
+			String regionCode = jsonObject.getString("Region");
+
+			CommerceRegion commerceRegion =
+				_commerceRegionLocalService.getCommerceRegion(
+					commerceCountry.getCommerceCountryId(), regionCode);
+
+			String name = jsonObject.getString("Name");
+			String description = jsonObject.getString("Description");
+			boolean active = jsonObject.getBoolean("Active", true);
+			String street1 = jsonObject.getString("Street1");
+			String street2 = jsonObject.getString("Street2");
+			String street3 = jsonObject.getString("Street3");
+			String city = jsonObject.getString("City");
+			String zip = jsonObject.getString("Zip");
+			double latitude = jsonObject.getDouble("Latitude");
+			double longitude = jsonObject.getDouble("Longitude");
+
+			commerceInventoryWarehouse =
+				_commerceInventoryWarehouseLocalService.
+					addCommerceInventoryWarehouse(
+						name, description, active, street1, street2, street3,
+						city, zip, commerceRegion.getCode(),
+						commerceCountry.getTwoLettersISOCode(), latitude,
+						longitude, serviceContext);
+		}
 
 		// Commerce channel rel
 
