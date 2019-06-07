@@ -406,6 +406,7 @@ public class CommerceAccountLocalServiceImpl
 		return searchCommerceAccountsCount(searchContext);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount setActive(long commerceAccountId, boolean active)
 		throws PortalException {
