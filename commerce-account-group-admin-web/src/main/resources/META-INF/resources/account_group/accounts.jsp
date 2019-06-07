@@ -110,7 +110,7 @@ PortletURL portletURL = commerceAccountGroupAdminDisplayContext.getPortletURL();
 
 					<liferay-ui:search-container-column-jsp
 						cssClass="entry-action-column"
-						path="/account_group_account_rel_action.jsp.jsp"
+						path="/account_group_account_rel_action.jsp"
 					/>
 				</liferay-ui:search-container-row>
 
@@ -154,7 +154,7 @@ PortletURL portletURL = commerceAccountGroupAdminDisplayContext.getPortletURL();
 									A.Array.each(
 										selectedItems,
 										function(item, index, selectedItems) {
-											<portlet:namespace />addCommerceAccountIds.push(item.id);
+											<portlet:namespace />addCommerceAccountIds.push(item.commerceAccountId);
 										}
 									);
 

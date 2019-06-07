@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.account.item.selector.web.internal.display.context;
 
-import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.item.selector.web.internal.display.context.util.CommerceAccountItemSelectorRequestHelper;
 import com.liferay.commerce.account.item.selector.web.internal.search.CommerceAccountItemSelectorChecker;
@@ -23,8 +22,6 @@ import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.util.List;
@@ -41,12 +38,10 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 	public CommerceAccountItemSelectorViewDisplayContext(
 		CommerceAccountService commerceAccountService,
-		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest, PortletURL portletURL,
 		String itemSelectedEventName) {
 
 		_commerceAccountService = commerceAccountService;
-		_configurationProvider = configurationProvider;
 		_portletURL = portletURL;
 		_itemSelectedEventName = itemSelectedEventName;
 
@@ -97,30 +92,19 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 		_searchContainer.setRowChecker(rowChecker);
 
-		CommerceAccountGroupServiceConfiguration
-			commerceAccountGroupServiceConfiguration =
-				_configurationProvider.getConfiguration(
-					CommerceAccountGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						_commerceAccountItemSelectorRequestHelper.
-							getScopeGroupId(),
-						CommerceAccountConstants.SERVICE_NAME));
-
 		List<CommerceAccount> results =
 			_commerceAccountService.getUserCommerceAccounts(
 				_commerceAccountItemSelectorRequestHelper.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				commerceAccountGroupServiceConfiguration.commerceSiteType(),
-				getKeywords(), _searchContainer.getStart(),
-				_searchContainer.getEnd());
+				CommerceAccountConstants.SITE_TYPE_B2C_B2B, getKeywords(),
+				_searchContainer.getStart(), _searchContainer.getEnd());
 
 		_searchContainer.setResults(results);
 
 		int total = _commerceAccountService.getUserCommerceAccountsCount(
 			_commerceAccountItemSelectorRequestHelper.getUserId(),
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-			commerceAccountGroupServiceConfiguration.commerceSiteType(),
-			getKeywords());
+			CommerceAccountConstants.SITE_TYPE_B2C_B2B, getKeywords());
 
 		_searchContainer.setTotal(total);
 
@@ -148,7 +132,6 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 	private final CommerceAccountItemSelectorRequestHelper
 		_commerceAccountItemSelectorRequestHelper;
 	private final CommerceAccountService _commerceAccountService;
-	private final ConfigurationProvider _configurationProvider;
 	private final String _itemSelectedEventName;
 	private String _keywords;
 	private final PortletURL _portletURL;

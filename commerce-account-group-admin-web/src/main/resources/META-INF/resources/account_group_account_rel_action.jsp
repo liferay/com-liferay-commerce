@@ -31,7 +31,7 @@ CommerceAccountGroupCommerceAccountRel commerceAccountGroupCommerceAccountRel = 
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasPermission(commerceAccountGroupCommerceAccountRel.getCommerceAccountId(), ActionKeys.DELETE) %>">
+	<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasPermission(commerceAccountGroupCommerceAccountRel.getCommerceAccountGroupId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editCommerceAccountGroupCommerceAccountRel" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
