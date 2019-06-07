@@ -22,7 +22,6 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,7 +42,6 @@ public class CPDefinitionAccountGroupDisplayContext
 	public CPDefinitionAccountGroupDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		CPDefinitionHelper cpDefinitionHelper,
 		ModelResourcePermission<CPDefinition>
 			cpDefinitionModelResourcePermission,
 		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
@@ -53,8 +51,8 @@ public class CPDefinitionAccountGroupDisplayContext
 
 		super(
 			actionHelper, httpServletRequest, commerceCatalogService,
-			cpDefinitionHelper, cpDefinitionModelResourcePermission,
-			cpDefinitionService, itemSelector, portletResourcePermission);
+			cpDefinitionModelResourcePermission, cpDefinitionService,
+			itemSelector, portletResourcePermission);
 
 		_commerceAccountGroupRelService = commerceAccountGroupRelService;
 		_commerceAccountGroupService = commerceAccountGroupService;

@@ -51,20 +51,6 @@ else {
 		/>
 	</c:if>
 
-	<c:if test="<%= cpDefinition.isApproved() && cpDefinitionsDisplayContext.hasViewPermission(cpDefinition.getCPDefinitionId()) %>">
-
-		<%
-		String productURL = cpDefinitionsDisplayContext.getProductURL(cpDefinition);
-		%>
-
-		<liferay-ui:icon
-			iconCssClass="icon-new-window"
-			message="view-in-public-store"
-			target="_blank"
-			url="<%= productURL %>"
-		/>
-	</c:if>
-
 	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission(cpDefinition.getCPDefinitionId()) %>">
 		<portlet:actionURL name="editProductDefinition" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

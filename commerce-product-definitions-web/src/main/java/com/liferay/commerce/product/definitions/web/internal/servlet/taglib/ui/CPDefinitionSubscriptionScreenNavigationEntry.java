@@ -21,7 +21,6 @@ import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefiniti
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
@@ -113,9 +112,8 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 			cpDefinitionSubscriptionInfoDisplayContext =
 				new CPDefinitionSubscriptionInfoDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionHelper, _cpDefinitionModelResourcePermission,
-					_cpDefinitionService, _itemSelector,
-					_portletResourcePermission,
+					_cpDefinitionModelResourcePermission, _cpDefinitionService,
+					_itemSelector, _portletResourcePermission,
 					_cpSubscriptionTypeJSPContributorRegistry,
 					_cpSubscriptionTypeRegistry);
 
@@ -136,9 +134,6 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"

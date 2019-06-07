@@ -23,7 +23,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -112,7 +111,7 @@ public class CPDefinitionShippingScreenNavigationEntry
 			cpDefinitionShippingInfoDisplayContext =
 				new CPDefinitionShippingInfoDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_commerceCurrencyLocalService, _cpDefinitionHelper,
+					_commerceCurrencyLocalService,
 					_cpDefinitionModelResourcePermission, _cpDefinitionService,
 					_itemSelector, _portletResourcePermission,
 					_cpMeasurementUnitLocalService);
@@ -137,9 +136,6 @@ public class CPDefinitionShippingScreenNavigationEntry
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
-
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
