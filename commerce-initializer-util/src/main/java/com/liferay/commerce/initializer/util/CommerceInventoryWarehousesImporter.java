@@ -99,7 +99,7 @@ public class CommerceInventoryWarehousesImporter {
 					serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (Validator.isNotNull(externalReferenceCode) &&
-			(commerceInventoryWarehouse != null)) {
+			(commerceInventoryWarehouse == null)) {
 
 			int countryNumericISOCode = jsonObject.getInt("Country");
 
