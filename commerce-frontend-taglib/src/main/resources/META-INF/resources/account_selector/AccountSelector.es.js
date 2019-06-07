@@ -13,6 +13,16 @@ class AccountSelector extends Component {
 
 	created() {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
+
+		window.Liferay.on('orderChanged', ({orderId}) => {
+			if(orderId) {
+				this._getOrders(orderId)
+					.then(orders => {
+						this.currentOrder = orders[0];
+						this.orders = orders;
+					})
+			}
+		})
 	}
 
 	_handleClickOutside(e) {
@@ -41,7 +51,10 @@ class AccountSelector extends Component {
 
 		if (this.currentAccount && !this.orders) {
 			this.currentView = 'orders';
-			this._fetchOrders();
+			this._getOrders()
+				.then(orders => {
+					this.orders = orders
+				});
 		}
 
 		this.openingState = 'opening';
@@ -106,7 +119,10 @@ class AccountSelector extends Component {
 		);
 
 		this.currentView = 'orders';
-		return this._fetchOrders();
+		return this._getOrders()
+			.then(orders => {
+				this.orders = orders
+			});
 	}
 
 	_handleGetAccounts(query = '') {
@@ -119,7 +135,10 @@ class AccountSelector extends Component {
 	}
 
 	_handleGetOrders(query = '') {
-		return this._fetchOrders(query);
+		return this._getOrders(query)
+			.then(orders => {
+				this.orders = orders
+			});
 	}
 
 	_fetchAccounts(query = '') {
@@ -140,7 +159,7 @@ class AccountSelector extends Component {
 			);
 	}
 
-	_fetchOrders(query = '') {
+	_getOrders(query = '') {
 		return fetch(
 			this.accountsAPI + 'search-accounts/' + this.currentAccount.accountId + '/orders?groupId=' + themeDisplay.getScopeGroupId() + '&page=1&pageSize=10&q=' + query,
 			{
@@ -151,10 +170,7 @@ class AccountSelector extends Component {
 				response => response.json()
 			)
 			.then(
-				response => {
-					this.orders = response.orders;
-					return this.orders;
-				}
+				response => response.orders
 			);
 	}
 }

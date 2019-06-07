@@ -26,6 +26,7 @@
 	]>}
 
 	{@param? productsQuantity: int}
+	{@param? orderId: int | string}
 
 	{@param? summary: [
 		checkoutUrl: string,
@@ -45,8 +46,10 @@
 
 	{let $formattedProductsQuantity : isNonnull($productsQuantity) ? $productsQuantity : 0 /}
 
-	{let $openCartButtonModifiers kind="text"}
-		{if isNonnull($disabled) and $disabled}
+	{let $openCartButtonClasses kind="text"}
+		commerce-topbar-button
+		
+		{if $disabled or not($orderId)}
 			{sp}is-disabled
 		{/if}
 
@@ -55,15 +58,16 @@
 		{/if}
 	{/let}
 
-	{let $cartModifiers kind="text"}
-		{if isNonnull($_open) and $_open}
+	{let $cartClasses kind="text"}
+		commerce-cart
+		{if $_open}
 			{sp}is-open
 		{/if}
 	{/let}
 
 	<div class="mini-cart-wrapper" id="mini-cart-wrapper">
 		<button
-			class="commerce-topbar-button{$openCartButtonModifiers}"
+			class="{$openCartButtonClasses}"
 			data-badge-count="{$formattedProductsQuantity}"
 			data-onclick="{$_handleToggleCart}"
 		>
@@ -73,7 +77,7 @@
 			{/call}
 		</button>
 
-		<div class="commerce-cart{$cartModifiers}">
+		<div class="{$cartClasses}">
 			<button
 				class="commerce-topbar-button commerce-cart__close"
 				data-onclick="{$_handleToggleCart}"

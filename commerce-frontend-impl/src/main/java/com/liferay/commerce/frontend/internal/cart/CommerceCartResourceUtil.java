@@ -57,6 +57,7 @@ public class CommerceCartResourceUtil {
 			commerceOrderId);
 
 		return new Cart(
+			commerceOrderId,
 			getProducts(commerceOrder, locale, commerceContext),
 			getSummary(commerceOrder, locale, commerceContext));
 	}
