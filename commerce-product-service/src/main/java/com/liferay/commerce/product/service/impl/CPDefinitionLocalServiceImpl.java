@@ -832,6 +832,10 @@ public class CPDefinitionLocalServiceImpl
 	public List<CPDefinition> getCPDefinitions(
 		long groupId, int status, int start, int end) {
 
+		if (status == WorkflowConstants.STATUS_ANY) {
+			cpDefinitionPersistence.findByGroupId(groupId, start, end);
+		}
+
 		return cpDefinitionPersistence.findByG_S(groupId, status, start, end);
 	}
 
@@ -839,6 +843,11 @@ public class CPDefinitionLocalServiceImpl
 	public List<CPDefinition> getCPDefinitions(
 		long groupId, int status, int start, int end,
 		OrderByComparator<CPDefinition> orderByComparator) {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			cpDefinitionPersistence.findByGroupId(
+				groupId, start, end, orderByComparator);
+		}
 
 		return cpDefinitionPersistence.findByG_S(
 			groupId, status, start, end, orderByComparator);
@@ -878,6 +887,10 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public int getCPDefinitionsCount(long groupId, int status) {
+		if (status == WorkflowConstants.STATUS_ANY) {
+			cpDefinitionPersistence.countByGroupId(groupId);
+		}
+
 		return cpDefinitionPersistence.countByG_S(groupId, status);
 	}
 
