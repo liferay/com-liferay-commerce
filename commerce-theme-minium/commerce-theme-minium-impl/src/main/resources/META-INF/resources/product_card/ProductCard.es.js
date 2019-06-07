@@ -38,7 +38,12 @@ class ProductCard extends Component {
 	}
 
 	_handleCheckboxCompareUpdate(newCompareState) {
-		this.compareState = newCompareState;
+		this.compareState = Object.assign(
+			{
+				checkboxVisible: this.compareState.checkboxVisible
+			},
+			newCompareState
+		);
 		return this.compareState;
 	}
 
