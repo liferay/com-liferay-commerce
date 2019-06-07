@@ -26,8 +26,6 @@ public class CPDefinitionTrashEntriesUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		Class<CPDefinitionTrashEntriesUpgradeProcess> clazz =
-			CPDefinitionTrashEntriesUpgradeProcess.class;
 
 		//CPDefinition
 
