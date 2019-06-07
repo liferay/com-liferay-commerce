@@ -295,14 +295,16 @@ public class CommerceShipmentItemLocalServiceImpl
 		Map<String, String> context = new HashMap<>();
 
 		context.put(
-			"OrderId ", String.valueOf(commerceOrderItem.getCommerceOrderId()));
+			"commerceOrderId",
+			String.valueOf(commerceOrderItem.getCommerceOrderId()));
 		context.put(
-			"OrderItemId ",
+			"commerceOrderItemId",
 			String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
 		context.put(
-			"ShipmentId",
+			"commerceShipmentId",
 			String.valueOf(commerceShipmentItem.getCommerceShipmentId()));
-		context.put("ShipmentItemId", String.valueOf(commerceShipmentItemId));
+		context.put(
+			"commerceShipmentItemId", String.valueOf(commerceShipmentItemId));
 
 		_commerceInventoryEngine.consumeQuantity(
 			commerceShipmentItem.getUserId(),

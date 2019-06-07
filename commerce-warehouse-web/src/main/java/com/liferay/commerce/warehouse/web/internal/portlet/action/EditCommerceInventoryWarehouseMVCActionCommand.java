@@ -206,12 +206,14 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 			CommerceChannelRel.class.getName(), actionRequest);
 
 		_commerceChannelRelService.deleteCommerceChannelRels(
-			CommerceInventoryWarehouse.class.getName(), commerceWarehouseId);
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouseId);
 
 		for (long commerceChannelId : commerceChannelIds) {
 			_commerceChannelRelService.addCommerceChannelRel(
-				CommerceInventoryWarehouse.class.getName(), commerceWarehouseId,
-				commerceChannelId, serviceContext);
+				CommerceInventoryWarehouse.class.getName(),
+				commerceInventoryWarehouseId, commerceChannelId,
+				serviceContext);
 		}
 	}
 

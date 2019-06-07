@@ -21,7 +21,7 @@ import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
@@ -64,7 +64,7 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 		decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
 
 		String description =
-			"Consume Quantity: " + JSONFactoryUtil.serialize(context);
+			"Consume Quantity: " + _jsonFactory.serialize(context);
 
 		_commerceInventoryAuditLocalService.addCommerceInventoryAudit(
 			userId, sku, quantity, description);
@@ -164,5 +164,8 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 	@Reference
 	private CommerceInventoryWarehouseItemLocalService
 		_commerceInventoryWarehouseItemLocalService;
+
+	@Reference
+	private JSONFactory _jsonFactory;
 
 }
