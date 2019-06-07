@@ -26,6 +26,8 @@ import com.liferay.commerce.payment.method.mercanet.internal.connector.PaypageCl
 import com.liferay.commerce.payment.method.mercanet.internal.constants.MercanetCommercePaymentMethodConstants;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -229,8 +231,12 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		paymentRequest.setTransactionReference(transactionId);
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
 		MercanetGroupServiceConfiguration mercanetGroupServiceConfiguration =
-			_getConfiguration(commerceOrder.getGroupId());
+			_getConfiguration(commerceChannel.getSiteGroupId());
 
 		String environment = StringUtil.toUpperCase(
 			mercanetGroupServiceConfiguration.environment());
@@ -298,6 +304,9 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			_portal.getPathModule(), StringPool.SLASH,
 			MercanetCommercePaymentMethodConstants.SERVLET_PATH);
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
