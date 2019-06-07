@@ -49,8 +49,7 @@ public class InventoryDataJSPDynamicInclude extends BaseJSPDynamicInclude {
 				"inventory-cpInstance");
 
 			int cpInstanceQuantity = _commerceInventoryEngine.getStockQuantity(
-				cpInstance.getCompanyId(), cpInstance.getGroupId(),
-				cpInstance.getSku());
+				cpInstance.getCompanyId(), cpInstance.getSku());
 
 			PrintWriter printWriter = response.getWriter();
 
