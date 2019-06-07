@@ -494,12 +494,21 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		long cpDefinitionId, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator) {
 
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpInstancePersistence.findByCPDefinitionId(
+				cpDefinitionId, start, end, orderByComparator);
+		}
+
 		return cpInstancePersistence.findByC_ST(
 			cpDefinitionId, status, start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCPDefinitionInstancesCount(long cpDefinitionId, int status) {
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpInstancePersistence.countByCPDefinitionId(cpDefinitionId);
+		}
+
 		return cpInstancePersistence.countByC_ST(cpDefinitionId, status);
 	}
 
@@ -525,6 +534,11 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			OrderByComparator<CPInstance> orderByComparator)
 		throws PortalException {
 
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpInstancePersistence.findByGroupId(
+				groupId, start, end, orderByComparator);
+		}
+
 		return cpInstancePersistence.findByG_ST(
 			groupId, status, start, end, orderByComparator);
 	}
@@ -532,6 +546,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	@Override
 	public int getCPInstancesCount(long groupId, int status)
 		throws PortalException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return cpInstancePersistence.countByGroupId(groupId);
+		}
 
 		return cpInstancePersistence.countByG_ST(groupId, status);
 	}
