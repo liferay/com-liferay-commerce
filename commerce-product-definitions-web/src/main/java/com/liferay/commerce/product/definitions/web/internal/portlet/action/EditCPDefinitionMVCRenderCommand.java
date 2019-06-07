@@ -23,7 +23,6 @@ import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -69,9 +68,8 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
 				new CPDefinitionsDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionHelper, _cpDefinitionModelResourcePermission,
-					_cpDefinitionService, _itemSelector,
-					_portletResourcePermission);
+					_cpDefinitionModelResourcePermission, _cpDefinitionService,
+					_itemSelector, _portletResourcePermission);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
@@ -107,9 +105,6 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"

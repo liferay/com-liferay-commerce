@@ -25,7 +25,6 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -77,7 +76,6 @@ public class CPDefinitionsDisplayContext
 	public CPDefinitionsDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		CPDefinitionHelper cpDefinitionHelper,
 		ModelResourcePermission<CPDefinition>
 			cpDefinitionModelResourcePermission,
 		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
@@ -90,7 +88,6 @@ public class CPDefinitionsDisplayContext
 		setDefaultOrderByType("desc");
 
 		_commerceCatalogService = commerceCatalogService;
-		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpDefinitionModelResourcePermission =
 			cpDefinitionModelResourcePermission;
 		_cpDefinitionService = cpDefinitionService;
@@ -258,21 +255,6 @@ public class CPDefinitionsDisplayContext
 		return portletURL;
 	}
 
-	public String getProductURL(CPDefinition cpDefinition)
-		throws PortalException {
-
-		if (cpDefinition == null) {
-			return StringPool.BLANK;
-		}
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return _cpDefinitionHelper.getFriendlyURL(
-			cpDefinition.getCPDefinitionId(), themeDisplay);
-	}
-
 	@Override
 	public SearchContainer<CPDefinition> getSearchContainer()
 		throws PortalException {
@@ -411,7 +393,6 @@ public class CPDefinitionsDisplayContext
 	}
 
 	private final CommerceCatalogService _commerceCatalogService;
-	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission;
 	private final CPDefinitionService _cpDefinitionService;

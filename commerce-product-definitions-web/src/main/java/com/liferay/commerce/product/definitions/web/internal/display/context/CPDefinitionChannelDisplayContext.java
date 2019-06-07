@@ -22,7 +22,6 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,7 +42,6 @@ public class CPDefinitionChannelDisplayContext
 	public CPDefinitionChannelDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		CPDefinitionHelper cpDefinitionHelper,
 		ModelResourcePermission<CPDefinition>
 			cpDefinitionModelResourcePermission,
 		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
@@ -53,8 +51,8 @@ public class CPDefinitionChannelDisplayContext
 
 		super(
 			actionHelper, httpServletRequest, commerceCatalogService,
-			cpDefinitionHelper, cpDefinitionModelResourcePermission,
-			cpDefinitionService, itemSelector, portletResourcePermission);
+			cpDefinitionModelResourcePermission, cpDefinitionService,
+			itemSelector, portletResourcePermission);
 
 		_commerceChannelRelService = commerceChannelRelService;
 		_commerceChannelService = commerceChannelService;
