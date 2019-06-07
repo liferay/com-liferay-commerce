@@ -62,14 +62,12 @@ public class CommerceStockQuantityMessageListener extends BaseMessageListener {
 			return;
 		}
 
+		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
+			cpInstance.getCompanyId(), cpInstance.getSku());
+
 		CPDefinitionInventoryEngine cpDefinitionInventoryEngine =
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
-
-		long groupId = cpDefinitionInventory.getGroupId();
-
-		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
-			cpInstance.getCompanyId(), groupId, cpInstance.getSku());
 
 		if (stockQuantity <= cpDefinitionInventoryEngine.getMinStockQuantity(
 				cpInstance)) {
