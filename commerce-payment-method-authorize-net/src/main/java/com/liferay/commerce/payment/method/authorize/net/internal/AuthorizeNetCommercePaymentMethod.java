@@ -24,6 +24,8 @@ import com.liferay.commerce.payment.method.authorize.net.internal.configuration.
 import com.liferay.commerce.payment.method.authorize.net.internal.constants.AuthorizeNetCommercePaymentMethodConstants;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -158,8 +160,12 @@ public class AuthorizeNetCommercePaymentMethod
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			authorizeNetCommercePaymentRequest.getCommerceOrderId());
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
 		AuthorizeNetGroupServiceConfiguration configuration = _getConfiguration(
-			commerceOrder.getGroupId());
+			commerceChannel.getSiteGroupId());
 
 		Environment environment = Environment.valueOf(
 			StringUtil.toUpperCase(configuration.environment()));
@@ -405,6 +411,9 @@ public class AuthorizeNetCommercePaymentMethod
 
 		return transactionRequestType;
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
