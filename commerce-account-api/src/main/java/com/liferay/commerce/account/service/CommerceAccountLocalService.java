@@ -315,6 +315,7 @@ public interface CommerceAccountLocalService extends BaseLocalService,
 		long parentCommerceAccountId, String keywords, int type, Boolean active)
 		throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount setActive(long commerceAccountId, boolean active)
 		throws PortalException;
 
