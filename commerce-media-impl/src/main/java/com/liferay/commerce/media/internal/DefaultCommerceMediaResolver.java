@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
@@ -206,28 +207,17 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		String[] pathArray = StringUtil.split(path, CharPool.SLASH);
 
 		if (pathArray.length < 2) {
-			long companyId = ParamUtil.getLong(httpServletRequest, "companyId");
+			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 
-			Company company = _companyLocalService.fetchCompany(companyId);
-
-			if (company == null) {
+			if (groupId == 0) {
 				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 
 				return;
 			}
 
-			try {
-				sendDefaultMediaBytes(
-					company.getGroupId(), httpServletRequest,
-					httpServletResponse, contentDisposition);
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-
-				httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-
-				return;
-			}
+			sendDefaultMediaBytes(
+				groupId, httpServletRequest, httpServletResponse,
+				contentDisposition);
 
 			return;
 		}
@@ -309,7 +299,10 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 						PermissionThreadLocal.getPermissionChecker(),
 						assetCategory, ActionKeys.VIEW)) {
 
-					return assetCategory.getGroupId();
+					Company company = _companyLocalService.getCompany(
+						assetCategory.getCompanyId());
+
+					return company.getGroupId();
 				}
 			}
 			catch (PortalException pe) {
@@ -446,6 +439,9 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private File _file;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private Html _html;
