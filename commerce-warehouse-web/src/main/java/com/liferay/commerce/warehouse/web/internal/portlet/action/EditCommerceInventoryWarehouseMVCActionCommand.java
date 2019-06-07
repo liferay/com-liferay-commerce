@@ -196,8 +196,8 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 	protected void updateChannels(ActionRequest actionRequest)
 		throws PortalException {
 
-		long commerceWarehouseId = ParamUtil.getLong(
-			actionRequest, "commerceWarehouseId");
+		long commerceInventoryWarehouseId = ParamUtil.getLong(
+			actionRequest, "commerceInventoryWarehouseId");
 
 		long[] commerceChannelIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
