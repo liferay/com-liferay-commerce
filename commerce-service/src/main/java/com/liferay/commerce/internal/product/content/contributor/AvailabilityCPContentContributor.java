@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPContentContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,8 +81,12 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 		boolean available = false;
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest));
+
 		if (_commerceInventoryEngine.getStockQuantity(
-				cpInstance.getCompanyId(), cpInstance.getGroupId(),
+				cpInstance.getCompanyId(), commerceChannelGroupId,
 				cpInstance.getSku()) >
 					cpDefinitionInventoryEngine.getMinStockQuantity(
 						cpInstance)) {
@@ -108,6 +114,9 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 	}
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
 	private CommerceInventoryEngine _commerceInventoryEngine;
 
 	@Reference
@@ -120,5 +129,8 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private Portal _portal;
 
 }

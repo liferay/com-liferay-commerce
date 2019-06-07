@@ -29,7 +29,6 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
@@ -96,7 +95,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 		}
 
 		int availableQuantity = _commerceInventoryEngine.getStockQuantity(
-			cpInstance.getCompanyId(), cpInstance.getGroupId(),
+			cpInstance.getCompanyId(), commerceOrder.getGroupId(),
 			cpInstance.getSku());
 
 		int orderQuantity =
@@ -147,7 +146,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 		}
 
 		int availableQuantity = _commerceInventoryEngine.getStockQuantity(
-			cpInstance.getCompanyId(), cpInstance.getGroupId(),
+			cpInstance.getCompanyId(), commerceOrderItem.getGroupId(),
 			cpInstance.getSku());
 
 		int orderQuantity =
@@ -176,9 +175,6 @@ public class AvailabilityCommerceOrderValidatorImpl
 
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry
