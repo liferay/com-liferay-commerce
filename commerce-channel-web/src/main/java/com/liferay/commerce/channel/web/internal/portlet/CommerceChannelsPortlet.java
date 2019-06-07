@@ -21,6 +21,8 @@ import com.liferay.commerce.product.channel.CommerceChannelTypeRegistry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
@@ -28,6 +30,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -64,6 +68,20 @@ import org.osgi.service.component.annotations.Reference;
 	service = {CommerceChannelsPortlet.class, Portlet.class}
 )
 public class CommerceChannelsPortlet extends MVCPortlet {
+
+	@Override
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
+				new ProxyModeThreadLocalCloseable()) {
+
+			ProxyModeThreadLocal.setForceSync(true);
+
+			super.processAction(actionRequest, actionResponse);
+		}
+	}
 
 	@Override
 	public void render(
