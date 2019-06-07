@@ -105,12 +105,13 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long channelGroupId =
+		long commerceChannelGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
 		return _commerceOrderService.getPlacedCommerceOrdersCount(
-			channelGroupId, orderFilter.getAccountId(), filter.getKeywords());
+			commerceChannelGroupId, orderFilter.getAccountId(),
+			filter.getKeywords());
 	}
 
 	@Override
@@ -155,13 +156,13 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long channelGroupId =
+		long commerceChannelGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPlacedCommerceOrders(
-				channelGroupId, orderFilter.getAccountId(),
+				commerceChannelGroupId, orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 

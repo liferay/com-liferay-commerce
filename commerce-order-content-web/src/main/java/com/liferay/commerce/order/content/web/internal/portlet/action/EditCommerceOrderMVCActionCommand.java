@@ -22,6 +22,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -85,10 +86,13 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
 		}
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		return _commerceOrderService.addCommerceOrder(
-			themeDisplay.getScopeGroupId(),
-			commerceAccount.getCommerceAccountId(), commerceCurrencyId, 0,
-			StringPool.BLANK);
+			commerceChannelGroupId, commerceAccount.getCommerceAccountId(),
+			commerceCurrencyId, 0, StringPool.BLANK);
 	}
 
 	protected void approveCommerceOrder(long commerceOrderId) throws Exception {
@@ -358,6 +362,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 		return portletURL.toString();
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
