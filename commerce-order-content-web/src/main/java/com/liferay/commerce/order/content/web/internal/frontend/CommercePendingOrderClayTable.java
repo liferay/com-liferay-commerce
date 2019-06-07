@@ -105,12 +105,13 @@ public class CommercePendingOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long channelGroupId =
+		long commerceChannelGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
 		return _commerceOrderService.getPendingCommerceOrdersCount(
-			channelGroupId, orderFilter.getAccountId(), filter.getKeywords());
+			commerceChannelGroupId, orderFilter.getAccountId(),
+			filter.getKeywords());
 	}
 
 	@Override
@@ -150,13 +151,13 @@ public class CommercePendingOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long channelGroupId =
+		long commerceChannelGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				channelGroupId, orderFilter.getAccountId(),
+				commerceChannelGroupId, orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 

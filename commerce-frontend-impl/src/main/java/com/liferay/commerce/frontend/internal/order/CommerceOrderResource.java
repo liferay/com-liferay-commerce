@@ -24,6 +24,7 @@ import com.liferay.commerce.frontend.internal.account.model.Order;
 import com.liferay.commerce.frontend.internal.account.model.OrderList;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -86,9 +87,14 @@ public class CommerceOrderResource {
 		int start = (page - 1) * pageSize;
 		int end = page * pageSize;
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				groupId);
+
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				groupId, commerceAccountId, keywords, start, end);
+				commerceChannelGroupId, commerceAccountId, keywords, start,
+				end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -119,8 +125,12 @@ public class CommerceOrderResource {
 			long groupId, String keywords, long commerceAccountId)
 		throws PortalException {
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				groupId);
+
 		return _commerceOrderService.getPendingCommerceOrdersCount(
-			groupId, commerceAccountId, keywords);
+			commerceChannelGroupId, commerceAccountId, keywords);
 	}
 
 	protected Response getResponse(Object object) {
@@ -175,6 +185,9 @@ public class CommerceOrderResource {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderResource.class);
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;

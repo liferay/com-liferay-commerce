@@ -17,6 +17,7 @@ package com.liferay.commerce.payment.method.authorize.net.internal.servlet;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.authorize.net.internal.constants.AuthorizeNetCommercePaymentMethodConstants;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -75,9 +76,13 @@ public class CompletePaymentAuthorizeNetServlet extends HttpServlet {
 			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 			String uuid = ParamUtil.getString(httpServletRequest, "uuid");
 
+			long commerceChannelGroupId =
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(groupId);
+
 			CommerceOrder commerceOrder =
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
-					uuid, groupId);
+					uuid, commerceChannelGroupId);
 
 			boolean cancel = ParamUtil.getBoolean(httpServletRequest, "cancel");
 
@@ -101,6 +106,9 @@ public class CompletePaymentAuthorizeNetServlet extends HttpServlet {
 			_portal.sendError(e, httpServletRequest, httpServletResponse);
 		}
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
