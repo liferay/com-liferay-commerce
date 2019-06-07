@@ -12,6 +12,8 @@
 		product-{$productId}-compare-checkbox
 	{/let}
 
+	{let $disabled: (isNonnull($compareAvailable) and $compareAvailable == false) ? true : false /}
+
 	{let $compareAttributes kind="attributes"}
 		id="{$checkboxId}"
 		class="product-compare-checkbox__input"
@@ -19,13 +21,24 @@
 		{if isNonnull($inCompare) and $inCompare == true}
 			{sp}checked
 		{else}
-			{if isNonnull($compareAvailable) and $compareAvailable == false}
+			{if $disabled}
 				{sp}disabled
 			{/if}
 		{/if}
 	{/let}
 
-	<label class="product-compare-checkbox">
+	{let $containerClasses kind="text"}
+		product-compare-checkbox
+		{if isNonnull($inCompare) and $inCompare == true}
+			{sp}product-compare-checkbox__checked
+		{else}
+			{if $disabled}
+				{sp}product-compare-checkbox__disabled
+			{/if}
+		{/if}
+	{/let}
+
+	<label class="{$containerClasses}">
 		{if isNonnull($checkboxVisible) and $checkboxVisible == true }
 			<input
 				{$compareAttributes}
