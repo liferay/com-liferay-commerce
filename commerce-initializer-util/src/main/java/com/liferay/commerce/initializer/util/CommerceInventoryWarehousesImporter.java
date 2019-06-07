@@ -18,6 +18,9 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -84,6 +87,8 @@ public class CommerceInventoryWarehousesImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Commerce inventory warehouse
+
 		int countryNumericISOCode = jsonObject.getInt("Country");
 
 		CommerceCountry commerceCountry =
@@ -107,13 +112,35 @@ public class CommerceInventoryWarehousesImporter {
 		double latitude = jsonObject.getDouble("Latitude");
 		double longitude = jsonObject.getDouble("Longitude");
 
-		return _commerceInventoryWarehouseLocalService.
-			addCommerceInventoryWarehouse(
-				name, description, active, street1, street2, street3, city, zip,
-				commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), latitude, longitude,
-				serviceContext);
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseLocalService.
+				addCommerceInventoryWarehouse(
+					name, description, active, street1, street2, street3, city,
+					zip, commerceRegion.getCode(),
+					commerceCountry.getTwoLettersISOCode(), latitude, longitude,
+					serviceContext);
+
+		// Commerce channel rel
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+				serviceContext.getScopeGroupId());
+
+		if (commerceChannel != null) {
+			_commerceChannelRelLocalService.addCommerceChannelRel(
+				CommerceInventoryWarehouse.class.getName(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				commerceChannel.getCommerceChannelId(), serviceContext);
+		}
+
+		return commerceInventoryWarehouse;
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
