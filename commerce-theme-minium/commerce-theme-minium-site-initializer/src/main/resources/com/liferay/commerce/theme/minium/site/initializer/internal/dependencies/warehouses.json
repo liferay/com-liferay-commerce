@@ -2,6 +2,7 @@
 	{
 		"City": "Los Alamos",
 		"Country": 840,
+		"ExternalReferenceCode": "840NM87544",
 		"Latitude": 35.887737,
 		"Longitude": -106.326283,
 		"Name": "United States - Southwest",
@@ -12,6 +13,7 @@
 	{
 		"City": "Middleburg",
 		"Country": 840,
+		"ExternalReferenceCode": "840VA50309",
 		"Latitude": 40.741895,
 		"Longitude": -73.989308,
 		"Name": "United States - Northeast",
@@ -22,6 +24,7 @@
 	{
 		"City": "Borgorose",
 		"Country": 380,
+		"ExternalReferenceCode": "380RI2021",
 		"Latitude": 42.214601,
 		"Longitude": 12.796434,
 		"Name": "Italy",
