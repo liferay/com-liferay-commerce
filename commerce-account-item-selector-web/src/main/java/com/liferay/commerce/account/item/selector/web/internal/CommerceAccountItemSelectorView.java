@@ -20,8 +20,8 @@ import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.criteria.Base64ItemSelectorReturnType;
+import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -97,8 +97,8 @@ public class CommerceAccountItemSelectorView
 		CommerceAccountItemSelectorViewDisplayContext
 			commerceAccountItemSelectorViewDisplayContext =
 				new CommerceAccountItemSelectorViewDisplayContext(
-					_commerceAccountService, _configurationProvider,
-					httpServletRequest, portletURL, itemSelectedEventName);
+					_commerceAccountService, httpServletRequest, portletURL,
+					itemSelectedEventName);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -116,14 +116,12 @@ public class CommerceAccountItemSelectorView
 		_supportedItemSelectorReturnTypes = Collections.unmodifiableList(
 			ListUtil.fromArray(
 				new ItemSelectorReturnType[] {
-					new Base64ItemSelectorReturnType()
+					new Base64ItemSelectorReturnType(),
+					new UUIDItemSelectorReturnType()
 				}));
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.account.item.selector.web)"
