@@ -16,6 +16,11 @@
 		transform: translateY(20%);
 	}
 
+	&.is-disabled {
+		pointer-events: none;
+		opacity: .5;
+	}
+
 	&__input-wrapper {
 		transition: background-color .1s ease-in, border-radius .2s ease-in;
 		border: 2px solid $color-border;
