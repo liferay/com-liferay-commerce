@@ -78,7 +78,7 @@ public class CommerceInventoryWarehousesDisplayContext {
 
 		List<CommerceChannelRel> commerceChannelRels =
 			_commerceChannelRelService.getCommerceChannelRels(
-				commerceInventoryWarehouse.getModelClassName(),
+				CommerceInventoryWarehouse.class.getName(),
 				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
