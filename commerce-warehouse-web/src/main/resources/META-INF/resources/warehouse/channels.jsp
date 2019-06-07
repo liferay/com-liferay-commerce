@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceWarehousesDisplayContext commerceWarehousesDisplayContext = (CommerceWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+CommerceInventoryWarehousesDisplayContext commerceInventoryWarehousesDisplayContext = (CommerceInventoryWarehousesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-List<CommerceChannel> commerceChannels = commerceWarehousesDisplayContext.getCommerceChannels();
-long[] commerceChannelIds = commerceWarehousesDisplayContext.getCommerceChannelRelCommerceChannelIds();
+List<CommerceChannel> commerceChannels = commerceInventoryWarehousesDisplayContext.getCommerceChannels();
+long[] commerceChannelIds = commerceInventoryWarehousesDisplayContext.getCommerceChannelRelCommerceChannelIds();
 %>
 
 <c:choose>
