@@ -20,15 +20,18 @@ class Cart extends Component {
 		if (
 			topBar.contains(e.target) && !this.element.contains(e.target)
 		) {
-			this._closeCart();
+			this.close();
 		}
 	}
 
 	_handleToggleCart() {
-		return this._open ? this._closeCart() : this._openCart();
+		if(this.disabled || !this.orderId) {
+			return null
+		}
+		return this._open ? this.close() : this.open();
 	}
 
-	_openCart() {
+	open() {
 		this._open = true;
 		this.element.addEventListener('transitionend', () => {
 			window.addEventListener('click', this._handleClickOutside);
@@ -36,7 +39,7 @@ class Cart extends Component {
 		return this._open;
 	}
 
-	_closeCart() {
+	close() {
 		this._open = false;
 		this.element.addEventListener(
 			'transitionend',
@@ -49,17 +52,60 @@ class Cart extends Component {
 
 	attached() {
 		window.Liferay.on(
-			'updateCart',
+			'refreshCartUsingData',
 			(evt) => {
-				const updateCartData = evt.details[0];
-				this.products = updateCartData.products;
-				this.summary = updateCartData.summary;
-				this._loading = false;
-				this.pendingOperations = [];
-				return true;
+				try {
+					const {
+						products,
+						summary,
+						orderId
+					} = evt;
+					this.orderId = orderId
+					this.products = products;
+					this.summary = summary;
+					this._loading = false;
+					this.pendingOperations = [];
+					return true;
+				} catch (error) {
+					return false;				
+				}
 			}
 		);
-		return this.cartId && this._getProducts();
+
+		window.Liferay.on(
+			'accountSelected',
+			(e) => {
+				this.reset();
+				this.productsQuantity = null
+				this.orderId = null;
+			}
+		);
+
+		window.Liferay.on(
+			'orderSelected',
+			(orderId) => {
+				this.orderId = orderId;
+				return this.refresh();
+			}
+		)
+
+		return this._getData()
+	}
+
+	_getData() {
+		return this.orderId && this._getProducts();
+	}
+
+	refresh() {
+		return this._getData();
+	}
+
+	reset() {
+		this.products = null;
+		this.summary = null;
+		if(this._open === true) {
+			this.close();
+		}
 	}
 
 	syncPendingOperations(pendingOperations) {
@@ -67,6 +113,9 @@ class Cart extends Component {
 	}
 
 	normalizeProducts(rawProducts) {
+		if(!rawProducts) {
+			return null;
+		}
 		const normalizedProducts = rawProducts.map(
 			productData => {
 				return Object.assign(
@@ -139,9 +188,7 @@ class Cart extends Component {
 
 	_getProductProperty(productId, key) {
 		return this.products.reduce(
-			(property, product) => {
-				return product.id === productId ? product[key] : property;
-			},
+			(property, product) => product.id === productId ? product[key] : property,
 			null
 		);
 	}
@@ -291,7 +338,7 @@ class Cart extends Component {
 
 	_getProducts() {
 		return fetch(
-			`${this.cartAPI}/${this.cartId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
+			`${this.cartAPI}/${this.orderId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
 			{
 				method: 'GET'
 			}
@@ -312,12 +359,14 @@ class Cart extends Component {
 	}
 
 	syncProducts() {
-		this.productsQuantity = this.products.reduce(
-			(quantity, product) => {
-				return product.collapsed ? quantity : quantity + 1;
-			},
-			0
-		);
+		this.productsQuantity = this.products 
+			? this.products.reduce(
+				(quantity, product) => {
+					return product.collapsed ? quantity : quantity + 1;
+				},
+				0
+			)
+			: 0
 	}
 
 	_sendDeleteRequest(productId) {
@@ -375,7 +424,7 @@ const productStateSchema = {
 
 Cart.STATE = {
 	cartAPI: Config.string().required(),
-	cartId: Config.oneOfType(
+	orderId: Config.oneOfType(
 		[
 			Config.number(),
 			Config.string()
@@ -397,7 +446,7 @@ Cart.STATE = {
 		setter: 'normalizeProducts',
 		value: null
 	},
-	productsQuantity: Config.number().value(0),
+	productsQuantity: Config.number().internal().value(0),
 	spritemap: Config.string().required(),
 	summary: Config.shapeOf(
 		{

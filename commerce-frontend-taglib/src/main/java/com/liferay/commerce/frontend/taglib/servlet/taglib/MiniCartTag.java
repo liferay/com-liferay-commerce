@@ -58,7 +58,7 @@ public class MiniCartTag extends ComponentRendererTag {
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
 			if (commerceOrder != null) {
-				putValue("cartId", commerceOrder.getCommerceOrderId());
+				putValue("orderId", commerceOrder.getCommerceOrderId());
 				putValue(
 					"commerceAccountId", commerceOrder.getCommerceAccountId());
 			}

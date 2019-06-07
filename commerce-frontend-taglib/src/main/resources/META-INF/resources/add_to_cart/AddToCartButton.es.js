@@ -90,12 +90,30 @@ function doSubmit() {
 	).then(
 		jsonresponse => {
 			if (jsonresponse.success) {
-				Liferay.fire('updateCart', jsonresponse);
+				if(jsonresponse.products) {
+					Liferay.fire(
+						'refreshCartUsingData',
+						{
+							orderId: jsonresponse.orderId,
+							products: jsonresponse.products,
+							summary: jsonresponse.summary
+						}
+					);
+				}
+
+				if(this.orderId !== jsonresponse.orderId) {
+					Liferay.fire(
+						'orderChanged',
+						{
+							orderId: jsonresponse.orderId
+						}
+					);
+					this.orderId = jsonresponse.orderId;
+				}
 
 				this.initialQuantity = this.quantity;
 				this.hasQuantityChanged = true;
 				this.emit('submitQuantity', this.productId, this.quantity);
-
 			}
 			else if (jsonresponse.errorMessages) {
 				showNotification(jsonresponse.errorMessages[0], 'danger');
@@ -186,6 +204,7 @@ class AddToCartButton extends Component {
 
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
+		this.orderId = null;
 	}
 
 	_handleBtnFocusin() {
