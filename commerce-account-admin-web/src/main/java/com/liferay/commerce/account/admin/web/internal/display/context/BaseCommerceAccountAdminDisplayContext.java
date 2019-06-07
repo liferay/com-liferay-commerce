@@ -103,6 +103,12 @@ public abstract class BaseCommerceAccountAdminDisplayContext<T> {
 			portletURL.setParameter("redirect", redirect);
 		}
 
+		String backURL = ParamUtil.getString(httpServletRequest, "backURL");
+
+		if (Validator.isNotNull(backURL)) {
+			portletURL.setParameter("backURL", backURL);
+		}
+
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "commerceAccountId");
 
