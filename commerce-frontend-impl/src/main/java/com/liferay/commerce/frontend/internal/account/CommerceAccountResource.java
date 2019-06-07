@@ -321,13 +321,14 @@ public class CommerceAccountResource {
 		int start = (page - 1) * pageSize;
 		int end = page * pageSize;
 
-		long channelGroupId =
+		long commerceChannelGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
 				groupId);
 
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				channelGroupId, accountId, StringPool.BLANK, start, end);
+				commerceChannelGroupId, accountId, StringPool.BLANK, start,
+				end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();

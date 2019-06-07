@@ -144,8 +144,7 @@ public class CommerceOrderGenerator {
 		ServiceContext serviceContext = _getServiceContext(commerceOrder);
 
 		_generateCommerceOrderItems(
-			commerceOrder.getCommerceOrderId(), cpCatalogEntries,
-			commerceContext, serviceContext);
+			commerceOrder, cpCatalogEntries, commerceContext, serviceContext);
 
 		// Recalculate Price
 
@@ -211,7 +210,7 @@ public class CommerceOrderGenerator {
 	}
 
 	private void _generateCommerceOrderItems(
-			long commerceOrderId, List<CPCatalogEntry> cpCatalogEntries,
+			CommerceOrder commerceOrder, List<CPCatalogEntry> cpCatalogEntries,
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -247,10 +246,12 @@ public class CommerceOrderGenerator {
 				int quantity = _randomInt(
 					cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
 					_getMaxOrderQuantity(
-						cpInstance, cpDefinitionInventoryEngine));
+						commerceOrder.getGroupId(), cpInstance,
+						cpDefinitionInventoryEngine));
 
 				_commerceOrderItemLocalService.addCommerceOrderItem(
-					commerceOrderId, cpInstance.getCPInstanceId(), quantity, 0,
+					commerceOrder.getCommerceOrderId(),
+					cpInstance.getCPInstanceId(), quantity, 0,
 					cpInstance.getJson(), commerceContext, serviceContext);
 			}
 			catch (Exception e) {
@@ -379,13 +380,12 @@ public class CommerceOrderGenerator {
 	}
 
 	private int _getMaxOrderQuantity(
-			CPInstance cpInstance,
+			long groupId, CPInstance cpInstance,
 			CPDefinitionInventoryEngine cpDefinitionInventoryEngine)
 		throws PortalException {
 
 		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
-			cpInstance.getCompanyId(), cpInstance.getGroupId(),
-			cpInstance.getSku());
+			cpInstance.getCompanyId(), groupId, cpInstance.getSku());
 
 		int maxOrderQuantity = cpDefinitionInventoryEngine.getMaxOrderQuantity(
 			cpInstance);

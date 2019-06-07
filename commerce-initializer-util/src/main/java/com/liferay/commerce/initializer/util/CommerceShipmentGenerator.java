@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalSer
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalService;
@@ -194,9 +195,14 @@ public class CommerceShipmentGenerator {
 
 		// Commerce orders
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				groupId);
+
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getCommerceOrders(
-				groupId, CommerceShipmentConstants.ALLOWED_ORDER_STATUSES, 0,
+				commerceChannelGroupId,
+				CommerceShipmentConstants.ALLOWED_ORDER_STATUSES, 0,
 				shipmentsCount - 1);
 
 		if (commerceOrders.isEmpty()) {
@@ -312,6 +318,9 @@ public class CommerceShipmentGenerator {
 	private static final TransactionConfig _transactionConfig =
 		TransactionConfig.Factory.create(
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceInventoryWarehouseLocalService
