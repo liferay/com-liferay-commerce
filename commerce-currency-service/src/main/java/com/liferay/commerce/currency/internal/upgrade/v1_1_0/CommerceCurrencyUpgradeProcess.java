@@ -25,6 +25,11 @@ public class CommerceCurrencyUpgradeProcess
 
 	@Override
 	public void doUpgrade() throws Exception {
+		dropIndex(CommerceCurrencyModelImpl.TABLE_NAME, "IX_66102211");
+		dropIndex(CommerceCurrencyModelImpl.TABLE_NAME, "IX_1C42BF4A");
+		dropIndex(CommerceCurrencyModelImpl.TABLE_NAME, "IX_C38368E0");
+		dropIndex(CommerceCurrencyModelImpl.TABLE_NAME, "IX_113CF268");
+
 		dropColumn(CommerceCurrencyModelImpl.TABLE_NAME, "groupId");
 	}
 
