@@ -29,7 +29,9 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +95,10 @@ public class CommerceAccountUserRolesClayTable
 
 		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		CommerceAccount commerceAccount =
 			_commerceAccountService.getCommerceAccount(
 				accountFilter.getAccountId());
@@ -107,7 +113,10 @@ public class CommerceAccountUserRolesClayTable
 		for (UserGroupRole userGroupRole : userGroupRoles) {
 			Role role = userGroupRole.getRole();
 
-			accountRoles.add(new AccountRole(role.getRoleId(), role.getName()));
+			accountRoles.add(
+				new AccountRole(
+					role.getRoleId(),
+					role.getTitle(themeDisplay.getLanguageId())));
 		}
 
 		return accountRoles;
