@@ -19,7 +19,6 @@ import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
-import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -92,13 +91,9 @@ public class CommercePaymentServlet extends HttpServlet {
 			long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 			String uuid = ParamUtil.getString(httpServletRequest, "uuid");
 
-			long commerceChannelGroupId =
-				_commerceChannelLocalService.
-					getCommerceChannelGroupIdBySiteGroupId(groupId);
-
 			CommerceOrder commerceOrder =
 				_commerceOrderService.getCommerceOrderByUuidAndGroupId(
-					uuid, commerceChannelGroupId);
+					uuid, groupId);
 
 			_nextUrl = ParamUtil.getString(httpServletRequest, "nextStep");
 
@@ -214,9 +209,6 @@ public class CommercePaymentServlet extends HttpServlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePaymentServlet.class);
-
-	@Reference
-	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	private long _commerceOrderId;
 
