@@ -246,6 +246,13 @@ public class CommerceChannelLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CommerceChannel getCommerceChannelByOrderGroupId(
+		long orderGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceChannelLocalService.getCommerceChannelByOrderGroupId(orderGroupId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.model.Group getCommerceChannelGroup(
 		long commerceChannelId)
 		throws com.liferay.portal.kernel.exception.PortalException {
