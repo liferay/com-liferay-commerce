@@ -14,13 +14,14 @@
 
 package com.liferay.commerce.product.internal.security.permission.resource;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.permission.CommerceCatalogPermission;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionLogic;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 /**
  * @author Alessio Antonio Rendina
@@ -31,9 +32,11 @@ public class CPDefinitionModelResourcePermissionLogic
 	implements ModelResourcePermissionLogic<CPDefinition> {
 
 	public CPDefinitionModelResourcePermissionLogic(
-		PortletResourcePermission portletResourcePermission) {
+		CommerceCatalogLocalService commerceCatalogLocalService,
+		CommerceCatalogPermission commerceCatalogPermission) {
 
-		_portletResourcePermission = portletResourcePermission;
+		_commerceCatalogLocalService = commerceCatalogLocalService;
+		_commerceCatalogPermission = commerceCatalogPermission;
 	}
 
 	@Override
@@ -42,13 +45,23 @@ public class CPDefinitionModelResourcePermissionLogic
 			CPDefinition cpDefinition, String actionId)
 		throws PortalException {
 
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpDefinition.getGroupId());
+
 		if (permissionChecker.isCompanyAdmin(cpDefinition.getCompanyId()) ||
 			permissionChecker.isGroupAdmin(cpDefinition.getGroupId()) ||
-			_portletResourcePermission.contains(
-				permissionChecker, cpDefinition.getGroupId(),
-				CPActionKeys.MANAGE_CATALOG)) {
+			_commerceCatalogPermission.contains(
+				permissionChecker, commerceCatalog.getCommerceCatalogId(),
+				ActionKeys.VIEW)) {
 
 			return true;
+		}
+
+		if (actionId.equals(ActionKeys.UPDATE)) {
+			return _commerceCatalogPermission.contains(
+				permissionChecker, commerceCatalog.getCommerceCatalogId(),
+				ActionKeys.UPDATE);
 		}
 
 		if (!actionId.equals(ActionKeys.VIEW) || !cpDefinition.isApproved() ||
@@ -60,6 +73,7 @@ public class CPDefinitionModelResourcePermissionLogic
 		return true;
 	}
 
-	private final PortletResourcePermission _portletResourcePermission;
+	private final CommerceCatalogLocalService _commerceCatalogLocalService;
+	private final CommerceCatalogPermission _commerceCatalogPermission;
 
 }
