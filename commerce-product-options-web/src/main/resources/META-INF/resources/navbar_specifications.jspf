@@ -25,22 +25,23 @@
 <%
 List<NavigationItem> navigationItems = new ArrayList<>();
 
-NavigationItem cpSpecificationOptionsNavigationItem = new NavigationItem();
-NavigationItem cpOptionCategoriesNavigationItem = new NavigationItem();
+if (PortletPermissionUtil.contains(permissionChecker, CPPortletKeys.CP_SPECIFICATION_OPTIONS, ActionKeys.VIEW)) {
+	NavigationItem cpSpecificationOptionsNavigationItem = new NavigationItem();
 
-cpSpecificationOptionsNavigationItem.setActive(portletName.equals(CPPortletKeys.CP_SPECIFICATION_OPTIONS));
-cpSpecificationOptionsNavigationItem.setHref(viewProductSpecificationOptionsURL.toString());
-cpSpecificationOptionsNavigationItem.setLabel(LanguageUtil.get(request, "specification-labels"));
+	cpSpecificationOptionsNavigationItem.setActive(portletName.equals(CPPortletKeys.CP_SPECIFICATION_OPTIONS));
+	cpSpecificationOptionsNavigationItem.setHref(viewProductSpecificationOptionsURL.toString());
+	cpSpecificationOptionsNavigationItem.setLabel(LanguageUtil.get(request, "specification-labels"));
 
-cpOptionCategoriesNavigationItem.setActive(portletName.equals(CPPortletKeys.CP_OPTION_CATEGORIES));
-cpOptionCategoriesNavigationItem.setHref(viewProductOptionCategoriesURL.toString());
-cpOptionCategoriesNavigationItem.setLabel(LanguageUtil.get(request, "specification-groups"));
-
-if (manageCPSpecificationOptionsPermission) {
 	navigationItems.add(cpSpecificationOptionsNavigationItem);
 }
 
-if (manageCPOptionCategoriesPermission) {
+if (PortletPermissionUtil.contains(permissionChecker, CPPortletKeys.CP_OPTIONS, ActionKeys.VIEW)) {
+	NavigationItem cpOptionCategoriesNavigationItem = new NavigationItem();
+
+	cpOptionCategoriesNavigationItem.setActive(portletName.equals(CPPortletKeys.CP_OPTION_CATEGORIES));
+	cpOptionCategoriesNavigationItem.setHref(viewProductOptionCategoriesURL.toString());
+	cpOptionCategoriesNavigationItem.setLabel(LanguageUtil.get(request, "specification-groups"));
+
 	navigationItems.add(cpOptionCategoriesNavigationItem);
 }
 %>

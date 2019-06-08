@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPSpecificationOptionDisplayContext cpSpecificationOptionDisplayContext = (CPSpecificationOptionDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPSpecificationOption cpSpecificationOption = null;
@@ -31,14 +29,14 @@ else {
 }
 %>
 
-<c:if test="<%= cpSpecificationOptionDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) && cpSpecificationOptionDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS) %>">
-	<liferay-ui:icon-menu
-		direction="left-side"
-		icon="<%= StringPool.BLANK %>"
-		markupView="lexicon"
-		message="<%= StringPool.BLANK %>"
-		showWhenSingleIcon="<%= true %>"
-	>
+<liferay-ui:icon-menu
+	direction="left-side"
+	icon="<%= StringPool.BLANK %>"
+	markupView="lexicon"
+	message="<%= StringPool.BLANK %>"
+	showWhenSingleIcon="<%= true %>"
+>
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductSpecificationOption" />
 			<portlet:param name="cpSpecificationOptionId" value="<%= String.valueOf(cpSpecificationOption.getCPSpecificationOptionId()) %>" />
@@ -48,7 +46,9 @@ else {
 			message="edit"
 			url="<%= editURL %>"
 		/>
+	</c:if>
 
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editProductSpecificationOption" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -58,5 +58,22 @@ else {
 		<liferay-ui:icon-delete
 			url="<%= deleteURL %>"
 		/>
-	</liferay-ui:icon-menu>
-</c:if>
+	</c:if>
+
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= CPSpecificationOption.class.getName() %>"
+			modelResourceDescription="<%= cpSpecificationOption.getTitle(locale) %>"
+			resourcePrimKey="<%= String.valueOf(cpSpecificationOption.getCPSpecificationOptionId()) %>"
+			var="permissionsSpecificationURL"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+		/>
+
+		<liferay-ui:icon
+			message="permissions"
+			method="get"
+			url="<%= permissionsSpecificationURL %>"
+			useDialog="<%= true %>"
+		/>
+	</c:if>
+</liferay-ui:icon-menu>
