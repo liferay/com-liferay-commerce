@@ -77,7 +77,7 @@ public interface CPContentHelper {
 			getCPDefinitionSpecificationOptionValues(long cpDefinitionId)
 		throws PortalException;
 
-	public List<CPOptionCategory> getCPOptionCategories(long groupId);
+	public List<CPOptionCategory> getCPOptionCategories(long companyId);
 
 	public List<CPType> getCPTypes();
 

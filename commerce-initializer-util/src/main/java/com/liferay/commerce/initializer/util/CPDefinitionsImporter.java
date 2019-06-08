@@ -555,7 +555,7 @@ public class CPDefinitionsImporter {
 		// Commerce product definition option rel
 
 		CPOption cpOption = _cpOptionLocalService.getCPOption(
-			cpDefinition.getGroupId(), jsonObject.getString("Key"));
+			cpDefinition.getCompanyId(), jsonObject.getString("Key"));
 
 		boolean importOptionValue = true;
 
@@ -670,7 +670,7 @@ public class CPDefinitionsImporter {
 				String key = optionsJSONObject.getString("key");
 
 				CPOption cpOption = _cpOptionLocalService.fetchCPOption(
-					catalogGroupId, key);
+					serviceContext.getCompanyId(), key);
 
 				if (cpOption == null) {
 					continue;

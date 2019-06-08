@@ -25,7 +25,7 @@ List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries()
 Set<String> cpDefinitionOptionRelTitles = cpCompareContentHelper.getCPDefinitionOptionRelNames(cpDataSourceResult, locale);
 Set<CPSpecificationOption> cpSpecificationOptions = cpCompareContentHelper.getCPSpecificationOptions(cpDataSourceResult);
 Set<CPSpecificationOption> categorizedCPSpecificationOptions = cpCompareContentHelper.getCategorizedCPSpecificationOptions(cpDataSourceResult);
-List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCategories(scopeGroupId);
+List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCategories(company.getCompanyId());
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">
@@ -200,6 +200,9 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 					%>
 
 						<tr class="commerce-compare-table__common-row">
+							<td class="commerce-compare-table__title">
+								<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
+							</td>
 
 							<%
 							for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {

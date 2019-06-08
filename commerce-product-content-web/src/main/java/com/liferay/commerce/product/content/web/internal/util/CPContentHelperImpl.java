@@ -244,9 +244,9 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Override
-	public List<CPOptionCategory> getCPOptionCategories(long groupId) {
+	public List<CPOptionCategory> getCPOptionCategories(long companyId) {
 		return _cpOptionCategoryLocalService.getCPOptionCategories(
-			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	@Override
