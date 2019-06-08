@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.options.web.internal.util;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.util.CPNavigationItem;
@@ -24,7 +22,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.service.permission.PortletPermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -57,23 +56,18 @@ public class CPSpecificationOptionNavigationItem implements CPNavigationItem {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		boolean manageCatalogPermission = _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
 		boolean manageCPOptionCategoriesPermission =
-			_portletResourcePermission.contains(
+			_portletPermission.contains(
 				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(),
-				CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-		boolean manageCPSpecificationOptionsPermission =
-			_portletResourcePermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(),
-				CPActionKeys.MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS);
+				CPPortletKeys.CP_OPTION_CATEGORIES, ActionKeys.VIEW);
 
-		if (!manageCatalogPermission ||
-			(!manageCPOptionCategoriesPermission &&
-			 !manageCPSpecificationOptionsPermission)) {
+		boolean manageCPSpecificationOptionsPermission =
+			_portletPermission.contains(
+				themeDisplay.getPermissionChecker(),
+				CPPortletKeys.CP_SPECIFICATION_OPTIONS, ActionKeys.VIEW);
+
+		if (!manageCPOptionCategoriesPermission &&
+			!manageCPSpecificationOptionsPermission) {
 
 			return null;
 		}
@@ -105,7 +99,7 @@ public class CPSpecificationOptionNavigationItem implements CPNavigationItem {
 	@Reference
 	private Portal _portal;
 
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
+	@Reference
+	private PortletPermission _portletPermission;
 
 }

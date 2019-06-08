@@ -15,7 +15,6 @@
 package com.liferay.commerce.media.internal.display.context;
 
 import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.document.library.kernel.service.DLAppService;
@@ -29,9 +28,6 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Collections;
 
@@ -47,15 +43,12 @@ public class CommerceMediaDefaultImageDisplayContext {
 	public CommerceMediaDefaultImageDisplayContext(
 		AttachmentsConfiguration attachmentsConfiguration,
 		ConfigurationProvider configurationProvider, DLAppService dlAppService,
-		ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission,
-		HttpServletRequest httpServletRequest) {
+		ItemSelector itemSelector, HttpServletRequest httpServletRequest) {
 
 		_attachmentsConfiguration = attachmentsConfiguration;
 		_configurationProvider = configurationProvider;
 		_dlAppService = dlAppService;
 		_itemSelector = itemSelector;
-		_portletResourcePermission = portletResourcePermission;
 		_httpServletRequest = httpServletRequest;
 
 		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
@@ -110,22 +103,11 @@ public class CommerceMediaDefaultImageDisplayContext {
 		return _attachmentsConfiguration.imageMaxSize();
 	}
 
-	public boolean hasManageCommerceMediaDefaultImagesPermission() {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return _portletResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
-	}
-
 	private final AttachmentsConfiguration _attachmentsConfiguration;
 	private final ConfigurationProvider _configurationProvider;
 	private final CPRequestHelper _cpRequestHelper;
 	private final DLAppService _dlAppService;
 	private final HttpServletRequest _httpServletRequest;
 	private final ItemSelector _itemSelector;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }
