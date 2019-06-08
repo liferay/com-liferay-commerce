@@ -122,12 +122,6 @@ public class CPDefinitionServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
-		long groupId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitions(groupId, status, start, end);
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
 		long groupId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -136,38 +130,9 @@ public class CPDefinitionServiceUtil {
 			orderByComparator);
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
-		long groupId, String productTypeName, String languageId, int status,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPDefinition> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCPDefinitions(groupId, productTypeName, languageId,
-			status, start, end, orderByComparator);
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionsByCategoryId(categoryId, start, end);
-	}
-
 	public static int getCPDefinitionsCount(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPDefinitionsCount(groupId, status);
-	}
-
-	public static int getCPDefinitionsCount(long groupId,
-		String productTypeName, String languageId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCPDefinitionsCount(groupId, productTypeName, languageId,
-			status);
-	}
-
-	public static int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionsCountByCategoryId(categoryId);
 	}
 
 	public static String getLayoutUuid(long cpDefinitionId)
