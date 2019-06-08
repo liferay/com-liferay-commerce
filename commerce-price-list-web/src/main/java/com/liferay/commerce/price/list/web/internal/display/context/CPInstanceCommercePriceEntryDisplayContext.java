@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.item.selector.criterion.CommercePriceListItemSelectorCriterion;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
@@ -59,6 +61,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 
 	public CPInstanceCommercePriceEntryDisplayContext(
 		ActionHelper actionHelper,
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceEntryService commercePriceEntryService,
 		CommercePriceFormatter commercePriceFormatter,
 		CommercePriceListActionHelper commercePriceListActionHelper,
@@ -68,6 +71,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 			actionHelper, httpServletRequest,
 			CommercePriceEntry.class.getSimpleName());
 
+		_commerceCurrencyService = commerceCurrencyService;
 		_commercePriceEntryService = commercePriceEntryService;
 		_commercePriceFormatter = commercePriceFormatter;
 		_commercePriceListActionHelper = commercePriceListActionHelper;
@@ -106,8 +110,13 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		CommercePriceList commercePriceList =
 			commercePriceEntry.getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyService.getCommerceCurrency(
+				commercePriceList.getCompanyId(),
+				commercePriceList.getCommerceCurrencyCode());
+
 		CommerceMoney priceCommerceMoney = commercePriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commerceCurrency.getCommerceCurrencyId());
 
 		return priceCommerceMoney.format(cpRequestHelper.getLocale());
 	}
@@ -283,6 +292,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 			getCPInstanceId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final CommercePriceFormatter _commercePriceFormatter;
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;

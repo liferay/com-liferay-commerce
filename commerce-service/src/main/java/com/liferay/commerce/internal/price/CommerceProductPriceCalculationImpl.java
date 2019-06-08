@@ -411,7 +411,8 @@ public class CommerceProductPriceCalculationImpl
 
 			CommerceCurrency priceListCurrency =
 				_commerceCurrencyLocalService.getCommerceCurrency(
-					commercePriceList.getCommerceCurrencyId());
+					commercePriceList.getCompanyId(),
+					commercePriceList.getCommerceCurrencyCode());
 
 			if (priceListCurrency.getCommerceCurrencyId() !=
 					commerceCurrency.getCommerceCurrencyId()) {

@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.item.selector.criterion.CommerceProductInstanceItemSelectorCriterion;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -52,12 +54,14 @@ public class CommercePriceEntryDisplayContext
 	extends BaseCommercePriceListDisplayContext<CommercePriceEntry> {
 
 	public CommercePriceEntryDisplayContext(
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
 		ItemSelector itemSelector, HttpServletRequest httpServletRequest) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
+		_commerceCurrencyService = commerceCurrencyService;
 		_commercePriceEntryService = commercePriceEntryService;
 		_itemSelector = itemSelector;
 	}
@@ -94,8 +98,13 @@ public class CommercePriceEntryDisplayContext
 		CommercePriceList commercePriceList =
 			commercePriceEntry.getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyService.getCommerceCurrency(
+				commercePriceEntry.getCompanyId(),
+				commercePriceList.getCommerceCurrencyCode());
+
 		CommerceMoney priceCommerceMoney = commercePriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commerceCurrency.getCommerceCurrencyId());
 
 		return priceCommerceMoney.format(
 			PortalUtil.getLocale(httpServletRequest));
@@ -205,6 +214,7 @@ public class CommercePriceEntryDisplayContext
 		return searchContainer;
 	}
 
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private CommercePriceEntry _commercePriceEntry;
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final ItemSelector _itemSelector;

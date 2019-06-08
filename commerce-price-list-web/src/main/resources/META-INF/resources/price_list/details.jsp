@@ -63,7 +63,7 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 
 	<aui:input name="name" />
 
-	<aui:select label="store-currency" name="commerceCurrencyId" showEmptyOption="<%= true %>">
+	<aui:select label="store-currency" name="commerceCurrencyCode" showEmptyOption="<%= true %>">
 
 		<%
 		List<CommerceCurrency> commerceCurrencies = commercePriceListDisplayContext.getCommerceCurrencies();
@@ -71,7 +71,7 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 		for (CommerceCurrency commerceCurrency : commerceCurrencies) {
 		%>
 
-			<aui:option label="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" selected="<%= (commercePriceList != null) && (commercePriceList.getCommerceCurrencyId() == commerceCurrency.getCommerceCurrencyId()) %>" value="<%= commerceCurrency.getCommerceCurrencyId() %>" />
+			<aui:option label="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" selected="<%= (commercePriceList != null) && (commercePriceList.getCommerceCurrencyCode() == commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
 
 		<%
 		}

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.price.list.web.internal.portlet.action;
 
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceEntryDisplayContext;
@@ -51,14 +52,18 @@ public class EditCommercePriceEntryMVCRenderCommand
 
 		CommercePriceEntryDisplayContext commercePriceEntryDisplayContext =
 			new CommercePriceEntryDisplayContext(
-				_commercePriceListActionHelper, _commercePriceEntryService,
-				_itemSelector, _portal.getHttpServletRequest(renderRequest));
+				_commerceCurrencyService, _commercePriceListActionHelper,
+				_commercePriceEntryService, _itemSelector,
+				_portal.getHttpServletRequest(renderRequest));
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commercePriceEntryDisplayContext);
 
 		return "/edit_price_entry.jsp";
 	}
+
+	@Reference
+	private CommerceCurrencyService _commerceCurrencyService;
 
 	@Reference
 	private CommercePriceEntryService _commercePriceEntryService;

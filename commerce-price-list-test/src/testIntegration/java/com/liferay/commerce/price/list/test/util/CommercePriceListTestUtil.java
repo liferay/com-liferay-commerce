@@ -44,6 +44,12 @@ public class CommercePriceListTestUtil {
 			Date expirationDate, String externalReferenceCode)
 		throws PortalException {
 
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		String commerceCurrencyCode = _getCommerceCurrencyCode(
+			serviceContext.getCompanyId(), currency);
+
 		if (priority == null) {
 			priority = 0D;
 		}
@@ -51,9 +57,6 @@ public class CommercePriceListTestUtil {
 		if (neverExpire == null) {
 			neverExpire = Boolean.TRUE;
 		}
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
 
 		User user = UserLocalServiceUtil.getUserById(
 			serviceContext.getUserId());
@@ -75,12 +78,9 @@ public class CommercePriceListTestUtil {
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
 
-		long commerceCurrencyId = _getCommerceCurrencyId(
-			serviceContext.getCompanyId(), currency);
-
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
-			commerceCatalog.getGroupId(), user.getUserId(), commerceCurrencyId,
-			parentCommercePriceListId, name, priority,
+			commerceCatalog.getGroupId(), user.getUserId(),
+			commerceCurrencyCode, parentCommercePriceListId, name, priority,
 			displayDateElements.getMonth(), displayDateElements.getDay(),
 			displayDateElements.getYear(), displayDateElements.getHour(),
 			displayDateElements.getMinute(), expirationDateElements.getMonth(),
@@ -132,16 +132,17 @@ public class CommercePriceListTestUtil {
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
 
-		long commerceCurrencyId = _getCommerceCurrencyId(
+		String commerceCurrencyCode = _getCommerceCurrencyCode(
 			serviceContext.getCompanyId(), currency);
 
 		return CommercePriceListLocalServiceUtil.updateCommercePriceList(
-			commercePriceListId, commerceCurrencyId, parentCommercePriceListId,
-			name, priority, displayDateElements.getMonth(),
-			displayDateElements.getDay(), displayDateElements.getYear(),
-			displayDateElements.getHour(), displayDateElements.getMinute(),
-			expirationDateElements.getMonth(), expirationDateElements.getDay(),
-			expirationDateElements.getYear(), expirationDateElements.getHour(),
+			commercePriceListId, commerceCurrencyCode,
+			parentCommercePriceListId, name, priority,
+			displayDateElements.getMonth(), displayDateElements.getDay(),
+			displayDateElements.getYear(), displayDateElements.getHour(),
+			displayDateElements.getMinute(), expirationDateElements.getMonth(),
+			expirationDateElements.getDay(), expirationDateElements.getYear(),
+			expirationDateElements.getHour(),
 			expirationDateElements.getMinute(), neverExpire, serviceContext);
 	}
 
@@ -183,12 +184,12 @@ public class CommercePriceListTestUtil {
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
 
-		long commerceCurrencyId = _getCommerceCurrencyId(
+		String commerceCurrencyCode = _getCommerceCurrencyCode(
 			serviceContext.getCompanyId(), currency);
 
 		return CommercePriceListLocalServiceUtil.upsertCommercePriceList(
 			commerceCatalog.getGroupId(), user.getUserId(), commercePriceListId,
-			commerceCurrencyId, parentCommercePriceListId, name, priority,
+			commerceCurrencyCode, parentCommercePriceListId, name, priority,
 			displayDateElements.getMonth(), displayDateElements.getDay(),
 			displayDateElements.getYear(), displayDateElements.getHour(),
 			displayDateElements.getMinute(), expirationDateElements.getMonth(),
@@ -209,15 +210,15 @@ public class CommercePriceListTestUtil {
 			neverExpire, displayDate, expirationDate, externalReferenceCode);
 	}
 
-	private static long _getCommerceCurrencyId(
-			long groupId, String currencyCode)
+	private static String _getCommerceCurrencyCode(
+			long companyId, String currencyCode)
 		throws PortalException {
 
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyLocalServiceUtil.getCommerceCurrency(
-				groupId, currencyCode);
+				companyId, currencyCode);
 
-		return commerceCurrency.getCommerceCurrencyId();
+		return commerceCurrency.getCode();
 	}
 
 	private static class DateElements {
