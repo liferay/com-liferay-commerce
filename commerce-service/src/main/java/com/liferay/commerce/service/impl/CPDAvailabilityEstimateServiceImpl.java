@@ -15,10 +15,10 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
-import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.service.base.CPDAvailabilityEstimateServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -35,8 +35,7 @@ public class CPDAvailabilityEstimateServiceImpl
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId,
-			CPActionKeys.MANAGE_CATALOG);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpdAvailabilityEstimateLocalService.
 			fetchCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
@@ -49,8 +48,7 @@ public class CPDAvailabilityEstimateServiceImpl
 		throws PortalException {
 
 		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId,
-			CPActionKeys.MANAGE_CATALOG);
+			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
 
 		return cpdAvailabilityEstimateLocalService.
 			updateCPDAvailabilityEstimate(

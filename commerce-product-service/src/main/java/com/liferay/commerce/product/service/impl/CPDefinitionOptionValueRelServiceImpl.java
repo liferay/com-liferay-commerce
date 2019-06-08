@@ -14,11 +14,10 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPDefinitionOptionValueRelServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -26,8 +25,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -188,8 +185,11 @@ public class CPDefinitionOptionValueRelServiceImpl
 			long groupId, String key, int start, int end)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRels(key, start, end);
@@ -256,15 +256,16 @@ public class CPDefinitionOptionValueRelServiceImpl
 				serviceContext);
 	}
 
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CPDefinitionOptionValueRelServiceImpl.class,
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 	private static volatile ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionOptionValueRelServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPDefinitionOptionValueRelServiceImpl.class,
-				"_portletResourcePermission", CPConstants.RESOURCE_NAME);
 
 }
