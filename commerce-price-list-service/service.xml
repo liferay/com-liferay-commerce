@@ -74,9 +74,9 @@
 
 		<!-- Other fields -->
 
-		<column name="commerceCurrencyId" type="long" />
 		<column name="parentCommercePriceListId" type="long" />
 		<column name="name" type="String" />
+		<column name="commerceCurrencyCode" type="String" />
 		<column name="priority" type="double" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
@@ -99,11 +99,11 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="CommerceCurrencyId" return-type="Collection">
-			<finder-column name="commerceCurrencyId" />
-		</finder>
 		<finder name="ParentCommercePriceListId" return-type="CommercePriceList">
 			<finder-column name="parentCommercePriceListId" />
+		</finder>
+		<finder name="CommerceCurrencyCode" return-type="Collection">
+			<finder-column name="commerceCurrencyCode" />
 		</finder>
 		<finder name="G_C" return-type="Collection">
 			<finder-column arrayable-operator="OR" name="groupId" />
