@@ -140,6 +140,15 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 		return commerceInventoryWarehouse;
 	}
 
+	@Override
+	public CommerceInventoryWarehouse
+		fetchCommerceInventoryWarehouseByReferenceCode(
+			long companyId, String externalReferenceCode) {
+
+		return commerceInventoryWarehousePersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceInventoryWarehouse geolocateCommerceInventoryWarehouse(
