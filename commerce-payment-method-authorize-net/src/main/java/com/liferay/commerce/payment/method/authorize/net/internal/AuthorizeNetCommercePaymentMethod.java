@@ -253,7 +253,9 @@ public class AuthorizeNetCommercePaymentMethod
 
 	private String _fixURL(String url) {
 
-		// See https://community.developer.authorize.net/t5/Integration-and-Testing/Unanticipated-Error-Occured-Hosted-Payment/m-p/57815#M32503
+		// See https://community.developer.authorize.net/t5/
+		// Integration-and-Testing/Unanticipated-Error-Occured-Hosted-Payment
+		// /m-p/57815#M32503
 
 		return StringUtil.replace(
 			url, new String[] {StringPool.PERCENT, StringPool.AMPERSAND},

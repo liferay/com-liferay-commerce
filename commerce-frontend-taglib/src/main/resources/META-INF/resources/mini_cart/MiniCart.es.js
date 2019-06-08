@@ -25,8 +25,8 @@ class Cart extends Component {
 	}
 
 	_handleToggleCart() {
-		if(this.disabled || !this.orderId) {
-			return null
+		if (this.disabled || !this.orderId) {
+			return null;
 		}
 		return this._open ? this.close() : this.open();
 	}
@@ -60,14 +60,15 @@ class Cart extends Component {
 						summary,
 						orderId
 					} = evt;
-					this.orderId = orderId
+					this.orderId = orderId;
 					this.products = products;
 					this.summary = summary;
 					this._loading = false;
 					this.pendingOperations = [];
 					return true;
-				} catch (error) {
-					return false;				
+				}
+				catch (error) {
+					return false;
 				}
 			}
 		);
@@ -76,7 +77,7 @@ class Cart extends Component {
 			'accountSelected',
 			(e) => {
 				this.reset();
-				this.productsQuantity = null
+				this.productsQuantity = null;
 				this.orderId = null;
 			}
 		);
@@ -87,9 +88,9 @@ class Cart extends Component {
 				this.orderId = orderId;
 				return this.refresh();
 			}
-		)
+		);
 
-		return this._getData()
+		return this._getData();
 	}
 
 	_getData() {
@@ -103,7 +104,7 @@ class Cart extends Component {
 	reset() {
 		this.products = null;
 		this.summary = null;
-		if(this._open === true) {
+		if (this._open === true) {
 			this.close();
 		}
 	}
@@ -113,7 +114,7 @@ class Cart extends Component {
 	}
 
 	normalizeProducts(rawProducts) {
-		if(!rawProducts) {
+		if (!rawProducts) {
 			return null;
 		}
 		const normalizedProducts = rawProducts.map(
@@ -359,14 +360,14 @@ class Cart extends Component {
 	}
 
 	syncProducts() {
-		this.productsQuantity = this.products 
-			? this.products.reduce(
+		this.productsQuantity = this.products ?
+			this.products.reduce(
 				(quantity, product) => {
 					return product.collapsed ? quantity : quantity + 1;
 				},
 				0
-			)
-			: 0
+			) :
+			0;
 	}
 
 	_sendDeleteRequest(productId) {
