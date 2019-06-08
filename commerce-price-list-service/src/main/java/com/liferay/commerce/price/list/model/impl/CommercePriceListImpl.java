@@ -29,7 +29,7 @@ public class CommercePriceListImpl extends CommercePriceListBaseImpl {
 	@Override
 	public CommerceCurrency getCommerceCurrency() throws PortalException {
 		return CommerceCurrencyLocalServiceUtil.getCommerceCurrency(
-			getCommerceCurrencyId());
+			getCompanyId(), getCommerceCurrencyCode());
 	}
 
 }

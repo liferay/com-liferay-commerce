@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.price.list.web.internal.portlet.action;
 
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommerceTierPriceEntryDisplayContext;
@@ -51,7 +52,7 @@ public class ViewCommerceTierPriceEntriesMVCRenderCommand
 		CommerceTierPriceEntryDisplayContext
 			commerceTierPriceEntryDisplayContext =
 				new CommerceTierPriceEntryDisplayContext(
-					_commercePriceListActionHelper,
+					_commerceCurrencyService, _commercePriceListActionHelper,
 					_commerceTierPriceEntryService,
 					_portal.getHttpServletRequest(renderRequest));
 
@@ -61,6 +62,9 @@ public class ViewCommerceTierPriceEntriesMVCRenderCommand
 
 		return "/tier_price_entries.jsp";
 	}
+
+	@Reference
+	private CommerceCurrencyService _commerceCurrencyService;
 
 	@Reference
 	private CommercePriceListActionHelper _commercePriceListActionHelper;

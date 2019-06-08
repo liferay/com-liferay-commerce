@@ -312,7 +312,7 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 
 		commercePriceList = _commercePriceListService.updateCommercePriceList(
 			commercePriceList.getCommercePriceListId(),
-			commerceCurrency.getCommerceCurrencyId(),
+			commerceCurrency.getCode(),
 			GetterUtil.get(priceList.getName(), commercePriceList.getName()),
 			GetterUtil.get(
 				priceList.getPriority(), commercePriceList.getPriority()),
@@ -371,7 +371,7 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 		CommercePriceList commercePriceList =
 			_commercePriceListService.upsertCommercePriceList(
 				commerceCatalog.getGroupId(), _user.getUserId(), 0L,
-				commerceCurrency.getCommerceCurrencyId(), priceList.getName(),
+				commerceCurrency.getCode(), priceList.getName(),
 				GetterUtil.get(priceList.getPriority(), 0D),
 				displayDateConfig.getMonth(), displayDateConfig.getDay(),
 				displayDateConfig.getYear(), displayDateConfig.getHour(),
