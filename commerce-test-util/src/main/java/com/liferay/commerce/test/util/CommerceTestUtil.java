@@ -179,7 +179,7 @@ public class CommerceTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				commerceRegion.getCode(),
 				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-				serviceContext);
+				null, serviceContext);
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
@@ -196,7 +196,7 @@ public class CommerceTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), null, null,
 				RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
-				serviceContext);
+				null, serviceContext);
 	}
 
 	public static CommerceInventoryWarehouseItem

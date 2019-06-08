@@ -250,7 +250,7 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 					addCommerceInventoryWarehouse(
 						name, description, active, street1, street2, street3,
 						city, zip, commerceRegionCode, commerceCountryCode,
-						latitude, longitude, serviceContext);
+						latitude, longitude, null, serviceContext);
 		}
 		else {
 			commerceInventoryWarehouse =

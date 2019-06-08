@@ -162,7 +162,8 @@ public class WarehouseHelper {
 				warehouse.getStreet1(), warehouse.getStreet2(),
 				warehouse.getStreet3(), warehouse.getCity(), warehouse.getZip(),
 				"", "", GetterUtil.get(warehouse.getLatitude(), 0D),
-				GetterUtil.get(warehouse.getLongitude(), 0D), serviceContext);
+				GetterUtil.get(warehouse.getLongitude(), 0D), null,
+				serviceContext);
 
 		return _dtoMapper.modelToDTO(commerceInventoryWarehouse);
 	}
