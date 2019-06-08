@@ -40,7 +40,8 @@ public class CommerceInventoryWarehouseServiceImpl
 			String name, String description, boolean active, String street1,
 			String street2, String street3, String city, String zip,
 			String commerceRegionCode, String commerceCountryCode,
-			double latitude, double longitude, ServiceContext serviceContext)
+			double latitude, double longitude, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		PortalPermissionUtil.check(
@@ -50,7 +51,7 @@ public class CommerceInventoryWarehouseServiceImpl
 			addCommerceInventoryWarehouse(
 				name, description, active, street1, street2, street3, city, zip,
 				commerceRegionCode, commerceCountryCode, latitude, longitude,
-				serviceContext);
+				externalReferenceCode, serviceContext);
 	}
 
 	@Override
