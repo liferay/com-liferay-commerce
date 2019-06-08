@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.method.mercanet.internal;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
-import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.mercanet.internal.configuration.MercanetGroupServiceConfiguration;
@@ -162,21 +161,19 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			mercanetCommercePaymentRequest.getCommerceOrderId());
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+		if (!Objects.equals(
+				commerceOrder.getCommerceCurrencyCode(),
+				MercanetCommercePaymentMethodConstants.EUR_CURRENCY_CODE)) {
 
-		if (!Objects.equals(commerceCurrency.getCode(), "EUR")) {
 			throw new Exception("Mercanet accepts only EUR currency");
 		}
 
 		PaymentRequest paymentRequest = new PaymentRequest();
 
-		int normalizedMultiplier = (int)Math.pow(
-			10, commerceCurrency.getMaxFractionDigits());
-
 		BigDecimal orderTotal = commerceOrder.getTotal();
 
 		BigDecimal normalizedOrderTotal = orderTotal.multiply(
-			new BigDecimal(normalizedMultiplier));
+			new BigDecimal(100));
 
 		paymentRequest.setAmount(normalizedOrderTotal.intValue());
 

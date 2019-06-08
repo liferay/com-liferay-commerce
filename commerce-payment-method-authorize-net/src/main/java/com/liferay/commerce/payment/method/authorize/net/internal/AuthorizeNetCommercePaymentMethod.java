@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.method.authorize.net.internal;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
-import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.authorize.net.internal.configuration.AuthorizeNetGroupServiceConfiguration;
@@ -185,7 +184,8 @@ public class AuthorizeNetCommercePaymentMethod
 			new GetHostedPaymentPageRequest();
 
 		TransactionRequestType transactionRequestType =
-			_getTransactionRequestType(commerceOrder);
+			_getTransactionRequestType(
+				commerceOrder, configuration.fractionDigits());
 
 		getHostedPaymentPageRequest.setTransactionRequest(
 			transactionRequestType);
@@ -389,7 +389,7 @@ public class AuthorizeNetCommercePaymentMethod
 	}
 
 	private TransactionRequestType _getTransactionRequestType(
-			CommerceOrder commerceOrder)
+			CommerceOrder commerceOrder, int fractionDigits)
 		throws PortalException {
 
 		TransactionRequestType transactionRequestType =
@@ -402,12 +402,8 @@ public class AuthorizeNetCommercePaymentMethod
 
 		BigDecimal amount = commerceOrder.getTotal();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		transactionRequestType.setAmount(
-			amount.setScale(
-				commerceCurrency.getMaxFractionDigits(),
-				RoundingMode.valueOf(commerceCurrency.getRoundingMode())));
+			amount.setScale(fractionDigits, RoundingMode.CEILING));
 
 		return transactionRequestType;
 	}

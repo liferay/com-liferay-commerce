@@ -38,6 +38,9 @@ public interface AuthorizeNetGroupServiceConfiguration {
 	@Meta.AD(name = "environment", required = false)
 	public String environment();
 
+	@Meta.AD(deflt = "2", name = "fraction-digits", required = false)
+	public int fractionDigits();
+
 	@Meta.AD(name = "require-captcha", required = false)
 	public boolean requireCaptcha();
 

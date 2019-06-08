@@ -53,6 +53,8 @@ AuthorizeNetGroupServiceConfiguration authorizeNetCommercePaymentEngineGroupServ
 			<aui:input checked="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.showCreditCard() %>" label="show-credit-card" name="settings--showCreditCard--" type="checkbox" />
 
 			<aui:input checked="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.showStoreName() %>" label="show-store-name" name="settings--showStoreName--" type="checkbox" />
+
+			<aui:input label="fraction-digits" name="settings--fractionDigits--" value="<%= authorizeNetCommercePaymentEngineGroupServiceConfiguration.fractionDigits() %>" />
 		</aui:fieldset>
 
 		<aui:fieldset label="security">
