@@ -873,6 +873,7 @@ openapi: 3.0.0
 paths:
     /attachments/by-externalReferenceCode/{externalReferenceCode}:
         delete:
+            operationId: deleteAttachmentByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -905,6 +906,7 @@ paths:
             tags:
                 - Attachment
         get:
+            operationId: getAttachmentByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -964,6 +966,7 @@ paths:
             tags:
                 - Attachment
         patch:
+            operationId: patchAttachmentByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -1028,6 +1031,7 @@ paths:
                 - Attachment
     /attachments/{id}:
         delete:
+            operationId: deleteAttachment
             parameters:
                 - explode: false
                   in: path
@@ -1061,6 +1065,7 @@ paths:
             tags:
                 - Attachment
         get:
+            operationId: getAttachment
             parameters:
                 - explode: false
                   in: path
@@ -1121,6 +1126,7 @@ paths:
             tags:
                 - Attachment
         patch:
+            operationId: patchAttachment
             parameters:
                 - explode: false
                   in: path
@@ -1186,6 +1192,7 @@ paths:
                 - Attachment
     /catalogs/{siteId}/option/:
         post:
+            operationId: postCatalogSiteOption
             parameters:
                 - explode: false
                   in: path
@@ -1260,6 +1267,7 @@ paths:
                 - Option
     /catalogs/{siteId}/optionCategories/:
         get:
+            operationId: getCatalogSiteOptionCategoriesPage
             parameters:
                 - explode: false
                   in: path
@@ -1337,6 +1345,7 @@ paths:
                 - OptionCategory
     /catalogs/{siteId}/optionCategory/:
         post:
+            operationId: postCatalogSiteOptionCategory
             parameters:
                 - explode: false
                   in: path
@@ -1411,6 +1420,7 @@ paths:
                 - OptionCategory
     /catalogs/{siteId}/options/:
         get:
+            operationId: getCatalogSiteOptionsPage
             parameters:
                 - explode: false
                   in: path
@@ -1488,6 +1498,7 @@ paths:
                 - Option
     /catalogs/{siteId}/product/:
         post:
+            operationId: postCatalogSiteProduct
             parameters:
                 - explode: false
                   in: path
@@ -1562,6 +1573,7 @@ paths:
                 - Product
     /catalogs/{siteId}/products/:
         get:
+            operationId: getCatalogSiteProductsPage
             parameters:
                 - explode: false
                   in: path
@@ -1639,6 +1651,7 @@ paths:
                 - Product
     /catalogs/{siteId}/specification/:
         post:
+            operationId: postCatalogSiteSpecification
             parameters:
                 - explode: false
                   in: path
@@ -1713,6 +1726,7 @@ paths:
                 - Specification
     /catalogs/{siteId}/specifications/:
         get:
+            operationId: getCatalogSiteSpecificationsPage
             parameters:
                 - explode: false
                   in: path
@@ -1790,6 +1804,7 @@ paths:
                 - Specification
     /optionCategories/{id}:
         delete:
+            operationId: deleteOptionCategory
             parameters:
                 - explode: false
                   in: path
@@ -1823,6 +1838,7 @@ paths:
             tags:
                 - OptionCategory
         get:
+            operationId: getOptionCategory
             parameters:
                 - explode: false
                   in: path
@@ -1883,6 +1899,7 @@ paths:
             tags:
                 - OptionCategory
         patch:
+            operationId: patchOptionCategory
             parameters:
                 - explode: false
                   in: path
@@ -1948,6 +1965,7 @@ paths:
                 - OptionCategory
     /options/by-externalReferenceCode/{externalReferenceCode}/optionValue/:
         post:
+            operationId: postOptionByExternalReferenceCodeOptionValue
             parameters:
                 - explode: false
                   in: path
@@ -2021,6 +2039,7 @@ paths:
                 - OptionValue
     /options/by-externalReferenceCode/{externalReferenceCode}/optionValues/:
         get:
+            operationId: getOptionByExternalReferenceCodeOptionValuesPage
             parameters:
                 - explode: false
                   in: path
@@ -2097,6 +2116,7 @@ paths:
                 - OptionValue
     /options/by-externalReferenceCode/{externalReferenceCode}:
         delete:
+            operationId: deleteOptionByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -2129,6 +2149,7 @@ paths:
             tags:
                 - Option
         get:
+            operationId: getOptionByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -2188,6 +2209,7 @@ paths:
             tags:
                 - Option
         patch:
+            operationId: patchOptionByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -2252,6 +2274,7 @@ paths:
                 - Option
     /options/{id}/optionValue/:
         post:
+            operationId: postOptionIdOptionValue
             parameters:
                 - explode: false
                   in: path
@@ -2326,6 +2349,7 @@ paths:
                 - OptionValue
     /options/{id}/optionValues/:
         get:
+            operationId: getOptionIdOptionValuesPage
             parameters:
                 - explode: false
                   in: path
@@ -2403,6 +2427,7 @@ paths:
                 - OptionValue
     /options/{id}:
         delete:
+            operationId: deleteOption
             parameters:
                 - explode: false
                   in: path
@@ -2436,6 +2461,7 @@ paths:
             tags:
                 - Option
         get:
+            operationId: getOption
             parameters:
                 - explode: false
                   in: path
@@ -2496,6 +2522,7 @@ paths:
             tags:
                 - Option
         patch:
+            operationId: patchOption
             parameters:
                 - explode: false
                   in: path
@@ -2561,6 +2588,7 @@ paths:
                 - Option
     /productOptions/{id}/productOptionValue/:
         post:
+            operationId: postProductOptionIdProductOptionValue
             parameters:
                 - explode: false
                   in: path
@@ -2635,6 +2663,7 @@ paths:
                 - ProductOptionValue
     /productOptions/{id}/productOptionValues/:
         get:
+            operationId: getProductOptionIdProductOptionValuesPage
             parameters:
                 - explode: false
                   in: path
@@ -2712,6 +2741,7 @@ paths:
                 - ProductOptionValue
     /productOptions/{id}:
         delete:
+            operationId: deleteProductOption
             parameters:
                 - explode: false
                   in: path
@@ -2745,6 +2775,7 @@ paths:
             tags:
                 - ProductOption
         get:
+            operationId: getProductOption
             parameters:
                 - explode: false
                   in: path
@@ -2805,6 +2836,7 @@ paths:
             tags:
                 - ProductOption
         patch:
+            operationId: patchProductOption
             parameters:
                 - explode: false
                   in: path
@@ -2870,6 +2902,7 @@ paths:
                 - ProductOption
     /products/by-externalReferenceCode/{externalReferenceCode}/attachment/:
         post:
+            operationId: postProductByExternalReferenceCodeAttachment
             parameters:
                 - explode: false
                   in: path
@@ -2943,6 +2976,7 @@ paths:
                 - Attachment
     /products/by-externalReferenceCode/{externalReferenceCode}/categories/:
         get:
+            operationId: getProductByExternalReferenceCodeCategoriesPage
             parameters:
                 - explode: false
                   in: path
@@ -3019,6 +3053,7 @@ paths:
                 - Category
     /products/by-externalReferenceCode/{externalReferenceCode}/category/:
         patch:
+            operationId: patchProductByExternalReferenceCodeCategory
             parameters:
                 - explode: false
                   in: path
@@ -3033,6 +3068,11 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            items:
+                                $ref: '#/components/schemas/Category'
+                            type: array
+                    application/xml:
                         schema:
                             items:
                                 $ref: '#/components/schemas/Category'
@@ -3082,6 +3122,7 @@ paths:
                 - Category
     /products/by-externalReferenceCode/{externalReferenceCode}/configuration/:
         get:
+            operationId: getProductByExternalReferenceCodeConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -3141,6 +3182,7 @@ paths:
             tags:
                 - ProductConfiguration
         patch:
+            operationId: patchProductByExternalReferenceCodeConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -3155,6 +3197,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductConfiguration'
                 required: true
@@ -3202,6 +3247,7 @@ paths:
                 - ProductConfiguration
     /products/by-externalReferenceCode/{externalReferenceCode}/image/:
         post:
+            operationId: postProductByExternalReferenceCodeImage
             parameters:
                 - explode: false
                   in: path
@@ -3275,6 +3321,7 @@ paths:
                 - Attachment
     /products/by-externalReferenceCode/{externalReferenceCode}/images/:
         get:
+            operationId: getProductByExternalReferenceCodeImagesPage
             parameters:
                 - explode: false
                   in: path
@@ -3351,6 +3398,7 @@ paths:
                 - Attachment
     /products/by-externalReferenceCode/{externalReferenceCode}/productOptions/:
         get:
+            operationId: getProductByExternalReferenceCodeProductOptionsPage
             parameters:
                 - explode: false
                   in: path
@@ -3428,6 +3476,7 @@ paths:
             tags:
                 - ProductOption
         post:
+            operationId: postProductByExternalReferenceCodeProductOptionsPage
             parameters:
                 - explode: false
                   in: path
@@ -3442,6 +3491,11 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            items:
+                                $ref: '#/components/schemas/ProductOption'
+                            type: array
+                    application/xml:
                         schema:
                             items:
                                 $ref: '#/components/schemas/ProductOption'
@@ -3504,6 +3558,7 @@ paths:
                 - ProductOption
     /products/by-externalReferenceCode/{externalReferenceCode}/relatedProduct/:
         post:
+            operationId: postProductByExternalReferenceCodeRelatedProduct
             parameters:
                 - explode: false
                   in: path
@@ -3577,6 +3632,7 @@ paths:
                 - RelatedProduct
     /products/by-externalReferenceCode/{externalReferenceCode}/relatedProducts/:
         get:
+            operationId: getProductByExternalReferenceCodeRelatedProductsPage
             parameters:
                 - explode: false
                   in: path
@@ -3660,6 +3716,7 @@ paths:
                 - RelatedProduct
     /products/by-externalReferenceCode/{externalReferenceCode}/shippingConfiguration/:
         get:
+            operationId: getProductByExternalReferenceCodeShippingConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -3719,6 +3776,7 @@ paths:
             tags:
                 - ProductShippingConfiguration
         patch:
+            operationId: patchProductByExternalReferenceCodeShippingConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -3733,6 +3791,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductShippingConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductShippingConfiguration'
                 required: true
@@ -3780,6 +3841,7 @@ paths:
                 - ProductShippingConfiguration
     /products/by-externalReferenceCode/{externalReferenceCode}/sku/:
         post:
+            operationId: postProductByExternalReferenceCodeSku
             parameters:
                 - explode: false
                   in: path
@@ -3853,6 +3915,7 @@ paths:
                 - Sku
     /products/by-externalReferenceCode/{externalReferenceCode}/skus/:
         get:
+            operationId: getProductByExternalReferenceCodeSkusPage
             parameters:
                 - explode: false
                   in: path
@@ -3929,6 +3992,7 @@ paths:
                 - Sku
     /products/by-externalReferenceCode/{externalReferenceCode}/subscriptionConfiguration/:
         get:
+            operationId: getProductByExternalReferenceCodeSubscriptionConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -3988,6 +4052,7 @@ paths:
             tags:
                 - ProductSubscriptionConfiguration
         patch:
+            operationId: patchProductByExternalReferenceCodeSubscriptionConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -4002,6 +4067,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductSubscriptionConfiguration'
                 required: true
@@ -4049,6 +4117,7 @@ paths:
                 - ProductSubscriptionConfiguration
     /products/by-externalReferenceCode/{externalReferenceCode}/taxConfiguration/:
         get:
+            operationId: getProductByExternalReferenceCodeTaxConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -4108,6 +4177,7 @@ paths:
             tags:
                 - ProductTaxConfiguration
         patch:
+            operationId: patchProductByExternalReferenceCodeTaxConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -4122,6 +4192,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductTaxConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductTaxConfiguration'
                 required: true
@@ -4169,6 +4242,7 @@ paths:
                 - ProductTaxConfiguration
     /products/by-externalReferenceCode/{externalReferenceCode}:
         delete:
+            operationId: deleteProductByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -4201,6 +4275,7 @@ paths:
             tags:
                 - Product
         get:
+            operationId: getProductByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -4260,6 +4335,7 @@ paths:
             tags:
                 - Product
         patch:
+            operationId: patchProductByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -4324,6 +4400,7 @@ paths:
                 - Product
     /products/by-externalReferenceCode{externalReferenceCode}/attachments/:
         get:
+            operationId: getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage
             parameters:
                 - explode: false
                   in: path
@@ -4400,6 +4477,7 @@ paths:
                 - Attachment
     /products/{id}/attachment/:
         post:
+            operationId: postProductIdAttachment
             parameters:
                 - explode: false
                   in: path
@@ -4474,6 +4552,7 @@ paths:
                 - Attachment
     /products/{id}/attachments/:
         get:
+            operationId: getProductIdAttachmentsPage
             parameters:
                 - explode: false
                   in: path
@@ -4551,6 +4630,7 @@ paths:
                 - Attachment
     /products/{id}/categories/:
         get:
+            operationId: getProductIdCategoriesPage
             parameters:
                 - explode: false
                   in: path
@@ -4628,6 +4708,7 @@ paths:
                 - Category
     /products/{id}/category/:
         patch:
+            operationId: patchProductIdCategory
             parameters:
                 - explode: false
                   in: path
@@ -4643,6 +4724,11 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            items:
+                                $ref: '#/components/schemas/Category'
+                            type: array
+                    application/xml:
                         schema:
                             items:
                                 $ref: '#/components/schemas/Category'
@@ -4692,6 +4778,7 @@ paths:
                 - Category
     /products/{id}/configuration/:
         get:
+            operationId: getProductIdConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -4752,6 +4839,7 @@ paths:
             tags:
                 - ProductConfiguration
         patch:
+            operationId: patchProductIdConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -4767,6 +4855,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductConfiguration'
                 required: true
@@ -4814,6 +4905,7 @@ paths:
                 - ProductConfiguration
     /products/{id}/image/:
         post:
+            operationId: postProductIdImage
             parameters:
                 - explode: false
                   in: path
@@ -4888,6 +4980,7 @@ paths:
                 - Attachment
     /products/{id}/images/:
         get:
+            operationId: getProductIdImagesPage
             parameters:
                 - explode: false
                   in: path
@@ -4965,6 +5058,7 @@ paths:
                 - Attachment
     /products/{id}/productOptions/:
         get:
+            operationId: getProductIdProductOptionsPage
             parameters:
                 - explode: false
                   in: path
@@ -5043,6 +5137,7 @@ paths:
             tags:
                 - ProductOption
         post:
+            operationId: postProductIdProductOptionsPage
             parameters:
                 - explode: false
                   in: path
@@ -5058,6 +5153,11 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            items:
+                                $ref: '#/components/schemas/ProductOption'
+                            type: array
+                    application/xml:
                         schema:
                             items:
                                 $ref: '#/components/schemas/ProductOption'
@@ -5120,6 +5220,7 @@ paths:
                 - ProductOption
     /products/{id}/relatedProduct/:
         post:
+            operationId: postProductIdRelatedProduct
             parameters:
                 - explode: false
                   in: path
@@ -5194,6 +5295,7 @@ paths:
                 - RelatedProduct
     /products/{id}/relatedProducts/:
         get:
+            operationId: getProductIdRelatedProductsPage
             parameters:
                 - explode: false
                   in: path
@@ -5278,6 +5380,7 @@ paths:
                 - RelatedProduct
     /products/{id}/shippingConfiguration/:
         get:
+            operationId: getProductIdShippingConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5338,6 +5441,7 @@ paths:
             tags:
                 - ProductShippingConfiguration
         patch:
+            operationId: patchProductIdShippingConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5353,6 +5457,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductShippingConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductShippingConfiguration'
                 required: true
@@ -5400,6 +5507,7 @@ paths:
                 - ProductShippingConfiguration
     /products/{id}/sku/:
         post:
+            operationId: postProductIdSku
             parameters:
                 - explode: false
                   in: path
@@ -5474,6 +5582,7 @@ paths:
                 - Sku
     /products/{id}/skus/:
         get:
+            operationId: getProductIdSkusPage
             parameters:
                 - explode: false
                   in: path
@@ -5551,6 +5660,7 @@ paths:
                 - Sku
     /products/{id}/subscriptionConfiguration/:
         get:
+            operationId: getProductIdSubscriptionConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5611,6 +5721,7 @@ paths:
             tags:
                 - ProductSubscriptionConfiguration
         patch:
+            operationId: patchProductIdSubscriptionConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5626,6 +5737,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductSubscriptionConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductSubscriptionConfiguration'
                 required: true
@@ -5673,6 +5787,7 @@ paths:
                 - ProductSubscriptionConfiguration
     /products/{id}/taxConfiguration/:
         get:
+            operationId: getProductIdTaxConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5733,6 +5848,7 @@ paths:
             tags:
                 - ProductTaxConfiguration
         patch:
+            operationId: patchProductIdTaxConfiguration
             parameters:
                 - explode: false
                   in: path
@@ -5748,6 +5864,9 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductTaxConfiguration'
+                    application/xml:
                         schema:
                             $ref: '#/components/schemas/ProductTaxConfiguration'
                 required: true
@@ -5795,6 +5914,7 @@ paths:
                 - ProductTaxConfiguration
     /products/{id}:
         delete:
+            operationId: deleteProduct
             parameters:
                 - explode: false
                   in: path
@@ -5828,6 +5948,7 @@ paths:
             tags:
                 - Product
         get:
+            operationId: getProduct
             parameters:
                 - explode: false
                   in: path
@@ -5888,6 +6009,7 @@ paths:
             tags:
                 - Product
         patch:
+            operationId: patchProduct
             parameters:
                 - explode: false
                   in: path
@@ -5953,6 +6075,7 @@ paths:
                 - Product
     /relatedProducts/{id}:
         delete:
+            operationId: deleteRelatedProduct
             parameters:
                 - explode: false
                   in: path
@@ -5986,6 +6109,7 @@ paths:
             tags:
                 - RelatedProduct
         get:
+            operationId: getRelatedProduct
             parameters:
                 - explode: false
                   in: path
@@ -6047,6 +6171,7 @@ paths:
                 - RelatedProduct
     /skus/by-externalReferenceCode/{externalReferenceCode}:
         delete:
+            operationId: deleteSkuByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -6079,6 +6204,7 @@ paths:
             tags:
                 - Sku
         get:
+            operationId: getSkuByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -6138,6 +6264,7 @@ paths:
             tags:
                 - Sku
         patch:
+            operationId: patchSkuByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
@@ -6202,6 +6329,7 @@ paths:
                 - Sku
     /skus/{id}:
         delete:
+            operationId: deleteSku
             parameters:
                 - explode: false
                   in: path
@@ -6235,6 +6363,7 @@ paths:
             tags:
                 - Sku
         get:
+            operationId: getSku
             parameters:
                 - explode: false
                   in: path
@@ -6295,6 +6424,7 @@ paths:
             tags:
                 - Sku
         patch:
+            operationId: patchSku
             parameters:
                 - explode: false
                   in: path
@@ -6394,6 +6524,7 @@ paths:
             tags:
                 - Specification
         get:
+            operationId: getSpecification
             parameters:
                 - explode: false
                   in: path
@@ -6454,6 +6585,7 @@ paths:
             tags:
                 - Specification
         patch:
+            operationId: patchSpecification
             parameters:
                 - explode: false
                   in: path
