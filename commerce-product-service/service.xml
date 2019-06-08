@@ -812,10 +812,6 @@
 
 		<column name="CPOptionId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -843,15 +839,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
-		</finder>
-		<finder name="G_K" return-type="CPOption" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="key" />
 		</finder>
 		<finder name="C_K" return-type="CPOption" unique="true">
 			<finder-column name="companyId" />
@@ -867,10 +856,6 @@
 		<!-- PK fields -->
 
 		<column name="CPOptionCategoryId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -897,14 +882,11 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_K" return-type="CPOptionCategory" unique="true">
-			<finder-column name="groupId" />
+		<finder name="C_K" return-type="CPOptionCategory" unique="true">
+			<finder-column name="companyId" />
 			<finder-column name="key" />
 		</finder>
 	</entity>
@@ -913,10 +895,6 @@
 		<!-- PK fields -->
 
 		<column name="CPOptionValueId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -943,9 +921,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -1002,10 +977,6 @@
 
 		<column name="CPSpecificationOptionId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -1031,18 +1002,11 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="CPOptionCategoryId" return-type="Collection">
 			<finder-column name="CPOptionCategoryId" />
-		</finder>
-		<finder name="G_K" return-type="CPSpecificationOption" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="key" />
 		</finder>
 		<finder name="C_K" return-type="CPSpecificationOption" unique="true">
 			<finder-column name="companyId" />
