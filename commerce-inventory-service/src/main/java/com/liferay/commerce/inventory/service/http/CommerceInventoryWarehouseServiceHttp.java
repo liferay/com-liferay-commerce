@@ -60,6 +60,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 		boolean active, String street1, String street2, String street3,
 		String city, String zip, String commerceRegionCode,
 		String commerceCountryCode, double latitude, double longitude,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -70,7 +71,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description, active, street1, street2, street3, city, zip,
 					commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
+					longitude, externalReferenceCode, serviceContext);
 
 			Object returnObj = null;
 
@@ -512,7 +513,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 		new Class[] {
 			String.class, String.class, boolean.class, String.class,
 			String.class, String.class, String.class, String.class, String.class,
-			String.class, double.class, double.class,
+			String.class, double.class, double.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceInventoryWarehouseParameterTypes1 =

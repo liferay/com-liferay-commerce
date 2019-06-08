@@ -69,7 +69,7 @@ public class CommerceInventoryWarehouseServiceSoap {
 		String name, String description, boolean active, String street1,
 		String street2, String street3, String city, String zip,
 		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude,
+		double longitude, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -77,7 +77,7 @@ public class CommerceInventoryWarehouseServiceSoap {
 				CommerceInventoryWarehouseServiceUtil.addCommerceInventoryWarehouse(name,
 					description, active, street1, street2, street3, city, zip,
 					commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
+					longitude, externalReferenceCode, serviceContext);
 
 			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
 		}
