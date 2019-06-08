@@ -65,8 +65,7 @@ public class CommercePriceListTestUtil {
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
 			commerceCatalog.getGroupId(), user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId(),
-			RandomTestUtil.randomString(), priority,
+			commerceCurrency.getCode(), RandomTestUtil.randomString(), priority,
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
 			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
 			calendar.get(Calendar.MINUTE), calendar.get(Calendar.MONTH),

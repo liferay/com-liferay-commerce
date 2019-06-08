@@ -163,8 +163,8 @@ public class EditCommercePriceListMVCActionCommand
 
 		long parentCommercePriceListId = ParamUtil.getLong(
 			actionRequest, "parentCommercePriceListId");
-		long commerceCurrencyId = ParamUtil.getLong(
-			actionRequest, "commerceCurrencyId");
+		String commerceCurrencyCode = ParamUtil.getString(
+			actionRequest, "commerceCurrencyCode");
 		long commerceCatalogGroupId = ParamUtil.getLong(
 			actionRequest, "commerceCatalogGroupId");
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -215,7 +215,7 @@ public class EditCommercePriceListMVCActionCommand
 		if (commercePriceListId <= 0) {
 			commercePriceList = _commercePriceListService.addCommercePriceList(
 				commerceCatalogGroupId, serviceContext.getUserId(),
-				commerceCurrencyId, parentCommercePriceListId, name, priority,
+				commerceCurrencyCode, parentCommercePriceListId, name, priority,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
@@ -224,7 +224,7 @@ public class EditCommercePriceListMVCActionCommand
 		else {
 			commercePriceList =
 				_commercePriceListService.updateCommercePriceList(
-					commercePriceListId, commerceCurrencyId,
+					commercePriceListId, commerceCurrencyCode,
 					parentCommercePriceListId, name, priority, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
