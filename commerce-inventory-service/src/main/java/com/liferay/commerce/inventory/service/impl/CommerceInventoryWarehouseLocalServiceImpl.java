@@ -63,7 +63,8 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 			String name, String description, boolean active, String street1,
 			String street2, String street3, String city, String zip,
 			String commerceRegionCode, String commerceCountryCode,
-			double latitude, double longitude, ServiceContext serviceContext)
+			double latitude, double longitude, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -92,6 +93,8 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 			commerceCountryCode);
 		commerceInventoryWarehouse.setLatitude(latitude);
 		commerceInventoryWarehouse.setLongitude(longitude);
+		commerceInventoryWarehouse.setExternalReferenceCode(
+			externalReferenceCode);
 		commerceInventoryWarehouse.setExpandoBridgeAttributes(serviceContext);
 
 		commerceInventoryWarehousePersistence.update(
