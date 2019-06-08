@@ -81,7 +81,6 @@ public class CPOptionValueLocalServiceImpl
 		// Commerce product option value
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
 
 		key = FriendlyURLNormalizerUtil.normalize(key);
 
@@ -93,7 +92,6 @@ public class CPOptionValueLocalServiceImpl
 			cpOptionValueId);
 
 		cpOptionValue.setUuid(serviceContext.getUuid());
-		cpOptionValue.setGroupId(groupId);
 		cpOptionValue.setCompanyId(user.getCompanyId());
 		cpOptionValue.setUserId(user.getUserId());
 		cpOptionValue.setUserName(user.getFullName());

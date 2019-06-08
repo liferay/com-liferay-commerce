@@ -14,14 +14,13 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.base.CPOptionValueServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.List;
@@ -39,22 +38,23 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			String key, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPOption cpOption = cpOptionLocalService.getCPOption(cpOptionId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpOption.getGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionId, ActionKeys.UPDATE);
 
 		return cpOptionValueLocalService.addCPOptionValue(
-			cpOption.getCPOptionId(), titleMap, priority, key, serviceContext);
+			cpOptionId, titleMap, priority, key, serviceContext);
 	}
 
 	@Override
 	public void deleteCPOptionValue(long cpOptionValueId)
 		throws PortalException {
 
-		CPOptionValue cpOptionValue = cpOptionValueService.getCPOptionValue(
-			cpOptionValueId);
+		CPOptionValue cpOptionValue =
+			cpOptionValueLocalService.fetchCPOptionValue(cpOptionValueId);
+
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionValue.getCPOptionId(),
+			ActionKeys.UPDATE);
 
 		cpOptionValueLocalService.deleteCPOptionValue(cpOptionValue);
 	}
@@ -68,9 +68,9 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 				companyId, externalReferenceCode);
 
 		if (cpOptionValue != null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), cpOptionValue.getGroupId(),
-				CPActionKeys.MANAGE_CATALOG);
+			_cpOptionModelResourcePermission.check(
+				getPermissionChecker(), cpOptionValue.getCPOptionId(),
+				ActionKeys.VIEW);
 		}
 
 		return cpOptionValue;
@@ -84,9 +84,9 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			cpOptionValueLocalService.fetchCPOptionValue(cpOptionValueId);
 
 		if (cpOptionValue != null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), cpOptionValue.getGroupId(),
-				CPActionKeys.MANAGE_CATALOG);
+			_cpOptionModelResourcePermission.check(
+				getPermissionChecker(), cpOptionValue.getCPOptionId(),
+				ActionKeys.VIEW);
 		}
 
 		return cpOptionValue;
@@ -99,9 +99,9 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 		CPOptionValue cpOptionValue =
 			cpOptionValueLocalService.getCPOptionValue(cpOptionValueId);
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpOptionValue.getGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionValue.getCPOptionId(),
+			ActionKeys.VIEW);
 
 		return cpOptionValue;
 	}
@@ -111,8 +111,8 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			long cpOptionId, int start, int end)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpOptionId, CPActionKeys.MANAGE_CATALOG);
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionId, ActionKeys.VIEW);
 
 		return cpOptionValueLocalService.getCPOptionValues(
 			cpOptionId, start, end);
@@ -120,8 +120,8 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 
 	@Override
 	public int getCPOptionValuesCount(long cpOptionId) throws PortalException {
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpOptionId, CPActionKeys.MANAGE_CATALOG);
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionId, ActionKeys.VIEW);
 
 		return cpOptionValueLocalService.getCPOptionValuesCount(cpOptionId);
 	}
@@ -134,6 +134,10 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 
 		CPOptionValue cpOptionValue = cpOptionValueService.getCPOptionValue(
 			cpOptionValueId);
+
+		_cpOptionModelResourcePermission.check(
+			getPermissionChecker(), cpOptionValue.getCPOptionId(),
+			ActionKeys.VIEW);
 
 		return cpOptionValueLocalService.updateCPOptionValue(
 			cpOptionValue.getCPOptionValueId(), titleMap, priority, key,
@@ -152,9 +156,8 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpOptionValue == null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), serviceContext.getScopeGroupId(),
-				CPActionKeys.MANAGE_CATALOG);
+			_cpOptionModelResourcePermission.check(
+				getPermissionChecker(), cpOptionId, ActionKeys.UPDATE);
 		}
 
 		return cpOptionValueLocalService.upsertCPOptionValue(
@@ -162,10 +165,10 @@ public class CPOptionValueServiceImpl extends CPOptionValueServiceBaseImpl {
 			serviceContext);
 	}
 
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPOptionServiceImpl.class, "_portletResourcePermission",
-				CPConstants.RESOURCE_NAME);
+	private static volatile ModelResourcePermission<CPOption>
+		_cpOptionModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CPOptionValueServiceImpl.class,
+				"_cpOptionModelResourcePermission", CPOption.class);
 
 }

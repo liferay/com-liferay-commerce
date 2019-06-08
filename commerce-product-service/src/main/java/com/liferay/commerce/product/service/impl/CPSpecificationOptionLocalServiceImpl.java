@@ -20,7 +20,7 @@ import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.search.CPSpecificationOptionIndexer;
 import com.liferay.commerce.product.service.base.CPSpecificationOptionLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
@@ -62,17 +61,16 @@ public class CPSpecificationOptionLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPSpecificationOption addCPSpecificationOption(
-			long cpOptionCategoryId, Map<Locale, String> titleMap,
+			long userId, long cpOptionCategoryId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, boolean facetable, String key,
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
 		key = FriendlyURLNormalizerUtil.normalize(key);
 
-		validate(0, groupId, titleMap, key);
+		validate(0, user.getCompanyId(), titleMap, key);
 
 		long cpSpecificationOptionId = counterLocalService.increment();
 
@@ -80,7 +78,6 @@ public class CPSpecificationOptionLocalServiceImpl
 			cpSpecificationOptionPersistence.create(cpSpecificationOptionId);
 
 		cpSpecificationOption.setUuid(serviceContext.getUuid());
-		cpSpecificationOption.setGroupId(groupId);
 		cpSpecificationOption.setCompanyId(user.getCompanyId());
 		cpSpecificationOption.setUserId(user.getUserId());
 		cpSpecificationOption.setUserName(user.getFullName());
@@ -92,6 +89,11 @@ public class CPSpecificationOptionLocalServiceImpl
 		cpSpecificationOption.setExpandoBridgeAttributes(serviceContext);
 
 		cpSpecificationOptionPersistence.update(cpSpecificationOption);
+
+		// Resources
+
+		resourceLocalService.addModelResources(
+			cpSpecificationOption, serviceContext);
 
 		return cpSpecificationOption;
 	}
@@ -112,6 +114,11 @@ public class CPSpecificationOptionLocalServiceImpl
 		cpDefinitionSpecificationOptionValueLocalService.
 			deleteCPSpecificationOptionDefinitionValues(
 				cpSpecificationOption.getCPSpecificationOptionId());
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			cpSpecificationOption, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Expando
 
@@ -135,11 +142,11 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPSpecificationOptions(long groupId)
+	public void deleteCPSpecificationOptions(long companyId)
 		throws PortalException {
 
 		List<CPSpecificationOption> cpSpecificationOptions =
-			cpSpecificationOptionPersistence.findByGroupId(groupId);
+			cpSpecificationOptionPersistence.findByCompanyId(companyId);
 
 		for (CPSpecificationOption cpSpecificationOption :
 				cpSpecificationOptions) {
@@ -151,55 +158,17 @@ public class CPSpecificationOptionLocalServiceImpl
 
 	@Override
 	public CPSpecificationOption fetchCPSpecificationOption(
-		long groupId, String key) {
+		long companyId, String key) {
 
-		return cpSpecificationOptionPersistence.fetchByG_K(groupId, key);
+		return cpSpecificationOptionPersistence.fetchByC_K(companyId, key);
 	}
 
 	@Override
 	public CPSpecificationOption getCPSpecificationOption(
-			long groupId, String key)
+			long companyId, String key)
 		throws PortalException {
 
-		return cpSpecificationOptionPersistence.findByG_K(groupId, key);
-	}
-
-	@Override
-	public List<CPSpecificationOption> getCPSpecificationOptions(
-		long companyId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator) {
-
-		return cpSpecificationOptionPersistence.findByCompanyId(
-			companyId, start, end, orderByComparator);
-	}
-
-	@Override
-	public List<CPSpecificationOption>
-		getCPSpecificationOptionsByCatalogGroupId(
-			long groupId, int start, int end,
-			OrderByComparator<CPSpecificationOption> orderByComparator) {
-
-		return cpSpecificationOptionPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCPSpecificationOptionsByCatalogGroupIdCount(long groupId) {
-		return cpSpecificationOptionPersistence.countByGroupId(groupId);
-	}
-
-	@Override
-	public Hits search(SearchContext searchContext) {
-		try {
-			Indexer<CPSpecificationOption> indexer =
-				IndexerRegistryUtil.nullSafeGetIndexer(
-					CPSpecificationOption.class);
-
-			return indexer.search(searchContext);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return cpSpecificationOptionPersistence.findByC_K(companyId, key);
 	}
 
 	@Override
@@ -247,7 +216,7 @@ public class CPSpecificationOptionLocalServiceImpl
 
 		validate(
 			cpSpecificationOption.getCPSpecificationOptionId(),
-			cpSpecificationOption.getGroupId(), titleMap, key);
+			cpSpecificationOption.getCompanyId(), titleMap, key);
 
 		cpSpecificationOption.setCPOptionCategoryId(cpOptionCategoryId);
 		cpSpecificationOption.setTitleMap(titleMap);
@@ -371,7 +340,7 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	protected void validate(
-			long cpSpecificationOptionId, long groupId,
+			long cpSpecificationOptionId, long companyId,
 			Map<Locale, String> titleMap, String key)
 		throws PortalException {
 
@@ -388,7 +357,7 @@ public class CPSpecificationOptionLocalServiceImpl
 		}
 
 		CPSpecificationOption cpSpecificationOption =
-			cpSpecificationOptionPersistence.fetchByG_K(groupId, key);
+			cpSpecificationOptionPersistence.fetchByC_K(companyId, key);
 
 		if ((cpSpecificationOption != null) &&
 			(cpSpecificationOption.getCPSpecificationOptionId() !=
@@ -399,7 +368,7 @@ public class CPSpecificationOptionLocalServiceImpl
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.UID
 	};
 
 }
