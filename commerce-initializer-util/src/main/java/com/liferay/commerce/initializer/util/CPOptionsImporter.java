@@ -89,6 +89,13 @@ public class CPOptionsImporter {
 
 		String key = jsonObject.getString("Key");
 
+		CPOption cpOption = _cpOptionLocalService.fetchCPOption(
+			serviceContext.getCompanyId(), key);
+
+		if (cpOption != null) {
+			return cpOption;
+		}
+
 		Locale locale = LocaleUtil.getSiteDefault();
 
 		Map<Locale, String> nameMap = Collections.singletonMap(
@@ -103,7 +110,7 @@ public class CPOptionsImporter {
 		boolean required = jsonObject.getBoolean("Required");
 		boolean skuContributor = jsonObject.getBoolean("SkuContributor");
 
-		CPOption cpOption = _cpOptionLocalService.addCPOption(
+		cpOption = _cpOptionLocalService.addCPOption(
 			serviceContext.getUserId(), nameMap, descriptionMap,
 			ddmFormFieldTypeName, facetable, required, skuContributor, key,
 			null, serviceContext);
