@@ -28,6 +28,8 @@ public class MercanetCommercePaymentMethodConstants {
 		StringUtil.toLowerCase(Environment.SIMU.name())
 	};
 
+	public static final String EUR_CURRENCY_CODE = "EUR";
+
 	public static final String SERVICE_NAME =
 		"com.liferay.commerce.payment.method.mercanet";
 

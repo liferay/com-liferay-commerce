@@ -83,6 +83,11 @@ public class EditAuthorizeNetCommercePaymentMethodConfigurationMVCActionCommand
 
 		modifiableSettings.setValue("environment", environment);
 
+		String fractionDigits = ParamUtil.getString(
+			actionRequest, "settings--fractionDigits--");
+
+		modifiableSettings.setValue("fractionDigits", fractionDigits);
+
 		String requireCaptcha = ParamUtil.getString(
 			actionRequest, "settings--requireCaptcha--");
 
