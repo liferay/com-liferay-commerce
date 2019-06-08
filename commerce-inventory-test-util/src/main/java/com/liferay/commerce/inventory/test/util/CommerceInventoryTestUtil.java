@@ -58,7 +58,7 @@ public class CommerceInventoryTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				commerceRegion.getCode(),
 				commerceCountry.getTwoLettersISOCode(),
-				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(),
+				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(), null,
 				serviceContext);
 	}
 
