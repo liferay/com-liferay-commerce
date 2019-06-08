@@ -83,7 +83,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 			{ "uuid_", Types.VARCHAR },
 			{ "externalReferenceCode", Types.VARCHAR },
 			{ "CPOptionId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -104,7 +103,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPOptionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -120,7 +118,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPOption (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPOptionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,DDMFormFieldTypeName VARCHAR(75) null,facetable BOOLEAN,required BOOLEAN,skuContributor BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPOption (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,CPOptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,DDMFormFieldTypeName VARCHAR(75) null,facetable BOOLEAN,required BOOLEAN,skuContributor BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPOption";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpOption.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPOption.name ASC";
@@ -138,10 +136,9 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long KEY_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long NAME_COLUMN_BITMASK = 32L;
+	public static final long KEY_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+	public static final long NAME_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -159,7 +156,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		model.setUuid(soapModel.getUuid());
 		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCPOptionId(soapModel.getCPOptionId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -240,7 +236,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		attributes.put("uuid", getUuid());
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPOptionId", getCPOptionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -280,12 +275,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 		if (CPOptionId != null) {
 			setCPOptionId(CPOptionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -427,29 +416,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 	@Override
 	public void setCPOptionId(long CPOptionId) {
 		_CPOptionId = CPOptionId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -609,7 +575,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -634,7 +600,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -708,7 +674,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public void setDescription(String description, Locale locale) {
-		setDescription(description, locale, LocaleUtil.getSiteDefault());
+		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -735,7 +701,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
-		setDescriptionMap(descriptionMap, LocaleUtil.getSiteDefault());
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -914,7 +880,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -935,7 +901,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -976,7 +942,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		cpOptionImpl.setUuid(getUuid());
 		cpOptionImpl.setExternalReferenceCode(getExternalReferenceCode());
 		cpOptionImpl.setCPOptionId(getCPOptionId());
-		cpOptionImpl.setGroupId(getGroupId());
 		cpOptionImpl.setCompanyId(getCompanyId());
 		cpOptionImpl.setUserId(getUserId());
 		cpOptionImpl.setUserName(getUserName());
@@ -1054,10 +1019,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 		cpOptionModelImpl._originalExternalReferenceCode = cpOptionModelImpl._externalReferenceCode;
 
-		cpOptionModelImpl._originalGroupId = cpOptionModelImpl._groupId;
-
-		cpOptionModelImpl._setOriginalGroupId = false;
-
 		cpOptionModelImpl._originalCompanyId = cpOptionModelImpl._companyId;
 
 		cpOptionModelImpl._setOriginalCompanyId = false;
@@ -1091,8 +1052,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		}
 
 		cpOptionCacheModel.CPOptionId = getCPOptionId();
-
-		cpOptionCacheModel.groupId = getGroupId();
 
 		cpOptionCacheModel.companyId = getCompanyId();
 
@@ -1177,7 +1136,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1185,8 +1144,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		sb.append(getExternalReferenceCode());
 		sb.append(", CPOptionId=");
 		sb.append(getCPOptionId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -1220,7 +1177,7 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPOption");
@@ -1237,10 +1194,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 		sb.append(
 			"<column><column-name>CPOptionId</column-name><column-value><![CDATA[");
 		sb.append(getCPOptionId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -1309,9 +1262,6 @@ public class CPOptionModelImpl extends BaseModelImpl<CPOption>
 	private String _externalReferenceCode;
 	private String _originalExternalReferenceCode;
 	private long _CPOptionId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

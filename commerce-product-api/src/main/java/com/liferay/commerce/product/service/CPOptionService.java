@@ -30,9 +30,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -79,28 +77,7 @@ public interface CPOptionService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOptionByCatalogGroupId(long groupId, String key)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption getCPOption(long cpOptionId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long companyId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptionsByCatalogGroupId(long groupId, int start,
-		int end, OrderByComparator<CPOption> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCount(long companyId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCountByCatalogGroupId(long groupId)
-		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.

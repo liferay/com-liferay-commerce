@@ -58,52 +58,6 @@ public class CPOptionCategoryServiceWrapper implements CPOptionCategoryService,
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		long companyId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategories(companyId, start,
-			end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategories(
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategories(companyId, start,
-			end, orderByComparator);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategoriesByCatalogGroupId(groupId,
-			start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOptionCategory> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategoriesByCatalogGroupId(groupId,
-			start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCount(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategoriesCount(companyId);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionCategoryService.getCPOptionCategoriesCountByCatalogGroupId(groupId);
-	}
-
-	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory getCPOptionCategory(
 		long cpOptionCategoryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -118,6 +72,15 @@ public class CPOptionCategoryServiceWrapper implements CPOptionCategoryService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _cpOptionCategoryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPOptionCategory> searchCPOptionCategories(
+		long companyId, String keywords, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpOptionCategoryService.searchCPOptionCategories(companyId,
+			keywords, start, end, sort);
 	}
 
 	@Override

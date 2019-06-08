@@ -148,36 +148,6 @@ public class CommerceCatalogServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] getCommerceCatalogs(
-		long companyId, boolean system) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
-				CommerceCatalogServiceUtil.getCommerceCatalogs(companyId, system);
-
-			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] searchCommerceCatalogs(
-		long companyId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
-				CommerceCatalogServiceUtil.searchCommerceCatalogs(companyId);
-
-			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] searchCommerceCatalogs(
 		long companyId, String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort) throws RemoteException {

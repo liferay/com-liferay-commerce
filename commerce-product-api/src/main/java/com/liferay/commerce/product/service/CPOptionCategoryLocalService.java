@@ -29,8 +29,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -79,9 +81,11 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public CPOptionCategory addCPOptionCategory(
 		CPOptionCategory cpOptionCategory);
 
-	public CPOptionCategory addCPOptionCategory(Map<Locale, String> titleMap,
-		Map<Locale, String> descriptionMap, double priority, String key,
-		ServiceContext serviceContext) throws PortalException;
+	@Indexable(type = IndexableType.REINDEX)
+	public CPOptionCategory addCPOptionCategory(long userId,
+		Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+		double priority, String key, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	* Creates a new cp option category with the primary key. Does not add the cp option category to the database.
@@ -92,7 +96,7 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	@Transactional(enabled = false)
 	public CPOptionCategory createCPOptionCategory(long CPOptionCategoryId);
 
-	public void deleteCPOptionCategories(long groupId)
+	public void deleteCPOptionCategories(long companyId)
 		throws PortalException;
 
 	/**
@@ -194,18 +198,18 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public CPOptionCategory fetchCPOptionCategory(long CPOptionCategoryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionCategory fetchCPOptionCategory(long groupId, String key);
+	public CPOptionCategory fetchCPOptionCategory(long companyId, String key);
 
 	/**
-	* Returns the cp option category matching the UUID and group.
+	* Returns the cp option category with the matching UUID and company.
 	*
 	* @param uuid the cp option category's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option category, or <code>null</code> if a matching cp option category could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionCategory fetchCPOptionCategoryByUuidAndGroupId(String uuid,
-		long groupId);
+	public CPOptionCategory fetchCPOptionCategoryByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -228,46 +232,6 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public List<CPOptionCategory> getCPOptionCategories(long companyId,
 		int start, int end);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long companyId,
-		int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator);
-
-	/**
-	* Returns all the cp option categories matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp option categories
-	* @param companyId the primary key of the company
-	* @return the matching cp option categories, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	* Returns a range of cp option categories matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp option categories
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of cp option categories
-	* @param end the upper bound of the range of cp option categories (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching cp option categories, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator);
-
 	/**
 	* Returns the number of cp option categories.
 	*
@@ -275,12 +239,6 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPOptionCategoriesCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCount(long companyId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId);
 
 	/**
 	* Returns the cp option category with the primary key.
@@ -294,20 +252,20 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionCategory getCPOptionCategory(long groupId, String key)
+	public CPOptionCategory getCPOptionCategory(long companyId, String key)
 		throws PortalException;
 
 	/**
-	* Returns the cp option category matching the UUID and group.
+	* Returns the cp option category with the matching UUID and company.
 	*
 	* @param uuid the cp option category's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option category
 	* @throws PortalException if a matching cp option category could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionCategory getCPOptionCategoryByUuidAndGroupId(String uuid,
-		long groupId) throws PortalException;
+	public CPOptionCategory getCPOptionCategoryByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -328,6 +286,11 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPOptionCategory> searchCPOptionCategories(
+		long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
 	/**
 	* Updates the cp option category in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
@@ -338,6 +301,7 @@ public interface CPOptionCategoryLocalService extends BaseLocalService,
 	public CPOptionCategory updateCPOptionCategory(
 		CPOptionCategory cpOptionCategory);
 
+	@Indexable(type = IndexableType.REINDEX)
 	public CPOptionCategory updateCPOptionCategory(long cpOptionCategoryId,
 		Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 		double priority, String key, ServiceContext serviceContext)

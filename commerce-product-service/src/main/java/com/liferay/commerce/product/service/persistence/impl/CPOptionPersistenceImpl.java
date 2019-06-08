@@ -28,9 +28,11 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.CompanyProvider;
@@ -557,6 +559,339 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 	}
 
 	/**
+	 * Returns all the cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @return the matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid(String uuid) {
+		return filterFindByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid(String uuid, int start, int end) {
+		return filterFindByUuid(uuid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid(String uuid, int start, int end,
+		OrderByComparator<CPOption> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByUuid(uuid, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindUuid = false;
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_UUID_3_SQL);
+		}
+		else {
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_UUID_2_SQL);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindUuid) {
+				qPos.add(uuid);
+			}
+
+			return (List<CPOption>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param uuid the uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	@Override
+	public CPOption[] filterFindByUuid_PrevAndNext(long CPOptionId,
+		String uuid, OrderByComparator<CPOption> orderByComparator)
+		throws NoSuchCPOptionException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByUuid_PrevAndNext(CPOptionId, uuid, orderByComparator);
+		}
+
+		CPOption cpOption = findByPrimaryKey(CPOptionId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPOption[] array = new CPOptionImpl[3];
+
+			array[0] = filterGetByUuid_PrevAndNext(session, cpOption, uuid,
+					orderByComparator, true);
+
+			array[1] = cpOption;
+
+			array[2] = filterGetByUuid_PrevAndNext(session, cpOption, uuid,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPOption filterGetByUuid_PrevAndNext(Session session,
+		CPOption cpOption, String uuid,
+		OrderByComparator<CPOption> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindUuid = false;
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_UUID_3_SQL);
+		}
+		else {
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_UUID_2_SQL);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindUuid) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(cpOption);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CPOption> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the cp options where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
@@ -634,256 +969,73 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 		return count.intValue();
 	}
 
+	/**
+	 * Returns the number of cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @return the number of matching cp options that the user has permission to view
+	 */
+	@Override
+	public int filterCountByUuid(String uuid) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByUuid(uuid);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_CPOPTION_WHERE);
+
+		boolean bindUuid = false;
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_UUID_3_SQL);
+		}
+		else {
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_UUID_2_SQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindUuid) {
+				qPos.add(uuid);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "cpOption.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "cpOption.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(cpOption.uuid IS NULL OR cpOption.uuid = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() },
-			CPOptionModelImpl.UUID_COLUMN_BITMASK |
-			CPOptionModelImpl.GROUPID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchCPOptionException} if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cp option
-	 * @throws NoSuchCPOptionException if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption findByUUID_G(String uuid, long groupId)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = fetchByUUID_G(uuid, groupId);
-
-		if (cpOption == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCPOptionException(msg.toString());
-		}
-
-		return cpOption;
-	}
-
-	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-					finderArgs, this);
-		}
-
-		if (result instanceof CPOption) {
-			CPOption cpOption = (CPOption)result;
-
-			if (!Objects.equals(uuid, cpOption.getUuid()) ||
-					(groupId != cpOption.getGroupId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_CPOPTION_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<CPOption> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
-				}
-				else {
-					CPOption cpOption = list.get(0);
-
-					result = cpOption;
-
-					cacheResult(cpOption);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CPOption)result;
-		}
-	}
-
-	/**
-	 * Removes the cp option where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the cp option that was removed
-	 */
-	@Override
-	public CPOption removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = findByUUID_G(uuid, groupId);
-
-		return remove(cpOption);
-	}
-
-	/**
-	 * Returns the number of cp options where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching cp options
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
-
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CPOPTION_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals("")) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "cpOption.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "cpOption.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(cpOption.uuid IS NULL OR cpOption.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "cpOption.groupId = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_1_SQL = "cpOption.uuid_ IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2_SQL = "cpOption.uuid_ = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3_SQL = "(cpOption.uuid_ IS NULL OR cpOption.uuid_ = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
 			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
@@ -1383,6 +1535,355 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 	}
 
 	/**
+	 * Returns all the cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @return the matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid_C(String uuid, long companyId) {
+		return filterFindByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid_C(String uuid, long companyId,
+		int start, int end) {
+		return filterFindByUuid_C(uuid, companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByUuid_C(String uuid, long companyId,
+		int start, int end, OrderByComparator<CPOption> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByUuid_C(uuid, companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindUuid = false;
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_3_SQL);
+		}
+		else {
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_C_UUID_2_SQL);
+		}
+
+		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindUuid) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(companyId);
+
+			return (List<CPOption>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	@Override
+	public CPOption[] filterFindByUuid_C_PrevAndNext(long CPOptionId,
+		String uuid, long companyId,
+		OrderByComparator<CPOption> orderByComparator)
+		throws NoSuchCPOptionException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByUuid_C_PrevAndNext(CPOptionId, uuid, companyId,
+				orderByComparator);
+		}
+
+		CPOption cpOption = findByPrimaryKey(CPOptionId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPOption[] array = new CPOptionImpl[3];
+
+			array[0] = filterGetByUuid_C_PrevAndNext(session, cpOption, uuid,
+					companyId, orderByComparator, true);
+
+			array[1] = cpOption;
+
+			array[2] = filterGetByUuid_C_PrevAndNext(session, cpOption, uuid,
+					companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPOption filterGetByUuid_C_PrevAndNext(Session session,
+		CPOption cpOption, String uuid, long companyId,
+		OrderByComparator<CPOption> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindUuid = false;
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_3_SQL);
+		}
+		else {
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_C_UUID_2_SQL);
+		}
+
+		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindUuid) {
+			qPos.add(uuid);
+		}
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(cpOption);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CPOption> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the cp options where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
@@ -1466,330 +1967,63 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "cpOption.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpOption.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpOption.uuid IS NULL OR cpOption.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpOption.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
-		new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
-			new String[] { Long.class.getName() },
-			CPOptionModelImpl.GROUPID_COLUMN_BITMASK |
-			CPOptionModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
-			new String[] { Long.class.getName() });
-
 	/**
-	 * Returns all the cp options where groupId = &#63;.
+	 * Returns the number of cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param groupId the group ID
-	 * @return the matching cp options
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @return the number of matching cp options that the user has permission to view
 	 */
 	@Override
-	public List<CPOption> findByGroupId(long groupId) {
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
+	public int filterCountByUuid_C(String uuid, long companyId) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByUuid_C(uuid, companyId);
+		}
 
-	/**
-	 * Returns a range of all the cp options where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @return the range of matching cp options
-	 */
-	@Override
-	public List<CPOption> findByGroupId(long groupId, int start, int end) {
-		return findByGroupId(groupId, start, end, null);
-	}
+		StringBundler query = new StringBundler(3);
 
-	/**
-	 * Returns an ordered range of all the cp options where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching cp options
-	 */
-	@Override
-	public List<CPOption> findByGroupId(long groupId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator) {
-		return findByGroupId(groupId, start, end, orderByComparator, true);
-	}
+		query.append(_FILTER_SQL_COUNT_CPOPTION_WHERE);
 
-	/**
-	 * Returns an ordered range of all the cp options where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching cp options
-	 */
-	@Override
-	public List<CPOption> findByGroupId(long groupId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator, boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+		boolean bindUuid = false;
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId };
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_1_SQL);
+		}
+		else if (uuid.equals("")) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_3_SQL);
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-			finderArgs = new Object[] { groupId, start, end, orderByComparator };
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_C_UUID_2_SQL);
 		}
 
-		List<CPOption> list = null;
+		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
 
-		if (retrieveFromCache) {
-			list = (List<CPOption>)finderCache.getResult(finderPath,
-					finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CPOption cpOption : list) {
-					if ((groupId != cpOption.getGroupId())) {
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_CPOPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (!pagination) {
-					list = (List<CPOption>)QueryUtil.list(q, getDialect(),
-							start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CPOption>)QueryUtil.list(q, getDialect(),
-							start, end);
-				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first cp option in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching cp option
-	 * @throws NoSuchCPOptionException if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption findByGroupId_First(long groupId,
-		OrderByComparator<CPOption> orderByComparator)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = fetchByGroupId_First(groupId, orderByComparator);
-
-		if (cpOption != null) {
-			return cpOption;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append("}");
-
-		throw new NoSuchCPOptionException(msg.toString());
-	}
-
-	/**
-	 * Returns the first cp option in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByGroupId_First(long groupId,
-		OrderByComparator<CPOption> orderByComparator) {
-		List<CPOption> list = findByGroupId(groupId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last cp option in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching cp option
-	 * @throws NoSuchCPOptionException if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption findByGroupId_Last(long groupId,
-		OrderByComparator<CPOption> orderByComparator)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = fetchByGroupId_Last(groupId, orderByComparator);
-
-		if (cpOption != null) {
-			return cpOption;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append("}");
-
-		throw new NoSuchCPOptionException(msg.toString());
-	}
-
-	/**
-	 * Returns the last cp option in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByGroupId_Last(long groupId,
-		OrderByComparator<CPOption> orderByComparator) {
-		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CPOption> list = findByGroupId(groupId, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the cp options before and after the current cp option in the ordered set where groupId = &#63;.
-	 *
-	 * @param CPOptionId the primary key of the current cp option
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next cp option
-	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
-	 */
-	@Override
-	public CPOption[] findByGroupId_PrevAndNext(long CPOptionId, long groupId,
-		OrderByComparator<CPOption> orderByComparator)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = findByPrimaryKey(CPOptionId);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CPOption[] array = new CPOptionImpl[3];
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
-			array[0] = getByGroupId_PrevAndNext(session, cpOption, groupId,
-					orderByComparator, true);
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
 
-			array[1] = cpOption;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			array[2] = getByGroupId_PrevAndNext(session, cpOption, groupId,
-					orderByComparator, false);
+			if (bindUuid) {
+				qPos.add(uuid);
+			}
 
-			return array;
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1799,177 +2033,13 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 		}
 	}
 
-	protected CPOption getByGroupId_PrevAndNext(Session session,
-		CPOption cpOption, long groupId,
-		OrderByComparator<CPOption> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_CPOPTION_WHERE);
-
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CPOptionModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(groupId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(cpOption);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<CPOption> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the cp options where groupId = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 */
-	@Override
-	public void removeByGroupId(long groupId) {
-		for (CPOption cpOption : findByGroupId(groupId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
-			remove(cpOption);
-		}
-	}
-
-	/**
-	 * Returns the number of cp options where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @return the number of matching cp options
-	 */
-	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
-
-		Object[] finderArgs = new Object[] { groupId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_CPOPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "cpOption.groupId = ?";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "cpOption.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "cpOption.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(cpOption.uuid IS NULL OR cpOption.uuid = '') AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_1_SQL = "cpOption.uuid_ IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_2_SQL = "cpOption.uuid_ = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3_SQL = "(cpOption.uuid_ IS NULL OR cpOption.uuid_ = '') AND ";
+	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "cpOption.companyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
 		new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
 			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
@@ -2408,6 +2478,314 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 	}
 
 	/**
+	 * Returns all the cp options that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByCompanyId(long companyId) {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp options that the user has permission to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByCompanyId(long companyId, int start,
+		int end) {
+		return filterFindByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CPOptionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	@Override
+	public List<CPOption> filterFindByCompanyId(long companyId, int start,
+		int end, OrderByComparator<CPOption> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (List<CPOption>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	@Override
+	public CPOption[] filterFindByCompanyId_PrevAndNext(long CPOptionId,
+		long companyId, OrderByComparator<CPOption> orderByComparator)
+		throws NoSuchCPOptionException {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return findByCompanyId_PrevAndNext(CPOptionId, companyId,
+				orderByComparator);
+		}
+
+		CPOption cpOption = findByPrimaryKey(CPOptionId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPOption[] array = new CPOptionImpl[3];
+
+			array[0] = filterGetByCompanyId_PrevAndNext(session, cpOption,
+					companyId, orderByComparator, true);
+
+			array[1] = cpOption;
+
+			array[2] = filterGetByCompanyId_PrevAndNext(session, cpOption,
+					companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPOption filterGetByCompanyId_PrevAndNext(Session session,
+		CPOption cpOption, long companyId,
+		OrderByComparator<CPOption> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CPOptionModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CPOptionImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CPOptionImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(cpOption);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CPOption> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the cp options where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -2471,254 +2849,54 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 		return count.intValue();
 	}
 
+	/**
+	 * Returns the number of cp options that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the number of matching cp options that the user has permission to view
+	 */
+	@Override
+	public int filterCountByCompanyId(long companyId) {
+		if (!InlineSQLHelperUtil.isEnabled(companyId, 0)) {
+			return countByCompanyId(companyId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_CPOPTION_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CPOption.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "cpOption.companyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_K = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_K",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CPOptionModelImpl.GROUPID_COLUMN_BITMASK |
-			CPOptionModelImpl.KEY_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_K = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
-			CPOptionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_K",
-			new String[] { Long.class.getName(), String.class.getName() });
-
-	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or throws a {@link NoSuchCPOptionException} if it could not be found.
-	 *
-	 * @param groupId the group ID
-	 * @param key the key
-	 * @return the matching cp option
-	 * @throws NoSuchCPOptionException if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption findByG_K(long groupId, String key)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = fetchByG_K(groupId, key);
-
-		if (cpOption == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", key=");
-			msg.append(key);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCPOptionException(msg.toString());
-		}
-
-		return cpOption;
-	}
-
-	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param key the key
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByG_K(long groupId, String key) {
-		return fetchByG_K(groupId, key, true);
-	}
-
-	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	@Override
-	public CPOption fetchByG_K(long groupId, String key,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { groupId, key };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_G_K,
-					finderArgs, this);
-		}
-
-		if (result instanceof CPOption) {
-			CPOption cpOption = (CPOption)result;
-
-			if ((groupId != cpOption.getGroupId()) ||
-					!Objects.equals(key, cpOption.getKey())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_CPOPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_G_K_GROUPID_2);
-
-			boolean bindKey = false;
-
-			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_KEY_1);
-			}
-			else if (key.equals("")) {
-				query.append(_FINDER_COLUMN_G_K_KEY_3);
-			}
-			else {
-				bindKey = true;
-
-				query.append(_FINDER_COLUMN_G_K_KEY_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (bindKey) {
-					qPos.add(key);
-				}
-
-				List<CPOption> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_G_K, finderArgs,
-						list);
-				}
-				else {
-					CPOption cpOption = list.get(0);
-
-					result = cpOption;
-
-					cacheResult(cpOption);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CPOption)result;
-		}
-	}
-
-	/**
-	 * Removes the cp option where groupId = &#63; and key = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param key the key
-	 * @return the cp option that was removed
-	 */
-	@Override
-	public CPOption removeByG_K(long groupId, String key)
-		throws NoSuchCPOptionException {
-		CPOption cpOption = findByG_K(groupId, key);
-
-		return remove(cpOption);
-	}
-
-	/**
-	 * Returns the number of cp options where groupId = &#63; and key = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param key the key
-	 * @return the number of matching cp options
-	 */
-	@Override
-	public int countByG_K(long groupId, String key) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_K;
-
-		Object[] finderArgs = new Object[] { groupId, key };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CPOPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_G_K_GROUPID_2);
-
-			boolean bindKey = false;
-
-			if (key == null) {
-				query.append(_FINDER_COLUMN_G_K_KEY_1);
-			}
-			else if (key.equals("")) {
-				query.append(_FINDER_COLUMN_G_K_KEY_3);
-			}
-			else {
-				bindKey = true;
-
-				query.append(_FINDER_COLUMN_G_K_KEY_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (bindKey) {
-					qPos.add(key);
-				}
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_G_K_GROUPID_2 = "cpOption.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_K_KEY_1 = "cpOption.key IS NULL";
-	private static final String _FINDER_COLUMN_G_K_KEY_2 = "cpOption.key = ?";
-	private static final String _FINDER_COLUMN_G_K_KEY_3 = "(cpOption.key IS NULL OR cpOption.key = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_K = new FinderPath(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
 			CPOptionModelImpl.FINDER_CACHE_ENABLED, CPOptionImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_K",
@@ -3259,12 +3437,6 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 		entityCache.putResult(CPOptionModelImpl.ENTITY_CACHE_ENABLED,
 			CPOptionImpl.class, cpOption.getPrimaryKey(), cpOption);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { cpOption.getUuid(), cpOption.getGroupId() }, cpOption);
-
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K,
-			new Object[] { cpOption.getGroupId(), cpOption.getKey() }, cpOption);
-
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_K,
 			new Object[] { cpOption.getCompanyId(), cpOption.getKey() },
 			cpOption);
@@ -3344,24 +3516,6 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 
 	protected void cacheUniqueFindersCache(CPOptionModelImpl cpOptionModelImpl) {
 		Object[] args = new Object[] {
-				cpOptionModelImpl.getUuid(), cpOptionModelImpl.getGroupId()
-			};
-
-		finderCache.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
-			Long.valueOf(1), false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
-			cpOptionModelImpl, false);
-
-		args = new Object[] {
-				cpOptionModelImpl.getGroupId(), cpOptionModelImpl.getKey()
-			};
-
-		finderCache.putResult(FINDER_PATH_COUNT_BY_G_K, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_G_K, args,
-			cpOptionModelImpl, false);
-
-		args = new Object[] {
 				cpOptionModelImpl.getCompanyId(), cpOptionModelImpl.getKey()
 			};
 
@@ -3383,46 +3537,6 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 
 	protected void clearUniqueFindersCache(
 		CPOptionModelImpl cpOptionModelImpl, boolean clearCurrent) {
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					cpOptionModelImpl.getUuid(), cpOptionModelImpl.getGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-		}
-
-		if ((cpOptionModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					cpOptionModelImpl.getOriginalUuid(),
-					cpOptionModelImpl.getOriginalGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-		}
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-					cpOptionModelImpl.getGroupId(), cpOptionModelImpl.getKey()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, args);
-		}
-
-		if ((cpOptionModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_K.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					cpOptionModelImpl.getOriginalGroupId(),
-					cpOptionModelImpl.getOriginalKey()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_K, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_G_K, args);
-		}
-
 		if (clearCurrent) {
 			Object[] args = new Object[] {
 					cpOptionModelImpl.getCompanyId(), cpOptionModelImpl.getKey()
@@ -3662,12 +3776,6 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 				args);
 
-			args = new Object[] { cpOptionModelImpl.getGroupId() };
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-				args);
-
 			args = new Object[] { cpOptionModelImpl.getCompanyId() };
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
@@ -3713,23 +3821,6 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
-					args);
-			}
-
-			if ((cpOptionModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						cpOptionModelImpl.getOriginalGroupId()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
-					args);
-
-				args = new Object[] { cpOptionModelImpl.getGroupId() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 			}
 
@@ -4175,7 +4266,17 @@ public class CPOptionPersistenceImpl extends BasePersistenceImpl<CPOption>
 	private static final String _SQL_SELECT_CPOPTION_WHERE = "SELECT cpOption FROM CPOption cpOption WHERE ";
 	private static final String _SQL_COUNT_CPOPTION = "SELECT COUNT(cpOption) FROM CPOption cpOption";
 	private static final String _SQL_COUNT_CPOPTION_WHERE = "SELECT COUNT(cpOption) FROM CPOption cpOption WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "cpOption.CPOptionId";
+	private static final String _FILTER_SQL_SELECT_CPOPTION_WHERE = "SELECT DISTINCT {cpOption.*} FROM CPOption cpOption WHERE ";
+	private static final String _FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {CPOption.*} FROM (SELECT DISTINCT cpOption.CPOptionId FROM CPOption cpOption WHERE ";
+	private static final String _FILTER_SQL_SELECT_CPOPTION_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN CPOption ON TEMP_TABLE.CPOptionId = CPOption.CPOptionId";
+	private static final String _FILTER_SQL_COUNT_CPOPTION_WHERE = "SELECT COUNT(DISTINCT cpOption.CPOptionId) AS COUNT_VALUE FROM CPOption cpOption WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "cpOption";
+	private static final String _FILTER_ENTITY_TABLE = "CPOption";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "cpOption.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "CPOption.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CPOption exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CPOption exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CPOptionPersistenceImpl.class);

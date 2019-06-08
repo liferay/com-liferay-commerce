@@ -77,12 +77,6 @@ public class CommerceCatalogServiceUtil {
 		return getService().getCommerceCatalogGroup(commerceCatalogId);
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
-		long companyId, boolean system)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceCatalogs(companyId, system);
-	}
-
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -90,12 +84,6 @@ public class CommerceCatalogServiceUtil {
 	*/
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
-		long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().searchCommerceCatalogs(companyId);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(

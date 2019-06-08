@@ -30,10 +30,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
@@ -84,7 +82,7 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 		CPSpecificationOption cpSpecificationOption);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CPSpecificationOption addCPSpecificationOption(
+	public CPSpecificationOption addCPSpecificationOption(long userId,
 		long cpOptionCategoryId, Map<Locale, String> titleMap,
 		Map<Locale, String> descriptionMap, boolean facetable, String key,
 		ServiceContext serviceContext) throws PortalException;
@@ -122,7 +120,7 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	public CPSpecificationOption deleteCPSpecificationOption(
 		long CPSpecificationOptionId) throws PortalException;
 
-	public void deleteCPSpecificationOptions(long groupId)
+	public void deleteCPSpecificationOptions(long companyId)
 		throws PortalException;
 
 	/**
@@ -202,19 +200,19 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 		long CPSpecificationOptionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPSpecificationOption fetchCPSpecificationOption(long groupId,
+	public CPSpecificationOption fetchCPSpecificationOption(long companyId,
 		String key);
 
 	/**
-	* Returns the cp specification option matching the UUID and group.
+	* Returns the cp specification option with the matching UUID and company.
 	*
 	* @param uuid the cp specification option's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPSpecificationOption fetchCPSpecificationOptionByUuidAndGroupId(
-		String uuid, long groupId);
+	public CPSpecificationOption fetchCPSpecificationOptionByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -231,20 +229,20 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 		long CPSpecificationOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPSpecificationOption getCPSpecificationOption(long groupId,
+	public CPSpecificationOption getCPSpecificationOption(long companyId,
 		String key) throws PortalException;
 
 	/**
-	* Returns the cp specification option matching the UUID and group.
+	* Returns the cp specification option with the matching UUID and company.
 	*
 	* @param uuid the cp specification option's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp specification option
 	* @throws PortalException if a matching cp specification option could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPSpecificationOption getCPSpecificationOptionByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException;
+	public CPSpecificationOption getCPSpecificationOptionByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException;
 
 	/**
 	* Returns a range of all the cp specification options.
@@ -260,45 +258,6 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPSpecificationOption> getCPSpecificationOptions(int start,
 		int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptions(
-		long companyId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPSpecificationOptionsByCatalogGroupIdCount(long groupId);
-
-	/**
-	* Returns all the cp specification options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp specification options
-	* @param companyId the primary key of the company
-	* @return the matching cp specification options, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptionsByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	* Returns a range of cp specification options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp specification options
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of cp specification options
-	* @param end the upper bound of the range of cp specification options (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching cp specification options, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptionsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator);
 
 	/**
 	* Returns the number of cp specification options.
@@ -326,9 +285,6 @@ public interface CPSpecificationOptionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Hits search(SearchContext searchContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPSpecificationOption> searchCPSpecificationOptions(

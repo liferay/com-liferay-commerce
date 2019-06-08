@@ -47,28 +47,15 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPOption addCPOption(
-		java.util.Map<java.util.Locale, String> nameMap,
-		java.util.Map<java.util.Locale, String> descriptionMap,
-		String ddmFormFieldTypeName, boolean facetable, boolean required,
-		boolean skuContributor, String key,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.addCPOption(nameMap, descriptionMap,
-			ddmFormFieldTypeName, facetable, required, skuContributor, key,
-			serviceContext);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPOption addCPOption(
-		java.util.Map<java.util.Locale, String> nameMap,
+		long userId, java.util.Map<java.util.Locale, String> nameMap,
 		java.util.Map<java.util.Locale, String> descriptionMap,
 		String ddmFormFieldTypeName, boolean facetable, boolean required,
 		boolean skuContributor, String key, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.addCPOption(nameMap, descriptionMap,
-			ddmFormFieldTypeName, facetable, required, skuContributor, key,
-			externalReferenceCode, serviceContext);
+		return _cpOptionLocalService.addCPOption(userId, nameMap,
+			descriptionMap, ddmFormFieldTypeName, facetable, required,
+			skuContributor, key, externalReferenceCode, serviceContext);
 	}
 
 	/**
@@ -112,9 +99,9 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 	}
 
 	@Override
-	public void deleteCPOptions(long groupId)
+	public void deleteCPOptions(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		_cpOptionLocalService.deleteCPOptions(groupId);
+		_cpOptionLocalService.deleteCPOptions(companyId);
 	}
 
 	/**
@@ -231,13 +218,6 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		return _cpOptionLocalService.fetchCPOption(companyId, key);
 	}
 
-	@Override
-	public com.liferay.commerce.product.model.CPOption fetchCPOptionByCatalogGroupId(
-		long groupId, String key)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.fetchCPOptionByCatalogGroupId(groupId, key);
-	}
-
 	/**
 	* Returns the cp option with the matching external reference code and company.
 	*
@@ -253,16 +233,17 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 	}
 
 	/**
-	* Returns the cp option matching the UUID and group.
+	* Returns the cp option with the matching UUID and company.
 	*
 	* @param uuid the cp option's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	*/
 	@Override
-	public com.liferay.commerce.product.model.CPOption fetchCPOptionByUuidAndGroupId(
-		String uuid, long groupId) {
-		return _cpOptionLocalService.fetchCPOptionByUuidAndGroupId(uuid, groupId);
+	public com.liferay.commerce.product.model.CPOption fetchCPOptionByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return _cpOptionLocalService.fetchCPOptionByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	@Override
@@ -291,26 +272,20 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		return _cpOptionLocalService.getCPOption(companyId, key);
 	}
 
-	@Override
-	public com.liferay.commerce.product.model.CPOption getCPOptionByCatalogGroupId(
-		long groupId, String key)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.getCPOptionByCatalogGroupId(groupId, key);
-	}
-
 	/**
-	* Returns the cp option matching the UUID and group.
+	* Returns the cp option with the matching UUID and company.
 	*
 	* @param uuid the cp option's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option
 	* @throws PortalException if a matching cp option could not be found
 	*/
 	@Override
-	public com.liferay.commerce.product.model.CPOption getCPOptionByUuidAndGroupId(
-		String uuid, long groupId)
+	public com.liferay.commerce.product.model.CPOption getCPOptionByUuidAndCompanyId(
+		String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.getCPOptionByUuidAndGroupId(uuid, groupId);
+		return _cpOptionLocalService.getCPOptionByUuidAndCompanyId(uuid,
+			companyId);
 	}
 
 	/**
@@ -330,67 +305,6 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 		return _cpOptionLocalService.getCPOptions(start, end);
 	}
 
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptions(
-		long companyId, int start, int end) {
-		return _cpOptionLocalService.getCPOptions(companyId, start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptions(
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator) {
-		return _cpOptionLocalService.getCPOptions(companyId, start, end,
-			orderByComparator);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByCatalogGroupId(
-		long groupId, int start, int end) {
-		return _cpOptionLocalService.getCPOptionsByCatalogGroupId(groupId,
-			start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByCatalogGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator) {
-		return _cpOptionLocalService.getCPOptionsByCatalogGroupId(groupId,
-			start, end, orderByComparator);
-	}
-
-	/**
-	* Returns all the cp options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp options
-	* @param companyId the primary key of the company
-	* @return the matching cp options, or an empty list if no matches were found
-	*/
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return _cpOptionLocalService.getCPOptionsByUuidAndCompanyId(uuid,
-			companyId);
-	}
-
-	/**
-	* Returns a range of cp options matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp options
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of cp options
-	* @param end the upper bound of the range of cp options (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching cp options, or an empty list if no matches were found
-	*/
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator) {
-		return _cpOptionLocalService.getCPOptionsByUuidAndCompanyId(uuid,
-			companyId, start, end, orderByComparator);
-	}
-
 	/**
 	* Returns the number of cp options.
 	*
@@ -404,11 +318,6 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 	@Override
 	public int getCPOptionsCount(long companyId) {
 		return _cpOptionLocalService.getCPOptionsCount(companyId);
-	}
-
-	@Override
-	public int getCPOptionsCountByCatalogGroupId(long groupId) {
-		return _cpOptionLocalService.getCPOptionsCountByCatalogGroupId(groupId);
 	}
 
 	@Override
@@ -440,40 +349,12 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-		return _cpOptionLocalService.search(searchContext);
-	}
-
-	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPOption> searchCPOptions(
 		long companyId, String keywords, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpOptionLocalService.searchCPOptions(companyId, keywords,
 			start, end, sort);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPOption setFacetable(
-		long cpOptionId, boolean facetable)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.setFacetable(cpOptionId, facetable);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPOption setRequired(
-		long cpOptionId, boolean required)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.setRequired(cpOptionId, required);
-	}
-
-	@Override
-	public com.liferay.commerce.product.model.CPOption setSkuContributor(
-		long cpOptionId, boolean skuContributor)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.setSkuContributor(cpOptionId,
-			skuContributor);
 	}
 
 	/**
@@ -503,15 +384,15 @@ public class CPOptionLocalServiceWrapper implements CPOptionLocalService,
 
 	@Override
 	public com.liferay.commerce.product.model.CPOption upsertCPOption(
-		java.util.Map<java.util.Locale, String> nameMap,
+		long userId, java.util.Map<java.util.Locale, String> nameMap,
 		java.util.Map<java.util.Locale, String> descriptionMap,
 		String ddmFormFieldTypeName, boolean facetable, boolean required,
 		boolean skuContributor, String key, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpOptionLocalService.upsertCPOption(nameMap, descriptionMap,
-			ddmFormFieldTypeName, facetable, required, skuContributor, key,
-			externalReferenceCode, serviceContext);
+		return _cpOptionLocalService.upsertCPOption(userId, nameMap,
+			descriptionMap, ddmFormFieldTypeName, facetable, required,
+			skuContributor, key, externalReferenceCode, serviceContext);
 	}
 
 	@Override

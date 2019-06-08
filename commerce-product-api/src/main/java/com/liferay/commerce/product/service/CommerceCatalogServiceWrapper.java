@@ -73,13 +73,6 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 		return _commerceCatalogService.getCommerceCatalogGroup(commerceCatalogId);
 	}
 
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
-		long companyId, boolean system)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogService.getCommerceCatalogs(companyId, system);
-	}
-
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -88,13 +81,6 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceCatalogService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
-		long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogService.searchCommerceCatalogs(companyId);
 	}
 
 	@Override

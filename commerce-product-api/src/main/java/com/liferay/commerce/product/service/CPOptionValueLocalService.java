@@ -218,15 +218,15 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 		String externalReferenceCode);
 
 	/**
-	* Returns the cp option value matching the UUID and group.
+	* Returns the cp option value with the matching UUID and company.
 	*
 	* @param uuid the cp option value's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionValue fetchCPOptionValueByUuidAndGroupId(String uuid,
-		long groupId);
+	public CPOptionValue fetchCPOptionValueByUuidAndCompanyId(String uuid,
+		long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -247,16 +247,16 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the cp option value matching the UUID and group.
+	* Returns the cp option value with the matching UUID and company.
 	*
 	* @param uuid the cp option value's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching cp option value
 	* @throws PortalException if a matching cp option value could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOptionValue getCPOptionValueByUuidAndGroupId(String uuid,
-		long groupId) throws PortalException;
+	public CPOptionValue getCPOptionValueByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException;
 
 	/**
 	* Returns a range of all the cp option values.
@@ -279,32 +279,6 @@ public interface CPOptionValueLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPOptionValue> getCPOptionValues(long cpOptionId, int start,
 		int end, OrderByComparator<CPOptionValue> orderByComparator);
-
-	/**
-	* Returns all the cp option values matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp option values
-	* @param companyId the primary key of the company
-	* @return the matching cp option values, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionValue> getCPOptionValuesByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	* Returns a range of cp option values matching the UUID and company.
-	*
-	* @param uuid the UUID of the cp option values
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of cp option values
-	* @param end the upper bound of the range of cp option values (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching cp option values, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionValue> getCPOptionValuesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPOptionValue> orderByComparator);
 
 	/**
 	* Returns the number of cp option values.

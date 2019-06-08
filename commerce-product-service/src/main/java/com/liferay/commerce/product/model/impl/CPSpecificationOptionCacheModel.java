@@ -65,14 +65,12 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", CPSpecificationOptionId=");
 		sb.append(CPSpecificationOptionId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -112,7 +110,6 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 		}
 
 		cpSpecificationOptionImpl.setCPSpecificationOptionId(CPSpecificationOptionId);
-		cpSpecificationOptionImpl.setGroupId(groupId);
 		cpSpecificationOptionImpl.setCompanyId(companyId);
 		cpSpecificationOptionImpl.setUserId(userId);
 
@@ -181,8 +178,6 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 
 		CPSpecificationOptionId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -210,8 +205,6 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 		}
 
 		objectOutput.writeLong(CPSpecificationOptionId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -257,7 +250,6 @@ public class CPSpecificationOptionCacheModel implements CacheModel<CPSpecificati
 
 	public String uuid;
 	public long CPSpecificationOptionId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

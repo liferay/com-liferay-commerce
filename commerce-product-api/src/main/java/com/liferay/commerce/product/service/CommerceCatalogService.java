@@ -79,20 +79,12 @@ public interface CommerceCatalogService extends BaseService {
 	public Group getCommerceCatalogGroup(long commerceCatalogId)
 		throws PortalException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCatalog> getCommerceCatalogs(long companyId,
-		boolean system) throws PortalException;
-
 	/**
 	* Returns the OSGi service identifier.
 	*
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
-		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCatalog> searchCommerceCatalogs(long companyId,

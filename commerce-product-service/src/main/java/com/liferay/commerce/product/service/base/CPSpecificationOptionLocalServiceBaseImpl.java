@@ -251,16 +251,17 @@ public abstract class CPSpecificationOptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
 	 */
 	@Override
-	public CPSpecificationOption fetchCPSpecificationOptionByUuidAndGroupId(
-		String uuid, long groupId) {
-		return cpSpecificationOptionPersistence.fetchByUUID_G(uuid, groupId);
+	public CPSpecificationOption fetchCPSpecificationOptionByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return cpSpecificationOptionPersistence.fetchByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**
@@ -351,8 +352,6 @@ public abstract class CPSpecificationOptionLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPSpecificationOption>() {
 				@Override
 				public void performAction(
@@ -384,48 +383,18 @@ public abstract class CPSpecificationOptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp specification options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPSpecificationOption> getCPSpecificationOptionsByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return cpSpecificationOptionPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp specification options
-	 * @param end the upper bound of the range of cp specification options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp specification options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPSpecificationOption> getCPSpecificationOptionsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator) {
-		return cpSpecificationOptionPersistence.findByUuid_C(uuid, companyId,
-			start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option
 	 * @throws PortalException if a matching cp specification option could not be found
 	 */
 	@Override
-	public CPSpecificationOption getCPSpecificationOptionByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException {
-		return cpSpecificationOptionPersistence.findByUUID_G(uuid, groupId);
+	public CPSpecificationOption getCPSpecificationOptionByUuidAndCompanyId(
+		String uuid, long companyId) throws PortalException {
+		return cpSpecificationOptionPersistence.findByUuid_C_First(uuid,
+			companyId, null);
 	}
 
 	/**

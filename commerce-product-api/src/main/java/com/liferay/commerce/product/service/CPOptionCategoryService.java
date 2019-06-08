@@ -21,6 +21,8 @@ import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -28,9 +30,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -70,34 +70,6 @@ public interface CPOptionCategoryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long companyId,
-		int start, int end) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategories(long companyId,
-		int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCount(long companyId)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOptionCategory getCPOptionCategory(long cpOptionCategoryId)
 		throws PortalException;
 
@@ -107,6 +79,11 @@ public interface CPOptionCategoryService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPOptionCategory> searchCPOptionCategories(
+		long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException;
 
 	public CPOptionCategory updateCPOptionCategory(long cpOptionCategoryId,
 		Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,

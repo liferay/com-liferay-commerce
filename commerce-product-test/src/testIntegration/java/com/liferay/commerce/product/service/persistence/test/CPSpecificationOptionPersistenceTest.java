@@ -126,8 +126,6 @@ public class CPSpecificationOptionPersistenceTest {
 
 		newCPSpecificationOption.setUuid(RandomTestUtil.randomString());
 
-		newCPSpecificationOption.setGroupId(RandomTestUtil.nextLong());
-
 		newCPSpecificationOption.setCompanyId(RandomTestUtil.nextLong());
 
 		newCPSpecificationOption.setUserId(RandomTestUtil.nextLong());
@@ -159,8 +157,6 @@ public class CPSpecificationOptionPersistenceTest {
 			newCPSpecificationOption.getUuid());
 		Assert.assertEquals(existingCPSpecificationOption.getCPSpecificationOptionId(),
 			newCPSpecificationOption.getCPSpecificationOptionId());
-		Assert.assertEquals(existingCPSpecificationOption.getGroupId(),
-			newCPSpecificationOption.getGroupId());
 		Assert.assertEquals(existingCPSpecificationOption.getCompanyId(),
 			newCPSpecificationOption.getCompanyId());
 		Assert.assertEquals(existingCPSpecificationOption.getUserId(),
@@ -199,28 +195,12 @@ public class CPSpecificationOptionPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByUuid_C() throws Exception {
 		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
 
 		_persistence.countByUuid_C("null", 0L);
 
 		_persistence.countByUuid_C((String)null, 0L);
-	}
-
-	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countByGroupId(0L);
 	}
 
 	@Test
@@ -235,15 +215,6 @@ public class CPSpecificationOptionPersistenceTest {
 		_persistence.countByCPOptionCategoryId(RandomTestUtil.nextLong());
 
 		_persistence.countByCPOptionCategoryId(0L);
-	}
-
-	@Test
-	public void testCountByG_K() throws Exception {
-		_persistence.countByG_K(RandomTestUtil.nextLong(), "");
-
-		_persistence.countByG_K(0L, "null");
-
-		_persistence.countByG_K(0L, (String)null);
 	}
 
 	@Test
@@ -280,10 +251,10 @@ public class CPSpecificationOptionPersistenceTest {
 
 	protected OrderByComparator<CPSpecificationOption> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("CPSpecificationOption",
-			"uuid", true, "CPSpecificationOptionId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "CPOptionCategoryId", true, "title",
-			true, "description", true, "facetable", true, "key", true,
+			"uuid", true, "CPSpecificationOptionId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "CPOptionCategoryId", true, "title", true,
+			"description", true, "facetable", true, "key", true,
 			"lastPublishDate", true);
 	}
 
@@ -495,24 +466,6 @@ public class CPSpecificationOptionPersistenceTest {
 
 		CPSpecificationOption existingCPSpecificationOption = _persistence.findByPrimaryKey(newCPSpecificationOption.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(
-				existingCPSpecificationOption.getUuid(),
-				ReflectionTestUtil.invoke(existingCPSpecificationOption,
-					"getOriginalUuid", new Class<?>[0])));
-		Assert.assertEquals(Long.valueOf(
-				existingCPSpecificationOption.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
-				"getOriginalGroupId", new Class<?>[0]));
-
-		Assert.assertEquals(Long.valueOf(
-				existingCPSpecificationOption.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
-				"getOriginalGroupId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
-				existingCPSpecificationOption.getKey(),
-				ReflectionTestUtil.invoke(existingCPSpecificationOption,
-					"getOriginalKey", new Class<?>[0])));
-
 		Assert.assertEquals(Long.valueOf(
 				existingCPSpecificationOption.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(existingCPSpecificationOption,
@@ -530,8 +483,6 @@ public class CPSpecificationOptionPersistenceTest {
 		CPSpecificationOption cpSpecificationOption = _persistence.create(pk);
 
 		cpSpecificationOption.setUuid(RandomTestUtil.randomString());
-
-		cpSpecificationOption.setGroupId(RandomTestUtil.nextLong());
 
 		cpSpecificationOption.setCompanyId(RandomTestUtil.nextLong());
 

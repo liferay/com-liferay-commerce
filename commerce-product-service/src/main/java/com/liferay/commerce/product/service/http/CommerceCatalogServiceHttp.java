@@ -222,70 +222,6 @@ public class CommerceCatalogServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
-		HttpPrincipal httpPrincipal, long companyId, boolean system)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
-					"getCommerceCatalogs", _getCommerceCatalogsParameterTypes5);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, system);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.commerce.product.model.CommerceCatalog>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
-		HttpPrincipal httpPrincipal, long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		try {
-			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
-					"searchCommerceCatalogs",
-					_searchCommerceCatalogsParameterTypes6);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.commerce.product.model.CommerceCatalog>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> searchCommerceCatalogs(
 		HttpPrincipal httpPrincipal, long companyId, String keywords,
 		int start, int end, com.liferay.portal.kernel.search.Sort sort)
@@ -293,7 +229,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"searchCommerceCatalogs",
-					_searchCommerceCatalogsParameterTypes7);
+					_searchCommerceCatalogsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, keywords, start, end, sort);
@@ -326,7 +262,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"searchCommerceCatalogsCount",
-					_searchCommerceCatalogsCountParameterTypes8);
+					_searchCommerceCatalogsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, keywords);
@@ -361,7 +297,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"updateCommerceCatalog",
-					_updateCommerceCatalogParameterTypes9);
+					_updateCommerceCatalogParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceCatalogId, nameMap, commerceCurrencyCode,
@@ -405,20 +341,14 @@ public class CommerceCatalogServiceHttp {
 	private static final Class<?>[] _getCommerceCatalogGroupParameterTypes4 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceCatalogsParameterTypes5 = new Class[] {
-			long.class, boolean.class
-		};
-	private static final Class<?>[] _searchCommerceCatalogsParameterTypes6 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _searchCommerceCatalogsParameterTypes7 = new Class[] {
+	private static final Class<?>[] _searchCommerceCatalogsParameterTypes5 = new Class[] {
 			long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _searchCommerceCatalogsCountParameterTypes8 = new Class[] {
+	private static final Class<?>[] _searchCommerceCatalogsCountParameterTypes6 = new Class[] {
 			long.class, String.class
 		};
-	private static final Class<?>[] _updateCommerceCatalogParameterTypes9 = new Class[] {
+	private static final Class<?>[] _updateCommerceCatalogParameterTypes7 = new Class[] {
 			long.class, java.util.Map.class, String.class, String.class
 		};
 }

@@ -79,43 +79,10 @@ public class CPOptionServiceUtil {
 		return getService().fetchCPOption(companyId, key);
 	}
 
-	public static com.liferay.commerce.product.model.CPOption fetchCPOptionByCatalogGroupId(
-		long groupId, String key)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().fetchCPOptionByCatalogGroupId(groupId, key);
-	}
-
 	public static com.liferay.commerce.product.model.CPOption getCPOption(
 		long cpOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getCPOption(cpOptionId);
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptions(
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCPOptions(companyId, start, end, orderByComparator);
-	}
-
-	public static java.util.List<com.liferay.commerce.product.model.CPOption> getCPOptionsByCatalogGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .getCPOptionsByCatalogGroupId(groupId, start, end,
-			orderByComparator);
-	}
-
-	public static int getCPOptionsCount(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPOptionsCount(companyId);
-	}
-
-	public static int getCPOptionsCountByCatalogGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPOptionsCountByCatalogGroupId(groupId);
 	}
 
 	/**

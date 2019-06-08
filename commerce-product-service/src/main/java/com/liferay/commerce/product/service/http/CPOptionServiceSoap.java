@@ -151,91 +151,12 @@ public class CPOptionServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.product.model.CPOptionSoap fetchCPOptionByCatalogGroupId(
-		long groupId, String key) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.fetchCPOptionByCatalogGroupId(groupId,
-					key);
-
-			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.product.model.CPOptionSoap getCPOption(
 		long cpOptionId) throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CPOption returnValue = CPOptionServiceUtil.getCPOption(cpOptionId);
 
 			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionSoap[] getCPOptions(
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPOption> returnValue =
-				CPOptionServiceUtil.getCPOptions(companyId, start, end,
-					orderByComparator);
-
-			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPOptionSoap[] getCPOptionsByCatalogGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.product.model.CPOption> orderByComparator)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.commerce.product.model.CPOption> returnValue =
-				CPOptionServiceUtil.getCPOptionsByCatalogGroupId(groupId,
-					start, end, orderByComparator);
-
-			return com.liferay.commerce.product.model.CPOptionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCPOptionsCount(long companyId)
-		throws RemoteException {
-		try {
-			int returnValue = CPOptionServiceUtil.getCPOptionsCount(companyId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCPOptionsCountByCatalogGroupId(long groupId)
-		throws RemoteException {
-		try {
-			int returnValue = CPOptionServiceUtil.getCPOptionsCountByCatalogGroupId(groupId);
-
-			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
