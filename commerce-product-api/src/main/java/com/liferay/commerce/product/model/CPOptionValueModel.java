@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.LocalizedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -48,7 +48,7 @@ import java.util.Map;
  */
 @ProviderType
 public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
-	LocalizedModel, ShardedModel, StagedGroupedModel {
+	LocalizedModel, ShardedModel, StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -114,22 +114,6 @@ public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
 	 * @param CPOptionValueId the cp option value ID of this cp option value
 	 */
 	public void setCPOptionValueId(long CPOptionValueId);
-
-	/**
-	 * Returns the group ID of this cp option value.
-	 *
-	 * @return the group ID of this cp option value
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this cp option value.
-	 *
-	 * @param groupId the group ID of this cp option value
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this cp option value.
@@ -375,7 +359,6 @@ public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
 	 *
 	 * @return the last publish date of this cp option value
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -383,7 +366,6 @@ public interface CPOptionValueModel extends BaseModel<CPOptionValue>,
 	 *
 	 * @param lastPublishDate the last publish date of this cp option value
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override

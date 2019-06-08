@@ -355,7 +355,6 @@
 		<field name="uuid" type="String" />
 		<field name="externalReferenceCode" type="String" />
 		<field name="CPOptionId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -381,7 +380,6 @@
 	<model name="com.liferay.commerce.product.model.CPOptionCategory">
 		<field name="uuid" type="String" />
 		<field name="CPOptionCategoryId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -403,7 +401,6 @@
 		<field name="uuid" type="String" />
 		<field name="externalReferenceCode" type="String" />
 		<field name="CPOptionValueId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -437,7 +434,6 @@
 	<model name="com.liferay.commerce.product.model.CPSpecificationOption">
 		<field name="uuid" type="String" />
 		<field name="CPSpecificationOptionId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

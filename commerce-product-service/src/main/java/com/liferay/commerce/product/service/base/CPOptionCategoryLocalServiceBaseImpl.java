@@ -247,16 +247,17 @@ public abstract class CPOptionCategoryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cp option category matching the UUID and group.
+	 * Returns the cp option category with the matching UUID and company.
 	 *
 	 * @param uuid the cp option category's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option category, or <code>null</code> if a matching cp option category could not be found
 	 */
 	@Override
-	public CPOptionCategory fetchCPOptionCategoryByUuidAndGroupId(String uuid,
-		long groupId) {
-		return cpOptionCategoryPersistence.fetchByUUID_G(uuid, groupId);
+	public CPOptionCategory fetchCPOptionCategoryByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return cpOptionCategoryPersistence.fetchByUuid_C_First(uuid, companyId,
+			null);
 	}
 
 	/**
@@ -345,8 +346,6 @@ public abstract class CPOptionCategoryLocalServiceBaseImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPOptionCategory>() {
 				@Override
 				public void performAction(CPOptionCategory cpOptionCategory)
@@ -377,48 +376,18 @@ public abstract class CPOptionCategoryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the cp option categories matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option categories
-	 * @param companyId the primary key of the company
-	 * @return the matching cp option categories, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-		return cpOptionCategoryPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp option categories matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option categories
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp option categories
-	 * @param end the upper bound of the range of cp option categories (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp option categories, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator) {
-		return cpOptionCategoryPersistence.findByUuid_C(uuid, companyId, start,
-			end, orderByComparator);
-	}
-
-	/**
-	 * Returns the cp option category matching the UUID and group.
+	 * Returns the cp option category with the matching UUID and company.
 	 *
 	 * @param uuid the cp option category's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option category
 	 * @throws PortalException if a matching cp option category could not be found
 	 */
 	@Override
-	public CPOptionCategory getCPOptionCategoryByUuidAndGroupId(String uuid,
-		long groupId) throws PortalException {
-		return cpOptionCategoryPersistence.findByUUID_G(uuid, groupId);
+	public CPOptionCategory getCPOptionCategoryByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException {
+		return cpOptionCategoryPersistence.findByUuid_C_First(uuid, companyId,
+			null);
 	}
 
 	/**

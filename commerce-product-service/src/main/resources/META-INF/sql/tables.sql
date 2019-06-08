@@ -239,7 +239,6 @@ create table CPOption (
 	uuid_ VARCHAR(75) null,
 	externalReferenceCode VARCHAR(75) null,
 	CPOptionId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -258,7 +257,6 @@ create table CPOption (
 create table CPOptionCategory (
 	uuid_ VARCHAR(75) null,
 	CPOptionCategoryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -275,7 +273,6 @@ create table CPOptionValue (
 	uuid_ VARCHAR(75) null,
 	externalReferenceCode VARCHAR(75) null,
 	CPOptionValueId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -291,7 +288,6 @@ create table CPOptionValue (
 create table CPSpecificationOption (
 	uuid_ VARCHAR(75) null,
 	CPSpecificationOptionId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

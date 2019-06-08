@@ -244,15 +244,15 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
 	@Override
-	public CPOption fetchCPOptionByUuidAndGroupId(String uuid, long groupId) {
-		return cpOptionPersistence.fetchByUUID_G(uuid, groupId);
+	public CPOption fetchCPOptionByUuidAndCompanyId(String uuid, long companyId) {
+		return cpOptionPersistence.fetchByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -352,8 +352,6 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 
 		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CPOption>() {
 				@Override
 				public void performAction(CPOption cpOption)
@@ -384,48 +382,17 @@ public abstract class CPOptionLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns all the cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(String uuid,
-		long companyId) {
-		return cpOptionPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator) {
-		return cpOptionPersistence.findByUuid_C(uuid, companyId, start, end,
-			orderByComparator);
-	}
-
-	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option
 	 * @throws PortalException if a matching cp option could not be found
 	 */
 	@Override
-	public CPOption getCPOptionByUuidAndGroupId(String uuid, long groupId)
+	public CPOption getCPOptionByUuidAndCompanyId(String uuid, long companyId)
 		throws PortalException {
-		return cpOptionPersistence.findByUUID_G(uuid, groupId);
+		return cpOptionPersistence.findByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**

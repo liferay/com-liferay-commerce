@@ -64,7 +64,7 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -72,8 +72,6 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 		sb.append(externalReferenceCode);
 		sb.append(", CPOptionId=");
 		sb.append(CPOptionId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -124,7 +122,6 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 		}
 
 		cpOptionImpl.setCPOptionId(CPOptionId);
-		cpOptionImpl.setGroupId(groupId);
 		cpOptionImpl.setCompanyId(companyId);
 		cpOptionImpl.setUserId(userId);
 
@@ -200,8 +197,6 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 
 		CPOptionId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -239,8 +234,6 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 		}
 
 		objectOutput.writeLong(CPOptionId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -296,7 +289,6 @@ public class CPOptionCacheModel implements CacheModel<CPOption>, Externalizable 
 	public String uuid;
 	public String externalReferenceCode;
 	public long CPOptionId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

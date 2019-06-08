@@ -62,7 +62,6 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("CPOptionCategoryId", getCPOptionCategoryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -89,12 +88,6 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 
 		if (CPOptionCategoryId != null) {
 			setCPOptionCategoryId(CPOptionCategoryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -287,16 +280,6 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cpOptionCategory.getExpandoBridge();
-	}
-
-	/**
-	* Returns the group ID of this cp option category.
-	*
-	* @return the group ID of this cp option category
-	*/
-	@Override
-	public long getGroupId() {
-		return _cpOptionCategory.getGroupId();
 	}
 
 	/**
@@ -619,16 +602,6 @@ public class CPOptionCategoryWrapper implements CPOptionCategory,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cpOptionCategory.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the group ID of this cp option category.
-	*
-	* @param groupId the group ID of this cp option category
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_cpOptionCategory.setGroupId(groupId);
 	}
 
 	/**

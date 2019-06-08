@@ -82,7 +82,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "CPSpecificationOptionId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
@@ -100,7 +99,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPSpecificationOptionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -114,7 +112,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPSpecificationOption (uuid_ VARCHAR(75) null,CPSpecificationOptionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionCategoryId LONG,title STRING null,description STRING null,facetable BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPSpecificationOption (uuid_ VARCHAR(75) null,CPSpecificationOptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionCategoryId LONG,title STRING null,description STRING null,facetable BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPSpecificationOption";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpSpecificationOption.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPSpecificationOption.title ASC";
@@ -132,10 +130,9 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 			true);
 	public static final long CPOPTIONCATEGORYID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
-	public static final long KEY_COLUMN_BITMASK = 8L;
-	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long TITLE_COLUMN_BITMASK = 32L;
+	public static final long KEY_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+	public static final long TITLE_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -153,7 +150,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 		model.setUuid(soapModel.getUuid());
 		model.setCPSpecificationOptionId(soapModel.getCPSpecificationOptionId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -232,7 +228,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 		attributes.put("uuid", getUuid());
 		attributes.put("CPSpecificationOptionId", getCPSpecificationOptionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -264,12 +259,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 		if (CPSpecificationOptionId != null) {
 			setCPSpecificationOptionId(CPSpecificationOptionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -372,29 +361,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 	@Override
 	public void setCPSpecificationOptionId(long CPSpecificationOptionId) {
 		_CPSpecificationOptionId = CPSpecificationOptionId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -577,7 +543,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public void setTitle(String title, Locale locale) {
-		setTitle(title, locale, LocaleUtil.getSiteDefault());
+		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -602,7 +568,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
-		setTitleMap(titleMap, LocaleUtil.getSiteDefault());
+		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -676,7 +642,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public void setDescription(String description, Locale locale) {
-		setDescription(description, locale, LocaleUtil.getSiteDefault());
+		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -703,7 +669,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
-		setDescriptionMap(descriptionMap, LocaleUtil.getSiteDefault());
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -832,7 +798,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -853,7 +819,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -893,7 +859,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 		cpSpecificationOptionImpl.setUuid(getUuid());
 		cpSpecificationOptionImpl.setCPSpecificationOptionId(getCPSpecificationOptionId());
-		cpSpecificationOptionImpl.setGroupId(getGroupId());
 		cpSpecificationOptionImpl.setCompanyId(getCompanyId());
 		cpSpecificationOptionImpl.setUserId(getUserId());
 		cpSpecificationOptionImpl.setUserName(getUserName());
@@ -967,10 +932,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 		cpSpecificationOptionModelImpl._originalUuid = cpSpecificationOptionModelImpl._uuid;
 
-		cpSpecificationOptionModelImpl._originalGroupId = cpSpecificationOptionModelImpl._groupId;
-
-		cpSpecificationOptionModelImpl._setOriginalGroupId = false;
-
 		cpSpecificationOptionModelImpl._originalCompanyId = cpSpecificationOptionModelImpl._companyId;
 
 		cpSpecificationOptionModelImpl._setOriginalCompanyId = false;
@@ -999,8 +960,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 		}
 
 		cpSpecificationOptionCacheModel.CPSpecificationOptionId = getCPSpecificationOptionId();
-
-		cpSpecificationOptionCacheModel.groupId = getGroupId();
 
 		cpSpecificationOptionCacheModel.companyId = getCompanyId();
 
@@ -1074,14 +1033,12 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", CPSpecificationOptionId=");
 		sb.append(getCPSpecificationOptionId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -1111,7 +1068,7 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPSpecificationOption");
@@ -1124,10 +1081,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 		sb.append(
 			"<column><column-name>CPSpecificationOptionId</column-name><column-value><![CDATA[");
 		sb.append(getCPSpecificationOptionId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -1186,9 +1139,6 @@ public class CPSpecificationOptionModelImpl extends BaseModelImpl<CPSpecificatio
 	private String _uuid;
 	private String _originalUuid;
 	private long _CPSpecificationOptionId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

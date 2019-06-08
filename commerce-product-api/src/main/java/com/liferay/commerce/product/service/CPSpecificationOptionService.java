@@ -30,9 +30,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -71,22 +69,6 @@ public interface CPSpecificationOptionService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPSpecificationOption getCPSpecificationOption(
 		long cpSpecificationOptionId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptions(
-		long companyId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPSpecificationOption> getCPSpecificationOptionsByCatalogGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CPSpecificationOption> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPSpecificationOptionsCount(long groupId)
-		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
