@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
-
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,35 +68,19 @@ public class CPSpecificationOptionItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 		searchContainer.setRowChecker(getRowChecker());
 
-		int total;
-		List<CPSpecificationOption> results;
+		Sort sort = CPItemSelectorViewUtil.getCPSpecificationOptionSort(
+			getOrderByCol(), getOrderByType());
 
-		if (isSearch()) {
-			Sort sort = CPItemSelectorViewUtil.getCPSpecificationOptionSort(
-				getOrderByCol(), getOrderByType());
+		BaseModelSearchResult<CPSpecificationOption>
+			cpSpecificationOptionBaseModelSearchResult =
+				_cpSpecificationOptionService.searchCPSpecificationOptions(
+					cpRequestHelper.getCompanyId(), null, getKeywords(),
+					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
-			BaseModelSearchResult<CPSpecificationOption>
-				cpSpecificationOptionBaseModelSearchResult =
-					_cpSpecificationOptionService.searchCPSpecificationOptions(
-						cpRequestHelper.getCompanyId(), null, getKeywords(),
-						searchContainer.getStart(), searchContainer.getEnd(),
-						sort);
-
-			total = cpSpecificationOptionBaseModelSearchResult.getLength();
-			results =
-				cpSpecificationOptionBaseModelSearchResult.getBaseModels();
-		}
-		else {
-			total =
-				_cpSpecificationOptionService.getCPSpecificationOptionsCount(
-					cpRequestHelper.getCompanyId());
-			results = _cpSpecificationOptionService.getCPSpecificationOptions(
-				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
-				searchContainer.getEnd(), orderByComparator);
-		}
-
-		searchContainer.setTotal(total);
-		searchContainer.setResults(results);
+		searchContainer.setTotal(
+			cpSpecificationOptionBaseModelSearchResult.getLength());
+		searchContainer.setResults(
+			cpSpecificationOptionBaseModelSearchResult.getBaseModels());
 
 		return searchContainer;
 	}

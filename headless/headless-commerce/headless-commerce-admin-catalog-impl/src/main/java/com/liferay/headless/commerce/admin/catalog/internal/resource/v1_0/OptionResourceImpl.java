@@ -24,6 +24,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -83,13 +84,16 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			Long siteId, Pagination pagination)
 		throws Exception {
 
-		List<CPOption> cpOptions = _cpOptionService.getCPOptions(
-			siteId, pagination.getStartPosition(), pagination.getEndPosition(),
-			null);
+		BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
+			_cpOptionService.searchCPOptions(
+				siteId, null, pagination.getStartPosition(),
+				pagination.getEndPosition(), null);
 
-		int totalItems = _cpOptionService.getCPOptionsCount(siteId);
+		int totalItems = cpOptionBaseModelSearchResult.getLength();
 
-		return Page.of(_toOptions(cpOptions), pagination, totalItems);
+		return Page.of(
+			_toOptions(cpOptionBaseModelSearchResult.getBaseModels()),
+			pagination, totalItems);
 	}
 
 	@Override
@@ -188,8 +192,7 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			GetterUtil.get(option.getRequired(), cpOption.isRequired()),
 			GetterUtil.get(
 				option.getSkuContributor(), cpOption.isSkuContributor()),
-			option.getKey(),
-			_serviceContextHelper.getServiceContext(cpOption.getGroupId()));
+			option.getKey(), _serviceContextHelper.getServiceContext());
 
 		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
 			CPOption.class.getName());

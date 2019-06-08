@@ -160,17 +160,18 @@ public class CPTestUtil {
 			cpOptionConfiguration.ddmFormFieldTypesAllowed();
 
 		return CPOptionLocalServiceUtil.addCPOption(
-			RandomTestUtil.randomLocaleStringMap(),
+			serviceContext.getUserId(), RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(), ddmFormFieldTypesAllowed[0],
 			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean(),
-			skuContributor, RandomTestUtil.randomString(), serviceContext);
+			skuContributor, RandomTestUtil.randomString(), null,
+			serviceContext);
 	}
 
 	public static CPOptionValue addCPOptionValue(CPOption cpOption)
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(cpOption.getGroupId());
+			ServiceContextTestUtil.getServiceContext();
 
 		return CPOptionValueLocalServiceUtil.addCPOptionValue(
 			cpOption.getCPOptionId(), RandomTestUtil.randomLocaleStringMap(),

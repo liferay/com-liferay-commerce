@@ -104,8 +104,9 @@ public class CPOptionsImporter {
 		boolean skuContributor = jsonObject.getBoolean("SkuContributor");
 
 		CPOption cpOption = _cpOptionLocalService.addCPOption(
-			nameMap, descriptionMap, ddmFormFieldTypeName, facetable, required,
-			skuContributor, key, serviceContext);
+			serviceContext.getUserId(), nameMap, descriptionMap,
+			ddmFormFieldTypeName, facetable, required, skuContributor, key,
+			null, serviceContext);
 
 		// Commerce product option values
 
