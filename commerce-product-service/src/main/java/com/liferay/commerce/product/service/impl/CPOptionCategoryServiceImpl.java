@@ -15,16 +15,17 @@
 package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.base.CPOptionCategoryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -42,22 +43,23 @@ public class CPOptionCategoryServiceImpl
 			double priority, String key, ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
 			CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION_CATEGORY);
 
 		return cpOptionCategoryLocalService.addCPOptionCategory(
-			titleMap, descriptionMap, priority, key, serviceContext);
+			getUserId(), titleMap, descriptionMap, priority, key,
+			serviceContext);
 	}
 
 	@Override
 	public void deleteCPOptionCategory(long cpOptionCategoryId)
 		throws PortalException {
 
-		CPOptionCategory cpOptionCategory =
-			cpOptionCategoryService.getCPOptionCategory(cpOptionCategoryId);
+		_cpOptionCategoryModelResourcePermission.check(
+			getPermissionChecker(), cpOptionCategoryId, ActionKeys.DELETE);
 
-		cpOptionCategoryLocalService.deleteCPOptionCategory(cpOptionCategory);
+		cpOptionCategoryLocalService.deleteCPOptionCategory(cpOptionCategoryId);
 	}
 
 	@Override
@@ -69,93 +71,31 @@ public class CPOptionCategoryServiceImpl
 				cpOptionCategoryId);
 
 		if (cpOptionCategory != null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), cpOptionCategory.getGroupId(),
-				CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
+			_cpOptionCategoryModelResourcePermission.check(
+				getPermissionChecker(), cpOptionCategory, ActionKeys.VIEW);
 		}
 
 		return cpOptionCategory;
 	}
 
 	@Override
-	public List<CPOptionCategory> getCPOptionCategories(
-			long companyId, int start, int end)
-		throws PortalException {
-
-		return cpOptionCategoryLocalService.getCPOptionCategories(
-			companyId, start, end);
-	}
-
-	@Override
-	public List<CPOptionCategory> getCPOptionCategories(
-			long companyId, int start, int end,
-			OrderByComparator<CPOptionCategory> orderByComparator)
-		throws PortalException {
-
-		return cpOptionCategoryLocalService.getCPOptionCategories(
-			companyId, start, end, orderByComparator);
-	}
-
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-			long groupId, int start, int end)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-
-		return cpOptionCategoryLocalService.
-			getCPOptionCategoriesByCatalogGroupId(groupId, start, end);
-	}
-
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-			long groupId, int start, int end,
-			OrderByComparator<CPOptionCategory> orderByComparator)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-
-		return cpOptionCategoryLocalService.
-			getCPOptionCategoriesByCatalogGroupId(
-				groupId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCount(long companyId)
-		throws PortalException {
-
-		return cpOptionCategoryLocalService.getCPOptionCategoriesCount(
-			companyId);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
-
-		return cpOptionCategoryLocalService.getCPOptionCategoriesCount(groupId);
-	}
-
-	@Override
 	public CPOptionCategory getCPOptionCategory(long cpOptionCategoryId)
 		throws PortalException {
 
-		CPOptionCategory cpOptionCategory =
-			cpOptionCategoryLocalService.getCPOptionCategory(
-				cpOptionCategoryId);
+		_cpOptionCategoryModelResourcePermission.check(
+			getPermissionChecker(), cpOptionCategoryId, ActionKeys.VIEW);
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), cpOptionCategory.getGroupId(),
-			CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES);
+		return cpOptionCategoryLocalService.getCPOptionCategory(
+			cpOptionCategoryId);
+	}
 
-		return cpOptionCategory;
+	@Override
+	public BaseModelSearchResult<CPOptionCategory> searchCPOptionCategories(
+			long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		return cpOptionCategoryLocalService.searchCPOptionCategories(
+			companyId, keywords, start, end, sort);
 	}
 
 	@Override
@@ -165,18 +105,19 @@ public class CPOptionCategoryServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPOptionCategory cpOptionCategory =
-			cpOptionCategoryService.getCPOptionCategory(cpOptionCategoryId);
+		_cpOptionCategoryModelResourcePermission.check(
+			getPermissionChecker(), cpOptionCategoryId, ActionKeys.UPDATE);
 
 		return cpOptionCategoryLocalService.updateCPOptionCategory(
-			cpOptionCategory.getCPOptionCategoryId(), titleMap, descriptionMap,
-			priority, key, serviceContext);
+			cpOptionCategoryId, titleMap, descriptionMap, priority, key,
+			serviceContext);
 	}
 
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPOptionCategoryServiceImpl.class, "_portletResourcePermission",
-				CPConstants.RESOURCE_NAME);
+	private static volatile ModelResourcePermission<CPOptionCategory>
+		_cpOptionCategoryModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CPOptionCategoryServiceImpl.class,
+				"_cpOptionCategoryModelResourcePermission",
+				CPOptionCategory.class);
 
 }

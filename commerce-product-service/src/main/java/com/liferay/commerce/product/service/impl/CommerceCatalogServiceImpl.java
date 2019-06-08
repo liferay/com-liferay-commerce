@@ -85,8 +85,8 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
 
 		if (commerceCatalog != null) {
-			PortalPermissionUtil.check(
-				getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
+			_commerceCatalogModelResourcePermission.check(
+				getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
 		}
 
 		return commerceCatalog;
@@ -104,34 +104,9 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
-	public List<CommerceCatalog> getCommerceCatalogs(
-			long companyId, boolean system)
-		throws PortalException {
-
-		PortalPermissionUtil.check(
-			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
-
-		return commerceCatalogLocalService.getCommerceCatalogs(
-			companyId, system);
-	}
-
-	@Override
-	public List<CommerceCatalog> searchCommerceCatalogs(long companyId)
-		throws PortalException {
-
-		PortalPermissionUtil.check(
-			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
-
-		return commerceCatalogLocalService.searchCommerceCatalogs(companyId);
-	}
-
-	@Override
 	public List<CommerceCatalog> searchCommerceCatalogs(
 			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
-
-		PortalPermissionUtil.check(
-			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
 
 		return commerceCatalogLocalService.searchCommerceCatalogs(
 			companyId, keywords, start, end, sort);
@@ -140,9 +115,6 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	@Override
 	public int searchCommerceCatalogsCount(long companyId, String keywords)
 		throws PortalException {
-
-		PortalPermissionUtil.check(
-			getPermissionChecker(), CPActionKeys.VIEW_COMMERCE_CATALOGS);
 
 		return commerceCatalogLocalService.searchCommerceCatalogsCount(
 			companyId, keywords);
