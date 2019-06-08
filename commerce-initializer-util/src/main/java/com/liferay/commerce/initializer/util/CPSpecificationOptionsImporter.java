@@ -74,6 +74,18 @@ public class CPSpecificationOptionsImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
+		CPSpecificationOption cpSpecificationOption;
+
+		String key = jsonObject.getString("Key");
+
+		cpSpecificationOption =
+			_cpSpecificationOptionLocalService.fetchCPSpecificationOption(
+				serviceContext.getCompanyId(), key);
+
+		if (cpSpecificationOption != null) {
+			return cpSpecificationOption;
+		}
+
 		long cpOptionCategoryId = 0;
 
 		String categoryKey = jsonObject.getString("CategoryKey");
@@ -81,12 +93,10 @@ public class CPSpecificationOptionsImporter {
 		if (Validator.isNotNull(categoryKey)) {
 			CPOptionCategory cpOptionCategory =
 				_cpOptionCategoryLocalService.getCPOptionCategory(
-					serviceContext.getScopeGroupId(), categoryKey);
+					serviceContext.getCompanyId(), categoryKey);
 
 			cpOptionCategoryId = cpOptionCategory.getCPOptionCategoryId();
 		}
-
-		String key = jsonObject.getString("Key");
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
