@@ -249,7 +249,7 @@
 		<!-- Other fields -->
 
 		<column name="commerceAccountId" type="long" />
-		<column name="commerceCurrencyId" type="long" />
+		<column name="commerceCurrencyCode" type="String" />
 		<column name="billingAddressId" type="long" />
 		<column name="shippingAddressId" type="long" />
 		<column name="commercePaymentMethodKey" type="String" />
