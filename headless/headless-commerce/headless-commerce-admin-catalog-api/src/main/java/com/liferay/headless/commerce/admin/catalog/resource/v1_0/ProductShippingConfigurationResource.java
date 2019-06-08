@@ -32,14 +32,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductShippingConfigurationResource {
 
-	public ProductShippingConfiguration getProductIdShippingConfiguration(
-			Long id)
-		throws Exception;
-
-	public Response patchProductIdShippingConfiguration(
-			Long id, ProductShippingConfiguration productShippingConfiguration)
-		throws Exception;
-
 	public ProductShippingConfiguration
 			getProductByExternalReferenceCodeShippingConfiguration(
 				String externalReferenceCode)
@@ -48,6 +40,14 @@ public interface ProductShippingConfigurationResource {
 	public Response patchProductByExternalReferenceCodeShippingConfiguration(
 			String externalReferenceCode,
 			ProductShippingConfiguration productShippingConfiguration)
+		throws Exception;
+
+	public ProductShippingConfiguration getProductIdShippingConfiguration(
+			Long id)
+		throws Exception;
+
+	public Response patchProductIdShippingConfiguration(
+			Long id, ProductShippingConfiguration productShippingConfiguration)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

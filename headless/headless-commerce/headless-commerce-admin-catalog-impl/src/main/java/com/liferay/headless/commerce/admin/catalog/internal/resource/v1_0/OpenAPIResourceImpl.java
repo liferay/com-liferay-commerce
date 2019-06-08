@@ -106,8 +106,6 @@ public class OpenAPIResourceImpl {
 
 			add(SpecificationResourceImpl.class);
 
-			add(SpecificationValueResourceImpl.class);
-
 			add(OpenAPIResourceImpl.class);
 		}
 	};

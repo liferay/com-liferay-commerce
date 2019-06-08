@@ -31,7 +31,6 @@ import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductTaxConfi
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.RelatedProductResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SkuResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SpecificationResource;
-import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SpecificationValueResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
 
 import javax.annotation.Generated;
@@ -84,8 +83,6 @@ public class ServletDataImpl implements ServletData {
 			_skuResourceComponentServiceObjects);
 		Mutation.setSpecificationResourceComponentServiceObjects(
 			_specificationResourceComponentServiceObjects);
-		Mutation.setSpecificationValueResourceComponentServiceObjects(
-			_specificationValueResourceComponentServiceObjects);
 
 		Query.setAttachmentResourceComponentServiceObjects(
 			_attachmentResourceComponentServiceObjects);
@@ -118,8 +115,6 @@ public class ServletDataImpl implements ServletData {
 			_skuResourceComponentServiceObjects);
 		Query.setSpecificationResourceComponentServiceObjects(
 			_specificationResourceComponentServiceObjects);
-		Query.setSpecificationValueResourceComponentServiceObjects(
-			_specificationValueResourceComponentServiceObjects);
 	}
 
 	@Override
@@ -196,9 +191,5 @@ public class ServletDataImpl implements ServletData {
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<SpecificationResource>
 		_specificationResourceComponentServiceObjects;
-
-	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
-	private ComponentServiceObjects<SpecificationValueResource>
-		_specificationValueResourceComponentServiceObjects;
 
 }
