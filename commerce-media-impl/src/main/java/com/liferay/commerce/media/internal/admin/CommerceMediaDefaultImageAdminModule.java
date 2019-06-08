@@ -18,7 +18,6 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.media.internal.display.context.CommerceMediaDefaultImageDisplayContext;
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -28,7 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -91,8 +90,8 @@ public class CommerceMediaDefaultImageAdminModule
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		return _portletResourcePermission.contains(
-			permissionChecker, groupId, CPActionKeys.MANAGE_CATALOG);
+		return PortalPermissionUtil.contains(
+			permissionChecker, CPActionKeys.ADD_COMMERCE_CATALOG);
 	}
 
 	@Override
@@ -107,8 +106,7 @@ public class CommerceMediaDefaultImageAdminModule
 			commerceMediaDefaultImageDisplayContext =
 				new CommerceMediaDefaultImageDisplayContext(
 					_attachmentsConfiguration, _configurationProvider,
-					_dlAppService, _itemSelector, _portletResourcePermission,
-					httpServletRequest);
+					_dlAppService, _itemSelector, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -144,9 +142,6 @@ public class CommerceMediaDefaultImageAdminModule
 
 	@Reference
 	private Portal _portal;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.media.impl)"

@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,13 +40,11 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 
 	public BaseCPOptionsDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-		String portalPreferenceNamespace,
-		PortletResourcePermission portletResourcePermission) {
+		String portalPreferenceNamespace) {
 
 		this.actionHelper = actionHelper;
 		this.httpServletRequest = httpServletRequest;
 		_portalPreferenceNamespace = portalPreferenceNamespace;
-		_portletResourcePermission = portletResourcePermission;
 
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
@@ -172,12 +169,6 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 	public abstract SearchContainer<T> getSearchContainer()
 		throws PortalException;
 
-	public boolean hasPermission(String actionId) {
-		return _portletResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(),
-			cpRequestHelper.getScopeGroupId(), actionId);
-	}
-
 	public boolean isShowInfoPanel() {
 		return true;
 	}
@@ -253,7 +244,6 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 	private String _orderByCol;
 	private String _orderByType;
 	private final String _portalPreferenceNamespace;
-	private final PortletResourcePermission _portletResourcePermission;
 	private RowChecker _rowChecker;
 
 }

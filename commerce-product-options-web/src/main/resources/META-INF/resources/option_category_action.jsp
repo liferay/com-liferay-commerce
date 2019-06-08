@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext = (CPOptionCategoryDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPOptionCategory cpOptionCategory = null;
@@ -31,14 +29,14 @@ else {
 }
 %>
 
-<c:if test="<%= cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) && cpOptionCategoryDisplayContext.hasPermission(CPActionKeys.MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES) %>">
-	<liferay-ui:icon-menu
-		direction="left-side"
-		icon="<%= StringPool.BLANK %>"
-		markupView="lexicon"
-		message="<%= StringPool.BLANK %>"
-		showWhenSingleIcon="<%= true %>"
-	>
+<liferay-ui:icon-menu
+	direction="left-side"
+	icon="<%= StringPool.BLANK %>"
+	markupView="lexicon"
+	message="<%= StringPool.BLANK %>"
+	showWhenSingleIcon="<%= true %>"
+>
+	<c:if test="<%= CPOptionCategoryPermission.contains(permissionChecker, cpOptionCategory, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductOptionCategory" />
 			<portlet:param name="cpOptionCategoryId" value="<%= String.valueOf(cpOptionCategory.getCPOptionCategoryId()) %>" />
@@ -48,7 +46,9 @@ else {
 			message="edit"
 			url="<%= editURL %>"
 		/>
+	</c:if>
 
+	<c:if test="<%= CPOptionCategoryPermission.contains(permissionChecker, cpOptionCategory, ActionKeys.UPDATE) %>">
 		<portlet:actionURL name="editProductOptionCategory" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -58,5 +58,22 @@ else {
 		<liferay-ui:icon-delete
 			url="<%= deleteURL %>"
 		/>
-	</liferay-ui:icon-menu>
-</c:if>
+	</c:if>
+
+	<c:if test="<%= CPOptionCategoryPermission.contains(permissionChecker, cpOptionCategory, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= CPOptionCategory.class.getName() %>"
+			modelResourceDescription="<%= cpOptionCategory.getTitle(locale) %>"
+			resourcePrimKey="<%= String.valueOf(cpOptionCategory.getCPOptionCategoryId()) %>"
+			var="permissionsOptionCategoryURL"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+		/>
+
+		<liferay-ui:icon
+			message="permissions"
+			method="get"
+			url="<%= permissionsOptionCategoryURL %>"
+			useDialog="<%= true %>"
+		/>
+	</c:if>
+</liferay-ui:icon-menu>

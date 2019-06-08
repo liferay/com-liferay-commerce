@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPOptionDisplayContext cpOptionDisplayContext = (CPOptionDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 %>
 
@@ -35,42 +33,40 @@ navigationItem.setHref(currentURL);
 navigationItem.setLabel(LanguageUtil.get(request, "option-templates"));
 %>
 
-<c:if test="<%= cpOptionDisplayContext.hasPermission(CPActionKeys.MANAGE_CATALOG) %>">
-	<clay:navigation-bar
-		navigationItems="<%= Collections.singletonList(navigationItem) %>"
-	/>
+<clay:navigation-bar
+	navigationItems="<%= Collections.singletonList(navigationItem) %>"
+/>
 
-	<div class="container-fluid-1280" id="<portlet:namespace />CPOptionsEditor">
+<div class="container-fluid-1280" id="<portlet:namespace />CPOptionsEditor">
 
-	</div>
+</div>
 
-	<portlet:resourceURL id="cpOptions" var="cpOptionsURL">
-	</portlet:resourceURL>
+<portlet:resourceURL id="cpOptions" var="cpOptionsURL">
+</portlet:resourceURL>
 
-	<liferay-portlet:renderURL var="cpOptionURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-		<portlet:param name="mvcRenderCommandName" value="cpOption" />
-	</liferay-portlet:renderURL>
+<liferay-portlet:renderURL var="cpOptionURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="cpOption" />
+</liferay-portlet:renderURL>
 
-	<portlet:resourceURL id="cpOptionValues" var="cpOptionValuesURL">
-	</portlet:resourceURL>
+<portlet:resourceURL id="cpOptionValues" var="cpOptionValuesURL">
+</portlet:resourceURL>
 
-	<liferay-portlet:renderURL var="cpOptionValueURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-		<portlet:param name="mvcRenderCommandName" value="editProductOptionValue" />
-	</liferay-portlet:renderURL>
+<liferay-portlet:renderURL var="cpOptionValueURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="editProductOptionValue" />
+</liferay-portlet:renderURL>
 
-	<aui:script require="commerce-product-options-web@1.0.14/CPOptionsEditor.es as CPOptionsEditor">
-		var cpOptionsEditor = new CPOptionsEditor.default(
-			{
-				hasEditPermission : <%= cpOptionDisplayContext.hasPermission(CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION) %>,
-				namespace : '<portlet:namespace />',
-				optionURL : '<%= cpOptionURL %>',
-				optionValueURL : '<%= cpOptionValueURL %>',
-				optionValuesURL : '<%= cpOptionValuesURL %>',
-				optionsURL : '<%= cpOptionsURL %>',
-				pathThemeImages: '<%= themeDisplay.getPathThemeImages() %>',
-				successMessage: '<liferay-ui:message key="your-request-completed-successfully" />'
-			},
-			'#<portlet:namespace />CPOptionsEditor'
-		);
-	</aui:script>
-</c:if>
+<aui:script require="commerce-product-options-web@1.0.14/CPOptionsEditor.es as CPOptionsEditor">
+	var cpOptionsEditor = new CPOptionsEditor.default(
+		{
+			hasEditPermission : <%= PortalPermissionUtil.contains(permissionChecker, CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION) %>,
+			namespace : '<portlet:namespace />',
+			optionURL : '<%= cpOptionURL %>',
+			optionValueURL : '<%= cpOptionValueURL %>',
+			optionValuesURL : '<%= cpOptionValuesURL %>',
+			optionsURL : '<%= cpOptionsURL %>',
+			pathThemeImages: '<%= themeDisplay.getPathThemeImages() %>',
+			successMessage: '<liferay-ui:message key="your-request-completed-successfully" />'
+		},
+		'#<portlet:namespace />CPOptionsEditor'
+	);
+</aui:script>
