@@ -115,7 +115,9 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			_SCHEMA_VERSION_3_2_0, _SCHEMA_VERSION_4_0_0,
 			new com.liferay.commerce.internal.upgrade.v4_0_0.
 				CommerceOrderItemUpgradeProcess(),
-			new CommerceShipmentItemUpgradeProcess());
+			new CommerceShipmentItemUpgradeProcess(),
+			new com.liferay.commerce.internal.upgrade.v4_0_0.
+				CommerceOrderUpgradeProcess());
 
 		registry.register(
 			_SCHEMA_VERSION_4_0_0, _SCHEMA_VERSION_4_1_0,
