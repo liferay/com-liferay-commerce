@@ -17,7 +17,6 @@ package com.liferay.commerce.payment.method.paypal.internal;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
-import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrder;
@@ -491,9 +490,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Amount amount = new Amount();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
-		amount.setCurrency(StringUtil.toUpperCase(commerceCurrency.getCode()));
+		amount.setCurrency(
+			StringUtil.toUpperCase(commerceOrder.getCommerceCurrencyCode()));
 
 		amount.setTotal(
 			_payPalDecimalFormat.format(commercePaymentRequest.getAmount()));
@@ -731,12 +729,12 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	private void _addItem(
-		CommerceCurrency commerceCurrency, String description, boolean discount,
+		String currencyCode, String description, boolean discount,
 		List<Item> items, String name, BigDecimal amount) {
 
 		Item item = new Item();
 
-		item.setCurrency(StringUtil.toUpperCase(commerceCurrency.getCode()));
+		item.setCurrency(StringUtil.toUpperCase(currencyCode));
 		item.setDescription(description);
 		item.setName(name);
 
@@ -806,9 +804,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		Amount amount = new Amount();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
-		amount.setCurrency(StringUtil.toUpperCase(commerceCurrency.getCode()));
+		amount.setCurrency(
+			StringUtil.toUpperCase(commerceOrder.getCommerceCurrencyCode()));
 
 		amount.setTotal(_payPalDecimalFormat.format(commerceOrder.getTotal()));
 
@@ -863,13 +860,12 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		List<Item> items = new ArrayList<>(commerceOrderItems.size());
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 			Item item = new Item();
 
 			item.setCurrency(
-				StringUtil.toUpperCase(commerceCurrency.getCode()));
+				StringUtil.toUpperCase(
+					commerceOrder.getCommerceCurrencyCode()));
 
 			CPDefinition cpDefinition = commerceOrderItem.getCPDefinition();
 
@@ -910,13 +906,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		BigDecimal subtotalDiscountAmount =
 			commerceOrder.getSubtotalDiscountAmount();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		if ((subtotalDiscountAmount != null) &&
 			(subtotalDiscountAmount.compareTo(BigDecimal.ZERO) > 0)) {
 
 			_addItem(
-				commerceCurrency,
+				commerceOrder.getCommerceCurrencyCode(),
 				_getResource(locale, "paypal-subtotal-discount-description"),
 				true, items, _getResource(locale, "paypal-subtotal-discount"),
 				subtotalDiscountAmount);
@@ -928,7 +922,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			(totalDiscountAmount.compareTo(BigDecimal.ZERO) > 0)) {
 
 			_addItem(
-				commerceCurrency,
+				commerceOrder.getCommerceCurrencyCode(),
 				_getResource(locale, "paypal-total-discount-description"), true,
 				items, _getResource(locale, "paypal-total-discount"),
 				totalDiscountAmount);
@@ -983,8 +977,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommerceOrder commerceOrder, APIContext apiContext, Locale locale)
 		throws PayPalRESTException, PortalException {
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();
 
@@ -1018,7 +1010,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		}
 
 		Currency amount = new Currency(
-			commerceCurrency.getCode(),
+			commerceOrder.getCommerceCurrencyCode(),
 			_payPalDecimalFormat.format(commerceOrderItem.getFinalPrice()));
 
 		PaymentDefinition paymentDefinition = new PaymentDefinition(
@@ -1097,13 +1089,11 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		BigDecimal shippingAmount = commerceOrder.getShippingAmount();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		if ((shippingAmount != null) &&
 			(shippingAmount.compareTo(BigDecimal.ZERO) > 0)) {
 
 			_addItem(
-				commerceCurrency,
+				commerceOrder.getCommerceCurrencyCode(),
 				_getResource(locale, "paypal-shipping-description"), false,
 				items, _getResource(locale, "paypal-shipping"), shippingAmount);
 
@@ -1114,7 +1104,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				(shippingDiscountAmount.compareTo(BigDecimal.ZERO) > 0)) {
 
 				_addItem(
-					commerceCurrency,
+					commerceOrder.getCommerceCurrencyCode(),
 					_getResource(
 						locale, "paypal-shipping-discount-description"),
 					true, items,
@@ -1159,7 +1149,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		if ((taxAmount != null) && (taxAmount.compareTo(BigDecimal.ZERO) > 0)) {
 			_addItem(
-				commerceOrder.getCommerceCurrency(),
+				commerceOrder.getCommerceCurrencyCode(),
 				_getResource(locale, "paypal-taxes-description"), false, items,
 				_getResource(locale, "paypal-taxes"), taxAmount);
 		}
