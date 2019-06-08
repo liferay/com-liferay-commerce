@@ -19,15 +19,35 @@ import com.liferay.commerce.product.exception.CPOptionCategoryKeyException;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
+import com.liferay.commerce.product.search.CPOptionCategoryIndexer;
 import com.liferay.commerce.product.service.base.CPOptionCategoryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -39,18 +59,19 @@ import java.util.Map;
 public class CPOptionCategoryLocalServiceImpl
 	extends CPOptionCategoryLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPOptionCategory addCPOptionCategory(
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			double priority, String key, ServiceContext serviceContext)
+			long userId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, double priority, String key,
+			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		User user = userLocalService.getUser(userId);
 
 		key = FriendlyURLNormalizerUtil.normalize(key);
 
-		validate(0, groupId, key);
+		validate(0, user.getCompanyId(), key);
 
 		long cpOptionCategoryId = counterLocalService.increment();
 
@@ -58,7 +79,6 @@ public class CPOptionCategoryLocalServiceImpl
 			cpOptionCategoryId);
 
 		cpOptionCategory.setUuid(serviceContext.getUuid());
-		cpOptionCategory.setGroupId(groupId);
 		cpOptionCategory.setCompanyId(user.getCompanyId());
 		cpOptionCategory.setUserId(user.getUserId());
 		cpOptionCategory.setUserName(user.getFullName());
@@ -69,13 +89,20 @@ public class CPOptionCategoryLocalServiceImpl
 
 		cpOptionCategoryPersistence.update(cpOptionCategory);
 
+		// Resources
+
+		resourceLocalService.addModelResources(
+			cpOptionCategory, serviceContext);
+
 		return cpOptionCategory;
 	}
 
 	@Override
-	public void deleteCPOptionCategories(long groupId) throws PortalException {
+	public void deleteCPOptionCategories(long companyId)
+		throws PortalException {
+
 		List<CPOptionCategory> cpOptionCategories =
-			cpOptionCategoryPersistence.findByGroupId(groupId);
+			cpOptionCategoryPersistence.findByCompanyId(companyId);
 
 		for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
 			cpOptionCategoryLocalService.deleteCPOptionCategory(
@@ -83,6 +110,7 @@ public class CPOptionCategoryLocalServiceImpl
 		}
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CPOptionCategory deleteCPOptionCategory(
@@ -92,6 +120,11 @@ public class CPOptionCategoryLocalServiceImpl
 		// Commerce product option category
 
 		cpOptionCategoryPersistence.remove(cpOptionCategory);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			cpOptionCategory, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Commerce product specification options
 
@@ -141,8 +174,8 @@ public class CPOptionCategoryLocalServiceImpl
 	}
 
 	@Override
-	public CPOptionCategory fetchCPOptionCategory(long groupId, String key) {
-		return cpOptionCategoryPersistence.fetchByG_K(groupId, key);
+	public CPOptionCategory fetchCPOptionCategory(long companyId, String key) {
+		return cpOptionCategoryPersistence.fetchByC_K(companyId, key);
 	}
 
 	@Override
@@ -154,47 +187,24 @@ public class CPOptionCategoryLocalServiceImpl
 	}
 
 	@Override
-	public List<CPOptionCategory> getCPOptionCategories(
-		long companyId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator) {
-
-		return cpOptionCategoryPersistence.findByCompanyId(
-			companyId, start, end, orderByComparator);
-	}
-
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end) {
-
-		return cpOptionCategoryPersistence.findByGroupId(groupId, start, end);
-	}
-
-	@Override
-	public List<CPOptionCategory> getCPOptionCategoriesByCatalogGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CPOptionCategory> orderByComparator) {
-
-		return cpOptionCategoryPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCount(long companyId) {
-		return cpOptionCategoryPersistence.countByCompanyId(companyId);
-	}
-
-	@Override
-	public int getCPOptionCategoriesCountByCatalogGroupId(long groupId) {
-		return cpOptionCategoryPersistence.countByGroupId(groupId);
-	}
-
-	@Override
-	public CPOptionCategory getCPOptionCategory(long groupId, String key)
+	public CPOptionCategory getCPOptionCategory(long companyId, String key)
 		throws PortalException {
 
-		return cpOptionCategoryPersistence.findByG_K(groupId, key);
+		return cpOptionCategoryPersistence.findByC_K(companyId, key);
 	}
 
+	@Override
+	public BaseModelSearchResult<CPOptionCategory> searchCPOptionCategories(
+			long companyId, String keywords, int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, keywords, start, end, sort);
+
+		return searchCPOptionCategories(searchContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
@@ -209,7 +219,7 @@ public class CPOptionCategoryLocalServiceImpl
 
 		validate(
 			cpOptionCategory.getCPOptionCategoryId(),
-			cpOptionCategory.getGroupId(), key);
+			cpOptionCategory.getCompanyId(), key);
 
 		cpOptionCategory.setTitleMap(titleMap);
 		cpOptionCategory.setDescriptionMap(descriptionMap);
@@ -221,11 +231,106 @@ public class CPOptionCategoryLocalServiceImpl
 		return cpOptionCategory;
 	}
 
-	protected void validate(long cpOptionCategoryId, long groupId, String key)
+	protected SearchContext buildSearchContext(
+		long companyId, String keywords, int start, int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+
+		params.put("keywords", keywords);
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
+		attributes.put(Field.TITLE, keywords);
+		attributes.put(Field.DESCRIPTION, keywords);
+
+		attributes.put(CPOptionCategoryIndexer.FIELD_KEY, keywords);
+		attributes.put("params", params);
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		if (Validator.isNotNull(keywords)) {
+			searchContext.setKeywords(keywords);
+		}
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
+	}
+
+	protected List<CPOptionCategory> getCPOptionCategories(Hits hits)
+		throws PortalException {
+
+		List<Document> documents = hits.toList();
+
+		List<CPOptionCategory> cpOptionCategories = new ArrayList<>(
+			documents.size());
+
+		for (Document document : documents) {
+			long cpOptionCategoryId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			CPOptionCategory cpOptionCategory = fetchCPOptionCategory(
+				cpOptionCategoryId);
+
+			if (cpOptionCategory == null) {
+				Indexer<CPOptionCategory> indexer =
+					IndexerRegistryUtil.getIndexer(CPOptionCategory.class);
+
+				long companyId = GetterUtil.getLong(
+					document.get(Field.COMPANY_ID));
+
+				indexer.delete(companyId, document.getUID());
+			}
+			else if (cpOptionCategory != null) {
+				cpOptionCategories.add(cpOptionCategory);
+			}
+		}
+
+		return cpOptionCategories;
+	}
+
+	protected BaseModelSearchResult<CPOptionCategory> searchCPOptionCategories(
+			SearchContext searchContext)
+		throws PortalException {
+
+		Indexer<CPOptionCategory> indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(CPOptionCategory.class);
+
+		for (int i = 0; i < 10; i++) {
+			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
+
+			List<CPOptionCategory> cpOptionCategories = getCPOptionCategories(
+				hits);
+
+			if (cpOptionCategories != null) {
+				return new BaseModelSearchResult<>(
+					cpOptionCategories, hits.getLength());
+			}
+		}
+
+		throw new SearchException(
+			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected void validate(long cpOptionCategoryId, long companyId, String key)
 		throws PortalException {
 
 		CPOptionCategory cpOptionCategory =
-			cpOptionCategoryPersistence.fetchByG_K(groupId, key);
+			cpOptionCategoryPersistence.fetchByC_K(companyId, key);
 
 		if ((cpOptionCategory != null) &&
 			(cpOptionCategory.getCPOptionCategoryId() != cpOptionCategoryId)) {
@@ -233,5 +338,9 @@ public class CPOptionCategoryLocalServiceImpl
 			throw new CPOptionCategoryKeyException();
 		}
 	}
+
+	private static final String[] _SELECTED_FIELD_NAMES = {
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.UID
+	};
 
 }
