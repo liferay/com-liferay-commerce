@@ -65,8 +65,13 @@ public class CPSpecificationOptionDisplayContext
 	public List<CPOptionCategory> getCPOptionCategories()
 		throws PortalException {
 
-		return _cpOptionCategoryService.getCPOptionCategories(
-			getScopeGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		BaseModelSearchResult<CPOptionCategory>
+			cpOptionCategoryBaseModelSearchResult =
+				_cpOptionCategoryService.searchCPOptionCategories(
+					cpRequestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null);
+
+		return cpOptionCategoryBaseModelSearchResult.getBaseModels();
 	}
 
 	public String getCPOptionCategoryTitle(
@@ -135,33 +140,16 @@ public class CPSpecificationOptionDisplayContext
 			facetable = true;
 		}
 
-		int total;
-		List<CPSpecificationOption> results;
+		BaseModelSearchResult<CPSpecificationOption>
+			cpSpecificationOptionBaseModelSearchResult =
+				_cpSpecificationOptionService.searchCPSpecificationOptions(
+					cpRequestHelper.getCompanyId(), facetable, getKeywords(),
+					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
-		if (!isSearch() && (facetable == null) && (orderByComparator != null)) {
-			total =
-				_cpSpecificationOptionService.getCPSpecificationOptionsCount(
-					cpRequestHelper.getCompanyId());
-
-			results = _cpSpecificationOptionService.getCPSpecificationOptions(
-				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
-				searchContainer.getEnd(), orderByComparator);
-		}
-		else {
-			BaseModelSearchResult<CPSpecificationOption>
-				cpSpecificationOptionBaseModelSearchResult =
-					_cpSpecificationOptionService.searchCPSpecificationOptions(
-						cpRequestHelper.getCompanyId(), facetable,
-						getKeywords(), searchContainer.getStart(),
-						searchContainer.getEnd(), sort);
-
-			total = cpSpecificationOptionBaseModelSearchResult.getLength();
-			results =
-				cpSpecificationOptionBaseModelSearchResult.getBaseModels();
-		}
-
-		searchContainer.setTotal(total);
-		searchContainer.setResults(results);
+		searchContainer.setTotal(
+			cpSpecificationOptionBaseModelSearchResult.getLength());
+		searchContainer.setResults(
+			cpSpecificationOptionBaseModelSearchResult.getBaseModels());
 
 		return searchContainer;
 	}

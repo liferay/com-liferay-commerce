@@ -31,6 +31,7 @@ import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
 import com.liferay.layout.item.selector.criterion.LayoutItemSelectorCriterion;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -121,7 +122,8 @@ public class CPDefinitionsDisplayContext
 
 	public List<CommerceCatalog> getCommerceCatalogs() throws PortalException {
 		return _commerceCatalogService.searchCommerceCatalogs(
-			cpRequestHelper.getCompanyId());
+			cpRequestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public String getItemSelectorUrl() {

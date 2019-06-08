@@ -617,7 +617,7 @@ public class CPDefinitionsImporter {
 
 		CPSpecificationOption cpSpecificationOption =
 			_cpSpecificationOptionLocalService.getCPSpecificationOption(
-				cpDefinition.getGroupId(), jsonObject.getString("Key"));
+				cpDefinition.getCompanyId(), jsonObject.getString("Key"));
 
 		long cpOptionCategoryId = 0;
 
@@ -626,7 +626,7 @@ public class CPDefinitionsImporter {
 		if (Validator.isNotNull(categoryKey)) {
 			CPOptionCategory cpOptionCategory =
 				_cpOptionCategoryLocalService.getCPOptionCategory(
-					cpSpecificationOption.getGroupId(), categoryKey);
+					cpSpecificationOption.getCompanyId(), categoryKey);
 
 			cpOptionCategoryId = cpOptionCategory.getCPOptionCategoryId();
 		}

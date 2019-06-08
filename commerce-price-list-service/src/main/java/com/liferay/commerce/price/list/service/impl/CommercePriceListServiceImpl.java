@@ -19,6 +19,7 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceListServiceBaseImpl;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -170,7 +171,8 @@ public class CommercePriceListServiceImpl
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogService.searchCommerceCatalogs(companyId);
+			_commerceCatalogService.searchCommerceCatalogs(
+				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
@@ -192,7 +194,8 @@ public class CommercePriceListServiceImpl
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogService.searchCommerceCatalogs(companyId);
+			_commerceCatalogService.searchCommerceCatalogs(
+				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
@@ -215,7 +218,8 @@ public class CommercePriceListServiceImpl
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogService.searchCommerceCatalogs(companyId);
+			_commerceCatalogService.searchCommerceCatalogs(
+				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
