@@ -130,7 +130,7 @@ public class CommerceInventoryWarehousesImporter {
 						name, description, active, street1, street2, street3,
 						city, zip, commerceRegion.getCode(),
 						commerceCountry.getTwoLettersISOCode(), latitude,
-						longitude, serviceContext);
+						longitude, externalReferenceCode, serviceContext);
 		}
 
 		// Commerce channel rel
