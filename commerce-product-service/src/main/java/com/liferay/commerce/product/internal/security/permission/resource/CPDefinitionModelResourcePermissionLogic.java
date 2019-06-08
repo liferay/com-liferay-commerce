@@ -15,9 +15,6 @@
 package com.liferay.commerce.product.internal.security.permission.resource;
 
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.permission.CommerceCatalogPermission;
-import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -31,37 +28,16 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 public class CPDefinitionModelResourcePermissionLogic
 	implements ModelResourcePermissionLogic<CPDefinition> {
 
-	public CPDefinitionModelResourcePermissionLogic(
-		CommerceCatalogLocalService commerceCatalogLocalService,
-		CommerceCatalogPermission commerceCatalogPermission) {
-
-		_commerceCatalogLocalService = commerceCatalogLocalService;
-		_commerceCatalogPermission = commerceCatalogPermission;
-	}
-
 	@Override
 	public Boolean contains(
 			PermissionChecker permissionChecker, String name,
 			CPDefinition cpDefinition, String actionId)
 		throws PortalException {
 
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
-				cpDefinition.getGroupId());
-
 		if (permissionChecker.isCompanyAdmin(cpDefinition.getCompanyId()) ||
-			permissionChecker.isGroupAdmin(cpDefinition.getGroupId()) ||
-			_commerceCatalogPermission.contains(
-				permissionChecker, commerceCatalog.getCommerceCatalogId(),
-				ActionKeys.VIEW)) {
+			permissionChecker.isGroupAdmin(cpDefinition.getGroupId())) {
 
 			return true;
-		}
-
-		if (actionId.equals(ActionKeys.UPDATE)) {
-			return _commerceCatalogPermission.contains(
-				permissionChecker, commerceCatalog.getCommerceCatalogId(),
-				ActionKeys.UPDATE);
 		}
 
 		if (!actionId.equals(ActionKeys.VIEW) || !cpDefinition.isApproved() ||
@@ -72,8 +48,5 @@ public class CPDefinitionModelResourcePermissionLogic
 
 		return true;
 	}
-
-	private final CommerceCatalogLocalService _commerceCatalogLocalService;
-	private final CommerceCatalogPermission _commerceCatalogPermission;
 
 }
