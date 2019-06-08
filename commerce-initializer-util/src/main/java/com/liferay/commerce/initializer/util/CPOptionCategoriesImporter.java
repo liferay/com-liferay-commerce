@@ -72,9 +72,18 @@ public class CPOptionCategoriesImporter {
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		CPOptionCategory cpOptionCategory;
+
 		Locale locale = LocaleUtil.getSiteDefault();
 
 		String key = jsonObject.getString("Key");
+
+		cpOptionCategory = _cpOptionCategoryLocalService.fetchCPOptionCategory(
+			serviceContext.getCompanyId(), key);
+
+		if (cpOptionCategory != null) {
+			return cpOptionCategory;
+		}
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
 			locale, CommerceInitializerUtil.getValue(jsonObject, "Title", key));
