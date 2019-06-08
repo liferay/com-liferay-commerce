@@ -70,8 +70,9 @@ public class CPSpecificationOptionIndexer
 	public CPSpecificationOptionIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			Field.TITLE, Field.UID, FIELD_KEY);
+			Field.MODIFIED_DATE, Field.TITLE, Field.UID, FIELD_KEY);
+		setFilterSearch(true);
+		setPermissionAware(true);
 	}
 
 	@Override
