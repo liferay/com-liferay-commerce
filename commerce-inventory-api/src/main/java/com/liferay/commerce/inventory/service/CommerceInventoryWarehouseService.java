@@ -61,8 +61,8 @@ public interface CommerceInventoryWarehouseService extends BaseService {
 		String name, String description, boolean active, String street1,
 		String street2, String street3, String city, String zip,
 		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude, ServiceContext serviceContext)
-		throws PortalException;
+		double longitude, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	public CommerceInventoryWarehouse deleteCommerceInventoryWarehouse(
 		long commerceInventoryWarehouseId) throws PortalException;

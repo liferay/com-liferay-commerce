@@ -80,8 +80,8 @@ public interface CommerceInventoryWarehouseLocalService extends BaseLocalService
 		String name, String description, boolean active, String street1,
 		String street2, String street3, String city, String zip,
 		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude, ServiceContext serviceContext)
-		throws PortalException;
+		double longitude, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Creates a new commerce inventory warehouse with the primary key. Does not add the commerce inventory warehouse to the database.

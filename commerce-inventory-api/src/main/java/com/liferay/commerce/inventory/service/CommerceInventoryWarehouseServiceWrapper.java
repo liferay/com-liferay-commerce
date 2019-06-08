@@ -39,13 +39,13 @@ public class CommerceInventoryWarehouseServiceWrapper
 		String name, String description, boolean active, String street1,
 		String street2, String street3, String city, String zip,
 		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude,
+		double longitude, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceInventoryWarehouseService.addCommerceInventoryWarehouse(name,
 			description, active, street1, street2, street3, city, zip,
 			commerceRegionCode, commerceCountryCode, latitude, longitude,
-			serviceContext);
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
