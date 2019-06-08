@@ -32,8 +32,8 @@ import javax.annotation.Generated;
 @Generated("")
 public interface OptionValueResource {
 
-	public Page<OptionValue> getOptionIdOptionValuesPage(
-			Long id, Pagination pagination)
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			String externalReferenceCode, OptionValue optionValue)
 		throws Exception;
 
 	public Page<OptionValue> getOptionByExternalReferenceCodeOptionValuesPage(
@@ -43,8 +43,8 @@ public interface OptionValueResource {
 	public OptionValue postOptionIdOptionValue(Long id, OptionValue optionValue)
 		throws Exception;
 
-	public OptionValue postOptionByExternalReferenceCodeOptionValue(
-			String externalReferenceCode, OptionValue optionValue)
+	public Page<OptionValue> getOptionIdOptionValuesPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -34,19 +34,19 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface SpecificationResource {
 
-	public Response deleteSpecification(Long id) throws Exception;
-
-	public Specification getSpecification(Long id) throws Exception;
-
-	public Response patchSpecification(Long id, Specification specification)
+	public Specification postCatalogSiteSpecification(
+			Long siteId, Specification specification)
 		throws Exception;
 
 	public Page<Specification> getCatalogSiteSpecificationsPage(
 			Long siteId, Pagination pagination)
 		throws Exception;
 
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public Response deleteSpecification(Long id) throws Exception;
+
+	public Specification getSpecification(Long id) throws Exception;
+
+	public Response patchSpecification(Long id, Specification specification)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
