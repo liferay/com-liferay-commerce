@@ -150,6 +150,11 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			_SCHEMA_VERSION_4_3_0, _SCHEMA_VERSION_4_4_0,
 			new CommerceOrderManuallyAdjustedUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_4_4_0, _SCHEMA_VERSION_5_0_0,
+			new com.liferay.commerce.internal.upgrade.v5_0_0.
+				CommerceOrderUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -186,6 +191,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	private static final String _SCHEMA_VERSION_4_3_0 = "4.3.0";
 
 	private static final String _SCHEMA_VERSION_4_4_0 = "4.4.0";
+	
+	private static final String _SCHEMA_VERSION_5_0_0 = "5.0.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
