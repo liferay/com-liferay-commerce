@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -112,8 +113,13 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 	public List<CPOptionCategory> getCPOptionCategories()
 		throws PortalException {
 
-		return _cpOptionCategoryService.getCPOptionCategories(
-			getScopeGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		BaseModelSearchResult<CPOptionCategory>
+			cpOptionCategoryBaseModelSearchResult =
+				_cpOptionCategoryService.searchCPOptionCategories(
+					cpRequestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null);
+
+		return cpOptionCategoryBaseModelSearchResult.getBaseModels();
 	}
 
 	public String getCPOptionCategoryTitle(

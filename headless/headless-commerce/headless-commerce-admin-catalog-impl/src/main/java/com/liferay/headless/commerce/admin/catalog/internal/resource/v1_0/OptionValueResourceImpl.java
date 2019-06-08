@@ -145,7 +145,7 @@ public class OptionValueResourceImpl extends BaseOptionValueResourceImpl {
 			LanguageUtils.getLocalizedMap(optionValue.getName()),
 			GetterUtil.get(optionValue.getPriority(), 0D), optionValue.getKey(),
 			optionValue.getExternalReferenceCode(),
-			_serviceContextHelper.getServiceContext(cpOption.getGroupId()));
+			_serviceContextHelper.getServiceContext());
 
 		DTOConverter optionValueDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(

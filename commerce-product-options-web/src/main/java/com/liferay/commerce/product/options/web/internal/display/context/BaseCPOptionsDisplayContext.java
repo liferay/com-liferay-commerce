@@ -179,10 +179,6 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 	}
 
 	public boolean isShowInfoPanel() {
-		if (isSearch()) {
-			return false;
-		}
-
 		return true;
 	}
 
@@ -232,14 +228,6 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getScopeGroupId();
-	}
-
-	protected boolean isSearch() {
-		if (Validator.isNotNull(getKeywords())) {
-			return true;
-		}
-
-		return false;
 	}
 
 	protected void setDefaultOrderByCol(String defaultOrderByCol) {

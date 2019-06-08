@@ -99,8 +99,8 @@ public class CPSpecificationOptionsImporter {
 		boolean facetable = jsonObject.getBoolean("Facetable");
 
 		return _cpSpecificationOptionLocalService.addCPSpecificationOption(
-			cpOptionCategoryId, titleMap, descriptionMap, facetable, key,
-			serviceContext);
+			serviceContext.getUserId(), cpOptionCategoryId, titleMap,
+			descriptionMap, facetable, key, serviceContext);
 	}
 
 	@Reference

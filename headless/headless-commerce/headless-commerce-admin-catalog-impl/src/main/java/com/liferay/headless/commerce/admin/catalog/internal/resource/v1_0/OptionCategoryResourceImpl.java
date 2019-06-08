@@ -27,6 +27,8 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -34,6 +36,7 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -64,16 +67,16 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			Long siteId, Pagination pagination)
 		throws Exception {
 
-		List<CPOptionCategory> cpOptionCategories =
-			_cpOptionCategoryService.getCPOptionCategories(
-				siteId, pagination.getStartPosition(),
-				pagination.getEndPosition());
-
-		int totalItems = _cpOptionCategoryService.getCPOptionCategoriesCount(
-			siteId);
+		BaseModelSearchResult<CPOptionCategory>
+			cpOptionCategoryBaseModelSearchResult =
+				_cpOptionCategoryService.searchCPOptionCategories(
+					_user.getCompanyId(), null, pagination.getStartPosition(),
+					pagination.getEndPosition(), null);
 
 		return Page.of(
-			_toOptionCategories(cpOptionCategories), pagination, totalItems);
+			_toOptionCategories(
+				cpOptionCategoryBaseModelSearchResult.getBaseModels()),
+			pagination, cpOptionCategoryBaseModelSearchResult.getLength());
 	}
 
 	@Override
@@ -140,9 +143,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 			GetterUtil.get(
 				optionCategory.getPriority(), cpOptionCategory.getPriority()),
-			optionCategory.getKey(),
-			_serviceContextHelper.getServiceContext(
-				cpOptionCategory.getGroupId()));
+			optionCategory.getKey(), _serviceContextHelper.getServiceContext());
 	}
 
 	private OptionCategory _upsertOptionCategory(
@@ -195,5 +196,8 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
+
+	@Context
+	private User _user;
 
 }

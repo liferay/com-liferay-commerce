@@ -26,7 +26,6 @@ import com.liferay.commerce.product.util.comparator.CPInstanceCreateDateComparat
 import com.liferay.commerce.product.util.comparator.CPInstanceDisplayDateComparator;
 import com.liferay.commerce.product.util.comparator.CPInstanceSkuComparator;
 import com.liferay.commerce.product.util.comparator.CPOptionModifiedDateComparator;
-import com.liferay.commerce.product.util.comparator.CPOptionNameComparator;
 import com.liferay.commerce.product.util.comparator.CPSpecificationOptionModifiedDateComparator;
 import com.liferay.commerce.product.util.comparator.CPSpecificationOptionTitleComparator;
 import com.liferay.portal.kernel.search.Field;
@@ -155,10 +154,6 @@ public class CPItemSelectorViewUtil {
 
 		if (orderByCol.equals("modified-date")) {
 			orderByComparator = new CPOptionModifiedDateComparator(orderByAsc);
-		}
-
-		if (orderByCol.equals("name")) {
-			orderByComparator = new CPOptionNameComparator(orderByAsc);
 		}
 
 		return orderByComparator;

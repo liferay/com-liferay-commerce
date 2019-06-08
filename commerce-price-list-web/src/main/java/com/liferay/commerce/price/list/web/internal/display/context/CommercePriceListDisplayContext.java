@@ -169,7 +169,8 @@ public class CommercePriceListDisplayContext
 				WebKeys.THEME_DISPLAY);
 
 		return _commerceCatalogService.searchCommerceCatalogs(
-			themeDisplay.getCompanyId());
+			themeDisplay.getCompanyId(), null, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<CommerceCurrency> getCommerceCurrencies()

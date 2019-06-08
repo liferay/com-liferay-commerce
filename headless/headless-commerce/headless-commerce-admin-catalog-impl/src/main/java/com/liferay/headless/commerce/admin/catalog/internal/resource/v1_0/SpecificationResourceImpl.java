@@ -28,12 +28,15 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -64,17 +67,17 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 			Long siteId, Pagination pagination)
 		throws Exception {
 
-		int totalItems =
-			_cpSpecificationOptionService.getCPSpecificationOptionsCount(
-				siteId);
-
-		List<CPSpecificationOption> cpSpecificationOptions =
-			_cpSpecificationOptionService.getCPSpecificationOptions(
-				siteId, pagination.getStartPosition(),
-				pagination.getEndPosition(), null);
+		BaseModelSearchResult<CPSpecificationOption>
+			cpSpecificationOptionBaseModelSearchResult =
+				_cpSpecificationOptionService.searchCPSpecificationOptions(
+					_user.getCompanyId(), null, null,
+					pagination.getStartPosition(), pagination.getEndPosition(),
+					null);
 
 		return Page.of(
-			_toSpecifications(cpSpecificationOptions), pagination, totalItems);
+			_toSpecifications(
+				cpSpecificationOptionBaseModelSearchResult.getBaseModels()),
+			pagination, cpSpecificationOptionBaseModelSearchResult.getLength());
 	}
 
 	@Override
@@ -163,8 +166,7 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 			LanguageUtils.getLocalizedMap(specification.getTitle()),
 			LanguageUtils.getLocalizedMap(specification.getDescription()),
 			_isFacetable(specification), specification.getKey(),
-			_serviceContextHelper.getServiceContext(
-				cpSpecificationOption.getGroupId()));
+			_serviceContextHelper.getServiceContext());
 	}
 
 	private Specification _upsertSpecification(
@@ -217,5 +219,8 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;
+
+	@Context
+	private User _user;
 
 }

@@ -62,6 +62,29 @@ public class CPOptionsPortletUtil {
 		return orderByComparator;
 	}
 
+	public static Sort getCPOptionCategorySort(
+		String orderByCol, String orderByType) {
+
+		boolean reverse = true;
+
+		if (orderByType.equals("asc")) {
+			reverse = false;
+		}
+
+		Sort sort = null;
+
+		if (orderByCol.equals("title")) {
+			sort = SortFactoryUtil.create(
+				Field.TITLE, Sort.STRING_TYPE, reverse);
+		}
+		else if (orderByCol.equals("modified-date")) {
+			sort = SortFactoryUtil.create(
+				Field.MODIFIED_DATE + "_sortable", reverse);
+		}
+
+		return sort;
+	}
+
 	public static OrderByComparator<CPOptionValue>
 		getCPOptionValueOrderByComparator(
 			String orderByCol, String orderByType) {
