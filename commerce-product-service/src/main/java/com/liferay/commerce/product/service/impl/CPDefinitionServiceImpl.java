@@ -14,11 +14,9 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPDefinitionServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -26,8 +24,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -69,9 +65,7 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			CPActionKeys.ADD_COMMERCE_PRODUCT_DEFINITION);
+		_checkCommerceCatalogPermission(groupId, ActionKeys.UPDATE);
 
 		return cpDefinitionLocalService.addCPDefinition(
 			groupId, userId, nameMap, shortDescriptionMap, descriptionMap,
@@ -168,95 +162,23 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 	@Override
 	public List<CPDefinition> getCPDefinitions(
-			long groupId, int status, int start, int end)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
-		return cpDefinitionLocalService.getCPDefinitions(
-			groupId, status, start, end);
-	}
-
-	@Override
-	public List<CPDefinition> getCPDefinitions(
 			long groupId, int status, int start, int end,
 			OrderByComparator<CPDefinition> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+		_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
 
 		return cpDefinitionLocalService.getCPDefinitions(
 			groupId, status, start, end, orderByComparator);
 	}
 
 	@Override
-	public List<CPDefinition> getCPDefinitions(
-			long groupId, String productTypeName, String languageId, int status,
-			int start, int end,
-			OrderByComparator<CPDefinition> orderByComparator)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
-		return cpDefinitionLocalService.getCPDefinitions(
-			groupId, productTypeName, languageId, status, start, end,
-			orderByComparator);
-	}
-
-	@Override
-	public List<CPDefinition> getCPDefinitionsByCategoryId(
-			long categoryId, int start, int end)
-		throws PortalException {
-
-		AssetCategory assetCategory =
-			assetCategoryLocalService.getAssetCategory(categoryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), assetCategory.getGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
-
-		return cpDefinitionLocalService.getCPDefinitionsByCategoryId(
-			categoryId, start, end);
-	}
-
-	@Override
 	public int getCPDefinitionsCount(long groupId, int status)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+		_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
 
 		return cpDefinitionLocalService.getCPDefinitionsCount(groupId, status);
-	}
-
-	@Override
-	public int getCPDefinitionsCount(
-			long groupId, String productTypeName, String languageId, int status)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
-
-		return cpDefinitionLocalService.getCPDefinitionsCount(
-			groupId, productTypeName, languageId, status);
-	}
-
-	@Override
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws PortalException {
-
-		AssetCategory assetCategory =
-			assetCategoryLocalService.getAssetCategory(categoryId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), assetCategory.getGroupId(),
-			CPActionKeys.MANAGE_CATALOG);
-
-		return cpDefinitionLocalService.getCPDefinitionsCountByCategoryId(
-			categoryId);
 	}
 
 	@Override
@@ -439,9 +361,7 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cProduct == null) {
-			_portletResourcePermission.check(
-				getPermissionChecker(), serviceContext.getScopeGroupId(),
-				CPActionKeys.ADD_COMMERCE_PRODUCT_DEFINITION);
+			_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
 		}
 		else {
 			_cpDefinitionModelResourcePermission.check(
@@ -464,15 +384,26 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 			externalReferenceCode, serviceContext);
 	}
 
+	private void _checkCommerceCatalogPermission(long groupId, String actionId)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CPDefinitionServiceImpl.class,
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 	private static volatile ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPDefinitionServiceImpl.class, "_portletResourcePermission",
-				CPConstants.RESOURCE_NAME);
 
 }

@@ -15,10 +15,10 @@
 package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPInstanceServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -183,8 +181,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			OrderByComparator<CPInstance> orderByComparator)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+		_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
 
 		return cpInstanceLocalService.getCPInstances(
 			groupId, status, start, end, orderByComparator);
@@ -194,8 +191,7 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 	public int getCPInstancesCount(long groupId, int status)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId, CPActionKeys.MANAGE_CATALOG);
+		_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
 
 		return cpInstanceLocalService.getCPInstancesCount(groupId, status);
 	}
@@ -348,15 +344,26 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			serviceContext);
 	}
 
+	private void _checkCommerceCatalogPermission(long groupId, String actionId)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CPInstanceServiceImpl.class,
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 	private static volatile ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPInstanceServiceImpl.class,
 				"_cpDefinitionModelResourcePermission", CPDefinition.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CPDefinitionServiceImpl.class, "_portletResourcePermission",
-				CPConstants.RESOURCE_NAME);
 
 }
