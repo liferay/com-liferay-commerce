@@ -90,7 +90,7 @@ function doSubmit() {
 	).then(
 		jsonresponse => {
 			if (jsonresponse.success) {
-				if(jsonresponse.products) {
+				if (jsonresponse.products) {
 					Liferay.fire(
 						'refreshCartUsingData',
 						{
@@ -101,7 +101,7 @@ function doSubmit() {
 					);
 				}
 
-				if(this.orderId !== jsonresponse.orderId) {
+				if (this.orderId !== jsonresponse.orderId) {
 					Liferay.fire(
 						'orderChanged',
 						{

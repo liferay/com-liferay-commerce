@@ -15,14 +15,14 @@ class AccountSelector extends Component {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
 
 		window.Liferay.on('orderChanged', ({orderId}) => {
-			if(orderId) {
+			if (orderId) {
 				this._getOrders(orderId)
 					.then(orders => {
 						this.currentOrder = orders[0];
 						this.orders = orders;
-					})
+					});
 			}
-		})
+		});
 	}
 
 	_handleClickOutside(e) {
@@ -53,7 +53,7 @@ class AccountSelector extends Component {
 			this.currentView = 'orders';
 			this._getOrders()
 				.then(orders => {
-					this.orders = orders
+					this.orders = orders;
 				});
 		}
 
@@ -121,7 +121,7 @@ class AccountSelector extends Component {
 		this.currentView = 'orders';
 		return this._getOrders()
 			.then(orders => {
-				this.orders = orders
+				this.orders = orders;
 			});
 	}
 
@@ -137,7 +137,7 @@ class AccountSelector extends Component {
 	_handleGetOrders(query = '') {
 		return this._getOrders(query)
 			.then(orders => {
-				this.orders = orders
+				this.orders = orders;
 			});
 	}
 
