@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -58,6 +60,7 @@ public class CommercePriceEntryDisplayContext
 	extends BaseCommercePriceListDisplayContext<CommercePriceEntry> {
 
 	public CommercePriceEntryDisplayContext(
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
 		CPInstanceService cpInstanceService, ItemSelector itemSelector,
@@ -65,6 +68,7 @@ public class CommercePriceEntryDisplayContext
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
+		_commerceCurrencyService = commerceCurrencyService;
 		_commercePriceEntryService = commercePriceEntryService;
 		_cpInstanceService = cpInstanceService;
 		_itemSelector = itemSelector;
@@ -102,8 +106,13 @@ public class CommercePriceEntryDisplayContext
 		CommercePriceList commercePriceList =
 			commercePriceEntry.getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyService.getCommerceCurrency(
+				commercePriceEntry.getCompanyId(),
+				commercePriceList.getCommerceCurrencyCode());
+
 		CommerceMoney priceCommerceMoney = commercePriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commerceCurrency.getCommerceCurrencyId());
 
 		return priceCommerceMoney.format(
 			PortalUtil.getLocale(httpServletRequest));
@@ -242,6 +251,7 @@ public class CommercePriceEntryDisplayContext
 			getCommercePriceListId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private CommercePriceEntry _commercePriceEntry;
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final CPInstanceService _cpInstanceService;

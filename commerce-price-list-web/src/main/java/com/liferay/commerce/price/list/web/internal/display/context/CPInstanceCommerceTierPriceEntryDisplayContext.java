@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -54,6 +56,7 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 
 	public CPInstanceCommerceTierPriceEntryDisplayContext(
 		ActionHelper actionHelper,
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceTierPriceEntryService commercePriceEntryService,
 		HttpServletRequest httpServletRequest) {
@@ -62,6 +65,7 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 			actionHelper, httpServletRequest,
 			CommerceTierPriceEntry.class.getSimpleName());
 
+		_commerceCurrencyService = commerceCurrencyService;
 		_commercePriceListActionHelper = commercePriceListActionHelper;
 		_commerceTierPriceEntryService = commercePriceEntryService;
 
@@ -120,8 +124,13 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 		CommercePriceList commercePriceList =
 			commercePriceEntry.getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyService.getCommerceCurrency(
+				commercePriceList.getCompanyId(),
+				commercePriceList.getCommerceCurrencyCode());
+
 		CommerceMoney priceCommerceMoney = commerceTierPriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commerceCurrency.getCommerceCurrencyId());
 
 		return priceCommerceMoney.format(cpRequestHelper.getLocale());
 	}
@@ -325,6 +334,7 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;
 	private CommerceTierPriceEntry _commerceTierPriceEntry;
 	private final CommerceTierPriceEntryService _commerceTierPriceEntryService;

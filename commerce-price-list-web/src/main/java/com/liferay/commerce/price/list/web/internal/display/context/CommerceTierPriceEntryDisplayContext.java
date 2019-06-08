@@ -16,6 +16,7 @@ package com.liferay.commerce.price.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
@@ -50,6 +51,7 @@ public class CommerceTierPriceEntryDisplayContext
 	extends BaseCommercePriceListDisplayContext<CommerceTierPriceEntry> {
 
 	public CommerceTierPriceEntryDisplayContext(
+		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceTierPriceEntryService commerceTierPriceEntryService,
 		HttpServletRequest httpServletRequest) {
@@ -58,6 +60,7 @@ public class CommerceTierPriceEntryDisplayContext
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 
+		_commerceCurrencyService = commerceCurrencyService;
 		_commerceTierPriceEntryService = commerceTierPriceEntryService;
 	}
 
@@ -123,8 +126,13 @@ public class CommerceTierPriceEntryDisplayContext
 
 		CommercePriceList commercePriceList = getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyService.getCommerceCurrency(
+				commercePriceList.getCompanyId(),
+				commercePriceList.getCommerceCurrencyCode());
+
 		CommerceMoney priceCommerceMoney = commerceTierPriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commerceCurrency.getCommerceCurrencyId());
 
 		return priceCommerceMoney.format(_cpRequestHelper.getLocale());
 	}
@@ -264,6 +272,7 @@ public class CommerceTierPriceEntryDisplayContext
 			getCommerceTierPriceEntryId(), null);
 	}
 
+	private final CommerceCurrencyService _commerceCurrencyService;
 	private CommerceTierPriceEntry _commerceTierPriceEntry;
 	private final CommerceTierPriceEntryService _commerceTierPriceEntryService;
 	private final CPRequestHelper _cpRequestHelper;
