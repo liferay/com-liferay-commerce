@@ -60,11 +60,8 @@
 			<guest-unsupported>
 				<action-key>ADD_COMMERCE_PRODUCT_DEFINITION</action-key>
 				<action-key>ADD_COMMERCE_PRODUCT_RULE</action-key>
-				<action-key>MANAGE_CATALOG</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_IMAGES</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_OPTION_CATEGORIES</action-key>
-				<action-key>MANAGE_COMMERCE_PRODUCT_SPECIFICATION_OPTIONS</action-key>
 				<action-key>PERMISSIONS</action-key>
 			</guest-unsupported>
 		</permissions>
