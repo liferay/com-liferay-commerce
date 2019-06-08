@@ -37,6 +37,10 @@ public class Cart {
 		return _errorMessages;
 	}
 
+	public long getOrderId() {
+		return _orderId;
+	}
+
 	public List<Product> getProducts() {
 		return _products;
 	}
@@ -49,10 +53,6 @@ public class Cart {
 		return _summary;
 	}
 
-	public long getOrderId() {
-		return _orderId;
-	}
-
 	public void setErrorMessages(String[] errorMessages) {
 		_errorMessages = errorMessages;
 	}
@@ -62,9 +62,9 @@ public class Cart {
 	}
 
 	private String[] _errorMessages;
+	private long _orderId;
 	private List<Product> _products;
 	private boolean _success;
 	private Summary _summary;
-	private long _orderId;
 
 }
