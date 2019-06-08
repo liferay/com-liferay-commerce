@@ -56,35 +56,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public CommerceOrder addCommerceOrder(
-			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
-
-		return commerceOrderLocalService.addCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId);
-	}
-
-	@Override
-	public CommerceOrder addCommerceOrder(
-			long groupId, long commerceAccountId, long commerceCurrencyId,
-			long shippingAddressId, String purchaseOrderNumber)
-		throws PortalException {
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), groupId,
-			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
-
-		return commerceOrderLocalService.addCommerceOrder(
-			getUserId(), groupId, commerceAccountId, commerceCurrencyId,
-			shippingAddressId, purchaseOrderNumber);
-	}
-
-	@Override
-	public CommerceOrder addCommerceOrder(
 			long groupId, long commerceAccountId, long shippingAddressId,
 			String purchaseOrderNumber)
 		throws PortalException {
@@ -96,6 +67,35 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		return commerceOrderLocalService.addCommerceOrder(
 			getUserId(), groupId, commerceAccountId, shippingAddressId,
 			purchaseOrderNumber);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long userId, long groupId, String commerceCurrencyCode,
+			long commerceAccountId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
+
+		return commerceOrderLocalService.addCommerceOrder(
+			userId, groupId, commerceAccountId, commerceCurrencyCode);
+	}
+
+	@Override
+	public CommerceOrder addCommerceOrder(
+			long groupId, long commerceAccountId, String commerceCurrencyCode,
+			long shippingAddressId, String purchaseOrderNumber)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceOrderActionKeys.ADD_COMMERCE_ORDER);
+
+		return commerceOrderLocalService.addCommerceOrder(
+			getUserId(), groupId, commerceAccountId, commerceCurrencyCode,
+			shippingAddressId, purchaseOrderNumber);
 	}
 
 	@Override
@@ -798,7 +798,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	@Override
 	public CommerceOrder upsertCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long billingAddressId,
+			String commerceCurrencyCode, long billingAddressId,
 			long shippingAddressId, String commercePaymentMethodKey,
 			long commerceShippingMethodId, String shippingOptionName,
 			String purchaseOrderNumber, BigDecimal subtotal,
@@ -822,7 +822,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		}
 
 		return commerceOrderLocalService.upsertCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId,
+			userId, groupId, commerceAccountId, commerceCurrencyCode,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
