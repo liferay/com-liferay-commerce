@@ -247,6 +247,12 @@ public class CommerceAccountGroupLocalServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountGroup> getCommerceAccountGroupsByCommerceAccountId(
+		long commerceAccountId) {
+		return getService()
+				   .getCommerceAccountGroupsByCommerceAccountId(commerceAccountId);
+	}
+
 	/**
 	* Returns the number of commerce account groups.
 	*

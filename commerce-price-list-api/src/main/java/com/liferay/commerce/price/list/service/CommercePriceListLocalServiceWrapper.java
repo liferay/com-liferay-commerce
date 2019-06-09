@@ -334,11 +334,11 @@ public class CommercePriceListLocalServiceWrapper
 
 	@Override
 	public java.util.Optional<com.liferay.commerce.price.list.model.CommercePriceList> getCommercePriceList(
-		long[] groupIds, long companyId, long commerceAccountId,
+		long companyId, long groupId, long commerceAccountId,
 		long[] commerceAccountGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commercePriceListLocalService.getCommercePriceList(groupIds,
-			companyId, commerceAccountId, commerceAccountGroupIds);
+		return _commercePriceListLocalService.getCommercePriceList(companyId,
+			groupId, commerceAccountId, commerceAccountGroupIds);
 	}
 
 	/**

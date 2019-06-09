@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.CompanyProvider;
 import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -50,6 +51,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -972,6 +974,1044 @@ public class CommerceAccountGroupPersistenceImpl extends BasePersistenceImpl<Com
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "commerceAccountGroup.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS =
+		new FinderPath(CommerceAccountGroupModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountGroupImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceAccountGroupIds",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS =
+		new FinderPath(CommerceAccountGroupModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAccountGroupImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceAccountGroupIds",
+			new String[] { Long.class.getName() },
+			CommerceAccountGroupModelImpl.COMMERCEACCOUNTGROUPID_COLUMN_BITMASK |
+			CommerceAccountGroupModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEACCOUNTGROUPIDS = new FinderPath(CommerceAccountGroupModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountGroupIds",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_COMMERCEACCOUNTGROUPIDS =
+		new FinderPath(CommerceAccountGroupModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"countByCommerceAccountGroupIds",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the commerce account groups where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @return the range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupId, start,
+			end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupId, start,
+			end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS;
+			finderArgs = new Object[] { commerceAccountGroupId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS;
+			finderArgs = new Object[] {
+					commerceAccountGroupId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceAccountGroup> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceAccountGroup>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAccountGroup commerceAccountGroup : list) {
+					if ((commerceAccountGroupId != commerceAccountGroup.getCommerceAccountGroupId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEACCOUNTGROUP_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				if (!pagination) {
+					list = (List<CommerceAccountGroup>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAccountGroup>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account group
+	 * @throws NoSuchAccountGroupException if a matching commerce account group could not be found
+	 */
+	@Override
+	public CommerceAccountGroup findByCommerceAccountGroupIds_First(
+		long commerceAccountGroupId,
+		OrderByComparator<CommerceAccountGroup> orderByComparator)
+		throws NoSuchAccountGroupException {
+		CommerceAccountGroup commerceAccountGroup = fetchByCommerceAccountGroupIds_First(commerceAccountGroupId,
+				orderByComparator);
+
+		if (commerceAccountGroup != null) {
+			return commerceAccountGroup;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountGroupId=");
+		msg.append(commerceAccountGroupId);
+
+		msg.append("}");
+
+		throw new NoSuchAccountGroupException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
+	 */
+	@Override
+	public CommerceAccountGroup fetchByCommerceAccountGroupIds_First(
+		long commerceAccountGroupId,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		List<CommerceAccountGroup> list = findByCommerceAccountGroupIds(commerceAccountGroupId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account group
+	 * @throws NoSuchAccountGroupException if a matching commerce account group could not be found
+	 */
+	@Override
+	public CommerceAccountGroup findByCommerceAccountGroupIds_Last(
+		long commerceAccountGroupId,
+		OrderByComparator<CommerceAccountGroup> orderByComparator)
+		throws NoSuchAccountGroupException {
+		CommerceAccountGroup commerceAccountGroup = fetchByCommerceAccountGroupIds_Last(commerceAccountGroupId,
+				orderByComparator);
+
+		if (commerceAccountGroup != null) {
+			return commerceAccountGroup;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountGroupId=");
+		msg.append(commerceAccountGroupId);
+
+		msg.append("}");
+
+		throw new NoSuchAccountGroupException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
+	 */
+	@Override
+	public CommerceAccountGroup fetchByCommerceAccountGroupIds_Last(
+		long commerceAccountGroupId,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		int count = countByCommerceAccountGroupIds(commerceAccountGroupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceAccountGroup> list = findByCommerceAccountGroupIds(commerceAccountGroupId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns all the commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId) {
+		return filterFindByCommerceAccountGroupIds(commerceAccountGroupId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @return the range of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end) {
+		return filterFindByCommerceAccountGroupIds(commerceAccountGroupId,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups that the user has permissions to view where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCommerceAccountGroupIds(commerceAccountGroupId, start,
+				end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccountGroup.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CommerceAccountGroupImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CommerceAccountGroupImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(commerceAccountGroupId);
+
+			return (List<CommerceAccountGroup>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @return the matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds) {
+		return filterFindByCommerceAccountGroupIds(commerceAccountGroupIds,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @return the range of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end) {
+		return filterFindByCommerceAccountGroupIds(commerceAccountGroupIds,
+			start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCommerceAccountGroupIds(commerceAccountGroupIds,
+				start, end, orderByComparator);
+		}
+
+		if (commerceAccountGroupIds == null) {
+			commerceAccountGroupIds = new long[0];
+		}
+		else if (commerceAccountGroupIds.length > 1) {
+			commerceAccountGroupIds = ArrayUtil.unique(commerceAccountGroupIds);
+
+			Arrays.sort(commerceAccountGroupIds);
+		}
+
+		StringBundler query = new StringBundler();
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		if (commerceAccountGroupIds.length > 0) {
+			query.append("(");
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_7);
+
+			query.append(StringUtil.merge(commerceAccountGroupIds));
+
+			query.append(")");
+
+			query.append(")");
+		}
+
+		query.setStringAt(removeConjunction(query.stringAt(query.index() - 1)),
+			query.index() - 1);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_COMMERCEACCOUNTGROUP_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccountGroup.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CommerceAccountGroupImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CommerceAccountGroupImpl.class);
+			}
+
+			return (List<CommerceAccountGroup>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns all the commerce account groups where commerceAccountGroupId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @return the matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupIds,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce account groups where commerceAccountGroupId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @return the range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupIds, start,
+			end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups where commerceAccountGroupId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator) {
+		return findByCommerceAccountGroupIds(commerceAccountGroupIds, start,
+			end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;, optionally using the finder cache.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account groups
+	 * @param end the upper bound of the range of commerce account groups (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce account groups
+	 */
+	@Override
+	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		OrderByComparator<CommerceAccountGroup> orderByComparator,
+		boolean retrieveFromCache) {
+		if (commerceAccountGroupIds == null) {
+			commerceAccountGroupIds = new long[0];
+		}
+		else if (commerceAccountGroupIds.length > 1) {
+			commerceAccountGroupIds = ArrayUtil.unique(commerceAccountGroupIds);
+
+			Arrays.sort(commerceAccountGroupIds);
+		}
+
+		if (commerceAccountGroupIds.length == 1) {
+			return findByCommerceAccountGroupIds(commerceAccountGroupIds[0],
+				start, end, orderByComparator);
+		}
+
+		boolean pagination = true;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderArgs = new Object[] { StringUtil.merge(commerceAccountGroupIds) };
+		}
+		else {
+			finderArgs = new Object[] {
+					StringUtil.merge(commerceAccountGroupIds),
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<CommerceAccountGroup> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceAccountGroup>)finderCache.getResult(FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAccountGroup commerceAccountGroup : list) {
+					if (!ArrayUtil.contains(commerceAccountGroupIds,
+								commerceAccountGroup.getCommerceAccountGroupId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_SELECT_COMMERCEACCOUNTGROUP_WHERE);
+
+			if (commerceAccountGroupIds.length > 0) {
+				query.append("(");
+
+				query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_7);
+
+				query.append(StringUtil.merge(commerceAccountGroupIds));
+
+				query.append(")");
+
+				query.append(")");
+			}
+
+			query.setStringAt(removeConjunction(query.stringAt(query.index() -
+						1)), query.index() - 1);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CommerceAccountGroupModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				if (!pagination) {
+					list = (List<CommerceAccountGroup>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAccountGroup>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
+					finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Removes all the commerce account groups where commerceAccountGroupId = &#63; from the database.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 */
+	@Override
+	public void removeByCommerceAccountGroupIds(long commerceAccountGroupId) {
+		for (CommerceAccountGroup commerceAccountGroup : findByCommerceAccountGroupIds(
+				commerceAccountGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				null)) {
+			remove(commerceAccountGroup);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce account groups where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce account groups
+	 */
+	@Override
+	public int countByCommerceAccountGroupIds(long commerceAccountGroupId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEACCOUNTGROUPIDS;
+
+		Object[] finderArgs = new Object[] { commerceAccountGroupId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEACCOUNTGROUP_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce account groups where commerceAccountGroupId = any &#63;.
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @return the number of matching commerce account groups
+	 */
+	@Override
+	public int countByCommerceAccountGroupIds(long[] commerceAccountGroupIds) {
+		if (commerceAccountGroupIds == null) {
+			commerceAccountGroupIds = new long[0];
+		}
+		else if (commerceAccountGroupIds.length > 1) {
+			commerceAccountGroupIds = ArrayUtil.unique(commerceAccountGroupIds);
+
+			Arrays.sort(commerceAccountGroupIds);
+		}
+
+		Object[] finderArgs = new Object[] {
+				StringUtil.merge(commerceAccountGroupIds)
+			};
+
+		Long count = (Long)finderCache.getResult(FINDER_PATH_WITH_PAGINATION_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_COUNT_COMMERCEACCOUNTGROUP_WHERE);
+
+			if (commerceAccountGroupIds.length > 0) {
+				query.append("(");
+
+				query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_7);
+
+				query.append(StringUtil.merge(commerceAccountGroupIds));
+
+				query.append(")");
+
+				query.append(")");
+			}
+
+			query.setStringAt(removeConjunction(query.stringAt(query.index() -
+						1)), query.index() - 1);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(FINDER_PATH_WITH_PAGINATION_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+					finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_WITH_PAGINATION_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public int filterCountByCommerceAccountGroupIds(long commerceAccountGroupId) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByCommerceAccountGroupIds(commerceAccountGroupId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_COMMERCEACCOUNTGROUP_WHERE);
+
+		query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccountGroup.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(commerceAccountGroupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	 *
+	 * @param commerceAccountGroupIds the commerce account group IDs
+	 * @return the number of matching commerce account groups that the user has permission to view
+	 */
+	@Override
+	public int filterCountByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds) {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByCommerceAccountGroupIds(commerceAccountGroupIds);
+		}
+
+		if (commerceAccountGroupIds == null) {
+			commerceAccountGroupIds = new long[0];
+		}
+		else if (commerceAccountGroupIds.length > 1) {
+			commerceAccountGroupIds = ArrayUtil.unique(commerceAccountGroupIds);
+
+			Arrays.sort(commerceAccountGroupIds);
+		}
+
+		StringBundler query = new StringBundler();
+
+		query.append(_FILTER_SQL_COUNT_COMMERCEACCOUNTGROUP_WHERE);
+
+		if (commerceAccountGroupIds.length > 0) {
+			query.append("(");
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_7);
+
+			query.append(StringUtil.merge(commerceAccountGroupIds));
+
+			query.append(")");
+
+			query.append(")");
+		}
+
+		query.setStringAt(removeConjunction(query.stringAt(query.index() - 1)),
+			query.index() - 1);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CommerceAccountGroup.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_2 =
+		"commerceAccountGroup.commerceAccountGroupId = ?";
+	private static final String _FINDER_COLUMN_COMMERCEACCOUNTGROUPIDS_COMMERCEACCOUNTGROUPID_7 =
+		"commerceAccountGroup.commerceAccountGroupId IN (";
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_ERC = new FinderPath(CommerceAccountGroupModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAccountGroupModelImpl.FINDER_CACHE_ENABLED,
 			CommerceAccountGroupImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -1571,6 +2611,15 @@ public class CommerceAccountGroupPersistenceImpl extends BasePersistenceImpl<Com
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 				args);
 
+			args = new Object[] {
+					commerceAccountGroupModelImpl.getCommerceAccountGroupId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+				args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -1591,6 +2640,27 @@ public class CommerceAccountGroupPersistenceImpl extends BasePersistenceImpl<Com
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((commerceAccountGroupModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						commerceAccountGroupModelImpl.getOriginalCommerceAccountGroupId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
+					args);
+
+				args = new Object[] {
+						commerceAccountGroupModelImpl.getCommerceAccountGroupId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEACCOUNTGROUPIDS,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEACCOUNTGROUPIDS,
 					args);
 			}
 		}

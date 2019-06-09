@@ -237,6 +237,300 @@ public interface CommerceAccountGroupPersistence extends BasePersistence<Commerc
 	public int filterCountByCompanyId(long companyId);
 
 	/**
+	* Returns all the commerce account groups where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @return the matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId);
+
+	/**
+	* Returns a range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @return the range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account group
+	* @throws NoSuchAccountGroupException if a matching commerce account group could not be found
+	*/
+	public CommerceAccountGroup findByCommerceAccountGroupIds_First(
+		long commerceAccountGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator)
+		throws NoSuchAccountGroupException;
+
+	/**
+	* Returns the first commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
+	*/
+	public CommerceAccountGroup fetchByCommerceAccountGroupIds_First(
+		long commerceAccountGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns the last commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account group
+	* @throws NoSuchAccountGroupException if a matching commerce account group could not be found
+	*/
+	public CommerceAccountGroup findByCommerceAccountGroupIds_Last(
+		long commerceAccountGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator)
+		throws NoSuchAccountGroupException;
+
+	/**
+	* Returns the last commerce account group in the ordered set where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
+	*/
+	public CommerceAccountGroup fetchByCommerceAccountGroupIds_Last(
+		long commerceAccountGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns all the commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @return the matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId);
+
+	/**
+	* Returns a range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @return the range of matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce account groups that the user has permissions to view where commerceAccountGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long commerceAccountGroupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @return the matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds);
+
+	/**
+	* Returns a range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @return the range of matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce account groups that the user has permission to view
+	*/
+	public java.util.List<CommerceAccountGroup> filterFindByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns all the commerce account groups where commerceAccountGroupId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @return the matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds);
+
+	/**
+	* Returns a range of all the commerce account groups where commerceAccountGroupId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @return the range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end);
+
+	/**
+	* Returns an ordered range of all the commerce account groups where commerceAccountGroupId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the commerce account groups where commerceAccountGroupId = &#63;, optionally using the finder cache.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceAccountGroupModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @param start the lower bound of the range of commerce account groups
+	* @param end the upper bound of the range of commerce account groups (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching commerce account groups
+	*/
+	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes all the commerce account groups where commerceAccountGroupId = &#63; from the database.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	*/
+	public void removeByCommerceAccountGroupIds(long commerceAccountGroupId);
+
+	/**
+	* Returns the number of commerce account groups where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @return the number of matching commerce account groups
+	*/
+	public int countByCommerceAccountGroupIds(long commerceAccountGroupId);
+
+	/**
+	* Returns the number of commerce account groups where commerceAccountGroupId = any &#63;.
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @return the number of matching commerce account groups
+	*/
+	public int countByCommerceAccountGroupIds(long[] commerceAccountGroupIds);
+
+	/**
+	* Returns the number of commerce account groups that the user has permission to view where commerceAccountGroupId = &#63;.
+	*
+	* @param commerceAccountGroupId the commerce account group ID
+	* @return the number of matching commerce account groups that the user has permission to view
+	*/
+	public int filterCountByCommerceAccountGroupIds(long commerceAccountGroupId);
+
+	/**
+	* Returns the number of commerce account groups that the user has permission to view where commerceAccountGroupId = any &#63;.
+	*
+	* @param commerceAccountGroupIds the commerce account group IDs
+	* @return the number of matching commerce account groups that the user has permission to view
+	*/
+	public int filterCountByCommerceAccountGroupIds(
+		long[] commerceAccountGroupIds);
+
+	/**
 	* Returns the commerce account group where companyId = &#63; and externalReferenceCode = &#63; or throws a {@link NoSuchAccountGroupException} if it could not be found.
 	*
 	* @param companyId the company ID

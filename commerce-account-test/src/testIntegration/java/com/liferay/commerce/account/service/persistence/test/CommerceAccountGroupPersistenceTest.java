@@ -174,6 +174,21 @@ public class CommerceAccountGroupPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCommerceAccountGroupIds() throws Exception {
+		_persistence.countByCommerceAccountGroupIds(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceAccountGroupIds(0L);
+	}
+
+	@Test
+	public void testCountByCommerceAccountGroupIdsArrayable()
+		throws Exception {
+		_persistence.countByCommerceAccountGroupIds(new long[] {
+				RandomTestUtil.nextLong(), 0L
+			});
+	}
+
+	@Test
 	public void testCountByC_ERC() throws Exception {
 		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
 

@@ -234,6 +234,10 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 		int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountGroup> getCommerceAccountGroupsByCommerceAccountId(
+		long commerceAccountId);
+
 	/**
 	* Returns the number of commerce account groups.
 	*

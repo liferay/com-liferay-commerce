@@ -110,9 +110,10 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.commerce.account.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.commerce.account.model.CommerceAccountGroup"),
 			true);
-	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 2L;
-	public static final long NAME_COLUMN_BITMASK = 4L;
+	public static final long COMMERCEACCOUNTGROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 2L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
+	public static final long NAME_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -311,7 +312,19 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 	@Override
 	public void setCommerceAccountGroupId(long commerceAccountGroupId) {
+		_columnBitmask |= COMMERCEACCOUNTGROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalCommerceAccountGroupId) {
+			_setOriginalCommerceAccountGroupId = true;
+
+			_originalCommerceAccountGroupId = _commerceAccountGroupId;
+		}
+
 		_commerceAccountGroupId = commerceAccountGroupId;
+	}
+
+	public long getOriginalCommerceAccountGroupId() {
+		return _originalCommerceAccountGroupId;
 	}
 
 	@JSON
@@ -539,6 +552,10 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 		commerceAccountGroupModelImpl._originalExternalReferenceCode = commerceAccountGroupModelImpl._externalReferenceCode;
 
+		commerceAccountGroupModelImpl._originalCommerceAccountGroupId = commerceAccountGroupModelImpl._commerceAccountGroupId;
+
+		commerceAccountGroupModelImpl._setOriginalCommerceAccountGroupId = false;
+
 		commerceAccountGroupModelImpl._originalCompanyId = commerceAccountGroupModelImpl._companyId;
 
 		commerceAccountGroupModelImpl._setOriginalCompanyId = false;
@@ -690,6 +707,8 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 	private String _externalReferenceCode;
 	private String _originalExternalReferenceCode;
 	private long _commerceAccountGroupId;
+	private long _originalCommerceAccountGroupId;
+	private boolean _setOriginalCommerceAccountGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
