@@ -110,6 +110,9 @@
 
 		<!-- Finders -->
 
+		<finder name="CommerceAccountGroupIds" return-type="Collection">
+			<finder-column arrayable-operator="OR" name="commerceAccountGroupId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
