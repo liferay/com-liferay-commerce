@@ -24,6 +24,7 @@ import com.liferay.commerce.price.list.exception.DuplicateCommercePriceListExcep
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.base.CommercePriceListLocalServiceBaseImpl;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -64,6 +66,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -307,15 +310,24 @@ public class CommercePriceListLocalServiceImpl
 
 	@Override
 	public Optional<CommercePriceList> getCommercePriceList(
-			long[] groupIds, long companyId, long commerceAccountId,
+			long companyId, long groupId, long commerceAccountId,
 			long[] commerceAccountGroupIds)
 		throws PortalException {
 
 		Company company = companyLocalService.getCompany(companyId);
 
-		String cacheKey =
-			commerceAccountId + StringPool.POUND +
-				StringUtil.merge(commerceAccountGroupIds);
+		if (commerceAccountGroupIds == null) {
+			commerceAccountGroupIds = new long[0];
+		}
+		else if (commerceAccountGroupIds.length > 1) {
+			commerceAccountGroupIds = ArrayUtil.unique(commerceAccountGroupIds);
+
+			Arrays.sort(commerceAccountGroupIds);
+		}
+
+		String cacheKey = StringBundler.concat(
+			groupId, StringPool.POUND, commerceAccountId, StringPool.POUND,
+			StringUtil.merge(commerceAccountGroupIds));
 
 		PortalCache<String, Serializable> portalCache =
 			MultiVMPoolUtil.getPortalCache(
@@ -332,7 +344,7 @@ public class CommercePriceListLocalServiceImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			company.getCompanyId(), groupIds, commerceAccountId,
+			company.getCompanyId(), groupId, commerceAccountId,
 			commerceAccountGroupIds);
 
 		Indexer<CommercePriceList> indexer =
@@ -716,7 +728,7 @@ public class CommercePriceListLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long[] groupIds, long commerceAccountId,
+		long companyId, long groupId, long commerceAccountId,
 		long[] commerceAccountGroupIds) {
 
 		SearchContext searchContext = new SearchContext();
@@ -732,7 +744,7 @@ public class CommercePriceListLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(0);
 		searchContext.setEnd(1);
-		searchContext.setGroupIds(groupIds);
+		searchContext.setGroupIds(new long[] {groupId});
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
