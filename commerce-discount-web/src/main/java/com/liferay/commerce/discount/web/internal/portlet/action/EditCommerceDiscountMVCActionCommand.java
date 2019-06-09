@@ -162,11 +162,9 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		return portletURL.toString();
 	}
 
-	protected void updateChannels(ActionRequest actionRequest)
+	protected void updateChannels(
+			long commerceDiscountId, ActionRequest actionRequest)
 		throws PortalException {
-
-		long commerceDiscountId = ParamUtil.getLong(
-			actionRequest, "commerceDiscountId");
 
 		long[] commerceChannelIds = ParamUtil.getLongValues(
 			actionRequest, "commerceChannelIds");
@@ -346,7 +344,8 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 			CommerceDiscount commerceDiscount = updateCommerceDiscount(
 				_actionRequest);
 
-			updateChannels(_actionRequest);
+			updateChannels(
+				commerceDiscount.getCommerceDiscountId(), _actionRequest);
 
 			return commerceDiscount;
 		}
