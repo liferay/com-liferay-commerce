@@ -27,6 +27,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.Filter;
+import com.liferay.portal.kernel.search.filter.MissingFilter;
 import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -59,7 +61,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.ToLongFunction;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -178,8 +179,11 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 				Filter termFilter = new TermFilter(
 					FIELD_GROUP_IDS, String.valueOf(groupId));
 
-				groupBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
+				groupBooleanFilter.add(termFilter, BooleanClauseOccur.SHOULD);
 			}
+
+			groupBooleanFilter.add(
+				new MissingFilter(FIELD_GROUP_IDS), BooleanClauseOccur.SHOULD);
 
 			contextBooleanFilter.add(
 				groupBooleanFilter, BooleanClauseOccur.MUST);
@@ -337,7 +341,7 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 			"commerceAccountGroupIds_required_matches",
 			commerceAccountGroupIds.length);
 
-		List<CommerceChannel> commerceChannels = new ArrayList<>();
+		List<Long> groupIdList = new ArrayList<>();
 
 		List<CommerceChannelRel> commerceChannelRels =
 			_commerceChannelRelLocalService.getCommerceChannelRels(
@@ -346,18 +350,24 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 				QueryUtil.ALL_POS, null);
 
 		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
-			commerceChannels.add(commerceChannelRel.getCommerceChannel());
+			CommerceChannel commerceChannel =
+				_commerceChannelLocalService.fetchCommerceChannel(
+					commerceChannelRel.getCommerceChannelId());
+
+			if (commerceChannel == null) {
+				continue;
+			}
+
+			groupIdList.add(commerceChannel.getCommerceChannelGroupId());
 		}
 
-		Stream<CommerceChannel> commerceChannelStream =
-			commerceChannels.stream();
+		Stream<Long> stream = groupIdList.stream();
 
-		LongStream commerceChannelGroupIdStream =
-			commerceChannelStream.mapToLong(
-				_getCommerceChannelToLongFunction());
+		long[] groupIds = stream.mapToLong(
+			l -> l
+		).toArray();
 
-		document.addNumber(
-			FIELD_GROUP_IDS, commerceChannelGroupIdStream.toArray());
+		document.addNumber(FIELD_GROUP_IDS, groupIds);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -480,28 +490,11 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 		_commerceDiscountProductTargets.remove(commerceDiscountProductTarget);
 	}
 
-	private ToLongFunction<CommerceChannel>
-		_getCommerceChannelToLongFunction() {
-
-		return new ToLongFunction<CommerceChannel>() {
-
-			@Override
-			public long applyAsLong(CommerceChannel commerceChannel) {
-				try {
-					return commerceChannel.getCommerceChannelGroupId();
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-
-					return 0;
-				}
-			}
-
-		};
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceDiscountIndexer.class);
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
