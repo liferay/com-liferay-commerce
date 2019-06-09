@@ -42,8 +42,7 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 		return new CommerceContextHttpImpl(
 			httpServletRequest, _commerceAccountHelper,
 			_commerceChannelLocalService, _commerceCurrencyLocalService,
-			_commerceOrderHttpHelper, _commercePriceListLocalService,
-			_configurationProvider, _portal);
+			_commerceOrderHttpHelper, _configurationProvider, _portal);
 	}
 
 	@Override
@@ -52,10 +51,10 @@ public class CommerceContextFactoryImpl implements CommerceContextFactory {
 		long commerceAccountId) {
 
 		return new CommerceContextImpl(
-			companyId, groupId, userId, orderId, commerceAccountId,
-			_commerceAccountService, _commerceChannelLocalService,
-			_commerceCurrencyLocalService, _commerceOrderService,
-			_commercePriceListLocalService, _configurationProvider);
+			companyId, groupId, orderId, commerceAccountId,
+			_commerceAccountHelper, _commerceAccountService,
+			_commerceChannelLocalService, _commerceCurrencyLocalService,
+			_commerceOrderService, _configurationProvider);
 	}
 
 	@Reference

@@ -168,6 +168,23 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 				fieldBooleanFilter, BooleanClauseOccur.MUST);
 		}
 
+		long[] groupIds = GetterUtil.getLongValues(
+			searchContext.getAttribute(FIELD_GROUP_IDS), null);
+
+		if ((groupIds != null) && (groupIds.length > 0)) {
+			BooleanFilter groupBooleanFilter = new BooleanFilter();
+
+			for (long groupId : groupIds) {
+				Filter termFilter = new TermFilter(
+					FIELD_GROUP_IDS, String.valueOf(groupId));
+
+				groupBooleanFilter.add(termFilter, BooleanClauseOccur.MUST);
+			}
+
+			contextBooleanFilter.add(
+				groupBooleanFilter, BooleanClauseOccur.MUST);
+		}
+
 		boolean active = GetterUtil.getBoolean(
 			searchContext.getAttribute(FIELD_ACTIVE));
 

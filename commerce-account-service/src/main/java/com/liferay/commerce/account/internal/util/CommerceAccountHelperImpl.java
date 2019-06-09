@@ -18,6 +18,8 @@ import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceCon
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.SessionParamUtil;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -68,6 +71,19 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		}
 
 		return StringPool.BLANK;
+	}
+
+	@Override
+	public long[] getCommerceAccountGroupIds(long commerceAccountId) {
+		List<CommerceAccountGroup> commerceAccountGroups =
+			_commerceAccountGroupLocalService.
+				getCommerceAccountGroupsByCommerceAccountId(commerceAccountId);
+
+		Stream<CommerceAccountGroup> stream = commerceAccountGroups.stream();
+
+		return stream.mapToLong(
+			CommerceAccountGroup::getCommerceAccountGroupId
+		).toArray();
 	}
 
 	@Override
@@ -205,6 +221,9 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	private static final String _CURRENT_COMMERCE_ACCOUNT_ID_KEY =
 		"LIFERAY_SHARED_CURRENT_COMMERCE_ACCOUNT_ID_";
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;

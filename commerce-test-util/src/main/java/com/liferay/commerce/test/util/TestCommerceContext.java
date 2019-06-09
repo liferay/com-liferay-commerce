@@ -18,14 +18,10 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.price.list.model.CommercePriceList;
-import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
-
-import java.util.Optional;
 
 /**
  * @author Luca Pellizzon
@@ -56,11 +52,6 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
-	public CommerceChannel getCommerceChannel() {
-		return _commerceChannel;
-	}
-
-	@Override
 	public long getCommerceChannelGroupId() throws PortalException {
 		if (_commerceChannel == null) {
 			return 0;
@@ -80,21 +71,6 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
-	public Optional<CommercePriceList> getCommercePriceList()
-		throws PortalException {
-
-		if (_commerceAccount == null) {
-			return Optional.empty();
-		}
-
-		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			new long[] {getCommerceChannelGroupId()},
-			_contextUser.getCompanyId(),
-			_commerceAccount.getCommerceAccountId(),
-			getCommerceAccountGroupIds());
-	}
-
-	@Override
 	public int getCommerceSiteType() {
 		return 0;
 	}
@@ -102,11 +78,6 @@ public class TestCommerceContext implements CommerceContext {
 	@Override
 	public long getSiteGroupId() throws PortalException {
 		return _contextGroup.getGroupId();
-	}
-
-	@Override
-	public long getUserId() {
-		return _contextUser.getUserId();
 	}
 
 	private final CommerceAccount _commerceAccount;

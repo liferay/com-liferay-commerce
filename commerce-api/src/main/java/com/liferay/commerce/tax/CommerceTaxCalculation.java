@@ -37,7 +37,7 @@ public interface CommerceTaxCalculation {
 
 	public List<CommerceTaxValue> getCommerceTaxValues(
 			long groupId, long cpInstanceId, long commerceOrderId,
-			BigDecimal amount, CommerceContext commerceContext)
+			BigDecimal amount)
 		throws PortalException;
 
 	public CommerceMoney getTaxAmount(

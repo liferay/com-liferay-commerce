@@ -20,6 +20,7 @@ import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
@@ -57,6 +58,12 @@ public class ServletContextUtil {
 
 	public static final CommercePriceFormatter getCommercePriceFormatter() {
 		return _instance._getCommercePriceFormatter();
+	}
+
+	public static final CommercePriceListLocalService
+		getCommercePriceListLocalService() {
+
+		return _instance._getCommercePriceListLocalService();
 	}
 
 	public static final ConfigurationProvider getConfigurationProvider() {
@@ -129,6 +136,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCommercePriceListLocalService(
+		CommercePriceListLocalService commercePriceListLocalService) {
+
+		_commercePriceListLocalService = commercePriceListLocalService;
+	}
+
+	@Reference(unbind = "-")
 	protected void setConfigurationProvider(
 		ConfigurationProvider configurationProvider) {
 
@@ -185,6 +199,10 @@ public class ServletContextUtil {
 		return _commercePriceFormatter;
 	}
 
+	private CommercePriceListLocalService _getCommercePriceListLocalService() {
+		return _commercePriceListLocalService;
+	}
+
 	private ConfigurationProvider _getConfigurationProvider() {
 		return _configurationProvider;
 	}
@@ -215,6 +233,7 @@ public class ServletContextUtil {
 	private ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
 	private CommercePriceFormatter _commercePriceFormatter;
+	private CommercePriceListLocalService _commercePriceListLocalService;
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
 	private CPInstanceHelper _cpInstanceHelper;

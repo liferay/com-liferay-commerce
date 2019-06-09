@@ -41,10 +41,6 @@ public class CommerceTaxCalculateRequest {
 		return _taxCategoryId;
 	}
 
-	public long getUserId() {
-		return _userId;
-	}
-
 	public boolean isPercentage() {
 		return _percentage;
 	}
@@ -73,16 +69,11 @@ public class CommerceTaxCalculateRequest {
 		_taxCategoryId = taxCategoryId;
 	}
 
-	public void setUserId(long userId) {
-		_userId = userId;
-	}
-
 	private long _commerceAddressId;
 	private long _commerceTaxMethodId;
 	private boolean _percentage;
 	private BigDecimal _price;
 	private long _siteGroupId;
 	private long _taxCategoryId;
-	private long _userId;
 
 }
