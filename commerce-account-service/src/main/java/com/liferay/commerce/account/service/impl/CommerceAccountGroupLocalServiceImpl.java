@@ -17,6 +17,7 @@ package com.liferay.commerce.account.service.impl;
 import com.liferay.commerce.account.exception.CommerceAccountGroupNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,6 +44,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
 
@@ -141,6 +143,26 @@ public class CommerceAccountGroupLocalServiceImpl
 
 		return commerceAccountGroupPersistence.findByCompanyId(
 			companyId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceAccountGroup>
+		getCommerceAccountGroupsByCommerceAccountId(long commerceAccountId) {
+
+		List<CommerceAccountGroupCommerceAccountRel>
+			commerceAccountGroupCommerceAccountRels =
+				commerceAccountGroupCommerceAccountRelPersistence.
+					findByCommerceAccountId(commerceAccountId);
+
+		Stream<CommerceAccountGroupCommerceAccountRel> stream =
+			commerceAccountGroupCommerceAccountRels.stream();
+
+		long[] commerceAccountGroupIds = stream.mapToLong(
+			CommerceAccountGroupCommerceAccountRel::getCommerceAccountGroupId
+		).toArray();
+
+		return commerceAccountGroupPersistence.findByCommerceAccountGroupIds(
+			commerceAccountGroupIds);
 	}
 
 	@Override
