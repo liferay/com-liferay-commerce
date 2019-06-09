@@ -168,8 +168,8 @@ public class EditCommerceDiscountMVCActionCommand extends BaseMVCActionCommand {
 		long commerceDiscountId = ParamUtil.getLong(
 			actionRequest, "commerceDiscountId");
 
-		long[] commerceChannelIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
+		long[] commerceChannelIds = ParamUtil.getLongValues(
+			actionRequest, "commerceChannelIds");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannelRel.class.getName(), actionRequest);
