@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -22,8 +23,11 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalServiceUtil;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServiceUtil;
 import com.liferay.commerce.price.list.util.comparator.CommerceTierPriceEntryMinQuantityComparator;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -51,7 +55,7 @@ public class TierPriceTag extends IncludeTag {
 					CommerceWebKeys.COMMERCE_CONTEXT);
 
 			Optional<CommercePriceList> commercePriceListOptional =
-				commerceContext.getCommercePriceList();
+				_getPriceList(_cpInstanceId, commerceContext);
 
 			if (commercePriceListOptional.isPresent()) {
 				CommercePriceList commercePriceList =
@@ -120,6 +124,9 @@ public class TierPriceTag extends IncludeTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
+		_commercePriceListLocalService =
+			ServletContextUtil.getCommercePriceListLocalService();
+
 		commercePriceFormatter = ServletContextUtil.getCommercePriceFormatter();
 		servletContext = ServletContextUtil.getServletContext();
 	}
@@ -163,11 +170,31 @@ public class TierPriceTag extends IncludeTag {
 
 	protected CommercePriceFormatter commercePriceFormatter;
 
+	private Optional<CommercePriceList> _getPriceList(
+			long cpInstanceId, CommerceContext commerceContext)
+		throws PortalException {
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount == null) {
+			return Optional.empty();
+		}
+
+		CPInstance cpInstance = CPInstanceLocalServiceUtil.getCPInstance(
+			cpInstanceId);
+
+		return _commercePriceListLocalService.getCommercePriceList(
+			commerceAccount.getCompanyId(), cpInstance.getGroupId(),
+			commerceAccount.getCommerceAccountId(),
+			commerceContext.getCommerceAccountGroupIds());
+	}
+
 	private static final String _PAGE = "/tier_price/page.jsp";
 
 	private static final Log _log = LogFactoryUtil.getLog(TierPriceTag.class);
 
 	private long _commerceCurrencyId;
+	private CommercePriceListLocalService _commercePriceListLocalService;
 	private List<CommerceTierPriceEntry> _commerceTierPriceEntries;
 	private long _cpInstanceId;
 	private String _taglibQuantityInputId;

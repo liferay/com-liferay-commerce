@@ -139,27 +139,14 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 		long commerceAccountId = GetterUtil.getLong(
 			searchContext.getAttribute("commerceAccountId"));
 
-		if ((commerceAccountId > 0) &&
-			(commerceAccountGroupIdsTermsSetFilter != null)) {
+		BooleanFilter applicabilityBooleanFilter = new BooleanFilter();
 
-			BooleanFilter applicabilityBooleanFilter = new BooleanFilter();
+		applicabilityBooleanFilter.add(commerceAccountGroupIdsTermsSetFilter);
+		applicabilityBooleanFilter.addTerm(
+			"commerceAccountId", commerceAccountId);
 
-			applicabilityBooleanFilter.add(
-				commerceAccountGroupIdsTermsSetFilter);
-			applicabilityBooleanFilter.addTerm(
-				"commerceAccountId", commerceAccountId);
-
-			contextBooleanFilter.add(
-				applicabilityBooleanFilter, BooleanClauseOccur.MUST);
-		}
-		else if (commerceAccountId > 0) {
-			contextBooleanFilter.addRequiredTerm(
-				"commerceAccountId", commerceAccountId);
-		}
-		else if (commerceAccountGroupIdsTermsSetFilter != null) {
-			contextBooleanFilter.add(
-				commerceAccountGroupIdsTermsSetFilter, BooleanClauseOccur.MUST);
-		}
+		contextBooleanFilter.add(
+			applicabilityBooleanFilter, BooleanClauseOccur.MUST);
 	}
 
 	@Override

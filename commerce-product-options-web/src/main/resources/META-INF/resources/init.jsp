@@ -82,7 +82,7 @@ page import="java.util.Set" %>
 <liferay-frontend:defineObjects />
 
 <liferay-theme:defineObjects />
-./commerce-product-options-web/src/main/resources/META-INF/resources/option_category_action.jsp
+
 <portlet:defineObjects />
 
 <%

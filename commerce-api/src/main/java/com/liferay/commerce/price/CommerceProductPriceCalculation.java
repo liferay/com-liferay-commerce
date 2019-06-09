@@ -19,10 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.portal.kernel.exception.PortalException;
-
-import java.util.Optional;
 
 /**
  * @author Marco Leo
@@ -50,16 +47,8 @@ public interface CommerceProductPriceCalculation {
 		throws PortalException;
 
 	public CommerceMoney getPromoPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, boolean secure,
-			CommerceContext commerceContext)
-		throws PortalException;
-
-	public CommerceMoney getPromoPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
+			long cpInstanceId, int quantity, CommerceCurrency commerceCurrency,
+			boolean secure, CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getUnitMaxPrice(
@@ -81,16 +70,8 @@ public interface CommerceProductPriceCalculation {
 		throws PortalException;
 
 	public CommerceMoney getUnitPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, boolean secure,
-			CommerceContext commerceContext)
-		throws PortalException;
-
-	public CommerceMoney getUnitPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
+			long cpInstanceId, int quantity, CommerceCurrency commerceCurrency,
+			boolean secure, CommerceContext commerceContext)
 		throws PortalException;
 
 }

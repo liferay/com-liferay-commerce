@@ -16,6 +16,8 @@ package com.liferay.commerce.internal.price;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -29,6 +31,7 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalService;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService;
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
@@ -46,6 +49,7 @@ import java.math.RoundingMode;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -68,12 +72,12 @@ public class CommerceProductPriceCalculationImpl
 		}
 
 		CommerceMoney unitPrice = getUnitPrice(
-			cpInstanceId, quantity, commerceContext.getCommercePriceList(),
-			commerceContext.getCommerceCurrency(), secure, commerceContext);
+			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
+			secure, commerceContext);
 
 		CommerceMoney promoPrice = getPromoPrice(
-			cpInstanceId, quantity, commerceContext.getCommercePriceList(),
-			commerceContext.getCommerceCurrency(), secure, commerceContext);
+			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
+			secure, commerceContext);
 
 		CommerceProductPriceImpl commerceProductPrice =
 			new CommerceProductPriceImpl();
@@ -152,10 +156,8 @@ public class CommerceProductPriceCalculationImpl
 
 	@Override
 	public CommerceMoney getPromoPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, boolean secure,
-			CommerceContext commerceContext)
+			long cpInstanceId, int quantity, CommerceCurrency commerceCurrency,
+			boolean secure, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
@@ -165,6 +167,9 @@ public class CommerceProductPriceCalculationImpl
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 
 		BigDecimal price = cpInstance.getPromoPrice();
+
+		Optional<CommercePriceList> commercePriceList = _getPriceList(
+			cpInstance.getGroupId(), commerceContext);
 
 		if (commercePriceList.isPresent()) {
 			BigDecimal priceListPrice = _getPriceListPrice(
@@ -180,18 +185,6 @@ public class CommerceProductPriceCalculationImpl
 		}
 
 		return _commerceMoneyFactory.create(commerceCurrency, price);
-	}
-
-	@Override
-	public CommerceMoney getPromoPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
-		throws PortalException {
-
-		return getPromoPrice(
-			cpInstanceId, quantity, commercePriceList, commerceCurrency, true,
-			commerceContext);
 	}
 
 	@Override
@@ -215,7 +208,6 @@ public class CommerceProductPriceCalculationImpl
 		for (CPInstance cpInstance : cpInstances) {
 			CommerceMoney cpInstanceCommerceMoney = getUnitPrice(
 				cpInstance.getCPInstanceId(), quantity,
-				commerceContext.getCommercePriceList(),
 				commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 			if (maxPrice.compareTo(cpInstanceCommerceMoney.getPrice()) < 0) {
@@ -257,7 +249,6 @@ public class CommerceProductPriceCalculationImpl
 		for (CPInstance cpInstance : cpInstances) {
 			CommerceMoney cpInstanceCommerceMoney = getUnitPrice(
 				cpInstance.getCPInstanceId(), quantity,
-				commerceContext.getCommercePriceList(),
 				commerceContext.getCommerceCurrency(), secure, commerceContext);
 
 			if ((commerceMoney == null) ||
@@ -282,10 +273,8 @@ public class CommerceProductPriceCalculationImpl
 
 	@Override
 	public CommerceMoney getUnitPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, boolean secure,
-			CommerceContext commerceContext)
+			long cpInstanceId, int quantity, CommerceCurrency commerceCurrency,
+			boolean secure, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
@@ -295,6 +284,9 @@ public class CommerceProductPriceCalculationImpl
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 
 		BigDecimal price = cpInstance.getPrice();
+
+		Optional<CommercePriceList> commercePriceList = _getPriceList(
+			cpInstance.getGroupId(), commerceContext);
 
 		if (commercePriceList.isPresent()) {
 			BigDecimal priceListPrice = _getPriceListPrice(
@@ -312,16 +304,30 @@ public class CommerceProductPriceCalculationImpl
 		return _commerceMoneyFactory.create(commerceCurrency, price);
 	}
 
-	@Override
-	public CommerceMoney getUnitPrice(
-			long cpInstanceId, int quantity,
-			Optional<CommercePriceList> commercePriceList,
-			CommerceCurrency commerceCurrency, CommerceContext commerceContext)
+	private Optional<CommercePriceList> _getPriceList(
+			long groupId, CommerceContext commerceContext)
 		throws PortalException {
 
-		return getUnitPrice(
-			cpInstanceId, quantity, commercePriceList, commerceCurrency, true,
-			commerceContext);
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount == null) {
+			return Optional.empty();
+		}
+
+		List<CommerceAccountGroup> commerceAccountGroups =
+			_commerceAccountGroupLocalService.
+				getCommerceAccountGroupsByCommerceAccountId(
+					commerceAccount.getCommerceAccountId());
+
+		Stream<CommerceAccountGroup> stream = commerceAccountGroups.stream();
+
+		long[] commerceAccountGroupIds = stream.mapToLong(
+			CommerceAccountGroup::getCommerceAccountGroupId
+		).toArray();
+
+		return _commercePriceListLocalService.getCommercePriceList(
+			commerceAccount.getCompanyId(), groupId,
+			commerceAccount.getCommerceAccountId(), commerceAccountGroupIds);
 	}
 
 	private BigDecimal _getPriceListPrice(
@@ -397,6 +403,9 @@ public class CommerceProductPriceCalculationImpl
 	}
 
 	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
@@ -407,6 +416,9 @@ public class CommerceProductPriceCalculationImpl
 
 	@Reference
 	private CommercePriceEntryLocalService _commercePriceEntryLocalService;
+
+	@Reference
+	private CommercePriceListLocalService _commercePriceListLocalService;
 
 	@Reference
 	private CommerceTierPriceEntryLocalService
