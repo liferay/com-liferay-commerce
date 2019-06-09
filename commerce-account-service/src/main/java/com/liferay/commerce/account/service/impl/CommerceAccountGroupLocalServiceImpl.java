@@ -154,6 +154,10 @@ public class CommerceAccountGroupLocalServiceImpl
 				commerceAccountGroupCommerceAccountRelPersistence.
 					findByCommerceAccountId(commerceAccountId);
 
+		if (commerceAccountGroupCommerceAccountRels.isEmpty()) {
+			return new ArrayList<>();
+		}
+
 		Stream<CommerceAccountGroupCommerceAccountRel> stream =
 			commerceAccountGroupCommerceAccountRels.stream();
 
