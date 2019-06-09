@@ -134,19 +134,18 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 
 			commerceAccountGroupIdsTermsSetFilter =
 				termsSetFilterBuilder.build();
+
+			contextBooleanFilter.add(
+				commerceAccountGroupIdsTermsSetFilter, BooleanClauseOccur.MUST);
 		}
 
 		long commerceAccountId = GetterUtil.getLong(
 			searchContext.getAttribute("commerceAccountId"));
 
-		BooleanFilter applicabilityBooleanFilter = new BooleanFilter();
-
-		applicabilityBooleanFilter.add(commerceAccountGroupIdsTermsSetFilter);
-		applicabilityBooleanFilter.addTerm(
-			"commerceAccountId", commerceAccountId);
-
-		contextBooleanFilter.add(
-			applicabilityBooleanFilter, BooleanClauseOccur.MUST);
+		if (commerceAccountId > 0) {
+			contextBooleanFilter.addTerm(
+				"commerceAccountId", commerceAccountId);
+		}
 	}
 
 	@Override
