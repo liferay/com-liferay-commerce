@@ -244,14 +244,16 @@ public class CommerceShipmentContentDisplayContext {
 
 		_searchContainer.setEmptyResultsMessage("no-shipments-were-found");
 
+		CommerceShipment commerceShipment = getCommerceShipment();
+
 		int total = _commerceShipmentLocalService.getCommerceShipmentsCount(
-			_commerceShipmentContentRequestHelper.getScopeGroupId());
+			new long[] {commerceShipment.getGroupId()});
 
 		_searchContainer.setTotal(total);
 
 		List<CommerceShipment> results =
 			_commerceShipmentLocalService.getCommerceShipments(
-				_commerceShipmentContentRequestHelper.getScopeGroupId(),
+				new long[] {commerceShipment.getGroupId()},
 				_searchContainer.getStart(), _searchContainer.getEnd(),
 				new CommerceShipmentCreateDateComparator());
 

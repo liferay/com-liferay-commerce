@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -52,12 +51,11 @@ public class CommerceShipmentDisplayContext
 		CommerceOrderItemService commerceOrderItemService,
 		CommerceOrderService commerceOrderService,
 		CommerceShipmentService commerceShipmentService,
-		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
-		PortletResourcePermission portletResourcePermission) {
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService) {
 
 		super(
 			actionHelper, httpServletRequest,
-			CommerceShipment.class.getSimpleName(), portletResourcePermission);
+			CommerceShipment.class.getSimpleName());
 
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderService = commerceOrderService;
@@ -181,17 +179,17 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all") && (shipmentStatus != null)) {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getChannelGroupId(), shipmentStatus);
+				cpRequestHelper.getCompanyId(), shipmentStatus);
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getChannelGroupId(), shipmentStatus,
+				cpRequestHelper.getCompanyId(), shipmentStatus,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
 		else {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getChannelGroupId());
+				cpRequestHelper.getCompanyId());
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getChannelGroupId(), searchContainer.getStart(),
+				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 

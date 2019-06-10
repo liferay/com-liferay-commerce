@@ -28,7 +28,6 @@ import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 
@@ -49,13 +48,11 @@ public class CommerceShipmentItemDisplayContext
 		CommerceCountryService commerceCountryService,
 		CommerceOrderItemService commerceOrderItemService,
 		CommerceRegionService commerceRegionService,
-		CommerceShipmentItemService commerceShipmentItemService,
-		PortletResourcePermission portletResourcePermission) {
+		CommerceShipmentItemService commerceShipmentItemService) {
 
 		super(
 			actionHelper, httpServletRequest,
-			CommerceShipmentItem.class.getSimpleName(),
-			portletResourcePermission);
+			CommerceShipmentItem.class.getSimpleName());
 
 		_commerceCountryService = commerceCountryService;
 		_commerceOrderItemService = commerceOrderItemService;
