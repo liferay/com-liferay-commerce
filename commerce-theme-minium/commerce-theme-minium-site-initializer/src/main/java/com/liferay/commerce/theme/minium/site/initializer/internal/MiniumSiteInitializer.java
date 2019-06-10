@@ -829,8 +829,11 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("journal-articles.json");
 
 		_journalArticleImporter.importJournalArticles(
-			jsonArray, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId());
+			jsonArray,
+			_siteInitializerDependencyResolver.getDocumentsClassLoader(),
+			_siteInitializerDependencyResolver.getDependenciesPath() +
+				"journal_articles/",
+			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Journal Articles successfully imported");

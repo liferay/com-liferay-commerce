@@ -21,6 +21,8 @@ import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceLocalService;
+import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.Criterion;
@@ -171,7 +173,21 @@ public class PortletSettingsImporter {
 
 			String value = null;
 
-			if (key.equals("assetVocabularyId")) {
+			if (key.equals("assetEntryId")) {
+				value = portletPreferencesJSONObject.getString(key);
+
+				JournalArticle journalArticle =
+					_journalArticleLocalService.fetchArticle(
+						serviceContext.getScopeGroupId(), value);
+
+				if (journalArticle != null) {
+					value = String.valueOf(journalArticle.getPrimaryKey());
+				}
+				else {
+					value = "0";
+				}
+			}
+			else if (key.equals("assetVocabularyId")) {
 				value = portletPreferencesJSONObject.getString(key);
 
 				AssetVocabulary assetVocabulary =
@@ -180,7 +196,7 @@ public class PortletSettingsImporter {
 
 				value = String.valueOf(assetVocabulary.getVocabularyId());
 			}
-			else if (key.equals("classNameId")) {
+			else if (key.equals("classNameIds") || key.equals("anyAssetType")) {
 				String className = portletPreferencesJSONObject.getString(key);
 
 				value = String.valueOf(
@@ -241,6 +257,9 @@ public class PortletSettingsImporter {
 
 	@Reference
 	private DDMFormInstanceLocalService _ddmFormInstanceLocalService;
+
+	@Reference
+	private JournalArticleLocalService _journalArticleLocalService;
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
