@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.account.model.CommerceAccountGroupRel;
+import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -50,6 +52,8 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.search.filter.Filter;
+import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.CompanyLocalService;
@@ -69,6 +73,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -85,9 +90,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	public static final String CLASS_NAME = CPDefinition.class.getName();
 
-	public static final String FIELD_CHANNEL_IDS = "channelIds";
-
-	public static final String FIELD_CHANNEL_NAMES = "channelNames";
+	public static final String FIELD_CHANNEL_GROUP_IDS = "channelGroupIds";
 
 	public static final String FIELD_DEFAULT_IMAGE_FILE_ENTRY_ID =
 		"defaultImageFileEntryId";
@@ -207,6 +210,35 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			contextBooleanFilter.addTerm(
 				Field.ENTRY_CLASS_PK, excludedCPDefinitionId,
 				BooleanClauseOccur.MUST_NOT);
+		}
+
+		long commerceChannelId = GetterUtil.getLong(
+			attributes.get("commerceChannelGroupId"));
+
+		if (commerceChannelId > 0) {
+			contextBooleanFilter.addTerm(
+				FIELD_CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId));
+		}
+
+		long[] commerceAccountGroupIds = GetterUtil.getLongValues(
+			searchContext.getAttribute("commerceAccountGroupIds"), null);
+
+		if ((commerceAccountGroupIds != null) &&
+			(commerceAccountGroupIds.length > 0)) {
+
+			BooleanFilter accountGroupsBooleanFilter = new BooleanFilter();
+
+			for (long commerceAccountGroupId : commerceAccountGroupIds) {
+				Filter termFilter = new TermFilter(
+					"commerceAccountGroupIds",
+					String.valueOf(commerceAccountGroupId));
+
+				accountGroupsBooleanFilter.add(
+					termFilter, BooleanClauseOccur.SHOULD);
+			}
+
+			contextBooleanFilter.add(
+				accountGroupsBooleanFilter, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -336,8 +368,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			FIELD_SHORT_DESCRIPTION,
 			cpDefinition.getShortDescription(cpDefinitionDefaultLanguageId));
 
-		List<Long> channelIds = new ArrayList<>();
-		List<String> channelNames = new ArrayList<>();
+		List<Long> channelGroupIds = new ArrayList<>();
 
 		for (CommerceChannelRel commerceChannelRel :
 				_commerceChannelRelLocalService.getCommerceChannelRels(
@@ -348,12 +379,25 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			CommerceChannel commerceChannel =
 				commerceChannelRel.getCommerceChannel();
 
-			channelIds.add(commerceChannel.getCommerceChannelId());
-			channelNames.add(commerceChannel.getName());
+			channelGroupIds.add(commerceChannel.getCommerceChannelGroupId());
 		}
 
 		document.addNumber(
-			FIELD_CHANNEL_IDS, ArrayUtil.toLongArray(channelIds));
+			FIELD_CHANNEL_GROUP_IDS, ArrayUtil.toLongArray(channelGroupIds));
+
+		List<CommerceAccountGroupRel> commerceAccountGroupRels =
+			_commerceAccountGroupRelService.getCommerceAccountGroupRels(
+				CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		Stream<CommerceAccountGroupRel> stream =
+			commerceAccountGroupRels.stream();
+
+		long[] commerceAccountGroupIds = stream.mapToLong(
+			CommerceAccountGroupRel::getCommerceAccountGroupId
+		).toArray();
+
+		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
 
 		List<String> optionNames = new ArrayList<>();
 		List<Long> optionIds = new ArrayList<>();
@@ -669,6 +713,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
 
 	@Reference
 	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
