@@ -81,6 +81,10 @@ public class ProductHelperImpl implements ProductHelper {
 			priceModel.setDiscount(discountAmount.format(locale));
 		}
 
+		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+
+        priceModel.setFinalPrice(finalPrice.format(locale));
+
 		return priceModel;
 	}
 

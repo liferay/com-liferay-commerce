@@ -99,10 +99,10 @@ public class PriceTag extends ComponentRendererTag {
 		putValue("additionalPriceClasses", additionalPriceClasses);
 	}
 
-	public void setAdditionalPromoPriceClasses(
-		String additionalPromoPriceClasses) {
+	public void setadditionalFinalPriceClasses(
+		String additionalFinalPriceClasses) {
 
-		putValue("additionalPromoPriceClasses", additionalPromoPriceClasses);
+		putValue("additionalFinalPriceClasses", additionalFinalPriceClasses);
 	}
 
 	public void setCPInstanceId(long cpInstanceId) {
