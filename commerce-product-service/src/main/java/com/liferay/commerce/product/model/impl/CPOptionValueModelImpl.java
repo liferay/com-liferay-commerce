@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -300,6 +303,32 @@ public class CPOptionValueModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPOptionValue>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPOptionValue.class.getClassLoader(), CPOptionValue.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPOptionValue> constructor =
+				(Constructor<CPOptionValue>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPOptionValue, Object>>
@@ -1071,8 +1100,7 @@ public class CPOptionValueModelImpl
 	@Override
 	public CPOptionValue toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPOptionValue)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			_escapedModel = _escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1352,11 +1380,8 @@ public class CPOptionValueModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPOptionValue.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPOptionValue.class, ModelWrapper.class
-	};
+	private static final Function<InvocationHandler, CPOptionValue>
+		_escapedModelProxyProviderFunction = _getProxyProviderFunction();
 
 	private String _uuid;
 	private String _originalUuid;

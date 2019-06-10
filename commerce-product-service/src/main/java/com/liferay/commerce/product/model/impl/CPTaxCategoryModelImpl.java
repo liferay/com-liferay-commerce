@@ -41,6 +41,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -275,6 +278,32 @@ public class CPTaxCategoryModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPTaxCategory>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPTaxCategory.class.getClassLoader(), CPTaxCategory.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPTaxCategory> constructor =
+				(Constructor<CPTaxCategory>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPTaxCategory, Object>>
@@ -926,8 +955,7 @@ public class CPTaxCategoryModelImpl
 	@Override
 	public CPTaxCategory toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPTaxCategory)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			_escapedModel = _escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1141,11 +1169,8 @@ public class CPTaxCategoryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPTaxCategory.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPTaxCategory.class, ModelWrapper.class
-	};
+	private static final Function<InvocationHandler, CPTaxCategory>
+		_escapedModelProxyProviderFunction = _getProxyProviderFunction();
 
 	private long _CPTaxCategoryId;
 	private long _groupId;

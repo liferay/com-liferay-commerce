@@ -44,6 +44,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -366,6 +369,32 @@ public class CPInstanceModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPInstance>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPInstance.class.getClassLoader(), CPInstance.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPInstance> constructor =
+				(Constructor<CPInstance>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPInstance, Object>>
@@ -2036,8 +2065,7 @@ public class CPInstanceModelImpl
 	@Override
 	public CPInstance toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPInstance)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			_escapedModel = _escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -2457,11 +2485,8 @@ public class CPInstanceModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPInstance.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPInstance.class, ModelWrapper.class
-	};
+	private static final Function<InvocationHandler, CPInstance>
+		_escapedModelProxyProviderFunction = _getProxyProviderFunction();
 
 	private String _uuid;
 	private String _originalUuid;
