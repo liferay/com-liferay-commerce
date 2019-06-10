@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -147,19 +148,18 @@ public class CPPublisherConfigurationDisplayContext
 		JSONArray rulesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (int queryLogicIndex : queryLogicIndexes) {
-			JSONObject ruleJSONObject = JSONFactoryUtil.createJSONObject();
-
 			boolean queryAndOperator = PrefsParamUtil.getBoolean(
 				portletPreferences, cpContentRequestHelper.getRequest(),
 				"queryAndOperator" + queryLogicIndex);
-
-			ruleJSONObject.put("queryAndOperator", queryAndOperator);
-
 			boolean queryContains = PrefsParamUtil.getBoolean(
 				portletPreferences, cpContentRequestHelper.getRequest(),
 				"queryContains" + queryLogicIndex, true);
 
-			ruleJSONObject.put("queryContains", queryContains);
+			JSONObject ruleJSONObject = JSONUtil.put(
+				"queryAndOperator", queryAndOperator
+			).put(
+				"queryContains", queryContains
+			);
 
 			String queryValues = StringUtil.merge(
 				portletPreferences.getValues(
