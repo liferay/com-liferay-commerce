@@ -32,7 +32,7 @@ String quantityInputId = renderResponse.getNamespace() + cpDefinitionId + "Quant
 	<div class="card">
 		<div class="product-image-container">
 			<a href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
-				<img class="product-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
+				<img class="product-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" />
 			</a>
 		</div>
 

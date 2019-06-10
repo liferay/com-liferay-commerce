@@ -41,7 +41,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 							%>
 
 								<div class="card thumb" data-url="<%= thumbnailUrl %>">
-									<img class="center-block img-responsive" src="<%= thumbnailUrl %>">
+									<img class="center-block img-responsive" src="<%= thumbnailUrl %>" />
 								</div>
 
 							<%
@@ -53,7 +53,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 					<div class="col-lg-10 col-md-9 col-xs-10 full-image">
 						<c:if test="<%= Validator.isNotNull(cpCatalogEntry.getDefaultImageFileUrl()) %>">
-							<img class="center-block img-responsive" id="<portlet:namespace />full-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>">
+							<img class="center-block img-responsive" id="<portlet:namespace />full-image" src="<%= cpCatalogEntry.getDefaultImageFileUrl() %>" />
 						</c:if>
 					</div>
 				</div>
@@ -126,7 +126,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 				<div class="row">
 					<div class="col-md-4">
-						<img class="img-responsive" src="<%= cProductCPDefinition.getDefaultImageThumbnailSrc() %>">
+						<img class="img-responsive" src="<%= cProductCPDefinition.getDefaultImageThumbnailSrc() %>" />
 					</div>
 
 					<div class="col-md-8">
