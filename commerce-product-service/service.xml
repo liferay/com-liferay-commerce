@@ -1049,6 +1049,7 @@
 		</finder>
 	</entity>
 	<exceptions>
+		<exception>CommerceCatalogProducts</exception>
 		<exception>CommerceCatalogSystem</exception>
 		<exception>CPAttachmentFileEntryDisplayDate</exception>
 		<exception>CPAttachmentFileEntryExpirationDate</exception>

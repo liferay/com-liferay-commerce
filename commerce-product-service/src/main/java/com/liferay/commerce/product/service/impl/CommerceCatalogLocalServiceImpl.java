@@ -17,6 +17,7 @@ package com.liferay.commerce.product.service.impl;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.product.constants.CommerceCatalogConstants;
+import com.liferay.commerce.product.exception.CommerceCatalogProductsException;
 import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogLocalServiceBaseImpl;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.ArrayList;
@@ -149,9 +151,7 @@ public class CommerceCatalogLocalServiceImpl
 			CommerceCatalog commerceCatalog)
 		throws PortalException {
 
-		if (commerceCatalog.isSystem()) {
-			throw new CommerceCatalogSystemException();
-		}
+		validate(commerceCatalog);
 
 		// Group
 
@@ -366,6 +366,22 @@ public class CommerceCatalogLocalServiceImpl
 			IndexerRegistryUtil.nullSafeGetIndexer(CommerceCatalog.class);
 
 		return GetterUtil.getInteger(indexer.searchCount(searchContext));
+	}
+
+	protected void validate(CommerceCatalog commerceCatalog)
+		throws PortalException {
+
+		if (commerceCatalog.isSystem()) {
+			throw new CommerceCatalogSystemException();
+		}
+
+		int cpDefinitionsCount = cpDefinitionLocalService.getCPDefinitionsCount(
+			commerceCatalog.getCommerceCatalogGroupId(),
+			WorkflowConstants.STATUS_ANY);
+
+		if (cpDefinitionsCount > 0) {
+			throw new CommerceCatalogProductsException();
+		}
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {
