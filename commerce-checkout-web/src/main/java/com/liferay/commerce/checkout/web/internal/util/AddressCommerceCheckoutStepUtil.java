@@ -129,28 +129,38 @@ public class AddressCommerceCheckoutStepUtil {
 		if (Objects.equals(
 				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME,
 				paramName) &&
+			Objects.equals(
+				commerceOrder.getShippingAddressId(),
+				commerceOrder.getBillingAddressId()) &&
 			!useAsBilling) {
 
 			return updateCommerceOrderAddress(
 				commerceOrder, 0, commerceAddressId, commerceContext);
 		}
 
-		CommerceAddress billingAddress = commerceOrder.getBillingAddress();
-		long shippingAddressId = commerceOrder.getShippingAddressId();
+		if (Objects.equals(
+				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME,
+				paramName) &&
+			!Objects.equals(
+				commerceOrder.getShippingAddressId(),
+				commerceOrder.getBillingAddressId()) &&
+			!useAsBilling) {
+
+			return updateCommerceOrderAddress(
+				commerceOrder, commerceOrder.getBillingAddressId(),
+				commerceAddressId, commerceContext);
+		}
 
 		if (Objects.equals(
 				CommerceCheckoutWebKeys.BILLING_ADDRESS_PARAM_NAME,
-				paramName) &&
-			((billingAddress == null) ||
-			 Objects.equals(
-				 billingAddress.getCommerceAddressId(), shippingAddressId))) {
+				paramName)) {
 
 			return updateCommerceOrderAddress(
 				commerceOrder, commerceAddressId,
 				commerceOrder.getShippingAddressId(), commerceContext);
 		}
 
-		return null;
+		return commerceOrder;
 	}
 
 	protected CommerceOrder updateCommerceOrderAddress(

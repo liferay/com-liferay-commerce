@@ -61,12 +61,6 @@ public class BillingAddressCheckoutStepDisplayContext
 			}
 		}
 
-		if ((defaultCommerceAddressId == 0) && !commerceAddresses.isEmpty()) {
-			CommerceAddress commerceAddress = commerceAddresses.get(0);
-
-			defaultCommerceAddressId = commerceAddress.getCommerceAddressId();
-		}
-
 		return defaultCommerceAddressId;
 	}
 
