@@ -150,7 +150,7 @@ public class CommercePriceListTestUtil {
 				groupId, commerceAccountId, userId);*/
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
-			new long[] {groupId}, user.getUserId(), commerceAccountId,
+			user.getCompanyId(), groupId, commerceAccountId,
 			commerceAccountGroupIds);
 	}
 
