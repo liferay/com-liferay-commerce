@@ -54,6 +54,19 @@ public class CPInstanceItemSelectorViewDisplayContext
 	}
 
 	@Override
+	public PortletURL getPortletURL() {
+		PortletURL portletURL = super.getPortletURL();
+
+		portletURL.setParameter(
+			"checkedCPInstanceIds", String.valueOf(getCheckedCPInstanceIds()));
+		portletURL.setParameter(
+			"commerceCatalogGroupId",
+			String.valueOf(getCommerceCatalogGroupId()));
+
+		return portletURL;
+	}
+
+	@Override
 	public SearchContainer<CPInstance> getSearchContainer()
 		throws PortalException {
 
