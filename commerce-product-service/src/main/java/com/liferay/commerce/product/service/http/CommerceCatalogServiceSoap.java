@@ -20,12 +20,8 @@ import com.liferay.commerce.product.service.CommerceCatalogServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 
 import java.rmi.RemoteException;
-
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * Provides the SOAP utility for the
@@ -70,16 +66,12 @@ import java.util.Map;
 @ProviderType
 public class CommerceCatalogServiceSoap {
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap addCommerceCatalog(
-		String[] nameMapLanguageIds, String[] nameMapValues,
-		String commerceCurrencyCode, String catalogDefaultLanguageId,
-		String externalReferenceCode,
+		String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-
-			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.addCommerceCatalog(nameMap,
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.addCommerceCatalog(name,
 					commerceCurrencyCode, catalogDefaultLanguageId,
 					externalReferenceCode, serviceContext);
 
@@ -181,15 +173,11 @@ public class CommerceCatalogServiceSoap {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap updateCommerceCatalog(
-		long commerceCatalogId, String[] nameMapLanguageIds,
-		String[] nameMapValues, String commerceCurrencyCode,
+		long commerceCatalogId, String name, String commerceCurrencyCode,
 		String catalogDefaultLanguageId) throws RemoteException {
 		try {
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(nameMapLanguageIds,
-					nameMapValues);
-
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.updateCommerceCatalog(commerceCatalogId,
-					nameMap, commerceCurrencyCode, catalogDefaultLanguageId);
+					name, commerceCurrencyCode, catalogDefaultLanguageId);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}

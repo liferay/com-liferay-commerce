@@ -155,11 +155,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		return _commerceCatalog.compareTo(commerceCatalog);
 	}
 
-	@Override
-	public String[] getAvailableLanguageIds() {
-		return _commerceCatalog.getAvailableLanguageIds();
-	}
-
 	/**
 	* Returns the catalog default language ID of this commerce catalog.
 	*
@@ -223,11 +218,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	}
 
 	@Override
-	public String getDefaultLanguageId() {
-		return _commerceCatalog.getDefaultLanguageId();
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceCatalog.getExpandoBridge();
 	}
@@ -260,72 +250,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public String getName() {
 		return _commerceCatalog.getName();
-	}
-
-	/**
-	* Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale of the language
-	* @return the localized name of this commerce catalog
-	*/
-	@Override
-	public String getName(java.util.Locale locale) {
-		return _commerceCatalog.getName(locale);
-	}
-
-	/**
-	* Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce catalog. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
-	@Override
-	public String getName(java.util.Locale locale, boolean useDefault) {
-		return _commerceCatalog.getName(locale, useDefault);
-	}
-
-	/**
-	* Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @return the localized name of this commerce catalog
-	*/
-	@Override
-	public String getName(String languageId) {
-		return _commerceCatalog.getName(languageId);
-	}
-
-	/**
-	* Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the ID of the language
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized name of this commerce catalog
-	*/
-	@Override
-	public String getName(String languageId, boolean useDefault) {
-		return _commerceCatalog.getName(languageId, useDefault);
-	}
-
-	@Override
-	public String getNameCurrentLanguageId() {
-		return _commerceCatalog.getNameCurrentLanguageId();
-	}
-
-	@Override
-	public String getNameCurrentValue() {
-		return _commerceCatalog.getNameCurrentValue();
-	}
-
-	/**
-	* Returns a map of the locales and localized names of this commerce catalog.
-	*
-	* @return the locales and localized names of this commerce catalog
-	*/
-	@Override
-	public Map<java.util.Locale, String> getNameMap() {
-		return _commerceCatalog.getNameMap();
 	}
 
 	/**
@@ -416,19 +340,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void persist() {
 		_commerceCatalog.persist();
-	}
-
-	@Override
-	public void prepareLocalizedFieldsForImport()
-		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceCatalog.prepareLocalizedFieldsForImport();
-	}
-
-	@Override
-	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
-		throws com.liferay.portal.kernel.exception.LocaleException {
-		_commerceCatalog.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
 	@Override
@@ -530,57 +441,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public void setName(String name) {
 		_commerceCatalog.setName(name);
-	}
-
-	/**
-	* Sets the localized name of this commerce catalog in the language.
-	*
-	* @param name the localized name of this commerce catalog
-	* @param locale the locale of the language
-	*/
-	@Override
-	public void setName(String name, java.util.Locale locale) {
-		_commerceCatalog.setName(name, locale);
-	}
-
-	/**
-	* Sets the localized name of this commerce catalog in the language, and sets the default locale.
-	*
-	* @param name the localized name of this commerce catalog
-	* @param locale the locale of the language
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setName(String name, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
-		_commerceCatalog.setName(name, locale, defaultLocale);
-	}
-
-	@Override
-	public void setNameCurrentLanguageId(String languageId) {
-		_commerceCatalog.setNameCurrentLanguageId(languageId);
-	}
-
-	/**
-	* Sets the localized names of this commerce catalog from the map of locales and localized names.
-	*
-	* @param nameMap the locales and localized names of this commerce catalog
-	*/
-	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap) {
-		_commerceCatalog.setNameMap(nameMap);
-	}
-
-	/**
-	* Sets the localized names of this commerce catalog from the map of locales and localized names, and sets the default locale.
-	*
-	* @param nameMap the locales and localized names of this commerce catalog
-	* @param defaultLocale the default locale
-	*/
-	@Override
-	public void setNameMap(Map<java.util.Locale, String> nameMap,
-		java.util.Locale defaultLocale) {
-		_commerceCatalog.setNameMap(nameMap, defaultLocale);
 	}
 
 	@Override

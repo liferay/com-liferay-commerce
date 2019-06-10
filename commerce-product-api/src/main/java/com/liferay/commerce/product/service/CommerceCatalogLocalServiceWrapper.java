@@ -48,24 +48,23 @@ public class CommerceCatalogLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId,
-		boolean system, String externalReferenceCode,
+		String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId, boolean system,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
+		return _commerceCatalogLocalService.addCommerceCatalog(name,
 			commerceCurrencyCode, catalogDefaultLanguageId, system,
 			externalReferenceCode, serviceContext);
 	}
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId,
-		String externalReferenceCode,
+		String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogLocalService.addCommerceCatalog(nameMap,
+		return _commerceCatalogLocalService.addCommerceCatalog(name,
 			commerceCurrencyCode, catalogDefaultLanguageId,
 			externalReferenceCode, serviceContext);
 	}
@@ -364,12 +363,11 @@ public class CommerceCatalogLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
-		long commerceCatalogId,
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId)
+		long commerceCatalogId, String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogLocalService.updateCommerceCatalog(commerceCatalogId,
-			nameMap, commerceCurrencyCode, catalogDefaultLanguageId);
+			name, commerceCurrencyCode, catalogDefaultLanguageId);
 	}
 
 	@Override

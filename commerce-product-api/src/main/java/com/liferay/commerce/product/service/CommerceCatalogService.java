@@ -32,8 +32,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * Provides the remote service interface for CommerceCatalog. Methods of this
@@ -59,7 +57,7 @@ public interface CommerceCatalogService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCatalogServiceUtil} to access the commerce catalog remote service. Add custom service methods to {@link com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
+	public CommerceCatalog addCommerceCatalog(String name,
 		String commerceCurrencyCode, String catalogDefaultLanguageId,
 		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
@@ -96,6 +94,6 @@ public interface CommerceCatalogService extends BaseService {
 		throws PortalException;
 
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		Map<Locale, String> nameMap, String commerceCurrencyCode,
+		String name, String commerceCurrencyCode,
 		String catalogDefaultLanguageId) throws PortalException;
 }
