@@ -44,16 +44,12 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Alec Sloan
@@ -65,7 +61,7 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String name, String commerceCurrencyCode,
 			String catalogDefaultLanguageId, boolean system,
 			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
@@ -81,7 +77,7 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setUserId(user.getUserId());
 		commerceCatalog.setUserName(user.getFullName());
 
-		commerceCatalog.setNameMap(nameMap);
+		commerceCatalog.setName(name);
 		commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 		commerceCatalog.setSystem(system);
@@ -94,7 +90,7 @@ public class CommerceCatalogLocalServiceImpl
 		groupLocalService.addGroup(
 			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			CommerceCatalog.class.getName(), commerceCatalogId,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap, null,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, null,
 			GroupConstants.TYPE_SITE_PRIVATE, false,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
@@ -108,13 +104,13 @@ public class CommerceCatalogLocalServiceImpl
 
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String name, String commerceCurrencyCode,
 			String catalogDefaultLanguageId, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			nameMap, commerceCurrencyCode, catalogDefaultLanguageId, false,
+			name, commerceCurrencyCode, catalogDefaultLanguageId, false,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -137,9 +133,7 @@ public class CommerceCatalogLocalServiceImpl
 		serviceContext.setUuid(PortalUUIDUtil.generate());
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			Collections.singletonMap(
-				LocaleUtil.fromLanguageId(defaultUser.getLanguageId()),
-				CommerceCatalogConstants.MASTER_COMMERCE_CATALOG),
+			CommerceCatalogConstants.MASTER_COMMERCE_CATALOG,
 			commerceCurrency.getCode(), defaultUser.getLanguageId(), true, null,
 			serviceContext);
 	}
@@ -263,8 +257,8 @@ public class CommerceCatalogLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, Map<Locale, String> nameMap,
-			String commerceCurrencyCode, String catalogDefaultLanguageId)
+			long commerceCatalogId, String name, String commerceCurrencyCode,
+			String catalogDefaultLanguageId)
 		throws PortalException {
 
 		CommerceCatalog commerceCatalog =
@@ -274,7 +268,7 @@ public class CommerceCatalogLocalServiceImpl
 			throw new CommerceCatalogSystemException();
 		}
 
-		commerceCatalog.setNameMap(nameMap);
+		commerceCatalog.setName(name);
 		commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
 		commerceCatalog.setCatalogDefaultLanguageId(catalogDefaultLanguageId);
 

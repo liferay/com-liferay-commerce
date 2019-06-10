@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Alec Sloan
@@ -38,7 +36,7 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
 	@Override
 	public CommerceCatalog addCommerceCatalog(
-			Map<Locale, String> nameMap, String commerceCurrencyCode,
+			String name, String commerceCurrencyCode,
 			String catalogDefaultLanguageId, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -47,7 +45,7 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			getPermissionChecker(), CPActionKeys.ADD_COMMERCE_CATALOG);
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			nameMap, commerceCurrencyCode, catalogDefaultLanguageId,
+			name, commerceCurrencyCode, catalogDefaultLanguageId,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -122,15 +120,15 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 
 	@Override
 	public CommerceCatalog updateCommerceCatalog(
-			long commerceCatalogId, Map<Locale, String> nameMap,
-			String commerceCurrencyCode, String catalogDefaultLanguageId)
+			long commerceCatalogId, String name, String commerceCurrencyCode,
+			String catalogDefaultLanguageId)
 		throws PortalException {
 
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalogId, ActionKeys.UPDATE);
 
 		return commerceCatalogLocalService.updateCommerceCatalog(
-			commerceCatalogId, nameMap, commerceCurrencyCode,
+			commerceCatalogId, name, commerceCurrencyCode,
 			catalogDefaultLanguageId);
 	}
 
