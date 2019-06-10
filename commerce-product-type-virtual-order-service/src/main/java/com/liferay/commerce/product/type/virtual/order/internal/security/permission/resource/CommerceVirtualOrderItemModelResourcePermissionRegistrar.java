@@ -56,11 +56,9 @@ public class CommerceVirtualOrderItemModelResourcePermissionRegistrar {
 				_commerceVirtualOrderItemLocalService::
 					getCommerceVirtualOrderItem,
 				_portletResourcePermission,
-				(modelResourcePermission, consumer) -> {
-					consumer.accept(
-						new CommerceVirtualOrderItemModelResourcePermissionLogic(
-							_commerceOrderModelResourcePermission));
-				}),
+				(modelResourcePermission, consumer) -> consumer.accept(
+					new CommerceVirtualOrderItemModelResourcePermissionLogic(
+						_commerceOrderModelResourcePermission))),
 			properties);
 	}
 
