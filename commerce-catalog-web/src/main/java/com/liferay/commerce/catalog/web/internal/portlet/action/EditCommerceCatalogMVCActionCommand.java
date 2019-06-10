@@ -27,12 +27,8 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-
-import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -120,8 +116,7 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 		long commerceCatalogId = ParamUtil.getLong(
 			actionRequest, "commerceCatalogId");
 
-		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "name");
+		String name = ParamUtil.getString(actionRequest, "name");
 		String commerceCurrencyCode = ParamUtil.getString(
 			actionRequest, "commerceCurrencyCode");
 		String catalogDefaultLanguageId = ParamUtil.getString(
@@ -132,12 +127,12 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 
 		if (commerceCatalogId <= 0) {
 			return _commerceCatalogService.addCommerceCatalog(
-				nameMap, commerceCurrencyCode, catalogDefaultLanguageId, null,
+				name, commerceCurrencyCode, catalogDefaultLanguageId, null,
 				serviceContext);
 		}
 
 		return _commerceCatalogService.updateCommerceCatalog(
-			commerceCatalogId, nameMap, commerceCurrencyCode,
+			commerceCatalogId, name, commerceCurrencyCode,
 			catalogDefaultLanguageId);
 	}
 
