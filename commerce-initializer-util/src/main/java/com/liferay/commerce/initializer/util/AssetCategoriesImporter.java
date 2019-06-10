@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
@@ -88,6 +89,9 @@ public class AssetCategoriesImporter {
 			assetVocabularyName, serviceContext);
 
 		for (int i = 0; i < jsonArray.length(); i++) {
+
+			// Asset category
+
 			String title = null;
 			String imageFileName = null;
 
@@ -106,9 +110,57 @@ public class AssetCategoriesImporter {
 				imageDependenciesPath, imageFileName, serviceContext);
 
 			assetCategories.add(assetCategory);
+
+			// Permissions
+
+			if (jsonObject == null) {
+				continue;
+			}
+
+			JSONArray permissionsJSONArray = jsonObject.getJSONArray(
+				"Permissions");
+
+			if ((permissionsJSONArray != null) &&
+				(permissionsJSONArray.length() > 0)) {
+
+				updatePermissions(
+					assetCategory.getCompanyId(),
+					assetCategory.getModelClassName(),
+					String.valueOf(assetCategory.getCategoryId()),
+					permissionsJSONArray);
+			}
 		}
 
 		return assetCategories;
+	}
+
+	protected void updatePermissions(
+			long companyId, String name, String primKey, JSONArray jsonArray)
+		throws PortalException {
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			int scope = jsonObject.getInt("Scope");
+
+			String roleName = jsonObject.getString("RoleName");
+
+			Role role = _roleLocalService.getRole(companyId, roleName);
+
+			String[] actionIds = new String[0];
+
+			JSONArray actionIdsJSONArray = jsonObject.getJSONArray("ActionIds");
+
+			if (actionIdsJSONArray != null) {
+				for (int j = 0; j < actionIdsJSONArray.length(); j++) {
+					actionIds = ArrayUtil.append(
+						actionIds, actionIdsJSONArray.getString(j));
+				}
+			}
+
+			_resourcePermissionLocalService.setResourcePermissions(
+				companyId, name, scope, primKey, role.getRoleId(), actionIds);
+		}
 	}
 
 	private AssetCategory _addAssetCategory(
