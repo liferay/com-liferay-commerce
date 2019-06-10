@@ -532,6 +532,15 @@ public class CPInstanceLocalServiceWrapper implements CPInstanceLocalService,
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpInstanceLocalService.searchCPInstances(companyId, groupIds,
+			keywords, status, start, end, sort);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
 		long companyId, String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {

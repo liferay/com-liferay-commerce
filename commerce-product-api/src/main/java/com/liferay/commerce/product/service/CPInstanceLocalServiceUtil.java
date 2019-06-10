@@ -497,6 +497,15 @@ public class CPInstanceLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .searchCPInstances(companyId, groupIds, keywords, status,
+			start, end, sort);
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
 		long companyId, String keywords, int status, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {

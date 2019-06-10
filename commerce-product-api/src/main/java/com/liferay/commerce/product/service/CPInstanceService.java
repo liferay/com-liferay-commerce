@@ -124,6 +124,11 @@ public interface CPInstanceService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPInstances(long companyId,
+		long groupId, String keywords, int status, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPInstance> searchCPInstances(long companyId,
 		String keywords, int status, int start, int end, Sort sort)
 		throws PortalException;
 
