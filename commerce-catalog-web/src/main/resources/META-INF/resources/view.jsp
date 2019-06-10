@@ -37,6 +37,7 @@ portletURL.setParameter("searchContainerId", "commerceCatalogs");
 			<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 			<aui:input name="commerceCatalogIds" type="hidden" />
 
+			<liferay-ui:error exception="<%= CommerceCatalogProductsException.class %>" message="you-cannot-delete-catalogs-that-have-products" />
 			<liferay-ui:error exception="<%= CommerceCatalogSystemException.class %>" message="you-cannot-delete-master-catalog" />
 
 			<div class="products-container" id="<portlet:namespace />commerceCatalogsContainer">
