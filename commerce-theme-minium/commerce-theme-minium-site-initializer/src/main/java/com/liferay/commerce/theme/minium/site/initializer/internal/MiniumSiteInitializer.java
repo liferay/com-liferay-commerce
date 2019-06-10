@@ -313,8 +313,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 				serviceContext.getCompanyId());
 
 		return _commerceCatalogLocalService.addCommerceCatalog(
-			group.getName(), commerceCurrency.getCode(),
-			serviceContext.getLanguageId(), StringPool.BLANK, serviceContext);
+			group.getName(serviceContext.getLanguageId()),
+			commerceCurrency.getCode(), serviceContext.getLanguageId(),
+			StringPool.BLANK, serviceContext);
 	}
 
 	protected CommerceChannel createChannel(
