@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -42,12 +42,10 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 
 	public BaseCommerceShipmentDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-		String portalPreferenceNamespace,
-		PortletResourcePermission portletResourcePermission) {
+		String portalPreferenceNamespace) {
 
 		this.actionHelper = actionHelper;
 		this.httpServletRequest = httpServletRequest;
-		this.portletResourcePermission = portletResourcePermission;
 
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
@@ -215,9 +213,8 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 		throws PortalException;
 
 	public boolean hasManageCommerceShipmentsPermission() {
-		return portletResourcePermission.contains(
+		return PortalPermissionUtil.contains(
 			cpRequestHelper.getPermissionChecker(),
-			cpRequestHelper.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 	}
 
@@ -265,7 +262,6 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
-	protected final PortletResourcePermission portletResourcePermission;
 	protected SearchContainer<T> searchContainer;
 
 	private CommerceShipment _commerceShipment;
