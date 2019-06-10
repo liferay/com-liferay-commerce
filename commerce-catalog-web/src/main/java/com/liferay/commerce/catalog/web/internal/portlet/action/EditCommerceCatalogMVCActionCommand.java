@@ -15,6 +15,7 @@
 package com.liferay.commerce.catalog.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.exception.CommerceCatalogProductsException;
 import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
 import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -92,7 +93,9 @@ public class EditCommerceCatalogMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof CommerceCatalogSystemException) {
+			if (e instanceof CommerceCatalogProductsException ||
+				e instanceof CommerceCatalogSystemException) {
+
 				hideDefaultErrorMessage(actionRequest);
 
 				SessionErrors.add(actionRequest, e.getClass());
