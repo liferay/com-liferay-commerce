@@ -53,7 +53,7 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= CommerceCatalog.class.getName() %>"
-			modelResourceDescription="<%= commerceCatalog.getName(locale) %>"
+			modelResourceDescription="<%= commerceCatalog.getName() %>"
 			resourcePrimKey="<%= String.valueOf(commerceCatalogId) %>"
 			var="permissionsCatalogURL"
 			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
