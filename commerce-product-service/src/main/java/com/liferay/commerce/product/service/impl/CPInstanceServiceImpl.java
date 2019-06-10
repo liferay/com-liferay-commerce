@@ -213,6 +213,17 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
+			long companyId, long groupId, String keywords, int status,
+			int start, int end, Sort sort)
+		throws PortalException {
+
+		return cpInstanceLocalService.searchCPInstances(
+			companyId, new long[] {groupId}, keywords, status, start, end,
+			sort);
+	}
+
+	@Override
+	public BaseModelSearchResult<CPInstance> searchCPInstances(
 			long companyId, String keywords, int status, int start, int end,
 			Sort sort)
 		throws PortalException {
