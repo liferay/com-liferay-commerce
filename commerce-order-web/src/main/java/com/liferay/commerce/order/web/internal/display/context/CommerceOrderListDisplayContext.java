@@ -24,7 +24,7 @@ import com.liferay.commerce.order.web.internal.search.facet.NegatableMultiValueF
 import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.model.CommerceChannel;
-import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.search.facet.NegatableSimpleFacet;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
@@ -41,6 +41,8 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -77,6 +79,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.function.ToLongFunction;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -90,14 +94,14 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceOrderListDisplayContext {
 
 	public CommerceOrderListDisplayContext(
-		CommerceChannelLocalService commerceChannelLocalService,
+		CommerceChannelService commerceChannelService,
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 		GroupLocalService groupLocalService, JSONFactory jsonFactory,
 		RenderRequest renderRequest) {
 
-		_commerceChannelLocalService = commerceChannelLocalService;
+		_commerceChannelService = commerceChannelService;
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
@@ -141,20 +145,14 @@ public class CommerceOrderListDisplayContext {
 	}
 
 	public String getCommerceChannelName(long groupId) {
-		ThemeDisplay themeDisplay =
-			_commerceOrderRequestHelper.getThemeDisplay();
-
 		Group group = _groupLocalService.fetchGroup(groupId);
 
-		return group.getName(themeDisplay.getLocale());
+		return group.getName(_commerceOrderRequestHelper.getLocale());
 	}
 
-	public List<CommerceChannel> getCommerceChannels() {
-		ThemeDisplay themeDisplay =
-			_commerceOrderRequestHelper.getThemeDisplay();
-
-		return _commerceChannelLocalService.getCommerceChannels(
-			themeDisplay.getCompanyId());
+	public List<CommerceChannel> getCommerceChannels() throws PortalException {
+		return _commerceChannelService.getCommerceChannels(
+			_commerceOrderRequestHelper.getCompanyId());
 	}
 
 	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
@@ -417,7 +415,7 @@ public class CommerceOrderListDisplayContext {
 		return navigationItem;
 	}
 
-	private SearchContext _buildSearchContext() {
+	private SearchContext _buildSearchContext() throws PortalException {
 		SearchContext searchContext = new SearchContext();
 
 		CommerceOrderDisplayTerms commerceOrderDisplayTerms =
@@ -444,6 +442,14 @@ public class CommerceOrderListDisplayContext {
 		searchContext.setStart(_searchContainer.getStart());
 		searchContext.setEnd(_searchContainer.getEnd());
 
+		long[] commerceChannelGroupIds = _getCommerceChannelGroupIds();
+
+		if ((commerceChannelGroupIds != null) &&
+			(commerceChannelGroupIds.length > 0)) {
+
+			searchContext.setGroupIds(commerceChannelGroupIds);
+		}
+
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(false);
@@ -456,6 +462,38 @@ public class CommerceOrderListDisplayContext {
 		searchContext.setSorts(sorts);
 
 		return searchContext;
+	}
+
+	private long[] _getCommerceChannelGroupIds() throws PortalException {
+		List<CommerceChannel> commerceChannels =
+			_commerceChannelService.searchCommerceChannels(
+				_commerceOrderRequestHelper.getCompanyId());
+
+		Stream<CommerceChannel> stream = commerceChannels.stream();
+
+		return stream.mapToLong(
+			_getCommerceChannelToLongFunction()
+		).toArray();
+	}
+
+	private ToLongFunction<CommerceChannel>
+		_getCommerceChannelToLongFunction() {
+
+		return new ToLongFunction<CommerceChannel>() {
+
+			@Override
+			public long applyAsLong(CommerceChannel commerceChannel) {
+				try {
+					return commerceChannel.getCommerceChannelGroupId();
+				}
+				catch (PortalException pe) {
+					_log.error(pe, pe);
+
+					return 0;
+				}
+			}
+
+		};
 	}
 
 	private String _getEmptyResultsMessage(boolean filterByStatuses) {
@@ -580,9 +618,12 @@ public class CommerceOrderListDisplayContext {
 		}
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderListDisplayContext.class);
+
 	private List<KeyValuePair> _availableAdvanceStatusKVPs;
 	private List<KeyValuePair> _availableOrderStatusKVPs;
-	private final CommerceChannelLocalService _commerceChannelLocalService;
+	private final CommerceChannelService _commerceChannelService;
 	private final Format _commerceOrderDateFormatDateTime;
 	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
