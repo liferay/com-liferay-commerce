@@ -133,6 +133,14 @@ public class CPFriendlyURLEntryLocalServiceImpl
 	}
 
 	@Override
+	public List<CPFriendlyURLEntry> getCPFriendlyURLEntries(
+		long groupId, long classNameId, String urlTitle) {
+
+		return cpFriendlyURLEntryPersistence.findByG_C_U(
+			groupId, classNameId, urlTitle);
+	}
+
+	@Override
 	public Map<String, String> getLanguageIdToUrlTitleMap(
 		long groupId, long classNameId, long classPK) {
 
