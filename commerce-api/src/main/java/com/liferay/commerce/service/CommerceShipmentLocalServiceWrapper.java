@@ -233,17 +233,17 @@ public class CommerceShipmentLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
+		long[] groupIds, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipments(groupId,
+		return _commerceShipmentLocalService.getCommerceShipments(groupIds,
 			status, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
+		long[] groupIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
-		return _commerceShipmentLocalService.getCommerceShipments(groupId,
+		return _commerceShipmentLocalService.getCommerceShipments(groupIds,
 			start, end, orderByComparator);
 	}
 
@@ -258,13 +258,13 @@ public class CommerceShipmentLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupId);
+	public int getCommerceShipmentsCount(long[] groupIds) {
+		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupIds);
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId, int status) {
-		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupId,
+	public int getCommerceShipmentsCount(long[] groupIds, int status) {
+		return _commerceShipmentLocalService.getCommerceShipmentsCount(groupIds,
 			status);
 	}
 

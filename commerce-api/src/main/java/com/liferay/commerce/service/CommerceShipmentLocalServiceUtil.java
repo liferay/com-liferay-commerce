@@ -222,18 +222,18 @@ public class CommerceShipmentLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
+		long[] groupIds, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
 		return getService()
-				   .getCommerceShipments(groupId, status, start, end,
+				   .getCommerceShipments(groupIds, status, start, end,
 			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
+		long[] groupIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator) {
 		return getService()
-				   .getCommerceShipments(groupId, start, end, orderByComparator);
+				   .getCommerceShipments(groupIds, start, end, orderByComparator);
 	}
 
 	/**
@@ -245,12 +245,12 @@ public class CommerceShipmentLocalServiceUtil {
 		return getService().getCommerceShipmentsCount();
 	}
 
-	public static int getCommerceShipmentsCount(long groupId) {
-		return getService().getCommerceShipmentsCount(groupId);
+	public static int getCommerceShipmentsCount(long[] groupIds) {
+		return getService().getCommerceShipmentsCount(groupIds);
 	}
 
-	public static int getCommerceShipmentsCount(long groupId, int status) {
-		return getService().getCommerceShipmentsCount(groupId, status);
+	public static int getCommerceShipmentsCount(long[] groupIds, int status) {
+		return getService().getCommerceShipmentsCount(groupIds, status);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

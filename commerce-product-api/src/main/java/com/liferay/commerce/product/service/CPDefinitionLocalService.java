@@ -149,7 +149,7 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	public CPDefinition deleteCPDefinition(long CPDefinitionId)
 		throws PortalException;
 
-	public void deleteCPDefinitions(long groupId) throws PortalException;
+	public void deleteCPDefinitions(long companyId) throws PortalException;
 
 	/**
 	* @throws PortalException

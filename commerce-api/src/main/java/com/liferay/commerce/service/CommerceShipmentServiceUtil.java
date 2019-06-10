@@ -61,30 +61,31 @@ public class CommerceShipmentServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
+		long companyId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceShipments(groupId, status, start, end,
+				   .getCommerceShipments(companyId, status, start, end,
 			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.model.CommerceShipment> orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .getCommerceShipments(groupId, start, end, orderByComparator);
+				   .getCommerceShipments(companyId, start, end,
+			orderByComparator);
 	}
 
-	public static int getCommerceShipmentsCount(long groupId)
+	public static int getCommerceShipmentsCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceShipmentsCount(groupId);
+		return getService().getCommerceShipmentsCount(companyId);
 	}
 
-	public static int getCommerceShipmentsCount(long groupId, int status)
+	public static int getCommerceShipmentsCount(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCommerceShipmentsCount(groupId, status);
+		return getService().getCommerceShipmentsCount(companyId, status);
 	}
 
 	/**
