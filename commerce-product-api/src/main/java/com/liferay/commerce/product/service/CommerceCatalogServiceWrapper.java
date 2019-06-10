@@ -35,12 +35,11 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId,
-		String externalReferenceCode,
+		String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogService.addCommerceCatalog(nameMap,
+		return _commerceCatalogService.addCommerceCatalog(name,
 			commerceCurrencyCode, catalogDefaultLanguageId,
 			externalReferenceCode, serviceContext);
 	}
@@ -101,12 +100,11 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
-		long commerceCatalogId,
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId)
+		long commerceCatalogId, String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _commerceCatalogService.updateCommerceCatalog(commerceCatalogId,
-			nameMap, commerceCurrencyCode, catalogDefaultLanguageId);
+			name, commerceCurrencyCode, catalogDefaultLanguageId);
 	}
 
 	@Override

@@ -56,17 +56,15 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceCatalogServiceHttp {
 	public static com.liferay.commerce.product.model.CommerceCatalog addCommerceCatalog(
-		HttpPrincipal httpPrincipal,
-		java.util.Map<java.util.Locale, String> nameMap,
-		String commerceCurrencyCode, String catalogDefaultLanguageId,
-		String externalReferenceCode,
+		HttpPrincipal httpPrincipal, String name, String commerceCurrencyCode,
+		String catalogDefaultLanguageId, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
 					"addCommerceCatalog", _addCommerceCatalogParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					commerceCurrencyCode, catalogDefaultLanguageId,
 					externalReferenceCode, serviceContext);
 
@@ -290,8 +288,7 @@ public class CommerceCatalogServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog updateCommerceCatalog(
-		HttpPrincipal httpPrincipal, long commerceCatalogId,
-		java.util.Map<java.util.Locale, String> nameMap,
+		HttpPrincipal httpPrincipal, long commerceCatalogId, String name,
 		String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -300,7 +297,7 @@ public class CommerceCatalogServiceHttp {
 					_updateCommerceCatalogParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceCatalogId, nameMap, commerceCurrencyCode,
+					commerceCatalogId, name, commerceCurrencyCode,
 					catalogDefaultLanguageId);
 
 			Object returnObj = null;
@@ -327,7 +324,7 @@ public class CommerceCatalogServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceCatalogServiceHttp.class);
 	private static final Class<?>[] _addCommerceCatalogParameterTypes0 = new Class[] {
-			java.util.Map.class, String.class, String.class, String.class,
+			String.class, String.class, String.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceCatalogParameterTypes1 = new Class[] {
@@ -349,6 +346,6 @@ public class CommerceCatalogServiceHttp {
 			long.class, String.class
 		};
 	private static final Class<?>[] _updateCommerceCatalogParameterTypes7 = new Class[] {
-			long.class, java.util.Map.class, String.class, String.class
+			long.class, String.class, String.class, String.class
 		};
 }

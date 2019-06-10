@@ -42,8 +42,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import java.io.Serializable;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * Provides the local service interface for CommerceCatalog. Methods of this
@@ -78,12 +76,12 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 	public CommerceCatalog addCommerceCatalog(CommerceCatalog commerceCatalog);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
+	public CommerceCatalog addCommerceCatalog(String name,
 		String commerceCurrencyCode, String catalogDefaultLanguageId,
 		boolean system, String externalReferenceCode,
 		ServiceContext serviceContext) throws PortalException;
 
-	public CommerceCatalog addCommerceCatalog(Map<Locale, String> nameMap,
+	public CommerceCatalog addCommerceCatalog(String name,
 		String commerceCurrencyCode, String catalogDefaultLanguageId,
 		String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
@@ -299,6 +297,6 @@ public interface CommerceCatalogLocalService extends BaseLocalService,
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceCatalog updateCommerceCatalog(long commerceCatalogId,
-		Map<Locale, String> nameMap, String commerceCurrencyCode,
+		String name, String commerceCurrencyCode,
 		String catalogDefaultLanguageId) throws PortalException;
 }

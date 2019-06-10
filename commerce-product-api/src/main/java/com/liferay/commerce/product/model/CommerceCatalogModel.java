@@ -19,19 +19,15 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.LocaleException;
 import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.model.LocalizedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
 
 import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * The base model interface for the CommerceCatalog service. Represents a row in the &quot;CommerceCatalog&quot; database table, with each column mapped to a property of this class.
@@ -48,7 +44,7 @@ import java.util.Map;
  */
 @ProviderType
 public interface CommerceCatalogModel extends AuditedModel,
-	BaseModel<CommerceCatalog>, LocalizedModel, ShardedModel {
+	BaseModel<CommerceCatalog>, ShardedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -200,58 +196,8 @@ public interface CommerceCatalogModel extends AuditedModel,
 	 *
 	 * @return the name of this commerce catalog
 	 */
+	@AutoEscape
 	public String getName();
-
-	/**
-	 * Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	 *
-	 * @param locale the locale of the language
-	 * @return the localized name of this commerce catalog
-	 */
-	@AutoEscape
-	public String getName(Locale locale);
-
-	/**
-	 * Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	 *
-	 * @param locale the local of the language
-	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized name of this commerce catalog. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	 */
-	@AutoEscape
-	public String getName(Locale locale, boolean useDefault);
-
-	/**
-	 * Returns the localized name of this commerce catalog in the language. Uses the default language if no localization exists for the requested language.
-	 *
-	 * @param languageId the ID of the language
-	 * @return the localized name of this commerce catalog
-	 */
-	@AutoEscape
-	public String getName(String languageId);
-
-	/**
-	 * Returns the localized name of this commerce catalog in the language, optionally using the default language if no localization exists for the requested language.
-	 *
-	 * @param languageId the ID of the language
-	 * @param useDefault whether to use the default language if no localization exists for the requested language
-	 * @return the localized name of this commerce catalog
-	 */
-	@AutoEscape
-	public String getName(String languageId, boolean useDefault);
-
-	@AutoEscape
-	public String getNameCurrentLanguageId();
-
-	@AutoEscape
-	public String getNameCurrentValue();
-
-	/**
-	 * Returns a map of the locales and localized names of this commerce catalog.
-	 *
-	 * @return the locales and localized names of this commerce catalog
-	 */
-	public Map<Locale, String> getNameMap();
 
 	/**
 	 * Sets the name of this commerce catalog.
@@ -259,40 +205,6 @@ public interface CommerceCatalogModel extends AuditedModel,
 	 * @param name the name of this commerce catalog
 	 */
 	public void setName(String name);
-
-	/**
-	 * Sets the localized name of this commerce catalog in the language.
-	 *
-	 * @param name the localized name of this commerce catalog
-	 * @param locale the locale of the language
-	 */
-	public void setName(String name, Locale locale);
-
-	/**
-	 * Sets the localized name of this commerce catalog in the language, and sets the default locale.
-	 *
-	 * @param name the localized name of this commerce catalog
-	 * @param locale the locale of the language
-	 * @param defaultLocale the default locale
-	 */
-	public void setName(String name, Locale locale, Locale defaultLocale);
-
-	public void setNameCurrentLanguageId(String languageId);
-
-	/**
-	 * Sets the localized names of this commerce catalog from the map of locales and localized names.
-	 *
-	 * @param nameMap the locales and localized names of this commerce catalog
-	 */
-	public void setNameMap(Map<Locale, String> nameMap);
-
-	/**
-	 * Sets the localized names of this commerce catalog from the map of locales and localized names, and sets the default locale.
-	 *
-	 * @param nameMap the locales and localized names of this commerce catalog
-	 * @param defaultLocale the default locale
-	 */
-	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
 	 * Returns the commerce currency code of this commerce catalog.
@@ -377,19 +289,6 @@ public interface CommerceCatalogModel extends AuditedModel,
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
-
-	@Override
-	public String[] getAvailableLanguageIds();
-
-	@Override
-	public String getDefaultLanguageId();
-
-	@Override
-	public void prepareLocalizedFieldsForImport() throws LocaleException;
-
-	@Override
-	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
-		throws LocaleException;
 
 	@Override
 	public Object clone();
