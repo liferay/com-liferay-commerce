@@ -130,6 +130,12 @@ public class CommercePriceEntryDisplayContext
 		itemSelectorURL.setParameter(
 			"checkedCPInstanceIds", checkedCPInstanceIds);
 
+		CommercePriceList commercePriceList = getCommercePriceList();
+
+		itemSelectorURL.setParameter(
+			"commerceCatalogGroupId",
+			String.valueOf(commercePriceList.getGroupId()));
+
 		return itemSelectorURL.toString();
 	}
 
