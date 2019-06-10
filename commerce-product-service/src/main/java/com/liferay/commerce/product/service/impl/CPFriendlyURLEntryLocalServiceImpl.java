@@ -322,13 +322,8 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		}
 
 		if (classPK > 0) {
-			CPFriendlyURLEntry cpFriendlyURLEntry =
-				cpFriendlyURLEntryPersistence.fetchByG_C_C_L_U(
-					groupId, classNameId, classPK, languageId, urlTitle);
-
-			if (cpFriendlyURLEntry != null) {
-				return;
-			}
+			cpFriendlyURLEntryPersistence.fetchByG_C_C_L_U(
+				groupId, classNameId, classPK, languageId, urlTitle);
 		}
 	}
 
