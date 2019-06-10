@@ -81,11 +81,22 @@ public class CPInstanceItemSelectorViewDisplayContext
 		Sort sort = CPItemSelectorViewUtil.getCPInstanceSort(
 			getOrderByCol(), getOrderByType());
 
-		BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult =
-			_cpInstanceService.searchCPInstances(
-				cpRequestHelper.getCompanyId(), getKeywords(),
-				WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(),
-				searchContainer.getEnd(), sort);
+		BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult;
+
+		if (getCommerceCatalogGroupId() > 0) {
+			cpInstanceBaseModelSearchResult =
+				_cpInstanceService.searchCPInstances(
+					cpRequestHelper.getCompanyId(), getCommerceCatalogGroupId(),
+					getKeywords(), WorkflowConstants.STATUS_APPROVED,
+					searchContainer.getStart(), searchContainer.getEnd(), sort);
+		}
+		else {
+			cpInstanceBaseModelSearchResult =
+				_cpInstanceService.searchCPInstances(
+					cpRequestHelper.getCompanyId(), getKeywords(),
+					WorkflowConstants.STATUS_APPROVED,
+					searchContainer.getStart(), searchContainer.getEnd(), sort);
+		}
 
 		List<CPInstance> cpInstances =
 			cpInstanceBaseModelSearchResult.getBaseModels();
@@ -100,6 +111,10 @@ public class CPInstanceItemSelectorViewDisplayContext
 	protected long[] getCheckedCPInstanceIds() {
 		return ParamUtil.getLongValues(
 			httpServletRequest, "checkedCPInstanceIds");
+	}
+
+	protected long getCommerceCatalogGroupId() {
+		return ParamUtil.getLong(httpServletRequest, "commerceCatalogGroupId");
 	}
 
 	private final CPInstanceService _cpInstanceService;
