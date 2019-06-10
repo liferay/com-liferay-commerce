@@ -99,6 +99,14 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		}
 
 		if (cpFriendlyURLEntry == null) {
+			List<CPFriendlyURLEntry> cpFriendlyURLEntries =
+				_cpFriendlyURLEntryLocalService.getCPFriendlyURLEntries(
+					groupId, classNameId, urlTitle);
+
+			cpFriendlyURLEntry = cpFriendlyURLEntries.get(0);
+		}
+
+		if (cpFriendlyURLEntry == null) {
 			return null;
 		}
 
@@ -216,7 +224,15 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		}
 
 		if (cpFriendlyURLEntry == null) {
-			return null;
+			List<CPFriendlyURLEntry> cpFriendlyURLEntries =
+				_cpFriendlyURLEntryLocalService.getCPFriendlyURLEntries(
+					groupId, classNameId, urlTitle);
+
+			if (cpFriendlyURLEntries.isEmpty()) {
+				return null;
+			}
+
+			cpFriendlyURLEntry = cpFriendlyURLEntries.get(0);
 		}
 
 		if (!cpFriendlyURLEntry.isMain()) {
