@@ -25,6 +25,7 @@ import com.liferay.commerce.product.content.search.web.internal.configuration.CP
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSearchResultsDisplayContext;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
@@ -186,8 +187,8 @@ public class CPSearchResultsPortlet
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
 				themeDisplay.getScopeGroupId());
 
 		Optional<String> parameterValueOptional =
@@ -220,19 +221,26 @@ public class CPSearchResultsPortlet
 		searchContext.setAttribute(
 			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
 
-		searchContext.setAttribute(
-			"commerceChannelGroupId", commerceChannelGroupId);
+		if (commerceChannel != null) {
+			searchContext.setAttribute(
+				"commerceChannelGroupId",
+				commerceChannel.getCommerceChannelGroupId());
+		}
 
 		CommerceAccount commerceAccount =
 			_commerceAccountHelper.getCurrentCommerceAccount(
 				_portal.getHttpServletRequest(renderRequest));
 
-		long[] commerceAccountGroupIds =
-			_commerceAccountHelper.getCommerceAccountGroupIds(
-				commerceAccount.getCommerceAccountId());
+		if (commerceAccount != null) {
+			long[] commerceAccountGroupIds =
+				_commerceAccountHelper.getCommerceAccountGroupIds(
+					commerceAccount.getCommerceAccountId());
 
-		searchContext.setAttribute(
-			"commerceAccountGroupIds", commerceAccountGroupIds);
+			searchContext.setAttribute(
+				"commerceAccountGroupIds", commerceAccountGroupIds);
+		}
+
+		searchContext.setAttribute("secure", Boolean.TRUE);
 
 		QueryConfig queryConfig = portletSharedSearchSettings.getQueryConfig();
 

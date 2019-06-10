@@ -212,33 +212,39 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
-		long commerceChannelId = GetterUtil.getLong(
-			attributes.get("commerceChannelGroupId"));
+		if (GetterUtil.getBoolean(attributes.get("secure"))) {
+			long commerceChannelId = GetterUtil.getLong(
+				attributes.get("commerceChannelGroupId"));
 
-		if (commerceChannelId > 0) {
-			contextBooleanFilter.addTerm(
-				FIELD_CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId));
-		}
-
-		long[] commerceAccountGroupIds = GetterUtil.getLongValues(
-			searchContext.getAttribute("commerceAccountGroupIds"), null);
-
-		if ((commerceAccountGroupIds != null) &&
-			(commerceAccountGroupIds.length > 0)) {
-
-			BooleanFilter accountGroupsBooleanFilter = new BooleanFilter();
-
-			for (long commerceAccountGroupId : commerceAccountGroupIds) {
-				Filter termFilter = new TermFilter(
-					"commerceAccountGroupIds",
-					String.valueOf(commerceAccountGroupId));
-
-				accountGroupsBooleanFilter.add(
-					termFilter, BooleanClauseOccur.SHOULD);
+			if (commerceChannelId > 0) {
+				contextBooleanFilter.addTerm(
+					FIELD_CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId));
+			}
+			else {
+				contextBooleanFilter.addTerm(
+					FIELD_CHANNEL_GROUP_IDS, "-1", BooleanClauseOccur.MUST);
 			}
 
-			contextBooleanFilter.add(
-				accountGroupsBooleanFilter, BooleanClauseOccur.MUST);
+			long[] commerceAccountGroupIds = GetterUtil.getLongValues(
+				searchContext.getAttribute("commerceAccountGroupIds"), null);
+
+			if ((commerceAccountGroupIds != null) &&
+				(commerceAccountGroupIds.length > 0)) {
+
+				BooleanFilter accountGroupsBooleanFilter = new BooleanFilter();
+
+				for (long commerceAccountGroupId : commerceAccountGroupIds) {
+					Filter termFilter = new TermFilter(
+						"commerceAccountGroupIds",
+						String.valueOf(commerceAccountGroupId));
+
+					accountGroupsBooleanFilter.add(
+						termFilter, BooleanClauseOccur.SHOULD);
+				}
+
+				contextBooleanFilter.add(
+					accountGroupsBooleanFilter, BooleanClauseOccur.MUST);
+			}
 		}
 	}
 
