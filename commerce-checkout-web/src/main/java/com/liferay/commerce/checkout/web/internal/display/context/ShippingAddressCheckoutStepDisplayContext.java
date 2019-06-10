@@ -16,7 +16,6 @@ package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -60,18 +59,6 @@ public class ShippingAddressCheckoutStepDisplayContext
 
 				break;
 			}
-		}
-
-		if (defaultCommerceAddressId == 0) {
-			CommerceOrder commerceOrder = getCommerceOrder();
-
-			defaultCommerceAddressId = commerceOrder.getBillingAddressId();
-		}
-
-		if ((defaultCommerceAddressId == 0) && !commerceAddresses.isEmpty()) {
-			CommerceAddress commerceAddress = commerceAddresses.get(0);
-
-			defaultCommerceAddressId = commerceAddress.getCommerceAddressId();
 		}
 
 		return defaultCommerceAddressId;
