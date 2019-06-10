@@ -20,7 +20,7 @@
 
 		<!-- Other fields -->
 
-		<column localized="true" name="name" type="String" />
+		<column name="name" type="String" />
 		<column name="commerceCurrencyCode" type="String" />
 		<column name="catalogDefaultLanguageId" type="String" />
 		<column name="system" type="boolean" />
