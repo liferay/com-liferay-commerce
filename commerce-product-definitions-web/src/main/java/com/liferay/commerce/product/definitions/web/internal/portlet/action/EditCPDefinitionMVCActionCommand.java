@@ -40,6 +40,8 @@ import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -267,6 +269,18 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		return portletURL.toString();
 	}
 
+	protected void reindexCPDefinition(long cpDefinitionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+			cpDefinitionId);
+
+		Indexer<CPDefinition> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CPDefinition.class);
+
+		indexer.reindex(cpDefinition);
+	}
+
 	protected void updateAccountGroups(ActionRequest actionRequest)
 		throws PortalException {
 
@@ -287,6 +301,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				CPDefinition.class.getName(), cpDefinitionId,
 				commerceAccountGroupId, serviceContext);
 		}
+
+		reindexCPDefinition(cpDefinitionId);
 	}
 
 	protected CPDefinition updateCategorization(ActionRequest actionRequest)
@@ -322,6 +338,8 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 				CPDefinition.class.getName(), cpDefinitionId, commerceChannelId,
 				serviceContext);
 		}
+
+		reindexCPDefinition(cpDefinitionId);
 	}
 
 	protected CPDefinition updateCPDefinition(ActionRequest actionRequest)
