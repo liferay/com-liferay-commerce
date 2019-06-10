@@ -1,8 +1,19 @@
 .price {
 	&__value {
 		font-weight: 600;
-		font-weight: bold;
 		margin-right: 10px;
+
+		&--original-price {
+			color: $color-fg-alt;
+			font-weight: normal;
+			text-decoration: line-through;
+			margin-left: 10px;
+			margin-right: 0;
+		}
+
+		&--final-price {
+			color: $color-mood-bad
+		}
 
 		&--big {
 			font-size: 18px;
