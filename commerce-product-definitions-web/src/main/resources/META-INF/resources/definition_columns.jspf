@@ -57,7 +57,7 @@ CommerceCatalog catalog = cpDefinitionsDisplayContext.fetchCommerceCatalogByGrou
 <liferay-ui:search-container-column-text
 	cssClass="table-cell-content"
 	name="catalog"
-	value="<%= (catalog == null) ? StringPool.BLANK : catalog.getName(locale) %>"
+	value="<%= (catalog == null) ? StringPool.BLANK : catalog.getName() %>"
 />
 
 <liferay-ui:search-container-column-date
