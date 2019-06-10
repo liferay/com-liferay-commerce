@@ -36,7 +36,9 @@ import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServic
 import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -173,14 +175,32 @@ public class CommerceProductPriceCalculationImpl
 
 		if (commercePriceList.isPresent()) {
 			BigDecimal priceListPrice = _getPriceListPrice(
-				cpInstanceId, quantity, commercePriceList.get(), true);
+				cpInstanceId, quantity, commercePriceList.get(),
+				commerceContext.getCommerceCurrency(), true);
 
 			if (priceListPrice != null) {
-				price = priceListPrice;
+				return _commerceMoneyFactory.create(
+					commerceCurrency, priceListPrice);
 			}
 		}
 
-		if ((commerceCurrency != null) && !commerceCurrency.isPrimary()) {
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpInstance.getGroupId());
+
+		CommerceCurrency catalogCommerceCurrency =
+			_commerceCurrencyLocalService.getCommerceCurrency(
+				commerceCatalog.getCompanyId(),
+				commerceCatalog.getCommerceCurrencyCode());
+
+		if (catalogCommerceCurrency.getCommerceCurrencyId() !=
+				commerceCurrency.getCommerceCurrencyId()) {
+
+			price = price.divide(
+				catalogCommerceCurrency.getRate(),
+				RoundingMode.valueOf(
+					catalogCommerceCurrency.getRoundingMode()));
+
 			price = price.multiply(commerceCurrency.getRate());
 		}
 
@@ -290,14 +310,32 @@ public class CommerceProductPriceCalculationImpl
 
 		if (commercePriceList.isPresent()) {
 			BigDecimal priceListPrice = _getPriceListPrice(
-				cpInstanceId, quantity, commercePriceList.get(), false);
+				cpInstanceId, quantity, commercePriceList.get(),
+				commerceContext.getCommerceCurrency(), false);
 
 			if (priceListPrice != null) {
-				price = priceListPrice;
+				return _commerceMoneyFactory.create(
+					commerceCurrency, priceListPrice);
 			}
 		}
 
-		if ((commerceCurrency != null) && !commerceCurrency.isPrimary()) {
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpInstance.getGroupId());
+
+		CommerceCurrency catalogCommerceCurrency =
+			_commerceCurrencyLocalService.getCommerceCurrency(
+				commerceCatalog.getCompanyId(),
+				commerceCatalog.getCommerceCurrencyCode());
+
+		if (catalogCommerceCurrency.getCommerceCurrencyId() !=
+				commerceCurrency.getCommerceCurrencyId()) {
+
+			price = price.divide(
+				catalogCommerceCurrency.getRate(),
+				RoundingMode.valueOf(
+					catalogCommerceCurrency.getRoundingMode()));
+
 			price = price.multiply(commerceCurrency.getRate());
 		}
 
@@ -332,7 +370,8 @@ public class CommerceProductPriceCalculationImpl
 
 	private BigDecimal _getPriceListPrice(
 			long cpInstanceId, int quantity,
-			CommercePriceList commercePriceList, boolean promo)
+			CommercePriceList commercePriceList,
+			CommerceCurrency commerceCurrency, boolean promo)
 		throws PortalException {
 
 		BigDecimal price = null;
@@ -370,10 +409,14 @@ public class CommerceProductPriceCalculationImpl
 				_commerceCurrencyLocalService.getCommerceCurrency(
 					commercePriceList.getCommerceCurrencyId());
 
-			if (!priceListCurrency.isPrimary()) {
+			if (priceListCurrency.getCommerceCurrencyId() !=
+					commerceCurrency.getCommerceCurrencyId()) {
+
 				price = price.divide(
 					priceListCurrency.getRate(),
 					RoundingMode.valueOf(priceListCurrency.getRoundingMode()));
+
+				price = price.multiply(commerceCurrency.getRate());
 			}
 		}
 
@@ -404,6 +447,9 @@ public class CommerceProductPriceCalculationImpl
 
 	@Reference
 	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
