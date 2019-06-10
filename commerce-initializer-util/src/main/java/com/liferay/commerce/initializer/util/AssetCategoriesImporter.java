@@ -24,6 +24,7 @@ import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -88,6 +89,8 @@ public class AssetCategoriesImporter {
 		AssetVocabulary assetVocabulary = _addAssetVocabulary(
 			assetVocabularyName, serviceContext);
 
+		updateAssetVocabularyPermissions(assetVocabulary);
+
 		for (int i = 0; i < jsonArray.length(); i++) {
 
 			// Asset category
@@ -132,6 +135,30 @@ public class AssetCategoriesImporter {
 		}
 
 		return assetCategories;
+	}
+
+	protected void updateAssetVocabularyPermissions(
+			AssetVocabulary assetVocabulary)
+		throws PortalException {
+
+		JSONArray jsonArray = _jsonFactory.createJSONArray();
+
+		JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+		jsonObject.put("RoleName", "User");
+		jsonObject.put("Scope", 4);
+
+		JSONArray actionIdsJSONArray = _jsonFactory.createJSONArray();
+
+		actionIdsJSONArray.put("VIEW");
+
+		jsonObject.put("ActionIds", actionIdsJSONArray);
+
+		jsonArray.put(jsonObject);
+
+		updatePermissions(
+			assetVocabulary.getCompanyId(), assetVocabulary.getModelClassName(),
+			String.valueOf(assetVocabulary.getVocabularyId()), jsonArray);
 	}
 
 	protected void updatePermissions(
@@ -286,6 +313,9 @@ public class AssetCategoriesImporter {
 
 	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
+
+	@Reference
+	private JSONFactory _jsonFactory;
 
 	@Reference
 	private Portal _portal;
