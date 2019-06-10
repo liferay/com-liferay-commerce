@@ -112,30 +112,30 @@ public class CommerceShipmentLocalServiceImpl
 
 	@Override
 	public List<CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
+		long[] groupIds, int status, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator) {
 
 		return commerceShipmentPersistence.findByG_S(
-			groupId, status, start, end, orderByComparator);
+			groupIds, status, start, end, orderByComparator);
 	}
 
 	@Override
 	public List<CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
+		long[] groupIds, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator) {
 
-		return commerceShipmentPersistence.findByGroupId(
-			groupId, start, end, orderByComparator);
+		return commerceShipmentPersistence.findByGroupIds(
+			groupIds, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId) {
-		return commerceShipmentPersistence.countByGroupId(groupId);
+	public int getCommerceShipmentsCount(long[] groupIds) {
+		return commerceShipmentPersistence.countByGroupIds(groupIds);
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId, int status) {
-		return commerceShipmentPersistence.countByG_S(groupId, status);
+	public int getCommerceShipmentsCount(long[] groupIds, int status) {
+		return commerceShipmentPersistence.countByG_S(groupIds, status);
 	}
 
 	@Override
