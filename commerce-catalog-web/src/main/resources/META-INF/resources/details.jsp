@@ -48,9 +48,10 @@ portletDisplay.setURLBack(backURL);
 
 					<%
 					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
+						String commerceCurrencyCode = commerceCurrency.getCode();
 					%>
 
-						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceCatalog == null) ? commerceCurrency.isPrimary() : (commerceCatalog.getCommerceCurrencyCode() == commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
+						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceCatalog == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCatalog.getCommerceCurrencyCode()) %>" value="<%= commerceCurrencyCode %>" />
 
 					<%
 					}
