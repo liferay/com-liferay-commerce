@@ -22,9 +22,9 @@ BaseAddressCheckoutStepDisplayContext baseAddressCheckoutStepDisplayContext = (B
 List<CommerceAddress> commerceAddresses = baseAddressCheckoutStepDisplayContext.getCommerceAddresses();
 long defaultCommerceAddressId = baseAddressCheckoutStepDisplayContext.getDefaultCommerceAddressId();
 
-	String paramName = baseAddressCheckoutStepDisplayContext.getParamName();
+String paramName = baseAddressCheckoutStepDisplayContext.getParamName();
 
-	long commerceAddressId = BeanParamUtil.getLong(baseAddressCheckoutStepDisplayContext.getCommerceOrder(), request, paramName);
+long commerceAddressId = BeanParamUtil.getLong(baseAddressCheckoutStepDisplayContext.getCommerceOrder(), request, paramName);
 
 if (commerceAddressId == 0) {
 	commerceAddressId = defaultCommerceAddressId;
@@ -32,10 +32,10 @@ if (commerceAddressId == 0) {
 
 String selectLabel = "choose-" + baseAddressCheckoutStepDisplayContext.getTitle();
 
-CommerceAddress defaultCommerceAddress = baseAddressCheckoutStepDisplayContext.getCommerceAddress(defaultCommerceAddressId);
+CommerceAddress currentCommerceAddress = baseAddressCheckoutStepDisplayContext.getCommerceAddress(commerceAddressId);
 
-long commerceCountryId = BeanParamUtil.getLong(defaultCommerceAddress, request, "commerceCountryId");
-long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "commerceRegionId");
+long commerceCountryId = BeanParamUtil.getLong(currentCommerceAddress, request, "commerceCountryId", 0);
+long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "commerceRegionId", 0);
 %>
 
 <div class="form-group-autofit">
@@ -54,7 +54,7 @@ long commerceRegionId = BeanParamUtil.getLong(defaultCommerceAddress, request, "
 
 	</aui:select>
 
-	<aui:input disabled="<%= commerceAddresses.isEmpty() ? true : false %>" name="<%= paramName %>" type="hidden" value="<%= defaultCommerceAddressId %>" />
+	<aui:input disabled="<%= commerceAddresses.isEmpty() ? true : false %>" name="<%= paramName %>" type="hidden" value="<%= commerceAddressId %>" />
 
 	<aui:input name="newAddress" type="hidden" value='<%= (commerceAddressId > 0) ? "0" : "1" %>' />
 </div>
