@@ -7,17 +7,99 @@
 	{@param prices: [
 		price: string,
 		promoPrice: string|null,
+		finalPrice: string|null,
 		discount: string|null
 	]}
+	{@param? template: string}
 	{@param? additionalDiscountClasses: string}
 	{@param? additionalPriceClasses: string}
-	{@param? additionalPromoPriceClasses: string}
+	{@param? additionalFinalPriceClasses: string}
+
+	{let $variant kind="text"}
+		{if $template}
+			{$template}
+		{else}
+			default
+		{/if}
+	{/let}
+
+	{let $formattedAdditionalDiscountClasses kind="text"}
+		{nil}
+		{if $additionalDiscountClasses}
+			{sp}{$additionalDiscountClasses}
+		{/if}
+	{/let}
+
+	{let $formattedAdditionalPriceClasses kind="text"}
+		{nil}
+		{if $additionalPriceClasses}
+			{sp}{$additionalPriceClasses}
+		{/if}
+	{/let}
+
+	{let $formattedAdditionalFinalPriceClasses kind="text"}
+		{nil}
+		{if $additionalFinalPriceClasses}
+			{sp}{$additionalFinalPriceClasses}
+		{/if}
+	{/let}
+
+	{delcall PriceVariant variant="$variant"}
+		{param prices: $prices /}
+		{param additionalDiscountClasses: $formattedAdditionalDiscountClasses /}
+		{param additionalFinalPriceClasses: $formattedAdditionalFinalPriceClasses /}
+		{param additionalPriceClasses: $formattedAdditionalPriceClasses /}
+	{/delcall}
+
+{/template}
+
+
+{deltemplate PriceVariant variant="'simplified'"}
+	{@param prices: [
+		price: string,
+		promoPrice: string|null,
+		finalPrice: string|null,
+		discount: string|null
+	]}
+	{@param? template: string}
+	{@param? additionalDiscountClasses: string}
+	{@param? additionalPriceClasses: string}
+	{@param? additionalFinalPriceClasses: string}
+
+	<span class="price">
+		{if $prices.finalPrice == $prices.price}
+			<span class="price__value{$additionalPriceClasses}">
+				{$prices.price}
+			</span>
+		{else}
+			<span class="price__value price__value--final-price{$additionalFinalPriceClasses}">
+				{$prices.finalPrice}
+			</span>
+			<span class="price__value price__value--original-price{$additionalPriceClasses}">
+				{$prices.price}
+			</span>
+		{/if}
+	</span>
+
+{/deltemplate}
+
+{deltemplate PriceVariant variant="'default'"}
+	{@param prices: [
+		price: string,
+		promoPrice: string|null,
+		finalPrice: string|null,
+		discount: string|null
+	]}
+	{@param? template: string}
+	{@param? additionalDiscountClasses: string}
+	{@param? additionalPriceClasses: string}
+	{@param? additionalFinalPriceClasses: string}
 
 	{if isNonnull($prices.promoPrice)}
 		{call .promoPrice}
 			{param price: $prices.price /}
 			{param promoPrice: $prices.promoPrice /}
-			{param additionalPromoPriceClasses: $additionalPromoPriceClasses /}
+			{param additionalFinalPriceClasses: $additionalFinalPriceClasses /}
 			{param additionalPriceClasses: $additionalPriceClasses /}
 		{/call}
 	{elseif isNonnull($prices.discount)}
@@ -33,7 +115,7 @@
 			{param additionalPriceClasses: $additionalPriceClasses /}
 		{/call}
 	{/if}
-{/template}
+{/deltemplate}
 
 /**
  * This renders the price and the discounted price.
@@ -41,14 +123,14 @@
 {template .promoPrice}
 	{@param price: string}
 	{@param promoPrice: string}
-	{@param? additionalPromoPriceClasses: string}
+	{@param? additionalFinalPriceClasses: string}
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value price__value--promo-price {$additionalPromoPriceClasses}">
+		<span class="price__value price__value--promo-price{$additionalFinalPriceClasses}">
 			{$promoPrice}
 		</span>
-		<span class="price__value price__value--inactive {$additionalPriceClasses}">
+		<span class="price__value price__value--inactive{$additionalPriceClasses}">
 			{$price}
 		</span>
 	</span>
@@ -64,10 +146,10 @@
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value {$additionalPriceClasses}">
+		<span class="price__value{$additionalPriceClasses}">
 			{$price}
 		</span>
-		<span class="price__value price__value--discount {$additionalDiscountClasses}">
+		<span class="price__value price__value--discount{$additionalDiscountClasses}">
 			{$discount}
 		</span>
 	</span>
@@ -81,7 +163,7 @@
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value {$additionalPriceClasses}">
+		<span class="price__value{$additionalPriceClasses}">
 			{$price}
 		</span>
 	</span>

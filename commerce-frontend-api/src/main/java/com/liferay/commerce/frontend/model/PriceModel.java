@@ -31,6 +31,10 @@ public class PriceModel {
 		return _price;
 	}
 
+	public String getFinalPrice() {
+		return _finalPrice;
+	}
+
 	public String getPromoPrice() {
 		return _promoPrice;
 	}
@@ -43,12 +47,17 @@ public class PriceModel {
 		_price = price;
 	}
 
+	public void setFinalPrice(String finalPrice) {
+		_finalPrice = finalPrice;
+	}
+
 	public void setPromoPrice(String promoPrice) {
 		_promoPrice = promoPrice;
 	}
 
 	private String _discount;
 	private String _price;
+	private String _finalPrice;
 	private String _promoPrice;
 
 }

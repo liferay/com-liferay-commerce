@@ -120,7 +120,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>additionalPromoPriceClasses</name>
+			<name>additionalFinalPriceClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

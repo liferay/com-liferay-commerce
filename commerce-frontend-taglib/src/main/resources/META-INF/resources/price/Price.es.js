@@ -6,11 +6,12 @@ class Price extends Component {}
 
 Price.STATE = {
 	additionalDiscountClasses: Config.string(),
-	additionalPromoPriceClasses: Config.string(),
-	additionalPriceClasses: Config.string(),
+	additionalOriginalPriceClasses: Config.string(),
+	additionalFinalPriceClasses: Config.string(),
 	prices: Config.shapeOf(
 		{
 			price: Config.string().required(),
+			finalPrice: Config.string(),
 			promoPrice: Config.string(),
 			discount: Config.string()
 		}
