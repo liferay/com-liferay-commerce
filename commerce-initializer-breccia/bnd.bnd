@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Initializer Breccia
-Bundle-SymbolicName: com.liferay.commerce.initializer.breccia
-Bundle-Version: 1.0.13
-Web-ContextPath: /commerce-initializer-breccia
