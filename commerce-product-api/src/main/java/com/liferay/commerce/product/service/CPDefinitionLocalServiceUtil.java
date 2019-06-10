@@ -150,9 +150,9 @@ public class CPDefinitionLocalServiceUtil {
 		return getService().deleteCPDefinition(CPDefinitionId);
 	}
 
-	public static void deleteCPDefinitions(long groupId)
+	public static void deleteCPDefinitions(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteCPDefinitions(groupId);
+		getService().deleteCPDefinitions(companyId);
 	}
 
 	/**
