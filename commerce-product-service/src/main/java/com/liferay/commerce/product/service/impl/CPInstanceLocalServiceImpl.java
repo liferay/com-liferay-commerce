@@ -611,6 +611,18 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
+			long companyId, long[] groupIds, String keywords, int status,
+			int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupIds, keywords, status, start, end, sort);
+
+		return searchCPInstances(searchContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CPInstance> searchCPInstances(
 			long companyId, String keywords, int status, int start, int end,
 			Sort sort)
 		throws PortalException {
@@ -1033,6 +1045,45 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(companyId);
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		if (Validator.isNotNull(keywords)) {
+			searchContext.setKeywords(keywords);
+		}
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		if (sort != null) {
+			searchContext.setSorts(sort);
+		}
+
+		return searchContext;
+	}
+
+	protected SearchContext buildSearchContext(
+		long companyId, long[] groupIds, String keywords, int status, int start,
+		int end, Sort sort) {
+
+		SearchContext searchContext = new SearchContext();
+
+		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+
+		params.put("keywords", keywords);
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.CONTENT, keywords);
+		attributes.put(Field.STATUS, status);
+		attributes.put("params", params);
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setGroupIds(groupIds);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
 
