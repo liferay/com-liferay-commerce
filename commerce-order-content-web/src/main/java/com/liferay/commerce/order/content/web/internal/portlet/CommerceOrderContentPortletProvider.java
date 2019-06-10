@@ -49,12 +49,14 @@ public class CommerceOrderContentPortletProvider
 	}
 
 	@Override
-	public PortletURL getPortletURL(HttpServletRequest request, Group group)
+	public PortletURL getPortletURL(
+			HttpServletRequest httpServletRequest, Group group)
 		throws PortalException {
 
 		if (group == null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)httpServletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			group = themeDisplay.getScopeGroup();
 		}
@@ -63,7 +65,8 @@ public class CommerceOrderContentPortletProvider
 			group.getGroupId(), getPortletName());
 
 		return PortletURLFactoryUtil.create(
-			request, getPortletName(), plid, PortletRequest.RENDER_PHASE);
+			httpServletRequest, getPortletName(), plid,
+			PortletRequest.RENDER_PHASE);
 	}
 
 	@Reference

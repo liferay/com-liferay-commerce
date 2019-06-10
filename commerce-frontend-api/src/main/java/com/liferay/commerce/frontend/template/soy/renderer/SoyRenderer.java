@@ -30,13 +30,14 @@ import javax.servlet.http.HttpServletResponse;
 public interface SoyRenderer {
 
 	public void renderSoy(
-			HttpServletRequest request, HttpServletResponse response,
-			String templateNamespace, Map<String, ?> context)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, String templateNamespace,
+			Map<String, ?> context)
 		throws IOException, TemplateException;
 
 	public void renderSoy(
-			HttpServletRequest request, Writer writer, String templateNamespace,
-			Map<String, ?> context)
+			HttpServletRequest httpServletRequest, Writer writer,
+			String templateNamespace, Map<String, ?> context)
 		throws TemplateException;
 
 }
