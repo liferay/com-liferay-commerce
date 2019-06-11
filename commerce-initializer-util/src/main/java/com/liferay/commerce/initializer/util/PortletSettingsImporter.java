@@ -232,9 +232,9 @@ public class PortletSettingsImporter {
 				value = String.valueOf(groupId);
 			}
 			else if (key.equals("portletSetupTitle")) {
-				key = key + CharPool.UNDERLINE + serviceContext.getLanguageId();
-
 				value = portletPreferencesJSONObject.getString(key);
+
+				key = key + CharPool.UNDERLINE + serviceContext.getLanguageId();
 			}
 			else {
 				value = portletPreferencesJSONObject.getString(key);
