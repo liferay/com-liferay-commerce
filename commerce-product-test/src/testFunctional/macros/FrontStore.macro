@@ -1,4 +1,5 @@
 definition {
+
 	macro selectAssociatedFSOptionsValue {
 		Click(locator1 = "CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT");
 
@@ -54,4 +55,5 @@ definition {
 			}
 		}
 	}
+
 }
