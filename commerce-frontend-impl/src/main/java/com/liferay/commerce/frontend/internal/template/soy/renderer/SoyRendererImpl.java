@@ -41,16 +41,19 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 public class SoyRendererImpl implements SoyRenderer {
 
 	public void renderSoy(
-			HttpServletRequest request, HttpServletResponse response,
-			String templateNamespace, Map<String, ?> context)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, String templateNamespace,
+			Map<String, ?> context)
 		throws IOException, TemplateException {
 
-		renderSoy(request, response.getWriter(), templateNamespace, context);
+		renderSoy(
+			httpServletRequest, httpServletResponse.getWriter(),
+			templateNamespace, context);
 	}
 
 	public void renderSoy(
-			HttpServletRequest request, Writer writer, String templateNamespace,
-			Map<String, ?> context)
+			HttpServletRequest httpServletRequest, Writer writer,
+			String templateNamespace, Map<String, ?> context)
 		throws TemplateException {
 
 		Template template = _getTemplate();
@@ -59,7 +62,7 @@ public class SoyRendererImpl implements SoyRenderer {
 
 		template.put(TemplateConstants.NAMESPACE, templateNamespace);
 
-		template.prepare(request);
+		template.prepare(httpServletRequest);
 
 		template.processTemplate(writer);
 	}

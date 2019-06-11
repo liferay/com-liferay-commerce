@@ -45,10 +45,10 @@ public class CPCompareUtil {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		HttpServletRequest originalServletRequest =
+		HttpServletRequest originalHttpServletRequest =
 			PortalUtil.getOriginalServletRequest(httpServletRequest);
 
-		HttpSession httpSession = originalServletRequest.getSession();
+		HttpSession httpSession = originalHttpServletRequest.getSession();
 
 		List<Long> cpDefinitionIds = (List<Long>)httpSession.getAttribute(
 			_getSessionAttributeKey(httpServletRequest));

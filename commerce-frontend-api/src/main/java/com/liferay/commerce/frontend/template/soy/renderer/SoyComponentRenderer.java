@@ -30,12 +30,13 @@ import javax.servlet.http.HttpServletResponse;
 public interface SoyComponentRenderer {
 
 	public void renderSoyComponent(
-			HttpServletRequest request, HttpServletResponse response,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse,
 			ComponentDescriptor componentDescriptor, Map<String, ?> context)
 		throws IOException, TemplateException;
 
 	public void renderSoyComponent(
-			HttpServletRequest request, Writer writer,
+			HttpServletRequest httpServletRequest, Writer writer,
 			ComponentDescriptor componentDescriptor, Map<String, ?> context)
 		throws IOException, TemplateException;
 
