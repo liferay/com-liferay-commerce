@@ -37,6 +37,7 @@ long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getComme
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateAccountGroups" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
+			<aui:input name="commerceAccountGroupIds" type="hidden" />
 
 			<div class="lfr-form-content">
 				<aui:fieldset-group markupView="lexicon">
@@ -46,7 +47,7 @@ long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getComme
 						for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroups) {
 						%>
 
-							<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name="commerceAccountGroupIds" type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
+							<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name='<%= "commerceAccountGroupId" + commerceAccountGroup.getCommerceAccountGroupId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceAccountGroupIds();" %>' type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
 
 						<%
 						}
@@ -64,3 +65,14 @@ long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getComme
 		</aui:form>
 	</c:otherwise>
 </c:choose>
+
+<aui:script>
+	function <portlet:namespace />fulfillCommerceAccountGroupIds(e) {
+		var form = AUI.$(document.<portlet:namespace />fm);
+		var values = Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds');
+		form.fm('commerceAccountGroupIds').val(values);
+		return values;
+	}
+
+	<portlet:namespace />fulfillCommerceChannelIds();
+</aui:script>

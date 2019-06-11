@@ -37,6 +37,7 @@ long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannel
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateChannels" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
+			<aui:input name="commerceChannelIds" type="hidden" />
 
 			<div class="lfr-form-content">
 				<aui:fieldset-group markupView="lexicon">
@@ -46,7 +47,7 @@ long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannel
 						for (CommerceChannel commerceChannel : commerceChannels) {
 						%>
 
-							<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" label="<%= commerceChannel.getName() %>" name="commerceChannelIds" type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
+							<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" label="<%= commerceChannel.getName() %>" name='<%= "commerceChannelId_" + commerceChannel.getCommerceChannelId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceChannelIds();" %>' type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
 
 						<%
 						}
@@ -64,3 +65,14 @@ long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannel
 		</aui:form>
 	</c:otherwise>
 </c:choose>
+
+<aui:script>
+	function <portlet:namespace />fulfillCommerceChannelIds(e) {
+		var form = AUI.$(document.<portlet:namespace />fm);
+		var values = Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds');
+		form.fm('commerceChannelIds').val(values);
+		return values;
+	}
+
+	<portlet:namespace />fulfillCommerceChannelIds();
+</aui:script>
