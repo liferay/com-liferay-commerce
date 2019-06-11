@@ -1,4 +1,5 @@
 definition {
+
 	macro gotoCommercePortletNavItem {
 		AssertClick(
 			locator1 = "NavBar#NAV_ITEM_LINK",
@@ -46,4 +47,5 @@ definition {
 
 		Click(locator1 = "CommerceNavigation#SEARCH");
 	}
+
 }
