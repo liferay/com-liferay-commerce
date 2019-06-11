@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.SystemEventConstants;
@@ -309,19 +310,17 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 						cpDefinitionOptionValueRel.getName(
 							serviceContext.getLanguageId())));
 
-				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-				JSONArray valueJSONArray = JSONFactoryUtil.createJSONArray();
-
-				valueJSONArray.put(
+				JSONArray valueJSONArray = JSONUtil.put(
 					String.valueOf(
 						cpDefinitionOptionValueRel.
 							getCPDefinitionOptionValueRelId()));
 
-				jsonObject.put(
+				JSONObject jsonObject = JSONUtil.put(
 					"key",
-					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
-				jsonObject.put("value", valueJSONArray);
+					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId()
+				).put(
+					"value", valueJSONArray
+				);
 
 				jsonArray.put(jsonObject);
 			}
