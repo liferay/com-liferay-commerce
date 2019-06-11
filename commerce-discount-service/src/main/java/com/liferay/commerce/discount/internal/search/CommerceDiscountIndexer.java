@@ -375,13 +375,19 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 		}
 
 		if (commerceDiscountTarget instanceof CommerceDiscountProductTarget) {
-			((CommerceDiscountProductTarget)commerceDiscountTarget).
-				contributeDocument(document, commerceDiscount);
+			CommerceDiscountProductTarget commerceDiscountProductTarget =
+				(CommerceDiscountProductTarget)commerceDiscountTarget;
+
+			commerceDiscountProductTarget.contributeDocument(
+				document, commerceDiscount);
 		}
 
 		if (commerceDiscountTarget instanceof CommerceDiscountOrderTarget) {
-			((CommerceDiscountOrderTarget)commerceDiscountTarget).
-				contributeDocument(document, commerceDiscount);
+			CommerceDiscountOrderTarget commerceDiscountOrderTarget =
+				(CommerceDiscountOrderTarget)commerceDiscountTarget;
+
+			commerceDiscountOrderTarget.contributeDocument(
+				document, commerceDiscount);
 		}
 
 		return document;
