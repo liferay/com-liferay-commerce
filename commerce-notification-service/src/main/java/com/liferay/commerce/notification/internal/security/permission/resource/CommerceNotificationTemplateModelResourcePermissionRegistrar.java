@@ -59,15 +59,12 @@ public class CommerceNotificationTemplateModelResourcePermissionRegistrar {
 				_commerceNotificationTemplateLocalService::
 					getCommerceNotificationTemplate,
 				_portletResourcePermission,
-				(modelResourcePermission, consumer) -> {
-					consumer.accept(
-						new StagedModelPermissionLogic<>(
-							_stagingPermission,
-							CommerceAdminPortletKeys.
-								COMMERCE_ADMIN_GROUP_INSTANCE,
-							CommerceNotificationTemplate::
-								getCommerceNotificationTemplateId));
-				}),
+				(modelResourcePermission, consumer) -> consumer.accept(
+					new StagedModelPermissionLogic<>(
+						_stagingPermission,
+						CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
+						CommerceNotificationTemplate::
+							getCommerceNotificationTemplateId))),
 			properties);
 	}
 
