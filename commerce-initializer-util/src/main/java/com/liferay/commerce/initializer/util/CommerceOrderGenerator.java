@@ -255,7 +255,6 @@ public class CommerceOrderGenerator {
 					cpInstance.getJson(), commerceContext, serviceContext);
 			}
 			catch (Exception e) {
-				continue;
 			}
 		}
 	}

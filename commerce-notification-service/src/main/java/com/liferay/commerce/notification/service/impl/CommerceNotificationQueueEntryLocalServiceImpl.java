@@ -240,7 +240,6 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 					true);
 			}
 			catch (Exception e) {
-				continue;
 			}
 		}
 	}
