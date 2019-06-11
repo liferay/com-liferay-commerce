@@ -44,7 +44,7 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 
 						<aui:input name="email" />
 
-						<aui:select name="type">
+						<aui:select disabled="<%= commerceAccount != null %>" name="type">
 
 							<%
 							for (int type : CommerceAccountConstants.ACCOUNT_TYPES) {
