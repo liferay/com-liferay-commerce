@@ -32,6 +32,8 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -148,6 +150,9 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 			return cpOptionCategory.getTitle(themeDisplay.getLocale());
 		}
 		catch (PrincipalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
 		}
 
 		return StringPool.BLANK;
@@ -241,6 +246,9 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
 			ActionKeys.VIEW);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPDefinitionSpecificationOptionValueDisplayContext.class);
 
 	private final ModelResourcePermission<CPDefinition>
 		_cpDefinitionModelResourcePermission;
