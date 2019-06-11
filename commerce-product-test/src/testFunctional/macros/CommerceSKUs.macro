@@ -19,15 +19,13 @@ definition {
 			Click(locator1 = "Button#PLUS");
 
 			AssertClick(
+				key_menuItem = "Add SKU",
 				locator1 = "MenuItem#DROPDOWN_MENU_ITEM",
-				value1 = "${key_menuItem}",
-				key_menuItem = "Add SKU"
-			);
+				value1 = "${key_menuItem}");
 
 			CommerceEntry.addSKUsEntry(
 				optionValue = "${optionValue}",
-				productSKU = "${optionValueUppercase}SKU"
-			);
+				productSKU = "${optionValueUppercase}SKU");
 
 			CommerceEntry.publishEntry();
 

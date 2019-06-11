@@ -30,8 +30,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Catalog"
-		);
+			portlet = "Catalog");
 
 		echo("Creating new Option complete with Values...");
 
@@ -44,8 +43,7 @@ definition {
 			optionFieldType = "Select from List",
 			optionName = "Color",
 			optionValuesList = "Black,Blue,White",
-			valuePriority = "1"
-		);
+			valuePriority = "1");
 
 		echo("Creating new Product...");
 
@@ -53,8 +51,7 @@ definition {
 
 		CPCommerceCatalog.newProductsEntry(
 			productName = "Simple T-Shirt",
-			productType = "Simple"
-		);
+			productType = "Simple");
 
 		echo("Associating the Option to the Product...");
 
@@ -80,8 +77,7 @@ definition {
 
 		FrontStore.viewProductDetail(
 			FSOptionValuesList = "Black:10.0,Blue:20.0,White:30.0",
-			FSProductName = "Simple T-Shirt"
-		);
+			FSProductName = "Simple T-Shirt");
 	}
 
 }

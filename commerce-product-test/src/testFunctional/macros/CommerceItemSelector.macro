@@ -14,9 +14,8 @@ definition {
 		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_IFRAME");
 
 		Click(
-			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX",
-			key_entryName = "${entryName}"
-		);
+			key_entryName = "${entryName}",
+			locator1 = "CommerceNavigation#SINGLE_ENTRY_CHECKBOX");
 
 		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_MODAL_FOOTER");
 
@@ -30,22 +29,21 @@ definition {
 
 		AssertClick(
 			locator1 = "ItemSelector#SELECT_FILE_UPLOAD_IMAGE",
-			value1 = "Select File"
-		);
+			value1 = "Select File");
 
 		SikuliUploadCommonFile(
 			locator1 = "OS#FILE_DIALOG_BOX_FILE_NAME_FIELD_PNG",
-			value1 = "${uploadFileName}"
-		);
+			value1 = "${uploadFileName}");
 
 		AssertTextEquals(
 			locator1 = "ItemSelector#CAPTION",
-			value1 = "${uploadFileName}"
-		);
+			value1 = "${uploadFileName}");
 
 		SelectFrame(locator1 = "ItemSelector#ITEM_SELECTOR_MODAL_FOOTER");
 
-		AssertClick(locator1 = "ItemSelector#ADD_BUTTON", value1 = "Add");
+		AssertClick(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 
 		SelectFrameTop(value1 = "relative=top");
 	}
