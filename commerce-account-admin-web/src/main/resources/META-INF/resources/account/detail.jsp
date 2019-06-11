@@ -60,7 +60,7 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 
 						<aui:input label="vat-number" name="taxId" />
 
-						<aui:input name="active" />
+						<aui:input name="active" value="<%= (commerceAccount == null) ? true : commerceAccount.isActive() %>" />
 					</div>
 
 					<div class="col-md-5">
