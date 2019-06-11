@@ -20,6 +20,8 @@ import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrde
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.WorkflowDefinitionLink;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
@@ -71,6 +73,9 @@ public class CommerceOrderSettingsDisplayContext {
 					CommerceOrder.class.getName(), 0, typePK, true);
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nswdle, nswdle);
+			}
 		}
 
 		return workflowDefinitionLink;
@@ -82,6 +87,9 @@ public class CommerceOrderSettingsDisplayContext {
 			_commerceOrderRequestHelper.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_ORDER_WORKFLOWS);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderSettingsDisplayContext.class);
 
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final PortletResourcePermission _portletResourcePermission;

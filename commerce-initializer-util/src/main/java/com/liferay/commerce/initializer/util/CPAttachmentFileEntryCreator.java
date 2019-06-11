@@ -118,6 +118,10 @@ public class CPAttachmentFileEntryCreator {
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, fileName);
 		}
 		catch (NoSuchFileEntryException nsfee) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsfee, nsfee);
+			}
+
 			file = FileUtil.createTempFile(inputStream);
 
 			fileEntry = TempFileEntryUtil.addTempFileEntry(
