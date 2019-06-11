@@ -157,7 +157,7 @@ public class CommerceOrderAssetRenderer
 			HttpServletResponse httpServletResponse, String template)
 		throws Exception {
 
-		request.setAttribute(
+		httpServletRequest.setAttribute(
 			CommerceOrderConstants.COMMERCE_ORDER, _commerceOrder);
 
 		return super.include(httpServletRequest, httpServletResponse, template);
