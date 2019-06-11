@@ -18,7 +18,6 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -85,7 +84,7 @@ public class CommercePriceListsImporter {
 
 		if (!Validator.isBlank(parentPriceListName)) {
 			String externalReferenceCode = StringBundler.concat(
-				String.valueOf(serviceContext.getScopeGroupId()), "_",
+				String.valueOf(catalogGroupId), "_",
 				FriendlyURLNormalizerUtil.normalize(parentPriceListName));
 
 			CommercePriceList parentPriceList =
@@ -156,7 +155,7 @@ public class CommercePriceListsImporter {
 		// Add Commerce Price List
 
 		String externalReferenceCode = StringBundler.concat(
-			String.valueOf(serviceContext.getScopeGroupId()), "_",
+			String.valueOf(catalogGroupId), "_",
 			FriendlyURLNormalizerUtil.normalize(name));
 
 		_commercePriceListLocalService.upsertCommercePriceList(
@@ -168,9 +167,6 @@ public class CommercePriceListsImporter {
 			expirationDateMinute, externalReferenceCode, neverExpire,
 			serviceContext);
 	}
-
-	@Reference
-	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
