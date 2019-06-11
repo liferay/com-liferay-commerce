@@ -56,6 +56,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -685,9 +686,7 @@ public class CPDefinitionsImporter {
 					continue;
 				}
 
-				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-				jsonObject.put(
+				JSONObject jsonObject = JSONUtil.put(
 					"key", cpDefinitionOptionRel.getCPDefinitionOptionRelId());
 
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
@@ -702,10 +701,7 @@ public class CPDefinitionsImporter {
 						LocaleUtil.getSiteDefault());
 
 					if (name.equals(optionsJSONObject.getString("value"))) {
-						JSONArray valueJSONArray =
-							JSONFactoryUtil.createJSONArray();
-
-						valueJSONArray.put(
+						JSONArray valueJSONArray = JSONUtil.put(
 							String.valueOf(
 								cpDefinitionOptionValueRel.
 									getCPDefinitionOptionValueRelId()));
