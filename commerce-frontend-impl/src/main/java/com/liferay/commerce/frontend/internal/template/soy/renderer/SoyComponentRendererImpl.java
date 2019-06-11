@@ -38,22 +38,25 @@ import org.osgi.service.component.annotations.Reference;
 public class SoyComponentRendererImpl implements SoyComponentRenderer {
 
 	public void renderSoyComponent(
-			HttpServletRequest request, HttpServletResponse response,
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse,
 			ComponentDescriptor componentDescriptor, Map<String, ?> context)
 		throws IOException, TemplateException {
 
 		renderSoyComponent(
-			request, response.getWriter(), componentDescriptor, context);
+			httpServletRequest, httpServletResponse.getWriter(),
+			componentDescriptor, context);
 	}
 
 	public void renderSoyComponent(
-			HttpServletRequest request, Writer writer,
+			HttpServletRequest httpServletRequest, Writer writer,
 			ComponentDescriptor componentDescriptor, Map<String, ?> context)
 		throws IOException, TemplateException {
 
 		SoyComponentRendererHelper soyComponentRendererHelper =
 			new SoyComponentRendererHelper(
-				request, componentDescriptor, context, _portal, _soyRenderer);
+				httpServletRequest, componentDescriptor, context, _portal,
+				_soyRenderer);
 
 		soyComponentRendererHelper.renderSoyComponent(writer);
 	}
