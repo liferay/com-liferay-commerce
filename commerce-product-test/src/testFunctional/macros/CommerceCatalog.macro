@@ -1,4 +1,5 @@
 definition {
+
 	macro addEntry {
 		Click(locator1 = "Button#PLUS");
 
@@ -35,4 +36,5 @@ definition {
 
 		AssertElementPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER");
 	}
+
 }
