@@ -132,7 +132,7 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
 
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setAttribute("commerceChannelGroupId", groupId);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
