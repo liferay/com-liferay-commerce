@@ -12,8 +12,7 @@ definition {
 		CommerceEntry.addOptionsEntry(
 			optionDescription = "${optionDescription}",
 			optionFieldType = "${optionFieldType}",
-			optionName = "${optionName}"
-		);
+			optionName = "${optionName}");
 	}
 
 	macro addOptionValueEntry {
@@ -23,8 +22,7 @@ definition {
 
 		CommerceEntry.addOptionValue(
 			valueName = "${optionValueName}",
-			valuePriority = "${optionValuePriority}"
-		);
+			valuePriority = "${optionValuePriority}");
 
 		CommerceEntry.saveEntry();
 	}

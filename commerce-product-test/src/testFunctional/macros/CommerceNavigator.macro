@@ -2,18 +2,16 @@ definition {
 
 	macro gotoCommercePortletNavItem {
 		AssertClick(
+			key_navItem = "${navItem}",
 			locator1 = "NavBar#NAV_ITEM_LINK",
-			value1 = "${navItem}",
-			key_navItem = "${navItem}"
-		);
+			value1 = "${navItem}");
 	}
 
 	macro gotoEntry {
 		AssertClick(
+			key_entryName = "${entryName}",
 			locator1 = "CommerceNavigation#ENTRY_NAME",
-			value1 = "${entryName}",
-			key_entryName = "${entryName}"
-		);
+			value1 = "${entryName}");
 	}
 
 	macro gotoFrontStoreProductPage {
@@ -28,10 +26,9 @@ definition {
 
 	macro gotoOptionValues {
 		Click(
+			key_optionEntryName = "${optionEntryName}",
 			locator1 = "CommerceNavigation#OPTION_VALUES_LINK",
-			value1 = "${optionEntryName}",
-			key_optionEntryName = "${optionEntryName}"
-		);
+			value1 = "${optionEntryName}");
 
 		WaitForSPARefresh();
 
@@ -40,10 +37,9 @@ definition {
 
 	macro searchEntry {
 		Type(
+			entryName = "${entryName}",
 			locator1 = "TextInput#SEARCH",
-			value1 = "${entryName}",
-			entryName = "${entryName}"
-		);
+			value1 = "${entryName}");
 
 		Click(locator1 = "CommerceNavigation#SEARCH");
 	}

@@ -4,16 +4,14 @@ definition {
 		Click(locator1 = "CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT");
 
 		Click(
-			locator1 = "CommerceFrontStore#FS_PRODUCT_OPTION",
-			key_optionValue = "${FSOptionValue}"
-		);
+			key_optionValue = "${FSOptionValue}",
+			locator1 = "CommerceFrontStore#FS_PRODUCT_OPTION");
 	}
 
 	macro viewProductDetail {
 		AssertElementPresent(
-			locator1 = "CommerceFrontStore#FS_PRODUCT_NAME",
-			key_FSProductName = "${FSProductName}"
-		);
+			key_FSProductName = "${FSProductName}",
+			locator1 = "CommerceFrontStore#FS_PRODUCT_NAME");
 
 		if (IsElementPresent(locator1 = "CommerceFrontStore#FS_PRODUCT_OPTIONS_SELECT")) {
 			for (var FSOptionValues : list "${FSOptionValuesList}") {
@@ -26,32 +24,28 @@ definition {
 				echo("Checking ${FSOptionValue} ${FSProductName} SKU is correct...");
 
 				AssertElementPresent(
-					locator1 = "CommerceFrontStore#FS_PRODUCT_SKU",
-					key_FSProductSKU = "${FSOptionValueUppercase}SKU"
-				);
+					key_FSProductSKU = "${FSOptionValueUppercase}SKU",
+					locator1 = "CommerceFrontStore#FS_PRODUCT_SKU");
 
 				echo("Checking ${FSOptionValue} ${FSProductName} price is correct...");
 
 				AssertElementPresent(
-					locator1 = "CommerceFrontStore#FS_PRODUCT_PRICE",
-					key_FSProductPrice = "${FSPrice}"
-				);
+					key_FSProductPrice = "${FSPrice}",
+					locator1 = "CommerceFrontStore#FS_PRODUCT_PRICE");
 
 				echo("Checking ${FSOptionValue} ${FSProductName} image is correct...");
 
 				AssertElementPresent(
+					key_FSProductImage = "${FSOptionValue}",
 					locator1 = "CommerceFrontStore#FS_PRODUCT_FULL_IMAGE",
-					value1 = "${FSOptionValue}",
-					key_FSProductImage = "${FSOptionValue}"
-				);
+					value1 = "${FSOptionValue}");
 
 				echo("Checking ${FSOptionValue} ${FSProductName} thumbnail is correct...");
 
 				AssertElementPresent(
+					key_FSProductImageThumb = "${FSOptionValue}",
 					locator1 = "CommerceFrontStore#FS_PRODUCT_IMAGE_THUMBNAIL",
-					value1 = "${FSOptionValue}",
-					key_FSProductImageThumb = "${FSOptionValue}"
-				);
+					value1 = "${FSOptionValue}");
 			}
 		}
 	}

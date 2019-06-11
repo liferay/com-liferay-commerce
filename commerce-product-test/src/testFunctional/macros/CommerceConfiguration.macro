@@ -4,12 +4,9 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
-			portlet = "Search"
-		);
+			portlet = "Search");
 
-		SearchAdministration.executeSearchActions(
-			actionsDescription = "Reindex all search indexes."
-		);
+		SearchAdministration.executeSearchActions(actionsDescription = "Reindex all search indexes.");
 	}
 
 	macro commerceAdminTearDown {
@@ -18,10 +15,11 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "Users and Organizations"
-		);
+			portlet = "Users and Organizations");
 
-		User.deactivateCP(deactivateType = "Actions", userFirstName = "Commerce");
+		User.deactivateCP(
+			deactivateType = "Actions",
+			userFirstName = "Commerce");
 
 		User.deleteCP(userFirstName = "Commerce");
 
@@ -34,8 +32,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "User Groups"
-		);
+			portlet = "User Groups");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
 			UserGroup.deleteCP(userGroupName = "Commerce UserGroup");
@@ -44,37 +41,28 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Account groupss"
-		);
+			portlet = "Account groupss");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			CommerceProducts.deleteEntries(
-				deleteMessage = "Are you sure you want to delete the selected entries? They will be deleted immediately."
-			);
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected entries? They will be deleted immediately.");
 		}
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Price Lists"
-		);
+			portlet = "Price Lists");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			CommerceProducts.deleteEntries(
-				deleteMessage = "Are you sure you want to delete the selected price lists?"
-			);
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected price lists?");
 		}
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Discounts"
-		);
+			portlet = "Discounts");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			CommerceProducts.deleteEntries(
-				deleteMessage = "Are you sure you want to delete the selected discounts?"
-			);
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected discounts?");
 		}
 
 		User.logoutPG();
@@ -86,8 +74,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
 
@@ -132,18 +119,16 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Health Check");
 
 		for (var buttonRowNumber : list "1,2,3,4,5,6,7,8,9,10") {
 			if (!(IsElementPresent(locator1 = "CommerceEntry#FIX_ISSUE_BUTTON", key_buttonStatus = "disabled"))) {
 				Click(
-					locator1 = "CommerceEntry#FIX_ISSUE_BUTTON",
 					key_buttonRowNumber = "${buttonRowNumber}",
-					key_buttonStatus = ""
-				);
+					key_buttonStatus = "",
+					locator1 = "CommerceEntry#FIX_ISSUE_BUTTON");
 			}
 		}
 	}
@@ -154,8 +139,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Catalog"
-		);
+			portlet = "Catalog");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
 			CommerceProducts.moveCatalogEntriesToRecycleBin();
