@@ -152,7 +152,7 @@ public class CommerceInventoryWarehouseIndexer
 			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 		document.addKeyword(Field.NAME, commerceInventoryWarehouse.getName());
 		document.addKeyword(
-			FIELD_ACTIVE, commerceInventoryWarehouse.getActive());
+			FIELD_ACTIVE, commerceInventoryWarehouse.isActive());
 		document.addKeyword(
 			FIELD_COUNTRY_TWO_LETTERS_ISO_CODE,
 			commerceInventoryWarehouse.getCountryTwoLettersISOCode());
