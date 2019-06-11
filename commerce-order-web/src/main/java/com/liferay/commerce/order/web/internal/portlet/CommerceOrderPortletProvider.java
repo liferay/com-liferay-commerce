@@ -50,11 +50,13 @@ public class CommerceOrderPortletProvider
 	}
 
 	@Override
-	public PortletURL getPortletURL(HttpServletRequest request, Group group)
+	public PortletURL getPortletURL(
+			HttpServletRequest httpServletRequest, Group group)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		long plid = _portal.getPlidFromPortletId(
 			group.getGroupId(), getPortletName());
@@ -66,12 +68,13 @@ public class CommerceOrderPortletProvider
 			(plid == LayoutConstants.DEFAULT_PLID)) {
 
 			return _portal.getControlPanelPortletURL(
-				request, group, getPortletName(), 0, 0,
+				httpServletRequest, group, getPortletName(), 0, 0,
 				PortletRequest.RENDER_PHASE);
 		}
 
 		return PortletURLFactoryUtil.create(
-			request, getPortletName(), plid, PortletRequest.RENDER_PHASE);
+			httpServletRequest, getPortletName(), plid,
+			PortletRequest.RENDER_PHASE);
 	}
 
 	@Reference

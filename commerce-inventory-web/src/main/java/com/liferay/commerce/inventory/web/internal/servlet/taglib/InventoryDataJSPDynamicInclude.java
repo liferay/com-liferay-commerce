@@ -40,18 +40,18 @@ public class InventoryDataJSPDynamicInclude extends BaseJSPDynamicInclude {
 
 	@Override
 	public void include(
-			HttpServletRequest request, HttpServletResponse response,
-			String key)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, String key)
 		throws IOException {
 
 		try {
-			CPInstance cpInstance = (CPInstance)request.getAttribute(
+			CPInstance cpInstance = (CPInstance)httpServletRequest.getAttribute(
 				"inventory-cpInstance");
 
 			int cpInstanceQuantity = _commerceInventoryEngine.getStockQuantity(
 				cpInstance.getCompanyId(), cpInstance.getSku());
 
-			PrintWriter printWriter = response.getWriter();
+			PrintWriter printWriter = httpServletResponse.getWriter();
 
 			printWriter.println(cpInstanceQuantity);
 		}
