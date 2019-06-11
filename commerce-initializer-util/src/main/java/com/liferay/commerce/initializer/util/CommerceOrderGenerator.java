@@ -165,7 +165,7 @@ public class CommerceOrderGenerator {
 
 		List<CommerceAddress> commerceAddresses =
 			_commerceAddressLocalService.getCommerceAddresses(
-				groupId, CommerceAccount.class.getName(),
+				CommerceAccount.class.getName(),
 				commerceAccount.getCommerceAccountId(), 0, 1, null);
 
 		if (commerceAddresses.isEmpty()) {
@@ -177,6 +177,9 @@ public class CommerceOrderGenerator {
 		}
 
 		CommerceAddress commerceAddress = commerceAddresses.get(0);
+
+		commerceOrder.setShippingAddressId(
+			commerceAddress.getCommerceAddressId());
 
 		// Commerce shipping options
 
@@ -419,7 +422,8 @@ public class CommerceOrderGenerator {
 		Group group = _groupLocalService.getGroup(groupId);
 
 		searchContext.setCompanyId(group.getCompanyId());
-		searchContext.setGroupIds(new long[] {group.getGroupId()});
+
+		searchContext.setAttribute("commerceChannelGroupId", groupId);
 
 		return searchContext;
 	}
