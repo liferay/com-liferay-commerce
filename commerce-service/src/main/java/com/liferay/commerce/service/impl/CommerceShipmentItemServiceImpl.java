@@ -15,19 +15,16 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.service.base.CommerceShipmentItemServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
@@ -45,8 +42,8 @@ public class CommerceShipmentItemServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		return commerceShipmentItemLocalService.addCommerceShipmentItem(
@@ -62,8 +59,8 @@ public class CommerceShipmentItemServiceImpl
 			commerceShipmentItemPersistence.findByPrimaryKey(
 				commerceShipmentItemId);
 
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceShipmentItem.getGroupId(),
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		commerceShipmentItemLocalService.deleteCommerceShipmentItem(
@@ -93,12 +90,8 @@ public class CommerceShipmentItemServiceImpl
 			OrderByComparator<CommerceShipmentItem> orderByComparator)
 		throws PortalException {
 
-		CommerceShipment commerceShipment =
-			commerceShipmentLocalService.getCommerceShipment(
-				commerceShipmentId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceShipment.getGroupId(),
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		return commerceShipmentItemLocalService.getCommerceShipmentItems(
@@ -109,12 +102,8 @@ public class CommerceShipmentItemServiceImpl
 	public int getCommerceShipmentItemsCount(long commerceShipmentId)
 		throws PortalException {
 
-		CommerceShipment commerceShipment =
-			commerceShipmentLocalService.getCommerceShipment(
-				commerceShipmentId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceShipment.getGroupId(),
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		return commerceShipmentItemLocalService.getCommerceShipmentItemsCount(
@@ -126,12 +115,8 @@ public class CommerceShipmentItemServiceImpl
 			long commerceShipmentItemId, int quantity)
 		throws PortalException {
 
-		CommerceShipmentItem commerceShipmentItem =
-			commerceShipmentItemPersistence.findByPrimaryKey(
-				commerceShipmentItemId);
-
-		_portletResourcePermission.check(
-			getPermissionChecker(), commerceShipmentItem.getGroupId(),
+		PortalPermissionUtil.contains(
+			getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		return commerceShipmentItemLocalService.updateCommerceShipmentItem(
@@ -143,10 +128,5 @@ public class CommerceShipmentItemServiceImpl
 			ModelResourcePermissionFactory.getInstance(
 				CommerceShipmentItemServiceImpl.class,
 				"_commerceOrderModelResourcePermission", CommerceOrder.class);
-	private static volatile PortletResourcePermission
-		_portletResourcePermission =
-			PortletResourcePermissionFactory.getInstance(
-				CommerceShipmentItemServiceImpl.class,
-				"_portletResourcePermission", CommerceConstants.RESOURCE_NAME);
 
 }
