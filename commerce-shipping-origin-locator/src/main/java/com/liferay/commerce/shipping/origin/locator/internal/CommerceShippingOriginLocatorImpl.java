@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.shipping.origin.locator;
+package com.liferay.commerce.shipping.origin.locator.internal;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
@@ -26,6 +26,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
+import com.liferay.commerce.shipping.origin.locator.CommerceShippingOriginLocator;
 import com.liferay.commerce.shipping.origin.locator.internal.util.DistanceCalculator;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -41,10 +42,13 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
+ * @author Ethan Bustad
  */
 @Component(immediate = true, service = CommerceShippingOriginLocator.class)
-public class CommerceShippingOriginLocator {
+public class CommerceShippingOriginLocatorImpl
+	implements CommerceShippingOriginLocator {
 
+	@Override
 	public Map<CommerceAddress, List<CommerceOrderItem>> getOriginAddresses(
 			CommerceOrder commerceOrder)
 		throws Exception {
