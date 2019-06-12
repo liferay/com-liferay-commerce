@@ -143,7 +143,7 @@ class AddressModal extends Component {
 			(this.addressType === 'shipping' ?
 				this.shippingCountriesAPI :
 				this.billingCountriesAPI
-			) + '?groupId=' + themeDisplay.getScopeGroupId(),
+			) + '?companyId=' + themeDisplay.getCompanyId(),
 			{
 				method: 'GET'
 			}
@@ -161,7 +161,7 @@ class AddressModal extends Component {
 
 	_fetchRegions() {
 		return fetch(
-			this.regionsAPI + this._formData.country + '?groupId=' + themeDisplay.getScopeGroupId(),
+			this.regionsAPI + this._formData.country,
 			{
 				method: 'GET'
 			}
