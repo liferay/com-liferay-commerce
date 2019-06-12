@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.portlet.PortletRequest;
 
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
@@ -41,6 +42,7 @@ public class CPNavigationItemRegistryUtil {
 
 	private static final ServiceTracker<?, CPNavigationItemRegistry>
 		_serviceTracker = ServiceTrackerFactory.open(
+			FrameworkUtil.getBundle(CPNavigationItemRegistryUtil.class),
 			CPNavigationItemRegistry.class);
 
 }
