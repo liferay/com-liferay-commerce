@@ -27,8 +27,6 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
 <c:if test="<%= commercePriceListDisplayContext.hasManageCommercePriceListPermission() %>">
-	<%@ include file="/price_list_navbar.jspf" %>
-
 	<liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>">
 		<liferay-util:param name="searchContainerId" value="commercePriceLists" />
 	</liferay-util:include>
