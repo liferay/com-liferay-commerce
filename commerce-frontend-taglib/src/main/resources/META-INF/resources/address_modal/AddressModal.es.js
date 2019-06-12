@@ -143,7 +143,7 @@ class AddressModal extends Component {
 			(this.addressType === 'shipping' ?
 				this.shippingCountriesAPI :
 				this.billingCountriesAPI
-			) + '?groupId=' + themeDisplay.getScopeGroupId(),
+			) + '?companyId=' + themeDisplay.getCompanyId(),
 			{
 				method: 'GET'
 			}
