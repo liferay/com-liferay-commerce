@@ -22,6 +22,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
@@ -98,6 +99,7 @@ public class CommerceMediaResolverUtil {
 
 	private static final ServiceTracker<?, CommerceMediaResolver>
 		_serviceTracker = ServiceTrackerFactory.open(
+			FrameworkUtil.getBundle(CommerceMediaResolverUtil.class),
 			CommerceMediaResolver.class);
 
 }

@@ -18,6 +18,7 @@ import com.liferay.osgi.util.ServiceTrackerFactory;
 
 import java.util.List;
 
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
@@ -41,6 +42,7 @@ public class CPVersionContributorRegistryUtil {
 
 	private static final ServiceTracker<?, CPVersionContributorRegistry>
 		_serviceTracker = ServiceTrackerFactory.open(
+			FrameworkUtil.getBundle(CPVersionContributorRegistryUtil.class),
 			CPVersionContributorRegistry.class);
 
 }
