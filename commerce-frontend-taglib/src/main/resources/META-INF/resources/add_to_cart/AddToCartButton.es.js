@@ -198,13 +198,13 @@ class AddToCartButton extends Component {
 		}
 	}
 
-	_handleBtnFocus(e) {
-		this._handleBtnClick(e);
-	}
-
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
 		this.orderId = null;
+	}
+
+	_handleBtnFocus(e) {
+		this._handleBtnClick(e);
 	}
 
 	_handleBtnFocusin() {
@@ -219,6 +219,10 @@ class AddToCartButton extends Component {
 	}
 
 	_handleSubmitClick() {
+		if (this.disabled) {
+			return null;
+		}
+
 		this.quantity = this.inputQuantity;
 		resetInputQuantity.call(this);
 
