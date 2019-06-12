@@ -297,6 +297,10 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			CPDefinition.class.getName(), cpDefinitionId);
 
 		for (long commerceAccountGroupId : commerceAccountGroupIds) {
+			if (commerceAccountGroupId == 0) {
+				return;
+			}
+
 			_commerceAccountGroupRelService.addCommerceAccountGroupRel(
 				CPDefinition.class.getName(), cpDefinitionId,
 				commerceAccountGroupId, serviceContext);
