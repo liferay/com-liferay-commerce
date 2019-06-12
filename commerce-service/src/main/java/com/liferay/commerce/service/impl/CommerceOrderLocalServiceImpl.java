@@ -52,6 +52,8 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserConstants;
+import com.liferay.portal.kernel.model.WorkflowDefinitionLink;
+import com.liferay.portal.kernel.model.WorkflowInstanceLink;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -314,15 +316,9 @@ public class CommerceOrderLocalServiceImpl
 
 		// Workflow
 
-		if (hasWorkflowDefinition(
-				commerceOrder.getGroupId(),
-				CommerceOrderConstants.TYPE_PK_APPROVAL)) {
-
-			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-				commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
-				CommerceOrder.class.getName(),
-				commerceOrder.getCommerceOrderId());
-		}
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
+			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId());
 
 		return commerceOrder;
 	}
@@ -338,6 +334,27 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
+
+		WorkflowInstanceLink workflowInstanceLink =
+			workflowInstanceLinkLocalService.fetchWorkflowInstanceLink(
+				commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
+				CommerceOrder.class.getName(),
+				commerceOrder.getCommerceOrderId());
+
+		WorkflowDefinitionLink workflowDefinitionLink =
+			workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
+				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
+				CommerceOrder.class.getName(), 0,
+				CommerceOrderConstants.TYPE_PK_APPROVAL, true);
+
+		if ((workflowInstanceLink != null) ||
+			((workflowDefinitionLink != null) &&
+			 (commerceOrder.getOrderStatus() !=
+				 CommerceOrderConstants.ORDER_STATUS_COMPLETED))) {
+
+			throw new PortalException(
+				"Order" + commerceOrderId + "needs to be approved");
+		}
 
 		if (commerceOrder.getOrderStatus() ==
 				CommerceOrderConstants.ORDER_STATUS_OPEN) {
