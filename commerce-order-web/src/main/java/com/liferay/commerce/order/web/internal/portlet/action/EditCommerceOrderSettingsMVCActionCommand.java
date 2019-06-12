@@ -18,6 +18,7 @@ import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -122,13 +123,20 @@ public class EditCommerceOrderSettingsMVCActionCommand
 				actionRequest, CommerceOrderConstants.TYPE_PK_TRANSMISSION,
 				"transmission"));
 
+		long commerceChannelGroupIdBySiteGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
 		_workflowDefinitionLinkLocalService.updateWorkflowDefinitionLinks(
 			themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-			themeDisplay.getScopeGroupId(), CommerceOrder.class.getName(), 0,
-			workflowDefinitionOVPs);
+			commerceChannelGroupIdBySiteGroupId, CommerceOrder.class.getName(),
+			0, workflowDefinitionOVPs);
 	}
 
 	private static PortletResourcePermission _portletResourcePermission;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private WorkflowDefinitionLinkLocalService
