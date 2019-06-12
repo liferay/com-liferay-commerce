@@ -59,8 +59,6 @@ renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 %>
 
 <c:if test="<%= commerceTierPriceEntryDisplayContext.hasManageCommercePriceListPermission() %>">
-	<%@ include file="/price_list_navbar.jspf" %>
-
 	<%@ include file="/breadcrumb.jspf" %>
 	<%@ include file="/price_entry_navbar.jspf" %>
 

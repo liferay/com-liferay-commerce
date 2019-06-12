@@ -42,8 +42,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, selected
 renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 %>
 
-<%@ include file="/price_list_navbar.jspf" %>
-
 <%@ include file="/breadcrumb.jspf" %>
 
 <liferay-frontend:screen-navigation
