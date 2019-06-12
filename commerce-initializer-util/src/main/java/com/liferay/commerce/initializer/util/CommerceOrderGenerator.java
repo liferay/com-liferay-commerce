@@ -23,6 +23,8 @@ import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
@@ -38,6 +40,7 @@ import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAddressLocalService;
@@ -128,10 +131,17 @@ public class CommerceOrderGenerator {
 
 		// Add commerce order
 
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
+				commerceAccount.getCompanyId());
+
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
-				commerceAccountUserRel.getCommerceAccountUserId(), groupId,
-				commerceAccountUserRel.getCommerceAccountId());
+				commerceAccountUserRel.getCommerceAccountUserId(),
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(groupId),
+				commerceAccountUserRel.getCommerceAccountId(),
+				commerceCurrency.getCommerceCurrencyId());
 
 		// Commerce order items
 
@@ -484,7 +494,13 @@ public class CommerceOrderGenerator {
 	private CommerceAddressLocalService _commerceAddressLocalService;
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
 	private CommerceContextFactory _commerceContextFactory;
+
+	@Reference
+	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Reference
 	private CommerceInventoryEngine _commerceInventoryEngine;
