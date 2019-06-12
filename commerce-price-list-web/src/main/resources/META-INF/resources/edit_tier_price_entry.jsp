@@ -73,8 +73,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 renderResponse.setTitle(LanguageUtil.get(request, "price-lists"));
 %>
 
-<%@ include file="/price_list_navbar.jspf" %>
-
 <%@ include file="/breadcrumb.jspf" %>
 
 <portlet:actionURL name="editCommerceTierPriceEntry" var="editCommerceTierPriceEntryActionURL" />
