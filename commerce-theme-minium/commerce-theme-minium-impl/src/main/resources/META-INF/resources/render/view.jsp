@@ -122,15 +122,20 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 										}
 									).then(
 										function(response) {
-											AddToCartButton.productId = response.cpInstanceId;
-											AddToCartButton.options = JSON.stringify(getFormValues());
-											AddToCartButton.quantity = 0;
-											AddToCartButton.settings = {
-												maxQuantity: 1000,
-												minQuantity: 1,
-												multipleQuantities: 1
-											};
-											AddToCartButton.disabled = false;
+											if (response.cpInstanceExist) {
+												AddToCartButton.productId = response.cpInstanceId;
+												AddToCartButton.options = JSON.stringify(getFormValues());
+												AddToCartButton.quantity = 0;
+												AddToCartButton.settings = {
+													maxQuantity: 1000,
+													minQuantity: 1,
+													multipleQuantities: 1
+												};
+												AddToCartButton.disabled = false;
+											}
+											else {
+												AddToCartButton.disabled = true;
+											}
 
 											document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
 											document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
