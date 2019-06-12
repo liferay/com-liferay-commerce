@@ -20,6 +20,7 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -110,6 +111,7 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			commerceOrderSettingsDisplayContext =
 				new CommerceOrderSettingsDisplayContext(
 					_portletResourcePermission, renderRequest,
+					_commerceChannelLocalService,
 					_workflowDefinitionLinkLocalService,
 					_workflowDefinitionManager);
 
@@ -126,6 +128,9 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			_servletContext, httpServletRequest, httpServletResponse,
 			"/edit_order_settings.jsp");
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
