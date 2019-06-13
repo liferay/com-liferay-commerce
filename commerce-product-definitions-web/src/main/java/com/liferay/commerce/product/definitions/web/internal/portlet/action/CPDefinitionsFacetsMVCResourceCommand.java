@@ -80,12 +80,9 @@ public class CPDefinitionsFacetsMVCResourceCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long[] groupIds = {themeDisplay.getScopeGroupId()};
-
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setCompanyId(themeDisplay.getCompanyId());
-		searchContext.setGroupIds(groupIds);
 		searchContext.setLayout(themeDisplay.getLayout());
 		searchContext.setLocale(themeDisplay.getLocale());
 		searchContext.setTimeZone(themeDisplay.getTimeZone());
