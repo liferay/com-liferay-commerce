@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.account.web.internal.model;
 
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -51,8 +54,8 @@ public class Member {
 		return _name;
 	}
 
-	public String[] getRoles() {
-		return _roles;
+	public String getRoles() {
+		return StringUtil.merge(_roles, StringPool.COMMA_AND_SPACE);
 	}
 
 	private final long _accountId;
