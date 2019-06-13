@@ -47,6 +47,7 @@ CommerceAccountUserRel commerceAccountUserRel = (CommerceAccountUserRel)row.getO
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
+			message="remove"
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
