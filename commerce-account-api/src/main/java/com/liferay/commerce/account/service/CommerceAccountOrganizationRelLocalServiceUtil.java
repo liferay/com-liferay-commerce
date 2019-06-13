@@ -270,6 +270,19 @@ public class CommerceAccountOrganizationRelLocalServiceUtil {
 			start, end);
 	}
 
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId, int start, int end) {
+		return getService()
+				   .getCommerceAccountOrganizationRelsByOrganizationId(organizationId,
+			start, end);
+	}
+
+	public static int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+		long organizationId) {
+		return getService()
+				   .getCommerceAccountOrganizationRelsByOrganizationIdCount(organizationId);
+	}
+
 	/**
 	* Returns the number of commerce account organization rels.
 	*

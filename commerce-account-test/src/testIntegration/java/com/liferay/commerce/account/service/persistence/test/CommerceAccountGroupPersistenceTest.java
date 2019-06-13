@@ -167,13 +167,6 @@ public class CommerceAccountGroupPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCompanyId() throws Exception {
-		_persistence.countByCompanyId(RandomTestUtil.nextLong());
-
-		_persistence.countByCompanyId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceAccountGroupIds() throws Exception {
 		_persistence.countByCommerceAccountGroupIds(RandomTestUtil.nextLong());
 
@@ -186,6 +179,13 @@ public class CommerceAccountGroupPersistenceTest {
 		_persistence.countByCommerceAccountGroupIds(new long[] {
 				RandomTestUtil.nextLong(), 0L
 			});
+	}
+
+	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
