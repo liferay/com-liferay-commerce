@@ -20,9 +20,11 @@ import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelServiceBaseImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
 
 import java.util.List;
 
@@ -134,6 +136,33 @@ public class CommerceAccountOrganizationRelServiceImpl
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRels(commerceAccountId, start, end);
+	}
+
+	@Override
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRelsByOrganizationId(
+				long organizationId, int start, int end)
+		throws PortalException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
+
+		return commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRelsByOrganizationId(
+				organizationId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+			long organizationId)
+		throws PortalException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
+
+		return commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRelsByOrganizationIdCount(
+				organizationId);
 	}
 
 	@Override

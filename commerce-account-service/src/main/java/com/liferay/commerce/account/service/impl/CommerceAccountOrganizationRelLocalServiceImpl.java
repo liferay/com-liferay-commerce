@@ -124,6 +124,23 @@ public class CommerceAccountOrganizationRelLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRelsByOrganizationId(
+			long organizationId, int start, int end) {
+
+		return commerceAccountOrganizationRelPersistence.findByOrganizationId(
+			organizationId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+		long organizationId) {
+
+		return commerceAccountOrganizationRelPersistence.countByOrganizationId(
+			organizationId);
+	}
+
+	@Override
 	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId) {
 		return commerceAccountOrganizationRelPersistence.
 			countByCommerceAccountId(commerceAccountId);
