@@ -38,18 +38,6 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 		url="<%= commerceCatalogDisplayContext.getCatalogURL(commerceCatalog) %>"
 	/>
 
-	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.DELETE) && !commerceCatalog.isSystem() %>">
-		<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
-		</portlet:actionURL>
-
-		<liferay-ui:icon-delete
-			message="delete"
-			url="<%= deleteURL %>"
-		/>
-	</c:if>
-
 	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= CommerceCatalog.class.getName() %>"
@@ -64,6 +52,18 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 			method="get"
 			url="<%= permissionsCatalogURL %>"
 			useDialog="<%= true %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.DELETE) && !commerceCatalog.isSystem() %>">
+		<portlet:actionURL name="editCommerceCatalog" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="commerceCatalogId" value="<%= String.valueOf(commerceCatalogId) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon-delete
+			message="delete"
+			url="<%= deleteURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
