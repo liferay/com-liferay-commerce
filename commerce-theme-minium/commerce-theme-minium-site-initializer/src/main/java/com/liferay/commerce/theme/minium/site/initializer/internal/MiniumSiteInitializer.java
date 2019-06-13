@@ -557,8 +557,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("categories.json");
 
 		_assetCategoriesImporter.importAssetCategories(
-			jsonArray,
-			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
+			jsonArray, group.getName(serviceContext.getLocale()),
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
 			company.getGroupId(), serviceContext.getUserId());
