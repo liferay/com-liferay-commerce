@@ -342,7 +342,7 @@ public class CommerceOrderLocalServiceImpl
 				commerceOrder.getCommerceOrderId());
 
 		WorkflowDefinitionLink workflowDefinitionLink =
-			workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
+			workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(
 				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 				CommerceOrder.class.getName(), 0,
 				CommerceOrderConstants.TYPE_PK_APPROVAL, true);
