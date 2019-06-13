@@ -726,8 +726,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 				COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR);
 
 		return _cpDefinitionsImporter.importCPDefinitions(
-			jsonArray,
-			_COMMERCE_VOCABULARY + group.getName(serviceContext.getLocale()),
+			jsonArray, group.getName(serviceContext.getLocale()),
 			catalogGroupId, commerceChannelId, commerceInventoryWarehouseIds,
 			_siteInitializerDependencyResolver.getImageClassLoader(),
 			_siteInitializerDependencyResolver.getImageDependencyPath(),
@@ -936,8 +935,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 				getDisplayTemplatesDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 	}
-
-	private static final String _COMMERCE_VOCABULARY = "Commerce_";
 
 	private static final String _MINIUM_THEME_ID = "minium_WAR_miniumtheme";
 
