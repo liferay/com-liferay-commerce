@@ -47,6 +47,7 @@ CommerceAccountOrganizationRel commerceAccountOrganizationRel = (CommerceAccount
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
+			message="remove"
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
