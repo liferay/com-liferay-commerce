@@ -535,6 +535,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 			long companyId, String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
+
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			commerceTierPriceEntryPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
