@@ -256,8 +256,7 @@ public class CommerceOrderGenerator {
 				int quantity = _randomInt(
 					cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
 					_getMaxOrderQuantity(
-						commerceOrder.getGroupId(), cpInstance,
-						cpDefinitionInventoryEngine));
+						cpInstance, cpDefinitionInventoryEngine));
 
 				_commerceOrderItemLocalService.addCommerceOrderItem(
 					commerceOrder.getCommerceOrderId(),
