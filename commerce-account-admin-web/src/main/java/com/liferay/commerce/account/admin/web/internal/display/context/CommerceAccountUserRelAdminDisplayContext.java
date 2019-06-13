@@ -21,6 +21,7 @@ import com.liferay.commerce.account.service.CommerceAccountUserRelService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -159,7 +160,7 @@ public class CommerceAccountUserRelAdminDisplayContext
 			String[]::new
 		);
 
-		return StringUtil.merge(rolesArray);
+		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
 	}
 
 	protected long[] getCheckedUserIds() throws PortalException {
