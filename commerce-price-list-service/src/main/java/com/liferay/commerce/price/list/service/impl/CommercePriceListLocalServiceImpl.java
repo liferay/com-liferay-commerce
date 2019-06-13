@@ -970,6 +970,10 @@ public class CommercePriceListLocalServiceImpl
 			long companyId, String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
+
 		CommercePriceList commercePriceList =
 			commercePriceListPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
