@@ -341,16 +341,21 @@ public class CommerceOrderLocalServiceImpl
 				CommerceOrder.class.getName(),
 				commerceOrder.getCommerceOrderId());
 
+		if ((workflowInstanceLink != null) &&
+			(commerceOrder.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+
+			throw new PortalException(
+				"Order" + commerceOrderId + "needs to be approved");
+		}
+
 		WorkflowDefinitionLink workflowDefinitionLink =
 			workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(
 				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
 				CommerceOrder.class.getName(), 0,
 				CommerceOrderConstants.TYPE_PK_APPROVAL, true);
 
-		if ((workflowInstanceLink != null) ||
-			((workflowDefinitionLink != null) &&
-			 (commerceOrder.getOrderStatus() !=
-				 CommerceOrderConstants.ORDER_STATUS_COMPLETED))) {
+		if ((workflowDefinitionLink != null) &&
+			(commerceOrder.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
 
 			throw new PortalException(
 				"Order" + commerceOrderId + "needs to be approved");
