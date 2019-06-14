@@ -80,7 +80,7 @@ if (commerceChannel != null) {
 </liferay-ui:search-container>
 
 <c:if test="<%= !isViewOnly %>">
-	<aui:button name="selectSite" value='<%= LanguageUtil.format(locale, "select-x", "site") %>' />
+	<aui:button cssClass="mb-4" name="selectSite" value='<%= LanguageUtil.format(locale, "select-x", "site") %>' />
 </c:if>
 
 <aui:script use="aui-base,liferay-item-selector-dialog">
