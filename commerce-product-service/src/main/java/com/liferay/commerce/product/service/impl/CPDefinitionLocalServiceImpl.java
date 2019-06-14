@@ -1522,10 +1522,7 @@ public class CPDefinitionLocalServiceImpl
 			companyId, groupId, keywords, WorkflowConstants.STATUS_ANY, start,
 			end, sort);
 
-		List<Facet> facets = getFacets(
-			filterFields, filterValues, searchContext);
-
-		searchContext.setFacets(facets);
+		searchContext.setAttribute(filterFields, filterValues);
 
 		return searchCPDefinitions(searchContext);
 	}

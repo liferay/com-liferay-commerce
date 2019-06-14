@@ -227,6 +227,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				Field.ENTRY_CLASS_PK, excludedCPDefinitionId,
 				BooleanClauseOccur.MUST_NOT);
 		}
+
+		if (attributes.containsKey(FIELD_PRODUCT_TYPE_NAME)) {
+			contextBooleanFilter.addTerm(
+				FIELD_PRODUCT_TYPE_NAME,
+				GetterUtil.getString(attributes.get(FIELD_PRODUCT_TYPE_NAME)));
+		}
 	}
 
 	@Override
