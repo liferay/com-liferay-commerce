@@ -1,35 +1,35 @@
 .main-link {
-	color: currentColor;
-	font-size: 14px;
-	font-weight: 600;
-	margin: 0 20px;
-	position: relative;
+  color: currentColor;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 20px;
+  position: relative;
 
-	&:hover {
-		color: currentColor;
-	}
+  &:hover {
+    color: currentColor;
+  }
 
-	&.is-active::before,
-	&.is-active::after {
-		background: $color-theme;
-		content: '';
-		height: 3px;
-		position: absolute;
-		top: 140%;
-		width: 4px;
-	}
+  &.is-active::before,
+  &.is-active::after {
+    background: $color-theme;
+    content: '';
+    height: 3px;
+    position: absolute;
+    top: 140%;
+    width: 4px;
+  }
 
-	&.is-active::before {
-		right: 50%;
-		transform: skew(0deg, 22deg);
-	}
+  &.is-active::before {
+    right: 50%;
+    transform: skew(0deg, 22deg);
+  }
 
-	&.is-active::after {
-		left: 50%;
-		transform: skew(0deg, -22deg);
-	}
+  &.is-active::after {
+    left: 50%;
+    transform: skew(0deg, -22deg);
+  }
 
-	@media (max-width: 767px) {
-		margin: 20px 0;
-	}
+  @media (max-width: 767px) {
+    margin: 20px 0;
+  }
 }

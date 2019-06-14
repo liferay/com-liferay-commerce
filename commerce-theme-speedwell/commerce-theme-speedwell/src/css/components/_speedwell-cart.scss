@@ -1,2 +1,123 @@
-.speedwell-cart {
+.commerce-cart {
+  background: #fff;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  position: fixed;
+  right: 0;
+  top: calc(56px + 80px);
+  transition: all ease 200ms;
+  width: 100%;
+
+  &::before {
+    position: fixed;
+    content: '';
+    top: calc(56px + 80px);
+    background: rgba(42, 42, 42, 0.7);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all ease 200ms 200ms;
+  }
+
+  &:not(.is-open)::before {
+    opacity: 0;
+  }
+
+  &:not(.is-open) {
+    transform: translateX(100%);
+  }
+
+  & &__close {
+    background: $stroke;
+    bottom: 100%;
+    color: #fff;
+    position: absolute;
+    right: 0;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &::before {
+      mix-blend-mode: color;
+    }
+  }
+
+  &__top {
+    align-items: center;
+    background-color: $stroke;
+    color: #fff;
+    display: flex;
+    font-size: 16px;
+    height: 60px;
+    justify-content: space-between;
+    padding: 10px 30px;
+    position: relative;
+
+    a,
+    a:hover {
+      color: currentColor;
+      text-decoration: underline;
+    }
+  }
+
+  &__content {
+    background: white;
+    flex-grow: 1;
+    position: relative;
+  }
+
+  &__footer {
+    background: white;
+    border-top: 1px solid #F2F2F2;
+    font-weight: bold;
+    position: relative;
+
+    a {
+      text-decoration: none;
+      transition: background-color .2s ease-out;
+
+      &:hover {
+        background-color: $color-theme-dark;
+        color: white;
+        transition: background-color .2s ease-in;
+      }
+    }
+  }
+
+  &__totals {
+    align-items: baseline;
+    color: $stroke;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 15px 45px;
+    text-align: right;
+
+    dt {
+      flex: 1 1 60%;
+      font-size: 12px;
+      font-weight: normal;
+      margin: 0;
+      opacity: 0.75;
+      text-transform: capitalize;
+
+      &.final-total + dd {
+        margin-top: 8px;
+        font-size: 16px;
+      }
+    }
+
+    dd {
+      flex: 1 1 40%;
+      font-size: 12px;
+      margin-bottom: 0;
+      font-weight: 600;
+
+      big {
+      }
+    }
+  }
 }

@@ -1,6 +1,5 @@
 .commerce-topbar-button {
 	align-items: center;
-	background-color: #FFF;
 	border: 0;
 	color: currentColor;
 	cursor: pointer;
@@ -14,32 +13,17 @@
 	position: relative;
 	transition: all ease 150ms;
 	width: 80px;
+	z-index: 0;
+
+	& > svg {
+		z-index: 1;
+	}
 
 	&__icon {
 		&--active {
-		display: none;
+			display: none;
 		}
 	}
 
-	&::before {
-		background-color: white;
-		bottom: 0;
-		content: '';
-		left: 0;
-		mix-blend-mode: difference;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transform: scaleY(0);
-		transform-origin: bottom;
-		transition: inherit;
-	}
-
-	&:hover {
-		color: black;
-
-		&::before {
-		transform: scaleY(1);
-		}
-	}
+	@include speedwellButtonEffect();
 }

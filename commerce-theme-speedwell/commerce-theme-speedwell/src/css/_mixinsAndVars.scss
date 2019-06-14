@@ -1,0 +1,79 @@
+/*
+ *  VARS
+ */
+
+$color-theme: #30CFA1;
+$color-fg: #30CFA1;
+$color-fg-alt: #7F848D;
+$color-bg: #FFF;
+$color-bg-medium: #FCFCFC;
+$color-bg-alt: #F7F7F8;
+$color-bg-dark: #34373E;
+$color-theme-light: rgba(48, 207, 161, 0.64);
+$color-theme-dark: #2C996E;
+$color-mood-good: #AFD62A;
+$color-mood-bad: #EC676A;
+$color-mood-bad-bg: #FEF7F7;
+
+$color-shadow: rgba(92, 94, 94, 0.14);
+
+$stroke: #2A2A2A;
+$color-bg-alt: #F7F7F8;
+
+$speedwell-shadow: 0 10px 20px $color-shadow;
+
+$transition: ease 200ms;
+$micro-transition: ease 100ms;
+$liferay-topbar-size: 56px;
+$liferay-topbar-size-small: 49px;
+$frame-size: 70px;
+
+/*
+ * COMMON MIXINS
+ */
+
+@mixin speedwellButtonEffect() {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFF;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: inherit;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: white;
+
+    &::before {
+      background-color: $stroke;
+      color: white;
+      transform: scaleY(1);
+    }
+  }
+}
+
+@mixin specialPricesStyles() {
+  &--promo-price {
+    color: red;
+  }
+
+  &--inactive {
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  &--discount {
+    color: red;
+
+    &::before {
+      content: '\02013\00020'
+    }
+  }
+}

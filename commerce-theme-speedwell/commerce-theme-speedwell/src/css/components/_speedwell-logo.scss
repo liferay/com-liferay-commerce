@@ -1,11 +1,6 @@
 .speedwell-logo {
-	width: 130px;
-
-	img {
-		max-width: 100%;
-	}
-
-	@media (max-width: 767px) {
-		display: none;
-	}
+  &-icon {
+    font-size: 4em;
+    transform: scale(2, 2);
+  }
 }
