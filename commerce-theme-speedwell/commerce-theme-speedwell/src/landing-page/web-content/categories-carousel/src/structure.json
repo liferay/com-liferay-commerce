@@ -1,127 +1,127 @@
 {
-  "availableLanguageIds": [
-    "en_US"
-  ],
-  "defaultLanguageId": "en_US",
-  "fields": [
-    {
-      "label": {
-        "en_US": "Section title"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "string",
-      "indexType": "keyword",
-      "localizable": true,
-      "name": "SectionTitle",
-      "readOnly": false,
-      "repeatable": false,
-      "required": false,
-      "showLabel": true,
-      "type": "text"
-    },
-    {
-      "label": {
-        "en_US": "Category image"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "image",
-      "fieldNamespace": "ddm",
-      "indexType": "text",
-      "localizable": true,
-      "name": "CategoryImage",
-      "readOnly": false,
-      "repeatable": true,
-      "required": true,
-      "showLabel": true,
-      "type": "ddm-image",
-      "nestedFields": [
-        {
-          "label": {
-            "en_US": "Separator"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "",
-          "fieldNamespace": "ddm",
-          "indexType": "keyword",
-          "localizable": true,
-          "name": "Separatorgqfk",
-          "readOnly": false,
-          "repeatable": false,
-          "required": false,
-          "showLabel": true,
-          "type": "ddm-separator"
-        },
-        {
-          "label": {
-            "en_US": "Category title"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "string",
-          "indexType": "keyword",
-          "localizable": true,
-          "name": "CategoryTitle",
-          "readOnly": false,
-          "repeatable": false,
-          "required": false,
-          "showLabel": true,
-          "type": "text"
-        },
-        {
-          "label": {
-            "en_US": "Category description"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "string",
-          "indexType": "keyword",
-          "localizable": true,
-          "name": "CategoryDescription",
-          "readOnly": false,
-          "repeatable": false,
-          "required": false,
-          "showLabel": true,
-          "type": "text"
-        }
-      ]
-    }
-  ]
+	"availableLanguageIds": [
+		"en_US"
+	],
+	"defaultLanguageId": "en_US",
+	"fields": [
+		{
+			"dataType": "string",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "Section title"
+			},
+			"localizable": true,
+			"name": "SectionTitle",
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": false,
+			"required": false,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "text"
+		},
+		{
+			"dataType": "image",
+			"fieldNamespace": "ddm",
+			"indexType": "text",
+			"label": {
+				"en_US": "Category image"
+			},
+			"localizable": true,
+			"name": "CategoryImage",
+			"nestedFields": [
+				{
+					"dataType": "",
+					"fieldNamespace": "ddm",
+					"indexType": "keyword",
+					"label": {
+						"en_US": "Separator"
+					},
+					"localizable": true,
+					"name": "Separatorgqfk",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": false,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "ddm-separator"
+				},
+				{
+					"dataType": "string",
+					"indexType": "keyword",
+					"label": {
+						"en_US": "Category title"
+					},
+					"localizable": true,
+					"name": "CategoryTitle",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": false,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "text"
+				},
+				{
+					"dataType": "string",
+					"indexType": "keyword",
+					"label": {
+						"en_US": "Category description"
+					},
+					"localizable": true,
+					"name": "CategoryDescription",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": false,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "text"
+				}
+			],
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": true,
+			"required": true,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "ddm-image"
+		}
+	]
 }

@@ -5,12 +5,14 @@
 				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#icon-menu" />
 			</svg>
 		</button>
+
 		<div class="speedwell-main-menu__link-wrapper">
 			<button class="commerce-topbar-button js-toggle-main-menu">
 				<svg class="commerce-icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
 				</svg>
 			</button>
+
 			<div class="speedwell-main-menu__links">
 				<@site_navigation_menu_main default_preferences=freeMarkerPortletPreferences.getPreferences("portletSetupPortletDecoratorId", "barebone") />
 			</div>
@@ -43,6 +45,7 @@
 						</svg>
 					</div>
 					<@liferay_commerce_ui["search-bar"] id="search-bar" />
+
 					<button class="commerce-topbar-button js-toggle-search">
 						<svg class="commerce-icon commerce-topbar-button__icon">
 							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
@@ -74,5 +77,4 @@
 			<@liferay_commerce_ui["mini-cart"] />
 		</div>
 	</div>
-
 </div>

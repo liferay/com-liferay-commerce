@@ -1,199 +1,199 @@
 {
-  "availableLanguageIds": [
-    "en_US"
-  ],
-  "defaultLanguageId": "en_US",
-  "fields": [
-    {
-      "label": {
-        "en_US": "BumperImage"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "image",
-      "fieldNamespace": "ddm",
-      "indexType": "text",
-      "localizable": true,
-      "name": "BumperImage",
-      "readOnly": false,
-      "repeatable": false,
-      "required": true,
-      "showLabel": true,
-      "type": "ddm-image"
-    },
-    {
-      "label": {
-        "en_US": "Greetings"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "string",
-      "indexType": "keyword",
-      "localizable": true,
-      "name": "Greetings",
-      "readOnly": false,
-      "repeatable": false,
-      "required": false,
-      "showLabel": true,
-      "type": "text"
-    },
-    {
-      "label": {
-        "en_US": "Secondary greetings"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "string",
-      "indexType": "keyword",
-      "localizable": true,
-      "name": "SecondaryGreetings",
-      "readOnly": false,
-      "repeatable": false,
-      "required": false,
-      "showLabel": true,
-      "type": "text"
-    },
-    {
-      "label": {
-        "en_US": "Link to Page"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "link-to-page",
-      "fieldNamespace": "ddm",
-      "indexType": "keyword",
-      "localizable": true,
-      "name": "LinkToPage8ilp",
-      "readOnly": false,
-      "repeatable": false,
-      "required": false,
-      "showLabel": true,
-      "type": "ddm-link-to-page",
-      "nestedFields": [
-        {
-          "label": {
-            "en_US": "ButtonLabel"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "string",
-          "indexType": "keyword",
-          "localizable": true,
-          "name": "ButtonLabel",
-          "readOnly": false,
-          "repeatable": false,
-          "required": true,
-          "showLabel": true,
-          "type": "text"
-        }
-      ]
-    },
-    {
-      "label": {
-        "en_US": "ProTitle"
-      },
-      "predefinedValue": {
-        "en_US": ""
-      },
-      "style": {
-        "en_US": ""
-      },
-      "tip": {
-        "en_US": ""
-      },
-      "dataType": "string",
-      "indexType": "keyword",
-      "localizable": true,
-      "name": "ProTitle",
-      "readOnly": false,
-      "repeatable": true,
-      "required": false,
-      "showLabel": true,
-      "type": "text",
-      "nestedFields": [
-        {
-          "label": {
-            "en_US": "ProDescription"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "string",
-          "indexType": "keyword",
-          "localizable": true,
-          "name": "ProDescription",
-          "readOnly": false,
-          "repeatable": false,
-          "required": false,
-          "showLabel": true,
-          "type": "text"
-        },
-        {
-          "label": {
-            "en_US": "ProIcon"
-          },
-          "predefinedValue": {
-            "en_US": ""
-          },
-          "style": {
-            "en_US": ""
-          },
-          "tip": {
-            "en_US": ""
-          },
-          "dataType": "image",
-          "fieldNamespace": "ddm",
-          "indexType": "text",
-          "localizable": true,
-          "name": "ProIcon",
-          "readOnly": false,
-          "repeatable": false,
-          "required": false,
-          "showLabel": true,
-          "type": "ddm-image"
-        }
-      ]
-    }
-  ]
+	"availableLanguageIds": [
+		"en_US"
+	],
+	"defaultLanguageId": "en_US",
+	"fields": [
+		{
+			"dataType": "image",
+			"fieldNamespace": "ddm",
+			"indexType": "text",
+			"label": {
+				"en_US": "BumperImage"
+			},
+			"localizable": true,
+			"name": "BumperImage",
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": false,
+			"required": true,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "ddm-image"
+		},
+		{
+			"dataType": "string",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "Greetings"
+			},
+			"localizable": true,
+			"name": "Greetings",
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": false,
+			"required": false,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "text"
+		},
+		{
+			"dataType": "string",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "Secondary greetings"
+			},
+			"localizable": true,
+			"name": "SecondaryGreetings",
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": false,
+			"required": false,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "text"
+		},
+		{
+			"dataType": "link-to-page",
+			"fieldNamespace": "ddm",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "Link to Page"
+			},
+			"localizable": true,
+			"name": "LinkToPage8ilp",
+			"nestedFields": [
+				{
+					"dataType": "string",
+					"indexType": "keyword",
+					"label": {
+						"en_US": "ButtonLabel"
+					},
+					"localizable": true,
+					"name": "ButtonLabel",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": true,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "text"
+				}
+			],
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": false,
+			"required": false,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "ddm-link-to-page"
+		},
+		{
+			"dataType": "string",
+			"indexType": "keyword",
+			"label": {
+				"en_US": "ProTitle"
+			},
+			"localizable": true,
+			"name": "ProTitle",
+			"nestedFields": [
+				{
+					"dataType": "string",
+					"indexType": "keyword",
+					"label": {
+						"en_US": "ProDescription"
+					},
+					"localizable": true,
+					"name": "ProDescription",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": false,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "text"
+				},
+				{
+					"dataType": "image",
+					"fieldNamespace": "ddm",
+					"indexType": "text",
+					"label": {
+						"en_US": "ProIcon"
+					},
+					"localizable": true,
+					"name": "ProIcon",
+					"predefinedValue": {
+						"en_US": ""
+					},
+					"readOnly": false,
+					"repeatable": false,
+					"required": false,
+					"showLabel": true,
+					"style": {
+						"en_US": ""
+					},
+					"tip": {
+						"en_US": ""
+					},
+					"type": "ddm-image"
+				}
+			],
+			"predefinedValue": {
+				"en_US": ""
+			},
+			"readOnly": false,
+			"repeatable": true,
+			"required": false,
+			"showLabel": true,
+			"style": {
+				"en_US": ""
+			},
+			"tip": {
+				"en_US": ""
+			},
+			"type": "text"
+		}
+	]
 }
