@@ -1,122 +1,138 @@
 .commerce-cart-item {
-	$item-image-size: 70px;
-	$item-image-size-sm: 50px;
+  $item-image-size: 70px;
+  $item-image-size-sm: 50px;
 
-	align-items: center;
-	border-bottom: 1px solid rgba(180,187,201,0.2);
-	display: grid;
-	font-size: 13px;
-	grid-gap: 10px;
-	grid-template-areas: "image content price actions";
-	grid-template-columns: $item-image-size 1fr 100px;
-	max-height: 140px;
-	overflow: hidden;
-	padding: 10px;
-	position: relative;
-	transition: max-height .2s ease-in, padding .1s ease-in;
+  align-items: center;
+  border-bottom: 1px solid rgba(180, 187, 201, 0.2);
+  color: $color-fg;
+  display: grid;
+  font-size: 13px;
+  grid-gap: 15px;
+  padding: 10px;
+  position: relative;
 
-	&__image {
-		align-self: center;
-		background-position: 50%;
-		background-size: cover;
-		border-radius: 4px;
-		grid-area: image;
-		height: $item-image-size;
-		margin: auto;
-		width: $item-image-size;
-	}
+  grid-template-areas: "image content actions price delete";
 
-	&__content {
-		grid-area: content;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
+  grid-template-columns: $item-image-size 180px $item-image-size 75px;
+  max-height: 140px;
+  overflow: hidden;
+  transition: max-height .2s ease-in, padding .1s ease-in;
 
-	&__name,
-	&__sku {
-		display: block;
-	}
+  &__image {
+    align-self: center;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 4px;
+    grid-area: image;
+    height: 70px;
+    margin: auto;
+    overflow: hidden;
+    width: 70px;
+  }
 
-	&__price {
-		grid-area: price;
-	}
+  &__content {
+    grid-area: content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-	&__actions {
-		display: flex;
-		grid-area: actions;
-	}
+    big {
+      font-weight: bold;
+    }
+  }
 
-	&__options {
-		font-weight: 600;
-	}
+  &__name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-	&__errors {
-		font-weight: 600;
-		grid-column: 1/3;
-		// color: $color-mood-bad;
-	}
+  &__sku {
+    display: block;
+  }
 
-	&__delete {
-		align-items: center;
-		// color: $color-mood-bad;
-		cursor: pointer;
-		display: flex;
-		font-size: 20px;
-		height: 16px;
-		justify-content: center;
-		margin: 10px auto 0 20px;
-		padding: 0;
-		position: relative;
-		-webkit-appearance: none;
-		background: transparent;
-		border: 0;
+  &__price {
+    grid-area: price;
+    text-align: right;
 
-		&:hover {
-			// color: $color-mood-bad;
-		}
+    .price__value {
+      display: block;
+      font-size: 1.1em;
+      margin: 0;
+    }
+  }
 
-		// .commerce-cart-item:not(:hover) &:not(:focus) {
-		// 	opacity: 0;
+  &__actions {
+    grid-area: actions;
+  }
 
-		// 	@media (hover: none) {
-		// 		opacity: 1;
-		// 	}
-		// }
+  &__options {
+    font-weight: 600;
+  }
 
-		&.is-disabled {
-			cursor: wait;
-			opacity: .5;
-		}
-	}
+  &__errors {
+    font-weight: 600;
+    grid-column: 1/3;
+    color: $color-mood-bad; // TODO change
+  }
 
-	&__cancel-delete {
-		align-items: center;
-		// background-color: $color-bg-alt;
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-		transform: translateX(100%);
-		transition: transform .2s ease-in;
-		z-index: 1102;
+  &__delete-wrapper {
+    grid-area: delete;
+  }
 
-		.commerce-cart-item.is-deleting & {
-			transform: translateX(0%);
-		}
-	}
+  &__delete {
+    align-items: center;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    font-size: 28px;
+    height: 22px;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    transition: background-color .1s ease-out;
+    width: 22px;
 
-	&.is-collapsed {
-		border-width: 0;
-		max-height: 0;
-		padding: 0 10px;
-	}
+    &:hover {
+      background-color: #F8F8F8;
+      transition: background-color .1s ease-in;
+    }
 
-	&.is-not-valid {
-		// background-color: $color-mood-bad-bg;
-	}
+    &.is-disabled {
+      cursor: wait;
+      opacity: .5;
+    }
+  }
+
+  &__cancel-delete {
+    align-items: center;
+    background-color: $color-fg; // TODO change
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform .2s ease-in;
+    z-index: 1102;
+
+    .commerce-cart-item.is-deleting & {
+      transform: translateX(0%);
+    }
+  }
+
+  &.is-collapsed {
+    border-width: 0;
+    max-height: 0;
+    padding: 0 10px;
+  }
+
+  &.is-not-valid {
+    background-color: $color-mood-bad; // TODO change with appropriate one
+  }
 }

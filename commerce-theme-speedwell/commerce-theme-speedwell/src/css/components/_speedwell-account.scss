@@ -1,44 +1,70 @@
 .speedwell-account {
-	position: relative;
+  position: relative;
 
-	&__dropdown {
-		background-color: #FFF;
-		box-shadow: 0px 15px 15px rgba(53, 53, 53, 0.15);
-		max-width: 400px;
-		position: absolute;
-		right: 0;
-		top: 100%;
-		width: 100vw;
-	}
+  &__dropdown {
+    background-color: #FFF;
+    box-shadow: 0px 15px 15px rgba(53, 53, 53, 0.15);
+    max-width: 400px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 100vw;
+  }
 
-	&:not(.is-open) &__dropdown {
-		display: none;
-	}
+  &:not(.is-open) &__dropdown {
+    display: none;
+  }
 
-	&.is-open .commerce-topbar-button {
-		background: #2A2A2A;
-		color: #FFF;
+  &.is-open .commerce-topbar-button {
+    background: $stroke;
+    color: #fff;
 
-		// &:hover {
-		// color: inherit;
-		// }
+    // &:hover {
+    // color: inherit;
+    // }
 
-		&::before {
-		mix-blend-mode: color;
-		}
-	}
+    &::before {
+      mix-blend-mode: color;
+    }
+  }
 
-	&__title {
-		align-items: center;
-		background-color: #2A2A2A;
-		color: #FFF;
-		display: flex;
-		font-size: 16px;
-		height: 60px;
-		padding: 10px 30px;
-	}
+  &__title {
+    align-items: center;
+    background-color: $stroke;
+    color: #fff;
+    display: flex;
+    font-size: 16px;
+    height: 60px;
+    padding: 10px 30px;
+  }
 
-	&__content {
-		padding: 10px 30px;
-	}
+  &__content {
+    padding: 10px 30px;
+
+    .speedwell-user-nav {
+      .main-link {
+        font-weight: normal;
+
+        &:hover {
+          font-weight: 600;
+          text-decoration: none;
+
+          /* TODO: fix and add
+          &::before {
+            color: $color-theme;
+            margin-left: -32px;
+            content: '⟫';
+            height: 100%;
+            top: 100%;
+            position: absolute;
+            width: 10px;
+          } */
+        }
+
+        &__icon {
+          display: none;
+        }
+      }
+    }
+  }
 }

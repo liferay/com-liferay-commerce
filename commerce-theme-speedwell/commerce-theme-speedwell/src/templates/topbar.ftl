@@ -2,17 +2,15 @@
 	<div class="speedwell-topbar__menu speedwell-main-menu">
 		<button class="commerce-topbar-button speedwell-main-menu__open js-toggle-main-menu">
 			<svg class="commerce-icon">
-				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#kebab-vertical" />
+				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#icon-menu" />
 			</svg>
 		</button>
-
 		<div class="speedwell-main-menu__link-wrapper">
 			<button class="commerce-topbar-button js-toggle-main-menu">
 				<svg class="commerce-icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
 				</svg>
 			</button>
-
 			<div class="speedwell-main-menu__links">
 				<@site_navigation_menu_main default_preferences=freeMarkerPortletPreferences.getPreferences("portletSetupPortletDecoratorId", "barebone") />
 			</div>
@@ -22,7 +20,9 @@
 	<div class="speedwell-topbar__logo">
 		<div class="speedwell-logo">
 			<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-				<img alt="${logo_description}" class="logo-image-sm" src="${site_logo}" />
+				<svg class="commerce-icon speedwell-logo-icon">
+					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#speedwell-logo" />
+				</svg>
 			</a>
 		</div>
 	</div>
@@ -43,7 +43,6 @@
 						</svg>
 					</div>
 					<@liferay_commerce_ui["search-bar"] id="search-bar" />
-
 					<button class="commerce-topbar-button js-toggle-search">
 						<svg class="commerce-icon commerce-topbar-button__icon">
 							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
@@ -59,18 +58,14 @@
 
 		<div class="speedwell-account">
 			<button class="commerce-topbar-button js-toggle-account">
-				<svg class="commerce-icon" viewBox="0 0 100 100">
-					<rect fill="currentColor" height="90" rx="10" ry="10" width="90" x="5" y="5" />
+				<svg class="commerce-icon">
+					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#icon-account" />
 				</svg>
 			</button>
 
 			<div class="speedwell-account__dropdown">
-				<div class="speedwell-account__title">
-					Sign in
-				</div>
-
 				<div class="speedwell-account__content">
-					<p>Lorem ipsum</p>
+					<#include "${full_templates_path}/user_nav.ftl" />
 				</div>
 			</div>
 		</div>
@@ -79,4 +74,5 @@
 			<@liferay_commerce_ui["mini-cart"] />
 		</div>
 	</div>
+
 </div>

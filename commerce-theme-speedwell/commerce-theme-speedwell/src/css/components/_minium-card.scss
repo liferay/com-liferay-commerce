@@ -1,252 +1,284 @@
 .minium-card {
-	align-items: center;
-	background: white;
-	border: 1px solid transparent;
-	box-shadow: 0 0 0 0 black;
+  align-items: center;
+  background: white;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  transition: all .2s ease-in-out;
 
-	// color: $color-fg-alt;
+  &:hover {
+    border-color: $stroke;
 
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	overflow: hidden;
-	padding: 20px;
-	position: relative;
-	text-align: center;
-	transition: all .2s ease-in-out;
+    .commerce-compare-table & {
+      box-shadow: 0 0 0 0 black;
+    }
+  }
 
-	&:hover {
-		border-color: black;
-		box-shadow: 4px 4px 0 0 black;
+  .commerce-compare-table & {
+    border: 0;
+  }
 
-		.commerce-compare-table & {
-			box-shadow: 0 0 0 0 black;
-		}
-	}
+  &:focus {
+    outline: none;
+  }
 
-	.commerce-compare-table & {
-		border: 0;
-	}
+  &__close {
+    position: absolute;
+  }
 
-	&:focus {
+  &__compare {
+    left: 12px;
+    position: absolute;
+  }
 
-		// box-shadow: $minium-shadow-focus;
+  &__availability {
+    left: 0;
+    margin-top: calc(75% - 30px);
+    position: absolute;
+    top: 0;
+    width: 100%;
 
-		outline: none;
-	}
+    .commerce-dot {
+      left: 20px;
+      line-height: 0;
+      position: absolute;
+      top: 0;
+      transform: translateY(-50%);
 
-	&__close {
-		position: absolute;
-	}
+      &::before {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
 
-	&__compare {
-		left: 20px;
-		position: absolute;
-		top: 20px;
-	}
+  // TODO turn to black
 
-	&__availability {
-		left: 0;
-		margin-top: calc(75% - 30px);
-		position: absolute;
-		top: 0;
-		width: 100%;
+  &__delete {
+    background: #F1676A;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+    height: 17px;
+    left: 18px;
+    line-height: 1.1;
+    position: absolute;
+    top: 18px;
+    width: 17px;
+    z-index: 10;
 
-		.commerce-dot {
-			left: 20px;
-			line-height: 0;
-			position: absolute;
-			top: 0;
-			transform: translateY(-50%);
+    [class*="-icon"] {
+      height: 22px;
+      left: -3px;
+      position: relative;
+      top: 0;
+      width: 22px;
+    }
 
-			&::before {
-				height: 20px;
-				width: 20px;
-			}
-		}
-	}
+    path {
+      fill: rgba(255, 255, 255, 0.9);
+    }
+  }
 
-	&__delete {
-		background: #F1676A;
-		border-radius: 50%;
-		color: white;
-		cursor: pointer;
-		font-size: 11px;
-		height: 17px;
-		left: 18px;
-		line-height: 1.1;
-		position: absolute;
-		top: 18px;
-		width: 17px;
-		z-index: 10;
+  &__picture {
+    background-color: #EBEBEB;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50%;
+    margin-top: -20px;
+    overflow: hidden;
+    padding-bottom: 75%;
+    position: relative;
+    width: calc(100% + 40px);
 
-		[class*="-icon"] {
-			height: 22px;
-			left: -3px;
-			position: relative;
-			top: 0;
-			width: 22px;
-		}
+    // TODO remove 2 line below
+    &:not([style*='default']) {
+      filter: contrast(1) brightness(.6);
+      mix-blend-mode: hard-light;
+    }
 
-		path {
-			fill: rgba(255,255,255, 0.9);
-		}
-	}
 
-	&__picture {
-		background-color: #EBEBEB;
-		background-position: 50%;
-		background-repeat: no-repeat;
-		background-size: cover;
-		height: 0;
-		margin-top: -20px;
-		overflow: hidden;
-		padding-bottom: 75%;
-		position: relative;
-		width: calc(100% + 40px);
+    &::before {
+      background: inherit;
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all ease 200ms;
 
-		&::before {
-			background: inherit;
-			bottom: 0;
-			content: "";
-			left: 0;
-			position: absolute;
-			right: 0;
-			top: 0;
-			transition: all ease 200ms;
+      .minium-card:hover & {
+        transform: scale(1.1);
+      }
+    }
+  }
 
-			.minium-card:hover & {
-				transform: scale(1.1);
-			}
-		}
-	}
+  &__sku {
+    display: none;
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 24px;
+  }
 
-	&__sku {
-		display: none;
-		font-size: 12px;
-		line-height: 1;
-		margin-bottom: 0;
-		margin-top: 24px;
-	}
+  &__empty_sku {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 24px;
+    min-height: 12px;
+  }
 
-	&__empty_sku {
-		display: inline-block;
-		font-size: 12px;
-		line-height: 1;
-		margin-bottom: 0;
-		margin-top: 24px;
-		min-height: 12px;
-	}
+  &__name {
+    color: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 10px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-	&__name {
-		color: inherit;
-		font-size: 17px;
-		font-weight: 600;
-		line-height: 1;
-		margin-bottom: 0;
-		margin-top: 20px;
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
 
-		&:hover {
-		 color: inherit;
-		 text-decoration: underline;
-		}
-	}
+  &__categories {
+    font-size: 13px;
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
 
-	&__categories {
-		font-size: 13px;
-		margin-bottom: 0;
-		margin-top: 5px;
-	}
+  &__compare-checkbox {
+    border-radius: 4px;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    z-index: 10;
+  }
 
-	&__compare-checkbox {
-		border-radius: 4px;
-		left: 20px;
-		position: absolute;
-		top: 20px;
-		z-index: 10;
-	}
+  &__description {
+    min-height: 26px;
+    font-size: 14px;
+    margin: 0;
+  }
 
-	&__description {
-		flex: 1;
-		line-height: 28px;
-		margin: 0;
-	}
+  &__price {
+    margin: 18px 0 15px 0;
 
-	&__price {
-		margin: 8px 0;
-		min-height: 33px;
-	}
+    .price {
+      &__value {
+        font-weight: 600;
+        line-height: 27px;
+        font-size: 20px;
 
-	&__add-to-wishlist-button {
-		background-color: white;
-		border: 0;
-		border-radius: 50%;
+        @include specialPricesStyles;
 
-		// color: $color-fg;
+        &--promo-price {
+          font-size: 20px;
+        }
 
-		cursor: pointer;
-		height: 35px;
-		padding: 0;
-		position: absolute;
-		right: 18px;
-		top: 18px;
-		width: 35px;
-		z-index: 10;
+        &--discount {
+          margin-left: 10px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 
-		&:focus {
+  &__actions {
+    margin-bottom: 20px;
+  }
 
-			// box-shadow: $minium-shadow-focus;
+  &__add-to-wishlist-button {
+    background-color: transparent;
+    height: 25px;
+    width: 25px;
+    border: 0;
 
-			outline: none;
-		}
+    // color: $color-fg;
 
-		[class*="-icon"] {
-			height: 24px;
-			opacity: .5;
-			position: relative;
-			top: 2px;
-			transition: all 0.1s ease-in;
-			width: 24px;
-		}
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
 
-		&:hover [class*="-icon"] {
-			opacity: 1;
-			transition: all .1s ease-in;
-		}
+    &:focus {
 
-		.empty-shape {
-			transition: all .1s ease-in;
-		}
+      // box-shadow: $minium-shadow-focus;
 
-		.filled-shape {
+      outline: none;
+    }
 
-			// color: $color-theme;
+    [class*="-icon"] {
+      height: 24px;
+      opacity: .5;
+      position: relative;
+      top: 2px;
+      transition: all 0.1s ease-in;
+      width: 24px;
+    }
 
-			opacity: 0;
-			transform: scale(0);
-			transform-origin: 50% 40%;
-			transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		}
+    &:hover [class*="-icon"] {
+      path {
+        fill: $stroke;
+      }
 
-		&--added {
-			[class*="-icon"] {
-				opacity: 1;
-			}
+      opacity: 1;
+      transition: all .1s ease-in;
+    }
 
-			&:hover [class*="-icon"] {
-				transform: scale(1.2);
-			}
+    .empty-shape {
+      transition: all .1s ease-in;
+    }
 
-			.filled-shape {
-				opacity: 1;
-				transform: scale(1);
-			}
-		}
-	}
+    .filled-shape {
 
-	.product-compare-checkbox {
-		line-height: 1;
-		position: absolute;
-		z-index: 1;
-	}
+      // color: $color-theme;
+
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: 50% 40%;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &--added {
+      path {
+        fill: $stroke;
+      }
+
+      [class*="-icon"] {
+        opacity: 1;
+      }
+
+      &:hover [class*="-icon"] {
+        transform: scale(1.2);
+      }
+
+      .filled-shape {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  .product-compare-checkbox {
+    line-height: 1;
+    position: absolute;
+    z-index: 1;
+  }
 }

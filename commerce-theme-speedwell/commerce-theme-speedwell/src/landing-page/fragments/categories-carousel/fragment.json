@@ -1,0 +1,6 @@
+{
+  "jsPath": "src/index.js",
+  "htmlPath": "src/index.html",
+  "cssPath": "src/index.css",
+  "name": "categories-carousel"
+}
