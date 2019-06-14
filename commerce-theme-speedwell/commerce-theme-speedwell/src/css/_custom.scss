@@ -2,14 +2,15 @@
 
 /* inject:imports */
 
-/* ---------- endinject ---------- */
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
 
-/* ---------- This file allows you to override default styles in one central location for easier upgrade and maintenance. ---------- */
+/*
+ *  Update: needs new component ProductCard --> needs speedwell-theme impl!
+ *  Example: We want to show the product categories in each product card (in the description)
+ */
 
-$color-theme: #30CFA1;
-
+@import './mixinsAndVars';
 @import './components/commerce-button';
-@import './components/commerce-cart';
 @import './components/commerce-cart-item';
 @import './components/commerce-compare-table';
 @import './components/commerce-icon';
@@ -30,7 +31,9 @@ $color-theme: #30CFA1;
 @import './components/product-detail';
 @import './components/specification-list';
 @import './components/speedwell-account';
+@import './components/speedwell-add-to-cart-button';
 @import './components/speedwell-cart';
+@import './components/speedwell-cart-item';
 @import './components/speedwell-footer';
 @import './components/speedwell-frame';
 @import './components/speedwell-logo';
@@ -38,10 +41,13 @@ $color-theme: #30CFA1;
 @import './components/speedwell-main-navigation';
 @import './components/speedwell-search';
 @import './components/speedwell-topbar';
+@import './components/speedwell-commerce-suggestions';
+@import './components/speedwell-commerce-item';
+@import './components/speedwell-checkboxes';
 @import './portlet';
 @import './overrides';
 @import './test';
 
 body {
-	font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }

@@ -1,59 +1,53 @@
 .commerce-quantity-selector {
-	align-items: center;
-	display: flex;
-	justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
-	&__input {
-		-moz-appearance: textfield;
-	}
+  &__input {
+    -moz-appearance: textfield;
+  }
 
-	&__input,
-	&__select {
-		background: white;
-		border: 2px solid rgba(180,187,201,0.25);
+  &__input,
+  &__select {
+    background: white;
+    border: 2px solid rgba(180, 187, 201, 0.25);
+    color: $stroke;
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    height: 30px;
+    text-align: center;
+    width: 50px;
 
-		// color: $color-fg;
+    &:focus {
+      border-color: $color-theme;
+      outline: none;
+    }
 
-		font-family: Roboto;
-		font-size: 12px;
-		height: 30px;
-		text-align: center;
-		width: 50px;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
 
-		&:focus {
-			border-color: $color-theme;
-			outline: none;
-		}
+  &__btn {
+    background: transparent;
+    border: 0;
+    color: $stroke;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    width: 24px;
 
-		&::-webkit-outer-spin-button,
-		&::-webkit-inner-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
-	}
+    &:hover {
+      text-decoration: none;
+    }
 
-	&__btn {
-
-		// color: $color-fg-alt;
-
-		cursor: pointer;
-		font-size: 14px;
-		font-weight: bold;
-		line-height: 30px;
-		text-align: center;
-		width: 24px;
-		-webkit-appearance: none;
-		background: transparent;
-		border: 0;
-
-		&:hover {
-			color: currentColor;
-			text-decoration: none;
-		}
-
-		&.is-disabled {
-			cursor: default;
-			opacity: .5;
-		}
-	}
+    &.is-disabled {
+      cursor: default;
+      opacity: .5;
+    }
+  }
 }

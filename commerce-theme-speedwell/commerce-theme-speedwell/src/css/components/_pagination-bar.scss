@@ -1,62 +1,45 @@
 .pagination-bar {
-	.dropdown-toggle {
-		border: 0;
-		color: #2A2A2A;
-		font-size: 14px;
-		font-weight: 600;
-		line-height: 12px;
-	}
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  justify-content: center;
 
-	.pagination-results {
-		color: #2A2A2A;
-		font-size: 14px;
-		font-weight: 600;
-		line-height: 12px;
-	}
+  .dropdown-toggle {
+    border: 0;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 12px;
+    color: $stroke;
+  }
 
-	.pagination {
-		li {
-			a {
-				background: transparent;
-				border: 0;
-				color: #2A2A2A;
-				font-size: 12px;
-				line-height: normal;
-				margin: 0 4px;
-				padding: 8px 12px;
-				position: relative;
+  .pagination-results {
+    display: none;
+  }
 
-				&::before {
-					background-color: white;
-					bottom: 0;
-					content: '';
-					left: 0;
-					mix-blend-mode: difference;
-					position: absolute;
-					right: 0;
-					top: 0;
-					transform: scaleY(0);
-					transform-origin: bottom;
-					transition: all ease 150ms;
-				}
+  .pagination {
+    justify-content: center;
 
-				&:hover {
-					background: white;
-					color: black;
+    li {
+      a {
+        background: transparent;
+        border: 0;
+        color: $stroke;
+        font-size: 12px;
+        line-height: normal;
+        padding: 8px 12px;
+        margin: 0 4px;
+        position: relative;
+        transition: all ease 150ms;
 
-					&::before {
-						transform: scaleY(1);
-					}
-				}
-			}
+        @include speedwellButtonEffect();
+      }
 
-			&:not(.active):not(:hover) a {
-				opacity: 0.5;
-			}
+      &:not(.active):not(:hover) a {
+        opacity: 0.5;
+      }
 
-			&.active a {
-				border-bottom: 2px solid currentColor;
-			}
-		}
-	}
+      &.active a {
+        border-bottom: 2px solid currentColor;
+      }
+    }
+  }
 }
