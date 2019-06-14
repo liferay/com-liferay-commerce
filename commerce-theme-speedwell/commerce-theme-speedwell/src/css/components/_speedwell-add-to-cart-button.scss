@@ -139,8 +139,8 @@
 			}
 
 			&:hover::before {
-				color: white;
 				align-items: center;
+				color: white;
 				content: attr(data-add-more-label);
 				display: flex;
 				justify-content: center;
@@ -207,8 +207,8 @@
 
 				&:hover::before {
 					align-items: center;
-					content: attr(data-add-more-label);
 					color: white;
+					content: attr(data-add-more-label);
 					display: flex;
 					justify-content: center;
 				}
