@@ -55,20 +55,6 @@ portletDisplay.setURLBack(backURL);
 			<aui:fieldset>
 				<aui:input autoFocus="<%= true %>" disabled="<%= isViewOnly %>" name="name" value="<%= name %>" />
 
-				<aui:select label="currency" name="commerceCurrencyCode" title="currency">
-
-					<%
-					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-					%>
-
-						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceChannel == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
 				<aui:select disabled="<%= isViewOnly %>" name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
 					<%
@@ -95,6 +81,20 @@ portletDisplay.setURLBack(backURL);
 					%>
 
 				</c:if>
+
+				<aui:select label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+
+					<%
+					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
+					%>
+
+						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceChannel == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCurrency.getCode()) %>" value="<%= commerceCurrency.getCode() %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 
 				<liferay-ui:error-marker
 					key="<%= WebKeys.ERROR_SECTION %>"
