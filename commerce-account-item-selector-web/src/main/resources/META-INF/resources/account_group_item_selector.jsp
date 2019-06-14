@@ -34,14 +34,6 @@ PortletURL portletURL = commerceAccountGroupItemSelectorViewDisplayContext.getPo
 			portletURL="<%= portletURL %>"
 			selectedDisplayStyle="list"
 		/>
-
-		<li>
-			<aui:form action="<%= String.valueOf(portletURL) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
-		</li>
 	</liferay-frontend:management-bar-buttons>
 
 	<liferay-frontend:management-bar-filters>
@@ -56,6 +48,14 @@ PortletURL portletURL = commerceAccountGroupItemSelectorViewDisplayContext.getPo
 			orderColumns="<%= new String[0] %>"
 			portletURL="<%= portletURL %>"
 		/>
+
+		<li>
+			<aui:form action="<%= String.valueOf(portletURL) %>" name="searchFm">
+				<liferay-ui:input-search
+					markupView="lexicon"
+				/>
+			</aui:form>
+		</li>
 	</liferay-frontend:management-bar-filters>
 </liferay-frontend:management-bar>
 
