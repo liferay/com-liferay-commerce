@@ -1,5 +1,5 @@
 $baseTransitions: all .1s ease;
-$inputOutline: $stroke;
+$inputOutline: #D0D0D0;
 
 @mixin formElement() {
 	background: transparent !important;
@@ -7,6 +7,7 @@ $inputOutline: $stroke;
 	font-size: 1.3em !important;
 	position: relative;
 	z-index: 1;
+	border-radius: 4px;
 }
 
 @mixin transformButton(
