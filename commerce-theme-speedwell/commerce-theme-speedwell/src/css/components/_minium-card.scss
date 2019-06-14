@@ -1,7 +1,7 @@
 .minium-card {
   align-items: center;
   background: white;
-  border: 1px solid transparent;
+  border: 1px solid #EEE;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
   position: relative;
   text-align: center;
   transition: all .2s ease-in-out;
+  border-radius: 4px;
 
   &:hover {
     border-color: $stroke;

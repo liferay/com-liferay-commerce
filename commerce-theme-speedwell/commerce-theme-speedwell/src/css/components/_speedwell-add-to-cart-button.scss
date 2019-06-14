@@ -4,12 +4,12 @@
 .add-to-cart-button {
 	&--compact {
 		::selection {
-			background-color: $color-theme-light;
+			background-color: #D0D0D0;
 		}
 
 		background-color: $color-theme;
 		border: 0 !important;
-		min-width: 140px;
+		min-width: 180px;
 		position: relative;
 		transition: min-width .1s ease,
 		border .1s ease;
@@ -17,13 +17,13 @@
 		&:hover {
 			background-color: $color-theme-dark;
 			cursor: pointer !important;
-			min-width: 160px;
 			transition: $baseTransitions;
 		}
 
 		&::before {
 			background: rgba(255, 255, 255, 0);
 			border: 3px solid transparent;
+			border-radius: 6px;
 			box-sizing: border-box;
 			content: '';
 			display: block;
@@ -48,13 +48,14 @@
 
 			&::before {
 				@include transformButton(
-					50%, 50%,
-					-22px, -35px,
-					70px, 44px,
-					3px solid $inputOutline,
-					rgba(255, 255, 255, 1)
+											50%, 50%,
+											-22px, -35px,
+											70px, 44px,
+											3px solid $inputOutline,
+											rgba(255, 255, 255, 1)
 				);
 				animation: toInput .3s ease-in 1 forwards;
+				border-radius: 4px;
 				content: '';
 				display: block;
 				position: absolute;
@@ -63,13 +64,14 @@
 			&.with-select {
 				&::before {
 					@include transformButton(
-						50%, 50%,
-						-22px, -35px,
-						70px, 44px,
-						3px solid $inputOutline,
-						rgba(255, 255, 255, 1)
+													50%, 50%,
+													-22px, -35px,
+													70px, 44px,
+													3px solid $inputOutline,
+													rgba(255, 255, 255, 1)
 					);
 					animation: toSelect .3s ease-in 1 forwards;
+					border-radius: 4px;
 					content: '';
 					display: block;
 					position: absolute;
@@ -129,6 +131,7 @@
 
 			&:hover {
 				.added-quantity {
+					color: white;
 					display: none;
 					height: inherit;
 					width: inherit;
@@ -136,6 +139,7 @@
 			}
 
 			&:hover::before {
+				color: white;
 				align-items: center;
 				content: attr(data-add-more-label);
 				display: flex;
@@ -165,7 +169,7 @@
 			}
 
 			&__btn {
-				font-size: 1.3em;
+				font-size: 2em;
 				height: 40px;
 				width: 40px;
 
@@ -204,6 +208,7 @@
 				&:hover::before {
 					align-items: center;
 					content: attr(data-add-more-label);
+					color: white;
 					display: flex;
 					justify-content: center;
 				}
@@ -221,6 +226,7 @@
 			}
 
 			&__select {
+				border-radius: 4px;
 				font-size: 1.3em;
 				height: 60px;
 				margin-right: 10px;
