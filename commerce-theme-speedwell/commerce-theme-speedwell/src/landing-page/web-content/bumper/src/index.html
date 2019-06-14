@@ -1,344 +1,351 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            html, body {
-                margin: 0;
-                padding: 0;
-                font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
-                font-size: 16px;
-            }
+	<head>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+				font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
+				font-size: 16px;
+			}
 
-            .bumper {
-                position: relative;
-                width: 100%;
-                background-color: #2C2C2C;
-                background-size: cover;
-                background-position: center;
-                overflow: hidden;
-            }
+			.bumper {
+				position: relative;
+				width: 100%;
+				background-color: #2C2C2C;
+				background-size: cover;
+				background-position: center;
+				overflow: hidden;
+			}
 
-            .bumper-slider.bumper__slider {
-                box-sizing: border-box;
-                background-color: rgba(0, 0, 0, .5);
-                padding: 20.3em 8em 28.5em 8em; /* TODO remove and set through parent with 100% width/height */
-                color: white;
-                width: 100%;
-            }
+			.bumper-slider.bumper__slider {
+				box-sizing: border-box;
+				background-color: rgba(0, 0, 0, .5);
+				padding: 20.3em 8em 28.5em 8em; /* TODO remove and set through parent with 100% width/height */
+				color: white;
+				width: 100%;
+			}
 
+			.bumper-overlay.bumper__overlay {
+				position: absolute;
+				width: 100%;
+				bottom: 0;
+				box-sizing: border-box;
+				background-color: rgba(42, 42, 42, 0.55);
+				z-index: 10;
+			}
 
-            .bumper-overlay.bumper__overlay {
-                position: absolute;
-                width: 100%;
-                bottom: 0;
-                box-sizing: border-box;
-                background-color: rgba(42, 42, 42, 0.55);
-                z-index: 10;
-            }
+			.bumper-overlay.bumper__overlay table {
+				width: 100%;
+				padding: 10px 16em;
+			}
 
-            .bumper-overlay.bumper__overlay table {
-                width: 100%;
-                padding: 10px 16em;
-            }
+			.bumper-overlay.bumper__overlay table tr {
+				height: 130px;
+			}
 
-            .bumper-overlay.bumper__overlay table tr {
-                height: 130px;
-            }
+			.bumper-overlay.bumper__overlay table tr td {
+				padding: 0 30px;
+				min-width: 10%;
+			}
 
-            .bumper-overlay.bumper__overlay table tr td {
-                padding: 0 30px;
-                min-width: 10%;
-            }
+			.feature {
+				vertical-align: middle;
+			}
 
-            .feature {
-                vertical-align: middle;
-            }
+			.feature__wrapper {
+				width: 100%;
+				display: grid;
+				grid-template-columns: 20% 80%;
+				align-items: center;
+			}
 
-            .feature__wrapper {
-                width: 100%;
-                display: grid;
-                grid-template-columns: 20% 80%;
-                align-items: center;
-            }
+			.feature__icon {
+				height: 80%;
+				width: auto;
+				background-image: url('https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png');
+				background-color: pink;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
 
-            .feature__icon {
-                height: 80%;
-                width: auto;
-                background-image: url('https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png');
-                background-color: pink;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
+			.feature__text {
+				color: white;
+				padding-left: 10px;
+			}
 
-            .feature__text {
-                color: white;
-                padding-left: 10px;
-            }
+			.feature__text h4 {
+				margin: 0 0 4px 0;
+			}
 
-            .feature__text h4 {
-                margin: 0 0 4px 0;
-            }
+			.feature__text p {
+				margin: 0;
+				padding: 0;
+				font-size: 14px;
+			}
 
-            .feature__text p {
-                margin: 0;
-                padding: 0;
-                font-size: 14px;
-            }
+			.bumper-slider.bumper__slider .bumper-slider__slide {
+				position: absolute;
+				background-position: center;
+				background-size: cover;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
 
-            .bumper-slider.bumper__slider .bumper-slider__slide {
-                position: absolute;
-                background-position: center;
-                background-size: cover;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
+			.bumper-slider.bumper__slider [data-state="current"] {
+				z-index: 4;
+				opacity: 1;
+			}
 
-            .bumper-slider.bumper__slider [data-state="current"] {
-                z-index: 4;
-                opacity: 1;
-            }
+			.bumper-slider.bumper__slider [data-state="next"] {
+				z-index: 5;
+				opacity: 0;
+			}
 
-            .bumper-slider.bumper__slider [data-state="next"] {
-                z-index: 5;
-                opacity: 0;
-            }
+			.bumper-slider.bumper__slider [data-state="next"].is-sliding-forwards {
+				opacity: 1;
+				transition: opacity 300ms ease-in-out;
+			}
 
-            .bumper-slider.bumper__slider [data-state="next"].is-sliding-forwards {
-                opacity: 1;
-                transition: opacity 300ms ease-in-out;
-            }
+			.bumper-slider.bumper__slider [data-state="will-be-next"] {
+				z-index: 5;
+				opacity: 0;
+			}
 
-            .bumper-slider.bumper__slider [data-state="will-be-next"] {
-                z-index: 5;
-                opacity: 0;
-            }
+			.bumper-slider.bumper__slider [data-state="will-be-next"].is-sliding-backwards {
+				opacity: 1;
+				transition: opacity 300ms ease-in-out;
+			}
 
-            .bumper-slider.bumper__slider [data-state="will-be-next"].is-sliding-backwards {
-                opacity: 1;
-                transition: opacity 300ms ease-in-out;
-            }
+			.bumper-slider.bumper__slider .bumper-slider__slide .bumper-slider__content {
+				width: 100%;
+				height: 100%;
+				top: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				box-sizing: border-box;
+				padding: 0 0 8em 6.75em;
+			}
 
-            .bumper-slider.bumper__slider .bumper-slider__slide .bumper-slider__content {
-                width: 100%;
-                height: 100%;
-                top: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                box-sizing: border-box;
-                padding: 0 0 8em 6.75em;
-            }
+			.bumper-slider.bumper__slider span {
+				display: block;
+				max-width: 50%;
+				z-index: 10;
+			}
 
+			.bumper-slider.bumper__slider .subtitle {
+				font-size: 1.8em;
+				font-weight: 100;
+			}
 
-            .bumper-slider.bumper__slider span {
-                display: block;
-                max-width: 50%;
-                z-index: 10;
-            }
+			.bumper-slider.bumper__slider .title {
+				font-size: 4em;
+				font-weight: 200;
+			}
 
-            .bumper-slider.bumper__slider .subtitle {
-                font-size: 1.8em;
-                font-weight: 100;
-            }
+			.bumper-slider.bumper__slider .call-to-action button {
+				margin-top: 1em;
+				color: white;
+				background: transparent;
+				border: 1px solid white;
+				padding: 10px 30px;
+				font-size: 1em;
+			}
 
-            .bumper-slider.bumper__slider .title {
-                font-size: 4em;
-                font-weight: 200;
-            }
+			.bumper-controls.bumper__controls {
+				display: none;
+			}
+		</style>
 
-            .bumper-slider.bumper__slider .call-to-action button {
-                margin-top: 1em;
-                color: white;
-                background: transparent;
-                border: 1px solid white;
-                padding: 10px 30px;
-                font-size: 1em;
-            }
+		<link href="../../../scss/product-highlight.scss" rel="stylesheet" />
+	</head>
 
-            .bumper-controls.bumper__controls {
-                display: none;
-            }
-        </style>
-        <link rel="stylesheet" href="../../../scss/product-highlight.scss">
-    </head>
+	<body>
+		<div class="bumper">
+			<div class="bumper-slider bumper__slider">
+				<div class="bumper-slider__wrapper">
+					<div class="bumper-slider__slide" data-state="current" style="background-image: url('https://sandbox-01.motorplex.com/wp-content/uploads/2018/03/shutterstock_379218652.jpg')">
+						<div class="bumper-slider__content">
+							<span class="subtitle">
+								Interior equipment
+							</span>
+							<span class="title">
+								Dolor sed viverra ipsum nunc aliquet bibendum.
+							</span>
+							<span class="call-to-action">
+								<button>Discover</button>
+							</span>
+						</div>
+					</div>
 
-    <body>
-        <div class="bumper">
-            <div class="bumper-slider bumper__slider">
-                <div class="bumper-slider__wrapper">
-                    <div data-state="current" class="bumper-slider__slide" style="background-image: url('https://sandbox-01.motorplex.com/wp-content/uploads/2018/03/shutterstock_379218652.jpg')">
-                        <div class="bumper-slider__content">
-                            <span class="subtitle">
-                                Interior equipment
-                            </span>
-                            <span class="title">
-                                Dolor sed viverra ipsum nunc aliquet bibendum.
-                            </span>
-                            <span class="call-to-action">
-                                <button>Discover</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div data-state="next" class="bumper-slider__slide" style="background-image: url('https://static.carfromjapan.com/wp-content/uploads/2018/04/feature-1.jpg')">
-                        <div class="bumper-slider__content">
-                            <span class="subtitle">
-                                Interior equipment
-                            </span>
-                            <span class="title">
-                                Ciao ciao ciao ciao ciao ciao ciao
-                            </span>
-                            <span class="call-to-action">
-                                <button>Discover</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div data-state="will-be-next" class="bumper-slider__slide" style="background-image: url('http://www.hdnicewallpapers.com/Walls/Big/BMW/BMW_M5_Car_Interior_Wallpapers.jpg')">
-                        <div class="bumper-slider__content">
-                            <span class="subtitle">
-                                Interior equipment
-                            </span>
-                            <span class="title">
-                                Bla bla bla bla bla bla bla bla bla bla.
-                            </span>
-                            <span class="call-to-action">
-                                <button>Discover</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bumper-overlay bumper__overlay">
-                <table>
-                    <tr>
-                        <td class="feature">
-                            <div class="feature__wrapper">
-                                <div class="feature__icon"></div>
-                                <div class="feature__text">
-                                    <h4>This is a cool pro!</h4>
-                                    <p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="feature">
-                            <div class="feature__wrapper">
-                                <div class="feature__icon"></div>
-                                <div class="feature__text">
-                                    <h4>This is a cool pro!</h4>
-                                    <p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="feature">
-                            <div class="feature__wrapper">
-                                <div class="feature__icon"></div>
-                                <div class="feature__text">
-                                    <h4>This is a cool pro!</h4>
-                                    <p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="feature">
-                            <div class="feature__wrapper">
-                                <div class="feature__icon"></div>
-                                <div class="feature__text">
-                                    <h4>This is a cool pro!</h4>
-                                    <p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="bumper-controls bumper__controls">
-                <button class="bumper-controls__control bumper-controls__control--prev" id="bumper-backwards">Back</button>
-                <button class="bumper-controls__control bumper-controls__control--next" id="bumper-forwards">Next</button>
-            </div>
-        </div>
+					<div class="bumper-slider__slide" data-state="next" style="background-image: url('https://static.carfromjapan.com/wp-content/uploads/2018/04/feature-1.jpg')">
+						<div class="bumper-slider__content">
+							<span class="subtitle">
+								Interior equipment
+							</span>
+							<span class="title">
+								Ciao ciao ciao ciao ciao ciao ciao
+							</span>
+							<span class="call-to-action">
+								<button>Discover</button>
+							</span>
+						</div>
+					</div>
 
-        <script>
-            const { scrollHeight } = window.document.body;
-            const scopeComponent = JSON.stringify({
-                section: 'bumper',
-                height: scrollHeight
-            });
+					<div class="bumper-slider__slide" data-state="will-be-next" style="background-image: url('http://www.hdnicewallpapers.com/Walls/Big/BMW/BMW_M5_Car_Interior_Wallpapers.jpg')">
+						<div class="bumper-slider__content">
+							<span class="subtitle">
+								Interior equipment
+							</span>
+							<span class="title">
+								Bla bla bla bla bla bla bla bla bla bla.
+							</span>
+							<span class="call-to-action">
+								<button>Discover</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            const contentName = 'bumper';
+			<div class="bumper-overlay bumper__overlay">
+				<table>
+					<tr>
+						<td class="feature">
+							<div class="feature__wrapper">
+								<div class="feature__icon"></div>
+								<div class="feature__text">
+									<h4>This is a cool pro!</h4>
 
-            window.parent.postMessage(scopeComponent, '*');
+									<p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
+								</div>
+							</div>
+						</td>
+						<td class="feature">
+							<div class="feature__wrapper">
+								<div class="feature__icon"></div>
+								<div class="feature__text">
+									<h4>This is a cool pro!</h4>
 
-            const slides = Array.from(document.querySelectorAll(`.${contentName} [data-state]`)),
-                goBack = document.querySelector('#bumper-backwards'),
-                goOn = document.querySelector('#bumper-forwards');
+									<p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
+								</div>
+							</div>
+						</td>
+						<td class="feature">
+							<div class="feature__wrapper">
+								<div class="feature__icon"></div>
+								<div class="feature__text">
+									<h4>This is a cool pro!</h4>
 
-            const statesMap = {
-                ['will-be-next']: {
-                    backwards: 'current',
-                    forwards: 'next'
-                },
-                ['next']: {
-                    backwards: 'will-be-next',
-                    forwards: 'current'
-                },
-                ['current']: {
-                    backwards: 'next',
-                    forwards: 'will-be-next'
-                }
-            };
+									<p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
+								</div>
+							</div>
+						</td>
+						<td class="feature">
+							<div class="feature__wrapper">
+								<div class="feature__icon"></div>
+								<div class="feature__text">
+									<h4>This is a cool pro!</h4>
 
-            function setNextState(direction, slide) {
-                slide.classList.remove(`is-sliding-${direction}`);
-                slide.dataset.state = statesMap[slide.dataset.state][direction];
-            }
+									<p>Enjoy our amazing pro's without cons, of course we're amazing.</p>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 
-            function onTransitionEnd(direction, restoreInteraction) {
-                slides.forEach(slide => setNextState(direction, slide));
-                restoreInteraction && restoreInteraction({isEnabled: true})
-            }
+			<div class="bumper-controls bumper__controls">
+				<button class="bumper-controls__control bumper-controls__control--prev" id="bumper-backwards">Back</button>
+				<button class="bumper-controls__control bumper-controls__control--next" id="bumper-forwards">Next</button>
+			</div>
+		</div>
 
-            function applyAnimation(direction) {
-                return new Promise(restoreInteraction => {
-                    const currentSlide = document.querySelector('.bumper');
+		<script>
+			const { scrollHeight } = window.document.body;
+			const scopeComponent = JSON.stringify({
+				section: 'bumper',
+				height: scrollHeight
+			});
 
-                    currentSlide.addEventListener(
-                        'webkitTransitionEnd',
-                        onTransitionEnd.bind(null, direction, restoreInteraction),
-                        {once: true}
-                    );
+			const contentName = 'bumper';
 
-                    slides.forEach(slide => {
-                        slide.classList.add(`is-sliding-${direction}`);
-                    });
-                });
-            }
+			window.parent.postMessage(scopeComponent, '*');
 
-            function toggleControls({isEnabled}) {
-                if (isEnabled) {
-                    goBack.removeAttribute('disabled');
-                    goOn.removeAttribute('disabled');
-                } else {
-                    goBack.setAttribute('disabled', isEnabled);
-                    goOn.setAttribute('disabled', isEnabled);
-                }
-            }
+			const slides = Array.from(document.querySelectorAll(`.${contentName} [data-state]`)),
+				goBack = document.querySelector('#bumper-backwards'),
+				goOn = document.querySelector('#bumper-forwards');
 
-            function throttleInteraction(event) {
-                const direction = event.target.id.split('-')[1];
+			const statesMap = {
+				['will-be-next']: {
+					backwards: 'current',
+					forwards: 'next'
+				},
+				['next']: {
+					backwards: 'will-be-next',
+					forwards: 'current'
+				},
+				['current']: {
+					backwards: 'next',
+					forwards: 'will-be-next'
+				}
+			};
 
-                toggleControls({isEnabled: false});
-                applyAnimation(direction)
-                    .then(restore => toggleControls(restore));
-            }
+			function setNextState(direction, slide) {
+				slide.classList.remove(`is-sliding-${direction}`);
+				slide.dataset.state = statesMap[slide.dataset.state][direction];
+			}
 
-            goBack.addEventListener('click', throttleInteraction, true);
-            goOn.addEventListener('click', throttleInteraction, true);
+			function onTransitionEnd(direction, restoreInteraction) {
+				slides.forEach(slide => setNextState(direction, slide));
+				restoreInteraction && restoreInteraction({isEnabled: true})
+			}
 
-            const bumperSlideshowInterval = setInterval(function() {
-                goOn.click();
-            }, 3000);
-        </script>
-    </body>
+			function applyAnimation(direction) {
+				return new Promise(restoreInteraction => {
+					const currentSlide = document.querySelector('.bumper');
+
+					currentSlide.addEventListener(
+						'webkitTransitionEnd',
+						onTransitionEnd.bind(null, direction, restoreInteraction),
+						{once: true}
+					);
+
+					slides.forEach(slide => {
+						slide.classList.add(`is-sliding-${direction}`);
+					});
+				});
+			}
+
+			function toggleControls({isEnabled}) {
+				if (isEnabled) {
+					goBack.removeAttribute('disabled');
+					goOn.removeAttribute('disabled');
+				} else {
+					goBack.setAttribute('disabled', isEnabled);
+					goOn.setAttribute('disabled', isEnabled);
+				}
+			}
+
+			function throttleInteraction(event) {
+				const direction = event.target.id.split('-')[1];
+
+				toggleControls({isEnabled: false});
+				applyAnimation(direction)
+					.then(restore => toggleControls(restore));
+			}
+
+			goBack.addEventListener('click', throttleInteraction, true);
+			goOn.addEventListener('click', throttleInteraction, true);
+
+			const bumperSlideshowInterval = setInterval(function() {
+				goOn.click();
+			}, 3000);
+		</script>
+	</body>
 </html>
