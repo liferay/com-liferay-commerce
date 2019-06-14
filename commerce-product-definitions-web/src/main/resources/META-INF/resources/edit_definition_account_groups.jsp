@@ -49,7 +49,7 @@ long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getComme
 						for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroups) {
 						%>
 
-							<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name='<%= "commerceAccountGroupId" + commerceAccountGroup.getCommerceAccountGroupId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceAccountGroupIds();" %>' type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
+							<aui:input checked="<%= ArrayUtil.contains(commerceAccountGroupIds, commerceAccountGroup.getCommerceAccountGroupId()) %>" label="<%= commerceAccountGroup.getName() %>" name='<%= "" + commerceAccountGroup.getCommerceAccountGroupId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceAccountGroupIds();" %>' type="checkbox" value="<%= commerceAccountGroup.getCommerceAccountGroupId() %>" />
 
 						<%
 						}
