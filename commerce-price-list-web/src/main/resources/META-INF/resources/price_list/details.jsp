@@ -47,6 +47,20 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 </liferay-util:buffer>
 
 <aui:fieldset>
+	<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogGroupId" required="<%= true %>" showEmptyOption="<%= true %>">
+
+		<%
+		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+		%>
+
+			<aui:option label="<%= commerceCatalog.getName() %>" selected="<%= (commercePriceList == null) ? (commerceCatalogs.size() == 1) : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogGroupId() %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+
 	<aui:input name="name" />
 
 	<aui:select label="store-currency" name="commerceCurrencyId" showEmptyOption="<%= true %>">
@@ -111,21 +125,6 @@ if (parentCommercePriceList != null) {
 	/>
 </liferay-ui:search-container>
 
-<aui:button name="setParentCommercePriceList" value="select" />
-
-<aui:select disabled="<%= commercePriceList != null %>" label="catalog" name="commerceCatalogGroupId" required="<%= true %>" showEmptyOption="<%= true %>">
-
-	<%
-	for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-	%>
-
-		<aui:option label="<%= commerceCatalog.getName() %>" selected="<%= (commercePriceList == null) ? (commerceCatalogs.size() == 1) : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getGroupId() %>" />
-
-	<%
-	}
-	%>
-
-</aui:select>
 
 <h5 class="text-default"><liferay-ui:message key="account-groups" /></h5>
 
@@ -165,7 +164,7 @@ if (parentCommercePriceList != null) {
 	/>
 </liferay-ui:search-container>
 
-<aui:button name="selectCommercePriceListCommerceAccountGroupRel" value="select" />
+<aui:button cssClass="mb-4" name="selectCommercePriceListCommerceAccountGroupRel" value="select" />
 
 <h5 class="text-default"><liferay-ui:message key="accounts" /></h5>
 
@@ -205,7 +204,7 @@ if (parentCommercePriceList != null) {
 	/>
 </liferay-ui:search-container>
 
-<aui:button name="selectCommercePriceListAccountRel" value="select" />
+<aui:button cssClass="mb-4" name="selectCommercePriceListAccountRel" value="select" />
 
 <aui:script use="liferay-item-selector-dialog">
 	$('#<portlet:namespace />selectCommercePriceListAccountRel').on(
