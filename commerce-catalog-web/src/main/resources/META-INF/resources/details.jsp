@@ -44,21 +44,6 @@ portletDisplay.setURLBack(backURL);
 			<aui:fieldset>
 				<aui:input bean="<%= commerceCatalog %>" disabled="<%= isViewOnly %>" model="<%= CommerceCatalog.class %>" name="name" required="<%= true %>" />
 
-				<aui:select disabled="<%= isViewOnly %>" label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
-
-					<%
-					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
-						String commerceCurrencyCode = commerceCurrency.getCode();
-					%>
-
-						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceCatalog == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCatalog.getCommerceCurrencyCode()) %>" value="<%= commerceCurrencyCode %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-
 				<aui:select disabled="<%= isViewOnly %>" helpMessage="the-default-language-for-the-content-within-this-catalog" label="default-catalog-language" name="catalogDefaultLanguageId" required="<%= true %>" title="language">
 
 					<%
@@ -74,6 +59,21 @@ portletDisplay.setURLBack(backURL);
 					%>
 
 						<aui:option label="<%= siteAvailableLocale.getDisplayName(locale) %>" lang="<%= LocaleUtil.toW3cLanguageId(siteAvailableLocale) %>" selected="<%= catalogDefaultLanguageId.equals(LanguageUtil.getLanguageId(siteAvailableLocale)) %>" value="<%= LocaleUtil.toLanguageId(siteAvailableLocale) %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
+
+				<aui:select disabled="<%= isViewOnly %>" label="currency" name="commerceCurrencyCode" required="<%= true %>" title="currency">
+
+					<%
+					for (CommerceCurrency commerceCurrency : commerceCurrencies) {
+						String commerceCurrencyCode = commerceCurrency.getCode();
+					%>
+
+						<aui:option label="<%= commerceCurrency.getName(locale) %>" selected="<%= (commerceCatalog == null) ? commerceCurrency.isPrimary() : commerceCurrencyCode.equals(commerceCatalog.getCommerceCurrencyCode()) %>" value="<%= commerceCurrencyCode %>" />
 
 					<%
 					}
