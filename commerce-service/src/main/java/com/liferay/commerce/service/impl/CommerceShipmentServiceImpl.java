@@ -20,15 +20,12 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.base.CommerceShipmentServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
-import java.util.function.ToLongFunction;
 import java.util.stream.Stream;
 
 /**
@@ -92,7 +89,7 @@ public class CommerceShipmentServiceImpl
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
 
 		return commerceShipmentLocalService.getCommerceShipments(
@@ -115,7 +112,7 @@ public class CommerceShipmentServiceImpl
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
 
 		return commerceShipmentLocalService.getCommerceShipments(
@@ -136,7 +133,7 @@ public class CommerceShipmentServiceImpl
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
 
 		return commerceShipmentLocalService.getCommerceShipmentsCount(
@@ -157,7 +154,7 @@ public class CommerceShipmentServiceImpl
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
 
 		return commerceShipmentLocalService.getCommerceShipmentsCount(
@@ -209,29 +206,6 @@ public class CommerceShipmentServiceImpl
 			expectedDateMonth, expectedDateDay, expectedDateYear,
 			expectedDateHour, expectedDateMinute);
 	}
-
-	private ToLongFunction<CommerceChannel>
-		_getCommerceChannelToLongFunction() {
-
-		return new ToLongFunction<CommerceChannel>() {
-
-			@Override
-			public long applyAsLong(CommerceChannel commerceChannel) {
-				try {
-					return commerceChannel.getCommerceChannelGroupId();
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-
-					return 0;
-				}
-			}
-
-		};
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceShipmentServiceImpl.class);
 
 	@ServiceReference(type = CommerceChannelService.class)
 	private CommerceChannelService _commerceChannelService;

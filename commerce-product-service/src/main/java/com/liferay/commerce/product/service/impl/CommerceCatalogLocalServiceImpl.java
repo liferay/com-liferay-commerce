@@ -83,8 +83,6 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setSystem(system);
 		commerceCatalog.setExternalReferenceCode(externalReferenceCode);
 
-		commerceCatalogPersistence.update(commerceCatalog);
-
 		// Group
 
 		groupLocalService.addGroup(
@@ -94,6 +92,8 @@ public class CommerceCatalogLocalServiceImpl
 			GroupConstants.TYPE_SITE_PRIVATE, false,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
+
+		commerceCatalogPersistence.update(commerceCatalog);
 
 		// Resources
 
@@ -149,10 +149,7 @@ public class CommerceCatalogLocalServiceImpl
 
 		// Group
 
-		Group group = getCommerceCatalogGroup(
-			commerceCatalog.getCommerceCatalogId());
-
-		groupLocalService.deleteGroup(group);
+		groupLocalService.deleteGroup(commerceCatalog.getGroupId());
 
 		// Resources
 
@@ -370,8 +367,7 @@ public class CommerceCatalogLocalServiceImpl
 		}
 
 		int cpDefinitionsCount = cpDefinitionLocalService.getCPDefinitionsCount(
-			commerceCatalog.getCommerceCatalogGroupId(),
-			WorkflowConstants.STATUS_ANY);
+			commerceCatalog.getGroupId(), WorkflowConstants.STATUS_ANY);
 
 		if (cpDefinitionsCount > 0) {
 			throw new CommerceCatalogProductsException();

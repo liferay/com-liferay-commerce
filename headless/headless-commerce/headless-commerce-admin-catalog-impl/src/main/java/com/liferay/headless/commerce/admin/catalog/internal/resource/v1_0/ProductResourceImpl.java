@@ -512,7 +512,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
-			commerceCatalog.getCommerceCatalogGroupId(), _user.getUserId(),
+			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(product.getShortDescription()),
 			LanguageUtils.getLocalizedMap(product.getDescription()), null,

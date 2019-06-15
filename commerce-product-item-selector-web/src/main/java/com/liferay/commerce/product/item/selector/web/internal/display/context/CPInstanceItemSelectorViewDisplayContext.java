@@ -60,8 +60,7 @@ public class CPInstanceItemSelectorViewDisplayContext
 		portletURL.setParameter(
 			"checkedCPInstanceIds", String.valueOf(getCheckedCPInstanceIds()));
 		portletURL.setParameter(
-			"commerceCatalogGroupId",
-			String.valueOf(getCommerceCatalogGroupId()));
+			"commerceCatalogGroupId", String.valueOf(getGroupId()));
 
 		return portletURL;
 	}
@@ -96,11 +95,11 @@ public class CPInstanceItemSelectorViewDisplayContext
 
 		BaseModelSearchResult<CPInstance> cpInstanceBaseModelSearchResult;
 
-		if (getCommerceCatalogGroupId() > 0) {
+		if (getGroupId() > 0) {
 			cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPInstances(
-					cpRequestHelper.getCompanyId(), getCommerceCatalogGroupId(),
-					getKeywords(), WorkflowConstants.STATUS_APPROVED,
+					cpRequestHelper.getCompanyId(), getGroupId(), getKeywords(),
+					WorkflowConstants.STATUS_APPROVED,
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 		}
 		else {
@@ -126,7 +125,7 @@ public class CPInstanceItemSelectorViewDisplayContext
 			httpServletRequest, "checkedCPInstanceIds");
 	}
 
-	protected long getCommerceCatalogGroupId() {
+	protected long getGroupId() {
 		return ParamUtil.getLong(httpServletRequest, "commerceCatalogGroupId");
 	}
 
