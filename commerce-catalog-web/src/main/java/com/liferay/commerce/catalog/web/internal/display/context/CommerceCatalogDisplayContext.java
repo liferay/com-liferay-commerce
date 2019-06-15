@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.catalog.web.internal.display.context;
 
-import com.liferay.commerce.catalog.web.display.context.BaseCommerceCatalogSearchContainerDisplayContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.constants.CPActionKeys;
