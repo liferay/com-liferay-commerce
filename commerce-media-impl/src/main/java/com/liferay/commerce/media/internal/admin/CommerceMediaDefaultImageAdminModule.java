@@ -17,8 +17,8 @@ package com.liferay.commerce.media.internal.admin;
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.media.internal.display.context.CommerceMediaDefaultImageDisplayContext;
+import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
@@ -55,7 +55,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration",
+	configurationPid = "com.liferay.commerce.product.configuration.AttachmentsConfiguration",
 	immediate = true,
 	property = "commerce.admin.module.key=" + CommerceMediaDefaultImageAdminModule.KEY,
 	service = CommerceAdminModule.class
