@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.asset.categories.web.internal.portlet.action;
 
 import com.liferay.commerce.product.asset.categories.web.internal.display.context.CategoryCPAttachmentFileEntriesDisplayContext;
-import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
+import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException;
 import com.liferay.item.selector.ItemSelector;
@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration",
+	configurationPid = "com.liferay.commerce.product.configuration.AttachmentsConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"javax.portlet.name=com_liferay_asset_categories_admin_web_portlet_AssetCategoriesAdminPortlet",
