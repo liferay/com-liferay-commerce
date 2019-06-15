@@ -112,7 +112,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		}
 
 		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				_portal.getScopeGroupId(_httpServletRequest));
 
 		if (commerceChannel == null) {

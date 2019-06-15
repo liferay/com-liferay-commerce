@@ -136,7 +136,7 @@ public class CommerceInventoryWarehousesImporter {
 		// Commerce channel rel
 
 		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				serviceContext.getScopeGroupId());
 
 		if (commerceChannel != null) {

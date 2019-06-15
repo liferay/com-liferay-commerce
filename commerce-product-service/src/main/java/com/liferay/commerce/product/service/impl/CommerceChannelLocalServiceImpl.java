@@ -153,7 +153,7 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	@Override
-	public CommerceChannel fetchCommerceChannelByGroupId(long siteGroupId) {
+	public CommerceChannel fetchCommerceChannelBySiteGroupId(long siteGroupId) {
 		return commerceChannelPersistence.fetchBySiteGroupId(siteGroupId);
 	}
 
@@ -340,7 +340,7 @@ public class CommerceChannelLocalServiceImpl
 	}
 
 	protected void validate(long siteGroupId) throws PortalException {
-		if (fetchCommerceChannelByGroupId(siteGroupId) != null) {
+		if (fetchCommerceChannelBySiteGroupId(siteGroupId) != null) {
 			throw new DuplicateCommerceChannelSiteGroupIdException();
 		}
 	}

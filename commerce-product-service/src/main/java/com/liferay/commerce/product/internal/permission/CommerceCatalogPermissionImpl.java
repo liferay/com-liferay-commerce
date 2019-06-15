@@ -18,7 +18,6 @@ import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.permission.CommerceCatalogPermission;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -132,11 +131,8 @@ public class CommerceCatalogPermissionImpl
 			return true;
 		}
 
-		Group group = _commerceCatalogLocalService.getCommerceCatalogGroup(
-			commerceCatalog.getCommerceCatalogId());
-
 		return permissionChecker.hasPermission(
-			group, CommerceCatalog.class.getName(),
+			commerceCatalog.getGroupId(), CommerceCatalog.class.getName(),
 			commerceCatalog.getCommerceCatalogId(), actionId);
 	}
 

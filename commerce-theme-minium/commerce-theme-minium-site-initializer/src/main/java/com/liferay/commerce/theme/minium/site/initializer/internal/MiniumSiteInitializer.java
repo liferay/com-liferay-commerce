@@ -184,7 +184,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			CommerceCatalog commerceCatalog = createCatalog(serviceContext);
 
-			long catalogGroupId = commerceCatalog.getCommerceCatalogGroupId();
+			long catalogGroupId = commerceCatalog.getGroupId();
 
 			CommerceChannel commerceChannel = createChannel(
 				commerceCatalog, serviceContext);

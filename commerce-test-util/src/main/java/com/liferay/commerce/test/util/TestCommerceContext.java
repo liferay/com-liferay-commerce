@@ -57,7 +57,7 @@ public class TestCommerceContext implements CommerceContext {
 			return 0;
 		}
 
-		return _commerceChannel.getCommerceChannelGroupId();
+		return _commerceChannel.getGroupId();
 	}
 
 	@Override

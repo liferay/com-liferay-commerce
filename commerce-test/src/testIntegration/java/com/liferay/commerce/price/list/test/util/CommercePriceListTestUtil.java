@@ -64,7 +64,7 @@ public class CommercePriceListTestUtil {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
-			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
+			commerceCatalog.getGroupId(), user.getUserId(),
 			commerceCurrency.getCommerceCurrencyId(),
 			RandomTestUtil.randomString(), priority,
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
