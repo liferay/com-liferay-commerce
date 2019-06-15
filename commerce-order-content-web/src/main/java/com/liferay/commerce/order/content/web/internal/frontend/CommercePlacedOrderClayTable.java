@@ -26,6 +26,7 @@ import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.Order;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
@@ -38,6 +39,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,12 +107,16 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
+		if (commerceChannel == null) {
+			return 0;
+		}
+
 		return _commerceOrderService.getPlacedCommerceOrdersCount(
-			commerceChannelGroupId, orderFilter.getAccountId(),
+			commerceChannel.getGroupId(), orderFilter.getAccountId(),
 			filter.getKeywords());
 	}
 
@@ -156,13 +162,17 @@ public class CommercePlacedOrderClayTable
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
+
+		if (commerceChannel == null) {
+			return Collections.emptyList();
+		}
 
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPlacedCommerceOrders(
-				commerceChannelGroupId, orderFilter.getAccountId(),
+				commerceChannel.getGroupId(), orderFilter.getAccountId(),
 				filter.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 
