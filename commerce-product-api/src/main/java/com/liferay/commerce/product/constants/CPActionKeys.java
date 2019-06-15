@@ -24,12 +24,6 @@ public class CPActionKeys {
 
 	public static final String ADD_COMMERCE_CHANNEL = "ADD_COMMERCE_CHANNEL";
 
-	public static final String ADD_COMMERCE_PRODUCT_DEFINITION =
-		"ADD_COMMERCE_PRODUCT_DEFINITION";
-
-	public static final String ADD_COMMERCE_PRODUCT_INSTANCE =
-		"ADD_COMMERCE_PRODUCT_INSTANCE";
-
 	public static final String ADD_COMMERCE_PRODUCT_OPTION =
 		"ADD_COMMERCE_PRODUCT_OPTION";
 
@@ -50,9 +44,6 @@ public class CPActionKeys {
 
 	public static final String MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES =
 		"MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES";
-
-	public static final String UPDATE_COMMERCE_PRODUCT_INSTANCE =
-		"UPDATE_COMMERCE_PRODUCT_INSTANCE";
 
 	public static final String VIEW_COMMERCE_CHANNELS =
 		"VIEW_COMMERCE_CHANNELS";
