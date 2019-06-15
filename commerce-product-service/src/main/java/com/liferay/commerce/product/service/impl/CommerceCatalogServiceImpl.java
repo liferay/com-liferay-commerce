@@ -18,7 +18,6 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -91,14 +90,11 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
-	public Group getCommerceCatalogGroup(long commerceCatalogId)
-		throws PortalException {
+	public List<CommerceCatalog> getCommerceCatalogs(
+		long companyId, int start, int end) {
 
-		_commerceCatalogModelResourcePermission.check(
-			getPermissionChecker(), commerceCatalogId, ActionKeys.VIEW);
-
-		return commerceCatalogLocalService.getCommerceCatalogGroup(
-			commerceCatalogId);
+		return commerceCatalogPersistence.filterFindByCompanyId(
+			companyId, start, end);
 	}
 
 	@Override

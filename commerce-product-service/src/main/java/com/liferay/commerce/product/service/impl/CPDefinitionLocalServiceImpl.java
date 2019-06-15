@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetLinkConstants;
 import com.liferay.commerce.product.configuration.CProductVersionConfiguration;
@@ -866,26 +865,6 @@ public class CPDefinitionLocalServiceImpl
 	}
 
 	@Override
-	public List<CPDefinition> getCPDefinitionsByCategoryId(
-			long categoryId, int start, int end)
-		throws PortalException {
-
-		AssetCategory assetCategory =
-			assetCategoryLocalService.getAssetCategory(categoryId);
-
-		SearchContext searchContext = buildSearchContext(
-			assetCategory.getCompanyId(), null, WorkflowConstants.STATUS_ANY,
-			start, end, null);
-
-		searchContext.setAssetCategoryIds(new long[] {categoryId});
-
-		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
-			searchCPDefinitions(searchContext);
-
-		return cpDefinitionBaseModelSearchResult.getBaseModels();
-	}
-
-	@Override
 	public int getCPDefinitionsCount(long groupId, int status) {
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return cpDefinitionPersistence.countByGroupId(groupId);
@@ -903,25 +882,6 @@ public class CPDefinitionLocalServiceImpl
 
 		return cpDefinitionFinder.countByG_P_S(
 			groupId, productTypeName, languageId, queryDefinition);
-	}
-
-	@Override
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws PortalException {
-
-		AssetCategory assetCategory =
-			assetCategoryLocalService.getAssetCategory(categoryId);
-
-		SearchContext searchContext = buildSearchContext(
-			assetCategory.getCompanyId(), null, WorkflowConstants.STATUS_ANY,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		searchContext.setAssetCategoryIds(new long[] {categoryId});
-
-		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
-			searchCPDefinitions(searchContext);
-
-		return cpDefinitionBaseModelSearchResult.getLength();
 	}
 
 	@Override
@@ -1193,25 +1153,26 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, String keywords, int status, int start, int end,
-			Sort sort)
+			long companyId, long[] groupIds, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, keywords, status, start, end, sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 
 		return searchCPDefinitions(searchContext);
 	}
 
 	@Override
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, String keywords, String filterFields,
-			String filterValues, int start, int end, Sort sort)
+			long companyId, long[] groupIds, String keywords,
+			String filterFields, String filterValues, int start, int end,
+			Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, keywords, WorkflowConstants.STATUS_ANY, start, end,
-			sort);
+			companyId, groupIds, keywords, WorkflowConstants.STATUS_ANY, start,
+			end, sort);
 
 		List<Facet> facets = getFacets(
 			filterFields, filterValues, searchContext);
@@ -1695,8 +1656,8 @@ public class CPDefinitionLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, String keywords, int status, int start, int end,
-		Sort sort) {
+		long companyId, long[] groupIds, String keywords, int status, int start,
+		int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -1716,6 +1677,11 @@ public class CPDefinitionLocalServiceImpl
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(companyId);
+
+		if (groupIds != null) {
+			searchContext.setGroupIds(groupIds);
+		}
+
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
 

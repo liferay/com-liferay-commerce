@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPDefinitionSpecificationOptionValueServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -43,8 +45,8 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 				double priority, ServiceContext serviceContext)
 		throws PortalException {
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.UPDATE);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.UPDATE);
 
 		return cpDefinitionSpecificationOptionValueLocalService.
 			addCPDefinitionSpecificationOptionValue(
@@ -62,10 +64,9 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 				cpDefinitionSpecificationOptionValuePersistence.
 					findByPrimaryKey(cpDefinitionSpecificationOptionValueId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(),
-			cpDefinitionSpecificationOptionValue.getCPDefinition(),
-			ActionKeys.UPDATE);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionSpecificationOptionValue.getCPDefinitionId(),
+			ActionKeys.VIEW);
 
 		cpDefinitionSpecificationOptionValueLocalService.
 			deleteCPDefinitionSpecificationOptionValue(
@@ -84,12 +85,9 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 					fetchCPDefinitionSpecificationOptionValue(
 						cpDefinitionSpecificationOptionValueId);
 
-		if (cpDefinitionSpecificationOptionValue != null) {
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(),
-				cpDefinitionSpecificationOptionValue.getCPDefinition(),
-				ActionKeys.VIEW);
-		}
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionSpecificationOptionValue.getCPDefinitionId(),
+			ActionKeys.VIEW);
 
 		return cpDefinitionSpecificationOptionValue;
 	}
@@ -106,8 +104,7 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 					getCPDefinitionSpecificationOptionValue(
 						cpDefinitionSpecificationOptionValueId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(),
+		_checkCommerceCatalogPermissionByCPDefinitionId(
 			cpDefinitionSpecificationOptionValue.getCPDefinitionId(),
 			ActionKeys.VIEW);
 
@@ -122,8 +119,8 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 					orderByComparator)
 		throws PortalException {
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionSpecificationOptionValueLocalService.
 			getCPDefinitionSpecificationOptionValues(
@@ -136,8 +133,8 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 				long cpDefinitionId, long cpOptionCategoryId)
 		throws PortalException {
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionId, ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.VIEW);
 
 		return cpDefinitionSpecificationOptionValueLocalService.
 			getCPDefinitionSpecificationOptionValues(
@@ -158,9 +155,8 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 					getCPDefinitionSpecificationOptionValue(
 						cpDefinitionSpecificationOptionValueId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(),
-			cpDefinitionSpecificationOptionValue.getCPDefinition(),
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionSpecificationOptionValue.getCPDefinitionId(),
 			ActionKeys.UPDATE);
 
 		return cpDefinitionSpecificationOptionValueLocalService.
@@ -169,10 +165,30 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 				valueMap, priority, serviceContext);
 	}
 
-	private static volatile ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission =
+	private void _checkCommerceCatalogPermissionByCPDefinitionId(
+			long cpDefinitionId, String actionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException();
+		}
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpDefinition.getGroupId());
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionSpecificationOptionValueServiceImpl.class,
-				"_cpDefinitionModelResourcePermission", CPDefinition.class);
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 
 }
