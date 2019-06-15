@@ -17,8 +17,10 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 
 /**
  * @author Alessio Antonio Rendina
@@ -30,17 +32,28 @@ public class CommerceCatalogImpl extends CommerceCatalogBaseImpl {
 	}
 
 	@Override
-	public Group getCommerceCatalogGroup() throws PortalException {
-		return CommerceCatalogLocalServiceUtil.getCommerceCatalogGroup(
-			getCommerceCatalogId());
+	public Group getGroup() {
+		if (getCommerceCatalogId() > 0) {
+			try {
+				return CommerceCatalogLocalServiceUtil.getCommerceCatalogGroup(
+					getCommerceCatalogId());
+			}
+			catch (Exception e) {
+				_log.error("Unable to get commerce catalog group", e);
+			}
+		}
+
+		return new GroupImpl();
 	}
 
 	@Override
-	public long getCommerceCatalogGroupId() throws PortalException {
-		Group group = CommerceCatalogLocalServiceUtil.getCommerceCatalogGroup(
-			getCommerceCatalogId());
+	public long getGroupId() {
+		Group group = getGroup();
 
 		return group.getGroupId();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceCatalogImpl.class);
 
 }
