@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -52,9 +51,6 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 
 	public static final String FIELD_CATALOG_DEFAULT_LANGUAGE_ID =
 		"catalogDefaultLanguageId";
-
-	public static final String FIELD_CATALOG_GROUP_ID =
-		"commerceCatalogGroupId";
 
 	public CommerceCatalogIndexer() {
 		setDefaultSelectedFieldNames(
@@ -126,10 +122,7 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 			FIELD_CATALOG_DEFAULT_LANGUAGE_ID,
 			commerceCatalog.getCatalogDefaultLanguageId());
 
-		Group group = _commerceCatalogLocalService.getCommerceCatalogGroup(
-			commerceCatalog.getCommerceCatalogId());
-
-		document.addKeyword(FIELD_CATALOG_GROUP_ID, group.getGroupId());
+		document.addKeyword(Field.GROUP_ID, commerceCatalog.getGroupId());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + commerceCatalog + " indexed successfully");
