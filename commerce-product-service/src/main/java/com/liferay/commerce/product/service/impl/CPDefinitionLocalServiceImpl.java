@@ -1677,10 +1677,7 @@ public class CPDefinitionLocalServiceImpl
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(companyId);
-
-		if (groupIds != null) {
-			searchContext.setGroupIds(groupIds);
-		}
+		searchContext.setGroupIds(groupIds);
 
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
