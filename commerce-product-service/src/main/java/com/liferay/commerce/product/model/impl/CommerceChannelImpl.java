@@ -17,9 +17,11 @@ package com.liferay.commerce.product.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.impl.GroupImpl;
 
 /**
  * @author Alec Sloan
@@ -32,15 +34,23 @@ public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 	}
 
 	@Override
-	public Group getCommerceChannelGroup() throws PortalException {
-		return CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
-			getCommerceChannelId());
+	public Group getGroup() {
+		if (getCommerceChannelId() > 0) {
+			try {
+				return CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
+					getCommerceChannelId());
+			}
+			catch (Exception e) {
+				_log.error("Unable to get commerce channel group", e);
+			}
+		}
+
+		return new GroupImpl();
 	}
 
 	@Override
-	public long getCommerceChannelGroupId() throws PortalException {
-		Group group = CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
-			getCommerceChannelId());
+	public long getGroupId() {
+		Group group = getGroup();
 
 		return group.getGroupId();
 	}
@@ -75,6 +85,9 @@ public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceChannelImpl.class);
 
 	private UnicodeProperties _typeSettingsProperties;
 
