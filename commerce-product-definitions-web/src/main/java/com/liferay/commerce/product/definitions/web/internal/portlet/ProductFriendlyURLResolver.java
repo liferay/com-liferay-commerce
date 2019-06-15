@@ -23,7 +23,7 @@ import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CProduct;
-import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -240,7 +240,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 			long groupId, boolean privateLayout, long cpDefinitionId)
 		throws PortalException {
 
-		String layoutUuid = _cpDefinitionService.getLayoutUuid(cpDefinitionId);
+		String layoutUuid = _cpDefinitionLocalService.getLayoutUuid(
+			cpDefinitionId);
 
 		if (Validator.isNotNull(layoutUuid)) {
 			return _layoutLocalService.getLayoutByUuidAndGroupId(
@@ -260,7 +261,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference
-	private CPDefinitionService _cpDefinitionService;
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private CPFriendlyURLEntryLocalService _cpFriendlyURLEntryLocalService;
