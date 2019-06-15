@@ -21,8 +21,6 @@ import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -31,7 +29,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
-import java.util.function.ToLongFunction;
 import java.util.stream.Stream;
 
 /**
@@ -176,13 +173,12 @@ public class CommercePriceListServiceImpl
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
-		long[] commerceCatalogGroupIds = stream.mapToLong(
-			_getCommerceCatalogToLongFunction()
+		long[] groupIds = stream.mapToLong(
+			CommerceCatalog::getGroupId
 		).toArray();
 
 		return commercePriceListLocalService.getCommercePriceLists(
-			commerceCatalogGroupIds, companyId, status, start, end,
-			orderByComparator);
+			groupIds, companyId, status, start, end, orderByComparator);
 	}
 
 	@Override
@@ -199,12 +195,12 @@ public class CommercePriceListServiceImpl
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
-		long[] commerceCatalogGroupIds = stream.mapToLong(
-			_getCommerceCatalogToLongFunction()
+		long[] groupIds = stream.mapToLong(
+			CommerceCatalog::getGroupId
 		).toArray();
 
 		return commercePriceListLocalService.getCommercePriceListsCount(
-			commerceCatalogGroupIds, companyId, status);
+			groupIds, companyId, status);
 	}
 
 	@Override
@@ -223,13 +219,12 @@ public class CommercePriceListServiceImpl
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
 
-		long[] commerceCatalogGroupIds = stream.mapToLong(
-			_getCommerceCatalogToLongFunction()
+		long[] groupIds = stream.mapToLong(
+			CommerceCatalog::getGroupId
 		).toArray();
 
 		return commercePriceListLocalService.searchCommercePriceLists(
-			companyId, commerceCatalogGroupIds, keywords, status, start, end,
-			sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 	}
 
 	@Override
@@ -334,29 +329,6 @@ public class CommercePriceListServiceImpl
 			expirationDateMinute, externalReferenceCode, neverExpire,
 			serviceContext);
 	}
-
-	private ToLongFunction<CommerceCatalog>
-		_getCommerceCatalogToLongFunction() {
-
-		return new ToLongFunction<CommerceCatalog>() {
-
-			@Override
-			public long applyAsLong(CommerceCatalog commerceCatalog) {
-				try {
-					return commerceCatalog.getCommerceCatalogGroupId();
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-
-					return 0;
-				}
-			}
-
-		};
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommercePriceListServiceImpl.class);
 
 	@ServiceReference(type = CommerceCatalogService.class)
 	private CommerceCatalogService _commerceCatalogService;

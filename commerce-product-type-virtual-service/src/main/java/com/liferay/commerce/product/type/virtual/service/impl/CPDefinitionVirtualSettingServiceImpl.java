@@ -14,9 +14,13 @@
 
 package com.liferay.commerce.product.type.virtual.service.impl;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.base.CPDefinitionVirtualSettingServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -156,24 +160,49 @@ public class CPDefinitionVirtualSettingServiceImpl
 			String className, long classPK, String action)
 		throws PortalException {
 
-		if (className.equals(CPDefinition.class.getName())) {
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), classPK, action);
-		}
-		else if (className.equals(CPInstance.class.getName())) {
+		long cpDefinitionId = classPK;
+
+		if (className.equals(CPInstance.class.getName())) {
 			CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 				classPK);
 
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(), cpInstance.getCPDefinitionId(), action);
+			cpDefinitionId = cpInstance.getCPDefinitionId();
 		}
+
+		_checkCommerceCatalogPermissionByCPDefinitionId(cpDefinitionId, action);
 	}
 
-	private static volatile ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission =
+	@ServiceReference(type = CommerceCatalogLocalService.class)
+	protected CommerceCatalogLocalService commerceCatalogLocalService;
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	protected CPDefinitionLocalService cpDefinitionLocalService;
+
+	private void _checkCommerceCatalogPermissionByCPDefinitionId(
+			long cpDefinitionId, String actionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException();
+		}
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpDefinition.getGroupId());
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
 			ModelResourcePermissionFactory.getInstance(
 				CPDefinitionVirtualSettingServiceImpl.class,
-				"_cpDefinitionModelResourcePermission", CPDefinition.class);
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
 
 	@ServiceReference(type = CPInstanceLocalService.class)
 	private CPInstanceLocalService _cpInstanceLocalService;
