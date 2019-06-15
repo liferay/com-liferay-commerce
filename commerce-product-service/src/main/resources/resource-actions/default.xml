@@ -44,7 +44,6 @@
 		<weight>1</weight>
 		<permissions>
 			<supports>
-				<action-key>ADD_COMMERCE_PRODUCT_DEFINITION</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_IMAGES</action-key>
 				<action-key>PERMISSIONS</action-key>
@@ -58,7 +57,6 @@
 				<action-key>VIEW_PRICE</action-key>
 			</guest-defaults>
 			<guest-unsupported>
-				<action-key>ADD_COMMERCE_PRODUCT_DEFINITION</action-key>
 				<action-key>ADD_COMMERCE_PRODUCT_RULE</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_ATTACHMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_PRODUCT_IMAGES</action-key>
