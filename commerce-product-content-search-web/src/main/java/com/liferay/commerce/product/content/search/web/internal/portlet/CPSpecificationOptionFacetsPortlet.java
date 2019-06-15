@@ -15,12 +15,17 @@
 package com.liferay.commerce.product.content.search.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSpecificationOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -34,6 +39,7 @@ import com.liferay.portal.kernel.search.facet.SimpleFacet;
 import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchContributor;
@@ -163,7 +169,9 @@ public class CPSpecificationOptionFacetsPortlet
 		super.render(renderRequest, renderResponse);
 	}
 
-	protected SearchContext buildSearchContext(RenderRequest renderRequest) {
+	protected SearchContext buildSearchContext(RenderRequest renderRequest)
+		throws PortalException {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -178,6 +186,33 @@ public class CPSpecificationOptionFacetsPortlet
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setLocale(themeDisplay.getLocale());
+
+		searchContext.setAttribute(
+			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
+		if (commerceChannel != null) {
+			searchContext.setAttribute(
+				"commerceChannelGroupId", commerceChannel.getGroupId());
+		}
+
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
+				_portal.getHttpServletRequest(renderRequest));
+
+		if (commerceAccount != null) {
+			long[] commerceAccountGroupIds =
+				_commerceAccountHelper.getCommerceAccountGroupIds(
+					commerceAccount.getCommerceAccountId());
+
+			searchContext.setAttribute(
+				"commerceAccountGroupIds", commerceAccountGroupIds);
+		}
+
+		searchContext.setAttribute("secure", Boolean.TRUE);
 
 		return searchContext;
 	}
@@ -244,7 +279,16 @@ public class CPSpecificationOptionFacetsPortlet
 		CPSpecificationOptionFacetsPortlet.class);
 
 	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
 	private CPSpecificationOptionLocalService
 		_cpSpecificationOptionLocalService;
+
+	@Reference
+	private Portal _portal;
 
 }

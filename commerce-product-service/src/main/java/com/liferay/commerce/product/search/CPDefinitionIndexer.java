@@ -246,11 +246,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 					accountGroupsBooleanFilter, BooleanClauseOccur.MUST);
 			}
 		}
+		else {
+			long[] groupIds = searchContext.getGroupIds();
 
-		long[] groupIds = searchContext.getGroupIds();
-
-		if ((groupIds == null) || (groupIds.length == 0)) {
-			contextBooleanFilter.addTerm(Field.GROUP_ID, "-1");
+			if ((groupIds == null) || (groupIds.length == 0)) {
+				contextBooleanFilter.addTerm(Field.GROUP_ID, "-1");
+			}
 		}
 	}
 
