@@ -187,16 +187,14 @@ public class CommerceCatalogServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
-		HttpPrincipal httpPrincipal, long commerceCatalogId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
+		HttpPrincipal httpPrincipal, long companyId, int start, int end) {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceCatalogServiceUtil.class,
-					"getCommerceCatalogGroup",
-					_getCommerceCatalogGroupParameterTypes4);
+					"getCommerceCatalogs", _getCommerceCatalogsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceCatalogId);
+					companyId, start, end);
 
 			Object returnObj = null;
 
@@ -204,14 +202,10 @@ public class CommerceCatalogServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 
-			return (com.liferay.portal.kernel.model.Group)returnObj;
+			return (java.util.List<com.liferay.commerce.product.model.CommerceCatalog>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -335,8 +329,8 @@ public class CommerceCatalogServiceHttp {
 		};
 	private static final Class<?>[] _fetchCommerceCatalogByGroupIdParameterTypes3 =
 		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceCatalogGroupParameterTypes4 = new Class[] {
-			long.class
+	private static final Class<?>[] _getCommerceCatalogsParameterTypes4 = new Class[] {
+			long.class, int.class, int.class
 		};
 	private static final Class<?>[] _searchCommerceCatalogsParameterTypes5 = new Class[] {
 			long.class, String.class, int.class, int.class,

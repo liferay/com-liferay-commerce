@@ -55,9 +55,7 @@ public interface CommerceCatalog extends CommerceCatalogModel, PersistedModel {
 			}
 		};
 
-	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup()
-		throws com.liferay.portal.kernel.exception.PortalException;
+	public com.liferay.portal.kernel.model.Group getGroup();
 
-	public long getCommerceCatalogGroupId()
-		throws com.liferay.portal.kernel.exception.PortalException;
+	public long getGroupId();
 }

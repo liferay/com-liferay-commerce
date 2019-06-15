@@ -200,11 +200,6 @@ public class CommerceChannelLocalServiceUtil {
 		return getService().fetchCommerceChannel(commerceChannelId);
 	}
 
-	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelByGroupId(
-		long siteGroupId) {
-		return getService().fetchCommerceChannelByGroupId(siteGroupId);
-	}
-
 	/**
 	* Returns the commerce channel with the matching external reference code and company.
 	*
@@ -217,6 +212,11 @@ public class CommerceChannelLocalServiceUtil {
 		return getService()
 				   .fetchCommerceChannelByReferenceCode(companyId,
 			externalReferenceCode);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelBySiteGroupId(
+		long siteGroupId) {
+		return getService().fetchCommerceChannelBySiteGroupId(siteGroupId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

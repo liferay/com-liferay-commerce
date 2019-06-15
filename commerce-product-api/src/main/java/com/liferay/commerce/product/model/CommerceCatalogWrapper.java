@@ -165,18 +165,6 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 		return _commerceCatalog.getCatalogDefaultLanguageId();
 	}
 
-	@Override
-	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalog.getCommerceCatalogGroup();
-	}
-
-	@Override
-	public long getCommerceCatalogGroupId()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalog.getCommerceCatalogGroupId();
-	}
-
 	/**
 	* Returns the commerce catalog ID of this commerce catalog.
 	*
@@ -230,6 +218,16 @@ public class CommerceCatalogWrapper implements CommerceCatalog,
 	@Override
 	public String getExternalReferenceCode() {
 		return _commerceCatalog.getExternalReferenceCode();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Group getGroup() {
+		return _commerceCatalog.getGroup();
+	}
+
+	@Override
+	public long getGroupId() {
+		return _commerceCatalog.getGroupId();
 	}
 
 	/**

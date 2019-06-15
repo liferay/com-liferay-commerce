@@ -206,12 +206,6 @@ public class CommerceChannelLocalServiceWrapper
 		return _commerceChannelLocalService.fetchCommerceChannel(commerceChannelId);
 	}
 
-	@Override
-	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelByGroupId(
-		long siteGroupId) {
-		return _commerceChannelLocalService.fetchCommerceChannelByGroupId(siteGroupId);
-	}
-
 	/**
 	* Returns the commerce channel with the matching external reference code and company.
 	*
@@ -224,6 +218,12 @@ public class CommerceChannelLocalServiceWrapper
 		long companyId, String externalReferenceCode) {
 		return _commerceChannelLocalService.fetchCommerceChannelByReferenceCode(companyId,
 			externalReferenceCode);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannel fetchCommerceChannelBySiteGroupId(
+		long siteGroupId) {
+		return _commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(siteGroupId);
 	}
 
 	@Override

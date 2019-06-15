@@ -66,10 +66,9 @@ public class CommerceCatalogServiceWrapper implements CommerceCatalogService,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
-		long commerceCatalogId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceCatalogService.getCommerceCatalogGroup(commerceCatalogId);
+	public java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(
+		long companyId, int start, int end) {
+		return _commerceCatalogService.getCommerceCatalogs(companyId, start, end);
 	}
 
 	/**

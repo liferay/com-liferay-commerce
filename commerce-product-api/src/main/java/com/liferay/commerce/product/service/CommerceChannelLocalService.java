@@ -192,9 +192,6 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceChannel fetchCommerceChannel(long commerceChannelId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceChannel fetchCommerceChannelByGroupId(long siteGroupId);
-
 	/**
 	* Returns the commerce channel with the matching external reference code and company.
 	*
@@ -205,6 +202,9 @@ public interface CommerceChannelLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceChannel fetchCommerceChannelByReferenceCode(long companyId,
 		String externalReferenceCode);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceChannel fetchCommerceChannelBySiteGroupId(long siteGroupId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

@@ -413,14 +413,6 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 			productTypeName, languageId, status, start, end, orderByComparator);
 	}
 
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionLocalService.getCPDefinitionsByCategoryId(categoryId,
-			start, end);
-	}
-
 	/**
 	* Returns all the cp definitions matching the UUID and company.
 	*
@@ -473,12 +465,6 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 		String languageId, int status) {
 		return _cpDefinitionLocalService.getCPDefinitionsCount(groupId,
 			productTypeName, languageId, status);
-	}
-
-	@Override
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _cpDefinitionLocalService.getCPDefinitionsCountByCategoryId(categoryId);
 	}
 
 	@Override
@@ -584,21 +570,21 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, int status, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.searchCPDefinitions(companyId,
-			keywords, status, start, end, sort);
+			groupIds, keywords, status, start, end, sort);
 	}
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, String filterFields,
+		long companyId, long[] groupIds, String keywords, String filterFields,
 		String filterValues, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.searchCPDefinitions(companyId,
-			keywords, filterFields, filterValues, start, end, sort);
+			groupIds, keywords, filterFields, filterValues, start, end, sort);
 	}
 
 	@Override
