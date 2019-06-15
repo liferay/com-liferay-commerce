@@ -344,6 +344,12 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		return _cpInstance.compareTo(cpInstance);
 	}
 
+	@Override
+	public CommerceCatalog getCommerceCatalog()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpInstance.getCommerceCatalog();
+	}
+
 	/**
 	* Returns the company ID of this cp instance.
 	*

@@ -126,12 +126,14 @@ public class CommerceCatalogServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.model.Group getCommerceCatalogGroup(
-		long commerceCatalogId) throws RemoteException {
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap[] getCommerceCatalogs(
+		long companyId, int start, int end) throws RemoteException {
 		try {
-			com.liferay.portal.kernel.model.Group returnValue = CommerceCatalogServiceUtil.getCommerceCatalogGroup(commerceCatalogId);
+			java.util.List<com.liferay.commerce.product.model.CommerceCatalog> returnValue =
+				CommerceCatalogServiceUtil.getCommerceCatalogs(companyId,
+					start, end);
 
-			return returnValue;
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

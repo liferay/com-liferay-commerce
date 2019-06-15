@@ -331,10 +331,6 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		String productTypeName, String languageId, int status, int start,
 		int end, OrderByComparator<CPDefinition> orderByComparator);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinition> getCPDefinitionsByCategoryId(long categoryId,
-		int start, int end) throws PortalException;
-
 	/**
 	* Returns all the cp definitions matching the UUID and company.
 	*
@@ -375,10 +371,6 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPDefinitionsCount(long groupId, String productTypeName,
 		String languageId, int status);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Map<Locale, String> getCPDefinitionShortDescriptionMap(
@@ -442,12 +434,12 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, int status, int start, int end,
-		Sort sort) throws PortalException;
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, Sort sort) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, String filterFields,
+		long companyId, long[] groupIds, String keywords, String filterFields,
 		String filterValues, int start, int end, Sort sort)
 		throws PortalException;
 

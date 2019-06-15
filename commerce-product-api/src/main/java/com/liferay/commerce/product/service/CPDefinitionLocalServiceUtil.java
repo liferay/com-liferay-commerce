@@ -389,12 +389,6 @@ public class CPDefinitionLocalServiceUtil {
 			status, start, end, orderByComparator);
 	}
 
-	public static java.util.List<com.liferay.commerce.product.model.CPDefinition> getCPDefinitionsByCategoryId(
-		long categoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionsByCategoryId(categoryId, start, end);
-	}
-
 	/**
 	* Returns all the cp definitions matching the UUID and company.
 	*
@@ -443,11 +437,6 @@ public class CPDefinitionLocalServiceUtil {
 		return getService()
 				   .getCPDefinitionsCount(groupId, productTypeName, languageId,
 			status);
-	}
-
-	public static int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getCPDefinitionsCountByCategoryId(categoryId);
 	}
 
 	public static java.util.Map<java.util.Locale, String> getCPDefinitionShortDescriptionMap(
@@ -534,22 +523,22 @@ public class CPDefinitionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, int status, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		long companyId, long[] groupIds, String keywords, int status,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCPDefinitions(companyId, keywords, status, start,
-			end, sort);
+				   .searchCPDefinitions(companyId, groupIds, keywords, status,
+			start, end, sort);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.commerce.product.model.CPDefinition> searchCPDefinitions(
-		long companyId, String keywords, String filterFields,
+		long companyId, long[] groupIds, String keywords, String filterFields,
 		String filterValues, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .searchCPDefinitions(companyId, keywords, filterFields,
-			filterValues, start, end, sort);
+				   .searchCPDefinitions(companyId, groupIds, keywords,
+			filterFields, filterValues, start, end, sort);
 	}
 
 	public static void updateAsset(long userId,

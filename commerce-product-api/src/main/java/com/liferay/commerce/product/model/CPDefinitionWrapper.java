@@ -372,6 +372,11 @@ public class CPDefinitionWrapper implements CPDefinition,
 		return _cpDefinition.getAvailableLanguageIds();
 	}
 
+	@Override
+	public CommerceCatalog getCommerceCatalog() {
+		return _cpDefinition.getCommerceCatalog();
+	}
+
 	/**
 	* Returns the company ID of this cp definition.
 	*
