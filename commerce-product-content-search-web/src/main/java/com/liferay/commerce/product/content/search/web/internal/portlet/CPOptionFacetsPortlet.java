@@ -15,12 +15,16 @@
 package com.liferay.commerce.product.content.search.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPOptionLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -161,7 +165,9 @@ public class CPOptionFacetsPortlet
 		super.render(renderRequest, renderResponse);
 	}
 
-	protected SearchContext buildSearchContext(RenderRequest renderRequest) {
+	protected SearchContext buildSearchContext(RenderRequest renderRequest)
+		throws PortalException {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -176,6 +182,33 @@ public class CPOptionFacetsPortlet
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setLocale(themeDisplay.getLocale());
+
+		searchContext.setAttribute(
+			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
+		if (commerceChannel != null) {
+			searchContext.setAttribute(
+				"commerceChannelGroupId", commerceChannel.getGroupId());
+		}
+
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
+				_portal.getHttpServletRequest(renderRequest));
+
+		if (commerceAccount != null) {
+			long[] commerceAccountGroupIds =
+				_commerceAccountHelper.getCommerceAccountGroupIds(
+					commerceAccount.getCommerceAccountId());
+
+			searchContext.setAttribute(
+				"commerceAccountGroupIds", commerceAccountGroupIds);
+		}
+
+		searchContext.setAttribute("secure", Boolean.TRUE);
 
 		return searchContext;
 	}
@@ -234,6 +267,12 @@ public class CPOptionFacetsPortlet
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPOptionFacetsPortlet.class);
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CPOptionLocalService _cpOptionLocalService;
