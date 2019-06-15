@@ -20,6 +20,7 @@ import com.liferay.asset.util.AssetHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -55,7 +56,7 @@ public class CPDefinitionAssetRenderer
 
 	public CPDefinitionAssetRenderer(
 		CPDefinition cpDefinition,
-		ModelResourcePermission<CPDefinition> modelResourcePermission) {
+		ModelResourcePermission<CommerceCatalog> modelResourcePermission) {
 
 		_cpDefinition = cpDefinition;
 		_modelResourcePermission = modelResourcePermission;
@@ -198,7 +199,8 @@ public class CPDefinitionAssetRenderer
 		throws PortalException {
 
 		return _modelResourcePermission.contains(
-			permissionChecker, _cpDefinition, ActionKeys.UPDATE);
+			permissionChecker, _cpDefinition.getCommerceCatalog(),
+			ActionKeys.UPDATE);
 	}
 
 	@Override
@@ -206,7 +208,8 @@ public class CPDefinitionAssetRenderer
 		throws PortalException {
 
 		return _modelResourcePermission.contains(
-			permissionChecker, _cpDefinition, ActionKeys.VIEW);
+			permissionChecker, _cpDefinition.getCommerceCatalog(),
+			ActionKeys.VIEW);
 	}
 
 	@Override
@@ -226,7 +229,7 @@ public class CPDefinitionAssetRenderer
 	}
 
 	private final CPDefinition _cpDefinition;
-	private final ModelResourcePermission<CPDefinition>
+	private final ModelResourcePermission<CommerceCatalog>
 		_modelResourcePermission;
 
 }
