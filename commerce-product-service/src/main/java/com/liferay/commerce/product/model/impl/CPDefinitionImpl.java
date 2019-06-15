@@ -28,6 +28,7 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
@@ -36,6 +37,7 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.service.CPTaxCategoryLocalServiceUtil;
 import com.liferay.commerce.product.service.CProductLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
@@ -161,6 +163,11 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 				getCPDefinitionId()));
 
 		return availableLanguageIds.toArray(new String[0]);
+	}
+
+	public CommerceCatalog getCommerceCatalog() {
+		return CommerceCatalogLocalServiceUtil.fetchCommerceCatalogByGroupId(
+			getGroupId());
 	}
 
 	@Override
