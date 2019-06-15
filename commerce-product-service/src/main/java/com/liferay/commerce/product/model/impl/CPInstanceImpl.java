@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -31,6 +32,13 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 public class CPInstanceImpl extends CPInstanceBaseImpl {
 
 	public CPInstanceImpl() {
+	}
+
+	@Override
+	public CommerceCatalog getCommerceCatalog() throws PortalException {
+		CPDefinition cpDefinition = getCPDefinition();
+
+		return cpDefinition.getCommerceCatalog();
 	}
 
 	@Override
