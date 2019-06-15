@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
+import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPAttachmentFileEntriesDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException;
@@ -51,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Marco Leo
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration",
+	configurationPid = "com.liferay.commerce.product.configuration.AttachmentsConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL, immediate = true,
 	property = {
 		"javax.portlet.name=" + CPPortletKeys.CP_DEFINITIONS,
