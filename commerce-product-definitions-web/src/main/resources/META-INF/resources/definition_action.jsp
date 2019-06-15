@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPDefinition cpDefinition = null;
@@ -38,7 +36,7 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= cpDefinitionsDisplayContext.hasEditPermission(cpDefinition.getCPDefinitionId()) %>">
+	<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinition" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
@@ -49,9 +47,7 @@ else {
 			message="edit"
 			url="<%= editURL %>"
 		/>
-	</c:if>
 
-	<c:if test="<%= cpDefinitionsDisplayContext.hasDeletePermission(cpDefinition.getCPDefinitionId()) %>">
 		<portlet:actionURL name="editProductDefinition" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
