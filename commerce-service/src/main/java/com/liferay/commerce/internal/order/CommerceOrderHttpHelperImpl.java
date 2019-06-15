@@ -24,6 +24,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
@@ -375,9 +376,13 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			return commerceOrder;
 		}
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
+
+		if (commerceChannel == null) {
+			return null;
+		}
 
 		if (commerceAccountId != CommerceAccountConstants.GUEST_ACCOUNT_ID) {
 			HttpServletRequest httpServletRequest = themeDisplay.getRequest();
@@ -388,11 +393,11 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				_getCookieName(commerceAccountId));
 
 			commerceOrder = _commerceOrderService.fetchCommerceOrder(
-				commerceOrderUuid, commerceChannelGroupId);
+				commerceOrderUuid, commerceChannel.getGroupId());
 
 			if (commerceOrder == null) {
 				commerceOrder = _commerceOrderService.fetchCommerceOrder(
-					commerceAccountId, commerceChannelGroupId,
+					commerceAccountId, commerceChannel.getGroupId(),
 					CommerceOrderConstants.ORDER_STATUS_OPEN);
 			}
 
@@ -405,7 +410,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			}
 		}
 
-		String cookieName = _getCookieName(commerceChannelGroupId);
+		String cookieName = _getCookieName(commerceChannel.getGroupId());
 
 		String commerceOrderUuid = CookieKeys.getCookie(
 			themeDisplay.getRequest(), cookieName, true);
@@ -413,7 +418,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		if (Validator.isNotNull(commerceOrderUuid)) {
 			commerceOrder =
 				_commerceOrderLocalService.fetchCommerceOrderByUuidAndGroupId(
-					commerceOrderUuid, commerceChannelGroupId);
+					commerceOrderUuid, commerceChannel.getGroupId());
 
 			if (commerceOrder != null) {
 				_commerceOrderUuidThreadLocal.set(commerceOrder);
