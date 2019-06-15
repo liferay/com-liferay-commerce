@@ -25,7 +25,7 @@ import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -96,7 +96,7 @@ public class ProductHelperImpl implements ProductHelper {
 
 		CPDefinitionInventory cpDefinitionInventory = null;
 
-		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
 		if (cpInstance != null) {
@@ -137,6 +137,6 @@ public class ProductHelperImpl implements ProductHelper {
 		_cpDefinitionInventoryLocalService;
 
 	@Reference
-	private CPInstanceService _cpInstanceService;
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 }

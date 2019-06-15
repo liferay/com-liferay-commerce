@@ -32,8 +32,8 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CProduct;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
-import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
+import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
@@ -120,7 +120,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 				long cpDefinitionId, long cpOptionCategoryId)
 		throws PortalException {
 
-		return _cpCatalogEntrySpecificationOptionValueService.
+		return _cpCatalogEntrySpecificationOptionValueLocalService.
 			getCPDefinitionSpecificationOptionValues(
 				cpDefinitionId, cpOptionCategoryId);
 	}
@@ -135,7 +135,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 		long classNameId = _portal.getClassNameId(CPDefinition.class);
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
+			_cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
 				classNameId, cpDefinitionId,
 				CPAttachmentFileEntryConstants.TYPE_OTHER,
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
@@ -237,7 +237,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 			getCPDefinitionSpecificationOptionValues(long cpDefinitionId)
 		throws PortalException {
 
-		return _cpCatalogEntrySpecificationOptionValueService.
+		return _cpCatalogEntrySpecificationOptionValueLocalService.
 			getCPDefinitionSpecificationOptionValues(
 				cpDefinitionId,
 				CPOptionCategoryConstants.DEFAULT_CP_OPTION_CATEGORY_ID);
@@ -309,7 +309,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 		long classNameId = _portal.getClassNameId(CPDefinition.class);
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntries(
+			_cpAttachmentFileEntryLocalService.getCPAttachmentFileEntries(
 				classNameId, cpDefinitionId,
 				CPAttachmentFileEntryConstants.TYPE_IMAGE,
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
@@ -405,7 +405,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 		List<CPDefinitionSpecificationOptionValue>
 			cpDefinitionSpecificationOptionValues =
-				_cpCatalogEntrySpecificationOptionValueService.
+				_cpCatalogEntrySpecificationOptionValueLocalService.
 					getCPDefinitionSpecificationOptionValues(
 						cpDefinitionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 						null);
@@ -468,11 +468,12 @@ public class CPContentHelperImpl implements CPContentHelper {
 	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
-	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
+	private CPAttachmentFileEntryLocalService
+		_cpAttachmentFileEntryLocalService;
 
 	@Reference
-	private CPDefinitionSpecificationOptionValueService
-		_cpCatalogEntrySpecificationOptionValueService;
+	private CPDefinitionSpecificationOptionValueLocalService
+		_cpCatalogEntrySpecificationOptionValueLocalService;
 
 	@Reference
 	private CPContentContributorRegistry _cpContentContributorRegistry;

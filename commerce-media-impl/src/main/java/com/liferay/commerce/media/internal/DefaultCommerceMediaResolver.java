@@ -22,10 +22,11 @@ import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultIma
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
@@ -137,7 +138,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 		if (secure) {
 			cpAttachmentFileEntry =
-				_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
+				_cpAttachmentFileEntryLocalService.fetchCPAttachmentFileEntry(
 					cpAttachmentFileEntryId);
 		}
 		else {
@@ -312,11 +313,14 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		else if (mediaType.equals("products")) {
 			CProduct cProduct = _cProductLocalService.fetchCProduct(primaryKey);
 
+			CommerceCatalog commerceCatalog =
+				_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+					cProduct.getGroupId());
+
 			try {
-				if (_cpDefinitionModelResourcePermission.contains(
+				if (_commerceCatalogModelResourcePermission.contains(
 						PermissionThreadLocal.getPermissionChecker(),
-						cProduct.getPublishedCPDefinitionId(),
-						ActionKeys.VIEW)) {
+						commerceCatalog, ActionKeys.VIEW)) {
 
 					Company company = _companyLocalService.getCompany(
 						cProduct.getCompanyId());
@@ -413,6 +417,15 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	private AssetCategoryLocalService _assetCategoryLocalService;
 
 	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
+	@Reference
 	private CompanyLocalService _companyLocalService;
 
 	@Reference
@@ -420,16 +433,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		_cpAttachmentFileEntryLocalService;
 
 	@Reference
-	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
-
-	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private CProductLocalService _cProductLocalService;

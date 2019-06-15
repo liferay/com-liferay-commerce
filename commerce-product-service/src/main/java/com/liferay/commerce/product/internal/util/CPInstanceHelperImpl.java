@@ -28,11 +28,11 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.search.CPAttachmentFileEntryIndexer;
 import com.liferay.commerce.product.search.CPInstanceIndexer;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
-import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
@@ -111,7 +111,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries = new ArrayList<>();
 
-		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
 		long cpDefinitionClassNameId = _portal.getClassNameId(
@@ -188,7 +188,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				document.get(Field.ENTRY_CLASS_PK));
 
 			cpAttachmentFileEntries.add(
-				_cpAttachmentFileEntryService.getCPAttachmentFileEntry(
+				_cpAttachmentFileEntryLocalService.getCPAttachmentFileEntry(
 					classPK));
 		}
 
@@ -267,7 +267,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			Map<String, String> optionMap)
 		throws Exception {
 
-		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
 		Indexer<CPInstance> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
@@ -331,7 +331,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			long cpDefinitionId, String serializedDDMFormValues)
 		throws Exception {
 
-		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
 		if (Validator.isNull(serializedDDMFormValues)) {
@@ -390,7 +390,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(cpDefinition.getCompanyId());
-		searchContext.setGroupIds(new long[] {cpDefinition.getGroupId()});
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
@@ -410,7 +409,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		long cpInstanceId = GetterUtil.getLong(
 			document.get(Field.ENTRY_CLASS_PK));
 
-		return _cpInstanceService.fetchCPInstance(cpInstanceId);
+		return _cpInstanceLocalService.fetchCPInstance(cpInstanceId);
 	}
 
 	@Override
@@ -428,7 +427,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	public String getCPInstanceThumbnailSrc(long cpInstanceId)
 		throws Exception {
 
-		CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 			cpInstanceId);
 
 		if (cpInstance == null) {
@@ -896,7 +895,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	private CommerceMediaResolver _commerceMediaResolver;
 
 	@Reference
-	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
+	private CPAttachmentFileEntryLocalService
+		_cpAttachmentFileEntryLocalService;
+
+	@Reference
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private CPDefinitionOptionRelLocalService
@@ -907,10 +910,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		_cpDefinitionOptionValueRelLocalService;
 
 	@Reference
-	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private CPInstanceService _cpInstanceService;
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
 	private DDMFormFieldTypeServicesTracker _ddmFormFieldTypeServicesTracker;

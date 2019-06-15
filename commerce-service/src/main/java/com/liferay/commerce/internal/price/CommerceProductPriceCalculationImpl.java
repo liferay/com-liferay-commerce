@@ -37,7 +37,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -166,7 +166,8 @@ public class CommerceProductPriceCalculationImpl
 			return null;
 		}
 
-		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
 
 		BigDecimal price = cpInstance.getPromoPrice();
 
@@ -221,7 +222,7 @@ public class CommerceProductPriceCalculationImpl
 		BigDecimal maxPrice = BigDecimal.ZERO;
 
 		List<CPInstance> cpInstances =
-			_cpInstanceService.getCPDefinitionInstances(
+			_cpInstanceLocalService.getCPDefinitionInstances(
 				cpDefinitionId, WorkflowConstants.STATUS_APPROVED,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
@@ -262,7 +263,7 @@ public class CommerceProductPriceCalculationImpl
 		BigDecimal minPrice = BigDecimal.ZERO;
 
 		List<CPInstance> cpInstances =
-			_cpInstanceService.getCPDefinitionInstances(
+			_cpInstanceLocalService.getCPDefinitionInstances(
 				cpDefinitionId, WorkflowConstants.STATUS_APPROVED,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
@@ -301,7 +302,8 @@ public class CommerceProductPriceCalculationImpl
 			return null;
 		}
 
-		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			cpInstanceId);
 
 		BigDecimal price = cpInstance.getPrice();
 
@@ -471,7 +473,7 @@ public class CommerceProductPriceCalculationImpl
 		_commerceTierPriceEntryLocalService;
 
 	@Reference
-	private CPInstanceService _cpInstanceService;
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
 	private PortletResourcePermission _portletResourcePermission;
