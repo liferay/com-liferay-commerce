@@ -19,6 +19,7 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -98,8 +99,9 @@ public class CPDefinitionProductLinksScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			return _cpDefinitionModelResourcePermission.contains(
-				permissionChecker, cpDefinition, ActionKeys.VIEW);
+			return _commerceCatalogModelResourcePermission.contains(
+				permissionChecker, cpDefinition.getCommerceCatalog(),
+				ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -121,8 +123,7 @@ public class CPDefinitionProductLinksScreenNavigationEntry
 			CPDefinitionLinkDisplayContext cpDefinitionLinkDisplayContext =
 				new CPDefinitionLinkDisplayContext(
 					_actionHelper, httpServletRequest, _cpDefinitionLinkService,
-					_cpDefinitionModelResourcePermission, _itemSelector,
-					_cpDefinitionLinkTypeConfiguration.type());
+					_itemSelector, _cpDefinitionLinkTypeConfiguration.type());
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -151,17 +152,17 @@ public class CPDefinitionProductLinksScreenNavigationEntry
 	@Reference
 	private ActionHelper _actionHelper;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
 
 	private volatile CPDefinitionLinkTypeConfiguration
 		_cpDefinitionLinkTypeConfiguration;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private ItemSelector _itemSelector;

@@ -18,6 +18,7 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
@@ -100,8 +101,9 @@ public class CPDefinitionSpecificationOptionsScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			return _cpDefinitionModelResourcePermission.contains(
-				permissionChecker, cpDefinition, ActionKeys.VIEW);
+			return _commerceCatalogModelResourcePermission.contains(
+				permissionChecker, cpDefinition.getCommerceCatalog(),
+				ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -121,7 +123,6 @@ public class CPDefinitionSpecificationOptionsScreenNavigationEntry
 				cpDefinitionSpecificationOptionValueDisplayContext =
 					new CPDefinitionSpecificationOptionValueDisplayContext(
 						_actionHelper, httpServletRequest,
-						_cpDefinitionModelResourcePermission,
 						_cpDefinitionSpecificationOptionValueService,
 						_cpOptionCategoryService, _itemSelector);
 
@@ -145,10 +146,10 @@ public class CPDefinitionSpecificationOptionsScreenNavigationEntry
 	private ActionHelper _actionHelper;
 
 	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
 	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 
 	@Reference
 	private CPDefinitionSpecificationOptionValueService

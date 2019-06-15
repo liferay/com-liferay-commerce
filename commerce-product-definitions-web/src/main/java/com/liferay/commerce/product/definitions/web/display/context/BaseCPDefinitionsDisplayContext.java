@@ -19,6 +19,7 @@ import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefiniti
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -58,6 +59,22 @@ public abstract class BaseCPDefinitionsDisplayContext {
 
 		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
 		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+	}
+
+	public CommerceCatalog getCommerceCatalog() throws PortalException {
+		if (_commerceCatalog != null) {
+			return _commerceCatalog;
+		}
+
+		CPDefinition cpDefinition = getCPDefinition();
+
+		if (cpDefinition == null) {
+			return null;
+		}
+
+		_commerceCatalog = _cpDefinition.getCommerceCatalog();
+
+		return _commerceCatalog;
 	}
 
 	public CPDefinition getCPDefinition() throws PortalException {
@@ -171,6 +188,7 @@ public abstract class BaseCPDefinitionsDisplayContext {
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
 
+	private CommerceCatalog _commerceCatalog;
 	private CPDefinition _cpDefinition;
 
 }

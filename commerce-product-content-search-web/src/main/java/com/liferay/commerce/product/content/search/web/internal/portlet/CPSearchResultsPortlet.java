@@ -188,7 +188,7 @@ public class CPSearchResultsPortlet
 			WebKeys.THEME_DISPLAY);
 
 		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
 
 		Optional<String> parameterValueOptional =
@@ -223,8 +223,7 @@ public class CPSearchResultsPortlet
 
 		if (commerceChannel != null) {
 			searchContext.setAttribute(
-				"commerceChannelGroupId",
-				commerceChannel.getCommerceChannelGroupId());
+				"commerceChannelGroupId", commerceChannel.getGroupId());
 		}
 
 		CommerceAccount commerceAccount =

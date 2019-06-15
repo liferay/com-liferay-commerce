@@ -15,11 +15,11 @@
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -94,8 +93,9 @@ public class CPDefinitionInstancesScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			return _cpDefinitionModelResourcePermission.contains(
-				permissionChecker, cpDefinition, ActionKeys.VIEW);
+			return _commerceCatalogModelResourcePermission.contains(
+				permissionChecker, cpDefinition.getCommerceCatalog(),
+				ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -114,9 +114,8 @@ public class CPDefinitionInstancesScreenNavigationEntry
 			CPInstanceDisplayContext cpInstanceDisplayContext =
 				new CPInstanceDisplayContext(
 					_actionHelper, httpServletRequest, _commercePriceFormatter,
-					_cpDefinitionModelResourcePermission,
 					_cpDefinitionOptionRelService, _cpInstanceService,
-					_cpInstanceHelper, _portletResourcePermission);
+					_cpInstanceHelper);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpInstanceDisplayContext);
@@ -136,14 +135,14 @@ public class CPDefinitionInstancesScreenNavigationEntry
 	@Reference
 	private ActionHelper _actionHelper;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
 	@Reference
 	private CommercePriceFormatter _commercePriceFormatter;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
@@ -156,9 +155,6 @@ public class CPDefinitionInstancesScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

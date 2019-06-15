@@ -41,8 +41,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
@@ -79,7 +77,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.function.ToLongFunction;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -472,28 +469,8 @@ public class CommerceOrderListDisplayContext {
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		return stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
-	}
-
-	private ToLongFunction<CommerceChannel>
-		_getCommerceChannelToLongFunction() {
-
-		return new ToLongFunction<CommerceChannel>() {
-
-			@Override
-			public long applyAsLong(CommerceChannel commerceChannel) {
-				try {
-					return commerceChannel.getCommerceChannelGroupId();
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-
-					return 0;
-				}
-			}
-
-		};
 	}
 
 	private String _getEmptyResultsMessage(boolean filterByStatuses) {
@@ -617,9 +594,6 @@ public class CommerceOrderListDisplayContext {
 			_availableOrderStatusKVPs = Collections.emptyList();
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderListDisplayContext.class);
 
 	private List<KeyValuePair> _availableAdvanceStatusKVPs;
 	private List<KeyValuePair> _availableOrderStatusKVPs;

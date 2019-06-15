@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionChannelDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -100,8 +99,9 @@ public class CPDefinitionChannelScreenNavigationEntry
 
 		try {
 			hasViewCPDefinitionPermission =
-				_cpDefinitionModelResourcePermission.contains(
-					permissionChecker, cpDefinition, ActionKeys.VIEW);
+				_commerceCatalogModelResourcePermission.contains(
+					permissionChecker, cpDefinition.getCommerceCatalog(),
+					ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -119,9 +119,8 @@ public class CPDefinitionChannelScreenNavigationEntry
 		CPDefinitionChannelDisplayContext cpDefinitionChannelDisplayContext =
 			new CPDefinitionChannelDisplayContext(
 				_actionHelper, httpServletRequest, _commerceCatalogService,
-				_cpDefinitionModelResourcePermission, _cpDefinitionService,
-				_itemSelector, _portletResourcePermission,
-				_commerceChannelRelService, _commerceChannelService);
+				_cpDefinitionService, _itemSelector, _commerceChannelRelService,
+				_commerceChannelService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionChannelDisplayContext);
@@ -137,6 +136,12 @@ public class CPDefinitionChannelScreenNavigationEntry
 	@Reference
 	private ActionHelper _actionHelper;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
 
@@ -146,12 +151,6 @@ public class CPDefinitionChannelScreenNavigationEntry
 	@Reference
 	private CommerceChannelService _commerceChannelService;
 
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
-
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
 
@@ -160,9 +159,6 @@ public class CPDefinitionChannelScreenNavigationEntry
 
 	@Reference
 	private JSPRenderer _jspRenderer;
-
-	@Reference(target = "(resource.name=" + CPConstants.RESOURCE_NAME + ")")
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"

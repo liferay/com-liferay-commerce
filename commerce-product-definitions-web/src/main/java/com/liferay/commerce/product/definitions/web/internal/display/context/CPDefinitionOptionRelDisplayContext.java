@@ -21,7 +21,6 @@ import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsP
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.item.selector.criterion.CPOptionItemSelectorCriterion;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.util.DDMFormFieldTypeUtil;
@@ -40,8 +39,6 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -73,8 +70,6 @@ public class CPDefinitionOptionRelDisplayContext
 	public CPDefinitionOptionRelDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			ConfigurationProvider configurationProvider,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			DDMFormFieldTypeServicesTracker ddmFormFieldTypeServicesTracker,
 			ItemSelector itemSelector)
@@ -87,8 +82,6 @@ public class CPDefinitionOptionRelDisplayContext
 		setDefaultOrderByCol("priority");
 
 		_configurationProvider = configurationProvider;
-		_cpDefinitionModelResourcePermission =
-			cpDefinitionModelResourcePermission;
 		_cpDefinitionOptionRelService = cpDefinitionOptionRelService;
 		_ddmFormFieldTypeServicesTracker = ddmFormFieldTypeServicesTracker;
 		_itemSelector = itemSelector;
@@ -272,24 +265,10 @@ public class CPDefinitionOptionRelDisplayContext
 			getCPDefinitionOptionRelId(), null);
 	}
 
-	public boolean hasEditPermission() throws PortalException {
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
-			ActionKeys.UPDATE);
-	}
-
-	public boolean hasViewPermission() throws PortalException {
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
-			ActionKeys.VIEW);
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPDefinitionOptionRelDisplayContext.class);
 
 	private final ConfigurationProvider _configurationProvider;
-	private final ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 	private CPDefinitionOptionRel _cpDefinitionOptionRel;
 	private final CPDefinitionOptionRelService _cpDefinitionOptionRelService;
 	private final DDMFormFieldTypeServicesTracker

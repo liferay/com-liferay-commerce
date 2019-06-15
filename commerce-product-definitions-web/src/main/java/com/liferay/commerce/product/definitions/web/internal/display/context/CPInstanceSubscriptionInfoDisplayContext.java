@@ -17,7 +17,6 @@ package com.liferay.commerce.product.definitions.web.internal.display.context;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -26,8 +25,6 @@ import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import java.util.List;
 
@@ -44,12 +41,9 @@ public class CPInstanceSubscriptionInfoDisplayContext
 	public CPInstanceSubscriptionInfoDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			CommercePriceFormatter commercePriceFormatter,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
 			CPInstanceHelper cpInstanceHelper,
-			PortletResourcePermission portletResourcePermission,
 			CPSubscriptionTypeJSPContributorRegistry
 				cpSubscriptionTypeJSPContributorRegistry,
 			CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry)
@@ -57,8 +51,7 @@ public class CPInstanceSubscriptionInfoDisplayContext
 
 		super(
 			actionHelper, httpServletRequest, commercePriceFormatter,
-			cpDefinitionModelResourcePermission, cpDefinitionOptionRelService,
-			cpInstanceService, cpInstanceHelper, portletResourcePermission);
+			cpDefinitionOptionRelService, cpInstanceService, cpInstanceHelper);
 
 		_cpSubscriptionTypeJSPContributorRegistry =
 			cpSubscriptionTypeJSPContributorRegistry;

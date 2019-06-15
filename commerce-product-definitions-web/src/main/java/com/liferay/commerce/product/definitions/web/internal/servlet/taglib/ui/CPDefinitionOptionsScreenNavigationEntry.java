@@ -18,6 +18,7 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
@@ -92,8 +93,9 @@ public class CPDefinitionOptionsScreenNavigationEntry
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			return _cpDefinitionModelResourcePermission.contains(
-				permissionChecker, cpDefinition, ActionKeys.VIEW);
+			return _commerceCatalogModelResourcePermission.contains(
+				permissionChecker, cpDefinition.getCommerceCatalog(),
+				ActionKeys.VIEW);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -113,9 +115,7 @@ public class CPDefinitionOptionsScreenNavigationEntry
 				cpDefinitionOptionRelDisplayContext =
 					new CPDefinitionOptionRelDisplayContext(
 						_actionHelper, httpServletRequest,
-						_configurationProvider,
-						_cpDefinitionModelResourcePermission,
-						_cpDefinitionOptionRelService,
+						_configurationProvider, _cpDefinitionOptionRelService,
 						_ddmFormFieldTypeServicesTracker, _itemSelector);
 
 			httpServletRequest.setAttribute(
@@ -137,14 +137,14 @@ public class CPDefinitionOptionsScreenNavigationEntry
 	@Reference
 	private ActionHelper _actionHelper;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
 	@Reference
 	private ConfigurationProvider _configurationProvider;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;

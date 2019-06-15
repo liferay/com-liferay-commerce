@@ -21,6 +21,7 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
@@ -68,8 +69,7 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
 				new CPDefinitionsDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionModelResourcePermission, _cpDefinitionService,
-					_itemSelector, _portletResourcePermission);
+					_cpDefinitionService, _itemSelector);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
@@ -103,14 +103,14 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 	@Reference
 	private ActionHelper _actionHelper;
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
