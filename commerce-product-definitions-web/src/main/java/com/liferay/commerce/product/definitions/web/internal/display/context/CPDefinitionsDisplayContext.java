@@ -43,9 +43,6 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -77,10 +74,7 @@ public class CPDefinitionsDisplayContext
 	public CPDefinitionsDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		ModelResourcePermission<CPDefinition>
-			cpDefinitionModelResourcePermission,
-		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission) {
+		CPDefinitionService cpDefinitionService, ItemSelector itemSelector) {
 
 		super(
 			actionHelper, httpServletRequest,
@@ -89,11 +83,8 @@ public class CPDefinitionsDisplayContext
 		setDefaultOrderByType("desc");
 
 		_commerceCatalogService = commerceCatalogService;
-		_cpDefinitionModelResourcePermission =
-			cpDefinitionModelResourcePermission;
 		_cpDefinitionService = cpDefinitionService;
 		_itemSelector = itemSelector;
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId)
@@ -350,44 +341,12 @@ public class CPDefinitionsDisplayContext
 			getCPDefinitionId(), null);
 	}
 
-	public boolean hasDeletePermission(long cpDefinitionId)
-		throws PortalException {
-
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
-			ActionKeys.DELETE);
-	}
-
-	public boolean hasEditPermission(long cpDefinitionId)
-		throws PortalException {
-
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
-			ActionKeys.UPDATE);
-	}
-
-	public boolean hasPermission(String actionId) {
-		return _portletResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(),
-			cpRequestHelper.getScopeGroupId(), actionId);
-	}
-
-	public boolean hasViewPermission(long cpDefinitionId)
-		throws PortalException {
-
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), cpDefinitionId,
-			ActionKeys.VIEW);
-	}
-
 	public boolean isSelectedCatalog(CommerceCatalog commerceCatalog)
 		throws PortalException {
 
 		CPDefinition cpDefinition = getCPDefinition();
 
-		if (commerceCatalog.getCommerceCatalogGroupId() ==
-				cpDefinition.getGroupId()) {
-
+		if (commerceCatalog.getGroupId() == cpDefinition.getGroupId()) {
 			return true;
 		}
 
@@ -395,10 +354,7 @@ public class CPDefinitionsDisplayContext
 	}
 
 	private final CommerceCatalogService _commerceCatalogService;
-	private final ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 	private final CPDefinitionService _cpDefinitionService;
 	private final ItemSelector _itemSelector;
-	private final PortletResourcePermission _portletResourcePermission;
 
 }

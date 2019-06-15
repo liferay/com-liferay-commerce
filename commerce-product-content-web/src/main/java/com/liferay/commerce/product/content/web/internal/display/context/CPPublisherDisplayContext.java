@@ -88,7 +88,6 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 
 		if (isSelectionStyleDynamic()) {
 			cpDataSourceResult = _getDynamicCPDataSourceResult(
-				cpContentRequestHelper.getScopeGroupId(),
 				_searchContainer.getStart(), _searchContainer.getEnd());
 		}
 		else if (isSelectionStyleDataSource()) {
@@ -166,8 +165,7 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		return _searchContainer;
 	}
 
-	private CPDataSourceResult _getDynamicCPDataSourceResult(
-			long groupId, int start, int end)
+	private CPDataSourceResult _getDynamicCPDataSourceResult(int start, int end)
 		throws Exception {
 
 		SearchContext searchContext = new SearchContext();
@@ -185,7 +183,6 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(cpContentRequestHelper.getCompanyId());
-		searchContext.setGroupIds(new long[] {groupId});
 
 		searchContext.setKeywords(StringPool.STAR);
 

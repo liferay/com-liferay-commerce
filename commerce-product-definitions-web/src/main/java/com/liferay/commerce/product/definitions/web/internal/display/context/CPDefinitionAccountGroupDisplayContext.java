@@ -25,8 +25,6 @@ import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -42,17 +40,13 @@ public class CPDefinitionAccountGroupDisplayContext
 	public CPDefinitionAccountGroupDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		ModelResourcePermission<CPDefinition>
-			cpDefinitionModelResourcePermission,
 		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission,
 		CommerceAccountGroupRelService commerceAccountGroupRelService,
 		CommerceAccountGroupService commerceAccountGroupService) {
 
 		super(
 			actionHelper, httpServletRequest, commerceCatalogService,
-			cpDefinitionModelResourcePermission, cpDefinitionService,
-			itemSelector, portletResourcePermission);
+			cpDefinitionService, itemSelector);
 
 		_commerceAccountGroupRelService = commerceAccountGroupRelService;
 		_commerceAccountGroupService = commerceAccountGroupService;
