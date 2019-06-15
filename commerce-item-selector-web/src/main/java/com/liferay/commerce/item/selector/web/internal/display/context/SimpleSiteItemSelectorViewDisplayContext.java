@@ -60,7 +60,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 
 	public String getChannelUsingSite(long siteGroupId) throws PortalException {
 		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				siteGroupId);
 
 		if (commerceChannel == null) {
@@ -145,7 +145,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 	}
 
 	public boolean isSiteAvailable(long siteGroupId) {
-		if (_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+		if (_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				siteGroupId) == null) {
 
 			return true;

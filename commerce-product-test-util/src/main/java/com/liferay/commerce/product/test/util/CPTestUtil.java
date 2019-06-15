@@ -306,9 +306,9 @@ public class CPTestUtil {
 		}
 
 		return CPDefinitionLocalServiceUtil.addCPDefinition(
-			commerceCatalog.getCommerceCatalogGroupId(), user.getUserId(),
-			titleMap, shortDescriptionMap, descriptionMap, urlTitleMap,
-			metaTitleMap, metaKeywordsMap, metaDescriptionMap, productTypeName,
+			commerceCatalog.getGroupId(), user.getUserId(), titleMap,
+			shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
+			metaKeywordsMap, metaDescriptionMap, productTypeName,
 			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
 			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
 			taxExempt, telcoOrElectronics, ddmStructureKey, published,

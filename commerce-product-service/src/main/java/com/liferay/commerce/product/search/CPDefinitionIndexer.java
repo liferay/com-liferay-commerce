@@ -385,7 +385,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			CommerceChannel commerceChannel =
 				commerceChannelRel.getCommerceChannel();
 
-			channelGroupIds.add(commerceChannel.getCommerceChannelGroupId());
+			channelGroupIds.add(commerceChannel.getGroupId());
 		}
 
 		document.addNumber(

@@ -283,8 +283,6 @@ public class CommerceCartResource {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceOrderItem.class.getName(), httpServletRequest);
 
-			serviceContext.setScopeGroupId(commerceOrder.getGroupId());
-
 			CommerceOrderItem commerceOrderItem =
 				_commerceOrderItemService.upsertCommerceOrderItem(
 					commerceOrder.getCommerceOrderId(), cpInstanceId, quantity,

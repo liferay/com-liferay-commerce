@@ -46,11 +46,6 @@ public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 	}
 
 	@Override
-	public long getCommerceCatalogGroupId() {
-		return _cpDefinition.getGroupId();
-	}
-
-	@Override
 	public long getCPDefinitionId() {
 		return _cpDefinition.getCPDefinitionId();
 	}
@@ -95,6 +90,11 @@ public class DatabaseCPCatalogEntryImpl implements CPCatalogEntry {
 	@Override
 	public String getDescription() {
 		return _cpDefinition.getDescription(_languageId);
+	}
+
+	@Override
+	public long getGroupId() {
+		return _cpDefinition.getGroupId();
 	}
 
 	@Override

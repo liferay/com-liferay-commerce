@@ -358,7 +358,7 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 				continue;
 			}
 
-			groupIdList.add(commerceChannel.getCommerceChannelGroupId());
+			groupIdList.add(commerceChannel.getGroupId());
 		}
 
 		Stream<Long> stream = groupIdList.stream();

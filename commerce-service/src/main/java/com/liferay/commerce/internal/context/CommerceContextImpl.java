@@ -113,7 +113,7 @@ public class CommerceContextImpl implements CommerceContext {
 		}
 
 		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelByGroupId(
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				_groupId);
 
 		if (commerceChannel == null) {
