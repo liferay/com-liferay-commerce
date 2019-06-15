@@ -125,7 +125,6 @@ if (parentCommercePriceList != null) {
 	/>
 </liferay-ui:search-container>
 
-
 <h5 class="text-default"><liferay-ui:message key="account-groups" /></h5>
 
 <liferay-ui:search-container
