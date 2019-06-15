@@ -21,8 +21,6 @@ import java.util.List;
  */
 public interface CPCatalogEntry {
 
-	public long getCommerceCatalogGroupId();
-
 	public long getCPDefinitionId();
 
 	public long getCProductId();
@@ -34,6 +32,8 @@ public interface CPCatalogEntry {
 	public double getDepth();
 
 	public String getDescription();
+
+	public long getGroupId();
 
 	public double getHeight();
 
