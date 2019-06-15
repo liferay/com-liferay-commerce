@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.media.internal.upload;
 
-import com.liferay.commerce.product.definitions.web.configuration.AttachmentsConfiguration;
+import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryNameException;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntrySizeException;
 import com.liferay.petra.string.StringPool;
@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alec Sloan
  */
 @Component(
-	configurationPid = "com.liferay.commerce.product.definition.web.configuration.AttachmentsConfiguration",
+	configurationPid = "com.liferay.commerce.product.configuration.AttachmentsConfiguration",
 	configurationPolicy = ConfigurationPolicy.OPTIONAL,
 	service = CommerceMediaDefaultImageUploadFileEntryHandler.class
 )
