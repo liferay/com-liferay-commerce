@@ -354,9 +354,7 @@ public class CommercePriceListDisplayContext
 
 		CommercePriceList commercePriceList = getCommercePriceList();
 
-		if (commerceCatalog.getCommerceCatalogGroupId() ==
-				commercePriceList.getGroupId()) {
-
+		if (commerceCatalog.getGroupId() == commercePriceList.getGroupId()) {
 			return true;
 		}
 

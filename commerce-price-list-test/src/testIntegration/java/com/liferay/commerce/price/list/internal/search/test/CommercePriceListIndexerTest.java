@@ -97,8 +97,7 @@ public class CommercePriceListIndexerTest {
 
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.addCommercePriceList(
-				commerceCatalog.getCommerceCatalogGroupId(),
-				serviceContext.getUserId(),
+				commerceCatalog.getGroupId(), serviceContext.getUserId(),
 				commerceCurrency.getCommerceCurrencyId(),
 				RandomTestUtil.randomString(), 0, 1, 1, 2018, 3, 4, 0, 0, 0, 0,
 				0, true, serviceContext);

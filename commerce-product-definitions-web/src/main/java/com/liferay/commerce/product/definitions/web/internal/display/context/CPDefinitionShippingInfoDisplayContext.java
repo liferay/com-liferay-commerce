@@ -17,15 +17,12 @@ package com.liferay.commerce.product.definitions.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
-import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -41,16 +38,12 @@ public class CPDefinitionShippingInfoDisplayContext
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
-		ModelResourcePermission<CPDefinition>
-			cpDefinitionModelResourcePermission,
 		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
-		PortletResourcePermission portletResourcePermission,
 		CPMeasurementUnitLocalService cpMeasurementUnitLocalService) {
 
 		super(
 			actionHelper, httpServletRequest, commerceCatalogService,
-			cpDefinitionModelResourcePermission, cpDefinitionService,
-			itemSelector, portletResourcePermission);
+			cpDefinitionService, itemSelector);
 
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_cpMeasurementUnitLocalService = cpMeasurementUnitLocalService;

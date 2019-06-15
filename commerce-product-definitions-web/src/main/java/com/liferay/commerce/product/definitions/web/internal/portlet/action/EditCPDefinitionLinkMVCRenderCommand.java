@@ -18,13 +18,11 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionLinkDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -66,8 +64,7 @@ public class EditCPDefinitionLinkMVCRenderCommand implements MVCRenderCommand {
 			CPDefinitionLinkDisplayContext cpDefinitionLinkDisplayContext =
 				new CPDefinitionLinkDisplayContext(
 					_actionHelper, httpServletRequest, _cpDefinitionLinkService,
-					_cpDefinitionModelResourcePermission, _itemSelector,
-					cpDefinitionLink.getType());
+					_itemSelector, cpDefinitionLink.getType());
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -93,12 +90,6 @@ public class EditCPDefinitionLinkMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPDefinition)"
-	)
-	private ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 
 	@Reference
 	private ItemSelector _itemSelector;

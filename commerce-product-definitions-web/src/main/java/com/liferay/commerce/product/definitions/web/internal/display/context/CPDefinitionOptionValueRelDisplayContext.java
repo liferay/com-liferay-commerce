@@ -18,7 +18,6 @@ import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefini
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
@@ -26,8 +25,6 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -48,8 +45,6 @@ public class CPDefinitionOptionValueRelDisplayContext
 
 	public CPDefinitionOptionValueRelDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			ModelResourcePermission<CPDefinition>
-				cpDefinitionModelResourcePermission,
 			CPDefinitionOptionValueRelService cpDefinitionOptionValueRelService)
 		throws PortalException {
 
@@ -59,8 +54,6 @@ public class CPDefinitionOptionValueRelDisplayContext
 
 		setDefaultOrderByCol("priority");
 
-		_cpDefinitionModelResourcePermission =
-			cpDefinitionModelResourcePermission;
 		_cpDefinitionOptionValueRelService = cpDefinitionOptionValueRelService;
 	}
 
@@ -211,20 +204,6 @@ public class CPDefinitionOptionValueRelDisplayContext
 			getCPDefinitionOptionValueRelId(), null);
 	}
 
-	public boolean hasEditPermission() throws PortalException {
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
-			ActionKeys.UPDATE);
-	}
-
-	public boolean hasViewPermission() throws PortalException {
-		return _cpDefinitionModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), getCPDefinition(),
-			ActionKeys.VIEW);
-	}
-
-	private final ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission;
 	private CPDefinitionOptionRel _cpDefinitionOptionRel;
 	private CPDefinitionOptionValueRel _cpDefinitionOptionValueRel;
 	private final CPDefinitionOptionValueRelService
