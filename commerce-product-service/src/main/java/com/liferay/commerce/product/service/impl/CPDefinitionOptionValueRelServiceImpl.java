@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -48,9 +49,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.UPDATE);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			addCPDefinitionOptionValueRel(
@@ -71,9 +71,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.UPDATE);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			deleteCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
@@ -93,8 +92,7 @@ public class CPDefinitionOptionValueRelServiceImpl
 				cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(),
+			_checkCommerceCatalogPermissionByCPDefinitionId(
 				cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 		}
 
@@ -115,8 +113,7 @@ public class CPDefinitionOptionValueRelServiceImpl
 				cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
-			_cpDefinitionModelResourcePermission.check(
-				getPermissionChecker(),
+			_checkCommerceCatalogPermissionByCPDefinitionId(
 				cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 		}
 
@@ -136,9 +133,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
@@ -153,9 +149,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRels(cpDefinitionOptionRelId, start, end);
@@ -171,9 +166,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRels(
@@ -203,9 +197,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			getCPDefinitionOptionValueRelsCount(cpDefinitionOptionRelId);
@@ -222,9 +215,8 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionRelId);
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.VIEW);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.VIEW);
 
 		return cpDefinitionOptionValueRelLocalService.
 			searchCPDefinitionOptionValueRels(
@@ -246,14 +238,32 @@ public class CPDefinitionOptionValueRelServiceImpl
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
 				cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
 
-		_cpDefinitionModelResourcePermission.check(
-			getPermissionChecker(), cpDefinitionOptionRel.getCPDefinitionId(),
-			ActionKeys.UPDATE);
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionOptionRel.getCPDefinitionId(), ActionKeys.UPDATE);
 
 		return cpDefinitionOptionValueRelLocalService.
 			updateCPDefinitionOptionValueRel(
 				cpDefinitionOptionValueRelId, nameMap, priority, key,
 				serviceContext);
+	}
+
+	private void _checkCommerceCatalogPermissionByCPDefinitionId(
+			long cpDefinitionId, String actionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.fetchCPDefinition(
+			cpDefinitionId);
+
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException();
+		}
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+				cpDefinition.getGroupId());
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceCatalog>
@@ -262,10 +272,5 @@ public class CPDefinitionOptionValueRelServiceImpl
 				CPDefinitionOptionValueRelServiceImpl.class,
 				"_commerceCatalogModelResourcePermission",
 				CommerceCatalog.class);
-	private static volatile ModelResourcePermission<CPDefinition>
-		_cpDefinitionModelResourcePermission =
-			ModelResourcePermissionFactory.getInstance(
-				CPDefinitionOptionValueRelServiceImpl.class,
-				"_cpDefinitionModelResourcePermission", CPDefinition.class);
 
 }

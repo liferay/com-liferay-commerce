@@ -20,8 +20,6 @@ import com.liferay.commerce.discount.service.base.CommerceDiscountServiceBaseImp
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -34,7 +32,6 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.function.ToLongFunction;
 import java.util.stream.Stream;
 
 /**
@@ -150,7 +147,7 @@ public class CommerceDiscountServiceImpl
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
-			_getCommerceChannelToLongFunction()
+			CommerceChannel::getGroupId
 		).toArray();
 
 		return commerceDiscountLocalService.searchCommerceDiscounts(
@@ -184,29 +181,6 @@ public class CommerceDiscountServiceImpl
 			expirationDateHour, expirationDateMinute, neverExpire,
 			serviceContext);
 	}
-
-	private ToLongFunction<CommerceChannel>
-		_getCommerceChannelToLongFunction() {
-
-		return new ToLongFunction<CommerceChannel>() {
-
-			@Override
-			public long applyAsLong(CommerceChannel commerceChannel) {
-				try {
-					return commerceChannel.getCommerceChannelGroupId();
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-
-					return 0;
-				}
-			}
-
-		};
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceDiscountServiceImpl.class);
 
 	private static volatile ModelResourcePermission<CommerceDiscount>
 		_commerceDiscountResourcePermission =
