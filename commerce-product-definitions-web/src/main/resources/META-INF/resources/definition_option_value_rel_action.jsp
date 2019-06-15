@@ -23,7 +23,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 CPDefinitionOptionValueRel cpDefinitionOptionValueRel = null;
 
-long cpDefinitionId = cpDefinitionSpecificationOptionValueDisplayContext.getCPDefinitionId();
+CPDefinition cpDefinition = cpDefinitionSpecificationOptionValueDisplayContext.getCPDefinition();
 
 if (row != null) {
 	cpDefinitionOptionValueRel = (CPDefinitionOptionValueRel)row.getObject();
@@ -33,7 +33,7 @@ else {
 }
 %>
 
-<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasEditPermission() %>">
+<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
 	<liferay-ui:icon-menu
 		direction="left-side"
 		icon="<%= StringPool.BLANK %>"
@@ -43,7 +43,7 @@ else {
 	>
 		<portlet:renderURL var="editProductDefinitionOptionValueRelURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinitionOptionValueRel" />
-			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
 			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
 		</portlet:renderURL>
 
@@ -55,7 +55,7 @@ else {
 		<portlet:actionURL name="editProductDefinitionOptionValueRel" var="deleteProductDefinitionOptionValueRelURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
+			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
 			<portlet:param name="cpDefinitionOptionValueRelId" value="<%= String.valueOf(cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId()) %>" />
 		</portlet:actionURL>
 
