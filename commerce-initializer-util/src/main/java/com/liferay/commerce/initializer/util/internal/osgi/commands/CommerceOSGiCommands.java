@@ -16,7 +16,6 @@ package com.liferay.commerce.initializer.util.internal.osgi.commands;
 
 import com.liferay.commerce.initializer.util.CommerceOrderGenerator;
 import com.liferay.commerce.initializer.util.CommerceShipmentGenerator;
-import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
@@ -54,15 +53,13 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceOSGiCommands {
 
 	public void generateOrders(long groupId, int ordersCount) {
-		_commerceOrderGenerator.generate(
-			_checkChannelGroupId(groupId), ordersCount);
+		_commerceOrderGenerator.generate(groupId, ordersCount);
 	}
 
 	public void generateShipments(long groupId, int shipmentsCount)
 		throws Exception {
 
-		_commerceShipmentGenerator.generate(
-			_checkChannelGroupId(groupId), shipmentsCount);
+		_commerceShipmentGenerator.generate(groupId, shipmentsCount);
 	}
 
 	public void initializeSite(long groupId, String key) throws Exception {
@@ -89,22 +86,6 @@ public class CommerceOSGiCommands {
 			_siteInitializerRegistry.getSiteInitializer(key);
 
 		siteInitializer.initialize(groupId);
-	}
-
-	private long _checkChannelGroupId(long groupId) {
-		Group group = _groupLocalService.fetchGroup(groupId);
-
-		String className = group.getClassName();
-
-		if (className.equals(CommerceChannel.class.getName())) {
-			return groupId;
-		}
-
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				groupId);
-
-		return commerceChannel.getGroupId();
 	}
 
 	@Reference
