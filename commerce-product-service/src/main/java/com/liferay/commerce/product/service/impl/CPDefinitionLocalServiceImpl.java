@@ -210,6 +210,8 @@ public class CPDefinitionLocalServiceImpl
 		cpDefinition.setSubscriptionTypeSettingsProperties(
 			subscriptionTypeSettingsProperties);
 		cpDefinition.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpDefinition.setAccountGroupFilterEnabled(false);
+		cpDefinition.setChannelFilterEnabled(false);
 		cpDefinition.setVersion(1);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
@@ -1364,6 +1366,19 @@ public class CPDefinitionLocalServiceImpl
 			serviceContext);
 	}
 
+	@Override
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
+		cpDefinition.setAccountGroupFilterEnabled(enable);
+
+		return cpDefinitionPersistence.update(cpDefinition);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPDefinition updateCPDefinitionCategorization(
@@ -1392,6 +1407,19 @@ public class CPDefinitionLocalServiceImpl
 			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
+
+		return cpDefinitionPersistence.update(cpDefinition);
+	}
+
+	@Override
+	public CPDefinition updateCPDefinitionChannelFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException {
+
+		CPDefinition cpDefinition = cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
+		cpDefinition.setChannelFilterEnabled(enable);
 
 		return cpDefinitionPersistence.update(cpDefinition);
 	}
