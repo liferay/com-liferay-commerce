@@ -23,7 +23,11 @@ public class CommerceAccountConstants {
 	public static final String ACCOUNT_ADMINISTRATOR_ROLE_NAME =
 		"Account Administrator";
 
+	public static final String ACCOUNT_GROUP_GUEST_NAME = "Guest";
+
 	public static final int ACCOUNT_GROUP_TYPE_DYNAMIC = 1;
+
+	public static final int ACCOUNT_GROUP_TYPE_GUEST = 2;
 
 	public static final int ACCOUNT_GROUP_TYPE_STATIC = 0;
 
