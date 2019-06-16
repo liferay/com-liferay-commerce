@@ -37,7 +37,7 @@ public class CommerceAccountGroupServiceImpl
 
 	@Override
 	public CommerceAccountGroup addCommerceAccountGroup(
-			String name, int type, String externalReferenceCode,
+			long companyId, String name, int type, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -46,7 +46,8 @@ public class CommerceAccountGroupServiceImpl
 			CommerceAccountActionKeys.ADD_ACCOUNT_GROUP);
 
 		return commerceAccountGroupLocalService.addCommerceAccountGroup(
-			name, type, externalReferenceCode, serviceContext);
+			companyId, name, type, false, externalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
