@@ -311,7 +311,7 @@ public class CPDefinitionsDisplayContext
 
 		List<AssetVocabulary> vocabularies =
 			AssetVocabularyServiceUtil.getGroupVocabularies(
-				themeDisplay.getScopeGroupId());
+				themeDisplay.getCompanyGroupId());
 
 		return ListUtil.toString(
 			vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR);
