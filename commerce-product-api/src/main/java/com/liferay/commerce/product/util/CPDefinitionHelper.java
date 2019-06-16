@@ -35,7 +35,9 @@ public interface CPDefinitionHelper {
 
 	public CPCatalogEntry getCPCatalogEntry(Document document, Locale locale);
 
-	public CPCatalogEntry getCPCatalogEntry(long cpDefinitionId, Locale locale)
+	public CPCatalogEntry getCPCatalogEntry(
+			long commerceAccountId, long groupId, long cpDefinitionId,
+			Locale locale)
 		throws PortalException;
 
 	public String getFriendlyURL(long cpDefinitionId, ThemeDisplay themeDisplay)

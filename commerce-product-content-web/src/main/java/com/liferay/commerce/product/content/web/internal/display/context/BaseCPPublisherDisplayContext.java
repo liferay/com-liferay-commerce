@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.product.content.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
@@ -69,7 +72,23 @@ public class BaseCPPublisherDisplayContext {
 	}
 
 	public List<CPCatalogEntry> getCPCatalogEntries() throws Exception {
+		HttpServletRequest httpServletRequest =
+			cpContentRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		return cpPublisherWebHelper.getCPCatalogEntries(
+			commerceAccountId, commerceContext.getCommerceChannelGroupId(),
 			cpContentRequestHelper.getPortletPreferences(),
 			cpContentRequestHelper.getThemeDisplay());
 	}

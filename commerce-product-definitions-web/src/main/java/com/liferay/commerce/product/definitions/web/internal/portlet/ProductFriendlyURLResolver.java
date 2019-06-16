@@ -16,6 +16,8 @@ package com.liferay.commerce.product.definitions.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalService;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutFriendlyURLComposite;
 import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
 import com.liferay.portal.kernel.service.LayoutLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.InheritableMap;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -108,6 +111,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 			cpFriendlyURLEntry.getClassPK());
 
 		CPCatalogEntry cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
+			groupId, _getCommerceAccountId(groupId, httpServletRequest),
 			cProduct.getPublishedCPDefinitionId(), locale);
 
 		Layout layout = getProductLayout(
@@ -254,8 +258,30 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		return _layoutLocalService.getLayout(plid);
 	}
 
+	private long _getCommerceAccountId(
+			long groupId, HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		// Passing the groupId is mandatory here. See COMMERCE-728.
+
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
+				groupId, httpServletRequest);
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
+		return commerceAccountId;
+	}
+
 	@Reference
 	private AssetTagLocalService _assetTagLocalService;
+
+	@Reference
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
@@ -277,5 +303,8 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }

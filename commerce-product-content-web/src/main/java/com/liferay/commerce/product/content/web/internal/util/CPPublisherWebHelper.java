@@ -51,6 +51,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CPPublisherWebHelper {
 
 	public List<CPCatalogEntry> getCPCatalogEntries(
+			long commerceAccountId, long groupId,
 			PortletPreferences portletPreferences, ThemeDisplay themeDisplay)
 		throws Exception {
 
@@ -72,7 +73,8 @@ public class CPPublisherWebHelper {
 			try {
 				CPCatalogEntry cpCatalogEntry =
 					_cpDefinitionHelper.getCPCatalogEntry(
-						cpDefinitionId, themeDisplay.getLocale());
+						commerceAccountId, groupId, cpDefinitionId,
+						themeDisplay.getLocale());
 
 				if (cpCatalogEntry != null) {
 					cpCatalogEntries.add(cpCatalogEntry);
