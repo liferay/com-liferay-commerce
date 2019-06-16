@@ -38,7 +38,7 @@ long commerceAccountGroupId = commerceAccountGroupAdminDisplayContext.getCommerc
 	<div class="lfr-form-content">
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<aui:input autoFocus="<%= true %>" disabled="<%= commerceAccountGroup.isSystem() %>" name="name" />
+				<aui:input autoFocus="<%= true %>" disabled="<%= (commerceAccountGroup != null) && commerceAccountGroup.isSystem() %>" name="name" />
 			</aui:fieldset>
 
 			<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasCustomAttributesAvailable() %>">
