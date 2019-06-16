@@ -136,7 +136,11 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				groupId);
 
-		return commerceChannel.getGroupId();
+		if (commerceChannel != null) {
+			return commerceChannel.getGroupId();
+		}
+
+		return groupId;
 	}
 
 	private CPDefinitionSearcher _getCPDefinitionSearcher(

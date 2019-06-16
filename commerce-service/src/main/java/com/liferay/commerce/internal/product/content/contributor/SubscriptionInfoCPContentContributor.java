@@ -17,6 +17,8 @@ package com.liferay.commerce.internal.product.content.contributor;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPContentContributor;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -59,6 +61,14 @@ public class SubscriptionInfoCPContentContributor
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		if (cpInstance == null) {
+			return jsonObject;
+		}
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest));
+
+		if (commerceChannel == null) {
 			return jsonObject;
 		}
 
@@ -136,6 +146,9 @@ public class SubscriptionInfoCPContentContributor
 
 		return sb.toString();
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
