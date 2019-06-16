@@ -26,6 +26,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.permission.CommerceProductViewPermission;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
@@ -47,6 +48,7 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -76,8 +78,14 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 	}
 
 	@Override
-	public CPCatalogEntry getCPCatalogEntry(long cpDefinitionId, Locale locale)
+	public CPCatalogEntry getCPCatalogEntry(
+			long commerceAccountId, long groupId, long cpDefinitionId,
+			Locale locale)
 		throws PortalException {
+
+		_commerceProductViewPermission.check(
+			PermissionThreadLocal.getPermissionChecker(), commerceAccountId,
+			groupId, cpDefinitionId);
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
@@ -303,6 +311,9 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceProductViewPermission _commerceProductViewPermission;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
