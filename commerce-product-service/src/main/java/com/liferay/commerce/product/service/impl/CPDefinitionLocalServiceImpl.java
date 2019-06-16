@@ -973,22 +973,18 @@ public class CPDefinitionLocalServiceImpl
 			for (Map.Entry<String, List<String>> entry : facetMap.entrySet()) {
 				String fieldName = entry.getKey();
 
-				List<String> facetValues = entry.getValue();
-
-				String[] facetValuesArray = ArrayUtil.toStringArray(
-					facetValues);
+				String[] values = ArrayUtil.toStringArray(entry.getValue());
 
 				MultiValueFacet multiValueFacet = new MultiValueFacet(
 					searchContext);
 
 				multiValueFacet.setFieldName(fieldName);
-				multiValueFacet.setStatic(true);
-				multiValueFacet.setValues(facetValuesArray);
+				multiValueFacet.setValues(values);
 
-				searchContext.setAttribute(fieldName, facetValuesArray);
+				searchContext.setAttribute(fieldName, StringUtil.merge(values));
 
 				if (fieldName.equals("assetCategoryIds")) {
-					Stream<String> stream = Arrays.stream(facetValuesArray);
+					Stream<String> stream = Arrays.stream(values);
 
 					LongStream longStream = stream.mapToLong(
 						GetterUtil::getLong);
