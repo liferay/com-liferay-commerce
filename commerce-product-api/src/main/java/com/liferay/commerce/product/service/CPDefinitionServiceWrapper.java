@@ -198,12 +198,28 @@ public class CPDefinitionServiceWrapper implements CPDefinitionService,
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionService.updateCPDefinitionAccountGroupFilter(cpDefinitionId,
+			enable);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionCategorization(
 		long cpDefinitionId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionService.updateCPDefinitionCategorization(cpDefinitionId,
 			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionChannelFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionService.updateCPDefinitionChannelFilter(cpDefinitionId,
+			enable);
 	}
 
 	@Override

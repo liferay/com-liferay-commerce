@@ -113,6 +113,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 			{ "subscriptionType", Types.VARCHAR },
 			{ "subscriptionTypeSettings", Types.CLOB },
 			{ "maxSubscriptionCycles", Types.BIGINT },
+			{ "accountGroupFilterEnabled", Types.BOOLEAN },
+			{ "channelFilterEnabled", Types.BOOLEAN },
 			{ "version", Types.INTEGER },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
@@ -156,6 +158,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("accountGroupFilterEnabled", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("channelFilterEnabled", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("version", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
@@ -163,7 +167,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table CPDefinition (uuid_ VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,accountGroupFilterEnabled BOOLEAN,channelFilterEnabled BOOLEAN,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table CPDefinition";
 	public static final String ORDER_BY_JPQL = " ORDER BY cpDefinition.displayDate DESC, cpDefinition.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY CPDefinition.displayDate DESC, CPDefinition.createDate DESC";
@@ -235,6 +239,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		model.setSubscriptionType(soapModel.getSubscriptionType());
 		model.setSubscriptionTypeSettings(soapModel.getSubscriptionTypeSettings());
 		model.setMaxSubscriptionCycles(soapModel.getMaxSubscriptionCycles());
+		model.setAccountGroupFilterEnabled(soapModel.isAccountGroupFilterEnabled());
+		model.setChannelFilterEnabled(soapModel.isChannelFilterEnabled());
 		model.setVersion(soapModel.getVersion());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
@@ -338,6 +344,9 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		attributes.put("subscriptionType", getSubscriptionType());
 		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
+		attributes.put("accountGroupFilterEnabled",
+			isAccountGroupFilterEnabled());
+		attributes.put("channelFilterEnabled", isChannelFilterEnabled());
 		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
@@ -561,6 +570,20 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 		if (maxSubscriptionCycles != null) {
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
+		}
+
+		Boolean accountGroupFilterEnabled = (Boolean)attributes.get(
+				"accountGroupFilterEnabled");
+
+		if (accountGroupFilterEnabled != null) {
+			setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+		}
+
+		Boolean channelFilterEnabled = (Boolean)attributes.get(
+				"channelFilterEnabled");
+
+		if (channelFilterEnabled != null) {
+			setChannelFilterEnabled(channelFilterEnabled);
 		}
 
 		Integer version = (Integer)attributes.get("version");
@@ -1494,6 +1517,40 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@JSON
 	@Override
+	public boolean getAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	@Override
+	public void setAccountGroupFilterEnabled(boolean accountGroupFilterEnabled) {
+		_accountGroupFilterEnabled = accountGroupFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_channelFilterEnabled = channelFilterEnabled;
+	}
+
+	@JSON
+	@Override
 	public int getVersion() {
 		return _version;
 	}
@@ -1731,6 +1788,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		cpDefinitionImpl.setSubscriptionType(getSubscriptionType());
 		cpDefinitionImpl.setSubscriptionTypeSettings(getSubscriptionTypeSettings());
 		cpDefinitionImpl.setMaxSubscriptionCycles(getMaxSubscriptionCycles());
+		cpDefinitionImpl.setAccountGroupFilterEnabled(isAccountGroupFilterEnabled());
+		cpDefinitionImpl.setChannelFilterEnabled(isChannelFilterEnabled());
 		cpDefinitionImpl.setVersion(getVersion());
 		cpDefinitionImpl.setStatus(getStatus());
 		cpDefinitionImpl.setStatusByUserId(getStatusByUserId());
@@ -1986,6 +2045,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 		cpDefinitionCacheModel.maxSubscriptionCycles = getMaxSubscriptionCycles();
 
+		cpDefinitionCacheModel.accountGroupFilterEnabled = isAccountGroupFilterEnabled();
+
+		cpDefinitionCacheModel.channelFilterEnabled = isChannelFilterEnabled();
+
 		cpDefinitionCacheModel.version = getVersion();
 
 		cpDefinitionCacheModel.status = getStatus();
@@ -2014,7 +2077,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(83);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -2084,6 +2147,10 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getSubscriptionTypeSettings());
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(getMaxSubscriptionCycles());
+		sb.append(", accountGroupFilterEnabled=");
+		sb.append(isAccountGroupFilterEnabled());
+		sb.append(", channelFilterEnabled=");
+		sb.append(isChannelFilterEnabled());
 		sb.append(", version=");
 		sb.append(getVersion());
 		sb.append(", status=");
@@ -2101,7 +2168,7 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(121);
+		StringBundler sb = new StringBundler(127);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.product.model.CPDefinition");
@@ -2244,6 +2311,14 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 		sb.append(getMaxSubscriptionCycles());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>accountGroupFilterEnabled</column-name><column-value><![CDATA[");
+		sb.append(isAccountGroupFilterEnabled());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>channelFilterEnabled</column-name><column-value><![CDATA[");
+		sb.append(isChannelFilterEnabled());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
 		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
@@ -2318,6 +2393,8 @@ public class CPDefinitionModelImpl extends BaseModelImpl<CPDefinition>
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
 	private long _maxSubscriptionCycles;
+	private boolean _accountGroupFilterEnabled;
+	private boolean _channelFilterEnabled;
 	private int _version;
 	private int _status;
 	private int _originalStatus;

@@ -54,10 +54,10 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 			}
 		};
 
-	public CommerceCatalog getCommerceCatalog();
-
 	@Override
 	public boolean equals(Object object);
+
+	public CommerceCatalog getCommerceCatalog();
 
 	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
 		int type, int status)

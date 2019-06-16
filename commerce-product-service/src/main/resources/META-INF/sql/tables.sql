@@ -76,6 +76,8 @@ create table CPDefinition (
 	subscriptionType VARCHAR(75) null,
 	subscriptionTypeSettings TEXT null,
 	maxSubscriptionCycles LONG,
+	accountGroupFilterEnabled BOOLEAN,
+	channelFilterEnabled BOOLEAN,
 	version INTEGER,
 	status INTEGER,
 	statusByUserId LONG,

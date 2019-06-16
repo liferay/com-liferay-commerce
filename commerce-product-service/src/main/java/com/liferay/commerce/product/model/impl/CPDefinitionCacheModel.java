@@ -65,7 +65,7 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(83);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -135,6 +135,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		sb.append(subscriptionTypeSettings);
 		sb.append(", maxSubscriptionCycles=");
 		sb.append(maxSubscriptionCycles);
+		sb.append(", accountGroupFilterEnabled=");
+		sb.append(accountGroupFilterEnabled);
+		sb.append(", channelFilterEnabled=");
+		sb.append(channelFilterEnabled);
 		sb.append(", version=");
 		sb.append(version);
 		sb.append(", status=");
@@ -265,6 +269,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		}
 
 		cpDefinitionImpl.setMaxSubscriptionCycles(maxSubscriptionCycles);
+		cpDefinitionImpl.setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+		cpDefinitionImpl.setChannelFilterEnabled(channelFilterEnabled);
 		cpDefinitionImpl.setVersion(version);
 		cpDefinitionImpl.setStatus(status);
 		cpDefinitionImpl.setStatusByUserId(statusByUserId);
@@ -346,6 +352,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 		subscriptionTypeSettings = objectInput.readUTF();
 
 		maxSubscriptionCycles = objectInput.readLong();
+
+		accountGroupFilterEnabled = objectInput.readBoolean();
+
+		channelFilterEnabled = objectInput.readBoolean();
 
 		version = objectInput.readInt();
 
@@ -458,6 +468,10 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 
 		objectOutput.writeLong(maxSubscriptionCycles);
 
+		objectOutput.writeBoolean(accountGroupFilterEnabled);
+
+		objectOutput.writeBoolean(channelFilterEnabled);
+
 		objectOutput.writeInt(version);
 
 		objectOutput.writeInt(status);
@@ -508,6 +522,8 @@ public class CPDefinitionCacheModel implements CacheModel<CPDefinition>,
 	public String subscriptionType;
 	public String subscriptionTypeSettings;
 	public long maxSubscriptionCycles;
+	public boolean accountGroupFilterEnabled;
+	public boolean channelFilterEnabled;
 	public int version;
 	public int status;
 	public long statusByUserId;

@@ -619,6 +619,13 @@ public class CPDefinitionLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinition updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCPDefinitionAccountGroupFilter(cpDefinitionId, enable);
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinition updateCPDefinitionCategorization(
 		long cpDefinitionId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -626,6 +633,13 @@ public class CPDefinitionLocalServiceUtil {
 		return getService()
 				   .updateCPDefinitionCategorization(cpDefinitionId,
 			serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinition updateCPDefinitionChannelFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateCPDefinitionChannelFilter(cpDefinitionId, enable);
 	}
 
 	public static com.liferay.commerce.product.model.CPDefinition updateCPDefinitionIgnoreSKUCombinations(

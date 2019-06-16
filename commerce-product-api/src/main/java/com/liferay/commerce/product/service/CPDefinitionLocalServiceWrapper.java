@@ -667,12 +667,28 @@ public class CPDefinitionLocalServiceWrapper implements CPDefinitionLocalService
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLocalService.updateCPDefinitionAccountGroupFilter(cpDefinitionId,
+			enable);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionCategorization(
 		long cpDefinitionId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _cpDefinitionLocalService.updateCPDefinitionCategorization(cpDefinitionId,
 			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDefinition updateCPDefinitionChannelFilter(
+		long cpDefinitionId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _cpDefinitionLocalService.updateCPDefinitionChannelFilter(cpDefinitionId,
+			enable);
 	}
 
 	@Override

@@ -153,8 +153,14 @@ public interface CPDefinitionService extends BaseService {
 		int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable) throws PortalException;
+
 	public CPDefinition updateCPDefinitionCategorization(long cpDefinitionId,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinition updateCPDefinitionChannelFilter(long cpDefinitionId,
+		boolean enable) throws PortalException;
 
 	public void updateCPDisplayLayout(long cpDefinitionId, String layoutUuid,
 		ServiceContext serviceContext) throws PortalException;

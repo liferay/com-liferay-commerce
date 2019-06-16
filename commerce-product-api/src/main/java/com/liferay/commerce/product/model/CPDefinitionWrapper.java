@@ -94,6 +94,9 @@ public class CPDefinitionWrapper implements CPDefinition,
 		attributes.put("subscriptionType", getSubscriptionType());
 		attributes.put("subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
+		attributes.put("accountGroupFilterEnabled",
+			isAccountGroupFilterEnabled());
+		attributes.put("channelFilterEnabled", isChannelFilterEnabled());
 		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
@@ -316,6 +319,20 @@ public class CPDefinitionWrapper implements CPDefinition,
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
+		Boolean accountGroupFilterEnabled = (Boolean)attributes.get(
+				"accountGroupFilterEnabled");
+
+		if (accountGroupFilterEnabled != null) {
+			setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+		}
+
+		Boolean channelFilterEnabled = (Boolean)attributes.get(
+				"channelFilterEnabled");
+
+		if (channelFilterEnabled != null) {
+			setChannelFilterEnabled(channelFilterEnabled);
+		}
+
 		Integer version = (Integer)attributes.get("version");
 
 		if (version != null) {
@@ -358,6 +375,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
+	* Returns the account group filter enabled of this cp definition.
+	*
+	* @return the account group filter enabled of this cp definition
+	*/
+	@Override
+	public boolean getAccountGroupFilterEnabled() {
+		return _cpDefinition.getAccountGroupFilterEnabled();
+	}
+
+	/**
 	* Returns the available individually of this cp definition.
 	*
 	* @return the available individually of this cp definition
@@ -370,6 +397,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public String[] getAvailableLanguageIds() {
 		return _cpDefinition.getAvailableLanguageIds();
+	}
+
+	/**
+	* Returns the channel filter enabled of this cp definition.
+	*
+	* @return the channel filter enabled of this cp definition
+	*/
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _cpDefinition.getChannelFilterEnabled();
 	}
 
 	@Override
@@ -1053,6 +1090,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
+	* Returns <code>true</code> if this cp definition is account group filter enabled.
+	*
+	* @return <code>true</code> if this cp definition is account group filter enabled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isAccountGroupFilterEnabled() {
+		return _cpDefinition.isAccountGroupFilterEnabled();
+	}
+
+	/**
 	* Returns <code>true</code> if this cp definition is approved.
 	*
 	* @return <code>true</code> if this cp definition is approved; <code>false</code> otherwise
@@ -1075,6 +1122,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public boolean isCachedModel() {
 		return _cpDefinition.isCachedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this cp definition is channel filter enabled.
+	*
+	* @return <code>true</code> if this cp definition is channel filter enabled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _cpDefinition.isChannelFilterEnabled();
 	}
 
 	/**
@@ -1243,6 +1300,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	}
 
 	/**
+	* Sets whether this cp definition is account group filter enabled.
+	*
+	* @param accountGroupFilterEnabled the account group filter enabled of this cp definition
+	*/
+	@Override
+	public void setAccountGroupFilterEnabled(boolean accountGroupFilterEnabled) {
+		_cpDefinition.setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+	}
+
+	/**
 	* Sets whether this cp definition is available individually.
 	*
 	* @param availableIndividually the available individually of this cp definition
@@ -1255,6 +1322,16 @@ public class CPDefinitionWrapper implements CPDefinition,
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_cpDefinition.setCachedModel(cachedModel);
+	}
+
+	/**
+	* Sets whether this cp definition is channel filter enabled.
+	*
+	* @param channelFilterEnabled the channel filter enabled of this cp definition
+	*/
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_cpDefinition.setChannelFilterEnabled(channelFilterEnabled);
 	}
 
 	/**

@@ -486,9 +486,15 @@ public interface CPDefinitionLocalService extends BaseLocalService,
 		int expirationDateMinute, boolean neverExpire,
 		ServiceContext serviceContext) throws PortalException;
 
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable) throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition updateCPDefinitionCategorization(long cpDefinitionId,
 		ServiceContext serviceContext) throws PortalException;
+
+	public CPDefinition updateCPDefinitionChannelFilter(long cpDefinitionId,
+		boolean enable) throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition updateCPDefinitionIgnoreSKUCombinations(

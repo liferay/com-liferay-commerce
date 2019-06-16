@@ -646,6 +646,48 @@ public interface CPDefinitionModel extends BaseModel<CPDefinition>, ShardedModel
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
+	 * Returns the account group filter enabled of this cp definition.
+	 *
+	 * @return the account group filter enabled of this cp definition
+	 */
+	public boolean getAccountGroupFilterEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp definition is account group filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is account group filter enabled; <code>false</code> otherwise
+	 */
+	public boolean isAccountGroupFilterEnabled();
+
+	/**
+	 * Sets whether this cp definition is account group filter enabled.
+	 *
+	 * @param accountGroupFilterEnabled the account group filter enabled of this cp definition
+	 */
+	public void setAccountGroupFilterEnabled(boolean accountGroupFilterEnabled);
+
+	/**
+	 * Returns the channel filter enabled of this cp definition.
+	 *
+	 * @return the channel filter enabled of this cp definition
+	 */
+	public boolean getChannelFilterEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp definition is channel filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is channel filter enabled; <code>false</code> otherwise
+	 */
+	public boolean isChannelFilterEnabled();
+
+	/**
+	 * Sets whether this cp definition is channel filter enabled.
+	 *
+	 * @param channelFilterEnabled the channel filter enabled of this cp definition
+	 */
+	public void setChannelFilterEnabled(boolean channelFilterEnabled);
+
+	/**
 	 * Returns the version of this cp definition.
 	 *
 	 * @return the version of this cp definition

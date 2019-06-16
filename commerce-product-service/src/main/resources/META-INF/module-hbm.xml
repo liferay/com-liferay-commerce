@@ -130,6 +130,8 @@
 		<property name="subscriptionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="subscriptionTypeSettings" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
 		<property name="maxSubscriptionCycles" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="accountGroupFilterEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="channelFilterEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

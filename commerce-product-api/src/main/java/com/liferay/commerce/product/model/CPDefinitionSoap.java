@@ -68,6 +68,8 @@ public class CPDefinitionSoap implements Serializable {
 		soapModel.setSubscriptionType(model.getSubscriptionType());
 		soapModel.setSubscriptionTypeSettings(model.getSubscriptionTypeSettings());
 		soapModel.setMaxSubscriptionCycles(model.getMaxSubscriptionCycles());
+		soapModel.setAccountGroupFilterEnabled(model.isAccountGroupFilterEnabled());
+		soapModel.setChannelFilterEnabled(model.isChannelFilterEnabled());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
@@ -433,6 +435,30 @@ public class CPDefinitionSoap implements Serializable {
 		_maxSubscriptionCycles = maxSubscriptionCycles;
 	}
 
+	public boolean getAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	public boolean isAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	public void setAccountGroupFilterEnabled(boolean accountGroupFilterEnabled) {
+		_accountGroupFilterEnabled = accountGroupFilterEnabled;
+	}
+
+	public boolean getChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	public boolean isChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_channelFilterEnabled = channelFilterEnabled;
+	}
+
 	public int getVersion() {
 		return _version;
 	}
@@ -507,6 +533,8 @@ public class CPDefinitionSoap implements Serializable {
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
 	private long _maxSubscriptionCycles;
+	private boolean _accountGroupFilterEnabled;
+	private boolean _channelFilterEnabled;
 	private int _version;
 	private int _status;
 	private long _statusByUserId;
