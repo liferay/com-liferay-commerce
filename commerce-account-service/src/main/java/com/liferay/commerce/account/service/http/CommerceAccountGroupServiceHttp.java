@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceAccountGroupServiceHttp {
 	public static com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
-		HttpPrincipal httpPrincipal, String name, int type,
+		HttpPrincipal httpPrincipal, long companyId, String name, int type,
 		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -65,8 +65,8 @@ public class CommerceAccountGroupServiceHttp {
 					"addCommerceAccountGroup",
 					_addCommerceAccountGroupParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					type, externalReferenceCode, serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, name, type, externalReferenceCode, serviceContext);
 
 			Object returnObj = null;
 
@@ -321,7 +321,7 @@ public class CommerceAccountGroupServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceAccountGroupServiceHttp.class);
 	private static final Class<?>[] _addCommerceAccountGroupParameterTypes0 = new Class[] {
-			String.class, int.class, String.class,
+			long.class, String.class, int.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceAccountGroupParameterTypes1 = new Class[] {

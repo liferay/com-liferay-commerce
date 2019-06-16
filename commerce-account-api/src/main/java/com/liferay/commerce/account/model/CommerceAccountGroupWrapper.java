@@ -68,6 +68,7 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("type", getType());
+		attributes.put("system", isSystem());
 
 		return attributes;
 	}
@@ -128,6 +129,12 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 
 		if (type != null) {
 			setType(type);
+		}
+
+		Boolean system = (Boolean)attributes.get("system");
+
+		if (system != null) {
+			setSystem(system);
 		}
 	}
 
@@ -222,6 +229,16 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 	}
 
 	/**
+	* Returns the system of this commerce account group.
+	*
+	* @return the system of this commerce account group
+	*/
+	@Override
+	public boolean getSystem() {
+		return _commerceAccountGroup.getSystem();
+	}
+
+	/**
 	* Returns the type of this commerce account group.
 	*
 	* @return the type of this commerce account group
@@ -279,6 +296,16 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 	@Override
 	public boolean isNew() {
 		return _commerceAccountGroup.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this commerce account group is system.
+	*
+	* @return <code>true</code> if this commerce account group is system; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSystem() {
+		return _commerceAccountGroup.isSystem();
 	}
 
 	@Override
@@ -385,6 +412,16 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_commerceAccountGroup.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets whether this commerce account group is system.
+	*
+	* @param system the system of this commerce account group
+	*/
+	@Override
+	public void setSystem(boolean system) {
+		_commerceAccountGroup.setSystem(system);
 	}
 
 	/**

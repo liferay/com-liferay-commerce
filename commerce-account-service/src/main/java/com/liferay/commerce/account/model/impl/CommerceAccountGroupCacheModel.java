@@ -65,7 +65,7 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -85,6 +85,8 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 		sb.append(name);
 		sb.append(", type=");
 		sb.append(type);
+		sb.append(", system=");
+		sb.append(system);
 		sb.append("}");
 
 		return sb.toString();
@@ -134,6 +136,7 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 		}
 
 		commerceAccountGroupImpl.setType(type);
+		commerceAccountGroupImpl.setSystem(system);
 
 		commerceAccountGroupImpl.resetOriginalValues();
 
@@ -155,6 +158,8 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 		name = objectInput.readUTF();
 
 		type = objectInput.readInt();
+
+		system = objectInput.readBoolean();
 	}
 
 	@Override
@@ -191,6 +196,8 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 		}
 
 		objectOutput.writeInt(type);
+
+		objectOutput.writeBoolean(system);
 	}
 
 	public String externalReferenceCode;
@@ -202,4 +209,5 @@ public class CommerceAccountGroupCacheModel implements CacheModel<CommerceAccoun
 	public long modifiedDate;
 	public String name;
 	public int type;
+	public boolean system;
 }

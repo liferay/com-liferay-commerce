@@ -66,12 +66,12 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CommerceAccountGroupServiceSoap {
 	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap addCommerceAccountGroup(
-		String name, int type, String externalReferenceCode,
+		long companyId, String name, int type, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.addCommerceAccountGroup(name,
-					type, externalReferenceCode, serviceContext);
+			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.addCommerceAccountGroup(companyId,
+					name, type, externalReferenceCode, serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModel(returnValue);
 		}

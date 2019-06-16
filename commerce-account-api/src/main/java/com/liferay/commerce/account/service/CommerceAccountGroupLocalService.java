@@ -76,8 +76,11 @@ public interface CommerceAccountGroupLocalService extends BaseLocalService,
 		CommerceAccountGroup commerceAccountGroup);
 
 	@Indexable(type = IndexableType.REINDEX)
-	public CommerceAccountGroup addCommerceAccountGroup(String name, int type,
-		String externalReferenceCode, ServiceContext serviceContext)
+	public CommerceAccountGroup addCommerceAccountGroup(long companyId,
+		String name, int type, boolean system, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
+
+	public void checkGuestCommerceAccountGroup(long companyId)
 		throws PortalException;
 
 	/**

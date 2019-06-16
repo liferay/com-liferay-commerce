@@ -140,6 +140,8 @@ public class CommerceAccountGroupPersistenceTest {
 
 		newCommerceAccountGroup.setType(RandomTestUtil.nextInt());
 
+		newCommerceAccountGroup.setSystem(RandomTestUtil.randomBoolean());
+
 		_commerceAccountGroups.add(_persistence.update(newCommerceAccountGroup));
 
 		CommerceAccountGroup existingCommerceAccountGroup = _persistence.findByPrimaryKey(newCommerceAccountGroup.getPrimaryKey());
@@ -164,6 +166,8 @@ public class CommerceAccountGroupPersistenceTest {
 			newCommerceAccountGroup.getName());
 		Assert.assertEquals(existingCommerceAccountGroup.getType(),
 			newCommerceAccountGroup.getType());
+		Assert.assertEquals(existingCommerceAccountGroup.isSystem(),
+			newCommerceAccountGroup.isSystem());
 	}
 
 	@Test
@@ -186,6 +190,14 @@ public class CommerceAccountGroupPersistenceTest {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
 		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
+	public void testCountByC_T() throws Exception {
+		_persistence.countByC_T(RandomTestUtil.nextLong(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByC_T(0L, 0);
 	}
 
 	@Test
@@ -224,7 +236,8 @@ public class CommerceAccountGroupPersistenceTest {
 		return OrderByComparatorFactoryUtil.create("CommerceAccountGroup",
 			"externalReferenceCode", true, "commerceAccountGroupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "name", true, "type", true);
+			true, "modifiedDate", true, "name", true, "type", true, "system",
+			true);
 	}
 
 	@Test
@@ -464,6 +477,8 @@ public class CommerceAccountGroupPersistenceTest {
 		commerceAccountGroup.setName(RandomTestUtil.randomString());
 
 		commerceAccountGroup.setType(RandomTestUtil.nextInt());
+
+		commerceAccountGroup.setSystem(RandomTestUtil.randomBoolean());
 
 		_commerceAccountGroups.add(_persistence.update(commerceAccountGroup));
 

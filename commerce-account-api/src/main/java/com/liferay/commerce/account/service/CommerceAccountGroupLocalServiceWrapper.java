@@ -48,11 +48,18 @@ public class CommerceAccountGroupLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
-		String name, int type, String externalReferenceCode,
+		long companyId, String name, int type, boolean system,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountGroupLocalService.addCommerceAccountGroup(name,
-			type, externalReferenceCode, serviceContext);
+		return _commerceAccountGroupLocalService.addCommerceAccountGroup(companyId,
+			name, type, system, externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public void checkGuestCommerceAccountGroup(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_commerceAccountGroupLocalService.checkGuestCommerceAccountGroup(companyId);
 	}
 
 	/**

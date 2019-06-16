@@ -247,16 +247,16 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRelsByOrganizationId(
-		HttpPrincipal httpPrincipal, long organizationId, int start, int end)
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
+		HttpPrincipal httpPrincipal, long commerceAccountId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRelsByOrganizationId",
-					_getCommerceAccountOrganizationRelsByOrganizationIdParameterTypes6);
+					"getCommerceAccountOrganizationRels",
+					_getCommerceAccountOrganizationRelsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, start, end);
+					commerceAccountId, start, end);
 
 			Object returnObj = null;
 
@@ -280,16 +280,16 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRels(
-		HttpPrincipal httpPrincipal, long commerceAccountId, int start, int end)
+	public static java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> getCommerceAccountOrganizationRelsByOrganizationId(
+		HttpPrincipal httpPrincipal, long organizationId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountOrganizationRelServiceUtil.class,
-					"getCommerceAccountOrganizationRels",
-					_getCommerceAccountOrganizationRelsParameterTypes7);
+					"getCommerceAccountOrganizationRelsByOrganizationId",
+					_getCommerceAccountOrganizationRelsByOrganizationIdParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceAccountId, start, end);
+					organizationId, start, end);
 
 			Object returnObj = null;
 
@@ -400,9 +400,9 @@ public class CommerceAccountOrganizationRelServiceHttp {
 		};
 	private static final Class<?>[] _getCommerceAccountOrganizationRelsParameterTypes5 =
 		new Class[] { long.class };
-	private static final Class<?>[] _getCommerceAccountOrganizationRelsByOrganizationIdParameterTypes6 =
+	private static final Class<?>[] _getCommerceAccountOrganizationRelsParameterTypes6 =
 		new Class[] { long.class, int.class, int.class };
-	private static final Class<?>[] _getCommerceAccountOrganizationRelsParameterTypes7 =
+	private static final Class<?>[] _getCommerceAccountOrganizationRelsByOrganizationIdParameterTypes7 =
 		new Class[] { long.class, int.class, int.class };
 	private static final Class<?>[] _getCommerceAccountOrganizationRelsByOrganizationIdCountParameterTypes8 =
 		new Class[] { long.class };

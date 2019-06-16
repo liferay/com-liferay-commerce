@@ -78,7 +78,8 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
-			{ "type_", Types.INTEGER }
+			{ "type_", Types.INTEGER },
+			{ "system", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -92,9 +93,10 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("system", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table CommerceAccountGroup (externalReferenceCode VARCHAR(75) null,commerceAccountGroupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CommerceAccountGroup (externalReferenceCode VARCHAR(75) null,commerceAccountGroupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ INTEGER,system BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccountGroup";
 	public static final String ORDER_BY_JPQL = " ORDER BY commerceAccountGroup.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CommerceAccountGroup.name ASC";
@@ -113,7 +115,8 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 	public static final long COMMERCEACCOUNTGROUPID_COLUMN_BITMASK = 1L;
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
-	public static final long NAME_COLUMN_BITMASK = 8L;
+	public static final long TYPE_COLUMN_BITMASK = 8L;
+	public static final long NAME_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -138,6 +141,7 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
+		model.setSystem(soapModel.isSystem());
 
 		return model;
 	}
@@ -212,6 +216,7 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("name", getName());
 		attributes.put("type", getType());
+		attributes.put("system", isSystem());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -275,6 +280,12 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 		if (type != null) {
 			setType(type);
+		}
+
+		Boolean system = (Boolean)attributes.get("system");
+
+		if (system != null) {
+			setSystem(system);
 		}
 	}
 
@@ -447,7 +458,36 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 	@Override
 	public void setType(int type) {
+		_columnBitmask |= TYPE_COLUMN_BITMASK;
+
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
+	}
+
+	@JSON
+	@Override
+	public boolean getSystem() {
+		return _system;
+	}
+
+	@JSON
+	@Override
+	public boolean isSystem() {
+		return _system;
+	}
+
+	@Override
+	public void setSystem(boolean system) {
+		_system = system;
 	}
 
 	public long getColumnBitmask() {
@@ -490,6 +530,7 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 		commerceAccountGroupImpl.setModifiedDate(getModifiedDate());
 		commerceAccountGroupImpl.setName(getName());
 		commerceAccountGroupImpl.setType(getType());
+		commerceAccountGroupImpl.setSystem(isSystem());
 
 		commerceAccountGroupImpl.resetOriginalValues();
 
@@ -562,6 +603,10 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 		commerceAccountGroupModelImpl._setModifiedDate = false;
 
+		commerceAccountGroupModelImpl._originalType = commerceAccountGroupModelImpl._type;
+
+		commerceAccountGroupModelImpl._setOriginalType = false;
+
 		commerceAccountGroupModelImpl._columnBitmask = 0;
 	}
 
@@ -620,12 +665,14 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 		commerceAccountGroupCacheModel.type = getType();
 
+		commerceAccountGroupCacheModel.system = isSystem();
+
 		return commerceAccountGroupCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(getExternalReferenceCode());
@@ -645,6 +692,8 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 		sb.append(getName());
 		sb.append(", type=");
 		sb.append(getType());
+		sb.append(", system=");
+		sb.append(isSystem());
 		sb.append("}");
 
 		return sb.toString();
@@ -652,7 +701,7 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.commerce.account.model.CommerceAccountGroup");
@@ -694,6 +743,10 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>system</column-name><column-value><![CDATA[");
+		sb.append(isSystem());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -719,6 +772,9 @@ public class CommerceAccountGroupModelImpl extends BaseModelImpl<CommerceAccount
 	private boolean _setModifiedDate;
 	private String _name;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
+	private boolean _system;
 	private long _columnBitmask;
 	private CommerceAccountGroup _escapedModel;
 }

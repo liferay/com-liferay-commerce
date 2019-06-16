@@ -55,12 +55,18 @@ public class CommerceAccountGroupLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
-		String name, int type, String externalReferenceCode,
+		long companyId, String name, int type, boolean system,
+		String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceAccountGroup(name, type, externalReferenceCode,
-			serviceContext);
+				   .addCommerceAccountGroup(companyId, name, type, system,
+			externalReferenceCode, serviceContext);
+	}
+
+	public static void checkGuestCommerceAccountGroup(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().checkGuestCommerceAccountGroup(companyId);
 	}
 
 	/**

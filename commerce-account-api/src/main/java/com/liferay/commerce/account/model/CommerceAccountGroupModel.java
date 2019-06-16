@@ -220,6 +220,27 @@ public interface CommerceAccountGroupModel extends AuditedModel,
 	 */
 	public void setType(int type);
 
+	/**
+	 * Returns the system of this commerce account group.
+	 *
+	 * @return the system of this commerce account group
+	 */
+	public boolean getSystem();
+
+	/**
+	 * Returns <code>true</code> if this commerce account group is system.
+	 *
+	 * @return <code>true</code> if this commerce account group is system; <code>false</code> otherwise
+	 */
+	public boolean isSystem();
+
+	/**
+	 * Sets whether this commerce account group is system.
+	 *
+	 * @param system the system of this commerce account group
+	 */
+	public void setSystem(boolean system);
+
 	@Override
 	public boolean isNew();
 

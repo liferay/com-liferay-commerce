@@ -45,6 +45,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="type_" name="type" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="system" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.commerce.account.model.impl.CommerceAccountGroupCommerceAccountRelImpl" table="CAccountGroupCAccountRel">
 		<id column="CAccountGroupCAccountRelId" name="commerceAccountGroupCommerceAccountRelId" type="long">

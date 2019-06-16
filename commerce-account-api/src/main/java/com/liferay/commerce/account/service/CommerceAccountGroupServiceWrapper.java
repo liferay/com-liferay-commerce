@@ -36,11 +36,11 @@ public class CommerceAccountGroupServiceWrapper
 
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup addCommerceAccountGroup(
-		String name, int type, String externalReferenceCode,
+		long companyId, String name, int type, String externalReferenceCode,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceAccountGroupService.addCommerceAccountGroup(name, type,
-			externalReferenceCode, serviceContext);
+		return _commerceAccountGroupService.addCommerceAccountGroup(companyId,
+			name, type, externalReferenceCode, serviceContext);
 	}
 
 	@Override

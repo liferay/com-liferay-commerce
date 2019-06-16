@@ -57,9 +57,9 @@ public interface CommerceAccountGroupService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountGroupServiceUtil} to access the commerce account group remote service. Add custom service methods to {@link com.liferay.commerce.account.service.impl.CommerceAccountGroupServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public CommerceAccountGroup addCommerceAccountGroup(String name, int type,
-		String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException;
+	public CommerceAccountGroup addCommerceAccountGroup(long companyId,
+		String name, int type, String externalReferenceCode,
+		ServiceContext serviceContext) throws PortalException;
 
 	public void deleteCommerceAccountGroup(long commerceAccountGroupId)
 		throws PortalException;

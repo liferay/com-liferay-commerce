@@ -156,11 +156,11 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRelsByOrganizationId(
-		long organizationId, int start, int end) throws RemoteException {
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRels(
+		long commerceAccountId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> returnValue =
-				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRelsByOrganizationId(organizationId,
+				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRels(commerceAccountId,
 					start, end);
 
 			return com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap.toSoapModels(returnValue);
@@ -172,11 +172,11 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRels(
-		long commerceAccountId, int start, int end) throws RemoteException {
+	public static com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[] getCommerceAccountOrganizationRelsByOrganizationId(
+		long organizationId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.commerce.account.model.CommerceAccountOrganizationRel> returnValue =
-				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRels(commerceAccountId,
+				CommerceAccountOrganizationRelServiceUtil.getCommerceAccountOrganizationRelsByOrganizationId(organizationId,
 					start, end);
 
 			return com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap.toSoapModels(returnValue);

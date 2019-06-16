@@ -44,6 +44,7 @@ public class CommerceAccountGroupSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
+		soapModel.setSystem(model.isSystem());
 
 		return soapModel;
 	}
@@ -171,6 +172,18 @@ public class CommerceAccountGroupSoap implements Serializable {
 		_type = type;
 	}
 
+	public boolean getSystem() {
+		return _system;
+	}
+
+	public boolean isSystem() {
+		return _system;
+	}
+
+	public void setSystem(boolean system) {
+		_system = system;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceAccountGroupId;
 	private long _companyId;
@@ -180,4 +193,5 @@ public class CommerceAccountGroupSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private int _type;
+	private boolean _system;
 }
