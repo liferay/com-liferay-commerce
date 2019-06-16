@@ -53,7 +53,7 @@ List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntr
 		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
 		%>
 
-			<aui:option label="<%= commerceCatalog.getName() %>" selected="<%= (commercePriceList == null) ? (commerceCatalogs.size() == 1) : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getCommerceCatalogGroupId() %>" />
+			<aui:option label="<%= commerceCatalog.getName() %>" selected="<%= (commercePriceList == null) ? (commerceCatalogs.size() == 1) : commercePriceListDisplayContext.isSelectedCatalog(commerceCatalog) %>" value="<%= commerceCatalog.getGroupId() %>" />
 
 		<%
 		}
