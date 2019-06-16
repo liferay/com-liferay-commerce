@@ -254,6 +254,8 @@
 		<column name="subscriptionType" type="String" />
 		<column name="subscriptionTypeSettings" type="String" />
 		<column name="maxSubscriptionCycles" type="long" />
+		<column name="accountGroupFilterEnabled" type="boolean" />
+		<column name="channelFilterEnabled" type="boolean" />
 		<column name="version" type="int" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
