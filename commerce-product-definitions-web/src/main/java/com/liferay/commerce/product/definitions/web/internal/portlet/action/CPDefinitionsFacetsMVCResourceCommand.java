@@ -18,13 +18,16 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
-import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
+import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.commerce.product.service.CPOptionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -51,6 +54,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -87,6 +91,19 @@ public class CPDefinitionsFacetsMVCResourceCommand
 		searchContext.setLocale(themeDisplay.getLocale());
 		searchContext.setTimeZone(themeDisplay.getTimeZone());
 		searchContext.setUserId(themeDisplay.getUserId());
+
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.getCommerceCatalogs(
+				themeDisplay.getCompanyId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		long[] groupIds = stream.mapToLong(
+			CommerceCatalog::getGroupId
+		).toArray();
+
+		searchContext.setGroupIds(groupIds);
 
 		searchContext.setAttribute(Field.STATUS, WorkflowConstants.STATUS_ANY);
 
@@ -189,7 +206,7 @@ public class CPDefinitionsFacetsMVCResourceCommand
 				String optionKey = termCollector.getTerm();
 
 				CPOption cpOption = _cpOptionService.fetchCPOption(
-					themeDisplay.getScopeGroupId(), optionKey);
+					themeDisplay.getCompanyId(), optionKey);
 
 				if (cpOption != null) {
 					label = cpOption.getName(themeDisplay.getLocale());
@@ -197,9 +214,8 @@ public class CPDefinitionsFacetsMVCResourceCommand
 			}
 			else if (Validator.isNotNull(currentOptionKey)) {
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
-					_cpDefinitionOptionValueRelService.
+					_cpDefinitionOptionValueRelLocalService.
 						getCPDefinitionOptionValueRels(
-							themeDisplay.getScopeGroupId(),
 							termCollector.getTerm(), 0, 1);
 
 				if (!cpDefinitionOptionValueRels.isEmpty()) {
@@ -236,11 +252,14 @@ public class CPDefinitionsFacetsMVCResourceCommand
 	}
 
 	@Reference
+	private CommerceCatalogService _commerceCatalogService;
+
+	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
-	private CPDefinitionOptionValueRelService
-		_cpDefinitionOptionValueRelService;
+	private CPDefinitionOptionValueRelLocalService
+		_cpDefinitionOptionValueRelLocalService;
 
 	@Reference
 	private CPOptionService _cpOptionService;
