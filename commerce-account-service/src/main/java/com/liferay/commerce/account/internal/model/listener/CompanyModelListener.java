@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.account.internal.model.listener;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,6 +34,17 @@ import org.osgi.service.component.annotations.Reference;
 public class CompanyModelListener extends BaseModelListener<Company> {
 
 	@Override
+	public void onAfterCreate(Company company) throws ModelListenerException {
+		try {
+			_commerceAccountGroupLocalService.checkGuestCommerceAccountGroup(
+				company.getCompanyId());
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+	}
+
+	@Override
 	public void onBeforeRemove(Company company) {
 		try {
 			_commerceAccountLocalService.deleteCommerceAccounts(
@@ -44,6 +57,9 @@ public class CompanyModelListener extends BaseModelListener<Company> {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CompanyModelListener.class);
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;

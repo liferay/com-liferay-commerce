@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.internal.verify;
 
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -47,6 +48,18 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		verifyAccountRoles();
+		verifyAccountGroup();
+	}
+
+	protected void verifyAccountGroup() throws Exception {
+		try (LoggingTimer loggingTimer = new LoggingTimer()) {
+			List<Company> companies = _companyLocalService.getCompanies();
+
+			for (Company company : companies) {
+				_commerceAccountGroupLocalService.
+					checkGuestCommerceAccountGroup(company.getCompanyId());
+			}
+		}
 	}
 
 	protected void verifyAccountRoles() throws Exception {
@@ -82,6 +95,9 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 
 		return userIds[0];
 	}
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
