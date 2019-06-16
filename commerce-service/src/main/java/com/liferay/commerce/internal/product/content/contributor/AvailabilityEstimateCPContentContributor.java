@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPContentContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
@@ -72,6 +73,14 @@ public class AvailabilityEstimateCPContentContributor
 			return jsonObject;
 		}
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest));
+
+		if (commerceChannel == null) {
+			return jsonObject;
+		}
+
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
 				fetchCPDefinitionInventoryByCPDefinitionId(
@@ -83,12 +92,8 @@ public class AvailabilityEstimateCPContentContributor
 
 		boolean available = false;
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
-
 		if (_commerceInventoryEngine.getStockQuantity(
-				cpInstance.getCompanyId(), commerceChannelGroupId,
+				cpInstance.getCompanyId(), commerceChannel.getGroupId(),
 				cpInstance.getSku()) >
 					cpDefinitionInventoryEngine.getMinStockQuantity(
 						cpInstance)) {
