@@ -44,7 +44,7 @@ CommerceAccountGroup commerceAccountGroup = (CommerceAccountGroup)row.getObject(
 		/>
 	</c:if>
 
-	<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasPermission(commerceAccountGroup.getCommerceAccountGroupId(), ActionKeys.DELETE) %>">
+	<c:if test="<%= commerceAccountGroupAdminDisplayContext.hasPermission(commerceAccountGroup.getCommerceAccountGroupId(), ActionKeys.DELETE) && !commerceAccountGroup.isSystem() %>">
 		<portlet:actionURL name="editCommerceAccountGroup" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
