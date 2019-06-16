@@ -8,7 +8,6 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.soy", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.cart.taglib", version: "2.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.content.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.item.selector.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.taglib", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.0.0"
@@ -25,6 +24,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-inventory-api")
 	compileOnly project(":apps:commerce:commerce-media-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
+	compileOnly project(":apps:commerce:commerce-product-content-api")
 	compileOnly project(":apps:commerce:commerce-product-service")
 
 	runtime group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.impl", version: "1.0.0"
