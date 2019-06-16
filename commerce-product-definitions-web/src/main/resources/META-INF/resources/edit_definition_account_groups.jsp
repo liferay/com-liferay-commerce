@@ -19,29 +19,31 @@
 <%
 CPDefinitionAccountGroupDisplayContext cpDefinitionAccountGroupDisplayContext = (CPDefinitionAccountGroupDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-long cpDefinitionId = cpDefinitionAccountGroupDisplayContext.getCPDefinitionId();
+CPDefinition cpDefinition = cpDefinitionAccountGroupDisplayContext.getCPDefinition();
 List<CommerceAccountGroup> commerceAccountGroups = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroups();
 long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getCommerceAccountGroupRelCommerceAccountGroupIds();
 %>
 
-<c:choose>
-	<c:when test="<%= commerceAccountGroups.isEmpty() %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="there-are-no-account-groups" />
-		</div>
-	</c:when>
-	<c:otherwise>
-		<portlet:actionURL name="editProductDefinition" var="editProductDefinitionAccountGroupActionURL" />
+<portlet:actionURL name="editProductDefinition" var="editProductDefinitionAccountGroupActionURL" />
 
-		<aui:form action="<%= editProductDefinitionAccountGroupActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateAccountGroups" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
-			<aui:input name="commerceAccountGroupIds" type="hidden" />
+<aui:form action="<%= editProductDefinitionAccountGroupActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateAccountGroups" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinition.getCPDefinitionId() %>" />
+	<aui:input name="commerceAccountGroupIds" type="hidden" />
 
-			<div class="lfr-form-content">
-				<aui:fieldset-group markupView="lexicon">
-					<aui:fieldset>
+	<div class="lfr-form-content">
+		<aui:fieldset-group markupView="lexicon">
+			<aui:fieldset>
+				<aui:input checked="<%= cpDefinition.isAccountGroupFilterEnabled() %>" label="enable-filter-account-groups" name="accountGroupFilterEnabled" type="toggle-switch" value="<%= cpDefinition.isAccountGroupFilterEnabled() %>" />
+
+				<c:choose>
+					<c:when test="<%= commerceAccountGroups.isEmpty() %>">
+						<div class="alert alert-info">
+							<liferay-ui:message key="there-are-no-account-groups" />
+						</div>
+					</c:when>
+					<c:otherwise>
 
 						<%
 						for (CommerceAccountGroup commerceAccountGroup : commerceAccountGroups) {
@@ -53,18 +55,18 @@ long[] commerceAccountGroupIds = cpDefinitionAccountGroupDisplayContext.getComme
 						}
 						%>
 
-					</aui:fieldset>
-				</aui:fieldset-group>
+					</c:otherwise>
+				</c:choose>
 
 				<aui:button-row>
 					<aui:button cssClass="btn-lg" type="submit" />
 
 					<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
 				</aui:button-row>
-			</div>
-		</aui:form>
-	</c:otherwise>
-</c:choose>
+			</aui:fieldset>
+		</aui:fieldset-group>
+	</div>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />fulfillCommerceAccountGroupIds(e) {
