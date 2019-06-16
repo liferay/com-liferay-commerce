@@ -280,7 +280,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 					accountGroupIdsBooleanFilter, BooleanClauseOccur.MUST);
 			}
 			else {
-				channelFilterEnableBooleanFiler.addTerm(
+				accountGroupsFilteEnableBooleanFilter.addTerm(
 					"commerceAccountGroupIds", "-1", BooleanClauseOccur.MUST);
 			}
 
