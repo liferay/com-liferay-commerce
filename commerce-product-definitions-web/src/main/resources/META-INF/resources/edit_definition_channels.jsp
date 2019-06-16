@@ -19,29 +19,31 @@
 <%
 CPDefinitionChannelDisplayContext cpDefinitionChannelDisplayContext = (CPDefinitionChannelDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-long cpDefinitionId = cpDefinitionChannelDisplayContext.getCPDefinitionId();
+CPDefinition cpDefinition = cpDefinitionChannelDisplayContext.getCPDefinition();
 List<CommerceChannel> commerceChannels = cpDefinitionChannelDisplayContext.getCommerceChannels();
 long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannelRelCommerceChannelIds();
 %>
 
-<c:choose>
-	<c:when test="<%= commerceChannels.isEmpty() %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="there-are-no-channels" />
-		</div>
-	</c:when>
-	<c:otherwise>
-		<portlet:actionURL name="editProductDefinition" var="editProductDefinitionChannelActionURL" />
+<portlet:actionURL name="editProductDefinition" var="editProductDefinitionChannelActionURL" />
 
-		<aui:form action="<%= editProductDefinitionChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateChannels" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
-			<aui:input name="commerceChannelIds" type="hidden" />
+<aui:form action="<%= editProductDefinitionChannelActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateChannels" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinition.getCPDefinitionId() %>" />
+	<aui:input name="commerceChannelIds" type="hidden" />
 
-			<div class="lfr-form-content">
-				<aui:fieldset-group markupView="lexicon">
-					<aui:fieldset>
+	<div class="lfr-form-content">
+		<aui:fieldset-group markupView="lexicon">
+			<aui:fieldset>
+				<aui:input checked="<%= cpDefinition.isChannelFilterEnabled() %>" label="enable-filter-channels" name="channelFilterEnabled" type="toggle-switch" value="<%= cpDefinition.isChannelFilterEnabled() %>" />
+
+				<c:choose>
+					<c:when test="<%= commerceChannels.isEmpty() %>">
+						<div class="alert alert-info">
+							<liferay-ui:message key="there-are-no-channels" />
+						</div>
+					</c:when>
+					<c:otherwise>
 
 						<%
 						for (CommerceChannel commerceChannel : commerceChannels) {
@@ -53,18 +55,18 @@ long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannel
 						}
 						%>
 
-					</aui:fieldset>
-				</aui:fieldset-group>
+					</c:otherwise>
+				</c:choose>
 
 				<aui:button-row>
 					<aui:button cssClass="btn-lg" type="submit" />
 
 					<aui:button cssClass="btn-lg" href="<%= catalogURL %>" type="cancel" />
 				</aui:button-row>
-			</div>
-		</aui:form>
-	</c:otherwise>
-</c:choose>
+			</aui:fieldset>
+		</aui:fieldset-group>
+	</div>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />fulfillCommerceChannelIds(e) {

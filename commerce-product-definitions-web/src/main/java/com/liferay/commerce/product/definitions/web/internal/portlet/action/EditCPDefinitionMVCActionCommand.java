@@ -290,6 +290,9 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		long[] commerceAccountGroupIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "commerceAccountGroupIds"), 0L);
 
+		boolean accountGroupFilterEnabled = ParamUtil.getBoolean(
+			actionRequest, "accountGroupFilterEnabled");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceAccountGroupRel.class.getName(), actionRequest);
 
@@ -298,13 +301,16 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 
 		for (long commerceAccountGroupId : commerceAccountGroupIds) {
 			if (commerceAccountGroupId == 0) {
-				return;
+				continue;
 			}
 
 			_commerceAccountGroupRelService.addCommerceAccountGroupRel(
 				CPDefinition.class.getName(), cpDefinitionId,
 				commerceAccountGroupId, serviceContext);
 		}
+
+		_cpDefinitionService.updateCPDefinitionAccountGroupFilter(
+			cpDefinitionId, accountGroupFilterEnabled);
 
 		reindexCPDefinition(cpDefinitionId);
 	}
@@ -331,6 +337,9 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 		long[] commerceChannelIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
 
+		boolean channelFilterEnabled = ParamUtil.getBoolean(
+			actionRequest, "channelFilterEnabled");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceChannelRel.class.getName(), actionRequest);
 
@@ -338,10 +347,17 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			CPDefinition.class.getName(), cpDefinitionId);
 
 		for (long commerceChannelId : commerceChannelIds) {
+			if (commerceChannelId == 0) {
+				continue;
+			}
+
 			_commerceChannelRelService.addCommerceChannelRel(
 				CPDefinition.class.getName(), cpDefinitionId, commerceChannelId,
 				serviceContext);
 		}
+
+		_cpDefinitionService.updateCPDefinitionChannelFilter(
+			cpDefinitionId, channelFilterEnabled);
 
 		reindexCPDefinition(cpDefinitionId);
 	}
