@@ -109,6 +109,11 @@ CommerceAccountGroupAdminDisplayContext commerceAccountGroupAdminDisplayContext 
 						property="name"
 					/>
 
+					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
+						property="system"
+					/>
+
 					<liferay-ui:search-container-column-jsp
 						cssClass="entry-action-column"
 						path="/account_group_action.jsp"

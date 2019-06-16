@@ -76,7 +76,7 @@ public class CommerceAccountGroupAccountScreenNavigationEntry
 	public boolean isVisible(
 		User user, CommerceAccountGroup commerceAccountGroup) {
 
-		if (commerceAccountGroup == null) {
+		if ((commerceAccountGroup == null) || commerceAccountGroup.isSystem()) {
 			return false;
 		}
 
