@@ -14,15 +14,20 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.CommerceAccountGroupNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
+import com.liferay.commerce.account.exception.SystemCommerceAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
@@ -40,6 +45,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -57,26 +63,27 @@ public class CommerceAccountGroupLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccountGroup addCommerceAccountGroup(
-			String name, int type, String externalReferenceCode,
-			ServiceContext serviceContext)
+			long companyId, String name, int type, boolean system,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce Account Group
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
+		validate(companyId, 0, name, externalReferenceCode);
 
 		long commerceAccountGroupId = counterLocalService.increment();
 
 		CommerceAccountGroup commerceAccountGroup =
 			commerceAccountGroupPersistence.create(commerceAccountGroupId);
 
-		commerceAccountGroup.setCompanyId(user.getCompanyId());
+		commerceAccountGroup.setCompanyId(companyId);
 		commerceAccountGroup.setUserId(user.getUserId());
 		commerceAccountGroup.setUserName(user.getFullName());
 		commerceAccountGroup.setName(name);
 		commerceAccountGroup.setType(type);
+		commerceAccountGroup.setSystem(system);
 		commerceAccountGroup.setExternalReferenceCode(externalReferenceCode);
 		commerceAccountGroup.setExpandoBridgeAttributes(serviceContext);
 
@@ -93,12 +100,56 @@ public class CommerceAccountGroupLocalServiceImpl
 		return commerceAccountGroup;
 	}
 
+	@Override
+	public void checkGuestCommerceAccountGroup(long companyId)
+		throws PortalException {
+
+		int count = commerceAccountGroupPersistence.countByC_T(
+			companyId, CommerceAccountConstants.ACCOUNT_GROUP_TYPE_GUEST);
+
+		if (count > 0) {
+			return;
+		}
+
+		Role role = roleLocalService.getRole(
+			companyId, RoleConstants.ADMINISTRATOR);
+
+		long[] userIds = userLocalService.getRoleUserIds(role.getRoleId());
+
+		if (userIds.length == 0) {
+			throw new NoSuchUserException(
+				StringBundler.concat(
+					"No user exists in company ", String.valueOf(companyId),
+					" with role ", role.getName()));
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setUserId(userIds[0]);
+
+		CommerceAccountGroup commerceAccountGroup =
+			commerceAccountGroupLocalService.addCommerceAccountGroup(
+				companyId, CommerceAccountConstants.ACCOUNT_GROUP_GUEST_NAME,
+				CommerceAccountConstants.ACCOUNT_GROUP_TYPE_GUEST, true, null,
+				serviceContext);
+
+		commerceAccountGroupCommerceAccountRelLocalService.
+			addCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				CommerceAccountConstants.GUEST_ACCOUNT_ID, serviceContext);
+	}
+
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceAccountGroup deleteCommerceAccountGroup(
 			CommerceAccountGroup commerceAccountGroup)
 		throws PortalException {
+
+		if (commerceAccountGroup.isSystem()) {
+			throw new SystemCommerceAccountGroupException();
+		}
 
 		// Commerce account rels
 
@@ -210,6 +261,10 @@ public class CommerceAccountGroupLocalServiceImpl
 			commerceAccountGroupPersistence.findByPrimaryKey(
 				commerceAccountGroupId);
 
+		if (commerceAccountGroup.isSystem()) {
+			throw new SystemCommerceAccountGroupException();
+		}
+
 		validate(
 			serviceContext.getCompanyId(),
 			commerceAccountGroup.getCommerceAccountGroupId(), name,
@@ -309,7 +364,7 @@ public class CommerceAccountGroupLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long commerceAccountGroupRelId, String name,
+			long companyId, long commerceAccountGroupId, String name,
 			String externalReferenceCode)
 		throws PortalException {
 
@@ -327,7 +382,7 @@ public class CommerceAccountGroupLocalServiceImpl
 
 		if ((commerceAccountGroup != null) &&
 			(commerceAccountGroup.getCommerceAccountGroupId() !=
-				commerceAccountGroupRelId)) {
+				commerceAccountGroupId)) {
 
 			throw new DuplicateCommerceAccountException(
 				"There is another commerce account group with external " +
