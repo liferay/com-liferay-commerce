@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -152,11 +155,24 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 	@Override
 	public CPCatalogEntry getCPCatalogEntry(
-		HttpServletRequest httpServletRequest) {
+			HttpServletRequest httpServletRequest)
+		throws PortalException {
 
 		CPCatalogEntry cpCatalogEntry =
 			(CPCatalogEntry)httpServletRequest.getAttribute(
 				CPWebKeys.CP_CATALOG_ENTRY);
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
 
 		if (cpCatalogEntry == null) {
 			long productId = ParamUtil.getLong(httpServletRequest, "productId");
@@ -170,6 +186,8 @@ public class CPContentHelperImpl implements CPContentHelper {
 				}
 
 				cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
+					commerceAccountId,
+					commerceContext.getCommerceChannelGroupId(),
 					cProduct.getPublishedCPDefinitionId(),
 					_portal.getLocale(httpServletRequest));
 			}
@@ -380,8 +398,21 @@ public class CPContentHelperImpl implements CPContentHelper {
 
 	@Override
 	public ResourceURL getViewAttachmentURL(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException {
+
+		CommerceContext commerceContext =
+			(CommerceContext)liferayPortletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
 
 		ResourceURL resourceURL = liferayPortletResponse.createResourceURL();
 

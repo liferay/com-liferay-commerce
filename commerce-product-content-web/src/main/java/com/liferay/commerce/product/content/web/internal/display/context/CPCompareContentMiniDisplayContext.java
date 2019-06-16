@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.product.content.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
@@ -135,10 +138,24 @@ public class CPCompareContentMiniDisplayContext {
 	public CPDataSourceResult getCPDataSourceResult() throws PortalException {
 		List<CPCatalogEntry> cpCatalogEntries = new ArrayList<>();
 
+		HttpServletRequest httpServletRequest = _cpRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		for (Long cpDefinitionId : _cpDefinitionIds) {
-			cpCatalogEntries.add(
-				_cpDefinitionHelper.getCPCatalogEntry(
-					cpDefinitionId, _cpRequestHelper.getLocale()));
+			_cpDefinitionHelper.getCPCatalogEntry(
+				commerceAccountId, commerceContext.getCommerceChannelGroupId(),
+				cpDefinitionId, _cpRequestHelper.getLocale());
 		}
 
 		if (cpCatalogEntries.size() > getProductsLimit()) {

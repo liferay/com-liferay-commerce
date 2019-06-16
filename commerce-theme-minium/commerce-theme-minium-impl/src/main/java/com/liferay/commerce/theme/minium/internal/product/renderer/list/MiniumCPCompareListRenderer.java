@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.theme.minium.internal.product.renderer.list;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
 import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -97,6 +100,18 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 			(CPCompareContentHelper)httpServletRequest.getAttribute(
 				CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		int limit = cpCompareContentHelper.getProductsLimit(
 			themeDisplay.getPortletDisplay());
 
@@ -108,7 +123,9 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 		for (Long cpDefinitionId : cpDefinitionIds) {
 			CPCatalogEntry cpCatalogEntry =
 				_cpDefinitionHelper.getCPCatalogEntry(
-					cpDefinitionId, themeDisplay.getLocale());
+					commerceAccountId,
+					commerceContext.getCommerceChannelGroupId(), cpDefinitionId,
+					themeDisplay.getLocale());
 
 			String thumbnail = cpCatalogEntry.getDefaultImageFileUrl();
 
