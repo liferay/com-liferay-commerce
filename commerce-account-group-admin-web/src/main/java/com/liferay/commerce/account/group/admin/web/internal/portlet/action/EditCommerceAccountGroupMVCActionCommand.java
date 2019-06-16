@@ -174,7 +174,8 @@ public class EditCommerceAccountGroupMVCActionCommand
 		if (commerceAccountGroupId <= 0) {
 			commerceAccountGroup =
 				_commerceAccountGroupService.addCommerceAccountGroup(
-					name, type, null, serviceContext);
+					_portal.getCompanyId(actionRequest), name, type, null,
+					serviceContext);
 		}
 		else {
 			commerceAccountGroup =
