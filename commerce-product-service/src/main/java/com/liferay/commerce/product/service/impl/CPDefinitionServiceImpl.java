@@ -272,6 +272,18 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 	}
 
 	@Override
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException {
+
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.UPDATE);
+
+		return cpDefinitionLocalService.updateCPDefinitionAccountGroupFilter(
+			cpDefinitionId, enable);
+	}
+
+	@Override
 	public CPDefinition updateCPDefinitionCategorization(
 			long cpDefinitionId, ServiceContext serviceContext)
 		throws PortalException {
@@ -281,6 +293,18 @@ public class CPDefinitionServiceImpl extends CPDefinitionServiceBaseImpl {
 
 		return cpDefinitionLocalService.updateCPDefinitionCategorization(
 			cpDefinitionId, serviceContext);
+	}
+
+	@Override
+	public CPDefinition updateCPDefinitionChannelFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException {
+
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.UPDATE);
+
+		return cpDefinitionLocalService.updateCPDefinitionChannelFilter(
+			cpDefinitionId, enable);
 	}
 
 	@Override
