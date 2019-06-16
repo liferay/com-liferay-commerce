@@ -250,7 +250,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			long[] groupIds = searchContext.getGroupIds();
 
 			if ((groupIds == null) || (groupIds.length == 0)) {
-				contextBooleanFilter.addTerm(Field.GROUP_ID, "-1");
+				contextBooleanFilter.addTerm(
+					Field.GROUP_ID, "-1", BooleanClauseOccur.MUST);
 			}
 		}
 	}
