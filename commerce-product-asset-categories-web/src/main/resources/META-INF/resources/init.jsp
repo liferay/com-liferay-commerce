@@ -29,16 +29,12 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 page import="com.liferay.commerce.media.CommerceMediaResolverUtil" %><%@
 page import="com.liferay.commerce.product.asset.categories.web.internal.display.context.CategoryCPAttachmentFileEntriesDisplayContext" %><%@
 page import="com.liferay.commerce.product.asset.categories.web.internal.servlet.taglib.ui.CategoryCPAttachmentFormNavigatorConstants" %><%@
-page import="com.liferay.commerce.product.asset.categories.web.internal.util.CPAssetCategoryWebPortletUtil" %><%@
 page import="com.liferay.commerce.product.constants.CPConstants" %><%@
 page import="com.liferay.commerce.product.exception.CPAttachmentFileEntryExpirationDateException" %><%@
 page import="com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryException" %><%@
 page import="com.liferay.commerce.product.model.CPAttachmentFileEntry" %><%@
 page import="com.liferay.commerce.product.model.CPAttachmentFileEntryConstants" %><%@
-page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.product.service.CPAttachmentFileEntryService" %><%@
-page import="com.liferay.commerce.product.service.CPDefinitionService" %><%@
-page import="com.liferay.commerce.product.type.CPType" %><%@
 page import="com.liferay.document.library.kernel.exception.NoSuchFileEntryException" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
