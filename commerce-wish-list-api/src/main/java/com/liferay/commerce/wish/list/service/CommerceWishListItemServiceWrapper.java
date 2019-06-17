@@ -36,12 +36,12 @@ public class CommerceWishListItemServiceWrapper
 
 	@Override
 	public com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		long commerceWishListId, long cProductId, String cpInstanceUuid,
-		String json,
+		long commerceAccountId, long commerceWishListId, long cProductId,
+		String cpInstanceUuid, String json,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListItemService.addCommerceWishListItem(commerceWishListId,
-			cProductId, cpInstanceUuid, json, serviceContext);
+		return _commerceWishListItemService.addCommerceWishListItem(commerceAccountId,
+			commerceWishListId, cProductId, cpInstanceUuid, json, serviceContext);
 	}
 
 	@Override

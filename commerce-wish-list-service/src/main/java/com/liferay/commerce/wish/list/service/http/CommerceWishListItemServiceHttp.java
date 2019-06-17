@@ -56,8 +56,9 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class CommerceWishListItemServiceHttp {
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		HttpPrincipal httpPrincipal, long commerceWishListId, long cProductId,
-		String cpInstanceUuid, String json,
+		HttpPrincipal httpPrincipal, long commerceAccountId,
+		long commerceWishListId, long cProductId, String cpInstanceUuid,
+		String json,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
@@ -66,8 +67,8 @@ public class CommerceWishListItemServiceHttp {
 					_addCommerceWishListItemParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					commerceWishListId, cProductId, cpInstanceUuid, json,
-					serviceContext);
+					commerceAccountId, commerceWishListId, cProductId,
+					cpInstanceUuid, json, serviceContext);
 
 			Object returnObj = null;
 
@@ -324,7 +325,7 @@ public class CommerceWishListItemServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CommerceWishListItemServiceHttp.class);
 	private static final Class<?>[] _addCommerceWishListItemParameterTypes0 = new Class[] {
-			long.class, long.class, String.class, String.class,
+			long.class, long.class, long.class, String.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCommerceWishListItemParameterTypes1 = new Class[] {

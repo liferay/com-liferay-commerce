@@ -43,13 +43,13 @@ public class CommerceWishListItemServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		long commerceWishListId, long cProductId, String cpInstanceUuid,
-		String json,
+		long commerceAccountId, long commerceWishListId, long cProductId,
+		String cpInstanceUuid, String json,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService()
-				   .addCommerceWishListItem(commerceWishListId, cProductId,
-			cpInstanceUuid, json, serviceContext);
+				   .addCommerceWishListItem(commerceAccountId,
+			commerceWishListId, cProductId, cpInstanceUuid, json, serviceContext);
 	}
 
 	public static void deleteCommerceWishListItem(long commerceWishListItemId)
