@@ -24,7 +24,12 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -40,9 +45,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("DiscountRule")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"discountId", "type"})
 @XmlRootElement(name = "DiscountRule")
 public class DiscountRule {
 
+	@Schema
 	public Long getDiscountId() {
 		return discountId;
 	}
@@ -58,6 +65,9 @@ public class DiscountRule {
 		try {
 			discountId = discountIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -68,6 +78,7 @@ public class DiscountRule {
 	@NotNull
 	protected Long discountId;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +92,9 @@ public class DiscountRule {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -90,6 +104,7 @@ public class DiscountRule {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
+	@Schema
 	public String getType() {
 		return type;
 	}
@@ -103,6 +118,9 @@ public class DiscountRule {
 		try {
 			type = typeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -113,6 +131,7 @@ public class DiscountRule {
 	@NotEmpty
 	protected String type;
 
+	@Schema
 	public String getTypeSettings() {
 		return typeSettings;
 	}
@@ -127,6 +146,9 @@ public class DiscountRule {
 
 		try {
 			typeSettings = typeSettingsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -164,28 +186,88 @@ public class DiscountRule {
 
 		sb.append("{");
 
-		sb.append("\"discountId\": ");
+		if (discountId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(discountId);
-		sb.append(", ");
+			sb.append("\"discountId\": ");
 
-		sb.append("\"id\": ");
+			sb.append(discountId);
+		}
 
-		sb.append(id);
-		sb.append(", ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"type\": ");
+			sb.append("\"id\": ");
 
-		sb.append("\"");
-		sb.append(type);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(id);
+		}
 
-		sb.append("\"typeSettings\": ");
+		if (type != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(typeSettings);
-		sb.append("\"");
+			sb.append("\"type\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(type));
+
+			sb.append("\"");
+		}
+
+		if (typeSettings != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"typeSettings\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(typeSettings));
+
+			sb.append("\"");
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

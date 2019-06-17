@@ -21,6 +21,9 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
@@ -34,7 +37,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -52,10 +55,12 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 
 	@Override
 	@DELETE
-	@Path("/tierPrice/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TierPrice")})
-	public Response deleteTierPrice(@NotNull @PathParam("id") String id)
+	public Response deleteTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -65,10 +70,12 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 
 	@Override
 	@GET
-	@Path("/tierPrice/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TierPrice")})
-	public TierPrice getTierPrice(@NotNull @PathParam("id") String id)
+	public TierPrice getTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
 		throws Exception {
 
 		return new TierPrice();
@@ -76,12 +83,14 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/tierPrice/{id}")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TierPrice")})
-	public Response updateTierPrice(
-			@NotNull @PathParam("id") String id, TierPrice tierPrice)
+	public Response patchTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			TierPrice tierPrice)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -93,7 +102,8 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(TierPrice tierPrice) {
+	protected void preparePatch(
+		TierPrice tierPrice, TierPrice existingTierPrice) {
 	}
 
 	protected <T, R> List<R> transform(

@@ -58,38 +58,48 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseProductResourceImpl implements ProductResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
-	@Path("/catalogs/{siteId}/product/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Product postCatalogSiteProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			Product product)
+	public Response deleteProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Product")})
+	public Product getProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new Product();
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "siteId"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/catalogs/{siteId}/products/")
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Page<Product> getCatalogSiteProductsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			@Context Pagination pagination)
+	public Response patchProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Product product)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -153,48 +163,30 @@ public abstract class BaseProductResourceImpl implements ProductResource {
 	}
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Product")})
-	public Response deleteProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Product getProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<Product> getProductsPage(@Context Pagination pagination)
 		throws Exception {
 
-		return new Product();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}")
+	@POST
+	@Path("/product/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Product")})
-	public Response patchProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Product product)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public Product postProduct(Product product) throws Exception {
+		return new Product();
 	}
 
 	public void setContextCompany(Company contextCompany) {

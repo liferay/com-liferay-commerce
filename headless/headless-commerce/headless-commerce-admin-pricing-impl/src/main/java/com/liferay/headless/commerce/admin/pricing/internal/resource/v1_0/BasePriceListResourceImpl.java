@@ -41,8 +41,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -62,15 +62,16 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/commerceAdminPricing/{groupId}/priceList/")
+	@Path("/priceLists/{id}/priceEntries/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public Page<PriceList> getPriceLists(
-			@NotNull @PathParam("groupId") Long groupId,
+	public Page<PriceEntry> getPriceListPriceEntriesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -80,14 +81,61 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/commerceAdminPricing/{groupId}/priceList/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}/priceEntry/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceList upsertPriceList(
-			@NotNull @PathParam("groupId") Long groupId, PriceList priceList)
+	public PriceEntry postPriceListPriceEntry(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			PriceEntry priceEntry)
+		throws Exception {
+
+		return new PriceEntry();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public Response deletePriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public PriceList getPriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
 		throws Exception {
 
 		return new PriceList();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public Response patchPriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			PriceList priceList)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -98,11 +146,10 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/priceList/{id}/priceEntry/")
+	@Path("/priceLists/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public Page<PriceEntry> getPriceEntries(
-			@NotNull @PathParam("id") String id, @Context Pagination pagination)
+	public Page<PriceList> getPriceListsPage(@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -111,60 +158,19 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/priceList/{id}/priceEntry/")
+	@Path("/priceList/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceEntry upsertPriceEntry(
-			@NotNull @PathParam("id") String id, PriceEntry priceEntry)
-		throws Exception {
-
-		return new PriceEntry();
-	}
-
-	@Override
-	@DELETE
-	@Path("/priceList/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public Response deletePriceList(@NotNull @PathParam("id") String id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Path("/priceList/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceList getPriceList(@NotNull @PathParam("id") String id)
-		throws Exception {
-
+	public PriceList postPriceList(PriceList priceList) throws Exception {
 		return new PriceList();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PUT
-	@Path("/priceList/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public Response updatePriceList(
-			@NotNull @PathParam("id") String id, PriceList priceList)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(PriceList priceList) {
+	protected void preparePatch(
+		PriceList priceList, PriceList existingPriceList) {
 	}
 
 	protected <T, R> List<R> transform(

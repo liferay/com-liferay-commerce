@@ -53,8 +53,8 @@ public class ProductOption {
 
 	public static enum FieldType {
 
-		CHECKBOX("checkbox"), CHECKBOX_MULTIPLE("checkbox_multiple"),
-		DATE("date"), NUMERIC("numeric"), RADIO("radio"), SELECT("select");
+		SELECT("select"), RADIO("radio"), DATE("date"), CHECKBOX("checkbox"),
+		CHECKBOX_MULTIPLE("checkbox_multiple"), NUMERIC("numeric");
 
 		@JsonCreator
 		public static FieldType create(String value) {

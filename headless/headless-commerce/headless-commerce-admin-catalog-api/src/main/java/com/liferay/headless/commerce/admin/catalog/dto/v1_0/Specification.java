@@ -217,34 +217,6 @@ public class Specification {
 	@NotNull
 	protected Map<String, String> title;
 
-	@Schema
-	public SpecificationValue[] getValues() {
-		return values;
-	}
-
-	public void setValues(SpecificationValue[] values) {
-		this.values = values;
-	}
-
-	@JsonIgnore
-	public void setValues(
-		UnsafeSupplier<SpecificationValue[], Exception> valuesUnsafeSupplier) {
-
-		try {
-			values = valuesUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SpecificationValue[] values;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -334,26 +306,6 @@ public class Specification {
 			sb.append("\"title\": ");
 
 			sb.append(_toJSON(title));
-		}
-
-		if (values != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"values\": ");
-
-			sb.append("[");
-
-			for (int i = 0; i < values.length; i++) {
-				sb.append(String.valueOf(values[i]));
-
-				if ((i + 1) < values.length) {
-					sb.append(", ");
-				}
-			}
-
-			sb.append("]");
 		}
 
 		sb.append("}");

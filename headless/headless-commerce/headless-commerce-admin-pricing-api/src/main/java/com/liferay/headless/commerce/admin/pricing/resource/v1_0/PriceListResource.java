@@ -35,24 +35,24 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface PriceListResource {
 
-	public Page<PriceList> getPriceLists(Long groupId, Pagination pagination)
+	public Page<PriceEntry> getPriceListPriceEntriesPage(
+			String id, Pagination pagination)
 		throws Exception;
 
-	public PriceList upsertPriceList(Long groupId, PriceList priceList)
-		throws Exception;
-
-	public Page<PriceEntry> getPriceEntries(String id, Pagination pagination)
-		throws Exception;
-
-	public PriceEntry upsertPriceEntry(String id, PriceEntry priceEntry)
+	public PriceEntry postPriceListPriceEntry(String id, PriceEntry priceEntry)
 		throws Exception;
 
 	public Response deletePriceList(String id) throws Exception;
 
 	public PriceList getPriceList(String id) throws Exception;
 
-	public Response updatePriceList(String id, PriceList priceList)
+	public Response patchPriceList(String id, PriceList priceList)
 		throws Exception;
+
+	public Page<PriceList> getPriceListsPage(Pagination pagination)
+		throws Exception;
+
+	public PriceList postPriceList(PriceList priceList) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

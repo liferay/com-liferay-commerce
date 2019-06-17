@@ -15,6 +15,7 @@
 package com.liferay.headless.commerce.admin.catalog.internal.graphql.mutation.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Catalog;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Category;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Option;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
@@ -24,12 +25,14 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.AttachmentResource;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.CatalogResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.CategoryResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionCategoryResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionResource;
@@ -39,6 +42,7 @@ import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionRe
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionValueResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductShippingConfigurationResource;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSpecificationResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSubscriptionConfigurationResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductTaxConfigurationResource;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.RelatedProductResource;
@@ -75,6 +79,14 @@ public class Mutation {
 
 		_attachmentResourceComponentServiceObjects =
 			attachmentResourceComponentServiceObjects;
+	}
+
+	public static void setCatalogResourceComponentServiceObjects(
+		ComponentServiceObjects<CatalogResource>
+			catalogResourceComponentServiceObjects) {
+
+		_catalogResourceComponentServiceObjects =
+			catalogResourceComponentServiceObjects;
 	}
 
 	public static void setCategoryResourceComponentServiceObjects(
@@ -150,6 +162,14 @@ public class Mutation {
 			productShippingConfigurationResourceComponentServiceObjects;
 	}
 
+	public static void setProductSpecificationResourceComponentServiceObjects(
+		ComponentServiceObjects<ProductSpecificationResource>
+			productSpecificationResourceComponentServiceObjects) {
+
+		_productSpecificationResourceComponentServiceObjects =
+			productSpecificationResourceComponentServiceObjects;
+	}
+
 	public static void
 		setProductSubscriptionConfigurationResourceComponentServiceObjects(
 			ComponentServiceObjects<ProductSubscriptionConfigurationResource>
@@ -193,6 +213,29 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
+	public Response deleteAttachment(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_attachmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			attachmentResource -> attachmentResource.deleteAttachment(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchAttachment(
+			@GraphQLName("id") Long id,
+			@GraphQLName("attachment") Attachment attachment)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_attachmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			attachmentResource -> attachmentResource.patchAttachment(
+				id, attachment));
+	}
+
+	@GraphQLInvokeDetached
 	public Response deleteAttachmentByExternalReferenceCode(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
@@ -219,18 +262,9 @@ public class Mutation {
 					externalReferenceCode, attachment));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteAttachment(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_attachmentResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			attachmentResource -> attachmentResource.deleteAttachment(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchAttachment(
+	public Attachment postProductIdAttachment(
 			@GraphQLName("id") Long id,
 			@GraphQLName("attachment") Attachment attachment)
 		throws Exception {
@@ -238,7 +272,7 @@ public class Mutation {
 		return _applyComponentServiceObjects(
 			_attachmentResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			attachmentResource -> attachmentResource.patchAttachment(
+			attachmentResource -> attachmentResource.postProductIdAttachment(
 				id, attachment));
 	}
 
@@ -259,6 +293,20 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public Attachment postProductIdImage(
+			@GraphQLName("id") Long id,
+			@GraphQLName("attachment") Attachment attachment)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_attachmentResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			attachmentResource -> attachmentResource.postProductIdImage(
+				id, attachment));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Attachment postProductByExternalReferenceCodeImage(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode,
 			@GraphQLName("attachment") Attachment attachment)
@@ -272,32 +320,74 @@ public class Mutation {
 					externalReferenceCode, attachment));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Attachment postProductIdAttachment(
-			@GraphQLName("id") Long id,
-			@GraphQLName("attachment") Attachment attachment)
+	public Response deleteCatalog(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_catalogResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogResource -> catalogResource.deleteCatalog(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchCatalog(
+			@GraphQLName("id") Long id, @GraphQLName("catalog") Catalog catalog)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_attachmentResourceComponentServiceObjects,
+			_catalogResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			attachmentResource -> attachmentResource.postProductIdAttachment(
-				id, attachment));
+			catalogResource -> catalogResource.patchCatalog(id, catalog));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteCatalogByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_catalogResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogResource ->
+				catalogResource.deleteCatalogByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchCatalogByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("catalog") Catalog catalog)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_catalogResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			catalogResource ->
+				catalogResource.patchCatalogByExternalReferenceCode(
+					externalReferenceCode, catalog));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Attachment postProductIdImage(
-			@GraphQLName("id") Long id,
-			@GraphQLName("attachment") Attachment attachment)
+	public Catalog postCatalog(@GraphQLName("catalog") Catalog catalog)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_attachmentResourceComponentServiceObjects,
+			_catalogResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			attachmentResource -> attachmentResource.postProductIdImage(
-				id, attachment));
+			catalogResource -> catalogResource.postCatalog(catalog));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchProductIdCategory(
+			@GraphQLName("id") Long id,
+			@GraphQLName("categories") Category[] categories)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_categoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			categoryResource -> categoryResource.patchProductIdCategory(
+				id, categories));
 	}
 
 	@GraphQLInvokeDetached
@@ -315,30 +405,22 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response patchProductIdCategory(
-			@GraphQLName("id") Long id,
-			@GraphQLName("categories") Category[] categories)
-		throws Exception {
-
+	public Response deleteOption(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
-			_categoryResourceComponentServiceObjects,
+			_optionResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			categoryResource -> categoryResource.patchProductIdCategory(
-				id, categories));
+			optionResource -> optionResource.deleteOption(id));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Option postCatalogSiteOption(
-			@GraphQLName("siteId") Long siteId,
-			@GraphQLName("option") Option option)
+	public Response patchOption(
+			@GraphQLName("id") Long id, @GraphQLName("option") Option option)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_optionResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			optionResource -> optionResource.postCatalogSiteOption(
-				siteId, option));
+			optionResource -> optionResource.patchOption(id, option));
 	}
 
 	@GraphQLInvokeDetached
@@ -367,38 +449,15 @@ public class Mutation {
 				externalReferenceCode, option));
 	}
 
-	@GraphQLInvokeDetached
-	public Response deleteOption(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_optionResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			optionResource -> optionResource.deleteOption(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchOption(
-			@GraphQLName("id") Long id, @GraphQLName("option") Option option)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_optionResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			optionResource -> optionResource.patchOption(id, option));
-	}
-
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public OptionCategory postCatalogSiteOptionCategory(
-			@GraphQLName("siteId") Long siteId,
-			@GraphQLName("optionCategory") OptionCategory optionCategory)
+	public Option postOption(@GraphQLName("option") Option option)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_optionCategoryResourceComponentServiceObjects,
+			_optionResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			optionCategoryResource ->
-				optionCategoryResource.postCatalogSiteOptionCategory(
-					siteId, optionCategory));
+			optionResource -> optionResource.postOption(option));
 	}
 
 	@GraphQLInvokeDetached
@@ -427,18 +486,15 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public OptionValue postOptionByExternalReferenceCodeOptionValue(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode,
-			@GraphQLName("optionValue") OptionValue optionValue)
+	public OptionCategory postOptionCategory(
+			@GraphQLName("optionCategory") OptionCategory optionCategory)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_optionValueResourceComponentServiceObjects,
+			_optionCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			optionValueResource ->
-				optionValueResource.
-					postOptionByExternalReferenceCodeOptionValue(
-						externalReferenceCode, optionValue));
+			optionCategoryResource -> optionCategoryResource.postOptionCategory(
+				optionCategory));
 	}
 
 	@GraphQLField
@@ -457,16 +513,37 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Product postCatalogSiteProduct(
-			@GraphQLName("siteId") Long siteId,
-			@GraphQLName("product") Product product)
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("optionValue") OptionValue optionValue)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_optionValueResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			optionValueResource ->
+				optionValueResource.
+					postOptionByExternalReferenceCodeOptionValue(
+						externalReferenceCode, optionValue));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteProduct(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_productResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productResource -> productResource.deleteProduct(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchProduct(
+			@GraphQLName("id") Long id, @GraphQLName("product") Product product)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productResource -> productResource.postCatalogSiteProduct(
-				siteId, product));
+			productResource -> productResource.patchProduct(id, product));
 	}
 
 	@GraphQLInvokeDetached
@@ -496,23 +573,30 @@ public class Mutation {
 					externalReferenceCode, product));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteProduct(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_productResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productResource -> productResource.deleteProduct(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchProduct(
-			@GraphQLName("id") Long id, @GraphQLName("product") Product product)
+	public Product postProduct(@GraphQLName("product") Product product)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_productResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productResource -> productResource.patchProduct(id, product));
+			productResource -> productResource.postProduct(product));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchProductIdConfiguration(
+			@GraphQLName("id") Long id,
+			@GraphQLName("productConfiguration") ProductConfiguration
+				productConfiguration)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productConfigurationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productConfigurationResource ->
+				productConfigurationResource.patchProductIdConfiguration(
+					id, productConfiguration));
 	}
 
 	@GraphQLInvokeDetached
@@ -531,19 +615,45 @@ public class Mutation {
 						externalReferenceCode, productConfiguration));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response patchProductIdConfiguration(
+	public Collection<ProductOption> postProductIdProductOptionsPage(
 			@GraphQLName("id") Long id,
-			@GraphQLName("productConfiguration") ProductConfiguration
-				productConfiguration)
+			@GraphQLName("productOptions") ProductOption[] productOptions)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productConfigurationResourceComponentServiceObjects,
+			_productOptionResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productConfigurationResource ->
-				productConfigurationResource.patchProductIdConfiguration(
-					id, productConfiguration));
+			productOptionResource -> {
+				Page paginationPage =
+					productOptionResource.postProductIdProductOptionsPage(
+						id, productOptions);
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<ProductOption>
+			postProductByExternalReferenceCodeProductOptionsPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("productOptions") ProductOption[] productOptions)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productOptionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productOptionResource -> {
+				Page paginationPage =
+					productOptionResource.
+						postProductByExternalReferenceCodeProductOptionsPage(
+							externalReferenceCode, productOptions);
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLInvokeDetached
@@ -572,47 +682,6 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<ProductOption>
-			postProductByExternalReferenceCodeProductOptionsPage(
-				@GraphQLName("externalReferenceCode") String
-					externalReferenceCode,
-				@GraphQLName("productOptions") ProductOption[] productOptions)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productOptionResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productOptionResource -> {
-				Page paginationPage =
-					productOptionResource.
-						postProductByExternalReferenceCodeProductOptionsPage(
-							externalReferenceCode, productOptions);
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<ProductOption> postProductIdProductOptionsPage(
-			@GraphQLName("id") Long id,
-			@GraphQLName("productOptions") ProductOption[] productOptions)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_productOptionResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			productOptionResource -> {
-				Page paginationPage =
-					productOptionResource.postProductIdProductOptionsPage(
-						id, productOptions);
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
 	public ProductOptionValue postProductOptionIdProductOptionValue(
 			@GraphQLName("id") Long id,
 			@GraphQLName("productOptionValue") ProductOptionValue
@@ -626,6 +695,22 @@ public class Mutation {
 				productOptionValueResource.
 					postProductOptionIdProductOptionValue(
 						id, productOptionValue));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchProductIdShippingConfiguration(
+			@GraphQLName("id") Long id,
+			@GraphQLName("productShippingConfiguration")
+				ProductShippingConfiguration productShippingConfiguration)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productShippingConfigurationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productShippingConfigurationResource ->
+				productShippingConfigurationResource.
+					patchProductIdShippingConfiguration(
+						id, productShippingConfiguration));
 	}
 
 	@GraphQLInvokeDetached
@@ -644,20 +729,37 @@ public class Mutation {
 						externalReferenceCode, productShippingConfiguration));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response patchProductIdShippingConfiguration(
+	public ProductSpecification postProductIdProductSpecification(
 			@GraphQLName("id") Long id,
-			@GraphQLName("productShippingConfiguration")
-				ProductShippingConfiguration productShippingConfiguration)
+			@GraphQLName("productSpecification") ProductSpecification
+				productSpecification)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productShippingConfigurationResourceComponentServiceObjects,
+			_productSpecificationResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productShippingConfigurationResource ->
-				productShippingConfigurationResource.
-					patchProductIdShippingConfiguration(
-						id, productShippingConfiguration));
+			productSpecificationResource ->
+				productSpecificationResource.postProductIdProductSpecification(
+					id, productSpecification));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchProductIdSubscriptionConfiguration(
+			@GraphQLName("id") Long id,
+			@GraphQLName("productSubscriptionConfiguration")
+				ProductSubscriptionConfiguration
+					productSubscriptionConfiguration)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_productSubscriptionConfigurationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			productSubscriptionConfigurationResource ->
+				productSubscriptionConfigurationResource.
+					patchProductIdSubscriptionConfiguration(
+						id, productSubscriptionConfiguration));
 	}
 
 	@GraphQLInvokeDetached
@@ -681,20 +783,18 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response patchProductIdSubscriptionConfiguration(
+	public Response patchProductIdTaxConfiguration(
 			@GraphQLName("id") Long id,
-			@GraphQLName("productSubscriptionConfiguration")
-				ProductSubscriptionConfiguration
-					productSubscriptionConfiguration)
+			@GraphQLName("productTaxConfiguration") ProductTaxConfiguration
+				productTaxConfiguration)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productSubscriptionConfigurationResourceComponentServiceObjects,
+			_productTaxConfigurationResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productSubscriptionConfigurationResource ->
-				productSubscriptionConfigurationResource.
-					patchProductIdSubscriptionConfiguration(
-						id, productSubscriptionConfiguration));
+			productTaxConfigurationResource ->
+				productTaxConfigurationResource.patchProductIdTaxConfiguration(
+					id, productTaxConfiguration));
 	}
 
 	@GraphQLInvokeDetached
@@ -714,18 +814,29 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response patchProductIdTaxConfiguration(
-			@GraphQLName("id") Long id,
-			@GraphQLName("productTaxConfiguration") ProductTaxConfiguration
-				productTaxConfiguration)
+	public Response deleteRelatedProduct(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_productTaxConfigurationResourceComponentServiceObjects,
+			_relatedProductResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			productTaxConfigurationResource ->
-				productTaxConfigurationResource.patchProductIdTaxConfiguration(
-					id, productTaxConfiguration));
+			relatedProductResource ->
+				relatedProductResource.deleteRelatedProduct(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public RelatedProduct postProductIdRelatedProduct(
+			@GraphQLName("id") Long id,
+			@GraphQLName("relatedProduct") RelatedProduct relatedProduct)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_relatedProductResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			relatedProductResource ->
+				relatedProductResource.postProductIdRelatedProduct(
+					id, relatedProduct));
 	}
 
 	@GraphQLField
@@ -744,54 +855,21 @@ public class Mutation {
 						externalReferenceCode, relatedProduct));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public RelatedProduct postProductIdRelatedProduct(
-			@GraphQLName("id") Long id,
-			@GraphQLName("relatedProduct") RelatedProduct relatedProduct)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_relatedProductResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			relatedProductResource ->
-				relatedProductResource.postProductIdRelatedProduct(
-					id, relatedProduct));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteRelatedProduct(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_relatedProductResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			relatedProductResource ->
-				relatedProductResource.deleteRelatedProduct(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Sku postProductByExternalReferenceCodeSku(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode,
-			@GraphQLName("sku") Sku sku)
-		throws Exception {
-
+	public Response deleteSku(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
 			_skuResourceComponentServiceObjects, this::_populateResourceContext,
-			skuResource -> skuResource.postProductByExternalReferenceCodeSku(
-				externalReferenceCode, sku));
+			skuResource -> skuResource.deleteSku(id));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Sku postProductIdSku(
+	public Response patchSku(
 			@GraphQLName("id") Long id, @GraphQLName("sku") Sku sku)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_skuResourceComponentServiceObjects, this::_populateResourceContext,
-			skuResource -> skuResource.postProductIdSku(id, sku));
+			skuResource -> skuResource.patchSku(id, sku));
 	}
 
 	@GraphQLInvokeDetached
@@ -817,36 +895,28 @@ public class Mutation {
 				externalReferenceCode, sku));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteSku(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_skuResourceComponentServiceObjects, this::_populateResourceContext,
-			skuResource -> skuResource.deleteSku(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchSku(
+	public Sku postProductIdSku(
 			@GraphQLName("id") Long id, @GraphQLName("sku") Sku sku)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_skuResourceComponentServiceObjects, this::_populateResourceContext,
-			skuResource -> skuResource.patchSku(id, sku));
+			skuResource -> skuResource.postProductIdSku(id, sku));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Specification postCatalogSiteSpecification(
-			@GraphQLName("siteId") Long siteId,
-			@GraphQLName("specification") Specification specification)
+	public Sku postProductByExternalReferenceCodeSku(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("sku") Sku sku)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_specificationResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			specificationResource ->
-				specificationResource.postCatalogSiteSpecification(
-					siteId, specification));
+			_skuResourceComponentServiceObjects, this::_populateResourceContext,
+			skuResource -> skuResource.postProductByExternalReferenceCodeSku(
+				externalReferenceCode, sku));
 	}
 
 	@GraphQLInvokeDetached
@@ -871,6 +941,19 @@ public class Mutation {
 			this::_populateResourceContext,
 			specificationResource -> specificationResource.patchSpecification(
 				id, specification));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Specification postSpecification(
+			@GraphQLName("specification") Specification specification)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_specificationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			specificationResource -> specificationResource.postSpecification(
+				specification));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -915,6 +998,14 @@ public class Mutation {
 		throws Exception {
 
 		attachmentResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(CatalogResource catalogResource)
+		throws Exception {
+
+		catalogResource.setContextCompany(
 			CompanyLocalServiceUtil.getCompany(
 				CompanyThreadLocal.getCompanyId()));
 	}
@@ -999,6 +1090,15 @@ public class Mutation {
 	}
 
 	private void _populateResourceContext(
+			ProductSpecificationResource productSpecificationResource)
+		throws Exception {
+
+		productSpecificationResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(
 			ProductSubscriptionConfigurationResource
 				productSubscriptionConfigurationResource)
 		throws Exception {
@@ -1045,6 +1145,8 @@ public class Mutation {
 
 	private static ComponentServiceObjects<AttachmentResource>
 		_attachmentResourceComponentServiceObjects;
+	private static ComponentServiceObjects<CatalogResource>
+		_catalogResourceComponentServiceObjects;
 	private static ComponentServiceObjects<CategoryResource>
 		_categoryResourceComponentServiceObjects;
 	private static ComponentServiceObjects<OptionResource>
@@ -1063,6 +1165,8 @@ public class Mutation {
 		_productOptionValueResourceComponentServiceObjects;
 	private static ComponentServiceObjects<ProductShippingConfigurationResource>
 		_productShippingConfigurationResourceComponentServiceObjects;
+	private static ComponentServiceObjects<ProductSpecificationResource>
+		_productSpecificationResourceComponentServiceObjects;
 	private static ComponentServiceObjects
 		<ProductSubscriptionConfigurationResource>
 			_productSubscriptionConfigurationResourceComponentServiceObjects;

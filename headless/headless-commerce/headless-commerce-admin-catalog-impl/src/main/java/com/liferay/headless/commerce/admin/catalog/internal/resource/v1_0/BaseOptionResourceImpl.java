@@ -58,38 +58,48 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseOptionResourceImpl implements OptionResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
-	@Path("/catalogs/{siteId}/option/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/options/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Option")})
-	public Option postCatalogSiteOption(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			Option option)
+	public Response deleteOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/options/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Option")})
+	public Option getOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new Option();
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "siteId"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/catalogs/{siteId}/options/")
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/options/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Option")})
-	public Page<Option> getCatalogSiteOptionsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			@Context Pagination pagination)
+	public Response patchOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Option option)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -153,48 +163,30 @@ public abstract class BaseOptionResourceImpl implements OptionResource {
 	}
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/options/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Option")})
-	public Response deleteOption(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/options/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/options/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Option")})
-	public Option getOption(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<Option> getOptionsPage(@Context Pagination pagination)
 		throws Exception {
 
-		return new Option();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/options/{id}")
+	@POST
+	@Path("/option/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Option")})
-	public Response patchOption(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Option option)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public Option postOption(Option option) throws Exception {
+		return new Option();
 	}
 
 	public void setContextCompany(Company contextCompany) {

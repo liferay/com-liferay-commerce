@@ -24,9 +24,14 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -42,9 +47,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("PriceEntry")
 @JsonFilter("Liferay.Vulcan")
+@Schema(
+	requiredProperties = {
+		"commercePriceListId", "externalReferenceCode", "price", "promoPrice",
+		"standardPrice"
+	}
+)
 @XmlRootElement(name = "PriceEntry")
 public class PriceEntry {
 
+	@Schema
 	public Long getCommercePriceListId() {
 		return commercePriceListId;
 	}
@@ -60,6 +72,9 @@ public class PriceEntry {
 		try {
 			commercePriceListId = commercePriceListIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -70,6 +85,7 @@ public class PriceEntry {
 	@NotNull
 	protected Long commercePriceListId;
 
+	@Schema
 	public Long getCommerceProductInstanceId() {
 		return commerceProductInstanceId;
 	}
@@ -87,6 +103,9 @@ public class PriceEntry {
 			commerceProductInstanceId =
 				commerceProductInstanceIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -96,6 +115,7 @@ public class PriceEntry {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long commerceProductInstanceId;
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -111,6 +131,9 @@ public class PriceEntry {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -121,6 +144,7 @@ public class PriceEntry {
 	@NotEmpty
 	protected String externalReferenceCode;
 
+	@Schema
 	public Boolean getHasTierPrice() {
 		return hasTierPrice;
 	}
@@ -136,6 +160,9 @@ public class PriceEntry {
 		try {
 			hasTierPrice = hasTierPriceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -145,6 +172,7 @@ public class PriceEntry {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean hasTierPrice;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -158,6 +186,9 @@ public class PriceEntry {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -167,6 +198,7 @@ public class PriceEntry {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long id;
 
+	@Schema
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -182,6 +214,9 @@ public class PriceEntry {
 		try {
 			price = priceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -192,6 +227,7 @@ public class PriceEntry {
 	@NotNull
 	protected BigDecimal price;
 
+	@Schema
 	public BigDecimal getPromoPrice() {
 		return promoPrice;
 	}
@@ -207,6 +243,9 @@ public class PriceEntry {
 		try {
 			promoPrice = promoPriceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -217,6 +256,7 @@ public class PriceEntry {
 	@NotNull
 	protected BigDecimal promoPrice;
 
+	@Schema
 	public String getSku() {
 		return sku;
 	}
@@ -230,6 +270,9 @@ public class PriceEntry {
 		try {
 			sku = skuUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -239,6 +282,7 @@ public class PriceEntry {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String sku;
 
+	@Schema
 	public String getSkuExternalReferenceCode() {
 		return skuExternalReferenceCode;
 	}
@@ -256,6 +300,9 @@ public class PriceEntry {
 			skuExternalReferenceCode =
 				skuExternalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -265,6 +312,7 @@ public class PriceEntry {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String skuExternalReferenceCode;
 
+	@Schema
 	public Boolean getStandardPrice() {
 		return standardPrice;
 	}
@@ -279,6 +327,9 @@ public class PriceEntry {
 
 		try {
 			standardPrice = standardPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -317,60 +368,152 @@ public class PriceEntry {
 
 		sb.append("{");
 
-		sb.append("\"commercePriceListId\": ");
+		if (commercePriceListId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(commercePriceListId);
-		sb.append(", ");
+			sb.append("\"commercePriceListId\": ");
 
-		sb.append("\"commerceProductInstanceId\": ");
+			sb.append(commercePriceListId);
+		}
 
-		sb.append(commerceProductInstanceId);
-		sb.append(", ");
+		if (commerceProductInstanceId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"externalReferenceCode\": ");
+			sb.append("\"commerceProductInstanceId\": ");
 
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append(commerceProductInstanceId);
+		}
 
-		sb.append("\"hasTierPrice\": ");
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(hasTierPrice);
-		sb.append(", ");
+			sb.append("\"externalReferenceCode\": ");
 
-		sb.append("\"id\": ");
+			sb.append("\"");
 
-		sb.append(id);
-		sb.append(", ");
+			sb.append(_escape(externalReferenceCode));
 
-		sb.append("\"price\": ");
+			sb.append("\"");
+		}
 
-		sb.append(price);
-		sb.append(", ");
+		if (hasTierPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"promoPrice\": ");
+			sb.append("\"hasTierPrice\": ");
 
-		sb.append(promoPrice);
-		sb.append(", ");
+			sb.append(hasTierPrice);
+		}
 
-		sb.append("\"sku\": ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"");
-		sb.append(sku);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"id\": ");
 
-		sb.append("\"skuExternalReferenceCode\": ");
+			sb.append(id);
+		}
 
-		sb.append("\"");
-		sb.append(skuExternalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+		if (price != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"standardPrice\": ");
+			sb.append("\"price\": ");
 
-		sb.append(standardPrice);
+			sb.append(price);
+		}
+
+		if (promoPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"promoPrice\": ");
+
+			sb.append(promoPrice);
+		}
+
+		if (sku != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"sku\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(sku));
+
+			sb.append("\"");
+		}
+
+		if (skuExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"skuExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(skuExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (standardPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"standardPrice\": ");
+
+			sb.append(standardPrice);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

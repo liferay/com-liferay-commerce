@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
+package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
-import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Catalog;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.CatalogResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -56,16 +55,16 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
+public abstract class BaseCatalogResourceImpl implements CatalogResource {
 
 	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
+	@Path("/catalog/{id}")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response deletePriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Response deleteCatalog(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -76,26 +75,46 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Override
 	@GET
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
+	@Path("/catalog/{id}")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry getPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Catalog getCatalog(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return new PriceEntry();
+		return new Catalog();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
+	@Path("/catalog/{id}")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response patchPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			PriceEntry priceEntry)
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Response patchCatalog(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Catalog catalog)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/catalog/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Response deleteCatalogByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -107,17 +126,54 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/catalog/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Catalog getCatalogByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return new Catalog();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/catalog/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Response patchCatalogByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Catalog catalog)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/priceEntries/{id}/tierPrices/")
+	@Path("/catalogs/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<TierPrice> getPriceEntryTierPricesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			@Context Pagination pagination)
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Page<Catalog> getCatalogsPage(@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -126,24 +182,18 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}/tierPrice/")
+	@Path("/catalog/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public TierPrice postPriceEntryTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			TierPrice tierPrice)
-		throws Exception {
-
-		return new TierPrice();
+	@Tags(value = {@Tag(name = "Catalog")})
+	public Catalog postCatalog(Catalog catalog) throws Exception {
+		return new Catalog();
 	}
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(
-		PriceEntry priceEntry, PriceEntry existingPriceEntry) {
+	protected void preparePatch(Catalog catalog, Catalog existingCatalog) {
 	}
 
 	protected <T, R> List<R> transform(
