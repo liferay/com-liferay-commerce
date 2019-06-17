@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.internal.upgrade.v1_6_0;
 
 import com.liferay.commerce.product.model.impl.CommerceChannelModelImpl;
+import com.liferay.commerce.product.model.impl.CommerceChannelRelModelImpl;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
@@ -26,6 +27,10 @@ public class CommerceChannelUpgradeProcess extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		if (!hasTable(CommerceChannelModelImpl.TABLE_NAME)) {
 			runSQL(CommerceChannelModelImpl.TABLE_SQL_CREATE);
+		}
+
+		if (!hasTable(CommerceChannelRelModelImpl.TABLE_NAME)) {
+			runSQL(CommerceChannelRelModelImpl.TABLE_SQL_CREATE);
 		}
 	}
 
