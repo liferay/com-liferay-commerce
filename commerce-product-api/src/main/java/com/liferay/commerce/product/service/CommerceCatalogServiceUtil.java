@@ -58,6 +58,14 @@ public class CommerceCatalogServiceUtil {
 		return getService().deleteCommerceCatalog(commerceCatalogId);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalog fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
 		long commerceCatalogId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -68,6 +76,12 @@ public class CommerceCatalogServiceUtil {
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().fetchCommerceCatalogByGroupId(groupId);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog getCommerceCatalog(
+		long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getCommerceCatalog(commerceCatalogId);
 	}
 
 	public static java.util.List<com.liferay.commerce.product.model.CommerceCatalog> getCommerceCatalogs(

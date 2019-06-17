@@ -345,6 +345,12 @@ public class CPDefinitionSpecificationOptionValueLocalServiceUtil {
 		return getService().getCPDefinitionSpecificationOptionValuesCount();
 	}
 
+	public static int getCPDefinitionSpecificationOptionValuesCount(
+		long cpDefinitionId) {
+		return getService()
+				   .getCPDefinitionSpecificationOptionValuesCount(cpDefinitionId);
+	}
+
 	public static java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPSpecificationOptionDefinitionValues(
 		long cpSpecificationOptionId) {
 		return getService()

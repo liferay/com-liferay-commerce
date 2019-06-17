@@ -153,6 +153,20 @@ public class CPDefinitionSpecificationOptionValueServiceSoap {
 		}
 	}
 
+	public static int getCPDefinitionSpecificationOptionValuesCount(
+		long cpDefinitionId) throws RemoteException {
+		try {
+			int returnValue = CPDefinitionSpecificationOptionValueServiceUtil.getCPDefinitionSpecificationOptionValuesCount(cpDefinitionId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap[] getCPDefinitionSpecificationOptionValues(
 		long cpDefinitionId, long cpOptionCategoryId) throws RemoteException {
 		try {

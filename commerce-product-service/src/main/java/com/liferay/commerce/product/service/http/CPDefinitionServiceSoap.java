@@ -69,36 +69,6 @@ import java.util.Map;
  */
 @ProviderType
 public class CPDefinitionServiceSoap {
-	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinitionAccountGroupFilter(
-		long cpDefinitionId, boolean enable) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateCPDefinitionAccountGroupFilter(cpDefinitionId,
-					enable);
-
-			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinitionChannelFilter(
-		long cpDefinitionId, boolean enable) throws RemoteException {
-		try {
-			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateCPDefinitionChannelFilter(cpDefinitionId,
-					enable);
-
-			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteAssetCategoryCPDefinition(long cpDefinitionId,
 		long categoryId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -294,6 +264,21 @@ public class CPDefinitionServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinitionAccountGroupFilter(
+		long cpDefinitionId, boolean enable) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateCPDefinitionAccountGroupFilter(cpDefinitionId,
+					enable);
+
+			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinitionCategorization(
 		long cpDefinitionId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -301,6 +286,21 @@ public class CPDefinitionServiceSoap {
 		try {
 			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateCPDefinitionCategorization(cpDefinitionId,
 					serviceContext);
+
+			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPDefinitionSoap updateCPDefinitionChannelFilter(
+		long cpDefinitionId, boolean enable) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CPDefinition returnValue = CPDefinitionServiceUtil.updateCPDefinitionChannelFilter(cpDefinitionId,
+					enable);
 
 			return com.liferay.commerce.product.model.CPDefinitionSoap.toSoapModel(returnValue);
 		}

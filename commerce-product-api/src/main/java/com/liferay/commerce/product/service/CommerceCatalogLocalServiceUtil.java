@@ -211,6 +211,13 @@ public class CommerceCatalogLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalog fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
 		long commerceCatalogId) {
 		return getService().fetchCommerceCatalog(commerceCatalogId);

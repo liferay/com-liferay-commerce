@@ -350,6 +350,12 @@ public class CPDefinitionSpecificationOptionValueLocalServiceWrapper
 	}
 
 	@Override
+	public int getCPDefinitionSpecificationOptionValuesCount(
+		long cpDefinitionId) {
+		return _cpDefinitionSpecificationOptionValueLocalService.getCPDefinitionSpecificationOptionValuesCount(cpDefinitionId);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue> getCPSpecificationOptionDefinitionValues(
 		long cpSpecificationOptionId) {
 		return _cpDefinitionSpecificationOptionValueLocalService.getCPSpecificationOptionDefinitionValues(cpSpecificationOptionId);

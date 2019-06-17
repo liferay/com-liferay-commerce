@@ -98,6 +98,21 @@ public class CommerceCatalogServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.product.model.CommerceCatalogSoap fetchCommerceCatalog(
 		long commerceCatalogId) throws RemoteException {
 		try {
@@ -116,6 +131,20 @@ public class CommerceCatalogServiceSoap {
 		long groupId) throws RemoteException {
 		try {
 			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.fetchCommerceCatalogByGroupId(groupId);
+
+			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalogSoap getCommerceCatalog(
+		long commerceCatalogId) throws RemoteException {
+		try {
+			com.liferay.commerce.product.model.CommerceCatalog returnValue = CommerceCatalogServiceUtil.getCommerceCatalog(commerceCatalogId);
 
 			return com.liferay.commerce.product.model.CommerceCatalogSoap.toSoapModel(returnValue);
 		}

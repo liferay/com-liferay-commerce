@@ -219,6 +219,13 @@ public class CommerceCatalogLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceCatalogLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog fetchCommerceCatalog(
 		long commerceCatalogId) {
 		return _commerceCatalogLocalService.fetchCommerceCatalog(commerceCatalogId);
