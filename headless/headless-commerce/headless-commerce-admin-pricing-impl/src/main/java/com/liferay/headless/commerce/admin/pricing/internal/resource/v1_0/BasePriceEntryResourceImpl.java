@@ -59,6 +59,41 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceEntries/{id}/tierPrice/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public TierPrice postPriceEntryTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			TierPrice tierPrice)
+		throws Exception {
+
+		return new TierPrice();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/priceEntries/{id}/tierPrices/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public Page<TierPrice> getPriceEntryTierPricesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/priceEntries/{id}")
@@ -101,41 +136,6 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/priceEntries/{id}/tierPrices/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<TierPrice> getPriceEntryTierPricesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}/tierPrice/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public TierPrice postPriceEntryTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			TierPrice tierPrice)
-		throws Exception {
-
-		return new TierPrice();
 	}
 
 	public void setContextCompany(Company contextCompany) {

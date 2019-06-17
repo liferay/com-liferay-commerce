@@ -588,34 +588,6 @@ public class Discount {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean usePercentage;
 
-	@Schema
-	public UserSegment[] getUserSegments() {
-		return userSegments;
-	}
-
-	public void setUserSegments(UserSegment[] userSegments) {
-		this.userSegments = userSegments;
-	}
-
-	@JsonIgnore
-	public void setUserSegments(
-		UnsafeSupplier<UserSegment[], Exception> userSegmentsUnsafeSupplier) {
-
-		try {
-			userSegments = userSegmentsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected UserSegment[] userSegments;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -858,26 +830,6 @@ public class Discount {
 			sb.append("\"usePercentage\": ");
 
 			sb.append(usePercentage);
-		}
-
-		if (userSegments != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"userSegments\": ");
-
-			sb.append("[");
-
-			for (int i = 0; i < userSegments.length; i++) {
-				sb.append(String.valueOf(userSegments[i]));
-
-				if ((i + 1) < userSegments.length) {
-					sb.append(", ");
-				}
-			}
-
-			sb.append("]");
 		}
 
 		sb.append("}");
