@@ -17,23 +17,12 @@ package com.liferay.commerce.account.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * The extended model implementation for the CommerceAccountGroupRel service. Represents a row in the &quot;CommerceAccountGroupRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.commerce.account.model.CommerceAccountGroupRel<code> interface.
- * </p>
- *
  * @author Marco Leo
  */
 @ProviderType
 public class CommerceAccountGroupRelImpl
 	extends CommerceAccountGroupRelBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce account group rel model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountGroupRel} interface instead.
-	 */
 	public CommerceAccountGroupRelImpl() {
 	}
 

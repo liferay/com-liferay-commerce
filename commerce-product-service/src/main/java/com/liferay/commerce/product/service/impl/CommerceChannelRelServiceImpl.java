@@ -30,8 +30,8 @@ public class CommerceChannelRelServiceImpl
 
 	@Override
 	public CommerceChannelRel addCommerceChannelRel(
-		String className, long classPK, long commerceChannelId,
-		ServiceContext serviceContext)
+			String className, long classPK, long commerceChannelId,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		return commerceChannelRelLocalService.addCommerceChannelRel(

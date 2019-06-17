@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.commerce.account.exception;
 
 import aQute.bnd.annotation.ProviderType;
@@ -30,7 +31,9 @@ public class DuplicateCommerceAccountGroupRelException extends PortalException {
 		super(msg);
 	}
 
-	public DuplicateCommerceAccountGroupRelException(String msg, Throwable cause) {
+	public DuplicateCommerceAccountGroupRelException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 

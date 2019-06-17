@@ -32,8 +32,8 @@ public class CommerceChannelRelLocalServiceImpl
 
 	@Override
 	public CommerceChannelRel addCommerceChannelRel(
-		String className, long classPK, long commerceChannelId,
-		ServiceContext serviceContext)
+			String className, long classPK, long commerceChannelId,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -41,7 +41,7 @@ public class CommerceChannelRelLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(className);
 
 		if (commerceChannelRelPersistence.fetchByC_C_C(
-			classNameId, classPK, commerceChannelId) != null) {
+				classNameId, classPK, commerceChannelId) != null) {
 
 			throw new DuplicateCommerceChannelRelException();
 		}

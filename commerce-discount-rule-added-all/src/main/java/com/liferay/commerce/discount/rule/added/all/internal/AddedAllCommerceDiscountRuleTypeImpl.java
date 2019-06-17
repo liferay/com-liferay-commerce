@@ -15,8 +15,8 @@
 package com.liferay.commerce.discount.rule.added.all.internal;
 
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.discount.model.CommerceDiscountRule;
 import com.liferay.commerce.discount.constants.CommerceDiscountRuleConstants;
+import com.liferay.commerce.discount.model.CommerceDiscountRule;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleType;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;

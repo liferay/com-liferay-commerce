@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.commerce.product.exception;
 
 import aQute.bnd.annotation.ProviderType;
@@ -21,7 +22,8 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
  * @author Marco Leo
  */
 @ProviderType
-public class NoSuchCPDefinitionLocalizationException extends NoSuchModelException {
+public class NoSuchCPDefinitionLocalizationException
+	extends NoSuchModelException {
 
 	public NoSuchCPDefinitionLocalizationException() {
 	}
@@ -30,7 +32,9 @@ public class NoSuchCPDefinitionLocalizationException extends NoSuchModelExceptio
 		super(msg);
 	}
 
-	public NoSuchCPDefinitionLocalizationException(String msg, Throwable cause) {
+	public NoSuchCPDefinitionLocalizationException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 

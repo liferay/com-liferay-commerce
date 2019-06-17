@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-	import aQute.bnd.annotation.ProviderType;
+import aQute.bnd.annotation.ProviderType;
 
-	import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
-	import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
-	import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
+import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 
-	import java.util.List;
+import java.util.List;
 
 /**
  * @author Marco Leo

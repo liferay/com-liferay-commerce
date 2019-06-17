@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.discount.internal.target;
 
-import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
+import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalService;
 import com.liferay.commerce.discount.target.CommerceDiscountProductTarget;

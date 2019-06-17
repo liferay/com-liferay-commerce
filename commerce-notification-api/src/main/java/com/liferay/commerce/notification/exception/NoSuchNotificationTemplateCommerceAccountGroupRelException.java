@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.commerce.notification.exception;
 
 import aQute.bnd.annotation.ProviderType;
@@ -21,20 +22,27 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public class NoSuchNotificationTemplateCommerceAccountGroupRelException extends NoSuchModelException {
+public class NoSuchNotificationTemplateCommerceAccountGroupRelException
+	extends NoSuchModelException {
 
 	public NoSuchNotificationTemplateCommerceAccountGroupRelException() {
 	}
 
-	public NoSuchNotificationTemplateCommerceAccountGroupRelException(String msg) {
+	public NoSuchNotificationTemplateCommerceAccountGroupRelException(
+		String msg) {
+
 		super(msg);
 	}
 
-	public NoSuchNotificationTemplateCommerceAccountGroupRelException(String msg, Throwable cause) {
+	public NoSuchNotificationTemplateCommerceAccountGroupRelException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 
-	public NoSuchNotificationTemplateCommerceAccountGroupRelException(Throwable cause) {
+	public NoSuchNotificationTemplateCommerceAccountGroupRelException(
+		Throwable cause) {
+
 		super(cause);
 	}
 

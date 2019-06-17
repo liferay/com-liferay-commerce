@@ -17,23 +17,12 @@ package com.liferay.commerce.price.list.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * The extended model implementation for the CommercePriceListCommerceAccountGroupRel service. Represents a row in the &quot;CPLCommerceGroupAccountRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel<code> interface.
- * </p>
- *
  * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommercePriceListCommerceAccountGroupRelImpl
 	extends CommercePriceListCommerceAccountGroupRelBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce price list commerce account group rel model instance should use the {@link com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel} interface instead.
-	 */
 	public CommercePriceListCommerceAccountGroupRelImpl() {
 	}
 

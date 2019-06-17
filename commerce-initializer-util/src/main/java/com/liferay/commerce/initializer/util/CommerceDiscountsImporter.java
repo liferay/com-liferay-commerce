@@ -16,8 +16,8 @@ package com.liferay.commerce.initializer.util;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
-import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
+import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalService;
 import com.liferay.portal.kernel.dao.orm.Criterion;

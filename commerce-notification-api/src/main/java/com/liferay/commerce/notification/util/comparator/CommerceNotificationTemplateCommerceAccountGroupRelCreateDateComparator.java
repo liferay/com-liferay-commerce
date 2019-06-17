@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class
 	CommerceNotificationTemplateCommerceAccountGroupRelCreateDateComparator
 		extends OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel> {
+			<CommerceNotificationTemplateCommerceAccountGroupRel> {
 
 	public static final String ORDER_BY_ASC = "createDate ASC";
 
