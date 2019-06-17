@@ -128,9 +128,7 @@ public class CommerceShipmentItemLocalServiceImpl
 		// Stock quantity
 
 		try {
-			_updateStockQuantity(
-				commerceOrderItem,
-				commerceShipmentItem.getCommerceShipmentItemId());
+			_restoreStockQuantity(commerceOrderItem, commerceShipmentItem);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -268,6 +266,17 @@ public class CommerceShipmentItemLocalServiceImpl
 		return _commerceInventoryWarehouseItemLocalService.
 			fetchCommerceInventoryWarehouseItem(
 				commerceShipmentItem.getCommerceInventoryWarehouseId(), sku);
+	}
+
+	private void _restoreStockQuantity(
+			CommerceOrderItem commerceOrderItem,
+			CommerceShipmentItem commerceShipmentItem)
+		throws PortalException {
+
+		_commerceInventoryEngine.increaseStockQuantity(
+			commerceShipmentItem.getUserId(),
+			commerceShipmentItem.getCommerceInventoryWarehouseId(),
+			commerceOrderItem.getSku(), commerceShipmentItem.getQuantity());
 	}
 
 	private void _updateStockQuantity(
