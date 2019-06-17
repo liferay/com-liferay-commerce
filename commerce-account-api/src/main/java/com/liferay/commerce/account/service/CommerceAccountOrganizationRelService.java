@@ -96,6 +96,17 @@ public interface CommerceAccountOrganizationRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRelsByOrganizationId(
+				long organizationId, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+			long organizationId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAccountOrganizationRelsCount(long commerceAccountId)
 		throws PortalException;
 

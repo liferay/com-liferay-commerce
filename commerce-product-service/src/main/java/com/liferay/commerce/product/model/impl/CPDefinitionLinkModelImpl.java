@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -288,6 +291,32 @@ public class CPDefinitionLinkModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPDefinitionLink>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinitionLink.class.getClassLoader(), CPDefinitionLink.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinitionLink> constructor =
+				(Constructor<CPDefinitionLink>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPDefinitionLink, Object>>
@@ -841,8 +870,12 @@ public class CPDefinitionLinkModelImpl
 	@Override
 	public CPDefinitionLink toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPDefinitionLink)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPDefinitionLink>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1091,11 +1124,12 @@ public class CPDefinitionLinkModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinitionLink.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinitionLink.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPDefinitionLink>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

@@ -61,7 +61,6 @@ public class CommerceCountryWrapper
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceCountryId", getCommerceCountryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -93,12 +92,6 @@ public class CommerceCountryWrapper
 
 		if (commerceCountryId != null) {
 			setCommerceCountryId(commerceCountryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -272,16 +265,6 @@ public class CommerceCountryWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceCountry.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this commerce country.
-	 *
-	 * @return the group ID of this commerce country
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceCountry.getGroupId();
 	}
 
 	/**
@@ -645,16 +628,6 @@ public class CommerceCountryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceCountry.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this commerce country.
-	 *
-	 * @param groupId the group ID of this commerce country
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceCountry.setGroupId(groupId);
 	}
 
 	/**

@@ -157,7 +157,8 @@ public class CommerceTierPriceEntryServiceSoap {
 
 	public static
 		com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap[]
-				fetchCommerceTierPriceEntries(long groupId, int start, int end)
+				fetchCommerceTierPriceEntries(
+					long companyId, int start, int end)
 			throws RemoteException {
 
 		try {
@@ -165,7 +166,8 @@ public class CommerceTierPriceEntryServiceSoap {
 				<com.liferay.commerce.price.list.model.CommerceTierPriceEntry>
 					returnValue =
 						CommerceTierPriceEntryServiceUtil.
-							fetchCommerceTierPriceEntries(groupId, start, end);
+							fetchCommerceTierPriceEntries(
+								companyId, start, end);
 
 			return com.liferay.commerce.price.list.model.
 				CommerceTierPriceEntrySoap.toSoapModels(returnValue);
@@ -268,13 +270,14 @@ public class CommerceTierPriceEntryServiceSoap {
 		}
 	}
 
-	public static int getCommerceTierPriceEntriesCountByGroupId(long groupId)
+	public static int getCommerceTierPriceEntriesCountByCompanyId(
+			long companyId)
 		throws RemoteException {
 
 		try {
 			int returnValue =
 				CommerceTierPriceEntryServiceUtil.
-					getCommerceTierPriceEntriesCountByGroupId(groupId);
+					getCommerceTierPriceEntriesCountByCompanyId(companyId);
 
 			return returnValue;
 		}
@@ -317,7 +320,7 @@ public class CommerceTierPriceEntryServiceSoap {
 				updateExternalReferenceCode(
 					com.liferay.commerce.price.list.model.
 						CommerceTierPriceEntrySoap commerceTierPriceEntry,
-					long groupId, String externalReferenceCode)
+					String externalReferenceCode)
 			throws RemoteException {
 
 		try {
@@ -328,7 +331,7 @@ public class CommerceTierPriceEntryServiceSoap {
 							com.liferay.commerce.price.list.model.impl.
 								CommerceTierPriceEntryModelImpl.toModel(
 									commerceTierPriceEntry),
-							groupId, externalReferenceCode);
+							externalReferenceCode);
 
 			return com.liferay.commerce.price.list.model.
 				CommerceTierPriceEntrySoap.toSoapModel(returnValue);

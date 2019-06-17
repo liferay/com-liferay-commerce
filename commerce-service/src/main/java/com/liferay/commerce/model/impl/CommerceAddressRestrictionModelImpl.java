@@ -39,6 +39,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -286,6 +289,32 @@ public class CommerceAddressRestrictionModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceAddressRestriction>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceAddressRestriction.class.getClassLoader(),
+			CommerceAddressRestriction.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceAddressRestriction> constructor =
+				(Constructor<CommerceAddressRestriction>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map
@@ -785,10 +814,13 @@ public class CommerceAddressRestrictionModelImpl
 	@Override
 	public CommerceAddressRestriction toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceAddressRestriction)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceAddressRestriction>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1019,11 +1051,14 @@ public class CommerceAddressRestrictionModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceAddressRestriction.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceAddressRestriction.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceAddressRestriction>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _commerceAddressRestrictionId;
 	private long _groupId;

@@ -16,7 +16,6 @@ package com.liferay.commerce.inventory.service.persistence.impl;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemPersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,19 +33,20 @@ import java.util.Set;
  */
 public class CommerceInventoryWarehouseItemFinderBaseImpl
 	extends BasePersistenceImpl<CommerceInventoryWarehouseItem> {
+
 	public CommerceInventoryWarehouseItemFinderBaseImpl() {
 		setModelClass(CommerceInventoryWarehouseItem.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceInventoryWarehouseItemId", "CIWarehouseItemId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceInventoryWarehouseItemId",
-				"CIWarehouseItemId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -59,7 +59,8 @@ public class CommerceInventoryWarehouseItemFinderBaseImpl
 
 	@Override
 	public Set<String> getBadColumnNames() {
-		return getCommerceInventoryWarehouseItemPersistence().getBadColumnNames();
+		return getCommerceInventoryWarehouseItemPersistence().
+			getBadColumnNames();
 	}
 
 	/**
@@ -67,7 +68,9 @@ public class CommerceInventoryWarehouseItemFinderBaseImpl
 	 *
 	 * @return the commerce inventory warehouse item persistence
 	 */
-	public CommerceInventoryWarehouseItemPersistence getCommerceInventoryWarehouseItemPersistence() {
+	public CommerceInventoryWarehouseItemPersistence
+		getCommerceInventoryWarehouseItemPersistence() {
+
 		return commerceInventoryWarehouseItemPersistence;
 	}
 
@@ -77,11 +80,18 @@ public class CommerceInventoryWarehouseItemFinderBaseImpl
 	 * @param commerceInventoryWarehouseItemPersistence the commerce inventory warehouse item persistence
 	 */
 	public void setCommerceInventoryWarehouseItemPersistence(
-		CommerceInventoryWarehouseItemPersistence commerceInventoryWarehouseItemPersistence) {
-		this.commerceInventoryWarehouseItemPersistence = commerceInventoryWarehouseItemPersistence;
+		CommerceInventoryWarehouseItemPersistence
+			commerceInventoryWarehouseItemPersistence) {
+
+		this.commerceInventoryWarehouseItemPersistence =
+			commerceInventoryWarehouseItemPersistence;
 	}
 
 	@BeanReference(type = CommerceInventoryWarehouseItemPersistence.class)
-	protected CommerceInventoryWarehouseItemPersistence commerceInventoryWarehouseItemPersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceInventoryWarehouseItemFinderBaseImpl.class);
+	protected CommerceInventoryWarehouseItemPersistence
+		commerceInventoryWarehouseItemPersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceInventoryWarehouseItemFinderBaseImpl.class);
+
 }

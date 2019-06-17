@@ -35,18 +35,22 @@ import com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItem
 public abstract class CommerceInventoryReplenishmentItemBaseImpl
 	extends CommerceInventoryReplenishmentItemModelImpl
 	implements CommerceInventoryReplenishmentItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce inventory replenishment item model instance should use the {@link CommerceInventoryReplenishmentItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory replenishment item model instance should use the <code>CommerceInventoryReplenishmentItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceInventoryReplenishmentItemLocalServiceUtil.addCommerceInventoryReplenishmentItem(this);
+			CommerceInventoryReplenishmentItemLocalServiceUtil.
+				addCommerceInventoryReplenishmentItem(this);
 		}
 		else {
-			CommerceInventoryReplenishmentItemLocalServiceUtil.updateCommerceInventoryReplenishmentItem(this);
+			CommerceInventoryReplenishmentItemLocalServiceUtil.
+				updateCommerceInventoryReplenishmentItem(this);
 		}
 	}
+
 }

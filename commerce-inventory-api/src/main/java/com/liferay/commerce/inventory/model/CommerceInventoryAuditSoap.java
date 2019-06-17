@@ -26,16 +26,18 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.inventory.service.http.CommerceInventoryAuditServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.inventory.service.http.CommerceInventoryAuditServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceInventoryAuditSoap implements Serializable {
+
 	public static CommerceInventoryAuditSoap toSoapModel(
 		CommerceInventoryAudit model) {
+
 		CommerceInventoryAuditSoap soapModel = new CommerceInventoryAuditSoap();
 
-		soapModel.setCommerceInventoryAuditId(model.getCommerceInventoryAuditId());
+		soapModel.setCommerceInventoryAuditId(
+			model.getCommerceInventoryAuditId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -50,7 +52,9 @@ public class CommerceInventoryAuditSoap implements Serializable {
 
 	public static CommerceInventoryAuditSoap[] toSoapModels(
 		CommerceInventoryAudit[] models) {
-		CommerceInventoryAuditSoap[] soapModels = new CommerceInventoryAuditSoap[models.length];
+
+		CommerceInventoryAuditSoap[] soapModels =
+			new CommerceInventoryAuditSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -61,10 +65,12 @@ public class CommerceInventoryAuditSoap implements Serializable {
 
 	public static CommerceInventoryAuditSoap[][] toSoapModels(
 		CommerceInventoryAudit[][] models) {
+
 		CommerceInventoryAuditSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceInventoryAuditSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceInventoryAuditSoap[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceInventoryAuditSoap[0][0];
@@ -79,13 +85,16 @@ public class CommerceInventoryAuditSoap implements Serializable {
 
 	public static CommerceInventoryAuditSoap[] toSoapModels(
 		List<CommerceInventoryAudit> models) {
-		List<CommerceInventoryAuditSoap> soapModels = new ArrayList<CommerceInventoryAuditSoap>(models.size());
+
+		List<CommerceInventoryAuditSoap> soapModels =
+			new ArrayList<CommerceInventoryAuditSoap>(models.size());
 
 		for (CommerceInventoryAudit model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceInventoryAuditSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceInventoryAuditSoap[soapModels.size()]);
 	}
 
 	public CommerceInventoryAuditSoap() {
@@ -180,4 +189,5 @@ public class CommerceInventoryAuditSoap implements Serializable {
 	private String _sku;
 	private String _description;
 	private int _quantity;
+
 }

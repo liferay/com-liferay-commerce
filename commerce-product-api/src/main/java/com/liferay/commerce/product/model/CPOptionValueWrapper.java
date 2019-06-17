@@ -62,7 +62,6 @@ public class CPOptionValueWrapper
 		attributes.put("uuid", getUuid());
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPOptionValueId", getCPOptionValueId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -96,12 +95,6 @@ public class CPOptionValueWrapper
 
 		if (CPOptionValueId != null) {
 			setCPOptionValueId(CPOptionValueId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -245,16 +238,6 @@ public class CPOptionValueWrapper
 	@Override
 	public String getExternalReferenceCode() {
 		return _cpOptionValue.getExternalReferenceCode();
-	}
-
-	/**
-	 * Returns the group ID of this cp option value.
-	 *
-	 * @return the group ID of this cp option value
-	 */
-	@Override
-	public long getGroupId() {
-		return _cpOptionValue.getGroupId();
 	}
 
 	/**
@@ -538,16 +521,6 @@ public class CPOptionValueWrapper
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_cpOptionValue.setExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	 * Sets the group ID of this cp option value.
-	 *
-	 * @param groupId the group ID of this cp option value
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_cpOptionValue.setGroupId(groupId);
 	}
 
 	/**

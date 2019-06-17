@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -291,6 +294,32 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceTaxFixedRateAddressRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceTaxFixedRateAddressRel.class.getClassLoader(),
+			CommerceTaxFixedRateAddressRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceTaxFixedRateAddressRel> constructor =
+				(Constructor<CommerceTaxFixedRateAddressRel>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map
@@ -906,10 +935,13 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 	@Override
 	public CommerceTaxFixedRateAddressRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceTaxFixedRateAddressRel)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceTaxFixedRateAddressRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1160,11 +1192,14 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceTaxFixedRateAddressRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceTaxFixedRateAddressRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceTaxFixedRateAddressRel>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _commerceTaxFixedRateAddressRelId;
 	private long _groupId;

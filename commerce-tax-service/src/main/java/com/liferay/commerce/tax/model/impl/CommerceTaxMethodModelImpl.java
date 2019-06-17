@@ -41,6 +41,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -288,6 +291,32 @@ public class CommerceTaxMethodModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceTaxMethod>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceTaxMethod.class.getClassLoader(), CommerceTaxMethod.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommerceTaxMethod> constructor =
+				(Constructor<CommerceTaxMethod>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CommerceTaxMethod, Object>>
@@ -1086,8 +1115,12 @@ public class CommerceTaxMethodModelImpl
 	@Override
 	public CommerceTaxMethod toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceTaxMethod)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceTaxMethod>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1326,11 +1359,12 @@ public class CommerceTaxMethodModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceTaxMethod.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceTaxMethod.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceTaxMethod>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _commerceTaxMethodId;
 	private long _groupId;

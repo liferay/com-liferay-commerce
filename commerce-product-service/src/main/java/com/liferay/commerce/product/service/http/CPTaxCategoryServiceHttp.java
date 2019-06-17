@@ -132,7 +132,7 @@ public class CPTaxCategoryServiceHttp {
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPTaxCategory> getCPTaxCategories(
-				HttpPrincipal httpPrincipal, long groupId)
+				HttpPrincipal httpPrincipal, long companyId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -140,7 +140,8 @@ public class CPTaxCategoryServiceHttp {
 				CPTaxCategoryServiceUtil.class, "getCPTaxCategories",
 				_getCPTaxCategoriesParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -171,7 +172,7 @@ public class CPTaxCategoryServiceHttp {
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPTaxCategory> getCPTaxCategories(
-				HttpPrincipal httpPrincipal, long groupId, int start, int end,
+				HttpPrincipal httpPrincipal, long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.product.model.CPTaxCategory>
 						orderByComparator)
@@ -183,7 +184,7 @@ public class CPTaxCategoryServiceHttp {
 				_getCPTaxCategoriesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, start, end, orderByComparator);
+				methodKey, companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -213,7 +214,7 @@ public class CPTaxCategoryServiceHttp {
 	}
 
 	public static int getCPTaxCategoriesCount(
-			HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -221,7 +222,8 @@ public class CPTaxCategoryServiceHttp {
 				CPTaxCategoryServiceUtil.class, "getCPTaxCategoriesCount",
 				_getCPTaxCategoriesCountParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 

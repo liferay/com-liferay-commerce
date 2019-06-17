@@ -39,7 +39,6 @@ public class CPSpecificationOptionSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setCPSpecificationOptionId(
 			model.getCPSpecificationOptionId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -127,14 +126,6 @@ public class CPSpecificationOptionSoap implements Serializable {
 
 	public void setCPSpecificationOptionId(long CPSpecificationOptionId) {
 		_CPSpecificationOptionId = CPSpecificationOptionId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -231,7 +222,6 @@ public class CPSpecificationOptionSoap implements Serializable {
 
 	private String _uuid;
 	private long _CPSpecificationOptionId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

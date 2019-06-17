@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -283,6 +286,32 @@ public class CommerceWishListItemModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceWishListItem>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceWishListItem.class.getClassLoader(),
+			CommerceWishListItem.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceWishListItem> constructor =
+				(Constructor<CommerceWishListItem>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CommerceWishListItem, Object>>
@@ -775,8 +804,12 @@ public class CommerceWishListItemModelImpl
 	@Override
 	public CommerceWishListItem toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceWishListItem)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceWishListItem>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1011,11 +1044,12 @@ public class CommerceWishListItemModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceWishListItem.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceWishListItem.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceWishListItem>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _commerceWishListItemId;
 	private long _groupId;

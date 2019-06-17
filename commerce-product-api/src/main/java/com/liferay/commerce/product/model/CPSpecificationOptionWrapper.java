@@ -63,7 +63,6 @@ public class CPSpecificationOptionWrapper
 
 		attributes.put("uuid", getUuid());
 		attributes.put("CPSpecificationOptionId", getCPSpecificationOptionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -92,12 +91,6 @@ public class CPSpecificationOptionWrapper
 
 		if (CPSpecificationOptionId != null) {
 			setCPSpecificationOptionId(CPSpecificationOptionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -324,16 +317,6 @@ public class CPSpecificationOptionWrapper
 	@Override
 	public boolean getFacetable() {
 		return _cpSpecificationOption.getFacetable();
-	}
-
-	/**
-	 * Returns the group ID of this cp specification option.
-	 *
-	 * @return the group ID of this cp specification option
-	 */
-	@Override
-	public long getGroupId() {
-		return _cpSpecificationOption.getGroupId();
 	}
 
 	/**
@@ -687,16 +670,6 @@ public class CPSpecificationOptionWrapper
 	@Override
 	public void setFacetable(boolean facetable) {
 		_cpSpecificationOption.setFacetable(facetable);
-	}
-
-	/**
-	 * Sets the group ID of this cp specification option.
-	 *
-	 * @param groupId the group ID of this cp specification option
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_cpSpecificationOption.setGroupId(groupId);
 	}
 
 	/**

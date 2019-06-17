@@ -35,18 +35,22 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLoca
 public abstract class CommerceInventoryWarehouseItemBaseImpl
 	extends CommerceInventoryWarehouseItemModelImpl
 	implements CommerceInventoryWarehouseItem {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse item model instance should use the {@link CommerceInventoryWarehouseItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse item model instance should use the <code>CommerceInventoryWarehouseItem</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceInventoryWarehouseItemLocalServiceUtil.addCommerceInventoryWarehouseItem(this);
+			CommerceInventoryWarehouseItemLocalServiceUtil.
+				addCommerceInventoryWarehouseItem(this);
 		}
 		else {
-			CommerceInventoryWarehouseItemLocalServiceUtil.updateCommerceInventoryWarehouseItem(this);
+			CommerceInventoryWarehouseItemLocalServiceUtil.
+				updateCommerceInventoryWarehouseItem(this);
 		}
 	}
+
 }

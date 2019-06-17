@@ -65,14 +65,12 @@ public class CommerceRegionCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", commerceRegionId=");
 		sb.append(commerceRegionId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -112,7 +110,6 @@ public class CommerceRegionCacheModel
 		}
 
 		commerceRegionImpl.setCommerceRegionId(commerceRegionId);
-		commerceRegionImpl.setGroupId(groupId);
 		commerceRegionImpl.setCompanyId(companyId);
 		commerceRegionImpl.setUserId(userId);
 
@@ -174,8 +171,6 @@ public class CommerceRegionCacheModel
 
 		commerceRegionId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -203,8 +198,6 @@ public class CommerceRegionCacheModel
 		}
 
 		objectOutput.writeLong(commerceRegionId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -244,7 +237,6 @@ public class CommerceRegionCacheModel
 
 	public String uuid;
 	public long commerceRegionId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

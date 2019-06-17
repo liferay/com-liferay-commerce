@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -314,6 +317,32 @@ public class CPDefinitionOptionRelModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPDefinitionOptionRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinitionOptionRel.class.getClassLoader(),
+			CPDefinitionOptionRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinitionOptionRel> constructor =
+				(Constructor<CPDefinitionOptionRel>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPDefinitionOptionRel, Object>>
@@ -1383,8 +1412,12 @@ public class CPDefinitionOptionRelModelImpl
 	@Override
 	public CPDefinitionOptionRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPDefinitionOptionRel)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPDefinitionOptionRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1674,11 +1707,12 @@ public class CPDefinitionOptionRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinitionOptionRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinitionOptionRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPDefinitionOptionRel>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

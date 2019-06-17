@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
@@ -83,16 +81,10 @@ public interface CPOptionLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOption addCPOption(
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			String ddmFormFieldTypeName, boolean facetable, boolean required,
-			boolean skuContributor, String key, ServiceContext serviceContext)
-		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CPOption addCPOption(
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			String ddmFormFieldTypeName, boolean facetable, boolean required,
-			boolean skuContributor, String key, String externalReferenceCode,
+			long userId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			boolean facetable, boolean required, boolean skuContributor,
+			String key, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 
@@ -126,7 +118,7 @@ public interface CPOptionLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public CPOption deleteCPOption(long CPOptionId) throws PortalException;
 
-	public void deleteCPOptions(long groupId) throws PortalException;
+	public void deleteCPOptions(long companyId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -209,7 +201,7 @@ public interface CPOptionLocalService
 	public CPOption fetchCPOption(long CPOptionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
 		throws PortalException;
 
 	/**
@@ -224,14 +216,15 @@ public interface CPOptionLocalService
 		long companyId, String externalReferenceCode);
 
 	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOptionByUuidAndGroupId(String uuid, long groupId);
+	public CPOption fetchCPOptionByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -247,19 +240,19 @@ public interface CPOptionLocalService
 	public CPOption getCPOption(long CPOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption getCPOption(long groupId, String key)
+	public CPOption getCPOption(long companyId, String key)
 		throws PortalException;
 
 	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option
 	 * @throws PortalException if a matching cp option could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption getCPOptionByUuidAndGroupId(String uuid, long groupId)
+	public CPOption getCPOptionByUuidAndCompanyId(String uuid, long companyId)
 		throws PortalException;
 
 	/**
@@ -276,40 +269,6 @@ public interface CPOptionLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPOption> getCPOptions(int start, int end);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(long groupId, int start, int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(
-		long groupId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator);
-
-	/**
-	 * Returns all the cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp options, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	 * Returns a range of cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp options, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator);
-
 	/**
 	 * Returns the number of cp options.
 	 *
@@ -319,7 +278,7 @@ public interface CPOptionLocalService
 	public int getCPOptionsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCount(long groupId);
+	public int getCPOptionsCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -341,21 +300,8 @@ public interface CPOptionLocalService
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Hits search(SearchContext searchContext);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPOption> searchCPOptions(
-			long companyId, long groupId, String keywords, int start, int end,
-			Sort sort)
-		throws PortalException;
-
-	public CPOption setFacetable(long cpOptionId, boolean facetable)
-		throws PortalException;
-
-	public CPOption setRequired(long cpOptionId, boolean required)
-		throws PortalException;
-
-	public CPOption setSkuContributor(long cpOptionId, boolean skuContributor)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	/**
@@ -376,9 +322,10 @@ public interface CPOptionLocalService
 		throws PortalException;
 
 	public CPOption upsertCPOption(
-			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-			String ddmFormFieldTypeName, boolean facetable, boolean required,
-			boolean skuContributor, String key, String externalReferenceCode,
+			long userId, Map<Locale, String> nameMap,
+			Map<Locale, String> descriptionMap, String ddmFormFieldTypeName,
+			boolean facetable, boolean required, boolean skuContributor,
+			String key, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 

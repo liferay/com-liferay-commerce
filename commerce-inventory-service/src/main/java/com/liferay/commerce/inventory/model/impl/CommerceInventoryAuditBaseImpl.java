@@ -34,18 +34,22 @@ import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService
 @ProviderType
 public abstract class CommerceInventoryAuditBaseImpl
 	extends CommerceInventoryAuditModelImpl implements CommerceInventoryAudit {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce inventory audit model instance should use the {@link CommerceInventoryAudit} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory audit model instance should use the <code>CommerceInventoryAudit</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceInventoryAuditLocalServiceUtil.addCommerceInventoryAudit(this);
+			CommerceInventoryAuditLocalServiceUtil.addCommerceInventoryAudit(
+				this);
 		}
 		else {
-			CommerceInventoryAuditLocalServiceUtil.updateCommerceInventoryAudit(this);
+			CommerceInventoryAuditLocalServiceUtil.updateCommerceInventoryAudit(
+				this);
 		}
 	}
+
 }

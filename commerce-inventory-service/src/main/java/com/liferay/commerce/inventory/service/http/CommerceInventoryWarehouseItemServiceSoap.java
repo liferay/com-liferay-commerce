@@ -16,21 +16,28 @@ package com.liferay.commerce.inventory.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceInventoryWarehouseItemServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem}, that is translated to a
- * {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem</code>, that is translated to a
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -52,10 +59,133 @@ import aQute.bnd.annotation.ProviderType;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryWarehouseItemServiceHttp
- * @see com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
- * @see com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseItemServiceSoap {
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
+				addCommerceInventoryWarehouseItem(
+					long userId, long commerceInventoryWarehouseId, String sku,
+					int quantity)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				returnValue =
+					CommerceInventoryWarehouseItemServiceUtil.
+						addCommerceInventoryWarehouseItem(
+							userId, commerceInventoryWarehouseId, sku,
+							quantity);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
+				fetchCommerceInventoryWarehouseItem(
+					long commerceInventoryWarehouseId, String sku)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				returnValue =
+					CommerceInventoryWarehouseItemServiceUtil.
+						fetchCommerceInventoryWarehouseItem(
+							commerceInventoryWarehouseId, sku);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.
+			CommerceInventoryWarehouseItemSoap[]
+					getCommerceInventoryWarehouseItems(
+						long commerceInventoryWarehouseId, int start, int end)
+				throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouseItem> returnValue =
+						CommerceInventoryWarehouseItemServiceUtil.
+							getCommerceInventoryWarehouseItems(
+								commerceInventoryWarehouseId, start, end);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
+				updateCommerceInventoryWarehouseItem(
+					long commerceInventoryWarehouseItemId, int quantity)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				returnValue =
+					CommerceInventoryWarehouseItemServiceUtil.
+						updateCommerceInventoryWarehouseItem(
+							commerceInventoryWarehouseItemId, quantity);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
+				upsertCommerceInventoryWarehouseItem(
+					long userId, long commerceInventoryWarehouseId, String sku,
+					int quantity)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				returnValue =
+					CommerceInventoryWarehouseItemServiceUtil.
+						upsertCommerceInventoryWarehouseItem(
+							userId, commerceInventoryWarehouseId, sku,
+							quantity);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceInventoryWarehouseItemServiceSoap.class);
+
 }

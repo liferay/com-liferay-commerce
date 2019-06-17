@@ -69,7 +69,7 @@ public class CommerceTierPriceEntryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -77,8 +77,6 @@ public class CommerceTierPriceEntryCacheModel
 		sb.append(externalReferenceCode);
 		sb.append(", commerceTierPriceEntryId=");
 		sb.append(commerceTierPriceEntryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -126,7 +124,6 @@ public class CommerceTierPriceEntryCacheModel
 
 		commerceTierPriceEntryImpl.setCommerceTierPriceEntryId(
 			commerceTierPriceEntryId);
-		commerceTierPriceEntryImpl.setGroupId(groupId);
 		commerceTierPriceEntryImpl.setCompanyId(companyId);
 		commerceTierPriceEntryImpl.setUserId(userId);
 
@@ -179,8 +176,6 @@ public class CommerceTierPriceEntryCacheModel
 
 		commerceTierPriceEntryId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -214,8 +209,6 @@ public class CommerceTierPriceEntryCacheModel
 
 		objectOutput.writeLong(commerceTierPriceEntryId);
 
-		objectOutput.writeLong(groupId);
-
 		objectOutput.writeLong(companyId);
 
 		objectOutput.writeLong(userId);
@@ -241,7 +234,6 @@ public class CommerceTierPriceEntryCacheModel
 	public String uuid;
 	public String externalReferenceCode;
 	public long commerceTierPriceEntryId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

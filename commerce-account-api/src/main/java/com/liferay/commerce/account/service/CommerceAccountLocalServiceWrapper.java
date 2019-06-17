@@ -402,6 +402,17 @@ public class CommerceAccountLocalServiceWrapper
 	public java.util.List<com.liferay.commerce.account.model.CommerceAccount>
 		getUserCommerceAccounts(
 			long userId, Long parentCommerceAccountId, int commerceSiteType,
+			String keywords, Boolean active, int start, int end) {
+
+		return _commerceAccountLocalService.getUserCommerceAccounts(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, active,
+			start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.account.model.CommerceAccount>
+		getUserCommerceAccounts(
+			long userId, Long parentCommerceAccountId, int commerceSiteType,
 			String keywords, int start, int end) {
 
 		return _commerceAccountLocalService.getUserCommerceAccounts(
@@ -416,6 +427,16 @@ public class CommerceAccountLocalServiceWrapper
 
 		return _commerceAccountLocalService.getUserCommerceAccountsCount(
 			userId, parentCommerceAccountId, commerceSiteType, keywords);
+	}
+
+	@Override
+	public int getUserCommerceAccountsCount(
+		long userId, Long parentCommerceAccountId, int commerceSiteType,
+		String keywords, Boolean active) {
+
+		return _commerceAccountLocalService.getUserCommerceAccountsCount(
+			userId, parentCommerceAccountId, commerceSiteType, keywords,
+			active);
 	}
 
 	@Override
@@ -439,6 +460,15 @@ public class CommerceAccountLocalServiceWrapper
 
 		return _commerceAccountLocalService.searchCommerceAccountsCount(
 			companyId, parentCommerceAccountId, keywords, type, active);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount setActive(
+			long commerceAccountId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountLocalService.setActive(
+			commerceAccountId, active);
 	}
 
 	/**

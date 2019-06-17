@@ -29,9 +29,7 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -82,20 +80,11 @@ public interface CPOptionService extends BaseService {
 	public CPOption fetchCPOption(long cpOptionId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPOption fetchCPOption(long groupId, String key)
+	public CPOption fetchCPOption(long companyId, String key)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPOption getCPOption(long cpOptionId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPOption> getCPOptions(
-			long groupId, int start, int end,
-			OrderByComparator<CPOption> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPOptionsCount(long groupId) throws PortalException;
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -106,8 +95,7 @@ public interface CPOptionService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPOption> searchCPOptions(
-			long companyId, long groupId, String keywords, int start, int end,
-			Sort sort)
+			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
 	public CPOption updateCPOption(

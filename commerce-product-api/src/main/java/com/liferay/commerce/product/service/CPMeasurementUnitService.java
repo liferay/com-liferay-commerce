@@ -74,7 +74,7 @@ public interface CPMeasurementUnitService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-			long groupId, int type)
+			long companyId, int type)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -83,21 +83,22 @@ public interface CPMeasurementUnitService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-			long groupId, int type, int start, int end,
+			long companyId, int type, int start, int end,
 			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CPMeasurementUnit> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPMeasurementUnitsCount(long groupId) throws PortalException;
+	public int getCPMeasurementUnitsCount(long companyId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPMeasurementUnitsCount(long groupId, int type)
+	public int getCPMeasurementUnitsCount(long companyId, int type)
 		throws PortalException;
 
 	/**

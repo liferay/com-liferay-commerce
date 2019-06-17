@@ -634,252 +634,6 @@ public class CommerceRegionPersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_UUID_3 =
 		"(commerceRegion.uuid IS NULL OR commerceRegion.uuid = '')";
 
-	private FinderPath _finderPathFetchByUUID_G;
-	private FinderPath _finderPathCountByUUID_G;
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchRegionException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region
-	 * @throws NoSuchRegionException if a matching commerce region could not be found
-	 */
-	@Override
-	public CommerceRegion findByUUID_G(String uuid, long groupId)
-		throws NoSuchRegionException {
-
-		CommerceRegion commerceRegion = fetchByUUID_G(uuid, groupId);
-
-		if (commerceRegion == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchRegionException(msg.toString());
-		}
-
-		return commerceRegion;
-	}
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	@Override
-	public CommerceRegion fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	@Override
-	public CommerceRegion fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		uuid = Objects.toString(uuid, "");
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByUUID_G, finderArgs, this);
-		}
-
-		if (result instanceof CommerceRegion) {
-			CommerceRegion commerceRegion = (CommerceRegion)result;
-
-			if (!Objects.equals(uuid, commerceRegion.getUuid()) ||
-				(groupId != commerceRegion.getGroupId())) {
-
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_COMMERCEREGION_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<CommerceRegion> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
-				}
-				else {
-					CommerceRegion commerceRegion = list.get(0);
-
-					result = commerceRegion;
-
-					cacheResult(commerceRegion);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CommerceRegion)result;
-		}
-	}
-
-	/**
-	 * Removes the commerce region where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce region that was removed
-	 */
-	@Override
-	public CommerceRegion removeByUUID_G(String uuid, long groupId)
-		throws NoSuchRegionException {
-
-		CommerceRegion commerceRegion = findByUUID_G(uuid, groupId);
-
-		return remove(commerceRegion);
-	}
-
-	/**
-	 * Returns the number of commerce regions where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce regions
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		uuid = Objects.toString(uuid, "");
-
-		FinderPath finderPath = _finderPathCountByUUID_G;
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_COMMERCEREGION_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 =
-		"commerceRegion.uuid = ? AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 =
-		"(commerceRegion.uuid IS NULL OR commerceRegion.uuid = '') AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 =
-		"commerceRegion.groupId = ?";
-
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
@@ -2835,13 +2589,6 @@ public class CommerceRegionPersistenceImpl
 			commerceRegion);
 
 		finderCache.putResult(
-			_finderPathFetchByUUID_G,
-			new Object[] {
-				commerceRegion.getUuid(), commerceRegion.getGroupId()
-			},
-			commerceRegion);
-
-		finderCache.putResult(
 			_finderPathFetchByC_C,
 			new Object[] {
 				commerceRegion.getCommerceCountryId(), commerceRegion.getCode()
@@ -2926,16 +2673,6 @@ public class CommerceRegionPersistenceImpl
 		CommerceRegionModelImpl commerceRegionModelImpl) {
 
 		Object[] args = new Object[] {
-			commerceRegionModelImpl.getUuid(),
-			commerceRegionModelImpl.getGroupId()
-		};
-
-		finderCache.putResult(
-			_finderPathCountByUUID_G, args, Long.valueOf(1), false);
-		finderCache.putResult(
-			_finderPathFetchByUUID_G, args, commerceRegionModelImpl, false);
-
-		args = new Object[] {
 			commerceRegionModelImpl.getCommerceCountryId(),
 			commerceRegionModelImpl.getCode()
 		};
@@ -2948,28 +2685,6 @@ public class CommerceRegionPersistenceImpl
 
 	protected void clearUniqueFindersCache(
 		CommerceRegionModelImpl commerceRegionModelImpl, boolean clearCurrent) {
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-				commerceRegionModelImpl.getUuid(),
-				commerceRegionModelImpl.getGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
-
-		if ((commerceRegionModelImpl.getColumnBitmask() &
-			 _finderPathFetchByUUID_G.getColumnBitmask()) != 0) {
-
-			Object[] args = new Object[] {
-				commerceRegionModelImpl.getOriginalUuid(),
-				commerceRegionModelImpl.getOriginalGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
@@ -3773,20 +3488,6 @@ public class CommerceRegionPersistenceImpl
 			CommerceRegionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
 			new String[] {String.class.getName()});
-
-		_finderPathFetchByUUID_G = new FinderPath(
-			CommerceRegionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceRegionModelImpl.FINDER_CACHE_ENABLED,
-			CommerceRegionImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()},
-			CommerceRegionModelImpl.UUID_COLUMN_BITMASK |
-			CommerceRegionModelImpl.GROUPID_COLUMN_BITMASK);
-
-		_finderPathCountByUUID_G = new FinderPath(
-			CommerceRegionModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceRegionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()});
 
 		_finderPathWithPaginationFindByUuid_C = new FinderPath(
 			CommerceRegionModelImpl.ENTITY_CACHE_ENABLED,

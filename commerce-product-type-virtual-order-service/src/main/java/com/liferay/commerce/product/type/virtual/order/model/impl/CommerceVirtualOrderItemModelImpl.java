@@ -39,6 +39,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -310,6 +313,32 @@ public class CommerceVirtualOrderItemModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceVirtualOrderItem>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceVirtualOrderItem.class.getClassLoader(),
+			CommerceVirtualOrderItem.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceVirtualOrderItem> constructor =
+				(Constructor<CommerceVirtualOrderItem>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CommerceVirtualOrderItem, Object>>
@@ -1107,10 +1136,13 @@ public class CommerceVirtualOrderItemModelImpl
 	@Override
 	public CommerceVirtualOrderItem toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceVirtualOrderItem)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceVirtualOrderItem>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1390,11 +1422,14 @@ public class CommerceVirtualOrderItemModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceVirtualOrderItem.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceVirtualOrderItem.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceVirtualOrderItem>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

@@ -39,6 +39,7 @@
 			<validator name="required" />
 		</field>
 		<field name="type" type="int" />
+		<field name="system" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel">
 		<field name="externalReferenceCode" type="String" />

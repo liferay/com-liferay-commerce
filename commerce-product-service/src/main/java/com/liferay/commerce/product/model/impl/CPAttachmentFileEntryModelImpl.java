@@ -43,6 +43,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -338,6 +341,32 @@ public class CPAttachmentFileEntryModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPAttachmentFileEntry>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPAttachmentFileEntry.class.getClassLoader(),
+			CPAttachmentFileEntry.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPAttachmentFileEntry> constructor =
+				(Constructor<CPAttachmentFileEntry>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPAttachmentFileEntry, Object>>
@@ -1659,8 +1688,12 @@ public class CPAttachmentFileEntryModelImpl
 	@Override
 	public CPAttachmentFileEntry toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPAttachmentFileEntry)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPAttachmentFileEntry>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -2022,11 +2055,12 @@ public class CPAttachmentFileEntryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPAttachmentFileEntry.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPAttachmentFileEntry.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPAttachmentFileEntry>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

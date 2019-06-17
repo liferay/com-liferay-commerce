@@ -35,6 +35,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.Collections;
@@ -70,11 +73,10 @@ public class CommerceDiscountUsageEntryModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"commerceDiscountUsageEntryId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"commerceAccountId", Types.BIGINT}, {"commerceOrderId", Types.BIGINT},
-		{"commerceDiscountId", Types.BIGINT}
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"commerceAccountId", Types.BIGINT},
+		{"commerceOrderId", Types.BIGINT}, {"commerceDiscountId", Types.BIGINT}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -82,7 +84,6 @@ public class CommerceDiscountUsageEntryModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceDiscountUsageEntryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -94,7 +95,7 @@ public class CommerceDiscountUsageEntryModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
+		"create table CommerceDiscountUsageEntry (commerceDiscountUsageEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceOrderId LONG,commerceDiscountId LONG)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceDiscountUsageEntry";
@@ -121,14 +122,7 @@ public class CommerceDiscountUsageEntryModelImpl
 			"value.object.finder.cache.enabled.com.liferay.commerce.discount.model.CommerceDiscountUsageEntry"),
 		true);
 
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(
-		com.liferay.commerce.discount.service.util.ServiceProps.get(
-			"value.object.column.bitmask.enabled.com.liferay.commerce.discount.model.CommerceDiscountUsageEntry"),
-		true);
-
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
-
-	public static final long CREATEDATE_COLUMN_BITMASK = 2L;
+	public static final boolean COLUMN_BITMASK_ENABLED = false;
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(
 		com.liferay.commerce.discount.service.util.ServiceProps.get(
@@ -224,6 +218,32 @@ public class CommerceDiscountUsageEntryModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceDiscountUsageEntry>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceDiscountUsageEntry.class.getClassLoader(),
+			CommerceDiscountUsageEntry.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceDiscountUsageEntry> constructor =
+				(Constructor<CommerceDiscountUsageEntry>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map
 		<String, Function<CommerceDiscountUsageEntry, Object>>
 			_attributeGetterFunctions;
@@ -265,31 +285,6 @@ public class CommerceDiscountUsageEntryModelImpl
 
 					commerceDiscountUsageEntry.setCommerceDiscountUsageEntryId(
 						(Long)commerceDiscountUsageEntryId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceDiscountUsageEntry, Object>() {
-
-				@Override
-				public Object apply(
-					CommerceDiscountUsageEntry commerceDiscountUsageEntry) {
-
-					return commerceDiscountUsageEntry.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceDiscountUsageEntry, Object>() {
-
-				@Override
-				public void accept(
-					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object groupId) {
-
-					commerceDiscountUsageEntry.setGroupId((Long)groupId);
 				}
 
 			});
@@ -517,28 +512,6 @@ public class CommerceDiscountUsageEntryModelImpl
 	}
 
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -596,8 +569,6 @@ public class CommerceDiscountUsageEntryModelImpl
 
 	@Override
 	public void setCreateDate(Date createDate) {
-		_columnBitmask = -1L;
-
 		_createDate = createDate;
 	}
 
@@ -647,10 +618,6 @@ public class CommerceDiscountUsageEntryModelImpl
 		_commerceDiscountId = commerceDiscountId;
 	}
 
-	public long getColumnBitmask() {
-		return _columnBitmask;
-	}
-
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(
@@ -668,10 +635,13 @@ public class CommerceDiscountUsageEntryModelImpl
 	@Override
 	public CommerceDiscountUsageEntry toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceDiscountUsageEntry)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceDiscountUsageEntry>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -684,7 +654,6 @@ public class CommerceDiscountUsageEntryModelImpl
 
 		commerceDiscountUsageEntryImpl.setCommerceDiscountUsageEntryId(
 			getCommerceDiscountUsageEntryId());
-		commerceDiscountUsageEntryImpl.setGroupId(getGroupId());
 		commerceDiscountUsageEntryImpl.setCompanyId(getCompanyId());
 		commerceDiscountUsageEntryImpl.setUserId(getUserId());
 		commerceDiscountUsageEntryImpl.setUserName(getUserName());
@@ -762,14 +731,7 @@ public class CommerceDiscountUsageEntryModelImpl
 		CommerceDiscountUsageEntryModelImpl
 			commerceDiscountUsageEntryModelImpl = this;
 
-		commerceDiscountUsageEntryModelImpl._originalGroupId =
-			commerceDiscountUsageEntryModelImpl._groupId;
-
-		commerceDiscountUsageEntryModelImpl._setOriginalGroupId = false;
-
 		commerceDiscountUsageEntryModelImpl._setModifiedDate = false;
-
-		commerceDiscountUsageEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -780,8 +742,6 @@ public class CommerceDiscountUsageEntryModelImpl
 
 		commerceDiscountUsageEntryCacheModel.commerceDiscountUsageEntryId =
 			getCommerceDiscountUsageEntryId();
-
-		commerceDiscountUsageEntryCacheModel.groupId = getGroupId();
 
 		commerceDiscountUsageEntryCacheModel.companyId = getCompanyId();
 
@@ -894,16 +854,16 @@ public class CommerceDiscountUsageEntryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceDiscountUsageEntry.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceDiscountUsageEntry.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceDiscountUsageEntry>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _commerceDiscountUsageEntryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
@@ -913,7 +873,6 @@ public class CommerceDiscountUsageEntryModelImpl
 	private long _commerceAccountId;
 	private long _commerceOrderId;
 	private long _commerceDiscountId;
-	private long _columnBitmask;
 	private CommerceDiscountUsageEntry _escapedModel;
 
 }

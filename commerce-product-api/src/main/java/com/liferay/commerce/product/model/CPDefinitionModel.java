@@ -18,12 +18,10 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.model.StagedGroupedModel;
-import com.liferay.portal.kernel.model.TrashedModel;
 import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -46,7 +44,7 @@ import java.util.Map;
 @ProviderType
 public interface CPDefinitionModel
 	extends BaseModel<CPDefinition>, ShardedModel, StagedGroupedModel,
-			TrashedModel, WorkflowedModel {
+			WorkflowedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -647,6 +645,48 @@ public interface CPDefinitionModel
 	public void setMaxSubscriptionCycles(long maxSubscriptionCycles);
 
 	/**
+	 * Returns the account group filter enabled of this cp definition.
+	 *
+	 * @return the account group filter enabled of this cp definition
+	 */
+	public boolean getAccountGroupFilterEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp definition is account group filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is account group filter enabled; <code>false</code> otherwise
+	 */
+	public boolean isAccountGroupFilterEnabled();
+
+	/**
+	 * Sets whether this cp definition is account group filter enabled.
+	 *
+	 * @param accountGroupFilterEnabled the account group filter enabled of this cp definition
+	 */
+	public void setAccountGroupFilterEnabled(boolean accountGroupFilterEnabled);
+
+	/**
+	 * Returns the channel filter enabled of this cp definition.
+	 *
+	 * @return the channel filter enabled of this cp definition
+	 */
+	public boolean getChannelFilterEnabled();
+
+	/**
+	 * Returns <code>true</code> if this cp definition is channel filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is channel filter enabled; <code>false</code> otherwise
+	 */
+	public boolean isChannelFilterEnabled();
+
+	/**
+	 * Sets whether this cp definition is channel filter enabled.
+	 *
+	 * @param channelFilterEnabled the channel filter enabled of this cp definition
+	 */
+	public void setChannelFilterEnabled(boolean channelFilterEnabled);
+
+	/**
 	 * Returns the version of this cp definition.
 	 *
 	 * @return the version of this cp definition
@@ -802,55 +842,6 @@ public interface CPDefinitionModel
 	public String getMetaKeywordsMapAsXML();
 
 	public Map<String, String> getLanguageIdToMetaKeywordsMap();
-
-	/**
-	 * Returns the trash entry created when this cp definition was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp definition.
-	 *
-	 * @return the trash entry created when this cp definition was moved to the Recycle Bin
-	 */
-	@Override
-	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
-		throws PortalException;
-
-	/**
-	 * Returns the class primary key of the trash entry for this cp definition.
-	 *
-	 * @return the class primary key of the trash entry for this cp definition
-	 */
-	@Override
-	public long getTrashEntryClassPK();
-
-	/**
-	 * Returns the trash handler for this cp definition.
-	 *
-	 * @return the trash handler for this cp definition
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	@Override
-	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler();
-
-	/**
-	 * Returns <code>true</code> if this cp definition is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrash();
-
-	/**
-	 * Returns <code>true</code> if the parent of this cp definition is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if the parent of this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrashContainer();
-
-	@Override
-	public boolean isInTrashExplicitly();
-
-	@Override
-	public boolean isInTrashImplicitly();
 
 	/**
 	 * Returns <code>true</code> if this cp definition is approved.

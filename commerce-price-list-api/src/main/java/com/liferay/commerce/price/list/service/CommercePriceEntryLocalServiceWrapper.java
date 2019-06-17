@@ -373,18 +373,18 @@ public class CommercePriceEntryLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
 	 */
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceEntry
-		fetchCommercePriceEntryByUuidAndGroupId(String uuid, long groupId) {
+		fetchCommercePriceEntryByUuidAndCompanyId(String uuid, long companyId) {
 
 		return _commercePriceEntryLocalService.
-			fetchCommercePriceEntryByUuidAndGroupId(uuid, groupId);
+			fetchCommercePriceEntryByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -440,51 +440,11 @@ public class CommercePriceEntryLocalServiceWrapper
 	@Override
 	public java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceEntry>
-			getCommercePriceEntriesByGroupId(long groupId, int start, int end) {
-
-		return _commercePriceEntryLocalService.getCommercePriceEntriesByGroupId(
-			groupId, start, end);
-	}
-
-	/**
-	 * Returns all the commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceEntry>
-			getCommercePriceEntriesByUuidAndCompanyId(
-				String uuid, long companyId) {
+			getCommercePriceEntriesByCompanyId(
+				long companyId, int start, int end) {
 
 		return _commercePriceEntryLocalService.
-			getCommercePriceEntriesByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price entries
-	 * @param end the upper bound of the range of commerce price entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceEntry>
-			getCommercePriceEntriesByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.price.list.model.CommercePriceEntry>
-						orderByComparator) {
-
-		return _commercePriceEntryLocalService.
-			getCommercePriceEntriesByUuidAndCompanyId(
-				uuid, companyId, start, end, orderByComparator);
+			getCommercePriceEntriesByCompanyId(companyId, start, end);
 	}
 
 	/**
@@ -504,9 +464,9 @@ public class CommercePriceEntryLocalServiceWrapper
 	}
 
 	@Override
-	public int getCommercePriceEntriesCountByGroupId(long groupId) {
+	public int getCommercePriceEntriesCountByCompanyId(long companyId) {
 		return _commercePriceEntryLocalService.
-			getCommercePriceEntriesCountByGroupId(groupId);
+			getCommercePriceEntriesCountByCompanyId(companyId);
 	}
 
 	/**
@@ -526,20 +486,20 @@ public class CommercePriceEntryLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry
 	 * @throws PortalException if a matching commerce price entry could not be found
 	 */
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceEntry
-			getCommercePriceEntryByUuidAndGroupId(String uuid, long groupId)
+			getCommercePriceEntryByUuidAndCompanyId(String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commercePriceEntryLocalService.
-			getCommercePriceEntryByUuidAndGroupId(uuid, groupId);
+			getCommercePriceEntryByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -659,14 +619,13 @@ public class CommercePriceEntryLocalServiceWrapper
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.price.list.model.CommercePriceEntry>
 				searchCommercePriceEntries(
-					long companyId, long groupId, long commercePriceListId,
-					String keywords, int start, int end,
+					long companyId, long commercePriceListId, String keywords,
+					int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commercePriceEntryLocalService.searchCommercePriceEntries(
-			companyId, groupId, commercePriceListId, keywords, start, end,
-			sort);
+			companyId, commercePriceListId, keywords, start, end, sort);
 	}
 
 	@Override

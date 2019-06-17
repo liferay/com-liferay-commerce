@@ -25,34 +25,39 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryAuditModel
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl"
+)
 @ProviderType
-public interface CommerceInventoryAudit extends CommerceInventoryAuditModel,
-	PersistedModel {
+public interface CommerceInventoryAudit
+	extends CommerceInventoryAuditModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceInventoryAudit, Long> COMMERCE_INVENTORY_AUDIT_ID_ACCESSOR =
-		new Accessor<CommerceInventoryAudit, Long>() {
-			@Override
-			public Long get(CommerceInventoryAudit commerceInventoryAudit) {
-				return commerceInventoryAudit.getCommerceInventoryAuditId();
-			}
+	public static final Accessor<CommerceInventoryAudit, Long>
+		COMMERCE_INVENTORY_AUDIT_ID_ACCESSOR =
+			new Accessor<CommerceInventoryAudit, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(CommerceInventoryAudit commerceInventoryAudit) {
+					return commerceInventoryAudit.getCommerceInventoryAuditId();
+				}
 
-			@Override
-			public Class<CommerceInventoryAudit> getTypeClass() {
-				return CommerceInventoryAudit.class;
-			}
-		};
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceInventoryAudit> getTypeClass() {
+					return CommerceInventoryAudit.class;
+				}
+
+			};
+
 }

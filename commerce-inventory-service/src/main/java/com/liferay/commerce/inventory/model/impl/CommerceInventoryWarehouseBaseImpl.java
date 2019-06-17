@@ -35,18 +35,22 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalSer
 public abstract class CommerceInventoryWarehouseBaseImpl
 	extends CommerceInventoryWarehouseModelImpl
 	implements CommerceInventoryWarehouse {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse model instance should use the {@link CommerceInventoryWarehouse} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse model instance should use the <code>CommerceInventoryWarehouse</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceInventoryWarehouseLocalServiceUtil.addCommerceInventoryWarehouse(this);
+			CommerceInventoryWarehouseLocalServiceUtil.
+				addCommerceInventoryWarehouse(this);
 		}
 		else {
-			CommerceInventoryWarehouseLocalServiceUtil.updateCommerceInventoryWarehouse(this);
+			CommerceInventoryWarehouseLocalServiceUtil.
+				updateCommerceInventoryWarehouse(this);
 		}
 	}
+
 }

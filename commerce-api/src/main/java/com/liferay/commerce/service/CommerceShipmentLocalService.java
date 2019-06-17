@@ -216,12 +216,12 @@ public interface CommerceShipmentLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipment> getCommerceShipments(
-		long groupId, int status, int start, int end,
+		long[] groupIds, int status, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipment> getCommerceShipments(
-		long groupId, int start, int end,
+		long[] groupIds, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator);
 
 	/**
@@ -233,10 +233,10 @@ public interface CommerceShipmentLocalService
 	public int getCommerceShipmentsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCount(long groupId);
+	public int getCommerceShipmentsCount(long[] groupIds);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCount(long groupId, int status);
+	public int getCommerceShipmentsCount(long[] groupIds, int status);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

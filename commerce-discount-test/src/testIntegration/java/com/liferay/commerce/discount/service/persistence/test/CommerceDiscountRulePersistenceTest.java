@@ -125,8 +125,6 @@ public class CommerceDiscountRulePersistenceTest {
 
 		CommerceDiscountRule newCommerceDiscountRule = _persistence.create(pk);
 
-		newCommerceDiscountRule.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceDiscountRule.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceDiscountRule.setUserId(RandomTestUtil.nextLong());
@@ -154,9 +152,6 @@ public class CommerceDiscountRulePersistenceTest {
 		Assert.assertEquals(
 			existingCommerceDiscountRule.getCommerceDiscountRuleId(),
 			newCommerceDiscountRule.getCommerceDiscountRuleId());
-		Assert.assertEquals(
-			existingCommerceDiscountRule.getGroupId(),
-			newCommerceDiscountRule.getGroupId());
 		Assert.assertEquals(
 			existingCommerceDiscountRule.getCompanyId(),
 			newCommerceDiscountRule.getCompanyId());
@@ -220,10 +215,9 @@ public class CommerceDiscountRulePersistenceTest {
 
 	protected OrderByComparator<CommerceDiscountRule> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"CommerceDiscountRule", "commerceDiscountRuleId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "commerceDiscountId",
-			true, "type", true);
+			"CommerceDiscountRule", "commerceDiscountRuleId", true, "companyId",
+			true, "userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceDiscountId", true, "type", true);
 	}
 
 	@Test
@@ -464,8 +458,6 @@ public class CommerceDiscountRulePersistenceTest {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceDiscountRule commerceDiscountRule = _persistence.create(pk);
-
-		commerceDiscountRule.setGroupId(RandomTestUtil.nextLong());
 
 		commerceDiscountRule.setCompanyId(RandomTestUtil.nextLong());
 

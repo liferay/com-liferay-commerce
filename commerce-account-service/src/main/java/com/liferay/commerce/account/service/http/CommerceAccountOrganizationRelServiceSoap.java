@@ -210,6 +210,49 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
+	public static
+		com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap[]
+				getCommerceAccountOrganizationRelsByOrganizationId(
+					long organizationId, int start, int end)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.account.model.
+					CommerceAccountOrganizationRel> returnValue =
+						CommerceAccountOrganizationRelServiceUtil.
+							getCommerceAccountOrganizationRelsByOrganizationId(
+								organizationId, start, end);
+
+			return com.liferay.commerce.account.model.
+				CommerceAccountOrganizationRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+			long organizationId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceAccountOrganizationRelServiceUtil.
+					getCommerceAccountOrganizationRelsByOrganizationIdCount(
+						organizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceAccountOrganizationRelsCount(
 			long commerceAccountId)
 		throws RemoteException {

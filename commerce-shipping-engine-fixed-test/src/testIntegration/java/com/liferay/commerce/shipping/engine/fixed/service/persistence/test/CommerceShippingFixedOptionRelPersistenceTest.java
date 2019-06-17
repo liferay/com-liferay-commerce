@@ -153,7 +153,7 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 		newCommerceShippingFixedOptionRel.setCommerceShippingFixedOptionId(
 			RandomTestUtil.nextLong());
 
-		newCommerceShippingFixedOptionRel.setCommerceWarehouseId(
+		newCommerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(
 			RandomTestUtil.nextLong());
 
 		newCommerceShippingFixedOptionRel.setCommerceCountryId(
@@ -223,8 +223,10 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 			newCommerceShippingFixedOptionRel.
 				getCommerceShippingFixedOptionId());
 		Assert.assertEquals(
-			existingCommerceShippingFixedOptionRel.getCommerceWarehouseId(),
-			newCommerceShippingFixedOptionRel.getCommerceWarehouseId());
+			existingCommerceShippingFixedOptionRel.
+				getCommerceInventoryWarehouseId(),
+			newCommerceShippingFixedOptionRel.
+				getCommerceInventoryWarehouseId());
 		Assert.assertEquals(
 			existingCommerceShippingFixedOptionRel.getCommerceCountryId(),
 			newCommerceShippingFixedOptionRel.getCommerceCountryId());
@@ -301,8 +303,8 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 			"groupId", true, "companyId", true, "userId", true, "userName",
 			true, "createDate", true, "modifiedDate", true,
 			"commerceShippingMethodId", true, "commerceShippingFixedOptionId",
-			true, "commerceWarehouseId", true, "commerceCountryId", true,
-			"commerceRegionId", true, "zip", true, "weightFrom", true,
+			true, "commerceInventoryWarehouseId", true, "commerceCountryId",
+			true, "commerceRegionId", true, "zip", true, "weightFrom", true,
 			"weightTo", true, "fixedPrice", true, "rateUnitWeightPrice", true,
 			"ratePercentage", true);
 	}
@@ -584,7 +586,7 @@ public class CommerceShippingFixedOptionRelPersistenceTest {
 		commerceShippingFixedOptionRel.setCommerceShippingFixedOptionId(
 			RandomTestUtil.nextLong());
 
-		commerceShippingFixedOptionRel.setCommerceWarehouseId(
+		commerceShippingFixedOptionRel.setCommerceInventoryWarehouseId(
 			RandomTestUtil.nextLong());
 
 		commerceShippingFixedOptionRel.setCommerceCountryId(

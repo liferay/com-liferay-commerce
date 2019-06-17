@@ -80,10 +80,10 @@ public class CommerceCountryLocalServiceUtil {
 		return getService().createCommerceCountry(commerceCountryId);
 	}
 
-	public static void deleteCommerceCountries(long groupId)
+	public static void deleteCommerceCountries(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		getService().deleteCommerceCountries(groupId);
+		getService().deleteCommerceCountries(companyId);
 	}
 
 	/**
@@ -218,23 +218,24 @@ public class CommerceCountryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountry
-			fetchCommerceCountry(long groupId, int numericISOCode)
+			fetchCommerceCountry(long companyId, int numericISOCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().fetchCommerceCountry(groupId, numericISOCode);
+		return getService().fetchCommerceCountry(companyId, numericISOCode);
 	}
 
 	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public static com.liferay.commerce.model.CommerceCountry
-		fetchCommerceCountryByUuidAndGroupId(String uuid, long groupId) {
+		fetchCommerceCountryByUuidAndCompanyId(String uuid, long companyId) {
 
-		return getService().fetchCommerceCountryByUuidAndGroupId(uuid, groupId);
+		return getService().fetchCommerceCountryByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -245,10 +246,10 @@ public class CommerceCountryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
-			long groupId, boolean billingAllowed, boolean active) {
+			long companyId, boolean billingAllowed, boolean active) {
 
 		return getService().getBillingCommerceCountries(
-			groupId, billingAllowed, active);
+			companyId, billingAllowed, active);
 	}
 
 	/**
@@ -269,66 +270,31 @@ public class CommerceCountryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
-		getCommerceCountries(long groupId, boolean active) {
+		getCommerceCountries(long companyId, boolean active) {
 
-		return getService().getCommerceCountries(groupId, active);
+		return getService().getCommerceCountries(companyId, active);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getCommerceCountries(
-			long groupId, boolean active, int start, int end,
+			long companyId, boolean active, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<com.liferay.commerce.model.CommerceCountry>
 					orderByComparator) {
 
 		return getService().getCommerceCountries(
-			groupId, active, start, end, orderByComparator);
+			companyId, active, start, end, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getCommerceCountries(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<com.liferay.commerce.model.CommerceCountry>
 					orderByComparator) {
 
 		return getService().getCommerceCountries(
-			groupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns all the commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce countries, or an empty list if no matches were found
-	 */
-	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
-		getCommerceCountriesByUuidAndCompanyId(String uuid, long companyId) {
-
-		return getService().getCommerceCountriesByUuidAndCompanyId(
-			uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce countries
-	 * @param end the upper bound of the range of commerce countries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce countries, or an empty list if no matches were found
-	 */
-	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
-		getCommerceCountriesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.liferay.commerce.model.CommerceCountry>
-					orderByComparator) {
-
-		return getService().getCommerceCountriesByUuidAndCompanyId(
-			uuid, companyId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -340,12 +306,14 @@ public class CommerceCountryLocalServiceUtil {
 		return getService().getCommerceCountriesCount();
 	}
 
-	public static int getCommerceCountriesCount(long groupId) {
-		return getService().getCommerceCountriesCount(groupId);
+	public static int getCommerceCountriesCount(long companyId) {
+		return getService().getCommerceCountriesCount(companyId);
 	}
 
-	public static int getCommerceCountriesCount(long groupId, boolean active) {
-		return getService().getCommerceCountriesCount(groupId, active);
+	public static int getCommerceCountriesCount(
+		long companyId, boolean active) {
+
+		return getService().getCommerceCountriesCount(companyId, active);
 	}
 
 	/**
@@ -363,25 +331,26 @@ public class CommerceCountryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountry getCommerceCountry(
-			long groupId, String twoLettersISOCode)
+			long companyId, String twoLettersISOCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCommerceCountry(groupId, twoLettersISOCode);
+		return getService().getCommerceCountry(companyId, twoLettersISOCode);
 	}
 
 	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country
 	 * @throws PortalException if a matching commerce country could not be found
 	 */
 	public static com.liferay.commerce.model.CommerceCountry
-			getCommerceCountryByUuidAndGroupId(String uuid, long groupId)
+			getCommerceCountryByUuidAndCompanyId(String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCommerceCountryByUuidAndGroupId(uuid, groupId);
+		return getService().getCommerceCountryByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
@@ -417,16 +386,16 @@ public class CommerceCountryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getShippingCommerceCountries(
-			long groupId, boolean shippingAllowed, boolean active) {
+			long companyId, boolean shippingAllowed, boolean active) {
 
 		return getService().getShippingCommerceCountries(
-			groupId, shippingAllowed, active);
+			companyId, shippingAllowed, active);
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
-		getWarehouseCommerceCountries(long groupId, boolean all) {
+		getWarehouseCommerceCountries(long companyId, boolean all) {
 
-		return getService().getWarehouseCommerceCountries(groupId, all);
+		return getService().getWarehouseCommerceCountries(companyId, all);
 	}
 
 	public static void importDefaultCountries(

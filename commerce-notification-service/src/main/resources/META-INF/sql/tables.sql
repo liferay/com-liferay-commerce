@@ -1,3 +1,15 @@
+create table CNTemplateCAccountGroupRel (
+	CNTemplateCAccountGroupRelId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commerceNotificationTemplateId LONG,
+	commerceAccountGroupId LONG
+);
+
 create table CNTemplateUserSegmentRel (
 	CNTemplateUserSegmentRelId LONG not null primary key,
 	groupId LONG,

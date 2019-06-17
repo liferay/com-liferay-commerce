@@ -83,10 +83,10 @@ public interface CommercePriceListLocalService
 		CommercePriceList commercePriceList);
 
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, ServiceContext serviceContext)
@@ -94,10 +94,10 @@ public interface CommercePriceListLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
@@ -105,27 +105,28 @@ public interface CommercePriceListLocalService
 		throws PortalException;
 
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommercePriceList addCommercePriceList(
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, String externalReferenceCode,
 			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException;
-
-	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			String externalReferenceCode, boolean neverExpire,
-			ServiceContext serviceContext)
 		throws PortalException;
 
 	public void checkCommercePriceLists() throws PortalException;
 
-	public void cleanPriceListCache(long groupId);
+	public void cleanPriceListCache(long companyId);
 
 	/**
 	 * Creates a new commerce price list with the primary key. Does not add the commerce price list to the database.
@@ -160,7 +161,7 @@ public interface CommercePriceListLocalService
 	public CommercePriceList deleteCommercePriceList(long commercePriceListId)
 		throws PortalException;
 
-	public void deleteCommercePriceLists(long groupId) throws PortalException;
+	public void deleteCommercePriceLists(long companyId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -280,8 +281,8 @@ public interface CommercePriceListLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Optional<CommercePriceList> getCommercePriceList(
-			long groupId, long commerceAccountId,
-			long[] commerceUserSegmentEntryIds)
+			long companyId, long groupId, long commerceAccountId,
+			long[] commerceAccountGroupIds)
 		throws PortalException;
 
 	/**
@@ -313,11 +314,15 @@ public interface CommercePriceListLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceList> getCommercePriceLists(
-		long groupId, int start, int end);
+		long companyId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceList> getCommercePriceLists(
-		long groupId, int status, int start, int end,
+		long[] groupIds, long companyId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePriceList> getCommercePriceLists(
+		long[] groupIds, long companyId, int status, int start, int end,
 		OrderByComparator<CommercePriceList> orderByComparator);
 
 	/**
@@ -355,7 +360,8 @@ public interface CommercePriceListLocalService
 	public int getCommercePriceListsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommercePriceListsCount(long groupId, int status);
+	public int getCommercePriceListsCount(
+		long[] groupIds, long companyId, int status);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -381,7 +387,7 @@ public interface CommercePriceListLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommercePriceList> searchCommercePriceLists(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
 		throws PortalException;
 
@@ -462,10 +468,11 @@ public interface CommercePriceListLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId,
-			long parentCommercePriceListId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, long parentCommercePriceListId,
+			String name, double priority, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
@@ -473,13 +480,14 @@ public interface CommercePriceListLocalService
 		throws PortalException;
 
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId, String name,
-			double priority, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, String externalReferenceCode,
-			boolean neverExpire, ServiceContext serviceContext)
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			String externalReferenceCode, boolean neverExpire,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 }

@@ -219,18 +219,19 @@ public interface CommerceShipmentItemModel
 	public void setCommerceOrderItemId(long commerceOrderItemId);
 
 	/**
-	 * Returns the commerce warehouse ID of this commerce shipment item.
+	 * Returns the commerce inventory warehouse ID of this commerce shipment item.
 	 *
-	 * @return the commerce warehouse ID of this commerce shipment item
+	 * @return the commerce inventory warehouse ID of this commerce shipment item
 	 */
-	public long getCommerceWarehouseId();
+	public long getCommerceInventoryWarehouseId();
 
 	/**
-	 * Sets the commerce warehouse ID of this commerce shipment item.
+	 * Sets the commerce inventory warehouse ID of this commerce shipment item.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID of this commerce shipment item
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce shipment item
 	 */
-	public void setCommerceWarehouseId(long commerceWarehouseId);
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId);
 
 	/**
 	 * Returns the quantity of this commerce shipment item.

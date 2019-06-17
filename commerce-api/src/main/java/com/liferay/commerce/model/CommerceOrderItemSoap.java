@@ -68,6 +68,7 @@ public class CommerceOrderItemSoap implements Serializable {
 		soapModel.setShippingAddressId(model.getShippingAddressId());
 		soapModel.setPrintedNote(model.getPrintedNote());
 		soapModel.setRequestedDeliveryDate(model.getRequestedDeliveryDate());
+		soapModel.setBookedQuantityId(model.getBookedQuantityId());
 
 		return soapModel;
 	}
@@ -365,6 +366,14 @@ public class CommerceOrderItemSoap implements Serializable {
 		_requestedDeliveryDate = requestedDeliveryDate;
 	}
 
+	public long getBookedQuantityId() {
+		return _bookedQuantityId;
+	}
+
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_bookedQuantityId = bookedQuantityId;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
@@ -393,5 +402,6 @@ public class CommerceOrderItemSoap implements Serializable {
 	private long _shippingAddressId;
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
+	private long _bookedQuantityId;
 
 }

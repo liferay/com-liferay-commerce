@@ -318,8 +318,8 @@ public class CommerceOrderCacheModel
 			commerceOrderImpl.setRequestedDeliveryDate(null);
 		}
 		else {
-			commerceOrderImpl.setRequestedDeliveryDate(new Date(
-					requestedDeliveryDate));
+			commerceOrderImpl.setRequestedDeliveryDate(
+				new Date(requestedDeliveryDate));
 		}
 
 		commerceOrderImpl.setStatus(status);

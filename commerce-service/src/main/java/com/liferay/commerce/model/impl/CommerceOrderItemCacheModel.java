@@ -69,7 +69,7 @@ public class CommerceOrderItemCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(59);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -127,6 +127,8 @@ public class CommerceOrderItemCacheModel
 		sb.append(printedNote);
 		sb.append(", requestedDeliveryDate=");
 		sb.append(requestedDeliveryDate);
+		sb.append(", bookedQuantityId=");
+		sb.append(bookedQuantityId);
 		sb.append("}");
 
 		return sb.toString();
@@ -235,6 +237,8 @@ public class CommerceOrderItemCacheModel
 				new Date(requestedDeliveryDate));
 		}
 
+		commerceOrderItemImpl.setBookedQuantityId(bookedQuantityId);
+
 		commerceOrderItemImpl.resetOriginalValues();
 
 		return commerceOrderItemImpl;
@@ -283,6 +287,8 @@ public class CommerceOrderItemCacheModel
 		shippingAddressId = objectInput.readLong();
 		printedNote = objectInput.readUTF();
 		requestedDeliveryDate = objectInput.readLong();
+
+		bookedQuantityId = objectInput.readLong();
 	}
 
 	@Override
@@ -370,6 +376,8 @@ public class CommerceOrderItemCacheModel
 		}
 
 		objectOutput.writeLong(requestedDeliveryDate);
+
+		objectOutput.writeLong(bookedQuantityId);
 	}
 
 	public String externalReferenceCode;
@@ -400,5 +408,6 @@ public class CommerceOrderItemCacheModel
 	public long shippingAddressId;
 	public String printedNote;
 	public long requestedDeliveryDate;
+	public long bookedQuantityId;
 
 }

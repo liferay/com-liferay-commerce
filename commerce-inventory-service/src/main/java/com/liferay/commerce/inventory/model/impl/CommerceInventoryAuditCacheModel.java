@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryAudit;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceInventoryAudit in entity cache.
  *
  * @author Luca Pellizzon
- * @see CommerceInventoryAudit
  * @generated
  */
 @ProviderType
-public class CommerceInventoryAuditCacheModel implements CacheModel<CommerceInventoryAudit>,
-	Externalizable {
+public class CommerceInventoryAuditCacheModel
+	implements CacheModel<CommerceInventoryAudit>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,9 +48,12 @@ public class CommerceInventoryAuditCacheModel implements CacheModel<CommerceInve
 			return false;
 		}
 
-		CommerceInventoryAuditCacheModel commerceInventoryAuditCacheModel = (CommerceInventoryAuditCacheModel)obj;
+		CommerceInventoryAuditCacheModel commerceInventoryAuditCacheModel =
+			(CommerceInventoryAuditCacheModel)obj;
 
-		if (commerceInventoryAuditId == commerceInventoryAuditCacheModel.commerceInventoryAuditId) {
+		if (commerceInventoryAuditId ==
+				commerceInventoryAuditCacheModel.commerceInventoryAuditId) {
+
 			return true;
 		}
 
@@ -92,9 +94,11 @@ public class CommerceInventoryAuditCacheModel implements CacheModel<CommerceInve
 
 	@Override
 	public CommerceInventoryAudit toEntityModel() {
-		CommerceInventoryAuditImpl commerceInventoryAuditImpl = new CommerceInventoryAuditImpl();
+		CommerceInventoryAuditImpl commerceInventoryAuditImpl =
+			new CommerceInventoryAuditImpl();
 
-		commerceInventoryAuditImpl.setCommerceInventoryAuditId(commerceInventoryAuditId);
+		commerceInventoryAuditImpl.setCommerceInventoryAuditId(
+			commerceInventoryAuditId);
 		commerceInventoryAuditImpl.setCompanyId(companyId);
 		commerceInventoryAuditImpl.setUserId(userId);
 
@@ -157,8 +161,7 @@ public class CommerceInventoryAuditCacheModel implements CacheModel<CommerceInve
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceInventoryAuditId);
 
 		objectOutput.writeLong(companyId);
@@ -201,4 +204,5 @@ public class CommerceInventoryAuditCacheModel implements CacheModel<CommerceInve
 	public String sku;
 	public String description;
 	public int quantity;
+
 }

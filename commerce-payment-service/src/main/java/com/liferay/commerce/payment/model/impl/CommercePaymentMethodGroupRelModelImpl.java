@@ -40,6 +40,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -298,6 +301,32 @@ public class CommercePaymentMethodGroupRelModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommercePaymentMethodGroupRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommercePaymentMethodGroupRel.class.getClassLoader(),
+			CommercePaymentMethodGroupRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommercePaymentMethodGroupRel> constructor =
+				(Constructor<CommercePaymentMethodGroupRel>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map
@@ -1186,10 +1215,13 @@ public class CommercePaymentMethodGroupRelModelImpl
 	@Override
 	public CommercePaymentMethodGroupRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommercePaymentMethodGroupRel)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommercePaymentMethodGroupRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1450,11 +1482,14 @@ public class CommercePaymentMethodGroupRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommercePaymentMethodGroupRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommercePaymentMethodGroupRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommercePaymentMethodGroupRel>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _commercePaymentMethodGroupRelId;
 	private long _groupId;

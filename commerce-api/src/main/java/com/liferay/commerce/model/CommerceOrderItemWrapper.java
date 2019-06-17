@@ -92,6 +92,7 @@ public class CommerceOrderItemWrapper
 		attributes.put("shippingAddressId", getShippingAddressId());
 		attributes.put("printedNote", getPrintedNote());
 		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
+		attributes.put("bookedQuantityId", getBookedQuantityId());
 
 		return attributes;
 	}
@@ -272,6 +273,12 @@ public class CommerceOrderItemWrapper
 		if (requestedDeliveryDate != null) {
 			setRequestedDeliveryDate(requestedDeliveryDate);
 		}
+
+		Long bookedQuantityId = (Long)attributes.get("bookedQuantityId");
+
+		if (bookedQuantityId != null) {
+			setBookedQuantityId(bookedQuantityId);
+		}
 	}
 
 	@Override
@@ -288,6 +295,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public String[] getAvailableLanguageIds() {
 		return _commerceOrderItem.getAvailableLanguageIds();
+	}
+
+	/**
+	 * Returns the booked quantity ID of this commerce order item.
+	 *
+	 * @return the booked quantity ID of this commerce order item
+	 */
+	@Override
+	public long getBookedQuantityId() {
+		return _commerceOrderItem.getBookedQuantityId();
 	}
 
 	@Override
@@ -769,6 +786,16 @@ public class CommerceOrderItemWrapper
 		throws com.liferay.portal.kernel.exception.LocaleException {
 
 		_commerceOrderItem.prepareLocalizedFieldsForImport(defaultImportLocale);
+	}
+
+	/**
+	 * Sets the booked quantity ID of this commerce order item.
+	 *
+	 * @param bookedQuantityId the booked quantity ID of this commerce order item
+	 */
+	@Override
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_commerceOrderItem.setBookedQuantityId(bookedQuantityId);
 	}
 
 	@Override

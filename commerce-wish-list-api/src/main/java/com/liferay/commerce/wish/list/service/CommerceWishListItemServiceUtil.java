@@ -40,33 +40,16 @@ public class CommerceWishListItemServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListItemServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
 			addCommerceWishListItem(
-				long commerceWishListId, long cpDefinitionId, long cpInstanceId,
-				String json,
+				long commerceAccountId, long commerceWishListId,
+				long cProductId, String cpInstanceUuid, String json,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceWishListItem(
-			commerceWishListId, cpDefinitionId, cpInstanceId, json,
-			serviceContext);
-	}
-
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItem
-			addCommerceWishListItem(
-				long commerceWishListId, long cProductId, String cpInstanceUuid,
-				String json,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().addCommerceWishListItem(
-			commerceWishListId, cProductId, cpInstanceUuid, json,
-			serviceContext);
+			commerceAccountId, commerceWishListId, cProductId, cpInstanceUuid,
+			json, serviceContext);
 	}
 
 	public static void deleteCommerceWishListItem(long commerceWishListItemId)

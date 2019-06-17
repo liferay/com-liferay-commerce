@@ -136,8 +136,6 @@ public class CommerceTierPriceEntryPersistenceTest {
 		newCommerceTierPriceEntry.setExternalReferenceCode(
 			RandomTestUtil.randomString());
 
-		newCommerceTierPriceEntry.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceTierPriceEntry.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceTierPriceEntry.setUserId(RandomTestUtil.nextLong());
@@ -177,9 +175,6 @@ public class CommerceTierPriceEntryPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceTierPriceEntry.getCommerceTierPriceEntryId(),
 			newCommerceTierPriceEntry.getCommerceTierPriceEntryId());
-		Assert.assertEquals(
-			existingCommerceTierPriceEntry.getGroupId(),
-			newCommerceTierPriceEntry.getGroupId());
 		Assert.assertEquals(
 			existingCommerceTierPriceEntry.getCompanyId(),
 			newCommerceTierPriceEntry.getCompanyId());
@@ -227,28 +222,12 @@ public class CommerceTierPriceEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByUuid_C() throws Exception {
 		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
 
 		_persistence.countByUuid_C("null", 0L);
 
 		_persistence.countByUuid_C((String)null, 0L);
-	}
-
-	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countByGroupId(0L);
 	}
 
 	@Test
@@ -319,11 +298,10 @@ public class CommerceTierPriceEntryPersistenceTest {
 	protected OrderByComparator<CommerceTierPriceEntry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"CommerceTierPriceEntry", "uuid", true, "externalReferenceCode",
-			true, "commerceTierPriceEntryId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commercePriceEntryId", true, "price",
-			true, "promoPrice", true, "minQuantity", true, "lastPublishDate",
-			true);
+			true, "commerceTierPriceEntryId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"commercePriceEntryId", true, "price", true, "promoPrice", true,
+			"minQuantity", true, "lastPublishDate", true);
 	}
 
 	@Test
@@ -573,18 +551,6 @@ public class CommerceTierPriceEntryPersistenceTest {
 			_persistence.findByPrimaryKey(
 				newCommerceTierPriceEntry.getPrimaryKey());
 
-		Assert.assertTrue(
-			Objects.equals(
-				existingCommerceTierPriceEntry.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommerceTierPriceEntry, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(
-			Long.valueOf(existingCommerceTierPriceEntry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommerceTierPriceEntry, "getOriginalGroupId",
-				new Class<?>[0]));
-
 		Assert.assertEquals(
 			Long.valueOf(
 				existingCommerceTierPriceEntry.getCommercePriceEntryId()),
@@ -621,8 +587,6 @@ public class CommerceTierPriceEntryPersistenceTest {
 
 		commerceTierPriceEntry.setExternalReferenceCode(
 			RandomTestUtil.randomString());
-
-		commerceTierPriceEntry.setGroupId(RandomTestUtil.nextLong());
 
 		commerceTierPriceEntry.setCompanyId(RandomTestUtil.nextLong());
 

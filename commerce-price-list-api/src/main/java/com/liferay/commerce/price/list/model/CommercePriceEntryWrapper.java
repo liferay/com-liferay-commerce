@@ -64,7 +64,6 @@ public class CommercePriceEntryWrapper
 		attributes.put("uuid", getUuid());
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commercePriceEntryId", getCommercePriceEntryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -101,12 +100,6 @@ public class CommercePriceEntryWrapper
 
 		if (commercePriceEntryId != null) {
 			setCommercePriceEntryId(commercePriceEntryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -280,16 +273,6 @@ public class CommercePriceEntryWrapper
 	@Override
 	public String getExternalReferenceCode() {
 		return _commercePriceEntry.getExternalReferenceCode();
-	}
-
-	/**
-	 * Returns the group ID of this commerce price entry.
-	 *
-	 * @return the group ID of this commerce price entry
-	 */
-	@Override
-	public long getGroupId() {
-		return _commercePriceEntry.getGroupId();
 	}
 
 	/**
@@ -538,16 +521,6 @@ public class CommercePriceEntryWrapper
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commercePriceEntry.setExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	 * Sets the group ID of this commerce price entry.
-	 *
-	 * @param groupId the group ID of this commerce price entry
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commercePriceEntry.setGroupId(groupId);
 	}
 
 	/**

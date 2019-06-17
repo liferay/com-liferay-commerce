@@ -61,7 +61,6 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 		attributes.put("uuid", getUuid());
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("CPOptionId", getCPOptionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -98,12 +97,6 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 
 		if (CPOptionId != null) {
 			setCPOptionId(CPOptionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -350,16 +343,6 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public boolean getFacetable() {
 		return _cpOption.getFacetable();
-	}
-
-	/**
-	 * Returns the group ID of this cp option.
-	 *
-	 * @return the group ID of this cp option
-	 */
-	@Override
-	public long getGroupId() {
-		return _cpOption.getGroupId();
 	}
 
 	/**
@@ -760,16 +743,6 @@ public class CPOptionWrapper implements CPOption, ModelWrapper<CPOption> {
 	@Override
 	public void setFacetable(boolean facetable) {
 		_cpOption.setFacetable(facetable);
-	}
-
-	/**
-	 * Sets the group ID of this cp option.
-	 *
-	 * @param groupId the group ID of this cp option
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_cpOption.setGroupId(groupId);
 	}
 
 	/**

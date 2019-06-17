@@ -57,7 +57,7 @@ public class CPSpecificationOptionLocalServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption
 			addCPSpecificationOption(
-				long cpOptionCategoryId,
+				long userId, long cpOptionCategoryId,
 				java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
 				boolean facetable, String key,
@@ -65,8 +65,8 @@ public class CPSpecificationOptionLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPSpecificationOption(
-			cpOptionCategoryId, titleMap, descriptionMap, facetable, key,
-			serviceContext);
+			userId, cpOptionCategoryId, titleMap, descriptionMap, facetable,
+			key, serviceContext);
 	}
 
 	/**
@@ -113,10 +113,10 @@ public class CPSpecificationOptionLocalServiceUtil {
 			CPSpecificationOptionId);
 	}
 
-	public static void deleteCPSpecificationOptions(long groupId)
+	public static void deleteCPSpecificationOptions(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		getService().deleteCPSpecificationOptions(groupId);
+		getService().deleteCPSpecificationOptions(companyId);
 	}
 
 	/**
@@ -222,23 +222,24 @@ public class CPSpecificationOptionLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption
-		fetchCPSpecificationOption(long groupId, String key) {
+		fetchCPSpecificationOption(long companyId, String key) {
 
-		return getService().fetchCPSpecificationOption(groupId, key);
+		return getService().fetchCPSpecificationOption(companyId, key);
 	}
 
 	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
 	 */
 	public static com.liferay.commerce.product.model.CPSpecificationOption
-		fetchCPSpecificationOptionByUuidAndGroupId(String uuid, long groupId) {
+		fetchCPSpecificationOptionByUuidAndCompanyId(
+			String uuid, long companyId) {
 
-		return getService().fetchCPSpecificationOptionByUuidAndGroupId(
-			uuid, groupId);
+		return getService().fetchCPSpecificationOptionByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -262,26 +263,27 @@ public class CPSpecificationOptionLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption
-			getCPSpecificationOption(long groupId, String key)
+			getCPSpecificationOption(long companyId, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPSpecificationOption(groupId, key);
+		return getService().getCPSpecificationOption(companyId, key);
 	}
 
 	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option
 	 * @throws PortalException if a matching cp specification option could not be found
 	 */
 	public static com.liferay.commerce.product.model.CPSpecificationOption
-			getCPSpecificationOptionByUuidAndGroupId(String uuid, long groupId)
+			getCPSpecificationOptionByUuidAndCompanyId(
+				String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPSpecificationOptionByUuidAndGroupId(
-			uuid, groupId);
+		return getService().getCPSpecificationOptionByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	/**
@@ -302,56 +304,6 @@ public class CPSpecificationOptionLocalServiceUtil {
 		return getService().getCPSpecificationOptions(start, end);
 	}
 
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptions(
-				long groupId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.product.model.CPSpecificationOption>
-						orderByComparator) {
-
-		return getService().getCPSpecificationOptions(
-			groupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns all the cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp specification options, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptionsByUuidAndCompanyId(
-				String uuid, long companyId) {
-
-		return getService().getCPSpecificationOptionsByUuidAndCompanyId(
-			uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp specification options
-	 * @param end the upper bound of the range of cp specification options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp specification options, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptionsByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.product.model.CPSpecificationOption>
-						orderByComparator) {
-
-		return getService().getCPSpecificationOptionsByUuidAndCompanyId(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
 	/**
 	 * Returns the number of cp specification options.
 	 *
@@ -359,10 +311,6 @@ public class CPSpecificationOptionLocalServiceUtil {
 	 */
 	public static int getCPSpecificationOptionsCount() {
 		return getService().getCPSpecificationOptionsCount();
-	}
-
-	public static int getCPSpecificationOptionsCount(long groupId) {
-		return getService().getCPSpecificationOptionsCount(groupId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
@@ -396,22 +344,16 @@ public class CPSpecificationOptionLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
-	public static com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-
-		return getService().search(searchContext);
-	}
-
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.product.model.CPSpecificationOption>
 				searchCPSpecificationOptions(
-					long companyId, long groupId, Boolean facetable,
-					String keywords, int start, int end,
+					long companyId, Boolean facetable, String keywords,
+					int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().searchCPSpecificationOptions(
-			companyId, groupId, facetable, keywords, start, end, sort);
+			companyId, facetable, keywords, start, end, sort);
 	}
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption

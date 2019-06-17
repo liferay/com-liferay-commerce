@@ -78,33 +78,38 @@ public interface CommerceCountryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getBillingCommerceCountries(
-		long groupId, boolean billingAllowed, boolean active);
+		long companyId, boolean billingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, boolean active);
+		long companyId, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-			long groupId, boolean active, int start, int end,
+			long companyId, boolean active, int start, int end,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCountriesCount(long groupId) throws PortalException;
+	public int getCommerceCountriesCount(long companyId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCountriesCount(long groupId, boolean active)
+	public int getCommerceCountriesCount(long companyId, boolean active)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCountry getCommerceCountry(long commerceCountryId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCountry getCommerceCountry(
+			long companyId, String twoLettersISOCode)
 		throws PortalException;
 
 	/**
@@ -116,16 +121,16 @@ public interface CommerceCountryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getShippingCommerceCountries(
-		long groupId, boolean shippingAllowed, boolean active);
+		long companyId, boolean shippingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getWarehouseCommerceCountries(
-			long groupId, boolean all)
+			long companyId, boolean all)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceCountry> searchCommerceCountries(
-			long groupId, SearchContext searchContext)
+			SearchContext searchContext)
 		throws PortalException;
 
 	public CommerceCountry setActive(long commerceCountryId, boolean active)

@@ -24,6 +24,6 @@ import aQute.bnd.annotation.ProviderType;
 public interface CommerceCountryFinder {
 
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
-		findByCommerceWarehouses(long groupId, boolean all);
+		findByCommerceInventoryWarehouses(long companyId, boolean all);
 
 }

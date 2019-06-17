@@ -259,19 +259,19 @@ public class CPDAvailabilityEstimateLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
 	public com.liferay.commerce.model.CPDAvailabilityEstimate
-		fetchCPDAvailabilityEstimateByUuidAndGroupId(
-			String uuid, long groupId) {
+		fetchCPDAvailabilityEstimateByUuidAndCompanyId(
+			String uuid, long companyId) {
 
 		return _cpdAvailabilityEstimateLocalService.
-			fetchCPDAvailabilityEstimateByUuidAndGroupId(uuid, groupId);
+			fetchCPDAvailabilityEstimateByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -298,21 +298,21 @@ public class CPDAvailabilityEstimateLocalServiceWrapper
 	}
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate
 	 * @throws PortalException if a matching cpd availability estimate could not be found
 	 */
 	@Override
 	public com.liferay.commerce.model.CPDAvailabilityEstimate
-			getCPDAvailabilityEstimateByUuidAndGroupId(
-				String uuid, long groupId)
+			getCPDAvailabilityEstimateByUuidAndCompanyId(
+				String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpdAvailabilityEstimateLocalService.
-			getCPDAvailabilityEstimateByUuidAndGroupId(uuid, groupId);
+			getCPDAvailabilityEstimateByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -332,45 +332,6 @@ public class CPDAvailabilityEstimateLocalServiceWrapper
 
 		return _cpdAvailabilityEstimateLocalService.getCPDAvailabilityEstimates(
 			start, end);
-	}
-
-	/**
-	 * Returns all the cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @return the matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List<com.liferay.commerce.model.CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId) {
-
-		return _cpdAvailabilityEstimateLocalService.
-			getCPDAvailabilityEstimatesByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cpd availability estimates
-	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List<com.liferay.commerce.model.CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.liferay.commerce.model.CPDAvailabilityEstimate>
-					orderByComparator) {
-
-		return _cpdAvailabilityEstimateLocalService.
-			getCPDAvailabilityEstimatesByUuidAndCompanyId(
-				uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**

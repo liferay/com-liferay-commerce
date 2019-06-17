@@ -88,17 +88,6 @@ public class CPDefinitionSpecificationOptionValueServiceUtil {
 		<com.liferay.commerce.product.model.
 			CPDefinitionSpecificationOptionValue>
 					getCPDefinitionSpecificationOptionValues(
-						long cpSpecificationOptionId, int start, int end)
-				throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPDefinitionSpecificationOptionValues(
-			cpSpecificationOptionId, start, end);
-	}
-
-	public static java.util.List
-		<com.liferay.commerce.product.model.
-			CPDefinitionSpecificationOptionValue>
-					getCPDefinitionSpecificationOptionValues(
 						long cpDefinitionId, int start, int end,
 						com.liferay.portal.kernel.util.OrderByComparator
 							<com.liferay.commerce.product.model.
@@ -119,14 +108,6 @@ public class CPDefinitionSpecificationOptionValueServiceUtil {
 
 		return getService().getCPDefinitionSpecificationOptionValues(
 			cpDefinitionId, cpOptionCategoryId);
-	}
-
-	public static int getCPDefinitionSpecificationOptionValuesCount(
-			long cpSpecificationOptionId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPDefinitionSpecificationOptionValuesCount(
-			cpSpecificationOptionId);
 	}
 
 	/**

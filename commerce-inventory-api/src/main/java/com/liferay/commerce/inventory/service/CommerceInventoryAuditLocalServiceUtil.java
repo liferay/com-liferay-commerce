@@ -18,270 +18,311 @@ import aQute.bnd.annotation.ProviderType;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the local service utility for CommerceInventoryAudit. This utility wraps
- * {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryAuditLocalServiceImpl} and is the
- * primary access point for service operations in application layer code running
+ * <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryAuditLocalServiceImpl</code> and
+ * is an access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryAuditLocalService
- * @see com.liferay.commerce.inventory.service.base.CommerceInventoryAuditLocalServiceBaseImpl
- * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryAuditLocalServiceImpl
  * @generated
  */
 @ProviderType
 public class CommerceInventoryAuditLocalServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryAuditLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryAuditLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* Adds the commerce inventory audit to the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryAudit the commerce inventory audit
-	* @return the commerce inventory audit that was added
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit addCommerceInventoryAudit(
-		com.liferay.commerce.inventory.model.CommerceInventoryAudit commerceInventoryAudit) {
+	 * Adds the commerce inventory audit to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryAudit the commerce inventory audit
+	 * @return the commerce inventory audit that was added
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+		addCommerceInventoryAudit(
+			com.liferay.commerce.inventory.model.CommerceInventoryAudit
+				commerceInventoryAudit) {
+
 		return getService().addCommerceInventoryAudit(commerceInventoryAudit);
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit addCommerceInventoryItemEntry(
-		String description, String sku, int quantity, long userId)
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+			addCommerceInventoryAudit(
+				long userId, String sku, int quantity, String description)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addCommerceInventoryItemEntry(description, sku, quantity,
-			userId);
+
+		return getService().addCommerceInventoryAudit(
+			userId, sku, quantity, description);
+	}
+
+	public static void checkCommerceInventoryAudit(java.util.Date date) {
+		getService().checkCommerceInventoryAudit(date);
 	}
 
 	/**
-	* Creates a new commerce inventory audit with the primary key. Does not add the commerce inventory audit to the database.
-	*
-	* @param commerceInventoryAuditId the primary key for the new commerce inventory audit
-	* @return the new commerce inventory audit
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit createCommerceInventoryAudit(
-		long commerceInventoryAuditId) {
-		return getService()
-				   .createCommerceInventoryAudit(commerceInventoryAuditId);
+	 * Creates a new commerce inventory audit with the primary key. Does not add the commerce inventory audit to the database.
+	 *
+	 * @param commerceInventoryAuditId the primary key for the new commerce inventory audit
+	 * @return the new commerce inventory audit
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+		createCommerceInventoryAudit(long commerceInventoryAuditId) {
+
+		return getService().createCommerceInventoryAudit(
+			commerceInventoryAuditId);
 	}
 
 	/**
-	* Deletes the commerce inventory audit from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryAudit the commerce inventory audit
-	* @return the commerce inventory audit that was removed
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit deleteCommerceInventoryAudit(
-		com.liferay.commerce.inventory.model.CommerceInventoryAudit commerceInventoryAudit) {
-		return getService().deleteCommerceInventoryAudit(commerceInventoryAudit);
+	 * Deletes the commerce inventory audit from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryAudit the commerce inventory audit
+	 * @return the commerce inventory audit that was removed
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+		deleteCommerceInventoryAudit(
+			com.liferay.commerce.inventory.model.CommerceInventoryAudit
+				commerceInventoryAudit) {
+
+		return getService().deleteCommerceInventoryAudit(
+			commerceInventoryAudit);
 	}
 
 	/**
-	* Deletes the commerce inventory audit with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryAuditId the primary key of the commerce inventory audit
-	* @return the commerce inventory audit that was removed
-	* @throws PortalException if a commerce inventory audit with the primary key could not be found
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit deleteCommerceInventoryAudit(
-		long commerceInventoryAuditId)
+	 * Deletes the commerce inventory audit with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryAuditId the primary key of the commerce inventory audit
+	 * @return the commerce inventory audit that was removed
+	 * @throws PortalException if a commerce inventory audit with the primary key could not be found
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+			deleteCommerceInventoryAudit(long commerceInventoryAuditId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .deleteCommerceInventoryAudit(commerceInventoryAuditId);
+
+		return getService().deleteCommerceInventoryAudit(
+			commerceInventoryAuditId);
 	}
 
 	/**
-	* @throws PortalException
-	*/
-	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+	 * @throws PortalException
+	 */
+	public static com.liferay.portal.kernel.model.PersistedModel
+			deletePersistedModel(
+				com.liferay.portal.kernel.model.PersistedModel persistedModel)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().deletePersistedModel(persistedModel);
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery
+		dynamicQuery() {
+
 		return getService().dynamicQuery();
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	public static <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	public static <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) {
+
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	public static <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
-		return getService()
-				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+
+		return getService().dynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
+
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit fetchCommerceInventoryAudit(
-		long commerceInventoryAuditId) {
-		return getService().fetchCommerceInventoryAudit(commerceInventoryAuditId);
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+		fetchCommerceInventoryAudit(long commerceInventoryAuditId) {
+
+		return getService().fetchCommerceInventoryAudit(
+			commerceInventoryAuditId);
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
+		getActionableDynamicQuery() {
+
 		return getService().getActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the commerce inventory audit with the primary key.
-	*
-	* @param commerceInventoryAuditId the primary key of the commerce inventory audit
-	* @return the commerce inventory audit
-	* @throws PortalException if a commerce inventory audit with the primary key could not be found
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit getCommerceInventoryAudit(
-		long commerceInventoryAuditId)
+	 * Returns the commerce inventory audit with the primary key.
+	 *
+	 * @param commerceInventoryAuditId the primary key of the commerce inventory audit
+	 * @return the commerce inventory audit
+	 * @throws PortalException if a commerce inventory audit with the primary key could not be found
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+			getCommerceInventoryAudit(long commerceInventoryAuditId)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getCommerceInventoryAudit(commerceInventoryAuditId);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory audits.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce inventory audits
-	* @param end the upper bound of the range of commerce inventory audits (not inclusive)
-	* @return the range of commerce inventory audits
-	*/
-	public static java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryAudit> getCommerceInventoryAudits(
-		int start, int end) {
+	 * Returns a range of all the commerce inventory audits.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce inventory audits
+	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
+	 * @return the range of commerce inventory audits
+	 */
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryAudit>
+			getCommerceInventoryAudits(int start, int end) {
+
 		return getService().getCommerceInventoryAudits(start, end);
 	}
 
 	/**
-	* Returns the number of commerce inventory audits.
-	*
-	* @return the number of commerce inventory audits
-	*/
+	 * Returns the number of commerce inventory audits.
+	 *
+	 * @return the number of commerce inventory audits
+	 */
 	public static int getCommerceInventoryAuditsCount() {
 		return getService().getCommerceInventoryAuditsCount();
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+	public static
+		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
+			getIndexableActionableDynamicQuery() {
+
 		return getService().getIndexableActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
+	public static com.liferay.portal.kernel.model.PersistedModel
+			getPersistedModel(java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
+
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
-	public static void removeOldCommerceInventoryAudit(java.util.Date olderThan) {
-		getService().removeOldCommerceInventoryAudit(olderThan);
-	}
-
 	/**
-	* Updates the commerce inventory audit in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryAudit the commerce inventory audit
-	* @return the commerce inventory audit that was updated
-	*/
-	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit updateCommerceInventoryAudit(
-		com.liferay.commerce.inventory.model.CommerceInventoryAudit commerceInventoryAudit) {
-		return getService().updateCommerceInventoryAudit(commerceInventoryAudit);
+	 * Updates the commerce inventory audit in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryAudit the commerce inventory audit
+	 * @return the commerce inventory audit that was updated
+	 */
+	public static com.liferay.commerce.inventory.model.CommerceInventoryAudit
+		updateCommerceInventoryAudit(
+			com.liferay.commerce.inventory.model.CommerceInventoryAudit
+				commerceInventoryAudit) {
+
+		return getService().updateCommerceInventoryAudit(
+			commerceInventoryAudit);
 	}
 
 	public static CommerceInventoryAuditLocalService getService() {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceInventoryAuditLocalService, CommerceInventoryAuditLocalService> _serviceTracker;
+	private static ServiceTracker
+		<CommerceInventoryAuditLocalService, CommerceInventoryAuditLocalService>
+			_serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceInventoryAuditLocalService.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceInventoryAuditLocalService.class);
 
-		ServiceTracker<CommerceInventoryAuditLocalService, CommerceInventoryAuditLocalService> serviceTracker =
-			new ServiceTracker<CommerceInventoryAuditLocalService, CommerceInventoryAuditLocalService>(bundle.getBundleContext(),
-				CommerceInventoryAuditLocalService.class, null);
+		ServiceTracker
+			<CommerceInventoryAuditLocalService,
+			 CommerceInventoryAuditLocalService> serviceTracker =
+				new ServiceTracker
+					<CommerceInventoryAuditLocalService,
+					 CommerceInventoryAuditLocalService>(
+						 bundle.getBundleContext(),
+						 CommerceInventoryAuditLocalService.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

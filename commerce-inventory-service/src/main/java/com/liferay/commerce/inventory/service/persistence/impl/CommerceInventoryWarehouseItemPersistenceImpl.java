@@ -21,7 +21,6 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemPersistence;
-
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -66,120 +65,104 @@ import java.util.Set;
  * </p>
  *
  * @author Luca Pellizzon
- * @see CommerceInventoryWarehouseItemPersistence
- * @see com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemUtil
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseItemPersistenceImpl
 	extends BasePersistenceImpl<CommerceInventoryWarehouseItem>
 	implements CommerceInventoryWarehouseItemPersistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link CommerceInventoryWarehouseItemUtil} to access the commerce inventory warehouse item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use <code>CommerceInventoryWarehouseItemUtil</code> to access the commerce inventory warehouse item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = CommerceInventoryWarehouseItemImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List1";
-	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
-		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID =
-		new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceWarehouseId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID =
-		new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceWarehouseId", new String[] { Long.class.getName() },
-			CommerceInventoryWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceWarehouseId", new String[] { Long.class.getName() });
+	public static final String FINDER_CLASS_NAME_ENTITY =
+		CommerceInventoryWarehouseItemImpl.class.getName();
+
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List1";
+
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION =
+		FINDER_CLASS_NAME_ENTITY + ".List2";
+
+	private FinderPath _finderPathWithPaginationFindAll;
+	private FinderPath _finderPathWithoutPaginationFindAll;
+	private FinderPath _finderPathCountAll;
+	private FinderPath
+		_finderPathWithPaginationFindByCommerceInventoryWarehouseId;
+	private FinderPath
+		_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId;
+	private FinderPath _finderPathCountByCommerceInventoryWarehouseId;
 
 	/**
-	 * Returns all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
+	 * Returns all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @return the matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId) {
-		return findByCommerceWarehouseId(commerceWarehouseId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(long commerceInventoryWarehouseId) {
+
+		return findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Returns a range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
+	 * Returns a range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @return the range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end) {
-		return findByCommerceWarehouseId(commerceWarehouseId, start, end, null);
+	public List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end) {
+
+		return findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return findByCommerceWarehouseId(commerceWarehouseId, start, end,
-			orderByComparator, true);
+	public List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		return findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
+	 * Returns an ordered range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -187,38 +170,46 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
+	public List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
+			boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID;
-			finderArgs = new Object[] { commerceWarehouseId };
+			finderPath =
+				_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId;
+			finderArgs = new Object[] {commerceInventoryWarehouseId};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID;
+			finderPath =
+				_finderPathWithPaginationFindByCommerceInventoryWarehouseId;
 			finderArgs = new Object[] {
-					commerceWarehouseId,
-					
-					start, end, orderByComparator
-				};
+				commerceInventoryWarehouseId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceInventoryWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : list) {
-					if ((commerceWarehouseId != commerceInventoryWarehouseItem.getCommerceWarehouseId())) {
+				for (CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem : list) {
+
+					if ((commerceInventoryWarehouseId !=
+							commerceInventoryWarehouseItem.
+								getCommerceInventoryWarehouseId())) {
+
 						list = null;
 
 						break;
@@ -231,8 +222,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -240,15 +231,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEINVENTORYWAREHOUSEID_COMMERCEINVENTORYWAREHOUSEID_2);
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -262,19 +254,19 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(commerceWarehouseId);
+				qPos.add(commerceInventoryWarehouseId);
 
 				if (!pagination) {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -295,20 +287,24 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
+	 * Returns the first commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse item
 	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem findByCommerceWarehouseId_First(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem
+			findByCommerceInventoryWarehouseId_First(
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchByCommerceWarehouseId_First(commerceWarehouseId,
-				orderByComparator);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchByCommerceInventoryWarehouseId_First(
+				commerceInventoryWarehouseId, orderByComparator);
 
 		if (commerceInventoryWarehouseItem != null) {
 			return commerceInventoryWarehouseItem;
@@ -318,8 +314,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("commerceWarehouseId=");
-		msg.append(commerceWarehouseId);
+		msg.append("commerceInventoryWarehouseId=");
+		msg.append(commerceInventoryWarehouseId);
 
 		msg.append("}");
 
@@ -327,18 +323,22 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
+	 * Returns the first commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchByCommerceWarehouseId_First(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		List<CommerceInventoryWarehouseItem> list = findByCommerceWarehouseId(commerceWarehouseId,
-				0, 1, orderByComparator);
+	public CommerceInventoryWarehouseItem
+		fetchByCommerceInventoryWarehouseId_First(
+			long commerceInventoryWarehouseId,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		List<CommerceInventoryWarehouseItem> list =
+			findByCommerceInventoryWarehouseId(
+				commerceInventoryWarehouseId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -348,20 +348,24 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
+	 * Returns the last commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse item
 	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem findByCommerceWarehouseId_Last(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem
+			findByCommerceInventoryWarehouseId_Last(
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchByCommerceWarehouseId_Last(commerceWarehouseId,
-				orderByComparator);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchByCommerceInventoryWarehouseId_Last(
+				commerceInventoryWarehouseId, orderByComparator);
 
 		if (commerceInventoryWarehouseItem != null) {
 			return commerceInventoryWarehouseItem;
@@ -371,8 +375,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("commerceWarehouseId=");
-		msg.append(commerceWarehouseId);
+		msg.append("commerceInventoryWarehouseId=");
+		msg.append(commerceInventoryWarehouseId);
 
 		msg.append("}");
 
@@ -380,24 +384,30 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
+	 * Returns the last commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchByCommerceWarehouseId_Last(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		int count = countByCommerceWarehouseId(commerceWarehouseId);
+	public CommerceInventoryWarehouseItem
+		fetchByCommerceInventoryWarehouseId_Last(
+			long commerceInventoryWarehouseId,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		int count = countByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryWarehouseItem> list = findByCommerceWarehouseId(commerceWarehouseId,
-				count - 1, count, orderByComparator);
+		List<CommerceInventoryWarehouseItem> list =
+			findByCommerceInventoryWarehouseId(
+				commerceInventoryWarehouseId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -407,37 +417,43 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
+	 * Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
 	 *
 	 * @param commerceInventoryWarehouseItemId the primary key of the current commerce inventory warehouse item
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce inventory warehouse item
 	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem[] findByCommerceWarehouseId_PrevAndNext(
-		long commerceInventoryWarehouseItemId, long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem[]
+			findByCommerceInventoryWarehouseId_PrevAndNext(
+				long commerceInventoryWarehouseItemId,
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = findByPrimaryKey(commerceInventoryWarehouseItemId);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			findByPrimaryKey(commerceInventoryWarehouseItemId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceInventoryWarehouseItem[] array = new CommerceInventoryWarehouseItemImpl[3];
+			CommerceInventoryWarehouseItem[] array =
+				new CommerceInventoryWarehouseItemImpl[3];
 
-			array[0] = getByCommerceWarehouseId_PrevAndNext(session,
-					commerceInventoryWarehouseItem, commerceWarehouseId,
-					orderByComparator, true);
+			array[0] = getByCommerceInventoryWarehouseId_PrevAndNext(
+				session, commerceInventoryWarehouseItem,
+				commerceInventoryWarehouseId, orderByComparator, true);
 
 			array[1] = commerceInventoryWarehouseItem;
 
-			array[2] = getByCommerceWarehouseId_PrevAndNext(session,
-					commerceInventoryWarehouseItem, commerceWarehouseId,
-					orderByComparator, false);
+			array[2] = getByCommerceInventoryWarehouseId_PrevAndNext(
+				session, commerceInventoryWarehouseItem,
+				commerceInventoryWarehouseId, orderByComparator, false);
 
 			return array;
 		}
@@ -449,17 +465,19 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouseItem getByCommerceWarehouseId_PrevAndNext(
-		Session session,
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem,
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean previous) {
+	protected CommerceInventoryWarehouseItem
+		getByCommerceInventoryWarehouseId_PrevAndNext(
+			Session session,
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem,
+			long commerceInventoryWarehouseId,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
+			boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -468,10 +486,12 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE);
 
-		query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
+		query.append(
+			_FINDER_COLUMN_COMMERCEINVENTORYWAREHOUSEID_COMMERCEINVENTORYWAREHOUSEID_2);
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -538,13 +558,14 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(commerceWarehouseId);
+		qPos.add(commerceInventoryWarehouseId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouseItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceInventoryWarehouseItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -559,29 +580,36 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce inventory warehouse items where commerceWarehouseId = &#63; from the database.
+	 * Removes all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63; from the database.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 */
 	@Override
-	public void removeByCommerceWarehouseId(long commerceWarehouseId) {
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : findByCommerceWarehouseId(
-				commerceWarehouseId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+				findByCommerceInventoryWarehouseId(
+					commerceInventoryWarehouseId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
 			remove(commerceInventoryWarehouseItem);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouse items where commerceWarehouseId = &#63;.
+	 * Returns the number of commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @return the number of matching commerce inventory warehouse items
 	 */
 	@Override
-	public int countByCommerceWarehouseId(long commerceWarehouseId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID;
+	public int countByCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
 
-		Object[] finderArgs = new Object[] { commerceWarehouseId };
+		FinderPath finderPath = _finderPathCountByCommerceInventoryWarehouseId;
+
+		Object[] finderArgs = new Object[] {commerceInventoryWarehouseId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -590,7 +618,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2);
+			query.append(
+				_FINDER_COLUMN_COMMERCEINVENTORYWAREHOUSEID_COMMERCEINVENTORYWAREHOUSEID_2);
 
 			String sql = query.toString();
 
@@ -603,7 +632,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(commerceWarehouseId);
+				qPos.add(commerceInventoryWarehouseId);
 
 				count = (Long)q.uniqueResult();
 
@@ -622,28 +651,13 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_COMMERCEWAREHOUSEID_COMMERCEWAREHOUSEID_2 =
-		"commerceInventoryWarehouseItem.commerceWarehouseId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBysku",
-			new String[] {
-				String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBysku",
-			new String[] { String.class.getName() },
-			CommerceInventoryWarehouseItemModelImpl.SKU_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_SKU = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countBysku", new String[] { String.class.getName() });
+	private static final String
+		_FINDER_COLUMN_COMMERCEINVENTORYWAREHOUSEID_COMMERCEINVENTORYWAREHOUSEID_2 =
+			"commerceInventoryWarehouseItem.commerceInventoryWarehouseId = ?";
+
+	private FinderPath _finderPathWithPaginationFindBySku;
+	private FinderPath _finderPathWithoutPaginationFindBySku;
+	private FinderPath _finderPathCountBySku;
 
 	/**
 	 * Returns all the commerce inventory warehouse items where sku = &#63;.
@@ -652,15 +666,15 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findBysku(String sku) {
-		return findBysku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceInventoryWarehouseItem> findBySku(String sku) {
+		return findBySku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
 	 * Returns a range of all the commerce inventory warehouse items where sku = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sku the sku
@@ -669,16 +683,17 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end) {
-		return findBysku(sku, start, end, null);
+	public List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end) {
+
+		return findBySku(sku, start, end, null);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sku the sku
@@ -688,17 +703,18 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end,
+	public List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return findBysku(sku, start, end, orderByComparator, true);
+
+		return findBySku(sku, start, end, orderByComparator, true);
 	}
 
 	/**
 	 * Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param sku the sku
@@ -709,35 +725,40 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end,
+	public List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
+
+		sku = Objects.toString(sku, "");
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU;
-			finderArgs = new Object[] { sku };
+			finderPath = _finderPathWithoutPaginationFindBySku;
+			finderArgs = new Object[] {sku};
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SKU;
-			finderArgs = new Object[] { sku, start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindBySku;
+			finderArgs = new Object[] {sku, start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
-				for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : list) {
-					if (!Objects.equals(sku,
-								commerceInventoryWarehouseItem.getSku())) {
+				for (CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem : list) {
+
+					if (!sku.equals(commerceInventoryWarehouseItem.getSku())) {
 						list = null;
 
 						break;
@@ -750,8 +771,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
 				query = new StringBundler(3);
@@ -761,10 +782,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			boolean bindSku = false;
 
-			if (sku == null) {
-				query.append(_FINDER_COLUMN_SKU_SKU_1);
-			}
-			else if (sku.equals("")) {
+			if (sku.isEmpty()) {
 				query.append(_FINDER_COLUMN_SKU_SKU_3);
 			}
 			else {
@@ -774,12 +792,12 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			}
 
 			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else
-			 if (pagination) {
-				query.append(CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
+			else if (pagination) {
+				query.append(
+					CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -798,16 +816,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				}
 
 				if (!pagination) {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -836,11 +854,13 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem findBysku_First(String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem findBySku_First(
+			String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchBysku_First(sku,
-				orderByComparator);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchBySku_First(sku, orderByComparator);
 
 		if (commerceInventoryWarehouseItem != null) {
 			return commerceInventoryWarehouseItem;
@@ -866,10 +886,12 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchBysku_First(String sku,
+	public CommerceInventoryWarehouseItem fetchBySku_First(
+		String sku,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		List<CommerceInventoryWarehouseItem> list = findBysku(sku, 0, 1,
-				orderByComparator);
+
+		List<CommerceInventoryWarehouseItem> list = findBySku(
+			sku, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -887,11 +909,13 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem findBysku_Last(String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem findBySku_Last(
+			String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchBysku_Last(sku,
-				orderByComparator);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchBySku_Last(sku, orderByComparator);
 
 		if (commerceInventoryWarehouseItem != null) {
 			return commerceInventoryWarehouseItem;
@@ -917,16 +941,18 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchBysku_Last(String sku,
+	public CommerceInventoryWarehouseItem fetchBySku_Last(
+		String sku,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		int count = countBysku(sku);
+
+		int count = countBySku(sku);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceInventoryWarehouseItem> list = findBysku(sku, count - 1,
-				count, orderByComparator);
+		List<CommerceInventoryWarehouseItem> list = findBySku(
+			sku, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -945,27 +971,33 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem[] findBysku_PrevAndNext(
-		long commerceInventoryWarehouseItemId, String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+	public CommerceInventoryWarehouseItem[] findBySku_PrevAndNext(
+			long commerceInventoryWarehouseItemId, String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = findByPrimaryKey(commerceInventoryWarehouseItemId);
+
+		sku = Objects.toString(sku, "");
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			findByPrimaryKey(commerceInventoryWarehouseItemId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceInventoryWarehouseItem[] array = new CommerceInventoryWarehouseItemImpl[3];
+			CommerceInventoryWarehouseItem[] array =
+				new CommerceInventoryWarehouseItemImpl[3];
 
-			array[0] = getBysku_PrevAndNext(session,
-					commerceInventoryWarehouseItem, sku, orderByComparator, true);
+			array[0] = getBySku_PrevAndNext(
+				session, commerceInventoryWarehouseItem, sku, orderByComparator,
+				true);
 
 			array[1] = commerceInventoryWarehouseItem;
 
-			array[2] = getBysku_PrevAndNext(session,
-					commerceInventoryWarehouseItem, sku, orderByComparator,
-					false);
+			array[2] = getBySku_PrevAndNext(
+				session, commerceInventoryWarehouseItem, sku, orderByComparator,
+				false);
 
 			return array;
 		}
@@ -977,17 +1009,18 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		}
 	}
 
-	protected CommerceInventoryWarehouseItem getBysku_PrevAndNext(
+	protected CommerceInventoryWarehouseItem getBySku_PrevAndNext(
 		Session session,
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem,
 		String sku,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
 		boolean previous) {
+
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
@@ -998,10 +1031,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 		boolean bindSku = false;
 
-		if (sku == null) {
-			query.append(_FINDER_COLUMN_SKU_SKU_1);
-		}
-		else if (sku.equals("")) {
+		if (sku.isEmpty()) {
 			query.append(_FINDER_COLUMN_SKU_SKU_3);
 		}
 		else {
@@ -1011,7 +1041,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
 
 			if (orderByConditionFields.length > 0) {
 				query.append(WHERE_AND);
@@ -1083,10 +1114,11 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(commerceInventoryWarehouseItem);
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceInventoryWarehouseItem)) {
 
-			for (Object value : values) {
-				qPos.add(value);
+				qPos.add(orderByConditionValue);
 			}
 		}
 
@@ -1106,9 +1138,10 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @param sku the sku
 	 */
 	@Override
-	public void removeBysku(String sku) {
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : findBysku(
-				sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeBySku(String sku) {
+		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+				findBySku(sku, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
 			remove(commerceInventoryWarehouseItem);
 		}
 	}
@@ -1120,10 +1153,12 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the number of matching commerce inventory warehouse items
 	 */
 	@Override
-	public int countBysku(String sku) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_SKU;
+	public int countBySku(String sku) {
+		sku = Objects.toString(sku, "");
 
-		Object[] finderArgs = new Object[] { sku };
+		FinderPath finderPath = _finderPathCountBySku;
+
+		Object[] finderArgs = new Object[] {sku};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1134,10 +1169,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			boolean bindSku = false;
 
-			if (sku == null) {
-				query.append(_FINDER_COLUMN_SKU_SKU_1);
-			}
-			else if (sku.equals("")) {
+			if (sku.isEmpty()) {
 				query.append(_FINDER_COLUMN_SKU_SKU_3);
 			}
 			else {
@@ -1178,43 +1210,38 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_SKU_SKU_1 = "commerceInventoryWarehouseItem.sku IS NULL";
-	private static final String _FINDER_COLUMN_SKU_SKU_2 = "commerceInventoryWarehouseItem.sku = ?";
-	private static final String _FINDER_COLUMN_SKU_SKU_3 = "(commerceInventoryWarehouseItem.sku IS NULL OR commerceInventoryWarehouseItem.sku = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_S = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_S",
-			new String[] { Long.class.getName(), String.class.getName() },
-			CommerceInventoryWarehouseItemModelImpl.COMMERCEWAREHOUSEID_COLUMN_BITMASK |
-			CommerceInventoryWarehouseItemModelImpl.SKU_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_S",
-			new String[] { Long.class.getName(), String.class.getName() });
+	private static final String _FINDER_COLUMN_SKU_SKU_2 =
+		"commerceInventoryWarehouseItem.sku = ?";
+
+	private static final String _FINDER_COLUMN_SKU_SKU_3 =
+		"(commerceInventoryWarehouseItem.sku IS NULL OR commerceInventoryWarehouseItem.sku = '')";
+
+	private FinderPath _finderPathFetchByC_S;
+	private FinderPath _finderPathCountByC_S;
 
 	/**
-	 * Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or throws a {@link NoSuchInventoryWarehouseItemException} if it could not be found.
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or throws a <code>NoSuchInventoryWarehouseItemException</code> if it could not be found.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
 	 * @return the matching commerce inventory warehouse item
 	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem findByC_S(long commerceWarehouseId,
-		String sku) throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchByC_S(commerceWarehouseId,
-				sku);
+	public CommerceInventoryWarehouseItem findByC_S(
+			long commerceInventoryWarehouseId, String sku)
+		throws NoSuchInventoryWarehouseItemException {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchByC_S(commerceInventoryWarehouseId, sku);
 
 		if (commerceInventoryWarehouseItem == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("commerceWarehouseId=");
-			msg.append(commerceWarehouseId);
+			msg.append("commerceInventoryWarehouseId=");
+			msg.append(commerceInventoryWarehouseId);
 
 			msg.append(", sku=");
 			msg.append(sku);
@@ -1232,43 +1259,52 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
 	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchByC_S(long commerceWarehouseId,
-		String sku) {
-		return fetchByC_S(commerceWarehouseId, sku, true);
+	public CommerceInventoryWarehouseItem fetchByC_S(
+		long commerceInventoryWarehouseId, String sku) {
+
+		return fetchByC_S(commerceInventoryWarehouseId, sku, true);
 	}
 
 	/**
-	 * Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	@Override
-	public CommerceInventoryWarehouseItem fetchByC_S(long commerceWarehouseId,
-		String sku, boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { commerceWarehouseId, sku };
+	public CommerceInventoryWarehouseItem fetchByC_S(
+		long commerceInventoryWarehouseId, String sku,
+		boolean retrieveFromCache) {
+
+		sku = Objects.toString(sku, "");
+
+		Object[] finderArgs = new Object[] {commerceInventoryWarehouseId, sku};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_C_S,
-					finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_S, finderArgs, this);
 		}
 
 		if (result instanceof CommerceInventoryWarehouseItem) {
-			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)result;
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+				(CommerceInventoryWarehouseItem)result;
 
-			if ((commerceWarehouseId != commerceInventoryWarehouseItem.getCommerceWarehouseId()) ||
-					!Objects.equals(sku, commerceInventoryWarehouseItem.getSku())) {
+			if ((commerceInventoryWarehouseId !=
+					commerceInventoryWarehouseItem.
+						getCommerceInventoryWarehouseId()) ||
+				!Objects.equals(sku, commerceInventoryWarehouseItem.getSku())) {
+
 				result = null;
 			}
 		}
@@ -1278,14 +1314,11 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_C_S_COMMERCEWAREHOUSEID_2);
+			query.append(_FINDER_COLUMN_C_S_COMMERCEINVENTORYWAREHOUSEID_2);
 
 			boolean bindSku = false;
 
-			if (sku == null) {
-				query.append(_FINDER_COLUMN_C_S_SKU_1);
-			}
-			else if (sku.equals("")) {
+			if (sku.isEmpty()) {
 				query.append(_FINDER_COLUMN_C_S_SKU_3);
 			}
 			else {
@@ -1305,7 +1338,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(commerceWarehouseId);
+				qPos.add(commerceInventoryWarehouseId);
 
 				if (bindSku) {
 					qPos.add(sku);
@@ -1314,8 +1347,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				List<CommerceInventoryWarehouseItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_C_S, finderArgs,
-						list);
+					finderCache.putResult(
+						_finderPathFetchByC_S, finderArgs, list);
 				}
 				else {
 					if (list.size() > 1) {
@@ -1324,13 +1357,13 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"CommerceInventoryWarehouseItemPersistenceImpl.fetchByC_S(long, String, boolean) with parameters (" +
-								StringUtil.merge(finderArgs) +
-								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
 					}
 
-					CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
-						list.get(0);
+					CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem = list.get(0);
 
 					result = commerceInventoryWarehouseItem;
 
@@ -1338,7 +1371,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_C_S, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_S, finderArgs);
 
 				throw processException(e);
 			}
@@ -1356,34 +1389,37 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Removes the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; from the database.
+	 * Removes the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; from the database.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
 	 * @return the commerce inventory warehouse item that was removed
 	 */
 	@Override
 	public CommerceInventoryWarehouseItem removeByC_S(
-		long commerceWarehouseId, String sku)
+			long commerceInventoryWarehouseId, String sku)
 		throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = findByC_S(commerceWarehouseId,
-				sku);
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			findByC_S(commerceInventoryWarehouseId, sku);
 
 		return remove(commerceInventoryWarehouseItem);
 	}
 
 	/**
-	 * Returns the number of commerce inventory warehouse items where commerceWarehouseId = &#63; and sku = &#63;.
+	 * Returns the number of commerce inventory warehouse items where commerceInventoryWarehouseId = &#63; and sku = &#63;.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
 	 * @return the number of matching commerce inventory warehouse items
 	 */
 	@Override
-	public int countByC_S(long commerceWarehouseId, String sku) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_S;
+	public int countByC_S(long commerceInventoryWarehouseId, String sku) {
+		sku = Objects.toString(sku, "");
 
-		Object[] finderArgs = new Object[] { commerceWarehouseId, sku };
+		FinderPath finderPath = _finderPathCountByC_S;
+
+		Object[] finderArgs = new Object[] {commerceInventoryWarehouseId, sku};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1392,14 +1428,11 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE);
 
-			query.append(_FINDER_COLUMN_C_S_COMMERCEWAREHOUSEID_2);
+			query.append(_FINDER_COLUMN_C_S_COMMERCEINVENTORYWAREHOUSEID_2);
 
 			boolean bindSku = false;
 
-			if (sku == null) {
-				query.append(_FINDER_COLUMN_C_S_SKU_1);
-			}
-			else if (sku.equals("")) {
+			if (sku.isEmpty()) {
 				query.append(_FINDER_COLUMN_C_S_SKU_3);
 			}
 			else {
@@ -1419,7 +1452,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(commerceWarehouseId);
+				qPos.add(commerceInventoryWarehouseId);
 
 				if (bindSku) {
 					qPos.add(sku);
@@ -1442,24 +1475,29 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_S_COMMERCEWAREHOUSEID_2 = "commerceInventoryWarehouseItem.commerceWarehouseId = ? AND ";
-	private static final String _FINDER_COLUMN_C_S_SKU_1 = "commerceInventoryWarehouseItem.sku IS NULL";
-	private static final String _FINDER_COLUMN_C_S_SKU_2 = "commerceInventoryWarehouseItem.sku = ?";
-	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(commerceInventoryWarehouseItem.sku IS NULL OR commerceInventoryWarehouseItem.sku = '')";
+	private static final String
+		_FINDER_COLUMN_C_S_COMMERCEINVENTORYWAREHOUSEID_2 =
+			"commerceInventoryWarehouseItem.commerceInventoryWarehouseId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_S_SKU_2 =
+		"commerceInventoryWarehouseItem.sku = ?";
+
+	private static final String _FINDER_COLUMN_C_S_SKU_3 =
+		"(commerceInventoryWarehouseItem.sku IS NULL OR commerceInventoryWarehouseItem.sku = '')";
 
 	public CommerceInventoryWarehouseItemPersistenceImpl() {
 		setModelClass(CommerceInventoryWarehouseItem.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put(
+			"commerceInventoryWarehouseItemId", "CIWarehouseItemId");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceInventoryWarehouseItemId",
-				"CIWarehouseItemId");
 
 			field.set(this, dbColumnNames);
 		}
@@ -1478,16 +1516,21 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public void cacheResult(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-		entityCache.putResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.putResult(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseItemImpl.class,
 			commerceInventoryWarehouseItem.getPrimaryKey(),
 			commerceInventoryWarehouseItem);
 
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_S,
+		finderCache.putResult(
+			_finderPathFetchByC_S,
 			new Object[] {
-				commerceInventoryWarehouseItem.getCommerceWarehouseId(),
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseId(),
 				commerceInventoryWarehouseItem.getSku()
-			}, commerceInventoryWarehouseItem);
+			},
+			commerceInventoryWarehouseItem);
 
 		commerceInventoryWarehouseItem.resetOriginalValues();
 	}
@@ -1500,11 +1543,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems) {
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : commerceInventoryWarehouseItems) {
+
+		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+				commerceInventoryWarehouseItems) {
+
 			if (entityCache.getResult(
-						CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-						CommerceInventoryWarehouseItemImpl.class,
-						commerceInventoryWarehouseItem.getPrimaryKey()) == null) {
+					CommerceInventoryWarehouseItemModelImpl.
+						ENTITY_CACHE_ENABLED,
+					CommerceInventoryWarehouseItemImpl.class,
+					commerceInventoryWarehouseItem.getPrimaryKey()) == null) {
+
 				cacheResult(commerceInventoryWarehouseItem);
 			}
 			else {
@@ -1517,7 +1565,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Clears the cache for all commerce inventory warehouse items.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
@@ -1533,74 +1581,93 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Clears the cache for the commerce inventory warehouse item.
 	 *
 	 * <p>
-	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * The <code>EntityCache</code> and <code>FinderCache</code> are both cleared by this method.
 	 * </p>
 	 */
 	@Override
 	public void clearCache(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-		entityCache.removeResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+
+		entityCache.removeResult(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseItemImpl.class,
 			commerceInventoryWarehouseItem.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		clearUniqueFindersCache((CommerceInventoryWarehouseItemModelImpl)commerceInventoryWarehouseItem,
+		clearUniqueFindersCache(
+			(CommerceInventoryWarehouseItemModelImpl)
+				commerceInventoryWarehouseItem,
 			true);
 	}
 
 	@Override
 	public void clearCache(
 		List<CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems) {
+
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : commerceInventoryWarehouseItems) {
-			entityCache.removeResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+				commerceInventoryWarehouseItems) {
+
+			entityCache.removeResult(
+				CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceInventoryWarehouseItemImpl.class,
 				commerceInventoryWarehouseItem.getPrimaryKey());
 
-			clearUniqueFindersCache((CommerceInventoryWarehouseItemModelImpl)commerceInventoryWarehouseItem,
+			clearUniqueFindersCache(
+				(CommerceInventoryWarehouseItemModelImpl)
+					commerceInventoryWarehouseItem,
 				true);
 		}
 	}
 
 	protected void cacheUniqueFindersCache(
-		CommerceInventoryWarehouseItemModelImpl commerceInventoryWarehouseItemModelImpl) {
-		Object[] args = new Object[] {
-				commerceInventoryWarehouseItemModelImpl.getCommerceWarehouseId(),
-				commerceInventoryWarehouseItemModelImpl.getSku()
-			};
+		CommerceInventoryWarehouseItemModelImpl
+			commerceInventoryWarehouseItemModelImpl) {
 
-		finderCache.putResult(FINDER_PATH_COUNT_BY_C_S, args, Long.valueOf(1),
-			false);
-		finderCache.putResult(FINDER_PATH_FETCH_BY_C_S, args,
+		Object[] args = new Object[] {
+			commerceInventoryWarehouseItemModelImpl.
+				getCommerceInventoryWarehouseId(),
+			commerceInventoryWarehouseItemModelImpl.getSku()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_S, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_S, args,
 			commerceInventoryWarehouseItemModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
-		CommerceInventoryWarehouseItemModelImpl commerceInventoryWarehouseItemModelImpl,
+		CommerceInventoryWarehouseItemModelImpl
+			commerceInventoryWarehouseItemModelImpl,
 		boolean clearCurrent) {
+
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-					commerceInventoryWarehouseItemModelImpl.getCommerceWarehouseId(),
-					commerceInventoryWarehouseItemModelImpl.getSku()
-				};
+				commerceInventoryWarehouseItemModelImpl.
+					getCommerceInventoryWarehouseId(),
+				commerceInventoryWarehouseItemModelImpl.getSku()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_S, args);
+			finderCache.removeResult(_finderPathCountByC_S, args);
+			finderCache.removeResult(_finderPathFetchByC_S, args);
 		}
 
 		if ((commerceInventoryWarehouseItemModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_C_S.getColumnBitmask()) != 0) {
-			Object[] args = new Object[] {
-					commerceInventoryWarehouseItemModelImpl.getOriginalCommerceWarehouseId(),
-					commerceInventoryWarehouseItemModelImpl.getOriginalSku()
-				};
+			 _finderPathFetchByC_S.getColumnBitmask()) != 0) {
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_S, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_C_S, args);
+			Object[] args = new Object[] {
+				commerceInventoryWarehouseItemModelImpl.
+					getOriginalCommerceInventoryWarehouseId(),
+				commerceInventoryWarehouseItemModelImpl.getOriginalSku()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_S, args);
+			finderCache.removeResult(_finderPathFetchByC_S, args);
 		}
 	}
 
@@ -1613,12 +1680,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public CommerceInventoryWarehouseItem create(
 		long commerceInventoryWarehouseItemId) {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = new CommerceInventoryWarehouseItemImpl();
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			new CommerceInventoryWarehouseItemImpl();
 
 		commerceInventoryWarehouseItem.setNew(true);
-		commerceInventoryWarehouseItem.setPrimaryKey(commerceInventoryWarehouseItemId);
+		commerceInventoryWarehouseItem.setPrimaryKey(
+			commerceInventoryWarehouseItemId);
 
-		commerceInventoryWarehouseItem.setCompanyId(companyProvider.getCompanyId());
+		commerceInventoryWarehouseItem.setCompanyId(
+			companyProvider.getCompanyId());
 
 		return commerceInventoryWarehouseItem;
 	}
@@ -1632,8 +1703,9 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 */
 	@Override
 	public CommerceInventoryWarehouseItem remove(
-		long commerceInventoryWarehouseItemId)
+			long commerceInventoryWarehouseItemId)
 		throws NoSuchInventoryWarehouseItemException {
+
 		return remove((Serializable)commerceInventoryWarehouseItemId);
 	}
 
@@ -1647,21 +1719,23 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public CommerceInventoryWarehouseItem remove(Serializable primaryKey)
 		throws NoSuchInventoryWarehouseItemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)session.get(CommerceInventoryWarehouseItemImpl.class,
-					primaryKey);
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+				(CommerceInventoryWarehouseItem)session.get(
+					CommerceInventoryWarehouseItemImpl.class, primaryKey);
 
 			if (commerceInventoryWarehouseItem == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchInventoryWarehouseItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					primaryKey);
+				throw new NoSuchInventoryWarehouseItemException(
+					_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
 			return remove(commerceInventoryWarehouseItem);
@@ -1680,13 +1754,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	protected CommerceInventoryWarehouseItem removeImpl(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
 			if (!session.contains(commerceInventoryWarehouseItem)) {
-				commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)session.get(CommerceInventoryWarehouseItemImpl.class,
+				commerceInventoryWarehouseItem =
+					(CommerceInventoryWarehouseItem)session.get(
+						CommerceInventoryWarehouseItemImpl.class,
 						commerceInventoryWarehouseItem.getPrimaryKeyObj());
 			}
 
@@ -1711,29 +1788,37 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public CommerceInventoryWarehouseItem updateImpl(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		boolean isNew = commerceInventoryWarehouseItem.isNew();
 
-		if (!(commerceInventoryWarehouseItem instanceof CommerceInventoryWarehouseItemModelImpl)) {
+		if (!(commerceInventoryWarehouseItem instanceof
+				CommerceInventoryWarehouseItemModelImpl)) {
+
 			InvocationHandler invocationHandler = null;
 
 			if (ProxyUtil.isProxyClass(
-						commerceInventoryWarehouseItem.getClass())) {
-				invocationHandler = ProxyUtil.getInvocationHandler(commerceInventoryWarehouseItem);
+					commerceInventoryWarehouseItem.getClass())) {
+
+				invocationHandler = ProxyUtil.getInvocationHandler(
+					commerceInventoryWarehouseItem);
 
 				throw new IllegalArgumentException(
 					"Implement ModelWrapper in commerceInventoryWarehouseItem proxy " +
-					invocationHandler.getClass());
+						invocationHandler.getClass());
 			}
 
 			throw new IllegalArgumentException(
 				"Implement ModelWrapper in custom CommerceInventoryWarehouseItem implementation " +
-				commerceInventoryWarehouseItem.getClass());
+					commerceInventoryWarehouseItem.getClass());
 		}
 
-		CommerceInventoryWarehouseItemModelImpl commerceInventoryWarehouseItemModelImpl =
-			(CommerceInventoryWarehouseItemModelImpl)commerceInventoryWarehouseItem;
+		CommerceInventoryWarehouseItemModelImpl
+			commerceInventoryWarehouseItemModelImpl =
+				(CommerceInventoryWarehouseItemModelImpl)
+					commerceInventoryWarehouseItem;
 
-		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		Date now = new Date();
 
@@ -1742,8 +1827,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				commerceInventoryWarehouseItem.setCreateDate(now);
 			}
 			else {
-				commerceInventoryWarehouseItem.setCreateDate(serviceContext.getCreateDate(
-						now));
+				commerceInventoryWarehouseItem.setCreateDate(
+					serviceContext.getCreateDate(now));
 			}
 		}
 
@@ -1752,8 +1837,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				commerceInventoryWarehouseItem.setModifiedDate(now);
 			}
 			else {
-				commerceInventoryWarehouseItem.setModifiedDate(serviceContext.getModifiedDate(
-						now));
+				commerceInventoryWarehouseItem.setModifiedDate(
+					serviceContext.getModifiedDate(now));
 			}
 		}
 
@@ -1768,7 +1853,9 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				commerceInventoryWarehouseItem.setNew(false);
 			}
 			else {
-				commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)session.merge(commerceInventoryWarehouseItem);
+				commerceInventoryWarehouseItem =
+					(CommerceInventoryWarehouseItem)session.merge(
+						commerceInventoryWarehouseItem);
 			}
 		}
 		catch (Exception e) {
@@ -1783,71 +1870,82 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		if (!CommerceInventoryWarehouseItemModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		else
-		 if (isNew) {
+		else if (isNew) {
 			Object[] args = new Object[] {
-					commerceInventoryWarehouseItemModelImpl.getCommerceWarehouseId()
-				};
+				commerceInventoryWarehouseItemModelImpl.
+					getCommerceInventoryWarehouseId()
+			};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
-				args);
-
-			args = new Object[] { commerceInventoryWarehouseItemModelImpl.getSku() };
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
+			finderCache.removeResult(
+				_finderPathCountByCommerceInventoryWarehouseId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId,
 				args);
 
-			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
-				FINDER_ARGS_EMPTY);
+			args = new Object[] {
+				commerceInventoryWarehouseItemModelImpl.getSku()
+			};
+
+			finderCache.removeResult(_finderPathCountBySku, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindBySku, args);
+
+			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
-
 		else {
 			if ((commerceInventoryWarehouseItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceInventoryWarehouseItemModelImpl.getOriginalCommerceWarehouseId()
-					};
+				 _finderPathWithoutPaginationFindByCommerceInventoryWarehouseId.
+					 getColumnBitmask()) != 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
+				Object[] args = new Object[] {
+					commerceInventoryWarehouseItemModelImpl.
+						getOriginalCommerceInventoryWarehouseId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceInventoryWarehouseId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId,
 					args);
 
 				args = new Object[] {
-						commerceInventoryWarehouseItemModelImpl.getCommerceWarehouseId()
-					};
+					commerceInventoryWarehouseItemModelImpl.
+						getCommerceInventoryWarehouseId()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMMERCEWAREHOUSEID,
-					args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMMERCEWAREHOUSEID,
+				finderCache.removeResult(
+					_finderPathCountByCommerceInventoryWarehouseId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId,
 					args);
 			}
 
 			if ((commerceInventoryWarehouseItemModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						commerceInventoryWarehouseItemModelImpl.getOriginalSku()
-					};
+				 _finderPathWithoutPaginationFindBySku.getColumnBitmask()) !=
+					 0) {
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
-					args);
+				Object[] args = new Object[] {
+					commerceInventoryWarehouseItemModelImpl.getOriginalSku()
+				};
+
+				finderCache.removeResult(_finderPathCountBySku, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindBySku, args);
 
 				args = new Object[] {
-						commerceInventoryWarehouseItemModelImpl.getSku()
-					};
+					commerceInventoryWarehouseItemModelImpl.getSku()
+				};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_SKU, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SKU,
-					args);
+				finderCache.removeResult(_finderPathCountBySku, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindBySku, args);
 			}
 		}
 
-		entityCache.putResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+		entityCache.putResult(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceInventoryWarehouseItemImpl.class,
 			commerceInventoryWarehouseItem.getPrimaryKey(),
 			commerceInventoryWarehouseItem, false);
@@ -1861,7 +1959,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce inventory warehouse item with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the commerce inventory warehouse item with the primary key or throws a <code>com.liferay.portal.kernel.exception.NoSuchModelException</code> if it could not be found.
 	 *
 	 * @param primaryKey the primary key of the commerce inventory warehouse item
 	 * @return the commerce inventory warehouse item
@@ -1869,23 +1967,26 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 */
 	@Override
 	public CommerceInventoryWarehouseItem findByPrimaryKey(
-		Serializable primaryKey) throws NoSuchInventoryWarehouseItemException {
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchByPrimaryKey(primaryKey);
+			Serializable primaryKey)
+		throws NoSuchInventoryWarehouseItemException {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			fetchByPrimaryKey(primaryKey);
 
 		if (commerceInventoryWarehouseItem == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchInventoryWarehouseItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				primaryKey);
+			throw new NoSuchInventoryWarehouseItemException(
+				_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 		}
 
 		return commerceInventoryWarehouseItem;
 	}
 
 	/**
-	 * Returns the commerce inventory warehouse item with the primary key or throws a {@link NoSuchInventoryWarehouseItemException} if it could not be found.
+	 * Returns the commerce inventory warehouse item with the primary key or throws a <code>NoSuchInventoryWarehouseItemException</code> if it could not be found.
 	 *
 	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
 	 * @return the commerce inventory warehouse item
@@ -1893,8 +1994,9 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 */
 	@Override
 	public CommerceInventoryWarehouseItem findByPrimaryKey(
-		long commerceInventoryWarehouseItemId)
+			long commerceInventoryWarehouseItemId)
 		throws NoSuchInventoryWarehouseItemException {
+
 		return findByPrimaryKey((Serializable)commerceInventoryWarehouseItemId);
 	}
 
@@ -1907,14 +2009,17 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public CommerceInventoryWarehouseItem fetchByPrimaryKey(
 		Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceInventoryWarehouseItemImpl.class, primaryKey);
+
+		Serializable serializable = entityCache.getResult(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class, primaryKey);
 
 		if (serializable == nullModel) {
 			return null;
 		}
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)serializable;
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			(CommerceInventoryWarehouseItem)serializable;
 
 		if (commerceInventoryWarehouseItem == null) {
 			Session session = null;
@@ -1922,20 +2027,25 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			try {
 				session = openSession();
 
-				commerceInventoryWarehouseItem = (CommerceInventoryWarehouseItem)session.get(CommerceInventoryWarehouseItemImpl.class,
-						primaryKey);
+				commerceInventoryWarehouseItem =
+					(CommerceInventoryWarehouseItem)session.get(
+						CommerceInventoryWarehouseItemImpl.class, primaryKey);
 
 				if (commerceInventoryWarehouseItem != null) {
 					cacheResult(commerceInventoryWarehouseItem);
 				}
 				else {
-					entityCache.putResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+					entityCache.putResult(
+						CommerceInventoryWarehouseItemModelImpl.
+							ENTITY_CACHE_ENABLED,
 						CommerceInventoryWarehouseItemImpl.class, primaryKey,
 						nullModel);
 				}
 			}
 			catch (Exception e) {
-				entityCache.removeResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.removeResult(
+					CommerceInventoryWarehouseItemModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceInventoryWarehouseItemImpl.class, primaryKey);
 
 				throw processException(e);
@@ -1957,24 +2067,29 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	@Override
 	public CommerceInventoryWarehouseItem fetchByPrimaryKey(
 		long commerceInventoryWarehouseItemId) {
-		return fetchByPrimaryKey((Serializable)commerceInventoryWarehouseItemId);
+
+		return fetchByPrimaryKey(
+			(Serializable)commerceInventoryWarehouseItemId);
 	}
 
 	@Override
 	public Map<Serializable, CommerceInventoryWarehouseItem> fetchByPrimaryKeys(
 		Set<Serializable> primaryKeys) {
+
 		if (primaryKeys.isEmpty()) {
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, CommerceInventoryWarehouseItem> map = new HashMap<Serializable, CommerceInventoryWarehouseItem>();
+		Map<Serializable, CommerceInventoryWarehouseItem> map =
+			new HashMap<Serializable, CommerceInventoryWarehouseItem>();
 
 		if (primaryKeys.size() == 1) {
 			Iterator<Serializable> iterator = primaryKeys.iterator();
 
 			Serializable primaryKey = iterator.next();
 
-			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = fetchByPrimaryKey(primaryKey);
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+				fetchByPrimaryKey(primaryKey);
 
 			if (commerceInventoryWarehouseItem != null) {
 				map.put(primaryKey, commerceInventoryWarehouseItem);
@@ -1986,8 +2101,9 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 		Set<Serializable> uncachedPrimaryKeys = null;
 
 		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
-					CommerceInventoryWarehouseItemImpl.class, primaryKey);
+			Serializable serializable = entityCache.getResult(
+				CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceInventoryWarehouseItemImpl.class, primaryKey);
 
 			if (serializable != nullModel) {
 				if (serializable == null) {
@@ -1998,7 +2114,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					map.put(primaryKey,
+					map.put(
+						primaryKey,
 						(CommerceInventoryWarehouseItem)serializable);
 				}
 			}
@@ -2008,8 +2125,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			return map;
 		}
 
-		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
-				1);
+		StringBundler query = new StringBundler(
+			uncachedPrimaryKeys.size() * 2 + 1);
 
 		query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE_PKS_IN);
 
@@ -2032,17 +2149,23 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 			Query q = session.createQuery(sql);
 
-			for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : (List<CommerceInventoryWarehouseItem>)q.list()) {
-				map.put(commerceInventoryWarehouseItem.getPrimaryKeyObj(),
+			for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+					(List<CommerceInventoryWarehouseItem>)q.list()) {
+
+				map.put(
+					commerceInventoryWarehouseItem.getPrimaryKeyObj(),
 					commerceInventoryWarehouseItem);
 
 				cacheResult(commerceInventoryWarehouseItem);
 
-				uncachedPrimaryKeys.remove(commerceInventoryWarehouseItem.getPrimaryKeyObj());
+				uncachedPrimaryKeys.remove(
+					commerceInventoryWarehouseItem.getPrimaryKeyObj());
 			}
 
 			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				entityCache.putResult(
+					CommerceInventoryWarehouseItemModelImpl.
+						ENTITY_CACHE_ENABLED,
 					CommerceInventoryWarehouseItemImpl.class, primaryKey,
 					nullModel);
 			}
@@ -2071,7 +2194,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Returns a range of all the commerce inventory warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce inventory warehouse items
@@ -2087,7 +2210,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Returns an ordered range of all the commerce inventory warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce inventory warehouse items
@@ -2096,8 +2219,10 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the ordered range of commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findAll(int start, int end,
+	public List<CommerceInventoryWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
+
 		return findAll(start, end, orderByComparator, true);
 	}
 
@@ -2105,7 +2230,7 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Returns an ordered range of all the commerce inventory warehouse items.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce inventory warehouse items
@@ -2115,29 +2240,32 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * @return the ordered range of commerce inventory warehouse items
 	 */
 	@Override
-	public List<CommerceInventoryWarehouseItem> findAll(int start, int end,
+	public List<CommerceInventoryWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
+
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
+			(orderByComparator == null)) {
+
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = _finderPathWithoutPaginationFindAll;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
-			finderArgs = new Object[] { start, end, orderByComparator };
+			finderPath = _finderPathWithPaginationFindAll;
+			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryWarehouseItem> list = null;
 
 		if (retrieveFromCache) {
-			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(finderPath,
-					finderArgs, this);
+			list = (List<CommerceInventoryWarehouseItem>)finderCache.getResult(
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -2145,13 +2273,13 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			String sql = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(2 +
-						(orderByComparator.getOrderByFields().length * 2));
+				query = new StringBundler(
+					2 + (orderByComparator.getOrderByFields().length * 2));
 
 				query.append(_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM);
 
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 				sql = query.toString();
 			}
@@ -2159,7 +2287,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				sql = _SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM;
 
 				if (pagination) {
-					sql = sql.concat(CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(
+						CommerceInventoryWarehouseItemModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -2171,16 +2300,16 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end, false);
 
 					Collections.sort(list);
 
 					list = Collections.unmodifiableList(list);
 				}
 				else {
-					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(q,
-							getDialect(), start, end);
+					list = (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+						q, getDialect(), start, end);
 				}
 
 				cacheResult(list);
@@ -2206,7 +2335,9 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 */
 	@Override
 	public void removeAll() {
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem : findAll()) {
+		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
+				findAll()) {
+
 			remove(commerceInventoryWarehouseItem);
 		}
 	}
@@ -2218,8 +2349,8 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 */
 	@Override
 	public int countAll() {
-		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
-				FINDER_ARGS_EMPTY, this);
+		Long count = (Long)finderCache.getResult(
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -2227,16 +2358,17 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM);
+				Query q = session.createQuery(
+					_SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM);
 
 				count = (Long)q.uniqueResult();
 
-				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
-					count);
+				finderCache.putResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
-					FINDER_ARGS_EMPTY);
+				finderCache.removeResult(
+					_finderPathCountAll, FINDER_ARGS_EMPTY);
 
 				throw processException(e);
 			}
@@ -2262,10 +2394,99 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 	 * Initializes the commerce inventory warehouse item persistence.
 	 */
 	public void afterPropertiesSet() {
+		_finderPathWithPaginationFindAll = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+
+		_finderPathWithoutPaginationFindAll = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
+			new String[0]);
+
+		_finderPathCountAll = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
+			new String[0]);
+
+		_finderPathWithPaginationFindByCommerceInventoryWarehouseId =
+			new FinderPath(
+				CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+				CommerceInventoryWarehouseItemImpl.class,
+				FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+				"findByCommerceInventoryWarehouseId",
+				new String[] {
+					Long.class.getName(), Integer.class.getName(),
+					Integer.class.getName(), OrderByComparator.class.getName()
+				});
+
+		_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId =
+			new FinderPath(
+				CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+				CommerceInventoryWarehouseItemImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceInventoryWarehouseId",
+				new String[] {Long.class.getName()},
+				CommerceInventoryWarehouseItemModelImpl.
+					COMMERCEINVENTORYWAREHOUSEID_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceInventoryWarehouseId = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceInventoryWarehouseId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindBySku = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySku",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindBySku = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySku",
+			new String[] {String.class.getName()},
+			CommerceInventoryWarehouseItemModelImpl.SKU_COLUMN_BITMASK);
+
+		_finderPathCountBySku = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySku",
+			new String[] {String.class.getName()});
+
+		_finderPathFetchByC_S = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_S",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceInventoryWarehouseItemModelImpl.
+				COMMERCEINVENTORYWAREHOUSEID_COLUMN_BITMASK |
+			CommerceInventoryWarehouseItemModelImpl.SKU_COLUMN_BITMASK);
+
+		_finderPathCountByC_S = new FinderPath(
+			CommerceInventoryWarehouseItemModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceInventoryWarehouseItemModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {
-		entityCache.removeCache(CommerceInventoryWarehouseItemImpl.class.getName());
+		entityCache.removeCache(
+			CommerceInventoryWarehouseItemImpl.class.getName());
 		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -2273,22 +2494,44 @@ public class CommerceInventoryWarehouseItemPersistenceImpl
 
 	@ServiceReference(type = CompanyProviderWrapper.class)
 	protected CompanyProvider companyProvider;
+
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
+
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM = "SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem";
-	private static final String _SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE_PKS_IN =
-		"SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE CIWarehouseItemId IN (";
-	private static final String _SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE =
-		"SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE ";
-	private static final String _SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM = "SELECT COUNT(commerceInventoryWarehouseItem) FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem";
-	private static final String _SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE = "SELECT COUNT(commerceInventoryWarehouseItem) FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "commerceInventoryWarehouseItem.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CommerceInventoryWarehouseItem exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CommerceInventoryWarehouseItem exists with the key {";
-	private static final Log _log = LogFactoryUtil.getLog(CommerceInventoryWarehouseItemPersistenceImpl.class);
-	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"commerceInventoryWarehouseItemId"
-			});
+
+	private static final String _SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM =
+		"SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem";
+
+	private static final String
+		_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE_PKS_IN =
+			"SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE CIWarehouseItemId IN (";
+
+	private static final String
+		_SQL_SELECT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE =
+			"SELECT commerceInventoryWarehouseItem FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE ";
+
+	private static final String _SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM =
+		"SELECT COUNT(commerceInventoryWarehouseItem) FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem";
+
+	private static final String
+		_SQL_COUNT_COMMERCEINVENTORYWAREHOUSEITEM_WHERE =
+			"SELECT COUNT(commerceInventoryWarehouseItem) FROM CommerceInventoryWarehouseItem commerceInventoryWarehouseItem WHERE ";
+
+	private static final String _ORDER_BY_ENTITY_ALIAS =
+		"commerceInventoryWarehouseItem.";
+
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
+		"No CommerceInventoryWarehouseItem exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No CommerceInventoryWarehouseItem exists with the key {";
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceInventoryWarehouseItemPersistenceImpl.class);
+
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(
+		new String[] {"commerceInventoryWarehouseItemId"});
+
 }

@@ -25,38 +25,46 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryWarehouseItemModel
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl"
+)
 @ProviderType
 public interface CommerceInventoryWarehouseItem
 	extends CommerceInventoryWarehouseItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceInventoryWarehouseItem, Long> COMMERCE_INVENTORY_WAREHOUSE_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceInventoryWarehouseItem, Long>() {
-			@Override
-			public Long get(
-				CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-				return commerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId();
-			}
+	public static final Accessor<CommerceInventoryWarehouseItem, Long>
+		COMMERCE_INVENTORY_WAREHOUSE_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceInventoryWarehouseItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem) {
 
-			@Override
-			public Class<CommerceInventoryWarehouseItem> getTypeClass() {
-				return CommerceInventoryWarehouseItem.class;
-			}
-		};
+					return commerceInventoryWarehouseItem.
+						getCommerceInventoryWarehouseItemId();
+				}
 
-	public CommerceInventoryWarehouse getCommerceWarehouse()
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceInventoryWarehouseItem> getTypeClass() {
+					return CommerceInventoryWarehouseItem.class;
+				}
+
+			};
+
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse()
 		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

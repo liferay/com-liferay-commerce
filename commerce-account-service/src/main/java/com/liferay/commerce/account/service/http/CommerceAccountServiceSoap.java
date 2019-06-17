@@ -205,6 +205,29 @@ public class CommerceAccountServiceSoap {
 	public static com.liferay.commerce.account.model.CommerceAccountSoap[]
 			getUserCommerceAccounts(
 				long userId, long parentCommerceAccountId, int commerceSiteType,
+				String keywords, Boolean active, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.account.model.CommerceAccount>
+				returnValue =
+					CommerceAccountServiceUtil.getUserCommerceAccounts(
+						userId, parentCommerceAccountId, commerceSiteType,
+						keywords, active, start, end);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap[]
+			getUserCommerceAccounts(
+				long userId, long parentCommerceAccountId, int commerceSiteType,
 				String keywords, int start, int end)
 		throws RemoteException {
 
@@ -237,6 +260,44 @@ public class CommerceAccountServiceSoap {
 					keywords);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, Boolean active)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceAccountServiceUtil.getUserCommerceAccountsCount(
+					userId, parentCommerceAccountId, commerceSiteType, keywords,
+					active);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			setActive(long commerceAccountId, boolean active)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.setActive(commerceAccountId, active);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

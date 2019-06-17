@@ -279,15 +279,15 @@ public interface CommercePriceEntryLocalService
 		long companyId, String externalReferenceCode);
 
 	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceEntry fetchCommercePriceEntryByUuidAndGroupId(
-		String uuid, long groupId);
+	public CommercePriceEntry fetchCommercePriceEntryByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -316,34 +316,8 @@ public interface CommercePriceEntryLocalService
 		OrderByComparator<CommercePriceEntry> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceEntry> getCommercePriceEntriesByGroupId(
-		long groupId, int start, int end);
-
-	/**
-	 * Returns all the commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceEntry> getCommercePriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	 * Returns a range of commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price entries
-	 * @param end the upper bound of the range of commerce price entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceEntry> getCommercePriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator);
+	public List<CommercePriceEntry> getCommercePriceEntriesByCompanyId(
+		long companyId, int start, int end);
 
 	/**
 	 * Returns the number of commerce price entries.
@@ -357,7 +331,7 @@ public interface CommercePriceEntryLocalService
 	public int getCommercePriceEntriesCount(long commercePriceListId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommercePriceEntriesCountByGroupId(long groupId);
+	public int getCommercePriceEntriesCountByCompanyId(long companyId);
 
 	/**
 	 * Returns the commerce price entry with the primary key.
@@ -371,16 +345,16 @@ public interface CommercePriceEntryLocalService
 		throws PortalException;
 
 	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry
 	 * @throws PortalException if a matching commerce price entry could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommercePriceEntry getCommercePriceEntryByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommercePriceEntry getCommercePriceEntryByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -443,8 +417,8 @@ public interface CommercePriceEntryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommercePriceEntry> searchCommercePriceEntries(
-			long companyId, long groupId, long commercePriceListId,
-			String keywords, int start, int end, Sort sort)
+			long companyId, long commercePriceListId, String keywords,
+			int start, int end, Sort sort)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)

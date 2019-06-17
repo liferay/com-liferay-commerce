@@ -252,16 +252,17 @@ public class CPOptionValueLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the cp option value matching the UUID and group.
+	 * Returns the cp option value with the matching UUID and company.
 	 *
 	 * @param uuid the cp option value's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option value, or <code>null</code> if a matching cp option value could not be found
 	 */
 	public static com.liferay.commerce.product.model.CPOptionValue
-		fetchCPOptionValueByUuidAndGroupId(String uuid, long groupId) {
+		fetchCPOptionValueByUuidAndCompanyId(String uuid, long companyId) {
 
-		return getService().fetchCPOptionValueByUuidAndGroupId(uuid, groupId);
+		return getService().fetchCPOptionValueByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -292,18 +293,18 @@ public class CPOptionValueLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the cp option value matching the UUID and group.
+	 * Returns the cp option value with the matching UUID and company.
 	 *
 	 * @param uuid the cp option value's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option value
 	 * @throws PortalException if a matching cp option value could not be found
 	 */
 	public static com.liferay.commerce.product.model.CPOptionValue
-			getCPOptionValueByUuidAndGroupId(String uuid, long groupId)
+			getCPOptionValueByUuidAndCompanyId(String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPOptionValueByUuidAndGroupId(uuid, groupId);
+		return getService().getCPOptionValueByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -340,43 +341,6 @@ public class CPOptionValueLocalServiceUtil {
 
 		return getService().getCPOptionValues(
 			cpOptionId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns all the cp option values matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option values
-	 * @param companyId the primary key of the company
-	 * @return the matching cp option values, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPOptionValue>
-			getCPOptionValuesByUuidAndCompanyId(String uuid, long companyId) {
-
-		return getService().getCPOptionValuesByUuidAndCompanyId(
-			uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp option values matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option values
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp option values
-	 * @param end the upper bound of the range of cp option values (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp option values, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPOptionValue>
-			getCPOptionValuesByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.product.model.CPOptionValue>
-						orderByComparator) {
-
-		return getService().getCPOptionValuesByUuidAndCompanyId(
-			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**

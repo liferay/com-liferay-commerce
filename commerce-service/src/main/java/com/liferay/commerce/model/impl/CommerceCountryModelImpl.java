@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -82,11 +85,10 @@ public class CommerceCountryModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"commerceCountryId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"name", Types.VARCHAR}, {"billingAllowed", Types.BOOLEAN},
-		{"shippingAllowed", Types.BOOLEAN},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"name", Types.VARCHAR},
+		{"billingAllowed", Types.BOOLEAN}, {"shippingAllowed", Types.BOOLEAN},
 		{"twoLettersISOCode", Types.VARCHAR},
 		{"threeLettersISOCode", Types.VARCHAR},
 		{"numericISOCode", Types.INTEGER}, {"subjectToVAT", Types.BOOLEAN},
@@ -100,7 +102,6 @@ public class CommerceCountryModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCountryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -119,7 +120,7 @@ public class CommerceCountryModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+		"create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceCountry";
 
@@ -156,17 +157,15 @@ public class CommerceCountryModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long NUMERICISOCODE_COLUMN_BITMASK = 8L;
 
-	public static final long NUMERICISOCODE_COLUMN_BITMASK = 16L;
+	public static final long SHIPPINGALLOWED_COLUMN_BITMASK = 16L;
 
-	public static final long SHIPPINGALLOWED_COLUMN_BITMASK = 32L;
+	public static final long TWOLETTERSISOCODE_COLUMN_BITMASK = 32L;
 
-	public static final long TWOLETTERSISOCODE_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 64L;
 
-	public static final long UUID_COLUMN_BITMASK = 128L;
-
-	public static final long PRIORITY_COLUMN_BITMASK = 256L;
+	public static final long PRIORITY_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -183,7 +182,6 @@ public class CommerceCountryModelImpl
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceCountryId(soapModel.getCommerceCountryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -318,6 +316,32 @@ public class CommerceCountryModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceCountry>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceCountry.class.getClassLoader(), CommerceCountry.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommerceCountry> constructor =
+				(Constructor<CommerceCountry>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommerceCountry, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommerceCountry, Object>>
@@ -372,28 +396,6 @@ public class CommerceCountryModelImpl
 
 					commerceCountry.setCommerceCountryId(
 						(Long)commerceCountryId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceCountry, Object>() {
-
-				@Override
-				public Object apply(CommerceCountry commerceCountry) {
-					return commerceCountry.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceCountry, Object>() {
-
-				@Override
-				public void accept(
-					CommerceCountry commerceCountry, Object groupId) {
-
-					commerceCountry.setGroupId((Long)groupId);
 				}
 
 			});
@@ -777,29 +779,6 @@ public class CommerceCountryModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -953,7 +932,7 @@ public class CommerceCountryModelImpl
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -980,7 +959,7 @@ public class CommerceCountryModelImpl
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1238,7 +1217,7 @@ public class CommerceCountryModelImpl
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -1263,7 +1242,7 @@ public class CommerceCountryModelImpl
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -1280,8 +1259,12 @@ public class CommerceCountryModelImpl
 	@Override
 	public CommerceCountry toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceCountry)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceCountry>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1294,7 +1277,6 @@ public class CommerceCountryModelImpl
 
 		commerceCountryImpl.setUuid(getUuid());
 		commerceCountryImpl.setCommerceCountryId(getCommerceCountryId());
-		commerceCountryImpl.setGroupId(getGroupId());
 		commerceCountryImpl.setCompanyId(getCompanyId());
 		commerceCountryImpl.setUserId(getUserId());
 		commerceCountryImpl.setUserName(getUserName());
@@ -1380,11 +1362,6 @@ public class CommerceCountryModelImpl
 
 		commerceCountryModelImpl._originalUuid = commerceCountryModelImpl._uuid;
 
-		commerceCountryModelImpl._originalGroupId =
-			commerceCountryModelImpl._groupId;
-
-		commerceCountryModelImpl._setOriginalGroupId = false;
-
 		commerceCountryModelImpl._originalCompanyId =
 			commerceCountryModelImpl._companyId;
 
@@ -1432,8 +1409,6 @@ public class CommerceCountryModelImpl
 		}
 
 		commerceCountryCacheModel.commerceCountryId = getCommerceCountryId();
-
-		commerceCountryCacheModel.groupId = getGroupId();
 
 		commerceCountryCacheModel.companyId = getCompanyId();
 
@@ -1581,18 +1556,16 @@ public class CommerceCountryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceCountry.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceCountry.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceCountry>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceCountryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

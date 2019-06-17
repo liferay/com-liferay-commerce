@@ -38,13 +38,6 @@ import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
-<<<<<<< HEAD
-import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
-import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
-import com.liferay.commerce.service.persistence.CommerceWarehousePersistence;
-=======
-
->>>>>>> COMMERCE-1405 build service
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -1046,119 +1039,6 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns the commerce warehouse local service.
-	 *
-	 * @return the commerce warehouse local service
-	 */
-	public com.liferay.commerce.service.CommerceWarehouseLocalService
-		getCommerceWarehouseLocalService() {
-
-		return commerceWarehouseLocalService;
-	}
-
-	/**
-	 * Sets the commerce warehouse local service.
-	 *
-	 * @param commerceWarehouseLocalService the commerce warehouse local service
-	 */
-	public void setCommerceWarehouseLocalService(
-		com.liferay.commerce.service.CommerceWarehouseLocalService
-			commerceWarehouseLocalService) {
-
-		this.commerceWarehouseLocalService = commerceWarehouseLocalService;
-	}
-
-	/**
-	 * Returns the commerce warehouse persistence.
-	 *
-	 * @return the commerce warehouse persistence
-	 */
-	public CommerceWarehousePersistence getCommerceWarehousePersistence() {
-		return commerceWarehousePersistence;
-	}
-
-	/**
-	 * Sets the commerce warehouse persistence.
-	 *
-	 * @param commerceWarehousePersistence the commerce warehouse persistence
-	 */
-	public void setCommerceWarehousePersistence(
-		CommerceWarehousePersistence commerceWarehousePersistence) {
-
-		this.commerceWarehousePersistence = commerceWarehousePersistence;
-	}
-
-	/**
-	 * Returns the commerce warehouse finder.
-	 *
-	 * @return the commerce warehouse finder
-	 */
-	public CommerceWarehouseFinder getCommerceWarehouseFinder() {
-		return commerceWarehouseFinder;
-	}
-
-	/**
-	 * Sets the commerce warehouse finder.
-	 *
-	 * @param commerceWarehouseFinder the commerce warehouse finder
-	 */
-	public void setCommerceWarehouseFinder(
-		CommerceWarehouseFinder commerceWarehouseFinder) {
-
-		this.commerceWarehouseFinder = commerceWarehouseFinder;
-	}
-
-	/**
-	 * Returns the commerce warehouse item local service.
-	 *
-	 * @return the commerce warehouse item local service
-	 */
-	public com.liferay.commerce.service.CommerceWarehouseItemLocalService
-		getCommerceWarehouseItemLocalService() {
-
-		return commerceWarehouseItemLocalService;
-	}
-
-	/**
-	 * Sets the commerce warehouse item local service.
-	 *
-	 * @param commerceWarehouseItemLocalService the commerce warehouse item local service
-	 */
-	public void setCommerceWarehouseItemLocalService(
-		com.liferay.commerce.service.CommerceWarehouseItemLocalService
-			commerceWarehouseItemLocalService) {
-
-		this.commerceWarehouseItemLocalService =
-			commerceWarehouseItemLocalService;
-	}
-
-	/**
-	 * Returns the commerce warehouse item persistence.
-	 *
-	 * @return the commerce warehouse item persistence
-	 */
-	public CommerceWarehouseItemPersistence
-		getCommerceWarehouseItemPersistence() {
-
-		return commerceWarehouseItemPersistence;
-	}
-
-	/**
-	 * Sets the commerce warehouse item persistence.
-	 *
-	 * @param commerceWarehouseItemPersistence the commerce warehouse item persistence
-	 */
-	public void setCommerceWarehouseItemPersistence(
-		CommerceWarehouseItemPersistence commerceWarehouseItemPersistence) {
-
-		this.commerceWarehouseItemPersistence =
-			commerceWarehouseItemPersistence;
-	}
-
-	/**
-=======
->>>>>>> COMMERCE-1405 build service
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1568,28 +1448,6 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
 	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
-<<<<<<< HEAD
-
-	@BeanReference(
-		type = com.liferay.commerce.service.CommerceWarehouseLocalService.class
-	)
-	protected com.liferay.commerce.service.CommerceWarehouseLocalService
-		commerceWarehouseLocalService;
-
-	@BeanReference(type = CommerceWarehousePersistence.class)
-	protected CommerceWarehousePersistence commerceWarehousePersistence;
-
-	@BeanReference(type = CommerceWarehouseFinder.class)
-	protected CommerceWarehouseFinder commerceWarehouseFinder;
-
-	@BeanReference(
-		type = com.liferay.commerce.service.CommerceWarehouseItemLocalService.class
-	)
-	protected com.liferay.commerce.service.CommerceWarehouseItemLocalService
-		commerceWarehouseItemLocalService;
-
-	@BeanReference(type = CommerceWarehouseItemPersistence.class)
-	protected CommerceWarehouseItemPersistence commerceWarehouseItemPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.service.CPDAvailabilityEstimateLocalService.class
@@ -1597,10 +1455,6 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	protected com.liferay.commerce.service.CPDAvailabilityEstimateLocalService
 		cpdAvailabilityEstimateLocalService;
 
-=======
-	@BeanReference(type = com.liferay.commerce.service.CPDAvailabilityEstimateLocalService.class)
-	protected com.liferay.commerce.service.CPDAvailabilityEstimateLocalService cpdAvailabilityEstimateLocalService;
->>>>>>> COMMERCE-1405 build service
 	@BeanReference(type = CPDAvailabilityEstimatePersistence.class)
 	protected CPDAvailabilityEstimatePersistence
 		cpdAvailabilityEstimatePersistence;

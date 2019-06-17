@@ -59,22 +59,44 @@ public class CommerceSubscriptionEntryServiceUtil {
 	public static java.util.List
 		<com.liferay.commerce.model.CommerceSubscriptionEntry>
 				getCommerceSubscriptionEntries(
-					long groupId, long userId, int start, int end,
+					long companyId, long userId, int start, int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.model.CommerceSubscriptionEntry>
 							orderByComparator)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceSubscriptionEntries(
-			groupId, userId, start, end, orderByComparator);
+			companyId, userId, start, end, orderByComparator);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				getCommerceSubscriptionEntries(
+					long companyId, long groupId, long userId, int start,
+					int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.model.CommerceSubscriptionEntry>
+							orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceSubscriptionEntries(
+			companyId, groupId, userId, start, end, orderByComparator);
 	}
 
 	public static int getCommerceSubscriptionEntriesCount(
-			long groupId, long userId)
+			long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceSubscriptionEntriesCount(
-			groupId, userId);
+			companyId, userId);
+	}
+
+	public static int getCommerceSubscriptionEntriesCount(
+			long companyId, long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceSubscriptionEntriesCount(
+			companyId, groupId, userId);
 	}
 
 	/**
@@ -84,6 +106,19 @@ public class CommerceSubscriptionEntryServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				searchCommerceSubscriptionEntries(
+					long companyId, Long maxSubscriptionCycles,
+					Integer subscriptionStatus, String keywords, int start,
+					int end, com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().searchCommerceSubscriptionEntries(
+			companyId, maxSubscriptionCycles, subscriptionStatus, keywords,
+			start, end, sort);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult

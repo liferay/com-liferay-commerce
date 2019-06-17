@@ -63,7 +63,6 @@ public class CommerceDiscountUsageEntryWrapper
 
 		attributes.put(
 			"commerceDiscountUsageEntryId", getCommerceDiscountUsageEntryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -83,12 +82,6 @@ public class CommerceDiscountUsageEntryWrapper
 
 		if (commerceDiscountUsageEntryId != null) {
 			setCommerceDiscountUsageEntryId(commerceDiscountUsageEntryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -217,16 +210,6 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceDiscountUsageEntry.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this commerce discount usage entry.
-	 *
-	 * @return the group ID of this commerce discount usage entry
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceDiscountUsageEntry.getGroupId();
 	}
 
 	/**
@@ -392,16 +375,6 @@ public class CommerceDiscountUsageEntryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceDiscountUsageEntry.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this commerce discount usage entry.
-	 *
-	 * @param groupId the group ID of this commerce discount usage entry
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceDiscountUsageEntry.setGroupId(groupId);
 	}
 
 	/**

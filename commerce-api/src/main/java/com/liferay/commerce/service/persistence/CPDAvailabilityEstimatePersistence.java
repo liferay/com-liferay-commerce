@@ -193,56 +193,6 @@ public interface CPDAvailabilityEstimatePersistence
 	public int countByUuid(String uuid);
 
 	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCPDAvailabilityEstimateException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cpd availability estimate
-	 * @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
-	 */
-	public CPDAvailabilityEstimate findByUUID_G(String uuid, long groupId)
-		throws NoSuchCPDAvailabilityEstimateException;
-
-	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	 */
-	public CPDAvailabilityEstimate fetchByUUID_G(String uuid, long groupId);
-
-	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	 */
-	public CPDAvailabilityEstimate fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
-
-	/**
-	 * Removes the cpd availability estimate where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the cpd availability estimate that was removed
-	 */
-	public CPDAvailabilityEstimate removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCPDAvailabilityEstimateException;
-
-	/**
-	 * Returns the number of cpd availability estimates where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching cpd availability estimates
-	 */
-	public int countByUUID_G(String uuid, long groupId);
-
-	/**
 	 * Returns all the cpd availability estimates where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid

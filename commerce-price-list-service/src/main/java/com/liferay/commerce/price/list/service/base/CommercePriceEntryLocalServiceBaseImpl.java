@@ -20,9 +20,9 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalService;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceEntryPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelPersistence;
+import com.liferay.commerce.price.list.service.persistence.CommercePriceListCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListFinder;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListPersistence;
-import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommerceTierPriceEntryPersistence;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
@@ -244,17 +244,18 @@ public abstract class CommercePriceEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry, or <code>null</code> if a matching commerce price entry could not be found
 	 */
 	@Override
-	public CommercePriceEntry fetchCommercePriceEntryByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CommercePriceEntry fetchCommercePriceEntryByUuidAndCompanyId(
+		String uuid, long companyId) {
 
-		return commercePriceEntryPersistence.fetchByUUID_G(uuid, groupId);
+		return commercePriceEntryPersistence.fetchByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -380,9 +381,6 @@ public abstract class CommercePriceEntryLocalServiceBaseImpl
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod
 				<CommercePriceEntry>() {
@@ -422,52 +420,20 @@ public abstract class CommercePriceEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommercePriceEntry> getCommercePriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-
-		return commercePriceEntryPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce price entries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price entries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price entries
-	 * @param end the upper bound of the range of commerce price entries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price entries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommercePriceEntry> getCommercePriceEntriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommercePriceEntry> orderByComparator) {
-
-		return commercePriceEntryPersistence.findByUuid_C(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce price entry matching the UUID and group.
+	 * Returns the commerce price entry with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price entry's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price entry
 	 * @throws PortalException if a matching commerce price entry could not be found
 	 */
 	@Override
-	public CommercePriceEntry getCommercePriceEntryByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommercePriceEntry getCommercePriceEntryByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException {
 
-		return commercePriceEntryPersistence.findByUUID_G(uuid, groupId);
+		return commercePriceEntryPersistence.findByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -666,53 +632,53 @@ public abstract class CommercePriceEntryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce price list user segment entry rel local service.
+	 * Returns the commerce price list commerce account group rel local service.
 	 *
-	 * @return the commerce price list user segment entry rel local service
+	 * @return the commerce price list commerce account group rel local service
 	 */
 	public com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelLocalService
-			getCommercePriceListUserSegmentEntryRelLocalService() {
+		CommercePriceListCommerceAccountGroupRelLocalService
+			getCommercePriceListCommerceAccountGroupRelLocalService() {
 
-		return commercePriceListUserSegmentEntryRelLocalService;
+		return commercePriceListCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Sets the commerce price list user segment entry rel local service.
+	 * Sets the commerce price list commerce account group rel local service.
 	 *
-	 * @param commercePriceListUserSegmentEntryRelLocalService the commerce price list user segment entry rel local service
+	 * @param commercePriceListCommerceAccountGroupRelLocalService the commerce price list commerce account group rel local service
 	 */
-	public void setCommercePriceListUserSegmentEntryRelLocalService(
+	public void setCommercePriceListCommerceAccountGroupRelLocalService(
 		com.liferay.commerce.price.list.service.
-			CommercePriceListUserSegmentEntryRelLocalService
-				commercePriceListUserSegmentEntryRelLocalService) {
+			CommercePriceListCommerceAccountGroupRelLocalService
+				commercePriceListCommerceAccountGroupRelLocalService) {
 
-		this.commercePriceListUserSegmentEntryRelLocalService =
-			commercePriceListUserSegmentEntryRelLocalService;
+		this.commercePriceListCommerceAccountGroupRelLocalService =
+			commercePriceListCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Returns the commerce price list user segment entry rel persistence.
+	 * Returns the commerce price list commerce account group rel persistence.
 	 *
-	 * @return the commerce price list user segment entry rel persistence
+	 * @return the commerce price list commerce account group rel persistence
 	 */
-	public CommercePriceListUserSegmentEntryRelPersistence
-		getCommercePriceListUserSegmentEntryRelPersistence() {
+	public CommercePriceListCommerceAccountGroupRelPersistence
+		getCommercePriceListCommerceAccountGroupRelPersistence() {
 
-		return commercePriceListUserSegmentEntryRelPersistence;
+		return commercePriceListCommerceAccountGroupRelPersistence;
 	}
 
 	/**
-	 * Sets the commerce price list user segment entry rel persistence.
+	 * Sets the commerce price list commerce account group rel persistence.
 	 *
-	 * @param commercePriceListUserSegmentEntryRelPersistence the commerce price list user segment entry rel persistence
+	 * @param commercePriceListCommerceAccountGroupRelPersistence the commerce price list commerce account group rel persistence
 	 */
-	public void setCommercePriceListUserSegmentEntryRelPersistence(
-		CommercePriceListUserSegmentEntryRelPersistence
-			commercePriceListUserSegmentEntryRelPersistence) {
+	public void setCommercePriceListCommerceAccountGroupRelPersistence(
+		CommercePriceListCommerceAccountGroupRelPersistence
+			commercePriceListCommerceAccountGroupRelPersistence) {
 
-		this.commercePriceListUserSegmentEntryRelPersistence =
-			commercePriceListUserSegmentEntryRelPersistence;
+		this.commercePriceListCommerceAccountGroupRelPersistence =
+			commercePriceListCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -1022,15 +988,17 @@ public abstract class CommercePriceEntryLocalServiceBaseImpl
 		commercePriceListAccountRelPersistence;
 
 	@BeanReference(
-		type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService.class
+		type = com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService.class
 	)
 	protected com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelLocalService
-			commercePriceListUserSegmentEntryRelLocalService;
+		CommercePriceListCommerceAccountGroupRelLocalService
+			commercePriceListCommerceAccountGroupRelLocalService;
 
-	@BeanReference(type = CommercePriceListUserSegmentEntryRelPersistence.class)
-	protected CommercePriceListUserSegmentEntryRelPersistence
-		commercePriceListUserSegmentEntryRelPersistence;
+	@BeanReference(
+		type = CommercePriceListCommerceAccountGroupRelPersistence.class
+	)
+	protected CommercePriceListCommerceAccountGroupRelPersistence
+		commercePriceListCommerceAccountGroupRelPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService.class

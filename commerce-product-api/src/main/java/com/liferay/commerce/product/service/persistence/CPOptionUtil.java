@@ -270,6 +270,73 @@ public class CPOptionUtil {
 	}
 
 	/**
+	 * Returns all the cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @return the matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid(String uuid) {
+		return getPersistence().filterFindByUuid(uuid);
+	}
+
+	/**
+	 * Returns a range of all the cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid(
+		String uuid, int start, int end) {
+
+		return getPersistence().filterFindByUuid(uuid, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid(
+		String uuid, int start, int end,
+		OrderByComparator<CPOption> orderByComparator) {
+
+		return getPersistence().filterFindByUuid(
+			uuid, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where uuid = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param uuid the uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	public static CPOption[] filterFindByUuid_PrevAndNext(
+			long CPOptionId, String uuid,
+			OrderByComparator<CPOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
+
+		return getPersistence().filterFindByUuid_PrevAndNext(
+			CPOptionId, uuid, orderByComparator);
+	}
+
+	/**
 	 * Removes all the cp options where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
@@ -289,66 +356,13 @@ public class CPOptionUtil {
 	}
 
 	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCPOptionException</code> if it could not be found.
+	 * Returns the number of cp options that the user has permission to view where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cp option
-	 * @throws NoSuchCPOptionException if a matching cp option could not be found
+	 * @return the number of matching cp options that the user has permission to view
 	 */
-	public static CPOption findByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
-
-		return getPersistence().findByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	public static CPOption fetchByUUID_G(String uuid, long groupId) {
-		return getPersistence().fetchByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the cp option where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
-	 */
-	public static CPOption fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
-	}
-
-	/**
-	 * Removes the cp option where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the cp option that was removed
-	 */
-	public static CPOption removeByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
-
-		return getPersistence().removeByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the number of cp options where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching cp options
-	 */
-	public static int countByUUID_G(String uuid, long groupId) {
-		return getPersistence().countByUUID_G(uuid, groupId);
+	public static int filterCountByUuid(String uuid) {
+		return getPersistence().filterCountByUuid(uuid);
 	}
 
 	/**
@@ -515,6 +529,79 @@ public class CPOptionUtil {
 	}
 
 	/**
+	 * Returns all the cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @return the matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid_C(
+		String uuid, long companyId) {
+
+		return getPersistence().filterFindByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of all the cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid_C(
+		String uuid, long companyId, int start, int end) {
+
+		return getPersistence().filterFindByUuid_C(uuid, companyId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByUuid_C(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<CPOption> orderByComparator) {
+
+		return getPersistence().filterFindByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	public static CPOption[] filterFindByUuid_C_PrevAndNext(
+			long CPOptionId, String uuid, long companyId,
+			OrderByComparator<CPOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
+
+		return getPersistence().filterFindByUuid_C_PrevAndNext(
+			CPOptionId, uuid, companyId, orderByComparator);
+	}
+
+	/**
 	 * Removes all the cp options where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
@@ -536,232 +623,323 @@ public class CPOptionUtil {
 	}
 
 	/**
-	 * Returns all the cp options where groupId = &#63;.
+	 * Returns the number of cp options that the user has permission to view where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param groupId the group ID
-	 * @return the matching cp options
+	 * @param uuid the uuid
+	 * @param companyId the company ID
+	 * @return the number of matching cp options that the user has permission to view
 	 */
-	public static List<CPOption> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
+	public static int filterCountByUuid_C(String uuid, long companyId) {
+		return getPersistence().filterCountByUuid_C(uuid, companyId);
 	}
 
 	/**
-	 * Returns a range of all the cp options where groupId = &#63;.
+	 * Returns all the cp options where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @return the matching cp options
+	 */
+	public static List<CPOption> findByCompanyId(long companyId) {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	/**
+	 * Returns a range of all the cp options where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @return the range of matching cp options
 	 */
-	public static List<CPOption> findByGroupId(
-		long groupId, int start, int end) {
+	public static List<CPOption> findByCompanyId(
+		long companyId, int start, int end) {
 
-		return getPersistence().findByGroupId(groupId, start, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp options where groupId = &#63;.
+	 * Returns an ordered range of all the cp options where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp options
 	 */
-	public static List<CPOption> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CPOption> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp options where groupId = &#63;.
+	 * Returns an ordered range of all the cp options where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp options
 	 */
-	public static List<CPOption> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CPOption> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first cp option in the ordered set where groupId = &#63;.
+	 * Returns the first cp option in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp option
 	 * @throws NoSuchCPOptionException if a matching cp option could not be found
 	 */
-	public static CPOption findByGroupId_First(
-			long groupId, OrderByComparator<CPOption> orderByComparator)
+	public static CPOption findByCompanyId_First(
+			long companyId, OrderByComparator<CPOption> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
 
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the first cp option in the ordered set where groupId = &#63;.
+	 * Returns the first cp option in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
-	public static CPOption fetchByGroupId_First(
-		long groupId, OrderByComparator<CPOption> orderByComparator) {
+	public static CPOption fetchByCompanyId_First(
+		long companyId, OrderByComparator<CPOption> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_First(
-			groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last cp option in the ordered set where groupId = &#63;.
+	 * Returns the last cp option in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp option
 	 * @throws NoSuchCPOptionException if a matching cp option could not be found
 	 */
-	public static CPOption findByGroupId_Last(
-			long groupId, OrderByComparator<CPOption> orderByComparator)
+	public static CPOption findByCompanyId_Last(
+			long companyId, OrderByComparator<CPOption> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
 
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last cp option in the ordered set where groupId = &#63;.
+	 * Returns the last cp option in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
-	public static CPOption fetchByGroupId_Last(
-		long groupId, OrderByComparator<CPOption> orderByComparator) {
+	public static CPOption fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CPOption> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the cp options before and after the current cp option in the ordered set where groupId = &#63;.
+	 * Returns the cp options before and after the current cp option in the ordered set where companyId = &#63;.
 	 *
 	 * @param CPOptionId the primary key of the current cp option
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp option
 	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
 	 */
-	public static CPOption[] findByGroupId_PrevAndNext(
-			long CPOptionId, long groupId,
+	public static CPOption[] findByCompanyId_PrevAndNext(
+			long CPOptionId, long companyId,
 			OrderByComparator<CPOption> orderByComparator)
 		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
 
-		return getPersistence().findByGroupId_PrevAndNext(
-			CPOptionId, groupId, orderByComparator);
+		return getPersistence().findByCompanyId_PrevAndNext(
+			CPOptionId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Removes all the cp options where groupId = &#63; from the database.
+	 * Returns all the cp options that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @return the matching cp options that the user has permission to view
 	 */
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
+	public static List<CPOption> filterFindByCompanyId(long companyId) {
+		return getPersistence().filterFindByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the number of cp options where groupId = &#63;.
+	 * Returns a range of all the cp options that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @return the range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByCompanyId(
+		long companyId, int start, int end) {
+
+		return getPersistence().filterFindByCompanyId(companyId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp options that the user has permissions to view where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPOptionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param start the lower bound of the range of cp options
+	 * @param end the upper bound of the range of cp options (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp options that the user has permission to view
+	 */
+	public static List<CPOption> filterFindByCompanyId(
+		long companyId, int start, int end,
+		OrderByComparator<CPOption> orderByComparator) {
+
+		return getPersistence().filterFindByCompanyId(
+			companyId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the cp options before and after the current cp option in the ordered set of cp options that the user has permission to view where companyId = &#63;.
+	 *
+	 * @param CPOptionId the primary key of the current cp option
+	 * @param companyId the company ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp option
+	 * @throws NoSuchCPOptionException if a cp option with the primary key could not be found
+	 */
+	public static CPOption[] filterFindByCompanyId_PrevAndNext(
+			long CPOptionId, long companyId,
+			OrderByComparator<CPOption> orderByComparator)
+		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
+
+		return getPersistence().filterFindByCompanyId_PrevAndNext(
+			CPOptionId, companyId, orderByComparator);
+	}
+
+	/**
+	 * Removes all the cp options where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 */
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	/**
+	 * Returns the number of cp options where companyId = &#63;.
+	 *
+	 * @param companyId the company ID
 	 * @return the number of matching cp options
 	 */
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or throws a <code>NoSuchCPOptionException</code> if it could not be found.
+	 * Returns the number of cp options that the user has permission to view where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @return the number of matching cp options that the user has permission to view
+	 */
+	public static int filterCountByCompanyId(long companyId) {
+		return getPersistence().filterCountByCompanyId(companyId);
+	}
+
+	/**
+	 * Returns the cp option where companyId = &#63; and key = &#63; or throws a <code>NoSuchCPOptionException</code> if it could not be found.
+	 *
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @return the matching cp option
 	 * @throws NoSuchCPOptionException if a matching cp option could not be found
 	 */
-	public static CPOption findByG_K(long groupId, String key)
+	public static CPOption findByC_K(long companyId, String key)
 		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
 
-		return getPersistence().findByG_K(groupId, key);
+		return getPersistence().findByC_K(companyId, key);
 	}
 
 	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
-	public static CPOption fetchByG_K(long groupId, String key) {
-		return getPersistence().fetchByG_K(groupId, key);
+	public static CPOption fetchByC_K(long companyId, String key) {
+		return getPersistence().fetchByC_K(companyId, key);
 	}
 
 	/**
-	 * Returns the cp option where groupId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp option where companyId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
-	public static CPOption fetchByG_K(
-		long groupId, String key, boolean retrieveFromCache) {
+	public static CPOption fetchByC_K(
+		long companyId, String key, boolean retrieveFromCache) {
 
-		return getPersistence().fetchByG_K(groupId, key, retrieveFromCache);
+		return getPersistence().fetchByC_K(companyId, key, retrieveFromCache);
 	}
 
 	/**
-	 * Removes the cp option where groupId = &#63; and key = &#63; from the database.
+	 * Removes the cp option where companyId = &#63; and key = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @return the cp option that was removed
 	 */
-	public static CPOption removeByG_K(long groupId, String key)
+	public static CPOption removeByC_K(long companyId, String key)
 		throws com.liferay.commerce.product.exception.NoSuchCPOptionException {
 
-		return getPersistence().removeByG_K(groupId, key);
+		return getPersistence().removeByC_K(companyId, key);
 	}
 
 	/**
-	 * Returns the number of cp options where groupId = &#63; and key = &#63;.
+	 * Returns the number of cp options where companyId = &#63; and key = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @return the number of matching cp options
 	 */
-	public static int countByG_K(long groupId, String key) {
-		return getPersistence().countByG_K(groupId, key);
+	public static int countByC_K(long companyId, String key) {
+		return getPersistence().countByC_K(companyId, key);
 	}
 
 	/**

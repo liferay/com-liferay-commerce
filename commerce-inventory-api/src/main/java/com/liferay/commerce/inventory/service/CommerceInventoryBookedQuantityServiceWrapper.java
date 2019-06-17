@@ -28,20 +28,25 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceInventoryBookedQuantityServiceWrapper
 	implements CommerceInventoryBookedQuantityService,
-		ServiceWrapper<CommerceInventoryBookedQuantityService> {
+			   ServiceWrapper<CommerceInventoryBookedQuantityService> {
+
 	public CommerceInventoryBookedQuantityServiceWrapper(
-		CommerceInventoryBookedQuantityService commerceInventoryBookedQuantityService) {
-		_commerceInventoryBookedQuantityService = commerceInventoryBookedQuantityService;
+		CommerceInventoryBookedQuantityService
+			commerceInventoryBookedQuantityService) {
+
+		_commerceInventoryBookedQuantityService =
+			commerceInventoryBookedQuantityService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceInventoryBookedQuantityService.getOSGiServiceIdentifier();
+		return _commerceInventoryBookedQuantityService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
@@ -51,9 +56,14 @@ public class CommerceInventoryBookedQuantityServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceInventoryBookedQuantityService commerceInventoryBookedQuantityService) {
-		_commerceInventoryBookedQuantityService = commerceInventoryBookedQuantityService;
+		CommerceInventoryBookedQuantityService
+			commerceInventoryBookedQuantityService) {
+
+		_commerceInventoryBookedQuantityService =
+			commerceInventoryBookedQuantityService;
 	}
 
-	private CommerceInventoryBookedQuantityService _commerceInventoryBookedQuantityService;
+	private CommerceInventoryBookedQuantityService
+		_commerceInventoryBookedQuantityService;
+
 }

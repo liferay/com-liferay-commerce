@@ -224,18 +224,19 @@ public interface CommerceShippingFixedOptionRelModel
 		long commerceShippingFixedOptionId);
 
 	/**
-	 * Returns the commerce warehouse ID of this commerce shipping fixed option rel.
+	 * Returns the commerce inventory warehouse ID of this commerce shipping fixed option rel.
 	 *
-	 * @return the commerce warehouse ID of this commerce shipping fixed option rel
+	 * @return the commerce inventory warehouse ID of this commerce shipping fixed option rel
 	 */
-	public long getCommerceWarehouseId();
+	public long getCommerceInventoryWarehouseId();
 
 	/**
-	 * Sets the commerce warehouse ID of this commerce shipping fixed option rel.
+	 * Sets the commerce inventory warehouse ID of this commerce shipping fixed option rel.
 	 *
-	 * @param commerceWarehouseId the commerce warehouse ID of this commerce shipping fixed option rel
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID of this commerce shipping fixed option rel
 	 */
-	public void setCommerceWarehouseId(long commerceWarehouseId);
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId);
 
 	/**
 	 * Returns the commerce country ID of this commerce shipping fixed option rel.

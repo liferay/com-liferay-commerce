@@ -84,7 +84,7 @@ public interface CPInstanceLocalService
 	public CPInstance addCPInstance(CPInstance cpInstance);
 
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -96,7 +96,7 @@ public interface CPInstanceLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -113,7 +113,7 @@ public interface CPInstanceLocalService
 		throws PortalException;
 
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,
@@ -413,14 +413,20 @@ public interface CPInstanceLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-			long companyId, long groupId, long cpDefinitionId, String keywords,
-			int status, int start, int end, Sort sort)
+			long companyId, long cpDefinitionId, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPInstance> searchCPInstances(
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -488,7 +494,7 @@ public interface CPInstanceLocalService
 		throws PortalException;
 
 	public CPInstance upsertCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,

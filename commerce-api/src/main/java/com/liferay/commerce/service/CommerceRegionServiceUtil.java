@@ -93,6 +93,15 @@ public class CommerceRegionServiceUtil {
 			commerceCountryId, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.commerce.model.CommerceRegion>
+			getCommerceRegions(
+				long companyId, String countryTwoLettersISOCode, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceRegions(
+			companyId, countryTwoLettersISOCode, active);
+	}
+
 	public static int getCommerceRegionsCount(long commerceCountryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

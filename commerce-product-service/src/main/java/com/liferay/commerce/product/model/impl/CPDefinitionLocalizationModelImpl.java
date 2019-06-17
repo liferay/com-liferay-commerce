@@ -31,6 +31,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.Collections;
@@ -220,6 +223,32 @@ public class CPDefinitionLocalizationModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPDefinitionLocalization>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinitionLocalization.class.getClassLoader(),
+			CPDefinitionLocalization.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinitionLocalization> constructor =
+				(Constructor<CPDefinitionLocalization>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPDefinitionLocalization, Object>>
@@ -715,10 +744,13 @@ public class CPDefinitionLocalizationModelImpl
 	@Override
 	public CPDefinitionLocalization toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CPDefinitionLocalization)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CPDefinitionLocalization>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -958,11 +990,14 @@ public class CPDefinitionLocalizationModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinitionLocalization.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinitionLocalization.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CPDefinitionLocalization>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _mvccVersion;
 	private long _cpDefinitionLocalizationId;

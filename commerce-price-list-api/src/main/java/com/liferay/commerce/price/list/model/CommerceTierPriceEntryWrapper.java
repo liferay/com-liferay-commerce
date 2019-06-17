@@ -67,7 +67,6 @@ public class CommerceTierPriceEntryWrapper
 		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put(
 			"commerceTierPriceEntryId", getCommerceTierPriceEntryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -102,12 +101,6 @@ public class CommerceTierPriceEntryWrapper
 
 		if (commerceTierPriceEntryId != null) {
 			setCommerceTierPriceEntryId(commerceTierPriceEntryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -243,16 +236,6 @@ public class CommerceTierPriceEntryWrapper
 	@Override
 	public String getExternalReferenceCode() {
 		return _commerceTierPriceEntry.getExternalReferenceCode();
-	}
-
-	/**
-	 * Returns the group ID of this commerce tier price entry.
-	 *
-	 * @return the group ID of this commerce tier price entry
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceTierPriceEntry.getGroupId();
 	}
 
 	/**
@@ -472,16 +455,6 @@ public class CommerceTierPriceEntryWrapper
 	@Override
 	public void setExternalReferenceCode(String externalReferenceCode) {
 		_commerceTierPriceEntry.setExternalReferenceCode(externalReferenceCode);
-	}
-
-	/**
-	 * Sets the group ID of this commerce tier price entry.
-	 *
-	 * @param groupId the group ID of this commerce tier price entry
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceTierPriceEntry.setGroupId(groupId);
 	}
 
 	/**

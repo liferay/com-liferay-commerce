@@ -74,21 +74,21 @@ public interface CommerceShipmentService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipment> getCommerceShipments(
-			long groupId, int status, int start, int end,
+			long companyId, int status, int start, int end,
 			OrderByComparator<CommerceShipment> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceShipment> getCommerceShipments(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceShipment> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCount(long groupId) throws PortalException;
+	public int getCommerceShipmentsCount(long companyId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceShipmentsCount(long groupId, int status)
+	public int getCommerceShipmentsCount(long companyId, int status)
 		throws PortalException;
 
 	/**

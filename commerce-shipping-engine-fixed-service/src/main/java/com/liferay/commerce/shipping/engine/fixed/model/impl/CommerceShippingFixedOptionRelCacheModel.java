@@ -91,8 +91,8 @@ public class CommerceShippingFixedOptionRelCacheModel
 		sb.append(commerceShippingMethodId);
 		sb.append(", commerceShippingFixedOptionId=");
 		sb.append(commerceShippingFixedOptionId);
-		sb.append(", commerceWarehouseId=");
-		sb.append(commerceWarehouseId);
+		sb.append(", commerceInventoryWarehouseId=");
+		sb.append(commerceInventoryWarehouseId);
 		sb.append(", commerceCountryId=");
 		sb.append(commerceCountryId);
 		sb.append(", commerceRegionId=");
@@ -152,8 +152,8 @@ public class CommerceShippingFixedOptionRelCacheModel
 			commerceShippingMethodId);
 		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionId(
 			commerceShippingFixedOptionId);
-		commerceShippingFixedOptionRelImpl.setCommerceWarehouseId(
-			commerceWarehouseId);
+		commerceShippingFixedOptionRelImpl.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceShippingFixedOptionRelImpl.setCommerceCountryId(
 			commerceCountryId);
 		commerceShippingFixedOptionRelImpl.setCommerceRegionId(
@@ -197,7 +197,7 @@ public class CommerceShippingFixedOptionRelCacheModel
 
 		commerceShippingFixedOptionId = objectInput.readLong();
 
-		commerceWarehouseId = objectInput.readLong();
+		commerceInventoryWarehouseId = objectInput.readLong();
 
 		commerceCountryId = objectInput.readLong();
 
@@ -237,7 +237,7 @@ public class CommerceShippingFixedOptionRelCacheModel
 
 		objectOutput.writeLong(commerceShippingFixedOptionId);
 
-		objectOutput.writeLong(commerceWarehouseId);
+		objectOutput.writeLong(commerceInventoryWarehouseId);
 
 		objectOutput.writeLong(commerceCountryId);
 
@@ -268,7 +268,7 @@ public class CommerceShippingFixedOptionRelCacheModel
 	public long modifiedDate;
 	public long commerceShippingMethodId;
 	public long commerceShippingFixedOptionId;
-	public long commerceWarehouseId;
+	public long commerceInventoryWarehouseId;
 	public long commerceCountryId;
 	public long commerceRegionId;
 	public String zip;

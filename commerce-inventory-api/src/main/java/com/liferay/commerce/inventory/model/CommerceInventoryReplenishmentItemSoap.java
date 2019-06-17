@@ -26,22 +26,26 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.inventory.service.http.CommerceInventoryReplenishmentItemServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.inventory.service.http.CommerceInventoryReplenishmentItemServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceInventoryReplenishmentItemSoap implements Serializable {
+
 	public static CommerceInventoryReplenishmentItemSoap toSoapModel(
 		CommerceInventoryReplenishmentItem model) {
-		CommerceInventoryReplenishmentItemSoap soapModel = new CommerceInventoryReplenishmentItemSoap();
 
-		soapModel.setCommerceInventoryReplenishmentItemId(model.getCommerceInventoryReplenishmentItemId());
+		CommerceInventoryReplenishmentItemSoap soapModel =
+			new CommerceInventoryReplenishmentItemSoap();
+
+		soapModel.setCommerceInventoryReplenishmentItemId(
+			model.getCommerceInventoryReplenishmentItemId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceWarehouseId(model.getCommerceWarehouseId());
+		soapModel.setCommerceInventoryWarehouseId(
+			model.getCommerceInventoryWarehouseId());
 		soapModel.setSku(model.getSku());
 		soapModel.setAvailabilityDate(model.getAvailabilityDate());
 		soapModel.setQuantity(model.getQuantity());
@@ -51,7 +55,9 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 
 	public static CommerceInventoryReplenishmentItemSoap[] toSoapModels(
 		CommerceInventoryReplenishmentItem[] models) {
-		CommerceInventoryReplenishmentItemSoap[] soapModels = new CommerceInventoryReplenishmentItemSoap[models.length];
+
+		CommerceInventoryReplenishmentItemSoap[] soapModels =
+			new CommerceInventoryReplenishmentItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +68,12 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 
 	public static CommerceInventoryReplenishmentItemSoap[][] toSoapModels(
 		CommerceInventoryReplenishmentItem[][] models) {
+
 		CommerceInventoryReplenishmentItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceInventoryReplenishmentItemSoap[models.length][models[0].length];
+			soapModels = new CommerceInventoryReplenishmentItemSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceInventoryReplenishmentItemSoap[0][0];
@@ -80,13 +88,17 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 
 	public static CommerceInventoryReplenishmentItemSoap[] toSoapModels(
 		List<CommerceInventoryReplenishmentItem> models) {
-		List<CommerceInventoryReplenishmentItemSoap> soapModels = new ArrayList<CommerceInventoryReplenishmentItemSoap>(models.size());
+
+		List<CommerceInventoryReplenishmentItemSoap> soapModels =
+			new ArrayList<CommerceInventoryReplenishmentItemSoap>(
+				models.size());
 
 		for (CommerceInventoryReplenishmentItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceInventoryReplenishmentItemSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceInventoryReplenishmentItemSoap[soapModels.size()]);
 	}
 
 	public CommerceInventoryReplenishmentItemSoap() {
@@ -106,7 +118,9 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 
 	public void setCommerceInventoryReplenishmentItemId(
 		long commerceInventoryReplenishmentItemId) {
-		_commerceInventoryReplenishmentItemId = commerceInventoryReplenishmentItemId;
+
+		_commerceInventoryReplenishmentItemId =
+			commerceInventoryReplenishmentItemId;
 	}
 
 	public long getCompanyId() {
@@ -149,12 +163,14 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	public String getSku() {
@@ -187,8 +203,9 @@ public class CommerceInventoryReplenishmentItemSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private String _sku;
 	private Date _availabilityDate;
 	private int _quantity;
+
 }

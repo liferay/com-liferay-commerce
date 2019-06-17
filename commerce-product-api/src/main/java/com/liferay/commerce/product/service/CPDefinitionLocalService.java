@@ -88,49 +88,7 @@ public interface CPDefinitionLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, boolean hasDefaultInstance,
-			ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException;
-
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -150,64 +108,6 @@ public interface CPDefinitionLocalService
 			int subscriptionLength, String subscriptionType,
 			UnicodeProperties subscriptionTypeSettingsProperties,
 			long maxSubscriptionCycles, String externalReferenceCode,
-			ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSku,
-			ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, boolean shippable,
-			boolean freeShipping, boolean shipSeparately,
-			double shippingExtraPrice, double width, double height,
-			double depth, double weight, long cpTaxCategoryId,
-			boolean taxExempt, boolean telcoOrElectronics,
-			String ddmStructureKey, boolean published, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSku,
-			String externalReferenceCode, ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, String ddmStructureKey,
-			boolean published, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
 			ServiceContext serviceContext)
 		throws PortalException;
 
@@ -252,7 +152,7 @@ public interface CPDefinitionLocalService
 	public CPDefinition deleteCPDefinition(long CPDefinitionId)
 		throws PortalException;
 
-	public void deleteCPDefinitions(long groupId) throws PortalException;
+	public void deleteCPDefinitions(long companyId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -438,11 +338,6 @@ public interface CPDefinitionLocalService
 		long groupId, String productTypeName, String languageId, int status,
 		int start, int end, OrderByComparator<CPDefinition> orderByComparator);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinition> getCPDefinitionsByCategoryId(
-			long categoryId, int start, int end)
-		throws PortalException;
-
 	/**
 	 * Returns all the cp definitions matching the UUID and company.
 	 *
@@ -483,10 +378,6 @@ public interface CPDefinitionLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPDefinitionsCount(
 		long groupId, String productTypeName, String languageId, int status);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
-		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Map<Locale, String> getCPDefinitionShortDescriptionMap(
@@ -548,60 +439,17 @@ public interface CPDefinitionLocalService
 	public void maintainVersionThreshold(long cProductId)
 		throws PortalException;
 
-	public void moveCPDefinitionsToTrash(long groupId, long userId)
-		throws PortalException;
-
-	/**
-	 * Moves the commerce product definition to the recycle bin.
-	 *
-	 * @param userId the primary key of the user moving the commerce product
-	 definition
-	 * @param cpDefinition the commerce product definition to be moved
-	 * @return the moved commerce product definition
-	 */
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition moveCPDefinitionToTrash(
-			long userId, CPDefinition cpDefinition)
-		throws PortalException;
-
-	/**
-	 * Moves the commerce product definition with the ID to the recycle bin.
-	 *
-	 * @param userId the primary key of the user moving the commerce product
-	 definition
-	 * @param cpDefinitionId the primary key of the commerce product definition
-	 to be moved
-	 * @return the moved commerce product definition
-	 */
-	public CPDefinition moveCPDefinitionToTrash(
-			long userId, long cpDefinitionId)
-		throws PortalException;
-
-	/**
-	 * Restores the commerce product definition with the ID from the recycle
-	 * bin.
-	 *
-	 * @param userId the primary key of the user restoring the commerce product
-	 definition
-	 * @param cpDefinitionId the primary key of the commerce product definition
-	 to be restored
-	 * @return the restored commerce product definition from the recycle bin
-	 */
-	@Indexable(type = IndexableType.REINDEX)
-	public CPDefinition restoreCPDefinitionFromTrash(
-			long userId, long cpDefinitionId)
-		throws PortalException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, String filterFields,
-			String filterValues, int start, int end, Sort sort)
+			long companyId, long[] groupIds, String keywords,
+			String filterFields, String filterValues, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	public void updateAsset(
@@ -653,9 +501,17 @@ public interface CPDefinitionLocalService
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDefinition updateCPDefinitionCategorization(
 			long cpDefinitionId, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPDefinition updateCPDefinitionChannelFilter(
+			long cpDefinitionId, boolean enable)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -711,7 +567,7 @@ public interface CPDefinitionLocalService
 		throws PortalException;
 
 	public CPDefinition upsertCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -727,8 +583,11 @@ public interface CPDefinitionLocalService
 			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSKU,
-			String externalReferenceCode, ServiceContext serviceContext)
+			boolean neverExpire, String defaultSku, boolean subscriptionEnabled,
+			int subscriptionLength, String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 }

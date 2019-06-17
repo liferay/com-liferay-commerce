@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -77,10 +80,9 @@ public class CommercePriceListAccountRelModelImpl
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR},
 		{"commercePriceListAccountRelId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"commerceAccountId", Types.BIGINT},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"commerceAccountId", Types.BIGINT},
 		{"commercePriceListId", Types.BIGINT}, {"order_", Types.INTEGER},
 		{"lastPublishDate", Types.TIMESTAMP}
 	};
@@ -91,7 +93,6 @@ public class CommercePriceListAccountRelModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commercePriceListAccountRelId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -104,7 +105,7 @@ public class CommercePriceListAccountRelModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommercePriceListAccountRel (uuid_ VARCHAR(75) null,commercePriceListAccountRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commercePriceListId LONG,order_ INTEGER,lastPublishDate DATE null)";
+		"create table CommercePriceListAccountRel (uuid_ VARCHAR(75) null,commercePriceListAccountRelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commercePriceListId LONG,order_ INTEGER,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommercePriceListAccountRel";
@@ -142,11 +143,9 @@ public class CommercePriceListAccountRelModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
 
-	public static final long UUID_COLUMN_BITMASK = 16L;
-
-	public static final long ORDER_COLUMN_BITMASK = 32L;
+	public static final long ORDER_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -167,7 +166,6 @@ public class CommercePriceListAccountRelModelImpl
 		model.setUuid(soapModel.getUuid());
 		model.setCommercePriceListAccountRelId(
 			soapModel.getCommercePriceListAccountRelId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -298,6 +296,32 @@ public class CommercePriceListAccountRelModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommercePriceListAccountRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommercePriceListAccountRel.class.getClassLoader(),
+			CommercePriceListAccountRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommercePriceListAccountRel> constructor =
+				(Constructor<CommercePriceListAccountRel>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map
 		<String, Function<CommercePriceListAccountRel, Object>>
 			_attributeGetterFunctions;
@@ -365,31 +389,6 @@ public class CommercePriceListAccountRelModelImpl
 					commercePriceListAccountRel.
 						setCommercePriceListAccountRelId(
 							(Long)commercePriceListAccountRelId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommercePriceListAccountRel, Object>() {
-
-				@Override
-				public Object apply(
-					CommercePriceListAccountRel commercePriceListAccountRel) {
-
-					return commercePriceListAccountRel.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommercePriceListAccountRel, Object>() {
-
-				@Override
-				public void accept(
-					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object groupId) {
-
-					commercePriceListAccountRel.setGroupId((Long)groupId);
 				}
 
 			});
@@ -670,29 +669,6 @@ public class CommercePriceListAccountRelModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -883,10 +859,13 @@ public class CommercePriceListAccountRelModelImpl
 	@Override
 	public CommercePriceListAccountRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommercePriceListAccountRel)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommercePriceListAccountRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -900,7 +879,6 @@ public class CommercePriceListAccountRelModelImpl
 		commercePriceListAccountRelImpl.setUuid(getUuid());
 		commercePriceListAccountRelImpl.setCommercePriceListAccountRelId(
 			getCommercePriceListAccountRelId());
-		commercePriceListAccountRelImpl.setGroupId(getGroupId());
 		commercePriceListAccountRelImpl.setCompanyId(getCompanyId());
 		commercePriceListAccountRelImpl.setUserId(getUserId());
 		commercePriceListAccountRelImpl.setUserName(getUserName());
@@ -988,11 +966,6 @@ public class CommercePriceListAccountRelModelImpl
 		commercePriceListAccountRelModelImpl._originalUuid =
 			commercePriceListAccountRelModelImpl._uuid;
 
-		commercePriceListAccountRelModelImpl._originalGroupId =
-			commercePriceListAccountRelModelImpl._groupId;
-
-		commercePriceListAccountRelModelImpl._setOriginalGroupId = false;
-
 		commercePriceListAccountRelModelImpl._originalCompanyId =
 			commercePriceListAccountRelModelImpl._companyId;
 
@@ -1031,8 +1004,6 @@ public class CommercePriceListAccountRelModelImpl
 
 		commercePriceListAccountRelCacheModel.commercePriceListAccountRelId =
 			getCommercePriceListAccountRelId();
-
-		commercePriceListAccountRelCacheModel.groupId = getGroupId();
 
 		commercePriceListAccountRelCacheModel.companyId = getCompanyId();
 
@@ -1155,18 +1126,18 @@ public class CommercePriceListAccountRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommercePriceListAccountRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommercePriceListAccountRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommercePriceListAccountRel>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _commercePriceListAccountRelId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -4,7 +4,6 @@
 	<model name="com.liferay.commerce.discount.model.CommerceDiscount">
 		<field name="uuid" type="String" />
 		<field name="commerceDiscountId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -34,9 +33,18 @@
 		<field name="statusByUserName" type="String" />
 		<field name="statusDate" type="Date" />
 	</model>
+	<model name="com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel">
+		<field name="commerceDiscountCommerceAccountGroupRelId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="commerceDiscountId" type="long" />
+		<field name="commerceAccountGroupId" type="long" />
+	</model>
 	<model name="com.liferay.commerce.discount.model.CommerceDiscountRel">
 		<field name="commerceDiscountRelId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -48,7 +56,6 @@
 	</model>
 	<model name="com.liferay.commerce.discount.model.CommerceDiscountRule">
 		<field name="commerceDiscountRuleId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -62,7 +69,6 @@
 	</model>
 	<model name="com.liferay.commerce.discount.model.CommerceDiscountUsageEntry">
 		<field name="commerceDiscountUsageEntryId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -71,16 +77,5 @@
 		<field name="commerceAccountId" type="long" />
 		<field name="commerceOrderId" type="long" />
 		<field name="commerceDiscountId" type="long" />
-	</model>
-	<model name="com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel">
-		<field name="commerceDiscountUserSegmentRelId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="commerceDiscountId" type="long" />
-		<field name="commerceUserSegmentEntryId" type="long" />
 	</model>
 </model-hints>

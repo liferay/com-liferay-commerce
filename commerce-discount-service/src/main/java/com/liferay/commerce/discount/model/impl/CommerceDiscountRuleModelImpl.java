@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -74,11 +77,11 @@ public class CommerceDiscountRuleModelImpl
 	public static final String TABLE_NAME = "CommerceDiscountRule";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"commerceDiscountRuleId", Types.BIGINT}, {"groupId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"commerceDiscountId", Types.BIGINT},
-		{"type_", Types.VARCHAR}, {"typeSettings", Types.CLOB}
+		{"commerceDiscountRuleId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"commerceDiscountId", Types.BIGINT}, {"type_", Types.VARCHAR},
+		{"typeSettings", Types.CLOB}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -86,7 +89,6 @@ public class CommerceDiscountRuleModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceDiscountRuleId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -98,7 +100,7 @@ public class CommerceDiscountRuleModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceDiscountRule (commerceDiscountRuleId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,type_ VARCHAR(75) null,typeSettings TEXT null)";
+		"create table CommerceDiscountRule (commerceDiscountRuleId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,type_ VARCHAR(75) null,typeSettings TEXT null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceDiscountRule";
@@ -150,7 +152,6 @@ public class CommerceDiscountRuleModelImpl
 		CommerceDiscountRule model = new CommerceDiscountRuleImpl();
 
 		model.setCommerceDiscountRuleId(soapModel.getCommerceDiscountRuleId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -278,6 +279,32 @@ public class CommerceDiscountRuleModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceDiscountRule>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceDiscountRule.class.getClassLoader(),
+			CommerceDiscountRule.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceDiscountRule> constructor =
+				(Constructor<CommerceDiscountRule>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommerceDiscountRule, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommerceDiscountRule, Object>>
@@ -314,28 +341,6 @@ public class CommerceDiscountRuleModelImpl
 
 					commerceDiscountRule.setCommerceDiscountRuleId(
 						(Long)commerceDiscountRuleId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceDiscountRule, Object>() {
-
-				@Override
-				public Object apply(CommerceDiscountRule commerceDiscountRule) {
-					return commerceDiscountRule.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceDiscountRule, Object>() {
-
-				@Override
-				public void accept(
-					CommerceDiscountRule commerceDiscountRule, Object groupId) {
-
-					commerceDiscountRule.setGroupId((Long)groupId);
 				}
 
 			});
@@ -542,17 +547,6 @@ public class CommerceDiscountRuleModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -711,8 +705,12 @@ public class CommerceDiscountRuleModelImpl
 	@Override
 	public CommerceDiscountRule toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceDiscountRule)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceDiscountRule>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -726,7 +724,6 @@ public class CommerceDiscountRuleModelImpl
 
 		commerceDiscountRuleImpl.setCommerceDiscountRuleId(
 			getCommerceDiscountRuleId());
-		commerceDiscountRuleImpl.setGroupId(getGroupId());
 		commerceDiscountRuleImpl.setCompanyId(getCompanyId());
 		commerceDiscountRuleImpl.setUserId(getUserId());
 		commerceDiscountRuleImpl.setUserName(getUserName());
@@ -815,8 +812,6 @@ public class CommerceDiscountRuleModelImpl
 
 		commerceDiscountRuleCacheModel.commerceDiscountRuleId =
 			getCommerceDiscountRuleId();
-
-		commerceDiscountRuleCacheModel.groupId = getGroupId();
 
 		commerceDiscountRuleCacheModel.companyId = getCompanyId();
 
@@ -936,14 +931,14 @@ public class CommerceDiscountRuleModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceDiscountRule.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceDiscountRule.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceDiscountRule>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _commerceDiscountRuleId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

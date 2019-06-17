@@ -58,6 +58,9 @@ public interface CPInstance extends CPInstanceModel, PersistedModel {
 
 		};
 
+	public CommerceCatalog getCommerceCatalog()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public CPDefinition getCPDefinition()
 		throws com.liferay.portal.kernel.exception.PortalException;
 

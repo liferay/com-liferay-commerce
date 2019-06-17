@@ -39,7 +39,7 @@ public class CommerceDiscountServiceWrapper
 	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscount
 			addCommerceDiscount(
-				String title, String target, boolean useCouponCode,
+				long userId, String title, String target, boolean useCouponCode,
 				String couponCode, boolean usePercentage,
 				java.math.BigDecimal maximumDiscountAmount,
 				java.math.BigDecimal level1, java.math.BigDecimal level2,
@@ -54,7 +54,7 @@ public class CommerceDiscountServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceDiscountService.addCommerceDiscount(
-			title, target, useCouponCode, couponCode, usePercentage,
+			userId, title, target, useCouponCode, couponCode, usePercentage,
 			maximumDiscountAmount, level1, level2, level3, level4,
 			limitationType, limitationTimes, active, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
@@ -89,39 +89,19 @@ public class CommerceDiscountServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscounts(
-				long groupId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.discount.model.CommerceDiscount>
-						orderByComparator)
+			getCommerceDiscounts(long companyId, String couponCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceDiscountService.getCommerceDiscounts(
-			groupId, start, end, orderByComparator);
+			companyId, couponCode);
 	}
 
 	@Override
-	public java.util.List<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscounts(long groupId, String couponCode)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceDiscountService.getCommerceDiscounts(
-			groupId, couponCode);
-	}
-
-	@Override
-	public int getCommerceDiscountsCount(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceDiscountService.getCommerceDiscountsCount(groupId);
-	}
-
-	@Override
-	public int getCommerceDiscountsCount(long groupId, String couponCode)
+	public int getCommerceDiscountsCount(long companyId, String couponCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceDiscountService.getCommerceDiscountsCount(
-			groupId, couponCode);
+			companyId, couponCode);
 	}
 
 	/**
@@ -138,13 +118,12 @@ public class CommerceDiscountServiceWrapper
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.discount.model.CommerceDiscount>
 				searchCommerceDiscounts(
-					long companyId, long groupId, String keywords, int status,
-					int start, int end,
-					com.liferay.portal.kernel.search.Sort sort)
+					long companyId, String keywords, int status, int start,
+					int end, com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceDiscountService.searchCommerceDiscounts(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, keywords, status, start, end, sort);
 	}
 
 	@Override

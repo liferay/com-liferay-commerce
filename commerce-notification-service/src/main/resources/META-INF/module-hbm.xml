@@ -5,7 +5,7 @@
 	<import class="com.liferay.commerce.notification.model.CommerceNotificationAttachment" />
 	<import class="com.liferay.commerce.notification.model.CommerceNotificationQueueEntry" />
 	<import class="com.liferay.commerce.notification.model.CommerceNotificationTemplate" />
-	<import class="com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel" />
+	<import class="com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel" />
 	<class name="com.liferay.commerce.notification.model.impl.CommerceNotificationAttachmentImpl" table="CNotificationAttachment">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="CNotificationAttachmentId" name="commerceNotificationAttachmentId" type="long">
 			<generator class="assigned" />
@@ -66,8 +66,8 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="subject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="body" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
 	</class>
-	<class name="com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateUserSegmentRelImpl" table="CNTemplateUserSegmentRel">
-		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="CNTemplateUserSegmentRelId" name="commerceNotificationTemplateUserSegmentRelId" type="long">
+	<class name="com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateCommerceAccountGroupRelImpl" table="CNTemplateCAccountGroupRel">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="CNTemplateCAccountGroupRelId" name="commerceNotificationTemplateCommerceAccountGroupRelId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -77,6 +77,6 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="createDate" type="org.hibernate.type.TimestampType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="commerceNotificationTemplateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="commerceUserSegmentEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="commerceAccountGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

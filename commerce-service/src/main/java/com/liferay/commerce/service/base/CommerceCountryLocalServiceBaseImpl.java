@@ -248,17 +248,18 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchCommerceCountryByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CommerceCountry fetchCommerceCountryByUuidAndCompanyId(
+		String uuid, long companyId) {
 
-		return commerceCountryPersistence.fetchByUUID_G(uuid, groupId);
+		return commerceCountryPersistence.fetchByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -364,9 +365,6 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<CommerceCountry>() {
 
@@ -405,52 +403,20 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce countries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceCountry> getCommerceCountriesByUuidAndCompanyId(
-		String uuid, long companyId) {
-
-		return commerceCountryPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce countries
-	 * @param end the upper bound of the range of commerce countries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce countries, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceCountry> getCommerceCountriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceCountry> orderByComparator) {
-
-		return commerceCountryPersistence.findByUuid_C(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country
 	 * @throws PortalException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry getCommerceCountryByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommerceCountry getCommerceCountryByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException {
 
-		return commerceCountryPersistence.findByUUID_G(uuid, groupId);
+		return commerceCountryPersistence.findByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -1177,101 +1143,6 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 	}
 
 	/**
-(??)	 * Returns the commerce warehouse local service.
-(??)	 *
-(??)	 * @return the commerce warehouse local service
-(??)	 */
-(??)	public com.liferay.commerce.service.CommerceWarehouseLocalService getCommerceWarehouseLocalService() {
-(??)		return commerceWarehouseLocalService;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Sets the commerce warehouse local service.
-(??)	 *
-(??)	 * @param commerceWarehouseLocalService the commerce warehouse local service
-(??)	 */
-(??)	public void setCommerceWarehouseLocalService(
-(??)		com.liferay.commerce.service.CommerceWarehouseLocalService commerceWarehouseLocalService) {
-(??)		this.commerceWarehouseLocalService = commerceWarehouseLocalService;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Returns the commerce warehouse persistence.
-(??)	 *
-(??)	 * @return the commerce warehouse persistence
-(??)	 */
-(??)	public CommerceWarehousePersistence getCommerceWarehousePersistence() {
-(??)		return commerceWarehousePersistence;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Sets the commerce warehouse persistence.
-(??)	 *
-(??)	 * @param commerceWarehousePersistence the commerce warehouse persistence
-(??)	 */
-(??)	public void setCommerceWarehousePersistence(
-(??)		CommerceWarehousePersistence commerceWarehousePersistence) {
-(??)		this.commerceWarehousePersistence = commerceWarehousePersistence;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Returns the commerce warehouse finder.
-(??)	 *
-(??)	 * @return the commerce warehouse finder
-(??)	 */
-(??)	public CommerceWarehouseFinder getCommerceWarehouseFinder() {
-(??)		return commerceWarehouseFinder;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Sets the commerce warehouse finder.
-(??)	 *
-(??)	 * @param commerceWarehouseFinder the commerce warehouse finder
-(??)	 */
-(??)	public void setCommerceWarehouseFinder(
-(??)		CommerceWarehouseFinder commerceWarehouseFinder) {
-(??)		this.commerceWarehouseFinder = commerceWarehouseFinder;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Returns the commerce warehouse item local service.
-(??)	 *
-(??)	 * @return the commerce warehouse item local service
-(??)	 */
-(??)	public com.liferay.commerce.service.CommerceWarehouseItemLocalService getCommerceWarehouseItemLocalService() {
-(??)		return commerceWarehouseItemLocalService;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Sets the commerce warehouse item local service.
-(??)	 *
-(??)	 * @param commerceWarehouseItemLocalService the commerce warehouse item local service
-(??)	 */
-(??)	public void setCommerceWarehouseItemLocalService(
-(??)		com.liferay.commerce.service.CommerceWarehouseItemLocalService commerceWarehouseItemLocalService) {
-(??)		this.commerceWarehouseItemLocalService = commerceWarehouseItemLocalService;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Returns the commerce warehouse item persistence.
-(??)	 *
-(??)	 * @return the commerce warehouse item persistence
-(??)	 */
-(??)	public CommerceWarehouseItemPersistence getCommerceWarehouseItemPersistence() {
-(??)		return commerceWarehouseItemPersistence;
-(??)	}
-(??)
-(??)	/**
-(??)	 * Sets the commerce warehouse item persistence.
-(??)	 *
-(??)	 * @param commerceWarehouseItemPersistence the commerce warehouse item persistence
-(??)	 */
-(??)	public void setCommerceWarehouseItemPersistence(
-(??)		CommerceWarehouseItemPersistence commerceWarehouseItemPersistence) {
-(??)		this.commerceWarehouseItemPersistence = commerceWarehouseItemPersistence;
-(??)	}
-(??)
-(??)	/**
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1681,16 +1552,6 @@ public abstract class CommerceCountryLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
 	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
-(??)	@BeanReference(type = com.liferay.commerce.service.CommerceWarehouseLocalService.class)
-(??)	protected com.liferay.commerce.service.CommerceWarehouseLocalService commerceWarehouseLocalService;
-(??)	@BeanReference(type = CommerceWarehousePersistence.class)
-(??)	protected CommerceWarehousePersistence commerceWarehousePersistence;
-(??)	@BeanReference(type = CommerceWarehouseFinder.class)
-(??)	protected CommerceWarehouseFinder commerceWarehouseFinder;
-(??)	@BeanReference(type = com.liferay.commerce.service.CommerceWarehouseItemLocalService.class)
-(??)	protected com.liferay.commerce.service.CommerceWarehouseItemLocalService commerceWarehouseItemLocalService;
-(??)	@BeanReference(type = CommerceWarehouseItemPersistence.class)
-(??)	protected CommerceWarehouseItemPersistence commerceWarehouseItemPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.service.CPDAvailabilityEstimateLocalService.class

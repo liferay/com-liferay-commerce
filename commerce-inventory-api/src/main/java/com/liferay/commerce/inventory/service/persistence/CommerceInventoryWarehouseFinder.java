@@ -22,39 +22,13 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CommerceInventoryWarehouseFinder {
-	public int countByKeywords(long companyId, long groupId, String keywords,
-		Boolean active, String commerceCountryCode);
 
-	public int countByG_A(long companyId, long groupId, Boolean active);
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse>
+			findByG_S(long groupId, String sku);
 
-	public int countByG_A_C(long companyId, long groupId, Boolean active,
-		String commerceCountryCode);
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse>
+			findByC_G_A(long companyId, long groupId, boolean active);
 
-	public int countByG_N_D_S_C_Z_C(long companyId, long groupId,
-		String[] names, String[] descriptions, String[] streets,
-		String[] cities, String[] zips, Boolean active,
-		String commerceCountryCode, boolean andOperator);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findByKeywords(
-		long companyId, long groupId, String keywords, Boolean active,
-		String commerceCountryCode, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> orderByComparator);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findByG_N_D_S_C_Z_C(
-		long companyId, long groupId, String[] names, String[] descriptions,
-		String[] streets, String[] cities, String[] zips, Boolean active,
-		String commerceCountryCode, boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> orderByComparator);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findWarehousesByGroupId(
-		long companyId, long groupId);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findWarehousesByGroupIdAndActive(
-		long companyId, long groupId, boolean active);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findWarehousesByGroupIdAndActiveAndCountryISOCode(
-		long companyId, long groupId, boolean active, String countryCode);
-
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse> findWarehousesByGroupIdAndSku(
-		long companyId, long groupId, String sku);
 }

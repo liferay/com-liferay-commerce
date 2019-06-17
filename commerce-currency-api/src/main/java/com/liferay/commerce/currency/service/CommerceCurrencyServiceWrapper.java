@@ -39,7 +39,8 @@ public class CommerceCurrencyServiceWrapper
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency
 			addCommerceCurrency(
-				String code, java.util.Map<java.util.Locale, String> nameMap,
+				long userId, String code,
+				java.util.Map<java.util.Locale, String> nameMap,
 				java.math.BigDecimal rate,
 				java.util.Map<java.util.Locale, String> formatPatternMap,
 				int maxFractionDigits, int minFractionDigits,
@@ -49,7 +50,7 @@ public class CommerceCurrencyServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCurrencyService.addCommerceCurrency(
-			code, nameMap, rate, formatPatternMap, maxFractionDigits,
+			userId, code, nameMap, rate, formatPatternMap, maxFractionDigits,
 			minFractionDigits, roundingMode, primary, priority, active,
 			serviceContext);
 	}
@@ -63,51 +64,51 @@ public class CommerceCurrencyServiceWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency
-			fetchPrimaryCommerceCurrency(long groupId)
+			fetchPrimaryCommerceCurrency(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceCurrencyService.fetchPrimaryCommerceCurrency(groupId);
+		return _commerceCurrencyService.fetchPrimaryCommerceCurrency(companyId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.currency.model.CommerceCurrency>
 			getCommerceCurrencies(
-				long groupId, boolean active, int start, int end,
+				long companyId, boolean active, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.currency.model.CommerceCurrency>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCurrencyService.getCommerceCurrencies(
-			groupId, active, start, end, orderByComparator);
+			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.currency.model.CommerceCurrency>
 			getCommerceCurrencies(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.currency.model.CommerceCurrency>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCurrencyService.getCommerceCurrencies(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId)
+	public int getCommerceCurrenciesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceCurrencyService.getCommerceCurrenciesCount(groupId);
+		return _commerceCurrencyService.getCommerceCurrenciesCount(companyId);
 	}
 
 	@Override
-	public int getCommerceCurrenciesCount(long groupId, boolean active)
+	public int getCommerceCurrenciesCount(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCurrencyService.getCommerceCurrenciesCount(
-			groupId, active);
+			companyId, active);
 	}
 
 	@Override
@@ -120,10 +121,10 @@ public class CommerceCurrencyServiceWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency
-			getCommerceCurrency(long groupId, String code)
+			getCommerceCurrency(long companyId, String code)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceCurrencyService.getCommerceCurrency(groupId, code);
+		return _commerceCurrencyService.getCommerceCurrency(companyId, code);
 	}
 
 	/**
@@ -181,11 +182,10 @@ public class CommerceCurrencyServiceWrapper
 	}
 
 	@Override
-	public void updateExchangeRates(
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public void updateExchangeRates()
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		_commerceCurrencyService.updateExchangeRates(serviceContext);
+		_commerceCurrencyService.updateExchangeRates();
 	}
 
 	@Override

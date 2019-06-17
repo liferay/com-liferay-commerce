@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -317,6 +320,33 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function
+		<InvocationHandler, CPDefinitionSpecificationOptionValue>
+			_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinitionSpecificationOptionValue.class.getClassLoader(),
+			CPDefinitionSpecificationOptionValue.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinitionSpecificationOptionValue> constructor =
+				(Constructor<CPDefinitionSpecificationOptionValue>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map
@@ -1207,11 +1237,13 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 	@Override
 	public CPDefinitionSpecificationOptionValue toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CPDefinitionSpecificationOptionValue)
-					ProxyUtil.newProxyInstance(
-						_classLoader, _escapedModelInterfaces,
-						new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CPDefinitionSpecificationOptionValue>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1530,11 +1562,14 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinitionSpecificationOptionValue.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinitionSpecificationOptionValue.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CPDefinitionSpecificationOptionValue>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

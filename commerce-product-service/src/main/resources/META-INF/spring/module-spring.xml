@@ -7,6 +7,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
+	<bean class="com.liferay.commerce.product.service.impl.CommerceCatalogLocalServiceImpl" id="com.liferay.commerce.product.service.CommerceCatalogLocalService" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceCatalogServiceImpl" id="com.liferay.commerce.product.service.CommerceCatalogService" />
+	<bean class="com.liferay.commerce.product.service.persistence.impl.CommerceCatalogPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelLocalServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelLocalService" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelService" />
+	<bean class="com.liferay.commerce.product.service.persistence.impl.CommerceChannelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CommerceChannelPersistence" parent="basePersistence" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelRelLocalServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelRelLocalService" />
+	<bean class="com.liferay.commerce.product.service.impl.CommerceChannelRelServiceImpl" id="com.liferay.commerce.product.service.CommerceChannelRelService" />
+	<bean class="com.liferay.commerce.product.service.persistence.impl.CommerceChannelRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.product.service.impl.CPAttachmentFileEntryLocalServiceImpl" id="com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl" id="com.liferay.commerce.product.service.CPAttachmentFileEntryService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPAttachmentFileEntryPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryPersistence" parent="basePersistence" />
@@ -50,15 +59,6 @@
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPOptionValuePersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPOptionValuePersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.product.service.impl.CProductLocalServiceImpl" id="com.liferay.commerce.product.service.CProductLocalService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CProductPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CProductPersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleLocalService" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleServiceImpl" id="com.liferay.commerce.product.service.CPRuleService" />
-	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRulePersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRulePersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleAssetCategoryRelServiceImpl" id="com.liferay.commerce.product.service.CPRuleAssetCategoryRelService" />
-	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRuleAssetCategoryRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence" parent="basePersistence" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelLocalServiceImpl" id="com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService" />
-	<bean class="com.liferay.commerce.product.service.impl.CPRuleUserSegmentRelServiceImpl" id="com.liferay.commerce.product.service.CPRuleUserSegmentRelService" />
-	<bean class="com.liferay.commerce.product.service.persistence.impl.CPRuleUserSegmentRelPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence" parent="basePersistence" />
 	<bean class="com.liferay.commerce.product.service.impl.CPSpecificationOptionLocalServiceImpl" id="com.liferay.commerce.product.service.CPSpecificationOptionLocalService" />
 	<bean class="com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl" id="com.liferay.commerce.product.service.CPSpecificationOptionService" />
 	<bean class="com.liferay.commerce.product.service.persistence.impl.CPSpecificationOptionPersistenceImpl" id="com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence" parent="basePersistence" />

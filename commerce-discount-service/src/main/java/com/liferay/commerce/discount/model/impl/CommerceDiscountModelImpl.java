@@ -40,6 +40,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -79,12 +82,11 @@ public class CommerceDiscountModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"commerceDiscountId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"title", Types.VARCHAR}, {"target", Types.VARCHAR},
-		{"useCouponCode", Types.BOOLEAN}, {"couponCode", Types.VARCHAR},
-		{"usePercentage", Types.BOOLEAN},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"title", Types.VARCHAR},
+		{"target", Types.VARCHAR}, {"useCouponCode", Types.BOOLEAN},
+		{"couponCode", Types.VARCHAR}, {"usePercentage", Types.BOOLEAN},
 		{"maximumDiscountAmount", Types.DECIMAL}, {"level1", Types.DECIMAL},
 		{"level2", Types.DECIMAL}, {"level3", Types.DECIMAL},
 		{"level4", Types.DECIMAL}, {"limitationType", Types.VARCHAR},
@@ -102,7 +104,6 @@ public class CommerceDiscountModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceDiscountId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -132,7 +133,7 @@ public class CommerceDiscountModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceDiscount (uuid_ VARCHAR(75) null,commerceDiscountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceDiscount (uuid_ VARCHAR(75) null,commerceDiscountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscount";
 
@@ -171,13 +172,11 @@ public class CommerceDiscountModelImpl
 
 	public static final long EXPIRATIONDATE_COLUMN_BITMASK = 8L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
+	public static final long STATUS_COLUMN_BITMASK = 16L;
 
-	public static final long STATUS_COLUMN_BITMASK = 32L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
 
-	public static final long UUID_COLUMN_BITMASK = 64L;
-
-	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -194,7 +193,6 @@ public class CommerceDiscountModelImpl
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceDiscountId(soapModel.getCommerceDiscountId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -340,6 +338,32 @@ public class CommerceDiscountModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceDiscount>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceDiscount.class.getClassLoader(), CommerceDiscount.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommerceDiscount> constructor =
+				(Constructor<CommerceDiscount>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommerceDiscount, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommerceDiscount, Object>>
@@ -396,28 +420,6 @@ public class CommerceDiscountModelImpl
 
 					commerceDiscount.setCommerceDiscountId(
 						(Long)commerceDiscountId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceDiscount, Object>() {
-
-				@Override
-				public Object apply(CommerceDiscount commerceDiscount) {
-					return commerceDiscount.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceDiscount, Object>() {
-
-				@Override
-				public void accept(
-					CommerceDiscount commerceDiscount, Object groupId) {
-
-					commerceDiscount.setGroupId((Long)groupId);
 				}
 
 			});
@@ -1044,29 +1046,6 @@ public class CommerceDiscountModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -1599,8 +1578,12 @@ public class CommerceDiscountModelImpl
 	@Override
 	public CommerceDiscount toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceDiscount)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceDiscount>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1613,7 +1596,6 @@ public class CommerceDiscountModelImpl
 
 		commerceDiscountImpl.setUuid(getUuid());
 		commerceDiscountImpl.setCommerceDiscountId(getCommerceDiscountId());
-		commerceDiscountImpl.setGroupId(getGroupId());
 		commerceDiscountImpl.setCompanyId(getCompanyId());
 		commerceDiscountImpl.setUserId(getUserId());
 		commerceDiscountImpl.setUserName(getUserName());
@@ -1707,11 +1689,6 @@ public class CommerceDiscountModelImpl
 		commerceDiscountModelImpl._originalUuid =
 			commerceDiscountModelImpl._uuid;
 
-		commerceDiscountModelImpl._originalGroupId =
-			commerceDiscountModelImpl._groupId;
-
-		commerceDiscountModelImpl._setOriginalGroupId = false;
-
 		commerceDiscountModelImpl._originalCompanyId =
 			commerceDiscountModelImpl._companyId;
 
@@ -1750,8 +1727,6 @@ public class CommerceDiscountModelImpl
 		}
 
 		commerceDiscountCacheModel.commerceDiscountId = getCommerceDiscountId();
-
-		commerceDiscountCacheModel.groupId = getGroupId();
 
 		commerceDiscountCacheModel.companyId = getCompanyId();
 
@@ -1952,18 +1927,16 @@ public class CommerceDiscountModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceDiscount.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceDiscount.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceDiscount>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceDiscountId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

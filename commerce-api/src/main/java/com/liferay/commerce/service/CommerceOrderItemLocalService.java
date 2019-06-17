@@ -17,6 +17,7 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -225,6 +226,11 @@ public interface CommerceOrderItemLocalService
 	public List<CommerceOrderItem> getAvailableForShipmentCommerceOrderItems(
 		long commerceOrderId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws PortalException;
+
 	/**
 	 * Returns the commerce order item with the primary key.
 	 *
@@ -281,11 +287,6 @@ public interface CommerceOrderItemLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderItemsQuantity(long commerceOrderId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPInstanceQuantity(long cpInstanceId, int orderStatus);
@@ -346,13 +347,18 @@ public interface CommerceOrderItemLocalService
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, long bookedQuantityId)
+		throws NoSuchOrderItemException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemInfo(
-		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
-		String printedNote, int requestedDeliveryDateMonth,
-		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
-		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
-		ServiceContext serviceContext) throws PortalException;
+			long commerceOrderItemId, String deliveryGroup,
+			long shippingAddressId, String printedNote,
+			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(

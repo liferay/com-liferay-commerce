@@ -92,6 +92,14 @@ public class CommerceOrderItemServiceUtil {
 			commerceOrderId);
 	}
 
+	public static int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemQuantity(
+			commerceOrderItemId, commerceInventoryWarehouseId);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem
 			getCommerceOrderItem(long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -116,14 +124,6 @@ public class CommerceOrderItemServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceOrderItemsQuantity(commerceOrderId);
-	}
-
-	public static int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCommerceWarehouseItemQuantity(
-			commerceOrderItemId, commerceWarehouseId);
 	}
 
 	/**

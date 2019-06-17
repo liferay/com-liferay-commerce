@@ -67,14 +67,12 @@ public class CPDAvailabilityEstimateCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", CPDAvailabilityEstimateId=");
 		sb.append(CPDAvailabilityEstimateId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -110,7 +108,6 @@ public class CPDAvailabilityEstimateCacheModel
 
 		cpdAvailabilityEstimateImpl.setCPDAvailabilityEstimateId(
 			CPDAvailabilityEstimateId);
-		cpdAvailabilityEstimateImpl.setGroupId(groupId);
 		cpdAvailabilityEstimateImpl.setCompanyId(companyId);
 		cpdAvailabilityEstimateImpl.setUserId(userId);
 
@@ -158,8 +155,6 @@ public class CPDAvailabilityEstimateCacheModel
 
 		CPDAvailabilityEstimateId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -184,8 +179,6 @@ public class CPDAvailabilityEstimateCacheModel
 
 		objectOutput.writeLong(CPDAvailabilityEstimateId);
 
-		objectOutput.writeLong(groupId);
-
 		objectOutput.writeLong(companyId);
 
 		objectOutput.writeLong(userId);
@@ -208,7 +201,6 @@ public class CPDAvailabilityEstimateCacheModel
 
 	public String uuid;
 	public long CPDAvailabilityEstimateId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

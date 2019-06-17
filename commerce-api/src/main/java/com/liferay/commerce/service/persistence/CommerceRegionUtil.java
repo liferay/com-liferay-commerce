@@ -291,69 +291,6 @@ public class CommerceRegionUtil {
 	}
 
 	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchRegionException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region
-	 * @throws NoSuchRegionException if a matching commerce region could not be found
-	 */
-	public static CommerceRegion findByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.exception.NoSuchRegionException {
-
-		return getPersistence().findByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	public static CommerceRegion fetchByUUID_G(String uuid, long groupId) {
-		return getPersistence().fetchByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	public static CommerceRegion fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
-	}
-
-	/**
-	 * Removes the commerce region where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce region that was removed
-	 */
-	public static CommerceRegion removeByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.exception.NoSuchRegionException {
-
-		return getPersistence().removeByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the number of commerce regions where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce regions
-	 */
-	public static int countByUUID_G(String uuid, long groupId) {
-		return getPersistence().countByUUID_G(uuid, groupId);
-	}
-
-	/**
 	 * Returns all the commerce regions where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid

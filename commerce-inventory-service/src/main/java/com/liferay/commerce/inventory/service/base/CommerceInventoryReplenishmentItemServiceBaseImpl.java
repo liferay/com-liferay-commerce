@@ -16,18 +16,13 @@ package com.liferay.commerce.inventory.service.base;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemService;
-import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditFinder;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditPersistence;
-import com.liferay.commerce.inventory.service.persistence.CommerceInventoryBookedQuantityFinder;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryBookedQuantityPersistence;
-import com.liferay.commerce.inventory.service.persistence.CommerceInventoryReplenishmentItemFinder;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryReplenishmentItemPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder;
-import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseGroupRelPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehousePersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -52,16 +47,17 @@ import javax.sql.DataSource;
  *
  * @author Luca Pellizzon
  * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl
- * @see com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemServiceUtil
  * @generated
  */
 public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
-	extends BaseServiceImpl implements CommerceInventoryReplenishmentItemService,
-		IdentifiableOSGiService {
+	extends BaseServiceImpl
+	implements CommerceInventoryReplenishmentItemService,
+			   IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemServiceUtil} to access the commerce inventory replenishment item remote service.
+	 * Never modify or reference this class directly. Use <code>CommerceInventoryReplenishmentItemService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemServiceUtil</code>.
 	 */
 
 	/**
@@ -69,7 +65,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory audit local service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService getCommerceInventoryAuditLocalService() {
+	public
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryAuditLocalService
+				getCommerceInventoryAuditLocalService() {
+
 		return commerceInventoryAuditLocalService;
 	}
 
@@ -79,8 +79,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryAuditLocalService the commerce inventory audit local service
 	 */
 	public void setCommerceInventoryAuditLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService commerceInventoryAuditLocalService) {
-		this.commerceInventoryAuditLocalService = commerceInventoryAuditLocalService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryAuditLocalService
+				commerceInventoryAuditLocalService) {
+
+		this.commerceInventoryAuditLocalService =
+			commerceInventoryAuditLocalService;
 	}
 
 	/**
@@ -88,7 +92,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory audit remote service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryAuditService getCommerceInventoryAuditService() {
+	public com.liferay.commerce.inventory.service.CommerceInventoryAuditService
+		getCommerceInventoryAuditService() {
+
 		return commerceInventoryAuditService;
 	}
 
@@ -98,7 +104,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryAuditService the commerce inventory audit remote service
 	 */
 	public void setCommerceInventoryAuditService(
-		com.liferay.commerce.inventory.service.CommerceInventoryAuditService commerceInventoryAuditService) {
+		com.liferay.commerce.inventory.service.CommerceInventoryAuditService
+			commerceInventoryAuditService) {
+
 		this.commerceInventoryAuditService = commerceInventoryAuditService;
 	}
 
@@ -107,7 +115,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory audit persistence
 	 */
-	public CommerceInventoryAuditPersistence getCommerceInventoryAuditPersistence() {
+	public CommerceInventoryAuditPersistence
+		getCommerceInventoryAuditPersistence() {
+
 		return commerceInventoryAuditPersistence;
 	}
 
@@ -118,26 +128,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setCommerceInventoryAuditPersistence(
 		CommerceInventoryAuditPersistence commerceInventoryAuditPersistence) {
-		this.commerceInventoryAuditPersistence = commerceInventoryAuditPersistence;
-	}
 
-	/**
-	 * Returns the commerce inventory audit finder.
-	 *
-	 * @return the commerce inventory audit finder
-	 */
-	public CommerceInventoryAuditFinder getCommerceInventoryAuditFinder() {
-		return commerceInventoryAuditFinder;
-	}
-
-	/**
-	 * Sets the commerce inventory audit finder.
-	 *
-	 * @param commerceInventoryAuditFinder the commerce inventory audit finder
-	 */
-	public void setCommerceInventoryAuditFinder(
-		CommerceInventoryAuditFinder commerceInventoryAuditFinder) {
-		this.commerceInventoryAuditFinder = commerceInventoryAuditFinder;
+		this.commerceInventoryAuditPersistence =
+			commerceInventoryAuditPersistence;
 	}
 
 	/**
@@ -145,7 +138,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory booked quantity local service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService getCommerceInventoryBookedQuantityLocalService() {
+	public com.liferay.commerce.inventory.service.
+		CommerceInventoryBookedQuantityLocalService
+			getCommerceInventoryBookedQuantityLocalService() {
+
 		return commerceInventoryBookedQuantityLocalService;
 	}
 
@@ -155,8 +151,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryBookedQuantityLocalService the commerce inventory booked quantity local service
 	 */
 	public void setCommerceInventoryBookedQuantityLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService commerceInventoryBookedQuantityLocalService) {
-		this.commerceInventoryBookedQuantityLocalService = commerceInventoryBookedQuantityLocalService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryBookedQuantityLocalService
+				commerceInventoryBookedQuantityLocalService) {
+
+		this.commerceInventoryBookedQuantityLocalService =
+			commerceInventoryBookedQuantityLocalService;
 	}
 
 	/**
@@ -164,7 +164,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory booked quantity remote service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityService getCommerceInventoryBookedQuantityService() {
+	public com.liferay.commerce.inventory.service.
+		CommerceInventoryBookedQuantityService
+			getCommerceInventoryBookedQuantityService() {
+
 		return commerceInventoryBookedQuantityService;
 	}
 
@@ -174,8 +177,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryBookedQuantityService the commerce inventory booked quantity remote service
 	 */
 	public void setCommerceInventoryBookedQuantityService(
-		com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityService commerceInventoryBookedQuantityService) {
-		this.commerceInventoryBookedQuantityService = commerceInventoryBookedQuantityService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryBookedQuantityService
+				commerceInventoryBookedQuantityService) {
+
+		this.commerceInventoryBookedQuantityService =
+			commerceInventoryBookedQuantityService;
 	}
 
 	/**
@@ -183,7 +190,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory booked quantity persistence
 	 */
-	public CommerceInventoryBookedQuantityPersistence getCommerceInventoryBookedQuantityPersistence() {
+	public CommerceInventoryBookedQuantityPersistence
+		getCommerceInventoryBookedQuantityPersistence() {
+
 		return commerceInventoryBookedQuantityPersistence;
 	}
 
@@ -193,27 +202,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryBookedQuantityPersistence the commerce inventory booked quantity persistence
 	 */
 	public void setCommerceInventoryBookedQuantityPersistence(
-		CommerceInventoryBookedQuantityPersistence commerceInventoryBookedQuantityPersistence) {
-		this.commerceInventoryBookedQuantityPersistence = commerceInventoryBookedQuantityPersistence;
-	}
+		CommerceInventoryBookedQuantityPersistence
+			commerceInventoryBookedQuantityPersistence) {
 
-	/**
-	 * Returns the commerce inventory booked quantity finder.
-	 *
-	 * @return the commerce inventory booked quantity finder
-	 */
-	public CommerceInventoryBookedQuantityFinder getCommerceInventoryBookedQuantityFinder() {
-		return commerceInventoryBookedQuantityFinder;
-	}
-
-	/**
-	 * Sets the commerce inventory booked quantity finder.
-	 *
-	 * @param commerceInventoryBookedQuantityFinder the commerce inventory booked quantity finder
-	 */
-	public void setCommerceInventoryBookedQuantityFinder(
-		CommerceInventoryBookedQuantityFinder commerceInventoryBookedQuantityFinder) {
-		this.commerceInventoryBookedQuantityFinder = commerceInventoryBookedQuantityFinder;
+		this.commerceInventoryBookedQuantityPersistence =
+			commerceInventoryBookedQuantityPersistence;
 	}
 
 	/**
@@ -221,7 +214,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory replenishment item local service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService getCommerceInventoryReplenishmentItemLocalService() {
+	public com.liferay.commerce.inventory.service.
+		CommerceInventoryReplenishmentItemLocalService
+			getCommerceInventoryReplenishmentItemLocalService() {
+
 		return commerceInventoryReplenishmentItemLocalService;
 	}
 
@@ -231,8 +227,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryReplenishmentItemLocalService the commerce inventory replenishment item local service
 	 */
 	public void setCommerceInventoryReplenishmentItemLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService commerceInventoryReplenishmentItemLocalService) {
-		this.commerceInventoryReplenishmentItemLocalService = commerceInventoryReplenishmentItemLocalService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryReplenishmentItemLocalService
+				commerceInventoryReplenishmentItemLocalService) {
+
+		this.commerceInventoryReplenishmentItemLocalService =
+			commerceInventoryReplenishmentItemLocalService;
 	}
 
 	/**
@@ -240,7 +240,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory replenishment item remote service
 	 */
-	public CommerceInventoryReplenishmentItemService getCommerceInventoryReplenishmentItemService() {
+	public CommerceInventoryReplenishmentItemService
+		getCommerceInventoryReplenishmentItemService() {
+
 		return commerceInventoryReplenishmentItemService;
 	}
 
@@ -250,8 +252,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryReplenishmentItemService the commerce inventory replenishment item remote service
 	 */
 	public void setCommerceInventoryReplenishmentItemService(
-		CommerceInventoryReplenishmentItemService commerceInventoryReplenishmentItemService) {
-		this.commerceInventoryReplenishmentItemService = commerceInventoryReplenishmentItemService;
+		CommerceInventoryReplenishmentItemService
+			commerceInventoryReplenishmentItemService) {
+
+		this.commerceInventoryReplenishmentItemService =
+			commerceInventoryReplenishmentItemService;
 	}
 
 	/**
@@ -259,7 +264,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory replenishment item persistence
 	 */
-	public CommerceInventoryReplenishmentItemPersistence getCommerceInventoryReplenishmentItemPersistence() {
+	public CommerceInventoryReplenishmentItemPersistence
+		getCommerceInventoryReplenishmentItemPersistence() {
+
 		return commerceInventoryReplenishmentItemPersistence;
 	}
 
@@ -269,27 +276,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryReplenishmentItemPersistence the commerce inventory replenishment item persistence
 	 */
 	public void setCommerceInventoryReplenishmentItemPersistence(
-		CommerceInventoryReplenishmentItemPersistence commerceInventoryReplenishmentItemPersistence) {
-		this.commerceInventoryReplenishmentItemPersistence = commerceInventoryReplenishmentItemPersistence;
-	}
+		CommerceInventoryReplenishmentItemPersistence
+			commerceInventoryReplenishmentItemPersistence) {
 
-	/**
-	 * Returns the commerce inventory replenishment item finder.
-	 *
-	 * @return the commerce inventory replenishment item finder
-	 */
-	public CommerceInventoryReplenishmentItemFinder getCommerceInventoryReplenishmentItemFinder() {
-		return commerceInventoryReplenishmentItemFinder;
-	}
-
-	/**
-	 * Sets the commerce inventory replenishment item finder.
-	 *
-	 * @param commerceInventoryReplenishmentItemFinder the commerce inventory replenishment item finder
-	 */
-	public void setCommerceInventoryReplenishmentItemFinder(
-		CommerceInventoryReplenishmentItemFinder commerceInventoryReplenishmentItemFinder) {
-		this.commerceInventoryReplenishmentItemFinder = commerceInventoryReplenishmentItemFinder;
+		this.commerceInventoryReplenishmentItemPersistence =
+			commerceInventoryReplenishmentItemPersistence;
 	}
 
 	/**
@@ -297,7 +288,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse local service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService getCommerceInventoryWarehouseLocalService() {
+	public com.liferay.commerce.inventory.service.
+		CommerceInventoryWarehouseLocalService
+			getCommerceInventoryWarehouseLocalService() {
+
 		return commerceInventoryWarehouseLocalService;
 	}
 
@@ -307,8 +301,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseLocalService the commerce inventory warehouse local service
 	 */
 	public void setCommerceInventoryWarehouseLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService commerceInventoryWarehouseLocalService) {
-		this.commerceInventoryWarehouseLocalService = commerceInventoryWarehouseLocalService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryWarehouseLocalService
+				commerceInventoryWarehouseLocalService) {
+
+		this.commerceInventoryWarehouseLocalService =
+			commerceInventoryWarehouseLocalService;
 	}
 
 	/**
@@ -316,7 +314,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse remote service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService getCommerceInventoryWarehouseService() {
+	public
+		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService
+			getCommerceInventoryWarehouseService() {
+
 		return commerceInventoryWarehouseService;
 	}
 
@@ -326,8 +327,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseService the commerce inventory warehouse remote service
 	 */
 	public void setCommerceInventoryWarehouseService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService commerceInventoryWarehouseService) {
-		this.commerceInventoryWarehouseService = commerceInventoryWarehouseService;
+		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService
+			commerceInventoryWarehouseService) {
+
+		this.commerceInventoryWarehouseService =
+			commerceInventoryWarehouseService;
 	}
 
 	/**
@@ -335,7 +339,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse persistence
 	 */
-	public CommerceInventoryWarehousePersistence getCommerceInventoryWarehousePersistence() {
+	public CommerceInventoryWarehousePersistence
+		getCommerceInventoryWarehousePersistence() {
+
 		return commerceInventoryWarehousePersistence;
 	}
 
@@ -345,8 +351,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehousePersistence the commerce inventory warehouse persistence
 	 */
 	public void setCommerceInventoryWarehousePersistence(
-		CommerceInventoryWarehousePersistence commerceInventoryWarehousePersistence) {
-		this.commerceInventoryWarehousePersistence = commerceInventoryWarehousePersistence;
+		CommerceInventoryWarehousePersistence
+			commerceInventoryWarehousePersistence) {
+
+		this.commerceInventoryWarehousePersistence =
+			commerceInventoryWarehousePersistence;
 	}
 
 	/**
@@ -354,7 +363,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse finder
 	 */
-	public CommerceInventoryWarehouseFinder getCommerceInventoryWarehouseFinder() {
+	public CommerceInventoryWarehouseFinder
+		getCommerceInventoryWarehouseFinder() {
+
 		return commerceInventoryWarehouseFinder;
 	}
 
@@ -365,64 +376,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setCommerceInventoryWarehouseFinder(
 		CommerceInventoryWarehouseFinder commerceInventoryWarehouseFinder) {
-		this.commerceInventoryWarehouseFinder = commerceInventoryWarehouseFinder;
-	}
 
-	/**
-	 * Returns the commerce inventory warehouse group rel local service.
-	 *
-	 * @return the commerce inventory warehouse group rel local service
-	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService getCommerceInventoryWarehouseGroupRelLocalService() {
-		return commerceInventoryWarehouseGroupRelLocalService;
-	}
-
-	/**
-	 * Sets the commerce inventory warehouse group rel local service.
-	 *
-	 * @param commerceInventoryWarehouseGroupRelLocalService the commerce inventory warehouse group rel local service
-	 */
-	public void setCommerceInventoryWarehouseGroupRelLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService commerceInventoryWarehouseGroupRelLocalService) {
-		this.commerceInventoryWarehouseGroupRelLocalService = commerceInventoryWarehouseGroupRelLocalService;
-	}
-
-	/**
-	 * Returns the commerce inventory warehouse group rel remote service.
-	 *
-	 * @return the commerce inventory warehouse group rel remote service
-	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelService getCommerceInventoryWarehouseGroupRelService() {
-		return commerceInventoryWarehouseGroupRelService;
-	}
-
-	/**
-	 * Sets the commerce inventory warehouse group rel remote service.
-	 *
-	 * @param commerceInventoryWarehouseGroupRelService the commerce inventory warehouse group rel remote service
-	 */
-	public void setCommerceInventoryWarehouseGroupRelService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelService commerceInventoryWarehouseGroupRelService) {
-		this.commerceInventoryWarehouseGroupRelService = commerceInventoryWarehouseGroupRelService;
-	}
-
-	/**
-	 * Returns the commerce inventory warehouse group rel persistence.
-	 *
-	 * @return the commerce inventory warehouse group rel persistence
-	 */
-	public CommerceInventoryWarehouseGroupRelPersistence getCommerceInventoryWarehouseGroupRelPersistence() {
-		return commerceInventoryWarehouseGroupRelPersistence;
-	}
-
-	/**
-	 * Sets the commerce inventory warehouse group rel persistence.
-	 *
-	 * @param commerceInventoryWarehouseGroupRelPersistence the commerce inventory warehouse group rel persistence
-	 */
-	public void setCommerceInventoryWarehouseGroupRelPersistence(
-		CommerceInventoryWarehouseGroupRelPersistence commerceInventoryWarehouseGroupRelPersistence) {
-		this.commerceInventoryWarehouseGroupRelPersistence = commerceInventoryWarehouseGroupRelPersistence;
+		this.commerceInventoryWarehouseFinder =
+			commerceInventoryWarehouseFinder;
 	}
 
 	/**
@@ -430,7 +386,10 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse item local service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService getCommerceInventoryWarehouseItemLocalService() {
+	public com.liferay.commerce.inventory.service.
+		CommerceInventoryWarehouseItemLocalService
+			getCommerceInventoryWarehouseItemLocalService() {
+
 		return commerceInventoryWarehouseItemLocalService;
 	}
 
@@ -440,8 +399,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseItemLocalService the commerce inventory warehouse item local service
 	 */
 	public void setCommerceInventoryWarehouseItemLocalService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService commerceInventoryWarehouseItemLocalService) {
-		this.commerceInventoryWarehouseItemLocalService = commerceInventoryWarehouseItemLocalService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryWarehouseItemLocalService
+				commerceInventoryWarehouseItemLocalService) {
+
+		this.commerceInventoryWarehouseItemLocalService =
+			commerceInventoryWarehouseItemLocalService;
 	}
 
 	/**
@@ -449,7 +412,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse item remote service
 	 */
-	public com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService getCommerceInventoryWarehouseItemService() {
+	public
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryWarehouseItemService
+				getCommerceInventoryWarehouseItemService() {
+
 		return commerceInventoryWarehouseItemService;
 	}
 
@@ -459,8 +426,12 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseItemService the commerce inventory warehouse item remote service
 	 */
 	public void setCommerceInventoryWarehouseItemService(
-		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService commerceInventoryWarehouseItemService) {
-		this.commerceInventoryWarehouseItemService = commerceInventoryWarehouseItemService;
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryWarehouseItemService
+				commerceInventoryWarehouseItemService) {
+
+		this.commerceInventoryWarehouseItemService =
+			commerceInventoryWarehouseItemService;
 	}
 
 	/**
@@ -468,7 +439,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse item persistence
 	 */
-	public CommerceInventoryWarehouseItemPersistence getCommerceInventoryWarehouseItemPersistence() {
+	public CommerceInventoryWarehouseItemPersistence
+		getCommerceInventoryWarehouseItemPersistence() {
+
 		return commerceInventoryWarehouseItemPersistence;
 	}
 
@@ -478,8 +451,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseItemPersistence the commerce inventory warehouse item persistence
 	 */
 	public void setCommerceInventoryWarehouseItemPersistence(
-		CommerceInventoryWarehouseItemPersistence commerceInventoryWarehouseItemPersistence) {
-		this.commerceInventoryWarehouseItemPersistence = commerceInventoryWarehouseItemPersistence;
+		CommerceInventoryWarehouseItemPersistence
+			commerceInventoryWarehouseItemPersistence) {
+
+		this.commerceInventoryWarehouseItemPersistence =
+			commerceInventoryWarehouseItemPersistence;
 	}
 
 	/**
@@ -487,7 +463,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the commerce inventory warehouse item finder
 	 */
-	public CommerceInventoryWarehouseItemFinder getCommerceInventoryWarehouseItemFinder() {
+	public CommerceInventoryWarehouseItemFinder
+		getCommerceInventoryWarehouseItemFinder() {
+
 		return commerceInventoryWarehouseItemFinder;
 	}
 
@@ -497,8 +475,11 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param commerceInventoryWarehouseItemFinder the commerce inventory warehouse item finder
 	 */
 	public void setCommerceInventoryWarehouseItemFinder(
-		CommerceInventoryWarehouseItemFinder commerceInventoryWarehouseItemFinder) {
-		this.commerceInventoryWarehouseItemFinder = commerceInventoryWarehouseItemFinder;
+		CommerceInventoryWarehouseItemFinder
+			commerceInventoryWarehouseItemFinder) {
+
+		this.commerceInventoryWarehouseItemFinder =
+			commerceInventoryWarehouseItemFinder;
 	}
 
 	/**
@@ -506,7 +487,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -516,7 +499,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -525,7 +510,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -535,7 +522,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -544,7 +533,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -555,6 +546,7 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -574,6 +566,7 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -582,7 +575,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -592,7 +587,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -601,7 +598,9 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -612,6 +611,7 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -631,6 +631,7 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -683,15 +684,16 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 	 */
 	protected void runSQL(String sql) {
 		try {
-			DataSource dataSource = commerceInventoryReplenishmentItemPersistence.getDataSource();
+			DataSource dataSource =
+				commerceInventoryReplenishmentItemPersistence.getDataSource();
 
 			DB db = DBManagerUtil.getDB();
 
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
@@ -700,66 +702,141 @@ public abstract class CommerceInventoryReplenishmentItemServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService commerceInventoryAuditLocalService;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryAuditService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryAuditService commerceInventoryAuditService;
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService.class
+	)
+	protected
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryAuditLocalService
+				commerceInventoryAuditLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryAuditService.class
+	)
+	protected
+		com.liferay.commerce.inventory.service.CommerceInventoryAuditService
+			commerceInventoryAuditService;
+
 	@BeanReference(type = CommerceInventoryAuditPersistence.class)
-	protected CommerceInventoryAuditPersistence commerceInventoryAuditPersistence;
-	@BeanReference(type = CommerceInventoryAuditFinder.class)
-	protected CommerceInventoryAuditFinder commerceInventoryAuditFinder;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService commerceInventoryBookedQuantityLocalService;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityService commerceInventoryBookedQuantityService;
+	protected CommerceInventoryAuditPersistence
+		commerceInventoryAuditPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService.class
+	)
+	protected com.liferay.commerce.inventory.service.
+		CommerceInventoryBookedQuantityLocalService
+			commerceInventoryBookedQuantityLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityService.class
+	)
+	protected com.liferay.commerce.inventory.service.
+		CommerceInventoryBookedQuantityService
+			commerceInventoryBookedQuantityService;
+
 	@BeanReference(type = CommerceInventoryBookedQuantityPersistence.class)
-	protected CommerceInventoryBookedQuantityPersistence commerceInventoryBookedQuantityPersistence;
-	@BeanReference(type = CommerceInventoryBookedQuantityFinder.class)
-	protected CommerceInventoryBookedQuantityFinder commerceInventoryBookedQuantityFinder;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService commerceInventoryReplenishmentItemLocalService;
+	protected CommerceInventoryBookedQuantityPersistence
+		commerceInventoryBookedQuantityPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService.class
+	)
+	protected com.liferay.commerce.inventory.service.
+		CommerceInventoryReplenishmentItemLocalService
+			commerceInventoryReplenishmentItemLocalService;
+
 	@BeanReference(type = CommerceInventoryReplenishmentItemService.class)
-	protected CommerceInventoryReplenishmentItemService commerceInventoryReplenishmentItemService;
+	protected CommerceInventoryReplenishmentItemService
+		commerceInventoryReplenishmentItemService;
+
 	@BeanReference(type = CommerceInventoryReplenishmentItemPersistence.class)
-	protected CommerceInventoryReplenishmentItemPersistence commerceInventoryReplenishmentItemPersistence;
-	@BeanReference(type = CommerceInventoryReplenishmentItemFinder.class)
-	protected CommerceInventoryReplenishmentItemFinder commerceInventoryReplenishmentItemFinder;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService commerceInventoryWarehouseLocalService;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService commerceInventoryWarehouseService;
+	protected CommerceInventoryReplenishmentItemPersistence
+		commerceInventoryReplenishmentItemPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService.class
+	)
+	protected com.liferay.commerce.inventory.service.
+		CommerceInventoryWarehouseLocalService
+			commerceInventoryWarehouseLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService.class
+	)
+	protected
+		com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService
+			commerceInventoryWarehouseService;
+
 	@BeanReference(type = CommerceInventoryWarehousePersistence.class)
-	protected CommerceInventoryWarehousePersistence commerceInventoryWarehousePersistence;
+	protected CommerceInventoryWarehousePersistence
+		commerceInventoryWarehousePersistence;
+
 	@BeanReference(type = CommerceInventoryWarehouseFinder.class)
 	protected CommerceInventoryWarehouseFinder commerceInventoryWarehouseFinder;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelLocalService commerceInventoryWarehouseGroupRelLocalService;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseGroupRelService commerceInventoryWarehouseGroupRelService;
-	@BeanReference(type = CommerceInventoryWarehouseGroupRelPersistence.class)
-	protected CommerceInventoryWarehouseGroupRelPersistence commerceInventoryWarehouseGroupRelPersistence;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService commerceInventoryWarehouseItemLocalService;
-	@BeanReference(type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService.class)
-	protected com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService commerceInventoryWarehouseItemService;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService.class
+	)
+	protected com.liferay.commerce.inventory.service.
+		CommerceInventoryWarehouseItemLocalService
+			commerceInventoryWarehouseItemLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService.class
+	)
+	protected
+		com.liferay.commerce.inventory.service.
+			CommerceInventoryWarehouseItemService
+				commerceInventoryWarehouseItemService;
+
 	@BeanReference(type = CommerceInventoryWarehouseItemPersistence.class)
-	protected CommerceInventoryWarehouseItemPersistence commerceInventoryWarehouseItemPersistence;
+	protected CommerceInventoryWarehouseItemPersistence
+		commerceInventoryWarehouseItemPersistence;
+
 	@BeanReference(type = CommerceInventoryWarehouseItemFinder.class)
-	protected CommerceInventoryWarehouseItemFinder commerceInventoryWarehouseItemFinder;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+	protected CommerceInventoryWarehouseItemFinder
+		commerceInventoryWarehouseItemFinder;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

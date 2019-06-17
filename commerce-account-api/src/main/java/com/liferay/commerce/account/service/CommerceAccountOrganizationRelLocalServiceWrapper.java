@@ -343,6 +343,26 @@ public class CommerceAccountOrganizationRelLocalServiceWrapper
 			getCommerceAccountOrganizationRels(commerceAccountId, start, end);
 	}
 
+	@Override
+	public java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+			getCommerceAccountOrganizationRelsByOrganizationId(
+				long organizationId, int start, int end) {
+
+		return _commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRelsByOrganizationId(
+				organizationId, start, end);
+	}
+
+	@Override
+	public int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+		long organizationId) {
+
+		return _commerceAccountOrganizationRelLocalService.
+			getCommerceAccountOrganizationRelsByOrganizationIdCount(
+				organizationId);
+	}
+
 	/**
 	 * Returns the number of commerce account organization rels.
 	 *

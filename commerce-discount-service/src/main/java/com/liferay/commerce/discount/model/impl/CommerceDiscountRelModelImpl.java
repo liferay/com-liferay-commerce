@@ -39,6 +39,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,11 +79,11 @@ public class CommerceDiscountRelModelImpl
 	public static final String TABLE_NAME = "CommerceDiscountRel";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"commerceDiscountRelId", Types.BIGINT}, {"groupId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"commerceDiscountId", Types.BIGINT},
-		{"classNameId", Types.BIGINT}, {"classPK", Types.BIGINT}
+		{"commerceDiscountRelId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"commerceDiscountId", Types.BIGINT}, {"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -88,7 +91,6 @@ public class CommerceDiscountRelModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceDiscountRelId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -100,7 +102,7 @@ public class CommerceDiscountRelModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceDiscountRel (commerceDiscountRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,classNameId LONG,classPK LONG)";
+		"create table CommerceDiscountRel (commerceDiscountRelId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceDiscountId LONG,classNameId LONG,classPK LONG)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceDiscountRel";
@@ -156,7 +158,6 @@ public class CommerceDiscountRelModelImpl
 		CommerceDiscountRel model = new CommerceDiscountRelImpl();
 
 		model.setCommerceDiscountRelId(soapModel.getCommerceDiscountRelId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -284,6 +285,32 @@ public class CommerceDiscountRelModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceDiscountRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceDiscountRel.class.getClassLoader(),
+			CommerceDiscountRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceDiscountRel> constructor =
+				(Constructor<CommerceDiscountRel>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommerceDiscountRel, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommerceDiscountRel, Object>>
@@ -319,28 +346,6 @@ public class CommerceDiscountRelModelImpl
 
 					commerceDiscountRel.setCommerceDiscountRelId(
 						(Long)commerceDiscountRelId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceDiscountRel, Object>() {
-
-				@Override
-				public Object apply(CommerceDiscountRel commerceDiscountRel) {
-					return commerceDiscountRel.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceDiscountRel, Object>() {
-
-				@Override
-				public void accept(
-					CommerceDiscountRel commerceDiscountRel, Object groupId) {
-
-					commerceDiscountRel.setGroupId((Long)groupId);
 				}
 
 			});
@@ -545,17 +550,6 @@ public class CommerceDiscountRelModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -748,8 +742,12 @@ public class CommerceDiscountRelModelImpl
 	@Override
 	public CommerceDiscountRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceDiscountRel)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceDiscountRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -763,7 +761,6 @@ public class CommerceDiscountRelModelImpl
 
 		commerceDiscountRelImpl.setCommerceDiscountRelId(
 			getCommerceDiscountRelId());
-		commerceDiscountRelImpl.setGroupId(getGroupId());
 		commerceDiscountRelImpl.setCompanyId(getCompanyId());
 		commerceDiscountRelImpl.setUserId(getUserId());
 		commerceDiscountRelImpl.setUserName(getUserName());
@@ -862,8 +859,6 @@ public class CommerceDiscountRelModelImpl
 
 		commerceDiscountRelCacheModel.commerceDiscountRelId =
 			getCommerceDiscountRelId();
-
-		commerceDiscountRelCacheModel.groupId = getGroupId();
 
 		commerceDiscountRelCacheModel.companyId = getCompanyId();
 
@@ -968,14 +963,14 @@ public class CommerceDiscountRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceDiscountRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceDiscountRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceDiscountRel>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _commerceDiscountRelId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

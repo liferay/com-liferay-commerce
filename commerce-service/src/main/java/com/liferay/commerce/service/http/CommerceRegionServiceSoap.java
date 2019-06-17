@@ -183,6 +183,26 @@ public class CommerceRegionServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceRegionSoap[]
+			getCommerceRegions(
+				long companyId, String countryTwoLettersISOCode, boolean active)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceRegion>
+				returnValue = CommerceRegionServiceUtil.getCommerceRegions(
+					companyId, countryTwoLettersISOCode, active);
+
+			return com.liferay.commerce.model.CommerceRegionSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceRegionsCount(long commerceCountryId)
 		throws RemoteException {
 

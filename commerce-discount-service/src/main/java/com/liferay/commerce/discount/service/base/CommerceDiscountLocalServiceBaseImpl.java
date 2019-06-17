@@ -18,11 +18,11 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
+import com.liferay.commerce.discount.service.persistence.CommerceDiscountCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRelPersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRulePersistence;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountUsageEntryPersistence;
-import com.liferay.commerce.discount.service.persistence.CommerceDiscountUserSegmentRelPersistence;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Disjunction;
@@ -247,17 +246,18 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	 */
 	@Override
-	public CommerceDiscount fetchCommerceDiscountByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CommerceDiscount fetchCommerceDiscountByUuidAndCompanyId(
+		String uuid, long companyId) {
 
-		return commerceDiscountPersistence.fetchByUUID_G(uuid, groupId);
+		return commerceDiscountPersistence.fetchByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -359,29 +359,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 					Criterion modifiedDateCriterion =
 						portletDataContext.getDateRangeCriteria("modifiedDate");
 
-					if (modifiedDateCriterion != null) {
-						Conjunction conjunction =
-							RestrictionsFactoryUtil.conjunction();
-
-						conjunction.add(modifiedDateCriterion);
-
-						Disjunction disjunction =
-							RestrictionsFactoryUtil.disjunction();
-
-						disjunction.add(
-							RestrictionsFactoryUtil.gtProperty(
-								"modifiedDate", "lastPublishDate"));
-
-						Property lastPublishDateProperty =
-							PropertyFactoryUtil.forName("lastPublishDate");
-
-						disjunction.add(lastPublishDateProperty.isNull());
-
-						conjunction.add(disjunction);
-
-						modifiedDateCriterion = conjunction;
-					}
-
 					Criterion statusDateCriterion =
 						portletDataContext.getDateRangeCriteria("statusDate");
 
@@ -423,9 +400,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<CommerceDiscount>() {
 
@@ -464,52 +438,20 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId) {
-
-		return commerceDiscountPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce discounts
-	 * @param end the upper bound of the range of commerce discounts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator) {
-
-		return commerceDiscountPersistence.findByUuid_C(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount
 	 * @throws PortalException if a matching commerce discount could not be found
 	 */
 	@Override
-	public CommerceDiscount getCommerceDiscountByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommerceDiscount getCommerceDiscountByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException {
 
-		return commerceDiscountPersistence.findByUUID_G(uuid, groupId);
+		return commerceDiscountPersistence.findByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -590,6 +532,56 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 		CommerceDiscountPersistence commerceDiscountPersistence) {
 
 		this.commerceDiscountPersistence = commerceDiscountPersistence;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel local service.
+	 *
+	 * @return the commerce discount commerce account group rel local service
+	 */
+	public com.liferay.commerce.discount.service.
+		CommerceDiscountCommerceAccountGroupRelLocalService
+			getCommerceDiscountCommerceAccountGroupRelLocalService() {
+
+		return commerceDiscountCommerceAccountGroupRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce discount commerce account group rel local service.
+	 *
+	 * @param commerceDiscountCommerceAccountGroupRelLocalService the commerce discount commerce account group rel local service
+	 */
+	public void setCommerceDiscountCommerceAccountGroupRelLocalService(
+		com.liferay.commerce.discount.service.
+			CommerceDiscountCommerceAccountGroupRelLocalService
+				commerceDiscountCommerceAccountGroupRelLocalService) {
+
+		this.commerceDiscountCommerceAccountGroupRelLocalService =
+			commerceDiscountCommerceAccountGroupRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel persistence.
+	 *
+	 * @return the commerce discount commerce account group rel persistence
+	 */
+	public CommerceDiscountCommerceAccountGroupRelPersistence
+		getCommerceDiscountCommerceAccountGroupRelPersistence() {
+
+		return commerceDiscountCommerceAccountGroupRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce discount commerce account group rel persistence.
+	 *
+	 * @param commerceDiscountCommerceAccountGroupRelPersistence the commerce discount commerce account group rel persistence
+	 */
+	public void setCommerceDiscountCommerceAccountGroupRelPersistence(
+		CommerceDiscountCommerceAccountGroupRelPersistence
+			commerceDiscountCommerceAccountGroupRelPersistence) {
+
+		this.commerceDiscountCommerceAccountGroupRelPersistence =
+			commerceDiscountCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -731,56 +723,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 
 		this.commerceDiscountUsageEntryPersistence =
 			commerceDiscountUsageEntryPersistence;
-	}
-
-	/**
-	 * Returns the commerce discount user segment rel local service.
-	 *
-	 * @return the commerce discount user segment rel local service
-	 */
-	public com.liferay.commerce.discount.service.
-		CommerceDiscountUserSegmentRelLocalService
-			getCommerceDiscountUserSegmentRelLocalService() {
-
-		return commerceDiscountUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Sets the commerce discount user segment rel local service.
-	 *
-	 * @param commerceDiscountUserSegmentRelLocalService the commerce discount user segment rel local service
-	 */
-	public void setCommerceDiscountUserSegmentRelLocalService(
-		com.liferay.commerce.discount.service.
-			CommerceDiscountUserSegmentRelLocalService
-				commerceDiscountUserSegmentRelLocalService) {
-
-		this.commerceDiscountUserSegmentRelLocalService =
-			commerceDiscountUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Returns the commerce discount user segment rel persistence.
-	 *
-	 * @return the commerce discount user segment rel persistence
-	 */
-	public CommerceDiscountUserSegmentRelPersistence
-		getCommerceDiscountUserSegmentRelPersistence() {
-
-		return commerceDiscountUserSegmentRelPersistence;
-	}
-
-	/**
-	 * Sets the commerce discount user segment rel persistence.
-	 *
-	 * @param commerceDiscountUserSegmentRelPersistence the commerce discount user segment rel persistence
-	 */
-	public void setCommerceDiscountUserSegmentRelPersistence(
-		CommerceDiscountUserSegmentRelPersistence
-			commerceDiscountUserSegmentRelPersistence) {
-
-		this.commerceDiscountUserSegmentRelPersistence =
-			commerceDiscountUserSegmentRelPersistence;
 	}
 
 	/**
@@ -1061,6 +1003,19 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	protected CommerceDiscountPersistence commerceDiscountPersistence;
 
 	@BeanReference(
+		type = com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalService.class
+	)
+	protected com.liferay.commerce.discount.service.
+		CommerceDiscountCommerceAccountGroupRelLocalService
+			commerceDiscountCommerceAccountGroupRelLocalService;
+
+	@BeanReference(
+		type = CommerceDiscountCommerceAccountGroupRelPersistence.class
+	)
+	protected CommerceDiscountCommerceAccountGroupRelPersistence
+		commerceDiscountCommerceAccountGroupRelPersistence;
+
+	@BeanReference(
 		type = com.liferay.commerce.discount.service.CommerceDiscountRelLocalService.class
 	)
 	protected
@@ -1091,17 +1046,6 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	@BeanReference(type = CommerceDiscountUsageEntryPersistence.class)
 	protected CommerceDiscountUsageEntryPersistence
 		commerceDiscountUsageEntryPersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalService.class
-	)
-	protected com.liferay.commerce.discount.service.
-		CommerceDiscountUserSegmentRelLocalService
-			commerceDiscountUserSegmentRelLocalService;
-
-	@BeanReference(type = CommerceDiscountUserSegmentRelPersistence.class)
-	protected CommerceDiscountUserSegmentRelPersistence
-		commerceDiscountUserSegmentRelPersistence;
 
 	@ServiceReference(
 		type = com.liferay.counter.kernel.service.CounterLocalService.class

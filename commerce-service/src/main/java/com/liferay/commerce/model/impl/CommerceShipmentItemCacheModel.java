@@ -87,8 +87,8 @@ public class CommerceShipmentItemCacheModel
 		sb.append(commerceShipmentId);
 		sb.append(", commerceOrderItemId=");
 		sb.append(commerceOrderItemId);
-		sb.append(", commerceWarehouseId=");
-		sb.append(commerceWarehouseId);
+		sb.append(", commerceInventoryWarehouseId=");
+		sb.append(commerceInventoryWarehouseId);
 		sb.append(", quantity=");
 		sb.append(quantity);
 		sb.append("}");
@@ -130,7 +130,8 @@ public class CommerceShipmentItemCacheModel
 
 		commerceShipmentItemImpl.setCommerceShipmentId(commerceShipmentId);
 		commerceShipmentItemImpl.setCommerceOrderItemId(commerceOrderItemId);
-		commerceShipmentItemImpl.setCommerceWarehouseId(commerceWarehouseId);
+		commerceShipmentItemImpl.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceShipmentItemImpl.setQuantity(quantity);
 
 		commerceShipmentItemImpl.resetOriginalValues();
@@ -155,7 +156,7 @@ public class CommerceShipmentItemCacheModel
 
 		commerceOrderItemId = objectInput.readLong();
 
-		commerceWarehouseId = objectInput.readLong();
+		commerceInventoryWarehouseId = objectInput.readLong();
 
 		quantity = objectInput.readInt();
 	}
@@ -184,7 +185,7 @@ public class CommerceShipmentItemCacheModel
 
 		objectOutput.writeLong(commerceOrderItemId);
 
-		objectOutput.writeLong(commerceWarehouseId);
+		objectOutput.writeLong(commerceInventoryWarehouseId);
 
 		objectOutput.writeInt(quantity);
 	}
@@ -198,7 +199,7 @@ public class CommerceShipmentItemCacheModel
 	public long modifiedDate;
 	public long commerceShipmentId;
 	public long commerceOrderItemId;
-	public long commerceWarehouseId;
+	public long commerceInventoryWarehouseId;
 	public int quantity;
 
 }

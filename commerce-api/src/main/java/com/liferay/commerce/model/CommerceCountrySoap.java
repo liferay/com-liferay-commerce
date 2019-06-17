@@ -36,7 +36,6 @@ public class CommerceCountrySoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setCommerceCountryId(model.getCommerceCountryId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -125,14 +124,6 @@ public class CommerceCountrySoap implements Serializable {
 
 	public void setCommerceCountryId(long commerceCountryId) {
 		_commerceCountryId = commerceCountryId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -273,7 +264,6 @@ public class CommerceCountrySoap implements Serializable {
 
 	private String _uuid;
 	private long _commerceCountryId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

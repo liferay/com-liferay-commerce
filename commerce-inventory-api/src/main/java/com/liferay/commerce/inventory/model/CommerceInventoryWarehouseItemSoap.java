@@ -26,22 +26,26 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.inventory.service.http.CommerceInventoryWarehouseItemServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.inventory.service.http.CommerceInventoryWarehouseItemServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseItemSoap implements Serializable {
+
 	public static CommerceInventoryWarehouseItemSoap toSoapModel(
 		CommerceInventoryWarehouseItem model) {
-		CommerceInventoryWarehouseItemSoap soapModel = new CommerceInventoryWarehouseItemSoap();
 
-		soapModel.setCommerceInventoryWarehouseItemId(model.getCommerceInventoryWarehouseItemId());
+		CommerceInventoryWarehouseItemSoap soapModel =
+			new CommerceInventoryWarehouseItemSoap();
+
+		soapModel.setCommerceInventoryWarehouseItemId(
+			model.getCommerceInventoryWarehouseItemId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCommerceWarehouseId(model.getCommerceWarehouseId());
+		soapModel.setCommerceInventoryWarehouseId(
+			model.getCommerceInventoryWarehouseId());
 		soapModel.setSku(model.getSku());
 		soapModel.setQuantity(model.getQuantity());
 		soapModel.setReservedQuantity(model.getReservedQuantity());
@@ -51,7 +55,9 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseItemSoap[] toSoapModels(
 		CommerceInventoryWarehouseItem[] models) {
-		CommerceInventoryWarehouseItemSoap[] soapModels = new CommerceInventoryWarehouseItemSoap[models.length];
+
+		CommerceInventoryWarehouseItemSoap[] soapModels =
+			new CommerceInventoryWarehouseItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +68,12 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseItemSoap[][] toSoapModels(
 		CommerceInventoryWarehouseItem[][] models) {
+
 		CommerceInventoryWarehouseItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceInventoryWarehouseItemSoap[models.length][models[0].length];
+			soapModels = new CommerceInventoryWarehouseItemSoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceInventoryWarehouseItemSoap[0][0];
@@ -80,13 +88,16 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseItemSoap[] toSoapModels(
 		List<CommerceInventoryWarehouseItem> models) {
-		List<CommerceInventoryWarehouseItemSoap> soapModels = new ArrayList<CommerceInventoryWarehouseItemSoap>(models.size());
+
+		List<CommerceInventoryWarehouseItemSoap> soapModels =
+			new ArrayList<CommerceInventoryWarehouseItemSoap>(models.size());
 
 		for (CommerceInventoryWarehouseItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceInventoryWarehouseItemSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceInventoryWarehouseItemSoap[soapModels.size()]);
 	}
 
 	public CommerceInventoryWarehouseItemSoap() {
@@ -106,6 +117,7 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 
 	public void setCommerceInventoryWarehouseItemId(
 		long commerceInventoryWarehouseItemId) {
+
 		_commerceInventoryWarehouseItemId = commerceInventoryWarehouseItemId;
 	}
 
@@ -149,12 +161,14 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	public String getSku() {
@@ -187,8 +201,9 @@ public class CommerceInventoryWarehouseItemSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private String _sku;
 	private int _quantity;
 	private int _reservedQuantity;
+
 }

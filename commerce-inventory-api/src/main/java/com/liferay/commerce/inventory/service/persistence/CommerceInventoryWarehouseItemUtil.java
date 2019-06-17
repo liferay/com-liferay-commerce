@@ -17,20 +17,22 @@ package com.liferay.commerce.inventory.service.persistence;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
-
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
-
-import org.osgi.util.tracker.ServiceTracker;
+import java.io.Serializable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * The persistence utility for the commerce inventory warehouse item service. This utility wraps {@link com.liferay.commerce.inventory.service.persistence.impl.CommerceInventoryWarehouseItemPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the commerce inventory warehouse item service. This utility wraps <code>com.liferay.commerce.inventory.service.persistence.impl.CommerceInventoryWarehouseItemPersistenceImpl</code> and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -38,11 +40,11 @@ import java.util.List;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryWarehouseItemPersistence
- * @see com.liferay.commerce.inventory.service.persistence.impl.CommerceInventoryWarehouseItemPersistenceImpl
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseItemUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -61,6 +63,7 @@ public class CommerceInventoryWarehouseItemUtil {
 	 */
 	public static void clearCache(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		getPersistence().clearCache(commerceInventoryWarehouseItem);
 	}
 
@@ -72,10 +75,20 @@ public class CommerceInventoryWarehouseItemUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#fetchByPrimaryKeys(Set)
+	 */
+	public static Map<Serializable, CommerceInventoryWarehouseItem>
+		fetchByPrimaryKeys(Set<Serializable> primaryKeys) {
+
+		return getPersistence().fetchByPrimaryKeys(primaryKeys);
+	}
+
+	/**
 	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
 	public static List<CommerceInventoryWarehouseItem> findWithDynamicQuery(
 		DynamicQuery dynamicQuery) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -84,6 +97,7 @@ public class CommerceInventoryWarehouseItemUtil {
 	 */
 	public static List<CommerceInventoryWarehouseItem> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -93,9 +107,9 @@ public class CommerceInventoryWarehouseItemUtil {
 	public static List<CommerceInventoryWarehouseItem> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .findWithDynamicQuery(dynamicQuery, start, end,
-			orderByComparator);
+
+		return getPersistence().findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -103,6 +117,7 @@ public class CommerceInventoryWarehouseItemUtil {
 	 */
 	public static CommerceInventoryWarehouseItem update(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		return getPersistence().update(commerceInventoryWarehouseItem);
 	}
 
@@ -112,567 +127,626 @@ public class CommerceInventoryWarehouseItemUtil {
 	public static CommerceInventoryWarehouseItem update(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem,
 		ServiceContext serviceContext) {
-		return getPersistence()
-				   .update(commerceInventoryWarehouseItem, serviceContext);
+
+		return getPersistence().update(
+			commerceInventoryWarehouseItem, serviceContext);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @return the matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId) {
-		return getPersistence().findByCommerceWarehouseId(commerceWarehouseId);
+	 * Returns all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @return the matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(long commerceInventoryWarehouseId) {
+
+		return getPersistence().findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @return the range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end) {
-		return getPersistence()
-				   .findByCommerceWarehouseId(commerceWarehouseId, start, end);
+	 * Returns a range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @return the range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end) {
+
+		return getPersistence().findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .findByCommerceWarehouseId(commerceWarehouseId, start, end,
-			orderByComparator);
+	 * Returns an ordered range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		return getPersistence().findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouse items where commerceWarehouseId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findByCommerceWarehouseId(
-		long commerceWarehouseId, int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByCommerceWarehouseId(commerceWarehouseId, start, end,
-			orderByComparator, retrieveFromCache);
-	}
+	 * Returns an ordered range of all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem>
+		findByCommerceInventoryWarehouseId(
+			long commerceInventoryWarehouseId, int start, int end,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
+			boolean retrieveFromCache) {
 
-	/**
-	* Returns the first commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem findByCommerceWarehouseId_First(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence()
-				   .findByCommerceWarehouseId_First(commerceWarehouseId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the first commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem fetchByCommerceWarehouseId_First(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCommerceWarehouseId_First(commerceWarehouseId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem findByCommerceWarehouseId_Last(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence()
-				   .findByCommerceWarehouseId_Last(commerceWarehouseId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the last commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem fetchByCommerceWarehouseId_Last(
-		long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence()
-				   .fetchByCommerceWarehouseId_Last(commerceWarehouseId,
-			orderByComparator);
-	}
-
-	/**
-	* Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where commerceWarehouseId = &#63;.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the current commerce inventory warehouse item
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
-	*/
-	public static CommerceInventoryWarehouseItem[] findByCommerceWarehouseId_PrevAndNext(
-		long commerceInventoryWarehouseItemId, long commerceWarehouseId,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence()
-				   .findByCommerceWarehouseId_PrevAndNext(commerceInventoryWarehouseItemId,
-			commerceWarehouseId, orderByComparator);
-	}
-
-	/**
-	* Removes all the commerce inventory warehouse items where commerceWarehouseId = &#63; from the database.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	*/
-	public static void removeByCommerceWarehouseId(long commerceWarehouseId) {
-		getPersistence().removeByCommerceWarehouseId(commerceWarehouseId);
-	}
-
-	/**
-	* Returns the number of commerce inventory warehouse items where commerceWarehouseId = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @return the number of matching commerce inventory warehouse items
-	*/
-	public static int countByCommerceWarehouseId(long commerceWarehouseId) {
-		return getPersistence().countByCommerceWarehouseId(commerceWarehouseId);
-	}
-
-	/**
-	* Returns all the commerce inventory warehouse items where sku = &#63;.
-	*
-	* @param sku the sku
-	* @return the matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findBysku(String sku) {
-		return getPersistence().findBysku(sku);
-	}
-
-	/**
-	* Returns a range of all the commerce inventory warehouse items where sku = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param sku the sku
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @return the range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end) {
-		return getPersistence().findBysku(sku, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param sku the sku
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence().findBysku(sku, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param sku the sku
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findBysku(String sku,
-		int start, int end,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findBysku(sku, start, end, orderByComparator,
+		return getPersistence().findByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse item in the ordered set where sku = &#63;.
-	*
-	* @param sku the sku
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem findBysku_First(String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence().findBysku_First(sku, orderByComparator);
+	 * Returns the first commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem
+			findByCommerceInventoryWarehouseId_First(
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findByCommerceInventoryWarehouseId_First(
+			commerceInventoryWarehouseId, orderByComparator);
 	}
 
 	/**
-	* Returns the first commerce inventory warehouse item in the ordered set where sku = &#63;.
-	*
-	* @param sku the sku
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem fetchBysku_First(String sku,
+	 * Returns the first commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem
+		fetchByCommerceInventoryWarehouseId_First(
+			long commerceInventoryWarehouseId,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		return getPersistence().fetchByCommerceInventoryWarehouseId_First(
+			commerceInventoryWarehouseId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem
+			findByCommerceInventoryWarehouseId_Last(
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findByCommerceInventoryWarehouseId_Last(
+			commerceInventoryWarehouseId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem
+		fetchByCommerceInventoryWarehouseId_Last(
+			long commerceInventoryWarehouseId,
+			OrderByComparator<CommerceInventoryWarehouseItem>
+				orderByComparator) {
+
+		return getPersistence().fetchByCommerceInventoryWarehouseId_Last(
+			commerceInventoryWarehouseId, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the current commerce inventory warehouse item
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
+	 */
+	public static CommerceInventoryWarehouseItem[]
+			findByCommerceInventoryWarehouseId_PrevAndNext(
+				long commerceInventoryWarehouseItemId,
+				long commerceInventoryWarehouseId,
+				OrderByComparator<CommerceInventoryWarehouseItem>
+					orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findByCommerceInventoryWarehouseId_PrevAndNext(
+			commerceInventoryWarehouseItemId, commerceInventoryWarehouseId,
+			orderByComparator);
+	}
+
+	/**
+	 * Removes all the commerce inventory warehouse items where commerceInventoryWarehouseId = &#63; from the database.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 */
+	public static void removeByCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		getPersistence().removeByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouse items where commerceInventoryWarehouseId = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @return the number of matching commerce inventory warehouse items
+	 */
+	public static int countByCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		return getPersistence().countByCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
+	}
+
+	/**
+	 * Returns all the commerce inventory warehouse items where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @return the matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findBySku(String sku) {
+		return getPersistence().findBySku(sku);
+	}
+
+	/**
+	 * Returns a range of all the commerce inventory warehouse items where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @return the range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end) {
+
+		return getPersistence().findBySku(sku, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence().fetchBysku_First(sku, orderByComparator);
+
+		return getPersistence().findBySku(sku, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse item in the ordered set where sku = &#63;.
-	*
-	* @param sku the sku
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem findBysku_Last(String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence().findBysku_Last(sku, orderByComparator);
+	 * Returns an ordered range of all the commerce inventory warehouse items where sku = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sku the sku
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findBySku(
+		String sku, int start, int end,
+		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findBySku(
+			sku, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Returns the last commerce inventory warehouse item in the ordered set where sku = &#63;.
-	*
-	* @param sku the sku
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
-	public static CommerceInventoryWarehouseItem fetchBysku_Last(String sku,
+	 * Returns the first commerce inventory warehouse item in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem findBySku_First(
+			String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findBySku_First(sku, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce inventory warehouse item in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem fetchBySku_First(
+		String sku,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
-		return getPersistence().fetchBysku_Last(sku, orderByComparator);
+
+		return getPersistence().fetchBySku_First(sku, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where sku = &#63;.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the current commerce inventory warehouse item
-	* @param sku the sku
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
-	*/
-	public static CommerceInventoryWarehouseItem[] findBysku_PrevAndNext(
-		long commerceInventoryWarehouseItemId, String sku,
-		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence()
-				   .findBysku_PrevAndNext(commerceInventoryWarehouseItemId,
-			sku, orderByComparator);
+	 * Returns the last commerce inventory warehouse item in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem findBySku_Last(
+			String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findBySku_Last(sku, orderByComparator);
 	}
 
 	/**
-	* Removes all the commerce inventory warehouse items where sku = &#63; from the database.
-	*
-	* @param sku the sku
-	*/
-	public static void removeBysku(String sku) {
-		getPersistence().removeBysku(sku);
+	 * Returns the last commerce inventory warehouse item in the ordered set where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public static CommerceInventoryWarehouseItem fetchBySku_Last(
+		String sku,
+		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
+
+		return getPersistence().fetchBySku_Last(sku, orderByComparator);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouse items where sku = &#63;.
-	*
-	* @param sku the sku
-	* @return the number of matching commerce inventory warehouse items
-	*/
-	public static int countBysku(String sku) {
-		return getPersistence().countBysku(sku);
+	 * Returns the commerce inventory warehouse items before and after the current commerce inventory warehouse item in the ordered set where sku = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the current commerce inventory warehouse item
+	 * @param sku the sku
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
+	 */
+	public static CommerceInventoryWarehouseItem[] findBySku_PrevAndNext(
+			long commerceInventoryWarehouseItemId, String sku,
+			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findBySku_PrevAndNext(
+			commerceInventoryWarehouseItemId, sku, orderByComparator);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or throws a {@link NoSuchInventoryWarehouseItemException} if it could not be found.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param sku the sku
-	* @return the matching commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
-	*/
+	 * Removes all the commerce inventory warehouse items where sku = &#63; from the database.
+	 *
+	 * @param sku the sku
+	 */
+	public static void removeBySku(String sku) {
+		getPersistence().removeBySku(sku);
+	}
+
+	/**
+	 * Returns the number of commerce inventory warehouse items where sku = &#63;.
+	 *
+	 * @param sku the sku
+	 * @return the number of matching commerce inventory warehouse items
+	 */
+	public static int countBySku(String sku) {
+		return getPersistence().countBySku(sku);
+	}
+
+	/**
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or throws a <code>NoSuchInventoryWarehouseItemException</code> if it could not be found.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param sku the sku
+	 * @return the matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
 	public static CommerceInventoryWarehouseItem findByC_S(
-		long commerceWarehouseId, String sku)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence().findByC_S(commerceWarehouseId, sku);
+			long commerceInventoryWarehouseId, String sku)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findByC_S(commerceInventoryWarehouseId, sku);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param sku the sku
-	* @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param sku the sku
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
 	public static CommerceInventoryWarehouseItem fetchByC_S(
-		long commerceWarehouseId, String sku) {
-		return getPersistence().fetchByC_S(commerceWarehouseId, sku);
+		long commerceInventoryWarehouseId, String sku) {
+
+		return getPersistence().fetchByC_S(commerceInventoryWarehouseId, sku);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param sku the sku
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
-	*/
+	 * Returns the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param sku the sku
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
 	public static CommerceInventoryWarehouseItem fetchByC_S(
-		long commerceWarehouseId, String sku, boolean retrieveFromCache) {
-		return getPersistence()
-				   .fetchByC_S(commerceWarehouseId, sku, retrieveFromCache);
+		long commerceInventoryWarehouseId, String sku,
+		boolean retrieveFromCache) {
+
+		return getPersistence().fetchByC_S(
+			commerceInventoryWarehouseId, sku, retrieveFromCache);
 	}
 
 	/**
-	* Removes the commerce inventory warehouse item where commerceWarehouseId = &#63; and sku = &#63; from the database.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param sku the sku
-	* @return the commerce inventory warehouse item that was removed
-	*/
+	 * Removes the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; from the database.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param sku the sku
+	 * @return the commerce inventory warehouse item that was removed
+	 */
 	public static CommerceInventoryWarehouseItem removeByC_S(
-		long commerceWarehouseId, String sku)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence().removeByC_S(commerceWarehouseId, sku);
+			long commerceInventoryWarehouseId, String sku)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().removeByC_S(commerceInventoryWarehouseId, sku);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouse items where commerceWarehouseId = &#63; and sku = &#63;.
-	*
-	* @param commerceWarehouseId the commerce warehouse ID
-	* @param sku the sku
-	* @return the number of matching commerce inventory warehouse items
-	*/
-	public static int countByC_S(long commerceWarehouseId, String sku) {
-		return getPersistence().countByC_S(commerceWarehouseId, sku);
+	 * Returns the number of commerce inventory warehouse items where commerceInventoryWarehouseId = &#63; and sku = &#63;.
+	 *
+	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
+	 * @param sku the sku
+	 * @return the number of matching commerce inventory warehouse items
+	 */
+	public static int countByC_S(
+		long commerceInventoryWarehouseId, String sku) {
+
+		return getPersistence().countByC_S(commerceInventoryWarehouseId, sku);
 	}
 
 	/**
-	* Caches the commerce inventory warehouse item in the entity cache if it is enabled.
-	*
-	* @param commerceInventoryWarehouseItem the commerce inventory warehouse item
-	*/
+	 * Caches the commerce inventory warehouse item in the entity cache if it is enabled.
+	 *
+	 * @param commerceInventoryWarehouseItem the commerce inventory warehouse item
+	 */
 	public static void cacheResult(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		getPersistence().cacheResult(commerceInventoryWarehouseItem);
 	}
 
 	/**
-	* Caches the commerce inventory warehouse items in the entity cache if it is enabled.
-	*
-	* @param commerceInventoryWarehouseItems the commerce inventory warehouse items
-	*/
+	 * Caches the commerce inventory warehouse items in the entity cache if it is enabled.
+	 *
+	 * @param commerceInventoryWarehouseItems the commerce inventory warehouse items
+	 */
 	public static void cacheResult(
 		List<CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems) {
+
 		getPersistence().cacheResult(commerceInventoryWarehouseItems);
 	}
 
 	/**
-	* Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key for the new commerce inventory warehouse item
-	* @return the new commerce inventory warehouse item
-	*/
+	 * Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key for the new commerce inventory warehouse item
+	 * @return the new commerce inventory warehouse item
+	 */
 	public static CommerceInventoryWarehouseItem create(
 		long commerceInventoryWarehouseItemId) {
+
 		return getPersistence().create(commerceInventoryWarehouseItemId);
 	}
 
 	/**
-	* Removes the commerce inventory warehouse item with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item that was removed
-	* @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
-	*/
+	 * Removes the commerce inventory warehouse item with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item that was removed
+	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
+	 */
 	public static CommerceInventoryWarehouseItem remove(
-		long commerceInventoryWarehouseItemId)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
+			long commerceInventoryWarehouseItemId)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
 		return getPersistence().remove(commerceInventoryWarehouseItemId);
 	}
 
 	public static CommerceInventoryWarehouseItem updateImpl(
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+
 		return getPersistence().updateImpl(commerceInventoryWarehouseItem);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item with the primary key or throws a {@link NoSuchInventoryWarehouseItemException} if it could not be found.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item
-	* @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
-	*/
+	 * Returns the commerce inventory warehouse item with the primary key or throws a <code>NoSuchInventoryWarehouseItemException</code> if it could not be found.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a commerce inventory warehouse item with the primary key could not be found
+	 */
 	public static CommerceInventoryWarehouseItem findByPrimaryKey(
-		long commerceInventoryWarehouseItemId)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return getPersistence()
-				   .findByPrimaryKey(commerceInventoryWarehouseItemId);
+			long commerceInventoryWarehouseItemId)
+		throws com.liferay.commerce.inventory.exception.
+			NoSuchInventoryWarehouseItemException {
+
+		return getPersistence().findByPrimaryKey(
+			commerceInventoryWarehouseItemId);
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item with the primary key or returns <code>null</code> if it could not be found.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item, or <code>null</code> if a commerce inventory warehouse item with the primary key could not be found
-	*/
+	 * Returns the commerce inventory warehouse item with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item, or <code>null</code> if a commerce inventory warehouse item with the primary key could not be found
+	 */
 	public static CommerceInventoryWarehouseItem fetchByPrimaryKey(
 		long commerceInventoryWarehouseItemId) {
-		return getPersistence()
-				   .fetchByPrimaryKey(commerceInventoryWarehouseItemId);
-	}
 
-	public static java.util.Map<java.io.Serializable, CommerceInventoryWarehouseItem> fetchByPrimaryKeys(
-		java.util.Set<java.io.Serializable> primaryKeys) {
-		return getPersistence().fetchByPrimaryKeys(primaryKeys);
+		return getPersistence().fetchByPrimaryKey(
+			commerceInventoryWarehouseItemId);
 	}
 
 	/**
-	* Returns all the commerce inventory warehouse items.
-	*
-	* @return the commerce inventory warehouse items
-	*/
+	 * Returns all the commerce inventory warehouse items.
+	 *
+	 * @return the commerce inventory warehouse items
+	 */
 	public static List<CommerceInventoryWarehouseItem> findAll() {
 		return getPersistence().findAll();
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouse items.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @return the range of commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findAll(int start,
-		int end) {
+	 * Returns a range of all the commerce inventory warehouse items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @return the range of commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findAll(
+		int start, int end) {
+
 		return getPersistence().findAll(start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouse items.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findAll(int start,
-		int end,
+	 * Returns an ordered range of all the commerce inventory warehouse items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator) {
+
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the commerce inventory warehouse items.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of commerce inventory warehouse items
-	*/
-	public static List<CommerceInventoryWarehouseItem> findAll(int start,
-		int end,
+	 * Returns an ordered range of all the commerce inventory warehouse items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of commerce inventory warehouse items
+	 */
+	public static List<CommerceInventoryWarehouseItem> findAll(
+		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
 		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findAll(start, end, orderByComparator, retrieveFromCache);
+
+		return getPersistence().findAll(
+			start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	* Removes all the commerce inventory warehouse items from the database.
-	*/
+	 * Removes all the commerce inventory warehouse items from the database.
+	 */
 	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouse items.
-	*
-	* @return the number of commerce inventory warehouse items
-	*/
+	 * Returns the number of commerce inventory warehouse items.
+	 *
+	 * @return the number of commerce inventory warehouse items
+	 */
 	public static int countAll() {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<String> getBadColumnNames() {
+	public static Set<String> getBadColumnNames() {
 		return getPersistence().getBadColumnNames();
 	}
 
@@ -680,17 +754,26 @@ public class CommerceInventoryWarehouseItemUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceInventoryWarehouseItemPersistence, CommerceInventoryWarehouseItemPersistence> _serviceTracker;
+	private static ServiceTracker
+		<CommerceInventoryWarehouseItemPersistence,
+		 CommerceInventoryWarehouseItemPersistence> _serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceInventoryWarehouseItemPersistence.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceInventoryWarehouseItemPersistence.class);
 
-		ServiceTracker<CommerceInventoryWarehouseItemPersistence, CommerceInventoryWarehouseItemPersistence> serviceTracker =
-			new ServiceTracker<CommerceInventoryWarehouseItemPersistence, CommerceInventoryWarehouseItemPersistence>(bundle.getBundleContext(),
-				CommerceInventoryWarehouseItemPersistence.class, null);
+		ServiceTracker
+			<CommerceInventoryWarehouseItemPersistence,
+			 CommerceInventoryWarehouseItemPersistence> serviceTracker =
+				new ServiceTracker
+					<CommerceInventoryWarehouseItemPersistence,
+					 CommerceInventoryWarehouseItemPersistence>(
+						 bundle.getBundleContext(),
+						 CommerceInventoryWarehouseItemPersistence.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

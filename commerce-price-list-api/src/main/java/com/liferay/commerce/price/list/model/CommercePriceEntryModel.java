@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -43,7 +43,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommercePriceEntryModel
-	extends BaseModel<CommercePriceEntry>, ShardedModel, StagedGroupedModel {
+	extends BaseModel<CommercePriceEntry>, ShardedModel, StagedAuditedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -110,22 +110,6 @@ public interface CommercePriceEntryModel
 	 * @param commercePriceEntryId the commerce price entry ID of this commerce price entry
 	 */
 	public void setCommercePriceEntryId(long commercePriceEntryId);
-
-	/**
-	 * Returns the group ID of this commerce price entry.
-	 *
-	 * @return the group ID of this commerce price entry
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce price entry.
-	 *
-	 * @param groupId the group ID of this commerce price entry
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce price entry.
@@ -321,7 +305,6 @@ public interface CommercePriceEntryModel
 	 *
 	 * @return the last publish date of this commerce price entry
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -329,7 +312,6 @@ public interface CommercePriceEntryModel
 	 *
 	 * @param lastPublishDate the last publish date of this commerce price entry
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override

@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -313,6 +316,32 @@ public class CPDefinitionInventoryModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPDefinitionInventory>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinitionInventory.class.getClassLoader(),
+			CPDefinitionInventory.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinitionInventory> constructor =
+				(Constructor<CPDefinitionInventory>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPDefinitionInventory, Object>>
@@ -1172,8 +1201,12 @@ public class CPDefinitionInventoryModelImpl
 	@Override
 	public CPDefinitionInventory toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPDefinitionInventory)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPDefinitionInventory>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1469,11 +1502,12 @@ public class CPDefinitionInventoryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinitionInventory.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinitionInventory.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPDefinitionInventory>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;

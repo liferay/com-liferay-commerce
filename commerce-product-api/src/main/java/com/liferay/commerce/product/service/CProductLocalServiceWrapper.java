@@ -50,12 +50,12 @@ public class CProductLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CProduct addCProduct(
-			String externalReferenceCode,
+			long groupId, long userId, String externalReferenceCode,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cProductLocalService.addCProduct(
-			externalReferenceCode, serviceContext);
+			groupId, userId, externalReferenceCode, serviceContext);
 	}
 
 	/**

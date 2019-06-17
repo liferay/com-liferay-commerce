@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -47,7 +46,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import org.junit.After;
@@ -128,8 +126,6 @@ public class CommerceDiscountPersistenceTest {
 
 		newCommerceDiscount.setUuid(RandomTestUtil.randomString());
 
-		newCommerceDiscount.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceDiscount.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceDiscount.setUserId(RandomTestUtil.nextLong());
@@ -197,9 +193,6 @@ public class CommerceDiscountPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceDiscount.getCommerceDiscountId(),
 			newCommerceDiscount.getCommerceDiscountId());
-		Assert.assertEquals(
-			existingCommerceDiscount.getGroupId(),
-			newCommerceDiscount.getGroupId());
 		Assert.assertEquals(
 			existingCommerceDiscount.getCompanyId(),
 			newCommerceDiscount.getCompanyId());
@@ -292,15 +285,6 @@ public class CommerceDiscountPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByUuid_C() throws Exception {
 		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
 
@@ -310,19 +294,19 @@ public class CommerceDiscountPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
-	public void testCountByG_C() throws Exception {
-		_persistence.countByG_C(RandomTestUtil.nextLong(), "");
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByG_C(0L, "null");
+		_persistence.countByC_C(0L, "null");
 
-		_persistence.countByG_C(0L, (String)null);
+		_persistence.countByC_C(0L, (String)null);
 	}
 
 	@Test
@@ -364,24 +348,18 @@ public class CommerceDiscountPersistenceTest {
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	@Test
-	public void testFilterFindByGroupId() throws Exception {
-		_persistence.filterFindByGroupId(
-			0, QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
-	}
-
 	protected OrderByComparator<CommerceDiscount> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"CommerceDiscount", "uuid", true, "commerceDiscountId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "title", true,
-			"target", true, "useCouponCode", true, "couponCode", true,
-			"usePercentage", true, "maximumDiscountAmount", true, "level1",
-			true, "level2", true, "level3", true, "level4", true,
-			"limitationType", true, "limitationTimes", true, "numberOfUse",
-			true, "active", true, "displayDate", true, "expirationDate", true,
-			"lastPublishDate", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "title", true, "target", true,
+			"useCouponCode", true, "couponCode", true, "usePercentage", true,
+			"maximumDiscountAmount", true, "level1", true, "level2", true,
+			"level3", true, "level4", true, "limitationType", true,
+			"limitationTimes", true, "numberOfUse", true, "active", true,
+			"displayDate", true, "expirationDate", true, "lastPublishDate",
+			true, "status", true, "statusByUserId", true, "statusByUserName",
+			true, "statusDate", true);
 	}
 
 	@Test
@@ -601,36 +579,12 @@ public class CommerceDiscountPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
-	@Test
-	public void testResetOriginalValues() throws Exception {
-		CommerceDiscount newCommerceDiscount = addCommerceDiscount();
-
-		_persistence.clearCache();
-
-		CommerceDiscount existingCommerceDiscount =
-			_persistence.findByPrimaryKey(newCommerceDiscount.getPrimaryKey());
-
-		Assert.assertTrue(
-			Objects.equals(
-				existingCommerceDiscount.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommerceDiscount, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(
-			Long.valueOf(existingCommerceDiscount.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommerceDiscount, "getOriginalGroupId",
-				new Class<?>[0]));
-	}
-
 	protected CommerceDiscount addCommerceDiscount() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceDiscount commerceDiscount = _persistence.create(pk);
 
 		commerceDiscount.setUuid(RandomTestUtil.randomString());
-
-		commerceDiscount.setGroupId(RandomTestUtil.nextLong());
 
 		commerceDiscount.setCompanyId(RandomTestUtil.nextLong());
 

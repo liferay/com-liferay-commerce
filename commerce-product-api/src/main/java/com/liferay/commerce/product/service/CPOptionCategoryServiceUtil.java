@@ -65,33 +65,6 @@ public class CPOptionCategoryServiceUtil {
 		return getService().fetchCPOptionCategory(cpOptionCategoryId);
 	}
 
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPOptionCategory>
-				getCPOptionCategories(long groupId, int start, int end)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPOptionCategories(groupId, start, end);
-	}
-
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPOptionCategory>
-				getCPOptionCategories(
-					long groupId, int start, int end,
-					com.liferay.portal.kernel.util.OrderByComparator
-						<com.liferay.commerce.product.model.CPOptionCategory>
-							orderByComparator)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPOptionCategories(
-			groupId, start, end, orderByComparator);
-	}
-
-	public static int getCPOptionCategoriesCount(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPOptionCategoriesCount(groupId);
-	}
-
 	public static com.liferay.commerce.product.model.CPOptionCategory
 			getCPOptionCategory(long cpOptionCategoryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -106,6 +79,17 @@ public class CPOptionCategoryServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPOptionCategory>
+				searchCPOptionCategories(
+					long companyId, String keywords, int start, int end,
+					com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().searchCPOptionCategories(
+			companyId, keywords, start, end, sort);
 	}
 
 	public static com.liferay.commerce.product.model.CPOptionCategory

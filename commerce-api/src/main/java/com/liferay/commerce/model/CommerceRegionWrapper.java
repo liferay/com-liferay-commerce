@@ -61,7 +61,6 @@ public class CommerceRegionWrapper
 
 		attributes.put("uuid", getUuid());
 		attributes.put("commerceRegionId", getCommerceRegionId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -89,12 +88,6 @@ public class CommerceRegionWrapper
 
 		if (commerceRegionId != null) {
 			setCommerceRegionId(commerceRegionId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -245,16 +238,6 @@ public class CommerceRegionWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceRegion.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this commerce region.
-	 *
-	 * @return the group ID of this commerce region
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceRegion.getGroupId();
 	}
 
 	/**
@@ -467,16 +450,6 @@ public class CommerceRegionWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceRegion.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this commerce region.
-	 *
-	 * @param groupId the group ID of this commerce region
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceRegion.setGroupId(groupId);
 	}
 
 	/**

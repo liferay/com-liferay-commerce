@@ -32,28 +32,35 @@ import com.liferay.portal.kernel.transaction.Transactional;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryReplenishmentItemServiceUtil
- * @see com.liferay.commerce.inventory.service.base.CommerceInventoryReplenishmentItemServiceBaseImpl
- * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=commerce", "json.web.service.context.path=CommerceInventoryReplenishmentItem"}, service = CommerceInventoryReplenishmentItemService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=commerce",
+		"json.web.service.context.path=CommerceInventoryReplenishmentItem"
+	},
+	service = CommerceInventoryReplenishmentItemService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface CommerceInventoryReplenishmentItemService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryReplenishmentItemServiceUtil} to access the commerce inventory replenishment item remote service. Add custom service methods to {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryReplenishmentItemServiceUtil} to access the commerce inventory replenishment item remote service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public String getOSGiServiceIdentifier();
+
 }

@@ -95,6 +95,16 @@ public class CommerceOrderItemServiceWrapper
 	}
 
 	@Override
+	public int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemService.
+			getCommerceInventoryWarehouseItemQuantity(
+				commerceOrderItemId, commerceInventoryWarehouseId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem getCommerceOrderItem(
 			long commerceOrderItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -126,15 +136,6 @@ public class CommerceOrderItemServiceWrapper
 
 		return _commerceOrderItemService.getCommerceOrderItemsQuantity(
 			commerceOrderId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceOrderItemService.getCommerceWarehouseItemQuantity(
-			commerceOrderItemId, commerceWarehouseId);
 	}
 
 	/**
@@ -194,15 +195,18 @@ public class CommerceOrderItemServiceWrapper
 	}
 
 	@Override
-	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItemInfo(
-		long commerceOrderItemId, String deliveryGroup, long shippingAddressId,
-		String printedNote, int requestedDeliveryDateMonth,
-		int requestedDeliveryDateDay, int requestedDeliveryDateYear,
-		int requestedDeliveryDateHour, int requestedDeliveryDateMinute,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemInfo(
+				long commerceOrderItemId, String deliveryGroup,
+				long shippingAddressId, String printedNote,
+				int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
+				int requestedDeliveryDateYear, int requestedDeliveryDateHour,
+				int requestedDeliveryDateMinute,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceOrderItemService.updateCommerceOrderItemInfo(commerceOrderItemId,
-			deliveryGroup, shippingAddressId, printedNote,
+
+		return _commerceOrderItemService.updateCommerceOrderItemInfo(
+			commerceOrderItemId, deliveryGroup, shippingAddressId, printedNote,
 			requestedDeliveryDateMonth, requestedDeliveryDateDay,
 			requestedDeliveryDateYear, requestedDeliveryDateHour,
 			requestedDeliveryDateMinute, serviceContext);

@@ -70,7 +70,7 @@ public class CommerceCurrencyServiceSoap {
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap
 			addCommerceCurrency(
-				String code, String[] nameMapLanguageIds,
+				long userId, String code, String[] nameMapLanguageIds,
 				String[] nameMapValues, java.math.BigDecimal rate,
 				String[] formatPatternMapLanguageIds,
 				String[] formatPatternMapValues, int maxFractionDigits,
@@ -88,9 +88,9 @@ public class CommerceCurrencyServiceSoap {
 
 			com.liferay.commerce.currency.model.CommerceCurrency returnValue =
 				CommerceCurrencyServiceUtil.addCommerceCurrency(
-					code, nameMap, rate, formatPatternMap, maxFractionDigits,
-					minFractionDigits, roundingMode, primary, priority, active,
-					serviceContext);
+					userId, code, nameMap, rate, formatPatternMap,
+					maxFractionDigits, minFractionDigits, roundingMode, primary,
+					priority, active, serviceContext);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.
 				toSoapModel(returnValue);
@@ -117,13 +117,13 @@ public class CommerceCurrencyServiceSoap {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap
-			fetchPrimaryCommerceCurrency(long groupId)
+			fetchPrimaryCommerceCurrency(long companyId)
 		throws RemoteException {
 
 		try {
 			com.liferay.commerce.currency.model.CommerceCurrency returnValue =
 				CommerceCurrencyServiceUtil.fetchPrimaryCommerceCurrency(
-					groupId);
+					companyId);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.
 				toSoapModel(returnValue);
@@ -137,7 +137,7 @@ public class CommerceCurrencyServiceSoap {
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap[]
 			getCommerceCurrencies(
-				long groupId, boolean active, int start, int end,
+				long companyId, boolean active, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.currency.model.CommerceCurrency>
 						orderByComparator)
@@ -146,7 +146,7 @@ public class CommerceCurrencyServiceSoap {
 		try {
 			java.util.List<com.liferay.commerce.currency.model.CommerceCurrency>
 				returnValue = CommerceCurrencyServiceUtil.getCommerceCurrencies(
-					groupId, active, start, end, orderByComparator);
+					companyId, active, start, end, orderByComparator);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.
 				toSoapModels(returnValue);
@@ -160,7 +160,7 @@ public class CommerceCurrencyServiceSoap {
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap[]
 			getCommerceCurrencies(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.currency.model.CommerceCurrency>
 						orderByComparator)
@@ -169,7 +169,7 @@ public class CommerceCurrencyServiceSoap {
 		try {
 			java.util.List<com.liferay.commerce.currency.model.CommerceCurrency>
 				returnValue = CommerceCurrencyServiceUtil.getCommerceCurrencies(
-					groupId, start, end, orderByComparator);
+					companyId, start, end, orderByComparator);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.
 				toSoapModels(returnValue);
@@ -181,12 +181,13 @@ public class CommerceCurrencyServiceSoap {
 		}
 	}
 
-	public static int getCommerceCurrenciesCount(long groupId)
+	public static int getCommerceCurrenciesCount(long companyId)
 		throws RemoteException {
 
 		try {
 			int returnValue =
-				CommerceCurrencyServiceUtil.getCommerceCurrenciesCount(groupId);
+				CommerceCurrencyServiceUtil.getCommerceCurrenciesCount(
+					companyId);
 
 			return returnValue;
 		}
@@ -197,13 +198,13 @@ public class CommerceCurrencyServiceSoap {
 		}
 	}
 
-	public static int getCommerceCurrenciesCount(long groupId, boolean active)
+	public static int getCommerceCurrenciesCount(long companyId, boolean active)
 		throws RemoteException {
 
 		try {
 			int returnValue =
 				CommerceCurrencyServiceUtil.getCommerceCurrenciesCount(
-					groupId, active);
+					companyId, active);
 
 			return returnValue;
 		}
@@ -234,12 +235,13 @@ public class CommerceCurrencyServiceSoap {
 	}
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap
-			getCommerceCurrency(long groupId, String code)
+			getCommerceCurrency(long companyId, String code)
 		throws RemoteException {
 
 		try {
 			com.liferay.commerce.currency.model.CommerceCurrency returnValue =
-				CommerceCurrencyServiceUtil.getCommerceCurrency(groupId, code);
+				CommerceCurrencyServiceUtil.getCommerceCurrency(
+					companyId, code);
 
 			return com.liferay.commerce.currency.model.CommerceCurrencySoap.
 				toSoapModel(returnValue);
@@ -338,12 +340,9 @@ public class CommerceCurrencyServiceSoap {
 		}
 	}
 
-	public static void updateExchangeRates(
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-
+	public static void updateExchangeRates() throws RemoteException {
 		try {
-			CommerceCurrencyServiceUtil.updateExchangeRates(serviceContext);
+			CommerceCurrencyServiceUtil.updateExchangeRates();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

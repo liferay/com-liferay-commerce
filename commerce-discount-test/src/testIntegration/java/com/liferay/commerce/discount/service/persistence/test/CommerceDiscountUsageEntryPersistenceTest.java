@@ -127,8 +127,6 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 		CommerceDiscountUsageEntry newCommerceDiscountUsageEntry =
 			_persistence.create(pk);
 
-		newCommerceDiscountUsageEntry.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceDiscountUsageEntry.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceDiscountUsageEntry.setUserId(RandomTestUtil.nextLong());
@@ -162,9 +160,6 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 				getCommerceDiscountUsageEntryId(),
 			newCommerceDiscountUsageEntry.getCommerceDiscountUsageEntryId());
 		Assert.assertEquals(
-			existingCommerceDiscountUsageEntry.getGroupId(),
-			newCommerceDiscountUsageEntry.getGroupId());
-		Assert.assertEquals(
 			existingCommerceDiscountUsageEntry.getCompanyId(),
 			newCommerceDiscountUsageEntry.getCompanyId());
 		Assert.assertEquals(
@@ -192,13 +187,6 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceDiscountUsageEntry.getCommerceDiscountId(),
 			newCommerceDiscountUsageEntry.getCommerceDiscountId());
-	}
-
-	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countByGroupId(0L);
 	}
 
 	@Test
@@ -232,9 +220,9 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 
 		return OrderByComparatorFactoryUtil.create(
 			"CommerceDiscountUsageEntry", "commerceDiscountUsageEntryId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "commerceAccountId",
-			true, "commerceOrderId", true, "commerceDiscountId", true);
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commerceAccountId", true,
+			"commerceOrderId", true, "commerceDiscountId", true);
 	}
 
 	@Test
@@ -489,8 +477,6 @@ public class CommerceDiscountUsageEntryPersistenceTest {
 
 		CommerceDiscountUsageEntry commerceDiscountUsageEntry =
 			_persistence.create(pk);
-
-		commerceDiscountUsageEntry.setGroupId(RandomTestUtil.nextLong());
 
 		commerceDiscountUsageEntry.setCompanyId(RandomTestUtil.nextLong());
 

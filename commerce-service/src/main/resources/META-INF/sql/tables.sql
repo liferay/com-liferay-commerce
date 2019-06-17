@@ -1,7 +1,6 @@
 create table CPDAvailabilityEstimate (
 	uuid_ VARCHAR(75) null,
 	CPDAvailabilityEstimateId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -76,7 +75,6 @@ create table CommerceAddressRestriction (
 create table CommerceAvailabilityEstimate (
 	uuid_ VARCHAR(75) null,
 	commerceAvailabilityEstimateId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -90,7 +88,6 @@ create table CommerceAvailabilityEstimate (
 create table CommerceCountry (
 	uuid_ VARCHAR(75) null,
 	commerceCountryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -123,9 +120,9 @@ create table CommerceOrder (
 	billingAddressId LONG,
 	shippingAddressId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
-	transactionId VARCHAR(75) null,
+	transactionId TEXT null,
 	commerceShippingMethodId LONG,
-	shippingOptionName VARCHAR(75) null,
+	shippingOptionName VARCHAR(255) null,
 	purchaseOrderNumber VARCHAR(75) null,
 	couponCode VARCHAR(75) null,
 	lastPriceUpdateDate DATE null,
@@ -173,7 +170,7 @@ create table CommerceOrderItem (
 	CPInstanceId LONG,
 	quantity INTEGER,
 	shippedQuantity INTEGER,
-	json VARCHAR(75) null,
+	json TEXT null,
 	name STRING null,
 	sku VARCHAR(75) null,
 	unitPrice DECIMAL(30, 16) null,
@@ -187,7 +184,8 @@ create table CommerceOrderItem (
 	deliveryGroup VARCHAR(75) null,
 	shippingAddressId LONG,
 	printedNote VARCHAR(75) null,
-	requestedDeliveryDate DATE null
+	requestedDeliveryDate DATE null,
+	bookedQuantityId LONG
 );
 
 create table CommerceOrderNote (
@@ -200,7 +198,7 @@ create table CommerceOrderNote (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceOrderId LONG,
-	content VARCHAR(75) null,
+	content STRING null,
 	restricted BOOLEAN
 );
 
@@ -214,14 +212,13 @@ create table CommerceOrderPayment (
 	modifiedDate DATE null,
 	commerceOrderId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
-	content VARCHAR(75) null,
+	content TEXT null,
 	status INTEGER
 );
 
 create table CommerceRegion (
 	uuid_ VARCHAR(75) null,
 	commerceRegionId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -264,7 +261,7 @@ create table CommerceShipmentItem (
 	modifiedDate DATE null,
 	commerceShipmentId LONG,
 	commerceOrderItemId LONG,
-	commerceWarehouseId LONG,
+	commerceInventoryWarehouseId LONG,
 	quantity INTEGER
 );
 
@@ -298,7 +295,7 @@ create table CommerceSubscriptionEntry (
 	commerceOrderItemId LONG,
 	subscriptionLength INTEGER,
 	subscriptionType VARCHAR(75) null,
-	subscriptionTypeSettings VARCHAR(75) null,
+	subscriptionTypeSettings TEXT null,
 	currentCycle LONG,
 	maxSubscriptionCycles LONG,
 	subscriptionStatus INTEGER,

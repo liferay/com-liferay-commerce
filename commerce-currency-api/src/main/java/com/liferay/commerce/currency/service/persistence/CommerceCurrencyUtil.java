@@ -291,69 +291,6 @@ public class CommerceCurrencyUtil {
 	}
 
 	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCurrencyException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency findByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByUUID_G(String uuid, long groupId) {
-		return getPersistence().fetchByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce currency where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
-	}
-
-	/**
-	 * Removes the commerce currency where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce currency that was removed
-	 */
-	public static CommerceCurrency removeByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().removeByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the number of commerce currencies where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce currencies
-	 */
-	public static int countByUUID_G(String uuid, long groupId) {
-		return getPersistence().countByUUID_G(uuid, groupId);
-	}
-
-	/**
 	 * Returns all the commerce currencies where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
@@ -540,296 +477,301 @@ public class CommerceCurrencyUtil {
 	}
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
+	public static List<CommerceCurrency> findByCompanyId(long companyId) {
+		return getPersistence().findByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @return the range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByGroupId(
-		long groupId, int start, int end) {
+	public static List<CommerceCurrency> findByCompanyId(
+		long companyId, int start, int end) {
 
-		return getPersistence().findByGroupId(groupId, start, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CommerceCurrency> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CommerceCurrency> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency findByGroupId_First(
-			long groupId, OrderByComparator<CommerceCurrency> orderByComparator)
+	public static CommerceCurrency findByCompanyId_First(
+			long companyId,
+			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByGroupId_First(
-		long groupId, OrderByComparator<CommerceCurrency> orderByComparator) {
+	public static CommerceCurrency fetchByCompanyId_First(
+		long companyId, OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_First(
-			groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency findByGroupId_Last(
-			long groupId, OrderByComparator<CommerceCurrency> orderByComparator)
+	public static CommerceCurrency findByCompanyId_Last(
+			long companyId,
+			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByGroupId_Last(
-		long groupId, OrderByComparator<CommerceCurrency> orderByComparator) {
+	public static CommerceCurrency fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce currency
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
-	public static CommerceCurrency[] findByGroupId_PrevAndNext(
-			long commerceCurrencyId, long groupId,
+	public static CommerceCurrency[] findByCompanyId_PrevAndNext(
+			long commerceCurrencyId, long companyId,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByGroupId_PrevAndNext(
-			commerceCurrencyId, groupId, orderByComparator);
+		return getPersistence().findByCompanyId_PrevAndNext(
+			commerceCurrencyId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce currencies
 	 */
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or throws a <code>NoSuchCurrencyException</code> if it could not be found.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or throws a <code>NoSuchCurrencyException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency findByG_C(long groupId, String code)
+	public static CommerceCurrency findByC_C(long companyId, String code)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByG_C(groupId, code);
+		return getPersistence().findByC_C(companyId, code);
 	}
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByG_C(long groupId, String code) {
-		return getPersistence().fetchByG_C(groupId, code);
+	public static CommerceCurrency fetchByC_C(long companyId, String code) {
+		return getPersistence().fetchByC_C(companyId, code);
 	}
 
 	/**
-	 * Returns the commerce currency where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce currency where companyId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByG_C(
-		long groupId, String code, boolean retrieveFromCache) {
+	public static CommerceCurrency fetchByC_C(
+		long companyId, String code, boolean retrieveFromCache) {
 
-		return getPersistence().fetchByG_C(groupId, code, retrieveFromCache);
+		return getPersistence().fetchByC_C(companyId, code, retrieveFromCache);
 	}
 
 	/**
-	 * Removes the commerce currency where groupId = &#63; and code = &#63; from the database.
+	 * Removes the commerce currency where companyId = &#63; and code = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the commerce currency that was removed
 	 */
-	public static CommerceCurrency removeByG_C(long groupId, String code)
+	public static CommerceCurrency removeByC_C(long companyId, String code)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().removeByG_C(groupId, code);
+		return getPersistence().removeByC_C(companyId, code);
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and code = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and code = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param code the code
 	 * @return the number of matching commerce currencies
 	 */
-	public static int countByG_C(long groupId, String code) {
-		return getPersistence().countByG_C(groupId, code);
+	public static int countByC_C(long companyId, String code) {
+		return getPersistence().countByC_C(companyId, code);
 	}
 
 	/**
-	 * Returns all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @return the matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByG_P(
-		long groupId, boolean primary) {
+	public static List<CommerceCurrency> findByC_P(
+		long companyId, boolean primary) {
 
-		return getPersistence().findByG_P(groupId, primary);
+		return getPersistence().findByC_P(companyId, primary);
 	}
 
 	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns a range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @return the range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByG_P(
-		long groupId, boolean primary, int start, int end) {
+	public static List<CommerceCurrency> findByC_P(
+		long companyId, boolean primary, int start, int end) {
 
-		return getPersistence().findByG_P(groupId, primary, start, end);
+		return getPersistence().findByC_P(companyId, primary, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByG_P(
-		long groupId, boolean primary, int start, int end,
+	public static List<CommerceCurrency> findByC_P(
+		long companyId, boolean primary, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().findByG_P(
-			groupId, primary, start, end, orderByComparator);
+		return getPersistence().findByC_P(
+			companyId, primary, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63;.
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
@@ -837,511 +779,513 @@ public class CommerceCurrencyUtil {
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
-	public static List<CommerceCurrency> findByG_P(
-		long groupId, boolean primary, int start, int end,
+	public static List<CommerceCurrency> findByC_P(
+		long companyId, boolean primary, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_P(
-			groupId, primary, start, end, orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency findByG_P_First(
-			long groupId, boolean primary,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_P_First(
-			groupId, primary, orderByComparator);
-	}
-
-	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByG_P_First(
-		long groupId, boolean primary,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().fetchByG_P_First(
-			groupId, primary, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency findByG_P_Last(
-			long groupId, boolean primary,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_P_Last(
-			groupId, primary, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByG_P_Last(
-		long groupId, boolean primary,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().fetchByG_P_Last(
-			groupId, primary, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce currency
-	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
-	 */
-	public static CommerceCurrency[] findByG_P_PrevAndNext(
-			long commerceCurrencyId, long groupId, boolean primary,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_P_PrevAndNext(
-			commerceCurrencyId, groupId, primary, orderByComparator);
-	}
-
-	/**
-	 * Removes all the commerce currencies where groupId = &#63; and primary = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 */
-	public static void removeByG_P(long groupId, boolean primary) {
-		getPersistence().removeByG_P(groupId, primary);
-	}
-
-	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and primary = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @return the number of matching commerce currencies
-	 */
-	public static int countByG_P(long groupId, boolean primary) {
-		return getPersistence().countByG_P(groupId, primary);
-	}
-
-	/**
-	 * Returns all the commerce currencies where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @return the matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_A(
-		long groupId, boolean active) {
-
-		return getPersistence().findByG_A(groupId, active);
-	}
-
-	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @return the range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_A(
-		long groupId, boolean active, int start, int end) {
-
-		return getPersistence().findByG_A(groupId, active, start, end);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_A(
-		long groupId, boolean active, int start, int end,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().findByG_A(
-			groupId, active, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_A(
-		long groupId, boolean active, int start, int end,
-		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
-
-		return getPersistence().findByG_A(
-			groupId, active, start, end, orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency findByG_A_First(
-			long groupId, boolean active,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_A_First(
-			groupId, active, orderByComparator);
-	}
-
-	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByG_A_First(
-		long groupId, boolean active,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().fetchByG_A_First(
-			groupId, active, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce currency
-	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency findByG_A_Last(
-			long groupId, boolean active,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_A_Last(
-			groupId, active, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
-	 */
-	public static CommerceCurrency fetchByG_A_Last(
-		long groupId, boolean active,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().fetchByG_A_Last(
-			groupId, active, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and active = &#63;.
-	 *
-	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce currency
-	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
-	 */
-	public static CommerceCurrency[] findByG_A_PrevAndNext(
-			long commerceCurrencyId, long groupId, boolean active,
-			OrderByComparator<CommerceCurrency> orderByComparator)
-		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
-
-		return getPersistence().findByG_A_PrevAndNext(
-			commerceCurrencyId, groupId, active, orderByComparator);
-	}
-
-	/**
-	 * Removes all the commerce currencies where groupId = &#63; and active = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 */
-	public static void removeByG_A(long groupId, boolean active) {
-		getPersistence().removeByG_A(groupId, active);
-	}
-
-	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param active the active
-	 * @return the number of matching commerce currencies
-	 */
-	public static int countByG_A(long groupId, boolean active) {
-		return getPersistence().countByG_A(groupId, active);
-	}
-
-	/**
-	 * Returns all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param active the active
-	 * @return the matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_P_A(
-		long groupId, boolean primary, boolean active) {
-
-		return getPersistence().findByG_P_A(groupId, primary, active);
-	}
-
-	/**
-	 * Returns a range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @return the range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_P_A(
-		long groupId, boolean primary, boolean active, int start, int end) {
-
-		return getPersistence().findByG_P_A(
-			groupId, primary, active, start, end);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_P_A(
-		long groupId, boolean primary, boolean active, int start, int end,
-		OrderByComparator<CommerceCurrency> orderByComparator) {
-
-		return getPersistence().findByG_P_A(
-			groupId, primary, active, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param primary the primary
-	 * @param active the active
-	 * @param start the lower bound of the range of commerce currencies
-	 * @param end the upper bound of the range of commerce currencies (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce currencies
-	 */
-	public static List<CommerceCurrency> findByG_P_A(
-		long groupId, boolean primary, boolean active, int start, int end,
-		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
-
-		return getPersistence().findByG_P_A(
-			groupId, primary, active, start, end, orderByComparator,
+		return getPersistence().findByC_P(
+			companyId, primary, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce currency
+	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency findByC_P_First(
+			long companyId, boolean primary,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_P_First(
+			companyId, primary, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency fetchByC_P_First(
+		long companyId, boolean primary,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().fetchByC_P_First(
+			companyId, primary, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce currency
+	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency findByC_P_Last(
+			long companyId, boolean primary,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_P_Last(
+			companyId, primary, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency fetchByC_P_Last(
+		long companyId, boolean primary,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().fetchByC_P_Last(
+			companyId, primary, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
+	 *
+	 * @param commerceCurrencyId the primary key of the current commerce currency
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce currency
+	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
+	 */
+	public static CommerceCurrency[] findByC_P_PrevAndNext(
+			long commerceCurrencyId, long companyId, boolean primary,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_P_PrevAndNext(
+			commerceCurrencyId, companyId, primary, orderByComparator);
+	}
+
+	/**
+	 * Removes all the commerce currencies where companyId = &#63; and primary = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 */
+	public static void removeByC_P(long companyId, boolean primary) {
+		getPersistence().removeByC_P(companyId, primary);
+	}
+
+	/**
+	 * Returns the number of commerce currencies where companyId = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @return the number of matching commerce currencies
+	 */
+	public static int countByC_P(long companyId, boolean primary) {
+		return getPersistence().countByC_P(companyId, primary);
+	}
+
+	/**
+	 * Returns all the commerce currencies where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @return the matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_A(
+		long companyId, boolean active) {
+
+		return getPersistence().findByC_A(companyId, active);
+	}
+
+	/**
+	 * Returns a range of all the commerce currencies where companyId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @return the range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_A(
+		long companyId, boolean active, int start, int end) {
+
+		return getPersistence().findByC_A(companyId, active, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_A(
+		long companyId, boolean active, int start, int end,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().findByC_A(
+			companyId, active, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_A(
+		long companyId, boolean active, int start, int end,
+		OrderByComparator<CommerceCurrency> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByC_A(
+			companyId, active, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce currency
+	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency findByC_A_First(
+			long companyId, boolean active,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_A_First(
+			companyId, active, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency fetchByC_A_First(
+		long companyId, boolean active,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().fetchByC_A_First(
+			companyId, active, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce currency
+	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency findByC_A_Last(
+			long companyId, boolean active,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_A_Last(
+			companyId, active, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
+	 */
+	public static CommerceCurrency fetchByC_A_Last(
+		long companyId, boolean active,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().fetchByC_A_Last(
+			companyId, active, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and active = &#63;.
+	 *
+	 * @param commerceCurrencyId the primary key of the current commerce currency
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce currency
+	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
+	 */
+	public static CommerceCurrency[] findByC_A_PrevAndNext(
+			long commerceCurrencyId, long companyId, boolean active,
+			OrderByComparator<CommerceCurrency> orderByComparator)
+		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
+
+		return getPersistence().findByC_A_PrevAndNext(
+			commerceCurrencyId, companyId, active, orderByComparator);
+	}
+
+	/**
+	 * Removes all the commerce currencies where companyId = &#63; and active = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 */
+	public static void removeByC_A(long companyId, boolean active) {
+		getPersistence().removeByC_A(companyId, active);
+	}
+
+	/**
+	 * Returns the number of commerce currencies where companyId = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param active the active
+	 * @return the number of matching commerce currencies
+	 */
+	public static int countByC_A(long companyId, boolean active) {
+		return getPersistence().countByC_A(companyId, active);
+	}
+
+	/**
+	 * Returns all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param active the active
+	 * @return the matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_P_A(
+		long companyId, boolean primary, boolean active) {
+
+		return getPersistence().findByC_P_A(companyId, primary, active);
+	}
+
+	/**
+	 * Returns a range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @return the range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_P_A(
+		long companyId, boolean primary, boolean active, int start, int end) {
+
+		return getPersistence().findByC_P_A(
+			companyId, primary, active, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_P_A(
+		long companyId, boolean primary, boolean active, int start, int end,
+		OrderByComparator<CommerceCurrency> orderByComparator) {
+
+		return getPersistence().findByC_P_A(
+			companyId, primary, active, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCurrencyModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param primary the primary
+	 * @param active the active
+	 * @param start the lower bound of the range of commerce currencies
+	 * @param end the upper bound of the range of commerce currencies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce currencies
+	 */
+	public static List<CommerceCurrency> findByC_P_A(
+		long companyId, boolean primary, boolean active, int start, int end,
+		OrderByComparator<CommerceCurrency> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByC_P_A(
+			companyId, primary, active, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
+	 *
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency findByG_P_A_First(
-			long groupId, boolean primary, boolean active,
+	public static CommerceCurrency findByC_P_A_First(
+			long companyId, boolean primary, boolean active,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByG_P_A_First(
-			groupId, primary, active, orderByComparator);
+		return getPersistence().findByC_P_A_First(
+			companyId, primary, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByG_P_A_First(
-		long groupId, boolean primary, boolean active,
+	public static CommerceCurrency fetchByC_P_A_First(
+		long companyId, boolean primary, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().fetchByG_P_A_First(
-			groupId, primary, active, orderByComparator);
+		return getPersistence().fetchByC_P_A_First(
+			companyId, primary, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency
 	 * @throws NoSuchCurrencyException if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency findByG_P_A_Last(
-			long groupId, boolean primary, boolean active,
+	public static CommerceCurrency findByC_P_A_Last(
+			long companyId, boolean primary, boolean active,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByG_P_A_Last(
-			groupId, primary, active, orderByComparator);
+		return getPersistence().findByC_P_A_Last(
+			companyId, primary, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the last commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
-	public static CommerceCurrency fetchByG_P_A_Last(
-		long groupId, boolean primary, boolean active,
+	public static CommerceCurrency fetchByC_P_A_Last(
+		long companyId, boolean primary, boolean active,
 		OrderByComparator<CommerceCurrency> orderByComparator) {
 
-		return getPersistence().fetchByG_P_A_Last(
-			groupId, primary, active, orderByComparator);
+		return getPersistence().fetchByC_P_A_Last(
+			companyId, primary, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the commerce currencies before and after the current commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
 	 * @param commerceCurrencyId the primary key of the current commerce currency
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce currency
 	 * @throws NoSuchCurrencyException if a commerce currency with the primary key could not be found
 	 */
-	public static CommerceCurrency[] findByG_P_A_PrevAndNext(
-			long commerceCurrencyId, long groupId, boolean primary,
+	public static CommerceCurrency[] findByC_P_A_PrevAndNext(
+			long commerceCurrencyId, long companyId, boolean primary,
 			boolean active,
 			OrderByComparator<CommerceCurrency> orderByComparator)
 		throws com.liferay.commerce.currency.exception.NoSuchCurrencyException {
 
-		return getPersistence().findByG_P_A_PrevAndNext(
-			commerceCurrencyId, groupId, primary, active, orderByComparator);
+		return getPersistence().findByC_P_A_PrevAndNext(
+			commerceCurrencyId, companyId, primary, active, orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce currencies where groupId = &#63; and primary = &#63; and active = &#63; from the database.
+	 * Removes all the commerce currencies where companyId = &#63; and primary = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 */
-	public static void removeByG_P_A(
-		long groupId, boolean primary, boolean active) {
+	public static void removeByC_P_A(
+		long companyId, boolean primary, boolean active) {
 
-		getPersistence().removeByG_P_A(groupId, primary, active);
+		getPersistence().removeByC_P_A(companyId, primary, active);
 	}
 
 	/**
-	 * Returns the number of commerce currencies where groupId = &#63; and primary = &#63; and active = &#63;.
+	 * Returns the number of commerce currencies where companyId = &#63; and primary = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param active the active
 	 * @return the number of matching commerce currencies
 	 */
-	public static int countByG_P_A(
-		long groupId, boolean primary, boolean active) {
+	public static int countByC_P_A(
+		long companyId, boolean primary, boolean active) {
 
-		return getPersistence().countByG_P_A(groupId, primary, active);
+		return getPersistence().countByC_P_A(companyId, primary, active);
 	}
 
 	/**

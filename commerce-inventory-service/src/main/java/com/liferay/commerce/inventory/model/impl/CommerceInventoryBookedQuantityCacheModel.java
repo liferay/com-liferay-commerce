@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceInventoryBookedQuantity in entity cache.
  *
  * @author Luca Pellizzon
- * @see CommerceInventoryBookedQuantity
  * @generated
  */
 @ProviderType
-public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<CommerceInventoryBookedQuantity>,
-	Externalizable {
+public class CommerceInventoryBookedQuantityCacheModel
+	implements CacheModel<CommerceInventoryBookedQuantity>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 			return false;
 		}
 
-		CommerceInventoryBookedQuantityCacheModel commerceInventoryBookedQuantityCacheModel =
-			(CommerceInventoryBookedQuantityCacheModel)obj;
+		CommerceInventoryBookedQuantityCacheModel
+			commerceInventoryBookedQuantityCacheModel =
+				(CommerceInventoryBookedQuantityCacheModel)obj;
 
-		if (commerceInventoryBookedQuantityId == commerceInventoryBookedQuantityCacheModel.commerceInventoryBookedQuantityId) {
+		if (commerceInventoryBookedQuantityId ==
+				commerceInventoryBookedQuantityCacheModel.
+					commerceInventoryBookedQuantityId) {
+
 			return true;
 		}
 
@@ -84,8 +87,8 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		sb.append(sku);
 		sb.append(", quantity=");
 		sb.append(quantity);
-		sb.append(", expireDate=");
-		sb.append(expireDate);
+		sb.append(", expirationDate=");
+		sb.append(expirationDate);
 		sb.append(", bookedNote=");
 		sb.append(bookedNote);
 		sb.append("}");
@@ -95,9 +98,13 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 
 	@Override
 	public CommerceInventoryBookedQuantity toEntityModel() {
-		CommerceInventoryBookedQuantityImpl commerceInventoryBookedQuantityImpl = new CommerceInventoryBookedQuantityImpl();
+		CommerceInventoryBookedQuantityImpl
+			commerceInventoryBookedQuantityImpl =
+				new CommerceInventoryBookedQuantityImpl();
 
-		commerceInventoryBookedQuantityImpl.setCommerceInventoryBookedQuantityId(commerceInventoryBookedQuantityId);
+		commerceInventoryBookedQuantityImpl.
+			setCommerceInventoryBookedQuantityId(
+				commerceInventoryBookedQuantityId);
 		commerceInventoryBookedQuantityImpl.setCompanyId(companyId);
 		commerceInventoryBookedQuantityImpl.setUserId(userId);
 
@@ -112,16 +119,16 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 			commerceInventoryBookedQuantityImpl.setCreateDate(null);
 		}
 		else {
-			commerceInventoryBookedQuantityImpl.setCreateDate(new Date(
-					createDate));
+			commerceInventoryBookedQuantityImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceInventoryBookedQuantityImpl.setModifiedDate(null);
 		}
 		else {
-			commerceInventoryBookedQuantityImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceInventoryBookedQuantityImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (sku == null) {
@@ -133,12 +140,12 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 
 		commerceInventoryBookedQuantityImpl.setQuantity(quantity);
 
-		if (expireDate == Long.MIN_VALUE) {
-			commerceInventoryBookedQuantityImpl.setExpireDate(null);
+		if (expirationDate == Long.MIN_VALUE) {
+			commerceInventoryBookedQuantityImpl.setExpirationDate(null);
 		}
 		else {
-			commerceInventoryBookedQuantityImpl.setExpireDate(new Date(
-					expireDate));
+			commerceInventoryBookedQuantityImpl.setExpirationDate(
+				new Date(expirationDate));
 		}
 
 		if (bookedNote == null) {
@@ -166,13 +173,12 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		sku = objectInput.readUTF();
 
 		quantity = objectInput.readInt();
-		expireDate = objectInput.readLong();
+		expirationDate = objectInput.readLong();
 		bookedNote = objectInput.readUTF();
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceInventoryBookedQuantityId);
 
 		objectOutput.writeLong(companyId);
@@ -197,7 +203,7 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 		}
 
 		objectOutput.writeInt(quantity);
-		objectOutput.writeLong(expireDate);
+		objectOutput.writeLong(expirationDate);
 
 		if (bookedNote == null) {
 			objectOutput.writeUTF("");
@@ -215,6 +221,7 @@ public class CommerceInventoryBookedQuantityCacheModel implements CacheModel<Com
 	public long modifiedDate;
 	public String sku;
 	public int quantity;
-	public long expireDate;
+	public long expirationDate;
 	public String bookedNote;
+
 }

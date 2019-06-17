@@ -28,20 +28,25 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceInventoryReplenishmentItemServiceWrapper
 	implements CommerceInventoryReplenishmentItemService,
-		ServiceWrapper<CommerceInventoryReplenishmentItemService> {
+			   ServiceWrapper<CommerceInventoryReplenishmentItemService> {
+
 	public CommerceInventoryReplenishmentItemServiceWrapper(
-		CommerceInventoryReplenishmentItemService commerceInventoryReplenishmentItemService) {
-		_commerceInventoryReplenishmentItemService = commerceInventoryReplenishmentItemService;
+		CommerceInventoryReplenishmentItemService
+			commerceInventoryReplenishmentItemService) {
+
+		_commerceInventoryReplenishmentItemService =
+			commerceInventoryReplenishmentItemService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceInventoryReplenishmentItemService.getOSGiServiceIdentifier();
+		return _commerceInventoryReplenishmentItemService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
@@ -51,9 +56,14 @@ public class CommerceInventoryReplenishmentItemServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceInventoryReplenishmentItemService commerceInventoryReplenishmentItemService) {
-		_commerceInventoryReplenishmentItemService = commerceInventoryReplenishmentItemService;
+		CommerceInventoryReplenishmentItemService
+			commerceInventoryReplenishmentItemService) {
+
+		_commerceInventoryReplenishmentItemService =
+			commerceInventoryReplenishmentItemService;
 	}
 
-	private CommerceInventoryReplenishmentItemService _commerceInventoryReplenishmentItemService;
+	private CommerceInventoryReplenishmentItemService
+		_commerceInventoryReplenishmentItemService;
+
 }

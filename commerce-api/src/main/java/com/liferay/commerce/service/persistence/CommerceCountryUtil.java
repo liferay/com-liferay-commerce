@@ -291,69 +291,6 @@ public class CommerceCountryUtil {
 	}
 
 	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce country
-	 * @throws NoSuchCountryException if a matching commerce country could not be found
-	 */
-	public static CommerceCountry findByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.exception.NoSuchCountryException {
-
-		return getPersistence().findByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	public static CommerceCountry fetchByUUID_G(String uuid, long groupId) {
-		return getPersistence().fetchByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	public static CommerceCountry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
-	}
-
-	/**
-	 * Removes the commerce country where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce country that was removed
-	 */
-	public static CommerceCountry removeByUUID_G(String uuid, long groupId)
-		throws com.liferay.commerce.exception.NoSuchCountryException {
-
-		return getPersistence().removeByUUID_G(uuid, groupId);
-	}
-
-	/**
-	 * Returns the number of commerce countries where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce countries
-	 */
-	public static int countByUUID_G(String uuid, long groupId) {
-		return getPersistence().countByUUID_G(uuid, groupId);
-	}
-
-	/**
 	 * Returns all the commerce countries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
@@ -540,365 +477,373 @@ public class CommerceCountryUtil {
 	}
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63;.
+	 * Returns all the commerce countries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce countries
 	 */
-	public static List<CommerceCountry> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
+	public static List<CommerceCountry> findByCompanyId(long companyId) {
+		return getPersistence().findByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end) {
+	public static List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end) {
 
-		return getPersistence().findByGroupId(groupId, start, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end,
+	public static List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByCompanyId(
+			companyId, start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByGroupId_First(
-			long groupId, OrderByComparator<CommerceCountry> orderByComparator)
+	public static CommerceCountry findByCompanyId_First(
+			long companyId,
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByGroupId_First(
-		long groupId, OrderByComparator<CommerceCountry> orderByComparator) {
+	public static CommerceCountry fetchByCompanyId_First(
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_First(
-			groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_First(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByGroupId_Last(
-			long groupId, OrderByComparator<CommerceCountry> orderByComparator)
+	public static CommerceCountry findByCompanyId_Last(
+			long companyId,
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().findByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByGroupId_Last(
-		long groupId, OrderByComparator<CommerceCountry> orderByComparator) {
+	public static CommerceCountry fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+		return getPersistence().fetchByCompanyId_Last(
+			companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
-	public static CommerceCountry[] findByGroupId_PrevAndNext(
-			long commerceCountryId, long groupId,
+	public static CommerceCountry[] findByCompanyId_PrevAndNext(
+			long commerceCountryId, long companyId,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByGroupId_PrevAndNext(
-			commerceCountryId, groupId, orderByComparator);
+		return getPersistence().findByCompanyId_PrevAndNext(
+			commerceCountryId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
+	public static void removeByCompanyId(long companyId) {
+		getPersistence().removeByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
+	public static int countByCompanyId(long companyId) {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_Tw(
-			long groupId, String twoLettersISOCode)
+	public static CommerceCountry findByC_Tw(
+			long companyId, String twoLettersISOCode)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_Tw(groupId, twoLettersISOCode);
+		return getPersistence().findByC_Tw(companyId, twoLettersISOCode);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_Tw(
-		long groupId, String twoLettersISOCode) {
+	public static CommerceCountry fetchByC_Tw(
+		long companyId, String twoLettersISOCode) {
 
-		return getPersistence().fetchByG_Tw(groupId, twoLettersISOCode);
+		return getPersistence().fetchByC_Tw(companyId, twoLettersISOCode);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_Tw(
-		long groupId, String twoLettersISOCode, boolean retrieveFromCache) {
+	public static CommerceCountry fetchByC_Tw(
+		long companyId, String twoLettersISOCode, boolean retrieveFromCache) {
 
-		return getPersistence().fetchByG_Tw(
-			groupId, twoLettersISOCode, retrieveFromCache);
+		return getPersistence().fetchByC_Tw(
+			companyId, twoLettersISOCode, retrieveFromCache);
 	}
 
 	/**
-	 * Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
+	 * Removes the commerce country where companyId = &#63; and twoLettersISOCode = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the commerce country that was removed
 	 */
-	public static CommerceCountry removeByG_Tw(
-			long groupId, String twoLettersISOCode)
+	public static CommerceCountry removeByC_Tw(
+			long companyId, String twoLettersISOCode)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().removeByG_Tw(groupId, twoLettersISOCode);
+		return getPersistence().removeByC_Tw(companyId, twoLettersISOCode);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and twoLettersISOCode = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByG_Tw(long groupId, String twoLettersISOCode) {
-		return getPersistence().countByG_Tw(groupId, twoLettersISOCode);
+	public static int countByC_Tw(long companyId, String twoLettersISOCode) {
+		return getPersistence().countByC_Tw(companyId, twoLettersISOCode);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_N(long groupId, int numericISOCode)
+	public static CommerceCountry findByC_N(long companyId, int numericISOCode)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_N(groupId, numericISOCode);
+		return getPersistence().findByC_N(companyId, numericISOCode);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_N(long groupId, int numericISOCode) {
-		return getPersistence().fetchByG_N(groupId, numericISOCode);
+	public static CommerceCountry fetchByC_N(
+		long companyId, int numericISOCode) {
+
+		return getPersistence().fetchByC_N(companyId, numericISOCode);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_N(
-		long groupId, int numericISOCode, boolean retrieveFromCache) {
+	public static CommerceCountry fetchByC_N(
+		long companyId, int numericISOCode, boolean retrieveFromCache) {
 
-		return getPersistence().fetchByG_N(
-			groupId, numericISOCode, retrieveFromCache);
+		return getPersistence().fetchByC_N(
+			companyId, numericISOCode, retrieveFromCache);
 	}
 
 	/**
-	 * Removes the commerce country where groupId = &#63; and numericISOCode = &#63; from the database.
+	 * Removes the commerce country where companyId = &#63; and numericISOCode = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the commerce country that was removed
 	 */
-	public static CommerceCountry removeByG_N(long groupId, int numericISOCode)
+	public static CommerceCountry removeByC_N(
+			long companyId, int numericISOCode)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().removeByG_N(groupId, numericISOCode);
+		return getPersistence().removeByC_N(companyId, numericISOCode);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and numericISOCode = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and numericISOCode = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByG_N(long groupId, int numericISOCode) {
-		return getPersistence().countByG_N(groupId, numericISOCode);
+	public static int countByC_N(long companyId, int numericISOCode) {
+		return getPersistence().countByC_N(companyId, numericISOCode);
 	}
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_A(
-		long groupId, boolean active) {
+	public static List<CommerceCountry> findByC_A(
+		long companyId, boolean active) {
 
-		return getPersistence().findByG_A(groupId, active);
+		return getPersistence().findByC_A(companyId, active);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end) {
+	public static List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end) {
 
-		return getPersistence().findByG_A(groupId, active, start, end);
+		return getPersistence().findByC_A(companyId, active, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end,
+	public static List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().findByG_A(
-			groupId, active, start, end, orderByComparator);
+		return getPersistence().findByC_A(
+			companyId, active, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
@@ -906,167 +851,168 @@ public class CommerceCountryUtil {
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end,
+	public static List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_A(
-			groupId, active, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByC_A(
+			companyId, active, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_A_First(
-			long groupId, boolean active,
+	public static CommerceCountry findByC_A_First(
+			long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_A_First(
-			groupId, active, orderByComparator);
+		return getPersistence().findByC_A_First(
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_A_First(
-		long groupId, boolean active,
+	public static CommerceCountry fetchByC_A_First(
+		long companyId, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_A_First(
-			groupId, active, orderByComparator);
+		return getPersistence().fetchByC_A_First(
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_A_Last(
-			long groupId, boolean active,
+	public static CommerceCountry findByC_A_Last(
+			long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_A_Last(
-			groupId, active, orderByComparator);
+		return getPersistence().findByC_A_Last(
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_A_Last(
-		long groupId, boolean active,
+	public static CommerceCountry fetchByC_A_Last(
+		long companyId, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_A_Last(
-			groupId, active, orderByComparator);
+		return getPersistence().fetchByC_A_Last(
+			companyId, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
-	public static CommerceCountry[] findByG_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean active,
+	public static CommerceCountry[] findByC_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_A_PrevAndNext(
-			commerceCountryId, groupId, active, orderByComparator);
+		return getPersistence().findByC_A_PrevAndNext(
+			commerceCountryId, companyId, active, orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 */
-	public static void removeByG_A(long groupId, boolean active) {
-		getPersistence().removeByG_A(groupId, active);
+	public static void removeByC_A(long companyId, boolean active) {
+		getPersistence().removeByC_A(companyId, active);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByG_A(long groupId, boolean active) {
-		return getPersistence().countByG_A(groupId, active);
+	public static int countByC_A(long companyId, boolean active) {
+		return getPersistence().countByC_A(companyId, active);
 	}
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public static List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
-		return getPersistence().findByG_B_A(groupId, billingAllowed, active);
+		return getPersistence().findByC_B_A(companyId, billingAllowed, active);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end) {
 
-		return getPersistence().findByG_B_A(
-			groupId, billingAllowed, active, start, end);
+		return getPersistence().findByC_B_A(
+			companyId, billingAllowed, active, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -1074,22 +1020,22 @@ public class CommerceCountryUtil {
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().findByG_B_A(
-			groupId, billingAllowed, active, start, end, orderByComparator);
+		return getPersistence().findByC_B_A(
+			companyId, billingAllowed, active, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -1098,181 +1044,181 @@ public class CommerceCountryUtil {
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_B_A(
-			groupId, billingAllowed, active, start, end, orderByComparator,
+		return getPersistence().findByC_B_A(
+			companyId, billingAllowed, active, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_B_A_First(
-			long groupId, boolean billingAllowed, boolean active,
+	public static CommerceCountry findByC_B_A_First(
+			long companyId, boolean billingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_B_A_First(
-			groupId, billingAllowed, active, orderByComparator);
+		return getPersistence().findByC_B_A_First(
+			companyId, billingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_B_A_First(
-		long groupId, boolean billingAllowed, boolean active,
+	public static CommerceCountry fetchByC_B_A_First(
+		long companyId, boolean billingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_B_A_First(
-			groupId, billingAllowed, active, orderByComparator);
+		return getPersistence().fetchByC_B_A_First(
+			companyId, billingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_B_A_Last(
-			long groupId, boolean billingAllowed, boolean active,
+	public static CommerceCountry findByC_B_A_Last(
+			long companyId, boolean billingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_B_A_Last(
-			groupId, billingAllowed, active, orderByComparator);
+		return getPersistence().findByC_B_A_Last(
+			companyId, billingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_B_A_Last(
-		long groupId, boolean billingAllowed, boolean active,
+	public static CommerceCountry fetchByC_B_A_Last(
+		long companyId, boolean billingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_B_A_Last(
-			groupId, billingAllowed, active, orderByComparator);
+		return getPersistence().fetchByC_B_A_Last(
+			companyId, billingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
-	public static CommerceCountry[] findByG_B_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean billingAllowed,
+	public static CommerceCountry[] findByC_B_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean billingAllowed,
 			boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_B_A_PrevAndNext(
-			commerceCountryId, groupId, billingAllowed, active,
+		return getPersistence().findByC_B_A_PrevAndNext(
+			commerceCountryId, companyId, billingAllowed, active,
 			orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 */
-	public static void removeByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public static void removeByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
-		getPersistence().removeByG_B_A(groupId, billingAllowed, active);
+		getPersistence().removeByC_B_A(companyId, billingAllowed, active);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public static int countByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
-		return getPersistence().countByG_B_A(groupId, billingAllowed, active);
+		return getPersistence().countByC_B_A(companyId, billingAllowed, active);
 	}
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public static List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		return getPersistence().findByG_S_A(groupId, shippingAllowed, active);
+		return getPersistence().findByC_S_A(companyId, shippingAllowed, active);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end) {
 
-		return getPersistence().findByG_S_A(
-			groupId, shippingAllowed, active, start, end);
+		return getPersistence().findByC_S_A(
+			companyId, shippingAllowed, active, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -1280,22 +1226,22 @@ public class CommerceCountryUtil {
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().findByG_S_A(
-			groupId, shippingAllowed, active, start, end, orderByComparator);
+		return getPersistence().findByC_S_A(
+			companyId, shippingAllowed, active, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -1304,135 +1250,136 @@ public class CommerceCountryUtil {
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
-	public static List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public static List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_S_A(
-			groupId, shippingAllowed, active, start, end, orderByComparator,
+		return getPersistence().findByC_S_A(
+			companyId, shippingAllowed, active, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_S_A_First(
-			long groupId, boolean shippingAllowed, boolean active,
+	public static CommerceCountry findByC_S_A_First(
+			long companyId, boolean shippingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_S_A_First(
-			groupId, shippingAllowed, active, orderByComparator);
+		return getPersistence().findByC_S_A_First(
+			companyId, shippingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_S_A_First(
-		long groupId, boolean shippingAllowed, boolean active,
+	public static CommerceCountry fetchByC_S_A_First(
+		long companyId, boolean shippingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_S_A_First(
-			groupId, shippingAllowed, active, orderByComparator);
+		return getPersistence().fetchByC_S_A_First(
+			companyId, shippingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
-	public static CommerceCountry findByG_S_A_Last(
-			long groupId, boolean shippingAllowed, boolean active,
+	public static CommerceCountry findByC_S_A_Last(
+			long companyId, boolean shippingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_S_A_Last(
-			groupId, shippingAllowed, active, orderByComparator);
+		return getPersistence().findByC_S_A_Last(
+			companyId, shippingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public static CommerceCountry fetchByG_S_A_Last(
-		long groupId, boolean shippingAllowed, boolean active,
+	public static CommerceCountry fetchByC_S_A_Last(
+		long companyId, boolean shippingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return getPersistence().fetchByG_S_A_Last(
-			groupId, shippingAllowed, active, orderByComparator);
+		return getPersistence().fetchByC_S_A_Last(
+			companyId, shippingAllowed, active, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
-	public static CommerceCountry[] findByG_S_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean shippingAllowed,
+	public static CommerceCountry[] findByC_S_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean shippingAllowed,
 			boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws com.liferay.commerce.exception.NoSuchCountryException {
 
-		return getPersistence().findByG_S_A_PrevAndNext(
-			commerceCountryId, groupId, shippingAllowed, active,
+		return getPersistence().findByC_S_A_PrevAndNext(
+			commerceCountryId, companyId, shippingAllowed, active,
 			orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 */
-	public static void removeByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public static void removeByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		getPersistence().removeByG_S_A(groupId, shippingAllowed, active);
+		getPersistence().removeByC_S_A(companyId, shippingAllowed, active);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
-	public static int countByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public static int countByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		return getPersistence().countByG_S_A(groupId, shippingAllowed, active);
+		return getPersistence().countByC_S_A(
+			companyId, shippingAllowed, active);
 	}
 
 	/**

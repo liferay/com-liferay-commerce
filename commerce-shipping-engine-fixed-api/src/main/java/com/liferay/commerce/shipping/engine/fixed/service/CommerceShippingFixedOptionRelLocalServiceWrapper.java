@@ -58,10 +58,10 @@ public class CommerceShippingFixedOptionRelLocalServiceWrapper
 	public com.liferay.commerce.shipping.engine.fixed.model.
 		CommerceShippingFixedOptionRel addCommerceShippingFixedOptionRel(
 				long commerceShippingMethodId,
-				long commerceShippingFixedOptionId, long commerceWarehouseId,
-				long commerceCountryId, long commerceRegionId, String zip,
-				double weightFrom, double weightTo,
-				java.math.BigDecimal fixedPrice,
+				long commerceShippingFixedOptionId,
+				long commerceInventoryWarehouseId, long commerceCountryId,
+				long commerceRegionId, String zip, double weightFrom,
+				double weightTo, java.math.BigDecimal fixedPrice,
 				java.math.BigDecimal rateUnitWeightPrice, double ratePercentage,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 			throws com.liferay.portal.kernel.exception.PortalException {
@@ -69,9 +69,9 @@ public class CommerceShippingFixedOptionRelLocalServiceWrapper
 		return _commerceShippingFixedOptionRelLocalService.
 			addCommerceShippingFixedOptionRel(
 				commerceShippingMethodId, commerceShippingFixedOptionId,
-				commerceWarehouseId, commerceCountryId, commerceRegionId, zip,
-				weightFrom, weightTo, fixedPrice, rateUnitWeightPrice,
-				ratePercentage, serviceContext);
+				commerceInventoryWarehouseId, commerceCountryId,
+				commerceRegionId, zip, weightFrom, weightTo, fixedPrice,
+				rateUnitWeightPrice, ratePercentage, serviceContext);
 	}
 
 	/**
@@ -436,16 +436,16 @@ public class CommerceShippingFixedOptionRelLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.shipping.engine.fixed.model.
 		CommerceShippingFixedOptionRel updateCommerceShippingFixedOptionRel(
-				long commerceShippingFixedOptionRelId, long commerceWarehouseId,
-				long commerceCountryId, long commerceRegionId, String zip,
-				double weightFrom, double weightTo,
-				java.math.BigDecimal fixedPrice,
+				long commerceShippingFixedOptionRelId,
+				long commerceInventoryWarehouseId, long commerceCountryId,
+				long commerceRegionId, String zip, double weightFrom,
+				double weightTo, java.math.BigDecimal fixedPrice,
 				java.math.BigDecimal rateUnitWeightPrice, double ratePercentage)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShippingFixedOptionRelLocalService.
 			updateCommerceShippingFixedOptionRel(
-				commerceShippingFixedOptionRelId, commerceWarehouseId,
+				commerceShippingFixedOptionRelId, commerceInventoryWarehouseId,
 				commerceCountryId, commerceRegionId, zip, weightFrom, weightTo,
 				fixedPrice, rateUnitWeightPrice, ratePercentage);
 	}

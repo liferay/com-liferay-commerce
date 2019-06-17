@@ -55,30 +55,30 @@ public class CPTaxCategoryServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
-			getCPTaxCategories(long groupId)
+			getCPTaxCategories(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _cpTaxCategoryService.getCPTaxCategories(groupId);
+		return _cpTaxCategoryService.getCPTaxCategories(companyId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
 			getCPTaxCategories(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.product.model.CPTaxCategory>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpTaxCategoryService.getCPTaxCategories(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCPTaxCategoriesCount(long groupId)
+	public int getCPTaxCategoriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _cpTaxCategoryService.getCPTaxCategoriesCount(groupId);
+		return _cpTaxCategoryService.getCPTaxCategoriesCount(companyId);
 	}
 
 	@Override

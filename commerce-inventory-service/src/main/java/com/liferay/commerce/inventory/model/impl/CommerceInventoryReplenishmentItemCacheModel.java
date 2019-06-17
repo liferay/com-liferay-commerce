@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceInventoryReplenishmentItem in entity cache.
  *
  * @author Luca Pellizzon
- * @see CommerceInventoryReplenishmentItem
  * @generated
  */
 @ProviderType
-public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<CommerceInventoryReplenishmentItem>,
-	Externalizable {
+public class CommerceInventoryReplenishmentItemCacheModel
+	implements CacheModel<CommerceInventoryReplenishmentItem>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 			return false;
 		}
 
-		CommerceInventoryReplenishmentItemCacheModel commerceInventoryReplenishmentItemCacheModel =
-			(CommerceInventoryReplenishmentItemCacheModel)obj;
+		CommerceInventoryReplenishmentItemCacheModel
+			commerceInventoryReplenishmentItemCacheModel =
+				(CommerceInventoryReplenishmentItemCacheModel)obj;
 
-		if (commerceInventoryReplenishmentItemId == commerceInventoryReplenishmentItemCacheModel.commerceInventoryReplenishmentItemId) {
+		if (commerceInventoryReplenishmentItemId ==
+				commerceInventoryReplenishmentItemCacheModel.
+					commerceInventoryReplenishmentItemId) {
+
 			return true;
 		}
 
@@ -80,8 +83,8 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", commerceWarehouseId=");
-		sb.append(commerceWarehouseId);
+		sb.append(", commerceInventoryWarehouseId=");
+		sb.append(commerceInventoryWarehouseId);
 		sb.append(", sku=");
 		sb.append(sku);
 		sb.append(", availabilityDate=");
@@ -95,10 +98,13 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 
 	@Override
 	public CommerceInventoryReplenishmentItem toEntityModel() {
-		CommerceInventoryReplenishmentItemImpl commerceInventoryReplenishmentItemImpl =
-			new CommerceInventoryReplenishmentItemImpl();
+		CommerceInventoryReplenishmentItemImpl
+			commerceInventoryReplenishmentItemImpl =
+				new CommerceInventoryReplenishmentItemImpl();
 
-		commerceInventoryReplenishmentItemImpl.setCommerceInventoryReplenishmentItemId(commerceInventoryReplenishmentItemId);
+		commerceInventoryReplenishmentItemImpl.
+			setCommerceInventoryReplenishmentItemId(
+				commerceInventoryReplenishmentItemId);
 		commerceInventoryReplenishmentItemImpl.setCompanyId(companyId);
 		commerceInventoryReplenishmentItemImpl.setUserId(userId);
 
@@ -113,19 +119,20 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 			commerceInventoryReplenishmentItemImpl.setCreateDate(null);
 		}
 		else {
-			commerceInventoryReplenishmentItemImpl.setCreateDate(new Date(
-					createDate));
+			commerceInventoryReplenishmentItemImpl.setCreateDate(
+				new Date(createDate));
 		}
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			commerceInventoryReplenishmentItemImpl.setModifiedDate(null);
 		}
 		else {
-			commerceInventoryReplenishmentItemImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceInventoryReplenishmentItemImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
-		commerceInventoryReplenishmentItemImpl.setCommerceWarehouseId(commerceWarehouseId);
+		commerceInventoryReplenishmentItemImpl.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 
 		if (sku == null) {
 			commerceInventoryReplenishmentItemImpl.setSku("");
@@ -138,8 +145,8 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 			commerceInventoryReplenishmentItemImpl.setAvailabilityDate(null);
 		}
 		else {
-			commerceInventoryReplenishmentItemImpl.setAvailabilityDate(new Date(
-					availabilityDate));
+			commerceInventoryReplenishmentItemImpl.setAvailabilityDate(
+				new Date(availabilityDate));
 		}
 
 		commerceInventoryReplenishmentItemImpl.setQuantity(quantity);
@@ -160,7 +167,7 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceWarehouseId = objectInput.readLong();
+		commerceInventoryWarehouseId = objectInput.readLong();
 		sku = objectInput.readUTF();
 		availabilityDate = objectInput.readLong();
 
@@ -168,8 +175,7 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceInventoryReplenishmentItemId);
 
 		objectOutput.writeLong(companyId);
@@ -186,7 +192,7 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(commerceWarehouseId);
+		objectOutput.writeLong(commerceInventoryWarehouseId);
 
 		if (sku == null) {
 			objectOutput.writeUTF("");
@@ -206,8 +212,9 @@ public class CommerceInventoryReplenishmentItemCacheModel implements CacheModel<
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long commerceWarehouseId;
+	public long commerceInventoryWarehouseId;
 	public String sku;
 	public long availabilityDate;
 	public int quantity;
+
 }

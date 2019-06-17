@@ -26,16 +26,19 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.inventory.service.http.CommerceInventoryBookedQuantityServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.inventory.service.http.CommerceInventoryBookedQuantityServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceInventoryBookedQuantitySoap implements Serializable {
+
 	public static CommerceInventoryBookedQuantitySoap toSoapModel(
 		CommerceInventoryBookedQuantity model) {
-		CommerceInventoryBookedQuantitySoap soapModel = new CommerceInventoryBookedQuantitySoap();
 
-		soapModel.setCommerceInventoryBookedQuantityId(model.getCommerceInventoryBookedQuantityId());
+		CommerceInventoryBookedQuantitySoap soapModel =
+			new CommerceInventoryBookedQuantitySoap();
+
+		soapModel.setCommerceInventoryBookedQuantityId(
+			model.getCommerceInventoryBookedQuantityId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -43,7 +46,7 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setSku(model.getSku());
 		soapModel.setQuantity(model.getQuantity());
-		soapModel.setExpireDate(model.getExpireDate());
+		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setBookedNote(model.getBookedNote());
 
 		return soapModel;
@@ -51,7 +54,9 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 
 	public static CommerceInventoryBookedQuantitySoap[] toSoapModels(
 		CommerceInventoryBookedQuantity[] models) {
-		CommerceInventoryBookedQuantitySoap[] soapModels = new CommerceInventoryBookedQuantitySoap[models.length];
+
+		CommerceInventoryBookedQuantitySoap[] soapModels =
+			new CommerceInventoryBookedQuantitySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -62,10 +67,12 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 
 	public static CommerceInventoryBookedQuantitySoap[][] toSoapModels(
 		CommerceInventoryBookedQuantity[][] models) {
+
 		CommerceInventoryBookedQuantitySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceInventoryBookedQuantitySoap[models.length][models[0].length];
+			soapModels = new CommerceInventoryBookedQuantitySoap
+				[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceInventoryBookedQuantitySoap[0][0];
@@ -80,13 +87,16 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 
 	public static CommerceInventoryBookedQuantitySoap[] toSoapModels(
 		List<CommerceInventoryBookedQuantity> models) {
-		List<CommerceInventoryBookedQuantitySoap> soapModels = new ArrayList<CommerceInventoryBookedQuantitySoap>(models.size());
+
+		List<CommerceInventoryBookedQuantitySoap> soapModels =
+			new ArrayList<CommerceInventoryBookedQuantitySoap>(models.size());
 
 		for (CommerceInventoryBookedQuantity model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceInventoryBookedQuantitySoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceInventoryBookedQuantitySoap[soapModels.size()]);
 	}
 
 	public CommerceInventoryBookedQuantitySoap() {
@@ -106,6 +116,7 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 
 	public void setCommerceInventoryBookedQuantityId(
 		long commerceInventoryBookedQuantityId) {
+
 		_commerceInventoryBookedQuantityId = commerceInventoryBookedQuantityId;
 	}
 
@@ -165,12 +176,12 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 		_quantity = quantity;
 	}
 
-	public Date getExpireDate() {
-		return _expireDate;
+	public Date getExpirationDate() {
+		return _expirationDate;
 	}
 
-	public void setExpireDate(Date expireDate) {
-		_expireDate = expireDate;
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
 	}
 
 	public String getBookedNote() {
@@ -189,6 +200,7 @@ public class CommerceInventoryBookedQuantitySoap implements Serializable {
 	private Date _modifiedDate;
 	private String _sku;
 	private int _quantity;
-	private Date _expireDate;
+	private Date _expirationDate;
 	private String _bookedNote;
+
 }

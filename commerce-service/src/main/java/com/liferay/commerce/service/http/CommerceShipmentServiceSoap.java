@@ -120,7 +120,7 @@ public class CommerceShipmentServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceShipmentSoap[]
 			getCommerceShipments(
-				long groupId, int status, int start, int end,
+				long companyId, int status, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
 						orderByComparator)
@@ -129,7 +129,7 @@ public class CommerceShipmentServiceSoap {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceShipment>
 				returnValue = CommerceShipmentServiceUtil.getCommerceShipments(
-					groupId, status, start, end, orderByComparator);
+					companyId, status, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(
 				returnValue);
@@ -143,7 +143,7 @@ public class CommerceShipmentServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceShipmentSoap[]
 			getCommerceShipments(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
 						orderByComparator)
@@ -152,7 +152,7 @@ public class CommerceShipmentServiceSoap {
 		try {
 			java.util.List<com.liferay.commerce.model.CommerceShipment>
 				returnValue = CommerceShipmentServiceUtil.getCommerceShipments(
-					groupId, start, end, orderByComparator);
+					companyId, start, end, orderByComparator);
 
 			return com.liferay.commerce.model.CommerceShipmentSoap.toSoapModels(
 				returnValue);
@@ -164,12 +164,13 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static int getCommerceShipmentsCount(long groupId)
+	public static int getCommerceShipmentsCount(long companyId)
 		throws RemoteException {
 
 		try {
 			int returnValue =
-				CommerceShipmentServiceUtil.getCommerceShipmentsCount(groupId);
+				CommerceShipmentServiceUtil.getCommerceShipmentsCount(
+					companyId);
 
 			return returnValue;
 		}
@@ -180,13 +181,13 @@ public class CommerceShipmentServiceSoap {
 		}
 	}
 
-	public static int getCommerceShipmentsCount(long groupId, int status)
+	public static int getCommerceShipmentsCount(long companyId, int status)
 		throws RemoteException {
 
 		try {
 			int returnValue =
 				CommerceShipmentServiceUtil.getCommerceShipmentsCount(
-					groupId, status);
+					companyId, status);
 
 			return returnValue;
 		}

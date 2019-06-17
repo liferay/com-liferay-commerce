@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.math.BigDecimal;
 
@@ -66,7 +65,7 @@ public interface CommerceDiscountService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountServiceUtil} to access the commerce discount remote service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceDiscount addCommerceDiscount(
-			String title, String target, boolean useCouponCode,
+			long userId, String title, String target, boolean useCouponCode,
 			String couponCode, boolean usePercentage,
 			BigDecimal maximumDiscountAmount, BigDecimal level1,
 			BigDecimal level2, BigDecimal level3, BigDecimal level4,
@@ -91,20 +90,11 @@ public interface CommerceDiscountService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceDiscount> getCommerceDiscounts(
-			long groupId, int start, int end,
-			OrderByComparator<CommerceDiscount> orderByComparator)
+			long companyId, String couponCode)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscounts(
-			long groupId, String couponCode)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId) throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId, String couponCode)
+	public int getCommerceDiscountsCount(long companyId, String couponCode)
 		throws PortalException;
 
 	/**
@@ -116,8 +106,8 @@ public interface CommerceDiscountService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	public CommerceDiscount updateCommerceDiscount(

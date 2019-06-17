@@ -211,15 +211,16 @@ public interface CPDAvailabilityEstimateLocalService
 		long cProductId);
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId);
+	public CPDAvailabilityEstimate
+		fetchCPDAvailabilityEstimateByUuidAndCompanyId(
+			String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -237,16 +238,16 @@ public interface CPDAvailabilityEstimateLocalService
 		throws PortalException;
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate
 	 * @throws PortalException if a matching cpd availability estimate could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndGroupId(
-			String uuid, long groupId)
+	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException;
 
 	/**
@@ -263,34 +264,6 @@ public interface CPDAvailabilityEstimateLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDAvailabilityEstimate> getCPDAvailabilityEstimates(
 		int start, int end);
-
-	/**
-	 * Returns all the cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @return the matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId);
-
-	/**
-	 * Returns a range of cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cpd availability estimates
-	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			OrderByComparator<CPDAvailabilityEstimate> orderByComparator);
 
 	/**
 	 * Returns the number of cpd availability estimates.

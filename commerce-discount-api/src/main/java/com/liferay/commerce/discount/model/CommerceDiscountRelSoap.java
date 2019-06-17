@@ -37,7 +37,6 @@ public class CommerceDiscountRelSoap implements Serializable {
 		CommerceDiscountRelSoap soapModel = new CommerceDiscountRelSoap();
 
 		soapModel.setCommerceDiscountRelId(model.getCommerceDiscountRelId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -116,14 +115,6 @@ public class CommerceDiscountRelSoap implements Serializable {
 		_commerceDiscountRelId = commerceDiscountRelId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -189,7 +180,6 @@ public class CommerceDiscountRelSoap implements Serializable {
 	}
 
 	private long _commerceDiscountRelId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

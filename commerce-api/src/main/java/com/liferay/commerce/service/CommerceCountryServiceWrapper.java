@@ -61,58 +61,58 @@ public class CommerceCountryServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
-			long groupId, boolean billingAllowed, boolean active) {
+			long companyId, boolean billingAllowed, boolean active) {
 
 		return _commerceCountryService.getBillingCommerceCountries(
-			groupId, billingAllowed, active);
+			companyId, billingAllowed, active);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
-		getCommerceCountries(long groupId, boolean active) {
+		getCommerceCountries(long companyId, boolean active) {
 
-		return _commerceCountryService.getCommerceCountries(groupId, active);
+		return _commerceCountryService.getCommerceCountries(companyId, active);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getCommerceCountries(
-				long groupId, boolean active, int start, int end,
+				long companyId, boolean active, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceCountry>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCountryService.getCommerceCountries(
-			groupId, active, start, end, orderByComparator);
+			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getCommerceCountries(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceCountry>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCountryService.getCommerceCountries(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceCountriesCount(long groupId)
+	public int getCommerceCountriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceCountryService.getCommerceCountriesCount(groupId);
+		return _commerceCountryService.getCommerceCountriesCount(companyId);
 	}
 
 	@Override
-	public int getCommerceCountriesCount(long groupId, boolean active)
+	public int getCommerceCountriesCount(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCountryService.getCommerceCountriesCount(
-			groupId, active);
+			companyId, active);
 	}
 
 	@Override
@@ -121,6 +121,15 @@ public class CommerceCountryServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCountryService.getCommerceCountry(commerceCountryId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+			long companyId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceCountryService.getCommerceCountry(
+			companyId, twoLettersISOCode);
 	}
 
 	/**
@@ -136,30 +145,28 @@ public class CommerceCountryServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getShippingCommerceCountries(
-			long groupId, boolean shippingAllowed, boolean active) {
+			long companyId, boolean shippingAllowed, boolean active) {
 
 		return _commerceCountryService.getShippingCommerceCountries(
-			groupId, shippingAllowed, active);
+			companyId, shippingAllowed, active);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
-			getWarehouseCommerceCountries(long groupId, boolean all)
+			getWarehouseCommerceCountries(long companyId, boolean all)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCountryService.getWarehouseCommerceCountries(
-			groupId, all);
+			companyId, all);
 	}
 
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.model.CommerceCountry> searchCommerceCountries(
-				long groupId,
 				com.liferay.portal.kernel.search.SearchContext searchContext)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceCountryService.searchCommerceCountries(
-			groupId, searchContext);
+		return _commerceCountryService.searchCommerceCountries(searchContext);
 	}
 
 	@Override

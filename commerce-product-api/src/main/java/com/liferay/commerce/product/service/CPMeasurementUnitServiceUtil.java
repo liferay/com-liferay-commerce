@@ -58,10 +58,10 @@ public class CPMeasurementUnitServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnit
-			fetchPrimaryCPMeasurementUnit(long groupId, int type)
+			fetchPrimaryCPMeasurementUnit(long companyId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().fetchPrimaryCPMeasurementUnit(groupId, type);
+		return getService().fetchPrimaryCPMeasurementUnit(companyId, type);
 	}
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnit
@@ -74,39 +74,39 @@ public class CPMeasurementUnitServiceUtil {
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPMeasurementUnit>
 				getCPMeasurementUnits(
-					long groupId, int type, int start, int end,
+					long companyId, int type, int start, int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.product.model.CPMeasurementUnit>
 							orderByComparator)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCPMeasurementUnits(
-			groupId, type, start, end, orderByComparator);
+			companyId, type, start, end, orderByComparator);
 	}
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPMeasurementUnit>
 				getCPMeasurementUnits(
-					long groupId, int start, int end,
+					long companyId, int start, int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.product.model.CPMeasurementUnit>
 							orderByComparator)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCPMeasurementUnits(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
-	public static int getCPMeasurementUnitsCount(long groupId)
+	public static int getCPMeasurementUnitsCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPMeasurementUnitsCount(groupId);
+		return getService().getCPMeasurementUnitsCount(companyId);
 	}
 
-	public static int getCPMeasurementUnitsCount(long groupId, int type)
+	public static int getCPMeasurementUnitsCount(long companyId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPMeasurementUnitsCount(groupId, type);
+		return getService().getCPMeasurementUnitsCount(companyId, type);
 	}
 
 	/**

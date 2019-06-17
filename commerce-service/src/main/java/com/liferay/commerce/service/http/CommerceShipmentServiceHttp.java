@@ -169,7 +169,7 @@ public class CommerceShipmentServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment>
 			getCommerceShipments(
-				HttpPrincipal httpPrincipal, long groupId, int status,
+				HttpPrincipal httpPrincipal, long companyId, int status,
 				int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
@@ -182,7 +182,7 @@ public class CommerceShipmentServiceHttp {
 				_getCommerceShipmentsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, status, start, end, orderByComparator);
+				methodKey, companyId, status, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -213,7 +213,7 @@ public class CommerceShipmentServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceShipment>
 			getCommerceShipments(
-				HttpPrincipal httpPrincipal, long groupId, int start, int end,
+				HttpPrincipal httpPrincipal, long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
 						orderByComparator)
@@ -225,7 +225,7 @@ public class CommerceShipmentServiceHttp {
 				_getCommerceShipmentsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, start, end, orderByComparator);
+				methodKey, companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -255,7 +255,7 @@ public class CommerceShipmentServiceHttp {
 	}
 
 	public static int getCommerceShipmentsCount(
-			HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -263,7 +263,8 @@ public class CommerceShipmentServiceHttp {
 				CommerceShipmentServiceUtil.class, "getCommerceShipmentsCount",
 				_getCommerceShipmentsCountParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -292,7 +293,7 @@ public class CommerceShipmentServiceHttp {
 	}
 
 	public static int getCommerceShipmentsCount(
-			HttpPrincipal httpPrincipal, long groupId, int status)
+			HttpPrincipal httpPrincipal, long companyId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -301,7 +302,7 @@ public class CommerceShipmentServiceHttp {
 				_getCommerceShipmentsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, status);
+				methodKey, companyId, status);
 
 			Object returnObj = null;
 

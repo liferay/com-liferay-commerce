@@ -15,20 +15,17 @@
 package com.liferay.commerce.inventory.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException;
 import com.liferay.commerce.inventory.model.CommerceInventoryAudit;
 import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalServiceUtil;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -40,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -56,19 +44,29 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceInventoryAuditPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.inventory.service"));
 
 	@Before
@@ -82,7 +80,8 @@ public class CommerceInventoryAuditPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceInventoryAudit> iterator = _commerceInventoryAudits.iterator();
+		Iterator<CommerceInventoryAudit> iterator =
+			_commerceInventoryAudits.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -104,11 +103,14 @@ public class CommerceInventoryAuditPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
 		_persistence.remove(newCommerceInventoryAudit);
 
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.fetchByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
+		CommerceInventoryAudit existingCommerceInventoryAudit =
+			_persistence.fetchByPrimaryKey(
+				newCommerceInventoryAudit.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceInventoryAudit);
 	}
@@ -122,7 +124,8 @@ public class CommerceInventoryAuditPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryAudit newCommerceInventoryAudit = _persistence.create(pk);
+		CommerceInventoryAudit newCommerceInventoryAudit = _persistence.create(
+			pk);
 
 		newCommerceInventoryAudit.setCompanyId(RandomTestUtil.nextLong());
 
@@ -140,50 +143,72 @@ public class CommerceInventoryAuditPersistenceTest {
 
 		newCommerceInventoryAudit.setQuantity(RandomTestUtil.nextInt());
 
-		_commerceInventoryAudits.add(_persistence.update(
-				newCommerceInventoryAudit));
+		_commerceInventoryAudits.add(
+			_persistence.update(newCommerceInventoryAudit));
 
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.findByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
+		CommerceInventoryAudit existingCommerceInventoryAudit =
+			_persistence.findByPrimaryKey(
+				newCommerceInventoryAudit.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryAudit.getCommerceInventoryAuditId(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getCommerceInventoryAuditId(),
 			newCommerceInventoryAudit.getCommerceInventoryAuditId());
-		Assert.assertEquals(existingCommerceInventoryAudit.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getCompanyId(),
 			newCommerceInventoryAudit.getCompanyId());
-		Assert.assertEquals(existingCommerceInventoryAudit.getUserId(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getUserId(),
 			newCommerceInventoryAudit.getUserId());
-		Assert.assertEquals(existingCommerceInventoryAudit.getUserName(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getUserName(),
 			newCommerceInventoryAudit.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryAudit.getCreateDate()),
 			Time.getShortTimestamp(newCommerceInventoryAudit.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryAudit.getModifiedDate()),
-			Time.getShortTimestamp(newCommerceInventoryAudit.getModifiedDate()));
-		Assert.assertEquals(existingCommerceInventoryAudit.getSku(),
+			Time.getShortTimestamp(
+				newCommerceInventoryAudit.getModifiedDate()));
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getSku(),
 			newCommerceInventoryAudit.getSku());
-		Assert.assertEquals(existingCommerceInventoryAudit.getDescription(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getDescription(),
 			newCommerceInventoryAudit.getDescription());
-		Assert.assertEquals(existingCommerceInventoryAudit.getQuantity(),
+		Assert.assertEquals(
+			existingCommerceInventoryAudit.getQuantity(),
 			newCommerceInventoryAudit.getQuantity());
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
+	}
+
+	@Test
+	public void testCountByLtCreateDate() throws Exception {
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
+
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.findByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
+		CommerceInventoryAudit existingCommerceInventoryAudit =
+			_persistence.findByPrimaryKey(
+				newCommerceInventoryAudit.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryAudit,
-			newCommerceInventoryAudit);
+		Assert.assertEquals(
+			existingCommerceInventoryAudit, newCommerceInventoryAudit);
 	}
 
 	@Test(expected = NoSuchInventoryAuditException.class)
@@ -195,32 +220,36 @@ public class CommerceInventoryAuditPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
 	protected OrderByComparator<CommerceInventoryAudit> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CIAudit",
-			"commerceInventoryAuditId", true, "companyId", true, "userId",
-			true, "userName", true, "createDate", true, "modifiedDate", true,
-			"sku", true, "description", true, "quantity", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CIAudit", "commerceInventoryAuditId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "sku", true, "quantity", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.fetchByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
+		CommerceInventoryAudit existingCommerceInventoryAudit =
+			_persistence.fetchByPrimaryKey(
+				newCommerceInventoryAudit.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryAudit,
-			newCommerceInventoryAudit);
+		Assert.assertEquals(
+			existingCommerceInventoryAudit, newCommerceInventoryAudit);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryAudit missingCommerceInventoryAudit = _persistence.fetchByPrimaryKey(pk);
+		CommerceInventoryAudit missingCommerceInventoryAudit =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceInventoryAudit);
 	}
@@ -228,21 +257,27 @@ public class CommerceInventoryAuditPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit1 = addCommerceInventoryAudit();
-		CommerceInventoryAudit newCommerceInventoryAudit2 = addCommerceInventoryAudit();
+
+		CommerceInventoryAudit newCommerceInventoryAudit1 =
+			addCommerceInventoryAudit();
+		CommerceInventoryAudit newCommerceInventoryAudit2 =
+			addCommerceInventoryAudit();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryAudit1.getPrimaryKey());
 		primaryKeys.add(newCommerceInventoryAudit2.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, commerceInventoryAudits.size());
-		Assert.assertEquals(newCommerceInventoryAudit1,
+		Assert.assertEquals(
+			newCommerceInventoryAudit1,
 			commerceInventoryAudits.get(
 				newCommerceInventoryAudit1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceInventoryAudit2,
+		Assert.assertEquals(
+			newCommerceInventoryAudit2,
 			commerceInventoryAudits.get(
 				newCommerceInventoryAudit2.getPrimaryKey()));
 	}
@@ -250,6 +285,7 @@ public class CommerceInventoryAuditPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -259,7 +295,8 @@ public class CommerceInventoryAuditPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceInventoryAudits.isEmpty());
 	}
@@ -267,7 +304,9 @@ public class CommerceInventoryAuditPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -276,37 +315,41 @@ public class CommerceInventoryAuditPersistenceTest {
 		primaryKeys.add(newCommerceInventoryAudit.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryAudits.size());
-		Assert.assertEquals(newCommerceInventoryAudit,
+		Assert.assertEquals(
+			newCommerceInventoryAudit,
 			commerceInventoryAudits.get(
 				newCommerceInventoryAudit.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertTrue(commerceInventoryAudits.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryAudit.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits = _persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryAudit> commerceInventoryAudits =
+			_persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryAudits.size());
-		Assert.assertEquals(newCommerceInventoryAudit,
+		Assert.assertEquals(
+			newCommerceInventoryAudit,
 			commerceInventoryAudits.get(
 				newCommerceInventoryAudit.getPrimaryKey()));
 	}
@@ -315,16 +358,22 @@ public class CommerceInventoryAuditPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceInventoryAuditLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceInventoryAuditLocalServiceUtil.getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceInventoryAudit>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceInventoryAudit>() {
+
 				@Override
 				public void performAction(
 					CommerceInventoryAudit commerceInventoryAudit) {
+
 					Assert.assertNotNull(commerceInventoryAudit);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -333,56 +382,62 @@ public class CommerceInventoryAuditPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryAudit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryAudit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceInventoryAuditId",
 				newCommerceInventoryAudit.getCommerceInventoryAuditId()));
 
-		List<CommerceInventoryAudit> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryAudit> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
 		CommerceInventoryAudit existingCommerceInventoryAudit = result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryAudit,
-			newCommerceInventoryAudit);
+		Assert.assertEquals(
+			existingCommerceInventoryAudit, newCommerceInventoryAudit);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryAudit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryAudit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceInventoryAuditId", RandomTestUtil.nextLong()));
 
-		List<CommerceInventoryAudit> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryAudit> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceInventoryAudit newCommerceInventoryAudit =
+			addCommerceInventoryAudit();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryAudit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryAudit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceInventoryAuditId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceInventoryAuditId"));
 
-		Object newCommerceInventoryAuditId = newCommerceInventoryAudit.getCommerceInventoryAuditId();
+		Object newCommerceInventoryAuditId =
+			newCommerceInventoryAudit.getCommerceInventoryAuditId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryAuditId",
-				new Object[] { newCommerceInventoryAuditId }));
+				new Object[] {newCommerceInventoryAuditId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -390,43 +445,31 @@ public class CommerceInventoryAuditPersistenceTest {
 
 		Object existingCommerceInventoryAuditId = result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryAuditId,
-			newCommerceInventoryAuditId);
+		Assert.assertEquals(
+			existingCommerceInventoryAuditId, newCommerceInventoryAuditId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryAudit.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryAudit.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceInventoryAuditId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceInventoryAuditId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryAuditId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
-	@Test
-	public void testResetOriginalValues() throws Exception {
-		CommerceInventoryAudit newCommerceInventoryAudit = addCommerceInventoryAudit();
-
-		_persistence.clearCache();
-
-		CommerceInventoryAudit existingCommerceInventoryAudit = _persistence.findByPrimaryKey(newCommerceInventoryAudit.getPrimaryKey());
-
-		Assert.assertTrue(Objects.equals(
-				existingCommerceInventoryAudit.getSku(),
-				ReflectionTestUtil.invoke(existingCommerceInventoryAudit,
-					"getOriginalSku", new Class<?>[0])));
-	}
-
 	protected CommerceInventoryAudit addCommerceInventoryAudit()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceInventoryAudit commerceInventoryAudit = _persistence.create(pk);
@@ -447,12 +490,15 @@ public class CommerceInventoryAuditPersistenceTest {
 
 		commerceInventoryAudit.setQuantity(RandomTestUtil.nextInt());
 
-		_commerceInventoryAudits.add(_persistence.update(commerceInventoryAudit));
+		_commerceInventoryAudits.add(
+			_persistence.update(commerceInventoryAudit));
 
 		return commerceInventoryAudit;
 	}
 
-	private List<CommerceInventoryAudit> _commerceInventoryAudits = new ArrayList<CommerceInventoryAudit>();
+	private List<CommerceInventoryAudit> _commerceInventoryAudits =
+		new ArrayList<CommerceInventoryAudit>();
 	private CommerceInventoryAuditPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -84,11 +87,10 @@ public class CommerceAvailabilityEstimateModelImpl
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR},
 		{"commerceAvailabilityEstimateId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"title", Types.VARCHAR}, {"priority", Types.DOUBLE},
-		{"lastPublishDate", Types.TIMESTAMP}
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"title", Types.VARCHAR},
+		{"priority", Types.DOUBLE}, {"lastPublishDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -97,7 +99,6 @@ public class CommerceAvailabilityEstimateModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceAvailabilityEstimateId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -109,7 +110,7 @@ public class CommerceAvailabilityEstimateModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceAvailabilityEstimate (uuid_ VARCHAR(75) null,commerceAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,priority DOUBLE,lastPublishDate DATE null)";
+		"create table CommerceAvailabilityEstimate (uuid_ VARCHAR(75) null,commerceAvailabilityEstimateId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,priority DOUBLE,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceAvailabilityEstimate";
@@ -143,11 +144,9 @@ public class CommerceAvailabilityEstimateModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
+	public static final long UUID_COLUMN_BITMASK = 2L;
 
-	public static final long UUID_COLUMN_BITMASK = 4L;
-
-	public static final long TITLE_COLUMN_BITMASK = 8L;
+	public static final long TITLE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -168,7 +167,6 @@ public class CommerceAvailabilityEstimateModelImpl
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceAvailabilityEstimateId(
 			soapModel.getCommerceAvailabilityEstimateId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -298,6 +296,32 @@ public class CommerceAvailabilityEstimateModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceAvailabilityEstimate>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceAvailabilityEstimate.class.getClassLoader(),
+			CommerceAvailabilityEstimate.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceAvailabilityEstimate> constructor =
+				(Constructor<CommerceAvailabilityEstimate>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map
 		<String, Function<CommerceAvailabilityEstimate, Object>>
 			_attributeGetterFunctions;
@@ -365,31 +389,6 @@ public class CommerceAvailabilityEstimateModelImpl
 					commerceAvailabilityEstimate.
 						setCommerceAvailabilityEstimateId(
 							(Long)commerceAvailabilityEstimateId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceAvailabilityEstimate, Object>() {
-
-				@Override
-				public Object apply(
-					CommerceAvailabilityEstimate commerceAvailabilityEstimate) {
-
-					return commerceAvailabilityEstimate.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceAvailabilityEstimate, Object>() {
-
-				@Override
-				public void accept(
-					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object groupId) {
-
-					commerceAvailabilityEstimate.setGroupId((Long)groupId);
 				}
 
 			});
@@ -644,29 +643,6 @@ public class CommerceAvailabilityEstimateModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -822,7 +798,7 @@ public class CommerceAvailabilityEstimateModelImpl
 
 	@Override
 	public void setTitle(String title, Locale locale) {
-		setTitle(title, locale, LocaleUtil.getSiteDefault());
+		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -849,7 +825,7 @@ public class CommerceAvailabilityEstimateModelImpl
 
 	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
-		setTitleMap(titleMap, LocaleUtil.getSiteDefault());
+		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -940,7 +916,7 @@ public class CommerceAvailabilityEstimateModelImpl
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -965,7 +941,7 @@ public class CommerceAvailabilityEstimateModelImpl
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -982,10 +958,13 @@ public class CommerceAvailabilityEstimateModelImpl
 	@Override
 	public CommerceAvailabilityEstimate toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceAvailabilityEstimate)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceAvailabilityEstimate>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -999,7 +978,6 @@ public class CommerceAvailabilityEstimateModelImpl
 		commerceAvailabilityEstimateImpl.setUuid(getUuid());
 		commerceAvailabilityEstimateImpl.setCommerceAvailabilityEstimateId(
 			getCommerceAvailabilityEstimateId());
-		commerceAvailabilityEstimateImpl.setGroupId(getGroupId());
 		commerceAvailabilityEstimateImpl.setCompanyId(getCompanyId());
 		commerceAvailabilityEstimateImpl.setUserId(getUserId());
 		commerceAvailabilityEstimateImpl.setUserName(getUserName());
@@ -1076,11 +1054,6 @@ public class CommerceAvailabilityEstimateModelImpl
 		commerceAvailabilityEstimateModelImpl._originalUuid =
 			commerceAvailabilityEstimateModelImpl._uuid;
 
-		commerceAvailabilityEstimateModelImpl._originalGroupId =
-			commerceAvailabilityEstimateModelImpl._groupId;
-
-		commerceAvailabilityEstimateModelImpl._setOriginalGroupId = false;
-
 		commerceAvailabilityEstimateModelImpl._originalCompanyId =
 			commerceAvailabilityEstimateModelImpl._companyId;
 
@@ -1107,8 +1080,6 @@ public class CommerceAvailabilityEstimateModelImpl
 
 		commerceAvailabilityEstimateCacheModel.commerceAvailabilityEstimateId =
 			getCommerceAvailabilityEstimateId();
-
-		commerceAvailabilityEstimateCacheModel.groupId = getGroupId();
 
 		commerceAvailabilityEstimateCacheModel.companyId = getCompanyId();
 
@@ -1234,18 +1205,18 @@ public class CommerceAvailabilityEstimateModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceAvailabilityEstimate.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceAvailabilityEstimate.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceAvailabilityEstimate>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceAvailabilityEstimateId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -26,17 +26,20 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.liferay.commerce.inventory.service.http.CommerceInventoryWarehouseServiceSoap}.
  *
  * @author Luca Pellizzon
- * @see com.liferay.commerce.inventory.service.http.CommerceInventoryWarehouseServiceSoap
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseSoap implements Serializable {
+
 	public static CommerceInventoryWarehouseSoap toSoapModel(
 		CommerceInventoryWarehouse model) {
-		CommerceInventoryWarehouseSoap soapModel = new CommerceInventoryWarehouseSoap();
+
+		CommerceInventoryWarehouseSoap soapModel =
+			new CommerceInventoryWarehouseSoap();
 
 		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
-		soapModel.setCommerceInventoryWarehouseId(model.getCommerceInventoryWarehouseId());
+		soapModel.setCommerceInventoryWarehouseId(
+			model.getCommerceInventoryWarehouseId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -51,7 +54,8 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 		soapModel.setCity(model.getCity());
 		soapModel.setZip(model.getZip());
 		soapModel.setCommerceRegionCode(model.getCommerceRegionCode());
-		soapModel.setCountryTwoLettersISOCode(model.getCountryTwoLettersISOCode());
+		soapModel.setCountryTwoLettersISOCode(
+			model.getCountryTwoLettersISOCode());
 		soapModel.setLatitude(model.getLatitude());
 		soapModel.setLongitude(model.getLongitude());
 		soapModel.setType(model.getType());
@@ -61,7 +65,9 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseSoap[] toSoapModels(
 		CommerceInventoryWarehouse[] models) {
-		CommerceInventoryWarehouseSoap[] soapModels = new CommerceInventoryWarehouseSoap[models.length];
+
+		CommerceInventoryWarehouseSoap[] soapModels =
+			new CommerceInventoryWarehouseSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -72,10 +78,13 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseSoap[][] toSoapModels(
 		CommerceInventoryWarehouse[][] models) {
+
 		CommerceInventoryWarehouseSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new CommerceInventoryWarehouseSoap[models.length][models[0].length];
+			soapModels =
+				new CommerceInventoryWarehouseSoap
+					[models.length][models[0].length];
 		}
 		else {
 			soapModels = new CommerceInventoryWarehouseSoap[0][0];
@@ -90,13 +99,16 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 
 	public static CommerceInventoryWarehouseSoap[] toSoapModels(
 		List<CommerceInventoryWarehouse> models) {
-		List<CommerceInventoryWarehouseSoap> soapModels = new ArrayList<CommerceInventoryWarehouseSoap>(models.size());
+
+		List<CommerceInventoryWarehouseSoap> soapModels =
+			new ArrayList<CommerceInventoryWarehouseSoap>(models.size());
 
 		for (CommerceInventoryWarehouse model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new CommerceInventoryWarehouseSoap[soapModels.size()]);
+		return soapModels.toArray(
+			new CommerceInventoryWarehouseSoap[soapModels.size()]);
 	}
 
 	public CommerceInventoryWarehouseSoap() {
@@ -124,6 +136,7 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 
 	public void setCommerceInventoryWarehouseId(
 		long commerceInventoryWarehouseId) {
+
 		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
@@ -295,4 +308,5 @@ public class CommerceInventoryWarehouseSoap implements Serializable {
 	private double _latitude;
 	private double _longitude;
 	private String _type;
+
 }

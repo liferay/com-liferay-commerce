@@ -234,37 +234,37 @@ public class CPMeasurementUnitPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
-	public void testCountByG_T() throws Exception {
-		_persistence.countByG_T(
+	public void testCountByC_T() throws Exception {
+		_persistence.countByC_T(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
-		_persistence.countByG_T(0L, 0);
+		_persistence.countByC_T(0L, 0);
 	}
 
 	@Test
-	public void testCountByG_K_T() throws Exception {
-		_persistence.countByG_K_T(
+	public void testCountByC_K_T() throws Exception {
+		_persistence.countByC_K_T(
 			RandomTestUtil.nextLong(), "", RandomTestUtil.nextInt());
 
-		_persistence.countByG_K_T(0L, "null", 0);
+		_persistence.countByC_K_T(0L, "null", 0);
 
-		_persistence.countByG_K_T(0L, (String)null, 0);
+		_persistence.countByC_K_T(0L, (String)null, 0);
 	}
 
 	@Test
-	public void testCountByG_P_T() throws Exception {
-		_persistence.countByG_P_T(
+	public void testCountByC_P_T() throws Exception {
+		_persistence.countByC_P_T(
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
 			RandomTestUtil.nextInt());
 
-		_persistence.countByG_P_T(0L, RandomTestUtil.randomBoolean(), 0);
+		_persistence.countByC_P_T(0L, RandomTestUtil.randomBoolean(), 0);
 	}
 
 	@Test
@@ -541,9 +541,9 @@ public class CPMeasurementUnitPersistenceTest {
 				new Class<?>[0]));
 
 		Assert.assertEquals(
-			Long.valueOf(existingCPMeasurementUnit.getGroupId()),
+			Long.valueOf(existingCPMeasurementUnit.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(
-				existingCPMeasurementUnit, "getOriginalGroupId",
+				existingCPMeasurementUnit, "getOriginalCompanyId",
 				new Class<?>[0]));
 		Assert.assertTrue(
 			Objects.equals(

@@ -115,7 +115,7 @@ public interface CPMeasurementUnitLocalService
 	public CPMeasurementUnit deleteCPMeasurementUnit(long CPMeasurementUnitId)
 		throws PortalException;
 
-	public void deleteCPMeasurementUnits(long groupId);
+	public void deleteCPMeasurementUnits(long companyId);
 
 	/**
 	 * @throws PortalException
@@ -206,7 +206,7 @@ public interface CPMeasurementUnitLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPMeasurementUnit fetchPrimaryCPMeasurementUnit(
-		long groupId, int type);
+		long companyId, int type);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -250,21 +250,21 @@ public interface CPMeasurementUnitLocalService
 	public List<CPMeasurementUnit> getCPMeasurementUnits(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPMeasurementUnit> getCPMeasurementUnits(long groupId);
+	public List<CPMeasurementUnit> getCPMeasurementUnits(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int type, int start, int end,
+		long companyId, int type, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CPMeasurementUnit> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPMeasurementUnit> getCPMeasurementUnits(
-		long groupId, String[] keys, int type);
+		long companyId, String[] keys, int type);
 
 	/**
 	 * Returns all the cp measurement units matching the UUID and company.
@@ -301,10 +301,10 @@ public interface CPMeasurementUnitLocalService
 	public int getCPMeasurementUnitsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPMeasurementUnitsCount(long groupId);
+	public int getCPMeasurementUnitsCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPMeasurementUnitsCount(long groupId, int type);
+	public int getCPMeasurementUnitsCount(long companyId, int type);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

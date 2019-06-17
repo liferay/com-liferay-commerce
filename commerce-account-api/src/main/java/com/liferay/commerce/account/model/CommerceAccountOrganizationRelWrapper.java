@@ -177,13 +177,6 @@ public class CommerceAccountOrganizationRelWrapper
 		return _commerceAccountOrganizationRel.getModifiedDate();
 	}
 
-	@Override
-	public com.liferay.portal.kernel.model.Organization getOrganization()
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceAccountOrganizationRel.getOrganization();
-	}
-
 	/**
 	 * Returns the organization ID of this commerce account organization rel.
 	 *

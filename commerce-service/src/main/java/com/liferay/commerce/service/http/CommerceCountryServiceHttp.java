@@ -136,7 +136,7 @@ public class CommerceCountryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
-			HttpPrincipal httpPrincipal, long groupId, boolean billingAllowed,
+			HttpPrincipal httpPrincipal, long companyId, boolean billingAllowed,
 			boolean active) {
 
 		try {
@@ -145,7 +145,7 @@ public class CommerceCountryServiceHttp {
 				_getBillingCommerceCountriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, billingAllowed, active);
+				methodKey, companyId, billingAllowed, active);
 
 			Object returnObj = null;
 
@@ -169,7 +169,7 @@ public class CommerceCountryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getCommerceCountries(
-			HttpPrincipal httpPrincipal, long groupId, boolean active) {
+			HttpPrincipal httpPrincipal, long companyId, boolean active) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
@@ -177,7 +177,7 @@ public class CommerceCountryServiceHttp {
 				_getCommerceCountriesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, active);
+				methodKey, companyId, active);
 
 			Object returnObj = null;
 
@@ -201,7 +201,7 @@ public class CommerceCountryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getCommerceCountries(
-				HttpPrincipal httpPrincipal, long groupId, boolean active,
+				HttpPrincipal httpPrincipal, long companyId, boolean active,
 				int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceCountry>
@@ -214,7 +214,7 @@ public class CommerceCountryServiceHttp {
 				_getCommerceCountriesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, active, start, end, orderByComparator);
+				methodKey, companyId, active, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -245,7 +245,7 @@ public class CommerceCountryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getCommerceCountries(
-				HttpPrincipal httpPrincipal, long groupId, int start, int end,
+				HttpPrincipal httpPrincipal, long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceCountry>
 						orderByComparator)
@@ -257,7 +257,7 @@ public class CommerceCountryServiceHttp {
 				_getCommerceCountriesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, start, end, orderByComparator);
+				methodKey, companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -287,7 +287,7 @@ public class CommerceCountryServiceHttp {
 	}
 
 	public static int getCommerceCountriesCount(
-			HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -295,7 +295,8 @@ public class CommerceCountryServiceHttp {
 				CommerceCountryServiceUtil.class, "getCommerceCountriesCount",
 				_getCommerceCountriesCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -324,7 +325,7 @@ public class CommerceCountryServiceHttp {
 	}
 
 	public static int getCommerceCountriesCount(
-			HttpPrincipal httpPrincipal, long groupId, boolean active)
+			HttpPrincipal httpPrincipal, long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -333,7 +334,7 @@ public class CommerceCountryServiceHttp {
 				_getCommerceCountriesCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, active);
+				methodKey, companyId, active);
 
 			Object returnObj = null;
 
@@ -399,19 +400,58 @@ public class CommerceCountryServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry getCommerceCountry(
+			HttpPrincipal httpPrincipal, long companyId,
+			String twoLettersISOCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceCountryServiceUtil.class, "getCommerceCountry",
+				_getCommerceCountryParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, twoLettersISOCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.model.CommerceCountry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getShippingCommerceCountries(
-			HttpPrincipal httpPrincipal, long groupId, boolean shippingAllowed,
-			boolean active) {
+			HttpPrincipal httpPrincipal, long companyId,
+			boolean shippingAllowed, boolean active) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getShippingCommerceCountries",
-				_getShippingCommerceCountriesParameterTypes9);
+				_getShippingCommerceCountriesParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, shippingAllowed, active);
+				methodKey, companyId, shippingAllowed, active);
 
 			Object returnObj = null;
 
@@ -435,17 +475,17 @@ public class CommerceCountryServiceHttp {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getWarehouseCommerceCountries(
-				HttpPrincipal httpPrincipal, long groupId, boolean all)
+				HttpPrincipal httpPrincipal, long companyId, boolean all)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getWarehouseCommerceCountries",
-				_getWarehouseCommerceCountriesParameterTypes10);
+				_getWarehouseCommerceCountriesParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, all);
+				methodKey, companyId, all);
 
 			Object returnObj = null;
 
@@ -476,17 +516,17 @@ public class CommerceCountryServiceHttp {
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.model.CommerceCountry> searchCommerceCountries(
-				HttpPrincipal httpPrincipal, long groupId,
+				HttpPrincipal httpPrincipal,
 				com.liferay.portal.kernel.search.SearchContext searchContext)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "searchCommerceCountries",
-				_searchCommerceCountriesParameterTypes11);
+				_searchCommerceCountriesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, searchContext);
+				methodKey, searchContext);
 
 			Object returnObj = null;
 
@@ -522,7 +562,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "setActive",
-				_setActiveParameterTypes12);
+				_setActiveParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId, active);
@@ -567,7 +607,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "updateCommerceCountry",
-				_updateCommerceCountryParameterTypes13);
+				_updateCommerceCountryParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId, nameMap, billingAllowed,
@@ -633,22 +673,22 @@ public class CommerceCountryServiceHttp {
 		new Class[] {long.class, boolean.class};
 	private static final Class<?>[] _getCommerceCountryParameterTypes8 =
 		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceCountryParameterTypes9 =
+		new Class[] {long.class, String.class};
 	private static final Class<?>[]
-		_getShippingCommerceCountriesParameterTypes9 = new Class[] {
+		_getShippingCommerceCountriesParameterTypes10 = new Class[] {
 			long.class, boolean.class, boolean.class
 		};
 	private static final Class<?>[]
-		_getWarehouseCommerceCountriesParameterTypes10 = new Class[] {
+		_getWarehouseCommerceCountriesParameterTypes11 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _searchCommerceCountriesParameterTypes11 =
-		new Class[] {
-			long.class, com.liferay.portal.kernel.search.SearchContext.class
-		};
-	private static final Class<?>[] _setActiveParameterTypes12 = new Class[] {
+	private static final Class<?>[] _searchCommerceCountriesParameterTypes12 =
+		new Class[] {com.liferay.portal.kernel.search.SearchContext.class};
+	private static final Class<?>[] _setActiveParameterTypes13 = new Class[] {
 		long.class, boolean.class
 	};
-	private static final Class<?>[] _updateCommerceCountryParameterTypes13 =
+	private static final Class<?>[] _updateCommerceCountryParameterTypes14 =
 		new Class[] {
 			long.class, java.util.Map.class, boolean.class, boolean.class,
 			String.class, String.class, int.class, boolean.class, double.class,

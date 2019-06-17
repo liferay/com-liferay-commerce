@@ -28,91 +28,113 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	implements CommerceInventoryWarehouseItemLocalService,
-		ServiceWrapper<CommerceInventoryWarehouseItemLocalService> {
+			   ServiceWrapper<CommerceInventoryWarehouseItemLocalService> {
+
 	public CommerceInventoryWarehouseItemLocalServiceWrapper(
-		CommerceInventoryWarehouseItemLocalService commerceInventoryWarehouseItemLocalService) {
-		_commerceInventoryWarehouseItemLocalService = commerceInventoryWarehouseItemLocalService;
+		CommerceInventoryWarehouseItemLocalService
+			commerceInventoryWarehouseItemLocalService) {
+
+		_commerceInventoryWarehouseItemLocalService =
+			commerceInventoryWarehouseItemLocalService;
 	}
 
 	/**
-	* Adds the commerce inventory warehouse item to the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryWarehouseItem the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item that was added
-	*/
+	 * Adds the commerce inventory warehouse item to the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryWarehouseItem the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item that was added
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
-		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-		return _commerceInventoryWarehouseItemLocalService.addCommerceInventoryWarehouseItem(commerceInventoryWarehouseItem);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		addCommerceInventoryWarehouseItem(
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				commerceInventoryWarehouseItem) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(commerceInventoryWarehouseItem);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addCommerceWarehouseItem(
-		long commerceWarehouseId, String sku, int quantity, long userId)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			addCommerceInventoryWarehouseItem(
+				long userId, long commerceInventoryWarehouseId, String sku,
+				int quantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.addCommerceWarehouseItem(commerceWarehouseId,
-			sku, quantity, userId);
-	}
 
-	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem addStockQuantity(
-		long commerceWarehouseItemId, int quantity)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return _commerceInventoryWarehouseItemLocalService.addStockQuantity(commerceWarehouseItemId,
-			quantity);
+		return _commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
 	/**
-	* Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key for the new commerce inventory warehouse item
-	* @return the new commerce inventory warehouse item
-	*/
+	 * Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key for the new commerce inventory warehouse item
+	 * @return the new commerce inventory warehouse item
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem createCommerceInventoryWarehouseItem(
-		long commerceInventoryWarehouseItemId) {
-		return _commerceInventoryWarehouseItemLocalService.createCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		createCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			createCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItemId);
 	}
 
 	/**
-	* Deletes the commerce inventory warehouse item from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryWarehouseItem the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item that was removed
-	*/
+	 * Deletes the commerce inventory warehouse item from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryWarehouseItem the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item that was removed
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem deleteCommerceInventoryWarehouseItem(
-		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-		return _commerceInventoryWarehouseItemLocalService.deleteCommerceInventoryWarehouseItem(commerceInventoryWarehouseItem);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		deleteCommerceInventoryWarehouseItem(
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				commerceInventoryWarehouseItem) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			deleteCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem);
 	}
 
 	/**
-	* Deletes the commerce inventory warehouse item with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item that was removed
-	* @throws PortalException if a commerce inventory warehouse item with the primary key could not be found
-	*/
+	 * Deletes the commerce inventory warehouse item with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item that was removed
+	 * @throws PortalException if a commerce inventory warehouse item with the primary key could not be found
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem deleteCommerceInventoryWarehouseItem(
-		long commerceInventoryWarehouseItemId)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			deleteCommerceInventoryWarehouseItem(
+				long commerceInventoryWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.deleteCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
+
+		return _commerceInventoryWarehouseItemLocalService.
+			deleteCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItemId);
 	}
 
 	@Override
-	public void deleteCommerceWarehouseItems(long commerceWarehouseId) {
-		_commerceInventoryWarehouseItemLocalService.deleteCommerceWarehouseItems(commerceWarehouseId);
+	public void deleteCommerceInventoryWarehouseItems(
+		long commerceInventoryWarehouseId) {
+
+		_commerceInventoryWarehouseItemLocalService.
+			deleteCommerceInventoryWarehouseItems(commerceInventoryWarehouseId);
 	}
 
 	/**
-	* @throws PortalException
-	*/
+	 * @throws PortalException
+	 */
 	@Override
 	public com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
-		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+			com.liferay.portal.kernel.model.PersistedModel persistedModel)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.deletePersistedModel(persistedModel);
+
+		return _commerceInventoryWarehouseItemLocalService.deletePersistedModel(
+			persistedModel);
 	}
 
 	@Override
@@ -121,226 +143,258 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the matching rows
-	*/
+	 * Performs a dynamic query on the database and returns the matching rows.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(dynamicQuery);
+
+		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(
+			dynamicQuery);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @return the range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns a range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @return the range of matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) {
-		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(dynamicQuery,
-			start, end);
+
+		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching rows
-	*/
+	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param start the lower bound of the range of model instances
+	 * @param end the upper bound of the range of model instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching rows
+	 */
 	@Override
 	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
-		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+
+		return _commerceInventoryWarehouseItemLocalService.dynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
-		return _commerceInventoryWarehouseItemLocalService.dynamicQueryCount(dynamicQuery);
+
+		return _commerceInventoryWarehouseItemLocalService.dynamicQueryCount(
+			dynamicQuery);
 	}
 
 	/**
-	* Returns the number of rows matching the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query
-	* @param projection the projection to apply to the query
-	* @return the number of rows matching the dynamic query
-	*/
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection) {
-		return _commerceInventoryWarehouseItemLocalService.dynamicQueryCount(dynamicQuery,
-			projection);
+
+		return _commerceInventoryWarehouseItemLocalService.dynamicQueryCount(
+			dynamicQuery, projection);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
-		long commerceInventoryWarehouseItemId) {
-		return _commerceInventoryWarehouseItemLocalService.fetchCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		fetchCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			fetchCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItemId);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem fetchCommerceWarehouseItem(
-		long commerceWarehouseId, String sku) {
-		return _commerceInventoryWarehouseItemLocalService.fetchCommerceWarehouseItem(commerceWarehouseId,
-			sku);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		fetchCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseId, String sku) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			fetchCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseId, sku);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
-		return _commerceInventoryWarehouseItemLocalService.getActionableDynamicQuery();
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
+		getActionableDynamicQuery() {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the commerce inventory warehouse item with the primary key.
-	*
-	* @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item
-	* @throws PortalException if a commerce inventory warehouse item with the primary key could not be found
-	*/
+	 * Returns the commerce inventory warehouse item with the primary key.
+	 *
+	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item
+	 * @throws PortalException if a commerce inventory warehouse item with the primary key could not be found
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem getCommerceInventoryWarehouseItem(
-		long commerceInventoryWarehouseItemId)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItem(
+				long commerceInventoryWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
 	}
 
 	/**
-	* Returns a range of all the commerce inventory warehouse items.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of commerce inventory warehouse items
-	* @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
-	* @return the range of commerce inventory warehouse items
-	*/
+	 * Returns a range of all the commerce inventory warehouse items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of commerce inventory warehouse items
+	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
+	 * @return the range of commerce inventory warehouse items
+	 */
 	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceInventoryWarehouseItems(
-		int start, int end) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceInventoryWarehouseItems(start,
-			end);
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItems(int start, int end) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItems(start, end);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItems(
+				long commerceInventoryWarehouseId, int start, int end) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItems(
+				commerceInventoryWarehouseId, start, end);
 	}
 
 	/**
-	* Returns the number of commerce inventory warehouse items.
-	*
-	* @return the number of commerce inventory warehouse items
-	*/
+	 * Returns the number of commerce inventory warehouse items.
+	 *
+	 * @return the number of commerce inventory warehouse items
+	 */
 	@Override
 	public int getCommerceInventoryWarehouseItemsCount() {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceInventoryWarehouseItemsCount();
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsCount();
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem getCommerceWarehouseItem(
-		long commerceWarehouseId, String sku)
-		throws com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItem(commerceWarehouseId,
-			sku);
-	}
+	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceWarehouseItems(
-		String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItems(sku);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem> getCommerceWarehouseItemsByCommerceWarehouseId(
-		long commerceWarehouseId) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItemsByCommerceWarehouseId(commerceWarehouseId);
-	}
-
-	@Override
-	public int getCommerceWarehouseItemsCount(String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getCommerceWarehouseItemsCount(sku);
-	}
-
-	@Override
-	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		return _commerceInventoryWarehouseItemLocalService.getIndexableActionableDynamicQuery();
+		return _commerceInventoryWarehouseItemLocalService.
+			getIndexableActionableDynamicQuery();
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
-		return _commerceInventoryWarehouseItemLocalService.getOSGiServiceIdentifier();
+		return _commerceInventoryWarehouseItemLocalService.
+			getOSGiServiceIdentifier();
 	}
 
 	@Override
 	public com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
+			java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.getPersistedModel(primaryKeyObj);
+
+		return _commerceInventoryWarehouseItemLocalService.getPersistedModel(
+			primaryKeyObj);
 	}
 
 	@Override
-	public int getStockQuantityByGroupIdAndSku(long companyId, long groupId,
-		String sku) {
-		return _commerceInventoryWarehouseItemLocalService.getStockQuantityByGroupIdAndSku(companyId,
-			groupId, sku);
+	public int getStockQuantity(long companyId, long groupId, String sku) {
+		return _commerceInventoryWarehouseItemLocalService.getStockQuantity(
+			companyId, groupId, sku);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem removeStockQuantity(
-		long commerceWarehouseItemId, int quantity)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.removeStockQuantity(commerceWarehouseItemId,
-			quantity);
+	public int getStockQuantity(long companyId, String sku) {
+		return _commerceInventoryWarehouseItemLocalService.getStockQuantity(
+			companyId, sku);
 	}
 
 	/**
-	* Updates the commerce inventory warehouse item in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param commerceInventoryWarehouseItem the commerce inventory warehouse item
-	* @return the commerce inventory warehouse item that was updated
-	*/
+	 * Updates the commerce inventory warehouse item in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	 *
+	 * @param commerceInventoryWarehouseItem the commerce inventory warehouse item
+	 * @return the commerce inventory warehouse item that was updated
+	 */
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
-		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
-		return _commerceInventoryWarehouseItemLocalService.updateCommerceInventoryWarehouseItem(commerceInventoryWarehouseItem);
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+		updateCommerceInventoryWarehouseItem(
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				commerceInventoryWarehouseItem) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem);
 	}
 
 	@Override
-	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem updateCommerceWarehouseItem(
-		long commerceWarehouseItemId, int quantity)
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			updateCommerceInventoryWarehouseItem(
+				long commerceInventoryWarehouseItemId, int quantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceInventoryWarehouseItemLocalService.updateCommerceWarehouseItem(commerceWarehouseItemId,
-			quantity);
+
+		return _commerceInventoryWarehouseItemLocalService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItemId, quantity);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			upsertCommerceInventoryWarehouseItem(
+				long userId, long commerceInventoryWarehouseId, String sku,
+				int quantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			upsertCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
 	@Override
@@ -350,9 +404,14 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 
 	@Override
 	public void setWrappedService(
-		CommerceInventoryWarehouseItemLocalService commerceInventoryWarehouseItemLocalService) {
-		_commerceInventoryWarehouseItemLocalService = commerceInventoryWarehouseItemLocalService;
+		CommerceInventoryWarehouseItemLocalService
+			commerceInventoryWarehouseItemLocalService) {
+
+		_commerceInventoryWarehouseItemLocalService =
+			commerceInventoryWarehouseItemLocalService;
 	}
 
-	private CommerceInventoryWarehouseItemLocalService _commerceInventoryWarehouseItemLocalService;
+	private CommerceInventoryWarehouseItemLocalService
+		_commerceInventoryWarehouseItemLocalService;
+
 }

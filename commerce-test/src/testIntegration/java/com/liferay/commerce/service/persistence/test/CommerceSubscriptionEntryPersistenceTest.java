@@ -283,10 +283,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
@@ -297,11 +297,20 @@ public class CommerceSubscriptionEntryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_U() throws Exception {
-		_persistence.countByG_U(
+	public void testCountByC_U() throws Exception {
+		_persistence.countByC_U(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		_persistence.countByG_U(0L, 0L);
+		_persistence.countByC_U(0L, 0L);
+	}
+
+	@Test
+	public void testCountByG_C_U() throws Exception {
+		_persistence.countByG_C_U(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByG_C_U(0L, 0L, 0L);
 	}
 
 	@Test
@@ -349,10 +358,10 @@ public class CommerceSubscriptionEntryPersistenceTest {
 			true, "userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "CPInstanceUuid", true, "CProductId", true,
 			"commerceOrderItemId", true, "subscriptionLength", true,
-			"subscriptionType", true, "subscriptionTypeSettings", true,
-			"currentCycle", true, "maxSubscriptionCycles", true,
-			"subscriptionStatus", true, "lastIterationDate", true,
-			"nextIterationDate", true, "startDate", true);
+			"subscriptionType", true, "currentCycle", true,
+			"maxSubscriptionCycles", true, "subscriptionStatus", true,
+			"lastIterationDate", true, "nextIterationDate", true, "startDate",
+			true);
 	}
 
 	@Test

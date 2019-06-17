@@ -22,7 +22,12 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public interface CPInstanceFinder {
-	public java.util.List<com.liferay.commerce.product.model.CPInstance> findByExpirationDate(
-		java.util.Date expirationDate,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.commerce.product.model.CPInstance> queryDefinition);
+
+	public java.util.List<com.liferay.commerce.product.model.CPInstance>
+		findByExpirationDate(
+			java.util.Date expirationDate,
+			com.liferay.portal.kernel.dao.orm.QueryDefinition
+				<com.liferay.commerce.product.model.CPInstance>
+					queryDefinition);
+
 }

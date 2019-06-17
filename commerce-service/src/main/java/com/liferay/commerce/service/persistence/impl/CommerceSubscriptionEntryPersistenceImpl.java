@@ -1501,70 +1501,70 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 =
 		"commerceSubscriptionEntry.companyId = ?";
 
-	private FinderPath _finderPathWithPaginationFindByGroupId;
-	private FinderPath _finderPathWithoutPaginationFindByGroupId;
-	private FinderPath _finderPathCountByGroupId;
+	private FinderPath _finderPathWithPaginationFindByCompanyId;
+	private FinderPath _finderPathWithoutPaginationFindByCompanyId;
+	private FinderPath _finderPathCountByCompanyId;
 
 	/**
-	 * Returns all the commerce subscription entries where groupId = &#63;.
+	 * Returns all the commerce subscription entries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByGroupId(long groupId) {
-		return findByGroupId(
-			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceSubscriptionEntry> findByCompanyId(long companyId) {
+		return findByCompanyId(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns a range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @return the range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end) {
+	public List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end) {
 
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end,
+	public List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1572,8 +1572,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end,
+	public List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -1585,12 +1585,14 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+			finderPath = _finderPathWithoutPaginationFindByCompanyId;
+			finderArgs = new Object[] {companyId};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId, start, end, orderByComparator};
+			finderPath = _finderPathWithPaginationFindByCompanyId;
+			finderArgs = new Object[] {
+				companyId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceSubscriptionEntry> list = null;
@@ -1603,7 +1605,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				for (CommerceSubscriptionEntry commerceSubscriptionEntry :
 						list) {
 
-					if ((groupId != commerceSubscriptionEntry.getGroupId())) {
+					if ((companyId !=
+							commerceSubscriptionEntry.getCompanyId())) {
+
 						list = null;
 
 						break;
@@ -1625,7 +1629,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -1646,7 +1650,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CommerceSubscriptionEntry>)QueryUtil.list(
@@ -1679,21 +1683,21 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findByGroupId_First(
-			long groupId,
+	public CommerceSubscriptionEntry findByCompanyId_First(
+			long companyId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			fetchByGroupId_First(groupId, orderByComparator);
+			fetchByCompanyId_First(companyId, orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
 			return commerceSubscriptionEntry;
@@ -1703,8 +1707,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1712,19 +1716,19 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchByGroupId_First(
-		long groupId,
+	public CommerceSubscriptionEntry fetchByCompanyId_First(
+		long companyId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		List<CommerceSubscriptionEntry> list = findByGroupId(
-			groupId, 0, 1, orderByComparator);
+		List<CommerceSubscriptionEntry> list = findByCompanyId(
+			companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1734,21 +1738,21 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findByGroupId_Last(
-			long groupId,
+	public CommerceSubscriptionEntry findByCompanyId_Last(
+			long companyId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
-			fetchByGroupId_Last(groupId, orderByComparator);
+			fetchByCompanyId_Last(companyId, orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
 			return commerceSubscriptionEntry;
@@ -1758,8 +1762,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1767,25 +1771,25 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchByGroupId_Last(
-		long groupId,
+	public CommerceSubscriptionEntry fetchByCompanyId_Last(
+		long companyId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceSubscriptionEntry> list = findByGroupId(
-			groupId, count - 1, count, orderByComparator);
+		List<CommerceSubscriptionEntry> list = findByCompanyId(
+			companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1795,17 +1799,17 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry[] findByGroupId_PrevAndNext(
-			long commerceSubscriptionEntryId, long groupId,
+	public CommerceSubscriptionEntry[] findByCompanyId_PrevAndNext(
+			long commerceSubscriptionEntryId, long companyId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
@@ -1820,15 +1824,15 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			CommerceSubscriptionEntry[] array =
 				new CommerceSubscriptionEntryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(
-				session, commerceSubscriptionEntry, groupId, orderByComparator,
-				true);
+			array[0] = getByCompanyId_PrevAndNext(
+				session, commerceSubscriptionEntry, companyId,
+				orderByComparator, true);
 
 			array[1] = commerceSubscriptionEntry;
 
-			array[2] = getByGroupId_PrevAndNext(
-				session, commerceSubscriptionEntry, groupId, orderByComparator,
-				false);
+			array[2] = getByCompanyId_PrevAndNext(
+				session, commerceSubscriptionEntry, companyId,
+				orderByComparator, false);
 
 			return array;
 		}
@@ -1840,9 +1844,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		}
 	}
 
-	protected CommerceSubscriptionEntry getByGroupId_PrevAndNext(
+	protected CommerceSubscriptionEntry getByCompanyId_PrevAndNext(
 		Session session, CommerceSubscriptionEntry commerceSubscriptionEntry,
-		long groupId,
+		long companyId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean previous) {
 
@@ -1859,7 +1863,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -1930,7 +1934,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -1952,31 +1956,31 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce subscription entries where groupId = &#63; from the database.
+	 * Removes all the commerce subscription entries where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByGroupId(long groupId) {
+	public void removeByCompanyId(long companyId) {
 		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
-				findByGroupId(
-					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				findByCompanyId(
+					companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
 			remove(commerceSubscriptionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce subscription entries where groupId = &#63;.
+	 * Returns the number of commerce subscription entries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce subscription entries
 	 */
 	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = _finderPathCountByGroupId;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = _finderPathCountByCompanyId;
 
-		Object[] finderArgs = new Object[] {groupId};
+		Object[] finderArgs = new Object[] {companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1985,7 +1989,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1998,7 +2002,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -2017,8 +2021,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
-		"commerceSubscriptionEntry.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 =
+		"commerceSubscriptionEntry.companyId = ?";
 
 	private FinderPath _finderPathWithPaginationFindBySubscriptionStatus;
 	private FinderPath _finderPathWithoutPaginationFindBySubscriptionStatus;
@@ -2553,53 +2557,53 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		_FINDER_COLUMN_SUBSCRIPTIONSTATUS_SUBSCRIPTIONSTATUS_2 =
 			"commerceSubscriptionEntry.subscriptionStatus = ?";
 
-	private FinderPath _finderPathWithPaginationFindByG_U;
-	private FinderPath _finderPathWithoutPaginationFindByG_U;
-	private FinderPath _finderPathCountByG_U;
+	private FinderPath _finderPathWithPaginationFindByC_U;
+	private FinderPath _finderPathWithoutPaginationFindByC_U;
+	private FinderPath _finderPathCountByC_U;
 
 	/**
-	 * Returns all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @return the matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId) {
+	public List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId) {
 
-		return findByG_U(
-			groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return findByC_U(
+			companyId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns a range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @return the range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end) {
+	public List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end) {
 
-		return findByG_U(groupId, userId, start, end, null);
+		return findByC_U(companyId, userId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
@@ -2607,21 +2611,22 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end,
+	public List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		return findByG_U(groupId, userId, start, end, orderByComparator, true);
+		return findByC_U(
+			companyId, userId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
@@ -2630,8 +2635,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	@Override
-	public List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end,
+	public List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -2643,13 +2648,13 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_U;
-			finderArgs = new Object[] {groupId, userId};
+			finderPath = _finderPathWithoutPaginationFindByC_U;
+			finderArgs = new Object[] {companyId, userId};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByG_U;
+			finderPath = _finderPathWithPaginationFindByC_U;
 			finderArgs = new Object[] {
-				groupId, userId, start, end, orderByComparator
+				companyId, userId, start, end, orderByComparator
 			};
 		}
 
@@ -2663,7 +2668,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				for (CommerceSubscriptionEntry commerceSubscriptionEntry :
 						list) {
 
-					if ((groupId != commerceSubscriptionEntry.getGroupId()) ||
+					if ((companyId !=
+							commerceSubscriptionEntry.getCompanyId()) ||
 						(userId != commerceSubscriptionEntry.getUserId())) {
 
 						list = null;
@@ -2687,9 +2693,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_U_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_U_USERID_2);
+			query.append(_FINDER_COLUMN_C_U_USERID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -2710,7 +2716,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(userId);
 
@@ -2745,22 +2751,22 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findByG_U_First(
-			long groupId, long userId,
+	public CommerceSubscriptionEntry findByC_U_First(
+			long companyId, long userId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
-		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByG_U_First(
-			groupId, userId, orderByComparator);
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByC_U_First(
+			companyId, userId, orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
 			return commerceSubscriptionEntry;
@@ -2770,8 +2776,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -2782,20 +2788,20 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchByG_U_First(
-		long groupId, long userId,
+	public CommerceSubscriptionEntry fetchByC_U_First(
+		long companyId, long userId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		List<CommerceSubscriptionEntry> list = findByG_U(
-			groupId, userId, 0, 1, orderByComparator);
+		List<CommerceSubscriptionEntry> list = findByC_U(
+			companyId, userId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2805,22 +2811,22 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry findByG_U_Last(
-			long groupId, long userId,
+	public CommerceSubscriptionEntry findByC_U_Last(
+			long companyId, long userId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
-		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByG_U_Last(
-			groupId, userId, orderByComparator);
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByC_U_Last(
+			companyId, userId, orderByComparator);
 
 		if (commerceSubscriptionEntry != null) {
 			return commerceSubscriptionEntry;
@@ -2830,8 +2836,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", userId=");
 		msg.append(userId);
@@ -2842,26 +2848,26 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry fetchByG_U_Last(
-		long groupId, long userId,
+	public CommerceSubscriptionEntry fetchByC_U_Last(
+		long companyId, long userId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
 
-		int count = countByG_U(groupId, userId);
+		int count = countByC_U(companyId, userId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceSubscriptionEntry> list = findByG_U(
-			groupId, userId, count - 1, count, orderByComparator);
+		List<CommerceSubscriptionEntry> list = findByC_U(
+			companyId, userId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2871,18 +2877,18 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
 	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	 */
 	@Override
-	public CommerceSubscriptionEntry[] findByG_U_PrevAndNext(
-			long commerceSubscriptionEntryId, long groupId, long userId,
+	public CommerceSubscriptionEntry[] findByC_U_PrevAndNext(
+			long commerceSubscriptionEntryId, long companyId, long userId,
 			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException {
 
@@ -2897,14 +2903,14 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			CommerceSubscriptionEntry[] array =
 				new CommerceSubscriptionEntryImpl[3];
 
-			array[0] = getByG_U_PrevAndNext(
-				session, commerceSubscriptionEntry, groupId, userId,
+			array[0] = getByC_U_PrevAndNext(
+				session, commerceSubscriptionEntry, companyId, userId,
 				orderByComparator, true);
 
 			array[1] = commerceSubscriptionEntry;
 
-			array[2] = getByG_U_PrevAndNext(
-				session, commerceSubscriptionEntry, groupId, userId,
+			array[2] = getByC_U_PrevAndNext(
+				session, commerceSubscriptionEntry, companyId, userId,
 				orderByComparator, false);
 
 			return array;
@@ -2917,9 +2923,9 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		}
 	}
 
-	protected CommerceSubscriptionEntry getByG_U_PrevAndNext(
+	protected CommerceSubscriptionEntry getByC_U_PrevAndNext(
 		Session session, CommerceSubscriptionEntry commerceSubscriptionEntry,
-		long groupId, long userId,
+		long companyId, long userId,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
 		boolean previous) {
 
@@ -2936,9 +2942,593 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_U_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_U_USERID_2);
+		query.append(_FINDER_COLUMN_C_U_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceSubscriptionEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceSubscriptionEntry)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceSubscriptionEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce subscription entries where companyId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 */
+	@Override
+	public void removeByC_U(long companyId, long userId) {
+		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
+				findByC_U(
+					companyId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
+			remove(commerceSubscriptionEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce subscription entries where companyId = &#63; and userId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	@Override
+	public int countByC_U(long companyId, long userId) {
+		FinderPath finderPath = _finderPathCountByC_U;
+
+		Object[] finderArgs = new Object[] {companyId, userId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_U_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_U_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_U_COMPANYID_2 =
+		"commerceSubscriptionEntry.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_U_USERID_2 =
+		"commerceSubscriptionEntry.userId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByG_C_U;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_U;
+	private FinderPath _finderPathCountByG_C_U;
+
+	/**
+	 * Returns all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @return the matching commerce subscription entries
+	 */
+	@Override
+	public List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId) {
+
+		return findByG_C_U(
+			groupId, companyId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @return the range of matching commerce subscription entries
+	 */
+	@Override
+	public List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end) {
+
+		return findByG_C_U(groupId, companyId, userId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	@Override
+	public List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		return findByG_C_U(
+			groupId, companyId, userId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	@Override
+	public List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean retrieveFromCache) {
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+			finderPath = _finderPathWithoutPaginationFindByG_C_U;
+			finderArgs = new Object[] {groupId, companyId, userId};
+		}
+		else {
+			finderPath = _finderPathWithPaginationFindByG_C_U;
+			finderArgs = new Object[] {
+				groupId, companyId, userId, start, end, orderByComparator
+			};
+		}
+
+		List<CommerceSubscriptionEntry> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CommerceSubscriptionEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceSubscriptionEntry commerceSubscriptionEntry :
+						list) {
+
+					if ((groupId != commerceSubscriptionEntry.getGroupId()) ||
+						(companyId !=
+							commerceSubscriptionEntry.getCompanyId()) ||
+						(userId != commerceSubscriptionEntry.getUserId())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					5 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_U_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_U_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_U_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CommerceSubscriptionEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(companyId);
+
+				qPos.add(userId);
+
+				if (!pagination) {
+					list = (List<CommerceSubscriptionEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceSubscriptionEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry findByG_C_U_First(
+			long groupId, long companyId, long userId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			fetchByG_C_U_First(groupId, companyId, userId, orderByComparator);
+
+		if (commerceSubscriptionEntry != null) {
+			return commerceSubscriptionEntry;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", companyId=");
+		msg.append(companyId);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append("}");
+
+		throw new NoSuchSubscriptionEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry fetchByG_C_U_First(
+		long groupId, long companyId, long userId,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		List<CommerceSubscriptionEntry> list = findByG_C_U(
+			groupId, companyId, userId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry findByG_C_U_Last(
+			long groupId, long companyId, long userId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry = fetchByG_C_U_Last(
+			groupId, companyId, userId, orderByComparator);
+
+		if (commerceSubscriptionEntry != null) {
+			return commerceSubscriptionEntry;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", companyId=");
+		msg.append(companyId);
+
+		msg.append(", userId=");
+		msg.append(userId);
+
+		msg.append("}");
+
+		throw new NoSuchSubscriptionEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry fetchByG_C_U_Last(
+		long groupId, long companyId, long userId,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		int count = countByG_C_U(groupId, companyId, userId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceSubscriptionEntry> list = findByG_C_U(
+			groupId, companyId, userId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
+	 */
+	@Override
+	public CommerceSubscriptionEntry[] findByG_C_U_PrevAndNext(
+			long commerceSubscriptionEntryId, long groupId, long companyId,
+			long userId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException {
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry = findByPrimaryKey(
+			commerceSubscriptionEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceSubscriptionEntry[] array =
+				new CommerceSubscriptionEntryImpl[3];
+
+			array[0] = getByG_C_U_PrevAndNext(
+				session, commerceSubscriptionEntry, groupId, companyId, userId,
+				orderByComparator, true);
+
+			array[1] = commerceSubscriptionEntry;
+
+			array[2] = getByG_C_U_PrevAndNext(
+				session, commerceSubscriptionEntry, groupId, companyId, userId,
+				orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceSubscriptionEntry getByG_C_U_PrevAndNext(
+		Session session, CommerceSubscriptionEntry commerceSubscriptionEntry,
+		long groupId, long companyId, long userId,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				6 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		query.append(_SQL_SELECT_COMMERCESUBSCRIPTIONENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_U_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_U_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_G_C_U_USERID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -3011,6 +3601,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 
 		qPos.add(groupId);
 
+		qPos.add(companyId);
+
 		qPos.add(userId);
 
 		if (orderByComparator != null) {
@@ -3033,45 +3625,49 @@ public class CommerceSubscriptionEntryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce subscription entries where groupId = &#63; and userId = &#63; from the database.
+	 * Removes all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByG_U(long groupId, long userId) {
+	public void removeByG_C_U(long groupId, long companyId, long userId) {
 		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
-				findByG_U(
-					groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null)) {
+				findByG_C_U(
+					groupId, companyId, userId, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
 
 			remove(commerceSubscriptionEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns the number of commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
 	 *
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @return the number of matching commerce subscription entries
 	 */
 	@Override
-	public int countByG_U(long groupId, long userId) {
-		FinderPath finderPath = _finderPathCountByG_U;
+	public int countByG_C_U(long groupId, long companyId, long userId) {
+		FinderPath finderPath = _finderPathCountByG_C_U;
 
-		Object[] finderArgs = new Object[] {groupId, userId};
+		Object[] finderArgs = new Object[] {groupId, companyId, userId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_COMMERCESUBSCRIPTIONENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_U_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_U_USERID_2);
+			query.append(_FINDER_COLUMN_G_C_U_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_U_USERID_2);
 
 			String sql = query.toString();
 
@@ -3085,6 +3681,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(groupId);
+
+				qPos.add(companyId);
 
 				qPos.add(userId);
 
@@ -3105,10 +3703,13 @@ public class CommerceSubscriptionEntryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_U_GROUPID_2 =
+	private static final String _FINDER_COLUMN_G_C_U_GROUPID_2 =
 		"commerceSubscriptionEntry.groupId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_U_USERID_2 =
+	private static final String _FINDER_COLUMN_G_C_U_COMPANYID_2 =
+		"commerceSubscriptionEntry.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_U_USERID_2 =
 		"commerceSubscriptionEntry.userId = ?";
 
 	private FinderPath _finderPathFetchByC_C_C;
@@ -3837,12 +4438,12 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				_finderPathWithoutPaginationFindByUuid_C, args);
 
 			args = new Object[] {
-				commerceSubscriptionEntryModelImpl.getGroupId()
+				commerceSubscriptionEntryModelImpl.getCompanyId()
 			};
 
-			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(_finderPathCountByCompanyId, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByGroupId, args);
+				_finderPathWithoutPaginationFindByCompanyId, args);
 
 			args = new Object[] {
 				commerceSubscriptionEntryModelImpl.getSubscriptionStatus()
@@ -3854,13 +4455,23 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				_finderPathWithoutPaginationFindBySubscriptionStatus, args);
 
 			args = new Object[] {
-				commerceSubscriptionEntryModelImpl.getGroupId(),
+				commerceSubscriptionEntryModelImpl.getCompanyId(),
 				commerceSubscriptionEntryModelImpl.getUserId()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_U, args);
+			finderCache.removeResult(_finderPathCountByC_U, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByG_U, args);
+				_finderPathWithoutPaginationFindByC_U, args);
+
+			args = new Object[] {
+				commerceSubscriptionEntryModelImpl.getGroupId(),
+				commerceSubscriptionEntryModelImpl.getCompanyId(),
+				commerceSubscriptionEntryModelImpl.getUserId()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_C_U, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_C_U, args);
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -3912,24 +4523,24 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			}
 
 			if ((commerceSubscriptionEntryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByGroupId.
+				 _finderPathWithoutPaginationFindByCompanyId.
 					 getColumnBitmask()) != 0) {
 
 				Object[] args = new Object[] {
-					commerceSubscriptionEntryModelImpl.getOriginalGroupId()
+					commerceSubscriptionEntryModelImpl.getOriginalCompanyId()
 				};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 
 				args = new Object[] {
-					commerceSubscriptionEntryModelImpl.getGroupId()
+					commerceSubscriptionEntryModelImpl.getCompanyId()
 				};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 			}
 
 			if ((commerceSubscriptionEntryModelImpl.getColumnBitmask() &
@@ -3957,26 +4568,51 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			}
 
 			if ((commerceSubscriptionEntryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByG_U.getColumnBitmask()) !=
+				 _finderPathWithoutPaginationFindByC_U.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceSubscriptionEntryModelImpl.getOriginalCompanyId(),
+					commerceSubscriptionEntryModelImpl.getOriginalUserId()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_U, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_U, args);
+
+				args = new Object[] {
+					commerceSubscriptionEntryModelImpl.getCompanyId(),
+					commerceSubscriptionEntryModelImpl.getUserId()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_U, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_U, args);
+			}
+
+			if ((commerceSubscriptionEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_C_U.getColumnBitmask()) !=
 					 0) {
 
 				Object[] args = new Object[] {
 					commerceSubscriptionEntryModelImpl.getOriginalGroupId(),
+					commerceSubscriptionEntryModelImpl.getOriginalCompanyId(),
 					commerceSubscriptionEntryModelImpl.getOriginalUserId()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_U, args);
+				finderCache.removeResult(_finderPathCountByG_C_U, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_U, args);
+					_finderPathWithoutPaginationFindByG_C_U, args);
 
 				args = new Object[] {
 					commerceSubscriptionEntryModelImpl.getGroupId(),
+					commerceSubscriptionEntryModelImpl.getCompanyId(),
 					commerceSubscriptionEntryModelImpl.getUserId()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_U, args);
+				finderCache.removeResult(_finderPathCountByG_C_U, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_U, args);
+					_finderPathWithoutPaginationFindByG_C_U, args);
 			}
 		}
 
@@ -4507,29 +5143,29 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid_C",
 			new String[] {String.class.getName(), Long.class.getName()});
 
-		_finderPathWithPaginationFindByGroupId = new FinderPath(
+		_finderPathWithPaginationFindByCompanyId = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+		_finderPathWithoutPaginationFindByCompanyId = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] {Long.class.getName()},
-			CommerceSubscriptionEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceSubscriptionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 
-		_finderPathCountByGroupId = new FinderPath(
+		_finderPathCountByCompanyId = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()});
 
 		_finderPathWithPaginationFindBySubscriptionStatus = new FinderPath(
@@ -4559,32 +5195,64 @@ public class CommerceSubscriptionEntryPersistenceImpl
 			"countBySubscriptionStatus",
 			new String[] {Integer.class.getName()});
 
-		_finderPathWithPaginationFindByG_U = new FinderPath(
+		_finderPathWithPaginationFindByC_U = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_U",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_U",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByG_U = new FinderPath(
+		_finderPathWithoutPaginationFindByC_U = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceSubscriptionEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_U",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_U",
 			new String[] {Long.class.getName(), Long.class.getName()},
-			CommerceSubscriptionEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceSubscriptionEntryModelImpl.USERID_COLUMN_BITMASK |
 			CommerceSubscriptionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
 
-		_finderPathCountByG_U = new FinderPath(
+		_finderPathCountByC_U = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_U",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_U",
 			new String[] {Long.class.getName(), Long.class.getName()});
+
+		_finderPathWithPaginationFindByG_C_U = new FinderPath(
+			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceSubscriptionEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_C_U",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_C_U = new FinderPath(
+			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceSubscriptionEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_U",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			CommerceSubscriptionEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.USERID_COLUMN_BITMASK |
+			CommerceSubscriptionEntryModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_C_U = new FinderPath(
+			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceSubscriptionEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_U",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
 
 		_finderPathFetchByC_C_C = new FinderPath(
 			CommerceSubscriptionEntryModelImpl.ENTITY_CACHE_ENABLED,

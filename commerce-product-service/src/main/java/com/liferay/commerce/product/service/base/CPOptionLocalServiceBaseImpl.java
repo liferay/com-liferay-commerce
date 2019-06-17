@@ -35,12 +35,12 @@ import com.liferay.commerce.product.service.persistence.CPMeasurementUnitPersist
 import com.liferay.commerce.product.service.persistence.CPOptionCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionValuePersistence;
-import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
-import com.liferay.commerce.product.service.persistence.CPRulePersistence;
-import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
@@ -247,15 +247,17 @@ public abstract class CPOptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
 	@Override
-	public CPOption fetchCPOptionByUuidAndGroupId(String uuid, long groupId) {
-		return cpOptionPersistence.fetchByUUID_G(uuid, groupId);
+	public CPOption fetchCPOptionByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return cpOptionPersistence.fetchByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -373,9 +375,6 @@ public abstract class CPOptionLocalServiceBaseImpl
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<CPOption>() {
 
@@ -413,51 +412,18 @@ public abstract class CPOptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId) {
-
-		return cpOptionPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp options
-	 * @param end the upper bound of the range of cp options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp options, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPOption> getCPOptionsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPOption> orderByComparator) {
-
-		return cpOptionPersistence.findByUuid_C(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the cp option matching the UUID and group.
+	 * Returns the cp option with the matching UUID and company.
 	 *
 	 * @param uuid the cp option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option
 	 * @throws PortalException if a matching cp option could not be found
 	 */
 	@Override
-	public CPOption getCPOptionByUuidAndGroupId(String uuid, long groupId)
+	public CPOption getCPOptionByUuidAndCompanyId(String uuid, long companyId)
 		throws PortalException {
 
-		return cpOptionPersistence.findByUUID_G(uuid, groupId);
+		return cpOptionPersistence.findByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -496,6 +462,135 @@ public abstract class CPOptionLocalServiceBaseImpl
 	@Override
 	public CPOption updateCPOption(CPOption cpOption) {
 		return cpOptionPersistence.update(cpOption);
+	}
+
+	/**
+	 * Returns the commerce catalog local service.
+	 *
+	 * @return the commerce catalog local service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogLocalService
+		getCommerceCatalogLocalService() {
+
+		return commerceCatalogLocalService;
+	}
+
+	/**
+	 * Sets the commerce catalog local service.
+	 *
+	 * @param commerceCatalogLocalService the commerce catalog local service
+	 */
+	public void setCommerceCatalogLocalService(
+		com.liferay.commerce.product.service.CommerceCatalogLocalService
+			commerceCatalogLocalService) {
+
+		this.commerceCatalogLocalService = commerceCatalogLocalService;
+	}
+
+	/**
+	 * Returns the commerce catalog persistence.
+	 *
+	 * @return the commerce catalog persistence
+	 */
+	public CommerceCatalogPersistence getCommerceCatalogPersistence() {
+		return commerceCatalogPersistence;
+	}
+
+	/**
+	 * Sets the commerce catalog persistence.
+	 *
+	 * @param commerceCatalogPersistence the commerce catalog persistence
+	 */
+	public void setCommerceCatalogPersistence(
+		CommerceCatalogPersistence commerceCatalogPersistence) {
+
+		this.commerceCatalogPersistence = commerceCatalogPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel local service.
+	 *
+	 * @return the commerce channel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelLocalService
+		getCommerceChannelLocalService() {
+
+		return commerceChannelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel local service.
+	 *
+	 * @param commerceChannelLocalService the commerce channel local service
+	 */
+	public void setCommerceChannelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelLocalService
+			commerceChannelLocalService) {
+
+		this.commerceChannelLocalService = commerceChannelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel persistence.
+	 *
+	 * @return the commerce channel persistence
+	 */
+	public CommerceChannelPersistence getCommerceChannelPersistence() {
+		return commerceChannelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel persistence.
+	 *
+	 * @param commerceChannelPersistence the commerce channel persistence
+	 */
+	public void setCommerceChannelPersistence(
+		CommerceChannelPersistence commerceChannelPersistence) {
+
+		this.commerceChannelPersistence = commerceChannelPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel rel local service.
+	 *
+	 * @return the commerce channel rel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelRelLocalService
+		getCommerceChannelRelLocalService() {
+
+		return commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel rel local service.
+	 *
+	 * @param commerceChannelRelLocalService the commerce channel rel local service
+	 */
+	public void setCommerceChannelRelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelRelLocalService
+			commerceChannelRelLocalService) {
+
+		this.commerceChannelRelLocalService = commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel rel persistence.
+	 *
+	 * @return the commerce channel rel persistence
+	 */
+	public CommerceChannelRelPersistence getCommerceChannelRelPersistence() {
+		return commerceChannelRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel rel persistence.
+	 *
+	 * @param commerceChannelRelPersistence the commerce channel rel persistence
+	 */
+	public void setCommerceChannelRelPersistence(
+		CommerceChannelRelPersistence commerceChannelRelPersistence) {
+
+		this.commerceChannelRelPersistence = commerceChannelRelPersistence;
 	}
 
 	/**
@@ -1203,141 +1298,6 @@ public abstract class CPOptionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cp rule local service.
-	 *
-	 * @return the cp rule local service
-	 */
-	public com.liferay.commerce.product.service.CPRuleLocalService
-		getCPRuleLocalService() {
-
-		return cpRuleLocalService;
-	}
-
-	/**
-	 * Sets the cp rule local service.
-	 *
-	 * @param cpRuleLocalService the cp rule local service
-	 */
-	public void setCPRuleLocalService(
-		com.liferay.commerce.product.service.CPRuleLocalService
-			cpRuleLocalService) {
-
-		this.cpRuleLocalService = cpRuleLocalService;
-	}
-
-	/**
-	 * Returns the cp rule persistence.
-	 *
-	 * @return the cp rule persistence
-	 */
-	public CPRulePersistence getCPRulePersistence() {
-		return cpRulePersistence;
-	}
-
-	/**
-	 * Sets the cp rule persistence.
-	 *
-	 * @param cpRulePersistence the cp rule persistence
-	 */
-	public void setCPRulePersistence(CPRulePersistence cpRulePersistence) {
-		this.cpRulePersistence = cpRulePersistence;
-	}
-
-	/**
-	 * Returns the cp rule asset category rel local service.
-	 *
-	 * @return the cp rule asset category rel local service
-	 */
-	public
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			getCPRuleAssetCategoryRelLocalService() {
-
-		return cpRuleAssetCategoryRelLocalService;
-	}
-
-	/**
-	 * Sets the cp rule asset category rel local service.
-	 *
-	 * @param cpRuleAssetCategoryRelLocalService the cp rule asset category rel local service
-	 */
-	public void setCPRuleAssetCategoryRelLocalService(
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			cpRuleAssetCategoryRelLocalService) {
-
-		this.cpRuleAssetCategoryRelLocalService =
-			cpRuleAssetCategoryRelLocalService;
-	}
-
-	/**
-	 * Returns the cp rule asset category rel persistence.
-	 *
-	 * @return the cp rule asset category rel persistence
-	 */
-	public CPRuleAssetCategoryRelPersistence
-		getCPRuleAssetCategoryRelPersistence() {
-
-		return cpRuleAssetCategoryRelPersistence;
-	}
-
-	/**
-	 * Sets the cp rule asset category rel persistence.
-	 *
-	 * @param cpRuleAssetCategoryRelPersistence the cp rule asset category rel persistence
-	 */
-	public void setCPRuleAssetCategoryRelPersistence(
-		CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence) {
-
-		this.cpRuleAssetCategoryRelPersistence =
-			cpRuleAssetCategoryRelPersistence;
-	}
-
-	/**
-	 * Returns the cp rule user segment rel local service.
-	 *
-	 * @return the cp rule user segment rel local service
-	 */
-	public com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-		getCPRuleUserSegmentRelLocalService() {
-
-		return cpRuleUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Sets the cp rule user segment rel local service.
-	 *
-	 * @param cpRuleUserSegmentRelLocalService the cp rule user segment rel local service
-	 */
-	public void setCPRuleUserSegmentRelLocalService(
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-			cpRuleUserSegmentRelLocalService) {
-
-		this.cpRuleUserSegmentRelLocalService =
-			cpRuleUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Returns the cp rule user segment rel persistence.
-	 *
-	 * @return the cp rule user segment rel persistence
-	 */
-	public CPRuleUserSegmentRelPersistence
-		getCPRuleUserSegmentRelPersistence() {
-
-		return cpRuleUserSegmentRelPersistence;
-	}
-
-	/**
-	 * Sets the cp rule user segment rel persistence.
-	 *
-	 * @param cpRuleUserSegmentRelPersistence the cp rule user segment rel persistence
-	 */
-	public void setCPRuleUserSegmentRelPersistence(
-		CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence) {
-
-		this.cpRuleUserSegmentRelPersistence = cpRuleUserSegmentRelPersistence;
-	}
-
-	/**
 	 * Returns the cp specification option local service.
 	 *
 	 * @return the cp specification option local service
@@ -1654,6 +1614,34 @@ public abstract class CPOptionLocalServiceBaseImpl
 	}
 
 	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceCatalogLocalService
+		commerceCatalogLocalService;
+
+	@BeanReference(type = CommerceCatalogPersistence.class)
+	protected CommerceCatalogPersistence commerceCatalogPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceChannelLocalService
+		commerceChannelLocalService;
+
+	@BeanReference(type = CommerceChannelPersistence.class)
+	protected CommerceChannelPersistence commerceChannelPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CommerceChannelRelLocalService
+			commerceChannelRelLocalService;
+
+	@BeanReference(type = CommerceChannelRelPersistence.class)
+	protected CommerceChannelRelPersistence commerceChannelRelPersistence;
+
+	@BeanReference(
 		type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class
 	)
 	protected
@@ -1796,36 +1784,6 @@ public abstract class CPOptionLocalServiceBaseImpl
 
 	@BeanReference(type = CProductPersistence.class)
 	protected CProductPersistence cProductPersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleLocalService.class
-	)
-	protected com.liferay.commerce.product.service.CPRuleLocalService
-		cpRuleLocalService;
-
-	@BeanReference(type = CPRulePersistence.class)
-	protected CPRulePersistence cpRulePersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService.class
-	)
-	protected
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			cpRuleAssetCategoryRelLocalService;
-
-	@BeanReference(type = CPRuleAssetCategoryRelPersistence.class)
-	protected CPRuleAssetCategoryRelPersistence
-		cpRuleAssetCategoryRelPersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class
-	)
-	protected
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-			cpRuleUserSegmentRelLocalService;
-
-	@BeanReference(type = CPRuleUserSegmentRelPersistence.class)
-	protected CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.product.service.CPSpecificationOptionLocalService.class

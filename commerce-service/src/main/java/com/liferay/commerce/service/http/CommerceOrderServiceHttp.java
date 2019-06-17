@@ -55,7 +55,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CommerceOrderServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			HttpPrincipal httpPrincipal, long groupId, long userId,
+			HttpPrincipal httpPrincipal, long userId, long groupId,
 			long commerceAccountId, long commerceCurrencyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -65,7 +65,7 @@ public class CommerceOrderServiceHttp {
 				_addCommerceOrderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, userId, commerceAccountId,
+				methodKey, userId, groupId, commerceAccountId,
 				commerceCurrencyId);
 
 			Object returnObj = null;
@@ -1705,14 +1705,14 @@ public class CommerceOrderServiceHttp {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
-			HttpPrincipal httpPrincipal, long commerceAccountId,
-			long commerceCurrencyId, long billingAddressId,
-			long shippingAddressId, String commercePaymentMethodKey,
-			long commerceShippingMethodId, String shippingOptionName,
-			String purchaseOrderNumber, java.math.BigDecimal subtotal,
-			java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
-			int paymentStatus, int orderStatus, String advanceStatus,
-			String externalReferenceCode,
+			HttpPrincipal httpPrincipal, long userId, long groupId,
+			long commerceAccountId, long commerceCurrencyId,
+			long billingAddressId, long shippingAddressId,
+			String commercePaymentMethodKey, long commerceShippingMethodId,
+			String shippingOptionName, String purchaseOrderNumber,
+			java.math.BigDecimal subtotal, java.math.BigDecimal shippingAmount,
+			java.math.BigDecimal total, int paymentStatus, int orderStatus,
+			String advanceStatus, String externalReferenceCode,
 			com.liferay.commerce.context.CommerceContext commerceContext,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -1723,12 +1723,13 @@ public class CommerceOrderServiceHttp {
 				_upsertCommerceOrderParameterTypes41);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commerceAccountId, commerceCurrencyId,
-				billingAddressId, shippingAddressId, commercePaymentMethodKey,
-				commerceShippingMethodId, shippingOptionName,
-				purchaseOrderNumber, subtotal, shippingAmount, total,
-				paymentStatus, orderStatus, advanceStatus,
-				externalReferenceCode, commerceContext, serviceContext);
+				methodKey, userId, groupId, commerceAccountId,
+				commerceCurrencyId, billingAddressId, shippingAddressId,
+				commercePaymentMethodKey, commerceShippingMethodId,
+				shippingOptionName, purchaseOrderNumber, subtotal,
+				shippingAmount, total, paymentStatus, orderStatus,
+				advanceStatus, externalReferenceCode, commerceContext,
+				serviceContext);
 
 			Object returnObj = null;
 
@@ -1903,11 +1904,11 @@ public class CommerceOrderServiceHttp {
 	};
 	private static final Class<?>[] _upsertCommerceOrderParameterTypes41 =
 		new Class[] {
-			long.class, long.class, long.class, long.class, String.class,
-			long.class, String.class, String.class, java.math.BigDecimal.class,
-			java.math.BigDecimal.class, java.math.BigDecimal.class, int.class,
-			int.class, String.class, String.class,
-			com.liferay.commerce.context.CommerceContext.class,
+			long.class, long.class, long.class, long.class, long.class,
+			long.class, String.class, long.class, String.class, String.class,
+			java.math.BigDecimal.class, java.math.BigDecimal.class,
+			java.math.BigDecimal.class, int.class, int.class, String.class,
+			String.class, com.liferay.commerce.context.CommerceContext.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 

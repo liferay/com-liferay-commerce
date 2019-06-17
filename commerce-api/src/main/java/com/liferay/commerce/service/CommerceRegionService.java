@@ -90,6 +90,11 @@ public interface CommerceRegionService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceRegion> getCommerceRegions(
+			long companyId, String countryTwoLettersISOCode, boolean active)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceRegionsCount(long commerceCountryId)
 		throws PortalException;
 

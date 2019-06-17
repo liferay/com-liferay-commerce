@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -41,7 +41,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommerceRegionModel
-	extends BaseModel<CommerceRegion>, ShardedModel, StagedGroupedModel {
+	extends BaseModel<CommerceRegion>, ShardedModel, StagedAuditedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -93,22 +93,6 @@ public interface CommerceRegionModel
 	 * @param commerceRegionId the commerce region ID of this commerce region
 	 */
 	public void setCommerceRegionId(long commerceRegionId);
-
-	/**
-	 * Returns the group ID of this commerce region.
-	 *
-	 * @return the group ID of this commerce region
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce region.
-	 *
-	 * @param groupId the group ID of this commerce region
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce region.
@@ -291,7 +275,6 @@ public interface CommerceRegionModel
 	 *
 	 * @return the last publish date of this commerce region
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -299,7 +282,6 @@ public interface CommerceRegionModel
 	 *
 	 * @param lastPublishDate the last publish date of this commerce region
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	@Override

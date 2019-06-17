@@ -25,37 +25,47 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryWarehouseModel
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl"
+)
 @ProviderType
 public interface CommerceInventoryWarehouse
 	extends CommerceInventoryWarehouseModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceInventoryWarehouse, Long> COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR =
-		new Accessor<CommerceInventoryWarehouse, Long>() {
-			@Override
-			public Long get(
-				CommerceInventoryWarehouse commerceInventoryWarehouse) {
-				return commerceInventoryWarehouse.getCommerceInventoryWarehouseId();
-			}
+	public static final Accessor<CommerceInventoryWarehouse, Long>
+		COMMERCE_INVENTORY_WAREHOUSE_ID_ACCESSOR =
+			new Accessor<CommerceInventoryWarehouse, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceInventoryWarehouse commerceInventoryWarehouse) {
 
-			@Override
-			public Class<CommerceInventoryWarehouse> getTypeClass() {
-				return CommerceInventoryWarehouse.class;
-			}
-		};
+					return commerceInventoryWarehouse.
+						getCommerceInventoryWarehouseId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceInventoryWarehouse> getTypeClass() {
+					return CommerceInventoryWarehouse.class;
+				}
+
+			};
+
+	public java.util.List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItems();
 
 	public boolean isGeolocated();
+
 }

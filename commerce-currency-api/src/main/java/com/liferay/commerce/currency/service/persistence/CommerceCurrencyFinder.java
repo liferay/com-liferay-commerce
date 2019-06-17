@@ -23,6 +23,6 @@ import aQute.bnd.annotation.ProviderType;
 @ProviderType
 public interface CommerceCurrencyFinder {
 
-	public java.util.List<Long> getGroupIds();
+	public java.util.List<Long> getCompanyIds();
 
 }

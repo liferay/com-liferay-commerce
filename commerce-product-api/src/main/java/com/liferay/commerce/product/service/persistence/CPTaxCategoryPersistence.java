@@ -50,147 +50,147 @@ public interface CPTaxCategoryPersistence
 		Set<Serializable> primaryKeys);
 
 	/**
-	 * Returns all the cp tax categories where groupId = &#63;.
+	 * Returns all the cp tax categories where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching cp tax categories
 	 */
-	public java.util.List<CPTaxCategory> findByGroupId(long groupId);
+	public java.util.List<CPTaxCategory> findByCompanyId(long companyId);
 
 	/**
-	 * Returns a range of all the cp tax categories where groupId = &#63;.
+	 * Returns a range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @return the range of matching cp tax categories
 	 */
-	public java.util.List<CPTaxCategory> findByGroupId(
-		long groupId, int start, int end);
+	public java.util.List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
+	 * Returns an ordered range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp tax categories
 	 */
-	public java.util.List<CPTaxCategory> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
+	 * Returns an ordered range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp tax categories
 	 */
-	public java.util.List<CPTaxCategory> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the first cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
-	public CPTaxCategory findByGroupId_First(
-			long groupId,
+	public CPTaxCategory findByCompanyId_First(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 				orderByComparator)
 		throws NoSuchCPTaxCategoryException;
 
 	/**
-	 * Returns the first cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the first cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
-	public CPTaxCategory fetchByGroupId_First(
-		long groupId,
+	public CPTaxCategory fetchByCompanyId_First(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator);
 
 	/**
-	 * Returns the last cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the last cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
-	public CPTaxCategory findByGroupId_Last(
-			long groupId,
+	public CPTaxCategory findByCompanyId_Last(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 				orderByComparator)
 		throws NoSuchCPTaxCategoryException;
 
 	/**
-	 * Returns the last cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the last cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
-	public CPTaxCategory fetchByGroupId_Last(
-		long groupId,
+	public CPTaxCategory fetchByCompanyId_Last(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator);
 
 	/**
-	 * Returns the cp tax categories before and after the current cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the cp tax categories before and after the current cp tax category in the ordered set where companyId = &#63;.
 	 *
 	 * @param CPTaxCategoryId the primary key of the current cp tax category
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a cp tax category with the primary key could not be found
 	 */
-	public CPTaxCategory[] findByGroupId_PrevAndNext(
-			long CPTaxCategoryId, long groupId,
+	public CPTaxCategory[] findByCompanyId_PrevAndNext(
+			long CPTaxCategoryId, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 				orderByComparator)
 		throws NoSuchCPTaxCategoryException;
 
 	/**
-	 * Removes all the cp tax categories where groupId = &#63; from the database.
+	 * Removes all the cp tax categories where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
-	public void removeByGroupId(long groupId);
+	public void removeByCompanyId(long companyId);
 
 	/**
-	 * Returns the number of cp tax categories where groupId = &#63;.
+	 * Returns the number of cp tax categories where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching cp tax categories
 	 */
-	public int countByGroupId(long groupId);
+	public int countByCompanyId(long companyId);
 
 	/**
 	 * Caches the cp tax category in the entity cache if it is enabled.

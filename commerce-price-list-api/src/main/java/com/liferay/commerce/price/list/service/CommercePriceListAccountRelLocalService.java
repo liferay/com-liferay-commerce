@@ -197,16 +197,16 @@ public interface CommercePriceListAccountRelLocalService
 		long commercePriceListId, long commerceAccountId);
 
 	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceListAccountRel
-		fetchCommercePriceListAccountRelByUuidAndGroupId(
-			String uuid, long groupId);
+		fetchCommercePriceListAccountRelByUuidAndCompanyId(
+			String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -224,17 +224,17 @@ public interface CommercePriceListAccountRelLocalService
 		throws PortalException;
 
 	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel
 	 * @throws PortalException if a matching commerce price list account rel could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceListAccountRel
-			getCommercePriceListAccountRelByUuidAndGroupId(
-				String uuid, long groupId)
+			getCommercePriceListAccountRelByUuidAndCompanyId(
+				String uuid, long companyId)
 		throws PortalException;
 
 	/**
@@ -255,34 +255,6 @@ public interface CommercePriceListAccountRelLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
 		long commercePriceListId);
-
-	/**
-	 * Returns all the commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceListAccountRel>
-		getCommercePriceListAccountRelsByUuidAndCompanyId(
-			String uuid, long companyId);
-
-	/**
-	 * Returns a range of commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price list account rels
-	 * @param end the upper bound of the range of commerce price list account rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceListAccountRel>
-		getCommercePriceListAccountRelsByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			OrderByComparator<CommercePriceListAccountRel> orderByComparator);
 
 	/**
 	 * Returns the number of commerce price list account rels.

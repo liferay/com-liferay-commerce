@@ -635,252 +635,6 @@ public class CommerceCountryPersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_UUID_3 =
 		"(commerceCountry.uuid IS NULL OR commerceCountry.uuid = '')";
 
-	private FinderPath _finderPathFetchByUUID_G;
-	private FinderPath _finderPathCountByUUID_G;
-
-	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce country
-	 * @throws NoSuchCountryException if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry findByUUID_G(String uuid, long groupId)
-		throws NoSuchCountryException {
-
-		CommerceCountry commerceCountry = fetchByUUID_G(uuid, groupId);
-
-		if (commerceCountry == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCountryException(msg.toString());
-		}
-
-		return commerceCountry;
-	}
-
-	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the commerce country where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
-	 */
-	@Override
-	public CommerceCountry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		uuid = Objects.toString(uuid, "");
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByUUID_G, finderArgs, this);
-		}
-
-		if (result instanceof CommerceCountry) {
-			CommerceCountry commerceCountry = (CommerceCountry)result;
-
-			if (!Objects.equals(uuid, commerceCountry.getUuid()) ||
-				(groupId != commerceCountry.getGroupId())) {
-
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<CommerceCountry> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
-				}
-				else {
-					CommerceCountry commerceCountry = list.get(0);
-
-					result = commerceCountry;
-
-					cacheResult(commerceCountry);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CommerceCountry)result;
-		}
-	}
-
-	/**
-	 * Removes the commerce country where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce country that was removed
-	 */
-	@Override
-	public CommerceCountry removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCountryException {
-
-		CommerceCountry commerceCountry = findByUUID_G(uuid, groupId);
-
-		return remove(commerceCountry);
-	}
-
-	/**
-	 * Returns the number of commerce countries where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce countries
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		uuid = Objects.toString(uuid, "");
-
-		FinderPath finderPath = _finderPathCountByUUID_G;
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 =
-		"commerceCountry.uuid = ? AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 =
-		"(commerceCountry.uuid IS NULL OR commerceCountry.uuid = '') AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 =
-		"commerceCountry.groupId = ?";
-
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
@@ -1475,70 +1229,70 @@ public class CommerceCountryPersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 =
 		"commerceCountry.companyId = ?";
 
-	private FinderPath _finderPathWithPaginationFindByGroupId;
-	private FinderPath _finderPathWithoutPaginationFindByGroupId;
-	private FinderPath _finderPathCountByGroupId;
+	private FinderPath _finderPathWithPaginationFindByCompanyId;
+	private FinderPath _finderPathWithoutPaginationFindByCompanyId;
+	private FinderPath _finderPathCountByCompanyId;
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63;.
+	 * Returns all the commerce countries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByGroupId(long groupId) {
-		return findByGroupId(
-			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceCountry> findByCompanyId(long companyId) {
+		return findByCompanyId(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end) {
+	public List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end) {
 
-		return findByGroupId(groupId, start, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end,
+	public List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1546,8 +1300,8 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByGroupId(
-		long groupId, int start, int end,
+	public List<CommerceCountry> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -1559,12 +1313,14 @@ public class CommerceCountryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+			finderPath = _finderPathWithoutPaginationFindByCompanyId;
+			finderArgs = new Object[] {companyId};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId, start, end, orderByComparator};
+			finderPath = _finderPathWithPaginationFindByCompanyId;
+			finderArgs = new Object[] {
+				companyId, start, end, orderByComparator
+			};
 		}
 
 		List<CommerceCountry> list = null;
@@ -1575,7 +1331,7 @@ public class CommerceCountryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCountry commerceCountry : list) {
-					if ((groupId != commerceCountry.getGroupId())) {
+					if ((companyId != commerceCountry.getCompanyId())) {
 						list = null;
 
 						break;
@@ -1597,7 +1353,7 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -1618,7 +1374,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CommerceCountry>)QueryUtil.list(
@@ -1651,20 +1407,21 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByGroupId_First(
-			long groupId, OrderByComparator<CommerceCountry> orderByComparator)
+	public CommerceCountry findByCompanyId_First(
+			long companyId,
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByGroupId_First(
-			groupId, orderByComparator);
+		CommerceCountry commerceCountry = fetchByCompanyId_First(
+			companyId, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -1674,8 +1431,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1683,18 +1440,18 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByGroupId_First(
-		long groupId, OrderByComparator<CommerceCountry> orderByComparator) {
+	public CommerceCountry fetchByCompanyId_First(
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		List<CommerceCountry> list = findByGroupId(
-			groupId, 0, 1, orderByComparator);
+		List<CommerceCountry> list = findByCompanyId(
+			companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1704,20 +1461,21 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByGroupId_Last(
-			long groupId, OrderByComparator<CommerceCountry> orderByComparator)
+	public CommerceCountry findByCompanyId_Last(
+			long companyId,
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByGroupId_Last(
-			groupId, orderByComparator);
+		CommerceCountry commerceCountry = fetchByCompanyId_Last(
+			companyId, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -1727,8 +1485,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -1736,24 +1494,24 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByGroupId_Last(
-		long groupId, OrderByComparator<CommerceCountry> orderByComparator) {
+	public CommerceCountry fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCountry> list = findByGroupId(
-			groupId, count - 1, count, orderByComparator);
+		List<CommerceCountry> list = findByCompanyId(
+			companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1763,17 +1521,17 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
 	@Override
-	public CommerceCountry[] findByGroupId_PrevAndNext(
-			long commerceCountryId, long groupId,
+	public CommerceCountry[] findByCompanyId_PrevAndNext(
+			long commerceCountryId, long companyId,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
@@ -1786,13 +1544,13 @@ public class CommerceCountryPersistenceImpl
 
 			CommerceCountry[] array = new CommerceCountryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(
-				session, commerceCountry, groupId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(
+				session, commerceCountry, companyId, orderByComparator, true);
 
 			array[1] = commerceCountry;
 
-			array[2] = getByGroupId_PrevAndNext(
-				session, commerceCountry, groupId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(
+				session, commerceCountry, companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -1804,8 +1562,8 @@ public class CommerceCountryPersistenceImpl
 		}
 	}
 
-	protected CommerceCountry getByGroupId_PrevAndNext(
-		Session session, CommerceCountry commerceCountry, long groupId,
+	protected CommerceCountry getByCompanyId_PrevAndNext(
+		Session session, CommerceCountry commerceCountry, long companyId,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean previous) {
 
@@ -1822,7 +1580,7 @@ public class CommerceCountryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -1893,7 +1651,7 @@ public class CommerceCountryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -1915,31 +1673,31 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByGroupId(long groupId) {
+	public void removeByCompanyId(long companyId) {
 		for (CommerceCountry commerceCountry :
-				findByGroupId(
-					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				findByCompanyId(
+					companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
 			remove(commerceCountry);
 		}
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = _finderPathCountByGroupId;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = _finderPathCountByCompanyId;
 
-		Object[] finderArgs = new Object[] {groupId};
+		Object[] finderArgs = new Object[] {companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1948,7 +1706,7 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1961,7 +1719,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1980,34 +1738,34 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
-		"commerceCountry.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 =
+		"commerceCountry.companyId = ?";
 
-	private FinderPath _finderPathFetchByG_Tw;
-	private FinderPath _finderPathCountByG_Tw;
+	private FinderPath _finderPathFetchByC_Tw;
+	private FinderPath _finderPathCountByC_Tw;
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_Tw(long groupId, String twoLettersISOCode)
+	public CommerceCountry findByC_Tw(long companyId, String twoLettersISOCode)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_Tw(
-			groupId, twoLettersISOCode);
+		CommerceCountry commerceCountry = fetchByC_Tw(
+			companyId, twoLettersISOCode);
 
 		if (commerceCountry == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(", twoLettersISOCode=");
 			msg.append(twoLettersISOCode);
@@ -2025,44 +1783,46 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_Tw(long groupId, String twoLettersISOCode) {
-		return fetchByG_Tw(groupId, twoLettersISOCode, true);
+	public CommerceCountry fetchByC_Tw(
+		long companyId, String twoLettersISOCode) {
+
+		return fetchByC_Tw(companyId, twoLettersISOCode, true);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_Tw(
-		long groupId, String twoLettersISOCode, boolean retrieveFromCache) {
+	public CommerceCountry fetchByC_Tw(
+		long companyId, String twoLettersISOCode, boolean retrieveFromCache) {
 
 		twoLettersISOCode = Objects.toString(twoLettersISOCode, "");
 
-		Object[] finderArgs = new Object[] {groupId, twoLettersISOCode};
+		Object[] finderArgs = new Object[] {companyId, twoLettersISOCode};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
 			result = finderCache.getResult(
-				_finderPathFetchByG_Tw, finderArgs, this);
+				_finderPathFetchByC_Tw, finderArgs, this);
 		}
 
 		if (result instanceof CommerceCountry) {
 			CommerceCountry commerceCountry = (CommerceCountry)result;
 
-			if ((groupId != commerceCountry.getGroupId()) ||
+			if ((companyId != commerceCountry.getCompanyId()) ||
 				!Objects.equals(
 					twoLettersISOCode,
 					commerceCountry.getTwoLettersISOCode())) {
@@ -2076,17 +1836,17 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_TW_COMPANYID_2);
 
 			boolean bindTwoLettersISOCode = false;
 
 			if (twoLettersISOCode.isEmpty()) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
+				query.append(_FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_3);
 			}
 			else {
 				bindTwoLettersISOCode = true;
 
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
+				query.append(_FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_2);
 			}
 
 			String sql = query.toString();
@@ -2100,7 +1860,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindTwoLettersISOCode) {
 					qPos.add(twoLettersISOCode);
@@ -2110,7 +1870,7 @@ public class CommerceCountryPersistenceImpl
 
 				if (list.isEmpty()) {
 					finderCache.putResult(
-						_finderPathFetchByG_Tw, finderArgs, list);
+						_finderPathFetchByC_Tw, finderArgs, list);
 				}
 				else {
 					CommerceCountry commerceCountry = list.get(0);
@@ -2121,7 +1881,7 @@ public class CommerceCountryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByG_Tw, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_Tw, finderArgs);
 
 				throw processException(e);
 			}
@@ -2139,36 +1899,37 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes the commerce country where groupId = &#63; and twoLettersISOCode = &#63; from the database.
+	 * Removes the commerce country where companyId = &#63; and twoLettersISOCode = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the commerce country that was removed
 	 */
 	@Override
-	public CommerceCountry removeByG_Tw(long groupId, String twoLettersISOCode)
+	public CommerceCountry removeByC_Tw(
+			long companyId, String twoLettersISOCode)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = findByG_Tw(
-			groupId, twoLettersISOCode);
+		CommerceCountry commerceCountry = findByC_Tw(
+			companyId, twoLettersISOCode);
 
 		return remove(commerceCountry);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and twoLettersISOCode = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and twoLettersISOCode = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByG_Tw(long groupId, String twoLettersISOCode) {
+	public int countByC_Tw(long companyId, String twoLettersISOCode) {
 		twoLettersISOCode = Objects.toString(twoLettersISOCode, "");
 
-		FinderPath finderPath = _finderPathCountByG_Tw;
+		FinderPath finderPath = _finderPathCountByC_Tw;
 
-		Object[] finderArgs = new Object[] {groupId, twoLettersISOCode};
+		Object[] finderArgs = new Object[] {companyId, twoLettersISOCode};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2177,17 +1938,17 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_TW_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_TW_COMPANYID_2);
 
 			boolean bindTwoLettersISOCode = false;
 
 			if (twoLettersISOCode.isEmpty()) {
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3);
+				query.append(_FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_3);
 			}
 			else {
 				bindTwoLettersISOCode = true;
 
-				query.append(_FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2);
+				query.append(_FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_2);
 			}
 
 			String sql = query.toString();
@@ -2201,7 +1962,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (bindTwoLettersISOCode) {
 					qPos.add(twoLettersISOCode);
@@ -2224,39 +1985,39 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_TW_GROUPID_2 =
-		"commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_TW_COMPANYID_2 =
+		"commerceCountry.companyId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_2 =
+	private static final String _FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_2 =
 		"commerceCountry.twoLettersISOCode = ?";
 
-	private static final String _FINDER_COLUMN_G_TW_TWOLETTERSISOCODE_3 =
+	private static final String _FINDER_COLUMN_C_TW_TWOLETTERSISOCODE_3 =
 		"(commerceCountry.twoLettersISOCode IS NULL OR commerceCountry.twoLettersISOCode = '')";
 
-	private FinderPath _finderPathFetchByG_N;
-	private FinderPath _finderPathCountByG_N;
+	private FinderPath _finderPathFetchByC_N;
+	private FinderPath _finderPathCountByC_N;
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or throws a <code>NoSuchCountryException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_N(long groupId, int numericISOCode)
+	public CommerceCountry findByC_N(long companyId, int numericISOCode)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_N(groupId, numericISOCode);
+		CommerceCountry commerceCountry = fetchByC_N(companyId, numericISOCode);
 
 		if (commerceCountry == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
+			msg.append("companyId=");
+			msg.append(companyId);
 
 			msg.append(", numericISOCode=");
 			msg.append(numericISOCode);
@@ -2274,42 +2035,42 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_N(long groupId, int numericISOCode) {
-		return fetchByG_N(groupId, numericISOCode, true);
+	public CommerceCountry fetchByC_N(long companyId, int numericISOCode) {
+		return fetchByC_N(companyId, numericISOCode, true);
 	}
 
 	/**
-	 * Returns the commerce country where groupId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_N(
-		long groupId, int numericISOCode, boolean retrieveFromCache) {
+	public CommerceCountry fetchByC_N(
+		long companyId, int numericISOCode, boolean retrieveFromCache) {
 
-		Object[] finderArgs = new Object[] {groupId, numericISOCode};
+		Object[] finderArgs = new Object[] {companyId, numericISOCode};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
 			result = finderCache.getResult(
-				_finderPathFetchByG_N, finderArgs, this);
+				_finderPathFetchByC_N, finderArgs, this);
 		}
 
 		if (result instanceof CommerceCountry) {
 			CommerceCountry commerceCountry = (CommerceCountry)result;
 
-			if ((groupId != commerceCountry.getGroupId()) ||
+			if ((companyId != commerceCountry.getCompanyId()) ||
 				(numericISOCode != commerceCountry.getNumericISOCode())) {
 
 				result = null;
@@ -2321,9 +2082,9 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_N_NUMERICISOCODE_2);
+			query.append(_FINDER_COLUMN_C_N_NUMERICISOCODE_2);
 
 			String sql = query.toString();
 
@@ -2336,7 +2097,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(numericISOCode);
 
@@ -2344,7 +2105,7 @@ public class CommerceCountryPersistenceImpl
 
 				if (list.isEmpty()) {
 					finderCache.putResult(
-						_finderPathFetchByG_N, finderArgs, list);
+						_finderPathFetchByC_N, finderArgs, list);
 				}
 				else {
 					CommerceCountry commerceCountry = list.get(0);
@@ -2355,7 +2116,7 @@ public class CommerceCountryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByG_N, finderArgs);
+				finderCache.removeResult(_finderPathFetchByC_N, finderArgs);
 
 				throw processException(e);
 			}
@@ -2373,33 +2134,33 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes the commerce country where groupId = &#63; and numericISOCode = &#63; from the database.
+	 * Removes the commerce country where companyId = &#63; and numericISOCode = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the commerce country that was removed
 	 */
 	@Override
-	public CommerceCountry removeByG_N(long groupId, int numericISOCode)
+	public CommerceCountry removeByC_N(long companyId, int numericISOCode)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = findByG_N(groupId, numericISOCode);
+		CommerceCountry commerceCountry = findByC_N(companyId, numericISOCode);
 
 		return remove(commerceCountry);
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and numericISOCode = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and numericISOCode = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByG_N(long groupId, int numericISOCode) {
-		FinderPath finderPath = _finderPathCountByG_N;
+	public int countByC_N(long companyId, int numericISOCode) {
+		FinderPath finderPath = _finderPathCountByC_N;
 
-		Object[] finderArgs = new Object[] {groupId, numericISOCode};
+		Object[] finderArgs = new Object[] {companyId, numericISOCode};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2408,9 +2169,9 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_N_NUMERICISOCODE_2);
+			query.append(_FINDER_COLUMN_C_N_NUMERICISOCODE_2);
 
 			String sql = query.toString();
 
@@ -2423,7 +2184,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(numericISOCode);
 
@@ -2444,57 +2205,57 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_N_GROUPID_2 =
-		"commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 =
+		"commerceCountry.companyId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_N_NUMERICISOCODE_2 =
+	private static final String _FINDER_COLUMN_C_N_NUMERICISOCODE_2 =
 		"commerceCountry.numericISOCode = ?";
 
-	private FinderPath _finderPathWithPaginationFindByG_A;
-	private FinderPath _finderPathWithoutPaginationFindByG_A;
-	private FinderPath _finderPathCountByG_A;
+	private FinderPath _finderPathWithPaginationFindByC_A;
+	private FinderPath _finderPathWithoutPaginationFindByC_A;
+	private FinderPath _finderPathCountByC_A;
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_A(long groupId, boolean active) {
-		return findByG_A(
-			groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CommerceCountry> findByC_A(long companyId, boolean active) {
+		return findByC_A(
+			companyId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @return the range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end) {
+	public List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end) {
 
-		return findByG_A(groupId, active, start, end, null);
+		return findByC_A(companyId, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
@@ -2502,21 +2263,22 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end,
+	public List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return findByG_A(groupId, active, start, end, orderByComparator, true);
+		return findByC_A(
+			companyId, active, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
@@ -2525,8 +2287,8 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_A(
-		long groupId, boolean active, int start, int end,
+	public List<CommerceCountry> findByC_A(
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -2538,13 +2300,13 @@ public class CommerceCountryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_A;
-			finderArgs = new Object[] {groupId, active};
+			finderPath = _finderPathWithoutPaginationFindByC_A;
+			finderArgs = new Object[] {companyId, active};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByG_A;
+			finderPath = _finderPathWithPaginationFindByC_A;
 			finderArgs = new Object[] {
-				groupId, active, start, end, orderByComparator
+				companyId, active, start, end, orderByComparator
 			};
 		}
 
@@ -2556,7 +2318,7 @@ public class CommerceCountryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCountry commerceCountry : list) {
-					if ((groupId != commerceCountry.getGroupId()) ||
+					if ((companyId != commerceCountry.getCompanyId()) ||
 						(active != commerceCountry.isActive())) {
 
 						list = null;
@@ -2580,9 +2342,9 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -2603,7 +2365,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(active);
 
@@ -2638,22 +2400,22 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_A_First(
-			long groupId, boolean active,
+	public CommerceCountry findByC_A_First(
+			long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_A_First(
-			groupId, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_A_First(
+			companyId, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -2663,8 +2425,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", active=");
 		msg.append(active);
@@ -2675,20 +2437,20 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_A_First(
-		long groupId, boolean active,
+	public CommerceCountry fetchByC_A_First(
+		long companyId, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		List<CommerceCountry> list = findByG_A(
-			groupId, active, 0, 1, orderByComparator);
+		List<CommerceCountry> list = findByC_A(
+			companyId, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2698,22 +2460,22 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_A_Last(
-			long groupId, boolean active,
+	public CommerceCountry findByC_A_Last(
+			long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_A_Last(
-			groupId, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_A_Last(
+			companyId, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -2723,8 +2485,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", active=");
 		msg.append(active);
@@ -2735,26 +2497,26 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_A_Last(
-		long groupId, boolean active,
+	public CommerceCountry fetchByC_A_Last(
+		long companyId, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		int count = countByG_A(groupId, active);
+		int count = countByC_A(companyId, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCountry> list = findByG_A(
-			groupId, active, count - 1, count, orderByComparator);
+		List<CommerceCountry> list = findByC_A(
+			companyId, active, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2764,18 +2526,18 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce country
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
 	@Override
-	public CommerceCountry[] findByG_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean active,
+	public CommerceCountry[] findByC_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
@@ -2788,14 +2550,14 @@ public class CommerceCountryPersistenceImpl
 
 			CommerceCountry[] array = new CommerceCountryImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(
-				session, commerceCountry, groupId, active, orderByComparator,
+			array[0] = getByC_A_PrevAndNext(
+				session, commerceCountry, companyId, active, orderByComparator,
 				true);
 
 			array[1] = commerceCountry;
 
-			array[2] = getByG_A_PrevAndNext(
-				session, commerceCountry, groupId, active, orderByComparator,
+			array[2] = getByC_A_PrevAndNext(
+				session, commerceCountry, companyId, active, orderByComparator,
 				false);
 
 			return array;
@@ -2808,8 +2570,8 @@ public class CommerceCountryPersistenceImpl
 		}
 	}
 
-	protected CommerceCountry getByG_A_PrevAndNext(
-		Session session, CommerceCountry commerceCountry, long groupId,
+	protected CommerceCountry getByC_A_PrevAndNext(
+		Session session, CommerceCountry commerceCountry, long companyId,
 		boolean active, OrderByComparator<CommerceCountry> orderByComparator,
 		boolean previous) {
 
@@ -2826,9 +2588,9 @@ public class CommerceCountryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -2899,7 +2661,7 @@ public class CommerceCountryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(active);
 
@@ -2923,16 +2685,16 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 */
 	@Override
-	public void removeByG_A(long groupId, boolean active) {
+	public void removeByC_A(long companyId, boolean active) {
 		for (CommerceCountry commerceCountry :
-				findByG_A(
-					groupId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				findByC_A(
+					companyId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 					null)) {
 
 			remove(commerceCountry);
@@ -2940,17 +2702,17 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByG_A(long groupId, boolean active) {
-		FinderPath finderPath = _finderPathCountByG_A;
+	public int countByC_A(long companyId, boolean active) {
+		FinderPath finderPath = _finderPathCountByC_A;
 
-		Object[] finderArgs = new Object[] {groupId, active};
+		Object[] finderArgs = new Object[] {companyId, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2959,9 +2721,9 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
 			String sql = query.toString();
 
@@ -2974,7 +2736,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(active);
 
@@ -2995,41 +2757,41 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 =
-		"commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 =
+		"commerceCountry.companyId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 =
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 =
 		"commerceCountry.active = ?";
 
-	private FinderPath _finderPathWithPaginationFindByG_B_A;
-	private FinderPath _finderPathWithoutPaginationFindByG_B_A;
-	private FinderPath _finderPathCountByG_B_A;
+	private FinderPath _finderPathWithPaginationFindByC_B_A;
+	private FinderPath _finderPathWithoutPaginationFindByC_B_A;
+	private FinderPath _finderPathCountByC_B_A;
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
-		return findByG_B_A(
-			groupId, billingAllowed, active, QueryUtil.ALL_POS,
+		return findByC_B_A(
+			companyId, billingAllowed, active, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3037,21 +2799,21 @@ public class CommerceCountryPersistenceImpl
 	 * @return the range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end) {
 
-		return findByG_B_A(groupId, billingAllowed, active, start, end, null);
+		return findByC_B_A(companyId, billingAllowed, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3060,23 +2822,23 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return findByG_B_A(
-			groupId, billingAllowed, active, start, end, orderByComparator,
+		return findByC_B_A(
+			companyId, billingAllowed, active, start, end, orderByComparator,
 			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3086,8 +2848,8 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_B_A(
-		long groupId, boolean billingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_B_A(
+		long companyId, boolean billingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -3099,13 +2861,13 @@ public class CommerceCountryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_B_A;
-			finderArgs = new Object[] {groupId, billingAllowed, active};
+			finderPath = _finderPathWithoutPaginationFindByC_B_A;
+			finderArgs = new Object[] {companyId, billingAllowed, active};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByG_B_A;
+			finderPath = _finderPathWithPaginationFindByC_B_A;
 			finderArgs = new Object[] {
-				groupId, billingAllowed, active, start, end, orderByComparator
+				companyId, billingAllowed, active, start, end, orderByComparator
 			};
 		}
 
@@ -3117,7 +2879,7 @@ public class CommerceCountryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCountry commerceCountry : list) {
-					if ((groupId != commerceCountry.getGroupId()) ||
+					if ((companyId != commerceCountry.getCompanyId()) ||
 						(billingAllowed !=
 							commerceCountry.isBillingAllowed()) ||
 						(active != commerceCountry.isActive())) {
@@ -3143,11 +2905,11 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_B_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_B_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_B_A_BILLINGALLOWED_2);
+			query.append(_FINDER_COLUMN_C_B_A_BILLINGALLOWED_2);
 
-			query.append(_FINDER_COLUMN_G_B_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_B_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -3168,7 +2930,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(billingAllowed);
 
@@ -3205,9 +2967,9 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3215,13 +2977,13 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_B_A_First(
-			long groupId, boolean billingAllowed, boolean active,
+	public CommerceCountry findByC_B_A_First(
+			long companyId, boolean billingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_B_A_First(
-			groupId, billingAllowed, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_B_A_First(
+			companyId, billingAllowed, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -3231,8 +2993,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", billingAllowed=");
 		msg.append(billingAllowed);
@@ -3246,21 +3008,21 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_B_A_First(
-		long groupId, boolean billingAllowed, boolean active,
+	public CommerceCountry fetchByC_B_A_First(
+		long companyId, boolean billingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		List<CommerceCountry> list = findByG_B_A(
-			groupId, billingAllowed, active, 0, 1, orderByComparator);
+		List<CommerceCountry> list = findByC_B_A(
+			companyId, billingAllowed, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3270,9 +3032,9 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3280,13 +3042,13 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_B_A_Last(
-			long groupId, boolean billingAllowed, boolean active,
+	public CommerceCountry findByC_B_A_Last(
+			long companyId, boolean billingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_B_A_Last(
-			groupId, billingAllowed, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_B_A_Last(
+			companyId, billingAllowed, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -3296,8 +3058,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", billingAllowed=");
 		msg.append(billingAllowed);
@@ -3311,27 +3073,27 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_B_A_Last(
-		long groupId, boolean billingAllowed, boolean active,
+	public CommerceCountry fetchByC_B_A_Last(
+		long companyId, boolean billingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		int count = countByG_B_A(groupId, billingAllowed, active);
+		int count = countByC_B_A(companyId, billingAllowed, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCountry> list = findByG_B_A(
-			groupId, billingAllowed, active, count - 1, count,
+		List<CommerceCountry> list = findByC_B_A(
+			companyId, billingAllowed, active, count - 1, count,
 			orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3342,10 +3104,10 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3353,8 +3115,8 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
 	@Override
-	public CommerceCountry[] findByG_B_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean billingAllowed,
+	public CommerceCountry[] findByC_B_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean billingAllowed,
 			boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
@@ -3368,14 +3130,14 @@ public class CommerceCountryPersistenceImpl
 
 			CommerceCountry[] array = new CommerceCountryImpl[3];
 
-			array[0] = getByG_B_A_PrevAndNext(
-				session, commerceCountry, groupId, billingAllowed, active,
+			array[0] = getByC_B_A_PrevAndNext(
+				session, commerceCountry, companyId, billingAllowed, active,
 				orderByComparator, true);
 
 			array[1] = commerceCountry;
 
-			array[2] = getByG_B_A_PrevAndNext(
-				session, commerceCountry, groupId, billingAllowed, active,
+			array[2] = getByC_B_A_PrevAndNext(
+				session, commerceCountry, companyId, billingAllowed, active,
 				orderByComparator, false);
 
 			return array;
@@ -3388,8 +3150,8 @@ public class CommerceCountryPersistenceImpl
 		}
 	}
 
-	protected CommerceCountry getByG_B_A_PrevAndNext(
-		Session session, CommerceCountry commerceCountry, long groupId,
+	protected CommerceCountry getByC_B_A_PrevAndNext(
+		Session session, CommerceCountry commerceCountry, long companyId,
 		boolean billingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean previous) {
@@ -3407,11 +3169,11 @@ public class CommerceCountryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_B_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_B_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_B_A_BILLINGALLOWED_2);
+		query.append(_FINDER_COLUMN_C_B_A_BILLINGALLOWED_2);
 
-		query.append(_FINDER_COLUMN_G_B_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_B_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -3482,7 +3244,7 @@ public class CommerceCountryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(billingAllowed);
 
@@ -3508,19 +3270,19 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 */
 	@Override
-	public void removeByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public void removeByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
 		for (CommerceCountry commerceCountry :
-				findByG_B_A(
-					groupId, billingAllowed, active, QueryUtil.ALL_POS,
+				findByC_B_A(
+					companyId, billingAllowed, active, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null)) {
 
 			remove(commerceCountry);
@@ -3528,20 +3290,20 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and billingAllowed = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByG_B_A(
-		long groupId, boolean billingAllowed, boolean active) {
+	public int countByC_B_A(
+		long companyId, boolean billingAllowed, boolean active) {
 
-		FinderPath finderPath = _finderPathCountByG_B_A;
+		FinderPath finderPath = _finderPathCountByC_B_A;
 
-		Object[] finderArgs = new Object[] {groupId, billingAllowed, active};
+		Object[] finderArgs = new Object[] {companyId, billingAllowed, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -3550,11 +3312,11 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_B_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_B_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_B_A_BILLINGALLOWED_2);
+			query.append(_FINDER_COLUMN_C_B_A_BILLINGALLOWED_2);
 
-			query.append(_FINDER_COLUMN_G_B_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_B_A_ACTIVE_2);
 
 			String sql = query.toString();
 
@@ -3567,7 +3329,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(billingAllowed);
 
@@ -3590,44 +3352,44 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_B_A_GROUPID_2 =
-		"commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_B_A_COMPANYID_2 =
+		"commerceCountry.companyId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_B_A_BILLINGALLOWED_2 =
+	private static final String _FINDER_COLUMN_C_B_A_BILLINGALLOWED_2 =
 		"commerceCountry.billingAllowed = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_B_A_ACTIVE_2 =
+	private static final String _FINDER_COLUMN_C_B_A_ACTIVE_2 =
 		"commerceCountry.active = ?";
 
-	private FinderPath _finderPathWithPaginationFindByG_S_A;
-	private FinderPath _finderPathWithoutPaginationFindByG_S_A;
-	private FinderPath _finderPathCountByG_S_A;
+	private FinderPath _finderPathWithPaginationFindByC_S_A;
+	private FinderPath _finderPathWithoutPaginationFindByC_S_A;
+	private FinderPath _finderPathCountByC_S_A;
 
 	/**
-	 * Returns all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @return the matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		return findByG_S_A(
-			groupId, shippingAllowed, active, QueryUtil.ALL_POS,
+		return findByC_S_A(
+			companyId, shippingAllowed, active, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns a range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3635,21 +3397,22 @@ public class CommerceCountryPersistenceImpl
 	 * @return the range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end) {
 
-		return findByG_S_A(groupId, shippingAllowed, active, start, end, null);
+		return findByC_S_A(
+			companyId, shippingAllowed, active, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3658,23 +3421,23 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator) {
 
-		return findByG_S_A(
-			groupId, shippingAllowed, active, start, end, orderByComparator,
+		return findByC_S_A(
+			companyId, shippingAllowed, active, start, end, orderByComparator,
 			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns an ordered range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
@@ -3684,8 +3447,8 @@ public class CommerceCountryPersistenceImpl
 	 * @return the ordered range of matching commerce countries
 	 */
 	@Override
-	public List<CommerceCountry> findByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active, int start,
+	public List<CommerceCountry> findByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -3697,13 +3460,14 @@ public class CommerceCountryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_S_A;
-			finderArgs = new Object[] {groupId, shippingAllowed, active};
+			finderPath = _finderPathWithoutPaginationFindByC_S_A;
+			finderArgs = new Object[] {companyId, shippingAllowed, active};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByG_S_A;
+			finderPath = _finderPathWithPaginationFindByC_S_A;
 			finderArgs = new Object[] {
-				groupId, shippingAllowed, active, start, end, orderByComparator
+				companyId, shippingAllowed, active, start, end,
+				orderByComparator
 			};
 		}
 
@@ -3715,7 +3479,7 @@ public class CommerceCountryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCountry commerceCountry : list) {
-					if ((groupId != commerceCountry.getGroupId()) ||
+					if ((companyId != commerceCountry.getCompanyId()) ||
 						(shippingAllowed !=
 							commerceCountry.isShippingAllowed()) ||
 						(active != commerceCountry.isActive())) {
@@ -3741,11 +3505,11 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_S_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_S_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_S_A_SHIPPINGALLOWED_2);
+			query.append(_FINDER_COLUMN_C_S_A_SHIPPINGALLOWED_2);
 
-			query.append(_FINDER_COLUMN_G_S_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_S_A_ACTIVE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -3766,7 +3530,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(shippingAllowed);
 
@@ -3803,9 +3567,9 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3813,13 +3577,13 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_S_A_First(
-			long groupId, boolean shippingAllowed, boolean active,
+	public CommerceCountry findByC_S_A_First(
+			long companyId, boolean shippingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_S_A_First(
-			groupId, shippingAllowed, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_S_A_First(
+			companyId, shippingAllowed, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -3829,8 +3593,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", shippingAllowed=");
 		msg.append(shippingAllowed);
@@ -3844,21 +3608,21 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_S_A_First(
-		long groupId, boolean shippingAllowed, boolean active,
+	public CommerceCountry fetchByC_S_A_First(
+		long companyId, boolean shippingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		List<CommerceCountry> list = findByG_S_A(
-			groupId, shippingAllowed, active, 0, 1, orderByComparator);
+		List<CommerceCountry> list = findByC_S_A(
+			companyId, shippingAllowed, active, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3868,9 +3632,9 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3878,13 +3642,13 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry findByG_S_A_Last(
-			long groupId, boolean shippingAllowed, boolean active,
+	public CommerceCountry findByC_S_A_Last(
+			long companyId, boolean shippingAllowed, boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
 
-		CommerceCountry commerceCountry = fetchByG_S_A_Last(
-			groupId, shippingAllowed, active, orderByComparator);
+		CommerceCountry commerceCountry = fetchByC_S_A_Last(
+			companyId, shippingAllowed, active, orderByComparator);
 
 		if (commerceCountry != null) {
 			return commerceCountry;
@@ -3894,8 +3658,8 @@ public class CommerceCountryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append(", shippingAllowed=");
 		msg.append(shippingAllowed);
@@ -3909,27 +3673,27 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the last commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Override
-	public CommerceCountry fetchByG_S_A_Last(
-		long groupId, boolean shippingAllowed, boolean active,
+	public CommerceCountry fetchByC_S_A_Last(
+		long companyId, boolean shippingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator) {
 
-		int count = countByG_S_A(groupId, shippingAllowed, active);
+		int count = countByC_S_A(companyId, shippingAllowed, active);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CommerceCountry> list = findByG_S_A(
-			groupId, shippingAllowed, active, count - 1, count,
+		List<CommerceCountry> list = findByC_S_A(
+			companyId, shippingAllowed, active, count - 1, count,
 			orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -3940,10 +3704,10 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce countries before and after the current commerce country in the ordered set where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
 	 * @param commerceCountryId the primary key of the current commerce country
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -3951,8 +3715,8 @@ public class CommerceCountryPersistenceImpl
 	 * @throws NoSuchCountryException if a commerce country with the primary key could not be found
 	 */
 	@Override
-	public CommerceCountry[] findByG_S_A_PrevAndNext(
-			long commerceCountryId, long groupId, boolean shippingAllowed,
+	public CommerceCountry[] findByC_S_A_PrevAndNext(
+			long commerceCountryId, long companyId, boolean shippingAllowed,
 			boolean active,
 			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException {
@@ -3966,14 +3730,14 @@ public class CommerceCountryPersistenceImpl
 
 			CommerceCountry[] array = new CommerceCountryImpl[3];
 
-			array[0] = getByG_S_A_PrevAndNext(
-				session, commerceCountry, groupId, shippingAllowed, active,
+			array[0] = getByC_S_A_PrevAndNext(
+				session, commerceCountry, companyId, shippingAllowed, active,
 				orderByComparator, true);
 
 			array[1] = commerceCountry;
 
-			array[2] = getByG_S_A_PrevAndNext(
-				session, commerceCountry, groupId, shippingAllowed, active,
+			array[2] = getByC_S_A_PrevAndNext(
+				session, commerceCountry, companyId, shippingAllowed, active,
 				orderByComparator, false);
 
 			return array;
@@ -3986,8 +3750,8 @@ public class CommerceCountryPersistenceImpl
 		}
 	}
 
-	protected CommerceCountry getByG_S_A_PrevAndNext(
-		Session session, CommerceCountry commerceCountry, long groupId,
+	protected CommerceCountry getByC_S_A_PrevAndNext(
+		Session session, CommerceCountry commerceCountry, long companyId,
 		boolean shippingAllowed, boolean active,
 		OrderByComparator<CommerceCountry> orderByComparator,
 		boolean previous) {
@@ -4005,11 +3769,11 @@ public class CommerceCountryPersistenceImpl
 
 		query.append(_SQL_SELECT_COMMERCECOUNTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_S_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_C_S_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_G_S_A_SHIPPINGALLOWED_2);
+		query.append(_FINDER_COLUMN_C_S_A_SHIPPINGALLOWED_2);
 
-		query.append(_FINDER_COLUMN_G_S_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_S_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -4080,7 +3844,7 @@ public class CommerceCountryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		qPos.add(shippingAllowed);
 
@@ -4106,19 +3870,19 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63; from the database.
+	 * Removes all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 */
 	@Override
-	public void removeByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public void removeByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
 		for (CommerceCountry commerceCountry :
-				findByG_S_A(
-					groupId, shippingAllowed, active, QueryUtil.ALL_POS,
+				findByC_S_A(
+					companyId, shippingAllowed, active, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null)) {
 
 			remove(commerceCountry);
@@ -4126,20 +3890,20 @@ public class CommerceCountryPersistenceImpl
 	}
 
 	/**
-	 * Returns the number of commerce countries where groupId = &#63; and shippingAllowed = &#63; and active = &#63;.
+	 * Returns the number of commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @return the number of matching commerce countries
 	 */
 	@Override
-	public int countByG_S_A(
-		long groupId, boolean shippingAllowed, boolean active) {
+	public int countByC_S_A(
+		long companyId, boolean shippingAllowed, boolean active) {
 
-		FinderPath finderPath = _finderPathCountByG_S_A;
+		FinderPath finderPath = _finderPathCountByC_S_A;
 
-		Object[] finderArgs = new Object[] {groupId, shippingAllowed, active};
+		Object[] finderArgs = new Object[] {companyId, shippingAllowed, active};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4148,11 +3912,11 @@ public class CommerceCountryPersistenceImpl
 
 			query.append(_SQL_COUNT_COMMERCECOUNTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_S_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_C_S_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_G_S_A_SHIPPINGALLOWED_2);
+			query.append(_FINDER_COLUMN_C_S_A_SHIPPINGALLOWED_2);
 
-			query.append(_FINDER_COLUMN_G_S_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_S_A_ACTIVE_2);
 
 			String sql = query.toString();
 
@@ -4165,7 +3929,7 @@ public class CommerceCountryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				qPos.add(shippingAllowed);
 
@@ -4188,13 +3952,13 @@ public class CommerceCountryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_S_A_GROUPID_2 =
-		"commerceCountry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_A_COMPANYID_2 =
+		"commerceCountry.companyId = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_S_A_SHIPPINGALLOWED_2 =
+	private static final String _FINDER_COLUMN_C_S_A_SHIPPINGALLOWED_2 =
 		"commerceCountry.shippingAllowed = ? AND ";
 
-	private static final String _FINDER_COLUMN_G_S_A_ACTIVE_2 =
+	private static final String _FINDER_COLUMN_C_S_A_ACTIVE_2 =
 		"commerceCountry.active = ?";
 
 	public CommerceCountryPersistenceImpl() {
@@ -4233,24 +3997,17 @@ public class CommerceCountryPersistenceImpl
 			commerceCountry);
 
 		finderCache.putResult(
-			_finderPathFetchByUUID_G,
+			_finderPathFetchByC_Tw,
 			new Object[] {
-				commerceCountry.getUuid(), commerceCountry.getGroupId()
-			},
-			commerceCountry);
-
-		finderCache.putResult(
-			_finderPathFetchByG_Tw,
-			new Object[] {
-				commerceCountry.getGroupId(),
+				commerceCountry.getCompanyId(),
 				commerceCountry.getTwoLettersISOCode()
 			},
 			commerceCountry);
 
 		finderCache.putResult(
-			_finderPathFetchByG_N,
+			_finderPathFetchByC_N,
 			new Object[] {
-				commerceCountry.getGroupId(),
+				commerceCountry.getCompanyId(),
 				commerceCountry.getNumericISOCode()
 			},
 			commerceCountry);
@@ -4334,34 +4091,24 @@ public class CommerceCountryPersistenceImpl
 		CommerceCountryModelImpl commerceCountryModelImpl) {
 
 		Object[] args = new Object[] {
-			commerceCountryModelImpl.getUuid(),
-			commerceCountryModelImpl.getGroupId()
-		};
-
-		finderCache.putResult(
-			_finderPathCountByUUID_G, args, Long.valueOf(1), false);
-		finderCache.putResult(
-			_finderPathFetchByUUID_G, args, commerceCountryModelImpl, false);
-
-		args = new Object[] {
-			commerceCountryModelImpl.getGroupId(),
+			commerceCountryModelImpl.getCompanyId(),
 			commerceCountryModelImpl.getTwoLettersISOCode()
 		};
 
 		finderCache.putResult(
-			_finderPathCountByG_Tw, args, Long.valueOf(1), false);
+			_finderPathCountByC_Tw, args, Long.valueOf(1), false);
 		finderCache.putResult(
-			_finderPathFetchByG_Tw, args, commerceCountryModelImpl, false);
+			_finderPathFetchByC_Tw, args, commerceCountryModelImpl, false);
 
 		args = new Object[] {
-			commerceCountryModelImpl.getGroupId(),
+			commerceCountryModelImpl.getCompanyId(),
 			commerceCountryModelImpl.getNumericISOCode()
 		};
 
 		finderCache.putResult(
-			_finderPathCountByG_N, args, Long.valueOf(1), false);
+			_finderPathCountByC_N, args, Long.valueOf(1), false);
 		finderCache.putResult(
-			_finderPathFetchByG_N, args, commerceCountryModelImpl, false);
+			_finderPathFetchByC_N, args, commerceCountryModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -4370,68 +4117,46 @@ public class CommerceCountryPersistenceImpl
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-				commerceCountryModelImpl.getUuid(),
-				commerceCountryModelImpl.getGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
-
-		if ((commerceCountryModelImpl.getColumnBitmask() &
-			 _finderPathFetchByUUID_G.getColumnBitmask()) != 0) {
-
-			Object[] args = new Object[] {
-				commerceCountryModelImpl.getOriginalUuid(),
-				commerceCountryModelImpl.getOriginalGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getCompanyId(),
 				commerceCountryModelImpl.getTwoLettersISOCode()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_Tw, args);
-			finderCache.removeResult(_finderPathFetchByG_Tw, args);
+			finderCache.removeResult(_finderPathCountByC_Tw, args);
+			finderCache.removeResult(_finderPathFetchByC_Tw, args);
 		}
 
 		if ((commerceCountryModelImpl.getColumnBitmask() &
-			 _finderPathFetchByG_Tw.getColumnBitmask()) != 0) {
+			 _finderPathFetchByC_Tw.getColumnBitmask()) != 0) {
 
 			Object[] args = new Object[] {
-				commerceCountryModelImpl.getOriginalGroupId(),
+				commerceCountryModelImpl.getOriginalCompanyId(),
 				commerceCountryModelImpl.getOriginalTwoLettersISOCode()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_Tw, args);
-			finderCache.removeResult(_finderPathFetchByG_Tw, args);
+			finderCache.removeResult(_finderPathCountByC_Tw, args);
+			finderCache.removeResult(_finderPathFetchByC_Tw, args);
 		}
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getCompanyId(),
 				commerceCountryModelImpl.getNumericISOCode()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_N, args);
-			finderCache.removeResult(_finderPathFetchByG_N, args);
+			finderCache.removeResult(_finderPathCountByC_N, args);
+			finderCache.removeResult(_finderPathFetchByC_N, args);
 		}
 
 		if ((commerceCountryModelImpl.getColumnBitmask() &
-			 _finderPathFetchByG_N.getColumnBitmask()) != 0) {
+			 _finderPathFetchByC_N.getColumnBitmask()) != 0) {
 
 			Object[] args = new Object[] {
-				commerceCountryModelImpl.getOriginalGroupId(),
+				commerceCountryModelImpl.getOriginalCompanyId(),
 				commerceCountryModelImpl.getOriginalNumericISOCode()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_N, args);
-			finderCache.removeResult(_finderPathFetchByG_N, args);
+			finderCache.removeResult(_finderPathCountByC_N, args);
+			finderCache.removeResult(_finderPathFetchByC_N, args);
 		}
 	}
 
@@ -4641,40 +4366,40 @@ public class CommerceCountryPersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByUuid_C, args);
 
-			args = new Object[] {commerceCountryModelImpl.getGroupId()};
+			args = new Object[] {commerceCountryModelImpl.getCompanyId()};
 
-			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(_finderPathCountByCompanyId, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByGroupId, args);
+				_finderPathWithoutPaginationFindByCompanyId, args);
 
 			args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getCompanyId(),
 				commerceCountryModelImpl.isActive()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_A, args);
+			finderCache.removeResult(_finderPathCountByC_A, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByG_A, args);
+				_finderPathWithoutPaginationFindByC_A, args);
 
 			args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getCompanyId(),
 				commerceCountryModelImpl.isBillingAllowed(),
 				commerceCountryModelImpl.isActive()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_B_A, args);
+			finderCache.removeResult(_finderPathCountByC_B_A, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByG_B_A, args);
+				_finderPathWithoutPaginationFindByC_B_A, args);
 
 			args = new Object[] {
-				commerceCountryModelImpl.getGroupId(),
+				commerceCountryModelImpl.getCompanyId(),
 				commerceCountryModelImpl.isShippingAllowed(),
 				commerceCountryModelImpl.isActive()
 			};
 
-			finderCache.removeResult(_finderPathCountByG_S_A, args);
+			finderCache.removeResult(_finderPathCountByC_S_A, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByG_S_A, args);
+				_finderPathWithoutPaginationFindByC_S_A, args);
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -4724,95 +4449,95 @@ public class CommerceCountryPersistenceImpl
 			}
 
 			if ((commerceCountryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByGroupId.
+				 _finderPathWithoutPaginationFindByCompanyId.
 					 getColumnBitmask()) != 0) {
 
 				Object[] args = new Object[] {
-					commerceCountryModelImpl.getOriginalGroupId()
+					commerceCountryModelImpl.getOriginalCompanyId()
 				};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 
-				args = new Object[] {commerceCountryModelImpl.getGroupId()};
+				args = new Object[] {commerceCountryModelImpl.getCompanyId()};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 			}
 
 			if ((commerceCountryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByG_A.getColumnBitmask()) !=
+				 _finderPathWithoutPaginationFindByC_A.getColumnBitmask()) !=
 					 0) {
 
 				Object[] args = new Object[] {
-					commerceCountryModelImpl.getOriginalGroupId(),
+					commerceCountryModelImpl.getOriginalCompanyId(),
 					commerceCountryModelImpl.getOriginalActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(_finderPathCountByC_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_A, args);
+					_finderPathWithoutPaginationFindByC_A, args);
 
 				args = new Object[] {
-					commerceCountryModelImpl.getGroupId(),
+					commerceCountryModelImpl.getCompanyId(),
 					commerceCountryModelImpl.isActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_A, args);
+				finderCache.removeResult(_finderPathCountByC_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_A, args);
+					_finderPathWithoutPaginationFindByC_A, args);
 			}
 
 			if ((commerceCountryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByG_B_A.getColumnBitmask()) !=
+				 _finderPathWithoutPaginationFindByC_B_A.getColumnBitmask()) !=
 					 0) {
 
 				Object[] args = new Object[] {
-					commerceCountryModelImpl.getOriginalGroupId(),
+					commerceCountryModelImpl.getOriginalCompanyId(),
 					commerceCountryModelImpl.getOriginalBillingAllowed(),
 					commerceCountryModelImpl.getOriginalActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_B_A, args);
+				finderCache.removeResult(_finderPathCountByC_B_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_B_A, args);
+					_finderPathWithoutPaginationFindByC_B_A, args);
 
 				args = new Object[] {
-					commerceCountryModelImpl.getGroupId(),
+					commerceCountryModelImpl.getCompanyId(),
 					commerceCountryModelImpl.isBillingAllowed(),
 					commerceCountryModelImpl.isActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_B_A, args);
+				finderCache.removeResult(_finderPathCountByC_B_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_B_A, args);
+					_finderPathWithoutPaginationFindByC_B_A, args);
 			}
 
 			if ((commerceCountryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByG_S_A.getColumnBitmask()) !=
+				 _finderPathWithoutPaginationFindByC_S_A.getColumnBitmask()) !=
 					 0) {
 
 				Object[] args = new Object[] {
-					commerceCountryModelImpl.getOriginalGroupId(),
+					commerceCountryModelImpl.getOriginalCompanyId(),
 					commerceCountryModelImpl.getOriginalShippingAllowed(),
 					commerceCountryModelImpl.getOriginalActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_S_A, args);
+				finderCache.removeResult(_finderPathCountByC_S_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_S_A, args);
+					_finderPathWithoutPaginationFindByC_S_A, args);
 
 				args = new Object[] {
-					commerceCountryModelImpl.getGroupId(),
+					commerceCountryModelImpl.getCompanyId(),
 					commerceCountryModelImpl.isShippingAllowed(),
 					commerceCountryModelImpl.isActive()
 				};
 
-				finderCache.removeResult(_finderPathCountByG_S_A, args);
+				finderCache.removeResult(_finderPathCountByC_S_A, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByG_S_A, args);
+					_finderPathWithoutPaginationFindByC_S_A, args);
 			}
 		}
 
@@ -5284,21 +5009,6 @@ public class CommerceCountryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
 			new String[] {String.class.getName()});
 
-		_finderPathFetchByUUID_G = new FinderPath(
-			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()},
-			CommerceCountryModelImpl.UUID_COLUMN_BITMASK |
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK);
-
-		_finderPathCountByUUID_G = new FinderPath(
-			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()});
-
 		_finderPathWithPaginationFindByUuid_C = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
@@ -5326,149 +5036,149 @@ public class CommerceCountryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid_C",
 			new String[] {String.class.getName(), Long.class.getName()});
 
-		_finderPathWithPaginationFindByGroupId = new FinderPath(
+		_finderPathWithPaginationFindByCompanyId = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByGroupId",
+			"findByCompanyId",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+		_finderPathWithoutPaginationFindByCompanyId = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
 			new String[] {Long.class.getName()},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.PRIORITY_COLUMN_BITMASK);
 
-		_finderPathCountByGroupId = new FinderPath(
+		_finderPathCountByCompanyId = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()});
 
-		_finderPathFetchByG_Tw = new FinderPath(
+		_finderPathFetchByC_Tw = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_Tw",
+			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_Tw",
 			new String[] {Long.class.getName(), String.class.getName()},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.TWOLETTERSISOCODE_COLUMN_BITMASK);
 
-		_finderPathCountByG_Tw = new FinderPath(
+		_finderPathCountByC_Tw = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_Tw",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_Tw",
 			new String[] {Long.class.getName(), String.class.getName()});
 
-		_finderPathFetchByG_N = new FinderPath(
+		_finderPathFetchByC_N = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
-			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_N",
+			CommerceCountryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_N",
 			new String[] {Long.class.getName(), Integer.class.getName()},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.NUMERICISOCODE_COLUMN_BITMASK);
 
-		_finderPathCountByG_N = new FinderPath(
+		_finderPathCountByC_N = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_N",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_N",
 			new String[] {Long.class.getName(), Integer.class.getName()});
 
-		_finderPathWithPaginationFindByG_A = new FinderPath(
+		_finderPathWithPaginationFindByC_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_A",
+			"findByC_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByG_A = new FinderPath(
+		_finderPathWithoutPaginationFindByC_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_A",
 			new String[] {Long.class.getName(), Boolean.class.getName()},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.ACTIVE_COLUMN_BITMASK |
 			CommerceCountryModelImpl.PRIORITY_COLUMN_BITMASK);
 
-		_finderPathCountByG_A = new FinderPath(
+		_finderPathCountByC_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_A",
 			new String[] {Long.class.getName(), Boolean.class.getName()});
 
-		_finderPathWithPaginationFindByG_B_A = new FinderPath(
+		_finderPathWithPaginationFindByC_B_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_B_A",
+			"findByC_B_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByG_B_A = new FinderPath(
+		_finderPathWithoutPaginationFindByC_B_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_B_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_B_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()
 			},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.BILLINGALLOWED_COLUMN_BITMASK |
 			CommerceCountryModelImpl.ACTIVE_COLUMN_BITMASK |
 			CommerceCountryModelImpl.PRIORITY_COLUMN_BITMASK);
 
-		_finderPathCountByG_B_A = new FinderPath(
+		_finderPathCountByC_B_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_B_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_B_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()
 			});
 
-		_finderPathWithPaginationFindByG_S_A = new FinderPath(
+		_finderPathWithPaginationFindByC_S_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByG_S_A",
+			"findByC_S_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByG_S_A = new FinderPath(
+		_finderPathWithoutPaginationFindByC_S_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED,
 			CommerceCountryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_S_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_S_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()
 			},
-			CommerceCountryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceCountryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CommerceCountryModelImpl.SHIPPINGALLOWED_COLUMN_BITMASK |
 			CommerceCountryModelImpl.ACTIVE_COLUMN_BITMASK |
 			CommerceCountryModelImpl.PRIORITY_COLUMN_BITMASK);
 
-		_finderPathCountByG_S_A = new FinderPath(
+		_finderPathCountByC_S_A = new FinderPath(
 			CommerceCountryModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceCountryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_S_A",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S_A",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				Boolean.class.getName()

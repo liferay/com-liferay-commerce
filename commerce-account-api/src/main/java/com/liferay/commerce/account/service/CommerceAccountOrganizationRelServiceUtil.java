@@ -108,6 +108,25 @@ public class CommerceAccountOrganizationRelServiceUtil {
 			commerceAccountId, start, end);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.account.model.CommerceAccountOrganizationRel>
+				getCommerceAccountOrganizationRelsByOrganizationId(
+					long organizationId, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceAccountOrganizationRelsByOrganizationId(
+			organizationId, start, end);
+	}
+
+	public static int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+			long organizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().
+			getCommerceAccountOrganizationRelsByOrganizationIdCount(
+				organizationId);
+	}
+
 	public static int getCommerceAccountOrganizationRelsCount(
 			long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {

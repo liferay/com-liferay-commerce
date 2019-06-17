@@ -41,7 +41,7 @@ public class CPInstanceServiceUtil {
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPInstanceServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.product.model.CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -52,11 +52,12 @@ public class CPInstanceServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, published, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, serviceContext);
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, published, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	public static void buildCPInstances(
@@ -153,14 +154,13 @@ public class CPInstanceServiceUtil {
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.product.model.CPInstance>
 				searchCPDefinitionInstances(
-					long companyId, long groupId, long cpDefinitionId,
-					String keywords, int status, int start, int end,
+					long companyId, long cpDefinitionId, String keywords,
+					int status, int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().searchCPDefinitionInstances(
-			companyId, groupId, cpDefinitionId, keywords, status, start, end,
-			sort);
+			companyId, cpDefinitionId, keywords, status, start, end, sort);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
@@ -171,6 +171,16 @@ public class CPInstanceServiceUtil {
 
 		return getService().searchCPInstances(
 			companyId, groupId, keywords, status, start, end, sort);
+	}
+
+	public static com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
+				long companyId, String keywords, int status, int start, int end,
+				com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().searchCPInstances(
+			companyId, keywords, status, start, end, sort);
 	}
 
 	public static com.liferay.commerce.product.model.CPInstance
@@ -235,7 +245,7 @@ public class CPInstanceServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPInstance
 			upsertCPInstance(
-				long cpDefinitionId, String sku, String gtin,
+				long cpDefinitionId, long groupId, String sku, String gtin,
 				String manufacturerPartNumber, boolean purchasable, String json,
 				double width, double height, double depth, double weight,
 				java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -250,10 +260,10 @@ public class CPInstanceServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, width, height, depth, weight, price, promoPrice, cost,
-			published, externalReferenceCode, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, width, height, depth, weight, price, promoPrice,
+			cost, published, externalReferenceCode, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			serviceContext);

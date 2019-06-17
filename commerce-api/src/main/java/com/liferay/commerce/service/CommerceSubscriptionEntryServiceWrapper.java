@@ -57,22 +57,44 @@ public class CommerceSubscriptionEntryServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry>
 			getCommerceSubscriptionEntries(
-				long groupId, long userId, int start, int end,
+				long companyId, long userId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceSubscriptionEntry>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
-			groupId, userId, start, end, orderByComparator);
+			companyId, userId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId)
+	public java.util.List<com.liferay.commerce.model.CommerceSubscriptionEntry>
+			getCommerceSubscriptionEntries(
+				long companyId, long groupId, long userId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceSubscriptionEntry>
+						orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
+			companyId, groupId, userId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceSubscriptionEntriesCount(long companyId, long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceSubscriptionEntryService.
-			getCommerceSubscriptionEntriesCount(groupId, userId);
+			getCommerceSubscriptionEntriesCount(companyId, userId);
+	}
+
+	@Override
+	public int getCommerceSubscriptionEntriesCount(
+			long companyId, long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceSubscriptionEntryService.
+			getCommerceSubscriptionEntriesCount(companyId, groupId, userId);
 	}
 
 	/**
@@ -83,6 +105,21 @@ public class CommerceSubscriptionEntryServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceSubscriptionEntryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceSubscriptionEntry>
+				searchCommerceSubscriptionEntries(
+					long companyId, Long maxSubscriptionCycles,
+					Integer subscriptionStatus, String keywords, int start,
+					int end, com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceSubscriptionEntryService.
+			searchCommerceSubscriptionEntries(
+				companyId, maxSubscriptionCycles, subscriptionStatus, keywords,
+				start, end, sort);
 	}
 
 	@Override

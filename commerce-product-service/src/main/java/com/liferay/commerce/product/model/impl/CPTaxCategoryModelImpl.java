@@ -41,6 +41,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -80,11 +83,10 @@ public class CPTaxCategoryModelImpl
 	public static final String TABLE_NAME = "CPTaxCategory";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"CPTaxCategoryId", Types.BIGINT}, {"groupId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"name", Types.VARCHAR},
-		{"description", Types.VARCHAR}
+		{"CPTaxCategoryId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"name", Types.VARCHAR}, {"description", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -92,7 +94,6 @@ public class CPTaxCategoryModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("CPTaxCategoryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -103,7 +104,7 @@ public class CPTaxCategoryModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CPTaxCategory (CPTaxCategoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null)";
+		"create table CPTaxCategory (CPTaxCategoryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CPTaxCategory";
 
@@ -134,7 +135,7 @@ public class CPTaxCategoryModelImpl
 			"value.object.column.bitmask.enabled.com.liferay.commerce.product.model.CPTaxCategory"),
 		true);
 
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
 	public static final long CREATEDATE_COLUMN_BITMASK = 2L;
 
@@ -152,7 +153,6 @@ public class CPTaxCategoryModelImpl
 		CPTaxCategory model = new CPTaxCategoryImpl();
 
 		model.setCPTaxCategoryId(soapModel.getCPTaxCategoryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -277,6 +277,32 @@ public class CPTaxCategoryModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CPTaxCategory>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPTaxCategory.class.getClassLoader(), CPTaxCategory.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPTaxCategory> constructor =
+				(Constructor<CPTaxCategory>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CPTaxCategory, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CPTaxCategory, Object>>
@@ -307,28 +333,6 @@ public class CPTaxCategoryModelImpl
 					CPTaxCategory cpTaxCategory, Object CPTaxCategoryId) {
 
 					cpTaxCategory.setCPTaxCategoryId((Long)CPTaxCategoryId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CPTaxCategory, Object>() {
-
-				@Override
-				public Object apply(CPTaxCategory cpTaxCategory) {
-					return cpTaxCategory.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CPTaxCategory, Object>() {
-
-				@Override
-				public void accept(
-					CPTaxCategory cpTaxCategory, Object groupId) {
-
-					cpTaxCategory.setGroupId((Long)groupId);
 				}
 
 			});
@@ -502,36 +506,25 @@ public class CPTaxCategoryModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -668,7 +661,7 @@ public class CPTaxCategoryModelImpl
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -695,7 +688,7 @@ public class CPTaxCategoryModelImpl
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -771,7 +764,7 @@ public class CPTaxCategoryModelImpl
 
 	@Override
 	public void setDescription(String description, Locale locale) {
-		setDescription(description, locale, LocaleUtil.getSiteDefault());
+		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -801,7 +794,7 @@ public class CPTaxCategoryModelImpl
 
 	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
-		setDescriptionMap(descriptionMap, LocaleUtil.getSiteDefault());
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -873,7 +866,7 @@ public class CPTaxCategoryModelImpl
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -898,7 +891,7 @@ public class CPTaxCategoryModelImpl
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -926,8 +919,12 @@ public class CPTaxCategoryModelImpl
 	@Override
 	public CPTaxCategory toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPTaxCategory)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPTaxCategory>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -939,7 +936,6 @@ public class CPTaxCategoryModelImpl
 		CPTaxCategoryImpl cpTaxCategoryImpl = new CPTaxCategoryImpl();
 
 		cpTaxCategoryImpl.setCPTaxCategoryId(getCPTaxCategoryId());
-		cpTaxCategoryImpl.setGroupId(getGroupId());
 		cpTaxCategoryImpl.setCompanyId(getCompanyId());
 		cpTaxCategoryImpl.setUserId(getUserId());
 		cpTaxCategoryImpl.setUserName(getUserName());
@@ -1010,10 +1006,10 @@ public class CPTaxCategoryModelImpl
 	public void resetOriginalValues() {
 		CPTaxCategoryModelImpl cpTaxCategoryModelImpl = this;
 
-		cpTaxCategoryModelImpl._originalGroupId =
-			cpTaxCategoryModelImpl._groupId;
+		cpTaxCategoryModelImpl._originalCompanyId =
+			cpTaxCategoryModelImpl._companyId;
 
-		cpTaxCategoryModelImpl._setOriginalGroupId = false;
+		cpTaxCategoryModelImpl._setOriginalCompanyId = false;
 
 		cpTaxCategoryModelImpl._setModifiedDate = false;
 
@@ -1026,8 +1022,6 @@ public class CPTaxCategoryModelImpl
 			new CPTaxCategoryCacheModel();
 
 		cpTaxCategoryCacheModel.CPTaxCategoryId = getCPTaxCategoryId();
-
-		cpTaxCategoryCacheModel.groupId = getGroupId();
 
 		cpTaxCategoryCacheModel.companyId = getCompanyId();
 
@@ -1141,17 +1135,17 @@ public class CPTaxCategoryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPTaxCategory.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPTaxCategory.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPTaxCategory>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _CPTaxCategoryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

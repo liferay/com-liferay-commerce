@@ -25,13 +25,10 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.NoSuchModelException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.model.ContainerModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.model.TrashedModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -42,10 +39,12 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
 
 import java.sql.Types;
 
@@ -103,7 +102,9 @@ public class CPDefinitionModelImpl
 		{"subscriptionLength", Types.INTEGER},
 		{"subscriptionType", Types.VARCHAR},
 		{"subscriptionTypeSettings", Types.CLOB},
-		{"maxSubscriptionCycles", Types.BIGINT}, {"version", Types.INTEGER},
+		{"maxSubscriptionCycles", Types.BIGINT},
+		{"accountGroupFilterEnabled", Types.BOOLEAN},
+		{"channelFilterEnabled", Types.BOOLEAN}, {"version", Types.INTEGER},
 		{"status", Types.INTEGER}, {"statusByUserId", Types.BIGINT},
 		{"statusByUserName", Types.VARCHAR}, {"statusDate", Types.TIMESTAMP}
 	};
@@ -146,6 +147,8 @@ public class CPDefinitionModelImpl
 		TABLE_COLUMNS_MAP.put("subscriptionType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("subscriptionTypeSettings", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("maxSubscriptionCycles", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("accountGroupFilterEnabled", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("channelFilterEnabled", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("version", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
@@ -154,7 +157,7 @@ public class CPDefinitionModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CPDefinition (uuid_ VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CPDefinition (uuid_ VARCHAR(75) null,defaultLanguageId VARCHAR(75) null,CPDefinitionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CProductId LONG,CPTaxCategoryId LONG,productTypeName VARCHAR(75) null,availableIndividually BOOLEAN,ignoreSKUCombinations BOOLEAN,shippable BOOLEAN,freeShipping BOOLEAN,shipSeparately BOOLEAN,shippingExtraPrice DOUBLE,width DOUBLE,height DOUBLE,depth DOUBLE,weight DOUBLE,taxExempt BOOLEAN,telcoOrElectronics BOOLEAN,DDMStructureKey VARCHAR(75) null,published BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,subscriptionEnabled BOOLEAN,subscriptionLength INTEGER,subscriptionType VARCHAR(75) null,subscriptionTypeSettings TEXT null,maxSubscriptionCycles LONG,accountGroupFilterEnabled BOOLEAN,channelFilterEnabled BOOLEAN,version INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CPDefinition";
 
@@ -249,6 +252,9 @@ public class CPDefinitionModelImpl
 		model.setSubscriptionTypeSettings(
 			soapModel.getSubscriptionTypeSettings());
 		model.setMaxSubscriptionCycles(soapModel.getMaxSubscriptionCycles());
+		model.setAccountGroupFilterEnabled(
+			soapModel.isAccountGroupFilterEnabled());
+		model.setChannelFilterEnabled(soapModel.isChannelFilterEnabled());
 		model.setVersion(soapModel.getVersion());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
@@ -369,6 +375,32 @@ public class CPDefinitionModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CPDefinition>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDefinition.class.getClassLoader(), CPDefinition.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CPDefinition> constructor =
+				(Constructor<CPDefinition>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CPDefinition, Object>>
@@ -1121,6 +1153,53 @@ public class CPDefinitionModelImpl
 
 					cpDefinition.setMaxSubscriptionCycles(
 						(Long)maxSubscriptionCycles);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"accountGroupFilterEnabled",
+			new Function<CPDefinition, Object>() {
+
+				@Override
+				public Object apply(CPDefinition cpDefinition) {
+					return cpDefinition.getAccountGroupFilterEnabled();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"accountGroupFilterEnabled",
+			new BiConsumer<CPDefinition, Object>() {
+
+				@Override
+				public void accept(
+					CPDefinition cpDefinition,
+					Object accountGroupFilterEnabled) {
+
+					cpDefinition.setAccountGroupFilterEnabled(
+						(Boolean)accountGroupFilterEnabled);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"channelFilterEnabled",
+			new Function<CPDefinition, Object>() {
+
+				@Override
+				public Object apply(CPDefinition cpDefinition) {
+					return cpDefinition.getChannelFilterEnabled();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"channelFilterEnabled",
+			new BiConsumer<CPDefinition, Object>() {
+
+				@Override
+				public void accept(
+					CPDefinition cpDefinition, Object channelFilterEnabled) {
+
+					cpDefinition.setChannelFilterEnabled(
+						(Boolean)channelFilterEnabled);
 				}
 
 			});
@@ -2212,6 +2291,42 @@ public class CPDefinitionModelImpl
 
 	@JSON
 	@Override
+	public boolean getAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isAccountGroupFilterEnabled() {
+		return _accountGroupFilterEnabled;
+	}
+
+	@Override
+	public void setAccountGroupFilterEnabled(
+		boolean accountGroupFilterEnabled) {
+
+		_accountGroupFilterEnabled = accountGroupFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_channelFilterEnabled = channelFilterEnabled;
+	}
+
+	@JSON
+	@Override
 	public int getVersion() {
 		return _version;
 	}
@@ -2302,151 +2417,6 @@ public class CPDefinitionModelImpl
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(
 			PortalUtil.getClassNameId(CPDefinition.class.getName()));
-	}
-
-	@Override
-	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
-		throws PortalException {
-
-		if (!isInTrash()) {
-			return null;
-		}
-
-		com.liferay.trash.kernel.model.TrashEntry trashEntry =
-			com.liferay.trash.kernel.service.TrashEntryLocalServiceUtil.
-				fetchEntry(getModelClassName(), getTrashEntryClassPK());
-
-		if (trashEntry != null) {
-			return trashEntry;
-		}
-
-		com.liferay.portal.kernel.trash.TrashHandler trashHandler =
-			getTrashHandler();
-
-		if (Validator.isNotNull(
-				trashHandler.getContainerModelClassName(getPrimaryKey()))) {
-
-			ContainerModel containerModel = null;
-
-			try {
-				containerModel = trashHandler.getParentContainerModel(this);
-			}
-			catch (NoSuchModelException nsme) {
-				return null;
-			}
-
-			while (containerModel != null) {
-				if (containerModel instanceof TrashedModel) {
-					TrashedModel trashedModel = (TrashedModel)containerModel;
-
-					return trashedModel.getTrashEntry();
-				}
-
-				trashHandler =
-					com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil.
-						getTrashHandler(
-							trashHandler.getContainerModelClassName(
-								containerModel.getContainerModelId()));
-
-				if (trashHandler == null) {
-					return null;
-				}
-
-				containerModel = trashHandler.getContainerModel(
-					containerModel.getParentContainerModelId());
-			}
-		}
-
-		return null;
-	}
-
-	@Override
-	public long getTrashEntryClassPK() {
-		return getPrimaryKey();
-	}
-
-	/**
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	@Override
-	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
-		return com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil.
-			getTrashHandler(getModelClassName());
-	}
-
-	@Override
-	public boolean isInTrash() {
-		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean isInTrashContainer() {
-		com.liferay.portal.kernel.trash.TrashHandler trashHandler =
-			getTrashHandler();
-
-		if ((trashHandler == null) ||
-			Validator.isNull(
-				trashHandler.getContainerModelClassName(getPrimaryKey()))) {
-
-			return false;
-		}
-
-		try {
-			ContainerModel containerModel =
-				trashHandler.getParentContainerModel(this);
-
-			if (containerModel == null) {
-				return false;
-			}
-
-			if (containerModel instanceof TrashedModel) {
-				return ((TrashedModel)containerModel).isInTrash();
-			}
-		}
-		catch (Exception e) {
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean isInTrashExplicitly() {
-		if (!isInTrash()) {
-			return false;
-		}
-
-		com.liferay.trash.kernel.model.TrashEntry trashEntry =
-			com.liferay.trash.kernel.service.TrashEntryLocalServiceUtil.
-				fetchEntry(getModelClassName(), getTrashEntryClassPK());
-
-		if (trashEntry != null) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public boolean isInTrashImplicitly() {
-		if (!isInTrash()) {
-			return false;
-		}
-
-		com.liferay.trash.kernel.model.TrashEntry trashEntry =
-			com.liferay.trash.kernel.service.TrashEntryLocalServiceUtil.
-				fetchEntry(getModelClassName(), getTrashEntryClassPK());
-
-		if (trashEntry != null) {
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override
@@ -2549,8 +2519,12 @@ public class CPDefinitionModelImpl
 	@Override
 	public CPDefinition toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPDefinition)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPDefinition>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -2596,6 +2570,9 @@ public class CPDefinitionModelImpl
 		cpDefinitionImpl.setSubscriptionTypeSettings(
 			getSubscriptionTypeSettings());
 		cpDefinitionImpl.setMaxSubscriptionCycles(getMaxSubscriptionCycles());
+		cpDefinitionImpl.setAccountGroupFilterEnabled(
+			isAccountGroupFilterEnabled());
+		cpDefinitionImpl.setChannelFilterEnabled(isChannelFilterEnabled());
 		cpDefinitionImpl.setVersion(getVersion());
 		cpDefinitionImpl.setStatus(getStatus());
 		cpDefinitionImpl.setStatusByUserId(getStatusByUserId());
@@ -2863,6 +2840,11 @@ public class CPDefinitionModelImpl
 		cpDefinitionCacheModel.maxSubscriptionCycles =
 			getMaxSubscriptionCycles();
 
+		cpDefinitionCacheModel.accountGroupFilterEnabled =
+			isAccountGroupFilterEnabled();
+
+		cpDefinitionCacheModel.channelFilterEnabled = isChannelFilterEnabled();
+
 		cpDefinitionCacheModel.version = getVersion();
 
 		cpDefinitionCacheModel.status = getStatus();
@@ -2952,11 +2934,12 @@ public class CPDefinitionModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDefinition.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDefinition.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPDefinition>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
@@ -3003,6 +2986,8 @@ public class CPDefinitionModelImpl
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;
 	private long _maxSubscriptionCycles;
+	private boolean _accountGroupFilterEnabled;
+	private boolean _channelFilterEnabled;
 	private int _version;
 	private int _status;
 	private int _originalStatus;

@@ -35,7 +35,7 @@ public class CPInstanceServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -46,11 +46,12 @@ public class CPInstanceServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpInstanceService.addCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, published, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, serviceContext);
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, published, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	@Override
@@ -159,14 +160,13 @@ public class CPInstanceServiceWrapper
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.product.model.CPInstance>
 				searchCPDefinitionInstances(
-					long companyId, long groupId, long cpDefinitionId,
-					String keywords, int status, int start, int end,
+					long companyId, long cpDefinitionId, String keywords,
+					int status, int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpInstanceService.searchCPDefinitionInstances(
-			companyId, groupId, cpDefinitionId, keywords, status, start, end,
-			sort);
+			companyId, cpDefinitionId, keywords, status, start, end, sort);
 	}
 
 	@Override
@@ -178,6 +178,17 @@ public class CPInstanceServiceWrapper
 
 		return _cpInstanceService.searchCPInstances(
 			companyId, groupId, keywords, status, start, end, sort);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPInstance> searchCPInstances(
+				long companyId, String keywords, int status, int start, int end,
+				com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpInstanceService.searchCPInstances(
+			companyId, keywords, status, start, end, sort);
 	}
 
 	@Override
@@ -242,7 +253,7 @@ public class CPInstanceServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPInstance upsertCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			java.math.BigDecimal price, java.math.BigDecimal promoPrice,
@@ -257,10 +268,10 @@ public class CPInstanceServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpInstanceService.upsertCPInstance(
-			cpDefinitionId, sku, gtin, manufacturerPartNumber, purchasable,
-			json, width, height, depth, weight, price, promoPrice, cost,
-			published, externalReferenceCode, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, width, height, depth, weight, price, promoPrice,
+			cost, published, externalReferenceCode, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			serviceContext);

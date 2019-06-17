@@ -398,200 +398,201 @@ public interface CPMeasurementUnitPersistence
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByGroupId(long groupId);
+	public java.util.List<CPMeasurementUnit> findByCompanyId(long companyId);
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @return the range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByGroupId(
-		long groupId, int start, int end);
+	public java.util.List<CPMeasurementUnit> findByCompanyId(
+		long companyId, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByGroupId_First(
-			long groupId,
+	public CPMeasurementUnit findByCompanyId_First(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByGroupId_First(
-		long groupId,
+	public CPMeasurementUnit fetchByCompanyId_First(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByGroupId_Last(
-			long groupId,
+	public CPMeasurementUnit findByCompanyId_Last(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByGroupId_Last(
-		long groupId,
+	public CPMeasurementUnit fetchByCompanyId_Last(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
-	public CPMeasurementUnit[] findByGroupId_PrevAndNext(
-			long CPMeasurementUnitId, long groupId,
+	public CPMeasurementUnit[] findByCompanyId_PrevAndNext(
+			long CPMeasurementUnitId, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
-	public void removeByGroupId(long groupId);
+	public void removeByCompanyId(long companyId);
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching cp measurement units
 	 */
-	public int countByGroupId(long groupId);
+	public int countByCompanyId(long companyId);
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @return the matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_T(long groupId, int type);
+	public java.util.List<CPMeasurementUnit> findByC_T(
+		long companyId, int type);
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @return the range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_T(
-		long groupId, int type, int start, int end);
+	public java.util.List<CPMeasurementUnit> findByC_T(
+		long companyId, int type, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_T(
-		long groupId, int type, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByC_T(
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
@@ -599,192 +600,192 @@ public interface CPMeasurementUnitPersistence
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_T(
-		long groupId, int type, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByC_T(
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByG_T_First(
-			long groupId, int type,
+	public CPMeasurementUnit findByC_T_First(
+			long companyId, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_T_First(
-		long groupId, int type,
+	public CPMeasurementUnit fetchByC_T_First(
+		long companyId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByG_T_Last(
-			long groupId, int type,
+	public CPMeasurementUnit findByC_T_Last(
+			long companyId, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_T_Last(
-		long groupId, int type,
+	public CPMeasurementUnit fetchByC_T_Last(
+		long companyId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63; and type = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
-	public CPMeasurementUnit[] findByG_T_PrevAndNext(
-			long CPMeasurementUnitId, long groupId, int type,
+	public CPMeasurementUnit[] findByC_T_PrevAndNext(
+			long CPMeasurementUnitId, long companyId, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; and type = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 */
-	public void removeByG_T(long groupId, int type);
+	public void removeByC_T(long companyId, int type);
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
-	public int countByG_T(long groupId, int type);
+	public int countByC_T(long companyId, int type);
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or throws a <code>NoSuchCPMeasurementUnitException</code> if it could not be found.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or throws a <code>NoSuchCPMeasurementUnitException</code> if it could not be found.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByG_K_T(long groupId, String key, int type)
+	public CPMeasurementUnit findByC_K_T(long companyId, String key, int type)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_K_T(long groupId, String key, int type);
+	public CPMeasurementUnit fetchByC_K_T(long companyId, String key, int type);
 
 	/**
-	 * Returns the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_K_T(
-		long groupId, String key, int type, boolean retrieveFromCache);
+	public CPMeasurementUnit fetchByC_K_T(
+		long companyId, String key, int type, boolean retrieveFromCache);
 
 	/**
-	 * Removes the cp measurement unit where groupId = &#63; and key = &#63; and type = &#63; from the database.
+	 * Removes the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the cp measurement unit that was removed
 	 */
-	public CPMeasurementUnit removeByG_K_T(long groupId, String key, int type)
+	public CPMeasurementUnit removeByC_K_T(long companyId, String key, int type)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and key = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and key = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
-	public int countByG_K_T(long groupId, String key, int type);
+	public int countByC_K_T(long companyId, String key, int type);
 
 	/**
-	 * Returns all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @return the matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_P_T(
-		long groupId, boolean primary, int type);
+	public java.util.List<CPMeasurementUnit> findByC_P_T(
+		long companyId, boolean primary, int type);
 
 	/**
-	 * Returns a range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns a range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @return the range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_P_T(
-		long groupId, boolean primary, int type, int start, int end);
+	public java.util.List<CPMeasurementUnit> findByC_P_T(
+		long companyId, boolean primary, int type, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
@@ -792,19 +793,19 @@ public interface CPMeasurementUnitPersistence
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_P_T(
-		long groupId, boolean primary, int type, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByC_P_T(
+		long companyId, boolean primary, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns an ordered range of all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPMeasurementUnitModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param start the lower bound of the range of cp measurement units
@@ -813,107 +814,107 @@ public interface CPMeasurementUnitPersistence
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
-	public java.util.List<CPMeasurementUnit> findByG_P_T(
-		long groupId, boolean primary, int type, int start, int end,
+	public java.util.List<CPMeasurementUnit> findByC_P_T(
+		long companyId, boolean primary, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByG_P_T_First(
-			long groupId, boolean primary, int type,
+	public CPMeasurementUnit findByC_P_T_First(
+			long companyId, boolean primary, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the first cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_P_T_First(
-		long groupId, boolean primary, int type,
+	public CPMeasurementUnit fetchByC_P_T_First(
+		long companyId, boolean primary, int type,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit findByG_P_T_Last(
-			long groupId, boolean primary, int type,
+	public CPMeasurementUnit findByC_P_T_Last(
+			long companyId, boolean primary, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Returns the last cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the last cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
-	public CPMeasurementUnit fetchByG_P_T_Last(
-		long groupId, boolean primary, int type,
+	public CPMeasurementUnit fetchByC_P_T_Last(
+		long companyId, boolean primary, int type,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator);
 
 	/**
-	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the cp measurement units before and after the current cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
 	 * @param CPMeasurementUnitId the primary key of the current cp measurement unit
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp measurement unit
 	 * @throws NoSuchCPMeasurementUnitException if a cp measurement unit with the primary key could not be found
 	 */
-	public CPMeasurementUnit[] findByG_P_T_PrevAndNext(
-			long CPMeasurementUnitId, long groupId, boolean primary, int type,
+	public CPMeasurementUnit[] findByC_P_T_PrevAndNext(
+			long CPMeasurementUnitId, long companyId, boolean primary, int type,
 			com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 				orderByComparator)
 		throws NoSuchCPMeasurementUnitException;
 
 	/**
-	 * Removes all the cp measurement units where groupId = &#63; and primary = &#63; and type = &#63; from the database.
+	 * Removes all the cp measurement units where companyId = &#63; and primary = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 */
-	public void removeByG_P_T(long groupId, boolean primary, int type);
+	public void removeByC_P_T(long companyId, boolean primary, int type);
 
 	/**
-	 * Returns the number of cp measurement units where groupId = &#63; and primary = &#63; and type = &#63;.
+	 * Returns the number of cp measurement units where companyId = &#63; and primary = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param primary the primary
 	 * @param type the type
 	 * @return the number of matching cp measurement units
 	 */
-	public int countByG_P_T(long groupId, boolean primary, int type);
+	public int countByC_P_T(long companyId, boolean primary, int type);
 
 	/**
 	 * Caches the cp measurement unit in the entity cache if it is enabled.

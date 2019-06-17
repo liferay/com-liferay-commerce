@@ -66,7 +66,6 @@ public class CommerceAvailabilityEstimateWrapper
 		attributes.put(
 			"commerceAvailabilityEstimateId",
 			getCommerceAvailabilityEstimateId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -92,12 +91,6 @@ public class CommerceAvailabilityEstimateWrapper
 
 		if (commerceAvailabilityEstimateId != null) {
 			setCommerceAvailabilityEstimateId(commerceAvailabilityEstimateId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -208,16 +201,6 @@ public class CommerceAvailabilityEstimateWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceAvailabilityEstimate.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this commerce availability estimate.
-	 *
-	 * @return the group ID of this commerce availability estimate
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceAvailabilityEstimate.getGroupId();
 	}
 
 	/**
@@ -476,16 +459,6 @@ public class CommerceAvailabilityEstimateWrapper
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceAvailabilityEstimate.setExpandoBridgeAttributes(
 			serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this commerce availability estimate.
-	 *
-	 * @param groupId the group ID of this commerce availability estimate
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceAvailabilityEstimate.setGroupId(groupId);
 	}
 
 	/**

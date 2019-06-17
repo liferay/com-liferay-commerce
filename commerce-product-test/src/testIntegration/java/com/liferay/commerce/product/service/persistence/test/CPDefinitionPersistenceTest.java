@@ -194,6 +194,11 @@ public class CPDefinitionPersistenceTest {
 
 		newCPDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
 
+		newCPDefinition.setAccountGroupFilterEnabled(
+			RandomTestUtil.randomBoolean());
+
+		newCPDefinition.setChannelFilterEnabled(RandomTestUtil.randomBoolean());
+
 		newCPDefinition.setVersion(RandomTestUtil.nextInt());
 
 		newCPDefinition.setStatus(RandomTestUtil.nextInt());
@@ -301,6 +306,12 @@ public class CPDefinitionPersistenceTest {
 			existingCPDefinition.getMaxSubscriptionCycles(),
 			newCPDefinition.getMaxSubscriptionCycles());
 		Assert.assertEquals(
+			existingCPDefinition.isAccountGroupFilterEnabled(),
+			newCPDefinition.isAccountGroupFilterEnabled());
+		Assert.assertEquals(
+			existingCPDefinition.isChannelFilterEnabled(),
+			newCPDefinition.isChannelFilterEnabled());
+		Assert.assertEquals(
 			existingCPDefinition.getVersion(), newCPDefinition.getVersion());
 		Assert.assertEquals(
 			existingCPDefinition.getStatus(), newCPDefinition.getStatus());
@@ -372,14 +383,6 @@ public class CPDefinitionPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_NotS() throws Exception {
-		_persistence.countByG_NotS(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-
-		_persistence.countByG_NotS(0L, 0);
-	}
-
-	@Test
 	public void testCountByC_S() throws Exception {
 		_persistence.countByC_S(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
@@ -432,7 +435,8 @@ public class CPDefinitionPersistenceTest {
 			"published", true, "displayDate", true, "expirationDate", true,
 			"lastPublishDate", true, "subscriptionEnabled", true,
 			"subscriptionLength", true, "subscriptionType", true,
-			"maxSubscriptionCycles", true, "version", true, "status", true,
+			"maxSubscriptionCycles", true, "accountGroupFilterEnabled", true,
+			"channelFilterEnabled", true, "version", true, "status", true,
 			"statusByUserId", true, "statusByUserName", true, "statusDate",
 			true);
 	}
@@ -740,6 +744,11 @@ public class CPDefinitionPersistenceTest {
 		cpDefinition.setSubscriptionTypeSettings(RandomTestUtil.randomString());
 
 		cpDefinition.setMaxSubscriptionCycles(RandomTestUtil.nextLong());
+
+		cpDefinition.setAccountGroupFilterEnabled(
+			RandomTestUtil.randomBoolean());
+
+		cpDefinition.setChannelFilterEnabled(RandomTestUtil.randomBoolean());
 
 		cpDefinition.setVersion(RandomTestUtil.nextInt());
 

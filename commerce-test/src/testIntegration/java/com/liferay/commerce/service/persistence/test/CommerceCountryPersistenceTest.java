@@ -127,8 +127,6 @@ public class CommerceCountryPersistenceTest {
 
 		newCommerceCountry.setUuid(RandomTestUtil.randomString());
 
-		newCommerceCountry.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceCountry.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceCountry.setUserId(RandomTestUtil.nextLong());
@@ -170,9 +168,6 @@ public class CommerceCountryPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceCountry.getCommerceCountryId(),
 			newCommerceCountry.getCommerceCountryId());
-		Assert.assertEquals(
-			existingCommerceCountry.getGroupId(),
-			newCommerceCountry.getGroupId());
 		Assert.assertEquals(
 			existingCommerceCountry.getCompanyId(),
 			newCommerceCountry.getCompanyId());
@@ -229,15 +224,6 @@ public class CommerceCountryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByUuid_C() throws Exception {
 		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
 
@@ -247,54 +233,54 @@ public class CommerceCountryPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
-	public void testCountByG_Tw() throws Exception {
-		_persistence.countByG_Tw(RandomTestUtil.nextLong(), "");
+	public void testCountByC_Tw() throws Exception {
+		_persistence.countByC_Tw(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByG_Tw(0L, "null");
+		_persistence.countByC_Tw(0L, "null");
 
-		_persistence.countByG_Tw(0L, (String)null);
+		_persistence.countByC_Tw(0L, (String)null);
 	}
 
 	@Test
-	public void testCountByG_N() throws Exception {
-		_persistence.countByG_N(
+	public void testCountByC_N() throws Exception {
+		_persistence.countByC_N(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
-		_persistence.countByG_N(0L, 0);
+		_persistence.countByC_N(0L, 0);
 	}
 
 	@Test
-	public void testCountByG_A() throws Exception {
-		_persistence.countByG_A(
+	public void testCountByC_A() throws Exception {
+		_persistence.countByC_A(
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
-		_persistence.countByG_A(0L, RandomTestUtil.randomBoolean());
+		_persistence.countByC_A(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
-	public void testCountByG_B_A() throws Exception {
-		_persistence.countByG_B_A(
+	public void testCountByC_B_A() throws Exception {
+		_persistence.countByC_B_A(
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
 			RandomTestUtil.randomBoolean());
 
-		_persistence.countByG_B_A(
+		_persistence.countByC_B_A(
 			0L, RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean());
 	}
 
 	@Test
-	public void testCountByG_S_A() throws Exception {
-		_persistence.countByG_S_A(
+	public void testCountByC_S_A() throws Exception {
+		_persistence.countByC_S_A(
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
 			RandomTestUtil.randomBoolean());
 
-		_persistence.countByG_S_A(
+		_persistence.countByC_S_A(
 			0L, RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean());
 	}
 
@@ -324,12 +310,11 @@ public class CommerceCountryPersistenceTest {
 	protected OrderByComparator<CommerceCountry> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"CommerceCountry", "uuid", true, "commerceCountryId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "name", true,
-			"billingAllowed", true, "shippingAllowed", true,
-			"twoLettersISOCode", true, "threeLettersISOCode", true,
-			"numericISOCode", true, "subjectToVAT", true, "priority", true,
-			"active", true, "lastPublishDate", true);
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true, "billingAllowed", true,
+			"shippingAllowed", true, "twoLettersISOCode", true,
+			"threeLettersISOCode", true, "numericISOCode", true, "subjectToVAT",
+			true, "priority", true, "active", true, "lastPublishDate", true);
 	}
 
 	@Test
@@ -556,22 +541,10 @@ public class CommerceCountryPersistenceTest {
 		CommerceCountry existingCommerceCountry = _persistence.findByPrimaryKey(
 			newCommerceCountry.getPrimaryKey());
 
-		Assert.assertTrue(
-			Objects.equals(
-				existingCommerceCountry.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommerceCountry, "getOriginalUuid",
-					new Class<?>[0])));
 		Assert.assertEquals(
-			Long.valueOf(existingCommerceCountry.getGroupId()),
+			Long.valueOf(existingCommerceCountry.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(
-				existingCommerceCountry, "getOriginalGroupId",
-				new Class<?>[0]));
-
-		Assert.assertEquals(
-			Long.valueOf(existingCommerceCountry.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommerceCountry, "getOriginalGroupId",
+				existingCommerceCountry, "getOriginalCompanyId",
 				new Class<?>[0]));
 		Assert.assertTrue(
 			Objects.equals(
@@ -581,9 +554,9 @@ public class CommerceCountryPersistenceTest {
 					new Class<?>[0])));
 
 		Assert.assertEquals(
-			Long.valueOf(existingCommerceCountry.getGroupId()),
+			Long.valueOf(existingCommerceCountry.getCompanyId()),
 			ReflectionTestUtil.<Long>invoke(
-				existingCommerceCountry, "getOriginalGroupId",
+				existingCommerceCountry, "getOriginalCompanyId",
 				new Class<?>[0]));
 		Assert.assertEquals(
 			Integer.valueOf(existingCommerceCountry.getNumericISOCode()),
@@ -598,8 +571,6 @@ public class CommerceCountryPersistenceTest {
 		CommerceCountry commerceCountry = _persistence.create(pk);
 
 		commerceCountry.setUuid(RandomTestUtil.randomString());
-
-		commerceCountry.setGroupId(RandomTestUtil.nextLong());
 
 		commerceCountry.setCompanyId(RandomTestUtil.nextLong());
 

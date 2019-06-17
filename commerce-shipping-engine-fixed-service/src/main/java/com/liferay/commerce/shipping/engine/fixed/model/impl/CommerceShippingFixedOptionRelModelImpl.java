@@ -36,6 +36,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -81,7 +84,7 @@ public class CommerceShippingFixedOptionRelModelImpl
 		{"modifiedDate", Types.TIMESTAMP},
 		{"commerceShippingMethodId", Types.BIGINT},
 		{"commerceShippingFixedOptionId", Types.BIGINT},
-		{"commerceWarehouseId", Types.BIGINT},
+		{"commerceInventoryWarehouseId", Types.BIGINT},
 		{"commerceCountryId", Types.BIGINT}, {"commerceRegionId", Types.BIGINT},
 		{"zip", Types.VARCHAR}, {"weightFrom", Types.DOUBLE},
 		{"weightTo", Types.DOUBLE}, {"fixedPrice", Types.DECIMAL},
@@ -101,7 +104,7 @@ public class CommerceShippingFixedOptionRelModelImpl
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceShippingMethodId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceShippingFixedOptionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("commerceWarehouseId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceInventoryWarehouseId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceCountryId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceRegionId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("zip", Types.VARCHAR);
@@ -113,7 +116,7 @@ public class CommerceShippingFixedOptionRelModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CShippingFixedOptionRel (CShippingFixedOptionRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceShippingMethodId LONG,commerceShippingFixedOptionId LONG,commerceWarehouseId LONG,commerceCountryId LONG,commerceRegionId LONG,zip VARCHAR(75) null,weightFrom DOUBLE,weightTo DOUBLE,fixedPrice DECIMAL(30, 16) null,rateUnitWeightPrice DECIMAL(30, 16) null,ratePercentage DOUBLE)";
+		"create table CShippingFixedOptionRel (CShippingFixedOptionRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceShippingMethodId LONG,commerceShippingFixedOptionId LONG,commerceInventoryWarehouseId LONG,commerceCountryId LONG,commerceRegionId LONG,zip VARCHAR(75) null,weightFrom DOUBLE,weightTo DOUBLE,fixedPrice DECIMAL(30, 16) null,rateUnitWeightPrice DECIMAL(30, 16) null,ratePercentage DOUBLE)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CShippingFixedOptionRel";
@@ -182,7 +185,8 @@ public class CommerceShippingFixedOptionRelModelImpl
 			soapModel.getCommerceShippingMethodId());
 		model.setCommerceShippingFixedOptionId(
 			soapModel.getCommerceShippingFixedOptionId());
-		model.setCommerceWarehouseId(soapModel.getCommerceWarehouseId());
+		model.setCommerceInventoryWarehouseId(
+			soapModel.getCommerceInventoryWarehouseId());
 		model.setCommerceCountryId(soapModel.getCommerceCountryId());
 		model.setCommerceRegionId(soapModel.getCommerceRegionId());
 		model.setZip(soapModel.getZip());
@@ -311,6 +315,32 @@ public class CommerceShippingFixedOptionRelModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceShippingFixedOptionRel>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceShippingFixedOptionRel.class.getClassLoader(),
+			CommerceShippingFixedOptionRel.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceShippingFixedOptionRel> constructor =
+				(Constructor<CommerceShippingFixedOptionRel>)
+					proxyClass.getConstructor(InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map
@@ -587,7 +617,7 @@ public class CommerceShippingFixedOptionRelModelImpl
 
 			});
 		attributeGetterFunctions.put(
-			"commerceWarehouseId",
+			"commerceInventoryWarehouseId",
 			new Function<CommerceShippingFixedOptionRel, Object>() {
 
 				@Override
@@ -596,22 +626,23 @@ public class CommerceShippingFixedOptionRelModelImpl
 						commerceShippingFixedOptionRel) {
 
 					return commerceShippingFixedOptionRel.
-						getCommerceWarehouseId();
+						getCommerceInventoryWarehouseId();
 				}
 
 			});
 		attributeSetterBiConsumers.put(
-			"commerceWarehouseId",
+			"commerceInventoryWarehouseId",
 			new BiConsumer<CommerceShippingFixedOptionRel, Object>() {
 
 				@Override
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceWarehouseId) {
+					Object commerceInventoryWarehouseId) {
 
-					commerceShippingFixedOptionRel.setCommerceWarehouseId(
-						(Long)commerceWarehouseId);
+					commerceShippingFixedOptionRel.
+						setCommerceInventoryWarehouseId(
+							(Long)commerceInventoryWarehouseId);
 				}
 
 			});
@@ -1004,13 +1035,15 @@ public class CommerceShippingFixedOptionRelModelImpl
 
 	@JSON
 	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
 	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	@JSON
@@ -1129,10 +1162,13 @@ public class CommerceShippingFixedOptionRelModelImpl
 	@Override
 	public CommerceShippingFixedOptionRel toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel =
-				(CommerceShippingFixedOptionRel)ProxyUtil.newProxyInstance(
-					_classLoader, _escapedModelInterfaces,
-					new AutoEscapeBeanHandler(this));
+			Function<InvocationHandler, CommerceShippingFixedOptionRel>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
+				new AutoEscapeBeanHandler(this));
 		}
 
 		return _escapedModel;
@@ -1155,8 +1191,8 @@ public class CommerceShippingFixedOptionRelModelImpl
 			getCommerceShippingMethodId());
 		commerceShippingFixedOptionRelImpl.setCommerceShippingFixedOptionId(
 			getCommerceShippingFixedOptionId());
-		commerceShippingFixedOptionRelImpl.setCommerceWarehouseId(
-			getCommerceWarehouseId());
+		commerceShippingFixedOptionRelImpl.setCommerceInventoryWarehouseId(
+			getCommerceInventoryWarehouseId());
 		commerceShippingFixedOptionRelImpl.setCommerceCountryId(
 			getCommerceCountryId());
 		commerceShippingFixedOptionRelImpl.setCommerceRegionId(
@@ -1318,8 +1354,8 @@ public class CommerceShippingFixedOptionRelModelImpl
 		commerceShippingFixedOptionRelCacheModel.commerceShippingFixedOptionId =
 			getCommerceShippingFixedOptionId();
 
-		commerceShippingFixedOptionRelCacheModel.commerceWarehouseId =
-			getCommerceWarehouseId();
+		commerceShippingFixedOptionRelCacheModel.commerceInventoryWarehouseId =
+			getCommerceInventoryWarehouseId();
 
 		commerceShippingFixedOptionRelCacheModel.commerceCountryId =
 			getCommerceCountryId();
@@ -1417,11 +1453,14 @@ public class CommerceShippingFixedOptionRelModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceShippingFixedOptionRel.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceShippingFixedOptionRel.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CommerceShippingFixedOptionRel>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private long _commerceShippingFixedOptionRelId;
 	private long _groupId;
@@ -1437,7 +1476,7 @@ public class CommerceShippingFixedOptionRelModelImpl
 	private long _commerceShippingFixedOptionId;
 	private long _originalCommerceShippingFixedOptionId;
 	private boolean _setOriginalCommerceShippingFixedOptionId;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private long _commerceCountryId;
 	private long _commerceRegionId;
 	private String _zip;

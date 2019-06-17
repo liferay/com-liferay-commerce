@@ -56,13 +56,13 @@ public class CommerceShipmentItemLocalServiceWrapper
 	public com.liferay.commerce.model.CommerceShipmentItem
 			addCommerceShipmentItem(
 				long commerceShipmentId, long commerceOrderItemId,
-				long commerceWarehouseId, int quantity,
+				long commerceInventoryWarehouseId, int quantity,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShipmentItemLocalService.addCommerceShipmentItem(
-			commerceShipmentId, commerceOrderItemId, commerceWarehouseId,
-			quantity, serviceContext);
+			commerceShipmentId, commerceOrderItemId,
+			commerceInventoryWarehouseId, quantity, serviceContext);
 	}
 
 	/**

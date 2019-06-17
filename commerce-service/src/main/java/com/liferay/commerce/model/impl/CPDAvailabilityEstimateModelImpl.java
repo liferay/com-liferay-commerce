@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -76,9 +79,9 @@ public class CPDAvailabilityEstimateModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"CPDAvailabilityEstimateId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
 		{"commerceAvailabilityEstimateId", Types.BIGINT},
 		{"CProductId", Types.BIGINT}, {"lastPublishDate", Types.TIMESTAMP}
 	};
@@ -89,7 +92,6 @@ public class CPDAvailabilityEstimateModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPDAvailabilityEstimateId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -101,7 +103,7 @@ public class CPDAvailabilityEstimateModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAvailabilityEstimateId LONG,CProductId LONG,lastPublishDate DATE null)";
+		"create table CPDAvailabilityEstimate (uuid_ VARCHAR(75) null,CPDAvailabilityEstimateId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAvailabilityEstimateId LONG,CProductId LONG,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CPDAvailabilityEstimate";
@@ -139,11 +141,9 @@ public class CPDAvailabilityEstimateModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
 
-	public static final long UUID_COLUMN_BITMASK = 16L;
-
-	public static final long CPDAVAILABILITYESTIMATEID_COLUMN_BITMASK = 32L;
+	public static final long CPDAVAILABILITYESTIMATEID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -163,7 +163,6 @@ public class CPDAvailabilityEstimateModelImpl
 		model.setUuid(soapModel.getUuid());
 		model.setCPDAvailabilityEstimateId(
 			soapModel.getCPDAvailabilityEstimateId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -293,6 +292,32 @@ public class CPDAvailabilityEstimateModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CPDAvailabilityEstimate>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPDAvailabilityEstimate.class.getClassLoader(),
+			CPDAvailabilityEstimate.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPDAvailabilityEstimate> constructor =
+				(Constructor<CPDAvailabilityEstimate>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CPDAvailabilityEstimate, Object>>
 		_attributeGetterFunctions;
 	private static final Map
@@ -358,31 +383,6 @@ public class CPDAvailabilityEstimateModelImpl
 
 					cpdAvailabilityEstimate.setCPDAvailabilityEstimateId(
 						(Long)CPDAvailabilityEstimateId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CPDAvailabilityEstimate, Object>() {
-
-				@Override
-				public Object apply(
-					CPDAvailabilityEstimate cpdAvailabilityEstimate) {
-
-					return cpdAvailabilityEstimate.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CPDAvailabilityEstimate, Object>() {
-
-				@Override
-				public void accept(
-					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object groupId) {
-
-					cpdAvailabilityEstimate.setGroupId((Long)groupId);
 				}
 
 			});
@@ -635,29 +635,6 @@ public class CPDAvailabilityEstimateModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -837,8 +814,12 @@ public class CPDAvailabilityEstimateModelImpl
 	@Override
 	public CPDAvailabilityEstimate toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPDAvailabilityEstimate)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPDAvailabilityEstimate>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -853,7 +834,6 @@ public class CPDAvailabilityEstimateModelImpl
 		cpdAvailabilityEstimateImpl.setUuid(getUuid());
 		cpdAvailabilityEstimateImpl.setCPDAvailabilityEstimateId(
 			getCPDAvailabilityEstimateId());
-		cpdAvailabilityEstimateImpl.setGroupId(getGroupId());
 		cpdAvailabilityEstimateImpl.setCompanyId(getCompanyId());
 		cpdAvailabilityEstimateImpl.setUserId(getUserId());
 		cpdAvailabilityEstimateImpl.setUserName(getUserName());
@@ -930,11 +910,6 @@ public class CPDAvailabilityEstimateModelImpl
 		cpdAvailabilityEstimateModelImpl._originalUuid =
 			cpdAvailabilityEstimateModelImpl._uuid;
 
-		cpdAvailabilityEstimateModelImpl._originalGroupId =
-			cpdAvailabilityEstimateModelImpl._groupId;
-
-		cpdAvailabilityEstimateModelImpl._setOriginalGroupId = false;
-
 		cpdAvailabilityEstimateModelImpl._originalCompanyId =
 			cpdAvailabilityEstimateModelImpl._companyId;
 
@@ -973,8 +948,6 @@ public class CPDAvailabilityEstimateModelImpl
 
 		cpdAvailabilityEstimateCacheModel.CPDAvailabilityEstimateId =
 			getCPDAvailabilityEstimateId();
-
-		cpdAvailabilityEstimateCacheModel.groupId = getGroupId();
 
 		cpdAvailabilityEstimateCacheModel.companyId = getCompanyId();
 
@@ -1090,18 +1063,18 @@ public class CPDAvailabilityEstimateModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPDAvailabilityEstimate.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPDAvailabilityEstimate.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function
+			<InvocationHandler, CPDAvailabilityEstimate>
+				_escapedModelProxyProviderFunction =
+					_getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _CPDAvailabilityEstimateId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -42,7 +42,6 @@ public class CommerceTierPriceEntrySoap implements Serializable {
 		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceTierPriceEntryId(
 			model.getCommerceTierPriceEntryId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -139,14 +138,6 @@ public class CommerceTierPriceEntrySoap implements Serializable {
 		_commerceTierPriceEntryId = commerceTierPriceEntryId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -230,7 +221,6 @@ public class CommerceTierPriceEntrySoap implements Serializable {
 	private String _uuid;
 	private String _externalReferenceCode;
 	private long _commerceTierPriceEntryId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

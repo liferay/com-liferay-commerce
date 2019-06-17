@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -38,10 +37,12 @@ import java.util.Objects;
  * @generated
  */
 @ProviderType
-public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
-	ModelWrapper<CommerceInventoryAudit> {
+public class CommerceInventoryAuditWrapper
+	implements CommerceInventoryAudit, ModelWrapper<CommerceInventoryAudit> {
+
 	public CommerceInventoryAuditWrapper(
 		CommerceInventoryAudit commerceInventoryAudit) {
+
 		_commerceInventoryAudit = commerceInventoryAudit;
 	}
 
@@ -59,7 +60,8 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("commerceInventoryAuditId", getCommerceInventoryAuditId());
+		attributes.put(
+			"commerceInventoryAuditId", getCommerceInventoryAuditId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -75,7 +77,7 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long commerceInventoryAuditId = (Long)attributes.get(
-				"commerceInventoryAuditId");
+			"commerceInventoryAuditId");
 
 		if (commerceInventoryAuditId != null) {
 			setCommerceInventoryAuditId(commerceInventoryAuditId);
@@ -132,7 +134,8 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 
 	@Override
 	public Object clone() {
-		return new CommerceInventoryAuditWrapper((CommerceInventoryAudit)_commerceInventoryAudit.clone());
+		return new CommerceInventoryAuditWrapper(
+			(CommerceInventoryAudit)_commerceInventoryAudit.clone());
 	}
 
 	@Override
@@ -141,40 +144,40 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Returns the commerce inventory audit ID of this commerce inventory audit.
-	*
-	* @return the commerce inventory audit ID of this commerce inventory audit
-	*/
+	 * Returns the commerce inventory audit ID of this commerce inventory audit.
+	 *
+	 * @return the commerce inventory audit ID of this commerce inventory audit
+	 */
 	@Override
 	public long getCommerceInventoryAuditId() {
 		return _commerceInventoryAudit.getCommerceInventoryAuditId();
 	}
 
 	/**
-	* Returns the company ID of this commerce inventory audit.
-	*
-	* @return the company ID of this commerce inventory audit
-	*/
+	 * Returns the company ID of this commerce inventory audit.
+	 *
+	 * @return the company ID of this commerce inventory audit
+	 */
 	@Override
 	public long getCompanyId() {
 		return _commerceInventoryAudit.getCompanyId();
 	}
 
 	/**
-	* Returns the create date of this commerce inventory audit.
-	*
-	* @return the create date of this commerce inventory audit
-	*/
+	 * Returns the create date of this commerce inventory audit.
+	 *
+	 * @return the create date of this commerce inventory audit
+	 */
 	@Override
 	public Date getCreateDate() {
 		return _commerceInventoryAudit.getCreateDate();
 	}
 
 	/**
-	* Returns the description of this commerce inventory audit.
-	*
-	* @return the description of this commerce inventory audit
-	*/
+	 * Returns the description of this commerce inventory audit.
+	 *
+	 * @return the description of this commerce inventory audit
+	 */
 	@Override
 	public String getDescription() {
 		return _commerceInventoryAudit.getDescription();
@@ -186,20 +189,20 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Returns the modified date of this commerce inventory audit.
-	*
-	* @return the modified date of this commerce inventory audit
-	*/
+	 * Returns the modified date of this commerce inventory audit.
+	 *
+	 * @return the modified date of this commerce inventory audit
+	 */
 	@Override
 	public Date getModifiedDate() {
 		return _commerceInventoryAudit.getModifiedDate();
 	}
 
 	/**
-	* Returns the primary key of this commerce inventory audit.
-	*
-	* @return the primary key of this commerce inventory audit
-	*/
+	 * Returns the primary key of this commerce inventory audit.
+	 *
+	 * @return the primary key of this commerce inventory audit
+	 */
 	@Override
 	public long getPrimaryKey() {
 		return _commerceInventoryAudit.getPrimaryKey();
@@ -211,50 +214,50 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Returns the quantity of this commerce inventory audit.
-	*
-	* @return the quantity of this commerce inventory audit
-	*/
+	 * Returns the quantity of this commerce inventory audit.
+	 *
+	 * @return the quantity of this commerce inventory audit
+	 */
 	@Override
 	public int getQuantity() {
 		return _commerceInventoryAudit.getQuantity();
 	}
 
 	/**
-	* Returns the sku of this commerce inventory audit.
-	*
-	* @return the sku of this commerce inventory audit
-	*/
+	 * Returns the sku of this commerce inventory audit.
+	 *
+	 * @return the sku of this commerce inventory audit
+	 */
 	@Override
 	public String getSku() {
 		return _commerceInventoryAudit.getSku();
 	}
 
 	/**
-	* Returns the user ID of this commerce inventory audit.
-	*
-	* @return the user ID of this commerce inventory audit
-	*/
+	 * Returns the user ID of this commerce inventory audit.
+	 *
+	 * @return the user ID of this commerce inventory audit
+	 */
 	@Override
 	public long getUserId() {
 		return _commerceInventoryAudit.getUserId();
 	}
 
 	/**
-	* Returns the user name of this commerce inventory audit.
-	*
-	* @return the user name of this commerce inventory audit
-	*/
+	 * Returns the user name of this commerce inventory audit.
+	 *
+	 * @return the user name of this commerce inventory audit
+	 */
 	@Override
 	public String getUserName() {
 		return _commerceInventoryAudit.getUserName();
 	}
 
 	/**
-	* Returns the user uuid of this commerce inventory audit.
-	*
-	* @return the user uuid of this commerce inventory audit
-	*/
+	 * Returns the user uuid of this commerce inventory audit.
+	 *
+	 * @return the user uuid of this commerce inventory audit
+	 */
 	@Override
 	public String getUserUuid() {
 		return _commerceInventoryAudit.getUserUuid();
@@ -291,40 +294,41 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Sets the commerce inventory audit ID of this commerce inventory audit.
-	*
-	* @param commerceInventoryAuditId the commerce inventory audit ID of this commerce inventory audit
-	*/
+	 * Sets the commerce inventory audit ID of this commerce inventory audit.
+	 *
+	 * @param commerceInventoryAuditId the commerce inventory audit ID of this commerce inventory audit
+	 */
 	@Override
 	public void setCommerceInventoryAuditId(long commerceInventoryAuditId) {
-		_commerceInventoryAudit.setCommerceInventoryAuditId(commerceInventoryAuditId);
+		_commerceInventoryAudit.setCommerceInventoryAuditId(
+			commerceInventoryAuditId);
 	}
 
 	/**
-	* Sets the company ID of this commerce inventory audit.
-	*
-	* @param companyId the company ID of this commerce inventory audit
-	*/
+	 * Sets the company ID of this commerce inventory audit.
+	 *
+	 * @param companyId the company ID of this commerce inventory audit
+	 */
 	@Override
 	public void setCompanyId(long companyId) {
 		_commerceInventoryAudit.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the create date of this commerce inventory audit.
-	*
-	* @param createDate the create date of this commerce inventory audit
-	*/
+	 * Sets the create date of this commerce inventory audit.
+	 *
+	 * @param createDate the create date of this commerce inventory audit
+	 */
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceInventoryAudit.setCreateDate(createDate);
 	}
 
 	/**
-	* Sets the description of this commerce inventory audit.
-	*
-	* @param description the description of this commerce inventory audit
-	*/
+	 * Sets the description of this commerce inventory audit.
+	 *
+	 * @param description the description of this commerce inventory audit
+	 */
 	@Override
 	public void setDescription(String description) {
 		_commerceInventoryAudit.setDescription(description);
@@ -333,6 +337,7 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
+
 		_commerceInventoryAudit.setExpandoBridgeAttributes(baseModel);
 	}
 
@@ -347,10 +352,10 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Sets the modified date of this commerce inventory audit.
-	*
-	* @param modifiedDate the modified date of this commerce inventory audit
-	*/
+	 * Sets the modified date of this commerce inventory audit.
+	 *
+	 * @param modifiedDate the modified date of this commerce inventory audit
+	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_commerceInventoryAudit.setModifiedDate(modifiedDate);
@@ -362,10 +367,10 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Sets the primary key of this commerce inventory audit.
-	*
-	* @param primaryKey the primary key of this commerce inventory audit
-	*/
+	 * Sets the primary key of this commerce inventory audit.
+	 *
+	 * @param primaryKey the primary key of this commerce inventory audit
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_commerceInventoryAudit.setPrimaryKey(primaryKey);
@@ -377,63 +382,66 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	/**
-	* Sets the quantity of this commerce inventory audit.
-	*
-	* @param quantity the quantity of this commerce inventory audit
-	*/
+	 * Sets the quantity of this commerce inventory audit.
+	 *
+	 * @param quantity the quantity of this commerce inventory audit
+	 */
 	@Override
 	public void setQuantity(int quantity) {
 		_commerceInventoryAudit.setQuantity(quantity);
 	}
 
 	/**
-	* Sets the sku of this commerce inventory audit.
-	*
-	* @param sku the sku of this commerce inventory audit
-	*/
+	 * Sets the sku of this commerce inventory audit.
+	 *
+	 * @param sku the sku of this commerce inventory audit
+	 */
 	@Override
 	public void setSku(String sku) {
 		_commerceInventoryAudit.setSku(sku);
 	}
 
 	/**
-	* Sets the user ID of this commerce inventory audit.
-	*
-	* @param userId the user ID of this commerce inventory audit
-	*/
+	 * Sets the user ID of this commerce inventory audit.
+	 *
+	 * @param userId the user ID of this commerce inventory audit
+	 */
 	@Override
 	public void setUserId(long userId) {
 		_commerceInventoryAudit.setUserId(userId);
 	}
 
 	/**
-	* Sets the user name of this commerce inventory audit.
-	*
-	* @param userName the user name of this commerce inventory audit
-	*/
+	 * Sets the user name of this commerce inventory audit.
+	 *
+	 * @param userName the user name of this commerce inventory audit
+	 */
 	@Override
 	public void setUserName(String userName) {
 		_commerceInventoryAudit.setUserName(userName);
 	}
 
 	/**
-	* Sets the user uuid of this commerce inventory audit.
-	*
-	* @param userUuid the user uuid of this commerce inventory audit
-	*/
+	 * Sets the user uuid of this commerce inventory audit.
+	 *
+	 * @param userUuid the user uuid of this commerce inventory audit
+	 */
 	@Override
 	public void setUserUuid(String userUuid) {
 		_commerceInventoryAudit.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<CommerceInventoryAudit> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CommerceInventoryAudit>
+		toCacheModel() {
+
 		return _commerceInventoryAudit.toCacheModel();
 	}
 
 	@Override
 	public CommerceInventoryAudit toEscapedModel() {
-		return new CommerceInventoryAuditWrapper(_commerceInventoryAudit.toEscapedModel());
+		return new CommerceInventoryAuditWrapper(
+			_commerceInventoryAudit.toEscapedModel());
 	}
 
 	@Override
@@ -443,7 +451,8 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 
 	@Override
 	public CommerceInventoryAudit toUnescapedModel() {
-		return new CommerceInventoryAuditWrapper(_commerceInventoryAudit.toUnescapedModel());
+		return new CommerceInventoryAuditWrapper(
+			_commerceInventoryAudit.toUnescapedModel());
 	}
 
 	@Override
@@ -461,10 +470,13 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 			return false;
 		}
 
-		CommerceInventoryAuditWrapper commerceInventoryAuditWrapper = (CommerceInventoryAuditWrapper)obj;
+		CommerceInventoryAuditWrapper commerceInventoryAuditWrapper =
+			(CommerceInventoryAuditWrapper)obj;
 
-		if (Objects.equals(_commerceInventoryAudit,
-					commerceInventoryAuditWrapper._commerceInventoryAudit)) {
+		if (Objects.equals(
+				_commerceInventoryAudit,
+				commerceInventoryAuditWrapper._commerceInventoryAudit)) {
+
 			return true;
 		}
 
@@ -492,4 +504,5 @@ public class CommerceInventoryAuditWrapper implements CommerceInventoryAudit,
 	}
 
 	private final CommerceInventoryAudit _commerceInventoryAudit;
+
 }

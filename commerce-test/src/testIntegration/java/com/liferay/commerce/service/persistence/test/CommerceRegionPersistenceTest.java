@@ -127,8 +127,6 @@ public class CommerceRegionPersistenceTest {
 
 		newCommerceRegion.setUuid(RandomTestUtil.randomString());
 
-		newCommerceRegion.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceRegion.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceRegion.setUserId(RandomTestUtil.nextLong());
@@ -161,9 +159,6 @@ public class CommerceRegionPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceRegion.getCommerceRegionId(),
 			newCommerceRegion.getCommerceRegionId());
-		Assert.assertEquals(
-			existingCommerceRegion.getGroupId(),
-			newCommerceRegion.getGroupId());
 		Assert.assertEquals(
 			existingCommerceRegion.getCompanyId(),
 			newCommerceRegion.getCompanyId());
@@ -202,15 +197,6 @@ public class CommerceRegionPersistenceTest {
 		_persistence.countByUuid("null");
 
 		_persistence.countByUuid((String)null);
-	}
-
-	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
 	}
 
 	@Test
@@ -271,11 +257,11 @@ public class CommerceRegionPersistenceTest {
 
 	protected OrderByComparator<CommerceRegion> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"CommerceRegion", "uuid", true, "commerceRegionId", true, "groupId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "commerceCountryId", true,
-			"name", true, "code", true, "priority", true, "active", true,
-			"lastPublishDate", true);
+			"CommerceRegion", "uuid", true, "commerceRegionId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commerceCountryId", true, "name", true,
+			"code", true, "priority", true, "active", true, "lastPublishDate",
+			true);
 	}
 
 	@Test
@@ -501,17 +487,6 @@ public class CommerceRegionPersistenceTest {
 		CommerceRegion existingCommerceRegion = _persistence.findByPrimaryKey(
 			newCommerceRegion.getPrimaryKey());
 
-		Assert.assertTrue(
-			Objects.equals(
-				existingCommerceRegion.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommerceRegion, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(
-			Long.valueOf(existingCommerceRegion.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommerceRegion, "getOriginalGroupId", new Class<?>[0]));
-
 		Assert.assertEquals(
 			Long.valueOf(existingCommerceRegion.getCommerceCountryId()),
 			ReflectionTestUtil.<Long>invoke(
@@ -531,8 +506,6 @@ public class CommerceRegionPersistenceTest {
 		CommerceRegion commerceRegion = _persistence.create(pk);
 
 		commerceRegion.setUuid(RandomTestUtil.randomString());
-
-		commerceRegion.setGroupId(RandomTestUtil.nextLong());
 
 		commerceRegion.setCompanyId(RandomTestUtil.nextLong());
 

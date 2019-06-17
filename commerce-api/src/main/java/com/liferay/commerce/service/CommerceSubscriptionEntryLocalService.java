@@ -78,7 +78,6 @@ public interface CommerceSubscriptionEntryLocalService
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 		CommerceSubscriptionEntry commerceSubscriptionEntry);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long cpInstanceId, long commerceOrderItemId,
 			ServiceContext serviceContext)
@@ -239,7 +238,12 @@ public interface CommerceSubscriptionEntryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
-		long groupId, long userId, int start, int end,
+		long companyId, long userId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceSubscriptionEntry> getCommerceSubscriptionEntries(
+		long companyId, long groupId, long userId, int start, int end,
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
@@ -279,7 +283,11 @@ public interface CommerceSubscriptionEntryLocalService
 	public int getCommerceSubscriptionEntriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceSubscriptionEntriesCount(long groupId, long userId);
+	public int getCommerceSubscriptionEntriesCount(long companyId, long userId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceSubscriptionEntriesCount(
+		long companyId, long groupId, long userId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceSubscriptionEntry>
@@ -332,6 +340,14 @@ public interface CommerceSubscriptionEntryLocalService
 
 	public CommerceSubscriptionEntry incrementCommerceSubscriptionEntryCycle(
 			long commerceSubscriptionEntryId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceSubscriptionEntry>
+			searchCommerceSubscriptionEntries(
+				long companyId, Long maxSubscriptionCycles,
+				Integer subscriptionStatus, String keywords, int start, int end,
+				Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

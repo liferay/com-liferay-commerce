@@ -81,8 +81,8 @@
 			<hint-collection name="CLOB" />
 		</field>
 	</model>
-	<model name="com.liferay.commerce.notification.model.CommerceNotificationTemplateUserSegmentRel">
-		<field name="commerceNotificationTemplateUserSegmentRelId" type="long" />
+	<model name="com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel">
+		<field name="commerceNotificationTemplateCommerceAccountGroupRelId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -90,6 +90,6 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceNotificationTemplateId" type="long" />
-		<field name="commerceUserSegmentEntryId" type="long" />
+		<field name="commerceAccountGroupId" type="long" />
 	</model>
 </model-hints>

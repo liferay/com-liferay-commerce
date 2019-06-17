@@ -345,6 +345,13 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		return _cpInstance.compareTo(cpInstance);
 	}
 
+	@Override
+	public CommerceCatalog getCommerceCatalog()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpInstance.getCommerceCatalog();
+	}
+
 	/**
 	 * Returns the company ID of this cp instance.
 	 *
@@ -717,40 +724,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	}
 
 	/**
-	 * Returns the trash entry created when this cp instance was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp instance.
-	 *
-	 * @return the trash entry created when this cp instance was moved to the Recycle Bin
-	 */
-	@Override
-	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _cpInstance.getTrashEntry();
-	}
-
-	/**
-	 * Returns the class primary key of the trash entry for this cp instance.
-	 *
-	 * @return the class primary key of the trash entry for this cp instance
-	 */
-	@Override
-	public long getTrashEntryClassPK() {
-		return _cpInstance.getTrashEntryClassPK();
-	}
-
-	/**
-	 * Returns the trash handler for this cp instance.
-	 *
-	 * @return the trash handler for this cp instance
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	@Override
-	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
-		return _cpInstance.getTrashHandler();
-	}
-
-	/**
 	 * Returns the user ID of this cp instance.
 	 *
 	 * @return the user ID of this cp instance
@@ -883,36 +856,6 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 	@Override
 	public boolean isIncomplete() {
 		return _cpInstance.isIncomplete();
-	}
-
-	/**
-	 * Returns <code>true</code> if this cp instance is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if this cp instance is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrash() {
-		return _cpInstance.isInTrash();
-	}
-
-	/**
-	 * Returns <code>true</code> if the parent of this cp instance is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if the parent of this cp instance is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrashContainer() {
-		return _cpInstance.isInTrashContainer();
-	}
-
-	@Override
-	public boolean isInTrashExplicitly() {
-		return _cpInstance.isInTrashExplicitly();
-	}
-
-	@Override
-	public boolean isInTrashImplicitly() {
-		return _cpInstance.isInTrashImplicitly();
 	}
 
 	@Override

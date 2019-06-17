@@ -8,7 +8,7 @@ create table CShippingFixedOptionRel (
 	modifiedDate DATE null,
 	commerceShippingMethodId LONG,
 	commerceShippingFixedOptionId LONG,
-	commerceWarehouseId LONG,
+	commerceInventoryWarehouseId LONG,
 	commerceCountryId LONG,
 	commerceRegionId LONG,
 	zip VARCHAR(75) null,

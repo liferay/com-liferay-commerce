@@ -69,12 +69,10 @@ public class CommerceDiscountUsageEntryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{commerceDiscountUsageEntryId=");
 		sb.append(commerceDiscountUsageEntryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -103,7 +101,6 @@ public class CommerceDiscountUsageEntryCacheModel
 
 		commerceDiscountUsageEntryImpl.setCommerceDiscountUsageEntryId(
 			commerceDiscountUsageEntryId);
-		commerceDiscountUsageEntryImpl.setGroupId(groupId);
 		commerceDiscountUsageEntryImpl.setCompanyId(companyId);
 		commerceDiscountUsageEntryImpl.setUserId(userId);
 
@@ -143,8 +140,6 @@ public class CommerceDiscountUsageEntryCacheModel
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		commerceDiscountUsageEntryId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -162,8 +157,6 @@ public class CommerceDiscountUsageEntryCacheModel
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceDiscountUsageEntryId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -187,7 +180,6 @@ public class CommerceDiscountUsageEntryCacheModel
 	}
 
 	public long commerceDiscountUsageEntryId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

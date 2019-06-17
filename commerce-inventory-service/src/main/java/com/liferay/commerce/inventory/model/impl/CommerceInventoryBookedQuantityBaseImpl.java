@@ -35,18 +35,22 @@ import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLoc
 public abstract class CommerceInventoryBookedQuantityBaseImpl
 	extends CommerceInventoryBookedQuantityModelImpl
 	implements CommerceInventoryBookedQuantity {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a commerce inventory booked quantity model instance should use the {@link CommerceInventoryBookedQuantity} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory booked quantity model instance should use the <code>CommerceInventoryBookedQuantity</code> interface instead.
 	 */
 	@Override
 	public void persist() {
 		if (this.isNew()) {
-			CommerceInventoryBookedQuantityLocalServiceUtil.addCommerceInventoryBookedQuantity(this);
+			CommerceInventoryBookedQuantityLocalServiceUtil.
+				addCommerceInventoryBookedQuantity(this);
 		}
 		else {
-			CommerceInventoryBookedQuantityLocalServiceUtil.updateCommerceInventoryBookedQuantity(this);
+			CommerceInventoryBookedQuantityLocalServiceUtil.
+				updateCommerceInventoryBookedQuantity(this);
 		}
 	}
+
 }

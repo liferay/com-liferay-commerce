@@ -55,14 +55,14 @@ public class CPOptionCategoryLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
 			addCPOptionCategory(
-				java.util.Map<java.util.Locale, String> titleMap,
+				long userId, java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
 				double priority, String key,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpOptionCategoryLocalService.addCPOptionCategory(
-			titleMap, descriptionMap, priority, key, serviceContext);
+			userId, titleMap, descriptionMap, priority, key, serviceContext);
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class CPOptionCategoryLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPOptionCategories(long groupId)
+	public void deleteCPOptionCategories(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		_cpOptionCategoryLocalService.deleteCPOptionCategories(groupId);
+		_cpOptionCategoryLocalService.deleteCPOptionCategories(companyId);
 	}
 
 	/**
@@ -233,25 +233,25 @@ public class CPOptionCategoryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
-		fetchCPOptionCategory(long groupId, String key) {
+		fetchCPOptionCategory(long companyId, String key) {
 
 		return _cpOptionCategoryLocalService.fetchCPOptionCategory(
-			groupId, key);
+			companyId, key);
 	}
 
 	/**
-	 * Returns the cp option category matching the UUID and group.
+	 * Returns the cp option category with the matching UUID and company.
 	 *
 	 * @param uuid the cp option category's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option category, or <code>null</code> if a matching cp option category could not be found
 	 */
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
-		fetchCPOptionCategoryByUuidAndGroupId(String uuid, long groupId) {
+		fetchCPOptionCategoryByUuidAndCompanyId(String uuid, long companyId) {
 
 		return _cpOptionCategoryLocalService.
-			fetchCPOptionCategoryByUuidAndGroupId(uuid, groupId);
+			fetchCPOptionCategoryByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -281,60 +281,10 @@ public class CPOptionCategoryLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
-		getCPOptionCategories(long groupId, int start, int end) {
+		getCPOptionCategories(long companyId, int start, int end) {
 
 		return _cpOptionCategoryLocalService.getCPOptionCategories(
-			groupId, start, end);
-	}
-
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
-		getCPOptionCategories(
-			long groupId, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.liferay.commerce.product.model.CPOptionCategory>
-					orderByComparator) {
-
-		return _cpOptionCategoryLocalService.getCPOptionCategories(
-			groupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns all the cp option categories matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option categories
-	 * @param companyId the primary key of the company
-	 * @return the matching cp option categories, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
-		getCPOptionCategoriesByUuidAndCompanyId(String uuid, long companyId) {
-
-		return _cpOptionCategoryLocalService.
-			getCPOptionCategoriesByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp option categories matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp option categories
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp option categories
-	 * @param end the upper bound of the range of cp option categories (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp option categories, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List<com.liferay.commerce.product.model.CPOptionCategory>
-		getCPOptionCategoriesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.liferay.commerce.product.model.CPOptionCategory>
-					orderByComparator) {
-
-		return _cpOptionCategoryLocalService.
-			getCPOptionCategoriesByUuidAndCompanyId(
-				uuid, companyId, start, end, orderByComparator);
+			companyId, start, end);
 	}
 
 	/**
@@ -345,12 +295,6 @@ public class CPOptionCategoryLocalServiceWrapper
 	@Override
 	public int getCPOptionCategoriesCount() {
 		return _cpOptionCategoryLocalService.getCPOptionCategoriesCount();
-	}
-
-	@Override
-	public int getCPOptionCategoriesCount(long groupId) {
-		return _cpOptionCategoryLocalService.getCPOptionCategoriesCount(
-			groupId);
 	}
 
 	/**
@@ -371,27 +315,28 @@ public class CPOptionCategoryLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
-			getCPOptionCategory(long groupId, String key)
+			getCPOptionCategory(long companyId, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _cpOptionCategoryLocalService.getCPOptionCategory(groupId, key);
+		return _cpOptionCategoryLocalService.getCPOptionCategory(
+			companyId, key);
 	}
 
 	/**
-	 * Returns the cp option category matching the UUID and group.
+	 * Returns the cp option category with the matching UUID and company.
 	 *
 	 * @param uuid the cp option category's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp option category
 	 * @throws PortalException if a matching cp option category could not be found
 	 */
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
-			getCPOptionCategoryByUuidAndGroupId(String uuid, long groupId)
+			getCPOptionCategoryByUuidAndCompanyId(String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpOptionCategoryLocalService.
-			getCPOptionCategoryByUuidAndGroupId(uuid, groupId);
+			getCPOptionCategoryByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -428,6 +373,18 @@ public class CPOptionCategoryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpOptionCategoryLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.product.model.CPOptionCategory>
+				searchCPOptionCategories(
+					long companyId, String keywords, int start, int end,
+					com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpOptionCategoryLocalService.searchCPOptionCategories(
+			companyId, keywords, start, end, sort);
 	}
 
 	/**

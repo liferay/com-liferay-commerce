@@ -65,14 +65,14 @@ import java.rmi.RemoteException;
 public class CommerceOrderServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderSoap addCommerceOrder(
-			long groupId, long userId, long commerceAccountId,
+			long userId, long groupId, long commerceAccountId,
 			long commerceCurrencyId)
 		throws RemoteException {
 
 		try {
 			com.liferay.commerce.model.CommerceOrder returnValue =
 				CommerceOrderServiceUtil.addCommerceOrder(
-					groupId, userId, commerceAccountId, commerceCurrencyId);
+					userId, groupId, commerceAccountId, commerceCurrencyId);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
 				returnValue);
@@ -898,11 +898,11 @@ public class CommerceOrderServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderSoap
 			upsertCommerceOrder(
-				long commerceAccountId, long commerceCurrencyId,
-				long billingAddressId, long shippingAddressId,
-				String commercePaymentMethodKey, long commerceShippingMethodId,
-				String shippingOptionName, String purchaseOrderNumber,
-				java.math.BigDecimal subtotal,
+				long userId, long groupId, long commerceAccountId,
+				long commerceCurrencyId, long billingAddressId,
+				long shippingAddressId, String commercePaymentMethodKey,
+				long commerceShippingMethodId, String shippingOptionName,
+				String purchaseOrderNumber, java.math.BigDecimal subtotal,
 				java.math.BigDecimal shippingAmount, java.math.BigDecimal total,
 				int paymentStatus, int orderStatus, String advanceStatus,
 				String externalReferenceCode,
@@ -913,12 +913,13 @@ public class CommerceOrderServiceSoap {
 		try {
 			com.liferay.commerce.model.CommerceOrder returnValue =
 				CommerceOrderServiceUtil.upsertCommerceOrder(
-					commerceAccountId, commerceCurrencyId, billingAddressId,
-					shippingAddressId, commercePaymentMethodKey,
-					commerceShippingMethodId, shippingOptionName,
-					purchaseOrderNumber, subtotal, shippingAmount, total,
-					paymentStatus, orderStatus, advanceStatus,
-					externalReferenceCode, commerceContext, serviceContext);
+					userId, groupId, commerceAccountId, commerceCurrencyId,
+					billingAddressId, shippingAddressId,
+					commercePaymentMethodKey, commerceShippingMethodId,
+					shippingOptionName, purchaseOrderNumber, subtotal,
+					shippingAmount, total, paymentStatus, orderStatus,
+					advanceStatus, externalReferenceCode, commerceContext,
+					serviceContext);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
 				returnValue);

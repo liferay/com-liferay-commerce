@@ -18,36 +18,34 @@ import aQute.bnd.annotation.ProviderType;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for CommerceInventoryReplenishmentItem. This utility wraps
- * {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryReplenishmentItemService
- * @see com.liferay.commerce.inventory.service.base.CommerceInventoryReplenishmentItemServiceBaseImpl
- * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl
  * @generated
  */
 @ProviderType
 public class CommerceInventoryReplenishmentItemServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
@@ -56,17 +54,26 @@ public class CommerceInventoryReplenishmentItemServiceUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<CommerceInventoryReplenishmentItemService, CommerceInventoryReplenishmentItemService> _serviceTracker;
+	private static ServiceTracker
+		<CommerceInventoryReplenishmentItemService,
+		 CommerceInventoryReplenishmentItemService> _serviceTracker;
 
 	static {
-		Bundle bundle = FrameworkUtil.getBundle(CommerceInventoryReplenishmentItemService.class);
+		Bundle bundle = FrameworkUtil.getBundle(
+			CommerceInventoryReplenishmentItemService.class);
 
-		ServiceTracker<CommerceInventoryReplenishmentItemService, CommerceInventoryReplenishmentItemService> serviceTracker =
-			new ServiceTracker<CommerceInventoryReplenishmentItemService, CommerceInventoryReplenishmentItemService>(bundle.getBundleContext(),
-				CommerceInventoryReplenishmentItemService.class, null);
+		ServiceTracker
+			<CommerceInventoryReplenishmentItemService,
+			 CommerceInventoryReplenishmentItemService> serviceTracker =
+				new ServiceTracker
+					<CommerceInventoryReplenishmentItemService,
+					 CommerceInventoryReplenishmentItemService>(
+						 bundle.getBundleContext(),
+						 CommerceInventoryReplenishmentItemService.class, null);
 
 		serviceTracker.open();
 
 		_serviceTracker = serviceTracker;
 	}
+
 }

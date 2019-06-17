@@ -39,7 +39,6 @@ public class CommercePriceEntrySoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommercePriceEntryId(model.getCommercePriceEntryId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -136,14 +135,6 @@ public class CommercePriceEntrySoap implements Serializable {
 
 	public void setCommercePriceEntryId(long commercePriceEntryId) {
 		_commercePriceEntryId = commercePriceEntryId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -249,7 +240,6 @@ public class CommercePriceEntrySoap implements Serializable {
 	private String _uuid;
 	private String _externalReferenceCode;
 	private long _commercePriceEntryId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

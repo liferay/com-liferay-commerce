@@ -41,6 +41,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -98,7 +101,8 @@ public class CommerceOrderItemModelImpl
 		{"discountPercentageLevel4", Types.DECIMAL},
 		{"subscription", Types.BOOLEAN}, {"deliveryGroup", Types.VARCHAR},
 		{"shippingAddressId", Types.BIGINT}, {"printedNote", Types.VARCHAR},
-		{"requestedDeliveryDate", Types.TIMESTAMP}
+		{"requestedDeliveryDate", Types.TIMESTAMP},
+		{"bookedQuantityId", Types.BIGINT}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -133,10 +137,11 @@ public class CommerceOrderItemModelImpl
 		TABLE_COLUMNS_MAP.put("shippingAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("printedNote", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("requestedDeliveryDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("bookedQuantityId", Types.BIGINT);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null)";
+		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null,bookedQuantityId LONG)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 
@@ -226,6 +231,7 @@ public class CommerceOrderItemModelImpl
 		model.setShippingAddressId(soapModel.getShippingAddressId());
 		model.setPrintedNote(soapModel.getPrintedNote());
 		model.setRequestedDeliveryDate(soapModel.getRequestedDeliveryDate());
+		model.setBookedQuantityId(soapModel.getBookedQuantityId());
 
 		return model;
 	}
@@ -343,6 +349,32 @@ public class CommerceOrderItemModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceOrderItem>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceOrderItem.class.getClassLoader(), CommerceOrderItem.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommerceOrderItem> constructor =
+				(Constructor<CommerceOrderItem>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CommerceOrderItem, Object>>
@@ -996,6 +1028,30 @@ public class CommerceOrderItemModelImpl
 				}
 
 			});
+		attributeGetterFunctions.put(
+			"bookedQuantityId",
+			new Function<CommerceOrderItem, Object>() {
+
+				@Override
+				public Object apply(CommerceOrderItem commerceOrderItem) {
+					return commerceOrderItem.getBookedQuantityId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"bookedQuantityId",
+			new BiConsumer<CommerceOrderItem, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrderItem commerceOrderItem,
+					Object bookedQuantityId) {
+
+					commerceOrderItem.setBookedQuantityId(
+						(Long)bookedQuantityId);
+				}
+
+			});
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -1541,6 +1597,17 @@ public class CommerceOrderItemModelImpl
 		_requestedDeliveryDate = requestedDeliveryDate;
 	}
 
+	@JSON
+	@Override
+	public long getBookedQuantityId() {
+		return _bookedQuantityId;
+	}
+
+	@Override
+	public void setBookedQuantityId(long bookedQuantityId) {
+		_bookedQuantityId = bookedQuantityId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1627,8 +1694,12 @@ public class CommerceOrderItemModelImpl
 	@Override
 	public CommerceOrderItem toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceOrderItem)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceOrderItem>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1674,6 +1745,7 @@ public class CommerceOrderItemModelImpl
 		commerceOrderItemImpl.setPrintedNote(getPrintedNote());
 		commerceOrderItemImpl.setRequestedDeliveryDate(
 			getRequestedDeliveryDate());
+		commerceOrderItemImpl.setBookedQuantityId(getBookedQuantityId());
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -1902,6 +1974,8 @@ public class CommerceOrderItemModelImpl
 			commerceOrderItemCacheModel.requestedDeliveryDate = Long.MIN_VALUE;
 		}
 
+		commerceOrderItemCacheModel.bookedQuantityId = getBookedQuantityId();
+
 		return commerceOrderItemCacheModel;
 	}
 
@@ -1968,11 +2042,12 @@ public class CommerceOrderItemModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceOrderItem.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceOrderItem.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceOrderItem>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _externalReferenceCode;
 	private String _originalExternalReferenceCode;
@@ -2015,6 +2090,7 @@ public class CommerceOrderItemModelImpl
 	private long _shippingAddressId;
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
+	private long _bookedQuantityId;
 	private long _columnBitmask;
 	private CommerceOrderItem _escapedModel;
 

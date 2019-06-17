@@ -69,14 +69,12 @@ public class CommerceDiscountCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", commerceDiscountId=");
 		sb.append(commerceDiscountId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -146,7 +144,6 @@ public class CommerceDiscountCacheModel
 		}
 
 		commerceDiscountImpl.setCommerceDiscountId(commerceDiscountId);
-		commerceDiscountImpl.setGroupId(groupId);
 		commerceDiscountImpl.setCompanyId(companyId);
 		commerceDiscountImpl.setUserId(userId);
 
@@ -263,8 +260,6 @@ public class CommerceDiscountCacheModel
 
 		commerceDiscountId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -311,8 +306,6 @@ public class CommerceDiscountCacheModel
 		}
 
 		objectOutput.writeLong(commerceDiscountId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -390,7 +383,6 @@ public class CommerceDiscountCacheModel
 
 	public String uuid;
 	public long commerceDiscountId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

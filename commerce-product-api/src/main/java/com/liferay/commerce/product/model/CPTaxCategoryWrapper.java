@@ -59,7 +59,6 @@ public class CPTaxCategoryWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("CPTaxCategoryId", getCPTaxCategoryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -77,12 +76,6 @@ public class CPTaxCategoryWrapper
 
 		if (CPTaxCategoryId != null) {
 			setCPTaxCategoryId(CPTaxCategoryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -257,16 +250,6 @@ public class CPTaxCategoryWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _cpTaxCategory.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this cp tax category.
-	 *
-	 * @return the group ID of this cp tax category
-	 */
-	@Override
-	public long getGroupId() {
-		return _cpTaxCategory.getGroupId();
 	}
 
 	/**
@@ -557,16 +540,6 @@ public class CPTaxCategoryWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_cpTaxCategory.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this cp tax category.
-	 *
-	 * @param groupId the group ID of this cp tax category
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_cpTaxCategory.setGroupId(groupId);
 	}
 
 	/**

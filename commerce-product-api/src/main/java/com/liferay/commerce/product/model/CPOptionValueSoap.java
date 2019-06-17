@@ -37,18 +37,16 @@ public class CPOptionValueSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCPOptionValueId(model.getCPOptionValueId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-(??)
+		soapModel.setCPOptionId(model.getCPOptionId());
 		soapModel.setName(model.getName());
-(??)		soapModel.setSiteGroupId(model.getSiteGroupId());
-(??)		soapModel.setType(model.getType());
-(??)		soapModel.setTypeSettings(model.getTypeSettings());
-(??)		soapModel.setCommerceCurrencyCode(model.getCommerceCurrencyCode());
+		soapModel.setPriority(model.getPriority());
+		soapModel.setKey(model.getKey());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
 	}
@@ -126,14 +124,6 @@ public class CPOptionValueSoap implements Serializable {
 		_CPOptionValueId = CPOptionValueId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -174,10 +164,12 @@ public class CPOptionValueSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-(??)
+	public long getCPOptionId() {
+		return _CPOptionId;
 	}
 
-(??)
+	public void setCPOptionId(long CPOptionId) {
+		_CPOptionId = CPOptionId;
 	}
 
 	public String getName() {
@@ -188,14 +180,14 @@ public class CPOptionValueSoap implements Serializable {
 		_name = name;
 	}
 
-(??)	public long getSiteGroupId() {
-(??)		return _siteGroupId;
-(??)	}
-(??)
-(??)	public void setSiteGroupId(long siteGroupId) {
-(??)		_siteGroupId = siteGroupId;
-(??)	}
-(??)
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
 	public String getKey() {
 		return _key;
 	}
@@ -215,16 +207,15 @@ public class CPOptionValueSoap implements Serializable {
 	private String _uuid;
 	private String _externalReferenceCode;
 	private long _CPOptionValueId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-(??)
+	private long _CPOptionId;
 	private String _name;
-(??)	private long _siteGroupId;
-(??)	private String _type;
-(??)	private String _typeSettings;
-(??)	private String _commerceCurrencyCode;
+	private double _priority;
+	private String _key;
+	private Date _lastPublishDate;
+
 }

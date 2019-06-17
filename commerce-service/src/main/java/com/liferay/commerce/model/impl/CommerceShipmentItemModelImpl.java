@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -79,7 +82,8 @@ public class CommerceShipmentItemModelImpl
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"commerceShipmentId", Types.BIGINT},
 		{"commerceOrderItemId", Types.BIGINT},
-		{"commerceWarehouseId", Types.BIGINT}, {"quantity", Types.INTEGER}
+		{"commerceInventoryWarehouseId", Types.BIGINT},
+		{"quantity", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -95,12 +99,12 @@ public class CommerceShipmentItemModelImpl
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceShipmentId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceOrderItemId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("commerceWarehouseId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceInventoryWarehouseId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("quantity", Types.INTEGER);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceShipmentItem (commerceShipmentItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceShipmentId LONG,commerceOrderItemId LONG,commerceWarehouseId LONG,quantity INTEGER)";
+		"create table CommerceShipmentItem (commerceShipmentItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceShipmentId LONG,commerceOrderItemId LONG,commerceInventoryWarehouseId LONG,quantity INTEGER)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceShipmentItem";
@@ -162,7 +166,8 @@ public class CommerceShipmentItemModelImpl
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommerceShipmentId(soapModel.getCommerceShipmentId());
 		model.setCommerceOrderItemId(soapModel.getCommerceOrderItemId());
-		model.setCommerceWarehouseId(soapModel.getCommerceWarehouseId());
+		model.setCommerceInventoryWarehouseId(
+			soapModel.getCommerceInventoryWarehouseId());
 		model.setQuantity(soapModel.getQuantity());
 
 		return model;
@@ -281,6 +286,32 @@ public class CommerceShipmentItemModelImpl
 		getAttributeSetterBiConsumers() {
 
 		return _attributeSetterBiConsumers;
+	}
+
+	private static Function<InvocationHandler, CommerceShipmentItem>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceShipmentItem.class.getClassLoader(),
+			CommerceShipmentItem.class, ModelWrapper.class);
+
+		try {
+			Constructor<CommerceShipmentItem> constructor =
+				(Constructor<CommerceShipmentItem>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
 	}
 
 	private static final Map<String, Function<CommerceShipmentItem, Object>>
@@ -507,26 +538,27 @@ public class CommerceShipmentItemModelImpl
 
 			});
 		attributeGetterFunctions.put(
-			"commerceWarehouseId",
+			"commerceInventoryWarehouseId",
 			new Function<CommerceShipmentItem, Object>() {
 
 				@Override
 				public Object apply(CommerceShipmentItem commerceShipmentItem) {
-					return commerceShipmentItem.getCommerceWarehouseId();
+					return commerceShipmentItem.
+						getCommerceInventoryWarehouseId();
 				}
 
 			});
 		attributeSetterBiConsumers.put(
-			"commerceWarehouseId",
+			"commerceInventoryWarehouseId",
 			new BiConsumer<CommerceShipmentItem, Object>() {
 
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object commerceWarehouseId) {
+					Object commerceInventoryWarehouseId) {
 
-					commerceShipmentItem.setCommerceWarehouseId(
-						(Long)commerceWarehouseId);
+					commerceShipmentItem.setCommerceInventoryWarehouseId(
+						(Long)commerceInventoryWarehouseId);
 				}
 
 			});
@@ -714,13 +746,15 @@ public class CommerceShipmentItemModelImpl
 
 	@JSON
 	@Override
-	public long getCommerceWarehouseId() {
-		return _commerceWarehouseId;
+	public long getCommerceInventoryWarehouseId() {
+		return _commerceInventoryWarehouseId;
 	}
 
 	@Override
-	public void setCommerceWarehouseId(long commerceWarehouseId) {
-		_commerceWarehouseId = commerceWarehouseId;
+	public void setCommerceInventoryWarehouseId(
+		long commerceInventoryWarehouseId) {
+
+		_commerceInventoryWarehouseId = commerceInventoryWarehouseId;
 	}
 
 	@JSON
@@ -755,8 +789,12 @@ public class CommerceShipmentItemModelImpl
 	@Override
 	public CommerceShipmentItem toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceShipmentItem)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceShipmentItem>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -779,8 +817,8 @@ public class CommerceShipmentItemModelImpl
 		commerceShipmentItemImpl.setCommerceShipmentId(getCommerceShipmentId());
 		commerceShipmentItemImpl.setCommerceOrderItemId(
 			getCommerceOrderItemId());
-		commerceShipmentItemImpl.setCommerceWarehouseId(
-			getCommerceWarehouseId());
+		commerceShipmentItemImpl.setCommerceInventoryWarehouseId(
+			getCommerceInventoryWarehouseId());
 		commerceShipmentItemImpl.setQuantity(getQuantity());
 
 		commerceShipmentItemImpl.resetOriginalValues();
@@ -907,8 +945,8 @@ public class CommerceShipmentItemModelImpl
 		commerceShipmentItemCacheModel.commerceOrderItemId =
 			getCommerceOrderItemId();
 
-		commerceShipmentItemCacheModel.commerceWarehouseId =
-			getCommerceWarehouseId();
+		commerceShipmentItemCacheModel.commerceInventoryWarehouseId =
+			getCommerceInventoryWarehouseId();
 
 		commerceShipmentItemCacheModel.quantity = getQuantity();
 
@@ -980,11 +1018,12 @@ public class CommerceShipmentItemModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceShipmentItem.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceShipmentItem.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceShipmentItem>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private long _commerceShipmentItemId;
 	private long _groupId;
@@ -1000,7 +1039,7 @@ public class CommerceShipmentItemModelImpl
 	private long _originalCommerceShipmentId;
 	private boolean _setOriginalCommerceShipmentId;
 	private long _commerceOrderItemId;
-	private long _commerceWarehouseId;
+	private long _commerceInventoryWarehouseId;
 	private int _quantity;
 	private long _columnBitmask;
 	private CommerceShipmentItem _escapedModel;

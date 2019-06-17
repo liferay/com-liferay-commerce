@@ -90,12 +90,6 @@ public interface CPDefinitionSpecificationOptionValueService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionSpecificationOptionValue>
 			getCPDefinitionSpecificationOptionValues(
-				long cpSpecificationOptionId, int start, int end)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinitionSpecificationOptionValue>
-			getCPDefinitionSpecificationOptionValues(
 				long cpDefinitionId, int start, int end,
 				OrderByComparator<CPDefinitionSpecificationOptionValue>
 					orderByComparator)
@@ -105,11 +99,6 @@ public interface CPDefinitionSpecificationOptionValueService
 	public List<CPDefinitionSpecificationOptionValue>
 			getCPDefinitionSpecificationOptionValues(
 				long cpDefinitionId, long cpOptionCategoryId)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionSpecificationOptionValuesCount(
-			long cpSpecificationOptionId)
 		throws PortalException;
 
 	/**

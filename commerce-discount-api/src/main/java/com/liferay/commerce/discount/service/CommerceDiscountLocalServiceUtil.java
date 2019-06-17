@@ -57,7 +57,7 @@ public class CommerceDiscountLocalServiceUtil {
 
 	public static com.liferay.commerce.discount.model.CommerceDiscount
 			addCommerceDiscount(
-				String title, String target, boolean useCouponCode,
+				long userId, String title, String target, boolean useCouponCode,
 				String couponCode, boolean usePercentage,
 				java.math.BigDecimal maximumDiscountAmount,
 				java.math.BigDecimal level1, java.math.BigDecimal level2,
@@ -72,7 +72,7 @@ public class CommerceDiscountLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceDiscount(
-			title, target, useCouponCode, couponCode, usePercentage,
+			userId, title, target, useCouponCode, couponCode, usePercentage,
 			maximumDiscountAmount, level1, level2, level3, level4,
 			limitationType, limitationTimes, active, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
@@ -129,10 +129,10 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().deleteCommerceDiscount(commerceDiscountId);
 	}
 
-	public static void deleteCommerceDiscounts(long groupId)
+	public static void deleteCommerceDiscounts(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		getService().deleteCommerceDiscounts(groupId);
+		getService().deleteCommerceDiscounts(companyId);
 	}
 
 	/**
@@ -238,17 +238,17 @@ public class CommerceDiscountLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	 */
 	public static com.liferay.commerce.discount.model.CommerceDiscount
-		fetchCommerceDiscountByUuidAndGroupId(String uuid, long groupId) {
+		fetchCommerceDiscountByUuidAndCompanyId(String uuid, long companyId) {
 
-		return getService().fetchCommerceDiscountByUuidAndGroupId(
-			uuid, groupId);
+		return getService().fetchCommerceDiscountByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -272,18 +272,19 @@ public class CommerceDiscountLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount
 	 * @throws PortalException if a matching commerce discount could not be found
 	 */
 	public static com.liferay.commerce.discount.model.CommerceDiscount
-			getCommerceDiscountByUuidAndGroupId(String uuid, long groupId)
+			getCommerceDiscountByUuidAndCompanyId(String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCommerceDiscountByUuidAndGroupId(uuid, groupId);
+		return getService().getCommerceDiscountByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	/**
@@ -306,59 +307,9 @@ public class CommerceDiscountLocalServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscounts(
-				long groupId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.discount.model.CommerceDiscount>
-						orderByComparator) {
+			getCommerceDiscounts(long companyId, String couponCode) {
 
-		return getService().getCommerceDiscounts(
-			groupId, start, end, orderByComparator);
-	}
-
-	public static java.util.List
-		<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscounts(long groupId, String couponCode) {
-
-		return getService().getCommerceDiscounts(groupId, couponCode);
-	}
-
-	/**
-	 * Returns all the commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce discounts, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscountsByUuidAndCompanyId(
-				String uuid, long companyId) {
-
-		return getService().getCommerceDiscountsByUuidAndCompanyId(
-			uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce discounts
-	 * @param end the upper bound of the range of commerce discounts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce discounts, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.discount.model.CommerceDiscount>
-			getCommerceDiscountsByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.discount.model.CommerceDiscount>
-						orderByComparator) {
-
-		return getService().getCommerceDiscountsByUuidAndCompanyId(
-			uuid, companyId, start, end, orderByComparator);
+		return getService().getCommerceDiscounts(companyId, couponCode);
 	}
 
 	/**
@@ -370,14 +321,10 @@ public class CommerceDiscountLocalServiceUtil {
 		return getService().getCommerceDiscountsCount();
 	}
 
-	public static int getCommerceDiscountsCount(long groupId) {
-		return getService().getCommerceDiscountsCount(groupId);
-	}
-
 	public static int getCommerceDiscountsCount(
-		long groupId, String couponCode) {
+		long companyId, String couponCode) {
 
-		return getService().getCommerceDiscountsCount(groupId, couponCode);
+		return getService().getCommerceDiscountsCount(companyId, couponCode);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
@@ -422,13 +369,13 @@ public class CommerceDiscountLocalServiceUtil {
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.discount.model.CommerceDiscount>
 				searchCommerceDiscounts(
-					long companyId, long groupId, String keywords, int status,
-					int start, int end,
+					long companyId, long[] groupIds, String keywords,
+					int status, int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().searchCommerceDiscounts(
-			companyId, groupId, keywords, status, start, end, sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult

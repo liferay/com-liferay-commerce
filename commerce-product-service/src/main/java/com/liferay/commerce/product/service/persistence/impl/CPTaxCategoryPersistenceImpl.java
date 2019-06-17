@@ -85,68 +85,70 @@ public class CPTaxCategoryPersistenceImpl
 	private FinderPath _finderPathWithPaginationFindAll;
 	private FinderPath _finderPathWithoutPaginationFindAll;
 	private FinderPath _finderPathCountAll;
-	private FinderPath _finderPathWithPaginationFindByGroupId;
-	private FinderPath _finderPathWithoutPaginationFindByGroupId;
-	private FinderPath _finderPathCountByGroupId;
+	private FinderPath _finderPathWithPaginationFindByCompanyId;
+	private FinderPath _finderPathWithoutPaginationFindByCompanyId;
+	private FinderPath _finderPathCountByCompanyId;
 
 	/**
-	 * Returns all the cp tax categories where groupId = &#63;.
+	 * Returns all the cp tax categories where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(long groupId) {
-		return findByGroupId(
-			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<CPTaxCategory> findByCompanyId(long companyId) {
+		return findByCompanyId(
+			companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the cp tax categories where groupId = &#63;.
+	 * Returns a range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @return the range of matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(long groupId, int start, int end) {
-		return findByGroupId(groupId, start, end, null);
+	public List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end) {
+
+		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
+	 * Returns an ordered range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(
-		long groupId, int start, int end,
+	public List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator) {
 
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp tax categories where groupId = &#63;.
+	 * Returns an ordered range of all the cp tax categories where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPTaxCategoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -154,8 +156,8 @@ public class CPTaxCategoryPersistenceImpl
 	 * @return the ordered range of matching cp tax categories
 	 */
 	@Override
-	public List<CPTaxCategory> findByGroupId(
-		long groupId, int start, int end,
+	public List<CPTaxCategory> findByCompanyId(
+		long companyId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator,
 		boolean retrieveFromCache) {
 
@@ -167,12 +169,14 @@ public class CPTaxCategoryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+			finderPath = _finderPathWithoutPaginationFindByCompanyId;
+			finderArgs = new Object[] {companyId};
 		}
 		else {
-			finderPath = _finderPathWithPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId, start, end, orderByComparator};
+			finderPath = _finderPathWithPaginationFindByCompanyId;
+			finderArgs = new Object[] {
+				companyId, start, end, orderByComparator
+			};
 		}
 
 		List<CPTaxCategory> list = null;
@@ -183,7 +187,7 @@ public class CPTaxCategoryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPTaxCategory cpTaxCategory : list) {
-					if ((groupId != cpTaxCategory.getGroupId())) {
+					if ((companyId != cpTaxCategory.getCompanyId())) {
 						list = null;
 
 						break;
@@ -205,7 +209,7 @@ public class CPTaxCategoryPersistenceImpl
 
 			query.append(_SQL_SELECT_CPTAXCATEGORY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -226,7 +230,7 @@ public class CPTaxCategoryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				if (!pagination) {
 					list = (List<CPTaxCategory>)QueryUtil.list(
@@ -259,20 +263,20 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the first cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory findByGroupId_First(
-			long groupId, OrderByComparator<CPTaxCategory> orderByComparator)
+	public CPTaxCategory findByCompanyId_First(
+			long companyId, OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
 
-		CPTaxCategory cpTaxCategory = fetchByGroupId_First(
-			groupId, orderByComparator);
+		CPTaxCategory cpTaxCategory = fetchByCompanyId_First(
+			companyId, orderByComparator);
 
 		if (cpTaxCategory != null) {
 			return cpTaxCategory;
@@ -282,8 +286,8 @@ public class CPTaxCategoryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -291,18 +295,18 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the first cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the first cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory fetchByGroupId_First(
-		long groupId, OrderByComparator<CPTaxCategory> orderByComparator) {
+	public CPTaxCategory fetchByCompanyId_First(
+		long companyId, OrderByComparator<CPTaxCategory> orderByComparator) {
 
-		List<CPTaxCategory> list = findByGroupId(
-			groupId, 0, 1, orderByComparator);
+		List<CPTaxCategory> list = findByCompanyId(
+			companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -312,20 +316,20 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the last cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory findByGroupId_Last(
-			long groupId, OrderByComparator<CPTaxCategory> orderByComparator)
+	public CPTaxCategory findByCompanyId_Last(
+			long companyId, OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
 
-		CPTaxCategory cpTaxCategory = fetchByGroupId_Last(
-			groupId, orderByComparator);
+		CPTaxCategory cpTaxCategory = fetchByCompanyId_Last(
+			companyId, orderByComparator);
 
 		if (cpTaxCategory != null) {
 			return cpTaxCategory;
@@ -335,8 +339,8 @@ public class CPTaxCategoryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("groupId=");
-		msg.append(groupId);
+		msg.append("companyId=");
+		msg.append(companyId);
 
 		msg.append("}");
 
@@ -344,24 +348,24 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the last cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the last cp tax category in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cp tax category, or <code>null</code> if a matching cp tax category could not be found
 	 */
 	@Override
-	public CPTaxCategory fetchByGroupId_Last(
-		long groupId, OrderByComparator<CPTaxCategory> orderByComparator) {
+	public CPTaxCategory fetchByCompanyId_Last(
+		long companyId, OrderByComparator<CPTaxCategory> orderByComparator) {
 
-		int count = countByGroupId(groupId);
+		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<CPTaxCategory> list = findByGroupId(
-			groupId, count - 1, count, orderByComparator);
+		List<CPTaxCategory> list = findByCompanyId(
+			companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -371,17 +375,17 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the cp tax categories before and after the current cp tax category in the ordered set where groupId = &#63;.
+	 * Returns the cp tax categories before and after the current cp tax category in the ordered set where companyId = &#63;.
 	 *
 	 * @param CPTaxCategoryId the primary key of the current cp tax category
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cp tax category
 	 * @throws NoSuchCPTaxCategoryException if a cp tax category with the primary key could not be found
 	 */
 	@Override
-	public CPTaxCategory[] findByGroupId_PrevAndNext(
-			long CPTaxCategoryId, long groupId,
+	public CPTaxCategory[] findByCompanyId_PrevAndNext(
+			long CPTaxCategoryId, long companyId,
 			OrderByComparator<CPTaxCategory> orderByComparator)
 		throws NoSuchCPTaxCategoryException {
 
@@ -394,13 +398,13 @@ public class CPTaxCategoryPersistenceImpl
 
 			CPTaxCategory[] array = new CPTaxCategoryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(
-				session, cpTaxCategory, groupId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(
+				session, cpTaxCategory, companyId, orderByComparator, true);
 
 			array[1] = cpTaxCategory;
 
-			array[2] = getByGroupId_PrevAndNext(
-				session, cpTaxCategory, groupId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(
+				session, cpTaxCategory, companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -412,8 +416,8 @@ public class CPTaxCategoryPersistenceImpl
 		}
 	}
 
-	protected CPTaxCategory getByGroupId_PrevAndNext(
-		Session session, CPTaxCategory cpTaxCategory, long groupId,
+	protected CPTaxCategory getByCompanyId_PrevAndNext(
+		Session session, CPTaxCategory cpTaxCategory, long companyId,
 		OrderByComparator<CPTaxCategory> orderByComparator, boolean previous) {
 
 		StringBundler query = null;
@@ -429,7 +433,7 @@ public class CPTaxCategoryPersistenceImpl
 
 		query.append(_SQL_SELECT_CPTAXCATEGORY_WHERE);
 
-		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -500,7 +504,7 @@ public class CPTaxCategoryPersistenceImpl
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
+		qPos.add(companyId);
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -522,31 +526,31 @@ public class CPTaxCategoryPersistenceImpl
 	}
 
 	/**
-	 * Removes all the cp tax categories where groupId = &#63; from the database.
+	 * Removes all the cp tax categories where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByGroupId(long groupId) {
+	public void removeByCompanyId(long companyId) {
 		for (CPTaxCategory cpTaxCategory :
-				findByGroupId(
-					groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				findByCompanyId(
+					companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
 			remove(cpTaxCategory);
 		}
 	}
 
 	/**
-	 * Returns the number of cp tax categories where groupId = &#63;.
+	 * Returns the number of cp tax categories where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching cp tax categories
 	 */
 	@Override
-	public int countByGroupId(long groupId) {
-		FinderPath finderPath = _finderPathCountByGroupId;
+	public int countByCompanyId(long companyId) {
+		FinderPath finderPath = _finderPathCountByCompanyId;
 
-		Object[] finderArgs = new Object[] {groupId};
+		Object[] finderArgs = new Object[] {companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -555,7 +559,7 @@ public class CPTaxCategoryPersistenceImpl
 
 			query.append(_SQL_COUNT_CPTAXCATEGORY_WHERE);
 
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -568,7 +572,7 @@ public class CPTaxCategoryPersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 
@@ -587,8 +591,8 @@ public class CPTaxCategoryPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
-		"cpTaxCategory.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 =
+		"cpTaxCategory.companyId = ?";
 
 	public CPTaxCategoryPersistenceImpl() {
 		setModelClass(CPTaxCategory.class);
@@ -853,11 +857,13 @@ public class CPTaxCategoryPersistenceImpl
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 		else if (isNew) {
-			Object[] args = new Object[] {cpTaxCategoryModelImpl.getGroupId()};
+			Object[] args = new Object[] {
+				cpTaxCategoryModelImpl.getCompanyId()
+			};
 
-			finderCache.removeResult(_finderPathCountByGroupId, args);
+			finderCache.removeResult(_finderPathCountByCompanyId, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByGroupId, args);
+				_finderPathWithoutPaginationFindByCompanyId, args);
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -865,22 +871,22 @@ public class CPTaxCategoryPersistenceImpl
 		}
 		else {
 			if ((cpTaxCategoryModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByGroupId.
+				 _finderPathWithoutPaginationFindByCompanyId.
 					 getColumnBitmask()) != 0) {
 
 				Object[] args = new Object[] {
-					cpTaxCategoryModelImpl.getOriginalGroupId()
+					cpTaxCategoryModelImpl.getOriginalCompanyId()
 				};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 
-				args = new Object[] {cpTaxCategoryModelImpl.getGroupId()};
+				args = new Object[] {cpTaxCategoryModelImpl.getCompanyId()};
 
-				finderCache.removeResult(_finderPathCountByGroupId, args);
+				finderCache.removeResult(_finderPathCountByCompanyId, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByGroupId, args);
+					_finderPathWithoutPaginationFindByCompanyId, args);
 			}
 		}
 
@@ -1315,28 +1321,28 @@ public class CPTaxCategoryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
 
-		_finderPathWithPaginationFindByGroupId = new FinderPath(
+		_finderPathWithPaginationFindByCompanyId = new FinderPath(
 			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
 			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByGroupId",
+			"findByCompanyId",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			});
 
-		_finderPathWithoutPaginationFindByGroupId = new FinderPath(
+		_finderPathWithoutPaginationFindByCompanyId = new FinderPath(
 			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED,
 			CPTaxCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByGroupId", new String[] {Long.class.getName()},
-			CPTaxCategoryModelImpl.GROUPID_COLUMN_BITMASK |
+			"findByCompanyId", new String[] {Long.class.getName()},
+			CPTaxCategoryModelImpl.COMPANYID_COLUMN_BITMASK |
 			CPTaxCategoryModelImpl.CREATEDATE_COLUMN_BITMASK);
 
-		_finderPathCountByGroupId = new FinderPath(
+		_finderPathCountByCompanyId = new FinderPath(
 			CPTaxCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			CPTaxCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()});
 	}
 

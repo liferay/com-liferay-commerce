@@ -39,6 +39,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -79,10 +82,9 @@ public class CommercePriceEntryModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"externalReferenceCode", Types.VARCHAR},
-		{"commercePriceEntryId", Types.BIGINT}, {"groupId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP},
+		{"commercePriceEntryId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
 		{"commercePriceListId", Types.BIGINT},
 		{"CPInstanceUuid", Types.VARCHAR}, {"CProductId", Types.BIGINT},
 		{"price", Types.DECIMAL}, {"promoPrice", Types.DECIMAL},
@@ -96,7 +98,6 @@ public class CommercePriceEntryModelImpl
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commercePriceEntryId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -112,7 +113,7 @@ public class CommercePriceEntryModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommercePriceEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commercePriceEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commercePriceListId LONG,CPInstanceUuid VARCHAR(75) null,CProductId LONG,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,hasTierPrice BOOLEAN,lastPublishDate DATE null)";
+		"create table CommercePriceEntry (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commercePriceEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commercePriceListId LONG,CPInstanceUuid VARCHAR(75) null,CProductId LONG,price DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,hasTierPrice BOOLEAN,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommercePriceEntry";
 
@@ -151,11 +152,9 @@ public class CommercePriceEntryModelImpl
 
 	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 8L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
 
-	public static final long UUID_COLUMN_BITMASK = 32L;
-
-	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -173,7 +172,6 @@ public class CommercePriceEntryModelImpl
 		model.setUuid(soapModel.getUuid());
 		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommercePriceEntryId(soapModel.getCommercePriceEntryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -305,6 +303,32 @@ public class CommercePriceEntryModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommercePriceEntry>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommercePriceEntry.class.getClassLoader(), CommercePriceEntry.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommercePriceEntry> constructor =
+				(Constructor<CommercePriceEntry>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommercePriceEntry, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommercePriceEntry, Object>>
@@ -386,28 +410,6 @@ public class CommercePriceEntryModelImpl
 
 					commercePriceEntry.setCommercePriceEntryId(
 						(Long)commercePriceEntryId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommercePriceEntry, Object>() {
-
-				@Override
-				public Object apply(CommercePriceEntry commercePriceEntry) {
-					return commercePriceEntry.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommercePriceEntry, Object>() {
-
-				@Override
-				public void accept(
-					CommercePriceEntry commercePriceEntry, Object groupId) {
-
-					commercePriceEntry.setGroupId((Long)groupId);
 				}
 
 			});
@@ -755,29 +757,6 @@ public class CommercePriceEntryModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -1009,8 +988,12 @@ public class CommercePriceEntryModelImpl
 	@Override
 	public CommercePriceEntry toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommercePriceEntry)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommercePriceEntry>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1027,7 +1010,6 @@ public class CommercePriceEntryModelImpl
 			getExternalReferenceCode());
 		commercePriceEntryImpl.setCommercePriceEntryId(
 			getCommercePriceEntryId());
-		commercePriceEntryImpl.setGroupId(getGroupId());
 		commercePriceEntryImpl.setCompanyId(getCompanyId());
 		commercePriceEntryImpl.setUserId(getUserId());
 		commercePriceEntryImpl.setUserName(getUserName());
@@ -1109,11 +1091,6 @@ public class CommercePriceEntryModelImpl
 		commercePriceEntryModelImpl._originalExternalReferenceCode =
 			commercePriceEntryModelImpl._externalReferenceCode;
 
-		commercePriceEntryModelImpl._originalGroupId =
-			commercePriceEntryModelImpl._groupId;
-
-		commercePriceEntryModelImpl._setOriginalGroupId = false;
-
 		commercePriceEntryModelImpl._originalCompanyId =
 			commercePriceEntryModelImpl._companyId;
 
@@ -1159,8 +1136,6 @@ public class CommercePriceEntryModelImpl
 
 		commercePriceEntryCacheModel.commercePriceEntryId =
 			getCommercePriceEntryId();
-
-		commercePriceEntryCacheModel.groupId = getGroupId();
 
 		commercePriceEntryCacheModel.companyId = getCompanyId();
 
@@ -1287,20 +1262,18 @@ public class CommercePriceEntryModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommercePriceEntry.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommercePriceEntry.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommercePriceEntry>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private String _externalReferenceCode;
 	private String _originalExternalReferenceCode;
 	private long _commercePriceEntryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

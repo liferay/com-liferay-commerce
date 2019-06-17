@@ -4,6 +4,59 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.account">
 	<author>Marco Leo</author>
 	<namespace>Commerce</namespace>
+	<entity external-reference-code="true" local-service="true" name="CommerceAccount" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="commerceAccountId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="parentCommerceAccountId" type="long" />
+		<column accessor="true" name="name" type="String" />
+		<column name="logoId" type="long" />
+		<column name="email" type="String" />
+		<column name="taxId" type="String" />
+		<column name="type" type="int" />
+		<column name="active" type="boolean" />
+		<column name="displayDate" type="Date" />
+		<column name="expirationDate" type="Date" />
+		<column name="lastPublishDate" type="Date" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finders -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="U_T" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="type" />
+		</finder>
+
+		<!-- References -->
+
+		<reference entity="Group" package-path="com.liferay.portal" />
+		<reference entity="Role" package-path="com.liferay.portal" />
+		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
+	</entity>
 	<entity external-reference-code="true" local-service="true" name="CommerceAccountGroup" remote-service="true">
 
 		<!-- PK fields -->
@@ -32,6 +85,9 @@
 
 		<!-- Finders -->
 
+		<finder name="CommerceAccountGroupIds" return-type="Collection">
+			<finder-column arrayable-operator="OR" name="commerceAccountGroupId" />
+		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
@@ -72,66 +128,6 @@
 		<finder name="CommerceAccountId" return-type="Collection">
 			<finder-column name="commerceAccountId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
-	</entity>
-	<entity external-reference-code="true" local-service="true" name="CommerceAccount" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="commerceAccountId" primary="true" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="parentCommerceAccountId" type="long" />
-		<column accessor="true" name="name" type="String" />
-		<column name="logoId" type="long" />
-		<column name="email" type="String" />
-		<column name="taxId" type="String" />
-		<column name="type" type="int" />
-		<column name="active" type="boolean" />
-		<column name="displayDate" type="Date" />
-		<column name="expirationDate" type="Date" />
-		<column name="lastPublishDate" type="Date" />
-		<column name="status" type="int" />
-		<column name="statusByUserId" type="long" />
-		<column name="statusByUserName" type="String" />
-		<column name="statusDate" type="Date" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="name" />
-		</order>
-
-		<!-- Finders -->
-
-		<finder name="CommerceAccountGroupIds" return-type="Collection">
-			<finder-column arrayable-operator="OR" name="commerceAccountGroupId" />
-		</finder>
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="U_T" return-type="Collection">
-			<finder-column name="userId" />
-			<finder-column name="type" />
-		</finder>
-
-		<!-- References -->
-
-		<reference entity="Group" package-path="com.liferay.portal" />
-		<reference entity="Role" package-path="com.liferay.portal" />
-		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
 	<entity local-service="true" name="CommerceAccountGroupRel" remote-service="true">
 

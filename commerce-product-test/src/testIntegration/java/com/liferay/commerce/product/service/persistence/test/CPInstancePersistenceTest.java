@@ -359,14 +359,6 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_NotST() throws Exception {
-		_persistence.countByG_NotST(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-
-		_persistence.countByG_NotST(0L, 0);
-	}
-
-	@Test
 	public void testCountByC_C() throws Exception {
 		_persistence.countByC_C(RandomTestUtil.nextLong(), "");
 
@@ -390,14 +382,6 @@ public class CPInstancePersistenceTest {
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByC_ST(0L, 0);
-	}
-
-	@Test
-	public void testCountByC_NotST() throws Exception {
-		_persistence.countByC_NotST(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-
-		_persistence.countByC_NotST(0L, 0);
 	}
 
 	@Test

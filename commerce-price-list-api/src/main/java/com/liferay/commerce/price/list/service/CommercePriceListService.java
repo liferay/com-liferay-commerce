@@ -64,28 +64,8 @@ public interface CommercePriceListService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CommercePriceListServiceUtil} to access the commerce price list remote service. Add custom service methods to <code>com.liferay.commerce.price.list.service.impl.CommercePriceListServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException;
-
-	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, long parentCommercePriceListId,
-			String name, double priority, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			String externalReferenceCode, boolean neverExpire,
-			ServiceContext serviceContext)
-		throws PortalException;
-
-	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
@@ -94,13 +74,34 @@ public interface CommercePriceListService extends BaseService {
 		throws PortalException;
 
 	public CommercePriceList addCommercePriceList(
-			long commerceCurrencyId, String name, double priority,
+			long groupId, long userId, long commerceCurrencyId,
+			long parentCommercePriceListId, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommercePriceList addCommercePriceList(
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommercePriceList addCommercePriceList(
+			long groupId, long userId, long commerceCurrencyId, String name,
+			double priority, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, String externalReferenceCode,
+			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommercePriceList(long commercePriceListId)
@@ -117,17 +118,12 @@ public interface CommercePriceListService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceList> getCommercePriceLists(
-			long groupId, int start, int end)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommercePriceList> getCommercePriceLists(
-			long groupId, int status, int start, int end,
+			long companyId, int status, int start, int end,
 			OrderByComparator<CommercePriceList> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommercePriceListsCount(long groupId, int status)
+	public int getCommercePriceListsCount(long companyId, int status)
 		throws PortalException;
 
 	/**
@@ -139,8 +135,8 @@ public interface CommercePriceListService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommercePriceList> searchCommercePriceLists(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	public CommercePriceList updateCommercePriceList(
@@ -164,15 +160,16 @@ public interface CommercePriceListService extends BaseService {
 		throws PortalException;
 
 	public CommercePriceList updateExternalReferenceCode(
-			CommercePriceList commercePriceList, long groupId,
+			CommercePriceList commercePriceList, long companyId,
 			String externalReferenceCode)
 		throws PortalException;
 
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId,
-			long parentCommercePriceListId, String name, double priority,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, long parentCommercePriceListId,
+			String name, double priority, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			String externalReferenceCode, boolean neverExpire,
@@ -180,13 +177,14 @@ public interface CommercePriceListService extends BaseService {
 		throws PortalException;
 
 	public CommercePriceList upsertCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId, String name,
-			double priority, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, String externalReferenceCode,
-			boolean neverExpire, ServiceContext serviceContext)
+			long groupId, long userId, long commercePriceListId,
+			long commerceCurrencyId, String name, double priority,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			String externalReferenceCode, boolean neverExpire,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 }

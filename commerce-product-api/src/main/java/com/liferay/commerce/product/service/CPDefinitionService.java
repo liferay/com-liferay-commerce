@@ -69,7 +69,7 @@ public interface CPDefinitionService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionServiceUtil} to access the cp definition remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -85,22 +85,10 @@ public interface CPDefinitionService extends BaseService {
 			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, ServiceContext serviceContext)
-		throws PortalException;
-
-	public CPDefinition addCPDefinition(
-			Map<Locale, String> nameMap,
-			Map<Locale, String> shortDescriptionMap,
-			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
-			Map<Locale, String> metaTitleMap,
-			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName,
-			boolean ignoreSKUCombinations, String ddmStructureKey,
-			boolean published, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
+			boolean neverExpire, String defaultSku, boolean subscriptionEnabled,
+			int subscriptionLength, String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 
@@ -129,38 +117,12 @@ public interface CPDefinitionService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinition> getCPDefinitions(
-			long groupId, int status, int start, int end)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinition> getCPDefinitions(
 			long groupId, int status, int start, int end,
 			OrderByComparator<CPDefinition> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinition> getCPDefinitions(
-			long groupId, String productTypeName, String languageId, int status,
-			int start, int end,
-			OrderByComparator<CPDefinition> orderByComparator)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPDefinition> getCPDefinitionsByCategoryId(
-			long categoryId, int start, int end)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCPDefinitionsCount(long groupId, int status)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionsCount(
-			long groupId, String productTypeName, String languageId, int status)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPDefinitionsCountByCategoryId(long categoryId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -177,21 +139,15 @@ public interface CPDefinitionService extends BaseService {
 	public String getUrlTitleMapAsXML(long cpDefinitionId)
 		throws PortalException;
 
-	public CPDefinition moveCPDefinitionToTrash(long cpDefinitionId)
-		throws PortalException;
-
-	public void restoreCPDefinitionFromTrash(long cpDefinitionId)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, int status,
-			int start, int end, Sort sort)
-		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public BaseModelSearchResult<CPDefinition> searchCPDefinitions(
-			long companyId, long groupId, String keywords, String filterFields,
+			long companyId, String keywords, String filterFields,
 			String filterValues, int start, int end, Sort sort)
 		throws PortalException;
 
@@ -210,8 +166,16 @@ public interface CPDefinitionService extends BaseService {
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CPDefinition updateCPDefinitionAccountGroupFilter(
+			long cpDefinitionId, boolean enable)
+		throws PortalException;
+
 	public CPDefinition updateCPDefinitionCategorization(
 			long cpDefinitionId, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPDefinition updateCPDefinitionChannelFilter(
+			long cpDefinitionId, boolean enable)
 		throws PortalException;
 
 	public void updateCPDisplayLayout(
@@ -245,7 +209,7 @@ public interface CPDefinitionService extends BaseService {
 		throws PortalException;
 
 	public CPDefinition upsertCPDefinition(
-			Map<Locale, String> nameMap,
+			long groupId, long userId, Map<Locale, String> nameMap,
 			Map<Locale, String> shortDescriptionMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> urlTitleMap,
 			Map<Locale, String> metaTitleMap,
@@ -261,8 +225,11 @@ public interface CPDefinitionService extends BaseService {
 			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, String defaultSKU,
-			String externalReferenceCode, ServiceContext serviceContext)
+			boolean neverExpire, String defaultSku, boolean subscriptionEnabled,
+			int subscriptionLength, String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 }

@@ -398,148 +398,148 @@ public interface CommerceSubscriptionEntryPersistence
 	public int countByUuid_C(String uuid, long companyId);
 
 	/**
-	 * Returns all the commerce subscription entries where groupId = &#63;.
+	 * Returns all the commerce subscription entries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId);
+	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId);
 
 	/**
-	 * Returns a range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns a range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @return the range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end);
+	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByGroupId(
-		long groupId, int start, int end,
+	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry findByGroupId_First(
-			long groupId,
+	public CommerceSubscriptionEntry findByCompanyId_First(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByGroupId_First(
-		long groupId,
+	public CommerceSubscriptionEntry fetchByCompanyId_First(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry findByGroupId_Last(
-			long groupId,
+	public CommerceSubscriptionEntry findByCompanyId_Last(
+			long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByGroupId_Last(
-		long groupId,
+	public CommerceSubscriptionEntry fetchByCompanyId_Last(
+		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63;.
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	 */
-	public CommerceSubscriptionEntry[] findByGroupId_PrevAndNext(
-			long commerceSubscriptionEntryId, long groupId,
+	public CommerceSubscriptionEntry[] findByCompanyId_PrevAndNext(
+			long commerceSubscriptionEntryId, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Removes all the commerce subscription entries where groupId = &#63; from the database.
+	 * Removes all the commerce subscription entries where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
-	public void removeByGroupId(long groupId);
+	public void removeByCompanyId(long companyId);
 
 	/**
-	 * Returns the number of commerce subscription entries where groupId = &#63;.
+	 * Returns the number of commerce subscription entries where companyId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching commerce subscription entries
 	 */
-	public int countByGroupId(long groupId);
+	public int countByCompanyId(long companyId);
 
 	/**
 	 * Returns all the commerce subscription entries where subscriptionStatus = &#63;.
@@ -686,58 +686,58 @@ public interface CommerceSubscriptionEntryPersistence
 	public int countBySubscriptionStatus(int subscriptionStatus);
 
 	/**
-	 * Returns all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @return the matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId);
+	public java.util.List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId);
 
 	/**
-	 * Returns a range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns a range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @return the range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end);
+	public java.util.List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end,
+	public java.util.List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
@@ -745,100 +745,267 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
-	public java.util.List<CommerceSubscriptionEntry> findByG_U(
-		long groupId, long userId, int start, int end,
+	public java.util.List<CommerceSubscriptionEntry> findByC_U(
+		long companyId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry findByG_U_First(
-			long groupId, long userId,
+	public CommerceSubscriptionEntry findByC_U_First(
+			long companyId, long userId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByG_U_First(
-		long groupId, long userId,
+	public CommerceSubscriptionEntry fetchByC_U_First(
+		long companyId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry findByG_U_Last(
-			long groupId, long userId,
+	public CommerceSubscriptionEntry findByC_U_Last(
+			long companyId, long userId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByG_U_Last(
-		long groupId, long userId,
+	public CommerceSubscriptionEntry fetchByC_U_Last(
+		long companyId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
-	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
 	 *
 	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce subscription entry
 	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
 	 */
-	public CommerceSubscriptionEntry[] findByG_U_PrevAndNext(
-			long commerceSubscriptionEntryId, long groupId, long userId,
+	public CommerceSubscriptionEntry[] findByC_U_PrevAndNext(
+			long commerceSubscriptionEntryId, long companyId, long userId,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Removes all the commerce subscription entries where groupId = &#63; and userId = &#63; from the database.
+	 * Removes all the commerce subscription entries where companyId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 */
-	public void removeByG_U(long groupId, long userId);
+	public void removeByC_U(long companyId, long userId);
 
 	/**
-	 * Returns the number of commerce subscription entries where groupId = &#63; and userId = &#63;.
+	 * Returns the number of commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @return the number of matching commerce subscription entries
 	 */
-	public int countByG_U(long groupId, long userId);
+	public int countByC_U(long companyId, long userId);
+
+	/**
+	 * Returns all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @return the matching commerce subscription entries
+	 */
+	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId);
+
+	/**
+	 * Returns a range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @return the range of matching commerce subscription entries
+	 */
+	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceSubscriptionEntry> orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
+		long groupId, long companyId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceSubscriptionEntry> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry findByG_C_U_First(
+			long groupId, long companyId, long userId,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException;
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry fetchByG_C_U_First(
+		long groupId, long companyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceSubscriptionEntry> orderByComparator);
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry findByG_C_U_Last(
+			long groupId, long companyId, long userId,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException;
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry fetchByG_C_U_Last(
+		long groupId, long companyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceSubscriptionEntry> orderByComparator);
+
+	/**
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
+	 */
+	public CommerceSubscriptionEntry[] findByG_C_U_PrevAndNext(
+			long commerceSubscriptionEntryId, long groupId, long companyId,
+			long userId,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceSubscriptionEntry> orderByComparator)
+		throws NoSuchSubscriptionEntryException;
+
+	/**
+	 * Removes all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 */
+	public void removeByG_C_U(long groupId, long companyId, long userId);
+
+	/**
+	 * Returns the number of commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param userId the user ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	public int countByG_C_U(long groupId, long companyId, long userId);
 
 	/**
 	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or throws a <code>NoSuchSubscriptionEntryException</code> if it could not be found.

@@ -74,7 +74,8 @@ public interface CProductLocalService
 	public CProduct addCProduct(CProduct cProduct);
 
 	public CProduct addCProduct(
-			String externalReferenceCode, ServiceContext serviceContext)
+			long groupId, long userId, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException;
 
 	/**

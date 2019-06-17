@@ -512,15 +512,16 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	protected OrderByComparator<CommerceOrder> getOrderByComparator() {
-(??)		return OrderByComparatorFactoryUtil.create("CommerceOrder", "uuid",
-(??)			true, "externalReferenceCode", true, "commerceOrderId", true,
-(??)			"groupId", true, "companyId", true, "userId", true, "userName",
-(??)			true, "createDate", true, "modifiedDate", true,
-(??)			"commerceAccountId", true, "commerceCurrencyId", true,
-(??)			"billingAddressId", true, "shippingAddressId", true,
-(??)			"commercePaymentMethodKey", true, "commerceShippingMethodId", true,
-(??)			"shippingOptionName", true, "purchaseOrderNumber", true,
-(??)			"couponCode", true, "lastPriceUpdateDate", true, "subtotal", true,
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceOrder", "uuid", true, "externalReferenceCode", true,
+			"commerceOrderId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceAccountId", true,
+			"commerceCurrencyId", true, "billingAddressId", true,
+			"shippingAddressId", true, "commercePaymentMethodKey", true,
+			"commerceShippingMethodId", true, "shippingOptionName", true,
+			"purchaseOrderNumber", true, "couponCode", true,
+			"lastPriceUpdateDate", true, "subtotal", true,
 			"subtotalDiscountAmount", true, "subtotalDiscountPercentageLevel1",
 			true, "subtotalDiscountPercentageLevel2", true,
 			"subtotalDiscountPercentageLevel3", true,

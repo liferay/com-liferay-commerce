@@ -1,3 +1,6 @@
+create index IX_7951AAEB on CNTemplateCAccountGroupRel (commerceAccountGroupId);
+create unique index IX_AFBF7DA on CNTemplateCAccountGroupRel (commerceNotificationTemplateId, commerceAccountGroupId);
+
 create unique index IX_7DEAC57F on CNTemplateUserSegmentRel (commerceNotificationTemplateId, commerceUserSegmentEntryId);
 create index IX_355FC10 on CNTemplateUserSegmentRel (commerceUserSegmentEntryId);
 

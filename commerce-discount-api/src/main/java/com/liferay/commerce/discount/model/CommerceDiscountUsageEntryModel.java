@@ -18,9 +18,9 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -41,7 +41,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommerceDiscountUsageEntryModel
-	extends BaseModel<CommerceDiscountUsageEntry>, GroupedModel, ShardedModel {
+	extends AuditedModel, BaseModel<CommerceDiscountUsageEntry>, ShardedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -77,22 +77,6 @@ public interface CommerceDiscountUsageEntryModel
 	 */
 	public void setCommerceDiscountUsageEntryId(
 		long commerceDiscountUsageEntryId);
-
-	/**
-	 * Returns the group ID of this commerce discount usage entry.
-	 *
-	 * @return the group ID of this commerce discount usage entry
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce discount usage entry.
-	 *
-	 * @param groupId the group ID of this commerce discount usage entry
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce discount usage entry.

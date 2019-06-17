@@ -551,177 +551,6 @@ public class CommercePriceListUtil {
 	}
 
 	/**
-	 * Returns all the commerce price lists where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @return the matching commerce price lists
-	 */
-	public static List<CommercePriceList> findByGroupId(long groupId) {
-		return getPersistence().findByGroupId(groupId);
-	}
-
-	/**
-	 * Returns a range of all the commerce price lists where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @return the range of matching commerce price lists
-	 */
-	public static List<CommercePriceList> findByGroupId(
-		long groupId, int start, int end) {
-
-		return getPersistence().findByGroupId(groupId, start, end);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce price lists
-	 */
-	public static List<CommercePriceList> findByGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce price lists
-	 */
-	public static List<CommercePriceList> findByGroupId(
-		long groupId, int start, int end,
-		OrderByComparator<CommercePriceList> orderByComparator,
-		boolean retrieveFromCache) {
-
-		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
-	}
-
-	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList findByGroupId_First(
-			long groupId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByGroupId_First(groupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList fetchByGroupId_First(
-		long groupId, OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return getPersistence().fetchByGroupId_First(
-			groupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList findByGroupId_Last(
-			long groupId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList fetchByGroupId_Last(
-		long groupId, OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63;.
-	 *
-	 * @param commercePriceListId the primary key of the current commerce price list
-	 * @param groupId the group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce price list
-	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
-	 */
-	public static CommercePriceList[] findByGroupId_PrevAndNext(
-			long commercePriceListId, long groupId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByGroupId_PrevAndNext(
-			commercePriceListId, groupId, orderByComparator);
-	}
-
-	/**
-	 * Removes all the commerce price lists where groupId = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 */
-	public static void removeByGroupId(long groupId) {
-		getPersistence().removeByGroupId(groupId);
-	}
-
-	/**
-	 * Returns the number of commerce price lists where groupId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @return the number of matching commerce price lists
-	 */
-	public static int countByGroupId(long groupId) {
-		return getPersistence().countByGroupId(groupId);
-	}
-
-	/**
 	 * Returns all the commerce price lists where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
@@ -1149,379 +978,287 @@ public class CommercePriceListUtil {
 	}
 
 	/**
-	 * Returns all the commerce price lists where groupId = &#63; and status = &#63;.
+	 * Returns all the commerce price lists where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @return the matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_S(long groupId, int status) {
-		return getPersistence().findByG_S(groupId, status);
+	public static List<CommercePriceList> findByG_C(
+		long groupId, long companyId) {
+
+		return getPersistence().findByG_C(groupId, companyId);
 	}
 
 	/**
-	 * Returns a range of all the commerce price lists where groupId = &#63; and status = &#63;.
+	 * Returns a range of all the commerce price lists where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @return the range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_S(
-		long groupId, int status, int start, int end) {
+	public static List<CommercePriceList> findByG_C(
+		long groupId, long companyId, int start, int end) {
 
-		return getPersistence().findByG_S(groupId, status, start, end);
+		return getPersistence().findByG_C(groupId, companyId, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and status = &#63;.
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_S(
-		long groupId, int status, int start, int end,
+	public static List<CommercePriceList> findByG_C(
+		long groupId, long companyId, int start, int end,
 		OrderByComparator<CommercePriceList> orderByComparator) {
 
-		return getPersistence().findByG_S(
-			groupId, status, start, end, orderByComparator);
+		return getPersistence().findByG_C(
+			groupId, companyId, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and status = &#63;.
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_S(
-		long groupId, int status, int start, int end,
+	public static List<CommercePriceList> findByG_C(
+		long groupId, long companyId, int start, int end,
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_S(
-			groupId, status, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByG_C(
+			groupId, companyId, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63; and status = &#63;.
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce price list
 	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
 	 */
-	public static CommercePriceList findByG_S_First(
-			long groupId, int status,
+	public static CommercePriceList findByG_C_First(
+			long groupId, long companyId,
 			OrderByComparator<CommercePriceList> orderByComparator)
 		throws com.liferay.commerce.price.list.exception.
 			NoSuchPriceListException {
 
-		return getPersistence().findByG_S_First(
-			groupId, status, orderByComparator);
+		return getPersistence().findByG_C_First(
+			groupId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63; and status = &#63;.
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
 	 */
-	public static CommercePriceList fetchByG_S_First(
-		long groupId, int status,
+	public static CommercePriceList fetchByG_C_First(
+		long groupId, long companyId,
 		OrderByComparator<CommercePriceList> orderByComparator) {
 
-		return getPersistence().fetchByG_S_First(
-			groupId, status, orderByComparator);
+		return getPersistence().fetchByG_C_First(
+			groupId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63; and status = &#63;.
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce price list
 	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
 	 */
-	public static CommercePriceList findByG_S_Last(
-			long groupId, int status,
+	public static CommercePriceList findByG_C_Last(
+			long groupId, long companyId,
 			OrderByComparator<CommercePriceList> orderByComparator)
 		throws com.liferay.commerce.price.list.exception.
 			NoSuchPriceListException {
 
-		return getPersistence().findByG_S_Last(
-			groupId, status, orderByComparator);
+		return getPersistence().findByG_C_Last(
+			groupId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63; and status = &#63;.
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
 	 */
-	public static CommercePriceList fetchByG_S_Last(
-		long groupId, int status,
+	public static CommercePriceList fetchByG_C_Last(
+		long groupId, long companyId,
 		OrderByComparator<CommercePriceList> orderByComparator) {
 
-		return getPersistence().fetchByG_S_Last(
-			groupId, status, orderByComparator);
+		return getPersistence().fetchByG_C_Last(
+			groupId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63; and status = &#63;.
+	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param commercePriceListId the primary key of the current commerce price list
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next commerce price list
 	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
 	 */
-	public static CommercePriceList[] findByG_S_PrevAndNext(
-			long commercePriceListId, long groupId, int status,
+	public static CommercePriceList[] findByG_C_PrevAndNext(
+			long commercePriceListId, long groupId, long companyId,
 			OrderByComparator<CommercePriceList> orderByComparator)
 		throws com.liferay.commerce.price.list.exception.
 			NoSuchPriceListException {
 
-		return getPersistence().findByG_S_PrevAndNext(
-			commercePriceListId, groupId, status, orderByComparator);
+		return getPersistence().findByG_C_PrevAndNext(
+			commercePriceListId, groupId, companyId, orderByComparator);
 	}
 
 	/**
-	 * Removes all the commerce price lists where groupId = &#63; and status = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 */
-	public static void removeByG_S(long groupId, int status) {
-		getPersistence().removeByG_S(groupId, status);
-	}
-
-	/**
-	 * Returns the number of commerce price lists where groupId = &#63; and status = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 * @return the number of matching commerce price lists
-	 */
-	public static int countByG_S(long groupId, int status) {
-		return getPersistence().countByG_S(groupId, status);
-	}
-
-	/**
-	 * Returns all the commerce price lists where groupId = &#63; and status &ne; &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 * @return the matching commerce price lists
-	 */
-	public static List<CommercePriceList> findByG_NotS(
-		long groupId, int status) {
-
-		return getPersistence().findByG_NotS(groupId, status);
-	}
-
-	/**
-	 * Returns a range of all the commerce price lists where groupId = &#63; and status &ne; &#63;.
+	 * Returns all the commerce price lists where groupId = any &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
-	 * @param status the status
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @return the matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C(
+		long[] groupIds, long companyId) {
+
+		return getPersistence().findByG_C(groupIds, companyId);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where groupId = any &#63; and companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @return the range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_NotS(
-		long groupId, int status, int start, int end) {
+	public static List<CommercePriceList> findByG_C(
+		long[] groupIds, long companyId, int start, int end) {
 
-		return getPersistence().findByG_NotS(groupId, status, start, end);
+		return getPersistence().findByG_C(groupIds, companyId, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and status &ne; &#63;.
+	 * Returns an ordered range of all the commerce price lists where groupId = any &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param groupId the group ID
-	 * @param status the status
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_NotS(
-		long groupId, int status, int start, int end,
+	public static List<CommercePriceList> findByG_C(
+		long[] groupIds, long companyId, int start, int end,
 		OrderByComparator<CommercePriceList> orderByComparator) {
 
-		return getPersistence().findByG_NotS(
-			groupId, status, start, end, orderByComparator);
+		return getPersistence().findByG_C(
+			groupIds, companyId, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and status &ne; &#63;.
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63;, optionally using the finder cache.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce price lists
 	 * @param end the upper bound of the range of commerce price lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce price lists
 	 */
-	public static List<CommercePriceList> findByG_NotS(
-		long groupId, int status, int start, int end,
+	public static List<CommercePriceList> findByG_C(
+		long[] groupIds, long companyId, int start, int end,
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean retrieveFromCache) {
 
-		return getPersistence().findByG_NotS(
-			groupId, status, start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findByG_C(
+			groupIds, companyId, start, end, orderByComparator,
+			retrieveFromCache);
 	}
 
 	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63; and status &ne; &#63;.
+	 * Removes all the commerce price lists where groupId = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 * @param companyId the company ID
 	 */
-	public static CommercePriceList findByG_NotS_First(
-			long groupId, int status,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByG_NotS_First(
-			groupId, status, orderByComparator);
+	public static void removeByG_C(long groupId, long companyId) {
+		getPersistence().removeByG_C(groupId, companyId);
 	}
 
 	/**
-	 * Returns the first commerce price list in the ordered set where groupId = &#63; and status &ne; &#63;.
+	 * Returns the number of commerce price lists where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList fetchByG_NotS_First(
-		long groupId, int status,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return getPersistence().fetchByG_NotS_First(
-			groupId, status, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63; and status &ne; &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList findByG_NotS_Last(
-			long groupId, int status,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByG_NotS_Last(
-			groupId, status, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where groupId = &#63; and status &ne; &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	public static CommercePriceList fetchByG_NotS_Last(
-		long groupId, int status,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return getPersistence().fetchByG_NotS_Last(
-			groupId, status, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63; and status &ne; &#63;.
-	 *
-	 * @param commercePriceListId the primary key of the current commerce price list
-	 * @param groupId the group ID
-	 * @param status the status
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce price list
-	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
-	 */
-	public static CommercePriceList[] findByG_NotS_PrevAndNext(
-			long commercePriceListId, long groupId, int status,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws com.liferay.commerce.price.list.exception.
-			NoSuchPriceListException {
-
-		return getPersistence().findByG_NotS_PrevAndNext(
-			commercePriceListId, groupId, status, orderByComparator);
-	}
-
-	/**
-	 * Removes all the commerce price lists where groupId = &#63; and status &ne; &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
-	 */
-	public static void removeByG_NotS(long groupId, int status) {
-		getPersistence().removeByG_NotS(groupId, status);
-	}
-
-	/**
-	 * Returns the number of commerce price lists where groupId = &#63; and status &ne; &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param status the status
+	 * @param companyId the company ID
 	 * @return the number of matching commerce price lists
 	 */
-	public static int countByG_NotS(long groupId, int status) {
-		return getPersistence().countByG_NotS(groupId, status);
+	public static int countByG_C(long groupId, long companyId) {
+		return getPersistence().countByG_C(groupId, companyId);
+	}
+
+	/**
+	 * Returns the number of commerce price lists where groupId = any &#63; and companyId = &#63;.
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @return the number of matching commerce price lists
+	 */
+	public static int countByG_C(long[] groupIds, long companyId) {
+		return getPersistence().countByG_C(groupIds, companyId);
 	}
 
 	/**
@@ -1712,6 +1449,618 @@ public class CommercePriceListUtil {
 	 */
 	public static int countByLtD_S(Date displayDate, int status) {
 		return getPersistence().countByLtD_S(displayDate, status);
+	}
+
+	/**
+	 * Returns all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long groupId, long companyId, int status) {
+
+		return getPersistence().findByG_C_S(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @return the range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long groupId, long companyId, int status, int start, int end) {
+
+		return getPersistence().findByG_C_S(
+			groupId, companyId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long groupId, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().findByG_C_S(
+			groupId, companyId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long groupId, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByG_C_S(
+			groupId, companyId, status, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList findByG_C_S_First(
+			long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_S_First(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList fetchByG_C_S_First(
+		long groupId, long companyId, int status,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().fetchByG_C_S_First(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList findByG_C_S_Last(
+			long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_S_Last(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList fetchByG_C_S_Last(
+		long groupId, long companyId, int status,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().fetchByG_C_S_Last(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param commercePriceListId the primary key of the current commerce price list
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce price list
+	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
+	 */
+	public static CommercePriceList[] findByG_C_S_PrevAndNext(
+			long commercePriceListId, long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_S_PrevAndNext(
+			commercePriceListId, groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns all the commerce price lists where groupId = any &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long[] groupIds, long companyId, int status) {
+
+		return getPersistence().findByG_C_S(groupIds, companyId, status);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where groupId = any &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @return the range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long[] groupIds, long companyId, int status, int start, int end) {
+
+		return getPersistence().findByG_C_S(
+			groupIds, companyId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = any &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long[] groupIds, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().findByG_C_S(
+			groupIds, companyId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;, optionally using the finder cache.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_S(
+		long[] groupIds, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByG_C_S(
+			groupIds, companyId, status, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Removes all the commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 */
+	public static void removeByG_C_S(long groupId, long companyId, int status) {
+		getPersistence().removeByG_C_S(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns the number of commerce price lists where groupId = &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the number of matching commerce price lists
+	 */
+	public static int countByG_C_S(long groupId, long companyId, int status) {
+		return getPersistence().countByG_C_S(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns the number of commerce price lists where groupId = any &#63; and companyId = &#63; and status = &#63;.
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the number of matching commerce price lists
+	 */
+	public static int countByG_C_S(
+		long[] groupIds, long companyId, int status) {
+
+		return getPersistence().countByG_C_S(groupIds, companyId, status);
+	}
+
+	/**
+	 * Returns all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long groupId, long companyId, int status) {
+
+		return getPersistence().findByG_C_NotS(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @return the range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long groupId, long companyId, int status, int start, int end) {
+
+		return getPersistence().findByG_C_NotS(
+			groupId, companyId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long groupId, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().findByG_C_NotS(
+			groupId, companyId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long groupId, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByG_C_NotS(
+			groupId, companyId, status, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList findByG_C_NotS_First(
+			long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_NotS_First(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList fetchByG_C_NotS_First(
+		long groupId, long companyId, int status,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().fetchByG_C_NotS_First(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList findByG_C_NotS_Last(
+			long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_NotS_Last(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	public static CommercePriceList fetchByG_C_NotS_Last(
+		long groupId, long companyId, int status,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().fetchByG_C_NotS_Last(
+			groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param commercePriceListId the primary key of the current commerce price list
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce price list
+	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
+	 */
+	public static CommercePriceList[] findByG_C_NotS_PrevAndNext(
+			long commercePriceListId, long groupId, long companyId, int status,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws com.liferay.commerce.price.list.exception.
+			NoSuchPriceListException {
+
+		return getPersistence().findByG_C_NotS_PrevAndNext(
+			commercePriceListId, groupId, companyId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns all the commerce price lists where groupId = any &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long[] groupIds, long companyId, int status) {
+
+		return getPersistence().findByG_C_NotS(groupIds, companyId, status);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where groupId = any &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @return the range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long[] groupIds, long companyId, int status, int start, int end) {
+
+		return getPersistence().findByG_C_NotS(
+			groupIds, companyId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = any &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long[] groupIds, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return getPersistence().findByG_C_NotS(
+			groupIds, companyId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;, optionally using the finder cache.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching commerce price lists
+	 */
+	public static List<CommercePriceList> findByG_C_NotS(
+		long[] groupIds, long companyId, int status, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean retrieveFromCache) {
+
+		return getPersistence().findByG_C_NotS(
+			groupIds, companyId, status, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	 * Removes all the commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 */
+	public static void removeByG_C_NotS(
+		long groupId, long companyId, int status) {
+
+		getPersistence().removeByG_C_NotS(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns the number of commerce price lists where groupId = &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the number of matching commerce price lists
+	 */
+	public static int countByG_C_NotS(
+		long groupId, long companyId, int status) {
+
+		return getPersistence().countByG_C_NotS(groupId, companyId, status);
+	}
+
+	/**
+	 * Returns the number of commerce price lists where groupId = any &#63; and companyId = &#63; and status &ne; &#63;.
+	 *
+	 * @param groupIds the group IDs
+	 * @param companyId the company ID
+	 * @param status the status
+	 * @return the number of matching commerce price lists
+	 */
+	public static int countByG_C_NotS(
+		long[] groupIds, long companyId, int status) {
+
+		return getPersistence().countByG_C_NotS(groupIds, companyId, status);
 	}
 
 	/**

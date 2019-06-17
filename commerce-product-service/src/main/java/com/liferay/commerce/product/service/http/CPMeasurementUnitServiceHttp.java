@@ -134,7 +134,7 @@ public class CPMeasurementUnitServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPMeasurementUnit
 			fetchPrimaryCPMeasurementUnit(
-				HttpPrincipal httpPrincipal, long groupId, int type)
+				HttpPrincipal httpPrincipal, long companyId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -144,7 +144,7 @@ public class CPMeasurementUnitServiceHttp {
 				_fetchPrimaryCPMeasurementUnitParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, type);
+				methodKey, companyId, type);
 
 			Object returnObj = null;
 
@@ -216,7 +216,7 @@ public class CPMeasurementUnitServiceHttp {
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPMeasurementUnit>
 				getCPMeasurementUnits(
-					HttpPrincipal httpPrincipal, long groupId, int type,
+					HttpPrincipal httpPrincipal, long companyId, int type,
 					int start, int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.product.model.CPMeasurementUnit>
@@ -229,7 +229,7 @@ public class CPMeasurementUnitServiceHttp {
 				_getCPMeasurementUnitsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, type, start, end, orderByComparator);
+				methodKey, companyId, type, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -262,7 +262,7 @@ public class CPMeasurementUnitServiceHttp {
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPMeasurementUnit>
 				getCPMeasurementUnits(
-					HttpPrincipal httpPrincipal, long groupId, int start,
+					HttpPrincipal httpPrincipal, long companyId, int start,
 					int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.product.model.CPMeasurementUnit>
@@ -275,7 +275,7 @@ public class CPMeasurementUnitServiceHttp {
 				_getCPMeasurementUnitsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, start, end, orderByComparator);
+				methodKey, companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -306,7 +306,7 @@ public class CPMeasurementUnitServiceHttp {
 	}
 
 	public static int getCPMeasurementUnitsCount(
-			HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -315,7 +315,8 @@ public class CPMeasurementUnitServiceHttp {
 				"getCPMeasurementUnitsCount",
 				_getCPMeasurementUnitsCountParameterTypes6);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -344,7 +345,7 @@ public class CPMeasurementUnitServiceHttp {
 	}
 
 	public static int getCPMeasurementUnitsCount(
-			HttpPrincipal httpPrincipal, long groupId, int type)
+			HttpPrincipal httpPrincipal, long companyId, int type)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -354,7 +355,7 @@ public class CPMeasurementUnitServiceHttp {
 				_getCPMeasurementUnitsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, type);
+				methodKey, companyId, type);
 
 			Object returnObj = null;
 

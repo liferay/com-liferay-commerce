@@ -97,7 +97,7 @@ public interface CommerceCountryLocalService
 	@Transactional(enabled = false)
 	public CommerceCountry createCommerceCountry(long commerceCountryId);
 
-	public void deleteCommerceCountries(long groupId) throws PortalException;
+	public void deleteCommerceCountries(long companyId) throws PortalException;
 
 	/**
 	 * Deletes the commerce country from the database. Also notifies the appropriate model listeners.
@@ -201,26 +201,26 @@ public interface CommerceCountryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCountry fetchCommerceCountry(
-			long groupId, int numericISOCode)
+			long companyId, int numericISOCode)
 		throws PortalException;
 
 	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCountry fetchCommerceCountryByUuidAndGroupId(
-		String uuid, long groupId);
+	public CommerceCountry fetchCommerceCountryByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getBillingCommerceCountries(
-		long groupId, boolean billingAllowed, boolean active);
+		long companyId, boolean billingAllowed, boolean active);
 
 	/**
 	 * Returns a range of all the commerce countries.
@@ -238,42 +238,16 @@ public interface CommerceCountryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, boolean active);
+		long companyId, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, boolean active, int start, int end,
+		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceCountry> orderByComparator);
-
-	/**
-	 * Returns all the commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce countries, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCountry> getCommerceCountriesByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	 * Returns a range of commerce countries matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce countries
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce countries
-	 * @param end the upper bound of the range of commerce countries (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce countries, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceCountry> getCommerceCountriesByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
@@ -285,10 +259,10 @@ public interface CommerceCountryLocalService
 	public int getCommerceCountriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCountriesCount(long groupId);
+	public int getCommerceCountriesCount(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceCountriesCount(long groupId, boolean active);
+	public int getCommerceCountriesCount(long companyId, boolean active);
 
 	/**
 	 * Returns the commerce country with the primary key.
@@ -303,20 +277,20 @@ public interface CommerceCountryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCountry getCommerceCountry(
-			long groupId, String twoLettersISOCode)
+			long companyId, String twoLettersISOCode)
 		throws PortalException;
 
 	/**
-	 * Returns the commerce country matching the UUID and group.
+	 * Returns the commerce country with the matching UUID and company.
 	 *
 	 * @param uuid the commerce country's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce country
 	 * @throws PortalException if a matching commerce country could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceCountry getCommerceCountryByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommerceCountry getCommerceCountryByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -340,11 +314,11 @@ public interface CommerceCountryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getShippingCommerceCountries(
-		long groupId, boolean shippingAllowed, boolean active);
+		long companyId, boolean shippingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getWarehouseCommerceCountries(
-		long groupId, boolean all);
+		long companyId, boolean all);
 
 	public void importDefaultCountries(ServiceContext serviceContext)
 		throws Exception;

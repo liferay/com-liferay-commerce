@@ -79,12 +79,12 @@ public interface CommerceAvailabilityEstimateService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAvailabilityEstimate> getCommerceAvailabilityEstimates(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			OrderByComparator<CommerceAvailabilityEstimate> orderByComparator)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceAvailabilityEstimatesCount(long groupId)
+	public int getCommerceAvailabilityEstimatesCount(long companyId)
 		throws PortalException;
 
 	/**

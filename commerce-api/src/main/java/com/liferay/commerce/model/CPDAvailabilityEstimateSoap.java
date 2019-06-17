@@ -40,7 +40,6 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setCPDAvailabilityEstimateId(
 			model.getCPDAvailabilityEstimateId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -129,14 +128,6 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 		_CPDAvailabilityEstimateId = CPDAvailabilityEstimateId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -205,7 +196,6 @@ public class CPDAvailabilityEstimateSoap implements Serializable {
 
 	private String _uuid;
 	private long _CPDAvailabilityEstimateId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

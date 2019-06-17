@@ -647,256 +647,6 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	private static final String _FINDER_COLUMN_UUID_UUID_3 =
 		"(cpdAvailabilityEstimate.uuid IS NULL OR cpdAvailabilityEstimate.uuid = '')";
 
-	private FinderPath _finderPathFetchByUUID_G;
-	private FinderPath _finderPathCountByUUID_G;
-
-	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchCPDAvailabilityEstimateException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cpd availability estimate
-	 * @throws NoSuchCPDAvailabilityEstimateException if a matching cpd availability estimate could not be found
-	 */
-	@Override
-	public CPDAvailabilityEstimate findByUUID_G(String uuid, long groupId)
-		throws NoSuchCPDAvailabilityEstimateException {
-
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = fetchByUUID_G(
-			uuid, groupId);
-
-		if (cpdAvailabilityEstimate == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCPDAvailabilityEstimateException(msg.toString());
-		}
-
-		return cpdAvailabilityEstimate;
-	}
-
-	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	 */
-	@Override
-	public CPDAvailabilityEstimate fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the cpd availability estimate where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
-	 */
-	@Override
-	public CPDAvailabilityEstimate fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
-		uuid = Objects.toString(uuid, "");
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByUUID_G, finderArgs, this);
-		}
-
-		if (result instanceof CPDAvailabilityEstimate) {
-			CPDAvailabilityEstimate cpdAvailabilityEstimate =
-				(CPDAvailabilityEstimate)result;
-
-			if (!Objects.equals(uuid, cpdAvailabilityEstimate.getUuid()) ||
-				(groupId != cpdAvailabilityEstimate.getGroupId())) {
-
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_CPDAVAILABILITYESTIMATE_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<CPDAvailabilityEstimate> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
-				}
-				else {
-					CPDAvailabilityEstimate cpdAvailabilityEstimate = list.get(
-						0);
-
-					result = cpdAvailabilityEstimate;
-
-					cacheResult(cpdAvailabilityEstimate);
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CPDAvailabilityEstimate)result;
-		}
-	}
-
-	/**
-	 * Removes the cpd availability estimate where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the cpd availability estimate that was removed
-	 */
-	@Override
-	public CPDAvailabilityEstimate removeByUUID_G(String uuid, long groupId)
-		throws NoSuchCPDAvailabilityEstimateException {
-
-		CPDAvailabilityEstimate cpdAvailabilityEstimate = findByUUID_G(
-			uuid, groupId);
-
-		return remove(cpdAvailabilityEstimate);
-	}
-
-	/**
-	 * Returns the number of cpd availability estimates where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching cpd availability estimates
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		uuid = Objects.toString(uuid, "");
-
-		FinderPath finderPath = _finderPathCountByUUID_G;
-
-		Object[] finderArgs = new Object[] {uuid, groupId};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CPDAVAILABILITYESTIMATE_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid.isEmpty()) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 =
-		"cpdAvailabilityEstimate.uuid = ? AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 =
-		"(cpdAvailabilityEstimate.uuid IS NULL OR cpdAvailabilityEstimate.uuid = '') AND ";
-
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 =
-		"cpdAvailabilityEstimate.groupId = ?";
-
 	private FinderPath _finderPathWithPaginationFindByUuid_C;
 	private FinderPath _finderPathWithoutPaginationFindByUuid_C;
 	private FinderPath _finderPathCountByUuid_C;
@@ -2283,14 +2033,6 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			cpdAvailabilityEstimate.getPrimaryKey(), cpdAvailabilityEstimate);
 
 		finderCache.putResult(
-			_finderPathFetchByUUID_G,
-			new Object[] {
-				cpdAvailabilityEstimate.getUuid(),
-				cpdAvailabilityEstimate.getGroupId()
-			},
-			cpdAvailabilityEstimate);
-
-		finderCache.putResult(
 			_finderPathFetchByCProductId,
 			new Object[] {cpdAvailabilityEstimate.getCProductId()},
 			cpdAvailabilityEstimate);
@@ -2385,17 +2127,8 @@ public class CPDAvailabilityEstimatePersistenceImpl
 		CPDAvailabilityEstimateModelImpl cpdAvailabilityEstimateModelImpl) {
 
 		Object[] args = new Object[] {
-			cpdAvailabilityEstimateModelImpl.getUuid(),
-			cpdAvailabilityEstimateModelImpl.getGroupId()
+			cpdAvailabilityEstimateModelImpl.getCProductId()
 		};
-
-		finderCache.putResult(
-			_finderPathCountByUUID_G, args, Long.valueOf(1), false);
-		finderCache.putResult(
-			_finderPathFetchByUUID_G, args, cpdAvailabilityEstimateModelImpl,
-			false);
-
-		args = new Object[] {cpdAvailabilityEstimateModelImpl.getCProductId()};
 
 		finderCache.putResult(
 			_finderPathCountByCProductId, args, Long.valueOf(1), false);
@@ -2407,28 +2140,6 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	protected void clearUniqueFindersCache(
 		CPDAvailabilityEstimateModelImpl cpdAvailabilityEstimateModelImpl,
 		boolean clearCurrent) {
-
-		if (clearCurrent) {
-			Object[] args = new Object[] {
-				cpdAvailabilityEstimateModelImpl.getUuid(),
-				cpdAvailabilityEstimateModelImpl.getGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
-
-		if ((cpdAvailabilityEstimateModelImpl.getColumnBitmask() &
-			 _finderPathFetchByUUID_G.getColumnBitmask()) != 0) {
-
-			Object[] args = new Object[] {
-				cpdAvailabilityEstimateModelImpl.getOriginalUuid(),
-				cpdAvailabilityEstimateModelImpl.getOriginalGroupId()
-			};
-
-			finderCache.removeResult(_finderPathCountByUUID_G, args);
-			finderCache.removeResult(_finderPathFetchByUUID_G, args);
-		}
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
@@ -3235,21 +2946,6 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
 			new String[] {String.class.getName()});
-
-		_finderPathFetchByUUID_G = new FinderPath(
-			CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
-			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED,
-			CPDAvailabilityEstimateImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()},
-			CPDAvailabilityEstimateModelImpl.UUID_COLUMN_BITMASK |
-			CPDAvailabilityEstimateModelImpl.GROUPID_COLUMN_BITMASK);
-
-		_finderPathCountByUUID_G = new FinderPath(
-			CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,
-			CPDAvailabilityEstimateModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] {String.class.getName(), Long.class.getName()});
 
 		_finderPathWithPaginationFindByUuid_C = new FinderPath(
 			CPDAvailabilityEstimateModelImpl.ENTITY_CACHE_ENABLED,

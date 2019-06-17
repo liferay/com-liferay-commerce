@@ -84,7 +84,7 @@ public interface CommerceDiscountLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceDiscount addCommerceDiscount(
-			String title, String target, boolean useCouponCode,
+			long userId, String title, String target, boolean useCouponCode,
 			String couponCode, boolean usePercentage,
 			BigDecimal maximumDiscountAmount, BigDecimal level1,
 			BigDecimal level2, BigDecimal level3, BigDecimal level4,
@@ -131,7 +131,7 @@ public interface CommerceDiscountLocalService
 	public CommerceDiscount deleteCommerceDiscount(long commerceDiscountId)
 		throws PortalException;
 
-	public void deleteCommerceDiscounts(long groupId) throws PortalException;
+	public void deleteCommerceDiscounts(long companyId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -210,15 +210,15 @@ public interface CommerceDiscountLocalService
 	public CommerceDiscount fetchCommerceDiscount(long commerceDiscountId);
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceDiscount fetchCommerceDiscountByUuidAndGroupId(
-		String uuid, long groupId);
+	public CommerceDiscount fetchCommerceDiscountByUuidAndCompanyId(
+		String uuid, long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -235,16 +235,16 @@ public interface CommerceDiscountLocalService
 		throws PortalException;
 
 	/**
-	 * Returns the commerce discount matching the UUID and group.
+	 * Returns the commerce discount with the matching UUID and company.
 	 *
 	 * @param uuid the commerce discount's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce discount
 	 * @throws PortalException if a matching commerce discount could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public CommerceDiscount getCommerceDiscountByUuidAndGroupId(
-			String uuid, long groupId)
+	public CommerceDiscount getCommerceDiscountByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException;
 
 	/**
@@ -263,38 +263,7 @@ public interface CommerceDiscountLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceDiscount> getCommerceDiscounts(
-		long groupId, int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscounts(
-		long groupId, String couponCode);
-
-	/**
-	 * Returns all the commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId);
-
-	/**
-	 * Returns a range of commerce discounts matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce discounts
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce discounts
-	 * @param end the upper bound of the range of commerce discounts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce discounts, or an empty list if no matches were found
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceDiscount> getCommerceDiscountsByUuidAndCompanyId(
-		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceDiscount> orderByComparator);
+		long companyId, String couponCode);
 
 	/**
 	 * Returns the number of commerce discounts.
@@ -305,10 +274,7 @@ public interface CommerceDiscountLocalService
 	public int getCommerceDiscountsCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceDiscountsCount(long groupId, String couponCode);
+	public int getCommerceDiscountsCount(long companyId, String couponCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
@@ -336,7 +302,7 @@ public interface CommerceDiscountLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceDiscount> searchCommerceDiscounts(
-			long companyId, long groupId, String keywords, int status,
+			long companyId, long[] groupIds, String keywords, int status,
 			int start, int end, Sort sort)
 		throws PortalException;
 

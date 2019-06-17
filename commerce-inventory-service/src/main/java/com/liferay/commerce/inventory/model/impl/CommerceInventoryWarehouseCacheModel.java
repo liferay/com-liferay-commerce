@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,12 +32,12 @@ import java.util.Date;
  * The cache model class for representing CommerceInventoryWarehouse in entity cache.
  *
  * @author Luca Pellizzon
- * @see CommerceInventoryWarehouse
  * @generated
  */
 @ProviderType
-public class CommerceInventoryWarehouseCacheModel implements CacheModel<CommerceInventoryWarehouse>,
-	Externalizable {
+public class CommerceInventoryWarehouseCacheModel
+	implements CacheModel<CommerceInventoryWarehouse>, Externalizable {
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -49,10 +48,14 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 			return false;
 		}
 
-		CommerceInventoryWarehouseCacheModel commerceInventoryWarehouseCacheModel =
-			(CommerceInventoryWarehouseCacheModel)obj;
+		CommerceInventoryWarehouseCacheModel
+			commerceInventoryWarehouseCacheModel =
+				(CommerceInventoryWarehouseCacheModel)obj;
 
-		if (commerceInventoryWarehouseId == commerceInventoryWarehouseCacheModel.commerceInventoryWarehouseId) {
+		if (commerceInventoryWarehouseId ==
+				commerceInventoryWarehouseCacheModel.
+					commerceInventoryWarehouseId) {
+
 			return true;
 		}
 
@@ -115,16 +118,19 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 
 	@Override
 	public CommerceInventoryWarehouse toEntityModel() {
-		CommerceInventoryWarehouseImpl commerceInventoryWarehouseImpl = new CommerceInventoryWarehouseImpl();
+		CommerceInventoryWarehouseImpl commerceInventoryWarehouseImpl =
+			new CommerceInventoryWarehouseImpl();
 
 		if (externalReferenceCode == null) {
 			commerceInventoryWarehouseImpl.setExternalReferenceCode("");
 		}
 		else {
-			commerceInventoryWarehouseImpl.setExternalReferenceCode(externalReferenceCode);
+			commerceInventoryWarehouseImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
-		commerceInventoryWarehouseImpl.setCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+		commerceInventoryWarehouseImpl.setCommerceInventoryWarehouseId(
+			commerceInventoryWarehouseId);
 		commerceInventoryWarehouseImpl.setCompanyId(companyId);
 		commerceInventoryWarehouseImpl.setUserId(userId);
 
@@ -146,8 +152,8 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 			commerceInventoryWarehouseImpl.setModifiedDate(null);
 		}
 		else {
-			commerceInventoryWarehouseImpl.setModifiedDate(new Date(
-					modifiedDate));
+			commerceInventoryWarehouseImpl.setModifiedDate(
+				new Date(modifiedDate));
 		}
 
 		if (name == null) {
@@ -205,14 +211,16 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 			commerceInventoryWarehouseImpl.setCommerceRegionCode("");
 		}
 		else {
-			commerceInventoryWarehouseImpl.setCommerceRegionCode(commerceRegionCode);
+			commerceInventoryWarehouseImpl.setCommerceRegionCode(
+				commerceRegionCode);
 		}
 
 		if (countryTwoLettersISOCode == null) {
 			commerceInventoryWarehouseImpl.setCountryTwoLettersISOCode("");
 		}
 		else {
-			commerceInventoryWarehouseImpl.setCountryTwoLettersISOCode(countryTwoLettersISOCode);
+			commerceInventoryWarehouseImpl.setCountryTwoLettersISOCode(
+				countryTwoLettersISOCode);
 		}
 
 		commerceInventoryWarehouseImpl.setLatitude(latitude);
@@ -261,8 +269,7 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (externalReferenceCode == null) {
 			objectOutput.writeUTF("");
 		}
@@ -383,4 +390,5 @@ public class CommerceInventoryWarehouseCacheModel implements CacheModel<Commerce
 	public double latitude;
 	public double longitude;
 	public String type;
+
 }

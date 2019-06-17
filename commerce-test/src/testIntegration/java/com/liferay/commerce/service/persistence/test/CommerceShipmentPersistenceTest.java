@@ -210,10 +210,16 @@ public class CommerceShipmentPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByGroupIds() throws Exception {
+		_persistence.countByGroupIds(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByGroupIds(0L);
+	}
+
+	@Test
+	public void testCountByGroupIdsArrayable() throws Exception {
+		_persistence.countByGroupIds(
+			new long[] {RandomTestUtil.nextLong(), 0L});
 	}
 
 	@Test
@@ -222,6 +228,13 @@ public class CommerceShipmentPersistenceTest {
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 
 		_persistence.countByG_S(0L, 0);
+	}
+
+	@Test
+	public void testCountByG_SArrayable() throws Exception {
+		_persistence.countByG_S(
+			new long[] {RandomTestUtil.nextLong(), 0L},
+			RandomTestUtil.nextInt());
 	}
 
 	@Test

@@ -17,7 +17,6 @@ package com.liferay.commerce.inventory.service.http;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseServiceUtil;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -25,19 +24,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link CommerceInventoryWarehouseServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>CommerceInventoryWarehouseServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouse}, that is translated to a
- * {@link com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouse</code>, that is translated to a
+ * <code>com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,27 +59,201 @@ import java.rmi.RemoteException;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryWarehouseServiceHttp
- * @see com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
- * @see CommerceInventoryWarehouseServiceUtil
  * @generated
  */
 @ProviderType
 public class CommerceInventoryWarehouseServiceSoap {
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap addCommerceWarehouse(
-		String name, String description, boolean active, String street1,
-		String street2, String street3, String city, String zip,
-		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				addCommerceInventoryWarehouse(
+					String name, String description, boolean active,
+					String street1, String street2, String street3, String city,
+					String zip, String commerceRegionCode,
+					String commerceCountryCode, double latitude,
+					double longitude, String externalReferenceCode,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						addCommerceInventoryWarehouse(
+							name, description, active, street1, street2,
+							street3, city, zip, commerceRegionCode,
+							commerceCountryCode, latitude, longitude,
+							externalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				deleteCommerceInventoryWarehouse(
+					long commerceInventoryWarehouseId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						deleteCommerceInventoryWarehouse(
+							commerceInventoryWarehouseId);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				geolocateCommerceInventoryWarehouse(
+					long commerceInventoryWarehouseId, double latitude,
+					double longitude)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						geolocateCommerceInventoryWarehouse(
+							commerceInventoryWarehouseId, latitude, longitude);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				getCommerceInventoryWarehouse(long commerceInventoryWarehouseId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						getCommerceInventoryWarehouse(
+							commerceInventoryWarehouseId);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
+				getCommerceInventoryWarehouses(
+					long companyId, boolean active, String commerceCountryCode,
+					int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.inventory.model.
+							CommerceInventoryWarehouse> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouse> returnValue =
+						CommerceInventoryWarehouseServiceUtil.
+							getCommerceInventoryWarehouses(
+								companyId, active, commerceCountryCode, start,
+								end, orderByComparator);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
+				getCommerceInventoryWarehouses(
+					long companyId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.inventory.model.
+							CommerceInventoryWarehouse> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouse> returnValue =
+						CommerceInventoryWarehouseServiceUtil.
+							getCommerceInventoryWarehouses(
+								companyId, start, end, orderByComparator);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
+				getCommerceInventoryWarehouses(
+					long companyId, long groupId, boolean active)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouse> returnValue =
+						CommerceInventoryWarehouseServiceUtil.
+							getCommerceInventoryWarehouses(
+								companyId, groupId, active);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceInventoryWarehousesCount(long companyId)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.addCommerceWarehouse(name,
-					description, active, street1, street2, street3, city, zip,
-					commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			int returnValue =
+				CommerceInventoryWarehouseServiceUtil.
+					getCommerceInventoryWarehousesCount(companyId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -88,21 +262,17 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap addCommerceWarehouseAndGroupRel(
-		String name, String description, boolean active, String street1,
-		String street2, String street3, String city, String zip,
-		String commerceRegionCode, String commerceCountryCode, double latitude,
-		double longitude,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static int getCommerceInventoryWarehousesCount(
+			long companyId, boolean active, String commerceCountryCode)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.addCommerceWarehouseAndGroupRel(name,
-					description, active, street1, street2, street3, city, zip,
-					commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			int returnValue =
+				CommerceInventoryWarehouseServiceUtil.
+					getCommerceInventoryWarehousesCount(
+						companyId, active, commerceCountryCode);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,13 +281,25 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap deleteCommerceWarehouse(
-		long commerceWarehouseId) throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.deleteCommerceWarehouse(commerceWarehouseId);
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
+				searchCommerceInventoryWarehouses(
+					long companyId, Boolean active, String commerceCountryCode,
+					String keywords, int start, int end,
+					com.liferay.portal.kernel.search.Sort sort)
+			throws RemoteException {
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouse> returnValue =
+						CommerceInventoryWarehouseServiceUtil.
+							searchCommerceInventoryWarehouses(
+								companyId, active, commerceCountryCode,
+								keywords, start, end, sort);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -126,30 +308,18 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap fetchDefaultCommerceWarehouse(
-		long groupId) throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.fetchDefaultCommerceWarehouse(groupId);
-
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap geolocateCommerceWarehouse(
-		long commerceWarehouseId, double latitude, double longitude)
+	public static int searchCommerceInventoryWarehousesCount(
+			long companyId, Boolean active, String commerceCountryCode,
+			String keywords)
 		throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.geolocateCommerceWarehouse(commerceWarehouseId,
-					latitude, longitude);
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			int returnValue =
+				CommerceInventoryWarehouseServiceUtil.
+					searchCommerceInventoryWarehousesCount(
+						companyId, active, commerceCountryCode, keywords);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -158,13 +328,18 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap getCommerceWarehouse(
-		long commerceWarehouseId) throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.getCommerceWarehouse(commerceWarehouseId);
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				setActive(long commerceInventoryWarehouseId, boolean active)
+			throws RemoteException {
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue = CommerceInventoryWarehouseServiceUtil.setActive(
+					commerceInventoryWarehouseId, active);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -173,14 +348,30 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap setActive(
-		long commerceWarehouseId, boolean active) throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.setActive(commerceWarehouseId,
-					active);
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				updateCommerceInventoryWarehouse(
+					long commerceInventoryWarehouseId, String name,
+					String description, boolean active, String street1,
+					String street2, String street3, String city, String zip,
+					String commerceRegionCode, String commerceCountryCode,
+					double latitude, double longitude,
+					com.liferay.portal.kernel.service.ServiceContext
+						serviceContext)
+			throws RemoteException {
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						updateCommerceInventoryWarehouse(
+							commerceInventoryWarehouseId, name, description,
+							active, street1, street2, street3, city, zip,
+							commerceRegionCode, commerceCountryCode, latitude,
+							longitude, serviceContext);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -189,49 +380,7 @@ public class CommerceInventoryWarehouseServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap updateCommerceWarehouse(
-		long commerceWarehouseId, String name, String description,
-		boolean active, String street1, String street2, String street3,
-		String city, String zip, String commerceRegionCode,
-		String commerceCountryCode, double latitude, double longitude,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.updateCommerceWarehouse(commerceWarehouseId,
-					name, description, active, street1, street2, street3, city,
-					zip, commerceRegionCode, commerceCountryCode, latitude,
-					longitude, serviceContext);
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceInventoryWarehouseServiceSoap.class);
 
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap updateDefaultCommerceWarehouse(
-		String name, String street1, String street2, String street3,
-		String city, String zip, String commerceRegionCode,
-		String commerceCountryCode, double latitude, double longitude,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse returnValue =
-				CommerceInventoryWarehouseServiceUtil.updateDefaultCommerceWarehouse(name,
-					street1, street2, street3, city, zip, commerceRegionCode,
-					commerceCountryCode, latitude, longitude, serviceContext);
-
-			return com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(CommerceInventoryWarehouseServiceSoap.class);
 }

@@ -61,6 +61,8 @@ public interface CPDefinition extends CPDefinitionModel, PersistedModel {
 	@Override
 	public boolean equals(Object object);
 
+	public CommerceCatalog getCommerceCatalog();
+
 	public java.util.List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
 			int type, int status)
 		throws com.liferay.portal.kernel.exception.PortalException;

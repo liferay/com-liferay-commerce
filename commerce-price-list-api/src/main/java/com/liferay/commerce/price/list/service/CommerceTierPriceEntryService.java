@@ -86,7 +86,7 @@ public interface CommerceTierPriceEntryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceTierPriceEntry> fetchCommerceTierPriceEntries(
-			long groupId, int start, int end)
+			long companyId, int start, int end)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -110,7 +110,7 @@ public interface CommerceTierPriceEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCommerceTierPriceEntriesCountByGroupId(long groupId)
+	public int getCommerceTierPriceEntriesCountByCompanyId(long companyId)
 		throws PortalException;
 
 	/**
@@ -123,8 +123,8 @@ public interface CommerceTierPriceEntryService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceTierPriceEntry>
 			searchCommerceTierPriceEntries(
-				long companyId, long groupId, long commercePriceEntryId,
-				String keywords, int start, int end, Sort sort)
+				long companyId, long commercePriceEntryId, String keywords,
+				int start, int end, Sort sort)
 		throws PortalException;
 
 	public CommerceTierPriceEntry updateCommerceTierPriceEntry(
@@ -134,7 +134,7 @@ public interface CommerceTierPriceEntryService extends BaseService {
 		throws PortalException;
 
 	public CommerceTierPriceEntry updateExternalReferenceCode(
-			CommerceTierPriceEntry commerceTierPriceEntry, long groupId,
+			CommerceTierPriceEntry commerceTierPriceEntry,
 			String externalReferenceCode)
 		throws PortalException;
 

@@ -193,56 +193,6 @@ public interface CommerceRegionPersistence
 	public int countByUuid(String uuid);
 
 	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or throws a <code>NoSuchRegionException</code> if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region
-	 * @throws NoSuchRegionException if a matching commerce region could not be found
-	 */
-	public CommerceRegion findByUUID_G(String uuid, long groupId)
-		throws NoSuchRegionException;
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	public CommerceRegion fetchByUUID_G(String uuid, long groupId);
-
-	/**
-	 * Returns the commerce region where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
-	 */
-	public CommerceRegion fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
-
-	/**
-	 * Removes the commerce region where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the commerce region that was removed
-	 */
-	public CommerceRegion removeByUUID_G(String uuid, long groupId)
-		throws NoSuchRegionException;
-
-	/**
-	 * Returns the number of commerce regions where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching commerce regions
-	 */
-	public int countByUUID_G(String uuid, long groupId);
-
-	/**
 	 * Returns all the commerce regions where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid

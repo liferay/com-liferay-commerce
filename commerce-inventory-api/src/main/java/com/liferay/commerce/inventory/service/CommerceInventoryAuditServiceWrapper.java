@@ -28,17 +28,19 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 @ProviderType
 public class CommerceInventoryAuditServiceWrapper
 	implements CommerceInventoryAuditService,
-		ServiceWrapper<CommerceInventoryAuditService> {
+			   ServiceWrapper<CommerceInventoryAuditService> {
+
 	public CommerceInventoryAuditServiceWrapper(
 		CommerceInventoryAuditService commerceInventoryAuditService) {
+
 		_commerceInventoryAuditService = commerceInventoryAuditService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceInventoryAuditService.getOSGiServiceIdentifier();
@@ -52,8 +54,10 @@ public class CommerceInventoryAuditServiceWrapper
 	@Override
 	public void setWrappedService(
 		CommerceInventoryAuditService commerceInventoryAuditService) {
+
 		_commerceInventoryAuditService = commerceInventoryAuditService;
 	}
 
 	private CommerceInventoryAuditService _commerceInventoryAuditService;
+
 }

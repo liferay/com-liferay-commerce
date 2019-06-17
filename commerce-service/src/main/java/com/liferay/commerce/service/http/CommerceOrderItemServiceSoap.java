@@ -178,6 +178,25 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static int getCommerceInventoryWarehouseItemQuantity(
+			long commerceOrderItemId, long commerceInventoryWarehouseId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceOrderItemServiceUtil.
+					getCommerceInventoryWarehouseItemQuantity(
+						commerceOrderItemId, commerceInventoryWarehouseId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItemSoap
 			getCommerceOrderItem(long commerceOrderItemId)
 		throws RemoteException {
@@ -241,24 +260,6 @@ public class CommerceOrderItemServiceSoap {
 			int returnValue =
 				CommerceOrderItemServiceUtil.getCommerceOrderItemsQuantity(
 					commerceOrderId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommerceWarehouseItemQuantity(
-			long commerceOrderItemId, long commerceWarehouseId)
-		throws RemoteException {
-
-		try {
-			int returnValue =
-				CommerceOrderItemServiceUtil.getCommerceWarehouseItemQuantity(
-					commerceOrderItemId, commerceWarehouseId);
 
 			return returnValue;
 		}

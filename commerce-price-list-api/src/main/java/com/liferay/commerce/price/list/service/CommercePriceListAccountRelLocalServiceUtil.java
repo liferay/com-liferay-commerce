@@ -240,19 +240,19 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel, or <code>null</code> if a matching commerce price list account rel could not be found
 	 */
 	public static
 		com.liferay.commerce.price.list.model.CommercePriceListAccountRel
-			fetchCommercePriceListAccountRelByUuidAndGroupId(
-				String uuid, long groupId) {
+			fetchCommercePriceListAccountRelByUuidAndCompanyId(
+				String uuid, long companyId) {
 
-		return getService().fetchCommercePriceListAccountRelByUuidAndGroupId(
-			uuid, groupId);
+		return getService().fetchCommercePriceListAccountRelByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -279,21 +279,21 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 	}
 
 	/**
-	 * Returns the commerce price list account rel matching the UUID and group.
+	 * Returns the commerce price list account rel with the matching UUID and company.
 	 *
 	 * @param uuid the commerce price list account rel's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching commerce price list account rel
 	 * @throws PortalException if a matching commerce price list account rel could not be found
 	 */
 	public static
 		com.liferay.commerce.price.list.model.CommercePriceListAccountRel
-				getCommercePriceListAccountRelByUuidAndGroupId(
-					String uuid, long groupId)
+				getCommercePriceListAccountRelByUuidAndCompanyId(
+					String uuid, long companyId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCommercePriceListAccountRelByUuidAndGroupId(
-			uuid, groupId);
+		return getService().getCommercePriceListAccountRelByUuidAndCompanyId(
+			uuid, companyId);
 	}
 
 	/**
@@ -320,44 +320,6 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 
 		return getService().getCommercePriceListAccountRels(
 			commercePriceListId);
-	}
-
-	/**
-	 * Returns all the commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @return the matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
-			getCommercePriceListAccountRelsByUuidAndCompanyId(
-				String uuid, long companyId) {
-
-		return getService().getCommercePriceListAccountRelsByUuidAndCompanyId(
-			uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of commerce price list account rels matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the commerce price list account rels
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of commerce price list account rels
-	 * @param end the upper bound of the range of commerce price list account rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching commerce price list account rels, or an empty list if no matches were found
-	 */
-	public static java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
-			getCommercePriceListAccountRelsByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.price.list.model.
-						CommercePriceListAccountRel> orderByComparator) {
-
-		return getService().getCommercePriceListAccountRelsByUuidAndCompanyId(
-			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**

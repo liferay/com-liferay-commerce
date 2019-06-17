@@ -190,6 +190,8 @@ public class CommerceOrderItemPersistenceTest {
 		newCommerceOrderItem.setRequestedDeliveryDate(
 			RandomTestUtil.nextDate());
 
+		newCommerceOrderItem.setBookedQuantityId(RandomTestUtil.nextLong());
+
 		_commerceOrderItems.add(_persistence.update(newCommerceOrderItem));
 
 		CommerceOrderItem existingCommerceOrderItem =
@@ -280,6 +282,9 @@ public class CommerceOrderItemPersistenceTest {
 				existingCommerceOrderItem.getRequestedDeliveryDate()),
 			Time.getShortTimestamp(
 				newCommerceOrderItem.getRequestedDeliveryDate()));
+		Assert.assertEquals(
+			existingCommerceOrderItem.getBookedQuantityId(),
+			newCommerceOrderItem.getBookedQuantityId());
 	}
 
 	@Test
@@ -352,16 +357,18 @@ public class CommerceOrderItemPersistenceTest {
 	}
 
 	protected OrderByComparator<CommerceOrderItem> getOrderByComparator() {
-(??)		return OrderByComparatorFactoryUtil.create("CommerceOrderItem",
-(??)			"externalReferenceCode", true, "commerceOrderItemId", true,
-(??)			"groupId", true, "companyId", true, "userId", true, "userName",
-(??)			true, "createDate", true, "modifiedDate", true, "commerceOrderId",
-(??)			true, "CProductId", true, "CPInstanceId", true, "quantity", true,
-(??)			"shippedQuantity", true, "name", true, "sku", true, "unitPrice",
-(??)			true, "discountAmount", true, "finalPrice", true,
-(??)			"discountPercentageLevel1", true, "discountPercentageLevel2", true,
-(??)			"discountPercentageLevel3", true, "discountPercentageLevel4", true,
-(??)			"subscription", true);
+		return OrderByComparatorFactoryUtil.create(
+			"CommerceOrderItem", "externalReferenceCode", true,
+			"commerceOrderItemId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "commerceOrderId", true, "CProductId", true,
+			"CPInstanceId", true, "quantity", true, "shippedQuantity", true,
+			"name", true, "sku", true, "unitPrice", true, "discountAmount",
+			true, "finalPrice", true, "discountPercentageLevel1", true,
+			"discountPercentageLevel2", true, "discountPercentageLevel3", true,
+			"discountPercentageLevel4", true, "subscription", true,
+			"deliveryGroup", true, "shippingAddressId", true, "printedNote",
+			true, "requestedDeliveryDate", true, "bookedQuantityId", true);
 	}
 
 	@Test
@@ -672,6 +679,8 @@ public class CommerceOrderItemPersistenceTest {
 		commerceOrderItem.setPrintedNote(RandomTestUtil.randomString());
 
 		commerceOrderItem.setRequestedDeliveryDate(RandomTestUtil.nextDate());
+
+		commerceOrderItem.setBookedQuantityId(RandomTestUtil.nextLong());
 
 		_commerceOrderItems.add(_persistence.update(commerceOrderItem));
 

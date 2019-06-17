@@ -25,35 +25,45 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryReplenishmentItemModel
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl"
+)
 @ProviderType
 public interface CommerceInventoryReplenishmentItem
 	extends CommerceInventoryReplenishmentItemModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceInventoryReplenishmentItem, Long> COMMERCE_INVENTORY_REPLENISHMENT_ITEM_ID_ACCESSOR =
-		new Accessor<CommerceInventoryReplenishmentItem, Long>() {
-			@Override
-			public Long get(
-				CommerceInventoryReplenishmentItem commerceInventoryReplenishmentItem) {
-				return commerceInventoryReplenishmentItem.getCommerceInventoryReplenishmentItemId();
-			}
+	public static final Accessor<CommerceInventoryReplenishmentItem, Long>
+		COMMERCE_INVENTORY_REPLENISHMENT_ITEM_ID_ACCESSOR =
+			new Accessor<CommerceInventoryReplenishmentItem, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceInventoryReplenishmentItem
+						commerceInventoryReplenishmentItem) {
 
-			@Override
-			public Class<CommerceInventoryReplenishmentItem> getTypeClass() {
-				return CommerceInventoryReplenishmentItem.class;
-			}
-		};
+					return commerceInventoryReplenishmentItem.
+						getCommerceInventoryReplenishmentItemId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceInventoryReplenishmentItem>
+					getTypeClass() {
+
+					return CommerceInventoryReplenishmentItem.class;
+				}
+
+			};
+
 }

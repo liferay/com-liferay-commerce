@@ -74,8 +74,8 @@ public class CPTaxCategoryLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPTaxCategories(long groupId) {
-		_cpTaxCategoryLocalService.deleteCPTaxCategories(groupId);
+	public void deleteCPTaxCategories(long companyId) {
+		_cpTaxCategoryLocalService.deleteCPTaxCategories(companyId);
 	}
 
 	/**
@@ -244,21 +244,21 @@ public class CPTaxCategoryLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
-		getCPTaxCategories(long groupId) {
+		getCPTaxCategories(long companyId) {
 
-		return _cpTaxCategoryLocalService.getCPTaxCategories(groupId);
+		return _cpTaxCategoryLocalService.getCPTaxCategories(companyId);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPTaxCategory>
 		getCPTaxCategories(
-			long groupId, int start, int end,
+			long companyId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<com.liferay.commerce.product.model.CPTaxCategory>
 					orderByComparator) {
 
 		return _cpTaxCategoryLocalService.getCPTaxCategories(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -272,8 +272,8 @@ public class CPTaxCategoryLocalServiceWrapper
 	}
 
 	@Override
-	public int getCPTaxCategoriesCount(long groupId) {
-		return _cpTaxCategoryLocalService.getCPTaxCategoriesCount(groupId);
+	public int getCPTaxCategoriesCount(long companyId) {
+		return _cpTaxCategoryLocalService.getCPTaxCategoriesCount(companyId);
 	}
 
 	/**

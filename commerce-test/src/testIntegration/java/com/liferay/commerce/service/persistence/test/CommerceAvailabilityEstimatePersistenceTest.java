@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
-import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -46,7 +45,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import org.junit.After;
@@ -132,8 +130,6 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 		newCommerceAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
 
-		newCommerceAvailabilityEstimate.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceAvailabilityEstimate.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceAvailabilityEstimate.setUserId(RandomTestUtil.nextLong());
@@ -170,9 +166,6 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 				getCommerceAvailabilityEstimateId(),
 			newCommerceAvailabilityEstimate.
 				getCommerceAvailabilityEstimateId());
-		Assert.assertEquals(
-			existingCommerceAvailabilityEstimate.getGroupId(),
-			newCommerceAvailabilityEstimate.getGroupId());
 		Assert.assertEquals(
 			existingCommerceAvailabilityEstimate.getCompanyId(),
 			newCommerceAvailabilityEstimate.getCompanyId());
@@ -215,15 +208,6 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testCountByUUID_G() throws Exception {
-		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
-
-		_persistence.countByUUID_G("null", 0L);
-
-		_persistence.countByUUID_G((String)null, 0L);
-	}
-
-	@Test
 	public void testCountByUuid_C() throws Exception {
 		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
 
@@ -233,10 +217,10 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
-		_persistence.countByGroupId(0L);
+		_persistence.countByCompanyId(0L);
 	}
 
 	@Test
@@ -271,10 +255,9 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 
 		return OrderByComparatorFactoryUtil.create(
 			"CommerceAvailabilityEstimate", "uuid", true,
-			"commerceAvailabilityEstimateId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "title", true, "priority", true,
-			"lastPublishDate", true);
+			"commerceAvailabilityEstimateId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"title", true, "priority", true, "lastPublishDate", true);
 	}
 
 	@Test
@@ -524,30 +507,6 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
-	@Test
-	public void testResetOriginalValues() throws Exception {
-		CommerceAvailabilityEstimate newCommerceAvailabilityEstimate =
-			addCommerceAvailabilityEstimate();
-
-		_persistence.clearCache();
-
-		CommerceAvailabilityEstimate existingCommerceAvailabilityEstimate =
-			_persistence.findByPrimaryKey(
-				newCommerceAvailabilityEstimate.getPrimaryKey());
-
-		Assert.assertTrue(
-			Objects.equals(
-				existingCommerceAvailabilityEstimate.getUuid(),
-				ReflectionTestUtil.invoke(
-					existingCommerceAvailabilityEstimate, "getOriginalUuid",
-					new Class<?>[0])));
-		Assert.assertEquals(
-			Long.valueOf(existingCommerceAvailabilityEstimate.getGroupId()),
-			ReflectionTestUtil.<Long>invoke(
-				existingCommerceAvailabilityEstimate, "getOriginalGroupId",
-				new Class<?>[0]));
-	}
-
 	protected CommerceAvailabilityEstimate addCommerceAvailabilityEstimate()
 		throws Exception {
 
@@ -557,8 +516,6 @@ public class CommerceAvailabilityEstimatePersistenceTest {
 			_persistence.create(pk);
 
 		commerceAvailabilityEstimate.setUuid(RandomTestUtil.randomString());
-
-		commerceAvailabilityEstimate.setGroupId(RandomTestUtil.nextLong());
 
 		commerceAvailabilityEstimate.setCompanyId(RandomTestUtil.nextLong());
 

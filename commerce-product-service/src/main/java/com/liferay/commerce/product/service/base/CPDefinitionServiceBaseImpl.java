@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import com.liferay.asset.kernel.service.persistence.AssetCategoryPersistence;
 import com.liferay.asset.kernel.service.persistence.AssetEntryPersistence;
 import com.liferay.asset.kernel.service.persistence.AssetLinkPersistence;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -36,12 +35,12 @@ import com.liferay.commerce.product.service.persistence.CPMeasurementUnitPersist
 import com.liferay.commerce.product.service.persistence.CPOptionCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPOptionValuePersistence;
-import com.liferay.commerce.product.service.persistence.CPRuleAssetCategoryRelPersistence;
-import com.liferay.commerce.product.service.persistence.CPRulePersistence;
-import com.liferay.commerce.product.service.persistence.CPRuleUserSegmentRelPersistence;
 import com.liferay.commerce.product.service.persistence.CPSpecificationOptionPersistence;
 import com.liferay.commerce.product.service.persistence.CPTaxCategoryPersistence;
 import com.liferay.commerce.product.service.persistence.CProductPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -52,11 +51,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.service.BaseServiceImpl;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
+import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.service.persistence.WorkflowInstanceLinkPersistence;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
-import com.liferay.trash.kernel.service.persistence.TrashEntryPersistence;
 
 import javax.sql.DataSource;
 
@@ -80,6 +79,204 @@ public abstract class CPDefinitionServiceBaseImpl
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPDefinitionServiceUtil</code>.
 	 */
+
+	/**
+	 * Returns the commerce catalog local service.
+	 *
+	 * @return the commerce catalog local service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogLocalService
+		getCommerceCatalogLocalService() {
+
+		return commerceCatalogLocalService;
+	}
+
+	/**
+	 * Sets the commerce catalog local service.
+	 *
+	 * @param commerceCatalogLocalService the commerce catalog local service
+	 */
+	public void setCommerceCatalogLocalService(
+		com.liferay.commerce.product.service.CommerceCatalogLocalService
+			commerceCatalogLocalService) {
+
+		this.commerceCatalogLocalService = commerceCatalogLocalService;
+	}
+
+	/**
+	 * Returns the commerce catalog remote service.
+	 *
+	 * @return the commerce catalog remote service
+	 */
+	public com.liferay.commerce.product.service.CommerceCatalogService
+		getCommerceCatalogService() {
+
+		return commerceCatalogService;
+	}
+
+	/**
+	 * Sets the commerce catalog remote service.
+	 *
+	 * @param commerceCatalogService the commerce catalog remote service
+	 */
+	public void setCommerceCatalogService(
+		com.liferay.commerce.product.service.CommerceCatalogService
+			commerceCatalogService) {
+
+		this.commerceCatalogService = commerceCatalogService;
+	}
+
+	/**
+	 * Returns the commerce catalog persistence.
+	 *
+	 * @return the commerce catalog persistence
+	 */
+	public CommerceCatalogPersistence getCommerceCatalogPersistence() {
+		return commerceCatalogPersistence;
+	}
+
+	/**
+	 * Sets the commerce catalog persistence.
+	 *
+	 * @param commerceCatalogPersistence the commerce catalog persistence
+	 */
+	public void setCommerceCatalogPersistence(
+		CommerceCatalogPersistence commerceCatalogPersistence) {
+
+		this.commerceCatalogPersistence = commerceCatalogPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel local service.
+	 *
+	 * @return the commerce channel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelLocalService
+		getCommerceChannelLocalService() {
+
+		return commerceChannelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel local service.
+	 *
+	 * @param commerceChannelLocalService the commerce channel local service
+	 */
+	public void setCommerceChannelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelLocalService
+			commerceChannelLocalService) {
+
+		this.commerceChannelLocalService = commerceChannelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel remote service.
+	 *
+	 * @return the commerce channel remote service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelService
+		getCommerceChannelService() {
+
+		return commerceChannelService;
+	}
+
+	/**
+	 * Sets the commerce channel remote service.
+	 *
+	 * @param commerceChannelService the commerce channel remote service
+	 */
+	public void setCommerceChannelService(
+		com.liferay.commerce.product.service.CommerceChannelService
+			commerceChannelService) {
+
+		this.commerceChannelService = commerceChannelService;
+	}
+
+	/**
+	 * Returns the commerce channel persistence.
+	 *
+	 * @return the commerce channel persistence
+	 */
+	public CommerceChannelPersistence getCommerceChannelPersistence() {
+		return commerceChannelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel persistence.
+	 *
+	 * @param commerceChannelPersistence the commerce channel persistence
+	 */
+	public void setCommerceChannelPersistence(
+		CommerceChannelPersistence commerceChannelPersistence) {
+
+		this.commerceChannelPersistence = commerceChannelPersistence;
+	}
+
+	/**
+	 * Returns the commerce channel rel local service.
+	 *
+	 * @return the commerce channel rel local service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelRelLocalService
+		getCommerceChannelRelLocalService() {
+
+		return commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Sets the commerce channel rel local service.
+	 *
+	 * @param commerceChannelRelLocalService the commerce channel rel local service
+	 */
+	public void setCommerceChannelRelLocalService(
+		com.liferay.commerce.product.service.CommerceChannelRelLocalService
+			commerceChannelRelLocalService) {
+
+		this.commerceChannelRelLocalService = commerceChannelRelLocalService;
+	}
+
+	/**
+	 * Returns the commerce channel rel remote service.
+	 *
+	 * @return the commerce channel rel remote service
+	 */
+	public com.liferay.commerce.product.service.CommerceChannelRelService
+		getCommerceChannelRelService() {
+
+		return commerceChannelRelService;
+	}
+
+	/**
+	 * Sets the commerce channel rel remote service.
+	 *
+	 * @param commerceChannelRelService the commerce channel rel remote service
+	 */
+	public void setCommerceChannelRelService(
+		com.liferay.commerce.product.service.CommerceChannelRelService
+			commerceChannelRelService) {
+
+		this.commerceChannelRelService = commerceChannelRelService;
+	}
+
+	/**
+	 * Returns the commerce channel rel persistence.
+	 *
+	 * @return the commerce channel rel persistence
+	 */
+	public CommerceChannelRelPersistence getCommerceChannelRelPersistence() {
+		return commerceChannelRelPersistence;
+	}
+
+	/**
+	 * Sets the commerce channel rel persistence.
+	 *
+	 * @param commerceChannelRelPersistence the commerce channel rel persistence
+	 */
+	public void setCommerceChannelRelPersistence(
+		CommerceChannelRelPersistence commerceChannelRelPersistence) {
+
+		this.commerceChannelRelPersistence = commerceChannelRelPersistence;
+	}
 
 	/**
 	 * Returns the cp attachment file entry local service.
@@ -1043,209 +1240,6 @@ public abstract class CPDefinitionServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cp rule local service.
-	 *
-	 * @return the cp rule local service
-	 */
-	public com.liferay.commerce.product.service.CPRuleLocalService
-		getCPRuleLocalService() {
-
-		return cpRuleLocalService;
-	}
-
-	/**
-	 * Sets the cp rule local service.
-	 *
-	 * @param cpRuleLocalService the cp rule local service
-	 */
-	public void setCPRuleLocalService(
-		com.liferay.commerce.product.service.CPRuleLocalService
-			cpRuleLocalService) {
-
-		this.cpRuleLocalService = cpRuleLocalService;
-	}
-
-	/**
-	 * Returns the cp rule remote service.
-	 *
-	 * @return the cp rule remote service
-	 */
-	public com.liferay.commerce.product.service.CPRuleService
-		getCPRuleService() {
-
-		return cpRuleService;
-	}
-
-	/**
-	 * Sets the cp rule remote service.
-	 *
-	 * @param cpRuleService the cp rule remote service
-	 */
-	public void setCPRuleService(
-		com.liferay.commerce.product.service.CPRuleService cpRuleService) {
-
-		this.cpRuleService = cpRuleService;
-	}
-
-	/**
-	 * Returns the cp rule persistence.
-	 *
-	 * @return the cp rule persistence
-	 */
-	public CPRulePersistence getCPRulePersistence() {
-		return cpRulePersistence;
-	}
-
-	/**
-	 * Sets the cp rule persistence.
-	 *
-	 * @param cpRulePersistence the cp rule persistence
-	 */
-	public void setCPRulePersistence(CPRulePersistence cpRulePersistence) {
-		this.cpRulePersistence = cpRulePersistence;
-	}
-
-	/**
-	 * Returns the cp rule asset category rel local service.
-	 *
-	 * @return the cp rule asset category rel local service
-	 */
-	public
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			getCPRuleAssetCategoryRelLocalService() {
-
-		return cpRuleAssetCategoryRelLocalService;
-	}
-
-	/**
-	 * Sets the cp rule asset category rel local service.
-	 *
-	 * @param cpRuleAssetCategoryRelLocalService the cp rule asset category rel local service
-	 */
-	public void setCPRuleAssetCategoryRelLocalService(
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			cpRuleAssetCategoryRelLocalService) {
-
-		this.cpRuleAssetCategoryRelLocalService =
-			cpRuleAssetCategoryRelLocalService;
-	}
-
-	/**
-	 * Returns the cp rule asset category rel remote service.
-	 *
-	 * @return the cp rule asset category rel remote service
-	 */
-	public com.liferay.commerce.product.service.CPRuleAssetCategoryRelService
-		getCPRuleAssetCategoryRelService() {
-
-		return cpRuleAssetCategoryRelService;
-	}
-
-	/**
-	 * Sets the cp rule asset category rel remote service.
-	 *
-	 * @param cpRuleAssetCategoryRelService the cp rule asset category rel remote service
-	 */
-	public void setCPRuleAssetCategoryRelService(
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelService
-			cpRuleAssetCategoryRelService) {
-
-		this.cpRuleAssetCategoryRelService = cpRuleAssetCategoryRelService;
-	}
-
-	/**
-	 * Returns the cp rule asset category rel persistence.
-	 *
-	 * @return the cp rule asset category rel persistence
-	 */
-	public CPRuleAssetCategoryRelPersistence
-		getCPRuleAssetCategoryRelPersistence() {
-
-		return cpRuleAssetCategoryRelPersistence;
-	}
-
-	/**
-	 * Sets the cp rule asset category rel persistence.
-	 *
-	 * @param cpRuleAssetCategoryRelPersistence the cp rule asset category rel persistence
-	 */
-	public void setCPRuleAssetCategoryRelPersistence(
-		CPRuleAssetCategoryRelPersistence cpRuleAssetCategoryRelPersistence) {
-
-		this.cpRuleAssetCategoryRelPersistence =
-			cpRuleAssetCategoryRelPersistence;
-	}
-
-	/**
-	 * Returns the cp rule user segment rel local service.
-	 *
-	 * @return the cp rule user segment rel local service
-	 */
-	public com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-		getCPRuleUserSegmentRelLocalService() {
-
-		return cpRuleUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Sets the cp rule user segment rel local service.
-	 *
-	 * @param cpRuleUserSegmentRelLocalService the cp rule user segment rel local service
-	 */
-	public void setCPRuleUserSegmentRelLocalService(
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-			cpRuleUserSegmentRelLocalService) {
-
-		this.cpRuleUserSegmentRelLocalService =
-			cpRuleUserSegmentRelLocalService;
-	}
-
-	/**
-	 * Returns the cp rule user segment rel remote service.
-	 *
-	 * @return the cp rule user segment rel remote service
-	 */
-	public com.liferay.commerce.product.service.CPRuleUserSegmentRelService
-		getCPRuleUserSegmentRelService() {
-
-		return cpRuleUserSegmentRelService;
-	}
-
-	/**
-	 * Sets the cp rule user segment rel remote service.
-	 *
-	 * @param cpRuleUserSegmentRelService the cp rule user segment rel remote service
-	 */
-	public void setCPRuleUserSegmentRelService(
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelService
-			cpRuleUserSegmentRelService) {
-
-		this.cpRuleUserSegmentRelService = cpRuleUserSegmentRelService;
-	}
-
-	/**
-	 * Returns the cp rule user segment rel persistence.
-	 *
-	 * @return the cp rule user segment rel persistence
-	 */
-	public CPRuleUserSegmentRelPersistence
-		getCPRuleUserSegmentRelPersistence() {
-
-		return cpRuleUserSegmentRelPersistence;
-	}
-
-	/**
-	 * Sets the cp rule user segment rel persistence.
-	 *
-	 * @param cpRuleUserSegmentRelPersistence the cp rule user segment rel persistence
-	 */
-	public void setCPRuleUserSegmentRelPersistence(
-		CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence) {
-
-		this.cpRuleUserSegmentRelPersistence = cpRuleUserSegmentRelPersistence;
-	}
-
-	/**
 	 * Returns the cp specification option local service.
 	 *
 	 * @return the cp specification option local service
@@ -1471,6 +1465,66 @@ public abstract class CPDefinitionServiceBaseImpl
 	}
 
 	/**
+	 * Returns the group local service.
+	 *
+	 * @return the group local service
+	 */
+	public com.liferay.portal.kernel.service.GroupLocalService
+		getGroupLocalService() {
+
+		return groupLocalService;
+	}
+
+	/**
+	 * Sets the group local service.
+	 *
+	 * @param groupLocalService the group local service
+	 */
+	public void setGroupLocalService(
+		com.liferay.portal.kernel.service.GroupLocalService groupLocalService) {
+
+		this.groupLocalService = groupLocalService;
+	}
+
+	/**
+	 * Returns the group remote service.
+	 *
+	 * @return the group remote service
+	 */
+	public com.liferay.portal.kernel.service.GroupService getGroupService() {
+		return groupService;
+	}
+
+	/**
+	 * Sets the group remote service.
+	 *
+	 * @param groupService the group remote service
+	 */
+	public void setGroupService(
+		com.liferay.portal.kernel.service.GroupService groupService) {
+
+		this.groupService = groupService;
+	}
+
+	/**
+	 * Returns the group persistence.
+	 *
+	 * @return the group persistence
+	 */
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	/**
+	 * Sets the group persistence.
+	 *
+	 * @param groupPersistence the group persistence
+	 */
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	/**
 	 * Returns the resource local service.
 	 *
 	 * @return the resource local service
@@ -1597,72 +1651,6 @@ public abstract class CPDefinitionServiceBaseImpl
 		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
 
 		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
-	}
-
-	/**
-	 * Returns the asset category local service.
-	 *
-	 * @return the asset category local service
-	 */
-	public com.liferay.asset.kernel.service.AssetCategoryLocalService
-		getAssetCategoryLocalService() {
-
-		return assetCategoryLocalService;
-	}
-
-	/**
-	 * Sets the asset category local service.
-	 *
-	 * @param assetCategoryLocalService the asset category local service
-	 */
-	public void setAssetCategoryLocalService(
-		com.liferay.asset.kernel.service.AssetCategoryLocalService
-			assetCategoryLocalService) {
-
-		this.assetCategoryLocalService = assetCategoryLocalService;
-	}
-
-	/**
-	 * Returns the asset category remote service.
-	 *
-	 * @return the asset category remote service
-	 */
-	public com.liferay.asset.kernel.service.AssetCategoryService
-		getAssetCategoryService() {
-
-		return assetCategoryService;
-	}
-
-	/**
-	 * Sets the asset category remote service.
-	 *
-	 * @param assetCategoryService the asset category remote service
-	 */
-	public void setAssetCategoryService(
-		com.liferay.asset.kernel.service.AssetCategoryService
-			assetCategoryService) {
-
-		this.assetCategoryService = assetCategoryService;
-	}
-
-	/**
-	 * Returns the asset category persistence.
-	 *
-	 * @return the asset category persistence
-	 */
-	public AssetCategoryPersistence getAssetCategoryPersistence() {
-		return assetCategoryPersistence;
-	}
-
-	/**
-	 * Sets the asset category persistence.
-	 *
-	 * @param assetCategoryPersistence the asset category persistence
-	 */
-	public void setAssetCategoryPersistence(
-		AssetCategoryPersistence assetCategoryPersistence) {
-
-		this.assetCategoryPersistence = assetCategoryPersistence;
 	}
 
 	/**
@@ -1816,71 +1804,6 @@ public abstract class CPDefinitionServiceBaseImpl
 		this.expandoRowPersistence = expandoRowPersistence;
 	}
 
-	/**
-	 * Returns the trash entry local service.
-	 *
-	 * @return the trash entry local service
-	 */
-	public com.liferay.trash.kernel.service.TrashEntryLocalService
-		getTrashEntryLocalService() {
-
-		return trashEntryLocalService;
-	}
-
-	/**
-	 * Sets the trash entry local service.
-	 *
-	 * @param trashEntryLocalService the trash entry local service
-	 */
-	public void setTrashEntryLocalService(
-		com.liferay.trash.kernel.service.TrashEntryLocalService
-			trashEntryLocalService) {
-
-		this.trashEntryLocalService = trashEntryLocalService;
-	}
-
-	/**
-	 * Returns the trash entry remote service.
-	 *
-	 * @return the trash entry remote service
-	 */
-	public com.liferay.trash.kernel.service.TrashEntryService
-		getTrashEntryService() {
-
-		return trashEntryService;
-	}
-
-	/**
-	 * Sets the trash entry remote service.
-	 *
-	 * @param trashEntryService the trash entry remote service
-	 */
-	public void setTrashEntryService(
-		com.liferay.trash.kernel.service.TrashEntryService trashEntryService) {
-
-		this.trashEntryService = trashEntryService;
-	}
-
-	/**
-	 * Returns the trash entry persistence.
-	 *
-	 * @return the trash entry persistence
-	 */
-	public TrashEntryPersistence getTrashEntryPersistence() {
-		return trashEntryPersistence;
-	}
-
-	/**
-	 * Sets the trash entry persistence.
-	 *
-	 * @param trashEntryPersistence the trash entry persistence
-	 */
-	public void setTrashEntryPersistence(
-		TrashEntryPersistence trashEntryPersistence) {
-
-		this.trashEntryPersistence = trashEntryPersistence;
-	}
-
 	public void afterPropertiesSet() {
 	}
 
@@ -1928,6 +1851,52 @@ public abstract class CPDefinitionServiceBaseImpl
 			throw new SystemException(e);
 		}
 	}
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceCatalogLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceCatalogLocalService
+		commerceCatalogLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceCatalogService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceCatalogService
+		commerceCatalogService;
+
+	@BeanReference(type = CommerceCatalogPersistence.class)
+	protected CommerceCatalogPersistence commerceCatalogPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelLocalService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceChannelLocalService
+		commerceChannelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceChannelService
+		commerceChannelService;
+
+	@BeanReference(type = CommerceChannelPersistence.class)
+	protected CommerceChannelPersistence commerceChannelPersistence;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelRelLocalService.class
+	)
+	protected
+		com.liferay.commerce.product.service.CommerceChannelRelLocalService
+			commerceChannelRelLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CommerceChannelRelService.class
+	)
+	protected com.liferay.commerce.product.service.CommerceChannelRelService
+		commerceChannelRelService;
+
+	@BeanReference(type = CommerceChannelRelPersistence.class)
+	protected CommerceChannelRelPersistence commerceChannelRelPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService.class
@@ -2142,53 +2111,6 @@ public abstract class CPDefinitionServiceBaseImpl
 	protected CProductPersistence cProductPersistence;
 
 	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleLocalService.class
-	)
-	protected com.liferay.commerce.product.service.CPRuleLocalService
-		cpRuleLocalService;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleService.class
-	)
-	protected com.liferay.commerce.product.service.CPRuleService cpRuleService;
-
-	@BeanReference(type = CPRulePersistence.class)
-	protected CPRulePersistence cpRulePersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService.class
-	)
-	protected
-		com.liferay.commerce.product.service.CPRuleAssetCategoryRelLocalService
-			cpRuleAssetCategoryRelLocalService;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleAssetCategoryRelService.class
-	)
-	protected com.liferay.commerce.product.service.CPRuleAssetCategoryRelService
-		cpRuleAssetCategoryRelService;
-
-	@BeanReference(type = CPRuleAssetCategoryRelPersistence.class)
-	protected CPRuleAssetCategoryRelPersistence
-		cpRuleAssetCategoryRelPersistence;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService.class
-	)
-	protected
-		com.liferay.commerce.product.service.CPRuleUserSegmentRelLocalService
-			cpRuleUserSegmentRelLocalService;
-
-	@BeanReference(
-		type = com.liferay.commerce.product.service.CPRuleUserSegmentRelService.class
-	)
-	protected com.liferay.commerce.product.service.CPRuleUserSegmentRelService
-		cpRuleUserSegmentRelService;
-
-	@BeanReference(type = CPRuleUserSegmentRelPersistence.class)
-	protected CPRuleUserSegmentRelPersistence cpRuleUserSegmentRelPersistence;
-
-	@BeanReference(
 		type = com.liferay.commerce.product.service.CPSpecificationOptionLocalService.class
 	)
 	protected
@@ -2241,6 +2163,20 @@ public abstract class CPDefinitionServiceBaseImpl
 	protected ClassNamePersistence classNamePersistence;
 
 	@ServiceReference(
+		type = com.liferay.portal.kernel.service.GroupLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.GroupLocalService
+		groupLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.GroupService.class
+	)
+	protected com.liferay.portal.kernel.service.GroupService groupService;
+
+	@ServiceReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+
+	@ServiceReference(
 		type = com.liferay.portal.kernel.service.ResourceLocalService.class
 	)
 	protected com.liferay.portal.kernel.service.ResourceLocalService
@@ -2268,21 +2204,6 @@ public abstract class CPDefinitionServiceBaseImpl
 
 	@ServiceReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-
-	@ServiceReference(
-		type = com.liferay.asset.kernel.service.AssetCategoryLocalService.class
-	)
-	protected com.liferay.asset.kernel.service.AssetCategoryLocalService
-		assetCategoryLocalService;
-
-	@ServiceReference(
-		type = com.liferay.asset.kernel.service.AssetCategoryService.class
-	)
-	protected com.liferay.asset.kernel.service.AssetCategoryService
-		assetCategoryService;
-
-	@ServiceReference(type = AssetCategoryPersistence.class)
-	protected AssetCategoryPersistence assetCategoryPersistence;
 
 	@ServiceReference(
 		type = com.liferay.asset.kernel.service.AssetEntryLocalService.class
@@ -2316,20 +2237,5 @@ public abstract class CPDefinitionServiceBaseImpl
 
 	@ServiceReference(type = ExpandoRowPersistence.class)
 	protected ExpandoRowPersistence expandoRowPersistence;
-
-	@ServiceReference(
-		type = com.liferay.trash.kernel.service.TrashEntryLocalService.class
-	)
-	protected com.liferay.trash.kernel.service.TrashEntryLocalService
-		trashEntryLocalService;
-
-	@ServiceReference(
-		type = com.liferay.trash.kernel.service.TrashEntryService.class
-	)
-	protected com.liferay.trash.kernel.service.TrashEntryService
-		trashEntryService;
-
-	@ServiceReference(type = TrashEntryPersistence.class)
-	protected TrashEntryPersistence trashEntryPersistence;
 
 }

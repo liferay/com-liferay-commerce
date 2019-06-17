@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.math.BigDecimal;
 
 import java.sql.Types;
@@ -84,12 +87,11 @@ public class CommerceCurrencyModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"commerceCurrencyId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"code_", Types.VARCHAR}, {"name", Types.VARCHAR},
-		{"rate", Types.DECIMAL}, {"formatPattern", Types.VARCHAR},
-		{"maxFractionDigits", Types.INTEGER},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"code_", Types.VARCHAR},
+		{"name", Types.VARCHAR}, {"rate", Types.DECIMAL},
+		{"formatPattern", Types.VARCHAR}, {"maxFractionDigits", Types.INTEGER},
 		{"minFractionDigits", Types.INTEGER}, {"roundingMode", Types.VARCHAR},
 		{"primary_", Types.BOOLEAN}, {"priority", Types.DOUBLE},
 		{"active_", Types.BOOLEAN}, {"lastPublishDate", Types.TIMESTAMP}
@@ -101,7 +103,6 @@ public class CommerceCurrencyModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceCurrencyId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -121,7 +122,7 @@ public class CommerceCurrencyModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceCurrency (uuid_ VARCHAR(75) null,commerceCurrencyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name STRING null,rate DECIMAL(30, 16) null,formatPattern STRING null,maxFractionDigits INTEGER,minFractionDigits INTEGER,roundingMode VARCHAR(75) null,primary_ BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+		"create table CommerceCurrency (uuid_ VARCHAR(75) null,commerceCurrencyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name STRING null,rate DECIMAL(30, 16) null,formatPattern STRING null,maxFractionDigits INTEGER,minFractionDigits INTEGER,roundingMode VARCHAR(75) null,primary_ BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceCurrency";
 
@@ -158,13 +159,11 @@ public class CommerceCurrencyModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 4L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 8L;
+	public static final long PRIMARY_COLUMN_BITMASK = 8L;
 
-	public static final long PRIMARY_COLUMN_BITMASK = 16L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
 
-	public static final long UUID_COLUMN_BITMASK = 32L;
-
-	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long PRIORITY_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -181,7 +180,6 @@ public class CommerceCurrencyModelImpl
 
 		model.setUuid(soapModel.getUuid());
 		model.setCommerceCurrencyId(soapModel.getCommerceCurrencyId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -317,6 +315,32 @@ public class CommerceCurrencyModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CommerceCurrency>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CommerceCurrency.class.getClassLoader(), CommerceCurrency.class,
+			ModelWrapper.class);
+
+		try {
+			Constructor<CommerceCurrency> constructor =
+				(Constructor<CommerceCurrency>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CommerceCurrency, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CommerceCurrency, Object>>
@@ -373,28 +397,6 @@ public class CommerceCurrencyModelImpl
 
 					commerceCurrency.setCommerceCurrencyId(
 						(Long)commerceCurrencyId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceCurrency, Object>() {
-
-				@Override
-				public Object apply(CommerceCurrency commerceCurrency) {
-					return commerceCurrency.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceCurrency, Object>() {
-
-				@Override
-				public void accept(
-					CommerceCurrency commerceCurrency, Object groupId) {
-
-					commerceCurrency.setGroupId((Long)groupId);
 				}
 
 			});
@@ -800,29 +802,6 @@ public class CommerceCurrencyModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -1002,7 +981,7 @@ public class CommerceCurrencyModelImpl
 
 	@Override
 	public void setName(String name, Locale locale) {
-		setName(name, locale, LocaleUtil.getSiteDefault());
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1029,7 +1008,7 @@ public class CommerceCurrencyModelImpl
 
 	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
-		setNameMap(nameMap, LocaleUtil.getSiteDefault());
+		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1116,7 +1095,7 @@ public class CommerceCurrencyModelImpl
 
 	@Override
 	public void setFormatPattern(String formatPattern, Locale locale) {
-		setFormatPattern(formatPattern, locale, LocaleUtil.getSiteDefault());
+		setFormatPattern(formatPattern, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1146,7 +1125,7 @@ public class CommerceCurrencyModelImpl
 
 	@Override
 	public void setFormatPatternMap(Map<Locale, String> formatPatternMap) {
-		setFormatPatternMap(formatPatternMap, LocaleUtil.getSiteDefault());
+		setFormatPatternMap(formatPatternMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1344,7 +1323,7 @@ public class CommerceCurrencyModelImpl
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -1369,7 +1348,7 @@ public class CommerceCurrencyModelImpl
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -1397,8 +1376,12 @@ public class CommerceCurrencyModelImpl
 	@Override
 	public CommerceCurrency toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CommerceCurrency)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CommerceCurrency>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1411,7 +1394,6 @@ public class CommerceCurrencyModelImpl
 
 		commerceCurrencyImpl.setUuid(getUuid());
 		commerceCurrencyImpl.setCommerceCurrencyId(getCommerceCurrencyId());
-		commerceCurrencyImpl.setGroupId(getGroupId());
 		commerceCurrencyImpl.setCompanyId(getCompanyId());
 		commerceCurrencyImpl.setUserId(getUserId());
 		commerceCurrencyImpl.setUserName(getUserName());
@@ -1499,11 +1481,6 @@ public class CommerceCurrencyModelImpl
 		commerceCurrencyModelImpl._originalUuid =
 			commerceCurrencyModelImpl._uuid;
 
-		commerceCurrencyModelImpl._originalGroupId =
-			commerceCurrencyModelImpl._groupId;
-
-		commerceCurrencyModelImpl._setOriginalGroupId = false;
-
 		commerceCurrencyModelImpl._originalCompanyId =
 			commerceCurrencyModelImpl._companyId;
 
@@ -1541,8 +1518,6 @@ public class CommerceCurrencyModelImpl
 		}
 
 		commerceCurrencyCacheModel.commerceCurrencyId = getCommerceCurrencyId();
-
-		commerceCurrencyCacheModel.groupId = getGroupId();
 
 		commerceCurrencyCacheModel.companyId = getCompanyId();
 
@@ -1694,18 +1669,16 @@ public class CommerceCurrencyModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CommerceCurrency.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CommerceCurrency.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CommerceCurrency>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _commerceCurrencyId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

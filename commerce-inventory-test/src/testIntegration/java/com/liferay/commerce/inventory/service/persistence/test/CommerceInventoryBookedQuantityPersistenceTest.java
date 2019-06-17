@@ -15,13 +15,11 @@
 package com.liferay.commerce.inventory.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryBookedQuantityException;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalServiceUtil;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryBookedQuantityPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryBookedQuantityUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -39,15 +37,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -57,16 +46,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceInventoryBookedQuantityPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.inventory.service"));
 
 	@Before
@@ -80,7 +80,8 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceInventoryBookedQuantity> iterator = _commerceInventoryBookedQuantities.iterator();
+		Iterator<CommerceInventoryBookedQuantity> iterator =
+			_commerceInventoryBookedQuantities.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -93,20 +94,26 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = _persistence.create(pk);
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceInventoryBookedQuantity);
 
-		Assert.assertEquals(commerceInventoryBookedQuantity.getPrimaryKey(), pk);
+		Assert.assertEquals(
+			commerceInventoryBookedQuantity.getPrimaryKey(), pk);
 	}
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
 		_persistence.remove(newCommerceInventoryBookedQuantity);
 
-		CommerceInventoryBookedQuantity existingCommerceInventoryBookedQuantity = _persistence.fetchByPrimaryKey(newCommerceInventoryBookedQuantity.getPrimaryKey());
+		CommerceInventoryBookedQuantity
+			existingCommerceInventoryBookedQuantity =
+				_persistence.fetchByPrimaryKey(
+					newCommerceInventoryBookedQuantity.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceInventoryBookedQuantity);
 	}
@@ -120,82 +127,111 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = _persistence.create(pk);
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			_persistence.create(pk);
 
-		newCommerceInventoryBookedQuantity.setCompanyId(RandomTestUtil.nextLong());
+		newCommerceInventoryBookedQuantity.setCompanyId(
+			RandomTestUtil.nextLong());
 
 		newCommerceInventoryBookedQuantity.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceInventoryBookedQuantity.setUserName(RandomTestUtil.randomString());
+		newCommerceInventoryBookedQuantity.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceInventoryBookedQuantity.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceInventoryBookedQuantity.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceInventoryBookedQuantity.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceInventoryBookedQuantity.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceInventoryBookedQuantity.setSku(RandomTestUtil.randomString());
+		newCommerceInventoryBookedQuantity.setSku(
+			RandomTestUtil.randomString());
 
-		newCommerceInventoryBookedQuantity.setQuantity(RandomTestUtil.nextInt());
+		newCommerceInventoryBookedQuantity.setQuantity(
+			RandomTestUtil.nextInt());
 
-		newCommerceInventoryBookedQuantity.setExpireDate(RandomTestUtil.nextDate());
+		newCommerceInventoryBookedQuantity.setExpirationDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceInventoryBookedQuantity.setBookedNote(RandomTestUtil.randomString());
+		newCommerceInventoryBookedQuantity.setBookedNote(
+			RandomTestUtil.randomString());
 
-		_commerceInventoryBookedQuantities.add(_persistence.update(
-				newCommerceInventoryBookedQuantity));
+		_commerceInventoryBookedQuantities.add(
+			_persistence.update(newCommerceInventoryBookedQuantity));
 
-		CommerceInventoryBookedQuantity existingCommerceInventoryBookedQuantity = _persistence.findByPrimaryKey(newCommerceInventoryBookedQuantity.getPrimaryKey());
+		CommerceInventoryBookedQuantity
+			existingCommerceInventoryBookedQuantity =
+				_persistence.findByPrimaryKey(
+					newCommerceInventoryBookedQuantity.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getCommerceInventoryBookedQuantityId(),
-			newCommerceInventoryBookedQuantity.getCommerceInventoryBookedQuantityId());
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.
+				getCommerceInventoryBookedQuantityId(),
+			newCommerceInventoryBookedQuantity.
+				getCommerceInventoryBookedQuantityId());
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getCompanyId(),
 			newCommerceInventoryBookedQuantity.getCompanyId());
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getUserId(),
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getUserId(),
 			newCommerceInventoryBookedQuantity.getUserId());
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getUserName(),
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getUserName(),
 			newCommerceInventoryBookedQuantity.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryBookedQuantity.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryBookedQuantity.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryBookedQuantity.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryBookedQuantity.getModifiedDate()));
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getSku(),
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getSku(),
 			newCommerceInventoryBookedQuantity.getSku());
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getQuantity(),
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getQuantity(),
 			newCommerceInventoryBookedQuantity.getQuantity());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingCommerceInventoryBookedQuantity.getExpireDate()),
+		Assert.assertEquals(
 			Time.getShortTimestamp(
-				newCommerceInventoryBookedQuantity.getExpireDate()));
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity.getBookedNote(),
+				existingCommerceInventoryBookedQuantity.getExpirationDate()),
+			Time.getShortTimestamp(
+				newCommerceInventoryBookedQuantity.getExpirationDate()));
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity.getBookedNote(),
 			newCommerceInventoryBookedQuantity.getBookedNote());
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
 	}
 
 	@Test
-	public void testCountByexpireDate() throws Exception {
-		_persistence.countByexpireDate(RandomTestUtil.nextDate());
+	public void testCountByLtExpirationDate() throws Exception {
+		_persistence.countByLtExpirationDate(RandomTestUtil.nextDate());
 
-		_persistence.countByexpireDate(RandomTestUtil.nextDate());
+		_persistence.countByLtExpirationDate(RandomTestUtil.nextDate());
 	}
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
-		CommerceInventoryBookedQuantity existingCommerceInventoryBookedQuantity = _persistence.findByPrimaryKey(newCommerceInventoryBookedQuantity.getPrimaryKey());
+		CommerceInventoryBookedQuantity
+			existingCommerceInventoryBookedQuantity =
+				_persistence.findByPrimaryKey(
+					newCommerceInventoryBookedQuantity.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity,
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity,
 			newCommerceInventoryBookedQuantity);
 	}
 
@@ -208,25 +244,32 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceInventoryBookedQuantity> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CIBookedQuantity",
-			"commerceInventoryBookedQuantityId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "sku", true, "quantity", true, "expireDate",
-			true, "bookedNote", true);
+	protected OrderByComparator<CommerceInventoryBookedQuantity>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CIBookedQuantity", "commerceInventoryBookedQuantityId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "sku", true, "quantity", true,
+			"expirationDate", true, "bookedNote", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
-		CommerceInventoryBookedQuantity existingCommerceInventoryBookedQuantity = _persistence.fetchByPrimaryKey(newCommerceInventoryBookedQuantity.getPrimaryKey());
+		CommerceInventoryBookedQuantity
+			existingCommerceInventoryBookedQuantity =
+				_persistence.fetchByPrimaryKey(
+					newCommerceInventoryBookedQuantity.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity,
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity,
 			newCommerceInventoryBookedQuantity);
 	}
 
@@ -234,7 +277,8 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryBookedQuantity missingCommerceInventoryBookedQuantity = _persistence.fetchByPrimaryKey(pk);
+		CommerceInventoryBookedQuantity missingCommerceInventoryBookedQuantity =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceInventoryBookedQuantity);
 	}
@@ -242,22 +286,28 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity1 = addCommerceInventoryBookedQuantity();
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity2 = addCommerceInventoryBookedQuantity();
+
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity1 =
+			addCommerceInventoryBookedQuantity();
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity2 =
+			addCommerceInventoryBookedQuantity();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryBookedQuantity1.getPrimaryKey());
 		primaryKeys.add(newCommerceInventoryBookedQuantity2.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryBookedQuantity> commerceInventoryBookedQuantities =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceInventoryBookedQuantities.size());
-		Assert.assertEquals(newCommerceInventoryBookedQuantity1,
+		Assert.assertEquals(
+			newCommerceInventoryBookedQuantity1,
 			commerceInventoryBookedQuantities.get(
 				newCommerceInventoryBookedQuantity1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceInventoryBookedQuantity2,
+		Assert.assertEquals(
+			newCommerceInventoryBookedQuantity2,
 			commerceInventoryBookedQuantities.get(
 				newCommerceInventoryBookedQuantity2.getPrimaryKey()));
 	}
@@ -265,6 +315,7 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -274,8 +325,9 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceInventoryBookedQuantity> commerceInventoryBookedQuantities =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceInventoryBookedQuantities.isEmpty());
 	}
@@ -283,7 +335,9 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -292,40 +346,44 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 		primaryKeys.add(newCommerceInventoryBookedQuantity.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceInventoryBookedQuantity> commerceInventoryBookedQuantities =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryBookedQuantities.size());
-		Assert.assertEquals(newCommerceInventoryBookedQuantity,
+		Assert.assertEquals(
+			newCommerceInventoryBookedQuantity,
 			commerceInventoryBookedQuantities.get(
 				newCommerceInventoryBookedQuantity.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceInventoryBookedQuantity> commerceInventoryBookedQuantities =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceInventoryBookedQuantities.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryBookedQuantity.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryBookedQuantity> commerceInventoryBookedQuantities =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryBookedQuantities.size());
-		Assert.assertEquals(newCommerceInventoryBookedQuantity,
+		Assert.assertEquals(
+			newCommerceInventoryBookedQuantity,
 			commerceInventoryBookedQuantities.get(
 				newCommerceInventoryBookedQuantity.getPrimaryKey()));
 	}
@@ -334,16 +392,24 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceInventoryBookedQuantityLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceInventoryBookedQuantityLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceInventoryBookedQuantity>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceInventoryBookedQuantity>() {
+
 				@Override
 				public void performAction(
-					CommerceInventoryBookedQuantity commerceInventoryBookedQuantity) {
+					CommerceInventoryBookedQuantity
+						commerceInventoryBookedQuantity) {
+
 					Assert.assertNotNull(commerceInventoryBookedQuantity);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -352,56 +418,68 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryBookedQuantity.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryBookedQuantity.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceInventoryBookedQuantityId",
-				newCommerceInventoryBookedQuantity.getCommerceInventoryBookedQuantityId()));
+				newCommerceInventoryBookedQuantity.
+					getCommerceInventoryBookedQuantityId()));
 
-		List<CommerceInventoryBookedQuantity> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryBookedQuantity> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceInventoryBookedQuantity existingCommerceInventoryBookedQuantity = result.get(0);
+		CommerceInventoryBookedQuantity
+			existingCommerceInventoryBookedQuantity = result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryBookedQuantity,
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantity,
 			newCommerceInventoryBookedQuantity);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryBookedQuantity.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryBookedQuantity.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
-				"commerceInventoryBookedQuantityId", RandomTestUtil.nextLong()));
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"commerceInventoryBookedQuantityId",
+				RandomTestUtil.nextLong()));
 
-		List<CommerceInventoryBookedQuantity> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryBookedQuantity> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity = addCommerceInventoryBookedQuantity();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceInventoryBookedQuantity newCommerceInventoryBookedQuantity =
+			addCommerceInventoryBookedQuantity();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryBookedQuantity.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryBookedQuantity.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commerceInventoryBookedQuantityId"));
 
-		Object newCommerceInventoryBookedQuantityId = newCommerceInventoryBookedQuantity.getCommerceInventoryBookedQuantityId();
+		Object newCommerceInventoryBookedQuantityId =
+			newCommerceInventoryBookedQuantity.
+				getCommerceInventoryBookedQuantityId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryBookedQuantityId",
-				new Object[] { newCommerceInventoryBookedQuantityId }));
+				new Object[] {newCommerceInventoryBookedQuantityId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -409,59 +487,72 @@ public class CommerceInventoryBookedQuantityPersistenceTest {
 
 		Object existingCommerceInventoryBookedQuantityId = result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryBookedQuantityId,
+		Assert.assertEquals(
+			existingCommerceInventoryBookedQuantityId,
 			newCommerceInventoryBookedQuantityId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryBookedQuantity.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryBookedQuantity.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property(
 				"commerceInventoryBookedQuantityId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryBookedQuantityId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
-	protected CommerceInventoryBookedQuantity addCommerceInventoryBookedQuantity()
+	protected CommerceInventoryBookedQuantity
+			addCommerceInventoryBookedQuantity()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity = _persistence.create(pk);
+		CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+			_persistence.create(pk);
 
 		commerceInventoryBookedQuantity.setCompanyId(RandomTestUtil.nextLong());
 
 		commerceInventoryBookedQuantity.setUserId(RandomTestUtil.nextLong());
 
-		commerceInventoryBookedQuantity.setUserName(RandomTestUtil.randomString());
+		commerceInventoryBookedQuantity.setUserName(
+			RandomTestUtil.randomString());
 
-		commerceInventoryBookedQuantity.setCreateDate(RandomTestUtil.nextDate());
+		commerceInventoryBookedQuantity.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		commerceInventoryBookedQuantity.setModifiedDate(RandomTestUtil.nextDate());
+		commerceInventoryBookedQuantity.setModifiedDate(
+			RandomTestUtil.nextDate());
 
 		commerceInventoryBookedQuantity.setSku(RandomTestUtil.randomString());
 
 		commerceInventoryBookedQuantity.setQuantity(RandomTestUtil.nextInt());
 
-		commerceInventoryBookedQuantity.setExpireDate(RandomTestUtil.nextDate());
+		commerceInventoryBookedQuantity.setExpirationDate(
+			RandomTestUtil.nextDate());
 
-		commerceInventoryBookedQuantity.setBookedNote(RandomTestUtil.randomString());
+		commerceInventoryBookedQuantity.setBookedNote(
+			RandomTestUtil.randomString());
 
-		_commerceInventoryBookedQuantities.add(_persistence.update(
-				commerceInventoryBookedQuantity));
+		_commerceInventoryBookedQuantities.add(
+			_persistence.update(commerceInventoryBookedQuantity));
 
 		return commerceInventoryBookedQuantity;
 	}
 
-	private List<CommerceInventoryBookedQuantity> _commerceInventoryBookedQuantities =
-		new ArrayList<CommerceInventoryBookedQuantity>();
+	private List<CommerceInventoryBookedQuantity>
+		_commerceInventoryBookedQuantities =
+			new ArrayList<CommerceInventoryBookedQuantity>();
 	private CommerceInventoryBookedQuantityPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

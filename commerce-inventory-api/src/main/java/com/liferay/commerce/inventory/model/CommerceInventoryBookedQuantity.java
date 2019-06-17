@@ -25,35 +25,43 @@ import com.liferay.portal.kernel.util.Accessor;
  *
  * @author Luca Pellizzon
  * @see CommerceInventoryBookedQuantityModel
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl
- * @see com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityModelImpl
  * @generated
  */
-@ImplementationClassName("com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl")
+@ImplementationClassName(
+	"com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl"
+)
 @ProviderType
 public interface CommerceInventoryBookedQuantity
 	extends CommerceInventoryBookedQuantityModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<CommerceInventoryBookedQuantity, Long> COMMERCE_INVENTORY_BOOKED_QUANTITY_ID_ACCESSOR =
-		new Accessor<CommerceInventoryBookedQuantity, Long>() {
-			@Override
-			public Long get(
-				CommerceInventoryBookedQuantity commerceInventoryBookedQuantity) {
-				return commerceInventoryBookedQuantity.getCommerceInventoryBookedQuantityId();
-			}
+	public static final Accessor<CommerceInventoryBookedQuantity, Long>
+		COMMERCE_INVENTORY_BOOKED_QUANTITY_ID_ACCESSOR =
+			new Accessor<CommerceInventoryBookedQuantity, Long>() {
 
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
+				@Override
+				public Long get(
+					CommerceInventoryBookedQuantity
+						commerceInventoryBookedQuantity) {
 
-			@Override
-			public Class<CommerceInventoryBookedQuantity> getTypeClass() {
-				return CommerceInventoryBookedQuantity.class;
-			}
-		};
+					return commerceInventoryBookedQuantity.
+						getCommerceInventoryBookedQuantityId();
+				}
+
+				@Override
+				public Class<Long> getAttributeClass() {
+					return Long.class;
+				}
+
+				@Override
+				public Class<CommerceInventoryBookedQuantity> getTypeClass() {
+					return CommerceInventoryBookedQuantity.class;
+				}
+
+			};
+
 }

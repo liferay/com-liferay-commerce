@@ -16,7 +16,6 @@ package com.liferay.commerce.inventory.service.persistence.impl;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehousePersistence;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,20 +33,21 @@ import java.util.Set;
  */
 public class CommerceInventoryWarehouseFinderBaseImpl
 	extends BasePersistenceImpl<CommerceInventoryWarehouse> {
+
 	public CommerceInventoryWarehouseFinderBaseImpl() {
 		setModelClass(CommerceInventoryWarehouse.class);
 
+		Map<String, String> dbColumnNames = new HashMap<String, String>();
+
+		dbColumnNames.put("commerceInventoryWarehouseId", "CIWarehouseId");
+		dbColumnNames.put("active", "active_");
+		dbColumnNames.put("type", "type_");
+
 		try {
 			Field field = BasePersistenceImpl.class.getDeclaredField(
-					"_dbColumnNames");
+				"_dbColumnNames");
 
 			field.setAccessible(true);
-
-			Map<String, String> dbColumnNames = new HashMap<String, String>();
-
-			dbColumnNames.put("commerceInventoryWarehouseId", "CIWarehouseId");
-			dbColumnNames.put("active", "active_");
-			dbColumnNames.put("type", "type_");
 
 			field.set(this, dbColumnNames);
 		}
@@ -68,7 +68,9 @@ public class CommerceInventoryWarehouseFinderBaseImpl
 	 *
 	 * @return the commerce inventory warehouse persistence
 	 */
-	public CommerceInventoryWarehousePersistence getCommerceInventoryWarehousePersistence() {
+	public CommerceInventoryWarehousePersistence
+		getCommerceInventoryWarehousePersistence() {
+
 		return commerceInventoryWarehousePersistence;
 	}
 
@@ -78,11 +80,18 @@ public class CommerceInventoryWarehouseFinderBaseImpl
 	 * @param commerceInventoryWarehousePersistence the commerce inventory warehouse persistence
 	 */
 	public void setCommerceInventoryWarehousePersistence(
-		CommerceInventoryWarehousePersistence commerceInventoryWarehousePersistence) {
-		this.commerceInventoryWarehousePersistence = commerceInventoryWarehousePersistence;
+		CommerceInventoryWarehousePersistence
+			commerceInventoryWarehousePersistence) {
+
+		this.commerceInventoryWarehousePersistence =
+			commerceInventoryWarehousePersistence;
 	}
 
 	@BeanReference(type = CommerceInventoryWarehousePersistence.class)
-	protected CommerceInventoryWarehousePersistence commerceInventoryWarehousePersistence;
-	private static final Log _log = LogFactoryUtil.getLog(CommerceInventoryWarehouseFinderBaseImpl.class);
+	protected CommerceInventoryWarehousePersistence
+		commerceInventoryWarehousePersistence;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceInventoryWarehouseFinderBaseImpl.class);
+
 }

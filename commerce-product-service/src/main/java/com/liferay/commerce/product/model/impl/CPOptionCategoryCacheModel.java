@@ -67,14 +67,12 @@ public class CPOptionCategoryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
 		sb.append(", CPOptionCategoryId=");
 		sb.append(CPOptionCategoryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -112,7 +110,6 @@ public class CPOptionCategoryCacheModel
 		}
 
 		cpOptionCategoryImpl.setCPOptionCategoryId(CPOptionCategoryId);
-		cpOptionCategoryImpl.setGroupId(groupId);
 		cpOptionCategoryImpl.setCompanyId(companyId);
 		cpOptionCategoryImpl.setUserId(userId);
 
@@ -178,8 +175,6 @@ public class CPOptionCategoryCacheModel
 
 		CPOptionCategoryId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -204,8 +199,6 @@ public class CPOptionCategoryCacheModel
 		}
 
 		objectOutput.writeLong(CPOptionCategoryId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -249,7 +242,6 @@ public class CPOptionCategoryCacheModel
 
 	public String uuid;
 	public long CPOptionCategoryId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

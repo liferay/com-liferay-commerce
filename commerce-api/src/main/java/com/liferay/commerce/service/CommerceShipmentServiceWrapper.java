@@ -64,42 +64,42 @@ public class CommerceShipmentServiceWrapper
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceShipment>
 			getCommerceShipments(
-				long groupId, int status, int start, int end,
+				long companyId, int status, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShipmentService.getCommerceShipments(
-			groupId, status, start, end, orderByComparator);
+			companyId, status, start, end, orderByComparator);
 	}
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceShipment>
 			getCommerceShipments(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.model.CommerceShipment>
 						orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShipmentService.getCommerceShipments(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId)
+	public int getCommerceShipmentsCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceShipmentService.getCommerceShipmentsCount(groupId);
+		return _commerceShipmentService.getCommerceShipmentsCount(companyId);
 	}
 
 	@Override
-	public int getCommerceShipmentsCount(long groupId, int status)
+	public int getCommerceShipmentsCount(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShipmentService.getCommerceShipmentsCount(
-			groupId, status);
+			companyId, status);
 	}
 
 	/**

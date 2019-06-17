@@ -94,6 +94,9 @@ public class CPDefinitionWrapper
 		attributes.put(
 			"subscriptionTypeSettings", getSubscriptionTypeSettings());
 		attributes.put("maxSubscriptionCycles", getMaxSubscriptionCycles());
+		attributes.put(
+			"accountGroupFilterEnabled", isAccountGroupFilterEnabled());
+		attributes.put("channelFilterEnabled", isChannelFilterEnabled());
 		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
@@ -317,6 +320,20 @@ public class CPDefinitionWrapper
 			setMaxSubscriptionCycles(maxSubscriptionCycles);
 		}
 
+		Boolean accountGroupFilterEnabled = (Boolean)attributes.get(
+			"accountGroupFilterEnabled");
+
+		if (accountGroupFilterEnabled != null) {
+			setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+		}
+
+		Boolean channelFilterEnabled = (Boolean)attributes.get(
+			"channelFilterEnabled");
+
+		if (channelFilterEnabled != null) {
+			setChannelFilterEnabled(channelFilterEnabled);
+		}
+
 		Integer version = (Integer)attributes.get("version");
 
 		if (version != null) {
@@ -359,6 +376,16 @@ public class CPDefinitionWrapper
 	}
 
 	/**
+	 * Returns the account group filter enabled of this cp definition.
+	 *
+	 * @return the account group filter enabled of this cp definition
+	 */
+	@Override
+	public boolean getAccountGroupFilterEnabled() {
+		return _cpDefinition.getAccountGroupFilterEnabled();
+	}
+
+	/**
 	 * Returns the available individually of this cp definition.
 	 *
 	 * @return the available individually of this cp definition
@@ -371,6 +398,21 @@ public class CPDefinitionWrapper
 	@Override
 	public String[] getAvailableLanguageIds() {
 		return _cpDefinition.getAvailableLanguageIds();
+	}
+
+	/**
+	 * Returns the channel filter enabled of this cp definition.
+	 *
+	 * @return the channel filter enabled of this cp definition
+	 */
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _cpDefinition.getChannelFilterEnabled();
+	}
+
+	@Override
+	public CommerceCatalog getCommerceCatalog() {
+		return _cpDefinition.getCommerceCatalog();
 	}
 
 	/**
@@ -971,40 +1013,6 @@ public class CPDefinitionWrapper
 		return _cpDefinition.getTelcoOrElectronics();
 	}
 
-	/**
-	 * Returns the trash entry created when this cp definition was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this cp definition.
-	 *
-	 * @return the trash entry created when this cp definition was moved to the Recycle Bin
-	 */
-	@Override
-	public com.liferay.trash.kernel.model.TrashEntry getTrashEntry()
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _cpDefinition.getTrashEntry();
-	}
-
-	/**
-	 * Returns the class primary key of the trash entry for this cp definition.
-	 *
-	 * @return the class primary key of the trash entry for this cp definition
-	 */
-	@Override
-	public long getTrashEntryClassPK() {
-		return _cpDefinition.getTrashEntryClassPK();
-	}
-
-	/**
-	 * Returns the trash handler for this cp definition.
-	 *
-	 * @return the trash handler for this cp definition
-	 * @deprecated As of Judson (7.1.x), with no direct replacement
-	 */
-	@Deprecated
-	@Override
-	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
-		return _cpDefinition.getTrashHandler();
-	}
-
 	@Override
 	public String getURL(String languageId) {
 		return _cpDefinition.getURL(languageId);
@@ -1091,6 +1099,16 @@ public class CPDefinitionWrapper
 	}
 
 	/**
+	 * Returns <code>true</code> if this cp definition is account group filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is account group filter enabled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isAccountGroupFilterEnabled() {
+		return _cpDefinition.isAccountGroupFilterEnabled();
+	}
+
+	/**
 	 * Returns <code>true</code> if this cp definition is approved.
 	 *
 	 * @return <code>true</code> if this cp definition is approved; <code>false</code> otherwise
@@ -1113,6 +1131,16 @@ public class CPDefinitionWrapper
 	@Override
 	public boolean isCachedModel() {
 		return _cpDefinition.isCachedModel();
+	}
+
+	/**
+	 * Returns <code>true</code> if this cp definition is channel filter enabled.
+	 *
+	 * @return <code>true</code> if this cp definition is channel filter enabled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _cpDefinition.isChannelFilterEnabled();
 	}
 
 	/**
@@ -1188,36 +1216,6 @@ public class CPDefinitionWrapper
 	@Override
 	public boolean isIncomplete() {
 		return _cpDefinition.isIncomplete();
-	}
-
-	/**
-	 * Returns <code>true</code> if this cp definition is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrash() {
-		return _cpDefinition.isInTrash();
-	}
-
-	/**
-	 * Returns <code>true</code> if the parent of this cp definition is in the Recycle Bin.
-	 *
-	 * @return <code>true</code> if the parent of this cp definition is in the Recycle Bin; <code>false</code> otherwise
-	 */
-	@Override
-	public boolean isInTrashContainer() {
-		return _cpDefinition.isInTrashContainer();
-	}
-
-	@Override
-	public boolean isInTrashExplicitly() {
-		return _cpDefinition.isInTrashExplicitly();
-	}
-
-	@Override
-	public boolean isInTrashImplicitly() {
-		return _cpDefinition.isInTrashImplicitly();
 	}
 
 	@Override
@@ -1311,6 +1309,18 @@ public class CPDefinitionWrapper
 	}
 
 	/**
+	 * Sets whether this cp definition is account group filter enabled.
+	 *
+	 * @param accountGroupFilterEnabled the account group filter enabled of this cp definition
+	 */
+	@Override
+	public void setAccountGroupFilterEnabled(
+		boolean accountGroupFilterEnabled) {
+
+		_cpDefinition.setAccountGroupFilterEnabled(accountGroupFilterEnabled);
+	}
+
+	/**
 	 * Sets whether this cp definition is available individually.
 	 *
 	 * @param availableIndividually the available individually of this cp definition
@@ -1323,6 +1333,16 @@ public class CPDefinitionWrapper
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_cpDefinition.setCachedModel(cachedModel);
+	}
+
+	/**
+	 * Sets whether this cp definition is channel filter enabled.
+	 *
+	 * @param channelFilterEnabled the channel filter enabled of this cp definition
+	 */
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_cpDefinition.setChannelFilterEnabled(channelFilterEnabled);
 	}
 
 	/**

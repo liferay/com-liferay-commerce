@@ -53,7 +53,6 @@
 	<model name="com.liferay.commerce.model.CommerceAvailabilityEstimate">
 		<field name="uuid" type="String" />
 		<field name="commerceAvailabilityEstimateId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -70,7 +69,6 @@
 	<model name="com.liferay.commerce.model.CommerceCountry">
 		<field name="uuid" type="String" />
 		<field name="commerceCountryId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -176,6 +174,7 @@
 		<field name="shippingAddressId" type="long" />
 		<field name="printedNote" type="String" />
 		<field name="requestedDeliveryDate" type="Date" />
+		<field name="bookedQuantityId" type="long" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderNote">
 		<field name="externalReferenceCode" type="String" />
@@ -211,7 +210,6 @@
 	<model name="com.liferay.commerce.model.CommerceRegion">
 		<field name="uuid" type="String" />
 		<field name="commerceRegionId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -258,7 +256,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="commerceShipmentId" type="long" />
 		<field name="commerceOrderItemId" type="long" />
-		<field name="commerceWarehouseId" type="long" />
+		<field name="commerceInventoryWarehouseId" type="long" />
 		<field name="quantity" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceShippingMethod">
@@ -311,7 +309,6 @@
 	<model name="com.liferay.commerce.model.CPDAvailabilityEstimate">
 		<field name="uuid" type="String" />
 		<field name="CPDAvailabilityEstimateId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

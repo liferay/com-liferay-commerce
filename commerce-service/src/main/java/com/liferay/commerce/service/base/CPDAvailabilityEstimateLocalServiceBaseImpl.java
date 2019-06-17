@@ -38,13 +38,6 @@ import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
 import com.liferay.commerce.service.persistence.CommerceShippingMethodPersistence;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryFinder;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
-<<<<<<< HEAD
-import com.liferay.commerce.service.persistence.CommerceWarehouseFinder;
-import com.liferay.commerce.service.persistence.CommerceWarehouseItemPersistence;
-import com.liferay.commerce.service.persistence.CommerceWarehousePersistence;
-=======
-
->>>>>>> COMMERCE-1405 build service
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -267,17 +260,19 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate fetchCPDAvailabilityEstimateByUuidAndGroupId(
-		String uuid, long groupId) {
+	public CPDAvailabilityEstimate
+		fetchCPDAvailabilityEstimateByUuidAndCompanyId(
+			String uuid, long companyId) {
 
-		return cpdAvailabilityEstimatePersistence.fetchByUUID_G(uuid, groupId);
+		return cpdAvailabilityEstimatePersistence.fetchByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -390,9 +385,6 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 		exportActionableDynamicQuery.setCompanyId(
 			portletDataContext.getCompanyId());
 
-		exportActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
 		exportActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod
 				<CPDAvailabilityEstimate>() {
@@ -436,54 +428,20 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @return the matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId) {
-
-		return cpdAvailabilityEstimatePersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cpd availability estimates matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cpd availability estimates
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cpd availability estimates
-	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cpd availability estimates, or an empty list if no matches were found
-	 */
-	@Override
-	public List<CPDAvailabilityEstimate>
-		getCPDAvailabilityEstimatesByUuidAndCompanyId(
-			String uuid, long companyId, int start, int end,
-			OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
-
-		return cpdAvailabilityEstimatePersistence.findByUuid_C(
-			uuid, companyId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the cpd availability estimate matching the UUID and group.
+	 * Returns the cpd availability estimate with the matching UUID and company.
 	 *
 	 * @param uuid the cpd availability estimate's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cpd availability estimate
 	 * @throws PortalException if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndGroupId(
-			String uuid, long groupId)
+	public CPDAvailabilityEstimate getCPDAvailabilityEstimateByUuidAndCompanyId(
+			String uuid, long companyId)
 		throws PortalException {
 
-		return cpdAvailabilityEstimatePersistence.findByUUID_G(uuid, groupId);
+		return cpdAvailabilityEstimatePersistence.findByUuid_C_First(
+			uuid, companyId, null);
 	}
 
 	/**
@@ -1216,119 +1174,6 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns the commerce warehouse local service.
-	 *
-	 * @return the commerce warehouse local service
-	 */
-	public com.liferay.commerce.service.CommerceWarehouseLocalService
-		getCommerceWarehouseLocalService() {
-
-		return commerceWarehouseLocalService;
-	}
-
-	/**
-	 * Sets the commerce warehouse local service.
-	 *
-	 * @param commerceWarehouseLocalService the commerce warehouse local service
-	 */
-	public void setCommerceWarehouseLocalService(
-		com.liferay.commerce.service.CommerceWarehouseLocalService
-			commerceWarehouseLocalService) {
-
-		this.commerceWarehouseLocalService = commerceWarehouseLocalService;
-	}
-
-	/**
-	 * Returns the commerce warehouse persistence.
-	 *
-	 * @return the commerce warehouse persistence
-	 */
-	public CommerceWarehousePersistence getCommerceWarehousePersistence() {
-		return commerceWarehousePersistence;
-	}
-
-	/**
-	 * Sets the commerce warehouse persistence.
-	 *
-	 * @param commerceWarehousePersistence the commerce warehouse persistence
-	 */
-	public void setCommerceWarehousePersistence(
-		CommerceWarehousePersistence commerceWarehousePersistence) {
-
-		this.commerceWarehousePersistence = commerceWarehousePersistence;
-	}
-
-	/**
-	 * Returns the commerce warehouse finder.
-	 *
-	 * @return the commerce warehouse finder
-	 */
-	public CommerceWarehouseFinder getCommerceWarehouseFinder() {
-		return commerceWarehouseFinder;
-	}
-
-	/**
-	 * Sets the commerce warehouse finder.
-	 *
-	 * @param commerceWarehouseFinder the commerce warehouse finder
-	 */
-	public void setCommerceWarehouseFinder(
-		CommerceWarehouseFinder commerceWarehouseFinder) {
-
-		this.commerceWarehouseFinder = commerceWarehouseFinder;
-	}
-
-	/**
-	 * Returns the commerce warehouse item local service.
-	 *
-	 * @return the commerce warehouse item local service
-	 */
-	public com.liferay.commerce.service.CommerceWarehouseItemLocalService
-		getCommerceWarehouseItemLocalService() {
-
-		return commerceWarehouseItemLocalService;
-	}
-
-	/**
-	 * Sets the commerce warehouse item local service.
-	 *
-	 * @param commerceWarehouseItemLocalService the commerce warehouse item local service
-	 */
-	public void setCommerceWarehouseItemLocalService(
-		com.liferay.commerce.service.CommerceWarehouseItemLocalService
-			commerceWarehouseItemLocalService) {
-
-		this.commerceWarehouseItemLocalService =
-			commerceWarehouseItemLocalService;
-	}
-
-	/**
-	 * Returns the commerce warehouse item persistence.
-	 *
-	 * @return the commerce warehouse item persistence
-	 */
-	public CommerceWarehouseItemPersistence
-		getCommerceWarehouseItemPersistence() {
-
-		return commerceWarehouseItemPersistence;
-	}
-
-	/**
-	 * Sets the commerce warehouse item persistence.
-	 *
-	 * @param commerceWarehouseItemPersistence the commerce warehouse item persistence
-	 */
-	public void setCommerceWarehouseItemPersistence(
-		CommerceWarehouseItemPersistence commerceWarehouseItemPersistence) {
-
-		this.commerceWarehouseItemPersistence =
-			commerceWarehouseItemPersistence;
-	}
-
-	/**
-=======
->>>>>>> COMMERCE-1405 build service
 	 * Returns the cpd availability estimate local service.
 	 *
 	 * @return the cpd availability estimate local service
@@ -1742,31 +1587,7 @@ public abstract class CPDAvailabilityEstimateLocalServiceBaseImpl
 
 	@BeanReference(type = CommerceSubscriptionEntryFinder.class)
 	protected CommerceSubscriptionEntryFinder commerceSubscriptionEntryFinder;
-<<<<<<< HEAD
 
-	@BeanReference(
-		type = com.liferay.commerce.service.CommerceWarehouseLocalService.class
-	)
-	protected com.liferay.commerce.service.CommerceWarehouseLocalService
-		commerceWarehouseLocalService;
-
-	@BeanReference(type = CommerceWarehousePersistence.class)
-	protected CommerceWarehousePersistence commerceWarehousePersistence;
-
-	@BeanReference(type = CommerceWarehouseFinder.class)
-	protected CommerceWarehouseFinder commerceWarehouseFinder;
-
-	@BeanReference(
-		type = com.liferay.commerce.service.CommerceWarehouseItemLocalService.class
-	)
-	protected com.liferay.commerce.service.CommerceWarehouseItemLocalService
-		commerceWarehouseItemLocalService;
-
-	@BeanReference(type = CommerceWarehouseItemPersistence.class)
-	protected CommerceWarehouseItemPersistence commerceWarehouseItemPersistence;
-
-=======
->>>>>>> COMMERCE-1405 build service
 	@BeanReference(type = CPDAvailabilityEstimateLocalService.class)
 	protected CPDAvailabilityEstimateLocalService
 		cpdAvailabilityEstimateLocalService;

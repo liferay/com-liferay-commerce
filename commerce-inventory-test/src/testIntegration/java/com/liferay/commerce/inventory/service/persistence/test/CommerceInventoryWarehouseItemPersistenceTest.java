@@ -15,13 +15,11 @@
 package com.liferay.commerce.inventory.service.persistence.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemPersistence;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemUtil;
-
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -40,15 +38,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PersistenceTestRule;
 import com.liferay.portal.test.rule.TransactionalTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.junit.runner.RunWith;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -59,16 +48,27 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 /**
  * @generated
  */
 @RunWith(Arquillian.class)
 public class CommerceInventoryWarehouseItemPersistenceTest {
+
 	@ClassRule
 	@Rule
-	public static final AggregateTestRule aggregateTestRule = new AggregateTestRule(new LiferayIntegrationTestRule(),
-			PersistenceTestRule.INSTANCE,
-			new TransactionalTestRule(Propagation.REQUIRED,
+	public static final AggregateTestRule aggregateTestRule =
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), PersistenceTestRule.INSTANCE,
+			new TransactionalTestRule(
+				Propagation.REQUIRED,
 				"com.liferay.commerce.inventory.service"));
 
 	@Before
@@ -82,7 +82,8 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Iterator<CommerceInventoryWarehouseItem> iterator = _commerceInventoryWarehouseItems.iterator();
+		Iterator<CommerceInventoryWarehouseItem> iterator =
+			_commerceInventoryWarehouseItems.iterator();
 
 		while (iterator.hasNext()) {
 			_persistence.remove(iterator.next());
@@ -95,7 +96,8 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	public void testCreate() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = _persistence.create(pk);
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_persistence.create(pk);
 
 		Assert.assertNotNull(commerceInventoryWarehouseItem);
 
@@ -104,11 +106,14 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	@Test
 	public void testRemove() throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
 		_persistence.remove(newCommerceInventoryWarehouseItem);
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.fetchByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceInventoryWarehouseItem.getPrimaryKey());
 
 		Assert.assertNull(existingCommerceInventoryWarehouseItem);
 	}
@@ -122,71 +127,95 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	public void testUpdateExisting() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = _persistence.create(pk);
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			_persistence.create(pk);
 
-		newCommerceInventoryWarehouseItem.setCompanyId(RandomTestUtil.nextLong());
+		newCommerceInventoryWarehouseItem.setCompanyId(
+			RandomTestUtil.nextLong());
 
 		newCommerceInventoryWarehouseItem.setUserId(RandomTestUtil.nextLong());
 
-		newCommerceInventoryWarehouseItem.setUserName(RandomTestUtil.randomString());
+		newCommerceInventoryWarehouseItem.setUserName(
+			RandomTestUtil.randomString());
 
-		newCommerceInventoryWarehouseItem.setCreateDate(RandomTestUtil.nextDate());
+		newCommerceInventoryWarehouseItem.setCreateDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceInventoryWarehouseItem.setModifiedDate(RandomTestUtil.nextDate());
+		newCommerceInventoryWarehouseItem.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		newCommerceInventoryWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		newCommerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(
+			RandomTestUtil.nextLong());
 
 		newCommerceInventoryWarehouseItem.setSku(RandomTestUtil.randomString());
 
 		newCommerceInventoryWarehouseItem.setQuantity(RandomTestUtil.nextInt());
 
-		newCommerceInventoryWarehouseItem.setReservedQuantity(RandomTestUtil.nextInt());
+		newCommerceInventoryWarehouseItem.setReservedQuantity(
+			RandomTestUtil.nextInt());
 
-		_commerceInventoryWarehouseItems.add(_persistence.update(
-				newCommerceInventoryWarehouseItem));
+		_commerceInventoryWarehouseItems.add(
+			_persistence.update(newCommerceInventoryWarehouseItem));
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.findByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			_persistence.findByPrimaryKey(
+				newCommerceInventoryWarehouseItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId(),
-			newCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getCompanyId(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.
+				getCommerceInventoryWarehouseItemId(),
+			newCommerceInventoryWarehouseItem.
+				getCommerceInventoryWarehouseItemId());
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getCompanyId(),
 			newCommerceInventoryWarehouseItem.getCompanyId());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getUserId(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getUserId(),
 			newCommerceInventoryWarehouseItem.getUserId());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getUserName(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getUserName(),
 			newCommerceInventoryWarehouseItem.getUserName());
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryWarehouseItem.getCreateDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryWarehouseItem.getCreateDate()));
-		Assert.assertEquals(Time.getShortTimestamp(
+		Assert.assertEquals(
+			Time.getShortTimestamp(
 				existingCommerceInventoryWarehouseItem.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceInventoryWarehouseItem.getModifiedDate()));
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getCommerceWarehouseId(),
-			newCommerceInventoryWarehouseItem.getCommerceWarehouseId());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getSku(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.
+				getCommerceInventoryWarehouseId(),
+			newCommerceInventoryWarehouseItem.
+				getCommerceInventoryWarehouseId());
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getSku(),
 			newCommerceInventoryWarehouseItem.getSku());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getQuantity(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getQuantity(),
 			newCommerceInventoryWarehouseItem.getQuantity());
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem.getReservedQuantity(),
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem.getReservedQuantity(),
 			newCommerceInventoryWarehouseItem.getReservedQuantity());
 	}
 
 	@Test
-	public void testCountByCommerceWarehouseId() throws Exception {
-		_persistence.countByCommerceWarehouseId(RandomTestUtil.nextLong());
+	public void testCountByCommerceInventoryWarehouseId() throws Exception {
+		_persistence.countByCommerceInventoryWarehouseId(
+			RandomTestUtil.nextLong());
 
-		_persistence.countByCommerceWarehouseId(0L);
+		_persistence.countByCommerceInventoryWarehouseId(0L);
 	}
 
 	@Test
-	public void testCountBysku() throws Exception {
-		_persistence.countBysku("");
+	public void testCountBySku() throws Exception {
+		_persistence.countBySku("");
 
-		_persistence.countBysku("null");
+		_persistence.countBySku("null");
 
-		_persistence.countBysku((String)null);
+		_persistence.countBySku((String)null);
 	}
 
 	@Test
@@ -200,11 +229,15 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.findByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			_persistence.findByPrimaryKey(
+				newCommerceInventoryWarehouseItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem,
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem,
 			newCommerceInventoryWarehouseItem);
 	}
 
@@ -217,25 +250,31 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		_persistence.findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			getOrderByComparator());
+		_persistence.findAll(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, getOrderByComparator());
 	}
 
-	protected OrderByComparator<CommerceInventoryWarehouseItem> getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("CIWarehouseItem",
-			"commerceInventoryWarehouseItemId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceWarehouseId", true, "sku", true,
-			"quantity", true, "reservedQuantity", true);
+	protected OrderByComparator<CommerceInventoryWarehouseItem>
+		getOrderByComparator() {
+
+		return OrderByComparatorFactoryUtil.create(
+			"CIWarehouseItem", "commerceInventoryWarehouseItemId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "commerceInventoryWarehouseId", true,
+			"sku", true, "quantity", true, "reservedQuantity", true);
 	}
 
 	@Test
 	public void testFetchByPrimaryKeyExisting() throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.fetchByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			_persistence.fetchByPrimaryKey(
+				newCommerceInventoryWarehouseItem.getPrimaryKey());
 
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem,
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem,
 			newCommerceInventoryWarehouseItem);
 	}
 
@@ -243,7 +282,8 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	public void testFetchByPrimaryKeyMissing() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryWarehouseItem missingCommerceInventoryWarehouseItem = _persistence.fetchByPrimaryKey(pk);
+		CommerceInventoryWarehouseItem missingCommerceInventoryWarehouseItem =
+			_persistence.fetchByPrimaryKey(pk);
 
 		Assert.assertNull(missingCommerceInventoryWarehouseItem);
 	}
@@ -251,22 +291,28 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem1 = addCommerceInventoryWarehouseItem();
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem2 = addCommerceInventoryWarehouseItem();
+
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem1 =
+			addCommerceInventoryWarehouseItem();
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem2 =
+			addCommerceInventoryWarehouseItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryWarehouseItem1.getPrimaryKey());
 		primaryKeys.add(newCommerceInventoryWarehouseItem2.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryWarehouseItem>
+			commerceInventoryWarehouseItems = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(2, commerceInventoryWarehouseItems.size());
-		Assert.assertEquals(newCommerceInventoryWarehouseItem1,
+		Assert.assertEquals(
+			newCommerceInventoryWarehouseItem1,
 			commerceInventoryWarehouseItems.get(
 				newCommerceInventoryWarehouseItem1.getPrimaryKey()));
-		Assert.assertEquals(newCommerceInventoryWarehouseItem2,
+		Assert.assertEquals(
+			newCommerceInventoryWarehouseItem2,
 			commerceInventoryWarehouseItems.get(
 				newCommerceInventoryWarehouseItem2.getPrimaryKey()));
 	}
@@ -274,6 +320,7 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist()
 		throws Exception {
+
 		long pk1 = RandomTestUtil.nextLong();
 
 		long pk2 = RandomTestUtil.nextLong();
@@ -283,8 +330,9 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
-		Map<Serializable, CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryWarehouseItem>
+			commerceInventoryWarehouseItems = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceInventoryWarehouseItems.isEmpty());
 	}
@@ -292,7 +340,9 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	@Test
 	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist()
 		throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
 		long pk = RandomTestUtil.nextLong();
 
@@ -301,40 +351,44 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 		primaryKeys.add(newCommerceInventoryWarehouseItem.getPrimaryKey());
 		primaryKeys.add(pk);
 
-		Map<Serializable, CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryWarehouseItem>
+			commerceInventoryWarehouseItems = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryWarehouseItems.size());
-		Assert.assertEquals(newCommerceInventoryWarehouseItem,
+		Assert.assertEquals(
+			newCommerceInventoryWarehouseItem,
 			commerceInventoryWarehouseItems.get(
 				newCommerceInventoryWarehouseItem.getPrimaryKey()));
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys()
-		throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		Map<Serializable, CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryWarehouseItem>
+			commerceInventoryWarehouseItems = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertTrue(commerceInventoryWarehouseItems.isEmpty());
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey()
-		throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(newCommerceInventoryWarehouseItem.getPrimaryKey());
 
-		Map<Serializable, CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
-			_persistence.fetchByPrimaryKeys(primaryKeys);
+		Map<Serializable, CommerceInventoryWarehouseItem>
+			commerceInventoryWarehouseItems = _persistence.fetchByPrimaryKeys(
+				primaryKeys);
 
 		Assert.assertEquals(1, commerceInventoryWarehouseItems.size());
-		Assert.assertEquals(newCommerceInventoryWarehouseItem,
+		Assert.assertEquals(
+			newCommerceInventoryWarehouseItem,
 			commerceInventoryWarehouseItems.get(
 				newCommerceInventoryWarehouseItem.getPrimaryKey()));
 	}
@@ -343,16 +397,24 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	public void testActionableDynamicQuery() throws Exception {
 		final IntegerWrapper count = new IntegerWrapper();
 
-		ActionableDynamicQuery actionableDynamicQuery = CommerceInventoryWarehouseItemLocalServiceUtil.getActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			CommerceInventoryWarehouseItemLocalServiceUtil.
+				getActionableDynamicQuery();
 
-		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<CommerceInventoryWarehouseItem>() {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod
+				<CommerceInventoryWarehouseItem>() {
+
 				@Override
 				public void performAction(
-					CommerceInventoryWarehouseItem commerceInventoryWarehouseItem) {
+					CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem) {
+
 					Assert.assertNotNull(commerceInventoryWarehouseItem);
 
 					count.increment();
 				}
+
 			});
 
 		actionableDynamicQuery.performActions();
@@ -361,56 +423,66 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	}
 
 	@Test
-	public void testDynamicQueryByPrimaryKeyExisting()
-		throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+	public void testDynamicQueryByPrimaryKeyExisting() throws Exception {
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryWarehouseItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryWarehouseItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceInventoryWarehouseItemId",
-				newCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId()));
+				newCommerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId()));
 
-		List<CommerceInventoryWarehouseItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryWarehouseItem> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = result.get(0);
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryWarehouseItem,
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItem,
 			newCommerceInventoryWarehouseItem);
 	}
 
 	@Test
 	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryWarehouseItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryWarehouseItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
 				"commerceInventoryWarehouseItemId", RandomTestUtil.nextLong()));
 
-		List<CommerceInventoryWarehouseItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CommerceInventoryWarehouseItem> result =
+			_persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
 	}
 
 	@Test
-	public void testDynamicQueryByProjectionExisting()
-		throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryWarehouseItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryWarehouseItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceInventoryWarehouseItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceInventoryWarehouseItemId"));
 
-		Object newCommerceInventoryWarehouseItemId = newCommerceInventoryWarehouseItem.getCommerceInventoryWarehouseItemId();
+		Object newCommerceInventoryWarehouseItemId =
+			newCommerceInventoryWarehouseItem.
+				getCommerceInventoryWarehouseItemId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryWarehouseItemId",
-				new Object[] { newCommerceInventoryWarehouseItemId }));
+				new Object[] {newCommerceInventoryWarehouseItemId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -418,21 +490,23 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 		Object existingCommerceInventoryWarehouseItemId = result.get(0);
 
-		Assert.assertEquals(existingCommerceInventoryWarehouseItemId,
+		Assert.assertEquals(
+			existingCommerceInventoryWarehouseItemId,
 			newCommerceInventoryWarehouseItemId);
 	}
 
 	@Test
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CommerceInventoryWarehouseItem.class,
-				_dynamicQueryClassLoader);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			CommerceInventoryWarehouseItem.class, _dynamicQueryClassLoader);
 
-		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"commerceInventoryWarehouseItemId"));
+		dynamicQuery.setProjection(
+			ProjectionFactoryUtil.property("commerceInventoryWarehouseItemId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in(
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.in(
 				"commerceInventoryWarehouseItemId",
-				new Object[] { RandomTestUtil.nextLong() }));
+				new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -441,18 +515,24 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	@Test
 	public void testResetOriginalValues() throws Exception {
-		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem = addCommerceInventoryWarehouseItem();
+		CommerceInventoryWarehouseItem newCommerceInventoryWarehouseItem =
+			addCommerceInventoryWarehouseItem();
 
 		_persistence.clearCache();
 
-		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem = _persistence.findByPrimaryKey(newCommerceInventoryWarehouseItem.getPrimaryKey());
+		CommerceInventoryWarehouseItem existingCommerceInventoryWarehouseItem =
+			_persistence.findByPrimaryKey(
+				newCommerceInventoryWarehouseItem.getPrimaryKey());
 
-		Assert.assertEquals(Long.valueOf(
-				existingCommerceInventoryWarehouseItem.getCommerceWarehouseId()),
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseId()),
 			ReflectionTestUtil.<Long>invoke(
 				existingCommerceInventoryWarehouseItem,
-				"getOriginalCommerceWarehouseId", new Class<?>[0]));
-		Assert.assertTrue(Objects.equals(
+				"getOriginalCommerceInventoryWarehouseId", new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
 				existingCommerceInventoryWarehouseItem.getSku(),
 				ReflectionTestUtil.invoke(
 					existingCommerceInventoryWarehouseItem, "getOriginalSku",
@@ -461,36 +541,44 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 
 	protected CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem()
 		throws Exception {
+
 		long pk = RandomTestUtil.nextLong();
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = _persistence.create(pk);
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_persistence.create(pk);
 
 		commerceInventoryWarehouseItem.setCompanyId(RandomTestUtil.nextLong());
 
 		commerceInventoryWarehouseItem.setUserId(RandomTestUtil.nextLong());
 
-		commerceInventoryWarehouseItem.setUserName(RandomTestUtil.randomString());
+		commerceInventoryWarehouseItem.setUserName(
+			RandomTestUtil.randomString());
 
 		commerceInventoryWarehouseItem.setCreateDate(RandomTestUtil.nextDate());
 
-		commerceInventoryWarehouseItem.setModifiedDate(RandomTestUtil.nextDate());
+		commerceInventoryWarehouseItem.setModifiedDate(
+			RandomTestUtil.nextDate());
 
-		commerceInventoryWarehouseItem.setCommerceWarehouseId(RandomTestUtil.nextLong());
+		commerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(
+			RandomTestUtil.nextLong());
 
 		commerceInventoryWarehouseItem.setSku(RandomTestUtil.randomString());
 
 		commerceInventoryWarehouseItem.setQuantity(RandomTestUtil.nextInt());
 
-		commerceInventoryWarehouseItem.setReservedQuantity(RandomTestUtil.nextInt());
+		commerceInventoryWarehouseItem.setReservedQuantity(
+			RandomTestUtil.nextInt());
 
-		_commerceInventoryWarehouseItems.add(_persistence.update(
-				commerceInventoryWarehouseItem));
+		_commerceInventoryWarehouseItems.add(
+			_persistence.update(commerceInventoryWarehouseItem));
 
 		return commerceInventoryWarehouseItem;
 	}
 
-	private List<CommerceInventoryWarehouseItem> _commerceInventoryWarehouseItems =
-		new ArrayList<CommerceInventoryWarehouseItem>();
+	private List<CommerceInventoryWarehouseItem>
+		_commerceInventoryWarehouseItems =
+			new ArrayList<CommerceInventoryWarehouseItem>();
 	private CommerceInventoryWarehouseItemPersistence _persistence;
 	private ClassLoader _dynamicQueryClassLoader;
+
 }

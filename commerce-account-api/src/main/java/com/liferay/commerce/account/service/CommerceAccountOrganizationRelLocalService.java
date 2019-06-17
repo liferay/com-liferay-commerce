@@ -241,6 +241,15 @@ public interface CommerceAccountOrganizationRelLocalService
 		getCommerceAccountOrganizationRels(
 			long commerceAccountId, int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAccountOrganizationRel>
+		getCommerceAccountOrganizationRelsByOrganizationId(
+			long organizationId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAccountOrganizationRelsByOrganizationIdCount(
+		long organizationId);
+
 	/**
 	 * Returns the number of commerce account organization rels.
 	 *

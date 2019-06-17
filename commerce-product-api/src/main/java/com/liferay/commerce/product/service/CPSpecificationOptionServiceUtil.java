@@ -67,25 +67,6 @@ public class CPSpecificationOptionServiceUtil {
 		return getService().getCPSpecificationOption(cpSpecificationOptionId);
 	}
 
-	public static java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-				getCPSpecificationOptions(
-					long groupId, int start, int end,
-					com.liferay.portal.kernel.util.OrderByComparator
-						<com.liferay.commerce.product.model.
-							CPSpecificationOption> orderByComparator)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPSpecificationOptions(
-			groupId, start, end, orderByComparator);
-	}
-
-	public static int getCPSpecificationOptionsCount(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCPSpecificationOptionsCount(groupId);
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -98,13 +79,13 @@ public class CPSpecificationOptionServiceUtil {
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.product.model.CPSpecificationOption>
 				searchCPSpecificationOptions(
-					long companyId, long groupId, Boolean facetable,
-					String keywords, int start, int end,
+					long companyId, Boolean facetable, String keywords,
+					int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().searchCPSpecificationOptions(
-			companyId, groupId, facetable, keywords, start, end, sort);
+			companyId, facetable, keywords, start, end, sort);
 	}
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption

@@ -55,7 +55,7 @@ public class CPSpecificationOptionLocalServiceWrapper
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
 			addCPSpecificationOption(
-				long cpOptionCategoryId,
+				long userId, long cpOptionCategoryId,
 				java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
 				boolean facetable, String key,
@@ -63,8 +63,8 @@ public class CPSpecificationOptionLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpSpecificationOptionLocalService.addCPSpecificationOption(
-			cpOptionCategoryId, titleMap, descriptionMap, facetable, key,
-			serviceContext);
+			userId, cpOptionCategoryId, titleMap, descriptionMap, facetable,
+			key, serviceContext);
 	}
 
 	/**
@@ -116,11 +116,11 @@ public class CPSpecificationOptionLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPSpecificationOptions(long groupId)
+	public void deleteCPSpecificationOptions(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		_cpSpecificationOptionLocalService.deleteCPSpecificationOptions(
-			groupId);
+			companyId);
 	}
 
 	/**
@@ -237,25 +237,26 @@ public class CPSpecificationOptionLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
-		fetchCPSpecificationOption(long groupId, String key) {
+		fetchCPSpecificationOption(long companyId, String key) {
 
 		return _cpSpecificationOptionLocalService.fetchCPSpecificationOption(
-			groupId, key);
+			companyId, key);
 	}
 
 	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
 	 */
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
-		fetchCPSpecificationOptionByUuidAndGroupId(String uuid, long groupId) {
+		fetchCPSpecificationOptionByUuidAndCompanyId(
+			String uuid, long companyId) {
 
 		return _cpSpecificationOptionLocalService.
-			fetchCPSpecificationOptionByUuidAndGroupId(uuid, groupId);
+			fetchCPSpecificationOptionByUuidAndCompanyId(uuid, companyId);
 	}
 
 	@Override
@@ -283,28 +284,29 @@ public class CPSpecificationOptionLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
-			getCPSpecificationOption(long groupId, String key)
+			getCPSpecificationOption(long companyId, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpSpecificationOptionLocalService.getCPSpecificationOption(
-			groupId, key);
+			companyId, key);
 	}
 
 	/**
-	 * Returns the cp specification option matching the UUID and group.
+	 * Returns the cp specification option with the matching UUID and company.
 	 *
 	 * @param uuid the cp specification option's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching cp specification option
 	 * @throws PortalException if a matching cp specification option could not be found
 	 */
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
-			getCPSpecificationOptionByUuidAndGroupId(String uuid, long groupId)
+			getCPSpecificationOptionByUuidAndCompanyId(
+				String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpSpecificationOptionLocalService.
-			getCPSpecificationOptionByUuidAndGroupId(uuid, groupId);
+			getCPSpecificationOptionByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -327,60 +329,6 @@ public class CPSpecificationOptionLocalServiceWrapper
 			start, end);
 	}
 
-	@Override
-	public java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptions(
-				long groupId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.product.model.CPSpecificationOption>
-						orderByComparator) {
-
-		return _cpSpecificationOptionLocalService.getCPSpecificationOptions(
-			groupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns all the cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @return the matching cp specification options, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptionsByUuidAndCompanyId(
-				String uuid, long companyId) {
-
-		return _cpSpecificationOptionLocalService.
-			getCPSpecificationOptionsByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of cp specification options matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the cp specification options
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of cp specification options
-	 * @param end the upper bound of the range of cp specification options (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching cp specification options, or an empty list if no matches were found
-	 */
-	@Override
-	public java.util.List
-		<com.liferay.commerce.product.model.CPSpecificationOption>
-			getCPSpecificationOptionsByUuidAndCompanyId(
-				String uuid, long companyId, int start, int end,
-				com.liferay.portal.kernel.util.OrderByComparator
-					<com.liferay.commerce.product.model.CPSpecificationOption>
-						orderByComparator) {
-
-		return _cpSpecificationOptionLocalService.
-			getCPSpecificationOptionsByUuidAndCompanyId(
-				uuid, companyId, start, end, orderByComparator);
-	}
-
 	/**
 	 * Returns the number of cp specification options.
 	 *
@@ -390,12 +338,6 @@ public class CPSpecificationOptionLocalServiceWrapper
 	public int getCPSpecificationOptionsCount() {
 		return _cpSpecificationOptionLocalService.
 			getCPSpecificationOptionsCount();
-	}
-
-	@Override
-	public int getCPSpecificationOptionsCount(long groupId) {
-		return _cpSpecificationOptionLocalService.
-			getCPSpecificationOptionsCount(groupId);
 	}
 
 	@Override
@@ -436,23 +378,16 @@ public class CPSpecificationOptionLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.portal.kernel.search.Hits search(
-		com.liferay.portal.kernel.search.SearchContext searchContext) {
-
-		return _cpSpecificationOptionLocalService.search(searchContext);
-	}
-
-	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.product.model.CPSpecificationOption>
 				searchCPSpecificationOptions(
-					long companyId, long groupId, Boolean facetable,
-					String keywords, int start, int end,
+					long companyId, Boolean facetable, String keywords,
+					int start, int end,
 					com.liferay.portal.kernel.search.Sort sort)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpSpecificationOptionLocalService.searchCPSpecificationOptions(
-			companyId, groupId, facetable, keywords, start, end, sort);
+			companyId, facetable, keywords, start, end, sort);
 	}
 
 	@Override

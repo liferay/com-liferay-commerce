@@ -18,9 +18,9 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceEntryPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListAccountRelPersistence;
+import com.liferay.commerce.price.list.service.persistence.CommercePriceListCommerceAccountGroupRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListFinder;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceListPersistence;
-import com.liferay.commerce.price.list.service.persistence.CommercePriceListUserSegmentEntryRelPersistence;
 import com.liferay.commerce.price.list.service.persistence.CommerceTierPriceEntryPersistence;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiService;
 import com.liferay.portal.kernel.service.BaseServiceImpl;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
-import com.liferay.portal.kernel.service.persistence.GroupPersistence;
+import com.liferay.portal.kernel.service.persistence.CompanyPersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import com.liferay.portal.kernel.service.persistence.WorkflowInstanceLinkPersistence;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -289,79 +289,79 @@ public abstract class CommercePriceListServiceBaseImpl
 	}
 
 	/**
-	 * Returns the commerce price list user segment entry rel local service.
+	 * Returns the commerce price list commerce account group rel local service.
 	 *
-	 * @return the commerce price list user segment entry rel local service
+	 * @return the commerce price list commerce account group rel local service
 	 */
 	public com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelLocalService
-			getCommercePriceListUserSegmentEntryRelLocalService() {
+		CommercePriceListCommerceAccountGroupRelLocalService
+			getCommercePriceListCommerceAccountGroupRelLocalService() {
 
-		return commercePriceListUserSegmentEntryRelLocalService;
+		return commercePriceListCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Sets the commerce price list user segment entry rel local service.
+	 * Sets the commerce price list commerce account group rel local service.
 	 *
-	 * @param commercePriceListUserSegmentEntryRelLocalService the commerce price list user segment entry rel local service
+	 * @param commercePriceListCommerceAccountGroupRelLocalService the commerce price list commerce account group rel local service
 	 */
-	public void setCommercePriceListUserSegmentEntryRelLocalService(
+	public void setCommercePriceListCommerceAccountGroupRelLocalService(
 		com.liferay.commerce.price.list.service.
-			CommercePriceListUserSegmentEntryRelLocalService
-				commercePriceListUserSegmentEntryRelLocalService) {
+			CommercePriceListCommerceAccountGroupRelLocalService
+				commercePriceListCommerceAccountGroupRelLocalService) {
 
-		this.commercePriceListUserSegmentEntryRelLocalService =
-			commercePriceListUserSegmentEntryRelLocalService;
+		this.commercePriceListCommerceAccountGroupRelLocalService =
+			commercePriceListCommerceAccountGroupRelLocalService;
 	}
 
 	/**
-	 * Returns the commerce price list user segment entry rel remote service.
+	 * Returns the commerce price list commerce account group rel remote service.
 	 *
-	 * @return the commerce price list user segment entry rel remote service
+	 * @return the commerce price list commerce account group rel remote service
 	 */
 	public com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelService
-			getCommercePriceListUserSegmentEntryRelService() {
+		CommercePriceListCommerceAccountGroupRelService
+			getCommercePriceListCommerceAccountGroupRelService() {
 
-		return commercePriceListUserSegmentEntryRelService;
+		return commercePriceListCommerceAccountGroupRelService;
 	}
 
 	/**
-	 * Sets the commerce price list user segment entry rel remote service.
+	 * Sets the commerce price list commerce account group rel remote service.
 	 *
-	 * @param commercePriceListUserSegmentEntryRelService the commerce price list user segment entry rel remote service
+	 * @param commercePriceListCommerceAccountGroupRelService the commerce price list commerce account group rel remote service
 	 */
-	public void setCommercePriceListUserSegmentEntryRelService(
+	public void setCommercePriceListCommerceAccountGroupRelService(
 		com.liferay.commerce.price.list.service.
-			CommercePriceListUserSegmentEntryRelService
-				commercePriceListUserSegmentEntryRelService) {
+			CommercePriceListCommerceAccountGroupRelService
+				commercePriceListCommerceAccountGroupRelService) {
 
-		this.commercePriceListUserSegmentEntryRelService =
-			commercePriceListUserSegmentEntryRelService;
+		this.commercePriceListCommerceAccountGroupRelService =
+			commercePriceListCommerceAccountGroupRelService;
 	}
 
 	/**
-	 * Returns the commerce price list user segment entry rel persistence.
+	 * Returns the commerce price list commerce account group rel persistence.
 	 *
-	 * @return the commerce price list user segment entry rel persistence
+	 * @return the commerce price list commerce account group rel persistence
 	 */
-	public CommercePriceListUserSegmentEntryRelPersistence
-		getCommercePriceListUserSegmentEntryRelPersistence() {
+	public CommercePriceListCommerceAccountGroupRelPersistence
+		getCommercePriceListCommerceAccountGroupRelPersistence() {
 
-		return commercePriceListUserSegmentEntryRelPersistence;
+		return commercePriceListCommerceAccountGroupRelPersistence;
 	}
 
 	/**
-	 * Sets the commerce price list user segment entry rel persistence.
+	 * Sets the commerce price list commerce account group rel persistence.
 	 *
-	 * @param commercePriceListUserSegmentEntryRelPersistence the commerce price list user segment entry rel persistence
+	 * @param commercePriceListCommerceAccountGroupRelPersistence the commerce price list commerce account group rel persistence
 	 */
-	public void setCommercePriceListUserSegmentEntryRelPersistence(
-		CommercePriceListUserSegmentEntryRelPersistence
-			commercePriceListUserSegmentEntryRelPersistence) {
+	public void setCommercePriceListCommerceAccountGroupRelPersistence(
+		CommercePriceListCommerceAccountGroupRelPersistence
+			commercePriceListCommerceAccountGroupRelPersistence) {
 
-		this.commercePriceListUserSegmentEntryRelPersistence =
-			commercePriceListUserSegmentEntryRelPersistence;
+		this.commercePriceListCommerceAccountGroupRelPersistence =
+			commercePriceListCommerceAccountGroupRelPersistence;
 	}
 
 	/**
@@ -526,63 +526,66 @@ public abstract class CommercePriceListServiceBaseImpl
 	}
 
 	/**
-	 * Returns the group local service.
+	 * Returns the company local service.
 	 *
-	 * @return the group local service
+	 * @return the company local service
 	 */
-	public com.liferay.portal.kernel.service.GroupLocalService
-		getGroupLocalService() {
+	public com.liferay.portal.kernel.service.CompanyLocalService
+		getCompanyLocalService() {
 
-		return groupLocalService;
+		return companyLocalService;
 	}
 
 	/**
-	 * Sets the group local service.
+	 * Sets the company local service.
 	 *
-	 * @param groupLocalService the group local service
+	 * @param companyLocalService the company local service
 	 */
-	public void setGroupLocalService(
-		com.liferay.portal.kernel.service.GroupLocalService groupLocalService) {
+	public void setCompanyLocalService(
+		com.liferay.portal.kernel.service.CompanyLocalService
+			companyLocalService) {
 
-		this.groupLocalService = groupLocalService;
+		this.companyLocalService = companyLocalService;
 	}
 
 	/**
-	 * Returns the group remote service.
+	 * Returns the company remote service.
 	 *
-	 * @return the group remote service
+	 * @return the company remote service
 	 */
-	public com.liferay.portal.kernel.service.GroupService getGroupService() {
-		return groupService;
+	public com.liferay.portal.kernel.service.CompanyService
+		getCompanyService() {
+
+		return companyService;
 	}
 
 	/**
-	 * Sets the group remote service.
+	 * Sets the company remote service.
 	 *
-	 * @param groupService the group remote service
+	 * @param companyService the company remote service
 	 */
-	public void setGroupService(
-		com.liferay.portal.kernel.service.GroupService groupService) {
+	public void setCompanyService(
+		com.liferay.portal.kernel.service.CompanyService companyService) {
 
-		this.groupService = groupService;
+		this.companyService = companyService;
 	}
 
 	/**
-	 * Returns the group persistence.
+	 * Returns the company persistence.
 	 *
-	 * @return the group persistence
+	 * @return the company persistence
 	 */
-	public GroupPersistence getGroupPersistence() {
-		return groupPersistence;
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
 	}
 
 	/**
-	 * Sets the group persistence.
+	 * Sets the company persistence.
 	 *
-	 * @param groupPersistence the group persistence
+	 * @param companyPersistence the company persistence
 	 */
-	public void setGroupPersistence(GroupPersistence groupPersistence) {
-		this.groupPersistence = groupPersistence;
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
 	}
 
 	/**
@@ -858,22 +861,24 @@ public abstract class CommercePriceListServiceBaseImpl
 		commercePriceListAccountRelPersistence;
 
 	@BeanReference(
-		type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelLocalService.class
+		type = com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService.class
 	)
 	protected com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelLocalService
-			commercePriceListUserSegmentEntryRelLocalService;
+		CommercePriceListCommerceAccountGroupRelLocalService
+			commercePriceListCommerceAccountGroupRelLocalService;
 
 	@BeanReference(
-		type = com.liferay.commerce.price.list.service.CommercePriceListUserSegmentEntryRelService.class
+		type = com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelService.class
 	)
 	protected com.liferay.commerce.price.list.service.
-		CommercePriceListUserSegmentEntryRelService
-			commercePriceListUserSegmentEntryRelService;
+		CommercePriceListCommerceAccountGroupRelService
+			commercePriceListCommerceAccountGroupRelService;
 
-	@BeanReference(type = CommercePriceListUserSegmentEntryRelPersistence.class)
-	protected CommercePriceListUserSegmentEntryRelPersistence
-		commercePriceListUserSegmentEntryRelPersistence;
+	@BeanReference(
+		type = CommercePriceListCommerceAccountGroupRelPersistence.class
+	)
+	protected CommercePriceListCommerceAccountGroupRelPersistence
+		commercePriceListCommerceAccountGroupRelPersistence;
 
 	@BeanReference(
 		type = com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService.class
@@ -916,18 +921,18 @@ public abstract class CommercePriceListServiceBaseImpl
 	protected ClassNamePersistence classNamePersistence;
 
 	@ServiceReference(
-		type = com.liferay.portal.kernel.service.GroupLocalService.class
+		type = com.liferay.portal.kernel.service.CompanyLocalService.class
 	)
-	protected com.liferay.portal.kernel.service.GroupLocalService
-		groupLocalService;
+	protected com.liferay.portal.kernel.service.CompanyLocalService
+		companyLocalService;
 
 	@ServiceReference(
-		type = com.liferay.portal.kernel.service.GroupService.class
+		type = com.liferay.portal.kernel.service.CompanyService.class
 	)
-	protected com.liferay.portal.kernel.service.GroupService groupService;
+	protected com.liferay.portal.kernel.service.CompanyService companyService;
 
-	@ServiceReference(type = GroupPersistence.class)
-	protected GroupPersistence groupPersistence;
+	@ServiceReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
 
 	@ServiceReference(
 		type = com.liferay.portal.kernel.service.ResourceLocalService.class

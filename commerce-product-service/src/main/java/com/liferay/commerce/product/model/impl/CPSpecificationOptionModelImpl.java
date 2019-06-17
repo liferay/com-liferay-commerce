@@ -42,6 +42,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -83,12 +86,12 @@ public class CPSpecificationOptionModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"CPSpecificationOptionId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"CPOptionCategoryId", Types.BIGINT}, {"title", Types.VARCHAR},
-		{"description", Types.VARCHAR}, {"facetable", Types.BOOLEAN},
-		{"key_", Types.VARCHAR}, {"lastPublishDate", Types.TIMESTAMP}
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"CPOptionCategoryId", Types.BIGINT},
+		{"title", Types.VARCHAR}, {"description", Types.VARCHAR},
+		{"facetable", Types.BOOLEAN}, {"key_", Types.VARCHAR},
+		{"lastPublishDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -97,7 +100,6 @@ public class CPSpecificationOptionModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CPSpecificationOptionId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -112,7 +114,7 @@ public class CPSpecificationOptionModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CPSpecificationOption (uuid_ VARCHAR(75) null,CPSpecificationOptionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionCategoryId LONG,title STRING null,description STRING null,facetable BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
+		"create table CPSpecificationOption (uuid_ VARCHAR(75) null,CPSpecificationOptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPOptionCategoryId LONG,title STRING null,description STRING null,facetable BOOLEAN,key_ VARCHAR(75) null,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CPSpecificationOption";
@@ -148,13 +150,11 @@ public class CPSpecificationOptionModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 4L;
+	public static final long KEY_COLUMN_BITMASK = 4L;
 
-	public static final long KEY_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
 
-	public static final long UUID_COLUMN_BITMASK = 16L;
-
-	public static final long TITLE_COLUMN_BITMASK = 32L;
+	public static final long TITLE_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -174,7 +174,6 @@ public class CPSpecificationOptionModelImpl
 		model.setUuid(soapModel.getUuid());
 		model.setCPSpecificationOptionId(
 			soapModel.getCPSpecificationOptionId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -306,6 +305,32 @@ public class CPSpecificationOptionModelImpl
 		return _attributeSetterBiConsumers;
 	}
 
+	private static Function<InvocationHandler, CPSpecificationOption>
+		_getProxyProviderFunction() {
+
+		Class<?> proxyClass = ProxyUtil.getProxyClass(
+			CPSpecificationOption.class.getClassLoader(),
+			CPSpecificationOption.class, ModelWrapper.class);
+
+		try {
+			Constructor<CPSpecificationOption> constructor =
+				(Constructor<CPSpecificationOption>)proxyClass.getConstructor(
+					InvocationHandler.class);
+
+			return invocationHandler -> {
+				try {
+					return constructor.newInstance(invocationHandler);
+				}
+				catch (ReflectiveOperationException roe) {
+					throw new InternalError(roe);
+				}
+			};
+		}
+		catch (NoSuchMethodException nsme) {
+			throw new InternalError(nsme);
+		}
+	}
+
 	private static final Map<String, Function<CPSpecificationOption, Object>>
 		_attributeGetterFunctions;
 	private static final Map<String, BiConsumer<CPSpecificationOption, Object>>
@@ -368,31 +393,6 @@ public class CPSpecificationOptionModelImpl
 
 					cpSpecificationOption.setCPSpecificationOptionId(
 						(Long)CPSpecificationOptionId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CPSpecificationOption, Object>() {
-
-				@Override
-				public Object apply(
-					CPSpecificationOption cpSpecificationOption) {
-
-					return cpSpecificationOption.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CPSpecificationOption, Object>() {
-
-				@Override
-				public void accept(
-					CPSpecificationOption cpSpecificationOption,
-					Object groupId) {
-
-					cpSpecificationOption.setGroupId((Long)groupId);
 				}
 
 			});
@@ -717,29 +717,6 @@ public class CPSpecificationOptionModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -918,7 +895,7 @@ public class CPSpecificationOptionModelImpl
 
 	@Override
 	public void setTitle(String title, Locale locale) {
-		setTitle(title, locale, LocaleUtil.getSiteDefault());
+		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -945,7 +922,7 @@ public class CPSpecificationOptionModelImpl
 
 	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
-		setTitleMap(titleMap, LocaleUtil.getSiteDefault());
+		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1023,7 +1000,7 @@ public class CPSpecificationOptionModelImpl
 
 	@Override
 	public void setDescription(String description, Locale locale) {
-		setDescription(description, locale, LocaleUtil.getSiteDefault());
+		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1053,7 +1030,7 @@ public class CPSpecificationOptionModelImpl
 
 	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
-		setDescriptionMap(descriptionMap, LocaleUtil.getSiteDefault());
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
 	@Override
@@ -1186,7 +1163,7 @@ public class CPSpecificationOptionModelImpl
 			return "";
 		}
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		return LocalizationUtil.getDefaultLanguageId(xml, defaultLocale);
 	}
@@ -1211,7 +1188,7 @@ public class CPSpecificationOptionModelImpl
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String modelDefaultLanguageId = getDefaultLanguageId();
 
@@ -1239,8 +1216,12 @@ public class CPSpecificationOptionModelImpl
 	@Override
 	public CPSpecificationOption toEscapedModel() {
 		if (_escapedModel == null) {
-			_escapedModel = (CPSpecificationOption)ProxyUtil.newProxyInstance(
-				_classLoader, _escapedModelInterfaces,
+			Function<InvocationHandler, CPSpecificationOption>
+				escapedModelProxyProviderFunction =
+					EscapedModelProxyProviderFunctionHolder.
+						_escapedModelProxyProviderFunction;
+
+			_escapedModel = escapedModelProxyProviderFunction.apply(
 				new AutoEscapeBeanHandler(this));
 		}
 
@@ -1255,7 +1236,6 @@ public class CPSpecificationOptionModelImpl
 		cpSpecificationOptionImpl.setUuid(getUuid());
 		cpSpecificationOptionImpl.setCPSpecificationOptionId(
 			getCPSpecificationOptionId());
-		cpSpecificationOptionImpl.setGroupId(getGroupId());
 		cpSpecificationOptionImpl.setCompanyId(getCompanyId());
 		cpSpecificationOptionImpl.setUserId(getUserId());
 		cpSpecificationOptionImpl.setUserName(getUserName());
@@ -1332,11 +1312,6 @@ public class CPSpecificationOptionModelImpl
 		cpSpecificationOptionModelImpl._originalUuid =
 			cpSpecificationOptionModelImpl._uuid;
 
-		cpSpecificationOptionModelImpl._originalGroupId =
-			cpSpecificationOptionModelImpl._groupId;
-
-		cpSpecificationOptionModelImpl._setOriginalGroupId = false;
-
 		cpSpecificationOptionModelImpl._originalCompanyId =
 			cpSpecificationOptionModelImpl._companyId;
 
@@ -1370,8 +1345,6 @@ public class CPSpecificationOptionModelImpl
 
 		cpSpecificationOptionCacheModel.CPSpecificationOptionId =
 			getCPSpecificationOptionId();
-
-		cpSpecificationOptionCacheModel.groupId = getGroupId();
 
 		cpSpecificationOptionCacheModel.companyId = getCompanyId();
 
@@ -1511,18 +1484,16 @@ public class CPSpecificationOptionModelImpl
 		return sb.toString();
 	}
 
-	private static final ClassLoader _classLoader =
-		CPSpecificationOption.class.getClassLoader();
-	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
-		CPSpecificationOption.class, ModelWrapper.class
-	};
+	private static class EscapedModelProxyProviderFunctionHolder {
+
+		private static final Function<InvocationHandler, CPSpecificationOption>
+			_escapedModelProxyProviderFunction = _getProxyProviderFunction();
+
+	}
 
 	private String _uuid;
 	private String _originalUuid;
 	private long _CPSpecificationOptionId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

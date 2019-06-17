@@ -89,7 +89,7 @@ public interface CPTaxCategoryLocalService
 	@Transactional(enabled = false)
 	public CPTaxCategory createCPTaxCategory(long CPTaxCategoryId);
 
-	public void deleteCPTaxCategories(long groupId);
+	public void deleteCPTaxCategories(long companyId);
 
 	/**
 	 * Deletes the cp tax category from the database. Also notifies the appropriate model listeners.
@@ -208,11 +208,11 @@ public interface CPTaxCategoryLocalService
 	public List<CPTaxCategory> getCPTaxCategories(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CPTaxCategory> getCPTaxCategories(long groupId);
+	public List<CPTaxCategory> getCPTaxCategories(long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPTaxCategory> getCPTaxCategories(
-		long groupId, int start, int end,
+		long companyId, int start, int end,
 		OrderByComparator<CPTaxCategory> orderByComparator);
 
 	/**
@@ -224,7 +224,7 @@ public interface CPTaxCategoryLocalService
 	public int getCPTaxCategoriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCPTaxCategoriesCount(long groupId);
+	public int getCPTaxCategoriesCount(long companyId);
 
 	/**
 	 * Returns the cp tax category with the primary key.

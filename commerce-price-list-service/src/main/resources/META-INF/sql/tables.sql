@@ -1,3 +1,17 @@
+create table CPLCommerceGroupAccountRel (
+	uuid_ VARCHAR(75) null,
+	CPLCommerceAccountGroupRelId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	commercePriceListId LONG,
+	commerceAccountGroupId LONG,
+	order_ INTEGER,
+	lastPublishDate DATE null
+);
+
 create table CPLUserSegmentEntryRel (
 	uuid_ VARCHAR(75) null,
 	CPLUserSegmentEntryRelId LONG not null primary key,
@@ -17,7 +31,6 @@ create table CommercePriceEntry (
 	uuid_ VARCHAR(75) null,
 	externalReferenceCode VARCHAR(75) null,
 	commercePriceEntryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -58,7 +71,6 @@ create table CommercePriceList (
 create table CommercePriceListAccountRel (
 	uuid_ VARCHAR(75) null,
 	commercePriceListAccountRelId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -74,7 +86,6 @@ create table CommerceTierPriceEntry (
 	uuid_ VARCHAR(75) null,
 	externalReferenceCode VARCHAR(75) null,
 	commerceTierPriceEntryId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

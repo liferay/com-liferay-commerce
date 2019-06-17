@@ -65,7 +65,7 @@ public class CPOptionValueCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -73,8 +73,6 @@ public class CPOptionValueCacheModel
 		sb.append(externalReferenceCode);
 		sb.append(", CPOptionValueId=");
 		sb.append(CPOptionValueId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -85,17 +83,16 @@ public class CPOptionValueCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-(??)
+		sb.append(", CPOptionId=");
+		sb.append(CPOptionId);
 		sb.append(", name=");
 		sb.append(name);
-(??)		sb.append(", siteGroupId=");
-(??)		sb.append(siteGroupId);
-(??)		sb.append(", type=");
-(??)		sb.append(type);
-(??)		sb.append(", typeSettings=");
-(??)		sb.append(typeSettings);
-(??)		sb.append(", commerceCurrencyCode=");
-(??)		sb.append(commerceCurrencyCode);
+		sb.append(", priority=");
+		sb.append(priority);
+		sb.append(", key=");
+		sb.append(key);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -120,7 +117,6 @@ public class CPOptionValueCacheModel
 		}
 
 		cpOptionValueImpl.setCPOptionValueId(CPOptionValueId);
-		cpOptionValueImpl.setGroupId(groupId);
 		cpOptionValueImpl.setCompanyId(companyId);
 		cpOptionValueImpl.setUserId(userId);
 
@@ -145,7 +141,7 @@ public class CPOptionValueCacheModel
 			cpOptionValueImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-(??)
+		cpOptionValueImpl.setCPOptionId(CPOptionId);
 
 		if (name == null) {
 			cpOptionValueImpl.setName("");
@@ -154,8 +150,8 @@ public class CPOptionValueCacheModel
 			cpOptionValueImpl.setName(name);
 		}
 
-(??)		commerceChannelImpl.setSiteGroupId(siteGroupId);
-(??)
+		cpOptionValueImpl.setPriority(priority);
+
 		if (key == null) {
 			cpOptionValueImpl.setKey("");
 		}
@@ -182,8 +178,6 @@ public class CPOptionValueCacheModel
 
 		CPOptionValueId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -192,11 +186,11 @@ public class CPOptionValueCacheModel
 		modifiedDate = objectInput.readLong();
 
 		CPOptionId = objectInput.readLong();
+		name = objectInput.readUTF();
 
-(??)		siteGroupId = objectInput.readLong();
-(??)		type = objectInput.readUTF();
-(??)		typeSettings = objectInput.readUTF();
-(??)		commerceCurrencyCode = objectInput.readUTF();
+		priority = objectInput.readDouble();
+		key = objectInput.readUTF();
+		lastPublishDate = objectInput.readLong();
 	}
 
 	@Override
@@ -217,8 +211,6 @@ public class CPOptionValueCacheModel
 
 		objectOutput.writeLong(CPOptionValueId);
 
-		objectOutput.writeLong(groupId);
-
 		objectOutput.writeLong(companyId);
 
 		objectOutput.writeLong(userId);
@@ -233,7 +225,7 @@ public class CPOptionValueCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-(??)
+		objectOutput.writeLong(CPOptionId);
 
 		if (name == null) {
 			objectOutput.writeUTF("");
@@ -242,8 +234,8 @@ public class CPOptionValueCacheModel
 			objectOutput.writeUTF(name);
 		}
 
-(??)		objectOutput.writeLong(siteGroupId);
-(??)
+		objectOutput.writeDouble(priority);
+
 		if (key == null) {
 			objectOutput.writeUTF("");
 		}
@@ -257,16 +249,15 @@ public class CPOptionValueCacheModel
 	public String uuid;
 	public String externalReferenceCode;
 	public long CPOptionValueId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-(??)
+	public long CPOptionId;
 	public String name;
-(??)	public long siteGroupId;
-(??)	public String type;
-(??)	public String typeSettings;
-(??)	public String commerceCurrencyCode;
+	public double priority;
+	public String key;
+	public long lastPublishDate;
+
 }

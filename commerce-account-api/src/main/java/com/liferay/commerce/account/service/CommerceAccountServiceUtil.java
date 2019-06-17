@@ -115,6 +115,19 @@ public class CommerceAccountServiceUtil {
 		<com.liferay.commerce.account.model.CommerceAccount>
 				getUserCommerceAccounts(
 					long userId, long parentCommerceAccountId,
+					int commerceSiteType, String keywords, Boolean active,
+					int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getUserCommerceAccounts(
+			userId, parentCommerceAccountId, commerceSiteType, keywords, active,
+			start, end);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.account.model.CommerceAccount>
+				getUserCommerceAccounts(
+					long userId, long parentCommerceAccountId,
 					int commerceSiteType, String keywords, int start, int end)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -130,6 +143,23 @@ public class CommerceAccountServiceUtil {
 
 		return getService().getUserCommerceAccountsCount(
 			userId, parentCommerceAccountId, commerceSiteType, keywords);
+	}
+
+	public static int getUserCommerceAccountsCount(
+			long userId, long parentCommerceAccountId, int commerceSiteType,
+			String keywords, Boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getUserCommerceAccountsCount(
+			userId, parentCommerceAccountId, commerceSiteType, keywords,
+			active);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount setActive(
+			long commerceAccountId, boolean active)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().setActive(commerceAccountId, active);
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount

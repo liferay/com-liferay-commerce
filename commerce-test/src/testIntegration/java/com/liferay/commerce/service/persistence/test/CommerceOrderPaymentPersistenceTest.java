@@ -228,7 +228,7 @@ public class CommerceOrderPaymentPersistenceTest {
 			"CommerceOrderPayment", "commerceOrderPaymentId", true, "groupId",
 			true, "companyId", true, "userId", true, "userName", true,
 			"createDate", true, "modifiedDate", true, "commerceOrderId", true,
-			"commercePaymentMethodKey", true, "content", true, "status", true);
+			"commercePaymentMethodKey", true, "status", true);
 	}
 
 	@Test

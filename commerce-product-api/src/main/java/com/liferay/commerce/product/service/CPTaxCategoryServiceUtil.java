@@ -59,28 +59,28 @@ public class CPTaxCategoryServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPTaxCategory> getCPTaxCategories(
-				long groupId)
+				long companyId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPTaxCategories(groupId);
+		return getService().getCPTaxCategories(companyId);
 	}
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPTaxCategory> getCPTaxCategories(
-				long groupId, int start, int end,
+				long companyId, int start, int end,
 				com.liferay.portal.kernel.util.OrderByComparator
 					<com.liferay.commerce.product.model.CPTaxCategory>
 						orderByComparator)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCPTaxCategories(
-			groupId, start, end, orderByComparator);
+			companyId, start, end, orderByComparator);
 	}
 
-	public static int getCPTaxCategoriesCount(long groupId)
+	public static int getCPTaxCategoriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return getService().getCPTaxCategoriesCount(groupId);
+		return getService().getCPTaxCategoriesCount(companyId);
 	}
 
 	public static com.liferay.commerce.product.model.CPTaxCategory

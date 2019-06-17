@@ -178,7 +178,7 @@ public class CommerceAvailabilityEstimateServiceHttp {
 	public static java.util.List
 		<com.liferay.commerce.model.CommerceAvailabilityEstimate>
 				getCommerceAvailabilityEstimates(
-					HttpPrincipal httpPrincipal, long groupId, int start,
+					HttpPrincipal httpPrincipal, long companyId, int start,
 					int end,
 					com.liferay.portal.kernel.util.OrderByComparator
 						<com.liferay.commerce.model.
@@ -192,7 +192,7 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				_getCommerceAvailabilityEstimatesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, start, end, orderByComparator);
+				methodKey, companyId, start, end, orderByComparator);
 
 			Object returnObj = null;
 
@@ -223,7 +223,7 @@ public class CommerceAvailabilityEstimateServiceHttp {
 	}
 
 	public static int getCommerceAvailabilityEstimatesCount(
-			HttpPrincipal httpPrincipal, long groupId)
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -232,7 +232,8 @@ public class CommerceAvailabilityEstimateServiceHttp {
 				"getCommerceAvailabilityEstimatesCount",
 				_getCommerceAvailabilityEstimatesCountParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId);
 
 			Object returnObj = null;
 

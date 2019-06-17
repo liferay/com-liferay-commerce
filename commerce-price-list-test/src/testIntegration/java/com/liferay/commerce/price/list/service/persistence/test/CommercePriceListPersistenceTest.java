@@ -264,13 +264,6 @@ public class CommercePriceListPersistenceTest {
 	}
 
 	@Test
-	public void testCountByGroupId() throws Exception {
-		_persistence.countByGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countByGroupId(0L);
-	}
-
-	@Test
 	public void testCountByCompanyId() throws Exception {
 		_persistence.countByCompanyId(RandomTestUtil.nextLong());
 
@@ -293,19 +286,18 @@ public class CommercePriceListPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_S() throws Exception {
-		_persistence.countByG_S(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
+	public void testCountByG_C() throws Exception {
+		_persistence.countByG_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
 
-		_persistence.countByG_S(0L, 0);
+		_persistence.countByG_C(0L, 0L);
 	}
 
 	@Test
-	public void testCountByG_NotS() throws Exception {
-		_persistence.countByG_NotS(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-
-		_persistence.countByG_NotS(0L, 0);
+	public void testCountByG_CArrayable() throws Exception {
+		_persistence.countByG_C(
+			new long[] {RandomTestUtil.nextLong(), 0L},
+			RandomTestUtil.nextLong());
 	}
 
 	@Test
@@ -314,6 +306,38 @@ public class CommercePriceListPersistenceTest {
 			RandomTestUtil.nextDate(), RandomTestUtil.nextInt());
 
 		_persistence.countByLtD_S(RandomTestUtil.nextDate(), 0);
+	}
+
+	@Test
+	public void testCountByG_C_S() throws Exception {
+		_persistence.countByG_C_S(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByG_C_S(0L, 0L, 0);
+	}
+
+	@Test
+	public void testCountByG_C_SArrayable() throws Exception {
+		_persistence.countByG_C_S(
+			new long[] {RandomTestUtil.nextLong(), 0L},
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
+	}
+
+	@Test
+	public void testCountByG_C_NotS() throws Exception {
+		_persistence.countByG_C_NotS(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextInt());
+
+		_persistence.countByG_C_NotS(0L, 0L, 0);
+	}
+
+	@Test
+	public void testCountByG_C_NotSArrayable() throws Exception {
+		_persistence.countByG_C_NotS(
+			new long[] {RandomTestUtil.nextLong(), 0L},
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
 	}
 
 	@Test

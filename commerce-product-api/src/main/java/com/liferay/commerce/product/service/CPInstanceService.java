@@ -67,7 +67,7 @@ public interface CPInstanceService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CPInstanceServiceUtil} to access the cp instance remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPInstanceServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CPInstance addCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			boolean published, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -128,14 +128,20 @@ public interface CPInstanceService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPDefinitionInstances(
-			long companyId, long groupId, long cpDefinitionId, String keywords,
-			int status, int start, int end, Sort sort)
+			long companyId, long cpDefinitionId, String keywords, int status,
+			int start, int end, Sort sort)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CPInstance> searchCPInstances(
 			long companyId, long groupId, String keywords, int status,
 			int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CPInstance> searchCPInstances(
+			long companyId, String keywords, int status, int start, int end,
+			Sort sort)
 		throws PortalException;
 
 	public CPInstance updateCPInstance(
@@ -168,7 +174,7 @@ public interface CPInstanceService extends BaseService {
 		throws PortalException;
 
 	public CPInstance upsertCPInstance(
-			long cpDefinitionId, String sku, String gtin,
+			long cpDefinitionId, long groupId, String sku, String gtin,
 			String manufacturerPartNumber, boolean purchasable, String json,
 			double width, double height, double depth, double weight,
 			BigDecimal price, BigDecimal promoPrice, BigDecimal cost,

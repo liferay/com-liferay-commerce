@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedGroupedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -44,7 +44,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommerceDiscountModel
-	extends BaseModel<CommerceDiscount>, ShardedModel, StagedGroupedModel,
+	extends BaseModel<CommerceDiscount>, ShardedModel, StagedAuditedModel,
 			WorkflowedModel {
 
 	/*
@@ -97,22 +97,6 @@ public interface CommerceDiscountModel
 	 * @param commerceDiscountId the commerce discount ID of this commerce discount
 	 */
 	public void setCommerceDiscountId(long commerceDiscountId);
-
-	/**
-	 * Returns the group ID of this commerce discount.
-	 *
-	 * @return the group ID of this commerce discount
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce discount.
-	 *
-	 * @param groupId the group ID of this commerce discount
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce discount.
@@ -465,7 +449,6 @@ public interface CommerceDiscountModel
 	 *
 	 * @return the last publish date of this commerce discount
 	 */
-	@Override
 	public Date getLastPublishDate();
 
 	/**
@@ -473,7 +456,6 @@ public interface CommerceDiscountModel
 	 *
 	 * @param lastPublishDate the last publish date of this commerce discount
 	 */
-	@Override
 	public void setLastPublishDate(Date lastPublishDate);
 
 	/**
