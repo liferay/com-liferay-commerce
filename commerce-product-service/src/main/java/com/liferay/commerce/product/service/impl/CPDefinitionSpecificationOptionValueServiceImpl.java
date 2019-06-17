@@ -142,6 +142,18 @@ public class CPDefinitionSpecificationOptionValueServiceImpl
 	}
 
 	@Override
+	public int getCPDefinitionSpecificationOptionValuesCount(
+			long cpDefinitionId)
+		throws PortalException {
+
+		_checkCommerceCatalogPermissionByCPDefinitionId(
+			cpDefinitionId, ActionKeys.VIEW);
+
+		return cpDefinitionSpecificationOptionValueLocalService.
+			getCPDefinitionSpecificationOptionValuesCount(cpDefinitionId);
+	}
+
+	@Override
 	public CPDefinitionSpecificationOptionValue
 			updateCPDefinitionSpecificationOptionValue(
 				long cpDefinitionSpecificationOptionValueId,
