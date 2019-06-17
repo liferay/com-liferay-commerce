@@ -64,12 +64,12 @@ public class CommerceProductViewPermissionImpl
 
 	@Override
 	public void check(
-			PermissionChecker permissionChecker, long groupId,
-			long commerceAccountId, long cpDefinitionId)
+			PermissionChecker permissionChecker, long commerceAccountId,
+			long groupId, long cpDefinitionId)
 		throws PortalException {
 
 		if (contains(
-				permissionChecker, groupId, commerceAccountId,
+				permissionChecker, commerceAccountId, groupId,
 				cpDefinitionId)) {
 
 			return;
@@ -104,8 +104,8 @@ public class CommerceProductViewPermissionImpl
 
 	@Override
 	public boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			long commerceAccountId, long cpDefinitionId)
+			PermissionChecker permissionChecker, long commerceAccountId,
+			long groupId, long cpDefinitionId)
 		throws PortalException {
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(

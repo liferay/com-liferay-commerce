@@ -111,7 +111,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 			cpFriendlyURLEntry.getClassPK());
 
 		CPCatalogEntry cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
-			groupId, _getCommerceAccountId(groupId, httpServletRequest),
+			_getCommerceAccountId(groupId, httpServletRequest), groupId,
 			cProduct.getPublishedCPDefinitionId(), locale);
 
 		Layout layout = getProductLayout(
