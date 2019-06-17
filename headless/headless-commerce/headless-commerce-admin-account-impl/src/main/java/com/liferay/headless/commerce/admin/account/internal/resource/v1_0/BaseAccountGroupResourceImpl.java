@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.site.setting.internal.resource.v1_0;
+package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroup;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroupCriterion;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AccountGroupResource;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -41,8 +40,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -51,7 +50,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  * @generated
  */
 @Generated("")
@@ -61,107 +60,8 @@ public abstract class BaseAccountGroupResourceImpl
 
 	@Override
 	@DELETE
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "criterionId"),
-			@Parameter(in = ParameterIn.PATH, name = "id")
-		}
-	)
-	@Path("/accountGroup/{id}/accountGroupCriterion/{criterionId}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Response deleteAccountGroupAccountGroupCriterion(
-			@NotNull @Parameter(hidden = true) @PathParam("criterionId") Long
-				criterionId,
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "criterionId"),
-			@Parameter(in = ParameterIn.PATH, name = "id")
-		}
-	)
-	@Path("/accountGroup/{id}/accountGroupCriterion/{criterionId}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroupCriterion getAccountGroupAccountGroupCriterion(
-			@NotNull @Parameter(hidden = true) @PathParam("criterionId") Long
-				criterionId,
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new AccountGroupCriterion();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "criterionId"),
-			@Parameter(in = ParameterIn.PATH, name = "id")
-		}
-	)
-	@Path("/accountGroup/{id}/accountGroupCriterion/{criterionId}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
-			@NotNull @Parameter(hidden = true) @PathParam("criterionId") Long
-				criterionId,
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			AccountGroupCriterion accountGroupCriterion)
-		throws Exception {
-
-		return new AccountGroupCriterion();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/accountGroup/{id}/accountGroupCriterion")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Page<AccountGroupCriterion> getAccountGroupAccountGroupCriterionPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroup/{id}/accountGroupCriterion")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			AccountGroupCriterion accountGroupCriterion)
-		throws Exception {
-
-		return new AccountGroupCriterion();
-	}
-
-	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroup/{id}")
+	@Path("/accountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
 	public Response deleteAccountGroup(
@@ -176,7 +76,7 @@ public abstract class BaseAccountGroupResourceImpl
 	@Override
 	@GET
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroup/{id}")
+	@Path("/accountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
 	public AccountGroup getAccountGroup(
@@ -188,13 +88,73 @@ public abstract class BaseAccountGroupResourceImpl
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PUT
+	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroup/{id}")
+	@Path("/accountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Response putAccountGroup(
+	public Response patchAccountGroup(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			AccountGroup accountGroup)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountGroups/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountGroup")})
+	public Response deleteAccountGroupByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountGroups/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountGroup")})
+	public AccountGroup getAccountGroupByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return new AccountGroup();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountGroups/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountGroup")})
+	public Response patchAccountGroupByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
 			AccountGroup accountGroup)
 		throws Exception {
 
@@ -207,17 +167,14 @@ public abstract class BaseAccountGroupResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "groupId"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/commerceAdminSiteSetting/{groupId}/accountGroup/")
+	@Path("/accountGroups/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Page<AccountGroup> getCommerceAdminSiteSettingGroupAccountGroupPage(
-			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-				groupId,
+	public Page<AccountGroup> getAccountGroupsPage(
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -227,14 +184,10 @@ public abstract class BaseAccountGroupResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
-	@Path("/commerceAdminSiteSetting/{groupId}/accountGroup/")
+	@Path("/accountGroup/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroup postCommerceAdminSiteSettingGroupAccountGroup(
-			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-				groupId,
-			AccountGroup accountGroup)
+	public AccountGroup postAccountGroup(AccountGroup accountGroup)
 		throws Exception {
 
 		return new AccountGroup();

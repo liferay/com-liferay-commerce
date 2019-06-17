@@ -14,13 +14,10 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.graphql.mutation.v1_0;
 
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroup;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroupCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
@@ -46,14 +43,6 @@ import org.osgi.service.component.ComponentServiceObjects;
  */
 @Generated("")
 public class Mutation {
-
-	public static void setAccountGroupResourceComponentServiceObjects(
-		ComponentServiceObjects<AccountGroupResource>
-			accountGroupResourceComponentServiceObjects) {
-
-		_accountGroupResourceComponentServiceObjects =
-			accountGroupResourceComponentServiceObjects;
-	}
 
 	public static void setAvailabilityEstimateResourceComponentServiceObjects(
 		ComponentServiceObjects<AvailabilityEstimateResource>
@@ -85,93 +74,6 @@ public class Mutation {
 
 		_warehouseResourceComponentServiceObjects =
 			warehouseResourceComponentServiceObjects;
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteAccountGroupAccountGroupCriterion(
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.deleteAccountGroupAccountGroupCriterion(
-					criterionId, id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("id") Long id,
-			@GraphQLName("accountGroupCriterion") AccountGroupCriterion
-				accountGroupCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.postAccountGroupAccountGroupCriterion(
-					criterionId, id, accountGroupCriterion));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroupCriterion postAccountGroupAccountGroupCriterion(
-			@GraphQLName("id") Long id,
-			@GraphQLName("accountGroupCriterion") AccountGroupCriterion
-				accountGroupCriterion)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.postAccountGroupAccountGroupCriterion(
-					id, accountGroupCriterion));
-	}
-
-	@GraphQLInvokeDetached
-	public Response deleteAccountGroup(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> accountGroupResource.deleteAccountGroup(
-				id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response putAccountGroup(
-			@GraphQLName("id") Long id,
-			@GraphQLName("accountGroup") AccountGroup accountGroup)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> accountGroupResource.putAccountGroup(
-				id, accountGroup));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroup postCommerceAdminSiteSettingGroupAccountGroup(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("accountGroup") AccountGroup accountGroup)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.
-					postCommerceAdminSiteSettingGroupAccountGroup(
-						groupId, accountGroup));
 	}
 
 	@GraphQLInvokeDetached
@@ -218,22 +120,6 @@ public class Mutation {
 						groupId, availabilityEstimate));
 	}
 
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("measurementUnit") MeasurementUnit measurementUnit)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_measurementUnitResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			measurementUnitResource ->
-				measurementUnitResource.
-					postCommerceAdminSiteSettingGroupMeasurementUnit(
-						groupId, measurementUnit));
-	}
-
 	@GraphQLInvokeDetached
 	public Response deleteMeasurementUnit(@GraphQLName("id") Long id)
 		throws Exception {
@@ -261,18 +147,18 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public TaxCategory postCommerceAdminSiteSettingGroupTaxCategory(
+	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("taxCategory") TaxCategory taxCategory)
+			@GraphQLName("measurementUnit") MeasurementUnit measurementUnit)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_taxCategoryResourceComponentServiceObjects,
+			_measurementUnitResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			taxCategoryResource ->
-				taxCategoryResource.
-					postCommerceAdminSiteSettingGroupTaxCategory(
-						groupId, taxCategory));
+			measurementUnitResource ->
+				measurementUnitResource.
+					postCommerceAdminSiteSettingGroupMeasurementUnit(
+						groupId, measurementUnit));
 	}
 
 	@GraphQLInvokeDetached
@@ -300,17 +186,18 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
+	public TaxCategory postCommerceAdminSiteSettingGroupTaxCategory(
 			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("warehouse") Warehouse warehouse)
+			@GraphQLName("taxCategory") TaxCategory taxCategory)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_warehouseResourceComponentServiceObjects,
+			_taxCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			warehouseResource ->
-				warehouseResource.postCommerceAdminSiteSettingGroupWarehouse(
-					groupId, warehouse));
+			taxCategoryResource ->
+				taxCategoryResource.
+					postCommerceAdminSiteSettingGroupTaxCategory(
+						groupId, taxCategory));
 	}
 
 	@GraphQLInvokeDetached
@@ -333,6 +220,21 @@ public class Mutation {
 			_warehouseResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			warehouseResource -> warehouseResource.putWarehouse(id, warehouse));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
+			@GraphQLName("groupId") Long groupId,
+			@GraphQLName("warehouse") Warehouse warehouse)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource ->
+				warehouseResource.postCommerceAdminSiteSettingGroupWarehouse(
+					groupId, warehouse));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -374,15 +276,6 @@ public class Mutation {
 	}
 
 	private void _populateResourceContext(
-			AccountGroupResource accountGroupResource)
-		throws Exception {
-
-		accountGroupResource.setContextCompany(
-			CompanyLocalServiceUtil.getCompany(
-				CompanyThreadLocal.getCompanyId()));
-	}
-
-	private void _populateResourceContext(
 			AvailabilityEstimateResource availabilityEstimateResource)
 		throws Exception {
 
@@ -417,8 +310,6 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
-	private static ComponentServiceObjects<AccountGroupResource>
-		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AvailabilityEstimateResource>
 		_availabilityEstimateResourceComponentServiceObjects;
 	private static ComponentServiceObjects<MeasurementUnitResource>

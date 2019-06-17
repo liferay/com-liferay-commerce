@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.site.setting.dto.v1_0;
+package com.liferay.headless.commerce.admin.account.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,36 +34,35 @@ import java.util.Set;
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  * @generated
  */
 @Generated("")
-@GraphQLName("AccountGroupCriterion")
+@GraphQLName("AccountGroup")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"commerceAccountGroupId", "type"})
-@XmlRootElement(name = "AccountGroupCriterion")
-public class AccountGroupCriterion {
+@Schema(requiredProperties = {"name"})
+@XmlRootElement(name = "AccountGroup")
+public class AccountGroup {
 
 	@Schema
-	public Long getCommerceAccountGroupId() {
-		return commerceAccountGroupId;
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
 	}
 
-	public void setCommerceAccountGroupId(Long commerceAccountGroupId) {
-		this.commerceAccountGroupId = commerceAccountGroupId;
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		this.externalReferenceCode = externalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setCommerceAccountGroupId(
-		UnsafeSupplier<Long, Exception> commerceAccountGroupIdUnsafeSupplier) {
+	public void setExternalReferenceCode(
+		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
 
 		try {
-			commerceAccountGroupId = commerceAccountGroupIdUnsafeSupplier.get();
+			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -75,8 +74,7 @@ public class AccountGroupCriterion {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commerceAccountGroupId;
+	protected String externalReferenceCode;
 
 	@Schema
 	public Long getId() {
@@ -101,50 +99,22 @@ public class AccountGroupCriterion {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
 	@Schema
-	public Double getPriority() {
-		return priority;
+	public String getName() {
+		return name;
 	}
 
-	public void setPriority(Double priority) {
-		this.priority = priority;
-	}
-
-	@JsonIgnore
-	public void setPriority(
-		UnsafeSupplier<Double, Exception> priorityUnsafeSupplier) {
-
-		try {
-			priority = priorityUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Double priority;
-
-	@Schema
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@JsonIgnore
-	public void setType(UnsafeSupplier<String, Exception> typeUnsafeSupplier) {
+	public void setName(UnsafeSupplier<String, Exception> nameUnsafeSupplier) {
 		try {
-			type = typeUnsafeSupplier.get();
+			name = nameUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -157,35 +127,7 @@ public class AccountGroupCriterion {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	@NotEmpty
-	protected String type;
-
-	@Schema
-	public String getTypeSettings() {
-		return typeSettings;
-	}
-
-	public void setTypeSettings(String typeSettings) {
-		this.typeSettings = typeSettings;
-	}
-
-	@JsonIgnore
-	public void setTypeSettings(
-		UnsafeSupplier<String, Exception> typeSettingsUnsafeSupplier) {
-
-		try {
-			typeSettings = typeSettingsUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String typeSettings;
+	protected String name;
 
 	@Override
 	public boolean equals(Object object) {
@@ -193,14 +135,13 @@ public class AccountGroupCriterion {
 			return true;
 		}
 
-		if (!(object instanceof AccountGroupCriterion)) {
+		if (!(object instanceof AccountGroup)) {
 			return false;
 		}
 
-		AccountGroupCriterion accountGroupCriterion =
-			(AccountGroupCriterion)object;
+		AccountGroup accountGroup = (AccountGroup)object;
 
-		return Objects.equals(toString(), accountGroupCriterion.toString());
+		return Objects.equals(toString(), accountGroup.toString());
 	}
 
 	@Override
@@ -215,14 +156,18 @@ public class AccountGroupCriterion {
 
 		sb.append("{");
 
-		if (commerceAccountGroupId != null) {
+		if (externalReferenceCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceAccountGroupId\": ");
+			sb.append("\"externalReferenceCode\": ");
 
-			sb.append(commerceAccountGroupId);
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (id != null) {
@@ -235,40 +180,16 @@ public class AccountGroupCriterion {
 			sb.append(id);
 		}
 
-		if (priority != null) {
+		if (name != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"priority\": ");
-
-			sb.append(priority);
-		}
-
-		if (type != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"type\": ");
+			sb.append("\"name\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(type));
-
-			sb.append("\"");
-		}
-
-		if (typeSettings != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"typeSettings\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(typeSettings));
+			sb.append(_escape(name));
 
 			sb.append("\"");
 		}
