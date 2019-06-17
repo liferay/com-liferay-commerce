@@ -93,7 +93,8 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		return (Account)accountDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override
