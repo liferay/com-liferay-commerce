@@ -26,7 +26,10 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -42,6 +45,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Error")
 @JsonFilter("Liferay.Vulcan")
+@Schema(
+	requiredProperties = {"errorCode", "errorDescription", "message", "status"}
+)
 @XmlRootElement(name = "Error")
 public class Error {
 
@@ -61,6 +67,9 @@ public class Error {
 		try {
 			errorCode = errorCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -71,6 +80,7 @@ public class Error {
 	@NotNull
 	protected Integer errorCode;
 
+	@Schema
 	public String getErrorDescription() {
 		return errorDescription;
 	}
@@ -86,6 +96,9 @@ public class Error {
 		try {
 			errorDescription = errorDescriptionUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -96,6 +109,7 @@ public class Error {
 	@NotEmpty
 	protected String errorDescription;
 
+	@Schema
 	public String getMessage() {
 		return message;
 	}
@@ -110,6 +124,9 @@ public class Error {
 
 		try {
 			message = messageUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -136,6 +153,9 @@ public class Error {
 
 		try {
 			status = statusUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -174,28 +194,88 @@ public class Error {
 
 		sb.append("{");
 
-		sb.append("\"errorCode\": ");
+		if (errorCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(errorCode);
-		sb.append(", ");
+			sb.append("\"errorCode\": ");
 
-		sb.append("\"errorDescription\": ");
+			sb.append(errorCode);
+		}
 
-		sb.append("\"");
-		sb.append(errorDescription);
-		sb.append("\"");
-		sb.append(", ");
+		if (errorDescription != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"message\": ");
+			sb.append("\"errorDescription\": ");
 
-		sb.append("\"");
-		sb.append(message);
-		sb.append("\"");
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"status\": ");
+			sb.append(_escape(errorDescription));
 
-		sb.append(status);
+			sb.append("\"");
+		}
+
+		if (message != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"message\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(message));
+
+			sb.append("\"");
+		}
+
+		if (status != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"status\": ");
+
+			sb.append(status);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

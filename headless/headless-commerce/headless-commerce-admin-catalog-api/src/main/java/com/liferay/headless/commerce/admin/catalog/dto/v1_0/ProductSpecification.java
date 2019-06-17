@@ -42,11 +42,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("SpecificationValue")
+@GraphQLName("ProductSpecification")
 @JsonFilter("Liferay.Vulcan")
 @Schema(requiredProperties = {"value"})
-@XmlRootElement(name = "SpecificationValue")
-public class SpecificationValue {
+@XmlRootElement(name = "ProductSpecification")
+public class ProductSpecification {
 
 	@Schema
 	public Long getId() {
@@ -222,13 +222,14 @@ public class SpecificationValue {
 			return true;
 		}
 
-		if (!(object instanceof SpecificationValue)) {
+		if (!(object instanceof ProductSpecification)) {
 			return false;
 		}
 
-		SpecificationValue specificationValue = (SpecificationValue)object;
+		ProductSpecification productSpecification =
+			(ProductSpecification)object;
 
-		return Objects.equals(toString(), specificationValue.toString());
+		return Objects.equals(toString(), productSpecification.toString());
 	}
 
 	@Override

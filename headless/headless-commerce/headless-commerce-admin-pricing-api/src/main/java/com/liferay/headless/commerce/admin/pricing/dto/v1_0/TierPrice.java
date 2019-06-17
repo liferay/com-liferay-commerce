@@ -24,9 +24,14 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -42,9 +47,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("TierPrice")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"commercePriceEntryId", "externalReferenceCode"})
 @XmlRootElement(name = "TierPrice")
 public class TierPrice {
 
+	@Schema
 	public Long getCommercePriceEntryId() {
 		return commercePriceEntryId;
 	}
@@ -60,6 +67,9 @@ public class TierPrice {
 		try {
 			commercePriceEntryId = commercePriceEntryIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -70,6 +80,7 @@ public class TierPrice {
 	@NotNull
 	protected Long commercePriceEntryId;
 
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -85,6 +96,9 @@ public class TierPrice {
 		try {
 			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -95,6 +109,7 @@ public class TierPrice {
 	@NotEmpty
 	protected String externalReferenceCode;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -108,6 +123,9 @@ public class TierPrice {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -117,6 +135,7 @@ public class TierPrice {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long id;
 
+	@Schema
 	public Integer getMinimumQuantity() {
 		return minimumQuantity;
 	}
@@ -132,6 +151,9 @@ public class TierPrice {
 		try {
 			minimumQuantity = minimumQuantityUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -141,6 +163,7 @@ public class TierPrice {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer minimumQuantity;
 
+	@Schema
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -156,6 +179,9 @@ public class TierPrice {
 		try {
 			price = priceUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -165,6 +191,7 @@ public class TierPrice {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal price;
 
+	@Schema
 	public String getPriceEntryExternalReferenceCode() {
 		return priceEntryExternalReferenceCode;
 	}
@@ -184,6 +211,9 @@ public class TierPrice {
 			priceEntryExternalReferenceCode =
 				priceEntryExternalReferenceCodeUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -193,6 +223,7 @@ public class TierPrice {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String priceEntryExternalReferenceCode;
 
+	@Schema
 	public BigDecimal getPromoPrice() {
 		return promoPrice;
 	}
@@ -207,6 +238,9 @@ public class TierPrice {
 
 		try {
 			promoPrice = promoPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -244,43 +278,118 @@ public class TierPrice {
 
 		sb.append("{");
 
-		sb.append("\"commercePriceEntryId\": ");
+		if (commercePriceEntryId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(commercePriceEntryId);
-		sb.append(", ");
+			sb.append("\"commercePriceEntryId\": ");
 
-		sb.append("\"externalReferenceCode\": ");
+			sb.append(commercePriceEntryId);
+		}
 
-		sb.append("\"");
-		sb.append(externalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"id\": ");
+			sb.append("\"externalReferenceCode\": ");
 
-		sb.append(id);
-		sb.append(", ");
+			sb.append("\"");
 
-		sb.append("\"minimumQuantity\": ");
+			sb.append(_escape(externalReferenceCode));
 
-		sb.append(minimumQuantity);
-		sb.append(", ");
+			sb.append("\"");
+		}
 
-		sb.append("\"price\": ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(price);
-		sb.append(", ");
+			sb.append("\"id\": ");
 
-		sb.append("\"priceEntryExternalReferenceCode\": ");
+			sb.append(id);
+		}
 
-		sb.append("\"");
-		sb.append(priceEntryExternalReferenceCode);
-		sb.append("\"");
-		sb.append(", ");
+		if (minimumQuantity != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"promoPrice\": ");
+			sb.append("\"minimumQuantity\": ");
 
-		sb.append(promoPrice);
+			sb.append(minimumQuantity);
+		}
+
+		if (price != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"price\": ");
+
+			sb.append(price);
+		}
+
+		if (priceEntryExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceEntryExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(priceEntryExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (promoPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"promoPrice\": ");
+
+			sb.append(promoPrice);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

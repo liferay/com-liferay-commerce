@@ -21,6 +21,9 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
@@ -53,10 +56,12 @@ public abstract class BaseDiscountRuleResourceImpl
 
 	@Override
 	@DELETE
-	@Path("/discountRule/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discountRules/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "DiscountRule")})
-	public Response deleteDiscountRule(@NotNull @PathParam("id") Long id)
+	public Response deleteDiscountRule(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -66,10 +71,12 @@ public abstract class BaseDiscountRuleResourceImpl
 
 	@Override
 	@GET
-	@Path("/discountRule/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discountRules/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "DiscountRule")})
-	public DiscountRule getDiscountRule(@NotNull @PathParam("id") Long id)
+	public DiscountRule getDiscountRule(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new DiscountRule();
@@ -78,11 +85,13 @@ public abstract class BaseDiscountRuleResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/discountRule/{id}")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discountRules/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "DiscountRule")})
-	public DiscountRule updateDiscountRule(
-			@NotNull @PathParam("id") Long id, DiscountRule discountRule)
+	public DiscountRule postDiscountRule(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			DiscountRule discountRule)
 		throws Exception {
 
 		return new DiscountRule();
@@ -92,7 +101,8 @@ public abstract class BaseDiscountRuleResourceImpl
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(DiscountRule discountRule) {
+	protected void preparePatch(
+		DiscountRule discountRule, DiscountRule existingDiscountRule) {
 	}
 
 	protected <T, R> List<R> transform(

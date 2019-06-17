@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
+package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
-import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSpecificationResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -39,15 +38,12 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -56,52 +52,8 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
-
-	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response deletePriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry getPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
-		throws Exception {
-
-		return new PriceEntry();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response patchPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			PriceEntry priceEntry)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
+public abstract class BaseProductSpecificationResourceImpl
+	implements ProductSpecificationResource {
 
 	@Override
 	@GET
@@ -112,11 +64,11 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/priceEntries/{id}/tierPrices/")
+	@Path("/products/{id}/productSpecifications/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<TierPrice> getPriceEntryTierPricesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+	@Tags(value = {@Tag(name = "ProductSpecification")})
+	public Page<ProductSpecification> getProductIdProductSpecificationsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -127,15 +79,15 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}/tierPrice/")
+	@Path("/products/{id}/productSpecification/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public TierPrice postPriceEntryTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			TierPrice tierPrice)
+	@Tags(value = {@Tag(name = "ProductSpecification")})
+	public ProductSpecification postProductIdProductSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductSpecification productSpecification)
 		throws Exception {
 
-		return new TierPrice();
+		return new ProductSpecification();
 	}
 
 	public void setContextCompany(Company contextCompany) {
@@ -143,7 +95,8 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	protected void preparePatch(
-		PriceEntry priceEntry, PriceEntry existingPriceEntry) {
+		ProductSpecification productSpecification,
+		ProductSpecification existingProductSpecification) {
 	}
 
 	protected <T, R> List<R> transform(

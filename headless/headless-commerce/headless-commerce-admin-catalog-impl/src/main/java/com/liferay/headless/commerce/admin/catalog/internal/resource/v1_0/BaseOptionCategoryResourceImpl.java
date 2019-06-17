@@ -59,41 +59,6 @@ public abstract class BaseOptionCategoryResourceImpl
 	implements OptionCategoryResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "siteId"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/catalogs/{siteId}/optionCategories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Page<OptionCategory> getCatalogSiteOptionCategoriesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "siteId")})
-	@Path("/catalogs/{siteId}/optionCategory/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public OptionCategory postCatalogSiteOptionCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("siteId") Long siteId,
-			OptionCategory optionCategory)
-		throws Exception {
-
-		return new OptionCategory();
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/optionCategories/{id}")
@@ -136,6 +101,36 @@ public abstract class BaseOptionCategoryResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/optionCategories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionCategory")})
+	public Page<OptionCategory> getOptionCategoriesPage(
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/optionCategory/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionCategory")})
+	public OptionCategory postOptionCategory(OptionCategory optionCategory)
+		throws Exception {
+
+		return new OptionCategory();
 	}
 
 	public void setContextCompany(Company contextCompany) {

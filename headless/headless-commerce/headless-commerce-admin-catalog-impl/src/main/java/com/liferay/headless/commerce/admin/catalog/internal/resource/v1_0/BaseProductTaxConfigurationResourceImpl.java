@@ -55,6 +55,36 @@ public abstract class BaseProductTaxConfigurationResourceImpl
 
 	@Override
 	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/taxConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductTaxConfiguration")})
+	public ProductTaxConfiguration getProductIdTaxConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ProductTaxConfiguration();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/taxConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductTaxConfiguration")})
+	public Response patchProductIdTaxConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductTaxConfiguration productTaxConfiguration)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -91,36 +121,6 @@ public abstract class BaseProductTaxConfigurationResourceImpl
 	public Response patchProductByExternalReferenceCodeTaxConfiguration(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			ProductTaxConfiguration productTaxConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/taxConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductTaxConfiguration")})
-	public ProductTaxConfiguration getProductIdTaxConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new ProductTaxConfiguration();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/taxConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductTaxConfiguration")})
-	public Response patchProductIdTaxConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			ProductTaxConfiguration productTaxConfiguration)
 		throws Exception {
 

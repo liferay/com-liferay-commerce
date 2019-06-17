@@ -14,11 +14,9 @@
 
 package com.liferay.headless.commerce.admin.catalog.dto.v1_0;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.petra.string.StringBundler;
@@ -35,6 +33,8 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -42,59 +42,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("ProductSubscriptionConfiguration")
+@GraphQLName("Catalog")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "ProductSubscriptionConfiguration")
-public class ProductSubscriptionConfiguration {
-
-	public static enum SubscriptionType {
-
-		DAY("day"), WEEK("week"), MONTH("month"), YEAR("year");
-
-		@JsonCreator
-		public static SubscriptionType create(String value) {
-			for (SubscriptionType subscriptionType : values()) {
-				if (Objects.equals(subscriptionType.getValue(), value)) {
-					return subscriptionType;
-				}
-			}
-
-			return null;
-		}
-
-		@JsonValue
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private SubscriptionType(String value) {
-			_value = value;
-		}
-
-		private final String _value;
-
-	}
+@Schema(requiredProperties = {"name"})
+@XmlRootElement(name = "Catalog")
+public class Catalog {
 
 	@Schema
-	public Boolean getEnable() {
-		return enable;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
-	public void setEnable(Boolean enable) {
-		this.enable = enable;
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
 	}
 
 	@JsonIgnore
-	public void setEnable(
-		UnsafeSupplier<Boolean, Exception> enableUnsafeSupplier) {
+	public void setCurrencyCode(
+		UnsafeSupplier<String, Exception> currencyCodeUnsafeSupplier) {
 
 		try {
-			enable = enableUnsafeSupplier.get();
+			currencyCode = currencyCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -106,23 +74,23 @@ public class ProductSubscriptionConfiguration {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean enable;
+	protected String currencyCode;
 
 	@Schema
-	public Integer getLength() {
-		return length;
+	public String getDefaultLanguageId() {
+		return defaultLanguageId;
 	}
 
-	public void setLength(Integer length) {
-		this.length = length;
+	public void setDefaultLanguageId(String defaultLanguageId) {
+		this.defaultLanguageId = defaultLanguageId;
 	}
 
 	@JsonIgnore
-	public void setLength(
-		UnsafeSupplier<Integer, Exception> lengthUnsafeSupplier) {
+	public void setDefaultLanguageId(
+		UnsafeSupplier<String, Exception> defaultLanguageIdUnsafeSupplier) {
 
 		try {
-			length = lengthUnsafeSupplier.get();
+			defaultLanguageId = defaultLanguageIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -134,23 +102,23 @@ public class ProductSubscriptionConfiguration {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer length;
+	protected String defaultLanguageId;
 
 	@Schema
-	public Long getNumberOfLength() {
-		return numberOfLength;
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
 	}
 
-	public void setNumberOfLength(Long numberOfLength) {
-		this.numberOfLength = numberOfLength;
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		this.externalReferenceCode = externalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setNumberOfLength(
-		UnsafeSupplier<Long, Exception> numberOfLengthUnsafeSupplier) {
+	public void setExternalReferenceCode(
+		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
 
 		try {
-			numberOfLength = numberOfLengthUnsafeSupplier.get();
+			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -162,33 +130,47 @@ public class ProductSubscriptionConfiguration {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long numberOfLength;
+	protected String externalReferenceCode;
 
 	@Schema
-	public SubscriptionType getSubscriptionType() {
-		return subscriptionType;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@JsonIgnore
-	public String getSubscriptionTypeAsString() {
-		if (subscriptionType == null) {
-			return null;
-		}
-
-		return subscriptionType.toString();
-	}
-
-	public void setSubscriptionType(SubscriptionType subscriptionType) {
-		this.subscriptionType = subscriptionType;
-	}
-
-	@JsonIgnore
-	public void setSubscriptionType(
-		UnsafeSupplier<SubscriptionType, Exception>
-			subscriptionTypeUnsafeSupplier) {
-
+	public void setId(UnsafeSupplier<Long, Exception> idUnsafeSupplier) {
 		try {
-			subscriptionType = subscriptionTypeUnsafeSupplier.get();
+			id = idUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	protected Long id;
+
+	@Schema(description = "Category Name")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@JsonIgnore
+	public void setName(UnsafeSupplier<String, Exception> nameUnsafeSupplier) {
+		try {
+			name = nameUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -200,27 +182,24 @@ public class ProductSubscriptionConfiguration {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected SubscriptionType subscriptionType;
+	@NotEmpty
+	protected String name;
 
 	@Schema
-	public Map<String, String> getSubscriptionTypeSettings() {
-		return subscriptionTypeSettings;
+	public Boolean getSystem() {
+		return system;
 	}
 
-	public void setSubscriptionTypeSettings(
-		Map<String, String> subscriptionTypeSettings) {
-
-		this.subscriptionTypeSettings = subscriptionTypeSettings;
+	public void setSystem(Boolean system) {
+		this.system = system;
 	}
 
 	@JsonIgnore
-	public void setSubscriptionTypeSettings(
-		UnsafeSupplier<Map<String, String>, Exception>
-			subscriptionTypeSettingsUnsafeSupplier) {
+	public void setSystem(
+		UnsafeSupplier<Boolean, Exception> systemUnsafeSupplier) {
 
 		try {
-			subscriptionTypeSettings =
-				subscriptionTypeSettingsUnsafeSupplier.get();
+			system = systemUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -231,8 +210,8 @@ public class ProductSubscriptionConfiguration {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Map<String, String> subscriptionTypeSettings;
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	protected Boolean system;
 
 	@Override
 	public boolean equals(Object object) {
@@ -240,15 +219,13 @@ public class ProductSubscriptionConfiguration {
 			return true;
 		}
 
-		if (!(object instanceof ProductSubscriptionConfiguration)) {
+		if (!(object instanceof Catalog)) {
 			return false;
 		}
 
-		ProductSubscriptionConfiguration productSubscriptionConfiguration =
-			(ProductSubscriptionConfiguration)object;
+		Catalog catalog = (Catalog)object;
 
-		return Objects.equals(
-			toString(), productSubscriptionConfiguration.toString());
+		return Objects.equals(toString(), catalog.toString());
 	}
 
 	@Override
@@ -263,58 +240,80 @@ public class ProductSubscriptionConfiguration {
 
 		sb.append("{");
 
-		if (enable != null) {
+		if (currencyCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"enable\": ");
-
-			sb.append(enable);
-		}
-
-		if (length != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"length\": ");
-
-			sb.append(length);
-		}
-
-		if (numberOfLength != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"numberOfLength\": ");
-
-			sb.append(numberOfLength);
-		}
-
-		if (subscriptionType != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"subscriptionType\": ");
+			sb.append("\"currencyCode\": ");
 
 			sb.append("\"");
 
-			sb.append(subscriptionType);
+			sb.append(_escape(currencyCode));
 
 			sb.append("\"");
 		}
 
-		if (subscriptionTypeSettings != null) {
+		if (defaultLanguageId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"subscriptionTypeSettings\": ");
+			sb.append("\"defaultLanguageId\": ");
 
-			sb.append(_toJSON(subscriptionTypeSettings));
+			sb.append("\"");
+
+			sb.append(_escape(defaultLanguageId));
+
+			sb.append("\"");
+		}
+
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"externalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"id\": ");
+
+			sb.append(id);
+		}
+
+		if (name != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"name\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(name));
+
+			sb.append("\"");
+		}
+
+		if (system != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"system\": ");
+
+			sb.append(system);
 		}
 
 		sb.append("}");

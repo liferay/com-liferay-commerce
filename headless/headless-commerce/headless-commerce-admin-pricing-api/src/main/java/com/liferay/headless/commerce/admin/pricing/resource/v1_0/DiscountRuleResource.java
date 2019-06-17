@@ -36,7 +36,7 @@ public interface DiscountRuleResource {
 
 	public DiscountRule getDiscountRule(Long id) throws Exception;
 
-	public DiscountRule updateDiscountRule(Long id, DiscountRule discountRule)
+	public DiscountRule postDiscountRule(Long id, DiscountRule discountRule)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

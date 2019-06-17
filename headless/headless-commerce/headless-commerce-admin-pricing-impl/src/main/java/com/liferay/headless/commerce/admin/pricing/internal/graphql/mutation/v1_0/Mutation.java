@@ -86,34 +86,6 @@ public class Mutation {
 			tierPriceResourceComponentServiceObjects;
 	}
 
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Discount upsertDiscount(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("Discount") Discount discount)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_discountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			discountResource -> discountResource.upsertDiscount(
-				groupId, discount));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public DiscountRule upsertDiscountRule(
-			@GraphQLName("id") Long id,
-			@GraphQLName("DiscountRule") DiscountRule discountRule)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_discountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			discountResource -> discountResource.upsertDiscountRule(
-				id, discountRule));
-	}
-
 	@GraphQLInvokeDetached
 	public Response deleteDiscount(@GraphQLName("id") Long id)
 		throws Exception {
@@ -125,15 +97,40 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateDiscount(
+	public Response patchDiscount(
 			@GraphQLName("id") Long id,
-			@GraphQLName("Discount") Discount discount)
+			@GraphQLName("discount") Discount discount)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_discountResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			discountResource -> discountResource.updateDiscount(id, discount));
+			discountResource -> discountResource.patchDiscount(id, discount));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public DiscountRule postDiscountDiscountRule(
+			@GraphQLName("id") Long id,
+			@GraphQLName("discountRule") DiscountRule discountRule)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountResource -> discountResource.postDiscountDiscountRule(
+				id, discountRule));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Discount postDiscount(@GraphQLName("discount") Discount discount)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountResource -> discountResource.postDiscount(discount));
 	}
 
 	@GraphQLInvokeDetached
@@ -149,30 +146,16 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public DiscountRule updateDiscountRule(
+	public DiscountRule postDiscountRule(
 			@GraphQLName("id") Long id,
-			@GraphQLName("DiscountRule") DiscountRule discountRule)
+			@GraphQLName("discountRule") DiscountRule discountRule)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_discountRuleResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			discountRuleResource -> discountRuleResource.updateDiscountRule(
+			discountRuleResource -> discountRuleResource.postDiscountRule(
 				id, discountRule));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public TierPrice upsertTierPrice(
-			@GraphQLName("id") String id,
-			@GraphQLName("TierPrice") TierPrice tierPrice)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_priceEntryResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			priceEntryResource -> priceEntryResource.upsertTierPrice(
-				id, tierPrice));
 	}
 
 	@GraphQLInvokeDetached
@@ -186,43 +169,43 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updatePriceEntry(
+	public Response patchPriceEntry(
 			@GraphQLName("id") String id,
-			@GraphQLName("PriceEntry") PriceEntry priceEntry)
+			@GraphQLName("priceEntry") PriceEntry priceEntry)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_priceEntryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			priceEntryResource -> priceEntryResource.updatePriceEntry(
+			priceEntryResource -> priceEntryResource.patchPriceEntry(
 				id, priceEntry));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public PriceList upsertPriceList(
-			@GraphQLName("groupId") Long groupId,
-			@GraphQLName("PriceList") PriceList priceList)
+	public TierPrice postPriceEntryTierPrice(
+			@GraphQLName("id") String id,
+			@GraphQLName("tierPrice") TierPrice tierPrice)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_priceListResourceComponentServiceObjects,
+			_priceEntryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			priceListResource -> priceListResource.upsertPriceList(
-				groupId, priceList));
+			priceEntryResource -> priceEntryResource.postPriceEntryTierPrice(
+				id, tierPrice));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public PriceEntry upsertPriceEntry(
+	public PriceEntry postPriceListPriceEntry(
 			@GraphQLName("id") String id,
-			@GraphQLName("PriceEntry") PriceEntry priceEntry)
+			@GraphQLName("priceEntry") PriceEntry priceEntry)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_priceListResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			priceListResource -> priceListResource.upsertPriceEntry(
+			priceListResource -> priceListResource.postPriceListPriceEntry(
 				id, priceEntry));
 	}
 
@@ -237,16 +220,28 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updatePriceList(
+	public Response patchPriceList(
 			@GraphQLName("id") String id,
-			@GraphQLName("PriceList") PriceList priceList)
+			@GraphQLName("priceList") PriceList priceList)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_priceListResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			priceListResource -> priceListResource.updatePriceList(
+			priceListResource -> priceListResource.patchPriceList(
 				id, priceList));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public PriceList postPriceList(
+			@GraphQLName("priceList") PriceList priceList)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_priceListResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceListResource -> priceListResource.postPriceList(priceList));
 	}
 
 	@GraphQLInvokeDetached
@@ -260,15 +255,15 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response updateTierPrice(
+	public Response patchTierPrice(
 			@GraphQLName("id") String id,
-			@GraphQLName("TierPrice") TierPrice tierPrice)
+			@GraphQLName("tierPrice") TierPrice tierPrice)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_tierPriceResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			tierPriceResource -> tierPriceResource.updateTierPrice(
+			tierPriceResource -> tierPriceResource.patchTierPrice(
 				id, tierPrice));
 	}
 

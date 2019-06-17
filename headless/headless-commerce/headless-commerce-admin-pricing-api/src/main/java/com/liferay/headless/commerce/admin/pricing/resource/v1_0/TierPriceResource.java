@@ -36,7 +36,7 @@ public interface TierPriceResource {
 
 	public TierPrice getTierPrice(String id) throws Exception;
 
-	public Response updateTierPrice(String id, TierPrice tierPrice)
+	public Response patchTierPrice(String id, TierPrice tierPrice)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

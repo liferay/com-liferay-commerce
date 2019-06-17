@@ -24,7 +24,12 @@ import com.liferay.petra.string.StringBundler;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Generated;
 
@@ -39,9 +44,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("DiscountCategory")
 @JsonFilter("Liferay.Vulcan")
+@Schema(requiredProperties = {"categoryId", "discountId"})
 @XmlRootElement(name = "DiscountCategory")
 public class DiscountCategory {
 
+	@Schema
 	public Long getDiscountId() {
 		return discountId;
 	}
@@ -57,6 +64,9 @@ public class DiscountCategory {
 		try {
 			discountId = discountIdUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -67,6 +77,7 @@ public class DiscountCategory {
 	@NotNull
 	protected Long discountId;
 
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -80,6 +91,9 @@ public class DiscountCategory {
 		try {
 			id = idUnsafeSupplier.get();
 		}
+		catch (RuntimeException re) {
+			throw re;
+		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -89,6 +103,7 @@ public class DiscountCategory {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
+	@Schema
 	public Long getProductId() {
 		return productId;
 	}
@@ -103,6 +118,9 @@ public class DiscountCategory {
 
 		try {
 			productId = productIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -140,19 +158,70 @@ public class DiscountCategory {
 
 		sb.append("{");
 
-		sb.append("\"discountId\": ");
+		if (discountId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append(discountId);
-		sb.append(", ");
+			sb.append("\"discountId\": ");
 
-		sb.append("\"id\": ");
+			sb.append(discountId);
+		}
 
-		sb.append(id);
-		sb.append(", ");
+		if (id != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
 
-		sb.append("\"productId\": ");
+			sb.append("\"id\": ");
 
-		sb.append(productId);
+			sb.append(id);
+		}
+
+		if (productId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"productId\": ");
+
+			sb.append(productId);
+		}
+
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	private static String _escape(Object object) {
+		String string = String.valueOf(object);
+
+		return string.replaceAll("\"", "\\\\\"");
+	}
+
+	private static String _toJSON(Map<String, ?> map) {
+		StringBuilder sb = new StringBuilder("{");
+
+		@SuppressWarnings("unchecked")
+		Set set = map.entrySet();
+
+		@SuppressWarnings("unchecked")
+		Iterator<Map.Entry<String, ?>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, ?> entry = iterator.next();
+
+			sb.append("\"");
+			sb.append(entry.getKey());
+			sb.append("\":");
+			sb.append("\"");
+			sb.append(entry.getValue());
+			sb.append("\"");
+
+			if (iterator.hasNext()) {
+				sb.append(",");
+			}
+		}
 
 		sb.append("}");
 

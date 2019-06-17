@@ -78,6 +78,8 @@ public class OpenAPIResourceImpl {
 		{
 			add(AttachmentResourceImpl.class);
 
+			add(CatalogResourceImpl.class);
+
 			add(CategoryResourceImpl.class);
 
 			add(OptionResourceImpl.class);
@@ -95,6 +97,8 @@ public class OpenAPIResourceImpl {
 			add(ProductOptionValueResourceImpl.class);
 
 			add(ProductShippingConfigurationResourceImpl.class);
+
+			add(ProductSpecificationResourceImpl.class);
 
 			add(ProductSubscriptionConfigurationResourceImpl.class);
 

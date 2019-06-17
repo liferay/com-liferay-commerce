@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Option;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Catalog;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -32,28 +32,30 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface OptionResource {
+public interface CatalogResource {
 
-	public Response deleteOption(Long id) throws Exception;
+	public Response deleteCatalog(Long id) throws Exception;
 
-	public Option getOption(Long id) throws Exception;
+	public Catalog getCatalog(Long id) throws Exception;
 
-	public Response patchOption(Long id, Option option) throws Exception;
+	public Response patchCatalog(Long id, Catalog catalog) throws Exception;
 
-	public Response deleteOptionByExternalReferenceCode(
+	public Response deleteCatalogByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
 
-	public Option getOptionByExternalReferenceCode(String externalReferenceCode)
+	public Catalog getCatalogByExternalReferenceCode(
+			String externalReferenceCode)
 		throws Exception;
 
-	public Response patchOptionByExternalReferenceCode(
-			String externalReferenceCode, Option option)
+	public Response patchCatalogByExternalReferenceCode(
+			String externalReferenceCode, Catalog catalog)
 		throws Exception;
 
-	public Page<Option> getOptionsPage(Pagination pagination) throws Exception;
+	public Page<Catalog> getCatalogsPage(Pagination pagination)
+		throws Exception;
 
-	public Option postOption(Option option) throws Exception;
+	public Catalog postCatalog(Catalog catalog) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 
