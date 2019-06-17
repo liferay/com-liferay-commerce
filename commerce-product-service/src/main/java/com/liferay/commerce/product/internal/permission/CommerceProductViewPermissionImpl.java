@@ -49,6 +49,21 @@ public class CommerceProductViewPermissionImpl
 
 	@Override
 	public void check(
+			PermissionChecker permissionChecker, long commerceAccountId,
+			long cpDefinitionId)
+		throws PortalException {
+
+		if (contains(permissionChecker, commerceAccountId, cpDefinitionId)) {
+			return;
+		}
+
+		throw new PrincipalException.MustHavePermission(
+			permissionChecker.getUserId(), CPDefinition.class.getName(),
+			cpDefinitionId, ActionKeys.VIEW);
+	}
+
+	@Override
+	public void check(
 			PermissionChecker permissionChecker, long groupId,
 			long commerceAccountId, long cpDefinitionId)
 		throws PortalException {
@@ -63,6 +78,28 @@ public class CommerceProductViewPermissionImpl
 		throw new PrincipalException.MustHavePermission(
 			permissionChecker.getUserId(), CPDefinition.class.getName(),
 			cpDefinitionId, ActionKeys.VIEW);
+	}
+
+	@Override
+	public boolean contains(
+			PermissionChecker permissionChecker, long commerceAccountId,
+			long cpDefinitionId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
+
+		if (_viewCatalog(
+				permissionChecker, cpDefinition.getCommerceCatalog())) {
+
+			return true;
+		}
+
+		if (_accountEnabled(commerceAccountId, cpDefinition)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override

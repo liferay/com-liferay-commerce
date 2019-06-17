@@ -19,11 +19,14 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.wishlist.model.WishListItemUpdated;
-import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
@@ -58,6 +61,7 @@ public class CommerceWishListResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addWishListItem(
+		@FormParam("commerceAccountId") long commerceAccountId,
 		@FormParam("groupId") long groupId,
 		@FormParam("productId") long cpDefinitionId,
 		@FormParam("skuId") long cpInstanceId,
@@ -67,6 +71,13 @@ public class CommerceWishListResource {
 		WishListItemUpdated wishListItemUpdated = new WishListItemUpdated();
 
 		try {
+			CommerceContext commerceContext = _commerceContextFactory.create(
+				_portal.getCompanyId(httpServletRequest), groupId,
+				_portal.getUserId(httpServletRequest), 0, commerceAccountId);
+
+			httpServletRequest.setAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
+
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CommerceWishListItem.class.getName(), httpServletRequest);
 
@@ -76,10 +87,12 @@ public class CommerceWishListResource {
 				_commerceWishListService.getDefaultCommerceWishList(
 					groupId, _portal.getUserId(httpServletRequest));
 
-			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
-				cpDefinitionId);
+			CPCatalogEntry cpCatalogEntry =
+				_cpDefinitionHelper.getCPCatalogEntry(
+					commerceAccountId, groupId, cpDefinitionId,
+					_portal.getLocale(httpServletRequest));
 
-			CPInstance cpInstance = _cpInstanceService.fetchCPInstance(
+			CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
 				cpInstanceId);
 
 			String cpInstanceUuid = StringPool.BLANK;
@@ -95,7 +108,7 @@ public class CommerceWishListResource {
 
 				_commerceWishListItemService.addCommerceWishListItem(
 					commerceWishList.getCommerceWishListId(),
-					cpDefinition.getCProductId(), cpInstanceUuid, options,
+					cpCatalogEntry.getCProductId(), cpInstanceUuid, options,
 					serviceContext);
 
 				wishListItemUpdated.setSuccess(true);
@@ -104,7 +117,7 @@ public class CommerceWishListResource {
 				CommerceWishListItem commerceWishListItem =
 					_commerceWishListItemService.getCommerceWishListItem(
 						commerceWishList.getCommerceWishListId(),
-						cpInstanceUuid, cpDefinition.getCProductId());
+						cpInstanceUuid, cpCatalogEntry.getCProductId());
 
 				_commerceWishListItemService.deleteCommerceWishListItem(
 					commerceWishListItem.getCommerceWishListItemId());
@@ -155,16 +168,19 @@ public class CommerceWishListResource {
 		CommerceWishListResource.class);
 
 	@Reference
+	private CommerceContextFactory _commerceContextFactory;
+
+	@Reference
 	private CommerceWishListItemService _commerceWishListItemService;
 
 	@Reference
 	private CommerceWishListService _commerceWishListService;
 
 	@Reference
-	private CPDefinitionService _cpDefinitionService;
+	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference
-	private CPInstanceService _cpInstanceService;
+	private CPInstanceService _cpInstanceLocalService;
 
 	@Reference
 	private Portal _portal;

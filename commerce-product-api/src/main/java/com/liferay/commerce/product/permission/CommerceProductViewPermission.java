@@ -24,7 +24,17 @@ public interface CommerceProductViewPermission {
 
 	public void check(
 			PermissionChecker permissionChecker, long commerceAccountId,
+			long cpDefinitionId)
+		throws PortalException;
+
+	public void check(
+			PermissionChecker permissionChecker, long commerceAccountId,
 			long channelGroupId, long cpDefinitionId)
+		throws PortalException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long commerceAccountId,
+			long cpDefinitionId)
 		throws PortalException;
 
 	public boolean contains(
