@@ -16,18 +16,30 @@ package com.liferay.commerce.account.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
+import java.util.List;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceAccountGroupImpl extends CommerceAccountGroupBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce account group model instance should use the {@link com.liferay.commerce.account.model.CommerceAccountGroup} interface instead.
-	 */
 	public CommerceAccountGroupImpl() {
+	}
+
+	@Override
+	public List<CommerceAccountGroupCommerceAccountRel>
+		getCommerceAccountGroupCommerceAccountRels() {
+
+		return CommerceAccountGroupCommerceAccountRelLocalServiceUtil.
+			getCommerceAccountGroupCommerceAccountRels(
+				getCommerceAccountGroupId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 	}
 
 }
