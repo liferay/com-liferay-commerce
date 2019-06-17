@@ -317,20 +317,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 				_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
 					cProduct.getGroupId());
 
-			try {
-				if (_commerceCatalogModelResourcePermission.contains(
-						PermissionThreadLocal.getPermissionChecker(),
-						commerceCatalog, ActionKeys.VIEW)) {
-
-					Company company = _companyLocalService.getCompany(
-						cProduct.getCompanyId());
-
-					return company.getGroupId();
-				}
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-			}
+			return commerceCatalog.getGroupId();
 		}
 
 		return 0;
