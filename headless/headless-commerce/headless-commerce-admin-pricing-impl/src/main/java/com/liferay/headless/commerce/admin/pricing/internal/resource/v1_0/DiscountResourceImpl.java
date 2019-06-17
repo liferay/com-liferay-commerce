@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
-import javax.validation.constraints.NotNull;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -34,6 +32,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/discount.properties",
@@ -42,7 +41,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 
 	@Override
-	public Response deleteDiscount(@NotNull Long id) throws Exception {
+	public Response deleteDiscount(Long id) throws Exception {
 		_discountHelper.deleteDiscount(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -51,30 +50,28 @@ public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 	}
 
 	@Override
-	public Discount getDiscount(@NotNull Long id) throws Exception {
+	public Discount getDiscount(Long id) throws Exception {
 		return _discountHelper.getDiscount(id);
 	}
 
 	@Override
-	public Page<DiscountRule> getDiscountRules(
-			@NotNull Long id, Pagination pagination)
+	public Page<DiscountRule> getDiscountDiscountRulesPage(
+			Long id, Pagination pagination)
 		throws Exception {
 
 		return _discountRuleHelper.getDiscountRules(id, pagination);
 	}
 
 	@Override
-	public Page<Discount> getDiscounts(
-			@NotNull Long groupId, Pagination pagination)
+	public Page<Discount> getDiscountsPage(Pagination pagination)
 		throws Exception {
 
-		return _discountHelper.getDiscounts(groupId, pagination);
+		return _discountHelper.getDiscounts(
+			contextCompany.getCompanyId(), pagination);
 	}
 
 	@Override
-	public Response updateDiscount(@NotNull Long id, Discount discount)
-		throws Exception {
-
+	public Response patchDiscount(Long id, Discount discount) throws Exception {
 		_discountHelper.updateDiscount(id, discount, _user);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -83,15 +80,13 @@ public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 	}
 
 	@Override
-	public Discount upsertDiscount(@NotNull Long groupId, Discount discount)
-		throws Exception {
-
-		return _discountHelper.upsertDiscount(groupId, discount, _user);
+	public Discount postDiscount(Discount discount) throws Exception {
+		return _discountHelper.upsertDiscount(discount, _user);
 	}
 
 	@Override
-	public DiscountRule upsertDiscountRule(
-			@NotNull Long id, DiscountRule discountRule)
+	public DiscountRule postDiscountDiscountRule(
+			Long id, DiscountRule discountRule)
 		throws Exception {
 
 		return _discountRuleHelper.upsertDiscountRule(id, discountRule, _user);

@@ -18,8 +18,6 @@ import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DiscountRuleHelper;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
 
-import javax.validation.constraints.NotNull;
-
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -28,6 +26,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/discount-rule.properties",
@@ -36,7 +35,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class DiscountRuleResourceImpl extends BaseDiscountRuleResourceImpl {
 
 	@Override
-	public Response deleteDiscountRule(@NotNull Long id) throws Exception {
+	public Response deleteDiscountRule(Long id) throws Exception {
 		_discountRuleHelper.deleteDiscountRule(id);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -45,13 +44,12 @@ public class DiscountRuleResourceImpl extends BaseDiscountRuleResourceImpl {
 	}
 
 	@Override
-	public DiscountRule getDiscountRule(@NotNull Long id) throws Exception {
+	public DiscountRule getDiscountRule(Long id) throws Exception {
 		return _discountRuleHelper.getDiscountRule(id);
 	}
 
 	@Override
-	public DiscountRule updateDiscountRule(
-			@NotNull Long id, DiscountRule discountRule)
+	public DiscountRule postDiscountRule(Long id, DiscountRule discountRule)
 		throws Exception {
 
 		return _discountRuleHelper.updateDiscountRule(id, discountRule);

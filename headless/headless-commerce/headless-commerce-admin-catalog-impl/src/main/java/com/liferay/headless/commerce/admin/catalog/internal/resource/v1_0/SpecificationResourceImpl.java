@@ -63,8 +63,18 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	}
 
 	@Override
-	public Page<Specification> getCatalogSiteSpecificationsPage(
-			Long siteId, Pagination pagination)
+	public Specification getSpecification(Long id) throws Exception {
+		DTOConverter specificationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPSpecificationOption.class.getName());
+
+		return (Specification)specificationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(), id));
+	}
+
+	@Override
+	public Page<Specification> getSpecificationsPage(Pagination pagination)
 		throws Exception {
 
 		BaseModelSearchResult<CPSpecificationOption>
@@ -81,17 +91,6 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	}
 
 	@Override
-	public Specification getSpecification(Long id) throws Exception {
-		DTOConverter specificationDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CPSpecificationOption.class.getName());
-
-		return (Specification)specificationDTOConverter.toDTO(
-			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
-	}
-
-	@Override
 	public Response patchSpecification(Long id, Specification specification)
 		throws Exception {
 
@@ -103,11 +102,10 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	}
 
 	@Override
-	public Specification postCatalogSiteSpecification(
-			Long siteId, Specification specification)
+	public Specification postSpecification(Specification specification)
 		throws Exception {
 
-		return _upsertSpecification(siteId, specification);
+		return _upsertSpecification(specification);
 	}
 
 	private long _getCPOptionCategoryId(Specification specification) {
@@ -169,8 +167,7 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 			_serviceContextHelper.getServiceContext());
 	}
 
-	private Specification _upsertSpecification(
-			long siteId, Specification specification)
+	private Specification _upsertSpecification(Specification specification)
 		throws Exception {
 
 		DTOConverter specificationDTOConverter =
@@ -200,7 +197,7 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 				LanguageUtils.getLocalizedMap(specification.getTitle()),
 				LanguageUtils.getLocalizedMap(specification.getDescription()),
 				_isFacetable(specification), specification.getKey(),
-				_serviceContextHelper.getServiceContext(siteId));
+				_serviceContextHelper.getServiceContext());
 
 		return (Specification)specificationDTOConverter.toDTO(
 			new DefaultDTOConverterContext(

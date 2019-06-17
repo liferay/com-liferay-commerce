@@ -63,8 +63,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	}
 
 	@Override
-	public Page<OptionCategory> getCatalogSiteOptionCategoriesPage(
-			Long siteId, Pagination pagination)
+	public Page<OptionCategory> getOptionCategoriesPage(Pagination pagination)
 		throws Exception {
 
 		BaseModelSearchResult<CPOptionCategory>
@@ -102,11 +101,10 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	}
 
 	@Override
-	public OptionCategory postCatalogSiteOptionCategory(
-			Long siteId, OptionCategory optionCategory)
+	public OptionCategory postOptionCategory(OptionCategory optionCategory)
 		throws Exception {
 
-		return _upsertOptionCategory(siteId, optionCategory);
+		return _upsertOptionCategory(optionCategory);
 	}
 
 	private List<OptionCategory> _toOptionCategories(
@@ -146,8 +144,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			optionCategory.getKey(), _serviceContextHelper.getServiceContext());
 	}
 
-	private OptionCategory _upsertOptionCategory(
-			Long siteId, OptionCategory optionCategory)
+	private OptionCategory _upsertOptionCategory(OptionCategory optionCategory)
 		throws Exception {
 
 		DTOConverter optionCategoryDTOConverter =
@@ -177,7 +174,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 				LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 				GetterUtil.get(optionCategory.getPriority(), 0D),
 				optionCategory.getKey(),
-				_serviceContextHelper.getServiceContext(siteId));
+				_serviceContextHelper.getServiceContext());
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(

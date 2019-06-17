@@ -80,23 +80,6 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 	}
 
 	@Override
-	public Page<Option> getCatalogSiteOptionsPage(
-			Long siteId, Pagination pagination)
-		throws Exception {
-
-		BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
-			_cpOptionService.searchCPOptions(
-				siteId, null, pagination.getStartPosition(),
-				pagination.getEndPosition(), null);
-
-		int totalItems = cpOptionBaseModelSearchResult.getLength();
-
-		return Page.of(
-			_toOptions(cpOptionBaseModelSearchResult.getBaseModels()),
-			pagination, totalItems);
-	}
-
-	@Override
 	public Option getOption(Long id) throws Exception {
 		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
 			CPOption.class.getName());
@@ -120,6 +103,21 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				cpOption.getCPOptionId()));
+	}
+
+	@Override
+	public Page<Option> getOptionsPage(Pagination pagination) throws Exception {
+		BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
+			_cpOptionService.searchCPOptions(
+				contextCompany.getCompanyId(), null,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int totalItems = cpOptionBaseModelSearchResult.getLength();
+
+		return Page.of(
+			_toOptions(cpOptionBaseModelSearchResult.getBaseModels()),
+			pagination, totalItems);
 	}
 
 	@Override
@@ -155,10 +153,8 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 	}
 
 	@Override
-	public Option postCatalogSiteOption(Long siteId, Option option)
-		throws Exception {
-
-		return _upsertOption(siteId, option);
+	public Option postOption(Option option) throws Exception {
+		return _upsertOption(option);
 	}
 
 	private List<Option> _toOptions(List<CPOption> cpOptions) throws Exception {
@@ -203,7 +199,7 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 				cpOption.getCPOptionId()));
 	}
 
-	private Option _upsertOption(long siteId, Option option) throws Exception {
+	private Option _upsertOption(Option option) throws Exception {
 		Option.FieldType fieldType = option.getFieldType();
 
 		CPOption cpOption = _cpOptionService.upsertCPOption(
@@ -213,7 +209,7 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 			GetterUtil.get(option.getRequired(), false),
 			GetterUtil.get(option.getSkuContributor(), false), option.getKey(),
 			option.getExternalReferenceCode(),
-			_serviceContextHelper.getServiceContext(siteId));
+			_serviceContextHelper.getServiceContext());
 
 		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
 			CPOption.class.getName());
