@@ -148,6 +148,11 @@ public class CommerceAccountGroupWrapper implements CommerceAccountGroup,
 		return _commerceAccountGroup.compareTo(commerceAccountGroup);
 	}
 
+	@Override
+	public java.util.List<CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels() {
+		return _commerceAccountGroup.getCommerceAccountGroupCommerceAccountRels();
+	}
+
 	/**
 	* Returns the commerce account group ID of this commerce account group.
 	*

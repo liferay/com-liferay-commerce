@@ -65,6 +65,10 @@ public interface CommerceAccountGroupService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountGroup fetchByExternalReferenceCode(long companyId,
+		String externalReferenceCode) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccountGroup getCommerceAccountGroup(
 		long commerceAccountGroupId) throws PortalException;
 

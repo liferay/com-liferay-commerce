@@ -199,6 +199,13 @@ public class CommerceAccountGroupLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return _commerceAccountGroupLocalService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup fetchCommerceAccountGroup(
 		long commerceAccountGroupId) {
 		return _commerceAccountGroupLocalService.fetchCommerceAccountGroup(commerceAccountGroupId);

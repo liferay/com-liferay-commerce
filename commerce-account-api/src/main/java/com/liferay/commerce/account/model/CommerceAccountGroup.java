@@ -55,4 +55,6 @@ public interface CommerceAccountGroup extends CommerceAccountGroupModel,
 				return CommerceAccountGroup.class;
 			}
 		};
+
+	public java.util.List<CommerceAccountGroupCommerceAccountRel> getCommerceAccountGroupCommerceAccountRels();
 }

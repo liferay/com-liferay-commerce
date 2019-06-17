@@ -94,6 +94,21 @@ public class CommerceAccountGroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) throws RemoteException {
+		try {
+			com.liferay.commerce.account.model.CommerceAccountGroup returnValue = CommerceAccountGroupServiceUtil.fetchByExternalReferenceCode(companyId,
+					externalReferenceCode);
+
+			return com.liferay.commerce.account.model.CommerceAccountGroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroupSoap getCommerceAccountGroup(
 		long commerceAccountGroupId) throws RemoteException {
 		try {
