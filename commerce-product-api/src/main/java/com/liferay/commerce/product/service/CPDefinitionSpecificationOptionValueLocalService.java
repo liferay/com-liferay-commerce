@@ -323,6 +323,10 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 	public int getCPDefinitionSpecificationOptionValuesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCPDefinitionSpecificationOptionValuesCount(
+		long cpDefinitionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CPDefinitionSpecificationOptionValue>
 		getCPSpecificationOptionDefinitionValues(long cpSpecificationOptionId);
 

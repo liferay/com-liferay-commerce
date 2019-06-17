@@ -58,6 +58,16 @@ public class CommerceCatalogServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CommerceCatalog
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceCatalogService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog
 			fetchCommerceCatalog(long commerceCatalogId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -70,6 +80,14 @@ public class CommerceCatalogServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceCatalogService.fetchCommerceCatalogByGroupId(groupId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CommerceCatalog
+			getCommerceCatalog(long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceCatalogService.getCommerceCatalog(commerceCatalogId);
 	}
 
 	@Override

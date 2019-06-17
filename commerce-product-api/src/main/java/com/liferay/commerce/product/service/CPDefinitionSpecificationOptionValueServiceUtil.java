@@ -110,6 +110,14 @@ public class CPDefinitionSpecificationOptionValueServiceUtil {
 			cpDefinitionId, cpOptionCategoryId);
 	}
 
+	public static int getCPDefinitionSpecificationOptionValuesCount(
+			long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCPDefinitionSpecificationOptionValuesCount(
+			cpDefinitionId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

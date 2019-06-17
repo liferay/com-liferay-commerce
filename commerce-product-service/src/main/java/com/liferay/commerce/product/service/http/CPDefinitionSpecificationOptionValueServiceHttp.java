@@ -318,6 +318,45 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 		}
 	}
 
+	public static int getCPDefinitionSpecificationOptionValuesCount(
+			HttpPrincipal httpPrincipal, long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPDefinitionSpecificationOptionValueServiceUtil.class,
+				"getCPDefinitionSpecificationOptionValuesCount",
+				_getCPDefinitionSpecificationOptionValuesCountParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, cpDefinitionId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static
 		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
 				updateCPDefinitionSpecificationOptionValue(
@@ -334,7 +373,7 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CPDefinitionSpecificationOptionValueServiceUtil.class,
 				"updateCPDefinitionSpecificationOptionValue",
-				_updateCPDefinitionSpecificationOptionValueParameterTypes6);
+				_updateCPDefinitionSpecificationOptionValueParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, cpDefinitionSpecificationOptionValueId,
@@ -395,7 +434,10 @@ public class CPDefinitionSpecificationOptionValueServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[]
-		_updateCPDefinitionSpecificationOptionValueParameterTypes6 =
+		_getCPDefinitionSpecificationOptionValuesCountParameterTypes6 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_updateCPDefinitionSpecificationOptionValueParameterTypes7 =
 			new Class[] {
 				long.class, long.class, java.util.Map.class, double.class,
 				com.liferay.portal.kernel.service.ServiceContext.class

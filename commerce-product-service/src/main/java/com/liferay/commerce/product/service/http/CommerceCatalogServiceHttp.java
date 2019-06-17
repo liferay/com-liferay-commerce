@@ -139,6 +139,48 @@ public class CommerceCatalogServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog
+			fetchByExternalReferenceCode(
+				HttpPrincipal httpPrincipal, long companyId,
+				String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceCatalogServiceUtil.class,
+				"fetchByExternalReferenceCode",
+				_fetchByExternalReferenceCodeParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, externalReferenceCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.product.model.CommerceCatalog)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog
 			fetchCommerceCatalog(
 				HttpPrincipal httpPrincipal, long commerceCatalogId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -146,7 +188,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class, "fetchCommerceCatalog",
-				_fetchCommerceCatalogParameterTypes2);
+				_fetchCommerceCatalogParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCatalogId);
@@ -187,9 +229,49 @@ public class CommerceCatalogServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class,
 				"fetchCommerceCatalogByGroupId",
-				_fetchCommerceCatalogByGroupIdParameterTypes3);
+				_fetchCommerceCatalogByGroupIdParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.product.model.CommerceCatalog)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog
+			getCommerceCatalog(
+				HttpPrincipal httpPrincipal, long commerceCatalogId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceCatalogServiceUtil.class, "getCommerceCatalog",
+				_getCommerceCatalogParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceCatalogId);
 
 			Object returnObj = null;
 
@@ -227,7 +309,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class, "getCommerceCatalogs",
-				_getCommerceCatalogsParameterTypes4);
+				_getCommerceCatalogsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, start, end);
@@ -263,7 +345,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class, "searchCommerceCatalogs",
-				_searchCommerceCatalogsParameterTypes5);
+				_searchCommerceCatalogsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, keywords, start, end, sort);
@@ -302,7 +384,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class, "searchCommerceCatalogsCount",
-				_searchCommerceCatalogsCountParameterTypes6);
+				_searchCommerceCatalogsCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, keywords);
@@ -343,7 +425,7 @@ public class CommerceCatalogServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCatalogServiceUtil.class, "updateCommerceCatalog",
-				_updateCommerceCatalogParameterTypes7);
+				_updateCommerceCatalogParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCatalogId, name, commerceCurrencyCode,
@@ -386,24 +468,30 @@ public class CommerceCatalogServiceHttp {
 		};
 	private static final Class<?>[] _deleteCommerceCatalogParameterTypes1 =
 		new Class[] {long.class};
-	private static final Class<?>[] _fetchCommerceCatalogParameterTypes2 =
+	private static final Class<?>[]
+		_fetchByExternalReferenceCodeParameterTypes2 = new Class[] {
+			long.class, String.class
+		};
+	private static final Class<?>[] _fetchCommerceCatalogParameterTypes3 =
 		new Class[] {long.class};
 	private static final Class<?>[]
-		_fetchCommerceCatalogByGroupIdParameterTypes3 = new Class[] {
+		_fetchCommerceCatalogByGroupIdParameterTypes4 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceCatalogsParameterTypes4 =
+	private static final Class<?>[] _getCommerceCatalogParameterTypes5 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceCatalogsParameterTypes6 =
 		new Class[] {long.class, int.class, int.class};
-	private static final Class<?>[] _searchCommerceCatalogsParameterTypes5 =
+	private static final Class<?>[] _searchCommerceCatalogsParameterTypes7 =
 		new Class[] {
 			long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[]
-		_searchCommerceCatalogsCountParameterTypes6 = new Class[] {
+		_searchCommerceCatalogsCountParameterTypes8 = new Class[] {
 			long.class, String.class
 		};
-	private static final Class<?>[] _updateCommerceCatalogParameterTypes7 =
+	private static final Class<?>[] _updateCommerceCatalogParameterTypes9 =
 		new Class[] {long.class, String.class, String.class, String.class};
 
 }

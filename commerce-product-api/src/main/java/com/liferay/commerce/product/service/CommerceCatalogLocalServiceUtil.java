@@ -232,6 +232,14 @@ public class CommerceCatalogLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CommerceCatalog
+		fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode) {
+
+		return getService().fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	public static com.liferay.commerce.product.model.CommerceCatalog
 		fetchCommerceCatalog(long commerceCatalogId) {
 
 		return getService().fetchCommerceCatalog(commerceCatalogId);
