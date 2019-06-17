@@ -7,7 +7,7 @@ create table CommerceAccount (
 	createDate DATE null,
 	modifiedDate DATE null,
 	parentCommerceAccountId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(255) null,
 	logoId LONG,
 	email VARCHAR(75) null,
 	taxId VARCHAR(75) null,
