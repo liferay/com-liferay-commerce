@@ -25,7 +25,7 @@ import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.wishlist.model.WishListItemUpdated;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
@@ -180,7 +180,7 @@ public class CommerceWishListResource {
 	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference
-	private CPInstanceService _cpInstanceLocalService;
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
 	private Portal _portal;
