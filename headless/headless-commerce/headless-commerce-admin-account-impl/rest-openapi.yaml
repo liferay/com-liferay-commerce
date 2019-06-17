@@ -62,10 +62,30 @@ components:
         Account:
             properties:
                 addresses:
+                    example:
+                        - city: Diamond Bar
+                          commerceCountryId: 30130
+                          commerceRegionId: 30234
+                          defaultBilling: true
+                          defaultShipping: true
+                          description: right stairs, first room on the left
+                          id: 31130
+                          latitude: 33.9976884
+                          longitude: -117.8144595
+                          name: Alessio Antonio Rendina
+                          phoneNumber: (123) 456 7890
+                          street1: 1400 Montefino Ave
+                          street2: 1st floor
+                          street3: suite 200
+                          zip: "91765"
                     items:
                         $ref: '#/components/schemas/Address'
                     type: array
                 emailAddresses:
+                    example:
+                        - joe.1@commerce.com
+                        - joe.2@commerce.com
+                        - joe.3@commerce.com
                     items:
                         format: email
                         type: string
@@ -87,6 +107,11 @@ components:
                     example: Account Name
                     type: string
                 organizations:
+                    example:
+                        - id: 20546
+                          name: Liferay Italy
+                          organizationId: 20433
+                          treePath: /Liferay/Liferay Italy
                     items:
                         $ref: '#/components/schemas/AccountOrganization'
                     type: array
@@ -103,11 +128,43 @@ components:
                     minimum: 0
                     type: integer
                 users:
+                    example:
+                        - id: 31256
+                          name: Alessio Antonio Rendina
+                          roles:
+                              - description:
+                                    en_US: Account Administrator Description US
+                                    hr_HR: Account Administrator Description HR
+                                    hu_HU: Account Administrator Description HU
+                                id: 30021
+                                name: Account Administrator
+                                title:
+                                    en_US: Account Administrator US
+                                    hr_HR: Account Administrator HR
+                                    hu_HU: Account Administrator HU
+                          userId: 30002
                     items:
                         $ref: '#/components/schemas/AccountMember'
                     type: array
             required:
                 - externalReferenceCode
+                - name
+            type: object
+        AccountGroup:
+            properties:
+                externalReferenceCode:
+                    example: AB-34098-789-N
+                    type: string
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                name:
+                    example: AccountGroup Name
+                    type: string
+            required:
                 - name
             type: object
         AccountMember:
@@ -121,6 +178,27 @@ components:
                     example: User Name
                     type: string
                 roles:
+                    example:
+                        - description:
+                              en_US: Account Administrator Description US
+                              hr_HR: Account Administrator Description HR
+                              hu_HU: Account Administrator Description HU
+                          id: 30021
+                          name: Account Administrator
+                          title:
+                              en_US: Account Administrator US
+                              hr_HR: Account Administrator HR
+                              hu_HU: Account Administrator HU
+                        - description:
+                              en_US: Order Manager Description US
+                              hr_HR: Order Manager Description HR
+                              hu_HU: Order Manager Description HU
+                          id: 30023
+                          name: Order Manager
+                          title:
+                              en_US: Order Manager US
+                              hr_HR: Order Manager HR
+                              hu_HU: Order Manager HU
                     items:
                         $ref: '#/components/schemas/AccountRole'
                     type: array
@@ -377,6 +455,455 @@ paths:
             summary: Creates or updates an Account.
             tags:
                 - Account
+    /accountGroup/:
+        post:
+            operationId: postAccountGroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Creates or updates an AccountGroup.
+            tags:
+                - AccountGroup
+    /accountGroups/:
+        get:
+            operationId: getAccountGroupsPage
+            parameters:
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountGroup'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountGroup'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.read
+            summary: Gets a list of AccountGroups.
+            tags:
+                - AccountGroup
+    /accountGroups/by-externalReferenceCode/{externalReferenceCode}:
+        delete:
+            operationId: deleteAccountGroupByExternalReferenceCode
+            parameters:
+                - explode: false
+                  in: path
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Deletes an AccountGroup by external reference code.
+            tags:
+                - AccountGroup
+        get:
+            operationId: getAccountGroupByExternalReferenceCode
+            parameters:
+                - explode: false
+                  in: path
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.read
+            summary: Gets an AccountGroup by external reference code.
+            tags:
+                - AccountGroup
+        patch:
+            operationId: patchAccountGroupByExternalReferenceCode
+            parameters:
+                - explode: false
+                  in: path
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                required: true
+            responses:
+                201:
+                    description: Created
+                202:
+                    description: Async
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Updates an AccountGroup by external reference code.
+            tags:
+                - AccountGroup
+    /accountGroups/{id}:
+        delete:
+            operationId: deleteAccountGroup
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Deletes an AccountGroup by ID.
+            tags:
+                - AccountGroup
+        get:
+            operationId: getAccountGroup
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/AccountGroup'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.read
+            summary: Gets an AccountGroup by ID.
+            tags:
+                - AccountGroup
+        patch:
+            operationId: patchAccountGroup
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/AccountGroup'
+                required: true
+            responses:
+                201:
+                    description: Created
+                202:
+                    description: Async
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Updates an AccountGroup by ID.
+            tags:
+                - AccountGroup
     /accounts/:
         get:
             operationId: getAccountsPage
