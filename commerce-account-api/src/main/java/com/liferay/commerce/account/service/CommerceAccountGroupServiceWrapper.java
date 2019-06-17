@@ -50,6 +50,14 @@ public class CommerceAccountGroupServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _commerceAccountGroupService.fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.account.model.CommerceAccountGroup getCommerceAccountGroup(
 		long commerceAccountGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {

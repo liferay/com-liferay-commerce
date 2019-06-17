@@ -193,6 +193,13 @@ public class CommerceAccountGroupLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountGroup fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+		return getService()
+				   .fetchByExternalReferenceCode(companyId,
+			externalReferenceCode);
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroup fetchCommerceAccountGroup(
 		long commerceAccountGroupId) {
 		return getService().fetchCommerceAccountGroup(commerceAccountGroupId);

@@ -119,13 +119,47 @@ public class CommerceAccountGroupServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccountGroup fetchByExternalReferenceCode(
+		HttpPrincipal httpPrincipal, long companyId,
+		String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
+					"fetchByExternalReferenceCode",
+					_fetchByExternalReferenceCodeParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, externalReferenceCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccountGroup)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.account.model.CommerceAccountGroup getCommerceAccountGroup(
 		HttpPrincipal httpPrincipal, long commerceAccountGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"getCommerceAccountGroup",
-					_getCommerceAccountGroupParameterTypes2);
+					_getCommerceAccountGroupParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountGroupId);
@@ -159,7 +193,7 @@ public class CommerceAccountGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"getCommerceAccountGroups",
-					_getCommerceAccountGroupsParameterTypes3);
+					_getCommerceAccountGroupsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, start, end, orderByComparator);
@@ -192,7 +226,7 @@ public class CommerceAccountGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"getCommerceAccountGroupsCount",
-					_getCommerceAccountGroupsCountParameterTypes4);
+					_getCommerceAccountGroupsCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
@@ -225,7 +259,7 @@ public class CommerceAccountGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"searchCommerceAccountGroups",
-					_searchCommerceAccountGroupsParameterTypes5);
+					_searchCommerceAccountGroupsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, keywords, start, end, sort);
@@ -258,7 +292,7 @@ public class CommerceAccountGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"searchCommerceAccountsGroupCount",
-					_searchCommerceAccountsGroupCountParameterTypes6);
+					_searchCommerceAccountsGroupCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, keywords);
@@ -292,7 +326,7 @@ public class CommerceAccountGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CommerceAccountGroupServiceUtil.class,
 					"updateCommerceAccountGroup",
-					_updateCommerceAccountGroupParameterTypes7);
+					_updateCommerceAccountGroupParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					commerceAccountGroupId, name, serviceContext);
@@ -327,22 +361,24 @@ public class CommerceAccountGroupServiceHttp {
 	private static final Class<?>[] _deleteCommerceAccountGroupParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceAccountGroupParameterTypes2 = new Class[] {
+	private static final Class<?>[] _fetchByExternalReferenceCodeParameterTypes2 =
+		new Class[] { long.class, String.class };
+	private static final Class<?>[] _getCommerceAccountGroupParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCommerceAccountGroupsParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getCommerceAccountGroupsParameterTypes4 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceAccountGroupsCountParameterTypes4 =
+	private static final Class<?>[] _getCommerceAccountGroupsCountParameterTypes5 =
 		new Class[] { long.class };
-	private static final Class<?>[] _searchCommerceAccountGroupsParameterTypes5 = new Class[] {
+	private static final Class<?>[] _searchCommerceAccountGroupsParameterTypes6 = new Class[] {
 			long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
-	private static final Class<?>[] _searchCommerceAccountsGroupCountParameterTypes6 =
+	private static final Class<?>[] _searchCommerceAccountsGroupCountParameterTypes7 =
 		new Class[] { long.class, String.class };
-	private static final Class<?>[] _updateCommerceAccountGroupParameterTypes7 = new Class[] {
+	private static final Class<?>[] _updateCommerceAccountGroupParameterTypes8 = new Class[] {
 			long.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
