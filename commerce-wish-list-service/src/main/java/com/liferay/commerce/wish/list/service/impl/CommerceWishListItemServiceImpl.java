@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.wish.list.service.impl;
 
+import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.permission.CommerceProductViewPermission;
+import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.base.CommerceWishListItemServiceBaseImpl;
@@ -23,6 +26,7 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
 
@@ -34,12 +38,18 @@ public class CommerceWishListItemServiceImpl
 
 	@Override
 	public CommerceWishListItem addCommerceWishListItem(
-			long commerceWishListId, long cProductId, String cpInstanceUuid,
-			String json, ServiceContext serviceContext)
+			long commerceAccountId, long commerceWishListId, long cProductId,
+			String cpInstanceUuid, String json, ServiceContext serviceContext)
 		throws PortalException {
 
 		_commerceWishListModelResourcePermission.check(
 			getPermissionChecker(), commerceWishListId, ActionKeys.UPDATE);
+
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		commerceProductViewPermission.check(
+			getPermissionChecker(), commerceAccountId,
+			cProduct.getPublishedCPDefinitionId());
 
 		return commerceWishListItemLocalService.addCommerceWishListItem(
 			commerceWishListId, cProductId, cpInstanceUuid, json,
@@ -137,6 +147,12 @@ public class CommerceWishListItemServiceImpl
 		return commerceWishListItemLocalService.getCommerceWishListItemsCount(
 			commerceWishListId);
 	}
+
+	@ServiceReference(type = CommerceProductViewPermission.class)
+	protected CommerceProductViewPermission commerceProductViewPermission;
+
+	@ServiceReference(type = CProductLocalService.class)
+	protected CProductLocalService cProductLocalService;
 
 	private static volatile ModelResourcePermission<CommerceWishList>
 		_commerceWishListModelResourcePermission =
