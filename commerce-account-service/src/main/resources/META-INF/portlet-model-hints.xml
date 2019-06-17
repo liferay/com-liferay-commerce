@@ -11,6 +11,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="parentCommerceAccountId" type="long" />
 		<field name="name" type="String">
+			<hint name="max-length">255</hint>
 			<validator name="required" />
 		</field>
 		<field name="logoId" type="long" />
