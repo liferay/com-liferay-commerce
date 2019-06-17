@@ -170,6 +170,13 @@ public class CommerceChannelRelWrapper
 		return _commerceChannelRel.getClassPK();
 	}
 
+	@Override
+	public CommerceChannel getCommerceChannel()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceChannelRel.getCommerceChannel();
+	}
+
 	/**
 	 * Returns the commerce channel ID of this commerce channel rel.
 	 *

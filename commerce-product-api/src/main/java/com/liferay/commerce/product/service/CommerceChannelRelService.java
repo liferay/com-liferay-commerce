@@ -16,14 +16,20 @@ package com.liferay.commerce.product.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
  * Provides the remote service interface for CommerceChannelRel. Methods of this
@@ -55,6 +61,28 @@ public interface CommerceChannelRelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceChannelRelServiceUtil} to access the commerce channel rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceChannelRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceChannelRel addCommerceChannelRel(
+			String className, long classPK, long commerceChannelId,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	public void deleteCommerceChannelRels(String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		long commerceChannelId, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		String className, long classPK, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceChannelRelsCount(long commerceChannelId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceChannelRelsCount(String className, long classPK);
 
 	/**
 	 * Returns the OSGi service identifier.

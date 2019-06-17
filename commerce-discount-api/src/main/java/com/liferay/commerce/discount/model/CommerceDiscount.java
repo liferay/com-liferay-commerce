@@ -59,7 +59,7 @@ public interface CommerceDiscount
 
 		};
 
-	public java.util.List<CommerceDiscountUserSegmentRel>
-		getCommerceDiscountUserSegmentRels();
+	public java.util.List<CommerceDiscountCommerceAccountGroupRel>
+		getCommerceDiscountCommerceAccountGroupRels();
 
 }

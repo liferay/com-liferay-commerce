@@ -87,4 +87,7 @@ public interface CommerceAccountOrganizationRel
 
 			};
 
+	public com.liferay.portal.kernel.model.Organization getOrganization()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

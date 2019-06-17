@@ -147,6 +147,15 @@ public class CommerceDiscountCommerceAccountGroupRelWrapper
 			commerceDiscountCommerceAccountGroupRel);
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup
+			getCommerceAccountGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountCommerceAccountGroupRel.
+			getCommerceAccountGroup();
+	}
+
 	/**
 	 * Returns the commerce account group ID of this commerce discount commerce account group rel.
 	 *

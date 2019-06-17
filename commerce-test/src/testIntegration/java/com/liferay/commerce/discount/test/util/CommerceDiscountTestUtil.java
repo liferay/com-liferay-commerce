@@ -18,7 +18,7 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
-import com.liferay.commerce.discount.model.CommerceDiscountConstants;
+import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil;

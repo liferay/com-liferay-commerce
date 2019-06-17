@@ -10,18 +10,6 @@ create table CNTemplateCAccountGroupRel (
 	commerceAccountGroupId LONG
 );
 
-create table CNTemplateUserSegmentRel (
-	CNTemplateUserSegmentRelId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	commerceNotificationTemplateId LONG,
-	commerceUserSegmentEntryId LONG
-);
-
 create table CNotificationAttachment (
 	uuid_ VARCHAR(75) null,
 	CNotificationAttachmentId LONG not null primary key,

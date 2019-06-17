@@ -60,4 +60,7 @@ public interface CommerceChannelRel
 
 			};
 
+	public CommerceChannel getCommerceChannel()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

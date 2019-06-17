@@ -52,6 +52,17 @@ public class CommerceChannelRelLocalServiceWrapper
 			commerceChannelRel);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CommerceChannelRel
+			addCommerceChannelRel(
+				String className, long classPK, long commerceChannelId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceChannelRelLocalService.addCommerceChannelRel(
+			className, classPK, commerceChannelId, serviceContext);
+	}
+
 	/**
 	 * Creates a new commerce channel rel with the primary key. Does not add the commerce channel rel to the database.
 	 *
@@ -96,6 +107,18 @@ public class CommerceChannelRelLocalServiceWrapper
 
 		return _commerceChannelRelLocalService.deleteCommerceChannelRel(
 			commerceChannelRelId);
+	}
+
+	@Override
+	public void deleteCommerceChannelRels(long commerceChannelId) {
+		_commerceChannelRelLocalService.deleteCommerceChannelRels(
+			commerceChannelId);
+	}
+
+	@Override
+	public void deleteCommerceChannelRels(String className, long classPK) {
+		_commerceChannelRelLocalService.deleteCommerceChannelRels(
+			className, classPK);
 	}
 
 	/**
@@ -251,6 +274,30 @@ public class CommerceChannelRelLocalServiceWrapper
 			start, end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannelRel>
+		getCommerceChannelRels(
+			long commerceChannelId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CommerceChannelRel>
+					orderByComparator) {
+
+		return _commerceChannelRelLocalService.getCommerceChannelRels(
+			commerceChannelId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CommerceChannelRel>
+		getCommerceChannelRels(
+			String className, long classPK, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.product.model.CommerceChannelRel>
+					orderByComparator) {
+
+		return _commerceChannelRelLocalService.getCommerceChannelRels(
+			className, classPK, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the number of commerce channel rels.
 	 *
@@ -259,6 +306,18 @@ public class CommerceChannelRelLocalServiceWrapper
 	@Override
 	public int getCommerceChannelRelsCount() {
 		return _commerceChannelRelLocalService.getCommerceChannelRelsCount();
+	}
+
+	@Override
+	public int getCommerceChannelRelsCount(long commerceChannelId) {
+		return _commerceChannelRelLocalService.getCommerceChannelRelsCount(
+			commerceChannelId);
+	}
+
+	@Override
+	public int getCommerceChannelRelsCount(String className, long classPK) {
+		return _commerceChannelRelLocalService.getCommerceChannelRelsCount(
+			className, classPK);
 	}
 
 	@Override

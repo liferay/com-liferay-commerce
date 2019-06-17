@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -71,6 +72,11 @@ public interface CommerceChannelRelLocalService
 	public CommerceChannelRel addCommerceChannelRel(
 		CommerceChannelRel commerceChannelRel);
 
+	public CommerceChannelRel addCommerceChannelRel(
+			String className, long classPK, long commerceChannelId,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new commerce channel rel with the primary key. Does not add the commerce channel rel to the database.
 	 *
@@ -102,6 +108,10 @@ public interface CommerceChannelRelLocalService
 	public CommerceChannelRel deleteCommerceChannelRel(
 			long commerceChannelRelId)
 		throws PortalException;
+
+	public void deleteCommerceChannelRels(long commerceChannelId);
+
+	public void deleteCommerceChannelRels(String className, long classPK);
 
 	/**
 	 * @throws PortalException
@@ -208,6 +218,16 @@ public interface CommerceChannelRelLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceChannelRel> getCommerceChannelRels(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		long commerceChannelId, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		String className, long classPK, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator);
+
 	/**
 	 * Returns the number of commerce channel rels.
 	 *
@@ -215,6 +235,12 @@ public interface CommerceChannelRelLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceChannelRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceChannelRelsCount(long commerceChannelId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceChannelRelsCount(String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

@@ -16,9 +16,15 @@ package com.liferay.commerce.product.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.service.CommerceChannelRelServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.commerce.product.service.CommerceChannelRelServiceUtil</code> service
+ * <code>CommerceChannelRelServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -57,4 +63,128 @@ import aQute.bnd.annotation.ProviderType;
  */
 @ProviderType
 public class CommerceChannelRelServiceSoap {
+
+	public static com.liferay.commerce.product.model.CommerceChannelRelSoap
+			addCommerceChannelRel(
+				String className, long classPK, long commerceChannelId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.product.model.CommerceChannelRel returnValue =
+				CommerceChannelRelServiceUtil.addCommerceChannelRel(
+					className, classPK, commerceChannelId, serviceContext);
+
+			return com.liferay.commerce.product.model.CommerceChannelRelSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCommerceChannelRels(String className, long classPK)
+		throws RemoteException {
+
+		try {
+			CommerceChannelRelServiceUtil.deleteCommerceChannelRels(
+				className, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelRelSoap[]
+			getCommerceChannelRels(
+				long commerceChannelId, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CommerceChannelRel>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.product.model.CommerceChannelRel>
+					returnValue =
+						CommerceChannelRelServiceUtil.getCommerceChannelRels(
+							commerceChannelId, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CommerceChannelRelSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CommerceChannelRelSoap[]
+			getCommerceChannelRels(
+				String className, long classPK, int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.product.model.CommerceChannelRel>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.product.model.CommerceChannelRel>
+					returnValue =
+						CommerceChannelRelServiceUtil.getCommerceChannelRels(
+							className, classPK, start, end, orderByComparator);
+
+			return com.liferay.commerce.product.model.CommerceChannelRelSoap.
+				toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceChannelRelsCount(long commerceChannelId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceChannelRelServiceUtil.getCommerceChannelRelsCount(
+					commerceChannelId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceChannelRelsCount(
+			String className, long classPK)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceChannelRelServiceUtil.getCommerceChannelRelsCount(
+					className, classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		CommerceChannelRelServiceSoap.class);
+
 }
