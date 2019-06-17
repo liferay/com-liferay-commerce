@@ -60,46 +60,6 @@ public abstract class BaseMeasurementUnitResourceImpl
 	implements MeasurementUnitResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "groupId"),
-			@Parameter(in = ParameterIn.QUERY, name = "type"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public Page<MeasurementUnit>
-			getCommerceAdminSiteSettingGroupMeasurementUnitPage(
-				@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-					groupId,
-				@Parameter(hidden = true) @QueryParam("type") Integer type,
-				@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
-	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "MeasurementUnit")})
-	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
-			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-				groupId,
-			MeasurementUnit measurementUnit)
-		throws Exception {
-
-		return new MeasurementUnit();
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/measurementUnit/{id}")
@@ -142,6 +102,46 @@ public abstract class BaseMeasurementUnitResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "groupId"),
+			@Parameter(in = ParameterIn.QUERY, name = "type"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "MeasurementUnit")})
+	public Page<MeasurementUnit>
+			getCommerceAdminSiteSettingGroupMeasurementUnitPage(
+				@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+					groupId,
+				@Parameter(hidden = true) @QueryParam("type") Integer type,
+				@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
+	@Path("/commerceAdminSiteSetting/{groupId}/measurementUnit/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "MeasurementUnit")})
+	public MeasurementUnit postCommerceAdminSiteSettingGroupMeasurementUnit(
+			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+				groupId,
+			MeasurementUnit measurementUnit)
+		throws Exception {
+
+		return new MeasurementUnit();
 	}
 
 	public void setContextCompany(Company contextCompany) {

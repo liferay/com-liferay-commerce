@@ -14,13 +14,10 @@
 
 package com.liferay.headless.commerce.admin.site.setting.internal.graphql.query.v1_0;
 
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroup;
-import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AccountGroupCriterion;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.AvailabilityEstimate;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.MeasurementUnit;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.TaxCategory;
 import com.liferay.headless.commerce.admin.site.setting.dto.v1_0.Warehouse;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
@@ -48,14 +45,6 @@ import org.osgi.service.component.ComponentServiceObjects;
  */
 @Generated("")
 public class Query {
-
-	public static void setAccountGroupResourceComponentServiceObjects(
-		ComponentServiceObjects<AccountGroupResource>
-			accountGroupResourceComponentServiceObjects) {
-
-		_accountGroupResourceComponentServiceObjects =
-			accountGroupResourceComponentServiceObjects;
-	}
 
 	public static void setAvailabilityEstimateResourceComponentServiceObjects(
 		ComponentServiceObjects<AvailabilityEstimateResource>
@@ -87,76 +76,6 @@ public class Query {
 
 		_warehouseResourceComponentServiceObjects =
 			warehouseResourceComponentServiceObjects;
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroupCriterion getAccountGroupAccountGroupCriterion(
-			@GraphQLName("criterionId") Long criterionId,
-			@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.getAccountGroupAccountGroupCriterion(
-					criterionId, id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountGroupCriterion>
-			getAccountGroupAccountGroupCriterionPage(
-				@GraphQLName("id") Long id,
-				@GraphQLName("pageSize") int pageSize,
-				@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> {
-				Page paginationPage =
-					accountGroupResource.
-						getAccountGroupAccountGroupCriterionPage(
-							id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> accountGroupResource.getAccountGroup(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountGroup>
-			getCommerceAdminSiteSettingGroupAccountGroupPage(
-				@GraphQLName("groupId") Long groupId,
-				@GraphQLName("pageSize") int pageSize,
-				@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> {
-				Page paginationPage =
-					accountGroupResource.
-						getCommerceAdminSiteSettingGroupAccountGroupPage(
-							groupId, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
 	}
 
 	@GraphQLField
@@ -196,6 +115,18 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public MeasurementUnit getMeasurementUnit(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_measurementUnitResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			measurementUnitResource ->
+				measurementUnitResource.getMeasurementUnit(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Collection<MeasurementUnit>
 			getCommerceAdminSiteSettingGroupMeasurementUnitPage(
 				@GraphQLName("groupId") Long groupId,
@@ -219,14 +150,13 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public MeasurementUnit getMeasurementUnit(@GraphQLName("id") Long id)
+	public TaxCategory getTaxCategory(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_measurementUnitResourceComponentServiceObjects,
+			_taxCategoryResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			measurementUnitResource ->
-				measurementUnitResource.getMeasurementUnit(id));
+			taxCategoryResource -> taxCategoryResource.getTaxCategory(id));
 	}
 
 	@GraphQLField
@@ -253,13 +183,11 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public TaxCategory getTaxCategory(@GraphQLName("id") Long id)
-		throws Exception {
-
+	public Warehouse getWarehouse(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
-			_taxCategoryResourceComponentServiceObjects,
+			_warehouseResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			taxCategoryResource -> taxCategoryResource.getTaxCategory(id));
+			warehouseResource -> warehouseResource.getWarehouse(id));
 	}
 
 	@GraphQLField
@@ -284,15 +212,6 @@ public class Query {
 			});
 	}
 
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Warehouse getWarehouse(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_warehouseResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			warehouseResource -> warehouseResource.getWarehouse(id));
-	}
-
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
 			_applyComponentServiceObjects(
 				ComponentServiceObjects<T> componentServiceObjects,
@@ -310,15 +229,6 @@ public class Query {
 		finally {
 			componentServiceObjects.ungetService(resource);
 		}
-	}
-
-	private void _populateResourceContext(
-			AccountGroupResource accountGroupResource)
-		throws Exception {
-
-		accountGroupResource.setContextCompany(
-			CompanyLocalServiceUtil.getCompany(
-				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private void _populateResourceContext(
@@ -356,8 +266,6 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
-	private static ComponentServiceObjects<AccountGroupResource>
-		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AvailabilityEstimateResource>
 		_availabilityEstimateResourceComponentServiceObjects;
 	private static ComponentServiceObjects<MeasurementUnitResource>

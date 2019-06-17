@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AccountRole")
 public class AccountRole {
 
-	@Schema(example = "")
+	@Schema
 	public Map<String, String> getDescription() {
 		return description;
 	}
@@ -77,7 +77,7 @@ public class AccountRole {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Map<String, String> description;
 
-	@Schema(example = "Role Name")
+	@Schema
 	public String getName() {
 		return name;
 	}
@@ -104,7 +104,7 @@ public class AccountRole {
 	@NotEmpty
 	protected String name;
 
-	@Schema(example = "30130")
+	@Schema
 	public Long getRoleId() {
 		return roleId;
 	}
@@ -132,7 +132,7 @@ public class AccountRole {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long roleId;
 
-	@Schema(example = "")
+	@Schema
 	public Map<String, String> getTitle() {
 		return title;
 	}

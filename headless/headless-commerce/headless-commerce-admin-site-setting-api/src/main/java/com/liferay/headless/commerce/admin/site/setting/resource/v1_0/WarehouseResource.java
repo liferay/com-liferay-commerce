@@ -34,6 +34,12 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseResource {
 
+	public Response deleteWarehouse(Long id) throws Exception;
+
+	public Warehouse getWarehouse(Long id) throws Exception;
+
+	public Response putWarehouse(Long id, Warehouse warehouse) throws Exception;
+
 	public Page<Warehouse> getCommerceAdminSiteSettingGroupWarehousePage(
 			Long groupId, Boolean active, Pagination pagination)
 		throws Exception;
@@ -41,12 +47,6 @@ public interface WarehouseResource {
 	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
 			Long groupId, Warehouse warehouse)
 		throws Exception;
-
-	public Response deleteWarehouse(Long id) throws Exception;
-
-	public Warehouse getWarehouse(Long id) throws Exception;
-
-	public Response putWarehouse(Long id, Warehouse warehouse) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

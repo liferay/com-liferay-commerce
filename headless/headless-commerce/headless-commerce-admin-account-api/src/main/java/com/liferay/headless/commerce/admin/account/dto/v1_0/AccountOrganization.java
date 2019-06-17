@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AccountOrganization")
 public class AccountOrganization {
 
-	@Schema(example = "30130")
+	@Schema
 	public Long getCommerceAccountId() {
 		return commerceAccountId;
 	}
@@ -77,7 +77,7 @@ public class AccountOrganization {
 	@NotNull
 	protected Long commerceAccountId;
 
-	@Schema(example = "Organization Name")
+	@Schema
 	public String getName() {
 		return name;
 	}
@@ -103,7 +103,7 @@ public class AccountOrganization {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String name;
 
-	@Schema(example = "30002")
+	@Schema
 	public Long getOrganizationId() {
 		return organizationId;
 	}
@@ -132,7 +132,7 @@ public class AccountOrganization {
 	@NotNull
 	protected Long organizationId;
 
-	@Schema(example = "/Parent Organization/Organization Name")
+	@Schema
 	public String getTreePath() {
 		return treePath;
 	}

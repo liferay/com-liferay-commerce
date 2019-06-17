@@ -16,7 +16,6 @@ package com.liferay.headless.commerce.admin.site.setting.internal.graphql.servle
 
 import com.liferay.headless.commerce.admin.site.setting.internal.graphql.mutation.v1_0.Mutation;
 import com.liferay.headless.commerce.admin.site.setting.internal.graphql.query.v1_0.Query;
-import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.AvailabilityEstimateResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.MeasurementUnitResource;
 import com.liferay.headless.commerce.admin.site.setting.resource.v1_0.TaxCategoryResource;
@@ -42,8 +41,6 @@ public class ServletDataImpl implements ServletData {
 
 	@Activate
 	public void activate(BundleContext bundleContext) {
-		Mutation.setAccountGroupResourceComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects);
 		Mutation.setAvailabilityEstimateResourceComponentServiceObjects(
 			_availabilityEstimateResourceComponentServiceObjects);
 		Mutation.setMeasurementUnitResourceComponentServiceObjects(
@@ -53,8 +50,6 @@ public class ServletDataImpl implements ServletData {
 		Mutation.setWarehouseResourceComponentServiceObjects(
 			_warehouseResourceComponentServiceObjects);
 
-		Query.setAccountGroupResourceComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects);
 		Query.setAvailabilityEstimateResourceComponentServiceObjects(
 			_availabilityEstimateResourceComponentServiceObjects);
 		Query.setMeasurementUnitResourceComponentServiceObjects(
@@ -79,10 +74,6 @@ public class ServletDataImpl implements ServletData {
 	public Query getQuery() {
 		return new Query();
 	}
-
-	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
-	private ComponentServiceObjects<AccountGroupResource>
-		_accountGroupResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<AvailabilityEstimateResource>

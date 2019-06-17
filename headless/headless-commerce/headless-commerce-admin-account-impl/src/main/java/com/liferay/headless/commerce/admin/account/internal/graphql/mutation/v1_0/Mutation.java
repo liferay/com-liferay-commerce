@@ -15,7 +15,9 @@
 package com.liferay.headless.commerce.admin.account.internal.graphql.mutation.v1_0;
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
@@ -47,6 +49,14 @@ public class Mutation {
 
 		_accountResourceComponentServiceObjects =
 			accountResourceComponentServiceObjects;
+	}
+
+	public static void setAccountGroupResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountGroupResource>
+			accountGroupResourceComponentServiceObjects) {
+
+		_accountGroupResourceComponentServiceObjects =
+			accountGroupResourceComponentServiceObjects;
 	}
 
 	public static void setAddressResourceComponentServiceObjects(
@@ -147,6 +157,70 @@ public class Mutation {
 			accountResource -> accountResource.postAccount(account));
 	}
 
+	@GraphQLInvokeDetached
+	public Response deleteAccountGroup(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.deleteAccountGroup(
+				id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchAccountGroup(
+			@GraphQLName("id") Long id,
+			@GraphQLName("accountGroup") AccountGroup accountGroup)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.patchAccountGroup(
+				id, accountGroup));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteAccountGroupByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.deleteAccountGroupByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchAccountGroupByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("accountGroup") AccountGroup accountGroup)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.patchAccountGroupByExternalReferenceCode(
+					externalReferenceCode, accountGroup));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup postAccountGroup(
+			@GraphQLName("accountGroup") AccountGroup accountGroup)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.postAccountGroup(
+				accountGroup));
+	}
+
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Address postAccountIdAddress(
@@ -221,6 +295,15 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			AccountGroupResource accountGroupResource)
+		throws Exception {
+
+		accountGroupResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(AddressResource addressResource)
 		throws Exception {
 
@@ -231,6 +314,8 @@ public class Mutation {
 
 	private static ComponentServiceObjects<AccountResource>
 		_accountResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountGroupResource>
+		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AddressResource>
 		_addressResourceComponentServiceObjects;
 

@@ -51,7 +51,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Error")
 public class Error {
 
-	@Schema(description = "Internal error code mapping", example = "996")
+	@Schema(description = "Internal error code mapping")
 	public Integer getErrorCode() {
 		return errorCode;
 	}
@@ -80,9 +80,7 @@ public class Error {
 	@NotNull
 	protected Integer errorCode;
 
-	@Schema(
-		example = "Unable to find currency. Currency code should be expressed with 3-letter ISO 4217 format."
-	)
+	@Schema
 	public String getErrorDescription() {
 		return errorDescription;
 	}
@@ -111,9 +109,7 @@ public class Error {
 	@NotEmpty
 	protected String errorDescription;
 
-	@Schema(
-		example = "No CommerceCurrency exists with the key {groupId=41811, code=US Dollar}"
-	)
+	@Schema
 	public String getMessage() {
 		return message;
 	}
@@ -142,7 +138,7 @@ public class Error {
 	@NotEmpty
 	protected String message;
 
-	@Schema(description = "HTTP Status code", example = "404")
+	@Schema(description = "HTTP Status code")
 	public Integer getStatus() {
 		return status;
 	}

@@ -104,7 +104,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String[] emailAddresses;
 
-	@Schema(example = "AB-34098-789-N")
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -133,7 +133,7 @@ public class Account {
 	@NotEmpty
 	protected String externalReferenceCode;
 
-	@Schema(example = "30130")
+	@Schema
 	public Long getId() {
 		return id;
 	}
@@ -159,7 +159,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long id;
 
-	@Schema(example = "20078")
+	@Schema
 	public Long getLogoId() {
 		return logoId;
 	}
@@ -187,7 +187,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long logoId;
 
-	@Schema(example = "Account Name")
+	@Schema
 	public String getName() {
 		return name;
 	}
@@ -243,7 +243,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected AccountOrganization[] organizations;
 
-	@Schema(example = "true")
+	@Schema
 	public Boolean getRoot() {
 		return root;
 	}
@@ -269,7 +269,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Boolean root;
 
-	@Schema(example = "Abcd1234")
+	@Schema
 	public String getTaxId() {
 		return taxId;
 	}
@@ -297,7 +297,7 @@ public class Account {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String taxId;
 
-	@Schema(example = "1")
+	@Schema
 	public Integer getType() {
 		return type;
 	}
