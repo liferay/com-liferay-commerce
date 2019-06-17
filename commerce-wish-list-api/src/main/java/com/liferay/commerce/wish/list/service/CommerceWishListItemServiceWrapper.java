@@ -34,20 +34,6 @@ public class CommerceWishListItemServiceWrapper
 		_commerceWishListItemService = commerceWishListItemService;
 	}
 
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	@Override
-	public com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
-		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
-		String json,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _commerceWishListItemService.addCommerceWishListItem(commerceWishListId,
-			cpDefinitionId, cpInstanceId, json, serviceContext);
-	}
-
 	@Override
 	public com.liferay.commerce.wish.list.model.CommerceWishListItem addCommerceWishListItem(
 		long commerceWishListId, long cProductId, String cpInstanceUuid,

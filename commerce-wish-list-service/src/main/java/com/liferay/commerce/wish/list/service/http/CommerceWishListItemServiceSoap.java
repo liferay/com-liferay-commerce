@@ -65,29 +65,6 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class CommerceWishListItemServiceSoap {
-	/**
-	* @deprecated As of Mueller (7.2.x)
-	*/
-	@Deprecated
-	public static com.liferay.commerce.wish.list.model.CommerceWishListItemSoap addCommerceWishListItem(
-		long commerceWishListId, long cpDefinitionId, long cpInstanceId,
-		String json,
-		com.liferay.portal.kernel.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.commerce.wish.list.model.CommerceWishListItem returnValue =
-				CommerceWishListItemServiceUtil.addCommerceWishListItem(commerceWishListId,
-					cpDefinitionId, cpInstanceId, json, serviceContext);
-
-			return com.liferay.commerce.wish.list.model.CommerceWishListItemSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItemSoap addCommerceWishListItem(
 		long commerceWishListId, long cProductId, String cpInstanceUuid,
 		String json,
