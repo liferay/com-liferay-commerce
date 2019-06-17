@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AccountMember")
 public class AccountMember {
 
-	@Schema(example = "30130")
+	@Schema
 	public Long getCommerceAccountId() {
 		return commerceAccountId;
 	}
@@ -77,7 +77,7 @@ public class AccountMember {
 	@NotNull
 	protected Long commerceAccountId;
 
-	@Schema(example = "User Name")
+	@Schema
 	public String getName() {
 		return name;
 	}
@@ -131,7 +131,7 @@ public class AccountMember {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected AccountRole[] roles;
 
-	@Schema(example = "30002")
+	@Schema
 	public Long getUserId() {
 		return userId;
 	}

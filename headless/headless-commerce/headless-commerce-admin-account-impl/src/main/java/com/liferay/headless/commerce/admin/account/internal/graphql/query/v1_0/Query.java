@@ -15,7 +15,9 @@
 package com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0;
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
@@ -48,6 +50,14 @@ public class Query {
 
 		_accountResourceComponentServiceObjects =
 			accountResourceComponentServiceObjects;
+	}
+
+	public static void setAccountGroupResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountGroupResource>
+			accountGroupResourceComponentServiceObjects) {
+
+		_accountGroupResourceComponentServiceObjects =
+			accountGroupResourceComponentServiceObjects;
 	}
 
 	public static void setAddressResourceComponentServiceObjects(
@@ -93,6 +103,49 @@ public class Query {
 			this::_populateResourceContext,
 			accountResource -> {
 				Page paginationPage = accountResource.getAccountsPage(
+					Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.getAccountGroup(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup getAccountGroupByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.getAccountGroupByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountGroup> getAccountGroupsPage(
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> {
+				Page paginationPage = accountGroupResource.getAccountGroupsPage(
 					Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
@@ -166,6 +219,15 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			AccountGroupResource accountGroupResource)
+		throws Exception {
+
+		accountGroupResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(AddressResource addressResource)
 		throws Exception {
 
@@ -176,6 +238,8 @@ public class Query {
 
 	private static ComponentServiceObjects<AccountResource>
 		_accountResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountGroupResource>
+		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AddressResource>
 		_addressResourceComponentServiceObjects;
 

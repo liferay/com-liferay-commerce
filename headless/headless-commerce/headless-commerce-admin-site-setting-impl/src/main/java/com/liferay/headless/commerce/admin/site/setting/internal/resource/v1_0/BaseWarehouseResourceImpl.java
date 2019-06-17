@@ -59,45 +59,6 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "groupId"),
-			@Parameter(in = ParameterIn.QUERY, name = "active"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Page<Warehouse> getCommerceAdminSiteSettingGroupWarehousePage(
-			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-				groupId,
-			@Parameter(hidden = true) @QueryParam("active") Boolean active,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
-	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
-			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
-				groupId,
-			Warehouse warehouse)
-		throws Exception {
-
-		return new Warehouse();
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/warehouse/{id}")
@@ -140,6 +101,45 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "groupId"),
+			@Parameter(in = ParameterIn.QUERY, name = "active"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Warehouse")})
+	public Page<Warehouse> getCommerceAdminSiteSettingGroupWarehousePage(
+			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+				groupId,
+			@Parameter(hidden = true) @QueryParam("active") Boolean active,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "groupId")})
+	@Path("/commerceAdminSiteSetting/{groupId}/warehouse/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Warehouse")})
+	public Warehouse postCommerceAdminSiteSettingGroupWarehouse(
+			@NotNull @Parameter(hidden = true) @PathParam("groupId") Long
+				groupId,
+			Warehouse warehouse)
+		throws Exception {
+
+		return new Warehouse();
 	}
 
 	public void setContextCompany(Company contextCompany) {
