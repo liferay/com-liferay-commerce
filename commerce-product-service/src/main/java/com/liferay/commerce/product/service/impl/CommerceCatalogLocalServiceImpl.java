@@ -183,6 +183,14 @@ public class CommerceCatalogLocalServiceImpl
 	}
 
 	@Override
+	public CommerceCatalog fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceCatalogPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId) {
 		Group group = groupPersistence.fetchByPrimaryKey(groupId);
 

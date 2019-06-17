@@ -60,6 +60,21 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceCatalog fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
+
+		return commerceCatalog;
+	}
+
+	@Override
 	public CommerceCatalog fetchCommerceCatalog(long commerceCatalogId)
 		throws PortalException {
 
@@ -87,6 +102,17 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 		}
 
 		return commerceCatalog;
+	}
+
+	@Override
+	public CommerceCatalog getCommerceCatalog(long commerceCatalogId)
+		throws PortalException {
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalogId, ActionKeys.VIEW);
+
+		return commerceCatalogLocalService.getCommerceCatalog(
+			commerceCatalogId);
 	}
 
 	@Override
