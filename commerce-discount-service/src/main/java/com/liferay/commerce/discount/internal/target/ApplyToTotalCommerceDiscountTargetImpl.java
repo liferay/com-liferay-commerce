@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.discount.internal.target;
 
-import com.liferay.commerce.discount.model.CommerceDiscountConstants;
+import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.target.CommerceDiscountTarget;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;

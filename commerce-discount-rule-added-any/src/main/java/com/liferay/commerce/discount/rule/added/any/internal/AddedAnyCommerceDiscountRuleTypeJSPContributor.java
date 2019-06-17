@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.discount.rule.added.any.internal;
 
-import com.liferay.commerce.discount.model.CommerceDiscountRuleConstants;
+import com.liferay.commerce.discount.constants.CommerceDiscountRuleConstants;
 import com.liferay.commerce.discount.rule.added.any.internal.display.context.AddedAnyCommerceDiscountRuleDisplayContext;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributor;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;

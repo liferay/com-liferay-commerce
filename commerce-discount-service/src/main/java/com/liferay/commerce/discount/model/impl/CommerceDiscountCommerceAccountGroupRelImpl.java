@@ -16,25 +16,26 @@ package com.liferay.commerce.discount.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
- * The extended model implementation for the CommerceDiscountCommerceAccountGroupRel service. Represents a row in the &quot;CDiscountCAccountGroupRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel<code> interface.
- * </p>
- *
  * @author Marco Leo
  */
 @ProviderType
 public class CommerceDiscountCommerceAccountGroupRelImpl
 	extends CommerceDiscountCommerceAccountGroupRelBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce discount commerce account group rel model instance should use the {@link com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel} interface instead.
-	 */
 	public CommerceDiscountCommerceAccountGroupRelImpl() {
+	}
+
+	@Override
+	public CommerceAccountGroup getCommerceAccountGroup()
+		throws PortalException {
+
+		return CommerceAccountGroupLocalServiceUtil.getCommerceAccountGroup(
+			getCommerceAccountGroupId());
 	}
 
 }

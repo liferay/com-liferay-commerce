@@ -14,27 +14,64 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.base.CommerceChannelRelServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
+import java.util.List;
 
 /**
- * The implementation of the commerce channel rel remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.commerce.product.service.CommerceChannelRelService</code> interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
- * @author Marco Leo
- * @see CommerceChannelRelServiceBaseImpl
+ * @author Alessio Antonio Rendina
  */
 public class CommerceChannelRelServiceImpl
 	extends CommerceChannelRelServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use <code>com.liferay.commerce.product.service.CommerceChannelRelServiceUtil</code> to access the commerce channel rel remote service.
-	 */
+	@Override
+	public CommerceChannelRel addCommerceChannelRel(
+		String className, long classPK, long commerceChannelId,
+		ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceChannelRelLocalService.addCommerceChannelRel(
+			className, classPK, commerceChannelId, serviceContext);
+	}
+
+	@Override
+	public void deleteCommerceChannelRels(String className, long classPK) {
+		commerceChannelRelLocalService.deleteCommerceChannelRels(
+			className, classPK);
+	}
+
+	@Override
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		long commerceChannelId, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator) {
+
+		return commerceChannelRelLocalService.getCommerceChannelRels(
+			commerceChannelId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommerceChannelRel> getCommerceChannelRels(
+		String className, long classPK, int start, int end,
+		OrderByComparator<CommerceChannelRel> orderByComparator) {
+
+		return commerceChannelRelLocalService.getCommerceChannelRels(
+			className, classPK, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceChannelRelsCount(long commerceChannelId) {
+		return commerceChannelRelLocalService.getCommerceChannelRelsCount(
+			commerceChannelId);
+	}
+
+	@Override
+	public int getCommerceChannelRelsCount(String className, long classPK) {
+		return commerceChannelRelLocalService.getCommerceChannelRelsCount(
+			className, classPK);
+	}
+
 }

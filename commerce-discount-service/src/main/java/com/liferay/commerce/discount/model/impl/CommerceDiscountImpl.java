@@ -14,13 +14,13 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
+	import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.commerce.discount.model.CommerceDiscountUserSegmentRel;
-import com.liferay.commerce.discount.service.CommerceDiscountUserSegmentRelLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
+	import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
+	import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
+	import com.liferay.portal.kernel.dao.orm.QueryUtil;
 
-import java.util.List;
+	import java.util.List;
 
 /**
  * @author Marco Leo
@@ -33,11 +33,11 @@ public class CommerceDiscountImpl extends CommerceDiscountBaseImpl {
 	}
 
 	@Override
-	public List<CommerceDiscountUserSegmentRel>
-		getCommerceDiscountUserSegmentRels() {
+	public List<CommerceDiscountCommerceAccountGroupRel>
+		getCommerceDiscountCommerceAccountGroupRels() {
 
-		return CommerceDiscountUserSegmentRelLocalServiceUtil.
-			getCommerceDiscountUserSegmentRels(
+		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
+			getCommerceDiscountCommerceAccountGroupRels(
 				getCommerceDiscountId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null);
 	}

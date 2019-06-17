@@ -15,7 +15,7 @@
 package com.liferay.commerce.discount.rule.cart.total.internal;
 
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
-import com.liferay.commerce.discount.model.CommerceDiscountRuleConstants;
+import com.liferay.commerce.discount.constants.CommerceDiscountRuleConstants;
 import com.liferay.commerce.discount.rule.cart.total.internal.display.context.CartTotalCommerceDiscountRuleDisplayContext;
 import com.liferay.commerce.discount.rule.type.CommerceDiscountRuleTypeJSPContributor;
 import com.liferay.commerce.discount.service.CommerceDiscountRuleService;

@@ -16,24 +16,23 @@ package com.liferay.commerce.product.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
- * The extended model implementation for the CommerceChannelRel service. Represents a row in the &quot;CommerceChannelRel&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.commerce.product.model.CommerceChannelRel<code> interface.
- * </p>
- *
- * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceChannelRelImpl extends CommerceChannelRelBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a commerce channel rel model instance should use the {@link com.liferay.commerce.product.model.CommerceChannelRel} interface instead.
-	 */
 	public CommerceChannelRelImpl() {
+	}
+
+	@Override
+	public CommerceChannel getCommerceChannel() throws PortalException {
+		return CommerceChannelLocalServiceUtil.getCommerceChannel(
+			getCommerceChannelId());
 	}
 
 }
