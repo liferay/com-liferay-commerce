@@ -134,7 +134,7 @@ public class DiscountHelper {
 			neverExpire, serviceContext);
 	}
 
-	public Discount upsertDiscount(Long groupId, Discount discount, User user)
+	public Discount upsertDiscount(Discount discount, User user)
 		throws PortalException {
 
 		try {
@@ -157,7 +157,7 @@ public class DiscountHelper {
 		}
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			groupId, new long[0], user, true);
+			user);
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());

@@ -18,12 +18,14 @@ import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
@@ -35,6 +37,7 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOptionValue;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
@@ -45,6 +48,7 @@ import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductCon
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionValueUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductShippingConfigurationUtil;
+import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSpecificationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSubscriptionConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductTaxConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductUtil;
@@ -58,6 +62,7 @@ import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -135,23 +140,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Page<Product> getCatalogSiteProductsPage(
-			Long siteId, Pagination pagination)
-		throws Exception {
-
-		List<CPDefinition> cpDefinitions =
-			_cpDefinitionService.getCPDefinitions(
-				siteId, WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
-
-		int totalItems = _cpDefinitionService.getCPDefinitionsCount(
-			siteId, WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(_toProducts(cpDefinitions), pagination, totalItems);
-	}
-
-	@Override
 	public Product getProduct(Long id) throws Exception {
 		CPDefinition cpDefinition =
 			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
@@ -196,6 +184,21 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
+	public Page<Product> getProductsPage(Pagination pagination)
+		throws Exception {
+
+		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
+			_cpDefinitionService.searchCPDefinitions(
+				contextCompany.getCompanyId(), null, null, null,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		return Page.of(
+			_toProducts(cpDefinitionBaseModelSearchResult.getBaseModels()),
+			pagination, cpDefinitionBaseModelSearchResult.getLength());
+	}
+
+	@Override
 	public Response patchProduct(Long id, Product product) throws Exception {
 		CPDefinition cpDefinition =
 			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
@@ -236,10 +239,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Product postCatalogSiteProduct(Long siteId, Product product)
-		throws Exception {
-
-		CPDefinition cpDefinition = _upsertProduct(siteId, product);
+	public Product postProduct(Product product) throws Exception {
+		CPDefinition cpDefinition = _upsertProduct(product);
 
 		DTOConverter productDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
@@ -350,6 +351,38 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 						cpDefinition.getModelClassName()),
 					cpDefinition.getCPDefinitionId(),
 					CPAttachmentFileEntryConstants.TYPE_IMAGE, serviceContext);
+			}
+		}
+
+		// Product specifications
+
+		ProductSpecification[] productSpecifications =
+			product.getProductSpecifications();
+
+		if (productSpecifications != null) {
+			for (ProductSpecification productSpecification :
+					productSpecifications) {
+
+				CPDefinitionSpecificationOptionValue
+					cpDefinitionSpecificationOptionValue =
+						_cpDefinitionSpecificationOptionValueService.
+							fetchCPDefinitionSpecificationOptionValue(
+								productSpecification.getId());
+
+				if (cpDefinitionSpecificationOptionValue == null) {
+					ProductSpecificationUtil.
+						addCPDefinitionSpecificationOptionValue(
+							_cpDefinitionSpecificationOptionValueService,
+							cpDefinition.getCPDefinitionId(),
+							productSpecification, serviceContext);
+				}
+				else {
+					ProductSpecificationUtil.
+						updateCPDefinitionSpecificationOptionValue(
+							_cpDefinitionSpecificationOptionValueService,
+							cpDefinitionSpecificationOptionValue,
+							productSpecification, serviceContext);
+				}
 			}
 		}
 
@@ -478,13 +511,11 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		return cpDefinition;
 	}
 
-	private CPDefinition _upsertProduct(Long siteId, Product product)
-		throws Exception {
-
+	private CPDefinition _upsertProduct(Product product) throws Exception {
 		boolean neverExpire = Boolean.TRUE;
 
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			siteId);
+		ServiceContext serviceContext =
+			_serviceContextHelper.getServiceContext();
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -598,6 +629,10 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private CPDefinitionSpecificationOptionValueService
+		_cpDefinitionSpecificationOptionValueService;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;

@@ -18,8 +18,6 @@ import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceHelper;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.TierPriceResource;
 
-import javax.validation.constraints.NotNull;
-
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -28,6 +26,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/tier-price.properties",
@@ -36,7 +35,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class TierPriceResourceImpl extends BaseTierPriceResourceImpl {
 
 	@Override
-	public Response deleteTierPrice(@NotNull String id) throws Exception {
+	public Response deleteTierPrice(String id) throws Exception {
 		_tierPriceHelper.deleteCommerceTierPriceEntry(
 			id, contextCompany.getCompanyId());
 
@@ -46,12 +45,12 @@ public class TierPriceResourceImpl extends BaseTierPriceResourceImpl {
 	}
 
 	@Override
-	public TierPrice getTierPrice(@NotNull String id) throws Exception {
+	public TierPrice getTierPrice(String id) throws Exception {
 		return _tierPriceHelper.getTierPrice(id, contextCompany.getCompanyId());
 	}
 
 	@Override
-	public Response updateTierPrice(@NotNull String id, TierPrice tierPrice)
+	public Response patchTierPrice(String id, TierPrice tierPrice)
 		throws Exception {
 
 		_tierPriceHelper.updateCommerceTierPriceEntry(

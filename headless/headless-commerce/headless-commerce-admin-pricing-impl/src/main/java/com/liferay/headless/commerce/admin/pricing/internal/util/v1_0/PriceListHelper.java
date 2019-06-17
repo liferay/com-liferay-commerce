@@ -119,17 +119,18 @@ public class PriceListHelper {
 	}
 
 	public Page<PriceList> getPriceLists(
-			long groupId, AcceptLanguage acceptLanguage, Pagination pagination)
+			long companyId, AcceptLanguage acceptLanguage,
+			Pagination pagination)
 		throws PortalException {
 
 		List<CommercePriceList> commercePriceLists =
 			_commercePriceListService.getCommercePriceLists(
-				groupId, WorkflowConstants.STATUS_APPROVED,
+				companyId, WorkflowConstants.STATUS_APPROVED,
 				pagination.getStartPosition(), pagination.getEndPosition(),
 				null);
 
 		int totalItems = _commercePriceListService.getCommercePriceListsCount(
-			groupId, WorkflowConstants.STATUS_APPROVED);
+			companyId, WorkflowConstants.STATUS_APPROVED);
 
 		Stream<CommercePriceList> stream = commercePriceLists.stream();
 

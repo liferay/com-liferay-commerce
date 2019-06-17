@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
-import javax.validation.constraints.NotNull;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -34,6 +32,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/price-list.properties",
@@ -42,7 +41,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class PriceListResourceImpl extends BasePriceListResourceImpl {
 
 	@Override
-	public Response deletePriceList(@NotNull String id) throws Exception {
+	public Response deletePriceList(String id) throws Exception {
 		_priceListHelper.deletePriceList(id, _user, contextCompany);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
@@ -51,8 +50,14 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 	}
 
 	@Override
-	public Page<PriceEntry> getPriceEntries(
-			@NotNull String id, Pagination pagination)
+	public PriceList getPriceList(String id) throws Exception {
+		return _priceListHelper.getPriceList(
+			id, contextAcceptLanguage, contextCompany);
+	}
+
+	@Override
+	public Page<PriceEntry> getPriceListPriceEntriesPage(
+			String id, Pagination pagination)
 		throws Exception {
 
 		return _priceEntryHelper.getPriceEntries(
@@ -60,22 +65,15 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 	}
 
 	@Override
-	public PriceList getPriceList(@NotNull String id) throws Exception {
-		return _priceListHelper.getPriceList(
-			id, contextAcceptLanguage, contextCompany);
-	}
-
-	@Override
-	public Page<PriceList> getPriceLists(
-			@NotNull Long groupId, Pagination pagination)
+	public Page<PriceList> getPriceListsPage(Pagination pagination)
 		throws Exception {
 
 		return _priceListHelper.getPriceLists(
-			groupId, contextAcceptLanguage, pagination);
+			contextCompany.getCompanyId(), contextAcceptLanguage, pagination);
 	}
 
 	@Override
-	public Response updatePriceList(@NotNull String id, PriceList priceList)
+	public Response patchPriceList(String id, PriceList priceList)
 		throws Exception {
 
 		_priceListHelper.updatePriceList(
@@ -87,21 +85,18 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 	}
 
 	@Override
-	public PriceEntry upsertPriceEntry(
-			@NotNull String id, PriceEntry priceEntry)
+	public PriceList postPriceList(PriceList priceList) throws Exception {
+		return _priceListHelper.upsertPriceList(
+			contextCompany.getCompanyId(), priceList, _user,
+			contextAcceptLanguage);
+	}
+
+	@Override
+	public PriceEntry postPriceListPriceEntry(String id, PriceEntry priceEntry)
 		throws Exception {
 
 		return _priceEntryHelper.upsertCommercePriceEntry(
 			id, priceEntry, contextCompany);
-	}
-
-	@Override
-	public PriceList upsertPriceList(@NotNull Long groupId, PriceList priceList)
-		throws Exception {
-
-		return _priceListHelper.upsertPriceList(
-			contextCompany.getCompanyId(), priceList, _user,
-			contextAcceptLanguage);
 	}
 
 	@Reference

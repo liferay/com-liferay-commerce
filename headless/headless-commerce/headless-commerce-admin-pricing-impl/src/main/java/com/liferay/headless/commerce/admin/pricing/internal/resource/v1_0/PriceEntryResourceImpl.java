@@ -22,8 +22,6 @@ import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResou
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
-import javax.validation.constraints.NotNull;
-
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -32,6 +30,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Zoltán Takács
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/price-entry.properties",
@@ -40,7 +39,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 
 	@Override
-	public Response deletePriceEntry(@NotNull String id) throws Exception {
+	public Response deletePriceEntry(String id) throws Exception {
 		_priceEntryHelper.deleteCommercePriceEntry(
 			id, contextCompany.getCompanyId());
 
@@ -50,21 +49,21 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 	}
 
 	@Override
-	public PriceEntry getPriceEntry(@NotNull String id) throws Exception {
+	public PriceEntry getPriceEntry(String id) throws Exception {
 		return _priceEntryHelper.getPriceEntry(
 			id, contextCompany.getCompanyId());
 	}
 
 	@Override
-	public Page<TierPrice> getTierPrices(
-			@NotNull String id, Pagination pagination)
+	public Page<TierPrice> getPriceEntryTierPricesPage(
+			String id, Pagination pagination)
 		throws Exception {
 
 		return _tierPriceHelper.getTierPrices(id, contextCompany, pagination);
 	}
 
 	@Override
-	public Response updatePriceEntry(@NotNull String id, PriceEntry priceEntry)
+	public Response patchPriceEntry(String id, PriceEntry priceEntry)
 		throws Exception {
 
 		_priceEntryHelper.updateCommercePriceEntry(
@@ -76,7 +75,7 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 	}
 
 	@Override
-	public TierPrice upsertTierPrice(@NotNull String id, TierPrice tierPrice)
+	public TierPrice postPriceEntryTierPrice(String id, TierPrice tierPrice)
 		throws Exception {
 
 		return _tierPriceHelper.upsertCommerceTierPriceEntry(

@@ -101,6 +101,12 @@ public class ProductDTOConverter implements DTOConverter {
 				images = _getAttachments(
 					cpDefinition, CPAttachmentFileEntryConstants.TYPE_IMAGE,
 					dtoConverterContext);
+				metaDescription = LanguageUtils.getLanguageIdMap(
+					cpDefinition.getMetaDescriptionMap());
+				metaKeyword = LanguageUtils.getLanguageIdMap(
+					cpDefinition.getMetaKeywordsMap());
+				metaTitle = LanguageUtils.getLanguageIdMap(
+					cpDefinition.getMetaTitleMap());
 				name = LanguageUtils.getLanguageIdMap(
 					cpDefinition.getNameMap());
 				options = _getProductOptions(cpDefinition, dtoConverterContext);
