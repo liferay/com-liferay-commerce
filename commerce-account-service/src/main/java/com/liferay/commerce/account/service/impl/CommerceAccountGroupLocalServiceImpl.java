@@ -188,6 +188,14 @@ public class CommerceAccountGroupLocalServiceImpl
 	}
 
 	@Override
+	public CommerceAccountGroup fetchByExternalReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceAccountGroupPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public List<CommerceAccountGroup> getCommerceAccountGroups(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator) {

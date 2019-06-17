@@ -62,6 +62,21 @@ public class CommerceAccountGroupServiceImpl
 	}
 
 	@Override
+	public CommerceAccountGroup fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceAccountGroup commerceAccountGroup =
+			commerceAccountGroupLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		_commerceAccountGroupModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountGroup, ActionKeys.VIEW);
+
+		return commerceAccountGroup;
+	}
+
+	@Override
 	public CommerceAccountGroup getCommerceAccountGroup(
 			long commerceAccountGroupId)
 		throws PortalException {
