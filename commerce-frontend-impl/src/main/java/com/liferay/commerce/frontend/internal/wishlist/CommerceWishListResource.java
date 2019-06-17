@@ -107,7 +107,7 @@ public class CommerceWishListResource {
 						cpInstanceUuid) == 0) {
 
 				_commerceWishListItemService.addCommerceWishListItem(
-					commerceWishList.getCommerceWishListId(),
+					commerceAccountId, commerceWishList.getCommerceWishListId(),
 					cpCatalogEntry.getCProductId(), cpInstanceUuid, options,
 					serviceContext);
 
