@@ -39,18 +39,6 @@ components:
             schema:
                 type: integer
             style: form
-        siteIdPathParam:
-            explode: false
-            in: path
-            name: siteId
-            required: true
-            schema:
-                description: Site to filter
-                example: 30130
-                format: int64
-                minimum: 0
-                type: integer
-            style: simple
     responses:
         NotFound:
             content:
@@ -123,6 +111,33 @@ components:
                     type: integer
             required:
                 - sku
+            type: object
+        Catalog:
+            properties:
+                currencyCode:
+                    example: USD
+                    type: string
+                defaultLanguageId:
+                    example: en_US
+                    type: string
+                externalReferenceCode:
+                    example: AB-34098-789-N
+                    type: string
+                id:
+                    example: 30130
+                    format: int64
+                    minimum: 0
+                    readOnly: true
+                    type: integer
+                name:
+                    description: Category Name
+                    type: string
+                system:
+                    example: false
+                    readOnly: true
+                    type: boolean
+            required:
+                - name
             type: object
         Category:
             properties:
@@ -389,6 +404,10 @@ components:
                     format: int64
                     readOnly: true
                     type: integer
+                productSpecifications:
+                    items:
+                        $ref: '#/components/schemas/ProductSpecification'
+                    type: array
                 productType:
                     example: simple
                     type: string
@@ -612,6 +631,35 @@ components:
                     minimum: 0
                     type: number
             type: object
+        ProductSpecification:
+            properties:
+                id:
+                    example: 31130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                optionCategory:
+                    $ref: '#/components/schemas/OptionCategory'
+                priority:
+                    example: 1.2
+                    format: double
+                    minimum: 0
+                    type: number
+                product:
+                    $ref: '#/components/schemas/Product'
+                specification:
+                    $ref: '#/components/schemas/Specification'
+                value:
+                    additionalProperties:
+                        type: string
+                    example:
+                        en_US: Croatia
+                        hr_HR: Hrvatska
+                        hu_HU: Horvatorszag
+                    type: object
+            required:
+                - value
+            type: object
         ProductSubscriptionConfiguration:
             properties:
                 enable:
@@ -805,42 +853,9 @@ components:
                         hr_HR: Hrvatska
                         hu_HU: Horvatorszag
                     type: object
-                values:
-                    items:
-                        $ref: '#/components/schemas/SpecificationValue'
-                    type: array
             required:
                 - key
                 - title
-            type: object
-        SpecificationValue:
-            properties:
-                id:
-                    example: 31130
-                    format: int64
-                    minimum: 0
-                    type: integer
-                optionCategory:
-                    $ref: '#/components/schemas/OptionCategory'
-                priority:
-                    example: 1.2
-                    format: double
-                    minimum: 0
-                    type: number
-                product:
-                    $ref: '#/components/schemas/Product'
-                specification:
-                    $ref: '#/components/schemas/Specification'
-                value:
-                    additionalProperties:
-                        type: string
-                    example:
-                        en_US: Croatia
-                        hr_HR: Hrvatska
-                        hu_HU: Horvatorszag
-                    type: object
-            required:
-                - value
             type: object
     securitySchemes:
         BasicAuth:
@@ -1190,21 +1205,458 @@ paths:
             summary: Updates a Attachment by ID.
             tags:
                 - Attachment
-    /catalogs/{siteId}/option/:
+    /catalog/:
         post:
-            operationId: postCatalogSiteOption
+            operationId: postCatalog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                    description: Created
+                202:
+                    description: Accepted - Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Catalog.
+            tags:
+                - Catalog
+    /catalog/by-externalReferenceCode/{externalReferenceCode}:
+        delete:
+            operationId: deleteCatalogByExternalReferenceCode
             parameters:
                 - explode: false
                   in: path
-                  name: siteId
+                  name: externalReferenceCode
                   required: true
                   schema:
-                      description: Site to filter
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Deletes a Catalog by external reference code.
+            tags:
+                - Catalog
+        get:
+            operationId: getCatalogByExternalReferenceCode
+            parameters:
+                - explode: false
+                  in: path
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a Catalog by external reference code.
+            tags:
+                - Catalog
+        patch:
+            operationId: patchCatalogByExternalReferenceCode
+            parameters:
+                - explode: false
+                  in: path
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Updates a Catalog by external reference code.
+            tags:
+                - Catalog
+    /catalog/{id}:
+        delete:
+            operationId: deleteCatalog
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
                       type: integer
                   style: simple
+            responses:
+                204:
+                    description: No content
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Deletes a Catalog by ID.
+            tags:
+                - Catalog
+        get:
+            operationId: getCatalog
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Catalog'
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a Catalog by ID.
+            tags:
+                - Catalog
+        patch:
+            operationId: patchCatalog
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Catalog'
+                required: true
+            responses:
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Updates a Catalog by ID.
+            tags:
+                - Catalog
+    /catalogs/:
+        get:
+            operationId: getCatalogsPage
+            parameters:
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Catalog'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Catalog'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Catalogs.
+            tags:
+                - Catalog
+    /option/:
+        post:
+            operationId: postOption
             requestBody:
                 content:
                     application/json:
@@ -1265,21 +1717,10 @@ paths:
             summary: Creates or updates an Option.
             tags:
                 - Option
-    /catalogs/{siteId}/optionCategories/:
+    /optionCategories/:
         get:
-            operationId: getCatalogSiteOptionCategoriesPage
+            operationId: getOptionCategoriesPage
             parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
                 - explode: true
                   in: query
                   name: page
@@ -1343,465 +1784,6 @@ paths:
             summary: Gets a list of Option Categories.
             tags:
                 - OptionCategory
-    /catalogs/{siteId}/optionCategory/:
-        post:
-            operationId: postCatalogSiteOptionCategory
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/OptionCategory'
-                    application/xml:
-                        schema:
-                            $ref: '#/components/schemas/OptionCategory'
-                required: true
-            responses:
-                201:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/OptionCategory'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/OptionCategory'
-                    description: Created
-                202:
-                    description: Async
-                204:
-                    description: Updated
-                400:
-                    description: Invalid input
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.write
-            summary: Creates or updates a Option Category.
-            tags:
-                - OptionCategory
-    /catalogs/{siteId}/options/:
-        get:
-            operationId: getCatalogSiteOptionsPage
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-                - explode: true
-                  in: query
-                  name: page
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: pageSize
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-            responses:
-                200:
-                    content:
-                        application/json:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Option'
-                                type: array
-                        application/xml:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Option'
-                                type: array
-                    description: Successful operation
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.read
-            summary: Gets a list of Option.
-            tags:
-                - Option
-    /catalogs/{siteId}/product/:
-        post:
-            operationId: postCatalogSiteProduct
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Product'
-                    application/xml:
-                        schema:
-                            $ref: '#/components/schemas/Product'
-                required: true
-            responses:
-                201:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Product'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Product'
-                    description: Created
-                202:
-                    description: Accepted - Async
-                204:
-                    description: Updated
-                400:
-                    description: Invalid input
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.write
-            summary: Creates or updates a Product.
-            tags:
-                - Product
-    /catalogs/{siteId}/products/:
-        get:
-            operationId: getCatalogSiteProductsPage
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-                - explode: true
-                  in: query
-                  name: page
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: pageSize
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-            responses:
-                200:
-                    content:
-                        application/json:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Product'
-                                type: array
-                        application/xml:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Product'
-                                type: array
-                    description: Successful operation
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.read
-            summary: Gets a list of Products.
-            tags:
-                - Product
-    /catalogs/{siteId}/specification/:
-        post:
-            operationId: postCatalogSiteSpecification
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Specification'
-                    application/xml:
-                        schema:
-                            $ref: '#/components/schemas/Specification'
-                required: true
-            responses:
-                201:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Specification'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Specification'
-                    description: Created
-                202:
-                    description: Async
-                204:
-                    description: Updated
-                400:
-                    description: Invalid input
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.write
-            summary: Creates or updates a Specification.
-            tags:
-                - Specification
-    /catalogs/{siteId}/specifications/:
-        get:
-            operationId: getCatalogSiteSpecificationsPage
-            parameters:
-                - explode: false
-                  in: path
-                  name: siteId
-                  required: true
-                  schema:
-                      description: Site to filter
-                      example: 30130
-                      format: int64
-                      minimum: 0
-                      type: integer
-                  style: simple
-                - explode: true
-                  in: query
-                  name: page
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: pageSize
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-            responses:
-                200:
-                    content:
-                        application/json:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Specification'
-                                type: array
-                        application/xml:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Specification'
-                                type: array
-                    description: Successful operation
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.read
-            summary: Gets a list of Specifications.
-            tags:
-                - Specification
     /optionCategories/{id}:
         delete:
             operationId: deleteOptionCategory
@@ -1963,6 +1945,136 @@ paths:
             summary: Updates a Option Category by ID.
             tags:
                 - OptionCategory
+    /optionCategory/:
+        post:
+            operationId: postOptionCategory
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/OptionCategory'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/OptionCategory'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/OptionCategory'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/OptionCategory'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Option Category.
+            tags:
+                - OptionCategory
+    /options/:
+        get:
+            operationId: getOptionsPage
+            parameters:
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Option'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Option'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Option.
+            tags:
+                - Option
     /options/by-externalReferenceCode/{externalReferenceCode}/optionValue/:
         post:
             operationId: postOptionByExternalReferenceCodeOptionValue
@@ -2586,6 +2698,69 @@ paths:
             summary: Updates an Option by ID.
             tags:
                 - Option
+    /product/:
+        post:
+            operationId: postProduct
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Product'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Product'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Product'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Product'
+                    description: Created
+                202:
+                    description: Accepted - Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Product.
+            tags:
+                - Product
     /productOptions/{id}/productOptionValue/:
         post:
             operationId: postProductOptionIdProductOptionValue
@@ -2900,6 +3075,73 @@ paths:
             summary: Updates a Product Option by ID.
             tags:
                 - ProductOption
+    /products/:
+        get:
+            operationId: getProductsPage
+            parameters:
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Product'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Product'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Products.
+            tags:
+                - Product
     /products/by-externalReferenceCode/{externalReferenceCode}/attachment/:
         post:
             operationId: postProductByExternalReferenceCodeAttachment
@@ -5218,6 +5460,159 @@ paths:
             summary: Creates or updates a list of Product Options related to a Product.
             tags:
                 - ProductOption
+    /products/{id}/productSpecification/:
+        post:
+            operationId: postProductIdProductSpecification
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ProductSpecification'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/ProductSpecification'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ProductSpecification'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/ProductSpecification'
+                    description: Created
+                202:
+                    description: Accepted - Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Value related to a Specification
+            tags:
+                - ProductSpecification
+    /products/{id}/productSpecifications/:
+        get:
+            operationId: getProductIdProductSpecificationsPage
+            parameters:
+                - explode: false
+                  in: path
+                  name: id
+                  required: true
+                  schema:
+                      description: The resource Id
+                      example: 30130
+                      format: int64
+                      minimum: 0
+                      type: integer
+                  style: simple
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/ProductSpecification'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/ProductSpecification'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Values related to a Specification.
+            tags:
+                - ProductSpecification
     /products/{id}/relatedProduct/:
         post:
             operationId: postProductIdRelatedProduct
@@ -6488,6 +6883,136 @@ paths:
             summary: Updates a Sku by ID.
             tags:
                 - Sku
+    /specification/:
+        post:
+            operationId: postSpecification
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Specification'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Specification'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Specification'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Specification'
+                    description: Created
+                202:
+                    description: Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Specification.
+            tags:
+                - Specification
+    /specifications/:
+        get:
+            operationId: getSpecificationsPage
+            parameters:
+                - explode: true
+                  in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - explode: true
+                  in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Specification'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Specification'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Specifications.
+            tags:
+                - Specification
     /specifications/{id}:
         delete:
             operationId: deleteSpecification
