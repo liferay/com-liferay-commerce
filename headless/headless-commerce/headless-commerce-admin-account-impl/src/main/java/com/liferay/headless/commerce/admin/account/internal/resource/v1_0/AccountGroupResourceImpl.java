@@ -197,7 +197,7 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 		if (commerceAccountGroup == null) {
 			commerceAccountGroup =
 				_commerceAccountGroupService.addCommerceAccountGroup(
-					accountGroup.getName(), 0,
+					contextCompany.getCompanyId(), accountGroup.getName(), 0,
 					accountGroup.getExternalReferenceCode(),
 					_serviceContextHelper.getServiceContext());
 		}
