@@ -11,6 +11,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.cart.taglib", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.frontend.api", version: "1.1.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "9.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.content.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.taglib", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.type.grouped.api", version: "2.0.0"
@@ -27,7 +28,6 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-frontend-taglib")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "9.0.0"
 	compileOnly project(":apps:commerce:commerce-wish-list-api")
 
 	jsCompile group: "com.liferay", name: "com.liferay.frontend.taglib.soy", version: "2.0.0"

@@ -14,6 +14,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.inventory.api", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.media.api", version: "1.1.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "9.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.content.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.type.grouped.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.type.virtual.api", version: "2.0.0"
@@ -29,7 +30,6 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-initializer-util")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "9.0.0"
 	compileOnly project(":apps:commerce:commerce-shipping-engine-fixed-api")
 	compileOnly project(":apps:commerce:commerce-theme-minium:commerce-theme-minium-api")
 }
