@@ -17,5 +17,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:headless:headless-commerce-core-api")
-	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-pricing-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.admin.pricing.api", version: "2.0.0"
 }
