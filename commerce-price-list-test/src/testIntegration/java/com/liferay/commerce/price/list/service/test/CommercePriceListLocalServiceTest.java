@@ -44,6 +44,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +53,7 @@ import org.junit.runner.RunWith;
  * @author Zoltán Takács
  * @author Ethan Bustad
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class CommercePriceListLocalServiceTest {
 
