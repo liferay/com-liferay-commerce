@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Ethan Bustad
@@ -101,6 +102,10 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 	protected void validate(long companyId, String externalReferenceCode)
 		throws PortalException {
+
+		if (Validator.isNull(externalReferenceCode)) {
+			return;
+		}
 
 		CProduct cProduct = cProductPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
