@@ -15,6 +15,6 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations", version: "1.3.0"
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
-	compileOnly project(":apps:commerce:commerce-health-status-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.health.status.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 }
