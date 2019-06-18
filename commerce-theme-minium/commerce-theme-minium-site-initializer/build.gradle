@@ -26,7 +26,7 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:commerce-initializer-util")
-	compileOnly project(":apps:commerce:commerce-inventory-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.inventory.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-media-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly project(":apps:commerce:commerce-product-api")

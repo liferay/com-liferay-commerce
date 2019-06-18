@@ -13,7 +13,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.admin.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
-	compileOnly project(":apps:commerce:commerce-inventory-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.inventory.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:commerce-service")
 	compileOnly project(":apps:commerce:commerce-shipping-engine-fixed-api")
