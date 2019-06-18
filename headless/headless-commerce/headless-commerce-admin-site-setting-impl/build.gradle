@@ -15,5 +15,5 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.inventory.api", version: "1.0.0"
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:headless:headless-commerce-core-api")
-	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-site-setting-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.admin.site.setting.api", version: "2.0.0"
 }
