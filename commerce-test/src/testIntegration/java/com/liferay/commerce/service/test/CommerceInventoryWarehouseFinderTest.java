@@ -29,12 +29,14 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 /**
  * @author Andrea Di Giorgi
  */
+@Ignore
 @RunWith(Arquillian.class)
 @Sync
 public class CommerceInventoryWarehouseFinderTest {

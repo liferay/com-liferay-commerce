@@ -56,6 +56,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Alessio Antonio Rendina
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class CommerceVirtualOrderItemLocalServiceTest {
 
@@ -72,7 +73,6 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		_user = UserTestUtil.addUser();
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommerceVirtualOrderItem() throws Exception {
 		frutillaRule.scenario(
@@ -135,7 +135,6 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		}
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommerceVirtualOrderItemWithSubscription()
 		throws Exception {

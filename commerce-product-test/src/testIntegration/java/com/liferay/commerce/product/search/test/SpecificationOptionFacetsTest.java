@@ -51,6 +51,7 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +59,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class SpecificationOptionFacetsTest {
 

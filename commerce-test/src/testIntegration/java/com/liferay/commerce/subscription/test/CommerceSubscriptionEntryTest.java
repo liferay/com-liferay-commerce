@@ -61,6 +61,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Alessio Antonio Rendina
  */
+@Ignore
 @RunWith(Arquillian.class)
 public class CommerceSubscriptionEntryTest {
 
