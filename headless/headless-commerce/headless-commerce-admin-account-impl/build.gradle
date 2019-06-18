@@ -16,5 +16,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly project(":apps:commerce:headless:headless-commerce-core-api")
-	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-account-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.admin.account.api", version: "1.1.0"
 }
