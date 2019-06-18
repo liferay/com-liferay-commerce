@@ -14,12 +14,18 @@
 
 package com.liferay.commerce.wish.list.web.internal.portlet.action;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
 import com.liferay.commerce.wish.list.service.CommerceWishListService;
 import com.liferay.commerce.wish.list.util.CommerceWishListHttpHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -77,7 +83,28 @@ public class AddCommerceWishListItemMVCActionCommand
 		HttpServletResponse httpServletResponse =
 			_portal.getHttpServletResponse(actionResponse);
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceAccountId = 0;
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
 		try {
+			CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
+				cpInstanceId);
+
+			String cpInstanceUuid = StringPool.BLANK;
+
+			if (cpInstance != null) {
+				cpInstanceUuid = cpInstance.getCPInstanceUuid();
+			}
+
 			CommerceWishList commerceWishList =
 				_commerceWishListHttpHelper.getCurrentCommerceWishList(
 					httpServletRequest, httpServletResponse);
@@ -87,8 +114,9 @@ public class AddCommerceWishListItemMVCActionCommand
 
 			CommerceWishListItem commerceWishListItem =
 				_commerceWishListItemService.addCommerceWishListItem(
-					commerceWishList.getCommerceWishListId(), cpDefinitionId,
-					cpInstanceId, ddmFormValues, serviceContext);
+					commerceAccountId, commerceWishList.getCommerceWishListId(),
+					cpDefinitionId, cpInstanceUuid, ddmFormValues,
+					serviceContext);
 
 			int commerceWishListItemsCount =
 				_commerceWishListItemService.getCommerceWishListItemsCount(
@@ -135,6 +163,9 @@ public class AddCommerceWishListItemMVCActionCommand
 
 	@Reference
 	private CommerceWishListService _commerceWishListService;
+
+	@Reference
+	private CPInstanceLocalService _cpInstanceLocalService;
 
 	@Reference
 	private JSONFactory _jsonFactory;
