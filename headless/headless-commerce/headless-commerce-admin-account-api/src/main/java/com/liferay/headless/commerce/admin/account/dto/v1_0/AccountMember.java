@@ -105,11 +105,11 @@ public class AccountMember {
 
 	@Schema
 	public AccountRole[] getRoles() {
-		return roles;
+		return roles.clone();
 	}
 
 	public void setRoles(AccountRole[] roles) {
-		this.roles = roles;
+		this.roles = roles.clone();
 	}
 
 	@JsonIgnore

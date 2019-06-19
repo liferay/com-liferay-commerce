@@ -34,6 +34,11 @@ public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
 	public Group getGroup() {
 		if (getCommerceChannelId() > 0) {
 			try {
@@ -64,6 +69,11 @@ public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 		}
 
 		return _typeSettingsProperties;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int)getPrimaryKey();
 	}
 
 	@Override
