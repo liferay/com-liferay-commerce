@@ -74,6 +74,23 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceWrapper
 				commerceAccountGroupId, commerceAccountId, serviceContext);
 	}
 
+	@Override
+	public
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					addCommerceAccountGroupCommerceAccountRel(
+						long commerceAccountGroupId, long commerceAccountId,
+						String externalReferenceCode,
+						com.liferay.portal.kernel.service.ServiceContext
+							serviceContext)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountGroupCommerceAccountRelLocalService.
+			addCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupId, commerceAccountId,
+				externalReferenceCode, serviceContext);
+	}
+
 	/**
 	 * Creates a new commerce account group commerce account rel with the primary key. Does not add the commerce account group commerce account rel to the database.
 	 *
