@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.price.list.internal.upgrade.v1_3_0;
+package com.liferay.commerce.price.list.internal.upgrade.v2_0_0;
 
 import com.liferay.commerce.price.list.internal.upgrade.base.BaseCommercePriceListUpgradeProcess;
 import com.liferay.commerce.price.list.model.impl.CommerceTierPriceEntryModelImpl;

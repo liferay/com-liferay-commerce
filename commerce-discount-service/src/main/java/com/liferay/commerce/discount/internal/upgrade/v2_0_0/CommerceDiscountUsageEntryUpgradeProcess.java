@@ -12,20 +12,20 @@
  * details.
  */
 
-package com.liferay.commerce.discount.internal.upgrade.v1_1_0;
+package com.liferay.commerce.discount.internal.upgrade.v2_0_0;
 
 import com.liferay.commerce.discount.internal.upgrade.base.BaseCommerceDiscountUpgradeProcess;
-import com.liferay.commerce.discount.model.impl.CommerceDiscountRelModelImpl;
+import com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryModelImpl;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class CommerceDiscountRelUpgradeProcess
+public class CommerceDiscountUsageEntryUpgradeProcess
 	extends BaseCommerceDiscountUpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		dropColumn(CommerceDiscountRelModelImpl.TABLE_NAME, "groupId");
+		dropColumn(CommerceDiscountUsageEntryModelImpl.TABLE_NAME, "groupId");
 	}
 
 }
