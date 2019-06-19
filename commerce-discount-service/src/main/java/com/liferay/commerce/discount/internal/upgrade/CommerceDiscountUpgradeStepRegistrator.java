@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.discount.internal.upgrade;
 
-import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountCommerceAccountGroupRelUpgradeProcess;
-import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountRelUpgradeProcess;
-import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountRuleUpgradeProcess;
-import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountUpgradeProcess;
-import com.liferay.commerce.discount.internal.upgrade.v1_1_0.CommerceDiscountUsageEntryUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v2_0_0.CommerceDiscountCommerceAccountGroupRelUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v2_0_0.CommerceDiscountRelUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v2_0_0.CommerceDiscountRuleUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v2_0_0.CommerceDiscountUpgradeProcess;
+import com.liferay.commerce.discount.internal.upgrade.v2_0_0.CommerceDiscountUsageEntryUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
@@ -39,7 +39,7 @@ public class CommerceDiscountUpgradeStepRegistrator
 		}
 
 		registry.register(
-			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
+			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_2_0_0,
 			new CommerceDiscountCommerceAccountGroupRelUpgradeProcess(),
 			new CommerceDiscountRelUpgradeProcess(),
 			new CommerceDiscountRuleUpgradeProcess(),
@@ -53,7 +53,7 @@ public class CommerceDiscountUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_0_0 = "1.0.0";
 
-	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
+	private static final String _SCHEMA_VERSION_2_0_0 = "2.0.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceDiscountUpgradeStepRegistrator.class);
