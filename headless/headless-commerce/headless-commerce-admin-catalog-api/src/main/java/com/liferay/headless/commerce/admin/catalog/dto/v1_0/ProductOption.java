@@ -86,6 +86,34 @@ public class ProductOption {
 	}
 
 	@Schema
+	public Long getCatalogId() {
+		return catalogId;
+	}
+
+	public void setCatalogId(Long catalogId) {
+		this.catalogId = catalogId;
+	}
+
+	@JsonIgnore
+	public void setCatalogId(
+		UnsafeSupplier<Long, Exception> catalogIdUnsafeSupplier) {
+
+		try {
+			catalogId = catalogIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long catalogId;
+
+	@Schema
 	public Map<String, String> getDescription() {
 		return description;
 	}
@@ -348,34 +376,6 @@ public class ProductOption {
 	protected Boolean required;
 
 	@Schema
-	public Long getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteId(Long siteId) {
-		this.siteId = siteId;
-	}
-
-	@JsonIgnore
-	public void setSiteId(
-		UnsafeSupplier<Long, Exception> siteIdUnsafeSupplier) {
-
-		try {
-			siteId = siteIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long siteId;
-
-	@Schema
 	public Boolean getSkuContributor() {
 		return skuContributor;
 	}
@@ -457,6 +457,16 @@ public class ProductOption {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (catalogId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"catalogId\": ");
+
+			sb.append(catalogId);
+		}
 
 		if (description != null) {
 			if (sb.length() > 1) {
@@ -554,16 +564,6 @@ public class ProductOption {
 			sb.append("\"required\": ");
 
 			sb.append(required);
-		}
-
-		if (siteId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"siteId\": ");
-
-			sb.append(siteId);
 		}
 
 		if (skuContributor != null) {
