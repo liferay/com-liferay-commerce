@@ -536,11 +536,20 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		ProductTaxConfiguration taxConfiguration =
 			product.getTaxConfiguration();
 
-		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogLocalService.getCommerceCatalogs(
-				contextCompany.getCompanyId(), true);
+		CommerceCatalog commerceCatalog = null;
 
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+		long catalogId = GetterUtil.getLong(product.getCatalogId());
+
+		if (catalogId > 0) {
+			_commerceCatalogLocalService.getCommerceCatalog(catalogId);
+		}
+		else {
+			List<CommerceCatalog> commerceCatalogs =
+				_commerceCatalogLocalService.getCommerceCatalogs(
+					contextCompany.getCompanyId(), true);
+
+			commerceCatalog = commerceCatalogs.get(0);
+		}
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
