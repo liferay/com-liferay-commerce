@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.upgrade.v1_6_0;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.model.impl.CommerceCatalogModelImpl;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -51,8 +52,8 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 
 		String insertCommerceChannelSQL = StringBundler.concat(
 			"insert into CommerceChannel (commerceChannelId, companyId, ",
-			"userId, userName, createDate, modifiedDate, name, type_, ",
-			"typeSettings) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			"userId, userName, createDate, modifiedDate, name, siteGroupId, ",
+			"type_) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
@@ -98,8 +99,8 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 				ps2.setDate(5, now);
 				ps2.setDate(6, now);
 				ps2.setString(7, siteGroup.getName(defaultLanguageId));
-				ps2.setString(8, "site");
-				ps2.setString(9, "groupId=" + siteGroup.getGroupId());
+				ps2.setLong(8, siteGroup.getGroupId());
+				ps2.setString(9, CommerceChannelConstants.CHANNEL_TYPE_SITE);
 
 				ps2.executeUpdate();
 
