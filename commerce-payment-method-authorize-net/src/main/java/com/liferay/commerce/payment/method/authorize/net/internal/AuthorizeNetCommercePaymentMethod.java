@@ -96,6 +96,12 @@ public class AuthorizeNetCommercePaymentMethod
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		if (!(commercePaymentRequest instanceof
+				AuthorizeNetCommercePaymentRequest)) {
+
+			throw new ClassCastException();
+		}
+
 		AuthorizeNetCommercePaymentRequest authorizeNetCommercePaymentRequest =
 			(AuthorizeNetCommercePaymentRequest)commercePaymentRequest;
 
@@ -153,6 +159,12 @@ public class AuthorizeNetCommercePaymentMethod
 	public CommercePaymentResult processPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
+
+		if (!(commercePaymentRequest instanceof
+				AuthorizeNetCommercePaymentRequest)) {
+
+			throw new ClassCastException();
+		}
 
 		AuthorizeNetCommercePaymentRequest authorizeNetCommercePaymentRequest =
 			(AuthorizeNetCommercePaymentRequest)commercePaymentRequest;

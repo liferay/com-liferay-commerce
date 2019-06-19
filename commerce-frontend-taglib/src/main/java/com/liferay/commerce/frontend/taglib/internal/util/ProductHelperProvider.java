@@ -34,9 +34,14 @@ public class ProductHelperProvider {
 		return _productHelperProvider._productHelper;
 	}
 
+	protected static void setProductHelperProvider(
+		ProductHelperProvider productHelperProvider) {
+
+		_productHelperProvider = productHelperProvider;
+	}
+
 	@Activate
 	protected void activate() {
-		_productHelperProvider = this;
 	}
 
 	@Reference(unbind = "-")

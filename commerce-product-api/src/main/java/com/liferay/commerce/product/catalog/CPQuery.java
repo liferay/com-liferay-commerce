@@ -34,11 +34,6 @@ import java.util.Map;
  */
 public class CPQuery {
 
-	public static final String[] ORDER_BY_COLUMNS = {
-		"name", "createDate", "modifiedDate", "publishDate", "expirationDate",
-		"priority"
-	};
-
 	public static String checkOrderByCol(String orderByCol) {
 		if (ArrayUtil.contains(ORDER_BY_COLUMNS, orderByCol) ||
 			(orderByCol != null)) {
@@ -81,31 +76,31 @@ public class CPQuery {
 	}
 
 	public long[] getAllCategoryIds() {
-		return _allCategoryIds;
+		return _allCategoryIds.clone();
 	}
 
 	public long[] getAllLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_allCategoryIds);
+		return _getLeftAndRightCategoryIds(_allCategoryIds.clone());
 	}
 
 	public long[] getAllTagIds() {
-		return _allTagIds;
+		return _allTagIds.clone();
 	}
 
 	public long[][] getAllTagIdsArray() {
-		return _allTagIdsArray;
+		return _allTagIdsArray.clone();
 	}
 
 	public long[] getAnyCategoryIds() {
-		return _anyCategoryIds;
+		return _anyCategoryIds.clone();
 	}
 
 	public long[] getAnyLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_anyCategoryIds);
+		return _getLeftAndRightCategoryIds(_anyCategoryIds.clone());
 	}
 
 	public long[] getAnyTagIds() {
-		return _anyTagIds;
+		return _anyTagIds.clone();
 	}
 
 	public Serializable getAttribute(String name) {
@@ -117,31 +112,31 @@ public class CPQuery {
 	}
 
 	public long[] getNotAllCategoryIds() {
-		return _notAllCategoryIds;
+		return _notAllCategoryIds.clone();
 	}
 
 	public long[] getNotAllLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_notAllCategoryIds);
+		return _getLeftAndRightCategoryIds(_notAllCategoryIds.clone());
 	}
 
 	public long[] getNotAllTagIds() {
-		return _notAllTagIds;
+		return _notAllTagIds.clone();
 	}
 
 	public long[][] getNotAllTagIdsArray() {
-		return _notAllTagIdsArray;
+		return _notAllTagIdsArray.clone();
 	}
 
 	public long[] getNotAnyCategoryIds() {
-		return _notAnyCategoryIds;
+		return _notAnyCategoryIds.clone();
 	}
 
 	public long[] getNotAnyLeftAndRightCategoryIds() {
-		return _getLeftAndRightCategoryIds(_notAnyCategoryIds);
+		return _getLeftAndRightCategoryIds(_notAnyCategoryIds.clone());
 	}
 
 	public long[] getNotAnyTagIds() {
-		return _notAnyTagIds;
+		return _notAnyTagIds.clone();
 	}
 
 	public String getOrderByCol1() {
@@ -161,13 +156,13 @@ public class CPQuery {
 	}
 
 	public void setAllCategoryIds(long[] allCategoryIds) {
-		_allCategoryIds = allCategoryIds;
+		_allCategoryIds = allCategoryIds.clone();
 
 		_toString = null;
 	}
 
 	public void setAllTagIds(long[] allTagIds) {
-		_allTagIds = allTagIds;
+		_allTagIds = allTagIds.clone();
 
 		_allTagIdsArray = _expandTagIds(allTagIds);
 
@@ -175,9 +170,9 @@ public class CPQuery {
 	}
 
 	public void setAllTagIdsArray(long[][] allTagIdsArray) {
-		_allTagIdsArray = allTagIdsArray;
+		_allTagIdsArray = allTagIdsArray.clone();
 
-		_allTagIds = _flattenTagIds(allTagIdsArray);
+		_allTagIds = _flattenTagIds(allTagIdsArray.clone());
 
 		_toString = null;
 	}
@@ -187,13 +182,13 @@ public class CPQuery {
 	}
 
 	public void setAnyCategoryIds(long[] anyCategoryIds) {
-		_anyCategoryIds = anyCategoryIds;
+		_anyCategoryIds = anyCategoryIds.clone();
 
 		_toString = null;
 	}
 
 	public void setAnyTagIds(long[] anyTagIds) {
-		_anyTagIds = anyTagIds;
+		_anyTagIds = anyTagIds.clone();
 
 		_toString = null;
 	}
@@ -212,35 +207,35 @@ public class CPQuery {
 	}
 
 	public void setNotAllCategoryIds(long[] notAllCategoryIds) {
-		_notAllCategoryIds = notAllCategoryIds;
+		_notAllCategoryIds = notAllCategoryIds.clone();
 
 		_toString = null;
 	}
 
 	public void setNotAllTagIds(long[] notAllTagIds) {
-		_notAllTagIds = notAllTagIds;
+		_notAllTagIds = notAllTagIds.clone();
 
-		_notAllTagIdsArray = _expandTagIds(notAllTagIds);
+		_notAllTagIdsArray = _expandTagIds(notAllTagIds.clone());
 
 		_toString = null;
 	}
 
 	public void setNotAllTagIdsArray(long[][] notAllTagIdsArray) {
-		_notAllTagIdsArray = notAllTagIdsArray;
+		_notAllTagIdsArray = notAllTagIdsArray.clone();
 
-		_notAllTagIds = _flattenTagIds(notAllTagIdsArray);
+		_notAllTagIds = _flattenTagIds(notAllTagIdsArray.clone());
 
 		_toString = null;
 	}
 
 	public void setNotAnyCategoryIds(long[] notAnyCategoryIds) {
-		_notAnyCategoryIds = notAnyCategoryIds;
+		_notAnyCategoryIds = notAnyCategoryIds.clone();
 
 		_toString = null;
 	}
 
 	public void setNotAnyTagIds(long[] notAnyTagIds) {
-		_notAnyTagIds = notAnyTagIds;
+		_notAnyTagIds = notAnyTagIds.clone();
 
 		_toString = null;
 	}
@@ -355,6 +350,11 @@ public class CPQuery {
 
 		return leftRightIds;
 	}
+
+	private static final String[] ORDER_BY_COLUMNS = {
+		"name", "createDate", "modifiedDate", "publishDate", "expirationDate",
+		"priority"
+	};
 
 	private static final Log _log = LogFactoryUtil.getLog(CPQuery.class);
 

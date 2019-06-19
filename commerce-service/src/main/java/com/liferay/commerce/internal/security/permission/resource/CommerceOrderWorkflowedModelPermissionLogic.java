@@ -53,7 +53,7 @@ public class CommerceOrderWorkflowedModelPermissionLogic
 				_modelResourcePermission.contains(
 					permissionChecker, commerceOrder, ActionKeys.UPDATE)) {
 
-				return null;
+				return false;
 			}
 
 			return false;
@@ -64,7 +64,7 @@ public class CommerceOrderWorkflowedModelPermissionLogic
 				_primKeyToLongFunction.applyAsLong(commerceOrder), actionId);
 		}
 
-		return null;
+		return false;
 	}
 
 	private final ModelResourcePermission<CommerceOrder>

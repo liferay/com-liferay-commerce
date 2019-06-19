@@ -402,18 +402,6 @@ public class CPContentHelperImpl implements CPContentHelper {
 			LiferayPortletResponse liferayPortletResponse)
 		throws PortalException {
 
-		CommerceContext commerceContext =
-			(CommerceContext)liferayPortletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
-		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
-
-		long commerceAccountId = 0;
-
-		if (commerceAccount != null) {
-			commerceAccountId = commerceAccount.getCommerceAccountId();
-		}
-
 		ResourceURL resourceURL = liferayPortletResponse.createResourceURL();
 
 		CPCatalogEntry cpCatalogEntry = getCPCatalogEntry(
