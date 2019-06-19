@@ -112,10 +112,10 @@ public class EditCPDefinitionInventoryMVCActionCommand
 			actionRequest, "maxOrderQuantity");
 		String multipleOrderQuantityString = ParamUtil.getString(
 			actionRequest, "multipleOrderQuantity");
-		int minStockQuantity = Integer.valueOf(minStockQuantityString);
-		int minOrderQuantity = Integer.valueOf(minOrderQuantityString);
-		int maxOrderQuantity = Integer.valueOf(maxOrderQuantityString);
-		int multipleOrderQuantity = Integer.valueOf(
+		int minStockQuantity = Integer.parseInt(minStockQuantityString);
+		int minOrderQuantity = Integer.parseInt(minOrderQuantityString);
+		int maxOrderQuantity = Integer.parseInt(maxOrderQuantityString);
+		int multipleOrderQuantity = Integer.parseInt(
 			multipleOrderQuantityString);
 		String allowedOrderQuantities = ParamUtil.getString(
 			actionRequest, "allowedOrderQuantities");

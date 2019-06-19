@@ -104,9 +104,11 @@ public class EditCPDefinitionOptionValueRelMVCActionCommand
 				"cpDefinitionId",
 				String.valueOf(cpDefinition.getCPDefinitionId()));
 
-			jsonObject.put(
-				"cpDefinitionOptionRelId",
-				cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
+			if (cpDefinitionOptionValueRel != null) {
+				jsonObject.put(
+					"cpDefinitionOptionRelId",
+					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId());
+			}
 
 			jsonObject.put("success", true);
 		}

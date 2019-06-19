@@ -97,7 +97,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				commerceAccount.getCommerceAccountId(), commerceCurrencyId);
 		}
 
-		setCurrentCommerceOrder(httpServletRequest, commerceOrder);
+		if (commerceOrder != null) {
+			setCurrentCommerceOrder(httpServletRequest, commerceOrder);
+		}
 
 		return commerceOrder;
 	}
@@ -138,13 +140,11 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				groupId, httpServletRequest,
 				CommercePortletKeys.COMMERCE_ORDER_CONTENT);
 
-			if (commerceOrder != null) {
-				portletURL.setParameter(
-					"mvcRenderCommandName", "viewCommerceOrderDetails");
-				portletURL.setParameter(
-					"commerceOrderId",
-					String.valueOf(commerceOrder.getCommerceOrderId()));
-			}
+			portletURL.setParameter(
+				"mvcRenderCommandName", "viewCommerceOrderDetails");
+			portletURL.setParameter(
+				"commerceOrderId",
+				String.valueOf(commerceOrder.getCommerceOrderId()));
 
 			return portletURL;
 		}
@@ -166,13 +166,11 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 				groupId, httpServletRequest,
 				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-			if (commerceOrder != null) {
-				portletURL.setParameter(
-					"mvcRenderCommandName", "editCommerceOrder");
-				portletURL.setParameter(
-					"commerceOrderId",
-					String.valueOf(commerceOrder.getCommerceOrderId()));
-			}
+			portletURL.setParameter(
+				"mvcRenderCommandName", "editCommerceOrder");
+			portletURL.setParameter(
+				"commerceOrderId",
+				String.valueOf(commerceOrder.getCommerceOrderId()));
 
 			return portletURL;
 		}
@@ -277,7 +275,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)",
 		unbind = "-"
 	)
-	protected void setModelResourcePermission(
+	protected static void setModelResourcePermission(
 		ModelResourcePermission<CommerceOrder> modelResourcePermission) {
 
 		_commerceOrderModelResourcePermission = modelResourcePermission;

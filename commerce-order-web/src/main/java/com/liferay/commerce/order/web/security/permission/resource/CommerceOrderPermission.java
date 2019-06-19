@@ -50,7 +50,7 @@ public class CommerceOrderPermission {
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)",
 		unbind = "-"
 	)
-	protected void setModelResourcePermission(
+	protected static void setModelResourcePermission(
 		ModelResourcePermission<CommerceOrder> modelResourcePermission) {
 
 		_commerceOrderModelResourcePermission = modelResourcePermission;

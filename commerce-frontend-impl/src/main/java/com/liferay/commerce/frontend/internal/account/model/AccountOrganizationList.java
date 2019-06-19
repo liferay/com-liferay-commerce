@@ -30,7 +30,7 @@ public class AccountOrganizationList {
 	}
 
 	public AccountOrganizationList(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 		_success = false;
 	}
 
@@ -39,7 +39,7 @@ public class AccountOrganizationList {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages;
+		return _errorMessages.clone();
 	}
 
 	public List<AccountOrganization> getOrganizations() {
@@ -55,7 +55,7 @@ public class AccountOrganizationList {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 	}
 
 	public void setOrganizations(List<AccountOrganization> organizations) {
