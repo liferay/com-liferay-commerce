@@ -36,6 +36,17 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 				ServiceContext serviceContext)
 		throws PortalException {
 
+		return addCommerceAccountGroupCommerceAccountRel(
+			commerceAccountGroupId, commerceAccountId, null, serviceContext);
+	}
+
+	@Override
+	public CommerceAccountGroupCommerceAccountRel
+			addCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId,
+				String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long commerceAccountGroupCommerceAccountRelId =
@@ -43,8 +54,8 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 
 		CommerceAccountGroupCommerceAccountRel
 			commerceAccountGroupCommerceAccountRel =
-				commerceAccountGroupCommerceAccountRelPersistence.create(
-					commerceAccountGroupCommerceAccountRelId);
+			commerceAccountGroupCommerceAccountRelPersistence.create(
+				commerceAccountGroupCommerceAccountRelId);
 
 		commerceAccountGroupCommerceAccountRel.setCompanyId(
 			user.getCompanyId());
@@ -55,6 +66,8 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 			commerceAccountGroupId);
 		commerceAccountGroupCommerceAccountRel.setCommerceAccountId(
 			commerceAccountId);
+		commerceAccountGroupCommerceAccountRel.setExternalReferenceCode(
+			externalReferenceCode);
 
 		commerceAccountGroupCommerceAccountRelPersistence.update(
 			commerceAccountGroupCommerceAccountRel);
