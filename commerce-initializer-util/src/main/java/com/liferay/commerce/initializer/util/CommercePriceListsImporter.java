@@ -14,13 +14,19 @@
 
 package com.liferay.commerce.initializer.util;
 
+import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -158,18 +164,63 @@ public class CommercePriceListsImporter {
 			String.valueOf(catalogGroupId), "_",
 			FriendlyURLNormalizerUtil.normalize(name));
 
-		_commercePriceListLocalService.upsertCommercePriceList(
-			catalogGroupId, user.getUserId(), 0,
-			commerceCurrency.getCommerceCurrencyId(), parentPriceListId, name,
-			priority, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, externalReferenceCode, neverExpire,
-			serviceContext);
+		CommercePriceList commercePriceList =
+			_commercePriceListLocalService.upsertCommercePriceList(
+				catalogGroupId, user.getUserId(), 0,
+				commerceCurrency.getCommerceCurrencyId(), parentPriceListId,
+				name, priority, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, externalReferenceCode,
+				neverExpire, serviceContext);
+
+		JSONArray accountGroupsJSONArray = jsonObject.getJSONArray(
+			"AccountGroups");
+
+		if (accountGroupsJSONArray != null) {
+			for (int i = 0; i < accountGroupsJSONArray.length(); i++) {
+				try {
+					String accountGroupExternalReferenceCode =
+						StringBundler.concat(
+							String.valueOf(serviceContext.getCompanyId()), "_",
+							FriendlyURLNormalizerUtil.normalize(
+								accountGroupsJSONArray.getString(i)));
+
+					CommerceAccountGroup commerceAccountGroup =
+						_commerceAccountGroupLocalService.
+							fetchCommerceAccountGroupByReferenceCode(
+								serviceContext.getCompanyId(),
+								accountGroupExternalReferenceCode);
+
+					if (commerceAccountGroup == null) {
+						throw new NoSuchAccountGroupException();
+					}
+
+					_commercePriceListCommerceAccountGroupRelLocalService.
+						addCommercePriceListCommerceAccountGroupRel(
+							commercePriceList.getCommercePriceListId(),
+							commerceAccountGroup.getCommerceAccountGroupId(), 0,
+							serviceContext);
+				}
+				catch (NoSuchAccountGroupException nsage) {
+					_log.error(nsage, nsage);
+				}
+			}
+		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommercePriceListsImporter.class);
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+
+	@Reference
+	private CommercePriceListCommerceAccountGroupRelLocalService
+		_commercePriceListCommerceAccountGroupRelLocalService;
 
 	@Reference
 	private CommercePriceListLocalService _commercePriceListLocalService;

@@ -15,8 +15,13 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelLocalService;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
@@ -257,10 +262,72 @@ public class CommerceAccountsImporter {
 				}
 			}
 		}
+
+		// Add/Find Account Group and Add Rel
+
+		JSONArray accountGroupsJSONArray = jsonObject.getJSONArray(
+			"AccountGroups");
+
+		if (accountGroupsJSONArray != null) {
+			for (int i = 0; i < accountGroupsJSONArray.length(); i++) {
+				try {
+					String accountGroupName = accountGroupsJSONArray.getString(
+						i);
+
+					String externalReferenceCode = StringBundler.concat(
+						String.valueOf(serviceContext.getCompanyId()), "_",
+						FriendlyURLNormalizerUtil.normalize(accountGroupName));
+
+					CommerceAccountGroup commerceAccountGroup =
+						_commerceAccountGroupLocalService.
+							fetchCommerceAccountGroupByReferenceCode(
+								serviceContext.getCompanyId(),
+								externalReferenceCode);
+
+					if (commerceAccountGroup == null) {
+						commerceAccountGroup =
+							_commerceAccountGroupLocalService.
+								addCommerceAccountGroup(
+									serviceContext.getCompanyId(),
+									accountGroupName,
+									CommerceAccountConstants.
+										ACCOUNT_GROUP_TYPE_GUEST,
+									false, externalReferenceCode,
+									serviceContext);
+					}
+
+					CommerceAccountGroupCommerceAccountRel
+						commerceAccountGroupCommerceAccountRel =
+							_commerceAccountGroupCommerceAccountRelLocalService.
+								fetchCommerceAccountGroupCommerceAccountRelByReferenceCode(
+									serviceContext.getCompanyId(),
+									externalReferenceCode);
+
+					if (commerceAccountGroupCommerceAccountRel == null) {
+						_commerceAccountGroupCommerceAccountRelLocalService.
+							addCommerceAccountGroupCommerceAccountRel(
+								commerceAccountGroup.
+									getCommerceAccountGroupId(),
+								commerceAccount.getCommerceAccountId(),
+								externalReferenceCode, serviceContext);
+					}
+				}
+				catch (NoSuchAccountGroupException nsage) {
+					_log.error(nsage, nsage);
+				}
+			}
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAccountsImporter.class);
+
+	@Reference
+	private CommerceAccountGroupCommerceAccountRelLocalService
+		_commerceAccountGroupCommerceAccountRelLocalService;
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;
