@@ -59,7 +59,6 @@
 		"liferay-npm-bundler-preset-standard": "2.7.1",
 		"liferay-npm-scripts": "^1.7.2",
 		"node-sass": "^4.11.0",
-		"odata-v4-parser": "^0.1.29",
 		"react-testing-library": "^5.3.2"
 	},
 	"main": "dynamic_panel/js/index.es.js",
@@ -71,8 +70,7 @@
 		"format": "npm run csf -- -i",
 		"test": "env TZ=utc liferay-npm-scripts test -e",
 		"test:watch": "env TZ=utc liferay-npm-scripts test --watch",
-		"watch": "liferay-npm-scripts webpack --watch",
-		"start": "webpack-dev-server --config webpack.config.dev.js"
+		"watch": "webpack-dev-server --config webpack.config.dev.js"
 	},
 	"sideEffects": false,
 	"version": "1.0.13"

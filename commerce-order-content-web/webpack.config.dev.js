@@ -29,12 +29,12 @@ module.exports = {
 	},
 	output: {
 		filename: `[name].js`,
-		path: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build')
+		path: path.resolve(__dirname, './dev/public')
 	},
 	plugins: [
 		// new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build/index.html')
+			template: path.resolve(__dirname, './dev/public/index.html')
 		})
 	],
 	resolve: {
@@ -43,7 +43,7 @@ module.exports = {
 
 	devServer: {
 		compress: false,
-		contentBase: path.join(__dirname, './src/main/resources/META-INF/resources/dynamic_panel/dev-build'),
+		contentBase: path.join(__dirname, './dev/public'),
 		open: true,
 		port: 9000,
 		// proxy: {
