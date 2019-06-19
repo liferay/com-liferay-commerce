@@ -175,7 +175,7 @@ components:
                     readOnly: true
                     type: string
                 message:
-                    example: No CommerceCurrency exists with the key {siteId=41811, code=US
+                    example: No CommerceCurrency exists with the key {catalogId=41811, code=US
                         Dollar}
                     readOnly: true
                     type: string
@@ -192,6 +192,9 @@ components:
             type: object
         Option:
             properties:
+                catalogId:
+                    format: int64
+                    type: integer
                 description:
                     additionalProperties:
                         type: string
@@ -240,9 +243,6 @@ components:
                 required:
                     example: true
                     type: boolean
-                siteId:
-                    format: int64
-                    type: integer
                 skuContributor:
                     example: true
                     type: boolean
@@ -330,6 +330,9 @@ components:
                     items:
                         $ref: '#/components/schemas/Attachment'
                     type: array
+                catalogId:
+                    format: int64
+                    type: integer
                 categories:
                     items:
                         $ref: '#/components/schemas/Category'
@@ -425,9 +428,6 @@ components:
                         hr_HR: Product Short Description HR
                         hu_HU: Product Short Description HU
                     type: object
-                siteId:
-                    format: int64
-                    type: integer
                 skus:
                     items:
                         $ref: '#/components/schemas/Sku'
@@ -501,6 +501,9 @@ components:
             type: object
         ProductOption:
             properties:
+                catalogId:
+                    format: int64
+                    type: integer
                 description:
                     additionalProperties:
                         type: string
@@ -551,9 +554,6 @@ components:
                 required:
                     example: true
                     type: boolean
-                siteId:
-                    format: int64
-                    type: integer
                 skuContributor:
                     example: true
                     type: boolean
