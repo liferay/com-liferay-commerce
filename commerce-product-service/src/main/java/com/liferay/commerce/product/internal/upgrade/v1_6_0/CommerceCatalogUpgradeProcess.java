@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.internal.upgrade.v1_6_0;
 
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.impl.CommerceCatalogModelImpl;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -67,12 +68,15 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 
 			while (rs.next()) {
 				long commerceCatalogId = increment();
+				long commerceChannelId = increment();
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
 				String userName = rs.getString("userName");
 				Date now = new Date(System.currentTimeMillis());
 				String defaultLanguageId = rs.getString("defaultLanguageId");
+
+				Group siteGroup = _groupLocalService.getGroup(groupId);
 
 				ps1.setLong(1, commerceCatalogId);
 				ps1.setLong(2, companyId);
@@ -81,15 +85,13 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 				ps1.setDate(5, now);
 				ps1.setDate(6, now);
 
-				Group siteGroup = _groupLocalService.getGroup(groupId);
-
 				ps1.setString(7, siteGroup.getName(defaultLanguageId));
 
 				ps1.setString(8, defaultLanguageId);
 
 				ps1.executeUpdate();
 
-				ps2.setLong(1, increment());
+				ps2.setLong(1, commerceChannelId);
 				ps2.setLong(2, companyId);
 				ps2.setLong(3, userId);
 				ps2.setString(4, userName);
@@ -110,32 +112,83 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 					GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false,
 					true, null);
 
-				String updateTableGroupIdSQL = StringBundler.concat(
-					"update %s set groupId = ",
-					String.valueOf(catalogGroup.getGroupId()),
-					" where groupId = ",
-					String.valueOf(siteGroup.getGroupId()));
+				Group channelGroup = _groupLocalService.addGroup(
+					userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
+					CommerceChannel.class.getName(), commerceChannelId,
+					GroupConstants.DEFAULT_LIVE_GROUP_ID,
+					siteGroup.getNameMap(), null,
+					GroupConstants.TYPE_SITE_PRIVATE, false,
+					GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false,
+					true, null);
 
-				runSQL(String.format(updateTableGroupIdSQL, "CPDefinition"));
-				runSQL(String.format(updateTableGroupIdSQL, "AssetEntry"));
-				runSQL(String.format(updateTableGroupIdSQL, "AssetCategory"));
+				String updateTableGroupIdSQL =
+					"update %s set groupId = %s where groupId = %s";
+
 				runSQL(
 					String.format(
-						updateTableGroupIdSQL, "CPAttachmentFileEntry"));
-				runSQL(
-					String.format(updateTableGroupIdSQL, "CPDefinitionLink"));
-				runSQL(
-					String.format(
-						updateTableGroupIdSQL, "CPDefinitionOptionRel"));
+						updateTableGroupIdSQL, "CPDefinition",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
 				runSQL(
 					String.format(
-						updateTableGroupIdSQL, "CPDefinitionOptionValueRel"));
+						updateTableGroupIdSQL, "AssetEntry",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
 				runSQL(
 					String.format(
-						updateTableGroupIdSQL, "CPDSpecificationOptionValue"));
-				runSQL(String.format(updateTableGroupIdSQL, "CPDisplayLayout"));
-				runSQL(String.format(updateTableGroupIdSQL, "CPInstance"));
-				runSQL(String.format(updateTableGroupIdSQL, "CProduct"));
+						updateTableGroupIdSQL, "AssetCategory",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPAttachmentFileEntry",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDefinitionLink",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDefinitionOptionRel",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDefinitionOptionValueRel",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDSpecificationOptionValue",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPDisplayLayout",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPInstance",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CProduct",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CProduct",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
+
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CPFriendlyURLEntry",
+						GroupConstants.DEFAULT_LIVE_GROUP_ID,
+						siteGroup.getGroupId()));
+
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CommerceOrder",
+						channelGroup.getGroupId(), siteGroup.getGroupId()));
+
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CommerceShipment",
+						channelGroup.getGroupId(), siteGroup.getGroupId()));
 			}
 
 			ps1.executeBatch();
