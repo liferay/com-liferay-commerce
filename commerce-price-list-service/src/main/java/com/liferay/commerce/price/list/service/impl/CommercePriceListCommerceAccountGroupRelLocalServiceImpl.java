@@ -66,7 +66,7 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 
 		// Commerce price list
 
-		reindexCommerceAccountGroup(commercePriceListId);
+		reindexPriceList(commercePriceListId);
 
 		// Cache
 
@@ -89,7 +89,7 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 
 		// Commerce price list
 
-		reindexCommerceAccountGroup(
+		reindexPriceList(
 			commercePriceListCommerceAccountGroupRel.getCommercePriceListId());
 
 		// Expando
@@ -187,7 +187,7 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 
 		// Commerce price list
 
-		reindexCommerceAccountGroup(
+		reindexPriceList(
 			commercePriceListCommerceAccountGroupRel.getCommercePriceListId());
 
 		// Cache
@@ -199,7 +199,7 @@ public class CommercePriceListCommerceAccountGroupRelLocalServiceImpl
 			commercePriceListCommerceAccountGroupRel);
 	}
 
-	protected void reindexCommerceAccountGroup(long commercePriceListId)
+	protected void reindexPriceList(long commercePriceListId)
 		throws PortalException {
 
 		Indexer<CommercePriceList> indexer =

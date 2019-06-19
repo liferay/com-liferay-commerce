@@ -176,6 +176,8 @@ public class CommercePriceListLocalServiceImpl
 		commercePriceList = startWorkflowInstance(
 			user.getUserId(), commercePriceList, serviceContext);
 
+		// Cache
+
 		cleanPriceListCache(user.getCompanyId());
 
 		return commercePriceList;
@@ -269,6 +271,8 @@ public class CommercePriceListLocalServiceImpl
 			commercePriceList.getCompanyId(), commercePriceList.getGroupId(),
 			CommercePriceList.class.getName(),
 			commercePriceList.getCommercePriceListId());
+
+		// Cache
 
 		cleanPriceListCache(commercePriceList.getCompanyId());
 
