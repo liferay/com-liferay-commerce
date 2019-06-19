@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -120,7 +123,16 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 	public Page<Catalog> getCatalogsPage(Pagination pagination)
 		throws Exception {
 
-		return super.getCatalogsPage(pagination);
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.searchCommerceCatalogs(
+				contextCompany.getCompanyId(), null,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int totalItems = _commerceCatalogService.searchCommerceCatalogsCount(
+			contextCompany.getCompanyId(), null);
+
+		return Page.of(_toCatalogs(commerceCatalogs), pagination, totalItems);
 	}
 
 	@Override
@@ -178,8 +190,7 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 		}
 		else {
 			commerceCatalog = _commerceCatalogService.updateCommerceCatalog(
-				commerceCatalog.getCommerceCatalogId(),
-				commerceCatalog.getName(),
+				commerceCatalog.getCommerceCatalogId(), catalog.getName(),
 				GetterUtil.get(
 					catalog.getCurrencyCode(),
 					commerceCatalog.getCommerceCurrencyCode()),
@@ -196,6 +207,26 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				commerceCatalog.getCommerceCatalogId()));
+	}
+
+	private List<Catalog> _toCatalogs(List<CommerceCatalog> commerceCatalogs)
+		throws Exception {
+
+		List<Catalog> catalogs = new ArrayList<>();
+
+		DTOConverter catalogDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceCatalog.class.getName());
+
+		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
+			catalogs.add(
+				(Catalog)catalogDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						commerceCatalog.getCommerceCatalogId())));
+		}
+
+		return catalogs;
 	}
 
 	@Reference
