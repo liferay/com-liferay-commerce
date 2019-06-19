@@ -50,11 +50,11 @@ public class Account {
 
 	@Schema
 	public Address[] getAddresses() {
-		return addresses;
+		return addresses.clone();
 	}
 
 	public void setAddresses(Address[] addresses) {
-		this.addresses = addresses;
+		this.addresses = addresses.clone();
 	}
 
 	@JsonIgnore
@@ -78,11 +78,11 @@ public class Account {
 
 	@Schema
 	public String[] getEmailAddresses() {
-		return emailAddresses;
+		return emailAddresses.clone();
 	}
 
 	public void setEmailAddresses(String[] emailAddresses) {
-		this.emailAddresses = emailAddresses;
+		this.emailAddresses = emailAddresses.clone();
 	}
 
 	@JsonIgnore
@@ -216,11 +216,11 @@ public class Account {
 
 	@Schema
 	public AccountOrganization[] getOrganizations() {
-		return organizations;
+		return organizations.clone();
 	}
 
 	public void setOrganizations(AccountOrganization[] organizations) {
-		this.organizations = organizations;
+		this.organizations = organizations.clone();
 	}
 
 	@JsonIgnore
@@ -325,11 +325,11 @@ public class Account {
 
 	@Schema
 	public AccountMember[] getUsers() {
-		return users;
+		return users.clone();
 	}
 
 	public void setUsers(AccountMember[] users) {
-		this.users = users;
+		this.users = users.clone();
 	}
 
 	@JsonIgnore

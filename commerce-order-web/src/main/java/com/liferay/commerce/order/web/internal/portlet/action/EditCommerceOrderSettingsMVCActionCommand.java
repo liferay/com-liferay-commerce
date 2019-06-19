@@ -54,6 +54,16 @@ import org.osgi.service.component.annotations.Reference;
 public class EditCommerceOrderSettingsMVCActionCommand
 	extends BaseMVCActionCommand {
 
+	@Reference(
+		target = "(resource.name=" + CommerceOrderConstants.RESOURCE_NAME + ")",
+		unbind = "-"
+	)
+	protected static void setPortletResourcePermission(
+		PortletResourcePermission portletResourcePermission) {
+
+		_portletResourcePermission = portletResourcePermission;
+	}
+
 	@Override
 	protected void doProcessAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -95,16 +105,6 @@ public class EditCommerceOrderSettingsMVCActionCommand
 			actionRequest, typePrefix + "WorkflowDefinition");
 
 		return new ObjectValuePair<>(typePK, workflowDefinition);
-	}
-
-	@Reference(
-		target = "(resource.name=" + CommerceOrderConstants.RESOURCE_NAME + ")",
-		unbind = "-"
-	)
-	protected void setPortletResourcePermission(
-		PortletResourcePermission portletResourcePermission) {
-
-		_portletResourcePermission = portletResourcePermission;
 	}
 
 	protected void updateWorkflowDefinitionLinks(
