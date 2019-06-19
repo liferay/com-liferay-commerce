@@ -212,13 +212,13 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importRelatedProducts(cpDefinitions, serviceContext);
 
-			_importCommercePriceLists(catalogGroupId, serviceContext);
-
-			_importCommercePriceEntries(catalogGroupId, serviceContext);
-
 			_importCommerceOrganizations(serviceContext);
 
 			_importCommerceAccounts(serviceContext);
+
+			_importCommercePriceLists(catalogGroupId, serviceContext);
+
+			_importCommercePriceEntries(catalogGroupId, serviceContext);
 
 			_importCommerceUsers(serviceContext);
 
