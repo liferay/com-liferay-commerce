@@ -21,7 +21,7 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
 import com.liferay.headless.commerce.admin.pricing.internal.mapper.v1_0.DTOMapper;
 import com.liferay.headless.commerce.core.util.DateConfig;
@@ -162,12 +162,29 @@ public class PriceListHelper {
 			AcceptLanguage acceptLanguage)
 		throws PortalException {
 
+		CommerceCatalog commerceCatalog = null;
+
+		long catalogId = GetterUtil.getLong(priceList.getCatalogId());
+
+		if (catalogId > 0) {
+			commerceCatalog = _commerceCatalogLocalService.getCommerceCatalog(
+				catalogId);
+		}
+		else {
+			List<CommerceCatalog> commerceCatalogs =
+				_commerceCatalogLocalService.getCommerceCatalogs(
+					companyId, true);
+
+			commerceCatalog = commerceCatalogs.get(0);
+		}
+
 		return _dtoMapper.modelToDTO(
 			_upsertPriceList(
-				companyId, 0L, priceList.getCommercePriceListId(),
-				priceList.getCurrency(), priceList.getName(),
-				priceList.getPriority(), priceList.getNeverExpire(),
-				priceList.getDisplayDate(), priceList.getExpirationDate(),
+				companyId, commerceCatalog.getGroupId(),
+				priceList.getCommercePriceListId(), priceList.getCurrency(),
+				priceList.getName(), priceList.getPriority(),
+				priceList.getNeverExpire(), priceList.getDisplayDate(),
+				priceList.getExpirationDate(),
 				priceList.getExternalReferenceCode(), priceList.getActive(),
 				user),
 			acceptLanguage.getPreferredLanguageId());
@@ -244,7 +261,7 @@ public class PriceListHelper {
 	}
 
 	private CommercePriceList _upsertPriceList(
-			Long companyId, Long commerceCatalogId, Long commercePriceListId,
+			Long companyId, long groupId, Long commercePriceListId,
 			String currency, String name, Double priority, Boolean neverExpire,
 			Date displayDate, Date expirationDate, String externalReferenceCode,
 			Boolean active, User currentUser)
@@ -305,18 +322,14 @@ public class PriceListHelper {
 			commercePriceListId = 0L;
 		}
 
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogService.fetchCommerceCatalog(commerceCatalogId);
-
 		CommercePriceList commercePriceList =
 			_commercePriceListService.upsertCommercePriceList(
-				commerceCatalog.getGroupId(), currentUser.getUserId(),
-				commercePriceListId, commerceCurrencyId, name, priority,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, externalReferenceCode, neverExpire,
-				serviceContext);
+				groupId, currentUser.getUserId(), commercePriceListId,
+				commerceCurrencyId, name, priority, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				externalReferenceCode, neverExpire, serviceContext);
 
 		if (!active) {
 			Map<String, Serializable> workflowContext = new HashMap<>();
@@ -335,7 +348,7 @@ public class PriceListHelper {
 		PriceListHelper.class);
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceCurrencyService _commerceCurrencyService;
