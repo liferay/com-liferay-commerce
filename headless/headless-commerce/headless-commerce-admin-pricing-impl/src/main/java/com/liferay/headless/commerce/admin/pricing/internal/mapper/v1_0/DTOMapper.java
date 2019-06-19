@@ -21,6 +21,8 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
@@ -31,6 +33,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -105,6 +108,19 @@ public class DTOMapper {
 
 		try {
 			priceList.setActive(!commercePriceList.isInactive());
+
+			CommerceCatalog commerceCatalog =
+				_commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
+					commercePriceList.getGroupId());
+
+			long catalogId = 0;
+
+			if (commerceCatalog != null) {
+				commerceCatalog.getCommerceCatalogId();
+			}
+
+			priceList.setCatalogId(catalogId);
+
 			priceList.setCommercePriceListId(
 				commercePriceList.getCommercePriceListId());
 			CommerceCurrency commerceCurrency =
@@ -116,7 +132,6 @@ public class DTOMapper {
 			priceList.setExpirationDate(commercePriceList.getExpirationDate());
 			priceList.setExternalReferenceCode(
 				commercePriceList.getExternalReferenceCode());
-			priceList.setGroupId(commercePriceList.getGroupId());
 			priceList.setId(commercePriceList.getCommercePriceListId());
 			priceList.setName(commercePriceList.getName());
 			priceList.setPriority(commercePriceList.getPriority());
@@ -154,5 +169,8 @@ public class DTOMapper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(DTOMapper.class);
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 }

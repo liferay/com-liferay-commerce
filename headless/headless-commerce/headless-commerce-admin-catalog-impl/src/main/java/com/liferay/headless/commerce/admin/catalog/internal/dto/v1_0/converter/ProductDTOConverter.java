@@ -21,8 +21,10 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
@@ -38,6 +40,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
@@ -89,6 +92,7 @@ public class ProductDTOConverter implements DTOConverter {
 				attachments = _getAttachments(
 					cpDefinition, CPAttachmentFileEntryConstants.TYPE_OTHER,
 					dtoConverterContext);
+				catalogId = _getCommerceCatalogId(cpDefinition);
 				configuration =
 					(ProductConfiguration)
 						productConfigurationDTOConverter.toDTO(
@@ -159,6 +163,20 @@ public class ProductDTOConverter implements DTOConverter {
 		return stream.toArray(Attachment[]::new);
 	}
 
+	private long _getCommerceCatalogId(CPDefinition cpDefinition)
+		throws PortalException {
+
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogService.fetchCommerceCatalogByGroupId(
+				cpDefinition.getGroupId());
+
+		if (commerceCatalog == null) {
+			return 0;
+		}
+
+		return commerceCatalog.getCommerceCatalogId();
+	}
+
 	private ProductOption[] _getProductOptions(
 			CPDefinition cpDefinition, DTOConverterContext dtoConverterContext)
 		throws Exception {
@@ -211,6 +229,9 @@ public class ProductDTOConverter implements DTOConverter {
 
 		return stream.toArray(RelatedProduct[]::new);
 	}
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
