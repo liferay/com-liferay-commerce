@@ -68,8 +68,10 @@ public class CommerceCatalogServiceImpl extends CommerceCatalogServiceBaseImpl {
 			commerceCatalogLocalService.fetchByExternalReferenceCode(
 				companyId, externalReferenceCode);
 
-		_commerceCatalogModelResourcePermission.check(
-			getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
+		if (commerceCatalog != null) {
+			_commerceCatalogModelResourcePermission.check(
+				getPermissionChecker(), commerceCatalog, ActionKeys.VIEW);
+		}
 
 		return commerceCatalog;
 	}

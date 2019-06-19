@@ -70,8 +70,10 @@ public class CommerceAccountGroupServiceImpl
 			commerceAccountGroupLocalService.fetchByExternalReferenceCode(
 				companyId, externalReferenceCode);
 
-		_commerceAccountGroupModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountGroup, ActionKeys.VIEW);
+		if (commerceAccountGroup != null) {
+			_commerceAccountGroupModelResourcePermission.check(
+				getPermissionChecker(), commerceAccountGroup, ActionKeys.VIEW);
+		}
 
 		return commerceAccountGroup;
 	}
