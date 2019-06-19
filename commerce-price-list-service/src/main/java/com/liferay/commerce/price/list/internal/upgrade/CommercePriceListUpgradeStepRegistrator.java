@@ -16,8 +16,8 @@ package com.liferay.commerce.price.list.internal.upgrade;
 
 import com.liferay.commerce.price.list.internal.upgrade.v1_1_0.CommercePriceEntryUpgradeProcess;
 import com.liferay.commerce.price.list.internal.upgrade.v1_2_0.CommercePriceListAccountRelUpgradeProcess;
-import com.liferay.commerce.price.list.internal.upgrade.v1_3_0.CommercePriceListCommerceAccountGroupRelUpgradeProcess;
-import com.liferay.commerce.price.list.internal.upgrade.v1_3_0.CommerceTierPriceEntryUpgradeProcess;
+import com.liferay.commerce.price.list.internal.upgrade.v2_0_0.CommercePriceListCommerceAccountGroupRelUpgradeProcess;
+import com.liferay.commerce.price.list.internal.upgrade.v2_0_0.CommerceTierPriceEntryUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -51,10 +51,10 @@ public class CommercePriceListUpgradeStepRegistrator
 			new CommercePriceListAccountRelUpgradeProcess());
 
 		registry.register(
-			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_1_3_0,
-			new com.liferay.commerce.price.list.internal.upgrade.v1_3_0.
+			_SCHEMA_VERSION_1_2_0, _SCHEMA_VERSION_2_0_0,
+			new com.liferay.commerce.price.list.internal.upgrade.v2_0_0.
 				CommercePriceEntryUpgradeProcess(),
-			new com.liferay.commerce.price.list.internal.upgrade.v1_3_0.
+			new com.liferay.commerce.price.list.internal.upgrade.v2_0_0.
 				CommercePriceListAccountRelUpgradeProcess(),
 			new CommercePriceListCommerceAccountGroupRelUpgradeProcess(),
 			new CommerceTierPriceEntryUpgradeProcess());
@@ -70,7 +70,7 @@ public class CommercePriceListUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
-	private static final String _SCHEMA_VERSION_1_3_0 = "1.3.0";
+	private static final String _SCHEMA_VERSION_2_0_0 = "2.0.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommercePriceListUpgradeStepRegistrator.class);
