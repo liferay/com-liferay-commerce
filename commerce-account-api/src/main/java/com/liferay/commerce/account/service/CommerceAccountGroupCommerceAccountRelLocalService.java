@@ -80,6 +80,12 @@ public interface CommerceAccountGroupCommerceAccountRelLocalService
 				ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceAccountGroupCommerceAccountRel
+			addCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId,
+				String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new commerce account group commerce account rel with the primary key. Does not add the commerce account group commerce account rel to the database.
 	 *
