@@ -54,8 +54,8 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 
 		CommerceAccountGroupCommerceAccountRel
 			commerceAccountGroupCommerceAccountRel =
-			commerceAccountGroupCommerceAccountRelPersistence.create(
-				commerceAccountGroupCommerceAccountRelId);
+				commerceAccountGroupCommerceAccountRelPersistence.create(
+					commerceAccountGroupCommerceAccountRelId);
 
 		commerceAccountGroupCommerceAccountRel.setCompanyId(
 			user.getCompanyId());
