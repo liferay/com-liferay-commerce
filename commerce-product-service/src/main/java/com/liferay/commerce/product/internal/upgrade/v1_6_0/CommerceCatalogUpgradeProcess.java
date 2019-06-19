@@ -190,6 +190,11 @@ public class CommerceCatalogUpgradeProcess extends UpgradeProcess {
 					String.format(
 						updateTableGroupIdSQL, "CommerceShipment",
 						channelGroup.getGroupId(), siteGroup.getGroupId()));
+
+				runSQL(
+					String.format(
+						updateTableGroupIdSQL, "CommercePriceList",
+						catalogGroup.getGroupId(), siteGroup.getGroupId()));
 			}
 
 			ps1.executeBatch();
