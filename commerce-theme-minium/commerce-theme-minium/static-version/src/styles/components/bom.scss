@@ -38,7 +38,7 @@
 		border-radius: 50%;
 		height: 24px;
 		margin-left: -12px;
-		margin-top: -12px;
+		margin-bottom: -12px;
 		position: absolute;
 		width: 24px;
 
@@ -68,7 +68,6 @@
 			opacity: 0;
 			position: absolute;
 			transition: transform 0.2s ease-in, opacity 0.2s ease-in;
-			transition-delay: 0.4s;
 			z-index: 2;
 
 			&--top-left {
