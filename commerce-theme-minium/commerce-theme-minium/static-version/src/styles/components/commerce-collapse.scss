@@ -2,11 +2,11 @@
 .commerce-collapse {
 
 	&__header {
+		align-items: center;
 		color: inherit;
-		padding: 0;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		padding: 0;
 		width: 100%;
 
 		.collapse-title {
@@ -16,8 +16,8 @@
 		.collapse-icon-closed,
 		.collapse-icon-open {
 			font-size: 20px;
-			position: static;
 			line-height: 0;
+			position: static;
 		}
 
 
@@ -43,9 +43,9 @@
 	}
 
 	&__content {
+		overflow: hidden;
 		padding-top: 10px;
 		transition: max-height .2s ease-in;
-		overflow: hidden;
 
 		&--collapsed {
 			display: none;
