@@ -296,12 +296,19 @@ public class CommerceAccountsImporter {
 									serviceContext);
 					}
 
+					String relExternalReferenceCode = StringBundler.concat(
+						String.valueOf(serviceContext.getCompanyId()), "_",
+						FriendlyURLNormalizerUtil.normalize(accountGroupName),
+						"_",
+						FriendlyURLNormalizerUtil.normalize(
+							commerceAccount.getName()));
+
 					CommerceAccountGroupCommerceAccountRel
 						commerceAccountGroupCommerceAccountRel =
 							_commerceAccountGroupCommerceAccountRelLocalService.
 								fetchCommerceAccountGroupCommerceAccountRelByReferenceCode(
 									serviceContext.getCompanyId(),
-									externalReferenceCode);
+									relExternalReferenceCode);
 
 					if (commerceAccountGroupCommerceAccountRel == null) {
 						_commerceAccountGroupCommerceAccountRelLocalService.
@@ -309,7 +316,7 @@ public class CommerceAccountsImporter {
 								commerceAccountGroup.
 									getCommerceAccountGroupId(),
 								commerceAccount.getCommerceAccountId(),
-								externalReferenceCode, serviceContext);
+								relExternalReferenceCode, serviceContext);
 					}
 				}
 				catch (NoSuchAccountGroupException nsage) {
