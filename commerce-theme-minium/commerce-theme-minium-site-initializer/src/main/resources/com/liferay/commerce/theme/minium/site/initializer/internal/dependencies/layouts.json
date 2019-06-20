@@ -53,7 +53,7 @@
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPPublisherPortlet_INSTANCE_product_detail",
 				"portletPreferences": {
 					"cpContentListRendererKey": "list-minium",
-					"dataSource": "related",
+					"dataSource": "assetCategoriesAndTagsDataSource",
 					"groupe--cpTypeListEntryRendererKey": "list-entry-minium",
 					"renderSelection": "custom",
 					"selectionStyle": "dataSource",
