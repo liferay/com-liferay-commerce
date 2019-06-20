@@ -142,7 +142,7 @@ public class CommerceShippingMethodServiceUtil {
 		<com.liferay.commerce.model.CommerceShippingMethod>
 				getCommerceShippingMethods(
 					long groupId, long commerceCountryId, boolean active)
-			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceShippingMethods(
 			groupId, commerceCountryId, active);

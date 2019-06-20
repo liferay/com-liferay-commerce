@@ -509,7 +509,7 @@ public class CommerceShippingMethodServiceHttp {
 				getCommerceShippingMethods(
 					HttpPrincipal httpPrincipal, long groupId,
 					long commerceCountryId, boolean active)
-			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
@@ -527,11 +527,10 @@ public class CommerceShippingMethodServiceHttp {
 			}
 			catch (Exception e) {
 				if (e instanceof
-						com.liferay.portal.kernel.security.auth.
-							PrincipalException) {
+						com.liferay.portal.kernel.exception.PortalException) {
 
-					throw (com.liferay.portal.kernel.security.auth.
-						PrincipalException)e;
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(
