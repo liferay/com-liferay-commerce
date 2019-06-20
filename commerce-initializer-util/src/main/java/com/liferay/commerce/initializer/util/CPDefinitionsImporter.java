@@ -20,6 +20,9 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.MappingJsonFactory;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
+import com.liferay.commerce.account.service.CommerceAccountGroupRelLocalService;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
@@ -534,16 +537,51 @@ public class CPDefinitionsImporter {
 			}
 		}
 
-		_cpDefinitionLocalService.updateStatus(
-			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
-			WorkflowConstants.STATUS_APPROVED, serviceContext,
-			new HashMap<String, Serializable>());
-
 		// Commerce product channel
+
+		cpDefinition.setChannelFilterEnabled(true);
 
 		_commerceChannelRelLocalService.addCommerceChannelRel(
 			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 			commerceChannelId, serviceContext);
+
+		// Filter account groups
+
+		JSONArray filterAccountGroupsJSONArray = jsonObject.getJSONArray(
+			"FilterAccountGroups");
+
+		if (filterAccountGroupsJSONArray != null) {
+			cpDefinition.setAccountGroupFilterEnabled(true);
+
+			for (int i = 0; i < filterAccountGroupsJSONArray.length(); i++) {
+				String accountGroupExternalReferenceCode = StringBundler.concat(
+					String.valueOf(serviceContext.getCompanyId()), "_",
+					FriendlyURLNormalizerUtil.normalize(
+						filterAccountGroupsJSONArray.getString(i)));
+
+				CommerceAccountGroup commerceAccountGroup =
+					_commerceAccountGroupLocalService.
+						fetchCommerceAccountGroupByReferenceCode(
+							serviceContext.getCompanyId(),
+							accountGroupExternalReferenceCode);
+
+				if (commerceAccountGroup != null) {
+					_commerceAccountGroupRelLocalService.
+						addCommerceAccountGroupRel(
+							CPDefinition.class.getName(),
+							cpDefinition.getCPDefinitionId(),
+							commerceAccountGroup.getCommerceAccountGroupId(),
+							serviceContext);
+				}
+			}
+		}
+
+		_cpDefinitionLocalService.updateCPDefinition(cpDefinition);
+
+		_cpDefinitionLocalService.updateStatus(
+			cpDefinition.getUserId(), cpDefinition.getCPDefinitionId(),
+			WorkflowConstants.STATUS_APPROVED, serviceContext,
+			new HashMap<String, Serializable>());
 
 		return cpDefinition;
 	}
@@ -788,6 +826,13 @@ public class CPDefinitionsImporter {
 
 	@Reference
 	private AssetCategoriesImporter _assetCategoriesImporter;
+
+	@Reference
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
+	private CommerceAccountGroupRelLocalService
+		_commerceAccountGroupRelLocalService;
 
 	@Reference
 	private CommerceAvailabilityEstimateLocalService

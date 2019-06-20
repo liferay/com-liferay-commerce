@@ -206,15 +206,15 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_importCPOptions(catalogGroupId, serviceContext);
 
+			_importCommerceOrganizations(serviceContext);
+
+			_importCommerceAccounts(serviceContext);
+
 			List<CPDefinition> cpDefinitions = _importCPDefinitions(
 				catalogGroupId, commerceChannel.getCommerceChannelId(),
 				commerceInventoryWarehouses, serviceContext);
 
 			_importRelatedProducts(cpDefinitions, serviceContext);
-
-			_importCommerceOrganizations(serviceContext);
-
-			_importCommerceAccounts(serviceContext);
 
 			_importCommercePriceLists(catalogGroupId, serviceContext);
 
