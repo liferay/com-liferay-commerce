@@ -20,7 +20,6 @@ import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.base.CommerceShippingMethodServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -219,7 +218,7 @@ public class CommerceShippingMethodServiceImpl
 	@Override
 	public List<CommerceShippingMethod> getCommerceShippingMethods(
 			long groupId, long commerceCountryId, boolean active)
-		throws PrincipalException {
+		throws PortalException {
 
 		_portletResourcePermission.check(
 			getPermissionChecker(), groupId,

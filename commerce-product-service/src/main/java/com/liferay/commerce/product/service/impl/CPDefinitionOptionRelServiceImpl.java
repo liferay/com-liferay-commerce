@@ -22,6 +22,7 @@ import com.liferay.commerce.product.service.base.CPDefinitionOptionRelServiceBas
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
@@ -237,6 +238,10 @@ public class CPDefinitionOptionRelServiceImpl
 		CommerceCatalog commerceCatalog =
 			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
 				cpDefinition.getGroupId());
+
+		if (commerceCatalog == null) {
+			throw new PrincipalException();
+		}
 
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalog, actionId);

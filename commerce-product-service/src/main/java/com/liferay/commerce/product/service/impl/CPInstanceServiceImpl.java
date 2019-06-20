@@ -20,9 +20,11 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPInstanceServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
@@ -33,6 +35,8 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
  * @author Marco Leo
@@ -212,6 +216,8 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			int start, int end, Sort sort)
 		throws PortalException {
 
+		_checkCommerceCatalogPermission(groupId, ActionKeys.VIEW);
+
 		return cpInstanceLocalService.searchCPInstances(
 			companyId, new long[] {groupId}, keywords, status, start, end,
 			sort);
@@ -223,8 +229,18 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 			Sort sort)
 		throws PortalException {
 
+		List<CommerceCatalog> commerceCatalogs =
+			commerceCatalogService.getCommerceCatalogs(
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		LongStream longStream = stream.mapToLong(CommerceCatalog::getGroupId);
+
+		long[] groupIds = longStream.toArray();
+
 		return cpInstanceLocalService.searchCPInstances(
-			companyId, keywords, status, start, end, sort);
+			companyId, groupIds, keywords, status, start, end, sort);
 	}
 
 	@Override
@@ -339,6 +355,10 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 		CommerceCatalog commerceCatalog =
 			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(groupId);
 
+		if (commerceCatalog == null) {
+			throw new PrincipalException();
+		}
+
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalog, actionId);
 	}
@@ -357,6 +377,10 @@ public class CPInstanceServiceImpl extends CPInstanceServiceBaseImpl {
 		CommerceCatalog commerceCatalog =
 			commerceCatalogLocalService.fetchCommerceCatalogByGroupId(
 				cpDefinition.getGroupId());
+
+		if (commerceCatalog == null) {
+			throw new PrincipalException();
+		}
 
 		_commerceCatalogModelResourcePermission.check(
 			getPermissionChecker(), commerceCatalog, actionId);
