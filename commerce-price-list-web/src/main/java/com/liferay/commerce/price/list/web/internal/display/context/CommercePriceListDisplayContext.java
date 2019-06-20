@@ -98,6 +98,14 @@ public class CommercePriceListDisplayContext
 		setDefaultOrderByType("asc");
 	}
 
+	public CommerceCatalog fetchCommerceCatalog(
+			CommercePriceList commercePriceList)
+		throws PortalException {
+
+		return _commerceCatalogService.fetchCommerceCatalogByGroupId(
+			commercePriceList.getGroupId());
+	}
+
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
