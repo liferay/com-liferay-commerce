@@ -1455,6 +1455,9 @@
 		"Description": "Includes wastegate actuator. Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment.",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"FilterAccountGroups": [
+			"North American Accounts"
+		],
 		"Height": 14.4,
 		"Images": [
 			"Minium_ProductImage_106.png",
