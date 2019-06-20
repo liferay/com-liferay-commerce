@@ -150,7 +150,7 @@ public class CommerceShippingMethodServiceWrapper
 	public java.util.List<com.liferay.commerce.model.CommerceShippingMethod>
 			getCommerceShippingMethods(
 				long groupId, long commerceCountryId, boolean active)
-		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceShippingMethodService.getCommerceShippingMethods(
 			groupId, commerceCountryId, active);
