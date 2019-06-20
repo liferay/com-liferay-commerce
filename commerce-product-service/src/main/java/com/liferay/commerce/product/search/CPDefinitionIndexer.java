@@ -529,10 +529,10 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 		document.addKeyword(
 			FIELD_ACCOUNT_GROUP_FILTER_ENABLED,
-			cpDefinition.getAccountGroupFilterEnabled());
+			cpDefinition.isAccountGroupFilterEnabled());
 		document.addKeyword(
 			FIELD_CHANNEL_FILTER_ENABLED,
-			cpDefinition.getChannelFilterEnabled());
+			cpDefinition.isChannelFilterEnabled());
 
 		document.addKeyword(
 			FIELD_IS_IGNORE_SKU_COMBINATIONS,
