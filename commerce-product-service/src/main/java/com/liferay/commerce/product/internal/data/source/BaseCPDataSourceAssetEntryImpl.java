@@ -76,7 +76,6 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(portal.getCompanyId(httpServletRequest));
-		searchContext.setGroupIds(new long[] {groupId});
 
 		searchContext.setKeywords(StringPool.STAR);
 
