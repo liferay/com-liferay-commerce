@@ -352,9 +352,11 @@ public class CPPublisherConfigurationDisplayContext
 	}
 
 	public String getVocabularyIds() throws Exception {
+		ThemeDisplay themeDisplay = cpContentRequestHelper.getThemeDisplay();
+
 		List<AssetVocabulary> vocabularies =
 			AssetVocabularyServiceUtil.getGroupVocabularies(
-				cpContentRequestHelper.getScopeGroupId());
+				themeDisplay.getCompanyGroupId());
 
 		return ListUtil.toString(
 			vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR);
