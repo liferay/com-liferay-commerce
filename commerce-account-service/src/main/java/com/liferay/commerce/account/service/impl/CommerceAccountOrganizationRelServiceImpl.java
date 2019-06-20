@@ -20,7 +20,6 @@ import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.base.CommerceAccountOrganizationRelServiceBaseImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.OrganizationConstants;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
@@ -145,12 +144,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 				long organizationId, int start, int end)
 		throws PortalException {
 
-		if (organizationId >
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId, ActionKeys.VIEW);
-		}
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRelsByOrganizationId(
@@ -162,12 +157,8 @@ public class CommerceAccountOrganizationRelServiceImpl
 			long organizationId)
 		throws PortalException {
 
-		if (organizationId >
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId, ActionKeys.VIEW);
-		}
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
 
 		return commerceAccountOrganizationRelLocalService.
 			getCommerceAccountOrganizationRelsByOrganizationIdCount(
