@@ -56,6 +56,21 @@ public abstract class BaseProductOptionValueResourceImpl
 	implements ProductOptionValueResource {
 
 	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}/productOptionValue/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductOptionValue")})
+	public ProductOptionValue postProductOptionIdProductOptionValue(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductOptionValue productOptionValue)
+		throws Exception {
+
+		return new ProductOptionValue();
+	}
+
+	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -73,21 +88,6 @@ public abstract class BaseProductOptionValueResourceImpl
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/productOptions/{id}/productOptionValue/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductOptionValue")})
-	public ProductOptionValue postProductOptionIdProductOptionValue(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductOptionValue productOptionValue)
-		throws Exception {
-
-		return new ProductOptionValue();
 	}
 
 	public void setContextCompany(Company contextCompany) {
