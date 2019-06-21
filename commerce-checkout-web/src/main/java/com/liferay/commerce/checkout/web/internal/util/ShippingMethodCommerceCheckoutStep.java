@@ -26,7 +26,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceShippingOption;
-import com.liferay.commerce.order.web.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
@@ -38,6 +37,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -165,6 +165,16 @@ public class ShippingMethodCommerceCheckoutStep
 		return super.showControls(httpServletRequest, httpServletResponse);
 	}
 
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)",
+		unbind = "-"
+	)
+	protected static void setModelResourcePermission(
+		ModelResourcePermission<CommerceOrder> modelResourcePermission) {
+
+		_commerceOrderModelResourcePermission = modelResourcePermission;
+	}
+
 	protected BigDecimal getShippingAmount(
 			CommerceContext commerceContext, CommerceOrder commerceOrder,
 			long commerceShippingMethodId, String shippingOptionName,
@@ -231,7 +241,7 @@ public class ShippingMethodCommerceCheckoutStep
 		PermissionChecker permissionChecker =
 			PermissionCheckerFactoryUtil.create(themeDisplay.getUser());
 
-		if (!CommerceOrderPermission.contains(
+		if (!_commerceOrderModelResourcePermission.contains(
 				permissionChecker, commerceOrder, ActionKeys.UPDATE)) {
 
 			return;
@@ -253,6 +263,9 @@ public class ShippingMethodCommerceCheckoutStep
 			commerceOrder.getCommerceOrderId(), commerceShippingMethodId,
 			shippingOptionName, shippingAmount, commerceContext);
 	}
+
+	private static ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission;
 
 	@Reference
 	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
