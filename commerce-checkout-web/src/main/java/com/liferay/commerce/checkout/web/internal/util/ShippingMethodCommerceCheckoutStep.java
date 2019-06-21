@@ -169,7 +169,7 @@ public class ShippingMethodCommerceCheckoutStep
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)",
 		unbind = "-"
 	)
-	protected static void setModelResourcePermission(
+	protected void setModelResourcePermission(
 		ModelResourcePermission<CommerceOrder> modelResourcePermission) {
 
 		_commerceOrderModelResourcePermission = modelResourcePermission;
@@ -264,7 +264,7 @@ public class ShippingMethodCommerceCheckoutStep
 			shippingOptionName, shippingAmount, commerceContext);
 	}
 
-	private static ModelResourcePermission<CommerceOrder>
+	private ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
 
 	@Reference
