@@ -75,11 +75,11 @@ public class ProductConfiguration {
 
 	@Schema
 	public Integer[] getAllowedOrderQuantities() {
-		return allowedOrderQuantities.clone();
+		return allowedOrderQuantities;
 	}
 
 	public void setAllowedOrderQuantities(Integer[] allowedOrderQuantities) {
-		this.allowedOrderQuantities = allowedOrderQuantities.clone();
+		this.allowedOrderQuantities = allowedOrderQuantities;
 	}
 
 	@JsonIgnore

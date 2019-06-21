@@ -23,7 +23,6 @@ import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Marco Leo
- * @author Alec Sloan
  */
 @Component(immediate = true, service = IndexSettingsContributor.class)
 public class CommerceIndexSettingsContributor
@@ -34,7 +33,7 @@ public class CommerceIndexSettingsContributor
 		if (getPriority() > indexSettingsContributor.getPriority()) {
 			return 1;
 		}
-		else if (equals(indexSettingsContributor)) {
+		else if (getPriority() == indexSettingsContributor.getPriority()) {
 			return 0;
 		}
 
@@ -52,33 +51,8 @@ public class CommerceIndexSettingsContributor
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof CommerceIndexSettingsContributor)) {
-			return false;
-		}
-
-		CommerceIndexSettingsContributor commerceIndexSettingsContributor =
-			(CommerceIndexSettingsContributor)obj;
-
-		if (getPriority() == commerceIndexSettingsContributor.getPriority()) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
 	public int getPriority() {
 		return 1;
-	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode();
 	}
 
 	@Override

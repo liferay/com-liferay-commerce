@@ -34,14 +34,9 @@ public class CPContentHelperProvider {
 		return _cpContentHelperProvider._cpContentHelper;
 	}
 
-	protected static void setCPContentHelperProvider(
-		CPContentHelperProvider cpContentHelperProvider) {
-
-		_cpContentHelperProvider = cpContentHelperProvider;
-	}
-
 	@Activate
 	protected void activate() {
+		_cpContentHelperProvider = this;
 	}
 
 	@Reference(unbind = "-")

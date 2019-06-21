@@ -35,11 +35,6 @@ public class CommerceSubscriptionEntryImpl
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
-
-	@Override
 	public CommerceOrderItem fetchCommerceOrderItem() throws PortalException {
 		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
 			getCommerceOrderItemId());
@@ -94,11 +89,6 @@ public class CommerceSubscriptionEntryImpl
 		}
 
 		return _subscriptionTypeSettingsProperties;
-	}
-
-	@Override
-	public int hashCode() {
-		return (int)getPrimaryKey();
 	}
 
 	@Override

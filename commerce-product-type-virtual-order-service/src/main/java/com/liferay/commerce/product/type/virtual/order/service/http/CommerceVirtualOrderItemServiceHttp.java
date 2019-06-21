@@ -72,7 +72,12 @@ public class CommerceVirtualOrderItemServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				throw e;
+				if (e instanceof Exception) {
+					throw (Exception)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
 			}
 
 			return (java.io.File)returnObj;

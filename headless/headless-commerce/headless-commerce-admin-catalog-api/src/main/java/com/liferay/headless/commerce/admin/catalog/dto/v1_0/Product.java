@@ -79,11 +79,11 @@ public class Product {
 
 	@Schema
 	public Attachment[] getAttachments() {
-		return attachments.clone();
+		return attachments;
 	}
 
 	public void setAttachments(Attachment[] attachments) {
-		this.attachments = attachments.clone();
+		this.attachments = attachments;
 	}
 
 	@JsonIgnore
@@ -107,11 +107,11 @@ public class Product {
 
 	@Schema
 	public Category[] getCategories() {
-		return categories.clone();
+		return categories;
 	}
 
 	public void setCategories(Category[] categories) {
-		this.categories = categories.clone();
+		this.categories = categories;
 	}
 
 	@JsonIgnore
@@ -303,11 +303,11 @@ public class Product {
 
 	@Schema
 	public Attachment[] getImages() {
-		return images.clone();
+		return images;
 	}
 
 	public void setImages(Attachment[] images) {
-		this.images = images.clone();
+		this.images = images;
 	}
 
 	@JsonIgnore
@@ -447,11 +447,11 @@ public class Product {
 
 	@Schema
 	public ProductOption[] getOptions() {
-		return options.clone();
+		return options;
 	}
 
 	public void setOptions(ProductOption[] options) {
-		this.options = options.clone();
+		this.options = options;
 	}
 
 	@JsonIgnore
@@ -503,13 +503,13 @@ public class Product {
 
 	@Schema
 	public ProductSpecification[] getProductSpecifications() {
-		return productSpecifications.clone();
+		return productSpecifications;
 	}
 
 	public void setProductSpecifications(
 		ProductSpecification[] productSpecifications) {
 
-		this.productSpecifications = productSpecifications.clone();
+		this.productSpecifications = productSpecifications;
 	}
 
 	@JsonIgnore
@@ -562,11 +562,11 @@ public class Product {
 
 	@Schema
 	public RelatedProduct[] getRelatedProducts() {
-		return relatedProducts.clone();
+		return relatedProducts;
 	}
 
 	public void setRelatedProducts(RelatedProduct[] relatedProducts) {
-		this.relatedProducts = relatedProducts.clone();
+		this.relatedProducts = relatedProducts;
 	}
 
 	@JsonIgnore
@@ -679,11 +679,11 @@ public class Product {
 
 	@Schema
 	public Sku[] getSkus() {
-		return skus.clone();
+		return skus;
 	}
 
 	public void setSkus(Sku[] skus) {
-		this.skus = skus.clone();
+		this.skus = skus;
 	}
 
 	@JsonIgnore
@@ -737,11 +737,11 @@ public class Product {
 
 	@Schema
 	public String[] getTags() {
-		return tags.clone();
+		return tags;
 	}
 
 	public void setTags(String[] tags) {
-		this.tags = tags.clone();
+		this.tags = tags;
 	}
 
 	@JsonIgnore

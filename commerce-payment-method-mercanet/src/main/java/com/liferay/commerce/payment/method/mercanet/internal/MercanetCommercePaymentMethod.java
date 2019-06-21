@@ -81,12 +81,6 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
-		if (!(commercePaymentRequest instanceof
-				MercanetCommercePaymentRequest)) {
-
-			throw new ClassCastException();
-		}
-
 		MercanetCommercePaymentRequest mercanetCommercePaymentRequest =
 			(MercanetCommercePaymentRequest)commercePaymentRequest;
 
@@ -101,12 +95,6 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 	public CommercePaymentResult completePayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
-
-		if (!(commercePaymentRequest instanceof
-				MercanetCommercePaymentRequest)) {
-
-			throw new ClassCastException();
-		}
 
 		MercanetCommercePaymentRequest mercanetCommercePaymentRequest =
 			(MercanetCommercePaymentRequest)commercePaymentRequest;
@@ -167,12 +155,6 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 	public CommercePaymentResult processPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
-
-		if (!(commercePaymentRequest instanceof
-				MercanetCommercePaymentRequest)) {
-
-			throw new ClassCastException();
-		}
 
 		MercanetCommercePaymentRequest mercanetCommercePaymentRequest =
 			(MercanetCommercePaymentRequest)commercePaymentRequest;

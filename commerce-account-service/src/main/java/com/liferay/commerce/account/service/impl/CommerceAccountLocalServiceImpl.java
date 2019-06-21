@@ -595,7 +595,7 @@ public class CommerceAccountLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else {
+			else if (commerceAccount != null) {
 				commerceAccounts.add(commerceAccount);
 			}
 		}

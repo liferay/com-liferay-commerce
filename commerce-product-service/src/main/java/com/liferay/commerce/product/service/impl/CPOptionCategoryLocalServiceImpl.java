@@ -295,7 +295,7 @@ public class CPOptionCategoryLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else {
+			else if (cpOptionCategory != null) {
 				cpOptionCategories.add(cpOptionCategory);
 			}
 		}
@@ -313,8 +313,13 @@ public class CPOptionCategoryLocalServiceImpl
 		for (int i = 0; i < 10; i++) {
 			Hits hits = indexer.search(searchContext, _SELECTED_FIELD_NAMES);
 
-			return new BaseModelSearchResult<>(
-				getCPOptionCategories(hits), hits.getLength());
+			List<CPOptionCategory> cpOptionCategories = getCPOptionCategories(
+				hits);
+
+			if (cpOptionCategories != null) {
+				return new BaseModelSearchResult<>(
+					cpOptionCategories, hits.getLength());
+			}
 		}
 
 		throw new SearchException(

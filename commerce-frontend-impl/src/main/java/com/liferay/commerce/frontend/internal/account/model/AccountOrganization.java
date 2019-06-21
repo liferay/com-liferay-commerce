@@ -30,7 +30,7 @@ public class AccountOrganization {
 	}
 
 	public AccountOrganization(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 		_success = false;
 	}
 
@@ -39,7 +39,7 @@ public class AccountOrganization {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return _errorMessages;
 	}
 
 	public long getId() {
@@ -59,7 +59,7 @@ public class AccountOrganization {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 	}
 
 	public void setSuccess(boolean success) {

@@ -532,7 +532,7 @@ public class CommerceOrderLocalServiceImpl
 		throws PortalException {
 
 		if (commerceOrderId <= 0) {
-			return AVAILABLE_ORDER_STATUSES.clone();
+			return AVAILABLE_ORDER_STATUSES;
 		}
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
@@ -542,7 +542,7 @@ public class CommerceOrderLocalServiceImpl
 			ArrayUtil.contains(
 				AVAILABLE_ORDER_STATUSES, commerceOrder.getOrderStatus())) {
 
-			return AVAILABLE_ORDER_STATUSES.clone();
+			return AVAILABLE_ORDER_STATUSES;
 		}
 
 		return new int[] {commerceOrder.getOrderStatus()};
@@ -1539,6 +1539,22 @@ public class CommerceOrderLocalServiceImpl
 		}
 	}
 
+	protected static final int[] AVAILABLE_ORDER_STATUSES = {
+		CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
+		CommerceOrderConstants.ORDER_STATUS_TRANSMITTED,
+		CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT,
+		CommerceOrderConstants.ORDER_STATUS_AWAITING_PICKUP,
+		CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT,
+		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
+		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
+		CommerceOrderConstants.ORDER_STATUS_REFUNDED,
+		CommerceOrderConstants.ORDER_STATUS_SHIPPED,
+		CommerceOrderConstants.ORDER_STATUS_COMPLETED,
+		CommerceOrderConstants.ORDER_STATUS_CANCELLED,
+		CommerceOrderConstants.ORDER_STATUS_DECLINED,
+		CommerceOrderConstants.ORDER_STATUS_DISPUTED
+	};
+
 	private void _setCommerceOrderShippingDiscountValue(
 		CommerceOrder commerceOrder,
 		CommerceDiscountValue commerceDiscountValue) {
@@ -1676,22 +1692,6 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTotalDiscountPercentageLevel4(
 			discountPercentageLevel4);
 	}
-
-	private static final int[] AVAILABLE_ORDER_STATUSES = {
-		CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
-		CommerceOrderConstants.ORDER_STATUS_TRANSMITTED,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_PICKUP,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
-		CommerceOrderConstants.ORDER_STATUS_REFUNDED,
-		CommerceOrderConstants.ORDER_STATUS_SHIPPED,
-		CommerceOrderConstants.ORDER_STATUS_COMPLETED,
-		CommerceOrderConstants.ORDER_STATUS_CANCELLED,
-		CommerceOrderConstants.ORDER_STATUS_DECLINED,
-		CommerceOrderConstants.ORDER_STATUS_DISPUTED
-	};
 
 	@ServiceReference(type = CommerceChannelLocalService.class)
 	private CommerceChannelLocalService _commerceChannelLocalService;
