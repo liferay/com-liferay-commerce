@@ -305,6 +305,15 @@ public class CPFriendlyURLEntryLocalServiceWrapper
 			groupId, classNameId, classPK);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPFriendlyURLEntry>
+		getCPFriendlyURLEntries(
+			long groupId, long classNameId, String urlTitle) {
+
+		return _cpFriendlyURLEntryLocalService.getCPFriendlyURLEntries(
+			groupId, classNameId, urlTitle);
+	}
+
 	/**
 	 * Returns all the cp friendly url entries matching the UUID and company.
 	 *
