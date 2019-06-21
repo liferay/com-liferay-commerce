@@ -14,21 +14,17 @@
 
 package com.liferay.commerce.product.internal.model.listener;
 
-import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
 import com.liferay.commerce.product.service.CPTaxCategoryLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.ModelListener;
-
-import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -38,23 +34,6 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = ModelListener.class)
 public class CompanyModelListener extends BaseModelListener<Company> {
-
-	@Override
-	public void onAfterCreate(Company company) throws ModelListenerException {
-		try {
-			List<CommerceCatalog> commerceCatalogs =
-				_commerceCatalogLocalService.getCommerceCatalogs(
-					company.getCompanyId(), true);
-
-			if (commerceCatalogs.isEmpty()) {
-				_commerceCatalogLocalService.addDefaultCommerceCatalog(
-					company.getCompanyId());
-			}
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-	}
 
 	@Override
 	public void onBeforeRemove(Company company) {
