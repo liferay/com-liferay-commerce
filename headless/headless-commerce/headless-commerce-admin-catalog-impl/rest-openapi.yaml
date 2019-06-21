@@ -331,7 +331,9 @@ components:
                         $ref: '#/components/schemas/Attachment'
                     type: array
                 catalogId:
+                    example: 30054
                     format: int64
+                    minimum: 0
                     type: integer
                 categories:
                     items:
@@ -454,6 +456,7 @@ components:
                     type: object
             required:
                 - active
+                - catalogId
                 - name
                 - productTypeName
             type: object
