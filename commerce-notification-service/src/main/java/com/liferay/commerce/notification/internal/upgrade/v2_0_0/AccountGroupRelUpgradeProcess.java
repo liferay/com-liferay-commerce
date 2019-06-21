@@ -15,8 +15,6 @@
 package com.liferay.commerce.notification.internal.upgrade.v2_0_0;
 
 import com.liferay.commerce.notification.model.impl.CommerceNotificationTemplateCommerceAccountGroupRelModelImpl;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
@@ -35,8 +33,5 @@ public class AccountGroupRelUpgradeProcess extends UpgradeProcess {
 					TABLE_SQL_CREATE);
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		AccountGroupRelUpgradeProcess.class);
 
 }

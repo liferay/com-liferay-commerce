@@ -58,6 +58,19 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 	}
 
 	@Override
+	public CProduct getCProductByCPInstanceUuid(String cpInstanceUuid)
+		throws PortalException {
+
+		CPInstance cpInstance =
+			cpInstancePersistence.fetchByCPInstanceUuid_First(
+				cpInstanceUuid, null);
+
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		return cpDefinition.getCProduct();
+	}
+
+	@Override
 	public int increment(long cProductId) throws PortalException {
 		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
 
@@ -66,16 +79,6 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		cProductPersistence.update(cProduct);
 
 		return cProduct.getLatestVersion();
-	}
-
-	@Override
-	public CProduct getCProductByCPInstanceUuid(String cpInstanceUuid) throws PortalException{
-
-		CPInstance cpInstance = cpInstancePersistence.fetchByCPInstanceUuid_First(cpInstanceUuid, null);
-
-		CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-		return cpDefinition.getCProduct();
 	}
 
 	@Override
