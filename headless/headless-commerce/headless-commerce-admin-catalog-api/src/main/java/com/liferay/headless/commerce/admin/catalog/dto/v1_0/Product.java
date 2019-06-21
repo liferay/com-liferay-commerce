@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("Product")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"active", "name", "productTypeName"})
+@Schema(requiredProperties = {"active", "catalogId", "name", "productTypeName"})
 @XmlRootElement(name = "Product")
 public class Product {
 
@@ -131,6 +131,7 @@ public class Product {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotNull
 	protected Long catalogId;
 
 	@Schema

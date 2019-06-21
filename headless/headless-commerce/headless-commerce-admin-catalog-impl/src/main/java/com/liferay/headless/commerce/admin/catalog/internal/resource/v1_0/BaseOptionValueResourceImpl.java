@@ -56,23 +56,25 @@ public abstract class BaseOptionValueResourceImpl
 	implements OptionValueResource {
 
 	@Override
-	@GET
+	@Consumes({"application/json", "application/xml"})
+	@POST
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
 		}
 	)
-	@Path("/options/{id}/optionValues/")
+	@Path(
+		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValue/"
+	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OptionValue")})
-	public Page<OptionValue> getOptionIdOptionValuesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			OptionValue optionValue)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		return new OptionValue();
 	}
 
 	@Override
@@ -114,25 +116,23 @@ public abstract class BaseOptionValueResourceImpl
 	}
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
+	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path(
-		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValue/"
-	)
+	@Path("/options/{id}/optionValues/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OptionValue")})
-	public OptionValue postOptionByExternalReferenceCodeOptionValue(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			OptionValue optionValue)
+	public Page<OptionValue> getOptionIdOptionValuesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
 		throws Exception {
 
-		return new OptionValue();
+		return Page.of(Collections.emptyList());
 	}
 
 	public void setContextCompany(Company contextCompany) {
