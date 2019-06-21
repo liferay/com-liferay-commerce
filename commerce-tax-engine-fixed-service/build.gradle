@@ -15,5 +15,4 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-tax-api")
 	compileOnly project(":apps:commerce:commerce-tax-engine-fixed-api")
-	compileOnly project(":apps:commerce:commerce-tax-engine-fixed-api")
 }
