@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.MappingJsonFactory;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
@@ -29,10 +30,12 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.petra.string.StringPool;
+import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -91,6 +94,19 @@ public class CommerceOrderImporter {
 		jsonFactoryParser.close();
 	}
 
+	public void importOrders(
+			JSONArray jsonArray, long scopeGroupId, long userId)
+		throws Exception {
+
+		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			_importCommerceOrder(jsonObject, serviceContext);
+		}
+	}
+
 	protected ServiceContext getServiceContext(long scopeGroupId, long userId)
 		throws PortalException {
 
@@ -109,40 +125,86 @@ public class CommerceOrderImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws Exception {
 
+		String externalAccountId = jsonObject.getString("externalAccountId");
+
 		String externalUserId = jsonObject.getString("externalUserId");
 
 		String externalSystemType = jsonObject.getString("externalSystemType");
 
 		String externalProductId = jsonObject.getString("externalProductId");
 
+		String externalOrderId = jsonObject.getString("externalOrderId");
+
+		int quantity = jsonObject.getInt("quantity", 1);
+
 		long timestamp = GetterUtil.getLong(jsonObject.getString("timestamp"));
 
 		Date createDate = new Date(timestamp * 1000);
 
-		// Retrieve Liferay User ID
+		CommerceAccount commerceAccount = null;
 
-		UserIdMapper userIdMapper = null;
+		long userId = 0;
 
-		try {
-			userIdMapper =
-				_userIdMapperLocalService.getUserIdMapperByExternalUserId(
-					externalSystemType, externalUserId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Can not find an user Id mapping for: " + externalUserId);
+		if (externalAccountId != null) {
+			commerceAccount =
+				_commerceAccountLocalService.fetchByExternalReferenceCode(
+					serviceContext.getCompanyId(), externalAccountId);
+
+			if (commerceAccount == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to fetch Commerce Account with external " +
+							"reference code: " + externalAccountId);
+				}
+
+				return;
+			}
+
+			List<CommerceAccountUserRel> commerceAccountUserRels =
+				commerceAccount.getCommerceAccountUserRels();
+
+			if (commerceAccountUserRels.size() > 0) {
+				CommerceAccountUserRel commerceAccountUserRel =
+					commerceAccountUserRels.get(0);
+
+				userId = commerceAccountUserRel.getUserId();
+			}
+			else {
+				userId = serviceContext.getUserId();
 			}
 		}
+		else {
 
-		if (userIdMapper == null) {
-			return;
+			// Retrieve Liferay User ID
+
+			UserIdMapper userIdMapper = null;
+
+			try {
+				userIdMapper =
+					_userIdMapperLocalService.getUserIdMapperByExternalUserId(
+						externalSystemType, externalUserId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Can not find an user Id mapping for: " +
+							externalUserId);
+				}
+			}
+
+			if (userIdMapper == null) {
+				return;
+			}
+
+			userId = userIdMapper.getUserId();
+
+			commerceAccount =
+				_commerceAccountLocalService.getPersonalCommerceAccount(userId);
 		}
 
-		long userId = userIdMapper.getUserId();
-
-		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.getPersonalCommerceAccount(userId);
+		if (commerceAccount == null) {
+			return;
+		}
 
 		// Retrieve CPDefinition and associated instances
 
@@ -177,28 +239,60 @@ public class CommerceOrderImporter {
 		// Create Order
 
 		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.addCommerceOrder(
-				userId, serviceContext.getScopeGroupId(),
-				commerceAccount.getCommerceAccountId());
+			_commerceOrderLocalService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), externalOrderId);
 
-		// We upate the order create date to the one in the dataset
+		if (commerceOrder == null) {
+			long channelGroupId =
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(
+						serviceContext.getScopeGroupId());
 
-		commerceOrder.setCreateDate(createDate);
+			commerceOrder = _commerceOrderLocalService.addCommerceOrder(
+				userId, channelGroupId, commerceAccount.getCommerceAccountId());
 
-		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
+			// Add the externalReferenceCode
+
+			if (externalOrderId != null) {
+				commerceOrder.setExternalReferenceCode(externalOrderId);
+			}
+
+			// We update the order create date to the one in the dataset
+
+			commerceOrder.setCreateDate(createDate);
+
+			_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
+		}
 
 		// Create CommerceContext
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			serviceContext.getCompanyId(), serviceContext.getScopeGroupId(),
-			serviceContext.getUserId(), commerceOrder.getCommerceOrderId(),
+			userId, commerceOrder.getCommerceOrderId(),
 			commerceAccount.getCommerceAccountId());
 
 		// Create CommerceOrderItem
 
-		_commerceOrderItemLocalService.addCommerceOrderItem(
-			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
-			1, StringPool.BLANK, commerceContext, serviceContext);
+		boolean portletImportInPorcess =
+			ExportImportThreadLocal.isPortletImportInProcess();
+
+		try {
+			ExportImportThreadLocal.setPortletImportInProcess(true);
+
+			_commerceOrderItemLocalService.addCommerceOrderItem(
+				commerceOrder.getCommerceOrderId(),
+				cpInstance.getCPInstanceId(), quantity, 0, cpInstance.getJson(),
+				commerceContext, serviceContext);
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+		}
+		finally {
+			ExportImportThreadLocal.setPortletImportInProcess(
+				portletImportInPorcess);
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -206,6 +300,9 @@ public class CommerceOrderImporter {
 
 	@Reference
 	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceContextFactory _commerceContextFactory;
