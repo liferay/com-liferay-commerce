@@ -172,14 +172,14 @@ public class PaymentMethodCommerceCheckoutStep
 			commerceOrder.getAdvanceStatus(), commerceContext);
 	}
 
-	private ModelResourcePermission<CommerceOrder>
-		_commerceOrderModelResourcePermission;
-
 	@Reference
 	private CommerceCheckoutStepHelper _commerceCheckoutStepHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	private ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
