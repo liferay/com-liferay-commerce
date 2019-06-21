@@ -351,6 +351,15 @@ public class CPInstancePersistenceTest {
 	}
 
 	@Test
+	public void testCountByCPInstanceUuid() throws Exception {
+		_persistence.countByCPInstanceUuid("");
+
+		_persistence.countByCPInstanceUuid("null");
+
+		_persistence.countByCPInstanceUuid((String)null);
+	}
+
+	@Test
 	public void testCountByG_ST() throws Exception {
 		_persistence.countByG_ST(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());

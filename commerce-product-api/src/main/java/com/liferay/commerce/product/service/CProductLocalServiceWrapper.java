@@ -260,6 +260,15 @@ public class CProductLocalServiceWrapper
 		return _cProductLocalService.getCProduct(CProductId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CProduct
+			getCProductByCPInstanceUuid(String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cProductLocalService.getCProductByCPInstanceUuid(
+			cpInstanceUuid);
+	}
+
 	/**
 	 * Returns the c product matching the UUID and group.
 	 *

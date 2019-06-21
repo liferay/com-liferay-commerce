@@ -216,6 +216,10 @@ public interface CProductLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CProduct getCProduct(long CProductId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CProduct getCProductByCPInstanceUuid(String cpInstanceUuid)
+		throws PortalException;
+
 	/**
 	 * Returns the c product matching the UUID and group.
 	 *
