@@ -40,7 +40,6 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
@@ -163,12 +162,8 @@ public class ProductDTOConverter implements DTOConverter {
 		return stream.toArray(Attachment[]::new);
 	}
 
-	private long _getCommerceCatalogId(CPDefinition cpDefinition)
-		throws PortalException {
-
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogService.fetchCommerceCatalogByGroupId(
-				cpDefinition.getGroupId());
+	private long _getCommerceCatalogId(CPDefinition cpDefinition) {
+		CommerceCatalog commerceCatalog = cpDefinition.getCommerceCatalog();
 
 		if (commerceCatalog == null) {
 			return 0;
