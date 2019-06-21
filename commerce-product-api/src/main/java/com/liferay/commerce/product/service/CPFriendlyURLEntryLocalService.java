@@ -236,6 +236,10 @@ public interface CPFriendlyURLEntryLocalService
 	public List<CPFriendlyURLEntry> getCPFriendlyURLEntries(
 		long groupId, long classNameId, long classPK);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPFriendlyURLEntry> getCPFriendlyURLEntries(
+		long groupId, long classNameId, String urlTitle);
+
 	/**
 	 * Returns all the cp friendly url entries matching the UUID and company.
 	 *
