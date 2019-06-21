@@ -8,6 +8,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "1",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_24.png"
@@ -16,7 +17,7 @@
 		"ManufacturerPartNumber": "BB98318",
 		"MinStockQuantity": 5,
 		"Name": "ABS Sensor",
-		"Price": 50.00,
+		"Price": 50.0,
 		"PromoPrice": 0,
 		"Sku": "MIN93015",
 		"SpecificationOptions": [
@@ -42,9 +43,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 60,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 60000,
+		"Warehouse3": 20000,
 		"Weight": 1,
 		"Width": 5.6
 	},
@@ -57,6 +58,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "2",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -83,8 +85,8 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98319",
-				"Price": 80.00,
-				"PromoPrice": 72.00,
+				"Price": 80.0,
+				"PromoPrice": 72.0,
 				"Sku": "MIN93016A",
 				"Warehouse1": 100,
 				"Warehouse2": 40,
@@ -98,8 +100,8 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98320",
-				"Price": 80.00,
-				"PromoPrice": 72.00,
+				"Price": 80.0,
+				"PromoPrice": 72.0,
 				"Sku": "MIN93016B",
 				"Warehouse1": 100,
 				"Warehouse2": 20,
@@ -113,8 +115,8 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98321",
-				"Price": 80.00,
-				"PromoPrice": 72.00,
+				"Price": 80.0,
+				"PromoPrice": 72.0,
 				"Sku": "MIN93016C",
 				"Warehouse1": 100,
 				"Warehouse2": 100,
@@ -155,6 +157,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "3",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -163,8 +166,8 @@
 		"ManufacturerPartNumber": "BB98322",
 		"MinStockQuantity": 5,
 		"Name": "Premium Brake Fluid",
-		"Price": 100.00,
-		"PromoPrice": 90.00,
+		"Price": 100.0,
+		"PromoPrice": 90.0,
 		"Sku": "MIN93017",
 		"SpecificationOptions": [
 			{
@@ -188,9 +191,9 @@
 			"featured"
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 60,
-		"Warehouse3": 40,
+		"Warehouse1": 60000,
+		"Warehouse2": 60000,
+		"Warehouse3": 40000,
 		"Weight": 0.875,
 		"Width": 9.5
 	},
@@ -206,12 +209,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "4",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "BB98334",
 		"MinStockQuantity": 5,
 		"Name": "Wear Sensors",
-		"Price": 60.00,
+		"Price": 60.0,
 		"PromoPrice": 0,
 		"Sku": "MIN93027",
 		"SpecificationOptions": [
@@ -233,9 +237,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 60,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 60000,
+		"Warehouse3": 60000,
 		"Weight": 1,
 		"Width": 2.1
 	},
@@ -251,6 +255,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "5",
 		"Height": 8.7,
 		"Images": [
 			"Minium_ProductImage_83.png"
@@ -259,8 +264,8 @@
 		"ManufacturerPartNumber": "BB98323",
 		"MinStockQuantity": 5,
 		"Name": "Brake Pads",
-		"Price": 21.00,
-		"PromoPrice": 18.90,
+		"Price": 21.0,
+		"PromoPrice": 18.9,
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
@@ -291,9 +296,9 @@
 			"featured"
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 40,
-		"Warehouse3": 40,
+		"Warehouse1": 40000,
+		"Warehouse2": 40000,
+		"Warehouse3": 40000,
 		"Weight": 3.96,
 		"Width": 2.1
 	},
@@ -309,6 +314,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "6",
 		"Height": 8.7,
 		"Images": [
 			"Minium_ProductImage_83.png"
@@ -317,8 +323,8 @@
 		"ManufacturerPartNumber": "BB98324",
 		"MinStockQuantity": 5,
 		"Name": "Premium Brake Pads",
-		"Price": 29.00,
-		"PromoPrice": 26.10,
+		"Price": 29.0,
+		"PromoPrice": 26.1,
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
@@ -349,9 +355,9 @@
 			"featured"
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 20,
-		"Warehouse3": 20,
+		"Warehouse1": 20000,
+		"Warehouse2": 20000,
+		"Warehouse3": 20000,
 		"Weight": 4.01,
 		"Width": 2.1
 	},
@@ -364,6 +370,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "7",
 		"Height": 1.7,
 		"Images": [
 			"Minium_ProductImage_30.png"
@@ -372,7 +379,7 @@
 		"ManufacturerPartNumber": "BB98325",
 		"MinStockQuantity": 5,
 		"Name": "Brake Rotors",
-		"Price": 40.00,
+		"Price": 40.0,
 		"PromoPrice": 0,
 		"Sku": "MIN93020",
 		"SpecificationOptions": [
@@ -401,9 +408,9 @@
 			"featured"
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 100,
-		"Warehouse3": 100,
+		"Warehouse1": 100000,
+		"Warehouse2": 100000,
+		"Warehouse3": 100000,
 		"Weight": 12.45,
 		"Width": 10.2
 	},
@@ -416,12 +423,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "8",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "BB98326",
 		"MinStockQuantity": 5,
 		"Name": "Calipers",
-		"Price": 90.00,
+		"Price": 90.0,
 		"PromoPrice": 0,
 		"Sku": "MIN93021",
 		"SpecificationOptions": [
@@ -447,9 +455,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 60,
-		"Warehouse3": 60,
+		"Warehouse1": 60000,
+		"Warehouse2": 60000,
+		"Warehouse3": 60000,
 		"Weight": 7.34,
 		"Width": 7.3
 	},
@@ -462,6 +470,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "9",
 		"Height": 18,
 		"Length": 12,
 		"MinStockQuantity": 5,
@@ -485,7 +494,7 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98327",
-				"Price": 120.00,
+				"Price": 120.0,
 				"PromoPrice": 0,
 				"Sku": "MIN93022A",
 				"Warehouse1": 40,
@@ -500,7 +509,7 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98328",
-				"Price": 120.00,
+				"Price": 120.0,
 				"PromoPrice": 0,
 				"Sku": "MIN93022B",
 				"Warehouse1": 40,
@@ -515,7 +524,7 @@
 					}
 				],
 				"ManufacturerPartNumber": "BB98329",
-				"Price": 120.00,
+				"Price": 120.0,
 				"PromoPrice": 0,
 				"Sku": "MIN93022C",
 				"Warehouse1": 40,
@@ -558,6 +567,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "10",
 		"Height": 18,
 		"Images": [
 			"Minium_ProductImage_42.png"
@@ -566,7 +576,7 @@
 		"ManufacturerPartNumber": "BB98330",
 		"MinStockQuantity": 5,
 		"Name": "Timing Belt",
-		"Price": 600.00,
+		"Price": 600.0,
 		"PromoPrice": 0,
 		"Sku": "MIN93023",
 		"SpecificationOptions": [
@@ -592,9 +602,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 60,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 60000,
+		"Warehouse3": 60000,
 		"Weight": 1,
 		"Width": 2
 	},
@@ -610,6 +620,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "11",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -619,7 +630,7 @@
 		"ManufacturerPartNumber": "BB98331",
 		"MinStockQuantity": 5,
 		"Name": "Master Cylinder",
-		"Price": 78.00,
+		"Price": 78.0,
 		"PromoPrice": 0,
 		"RelatedProducts": [
 			"Wear Sensors"
@@ -648,9 +659,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 40,
-		"Warehouse3": 40,
+		"Warehouse1": 100000,
+		"Warehouse2": 40000,
+		"Warehouse3": 40000,
 		"Weight": 1.456,
 		"Width": 4.1
 	},
@@ -666,6 +677,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "12",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -675,7 +687,7 @@
 		"ManufacturerPartNumber": "BB98332",
 		"MinStockQuantity": 5,
 		"Name": "Master Cylinder",
-		"Price": 34.00,
+		"Price": 34.0,
 		"PromoPrice": 0,
 		"RelatedProducts": [
 			"Wear Sensors"
@@ -704,9 +716,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 20,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 20000,
+		"Warehouse3": 20000,
 		"Weight": 1,
 		"Width": 4.1
 	},
@@ -722,6 +734,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "13",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -731,7 +744,7 @@
 		"ManufacturerPartNumber": "BB98333",
 		"MinStockQuantity": 5,
 		"Name": "Master Cylinder",
-		"Price": 39.00,
+		"Price": 39.0,
 		"PromoPrice": 0,
 		"RelatedProducts": [
 			"Wear Sensors"
@@ -760,9 +773,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 100,
-		"Warehouse3": 100,
+		"Warehouse1": 40000,
+		"Warehouse2": 100000,
+		"Warehouse3": 100000,
 		"Weight": 1,
 		"Width": 4.1
 	},
@@ -775,12 +788,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "14",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938051",
 		"MinStockQuantity": 5,
 		"Name": "Bearings",
-		"Price": 70.00,
+		"Price": 70.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00673",
 		"SpecificationOptions": [
@@ -806,9 +820,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 40,
-		"Warehouse3": 40,
+		"Warehouse1": 100000,
+		"Warehouse2": 40000,
+		"Warehouse3": 40000,
 		"Weight": 2,
 		"Width": 10.2
 	},
@@ -821,12 +835,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "15",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "EX938052",
 		"MinStockQuantity": 5,
 		"Name": "Cams",
-		"Price": 695.00,
+		"Price": 695.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00674",
 		"SpecificationOptions": [
@@ -852,9 +867,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 100,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 100000,
+		"Warehouse3": 20000,
 		"Weight": 2.81,
 		"Width": 7.3
 	},
@@ -867,12 +882,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "16",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938053",
 		"MinStockQuantity": 5,
 		"Name": "Engine Mount",
-		"Price": 120.00,
+		"Price": 120.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00675",
 		"SpecificationOptions": [
@@ -898,9 +914,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 100,
-		"Warehouse3": 100,
+		"Warehouse1": 40000,
+		"Warehouse2": 100000,
+		"Warehouse3": 100000,
 		"Weight": 1.9,
 		"Width": 2
 	},
@@ -913,6 +929,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "17",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_46.png"
@@ -921,7 +938,7 @@
 		"ManufacturerPartNumber": "EX938054",
 		"MinStockQuantity": 5,
 		"Name": "Oil Filter",
-		"Price": 450.00,
+		"Price": 450.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00676",
 		"SpecificationOptions": [
@@ -943,9 +960,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 100,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 100000,
+		"Warehouse3": 60000,
 		"Weight": 9,
 		"Width": 9.5
 	},
@@ -958,6 +975,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "18",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_33.png"
@@ -966,7 +984,7 @@
 		"ManufacturerPartNumber": "EX938055",
 		"MinStockQuantity": 5,
 		"Name": "Oil Pump",
-		"Price": 79.00,
+		"Price": 79.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00677",
 		"SpecificationOptions": [
@@ -992,9 +1010,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 20,
-		"Warehouse3": 40,
+		"Warehouse1": 100000,
+		"Warehouse2": 20000,
+		"Warehouse3": 40000,
 		"Weight": 2.05,
 		"Width": 5.6
 	},
@@ -1007,12 +1025,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "19",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "EX938056",
 		"MinStockQuantity": 5,
 		"Name": "Piston",
-		"Price": 14.00,
+		"Price": 14.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00678",
 		"SpecificationOptions": [
@@ -1038,9 +1057,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 60,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 60000,
+		"Warehouse3": 20000,
 		"Weight": 1.72,
 		"Width": 9.5
 	},
@@ -1053,12 +1072,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "20",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "EX938057",
 		"MinStockQuantity": 5,
 		"Name": "Pulley Kit",
-		"Price": 201.00,
+		"Price": 201.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00679",
 		"SpecificationOptions": [
@@ -1084,9 +1104,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 40,
-		"Warehouse3": 100,
+		"Warehouse1": 40000,
+		"Warehouse2": 40000,
+		"Warehouse3": 100000,
 		"Weight": 1.93,
 		"Width": 2.1
 	},
@@ -1099,12 +1119,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "21",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938058",
 		"MinStockQuantity": 5,
 		"Name": "Seal",
-		"Price": 30.00,
+		"Price": 30.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00680",
 		"SpecificationOptions": [
@@ -1130,9 +1151,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 20,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 20000,
+		"Warehouse3": 60000,
 		"Weight": 0.19,
 		"Width": 10.2
 	},
@@ -1145,6 +1166,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "22",
 		"Height": 5.3,
 		"Images": [
 			"Minium_ProductImage_94.png"
@@ -1153,7 +1175,7 @@
 		"ManufacturerPartNumber": "EX938059",
 		"MinStockQuantity": 5,
 		"Name": "Timing Chain Tensioner",
-		"Price": 30.00,
+		"Price": 30.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00681",
 		"SpecificationOptions": [
@@ -1180,7 +1202,7 @@
 		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 0,
-		"Warehouse2": 3,
+		"Warehouse2": 3000,
 		"Warehouse3": 0,
 		"Weight": 0.45,
 		"Width": 7.3
@@ -1194,12 +1216,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "23",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938060",
 		"MinStockQuantity": 5,
 		"Name": "Timing Chain",
-		"Price": 23.00,
+		"Price": 23.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00682",
 		"SpecificationOptions": [
@@ -1225,9 +1248,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 60,
-		"Warehouse3": 40,
+		"Warehouse1": 60000,
+		"Warehouse2": 60000,
+		"Warehouse3": 40000,
 		"Weight": 1.3,
 		"Width": 2
 	},
@@ -1240,12 +1263,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "24",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938061",
 		"MinStockQuantity": 5,
 		"Name": "Valve Cover Grommets",
-		"Price": 6.00,
+		"Price": 6.0,
 		"PromoPrice": 0,
 		"Sku": "MIN00683",
 		"SpecificationOptions": [
@@ -1271,9 +1295,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 40,
-		"Warehouse3": 40,
+		"Warehouse1": 40000,
+		"Warehouse2": 40000,
+		"Warehouse3": 40000,
 		"Weight": 0.1,
 		"Width": 10.2
 	},
@@ -1286,12 +1310,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "25",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "ES98205",
 		"MinStockQuantity": 5,
 		"Name": "Catalytic Converters",
-		"Price": 106.00,
+		"Price": 106.0,
 		"PromoPrice": 0,
 		"Sku": "MIN77822",
 		"SpecificationOptions": [
@@ -1332,12 +1357,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "26",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "ES98206",
 		"MinStockQuantity": 5,
 		"Name": "Exhaust Clamps",
-		"Price": 9.00,
+		"Price": 9.0,
 		"PromoPrice": 0,
 		"Sku": "MIN77823",
 		"SpecificationOptions": [
@@ -1363,9 +1389,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 20,
-		"Warehouse3": 100,
+		"Warehouse1": 100000,
+		"Warehouse2": 20000,
+		"Warehouse3": 100000,
 		"Weight": 0.62,
 		"Width": 2
 	},
@@ -1378,12 +1404,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "27",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "ES98207",
 		"MinStockQuantity": 5,
 		"Name": "Muffler/Resonators",
-		"Price": 32.00,
+		"Price": 32.0,
 		"PromoPrice": 0,
 		"Sku": "MIN77824",
 		"SpecificationOptions": [
@@ -1409,9 +1436,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 100,
-		"Warehouse3": 60,
+		"Warehouse1": 60000,
+		"Warehouse2": 100000,
+		"Warehouse3": 60000,
 		"Weight": 11.75,
 		"Width": 9.5
 	},
@@ -1424,12 +1451,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "28",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "ES98208",
 		"MinStockQuantity": 5,
 		"Name": "Lift Support",
-		"Price": 20.00,
+		"Price": 20.0,
 		"PromoPrice": 0,
 		"Sku": "MIN77825",
 		"SpecificationOptions": [
@@ -1455,9 +1483,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 20,
-		"Warehouse3": 40,
+		"Warehouse1": 40000,
+		"Warehouse2": 20000,
+		"Warehouse3": 40000,
 		"Weight": 0.6,
 		"Width": 5.6
 	},
@@ -1470,6 +1498,7 @@
 		"Description": "Includes wastegate actuator. Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment.",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "29",
 		"FilterAccountGroups": [
 			"North American Accounts"
 		],
@@ -1483,7 +1512,7 @@
 		"ManufacturerPartNumber": "TC90432",
 		"MinStockQuantity": 5,
 		"Name": "Turbocharger",
-		"Price": 665.00,
+		"Price": 665.0,
 		"PromoPrice": 0,
 		"Sku": "MIN19999",
 		"SpecificationOptions": [
@@ -1509,9 +1538,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 60,
-		"Warehouse3": 20,
+		"Warehouse1": 100000,
+		"Warehouse2": 60000,
+		"Warehouse3": 20000,
 		"Weight": 19,
 		"Width": 12.9
 	},
@@ -1524,12 +1553,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "30",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88893",
 		"MinStockQuantity": 5,
 		"Name": "Ball Joints",
-		"Price": 152.00,
+		"Price": 152.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38794",
 		"SpecificationOptions": [
@@ -1555,9 +1585,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 40,
-		"Warehouse3": 100,
+		"Warehouse1": 100000,
+		"Warehouse2": 40000,
+		"Warehouse3": 100000,
 		"Weight": 20.51,
 		"Width": 10.2
 	},
@@ -1570,12 +1600,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "31",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88894",
 		"MinStockQuantity": 5,
 		"Name": "Bushings",
-		"Price": 18.00,
+		"Price": 18.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38795",
 		"SpecificationOptions": [
@@ -1601,9 +1632,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 20,
-		"Warehouse3": 60,
+		"Warehouse1": 100000,
+		"Warehouse2": 20000,
+		"Warehouse3": 60000,
 		"Weight": 0.5,
 		"Width": 7.3
 	},
@@ -1616,12 +1647,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "32",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88895",
 		"MinStockQuantity": 5,
 		"Name": "CV Axles",
-		"Price": 89.00,
+		"Price": 89.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38796",
 		"SpecificationOptions": [
@@ -1643,9 +1675,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 100,
-		"Warehouse3": 40,
+		"Warehouse1": 20000,
+		"Warehouse2": 100000,
+		"Warehouse3": 40000,
 		"Weight": 19.39,
 		"Width": 2
 	},
@@ -1658,6 +1690,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "33",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_20.png"
@@ -1666,7 +1699,7 @@
 		"ManufacturerPartNumber": "HM88896",
 		"MinStockQuantity": 5,
 		"Name": "Universal CV Boot",
-		"Price": 185.00,
+		"Price": 185.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38797",
 		"SpecificationOptions": [
@@ -1688,9 +1721,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 100,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 100000,
+		"Warehouse3": 20000,
 		"Weight": 6.35,
 		"Width": 9.5
 	},
@@ -1703,12 +1736,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "34",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "HM88897",
 		"MinStockQuantity": 5,
 		"Name": "Hub Bearing Assembly - Rear",
-		"Price": 175.00,
+		"Price": 175.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38798",
 		"SpecificationOptions": [
@@ -1730,9 +1764,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 60,
-		"Warehouse3": 100,
+		"Warehouse1": 40000,
+		"Warehouse2": 60000,
+		"Warehouse3": 100000,
 		"Weight": 13.1,
 		"Width": 5.6
 	},
@@ -1745,6 +1779,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "35",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_13.png",
@@ -1754,7 +1789,7 @@
 		"ManufacturerPartNumber": "HM88898",
 		"MinStockQuantity": 5,
 		"Name": "Coil Spring - Rear",
-		"Price": 104.00,
+		"Price": 104.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38799",
 		"SpecificationOptions": [
@@ -1776,9 +1811,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 20,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 20000,
+		"Warehouse3": 60000,
 		"Weight": 19.81,
 		"Width": 9.5
 	},
@@ -1791,12 +1826,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "36",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "HM88899",
 		"MinStockQuantity": 5,
 		"Name": "Power Steering Pump",
-		"Price": 160.00,
+		"Price": 160.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38800",
 		"SpecificationOptions": [
@@ -1837,12 +1873,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "37",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88900",
 		"MinStockQuantity": 5,
 		"Name": "Differential Ring and Pinion - Universal",
-		"Price": 211.00,
+		"Price": 211.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38801",
 		"SpecificationOptions": [
@@ -1864,9 +1901,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 100,
-		"Warehouse3": 20,
+		"Warehouse1": 60000,
+		"Warehouse2": 100000,
+		"Warehouse3": 20000,
 		"Weight": 17.88,
 		"Width": 10.2
 	},
@@ -1879,12 +1916,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "38",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88901",
 		"MinStockQuantity": 5,
 		"Name": "Shock Absorber",
-		"Price": 75.00,
+		"Price": 75.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38802",
 		"SpecificationOptions": [
@@ -1906,9 +1944,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 60,
-		"Warehouse3": 100,
+		"Warehouse1": 40000,
+		"Warehouse2": 60000,
+		"Warehouse3": 100000,
 		"Weight": 12,
 		"Width": 7.3
 	},
@@ -1921,12 +1959,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "39",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88902",
 		"MinStockQuantity": 5,
 		"Name": "Shock Strut - Front",
-		"Price": 129.00,
+		"Price": 129.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38803",
 		"SpecificationOptions": [
@@ -1952,9 +1991,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 40,
-		"Warehouse3": 60,
+		"Warehouse1": 60000,
+		"Warehouse2": 40000,
+		"Warehouse3": 60000,
 		"Weight": 23.48,
 		"Width": 2
 	},
@@ -1967,12 +2006,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "40",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88903",
 		"MinStockQuantity": 5,
 		"Name": "Tie Rod End Tool",
-		"Price": 35.00,
+		"Price": 35.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38804",
 		"SpecificationOptions": [
@@ -1998,9 +2038,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 60,
-		"Warehouse3": 40,
+		"Warehouse1": 20000,
+		"Warehouse2": 60000,
+		"Warehouse3": 40000,
 		"Weight": 2,
 		"Width": 10.2
 	},
@@ -2013,6 +2053,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "41",
 		"Height": 5.3,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -2021,7 +2062,7 @@
 		"ManufacturerPartNumber": "HM88904",
 		"MinStockQuantity": 5,
 		"Name": "Wheel Bearing Grease",
-		"Price": 54.00,
+		"Price": 54.0,
 		"PromoPrice": 0,
 		"Sku": "MIN38805",
 		"SpecificationOptions": [
@@ -2039,9 +2080,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 20,
-		"Warehouse3": 20,
+		"Warehouse1": 100000,
+		"Warehouse2": 20000,
+		"Warehouse3": 20000,
 		"Weight": 0.75,
 		"Width": 7.3
 	},
@@ -2054,12 +2095,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "42",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00024",
 		"MinStockQuantity": 5,
 		"Name": "CV Axles",
-		"Price": 89.00,
+		"Price": 89.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55853",
 		"SpecificationOptions": [
@@ -2081,9 +2123,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 100,
-		"Warehouse3": 100,
+		"Warehouse1": 20000,
+		"Warehouse2": 100000,
+		"Warehouse3": 100000,
 		"Weight": 19.39,
 		"Width": 2
 	},
@@ -2096,6 +2138,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "43",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_20.png"
@@ -2104,7 +2147,7 @@
 		"ManufacturerPartNumber": "TT00025",
 		"MinStockQuantity": 5,
 		"Name": "Universal CV Boot",
-		"Price": 185.00,
+		"Price": 185.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55854",
 		"SpecificationOptions": [
@@ -2126,9 +2169,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 20,
-		"Warehouse3": 60,
+		"Warehouse1": 60000,
+		"Warehouse2": 20000,
+		"Warehouse3": 60000,
 		"Weight": 6.35,
 		"Width": 9.5
 	},
@@ -2141,12 +2184,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "44",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "TT00026",
 		"MinStockQuantity": 5,
 		"Name": "Drive Shafts",
-		"Price": 396.00,
+		"Price": 396.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55855",
 		"SpecificationOptions": [
@@ -2164,9 +2208,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 40,
-		"Warehouse2": 60,
-		"Warehouse3": 40,
+		"Warehouse1": 40000,
+		"Warehouse2": 60000,
+		"Warehouse3": 40000,
 		"Weight": 1.75,
 		"Width": 5.6
 	},
@@ -2179,6 +2223,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "45",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -2187,7 +2232,7 @@
 		"ManufacturerPartNumber": "TT00027",
 		"MinStockQuantity": 5,
 		"Name": "Transmission Fluid",
-		"Price": 42.00,
+		"Price": 42.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55856",
 		"SpecificationOptions": [
@@ -2205,9 +2250,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 40,
-		"Warehouse3": 40,
+		"Warehouse1": 20000,
+		"Warehouse2": 40000,
+		"Warehouse3": 40000,
 		"Weight": 11.72,
 		"Width": 9.5
 	},
@@ -2220,12 +2265,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "46",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "TT00028",
 		"MinStockQuantity": 5,
 		"Name": "Mount",
-		"Price": 3.00,
+		"Price": 3.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55857",
 		"SpecificationOptions": [
@@ -2251,9 +2297,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 20,
-		"Warehouse3": 40,
+		"Warehouse1": 100000,
+		"Warehouse2": 20000,
+		"Warehouse3": 40000,
 		"Weight": 2.26,
 		"Width": 10.2
 	},
@@ -2266,12 +2312,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "47",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "TT00029",
 		"MinStockQuantity": 5,
 		"Name": "Wheel Seal - Front",
-		"Price": 4.00,
+		"Price": 4.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55858",
 		"SpecificationOptions": [
@@ -2289,9 +2336,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 100,
-		"Warehouse2": 100,
-		"Warehouse3": 20,
+		"Warehouse1": 100000,
+		"Warehouse2": 100000,
+		"Warehouse3": 20000,
 		"Weight": 0.04,
 		"Width": 7.3
 	},
@@ -2304,12 +2351,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "48",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00030",
 		"MinStockQuantity": 5,
 		"Name": "Torque Converters",
-		"Price": 34.00,
+		"Price": 34.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55859",
 		"SpecificationOptions": [
@@ -2335,9 +2383,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 100,
-		"Warehouse3": 100,
+		"Warehouse1": 60000,
+		"Warehouse2": 100000,
+		"Warehouse3": 100000,
 		"Weight": 0.22,
 		"Width": 2
 	},
@@ -2350,12 +2398,13 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "49",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "TT00031",
 		"MinStockQuantity": 5,
 		"Name": "Transmission Cooler Line Assembly",
-		"Price": 15.00,
+		"Price": 15.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55860",
 		"SpecificationOptions": [
@@ -2381,9 +2430,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 20,
-		"Warehouse2": 60,
-		"Warehouse3": 60,
+		"Warehouse1": 20000,
+		"Warehouse2": 60000,
+		"Warehouse3": 60000,
 		"Weight": 0.71,
 		"Width": 9.5
 	},
@@ -2396,6 +2445,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "50",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_64.png"
@@ -2404,7 +2454,7 @@
 		"ManufacturerPartNumber": "TT00032",
 		"MinStockQuantity": 5,
 		"Name": "U-Joint",
-		"Price": 24.00,
+		"Price": 24.0,
 		"PromoPrice": 0,
 		"Sku": "MIN55861",
 		"SpecificationOptions": [
@@ -2430,9 +2480,9 @@
 			}
 		],
 		"TaxCategory": "Normal Product",
-		"Warehouse1": 60,
-		"Warehouse2": 20,
-		"Warehouse3": 40,
+		"Warehouse1": 60000,
+		"Warehouse2": 20000,
+		"Warehouse3": 40000,
 		"Weight": 1.3,
 		"Width": 5.6
 	}
