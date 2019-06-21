@@ -27,6 +27,7 @@ import com.liferay.commerce.initializer.util.CPSpecificationOptionsImporter;
 import com.liferay.commerce.initializer.util.CommerceAccountsImporter;
 import com.liferay.commerce.initializer.util.CommerceDiscountsImporter;
 import com.liferay.commerce.initializer.util.CommerceInventoryWarehousesImporter;
+import com.liferay.commerce.initializer.util.CommerceOrderImporter;
 import com.liferay.commerce.initializer.util.CommercePriceEntriesImporter;
 import com.liferay.commerce.initializer.util.CommercePriceListsImporter;
 import com.liferay.commerce.initializer.util.CommerceUsersImporter;
@@ -221,6 +222,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_importCommercePriceEntries(catalogGroupId, serviceContext);
 
 			_importCommerceUsers(serviceContext);
+
+			_importCommerceOrders(serviceContext);
 
 			_importDDMForms(serviceContext);
 
@@ -634,6 +637,16 @@ public class MiniumSiteInitializer implements SiteInitializer {
 				serviceContext.getUserId());
 	}
 
+	private void _importCommerceOrders(ServiceContext serviceContext)
+		throws Exception {
+
+		JSONArray jsonArray = _getJSONArray("orders.json");
+
+		_commerceOrderImporter.importOrders(
+			jsonArray, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId());
+	}
+
 	private void _importCommerceOrganizations(ServiceContext serviceContext)
 		throws Exception {
 
@@ -975,6 +988,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	@Reference
 	private CommerceInventoryWarehousesImporter
 		_commerceInventoryWarehousesImporter;
+
+	@Reference
+	private CommerceOrderImporter _commerceOrderImporter;
 
 	@Reference
 	private CommercePriceEntriesImporter _commercePriceEntriesImporter;
