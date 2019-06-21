@@ -14,15 +14,17 @@
 
 package com.liferay.commerce.account.web.internal.model;
 
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Alessio Antonio Rendina
- * @author Alec Sloan
  */
 public class Member {
 
 	public Member(
-		long memberId, long accountId, String name, String email, String roles,
-		String href) {
+		long memberId, long accountId, String name, String email,
+		String[] roles, String href) {
 
 		_memberId = memberId;
 		_accountId = accountId;
@@ -53,7 +55,7 @@ public class Member {
 	}
 
 	public String getRoles() {
-		return _roles;
+		return StringUtil.merge(_roles, StringPool.COMMA_AND_SPACE);
 	}
 
 	private final long _accountId;
@@ -61,6 +63,6 @@ public class Member {
 	private final String _href;
 	private final long _memberId;
 	private final String _name;
-	private final String _roles;
+	private final String[] _roles;
 
 }

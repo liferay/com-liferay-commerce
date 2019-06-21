@@ -943,6 +943,8 @@ public class CPDefinitionLocalServiceImpl
 			String[] filterFieldsArray = StringUtil.split(filterFields);
 			String[] filterValuesArray = StringUtil.split(filterValues);
 
+			List<String> options = new ArrayList<>();
+
 			for (int i = 0; i < filterFieldsArray.length; i++) {
 				String key = filterFieldsArray[i];
 				String value = filterValuesArray[i];
@@ -951,6 +953,8 @@ public class CPDefinitionLocalServiceImpl
 					key = key.replace("OPTION_", StringPool.BLANK);
 
 					key = _getIndexFieldName(key);
+
+					options.add(key);
 				}
 
 				List<String> facetValues = null;

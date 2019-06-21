@@ -20,7 +20,7 @@ package com.liferay.commerce.frontend.model;
 public class ProductSettingsModel {
 
 	public int[] getAllowedQuantities() {
-		return _allowedQuantities.clone();
+		return _allowedQuantities;
 	}
 
 	public int getMaxQuantity() {
@@ -36,7 +36,7 @@ public class ProductSettingsModel {
 	}
 
 	public void setAllowedQuantities(int[] allowedQuantities) {
-		_allowedQuantities = allowedQuantities.clone();
+		_allowedQuantities = allowedQuantities;
 	}
 
 	public void setMaxQuantity(int maxQuantity) {

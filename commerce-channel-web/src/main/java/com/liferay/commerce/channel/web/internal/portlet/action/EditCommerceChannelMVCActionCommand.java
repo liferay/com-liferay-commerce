@@ -122,16 +122,14 @@ public class EditCommerceChannelMVCActionCommand extends BaseMVCActionCommand {
 
 		UnicodeProperties typeSettingsProperties = null;
 
-		if (commerceChannelType != null) {
-			String channelType = commerceChannelType.getKey();
+		String channelType = commerceChannelType.getKey();
 
-			if (!channelType.equals(
-					CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
+		if ((commerceChannelType != null) &&
+			!channelType.equals(CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
 
-				typeSettingsProperties =
-					commerceChannelType.getTypeSettingsProperties(
-						httpServletRequest.getParameterMap());
-			}
+			typeSettingsProperties =
+				commerceChannelType.getTypeSettingsProperties(
+					httpServletRequest.getParameterMap());
 		}
 
 		if (commerceChannelId <= 0) {

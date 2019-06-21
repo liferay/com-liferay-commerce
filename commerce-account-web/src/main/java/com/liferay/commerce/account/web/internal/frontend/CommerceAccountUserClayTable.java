@@ -49,7 +49,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
@@ -213,7 +212,7 @@ public class CommerceAccountUserClayTable
 		return true;
 	}
 
-	protected String getUserRoles(
+	protected String[] getUserRoles(
 			User user, long groupId, PermissionChecker permissionChecker)
 		throws PortalException {
 
@@ -234,13 +233,11 @@ public class CommerceAccountUserClayTable
 
 		Stream<Role> stream = roles.stream();
 
-		String[] rolesArray = stream.map(
+		return stream.map(
 			Role::getName
 		).toArray(
 			String[]::new
 		);
-
-		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
 	}
 
 	private String _getAccountUserViewDetailURL(

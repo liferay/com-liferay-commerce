@@ -25,17 +25,11 @@ import java.io.IOException;
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
- * @author Alec Sloan
  */
 @ProviderType
 public class CommerceDiscountRuleImpl extends CommerceDiscountRuleBaseImpl {
 
 	public CommerceDiscountRuleImpl() {
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
 	}
 
 	@Override
@@ -59,11 +53,6 @@ public class CommerceDiscountRuleImpl extends CommerceDiscountRuleBaseImpl {
 		UnicodeProperties settingsProperties = getSettingsProperties();
 
 		return settingsProperties.getProperty(key);
-	}
-
-	@Override
-	public int hashCode() {
-		return (int)getPrimaryKey();
 	}
 
 	@Override

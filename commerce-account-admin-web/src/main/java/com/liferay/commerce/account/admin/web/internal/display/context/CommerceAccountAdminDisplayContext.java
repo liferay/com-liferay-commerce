@@ -111,8 +111,11 @@ public class CommerceAccountAdminDisplayContext
 		if (navigation.equals("active")) {
 			return true;
 		}
+		else if (navigation.equals("inactive")) {
+			return false;
+		}
 
-		return false;
+		return null;
 	}
 
 	protected int getCommerceSiteType() {
