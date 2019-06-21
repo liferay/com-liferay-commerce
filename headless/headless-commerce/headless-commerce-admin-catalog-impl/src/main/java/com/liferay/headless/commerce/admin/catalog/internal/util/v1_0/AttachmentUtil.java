@@ -57,11 +57,11 @@ public class AttachmentUtil {
 
 			File file = new File(_TEMP_FOLDER_NAME);
 
-			try (FileOutputStream fileOutputStream =
-					 new FileOutputStream(file)) {
+			FileOutputStream fileOutputStream = new FileOutputStream(file);
 
-				fileOutputStream.write(attachmentBytes);
-			}
+			fileOutputStream.write(attachmentBytes);
+
+			fileOutputStream.close();
 
 			return _addFileEntry(
 				groupId, userId, file, MimeTypesUtil.getContentType(file),

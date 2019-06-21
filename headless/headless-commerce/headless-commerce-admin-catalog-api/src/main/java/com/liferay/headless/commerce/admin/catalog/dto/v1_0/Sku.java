@@ -112,11 +112,11 @@ public class Sku {
 
 	@Schema
 	public Date getDisplayDate() {
-		return new Date(displayDate.getTime());
+		return displayDate;
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		this.displayDate = new Date(displayDate.getTime());
+		this.displayDate = displayDate;
 	}
 
 	@JsonIgnore
@@ -140,11 +140,11 @@ public class Sku {
 
 	@Schema
 	public Date getExpirationDate() {
-		return new Date(expirationDate.getTime());
+		return expirationDate;
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = new Date(expirationDate.getTime());
+		this.expirationDate = expirationDate;
 	}
 
 	@JsonIgnore

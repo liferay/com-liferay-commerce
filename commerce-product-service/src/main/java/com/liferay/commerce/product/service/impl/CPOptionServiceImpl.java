@@ -143,8 +143,10 @@ public class CPOptionServiceImpl extends CPOptionServiceBaseImpl {
 		CPOption cpOption = cpOptionLocalService.fetchByExternalReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
 
-		_cpOptionModelResourcePermission.check(
-			getPermissionChecker(), cpOption, ActionKeys.VIEW);
+		if (cpOption == null) {
+			_cpOptionModelResourcePermission.check(
+				getPermissionChecker(), cpOption, ActionKeys.VIEW);
+		}
 
 		return cpOptionLocalService.upsertCPOption(
 			getUserId(), nameMap, descriptionMap, ddmFormFieldTypeName,

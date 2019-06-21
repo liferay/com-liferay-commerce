@@ -84,7 +84,7 @@ public class CommerceContextImpl implements CommerceContext {
 	@Override
 	public long[] getCommerceAccountGroupIds() throws PortalException {
 		if (_commerceAccountGroupIds != null) {
-			return _commerceAccountGroupIds.clone();
+			return _commerceAccountGroupIds;
 		}
 
 		CommerceAccount commerceAccount = getCommerceAccount();
@@ -97,7 +97,7 @@ public class CommerceContextImpl implements CommerceContext {
 			_commerceAccountHelper.getCommerceAccountGroupIds(
 				commerceAccount.getCommerceAccountId());
 
-		return _commerceAccountGroupIds.clone();
+		return _commerceAccountGroupIds;
 	}
 
 	@Override

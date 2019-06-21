@@ -24,7 +24,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
-import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
@@ -42,6 +41,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
@@ -143,7 +143,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		}
 		else {
 			cpAttachmentFileEntry =
-				_cpAttachmentFileEntryService.fetchCPAttachmentFileEntry(
+				_cpAttachmentFileEntryLocalService.fetchCPAttachmentFileEntry(
 					cpAttachmentFileEntryId);
 		}
 
@@ -420,9 +420,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		_cpAttachmentFileEntryLocalService;
 
 	@Reference
-	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
-
-	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
@@ -433,6 +430,9 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private File _file;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private Html _html;

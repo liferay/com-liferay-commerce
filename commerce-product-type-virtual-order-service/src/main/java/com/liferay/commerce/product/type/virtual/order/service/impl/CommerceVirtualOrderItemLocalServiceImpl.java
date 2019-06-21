@@ -249,9 +249,7 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 				extension);
 
 		if (file.exists()) {
-			if (!file.delete()) {
-				throw new Exception();
-			}
+			file.delete();
 		}
 
 		if (!tempFile.renameTo(file)) {
