@@ -41,6 +41,7 @@ import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ModelHintsUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
@@ -366,7 +367,8 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 
 		Map<String, String> languageIdToUrlTitleMap =
 			CPFriendlyURLEntryLocalServiceUtil.getLanguageIdToUrlTitleMap(
-				getGroupId(), classNameId, getCProductId());
+				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
+				getCProductId());
 
 		return languageIdToUrlTitleMap.get(languageId);
 	}
