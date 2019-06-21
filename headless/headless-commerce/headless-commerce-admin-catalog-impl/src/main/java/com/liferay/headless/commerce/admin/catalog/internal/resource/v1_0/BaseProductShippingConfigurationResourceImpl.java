@@ -55,36 +55,6 @@ public abstract class BaseProductShippingConfigurationResourceImpl
 
 	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/shippingConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductShippingConfiguration")})
-	public ProductShippingConfiguration getProductIdShippingConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new ProductShippingConfiguration();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/shippingConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductShippingConfiguration")})
-	public Response patchProductIdShippingConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductShippingConfiguration productShippingConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -121,6 +91,36 @@ public abstract class BaseProductShippingConfigurationResourceImpl
 	public Response patchProductByExternalReferenceCodeShippingConfiguration(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			ProductShippingConfiguration productShippingConfiguration)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/shippingConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductShippingConfiguration")})
+	public ProductShippingConfiguration getProductIdShippingConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ProductShippingConfiguration();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/shippingConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductShippingConfiguration")})
+	public Response patchProductIdShippingConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			ProductShippingConfiguration productShippingConfiguration)
 		throws Exception {
 
