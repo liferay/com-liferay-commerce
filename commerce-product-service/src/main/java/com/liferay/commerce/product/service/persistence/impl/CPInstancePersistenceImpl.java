@@ -2991,6 +2991,564 @@ public class CPInstancePersistenceImpl
 	private static final String _FINDER_COLUMN_CPDEFINITIONID_CPDEFINITIONID_2 =
 		"cpInstance.CPDefinitionId = ?";
 
+	private FinderPath _finderPathWithPaginationFindByCPInstanceUuid;
+	private FinderPath _finderPathWithoutPaginationFindByCPInstanceUuid;
+	private FinderPath _finderPathCountByCPInstanceUuid;
+
+	/**
+	 * Returns all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the matching cp instances
+	 */
+	@Override
+	public List<CPInstance> findByCPInstanceUuid(String CPInstanceUuid) {
+		return findByCPInstanceUuid(
+			CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @return the range of matching cp instances
+	 */
+	@Override
+	public List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end) {
+
+		return findByCPInstanceUuid(CPInstanceUuid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp instances
+	 */
+	@Override
+	public List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CPInstance> orderByComparator) {
+
+		return findByCPInstanceUuid(
+			CPInstanceUuid, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching cp instances
+	 */
+	@Override
+	public List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		OrderByComparator<CPInstance> orderByComparator,
+		boolean retrieveFromCache) {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+			finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
+			finderArgs = new Object[] {CPInstanceUuid};
+		}
+		else {
+			finderPath = _finderPathWithPaginationFindByCPInstanceUuid;
+			finderArgs = new Object[] {
+				CPInstanceUuid, start, end, orderByComparator
+			};
+		}
+
+		List<CPInstance> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<CPInstance>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CPInstance cpInstance : list) {
+					if (!CPInstanceUuid.equals(
+							cpInstance.getCPInstanceUuid())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_CPINSTANCE_WHERE);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid.isEmpty()) {
+				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CPInstanceModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				if (!pagination) {
+					list = (List<CPInstance>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CPInstance>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp instance
+	 * @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance findByCPInstanceUuid_First(
+			String CPInstanceUuid,
+			OrderByComparator<CPInstance> orderByComparator)
+		throws NoSuchCPInstanceException {
+
+		CPInstance cpInstance = fetchByCPInstanceUuid_First(
+			CPInstanceUuid, orderByComparator);
+
+		if (cpInstance != null) {
+			return cpInstance;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("CPInstanceUuid=");
+		msg.append(CPInstanceUuid);
+
+		msg.append("}");
+
+		throw new NoSuchCPInstanceException(msg.toString());
+	}
+
+	/**
+	 * Returns the first cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance fetchByCPInstanceUuid_First(
+		String CPInstanceUuid,
+		OrderByComparator<CPInstance> orderByComparator) {
+
+		List<CPInstance> list = findByCPInstanceUuid(
+			CPInstanceUuid, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp instance
+	 * @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance findByCPInstanceUuid_Last(
+			String CPInstanceUuid,
+			OrderByComparator<CPInstance> orderByComparator)
+		throws NoSuchCPInstanceException {
+
+		CPInstance cpInstance = fetchByCPInstanceUuid_Last(
+			CPInstanceUuid, orderByComparator);
+
+		if (cpInstance != null) {
+			return cpInstance;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("CPInstanceUuid=");
+		msg.append(CPInstanceUuid);
+
+		msg.append("}");
+
+		throw new NoSuchCPInstanceException(msg.toString());
+	}
+
+	/**
+	 * Returns the last cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	@Override
+	public CPInstance fetchByCPInstanceUuid_Last(
+		String CPInstanceUuid,
+		OrderByComparator<CPInstance> orderByComparator) {
+
+		int count = countByCPInstanceUuid(CPInstanceUuid);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CPInstance> list = findByCPInstanceUuid(
+			CPInstanceUuid, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the cp instances before and after the current cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceId the primary key of the current cp instance
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp instance
+	 * @throws NoSuchCPInstanceException if a cp instance with the primary key could not be found
+	 */
+	@Override
+	public CPInstance[] findByCPInstanceUuid_PrevAndNext(
+			long CPInstanceId, String CPInstanceUuid,
+			OrderByComparator<CPInstance> orderByComparator)
+		throws NoSuchCPInstanceException {
+
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		CPInstance cpInstance = findByPrimaryKey(CPInstanceId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPInstance[] array = new CPInstanceImpl[3];
+
+			array[0] = getByCPInstanceUuid_PrevAndNext(
+				session, cpInstance, CPInstanceUuid, orderByComparator, true);
+
+			array[1] = cpInstance;
+
+			array[2] = getByCPInstanceUuid_PrevAndNext(
+				session, cpInstance, CPInstanceUuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPInstance getByCPInstanceUuid_PrevAndNext(
+		Session session, CPInstance cpInstance, String CPInstanceUuid,
+		OrderByComparator<CPInstance> orderByComparator, boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CPINSTANCE_WHERE);
+
+		boolean bindCPInstanceUuid = false;
+
+		if (CPInstanceUuid.isEmpty()) {
+			query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
+		}
+		else {
+			bindCPInstanceUuid = true;
+
+			query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CPInstanceModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindCPInstanceUuid) {
+			qPos.add(CPInstanceUuid);
+		}
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(cpInstance)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CPInstance> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the cp instances where CPInstanceUuid = &#63; from the database.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 */
+	@Override
+	public void removeByCPInstanceUuid(String CPInstanceUuid) {
+		for (CPInstance cpInstance :
+				findByCPInstanceUuid(
+					CPInstanceUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
+			remove(cpInstance);
+		}
+	}
+
+	/**
+	 * Returns the number of cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the number of matching cp instances
+	 */
+	@Override
+	public int countByCPInstanceUuid(String CPInstanceUuid) {
+		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
+
+		FinderPath finderPath = _finderPathCountByCPInstanceUuid;
+
+		Object[] finderArgs = new Object[] {CPInstanceUuid};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CPINSTANCE_WHERE);
+
+			boolean bindCPInstanceUuid = false;
+
+			if (CPInstanceUuid.isEmpty()) {
+				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3);
+			}
+			else {
+				bindCPInstanceUuid = true;
+
+				query.append(_FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCPInstanceUuid) {
+					qPos.add(CPInstanceUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_2 =
+		"cpInstance.CPInstanceUuid = ?";
+
+	private static final String _FINDER_COLUMN_CPINSTANCEUUID_CPINSTANCEUUID_3 =
+		"(cpInstance.CPInstanceUuid IS NULL OR cpInstance.CPInstanceUuid = '')";
+
 	private FinderPath _finderPathWithPaginationFindByG_ST;
 	private FinderPath _finderPathWithoutPaginationFindByG_ST;
 	private FinderPath _finderPathCountByG_ST;
@@ -6526,6 +7084,12 @@ public class CPInstancePersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByCPDefinitionId, args);
 
+			args = new Object[] {cpInstanceModelImpl.getCPInstanceUuid()};
+
+			finderCache.removeResult(_finderPathCountByCPInstanceUuid, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCPInstanceUuid, args);
+
 			args = new Object[] {
 				cpInstanceModelImpl.getGroupId(),
 				cpInstanceModelImpl.getStatus()
@@ -6648,6 +7212,27 @@ public class CPInstancePersistenceImpl
 					_finderPathCountByCPDefinitionId, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByCPDefinitionId, args);
+			}
+
+			if ((cpInstanceModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCPInstanceUuid.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					cpInstanceModelImpl.getOriginalCPInstanceUuid()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCPInstanceUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPInstanceUuid, args);
+
+				args = new Object[] {cpInstanceModelImpl.getCPInstanceUuid()};
+
+				finderCache.removeResult(
+					_finderPathCountByCPInstanceUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCPInstanceUuid, args);
 			}
 
 			if ((cpInstanceModelImpl.getColumnBitmask() &
@@ -7268,6 +7853,30 @@ public class CPInstancePersistenceImpl
 			CPInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPDefinitionId",
 			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCPInstanceUuid = new FinderPath(
+			CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			CPInstanceModelImpl.FINDER_CACHE_ENABLED, CPInstanceImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCPInstanceUuid",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCPInstanceUuid = new FinderPath(
+			CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			CPInstanceModelImpl.FINDER_CACHE_ENABLED, CPInstanceImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCPInstanceUuid",
+			new String[] {String.class.getName()},
+			CPInstanceModelImpl.CPINSTANCEUUID_COLUMN_BITMASK |
+			CPInstanceModelImpl.DISPLAYDATE_COLUMN_BITMASK |
+			CPInstanceModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCPInstanceUuid = new FinderPath(
+			CPInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			CPInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPInstanceUuid",
+			new String[] {String.class.getName()});
 
 		_finderPathWithPaginationFindByG_ST = new FinderPath(
 			CPInstanceModelImpl.ENTITY_CACHE_ENABLED,

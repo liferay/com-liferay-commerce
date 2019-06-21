@@ -250,6 +250,13 @@ public class CProductLocalServiceUtil {
 		return getService().getCProduct(CProductId);
 	}
 
+	public static com.liferay.commerce.product.model.CProduct
+			getCProductByCPInstanceUuid(String cpInstanceUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCProductByCPInstanceUuid(cpInstanceUuid);
+	}
+
 	/**
 	 * Returns the c product matching the UUID and group.
 	 *
