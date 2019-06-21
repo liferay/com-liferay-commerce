@@ -14,27 +14,28 @@
 
 package com.liferay.commerce.account.internal.model.listener;
 
-import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
+import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
+import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.ModelListener;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
-@Component(immediate = true, service = ModelListener.class)
-public class CompanyModelListener extends BaseModelListener<Company> {
+@Component(immediate = true, service = PortalInstanceLifecycleListener.class)
+public class PortalInstanceLifecycleListenerImpl
+	extends BasePortalInstanceLifecycleListener {
 
 	@Override
-	public void onBeforeRemove(Company company) {
+	public void portalInstanceRegistered(Company company) throws Exception {
 		try {
-			_commerceAccountLocalService.deleteCommerceAccounts(
+			_commerceAccountGroupLocalService.checkGuestCommerceAccountGroup(
 				company.getCompanyId());
 		}
 		catch (PortalException pe) {
@@ -43,9 +44,9 @@ public class CompanyModelListener extends BaseModelListener<Company> {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CompanyModelListener.class);
+		PortalInstanceLifecycleListenerImpl.class);
 
 	@Reference
-	private CommerceAccountLocalService _commerceAccountLocalService;
+	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
 
 }
