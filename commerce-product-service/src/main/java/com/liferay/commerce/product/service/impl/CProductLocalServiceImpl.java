@@ -16,6 +16,7 @@ package com.liferay.commerce.product.service.impl;
 
 import com.liferay.commerce.product.exception.DuplicateCProductException;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CProductLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -65,6 +66,16 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		cProductPersistence.update(cProduct);
 
 		return cProduct.getLatestVersion();
+	}
+
+	@Override
+	public CProduct getCProductByCPInstanceUuid(String cpInstanceUuid) throws PortalException{
+
+		CPInstance cpInstance = cpInstancePersistence.fetchByCPInstanceUuid_First(cpInstanceUuid, null);
+
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		return cpDefinition.getCProduct();
 	}
 
 	@Override
