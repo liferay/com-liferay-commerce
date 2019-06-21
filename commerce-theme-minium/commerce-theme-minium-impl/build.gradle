@@ -8,7 +8,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.petra.lang", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.petra.string", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.2.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "8.0.0"
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "9.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.cart.taglib", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.frontend.api", version: "1.1.0"
