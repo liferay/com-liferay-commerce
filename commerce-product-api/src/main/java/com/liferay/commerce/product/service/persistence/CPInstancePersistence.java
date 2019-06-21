@@ -826,6 +826,150 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	public int countByCPDefinitionId(long CPDefinitionId);
 
 	/**
+	 * Returns all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the matching cp instances
+	 */
+	public java.util.List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid);
+
+	/**
+	 * Returns a range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @return the range of matching cp instances
+	 */
+	public java.util.List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp instances
+	 */
+	public java.util.List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPInstanceModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param start the lower bound of the range of cp instances
+	 * @param end the upper bound of the range of cp instances (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching cp instances
+	 */
+	public java.util.List<CPInstance> findByCPInstanceUuid(
+		String CPInstanceUuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+			orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	 * Returns the first cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp instance
+	 * @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	 */
+	public CPInstance findByCPInstanceUuid_First(
+			String CPInstanceUuid,
+			com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+				orderByComparator)
+		throws NoSuchCPInstanceException;
+
+	/**
+	 * Returns the first cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	public CPInstance fetchByCPInstanceUuid_First(
+		String CPInstanceUuid,
+		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+			orderByComparator);
+
+	/**
+	 * Returns the last cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp instance
+	 * @throws NoSuchCPInstanceException if a matching cp instance could not be found
+	 */
+	public CPInstance findByCPInstanceUuid_Last(
+			String CPInstanceUuid,
+			com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+				orderByComparator)
+		throws NoSuchCPInstanceException;
+
+	/**
+	 * Returns the last cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp instance, or <code>null</code> if a matching cp instance could not be found
+	 */
+	public CPInstance fetchByCPInstanceUuid_Last(
+		String CPInstanceUuid,
+		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+			orderByComparator);
+
+	/**
+	 * Returns the cp instances before and after the current cp instance in the ordered set where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceId the primary key of the current cp instance
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp instance
+	 * @throws NoSuchCPInstanceException if a cp instance with the primary key could not be found
+	 */
+	public CPInstance[] findByCPInstanceUuid_PrevAndNext(
+			long CPInstanceId, String CPInstanceUuid,
+			com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
+				orderByComparator)
+		throws NoSuchCPInstanceException;
+
+	/**
+	 * Removes all the cp instances where CPInstanceUuid = &#63; from the database.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 */
+	public void removeByCPInstanceUuid(String CPInstanceUuid);
+
+	/**
+	 * Returns the number of cp instances where CPInstanceUuid = &#63;.
+	 *
+	 * @param CPInstanceUuid the cp instance uuid
+	 * @return the number of matching cp instances
+	 */
+	public int countByCPInstanceUuid(String CPInstanceUuid);
+
+	/**
 	 * Returns all the cp instances where groupId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
