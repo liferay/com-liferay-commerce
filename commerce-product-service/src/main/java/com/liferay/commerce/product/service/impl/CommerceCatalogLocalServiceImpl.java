@@ -122,9 +122,15 @@ public class CommerceCatalogLocalServiceImpl
 
 		User defaultUser = company.getDefaultUser();
 
+		String currencyCode = null;
+
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
 				companyId);
+
+		if (commerceCurrency != null) {
+			currencyCode = commerceCurrency.getCode();
+		}
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -133,9 +139,8 @@ public class CommerceCatalogLocalServiceImpl
 		serviceContext.setUuid(PortalUUIDUtil.generate());
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			CommerceCatalogConstants.MASTER_COMMERCE_CATALOG,
-			commerceCurrency.getCode(), defaultUser.getLanguageId(), true, null,
-			serviceContext);
+			CommerceCatalogConstants.MASTER_COMMERCE_CATALOG, currencyCode,
+			defaultUser.getLanguageId(), true, null, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
