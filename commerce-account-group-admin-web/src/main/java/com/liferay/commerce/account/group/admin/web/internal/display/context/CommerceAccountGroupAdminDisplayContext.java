@@ -15,6 +15,7 @@
 package com.liferay.commerce.account.group.admin.web.internal.display.context;
 
 import com.liferay.commerce.account.group.admin.web.internal.display.context.util.CommerceAccountGroupAdminRequestHelper;
+import com.liferay.commerce.account.group.admin.web.internal.search.CommerceAccountGroupChecker;
 import com.liferay.commerce.account.item.selector.criterion.CommerceAccountItemSelectorCriterion;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
@@ -232,7 +233,7 @@ public class CommerceAccountGroupAdminDisplayContext {
 			CommerceAccountGroup.class, _searchContainer, "name", "asc");
 
 		_searchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
+			new CommerceAccountGroupChecker(
 				_commerceAccountGroupAdminRequestHelper.
 					getLiferayPortletResponse()));
 
