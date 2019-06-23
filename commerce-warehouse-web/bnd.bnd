@@ -1,4 +1,8 @@
 Bundle-Name: Liferay Commerce Warehouse Web
 Bundle-SymbolicName: com.liferay.commerce.warehouse.web
 Bundle-Version: 1.0.21
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*
 Web-ContextPath: /commerce-warehouse-web
