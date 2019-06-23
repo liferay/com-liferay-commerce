@@ -1,4 +1,11 @@
 Bundle-Name: Liferay Commerce Checkout Web
 Bundle-SymbolicName: com.liferay.commerce.checkout.web
 Bundle-Version: 2.0.4
+Export-Package:\
+	com.liferay.commerce.checkout.web.constants,\
+	com.liferay.commerce.checkout.web.util
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*
 -dsannotations-options: inherit
