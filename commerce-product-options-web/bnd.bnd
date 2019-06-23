@@ -1,11 +1,16 @@
 Bundle-Name: Liferay Commerce Product Options Web
 Bundle-SymbolicName: com.liferay.commerce.product.options.web
 Bundle-Version: 1.0.24
+Import-Package:\
+	com.liferay.frontend.taglib.clay.servlet.taglib.util;version="[1.0.0,2.2.0)",\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*
 Provide-Capability:\
 	soy;\
 		type="options-web";\
 		version:Version="${Bundle-Version}"
 Require-Capability:\
 	osgi.extender;\
-		filter:="(&(osgi.extender=liferay.js)(version>=2.0)(!(version>=3.0)))"
+		filter:="(&(osgi.extender=liferay.js)(version>=2.0)(!(version>=5.0)))"
 Web-ContextPath: /commerce-product-options-web
