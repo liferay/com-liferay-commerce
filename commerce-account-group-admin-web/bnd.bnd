@@ -1,4 +1,8 @@
 Bundle-Name: Liferay Commerce Account Group Admin Web
 Bundle-SymbolicName: com.liferay.commerce.account.group.admin.web
 Bundle-Version: 1.0.7
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*
 Web-ContextPath: /commerce-account-group-admin-web

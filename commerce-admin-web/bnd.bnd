@@ -1,3 +1,8 @@
 Bundle-Name: Liferay Commerce Admin Web
 Bundle-SymbolicName: com.liferay.commerce.admin.web
 Bundle-Version: 1.0.19
+Import-Package:\
+	com.liferay.frontend.taglib.clay.servlet.taglib.util;version="[1.0.0,2.2.0)",\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*

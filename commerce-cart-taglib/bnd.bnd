@@ -2,6 +2,10 @@ Bundle-Name: Liferay Commerce Cart Taglib
 Bundle-SymbolicName: com.liferay.commerce.cart.taglib
 Bundle-Version: 2.1.9
 Export-Package: com.liferay.commerce.cart.taglib.servlet.taglib
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	\
+	*
 Provide-Capability:\
 	osgi.extender;\
 		osgi.extender="jsp.taglib";\
@@ -12,5 +16,5 @@ Provide-Capability:\
 		version:Version="${Bundle-Version}"
 Require-Capability:\
 	osgi.extender;\
-		filter:="(&(osgi.extender=liferay.js)(version>=2.0)(!(version>=3.0)))"
+		filter:="(&(osgi.extender=liferay.js)(version>=2.0)(!(version>=5.0)))"
 Web-ContextPath: /commerce-cart-taglib

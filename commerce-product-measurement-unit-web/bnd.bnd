@@ -1,4 +1,8 @@
 Bundle-Name: Liferay Commerce Product Measurement Unit Web
 Bundle-SymbolicName: com.liferay.commerce.product.measurement.unit.web
 Bundle-Version: 1.0.17
+Import-Package:\
+	com.liferay.frontend.taglib.clay.servlet.taglib.util;version="[1.0.0,2.2.0)",\
+	\
+	*
 Web-ContextPath: /commerce-product-measurement-unit-web
