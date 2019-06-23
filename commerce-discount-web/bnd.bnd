@@ -1,4 +1,8 @@
 Bundle-Name: Liferay Commerce Discount Web
 Bundle-SymbolicName: com.liferay.commerce.discount.web
 Bundle-Version: 1.0.21
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,9.0.0)",\
+	\
+	*
 Web-ContextPath: /commerce-discount-web

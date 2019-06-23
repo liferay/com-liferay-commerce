@@ -2,6 +2,10 @@ Bundle-Name: Liferay Commerce Taglib
 Bundle-SymbolicName: com.liferay.commerce.taglib
 Bundle-Version: 1.4.1
 Export-Package: com.liferay.commerce.taglib.servlet.taglib
+Import-Package:\
+	com.liferay.taglib.util;version="[7.4.0,9.0.0)",\
+	\
+	*
 Provide-Capability:\
 	osgi.extender;\
 		osgi.extender="jsp.taglib";\

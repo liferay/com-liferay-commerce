@@ -1,8 +1,9 @@
 {
 	"devDependencies": {
 		"gulp": "3.9.1",
-		"liferay-theme-deps-7.1": "8.0.0-rc.3",
-		"liferay-theme-tasks": "8.0.6"
+		"liferay-frontend-theme-styled": "^4.0.19",
+		"liferay-frontend-theme-unstyled": "^4.0.14",
+		"liferay-theme-tasks": "9.4.0"
 	},
 	"keywords": [
 		"liferay-theme"
