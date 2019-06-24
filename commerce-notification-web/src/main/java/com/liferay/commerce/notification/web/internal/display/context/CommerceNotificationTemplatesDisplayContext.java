@@ -27,6 +27,7 @@ import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.util.comparator.CommerceNotificationTemplateCommerceAccountGroupRelCreateDateComparator;
 import com.liferay.commerce.notification.web.internal.admin.NotificationsCommerceAdminModule;
 import com.liferay.commerce.notification.web.internal.display.context.util.CommerceNotificationsRequestHelper;
+import com.liferay.commerce.notification.web.internal.security.permission.resource.CommerceNotificationTemplatePermission;
 import com.liferay.commerce.notification.web.internal.util.CommerceNotificationsUtil;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -39,6 +40,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -62,6 +64,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 		CommerceNotificationTemplateService commerceNotificationTemplateService,
 		CommerceNotificationTemplateCommerceAccountGroupRelService
 			commerceNotificationTemplateCommerceAccountGroupRelService,
+		CommerceNotificationTemplatePermission
+			commerceNotificationTemplatePermission,
 		CommerceNotificationTypeRegistry commerceNotificationTypeRegistry,
 		CommerceAccountGroupService commerceAccountGroupService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
@@ -71,6 +75,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 			commerceNotificationTemplateService;
 		_commerceNotificationTemplateCommerceAccountGroupRelService =
 			commerceNotificationTemplateCommerceAccountGroupRelService;
+		_commerceNotificationTemplatePermission =
+			commerceNotificationTemplatePermission;
 		_commerceNotificationTypeRegistry = commerceNotificationTypeRegistry;
 		_commerceAccountGroupService = commerceAccountGroupService;
 		_itemSelector = itemSelector;
@@ -283,6 +289,16 @@ public class CommerceNotificationTemplatesDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasPermission(
+			CommerceNotificationTemplate commerceNotificationTemplate,
+			String actionId)
+		throws PortalException {
+
+		return _commerceNotificationTemplatePermission.contains(
+			PermissionThreadLocal.getPermissionChecker(),
+			commerceNotificationTemplate, actionId);
+	}
+
 	public boolean isShowAddButton() {
 		return _portletResourcePermission.contains(
 			_commerceNotificationsRequestHelper.getPermissionChecker(),
@@ -331,6 +347,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 	private CommerceNotificationTemplate _commerceNotificationTemplate;
 	private final CommerceNotificationTemplateCommerceAccountGroupRelService
 		_commerceNotificationTemplateCommerceAccountGroupRelService;
+	private final CommerceNotificationTemplatePermission
+		_commerceNotificationTemplatePermission;
 	private final CommerceNotificationTemplateService
 		_commerceNotificationTemplateService;
 	private final CommerceNotificationTypeRegistry
