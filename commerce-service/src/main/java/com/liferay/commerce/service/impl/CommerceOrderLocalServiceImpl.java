@@ -33,6 +33,7 @@ import com.liferay.commerce.exception.CommerceOrderShippingMethodException;
 import com.liferay.commerce.exception.CommerceOrderStatusException;
 import com.liferay.commerce.exception.CommercePaymentEngineException;
 import com.liferay.commerce.exception.GuestCartMaxAllowedException;
+import com.liferay.commerce.internal.constants.CommerceOrderAvailableOrderConstants;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -1677,21 +1678,8 @@ public class CommerceOrderLocalServiceImpl
 			discountPercentageLevel4);
 	}
 
-	private static final int[] _AVAILABLE_ORDER_STATUSES = {
-		CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
-		CommerceOrderConstants.ORDER_STATUS_TRANSMITTED,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_PICKUP,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
-		CommerceOrderConstants.ORDER_STATUS_REFUNDED,
-		CommerceOrderConstants.ORDER_STATUS_SHIPPED,
-		CommerceOrderConstants.ORDER_STATUS_COMPLETED,
-		CommerceOrderConstants.ORDER_STATUS_CANCELLED,
-		CommerceOrderConstants.ORDER_STATUS_DECLINED,
-		CommerceOrderConstants.ORDER_STATUS_DISPUTED
-	};
+	private static final int[] _AVAILABLE_ORDER_STATUSES =
+		CommerceOrderAvailableOrderConstants.getAvailableOrderStatuses();
 
 	@ServiceReference(type = CommerceChannelLocalService.class)
 	private CommerceChannelLocalService _commerceChannelLocalService;

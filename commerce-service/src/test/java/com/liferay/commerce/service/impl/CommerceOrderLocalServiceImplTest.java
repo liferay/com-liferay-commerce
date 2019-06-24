@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.service.impl;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.commerce.internal.constants.CommerceOrderAvailableOrderConstants;
 
 import java.util.Arrays;
 
@@ -28,8 +28,8 @@ public class CommerceOrderLocalServiceImplTest {
 
 	@Test
 	public void testAvailableOrderStatuses() {
-		int[] availableOrderStatuses = ArrayUtil.clone(
-			CommerceOrderLocalServiceImpl.AVAILABLE_ORDER_STATUSES);
+		int[] availableOrderStatuses =
+			CommerceOrderAvailableOrderConstants.getAvailableOrderStatuses();
 
 		Arrays.sort(availableOrderStatuses);
 
