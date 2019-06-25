@@ -96,14 +96,15 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 		throws IOException {
 
 		CommercePaymentMethodGroupRelsDisplayContext
-			commerceCurrenciesDisplayContext =
+			commercePaymentMethodGroupRelsDisplayContext =
 				new CommercePaymentMethodGroupRelsDisplayContext(
 					_commercePaymentMethodRegistry,
 					_commercePaymentMethodGroupRelService,
 					_portletResourcePermission, renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCurrenciesDisplayContext);
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
+			commercePaymentMethodGroupRelsDisplayContext);
 
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
