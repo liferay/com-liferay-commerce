@@ -29,9 +29,12 @@ import com.liferay.commerce.price.list.test.util.CommercePriceEntryTestUtil;
 import com.liferay.commerce.price.list.test.util.CommerceTierPriceEntryTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -48,15 +51,14 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
  * @author Zoltán Takács
+ * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceTierPriceEntryLocalServiceTest {
 
@@ -67,7 +69,12 @@ public class CommerceTierPriceEntryLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
+
+		User defaultUser = _company.getDefaultUser();
+
+		_group = GroupTestUtil.addGroup(
+			_company.getCompanyId(), defaultUser.getUserId(), 0);
 
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 
@@ -193,7 +200,8 @@ public class CommerceTierPriceEntryLocalServiceTest {
 
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			CommerceTierPriceEntryTestUtil.upsertCommerceTierPriceEntry(
-				0L, commercePriceEntry.getCommercePriceEntryId(), minQuantity,
+				_company.getCompanyId(), 0L,
+				commercePriceEntry.getCommercePriceEntryId(), minQuantity,
 				price, promoPrice, null, null);
 
 		_assertTierPriceEntryAttributes(
@@ -239,8 +247,9 @@ public class CommerceTierPriceEntryLocalServiceTest {
 		double promoPrice = RandomTestUtil.randomDouble();
 
 		CommerceTierPriceEntryTestUtil.upsertCommerceTierPriceEntry(
-			0L, commercePriceEntry.getCommercePriceEntryId(), minQuantity,
-			price, promoPrice, externalReferenceCode, null);
+			_company.getCompanyId(), 0L,
+			commercePriceEntry.getCommercePriceEntryId(), minQuantity, price,
+			promoPrice, externalReferenceCode, null);
 
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			_commerceTierPriceEntryLocalService.fetchByExternalReferenceCode(
@@ -291,8 +300,9 @@ public class CommerceTierPriceEntryLocalServiceTest {
 			promoPrice, null);
 
 		CommerceTierPriceEntryTestUtil.upsertCommerceTierPriceEntry(
-			0L, commercePriceEntry.getCommercePriceEntryId(), minQuantity,
-			price, promoPrice, null, null);
+			_company.getCompanyId(), 0L,
+			commercePriceEntry.getCommercePriceEntryId(), minQuantity, price,
+			promoPrice, null, null);
 	}
 
 	@Test(expected = NoSuchPriceEntryException.class)
@@ -329,8 +339,8 @@ public class CommerceTierPriceEntryLocalServiceTest {
 		double promoPrice = RandomTestUtil.randomDouble();
 
 		CommerceTierPriceEntryTestUtil.upsertCommerceTierPriceEntry(
-			0L, commercePriceEntryId, minQuantity, price, promoPrice, null,
-			null);
+			_company.getCompanyId(), 0L, commercePriceEntryId, minQuantity,
+			price, promoPrice, null, null);
 	}
 
 	@Test
@@ -374,8 +384,8 @@ public class CommerceTierPriceEntryLocalServiceTest {
 		double promoPrice = RandomTestUtil.randomDouble();
 
 		CommerceTierPriceEntryTestUtil.upsertCommerceTierPriceEntry(
-			0L, 0L, minQuantity, price, promoPrice, null,
-			priceEntryExternalReferenceCode);
+			_company.getCompanyId(), 0L, 0L, minQuantity, price, promoPrice,
+			null, priceEntryExternalReferenceCode);
 
 		CommercePriceEntry actualCommercePriceEntry =
 			_commercePriceEntryLocalService.fetchByExternalReferenceCode(
@@ -434,9 +444,9 @@ public class CommerceTierPriceEntryLocalServiceTest {
 		_commerceTierPriceEntryLocalService;
 
 	@DeleteAfterTestRun
-	private Group _group;
+	private Company _company;
 
-	@DeleteAfterTestRun
+	private Group _group;
 	private CommerceCurrency _usCommerceCurrency;
 
 }

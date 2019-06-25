@@ -21,7 +21,9 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -31,6 +33,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
@@ -46,7 +49,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +56,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommercePriceListIndexerTest {
 
@@ -70,7 +71,12 @@ public class CommercePriceListIndexerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
+
+		User defaultUser = _company.getDefaultUser();
+
+		_group = GroupTestUtil.addGroup(
+			_company.getCompanyId(), defaultUser.getUserId(), 0);
 	}
 
 	@Test
@@ -109,7 +115,7 @@ public class CommercePriceListIndexerTest {
 		searchContext.setCompanyId(_group.getCompanyId());
 		searchContext.setEntryClassNames(
 			new String[] {CommercePriceList.class.getName()});
-		searchContext.setGroupIds(new long[] {_group.getGroupId()});
+		searchContext.setGroupIds(new long[] {commerceCatalog.getGroupId()});
 
 		Hits hits = _indexer.search(searchContext);
 
@@ -132,6 +138,8 @@ public class CommercePriceListIndexerTest {
 	private CommercePriceListLocalService _commercePriceListLocalService;
 
 	@DeleteAfterTestRun
+	private Company _company;
+
 	private Group _group;
 
 }
