@@ -23,7 +23,6 @@ import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServic
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -58,14 +57,14 @@ public class CommerceTierPriceEntryTestUtil {
 	}
 
 	public static CommerceTierPriceEntry upsertCommerceTierPriceEntry(
-			long commerceTierPriceEntryId, long commercePriceEntryId,
-			int minQuantity, double price, double promoPrice,
-			String externalReferenceCode,
+			long companyId, long commerceTierPriceEntryId,
+			long commercePriceEntryId, int minQuantity, double price,
+			double promoPrice, String externalReferenceCode,
 			String priceEntryExternalReferenceCode)
 		throws PortalException {
 
 		long groupId = _getGroupId(
-			commercePriceEntryId, priceEntryExternalReferenceCode);
+			companyId, commercePriceEntryId, priceEntryExternalReferenceCode);
 
 		return CommerceTierPriceEntryLocalServiceUtil.
 			upsertCommerceTierPriceEntry(
@@ -77,7 +76,8 @@ public class CommerceTierPriceEntryTestUtil {
 	}
 
 	private static long _getGroupId(
-			Long commercePriceEntryId, String priceEntryExternalReferenceCode)
+			long companyId, Long commercePriceEntryId,
+			String priceEntryExternalReferenceCode)
 		throws PortalException {
 
 		if (commercePriceEntryId > 0) {
@@ -96,8 +96,7 @@ public class CommerceTierPriceEntryTestUtil {
 		if (priceEntryExternalReferenceCode != null) {
 			CommercePriceEntry commercePriceEntry =
 				CommercePriceEntryLocalServiceUtil.fetchByExternalReferenceCode(
-					CompanyThreadLocal.getCompanyId(),
-					priceEntryExternalReferenceCode);
+					companyId, priceEntryExternalReferenceCode);
 
 			if (commercePriceEntry != null) {
 				CommercePriceList commercePriceList =

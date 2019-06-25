@@ -34,6 +34,7 @@ import java.util.List;
 /**
  * @author Zoltán Takács
  * @author Ethan Bustad
+ * @author Luca Pellizzon
  */
 public class CommercePriceListTestUtil {
 
@@ -42,8 +43,6 @@ public class CommercePriceListTestUtil {
 			String name, Double priority, Boolean neverExpire, Date displayDate,
 			Date expirationDate, String externalReferenceCode)
 		throws PortalException {
-
-		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
 
 		if (priority == null) {
 			priority = 0D;
@@ -75,6 +74,9 @@ public class CommercePriceListTestUtil {
 
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
+
+		long commerceCurrencyId = _getCommerceCurrencyId(
+			serviceContext.getCompanyId(), currency);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
 			commerceCatalog.getGroupId(), user.getUserId(), commerceCurrencyId,
@@ -105,8 +107,6 @@ public class CommercePriceListTestUtil {
 			Boolean neverExpire, Date displayDate, Date expirationDate)
 		throws PortalException {
 
-		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
-
 		if (neverExpire == null) {
 			neverExpire = Boolean.TRUE;
 		}
@@ -132,6 +132,9 @@ public class CommercePriceListTestUtil {
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
 
+		long commerceCurrencyId = _getCommerceCurrencyId(
+			serviceContext.getCompanyId(), currency);
+
 		return CommercePriceListLocalServiceUtil.updateCommercePriceList(
 			commercePriceListId, commerceCurrencyId, parentCommercePriceListId,
 			name, priority, displayDateElements.getMonth(),
@@ -148,8 +151,6 @@ public class CommercePriceListTestUtil {
 			Boolean neverExpire, Date displayDate, Date expirationDate,
 			String externalReferenceCode)
 		throws PortalException {
-
-		long commerceCurrencyId = _getCommerceCurrencyId(groupId, currency);
 
 		if (neverExpire == null) {
 			neverExpire = Boolean.TRUE;
@@ -181,6 +182,9 @@ public class CommercePriceListTestUtil {
 
 		DateElements expirationDateElements = new DateElements(
 			expirationDate, defaultExpirationCalendar);
+
+		long commerceCurrencyId = _getCommerceCurrencyId(
+			serviceContext.getCompanyId(), currency);
 
 		return CommercePriceListLocalServiceUtil.upsertCommercePriceList(
 			commerceCatalog.getGroupId(), user.getUserId(), commercePriceListId,

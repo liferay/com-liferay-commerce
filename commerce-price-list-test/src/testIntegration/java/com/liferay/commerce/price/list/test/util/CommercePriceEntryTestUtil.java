@@ -19,8 +19,12 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalServiceUtil;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
@@ -29,9 +33,11 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import java.math.BigDecimal;
 
 import java.util.Currency;
+import java.util.List;
 
 /**
  * @author Zoltán Takács
+ * @author Luca Pellizzon
  */
 public class CommercePriceEntryTestUtil {
 
@@ -43,9 +49,17 @@ public class CommercePriceEntryTestUtil {
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(groupId);
 
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				groupId, currency.getCurrencyCode(), name,
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
 		double price = RandomTestUtil.randomDouble();
