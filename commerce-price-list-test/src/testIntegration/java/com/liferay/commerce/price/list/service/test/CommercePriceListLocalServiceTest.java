@@ -24,10 +24,15 @@ import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.price.list.test.util.CommercePriceListTestUtil;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -38,13 +43,13 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
+import java.util.List;
 
 import org.frutilla.FrutillaRule;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,8 +57,8 @@ import org.junit.runner.RunWith;
 /**
  * @author Zoltán Takács
  * @author Ethan Bustad
+ * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommercePriceListLocalServiceTest {
 
@@ -64,7 +69,12 @@ public class CommercePriceListLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
+
+		User defaultUser = _company.getDefaultUser();
+
+		_group = GroupTestUtil.addGroup(
+			_company.getCompanyId(), defaultUser.getUserId(), 0);
 
 		Currency currencyGBP = Currency.getInstance(LocaleUtil.UK);
 
@@ -98,9 +108,15 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), name,
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
 		_assertPriceListAttributes(currency, name, commercePriceList);
@@ -132,9 +148,15 @@ public class CommercePriceListLocalServiceTest {
 		String externalReferenceCode = RandomTestUtil.randomString();
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), name,
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null,
 				externalReferenceCode);
 
@@ -171,9 +193,15 @@ public class CommercePriceListLocalServiceTest {
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(),
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(),
 				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
 				true, null, null, null);
 
@@ -215,9 +243,15 @@ public class CommercePriceListLocalServiceTest {
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(),
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(),
 				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
 				true, null, null, externalReferenceCode);
 
@@ -257,9 +291,15 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), name,
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
 		currency = Currency.getInstance(LocaleUtil.UK);
@@ -315,8 +355,14 @@ public class CommercePriceListLocalServiceTest {
 		long commercePriceListId = RandomTestUtil.randomLong();
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceListTestUtil.updateCommercePriceList(
-			_group.getGroupId(), commercePriceListId,
+			commerceCatalog.getGroupId(), commercePriceListId,
 			currency.getCurrencyCode(), 0, RandomTestUtil.randomString(),
 			RandomTestUtil.randomDouble(), true, null, null);
 	}
@@ -339,10 +385,16 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), 0, name,
-				RandomTestUtil.randomDouble(), true, null, null, null);
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), 0,
+				name, RandomTestUtil.randomDouble(), true, null, null, null);
 
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
@@ -381,10 +433,16 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.upsertCommercePriceList(
-				_group.getGroupId(), 0, currency.getCurrencyCode(), name,
-				RandomTestUtil.randomDouble(), true, null, null, null);
+				commerceCatalog.getGroupId(), 0, currency.getCurrencyCode(),
+				name, RandomTestUtil.randomDouble(), true, null, null, null);
 
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
@@ -412,8 +470,14 @@ public class CommercePriceListLocalServiceTest {
 		String externalReferenceCode = RandomTestUtil.randomString();
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceListTestUtil.addCommercePriceList(
-			_group.getGroupId(), currency.getCurrencyCode(), name,
+			commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 			RandomTestUtil.randomDouble(), true, null, null,
 			externalReferenceCode);
 
@@ -455,9 +519,15 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addCommercePriceList(
-				_group.getGroupId(), currency.getCurrencyCode(), name,
+				commerceCatalog.getGroupId(), currency.getCurrencyCode(), name,
 				RandomTestUtil.randomDouble(), true, null, null, null);
 
 		Currency updatedCurrency = Currency.getInstance(LocaleUtil.UK);
@@ -524,10 +594,16 @@ public class CommercePriceListLocalServiceTest {
 		Currency currency = Currency.getInstance(LocaleUtil.US);
 		String name = RandomTestUtil.randomString();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.upsertCommercePriceList(
-				_group.getGroupId(), 1, currency.getCurrencyCode(), name,
-				RandomTestUtil.randomDouble(), true, null, null, null);
+				commerceCatalog.getGroupId(), 1, currency.getCurrencyCode(),
+				name, RandomTestUtil.randomDouble(), true, null, null, null);
 
 		_assertPriceListAttributes(currency, name, commercePriceList);
 	}
@@ -557,9 +633,15 @@ public class CommercePriceListLocalServiceTest {
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.upsertCommercePriceList(
-				_group.getGroupId(), 1, currency.getCurrencyCode(),
+				commerceCatalog.getGroupId(), 1, currency.getCurrencyCode(),
 				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
 				true, null, null, null);
 
@@ -593,9 +675,15 @@ public class CommercePriceListLocalServiceTest {
 		String name = RandomTestUtil.randomString();
 		long parentCommercePriceListId = RandomTestUtil.randomLong();
 
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				_group.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.upsertCommercePriceList(
-				_group.getGroupId(), 1, currency.getCurrencyCode(),
+				commerceCatalog.getGroupId(), 1, currency.getCurrencyCode(),
 				parentCommercePriceListId, name, RandomTestUtil.randomDouble(),
 				true, null, null, null);
 
@@ -642,6 +730,8 @@ public class CommercePriceListLocalServiceTest {
 	private CommercePriceListLocalService _commercePriceListLocalService;
 
 	@DeleteAfterTestRun
+	private Company _company;
+
 	private Group _group;
 
 }
