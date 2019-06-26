@@ -16,6 +16,7 @@ package com.liferay.commerce.frontend.model;
 
 /**
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 public class PriceModel {
 
@@ -27,37 +28,46 @@ public class PriceModel {
 		return _discount;
 	}
 
-	public String getPrice() {
-		return _price;
-	}
-
 	public String getFinalPrice() {
 		return _finalPrice;
+	}
+
+	public String getPrice() {
+		return _price;
 	}
 
 	public String getPromoPrice() {
 		return _promoPrice;
 	}
 
-	public void setDiscount(String discount) {
-		_discount = discount;
+	public String getTotalSavingPercentage() {
+		return _totalSavingPercentage;
 	}
 
-	public void setPrice(String price) {
-		_price = price;
+	public void setDiscount(String discount) {
+		_discount = discount;
 	}
 
 	public void setFinalPrice(String finalPrice) {
 		_finalPrice = finalPrice;
 	}
 
+	public void setPrice(String price) {
+		_price = price;
+	}
+
 	public void setPromoPrice(String promoPrice) {
 		_promoPrice = promoPrice;
 	}
 
+	public void setTotalSavingPercentage(String totalSavingPercentage) {
+		_totalSavingPercentage = totalSavingPercentage;
+	}
+
 	private String _discount;
-	private String _price;
 	private String _finalPrice;
+	private String _price;
 	private String _promoPrice;
+	private String _totalSavingPercentage;
 
 }
