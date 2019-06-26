@@ -6,165 +6,54 @@
 {template .render}
 	{@param prices: [
 		price: string,
-		promoPrice: string|null,
 		finalPrice: string|null,
-		discount: string|null
+		totalSavingPercentage: string|null
 	]}
-	{@param? template: string}
-	{@param? additionalDiscountClasses: string}
+	{@param? showLabel: bool}
 	{@param? additionalPriceClasses: string}
 	{@param? additionalFinalPriceClasses: string}
 
-	{let $variant kind="text"}
-		{if $template}
-			{$template}
-		{else}
-			default
-		{/if}
-	{/let}
-
-	{let $formattedAdditionalDiscountClasses kind="text"}
-		{nil}
-		{if $additionalDiscountClasses}
-			{sp}{$additionalDiscountClasses}
-		{/if}
-	{/let}
-
-	{let $formattedAdditionalPriceClasses kind="text"}
-		{nil}
+	{let $formattedPriceClasses kind="text"}
+		price__value
 		{if $additionalPriceClasses}
 			{sp}{$additionalPriceClasses}
 		{/if}
 	{/let}
 
-	{let $formattedAdditionalFinalPriceClasses kind="text"}
-		{nil}
+
+	{let $formattedFinalPriceClasses kind="text"}
+		price__value price__value--final-price
 		{if $additionalFinalPriceClasses}
 			{sp}{$additionalFinalPriceClasses}
 		{/if}
 	{/let}
 
-	{delcall PriceVariant variant="$variant"}
-		{param prices: $prices /}
-		{param additionalDiscountClasses: $formattedAdditionalDiscountClasses /}
-		{param additionalFinalPriceClasses: $formattedAdditionalFinalPriceClasses /}
-		{param additionalPriceClasses: $formattedAdditionalPriceClasses /}
-	{/delcall}
-
-{/template}
-
-
-{deltemplate PriceVariant variant="'simplified'"}
-	{@param prices: [
-		price: string,
-		promoPrice: string|null,
-		finalPrice: string|null,
-		discount: string|null
-	]}
-	{@param? template: string}
-	{@param? additionalDiscountClasses: string}
-	{@param? additionalPriceClasses: string}
-	{@param? additionalFinalPriceClasses: string}
+	{let $formattedOriginalPriceClasses kind="text"}
+		price__value price__value--original-price
+		{if $additionalPriceClasses}
+			{sp}{$additionalPriceClasses}
+		{/if}
+	{/let}
 
 	<span class="price">
 		{if $prices.finalPrice == $prices.price}
-			<span class="price__value{$additionalPriceClasses}">
+			<span class="{$formattedPriceClasses}">
 				{$prices.price}
 			</span>
 		{else}
-			<span class="price__value price__value--final-price{$additionalFinalPriceClasses}">
+			<span class="{$formattedFinalPriceClasses}">
 				{$prices.finalPrice}
 			</span>
-			<span class="price__value price__value--original-price{$additionalPriceClasses}">
+			<span class="{$formattedOriginalPriceClasses}">
 				{$prices.price}
 			</span>
+
+			{if $showLabel}
+				<div class="price__discount-label">
+					{msg desc="You save"}you-save{/msg}{sp}{$prices.totalSavingPercentage}
+				</div>
+			{/if}
 		{/if}
 	</span>
 
-{/deltemplate}
-
-{deltemplate PriceVariant variant="'default'"}
-	{@param prices: [
-		price: string,
-		promoPrice: string|null,
-		finalPrice: string|null,
-		discount: string|null
-	]}
-	{@param? template: string}
-	{@param? additionalDiscountClasses: string}
-	{@param? additionalPriceClasses: string}
-	{@param? additionalFinalPriceClasses: string}
-
-	{if isNonnull($prices.promoPrice)}
-		{call .promoPrice}
-			{param price: $prices.price /}
-			{param promoPrice: $prices.promoPrice /}
-			{param additionalFinalPriceClasses: $additionalFinalPriceClasses /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{elseif isNonnull($prices.discount)}
-		{call .discount}
-			{param price: $prices.price /}
-			{param discount: $prices.discount /}
-			{param additionalDiscountClasses: $additionalDiscountClasses /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{else}
-		{call .default}
-			{param price: $prices.price /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{/if}
-{/deltemplate}
-
-/**
- * This renders the price and the discounted price.
- */
-{template .promoPrice}
-	{@param price: string}
-	{@param promoPrice: string}
-	{@param? additionalFinalPriceClasses: string}
-	{@param? additionalPriceClasses: string}
-
-	<span class="price">
-		<span class="price__value price__value--promo-price{$additionalFinalPriceClasses}">
-			{$promoPrice}
-		</span>
-		<span class="price__value price__value--inactive{$additionalPriceClasses}">
-			{$price}
-		</span>
-	</span>
-{/template}
-
-/**
- * This renders the price and the discount.
- */
-{template .discount}
-	{@param price: string}
-	{@param discount: string}
-	{@param? additionalDiscountClasses: string}
-	{@param? additionalPriceClasses: string}
-
-	<span class="price">
-		<span class="price__value{$additionalPriceClasses}">
-			{$price}
-		</span>
-		<span class="price__value price__value--discount{$additionalDiscountClasses}">
-			{$discount}
-		</span>
-	</span>
-{/template}
-
-/**
- * This renders the normal price
- */
-{template .default}
-	{@param price: string}
-	{@param? additionalPriceClasses: string}
-
-	<span class="price">
-		<span class="price__value{$additionalPriceClasses}">
-			{$price}
-		</span>
-	</span>
 {/template}

@@ -91,14 +91,16 @@ public class PriceTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/price/Price.es");
 	}
 
-	public void setAdditionalDiscountClasses(String additionalDiscountClasses) {
-		putValue("additionalDiscountClasses", additionalDiscountClasses);
-	}
-
 	public void setadditionalFinalPriceClasses(
 		String additionalFinalPriceClasses) {
 
 		putValue("additionalFinalPriceClasses", additionalFinalPriceClasses);
+	}
+
+	public void setShowLabel(
+		boolean showLabel) {
+
+		putValue("showLabel", showLabel);
 	}
 
 	public void setAdditionalPriceClasses(String additionalPriceClasses) {
