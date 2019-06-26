@@ -3,7 +3,7 @@ Bundle-SymbolicName: com.liferay.commerce.product.taglib
 Bundle-Version: 1.1.6
 Export-Package: com.liferay.commerce.product.taglib.servlet.taglib
 Import-Package:\
-	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	com.liferay.taglib.util;version="[7.4.0,9.0.0)",\
 	\
 	*
 Provide-Capability:\
