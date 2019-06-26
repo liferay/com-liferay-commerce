@@ -8,7 +8,7 @@ Export-Package:\
 Import-Package:\
 	com.liferay.frontend.taglib.clay.servlet.taglib.util;version="[1.0.0,2.2.0)",\
 	com.liferay.portal.kernel.portlet;version="[8.0,9.1)",\
-	com.liferay.taglib.util;version="[7.4.0,8.1.0)",\
+	com.liferay.taglib.util;version="[7.4.0,9.0.0)",\
 	\
 	*
 Provide-Capability:\
