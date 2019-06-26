@@ -22,6 +22,7 @@ import java.math.RoundingMode;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @ExtendedObjectClassDefinition(
 	category = "pricing", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
@@ -40,5 +41,13 @@ public interface RoundingTypeConfiguration {
 
 	@Meta.AD(deflt = "HALF_EVEN", name = "rounding-mode", required = false)
 	public RoundingMode roundingMode();
+
+	@Meta.AD(deflt = "1", name = "percentage-fraction-digits", required = false)
+	public int percentageFractionDigits();
+
+	@Meta.AD(
+		deflt = "DOWN", name = "percentage-rounding-mode", required = false
+	)
+	public RoundingMode percentageRoundingMode();
 
 }
