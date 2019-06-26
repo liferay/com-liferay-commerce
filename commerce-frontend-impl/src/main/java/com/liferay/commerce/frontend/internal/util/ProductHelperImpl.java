@@ -16,7 +16,10 @@ package com.liferay.commerce.frontend.internal.util;
 
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.configuration.RoundingTypeConfiguration;
+import com.liferay.commerce.currency.constants.RoundingTypeConstants;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.currency.model.CommerceMoneyFactoryUtil;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.model.PriceModel;
 import com.liferay.commerce.frontend.model.ProductSettingsModel;
@@ -28,8 +31,12 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 
 import java.math.BigDecimal;
+
+import java.text.NumberFormat;
 
 import java.util.Locale;
 
@@ -38,6 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 @Component(service = ProductHelper.class)
 public class ProductHelperImpl implements ProductHelper {
@@ -57,7 +65,13 @@ public class ProductHelperImpl implements ProductHelper {
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 
-		PriceModel priceModel = new PriceModel(unitPrice.format(locale));
+		BigDecimal unitPriceValue = unitPrice.getPrice();
+
+		CommerceMoney price = CommerceMoneyFactoryUtil.create(
+			unitPrice.getCommerceCurrency(),
+			unitPriceValue.multiply(new BigDecimal(quantity)));
+
+		PriceModel priceModel = new PriceModel(price.format(locale));
 
 		CommerceMoney unitPromoPrice = commerceProductPrice.getUnitPromoPrice();
 
@@ -65,7 +79,7 @@ public class ProductHelperImpl implements ProductHelper {
 
 		if ((promoPrice != null) &&
 			(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
-			(promoPrice.compareTo(unitPrice.getPrice()) < 0)) {
+			(promoPrice.compareTo(unitPriceValue) < 0)) {
 
 			priceModel.setPromoPrice(unitPromoPrice.format(locale));
 		}
@@ -81,7 +95,30 @@ public class ProductHelperImpl implements ProductHelper {
 
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
-        priceModel.setFinalPrice(finalPrice.format(locale));
+		priceModel.setFinalPrice(finalPrice.format(locale));
+
+		RoundingTypeConfiguration roundingTypeConfiguration =
+			_configurationProvider.getConfiguration(
+				RoundingTypeConfiguration.class,
+				new SystemSettingsLocator(RoundingTypeConstants.SERVICE_NAME));
+
+		BigDecimal priceValue = price.getPrice();
+
+		BigDecimal difference = priceValue.subtract(finalPrice.getPrice());
+
+		BigDecimal percentage = difference.divide(
+			priceValue, 10, roundingTypeConfiguration.percentageRoundingMode());
+
+		NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
+
+		percentFormat.setMaximumFractionDigits(
+			roundingTypeConfiguration.percentageFractionDigits());
+		percentFormat.setRoundingMode(
+			roundingTypeConfiguration.percentageRoundingMode());
+
+		String result = percentFormat.format(percentage);
+
+		priceModel.setTotalSavingPercentage(result);
 
 		return priceModel;
 	}
@@ -135,6 +172,9 @@ public class ProductHelperImpl implements ProductHelper {
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference
 	private CPDefinitionInventoryLocalService
