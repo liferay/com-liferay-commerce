@@ -232,6 +232,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 				<c:if test="<%= cpSku != null %>">
 					<commerce-ui:price
 						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+						showLabel="<%= true %>"
 					/>
 				</c:if>
 			</h2>
