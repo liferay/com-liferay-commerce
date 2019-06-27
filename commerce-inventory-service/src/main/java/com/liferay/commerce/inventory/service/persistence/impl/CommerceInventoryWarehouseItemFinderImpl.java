@@ -82,7 +82,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 
 	@Override
 	public int countStockQuantityByC_G_S(
-		long companyId, long groupId, String sku) {
+		long companyId, long channelGroupId, String sku) {
 
 		Session session = null;
 
@@ -99,7 +99,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+			qPos.add(channelGroupId);
 			qPos.add(sku);
 
 			Iterator<Integer> itr = q.iterate();
