@@ -32,6 +32,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.model.Group;
@@ -105,16 +106,17 @@ public class CommerceOrderDiscountTest {
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse,
 			cpInstanceDiscount.getSku(), quantity);
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse,
 			cpInstancePlain.getSku(), quantity);
 
@@ -203,16 +205,17 @@ public class CommerceOrderDiscountTest {
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse,
 			cpInstanceDiscount.getSku(), quantity);
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse,
 			cpInstancePlain.getSku(), quantity);
 
