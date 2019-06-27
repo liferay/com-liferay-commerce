@@ -7,7 +7,7 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
 	testIntegrationCompile project(":apps:commerce:commerce-api")
 	testIntegrationCompile project(":apps:commerce:commerce-inventory-api")
-	testIntegrationCompile project(":apps:commerce:commerce-inventory-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-product-api")
 	testIntegrationCompile project(":apps:commerce:commerce-product-test-util")
+	testIntegrationCompile project(":apps:commerce:commerce-test-util")
 }
