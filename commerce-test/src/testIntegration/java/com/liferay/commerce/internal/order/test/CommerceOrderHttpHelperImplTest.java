@@ -27,6 +27,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.petra.lang.CentralizedThreadLocal;
@@ -160,9 +161,10 @@ public class CommerceOrderHttpHelperImplTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		_commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), _commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 

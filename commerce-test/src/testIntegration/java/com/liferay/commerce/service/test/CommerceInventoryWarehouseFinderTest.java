@@ -18,7 +18,7 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.test.util.CommerceTestUtil;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
@@ -70,7 +70,7 @@ public class CommerceInventoryWarehouseFinderTest {
 		throws Exception {
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
 				_group.getGroupId(), name);
 
 		for (int i = 0; i < quantities.length; i++) {
@@ -82,7 +82,7 @@ public class CommerceInventoryWarehouseFinderTest {
 
 			CPInstance cpInstance = _cpInstances[i];
 
-			CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouse.getUserId(),
 				commerceInventoryWarehouse, cpInstance.getSku(), quantity);
 		}
