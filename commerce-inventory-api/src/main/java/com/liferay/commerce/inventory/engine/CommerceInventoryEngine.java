@@ -38,10 +38,10 @@ public interface CommerceInventoryEngine {
 		throws PortalException;
 
 	public Map<String, Integer> getStockQuantities(
-			long companyId, long groupId, List<String> skus)
+			long companyId, long channelGroupId, List<String> skus)
 		throws PortalException;
 
-	public int getStockQuantity(long companyId, long groupId, String sku)
+	public int getStockQuantity(long companyId, long channelGroupId, String sku)
 		throws PortalException;
 
 	public int getStockQuantity(long companyId, String sku)
