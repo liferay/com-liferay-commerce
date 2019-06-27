@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.ServiceScope;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	properties = "OSGI-INF/liferay/rest/v1_0/specification-value.properties",
+	properties = "OSGI-INF/liferay/rest/v1_0/product-specification.properties",
 	scope = ServiceScope.PROTOTYPE, service = ProductSpecificationResource.class
 )
 public class ProductSpecificationResourceImpl
