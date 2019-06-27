@@ -7,6 +7,7 @@
 	{@param detailsUrl: string}
 	{@param checkoutUrl: string}
 	{@param spritemap: string }
+	{@param submitUrl: string}
 
 	{@param? disabled: bool}
 	{@param? products: list<[
@@ -127,6 +128,7 @@
 			{if isNonnull($summary)}
 				{call Summary.render}
 					{param checkoutUrl: $checkoutUrl /}
+					{param submitUrl: $submitUrl /}
 					{param subtotal: $summary.subtotal /}
 					{param total: $summary.total /}
 					{param discount: $summary.discount /}

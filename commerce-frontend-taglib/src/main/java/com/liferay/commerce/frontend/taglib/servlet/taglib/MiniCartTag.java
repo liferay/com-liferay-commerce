@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
@@ -27,6 +28,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -73,15 +75,36 @@ public class MiniCartTag extends ComponentRendererTag {
 				}
 			}
 
-			PortletURL commerceCheckoutPortletURL =
-				_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(request);
-
 			String checkoutURL = StringPool.BLANK;
+			String submitURL = StringPool.BLANK;
 
-			if (commerceCheckoutPortletURL != null) {
-				checkoutURL = String.valueOf(commerceCheckoutPortletURL);
+			if ((commerceOrder != null) &&
+				WorkflowDefinitionLinkLocalServiceUtil.
+					hasWorkflowDefinitionLink(
+						commerceOrder.getCompanyId(),
+						commerceOrder.getGroupId(),
+						CommerceOrder.class.getName(), 0,
+						CommerceOrderConstants.TYPE_PK_APPROVAL)) {
+
+				PortletURL commerceSubmitPortletURL =
+					_commerceOrderHttpHelper.getCommerceSubmitPortletURL(
+						request);
+
+				if (commerceSubmitPortletURL != null) {
+					submitURL = String.valueOf(commerceSubmitPortletURL);
+				}
+			}
+			else {
+				PortletURL commerceCheckoutPortletURL =
+					_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(
+						request);
+
+				if (commerceCheckoutPortletURL != null) {
+					checkoutURL = String.valueOf(commerceCheckoutPortletURL);
+				}
 			}
 
+			putValue("submitUrl", submitURL);
 			putValue("checkoutUrl", checkoutURL);
 
 			String detailsURL = StringPool.BLANK;

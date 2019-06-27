@@ -11,6 +11,7 @@
 	{@param? productsQuantity: int}
 	{@param? checkoutUrl: string}
 	{@param? discount: string}
+	{@param? submitUrl: string}
 	{@param? taxes: string}
 
 	<div class="commerce-cart__footer">
@@ -63,8 +64,12 @@
 			{/if}
 		{/let}
 
-		{if isNonnull($checkoutUrl)}
+		{if $checkoutUrl != ''}
 			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Checkout"}Checkout{/msg}</a>
+		{else}
+			{if $submitUrl != ''}
+				<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$submitUrl}">{msg desc="Submit"}Submit{/msg}</a>
+			{/if}
 		{/if}
 	</div>
 {/template}

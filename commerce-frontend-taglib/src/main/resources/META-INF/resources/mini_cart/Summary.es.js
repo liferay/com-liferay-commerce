@@ -12,6 +12,7 @@ Summary.STATE = {
 	itemsQuantity: Config.number(),
 	loading: Config.bool().value(false),
 	productsQuantity: Config.number(),
+	submitUrl: Config.string(),
 	subtotal: Config.string(),
 	taxes: Config.string(),
 	total: Config.string()

@@ -37,15 +37,18 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
@@ -203,6 +206,51 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		return _commerceOrderItemService.getCommerceOrderItemsQuantity(
 			commerceOrder.getCommerceOrderId());
+	}
+
+	@Override
+	public PortletURL getCommerceSubmitPortletURL(
+			HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		PortletURL portletURL = null;
+
+		if (_commerceOrderModelResourcePermission.contains(
+				PermissionThreadLocal.getPermissionChecker(),
+				getCurrentCommerceOrder(httpServletRequest),
+				ActionKeys.UPDATE)) {
+
+			portletURL = _portletURLFactory.create(
+				httpServletRequest,
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
+				PortletRequest.ACTION_PHASE);
+
+			portletURL.setParameter(
+				ActionRequest.ACTION_NAME, "editCommerceOrder");
+			portletURL.setParameter(Constants.CMD, "transition");
+			portletURL.setParameter("transitionName", "submit");
+
+			PortletURL redirectURL = _getPortletURL(
+				httpServletRequest,
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+			CommerceOrder commerceOrder = getCurrentCommerceOrder(
+				httpServletRequest);
+
+			long commerceOrderId = commerceOrder.getCommerceOrderId();
+
+			redirectURL.setParameter(
+				"mvcRenderCommandName", "editCommerceOrder");
+			redirectURL.setParameter(
+				"commerceOrderId", String.valueOf(commerceOrderId));
+
+			portletURL.setParameter("redirect", String.valueOf(redirectURL));
+
+			portletURL.setParameter(
+				"commerceOrderId", String.valueOf(commerceOrderId));
+		}
+
+		return portletURL;
 	}
 
 	@Override

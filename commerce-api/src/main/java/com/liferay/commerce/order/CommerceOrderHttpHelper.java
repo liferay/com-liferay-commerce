@@ -54,6 +54,10 @@ public interface CommerceOrderHttpHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException;
 
+	public PortletURL getCommerceSubmitPortletURL(
+			HttpServletRequest httpServletRequest)
+		throws PortalException;
+
 	public CommerceOrder getCurrentCommerceOrder(
 			HttpServletRequest httpServletRequest)
 		throws PortalException;
