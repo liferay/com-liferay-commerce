@@ -27,6 +27,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -129,13 +130,14 @@ public class OrderStockManagementTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
 		int quantity = 10;
 		int orderedQuantity = 4;
 
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
-			CommerceTestUtil.addCommerceInventoryWarehouseItem(
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_user.getUserId(), commerceInventoryWarehouse,
 				cpInstance.getSku(), quantity);
 
@@ -195,9 +197,10 @@ public class OrderStockManagementTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 
@@ -263,9 +266,10 @@ public class OrderStockManagementTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 
@@ -302,9 +306,10 @@ public class OrderStockManagementTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 

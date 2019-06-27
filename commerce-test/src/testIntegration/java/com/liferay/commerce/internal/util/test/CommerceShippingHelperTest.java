@@ -25,6 +25,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -66,7 +67,8 @@ public class CommerceShippingHelperTest {
 		_group = GroupTestUtil.addGroup();
 
 		_commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 	}
 
 	@Test
@@ -176,7 +178,7 @@ public class CommerceShippingHelperTest {
 
 		cpInstance.setPrice(price);
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			cpInstance.getUserId(), _commerceInventoryWarehouse,
 			cpInstance.getSku(), 10);
 	}
