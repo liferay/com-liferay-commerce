@@ -35,4 +35,7 @@ public interface MoneyOrderGroupServiceConfiguration {
 	@Meta.AD(name = "message", required = false)
 	public LocalizedValuesMap message();
 
+	@Meta.AD(name = "show-message-page", required = false)
+	public boolean showMessagePage();
+
 }
