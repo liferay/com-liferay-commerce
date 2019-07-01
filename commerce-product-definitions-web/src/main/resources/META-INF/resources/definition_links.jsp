@@ -26,7 +26,7 @@ String type = cpDefinitionLinkDisplayContext.getType();
 PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 %>
 
-<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
+<c:if test="<%= cpDefinitionLinkDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="cpDefinitionLinks"
@@ -56,7 +56,7 @@ PortletURL portletURL = cpDefinitionLinkDisplayContext.getPortletURL();
 				<aui:input name="type" type="hidden" value="<%= type %>" />
 			</aui:form>
 
-			<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
+			<c:if test="<%= cpDefinitionLinkDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
 				<liferay-frontend:add-menu
 					inline="<%= true %>"
 				>

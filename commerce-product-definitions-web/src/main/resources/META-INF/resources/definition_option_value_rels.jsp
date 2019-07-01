@@ -33,7 +33,7 @@ productOptionRelsURL.setParameter("cpDefinitionId", String.valueOf(cpDefinition.
 productOptionRelsURL.setParameter("screenNavigationCategoryKey", cpDefinitionOptionValueRelDisplayContext.getScreenNavigationCategoryKey());
 %>
 
-<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
+<c:if test="<%= cpDefinitionOptionValueRelDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="cpDefinitionOptionValueRels"
@@ -57,7 +57,7 @@ productOptionRelsURL.setParameter("screenNavigationCategoryKey", cpDefinitionOpt
 				<portlet:param name="cpDefinitionOptionRelId" value="<%= String.valueOf(cpDefinitionOptionRelId) %>" />
 			</liferay-portlet:renderURL>
 
-			<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
+			<c:if test="<%= cpDefinitionOptionValueRelDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE) %>">
 				<liferay-frontend:add-menu
 					inline="<%= true %>"
 				>
