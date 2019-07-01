@@ -22,7 +22,7 @@ CPDefinitionOptionRelDisplayContext cpDefinitionOptionRelDisplayContext = (CPDef
 CPDefinition cpDefinition = cpDefinitionOptionRelDisplayContext.getCPDefinition();
 %>
 
-<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
+<c:if test="<%= cpDefinitionOptionRelDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
 	<portlet:resourceURL id="cpDefinitionOptionRels" var="cpDefinitionOptionsURL">
 		<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinition.getCPDefinitionId()) %>" />
 	</portlet:resourceURL>
@@ -48,7 +48,7 @@ CPDefinition cpDefinition = cpDefinitionOptionRelDisplayContext.getCPDefinition(
 	context.put("cpDefinitionOptionValueRelsURL", cpDefinitionOptionValueRelsURL);
 	context.put("cpDefinitionOptionValueRelURL", cpDefinitionOptionValueRelURL);
 	context.put("editProductDefinitionOptionRelURL", editProductDefinitionOptionRelURL);
-	context.put("hasEditPermission", CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE));
+	context.put("hasEditPermission", cpDefinitionOptionRelDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE));
 	context.put("id", "CPDefinitionOptionsEditor");
 	context.put("namespace", liferayPortletResponse.getNamespace());
 	context.put("optionsItemSelectorURL", cpDefinitionOptionRelDisplayContext.getItemSelectorUrl());

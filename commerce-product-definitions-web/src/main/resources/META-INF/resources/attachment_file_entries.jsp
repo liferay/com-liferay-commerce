@@ -35,7 +35,7 @@ if (type == CPAttachmentFileEntryConstants.TYPE_OTHER) {
 PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 %>
 
-<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
+<c:if test="<%= cpAttachmentFileEntriesDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE) %>">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="cpAttachmentFileEntries"
