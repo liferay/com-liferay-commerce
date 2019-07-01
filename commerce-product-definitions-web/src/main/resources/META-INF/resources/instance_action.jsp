@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CPInstanceDisplayContext cpInstanceDisplayContext = (CPInstanceDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPInstance cpInstance = null;
@@ -36,7 +38,7 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpInstance.getCPDefinition(), ActionKeys.UPDATE) %>">
+	<c:if test="<%= cpInstanceDisplayContext.hasPermission(cpInstanceDisplayContext.getCommerceCatalog(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductInstance" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpInstance.getCPDefinitionId()) %>" />
