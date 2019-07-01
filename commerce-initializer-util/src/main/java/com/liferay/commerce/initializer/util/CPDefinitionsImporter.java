@@ -54,6 +54,7 @@ import com.liferay.commerce.service.CPDAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
 import com.liferay.commerce.util.comparator.CommerceAvailabilityEstimatePriorityComparator;
+import com.liferay.portal.json.JSONArrayImpl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -67,6 +68,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -188,10 +190,12 @@ public class CPDefinitionsImporter {
 			long catalogGroupId, String name, String shortDescription,
 			String description, String externalReferenceCode, String sku,
 			String taxCategory, long width, long height, long depth,
-			long weight, long[] assetCategoryIds, ServiceContext serviceContext)
+			long weight, long[] assetCategoryIds, String[] assetTagNames,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		User user = _userLocalService.getUser(serviceContext.getUserId());
 
@@ -322,6 +326,22 @@ public class CPDefinitionsImporter {
 				serviceContext.getUserId());
 		}
 
+		// Tags
+
+		JSONArray tagsJSONArray = jsonObject.getJSONArray("Tags");
+
+		if (tagsJSONArray != null) {
+			Company company = _companyLocalService.getCompany(
+				serviceContext.getCompanyId());
+
+			_assetTagsImporter.importAssetTags(
+				tagsJSONArray, company.getGroupId(),
+				serviceContext.getUserId());
+		}
+		else {
+			tagsJSONArray = new JSONArrayImpl();
+		}
+
 		// Commerce product definition
 
 		String name = jsonObject.getString("Name");
@@ -340,6 +360,8 @@ public class CPDefinitionsImporter {
 		long[] assetCategoryIds = ListUtil.toLongArray(
 			assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR);
 
+		String[] assetTagNames = ArrayUtil.toStringArray(tagsJSONArray);
+
 		int originalWorkflowAction = serviceContext.getWorkflowAction();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
@@ -347,7 +369,7 @@ public class CPDefinitionsImporter {
 		CPDefinition cpDefinition = _addCPDefinition(
 			catalogGroupId, name, shortDescription, description,
 			externalReferenceCode, sku, taxCategory, width, height, length,
-			weight, assetCategoryIds, serviceContext);
+			weight, assetCategoryIds, assetTagNames, serviceContext);
 
 		serviceContext.setWorkflowAction(originalWorkflowAction);
 
@@ -826,6 +848,9 @@ public class CPDefinitionsImporter {
 
 	@Reference
 	private AssetCategoriesImporter _assetCategoriesImporter;
+
+	@Reference
+	private AssetTagsImporter _assetTagsImporter;
 
 	@Reference
 	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;

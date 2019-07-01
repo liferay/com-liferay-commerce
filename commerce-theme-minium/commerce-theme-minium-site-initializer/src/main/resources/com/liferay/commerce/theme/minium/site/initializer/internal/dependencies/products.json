@@ -139,6 +139,9 @@
 				"Value": "4\" x 9.5\" x 2.5\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Weight": 1.75,
 		"Width": 9.5
@@ -180,6 +183,9 @@
 				"Key": "dimensions",
 				"Value": "4\" x 9.5\" x 2.5\""
 			}
+		],
+		"Tags": [
+			"featured"
 		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 60,
@@ -281,6 +287,9 @@
 				"Value": "6.2\" x 2.1\" x 8.7\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 40,
 		"Warehouse2": 40,
@@ -335,6 +344,9 @@
 				"Key": "dimensions",
 				"Value": "6.2\" x 2.1\" x 8.7\""
 			}
+		],
+		"Tags": [
+			"featured"
 		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 20,
