@@ -31,7 +31,7 @@ else {
 }
 %>
 
-<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinitionLinkDisplayContext.getCPDefinition(), ActionKeys.UPDATE) %>">
+<c:if test="<%= cpDefinitionLinkDisplayContext.hasPermission(cpDefinitionLinkDisplayContext.getCommerceCatalog(), ActionKeys.UPDATE) %>">
 	<liferay-ui:icon-menu
 		direction="left-side"
 		icon="<%= StringPool.BLANK %>"

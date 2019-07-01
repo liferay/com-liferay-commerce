@@ -23,6 +23,7 @@ import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
@@ -34,6 +35,7 @@ import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -58,6 +60,12 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(service = ActionHelper.class)
 public class ActionHelper {
+
+	public ModelResourcePermission<CommerceCatalog>
+		getCommerceCatalogModelResourcePermission() {
+
+		return _commerceCatalogModelResourcePermission;
+	}
 
 	public List<CPAttachmentFileEntry> getCPAttachmentFileEntries(
 			PortletRequest portletRequest)
@@ -462,6 +470,12 @@ public class ActionHelper {
 
 		return cpDefinition;
 	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
