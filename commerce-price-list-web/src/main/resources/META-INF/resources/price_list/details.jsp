@@ -125,6 +125,8 @@ if (parentCommercePriceList != null) {
 	/>
 </liferay-ui:search-container>
 
+<aui:button cssClass="mb-4" name="setParentCommercePriceList" value="select" />
+
 <h5 class="text-default"><liferay-ui:message key="account-groups" /></h5>
 
 <liferay-ui:search-container
