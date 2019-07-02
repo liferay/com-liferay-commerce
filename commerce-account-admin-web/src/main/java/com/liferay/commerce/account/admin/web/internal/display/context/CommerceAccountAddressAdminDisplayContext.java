@@ -215,13 +215,11 @@ public class CommerceAccountAddressAdminDisplayContext
 				commerceAccountAdminRequestHelper.getLiferayPortletResponse()));
 
 		int total = _commerceAddressService.getCommerceAddressesCount(
-			commerceAccountAdminRequestHelper.getScopeGroupId(),
 			CommerceAccount.class.getName(),
 			commerceAccount.getCommerceAccountId());
 
 		List<CommerceAddress> results =
 			_commerceAddressService.getCommerceAddresses(
-				commerceAccountAdminRequestHelper.getScopeGroupId(),
 				CommerceAccount.class.getName(),
 				commerceAccount.getCommerceAccountId(),
 				_searchContainer.getStart(), _searchContainer.getEnd(),
