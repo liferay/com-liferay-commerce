@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -62,7 +63,9 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CommerceAccountHelper commerceAccountHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
-			HttpServletRequest httpServletRequest)
+			HttpServletRequest httpServletRequest,
+			ModelResourcePermission<CommerceVirtualOrderItem>
+				modelResourcePermission)
 		throws PortalException {
 
 		_commerceVirtualOrderItemLocalService =
@@ -86,6 +89,9 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CommerceVirtualOrderItemContentPortletInstanceConfiguration.
 					class);
+
+		_commerceVirtualOrderItemModelResourcePermission =
+			modelResourcePermission;
 	}
 
 	public JournalArticleDisplay getArticleDisplay() throws Exception {
@@ -315,6 +321,16 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean hasPermission(
+			CommerceVirtualOrderItem commerceVirtualOrderItem, String actionId)
+		throws PortalException {
+
+		return _commerceVirtualOrderItemModelResourcePermission.contains(
+			_commerceVirtualOrderItemContentRequestHelper.
+				getPermissionChecker(),
+			commerceVirtualOrderItem, actionId);
+	}
+
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceAccount _commerceAccount;
 	private final CommerceAccountHelper _commerceAccountHelper;
@@ -324,6 +340,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_commerceVirtualOrderItemContentRequestHelper;
 	private final CommerceVirtualOrderItemLocalService
 		_commerceVirtualOrderItemLocalService;
+	private final ModelResourcePermission<CommerceVirtualOrderItem>
+		_commerceVirtualOrderItemModelResourcePermission;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final CPDefinitionVirtualSettingService
 		_cpDefinitionVirtualSettingService;
