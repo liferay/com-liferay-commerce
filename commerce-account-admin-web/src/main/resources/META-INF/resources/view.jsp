@@ -109,6 +109,16 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 						<portlet:param name="commerceAccountId" value="<%= String.valueOf(commerceAccount.getCommerceAccountId()) %>" />
 					</portlet:renderURL>
 
+					<%
+					long logoId = commerceAccount.getLogoId();
+					%>
+
+					<liferay-ui:search-container-column-image
+						colspan="1"
+						name="logo"
+						src='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=" + logoId + "&t=" + WebServerServletTokenUtil.getToken(logoId) %>'
+					/>
+
 					<liferay-ui:search-container-column-text
 						cssClass="important table-cell-content"
 						href="<%= rowURL %>"
