@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -199,6 +200,11 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 		long commerceInventoryWarehouseId = ParamUtil.getLong(
 			actionRequest, "commerceInventoryWarehouseId");
 
+		if (commerceInventoryWarehouseId == 0) {
+			commerceInventoryWarehouseId = GetterUtil.getLong(
+				actionRequest.getAttribute("commerceInventoryWarehouseId"));
+		}
+
 		long[] commerceChannelIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
 
@@ -210,10 +216,12 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 			commerceInventoryWarehouseId);
 
 		for (long commerceChannelId : commerceChannelIds) {
-			_commerceChannelRelService.addCommerceChannelRel(
-				CommerceInventoryWarehouse.class.getName(),
-				commerceInventoryWarehouseId, commerceChannelId,
-				serviceContext);
+			if (commerceChannelId != 0) {
+				_commerceChannelRelService.addCommerceChannelRel(
+					CommerceInventoryWarehouse.class.getName(),
+					commerceInventoryWarehouseId, commerceChannelId,
+					serviceContext);
+			}
 		}
 	}
 
@@ -251,6 +259,10 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 						name, description, active, street1, street2, street3,
 						city, zip, commerceRegionCode, commerceCountryCode,
 						latitude, longitude, null, serviceContext);
+
+			actionRequest.setAttribute(
+				"commerceInventoryWarehouseId",
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 		}
 		else {
 			commerceInventoryWarehouse =
