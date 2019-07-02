@@ -17,6 +17,7 @@ package com.liferay.commerce.product.type.virtual.order.content.web.internal.por
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
+import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.portlet.PortletConfig;
@@ -65,7 +67,7 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _commerceAccountHelper,
 						_cpDefinitionVirtualSettingService, _cpInstanceHelper,
-						httpServletRequest);
+						httpServletRequest, _modelResourcePermission);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -106,5 +108,11 @@ public class CommerceVirtualOrderItemContentConfigurationAction
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem)"
+	)
+	private ModelResourcePermission<CommerceVirtualOrderItem>
+		_modelResourcePermission;
 
 }
