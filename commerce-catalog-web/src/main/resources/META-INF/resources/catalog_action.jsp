@@ -24,6 +24,8 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 CommerceCatalog commerceCatalog = (CommerceCatalog)row.getObject();
 
 long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
+
+boolean hasUpdatePermissions = commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.UPDATE);
 %>
 
 <liferay-ui:icon-menu
@@ -34,7 +36,7 @@ long commerceCatalogId = commerceCatalog.getCommerceCatalogId();
 	showWhenSingleIcon="<%= true %>"
 >
 	<liferay-ui:icon
-		message='<%= commerceCatalogDisplayContext.hasPermission(commerceCatalogId, ActionKeys.UPDATE) ? "edit" : "view" %>'
+		message='<%= (hasUpdatePermissions && !commerceCatalog.isSystem()) ? "edit" : "view" %>'
 		url="<%= commerceCatalogDisplayContext.getCatalogURL(commerceCatalog) %>"
 	/>
 
