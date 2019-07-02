@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.catalog.web.internal.display.context;
 
+import com.liferay.commerce.catalog.web.internal.search.CommerceCatalogChecker;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -162,7 +163,7 @@ public abstract class BaseCommerceCatalogSearchContainerDisplayContext<T>
 
 	public RowChecker getRowChecker() {
 		if (_rowChecker == null) {
-			_rowChecker = new EmptyOnClickRowChecker(liferayPortletResponse);
+			_rowChecker = new CommerceCatalogChecker(liferayPortletResponse);
 		}
 
 		return _rowChecker;
