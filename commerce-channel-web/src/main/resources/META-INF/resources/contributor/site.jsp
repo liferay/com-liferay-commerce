@@ -92,8 +92,8 @@ if (commerceChannel != null) {
 			Liferay.Util.selectEntity(
 				{
 					dialog: {
-					constrain: true,
-					modal: true
+						constrain: true,
+						modal: true
 					},
 					eventName: 'sitesSelectItem',
 					title: '<liferay-ui:message arguments="site" key="select-x" />',
