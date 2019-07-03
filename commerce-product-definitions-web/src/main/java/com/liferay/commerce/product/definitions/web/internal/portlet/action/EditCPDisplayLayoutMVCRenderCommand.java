@@ -14,16 +14,16 @@
 
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
-import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.constants.CPWebKeys;
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionsDisplayContext;
+import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionDisplayLayoutDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
-import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.exception.NoSuchCPDisplayLayoutException;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.commerce.product.service.CPDisplayLayoutService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
@@ -33,46 +33,57 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
- * @author Marco Leo
  */
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + CPPortletKeys.CP_DEFINITIONS,
-		"mvc.command.name=editProductDefinition"
+		"javax.portlet.name=" + CommerceAdminPortletKeys.COMMERCE_ADMIN_GROUP_INSTANCE,
+		"mvc.command.name=editProductDisplayLayout"
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
+public class EditCPDisplayLayoutMVCRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(
+				"/edit_definition_display_page.jsp");
+
 		try {
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
+			HttpServletResponse httpServletResponse =
+				_portal.getHttpServletResponse(renderResponse);
 
-			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
-				new CPDefinitionsDisplayContext(
-					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionService);
+			CPDefinitionDisplayLayoutDisplayContext
+				cpDefinitionDisplayLayoutDisplayContext =
+					new CPDefinitionDisplayLayoutDisplayContext(
+						_actionHelper, httpServletRequest,
+						_commerceCatalogService, _cpDefinitionService,
+						_cpDisplayLayoutService, _itemSelector);
 
-			renderRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
+			httpServletRequest.setAttribute(
+				WebKeys.PORTLET_DISPLAY_CONTEXT,
+				cpDefinitionDisplayLayoutDisplayContext);
 
-			setCPDefinitionRequestAttribute(renderRequest);
+			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCPDefinitionException ||
+			if (e instanceof NoSuchCPDisplayLayoutException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass());
@@ -80,19 +91,11 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 				return "/error.jsp";
 			}
 
-			throw new PortletException(e);
+			throw new PortletException(
+				"Unable to include edit_definition_display_page.jsp", e);
 		}
 
-		return "/edit_definition.jsp";
-	}
-
-	protected void setCPDefinitionRequestAttribute(RenderRequest renderRequest)
-		throws PortalException {
-
-		CPDefinition cpDefinition = _actionHelper.getCPDefinition(
-			renderRequest);
-
-		renderRequest.setAttribute(CPWebKeys.CP_DEFINITION, cpDefinition);
+		return MVCRenderConstants.MVC_PATH_VALUE_SKIP_DISPATCH;
 	}
 
 	@Reference
@@ -105,6 +108,17 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
+	private CPDisplayLayoutService _cpDisplayLayoutService;
+
+	@Reference
+	private ItemSelector _itemSelector;
+
+	@Reference
 	private Portal _portal;
+
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"
+	)
+	private ServletContext _servletContext;
 
 }
