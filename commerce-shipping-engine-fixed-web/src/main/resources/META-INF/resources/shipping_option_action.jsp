@@ -31,27 +31,25 @@ CommerceShippingFixedOption commerceShippingFixedOption = (CommerceShippingFixed
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commerceShippingFixedOptionsDisplayContext.hasManageCommerceShipmentsPermission() %>">
-		<liferay-portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-			<portlet:param name="mvcRenderCommandName" value="editCommerceShippingFixedOption" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceShippingFixedOptionId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingFixedOptionId()) %>" />
-			<portlet:param name="commerceShippingMethodId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingMethodId()) %>" />
-		</liferay-portlet:renderURL>
+	<liferay-portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+		<portlet:param name="mvcRenderCommandName" value="editCommerceShippingFixedOption" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="commerceShippingFixedOptionId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingFixedOptionId()) %>" />
+		<portlet:param name="commerceShippingMethodId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingMethodId()) %>" />
+	</liferay-portlet:renderURL>
 
-		<liferay-ui:icon
-			message="edit"
-			url='<%= commerceShippingFixedOptionsDisplayContext.getEditURL("editCommerceShippingFixedOption", false, editURL) %>'
-		/>
+	<liferay-ui:icon
+		message="edit"
+		url='<%= commerceShippingFixedOptionsDisplayContext.getEditURL("editCommerceShippingFixedOption", false, editURL) %>'
+	/>
 
-		<portlet:actionURL name="editCommerceShippingFixedOption" var="deleteURL">
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceShippingFixedOptionId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingFixedOptionId()) %>" />
-		</portlet:actionURL>
+	<portlet:actionURL name="editCommerceShippingFixedOption" var="deleteURL">
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="commerceShippingFixedOptionId" value="<%= String.valueOf(commerceShippingFixedOption.getCommerceShippingFixedOptionId()) %>" />
+	</portlet:actionURL>
 
-		<liferay-ui:icon-delete
-			url="<%= deleteURL %>"
-		/>
-	</c:if>
+	<liferay-ui:icon-delete
+		url="<%= deleteURL %>"
+	/>
 </liferay-ui:icon-menu>
