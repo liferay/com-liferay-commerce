@@ -76,8 +76,11 @@ public class CPDisplayLayoutLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCPDisplayLayout(Class<?> clazz, long classPK) {
-		_cpDisplayLayoutLocalService.deleteCPDisplayLayout(clazz, classPK);
+	public com.liferay.commerce.product.model.CPDisplayLayout
+		deleteCPDisplayLayout(Class<?> clazz, long classPK) {
+
+		return _cpDisplayLayoutLocalService.deleteCPDisplayLayout(
+			clazz, classPK);
 	}
 
 	/**
@@ -402,6 +405,15 @@ public class CPDisplayLayoutLocalServiceWrapper
 
 		return _cpDisplayLayoutLocalService.updateCPDisplayLayout(
 			cpDisplayLayout);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPDisplayLayout
+			updateCPDisplayLayout(long cpDisplayLayoutId, String layoutUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpDisplayLayoutLocalService.updateCPDisplayLayout(
+			cpDisplayLayoutId, layoutUuid);
 	}
 
 	@Override
