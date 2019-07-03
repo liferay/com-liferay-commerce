@@ -97,6 +97,10 @@
 		"targetType": {
 			"store": true,
 			"type": "keyword"
+		},
+		"entryModelClassName": {
+			"store": true,
+			"type": "keyword"
 		}
 	}
 }
