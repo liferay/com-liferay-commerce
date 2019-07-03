@@ -70,6 +70,10 @@
 			"store": true,
 			"type": "integer"
 		},
+		"entryModelClassName": {
+			"store": true,
+			"type": "keyword"
+		},
 		"optionsNames": {
 			"store": true,
 			"type": "keyword"
@@ -95,10 +99,6 @@
 			"type": "keyword"
 		},
 		"targetType": {
-			"store": true,
-			"type": "keyword"
-		},
-		"entryModelClassName": {
 			"store": true,
 			"type": "keyword"
 		}
