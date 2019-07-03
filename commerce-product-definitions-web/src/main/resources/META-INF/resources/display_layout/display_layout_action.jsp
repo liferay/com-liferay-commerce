@@ -29,6 +29,17 @@ CPDisplayLayout cpDisplayLayout = (CPDisplayLayout)row.getObject();
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
+	<portlet:renderURL var="editURL">
+		<portlet:param name="mvcRenderCommandName" value="editProductDisplayLayout" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="cpDisplayLayoutId" value="<%= String.valueOf(cpDisplayLayout.getCPDisplayLayoutId()) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon
+		message="edit"
+		url="<%= editURL %>"
+	/>
+
 	<portlet:actionURL name="editProductDisplayLayout" var="deleteURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
