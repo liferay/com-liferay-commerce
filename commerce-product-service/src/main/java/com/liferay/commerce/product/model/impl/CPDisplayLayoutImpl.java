@@ -16,13 +16,57 @@ package com.liferay.commerce.product.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CPDisplayLayoutImpl extends CPDisplayLayoutBaseImpl {
 
 	public CPDisplayLayoutImpl() {
+	}
+
+	@Override
+	public AssetCategory fetchAssetCategory() {
+		String className = getClassName();
+
+		if (className.equals(AssetCategory.class.getName())) {
+			return AssetCategoryLocalServiceUtil.fetchAssetCategory(
+				getClassPK());
+		}
+
+		return null;
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinition() {
+		String className = getClassName();
+
+		if (className.equals(CPDefinition.class.getName())) {
+			return CPDefinitionLocalServiceUtil.fetchCPDefinition(getClassPK());
+		}
+
+		return null;
+	}
+
+	@Override
+	public Layout fetchLayout() {
+		Layout layout = LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
+			getLayoutUuid(), getGroupId(), false);
+
+		if (layout == null) {
+			layout = LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
+				getLayoutUuid(), getGroupId(), true);
+		}
+
+		return layout;
 	}
 
 }
