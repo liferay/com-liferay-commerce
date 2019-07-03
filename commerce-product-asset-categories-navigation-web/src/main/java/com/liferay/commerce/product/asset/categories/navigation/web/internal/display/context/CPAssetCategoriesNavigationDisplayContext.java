@@ -124,7 +124,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 				WebKeys.THEME_DISPLAY);
 
 		_assetVocabularies = _assetVocabularyService.getGroupVocabularies(
-			themeDisplay.getScopeGroupId());
+			themeDisplay.getCompanyGroupId());
 
 		return _assetVocabularies;
 	}
