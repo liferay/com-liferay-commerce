@@ -58,4 +58,10 @@ public interface CPDisplayLayout extends CPDisplayLayoutModel, PersistedModel {
 
 		};
 
+	public com.liferay.asset.kernel.model.AssetCategory fetchAssetCategory();
+
+	public CPDefinition fetchCPDefinition();
+
+	public com.liferay.portal.kernel.model.Layout fetchLayout();
+
 }

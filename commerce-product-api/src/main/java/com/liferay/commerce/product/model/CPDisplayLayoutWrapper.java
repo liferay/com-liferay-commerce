@@ -154,6 +154,21 @@ public class CPDisplayLayoutWrapper
 		return _cpDisplayLayout.compareTo(cpDisplayLayout);
 	}
 
+	@Override
+	public com.liferay.asset.kernel.model.AssetCategory fetchAssetCategory() {
+		return _cpDisplayLayout.fetchAssetCategory();
+	}
+
+	@Override
+	public CPDefinition fetchCPDefinition() {
+		return _cpDisplayLayout.fetchCPDefinition();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.model.Layout fetchLayout() {
+		return _cpDisplayLayout.fetchLayout();
+	}
+
 	/**
 	 * Returns the fully qualified class name of this cp display layout.
 	 *

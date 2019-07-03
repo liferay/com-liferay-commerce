@@ -75,8 +75,10 @@ public class CPDisplayLayoutLocalServiceUtil {
 		return getService().createCPDisplayLayout(CPDisplayLayoutId);
 	}
 
-	public static void deleteCPDisplayLayout(Class<?> clazz, long classPK) {
-		getService().deleteCPDisplayLayout(clazz, classPK);
+	public static com.liferay.commerce.product.model.CPDisplayLayout
+		deleteCPDisplayLayout(Class<?> clazz, long classPK) {
+
+		return getService().deleteCPDisplayLayout(clazz, classPK);
 	}
 
 	/**
@@ -370,6 +372,14 @@ public class CPDisplayLayoutLocalServiceUtil {
 				cpDisplayLayout) {
 
 		return getService().updateCPDisplayLayout(cpDisplayLayout);
+	}
+
+	public static com.liferay.commerce.product.model.CPDisplayLayout
+			updateCPDisplayLayout(long cpDisplayLayoutId, String layoutUuid)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCPDisplayLayout(
+			cpDisplayLayoutId, layoutUuid);
 	}
 
 	public static CPDisplayLayoutLocalService getService() {
