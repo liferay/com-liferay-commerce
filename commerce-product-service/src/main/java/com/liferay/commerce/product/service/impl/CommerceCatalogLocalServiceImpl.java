@@ -197,7 +197,7 @@ public class CommerceCatalogLocalServiceImpl
 
 	@Override
 	public CommerceCatalog fetchCommerceCatalogByGroupId(long groupId) {
-		Group group = groupPersistence.fetchByPrimaryKey(groupId);
+		Group group = groupLocalService.fetchGroup(groupId);
 
 		if ((group != null) &&
 			(group.getClassNameId() == classNameLocalService.getClassNameId(
