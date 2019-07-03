@@ -22,13 +22,11 @@ import javax.portlet.PortletResponse;
 /**
  * @author Alec Sloan
  */
-public class CommerceCatalogChecker
-	extends EmptyOnClickRowChecker {
+public class CommerceCatalogChecker extends EmptyOnClickRowChecker {
 
 	public CommerceCatalogChecker(PortletResponse portletResponse) {
 		super(portletResponse);
 	}
-
 
 	@Override
 	public boolean isDisabled(Object obj) {
@@ -36,6 +34,5 @@ public class CommerceCatalogChecker
 
 		return commerceCatalog.isSystem();
 	}
-
 
 }
