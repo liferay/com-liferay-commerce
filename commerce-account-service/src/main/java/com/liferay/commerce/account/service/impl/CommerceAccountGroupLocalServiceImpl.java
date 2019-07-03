@@ -157,6 +157,11 @@ public class CommerceAccountGroupLocalServiceImpl
 			deleteCommerceAccountGroupCommerceAccountRelByCAccountGroupId(
 				commerceAccountGroup.getCommerceAccountGroupId());
 
+		// Commerce account group generic rels
+
+		commerceAccountGroupRelLocalService.deleteCommerceAccountGroupRels(
+			commerceAccountGroup.getCommerceAccountGroupId());
+
 		// Commerce account group
 
 		commerceAccountGroupPersistence.remove(commerceAccountGroup);
