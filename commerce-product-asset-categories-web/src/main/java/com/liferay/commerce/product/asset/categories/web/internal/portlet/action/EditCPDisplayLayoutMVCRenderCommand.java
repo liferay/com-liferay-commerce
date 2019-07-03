@@ -59,7 +59,7 @@ public class EditCPDisplayLayoutMVCRenderCommand implements MVCRenderCommand {
 
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher(
-				"/edit_category_display_page.jsp");
+				"/display_layout/edit_category_display_page.jsp");
 
 		try {
 			HttpServletRequest httpServletRequest =

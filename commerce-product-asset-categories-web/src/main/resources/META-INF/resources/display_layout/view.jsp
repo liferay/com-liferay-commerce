@@ -102,7 +102,7 @@ PortletURL portletURL = categoryCPDisplayLayoutDisplayContext.getPortletURL();
 
 					<liferay-ui:search-container-column-jsp
 						cssClass="entry-action-column"
-						path="/display_layout_action.jsp"
+						path="/display_layout/display_layout_action.jsp"
 					/>
 				</liferay-ui:search-container-row>
 
