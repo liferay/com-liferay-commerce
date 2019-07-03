@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -44,7 +45,6 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-import com.liferay.portal.kernel.util.Validator;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -65,8 +65,8 @@ public class CPDisplayLayoutIndexer extends BaseIndexer<CPDisplayLayout> {
 	public CPDisplayLayoutIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID);
-		setFilterSearch(true);
-		setPermissionAware(true);
+		setFilterSearch(false);
+		setPermissionAware(false);
 	}
 
 	@Override
