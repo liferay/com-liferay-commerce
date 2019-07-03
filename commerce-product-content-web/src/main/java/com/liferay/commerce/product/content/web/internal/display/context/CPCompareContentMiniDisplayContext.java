@@ -153,9 +153,10 @@ public class CPCompareContentMiniDisplayContext {
 		}
 
 		for (Long cpDefinitionId : _cpDefinitionIds) {
-			_cpDefinitionHelper.getCPCatalogEntry(
-				commerceAccountId, commerceContext.getCommerceChannelGroupId(),
-				cpDefinitionId, _cpRequestHelper.getLocale());
+			cpCatalogEntries.add(
+				_cpDefinitionHelper.getCPCatalogEntry(
+					commerceAccountId, commerceContext.getCommerceChannelGroupId(),
+					cpDefinitionId, _cpRequestHelper.getLocale()));
 		}
 
 		if (cpCatalogEntries.size() > getProductsLimit()) {
