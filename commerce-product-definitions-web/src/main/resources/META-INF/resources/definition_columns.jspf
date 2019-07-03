@@ -51,7 +51,7 @@ CommerceCatalog commerceCatalog = cpDefinitionsDisplayContext.fetchCommerceCatal
 <liferay-ui:search-container-column-text
 	cssClass="table-cell-content"
 	name="sku"
-	value="<%= cpDefinitionDisplayLayoutDisplayContext.getSku(cpDefinition, locale) %>"
+	value="<%= cpDefinitionsDisplayContext.getSku(cpDefinition, locale) %>"
 />
 
 <liferay-ui:search-container-column-text

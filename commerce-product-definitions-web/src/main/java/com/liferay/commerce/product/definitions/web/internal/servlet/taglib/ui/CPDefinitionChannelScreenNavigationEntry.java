@@ -25,7 +25,6 @@ import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
-import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -119,7 +118,7 @@ public class CPDefinitionChannelScreenNavigationEntry
 		CPDefinitionChannelDisplayContext cpDefinitionChannelDisplayContext =
 			new CPDefinitionChannelDisplayContext(
 				_actionHelper, httpServletRequest, _commerceCatalogService,
-				_cpDefinitionService, _itemSelector, _commerceChannelRelService,
+				_cpDefinitionService, _commerceChannelRelService,
 				_commerceChannelService);
 
 		httpServletRequest.setAttribute(
@@ -153,9 +152,6 @@ public class CPDefinitionChannelScreenNavigationEntry
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private ItemSelector _itemSelector;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
