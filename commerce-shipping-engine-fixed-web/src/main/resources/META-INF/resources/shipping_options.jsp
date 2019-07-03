@@ -21,8 +21,6 @@ CommerceShippingFixedOptionsDisplayContext commerceShippingFixedOptionsDisplayCo
 
 CommerceShippingMethod commerceShippingMethod = commerceShippingFixedOptionsDisplayContext.getCommerceShippingMethod();
 SearchContainer<CommerceShippingFixedOption> commerceShippingFixedOptionSearchContainer = commerceShippingFixedOptionsDisplayContext.getSearchContainer();
-
-boolean hasManageCommerceShippingMethodsPermission = commerceShippingFixedOptionsDisplayContext.hasManageCommerceShipmentsPermission();
 %>
 
 <liferay-frontend:management-bar
@@ -50,36 +48,32 @@ boolean hasManageCommerceShippingMethodsPermission = commerceShippingFixedOption
 			selectedDisplayStyle="list"
 		/>
 
-		<c:if test="<%= hasManageCommerceShippingMethodsPermission %>">
-			<liferay-portlet:renderURL var="addCommerceShippingFixedOptionURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-				<portlet:param name="mvcRenderCommandName" value="editCommerceShippingFixedOption" />
-				<portlet:param name="commerceShippingMethodId" value="<%= String.valueOf(commerceShippingFixedOptionsDisplayContext.getCommerceShippingMethodId()) %>" />
-			</liferay-portlet:renderURL>
+		<liferay-portlet:renderURL var="addCommerceShippingFixedOptionURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="mvcRenderCommandName" value="editCommerceShippingFixedOption" />
+			<portlet:param name="commerceShippingMethodId" value="<%= String.valueOf(commerceShippingFixedOptionsDisplayContext.getCommerceShippingMethodId()) %>" />
+		</liferay-portlet:renderURL>
 
-			<%
-			String url = commerceShippingFixedOptionsDisplayContext.getEditURL("editCommerceShippingFixedOption", true, addCommerceShippingFixedOptionURL);
-			%>
+		<%
+		String url = commerceShippingFixedOptionsDisplayContext.getEditURL("editCommerceShippingFixedOption", true, addCommerceShippingFixedOptionURL);
+		%>
 
-			<liferay-frontend:add-menu
-				inline="<%= true %>"
-			>
-				<liferay-frontend:add-menu-item
-					title='<%= LanguageUtil.get(resourceBundle, "add-shipping-option") %>'
-					url="<%= url %>"
-				/>
-			</liferay-frontend:add-menu>
-		</c:if>
+		<liferay-frontend:add-menu
+			inline="<%= true %>"
+		>
+			<liferay-frontend:add-menu-item
+				title='<%= LanguageUtil.get(resourceBundle, "add-shipping-option") %>'
+				url="<%= url %>"
+			/>
+		</liferay-frontend:add-menu>
 	</liferay-frontend:management-bar-buttons>
 
-	<c:if test="<%= hasManageCommerceShippingMethodsPermission %>">
-		<liferay-frontend:management-bar-action-buttons>
-			<liferay-frontend:management-bar-button
-				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceShippingFixedOptions();" %>'
-				icon="times"
-				label="delete"
-			/>
-		</liferay-frontend:management-bar-action-buttons>
-	</c:if>
+	<liferay-frontend:management-bar-action-buttons>
+		<liferay-frontend:management-bar-button
+			href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceShippingFixedOptions();" %>'
+			icon="times"
+			label="delete"
+		/>
+	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
 <portlet:actionURL name="editCommerceShippingFixedOption" var="editCommerceShippingFixedOptionActionURL" />
