@@ -218,6 +218,9 @@ public class CPSearchResultsPortlet
 		SearchContext searchContext =
 			portletSharedSearchSettings.getSearchContext();
 
+		searchContext.setEntryClassNames(
+			new String[] {CPDefinition.class.getName()});
+
 		searchContext.setAttribute(
 			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
 
