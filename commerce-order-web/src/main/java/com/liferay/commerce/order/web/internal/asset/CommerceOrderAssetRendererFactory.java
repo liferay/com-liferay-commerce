@@ -22,10 +22,10 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 
 import javax.servlet.ServletContext;
 
-import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 

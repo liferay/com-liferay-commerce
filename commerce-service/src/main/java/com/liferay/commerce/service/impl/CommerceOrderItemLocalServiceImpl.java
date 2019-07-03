@@ -541,7 +541,10 @@ public class CommerceOrderItemLocalServiceImpl
 			QueryUtil.ALL_POS);
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			if (json.equals(commerceOrderItem.getJson()) || (json.equals("[]")  && Validator.isBlank(commerceOrderItem.getJson()))) {
+			if (json.equals(commerceOrderItem.getJson()) ||
+				(json.equals("[]") &&
+				 Validator.isBlank(commerceOrderItem.getJson()))) {
+
 				return commerceOrderItemLocalService.updateCommerceOrderItem(
 					commerceOrderItem.getCommerceOrderItemId(),
 					commerceOrderItem.getQuantity() + quantity,

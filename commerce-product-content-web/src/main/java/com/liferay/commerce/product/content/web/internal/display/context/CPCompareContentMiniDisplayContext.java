@@ -155,8 +155,9 @@ public class CPCompareContentMiniDisplayContext {
 		for (Long cpDefinitionId : _cpDefinitionIds) {
 			cpCatalogEntries.add(
 				_cpDefinitionHelper.getCPCatalogEntry(
-					commerceAccountId, commerceContext.getCommerceChannelGroupId(),
-					cpDefinitionId, _cpRequestHelper.getLocale()));
+					commerceAccountId,
+					commerceContext.getCommerceChannelGroupId(), cpDefinitionId,
+					_cpRequestHelper.getLocale()));
 		}
 
 		if (cpCatalogEntries.size() > getProductsLimit()) {

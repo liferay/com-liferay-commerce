@@ -15,7 +15,6 @@
 package com.liferay.commerce.catalog.web.internal.display.context;
 
 import com.liferay.commerce.catalog.web.internal.search.CommerceCatalogChecker;
-import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
