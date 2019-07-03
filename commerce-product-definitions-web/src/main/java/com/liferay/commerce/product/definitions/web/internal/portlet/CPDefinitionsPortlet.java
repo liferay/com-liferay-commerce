@@ -19,7 +19,6 @@ import com.liferay.commerce.product.definitions.web.internal.display.context.CPD
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
-import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -94,7 +93,7 @@ public class CPDefinitionsPortlet extends MVCPortlet {
 		CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
 			new CPDefinitionsDisplayContext(
 				_actionHelper, httpServletRequest, _commerceCatalogService,
-				_cpDefinitionService, _itemSelector);
+				_cpDefinitionService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
@@ -110,9 +109,6 @@ public class CPDefinitionsPortlet extends MVCPortlet {
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private ItemSelector _itemSelector;
 
 	@Reference
 	private Portal _portal;

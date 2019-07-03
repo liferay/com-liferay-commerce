@@ -24,7 +24,6 @@ import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
-import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -115,7 +114,7 @@ public class CPDefinitionCategorizationScreenNavigationEntry
 		CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
 			new CPDefinitionsDisplayContext(
 				_actionHelper, httpServletRequest, _commerceCatalogService,
-				_cpDefinitionService, _itemSelector);
+				_cpDefinitionService);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
@@ -142,9 +141,6 @@ public class CPDefinitionCategorizationScreenNavigationEntry
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private ItemSelector _itemSelector;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
