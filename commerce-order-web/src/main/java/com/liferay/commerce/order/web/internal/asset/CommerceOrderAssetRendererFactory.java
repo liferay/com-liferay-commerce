@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.servlet.ServletContext;
 
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -51,7 +52,12 @@ public class CommerceOrderAssetRendererFactory
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException {
 
-		return null;
+		AssetEntryImpl assetEntry = new AssetEntryImpl();
+
+		assetEntry.setClassName(className);
+		assetEntry.setClassPK(classPK);
+
+		return assetEntry;
 	}
 
 	@Override
