@@ -99,6 +99,10 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 
 		registry.register(
 			_SCHEMA_VERSION_3_1_0, _SCHEMA_VERSION_3_2_0,
+			new com.liferay.commerce.internal.upgrade.v3_2_0.
+				CommerceOrderUpgradeProcess(),
+			new com.liferay.commerce.internal.upgrade.v3_2_0.
+				CommerceOrderItemUpgradeProcess(),
 			new CommerceAvailabilityEstimateUpgradeProcess(),
 			new CommerceCountryUpgradeProcess(),
 			new CommerceRegionUpgradeProcess(),
