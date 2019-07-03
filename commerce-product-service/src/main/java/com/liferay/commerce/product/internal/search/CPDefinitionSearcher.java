@@ -50,6 +50,7 @@ public class CPDefinitionSearcher extends BaseSearcher {
 		setDefaultSelectedFieldNames(
 			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID, Field.NAME,
 			Field.DESCRIPTION, Field.URL,
+			CPDefinitionIndexer.FIELD_SHORT_DESCRIPTION,
 			CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL,
 			CPDefinitionIndexer.FIELD_DEPTH, CPDefinitionIndexer.FIELD_HEIGHT,
 			CPDefinitionIndexer.FIELD_IS_IGNORE_SKU_COMBINATIONS,
