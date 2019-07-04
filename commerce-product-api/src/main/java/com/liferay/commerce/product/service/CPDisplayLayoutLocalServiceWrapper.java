@@ -38,9 +38,10 @@ public class CPDisplayLayoutLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.product.model.CPDisplayLayout
-		addCPDisplayLayout(
-			Class<?> clazz, long classPK, String layoutUuid,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext) {
+			addCPDisplayLayout(
+				Class<?> clazz, long classPK, String layoutUuid,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpDisplayLayoutLocalService.addCPDisplayLayout(
 			clazz, classPK, layoutUuid, serviceContext);
