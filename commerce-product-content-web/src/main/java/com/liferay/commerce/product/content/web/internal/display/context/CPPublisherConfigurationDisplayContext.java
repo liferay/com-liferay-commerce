@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -175,7 +176,7 @@ public class CPPublisherConfigurationDisplayContext
 					"queryTagNames" + queryLogicIndex, queryValues);
 
 				queryValues = filterAssetTagNames(
-					themeDisplay.getScopeGroupId(), queryValues);
+					themeDisplay.getCompanyGroupId(), queryValues);
 			}
 			else {
 				queryValues = ParamUtil.getString(
@@ -337,9 +338,12 @@ public class CPPublisherConfigurationDisplayContext
 
 			portletURL.setParameter(
 				"eventName", _getPortletNamespace() + "selectTag");
+
+			Company company = cpContentRequestHelper.getCompany();
+
 			portletURL.setParameter(
-				"groupIds",
-				String.valueOf(cpContentRequestHelper.getScopeGroupId()));
+				"groupIds", String.valueOf(company.getGroupId()));
+
 			portletURL.setParameter("selectedTagNames", "{selectedTagNames}");
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
