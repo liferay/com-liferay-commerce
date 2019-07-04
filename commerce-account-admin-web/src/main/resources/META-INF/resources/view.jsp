@@ -114,7 +114,7 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 					%>
 
 					<liferay-ui:search-container-column-image
-						colspan="1"
+						colspan="<%= 1 %>"
 						name="logo"
 						src='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=" + logoId + "&t=" + WebServerServletTokenUtil.getToken(logoId) %>'
 					/>
