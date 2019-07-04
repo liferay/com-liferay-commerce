@@ -29,24 +29,26 @@ CPDisplayLayout cpDisplayLayout = (CPDisplayLayout)row.getObject();
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcRenderCommandName" value="editCategoryDisplayLayout" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpDisplayLayoutId" value="<%= String.valueOf(cpDisplayLayout.getCPDisplayLayoutId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_LAYOUT) %>">
+		<portlet:renderURL var="editURL">
+			<portlet:param name="mvcRenderCommandName" value="editCategoryDisplayLayout" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDisplayLayoutId" value="<%= String.valueOf(cpDisplayLayout.getCPDisplayLayoutId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editURL %>"
-	/>
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editURL %>"
+		/>
 
-	<portlet:actionURL name="editCategoryDisplayLayout" var="deleteURL">
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="cpDisplayLayoutId" value="<%= String.valueOf(cpDisplayLayout.getCPDisplayLayoutId()) %>" />
-	</portlet:actionURL>
+		<portlet:actionURL name="editCategoryDisplayLayout" var="deleteURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="cpDisplayLayoutId" value="<%= String.valueOf(cpDisplayLayout.getCPDisplayLayoutId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete
-		url="<%= deleteURL %>"
-	/>
+		<liferay-ui:icon-delete
+			url="<%= deleteURL %>"
+		/>
+	</c:if>
 </liferay-ui:icon-menu>
