@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.channel.web.display.context;
+package com.liferay.commerce.channel.web.internal.display.context;
 
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.portal.kernel.exception.PortalException;
