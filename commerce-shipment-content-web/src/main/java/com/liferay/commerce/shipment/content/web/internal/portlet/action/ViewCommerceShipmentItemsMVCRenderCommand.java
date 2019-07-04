@@ -16,6 +16,7 @@ package com.liferay.commerce.shipment.content.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalService;
 import com.liferay.commerce.service.CommerceShipmentLocalService;
 import com.liferay.commerce.shipment.content.web.internal.display.context.CommerceShipmentContentDisplayContext;
@@ -52,7 +53,8 @@ public class ViewCommerceShipmentItemsMVCRenderCommand
 		CommerceShipmentContentDisplayContext
 			commerceShipmentContentDisplayContext =
 				new CommerceShipmentContentDisplayContext(
-					_commerceOrderHttpHelper, _commerceShipmentItemLocalService,
+					_commerceChannelLocalService, _commerceOrderHttpHelper,
+					_commerceShipmentItemLocalService,
 					_commerceShipmentLocalService,
 					_commerceShippingEngineRegistry, renderRequest);
 
@@ -62,6 +64,9 @@ public class ViewCommerceShipmentItemsMVCRenderCommand
 
 		return "/view_shipment_items.jsp";
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
