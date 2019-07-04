@@ -65,8 +65,9 @@ public interface CPDisplayLayoutLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDisplayLayout addCPDisplayLayout(
-		Class<?> clazz, long classPK, String layoutUuid,
-		ServiceContext serviceContext);
+			Class<?> clazz, long classPK, String layoutUuid,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Adds the cp display layout to the database. Also notifies the appropriate model listeners.

@@ -41,9 +41,10 @@ public class CPDisplayLayoutLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDisplayLayoutLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.commerce.product.model.CPDisplayLayout
-		addCPDisplayLayout(
-			Class<?> clazz, long classPK, String layoutUuid,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext) {
+			addCPDisplayLayout(
+				Class<?> clazz, long classPK, String layoutUuid,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPDisplayLayout(
 			clazz, classPK, layoutUuid, serviceContext);
