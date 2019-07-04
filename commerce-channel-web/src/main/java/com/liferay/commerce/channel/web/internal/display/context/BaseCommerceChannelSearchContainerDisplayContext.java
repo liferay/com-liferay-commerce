@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.channel.web.display.context;
+package com.liferay.commerce.channel.web.internal.display.context;
 
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
