@@ -1402,8 +1402,11 @@ public class CPDefinitionLocalServiceImpl
 
 		// Asset
 
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			serviceContext.getCompanyId());
+
 		assetEntryLocalService.updateEntry(
-			serviceContext.getUserId(), cpDefinition.getGroupId(),
+			serviceContext.getUserId(), companyGroup.getGroupId(),
 			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());

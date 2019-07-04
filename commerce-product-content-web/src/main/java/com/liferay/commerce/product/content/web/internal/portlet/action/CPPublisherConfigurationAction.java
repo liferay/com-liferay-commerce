@@ -372,7 +372,7 @@ public class CPPublisherConfigurationAction extends DefaultConfigurationAction {
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getSiteGroupId();
+		long groupId = themeDisplay.getCompanyGroupId();
 
 		int[] queryRulesIndexes = StringUtil.split(
 			ParamUtil.getString(actionRequest, "queryLogicIndexes"), 0);
