@@ -213,7 +213,7 @@ public class CPDisplayLayoutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CPDisplayLayoutServiceUtil.class, "updateCPDisplayLayout",
-				_updateCPDisplayLayoutParameterTypes4);
+				_updateCPDisplayLayoutParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, cpDisplayLayoutId, layoutUuid);
@@ -259,7 +259,7 @@ public class CPDisplayLayoutServiceHttp {
 		new Class[] {long.class};
 	private static final Class<?>[] _fetchCPDisplayLayoutParameterTypes3 =
 		new Class[] {long.class};
-	private static final Class<?>[] _updateCPDisplayLayoutParameterTypes4 =
+	private static final Class<?>[] _updateCPDisplayLayoutParameterTypes5 =
 		new Class[] {long.class, String.class};
 
 }
