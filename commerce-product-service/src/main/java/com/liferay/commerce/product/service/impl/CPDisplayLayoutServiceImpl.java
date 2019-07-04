@@ -21,10 +21,13 @@ import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CPDisplayLayoutServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.permission.GroupPermissionUtil;
+import com.liferay.portal.kernel.service.permission.LayoutPermissionUtil;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
 /**
@@ -38,7 +41,11 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_checkPermissionByC_C(clazz.getName(), classPK, ActionKeys.UPDATE);
+		GroupPermissionUtil.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_LAYOUT);
+
+		_checkPermissionByC_C(clazz.getName(), classPK, ActionKeys.VIEW);
 
 		return cpDisplayLayoutLocalService.addCPDisplayLayout(
 			clazz, classPK, layoutUuid, serviceContext);
@@ -48,9 +55,22 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 	public void deleteCPDisplayLayout(Class<?> clazz, long classPK)
 		throws PortalException {
 
-		_checkPermissionByC_C(clazz.getName(), classPK, ActionKeys.UPDATE);
+		CPDisplayLayout cpDisplayLayout =
+			cpDisplayLayoutLocalService.fetchCPDisplayLayout(clazz, classPK);
 
-		cpDisplayLayoutLocalService.deleteCPDisplayLayout(clazz, classPK);
+		if (cpDisplayLayout == null) {
+			return;
+		}
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), cpDisplayLayout.getGroupId(),
+			ActionKeys.ADD_LAYOUT);
+
+		_checkPermissionByC_C(
+			cpDisplayLayout.getClassName(), cpDisplayLayout.getClassPK(),
+			ActionKeys.VIEW);
+
+		cpDisplayLayoutLocalService.deleteCPDisplayLayout(cpDisplayLayout);
 	}
 
 	@Override
@@ -59,6 +79,10 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 
 		CPDisplayLayout cpDisplayLayout =
 			cpDisplayLayoutLocalService.getCPDisplayLayout(cpDisplayLayoutId);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), cpDisplayLayout.getGroupId(),
+			ActionKeys.ADD_LAYOUT);
 
 		_checkPermissionByC_C(
 			cpDisplayLayout.getClassName(), cpDisplayLayout.getClassPK(),
@@ -75,6 +99,10 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 			cpDisplayLayoutLocalService.fetchCPDisplayLayout(cpDisplayLayoutId);
 
 		if (cpDisplayLayout != null) {
+			LayoutPermissionUtil.check(
+				getPermissionChecker(), _getLayout(cpDisplayLayout),
+				ActionKeys.VIEW);
+
 			_checkPermissionByC_C(
 				cpDisplayLayout.getClassName(), cpDisplayLayout.getClassPK(),
 				ActionKeys.VIEW);
@@ -91,9 +119,13 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 		CPDisplayLayout cpDisplayLayout =
 			cpDisplayLayoutLocalService.getCPDisplayLayout(cpDisplayLayoutId);
 
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), _getLayout(cpDisplayLayout),
+			ActionKeys.UPDATE);
+
 		_checkPermissionByC_C(
 			cpDisplayLayout.getClassName(), cpDisplayLayout.getClassPK(),
-			ActionKeys.UPDATE);
+			ActionKeys.VIEW);
 
 		return cpDisplayLayoutLocalService.updateCPDisplayLayout(
 			cpDisplayLayout.getCPDisplayLayoutId(), layoutUuid);
@@ -122,6 +154,20 @@ public class CPDisplayLayoutServiceImpl extends CPDisplayLayoutServiceBaseImpl {
 			AssetCategoryPermission.check(
 				getPermissionChecker(), classPK, actionId);
 		}
+	}
+
+	private Layout _getLayout(CPDisplayLayout cpDisplayLayout) {
+		Layout layout = layoutLocalService.fetchLayout(
+			cpDisplayLayout.getLayoutUuid(), cpDisplayLayout.getGroupId(),
+			false);
+
+		if (layout != null) {
+			return layout;
+		}
+
+		return layoutLocalService.fetchLayout(
+			cpDisplayLayout.getLayoutUuid(), cpDisplayLayout.getGroupId(),
+			true);
 	}
 
 	private static volatile ModelResourcePermission<CommerceCatalog>
