@@ -15,11 +15,16 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
+import com.liferay.commerce.product.exception.CPDisplayLayoutEntryException;
+import com.liferay.commerce.product.exception.CPDisplayLayoutLayoutUuidException;
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.exception.NoSuchCPDisplayLayoutException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.CPDisplayLayoutService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -32,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -48,6 +54,20 @@ import org.osgi.service.component.annotations.Reference;
 	service = MVCActionCommand.class
 )
 public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
+
+	@Override
+	public boolean processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws PortletException {
+
+		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
+				new ProxyModeThreadLocalCloseable()) {
+
+			ProxyModeThreadLocal.setForceSync(true);
+
+			return super.processAction(actionRequest, actionResponse);
+		}
+	}
 
 	protected void deleteCPDisplayLayouts(ActionRequest actionRequest)
 		throws Exception {
@@ -88,12 +108,21 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCPDisplayLayoutException ||
+			if (e instanceof NoSuchCPDefinitionException ||
+				e instanceof NoSuchCPDisplayLayoutException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+			}
+			else if (e instanceof CPDisplayLayoutEntryException ||
+					 e instanceof CPDisplayLayoutLayoutUuidException) {
+
+				SessionErrors.add(actionRequest, e.getClass());
+
+				actionResponse.setRenderParameter(
+					"mvcRenderCommandName", "editProductDisplayLayout");
 			}
 		}
 	}

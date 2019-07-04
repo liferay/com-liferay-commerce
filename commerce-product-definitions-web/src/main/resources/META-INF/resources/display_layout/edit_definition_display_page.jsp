@@ -69,6 +69,9 @@ if (Validator.isNotNull(layoutUuid)) {
 	<aui:input name="redirect" type="hidden" value="<%= backURL %>" />
 	<aui:input name="classPK" type="hidden" value="<%= (cpDisplayLayout == null) ? 0 : cpDisplayLayout.getClassPK() %>" />
 
+	<liferay-ui:error exception="<%= CPDisplayLayoutEntryException.class %>" message="please-select-a-valid-product" />
+	<liferay-ui:error exception="<%= CPDisplayLayoutLayoutUuidException.class %>" message="please-select-a-valid-layout" />
+
 	<aui:model-context bean="<%= cpDisplayLayout %>" model="<%= CPDisplayLayout.class %>" />
 
 	<aui:fieldset-group markupView="lexicon">
