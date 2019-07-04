@@ -57,7 +57,7 @@ public class CPDefinitionAccountGroupDisplayContext
 	public CPDefinitionAccountGroupDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCatalogService commerceCatalogService,
-		CPDefinitionService cpDefinitionService,
+		CPDefinitionService cpDefinitionService, ItemSelector itemSelector,
 		CommerceAccountGroupRelService commerceAccountGroupRelService,
 		CommerceAccountGroupService commerceAccountGroupService) {
 

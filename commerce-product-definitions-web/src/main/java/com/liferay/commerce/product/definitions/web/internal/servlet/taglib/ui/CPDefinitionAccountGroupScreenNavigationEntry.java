@@ -25,6 +25,7 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
+import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -119,7 +120,8 @@ public class CPDefinitionAccountGroupScreenNavigationEntry
 			cpDefinitionAccountGroupDisplayContext =
 				new CPDefinitionAccountGroupDisplayContext(
 					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionService, _commerceAccountGroupRelService,
+					_cpDefinitionService, _itemSelector,
+					_commerceAccountGroupRelService,
 					_commerceAccountGroupService);
 
 		httpServletRequest.setAttribute(
@@ -154,6 +156,9 @@ public class CPDefinitionAccountGroupScreenNavigationEntry
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
+	private ItemSelector _itemSelector;
 
 	@Reference
 	private JSPRenderer _jspRenderer;
