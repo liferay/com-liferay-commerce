@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrderListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceOrderItem commerceOrderItem = (CommerceOrderItem)row.getObject();
@@ -29,7 +31,7 @@ CommerceOrderItem commerceOrderItem = (CommerceOrderItem)row.getObject();
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= CommerceOrderPermission.contains(permissionChecker, commerceOrderItem.getCommerceOrderId(), ActionKeys.UPDATE) %>">
+	<c:if test="<%= commerceOrderListDisplayContext.hasPermission(commerceOrderItem.getCommerceOrderId(), ActionKeys.UPDATE) %>">
 		<liferay-portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editCommerceOrderItem" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
