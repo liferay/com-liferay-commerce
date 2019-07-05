@@ -48,8 +48,12 @@ import javax.servlet.http.HttpServletResponse;
 public class CommerceOrderAssetRenderer
 	extends BaseJSPAssetRenderer<CommerceOrder> {
 
-	public CommerceOrderAssetRenderer(CommerceOrder commerceOrder) {
+	public CommerceOrderAssetRenderer(
+		CommerceOrder commerceOrder,
+		CommerceOrderPermission commerceOrderPermission) {
+
 		_commerceOrder = commerceOrder;
+		_commerceOrderPermission = commerceOrderPermission;
 	}
 
 	@Override
@@ -139,7 +143,7 @@ public class CommerceOrderAssetRenderer
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException {
 
-		return CommerceOrderPermission.contains(
+		return _commerceOrderPermission.contains(
 			permissionChecker, _commerceOrder, ActionKeys.UPDATE);
 	}
 
@@ -147,7 +151,7 @@ public class CommerceOrderAssetRenderer
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException {
 
-		return CommerceOrderPermission.contains(
+		return _commerceOrderPermission.contains(
 			permissionChecker, _commerceOrder, ActionKeys.VIEW);
 	}
 
@@ -169,5 +173,6 @@ public class CommerceOrderAssetRenderer
 	}
 
 	private final CommerceOrder _commerceOrder;
+	private final CommerceOrderPermission _commerceOrderPermission;
 
 }
