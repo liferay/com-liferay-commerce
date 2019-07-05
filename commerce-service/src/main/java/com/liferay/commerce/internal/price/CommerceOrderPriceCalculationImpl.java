@@ -196,7 +196,7 @@ public class CommerceOrderPriceCalculationImpl
 		}
 
 		if (commerceOrder == null) {
-			_commerceMoneyFactory.create(
+			return _commerceMoneyFactory.create(
 				commerceContext.getCommerceCurrency(), BigDecimal.ZERO);
 		}
 
