@@ -18,11 +18,9 @@ import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.base.CommerceAccountServiceBaseImpl;
-import com.liferay.portal.kernel.exception.NoSuchAccountException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -102,6 +100,16 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 	public CommerceAccount fetchCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
+		if (_isAccountCompanyAdministrator()) {
+			return commerceAccountLocalService.fetchCommerceAccount(
+				commerceAccountId);
+		}
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		_commerceAccountModelResourcePermission.check(
+			permissionChecker, commerceAccountId, ActionKeys.VIEW);
+
 		User user = getUser();
 
 		if ((user == null) || user.isDefaultUser()) {
@@ -109,28 +117,24 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 				permissionChecker.getCompanyId());
 		}
 
-		if (_isAccountCompanyAdministrator()) {
-			return commerceAccountLocalService.fetchCommerceAccount(
-				commerceAccountId);
-		}
-
-		CommerceAccount commerceAccount =
-			commerceAccountLocalService.getCommerceAccount(
-				getUserId(), commerceAccountId);
-
-		if (commerceAccount == null) {
-			throw new PrincipalException.MustHavePermission(
-				getPermissionChecker(), CommerceAccount.class.getName(),
-				commerceAccountId, ActionKeys.VIEW);
-		}
-
-		return commerceAccount;
+		return commerceAccountLocalService.fetchCommerceAccount(
+			commerceAccountId);
 	}
 
 	@Override
 	public CommerceAccount getCommerceAccount(long commerceAccountId)
 		throws PortalException {
 
+		if (_isAccountCompanyAdministrator()) {
+			return commerceAccountLocalService.fetchCommerceAccount(
+				commerceAccountId);
+		}
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		_commerceAccountModelResourcePermission.check(
+			permissionChecker, commerceAccountId, ActionKeys.VIEW);
+
 		User user = getUser();
 
 		if ((user == null) || user.isDefaultUser()) {
@@ -138,20 +142,8 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 				permissionChecker.getCompanyId());
 		}
 
-		if (_isAccountCompanyAdministrator()) {
-			return commerceAccountLocalService.fetchCommerceAccount(
-				commerceAccountId);
-		}
-
-		CommerceAccount commerceAccount =
-			commerceAccountLocalService.getCommerceAccount(
-				getUserId(), commerceAccountId);
-
-		if (commerceAccount == null) {
-			throw new NoSuchAccountException();
-		}
-
-		return commerceAccount;
+		return commerceAccountLocalService.getCommerceAccount(
+			getUserId(), commerceAccountId);
 	}
 
 	@Override
