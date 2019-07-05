@@ -62,7 +62,6 @@ public class EditCommerceVirtualOrderItemMVCActionCommand
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceVirtualOrderItemException ||
-				e instanceof CommerceVirtualOrderItemException ||
 				e instanceof CommerceVirtualOrderItemFileEntryIdException) {
 
 				hideDefaultErrorMessage(actionRequest);
