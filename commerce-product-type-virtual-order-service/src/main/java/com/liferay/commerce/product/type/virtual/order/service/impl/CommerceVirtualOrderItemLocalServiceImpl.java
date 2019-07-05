@@ -248,8 +248,8 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			commerceOrderItem.getNameCurrentValue() + StringPool.PERIOD +
 				extension);
 
-		if (file.exists()) {
-			file.delete();
+		if (file.exists() && !file.delete()) {
+			throw new Exception();
 		}
 
 		if (!tempFile.renameTo(file)) {
