@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.type.simple.internal;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.constants.SimpleCPTypeConstants;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
-import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
