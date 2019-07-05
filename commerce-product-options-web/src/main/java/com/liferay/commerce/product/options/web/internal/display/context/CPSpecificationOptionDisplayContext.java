@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -46,7 +47,9 @@ public class CPSpecificationOptionDisplayContext
 	public CPSpecificationOptionDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 			CPOptionCategoryService cpOptionCategoryService,
-			CPSpecificationOptionService cpSpecificationOptionService)
+			CPSpecificationOptionService cpSpecificationOptionService,
+			ModelResourcePermission<CPSpecificationOption>
+				modelResourcePermission)
 		throws PortalException {
 
 		super(
@@ -56,6 +59,7 @@ public class CPSpecificationOptionDisplayContext
 		setDefaultOrderByCol("label");
 
 		_cpOptionCategoryService = cpOptionCategoryService;
+		_cpSpecificationOptionModelResourcePermission = modelResourcePermission;
 		_cpSpecificationOptionService = cpSpecificationOptionService;
 	}
 
@@ -150,11 +154,22 @@ public class CPSpecificationOptionDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasPermission(
+			CPSpecificationOption cpSpecificationOption, String actionId)
+		throws PortalException {
+
+		return _cpSpecificationOptionModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), cpSpecificationOption,
+			actionId);
+	}
+
 	protected String getNavigation() {
 		return ParamUtil.getString(httpServletRequest, "navigation");
 	}
 
 	private final CPOptionCategoryService _cpOptionCategoryService;
+	private final ModelResourcePermission<CPSpecificationOption>
+		_cpSpecificationOptionModelResourcePermission;
 	private final CPSpecificationOptionService _cpSpecificationOptionService;
 
 }
