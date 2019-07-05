@@ -253,6 +253,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
 
+		if (!(commercePaymentRequest instanceof PayPalCommercePaymentRequest)) {
+			throw new ClassCastException();
+		}
+
 		boolean success = true;
 
 		Payment payment = new Payment();
@@ -296,6 +300,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 	public CommercePaymentResult completeRecurringPayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
+
+		if (!(commercePaymentRequest instanceof PayPalCommercePaymentRequest)) {
+			throw new ClassCastException();
+		}
 
 		boolean success = true;
 
