@@ -138,17 +138,14 @@ public class CommerceAccountAdminDisplayContext
 			CommerceAccount.class.getName(), getCommerceAccountId(), null);
 	}
 
-	protected Boolean getActive() {
+	protected boolean getActive() {
 		String navigation = getNavigation("active");
 
 		if (navigation.equals("active")) {
 			return true;
 		}
-		else if (navigation.equals("inactive")) {
-			return false;
-		}
 
-		return null;
+		return false;
 	}
 
 	protected int getCommerceSiteType() {
