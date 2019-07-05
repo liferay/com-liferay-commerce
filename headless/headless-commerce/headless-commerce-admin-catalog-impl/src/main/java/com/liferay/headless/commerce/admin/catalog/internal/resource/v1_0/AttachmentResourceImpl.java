@@ -100,7 +100,8 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 		return (Attachment)attachmentDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override
