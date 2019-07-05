@@ -282,13 +282,13 @@ public class CommerceShipmentGenerator {
 
 		int value = _random.nextInt();
 
-		long range = max + 1 - min;
+		int range = max + 1 - min;
 
 		if (range == 0) {
 			return value;
 		}
 
-		return (int)(Math.abs(value) % range + min);
+		return (value % range) + min;
 	}
 
 	private void _setPermissionChecker(long groupId) throws Exception {
