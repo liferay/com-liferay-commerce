@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.URL;
@@ -248,8 +249,8 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			commerceOrderItem.getNameCurrentValue() + StringPool.PERIOD +
 				extension);
 
-		if (file.exists()) {
-			file.delete();
+		if (file.exists() && !file.delete()) {
+			throw new IOException();
 		}
 
 		if (!tempFile.renameTo(file)) {
