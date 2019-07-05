@@ -295,7 +295,7 @@ public class CPOptionCategoryLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else if (cpOptionCategory != null) {
+			else {
 				cpOptionCategories.add(cpOptionCategory);
 			}
 		}

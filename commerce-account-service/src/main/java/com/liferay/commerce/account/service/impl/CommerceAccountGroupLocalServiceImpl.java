@@ -337,7 +337,7 @@ public class CommerceAccountGroupLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else if (commerceAccountGroup != null) {
+			else {
 				commerceAccountGroups.add(commerceAccountGroup);
 			}
 		}
