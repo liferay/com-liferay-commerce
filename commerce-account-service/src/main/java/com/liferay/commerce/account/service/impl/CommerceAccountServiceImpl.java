@@ -151,12 +151,6 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			throw new NoSuchAccountException();
 		}
 
-		if (commerceAccount == null) {
-			throw new PrincipalException.MustHavePermission(
-				getPermissionChecker(), CommerceAccount.class.getName(),
-				commerceAccountId, ActionKeys.VIEW);
-		}
-
 		return commerceAccount;
 	}
 

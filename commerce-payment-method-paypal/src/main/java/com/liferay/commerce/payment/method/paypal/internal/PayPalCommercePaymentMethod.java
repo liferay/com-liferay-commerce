@@ -586,10 +586,6 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			commercePaymentRequest, commerceOrder, apiContext,
 			commercePaymentRequest.getLocale());
 
-		if (plan == null) {
-			return null;
-		}
-
 		String url = null;
 
 		Agreement agreement = _getAgreement(
