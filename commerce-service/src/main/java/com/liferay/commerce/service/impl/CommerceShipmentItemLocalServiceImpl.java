@@ -120,14 +120,9 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceOrderItemLocalService.incrementShippedQuantity(
 					commerceShipmentItem.getCommerceOrderItemId(),
 					shippedQuantity);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
 
-		// Stock quantity
+			// Stock quantity
 
-		try {
 			_restoreStockQuantity(commerceOrderItem, commerceShipmentItem);
 		}
 		catch (PortalException pe) {
