@@ -20,6 +20,7 @@ import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.asset.kernel.model.BaseAssetRendererFactory;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -68,7 +69,8 @@ public class CommerceOrderAssetRendererFactory
 		CommerceOrderAssetRenderer commerceOrderAssetRenderer =
 			new CommerceOrderAssetRenderer(
 				_commerceChannelLocalService,
-				_commerceOrderLocalService.getCommerceOrder(classPK));
+				_commerceOrderLocalService.getCommerceOrder(classPK),
+				_commerceOrderPermission);
 
 		commerceOrderAssetRenderer.setAssetRendererType(type);
 		commerceOrderAssetRenderer.setServletContext(_servletContext);
@@ -86,6 +88,9 @@ public class CommerceOrderAssetRendererFactory
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private CommerceOrderPermission _commerceOrderPermission;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.order.web)"
