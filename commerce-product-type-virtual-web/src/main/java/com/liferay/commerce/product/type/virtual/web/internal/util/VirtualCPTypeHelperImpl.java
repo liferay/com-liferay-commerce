@@ -68,10 +68,6 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 			return StringPool.BLANK;
 		}
 
-		if (cpDefinitionVirtualSetting == null) {
-			return StringPool.BLANK;
-		}
-
 		if (!cpDefinitionVirtualSetting.isUseSample()) {
 			return StringPool.BLANK;
 		}
