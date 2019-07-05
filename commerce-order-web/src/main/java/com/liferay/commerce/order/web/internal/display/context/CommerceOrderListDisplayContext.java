@@ -94,6 +94,7 @@ public class CommerceOrderListDisplayContext {
 		CommerceChannelService commerceChannelService,
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
+		CommerceOrderPermission commerceOrderPermission,
 		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 		GroupLocalService groupLocalService, JSONFactory jsonFactory,
 		RenderRequest renderRequest) {
@@ -101,6 +102,7 @@ public class CommerceOrderListDisplayContext {
 		_commerceChannelService = commerceChannelService;
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
+		_commerceOrderPermission = commerceOrderPermission;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_groupLocalService = groupLocalService;
 		_jsonFactory = jsonFactory;
@@ -160,7 +162,7 @@ public class CommerceOrderListDisplayContext {
 	public int getCommerceOrderNotesCount(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		if (CommerceOrderPermission.contains(
+		if (_commerceOrderPermission.contains(
 				_commerceOrderRequestHelper.getPermissionChecker(),
 				commerceOrder, ActionKeys.UPDATE_DISCUSSION)) {
 
@@ -601,6 +603,7 @@ public class CommerceOrderListDisplayContext {
 	private final Format _commerceOrderDateFormatDateTime;
 	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
+	private final CommerceOrderPermission _commerceOrderPermission;
 	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final GroupLocalService _groupLocalService;
