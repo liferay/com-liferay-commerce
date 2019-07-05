@@ -30,7 +30,7 @@ public class AccountUser {
 	}
 
 	public AccountUser(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 		_success = false;
 	}
 
@@ -39,7 +39,7 @@ public class AccountUser {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages;
+		return _errorMessages.clone();
 	}
 
 	public String getName() {
@@ -59,7 +59,7 @@ public class AccountUser {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 	}
 
 	public void setSuccess(boolean success) {
