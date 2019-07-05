@@ -29,7 +29,7 @@ public class CPQueryRule {
 		_contains = contains;
 		_andOperator = andOperator;
 		_name = name;
-		_values = values;
+		_values = values.clone();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class CPQueryRule {
 	}
 
 	public String[] getValues() {
-		return _values;
+		return _values.clone();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class CPQueryRule {
 	}
 
 	public void setValues(String[] values) {
-		_values = values;
+		_values = values.clone();
 	}
 
 	private boolean _andOperator;

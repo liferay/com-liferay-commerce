@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 
 /**
  * @author Marco Leo
+ * @author Alec Sloan
  */
 public class CommerceDiscountValue {
 
@@ -30,7 +31,7 @@ public class CommerceDiscountValue {
 		_id = id;
 		_discountAmount = discountAmount;
 		_discountPercentage = discountPercentage;
-		_percentages = percentages;
+		_percentages = percentages.clone();
 	}
 
 	public CommerceMoney getDiscountAmount() {
@@ -46,7 +47,7 @@ public class CommerceDiscountValue {
 	}
 
 	public BigDecimal[] getPercentages() {
-		return _percentages;
+		return _percentages.clone();
 	}
 
 	private final CommerceMoney _discountAmount;

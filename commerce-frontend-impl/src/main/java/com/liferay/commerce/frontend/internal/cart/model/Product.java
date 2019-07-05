@@ -37,11 +37,11 @@ public class Product {
 		_thumbnail = thumbnail;
 		_prices = prices;
 		_settings = settings;
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages;
+		return _errorMessages.clone();
 	}
 
 	public long getId() {
@@ -77,7 +77,7 @@ public class Product {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = errorMessages.clone();
 	}
 
 	public void setId(long id) {
