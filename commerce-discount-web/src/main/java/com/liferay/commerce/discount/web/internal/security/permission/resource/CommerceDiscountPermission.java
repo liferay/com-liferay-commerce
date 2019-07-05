@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = CommerceDiscountPermission.class)
 public class CommerceDiscountPermission {
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker,
 			CommerceDiscount commerceDiscount, String actionId)
 		throws PortalException {
@@ -37,7 +37,7 @@ public class CommerceDiscountPermission {
 			permissionChecker, commerceDiscount, actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long commerceDiscountId,
 			String actionId)
 		throws PortalException {
@@ -56,7 +56,7 @@ public class CommerceDiscountPermission {
 		_commerceDiscountModelResourcePermission = modelResourcePermission;
 	}
 
-	private static ModelResourcePermission<CommerceDiscount>
+	private ModelResourcePermission<CommerceDiscount>
 		_commerceDiscountModelResourcePermission;
 
 }
