@@ -404,11 +404,11 @@ public class Option {
 
 	@Schema
 	public OptionValue[] getValues() {
-		return values;
+		return values.clone();
 	}
 
 	public void setValues(OptionValue[] values) {
-		this.values = values;
+		this.values = values.clone();
 	}
 
 	@JsonIgnore

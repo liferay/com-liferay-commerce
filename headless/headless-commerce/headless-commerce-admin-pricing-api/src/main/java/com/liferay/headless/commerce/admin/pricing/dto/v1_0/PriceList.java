@@ -174,11 +174,11 @@ public class PriceList {
 
 	@Schema
 	public Date getDisplayDate() {
-		return displayDate;
+		return new Date (displayDate.getTime());
 	}
 
 	public void setDisplayDate(Date displayDate) {
-		this.displayDate = displayDate;
+		this.displayDate = new Date (displayDate.getTime());
 	}
 
 	@JsonIgnore
@@ -202,11 +202,11 @@ public class PriceList {
 
 	@Schema
 	public Date getExpirationDate() {
-		return expirationDate;
+		return new Date (expirationDate.getTime());
 	}
 
 	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
+		this.expirationDate = new Date (expirationDate.getTime());
 	}
 
 	@JsonIgnore

@@ -59,8 +59,7 @@ public class ProductConfigurationUtil {
 						productConfiguration.getMaxOrderQuantity(),
 						CPDefinitionInventoryConstants.
 							DEFAULT_MAX_ORDER_QUANTITY),
-					_getAllowedOrderQuantities(
-						cpDefinitionInventory, productConfiguration),
+					null,
 					GetterUtil.get(
 						productConfiguration.getMultipleOrderQuantity(),
 						CPDefinitionInventoryConstants.

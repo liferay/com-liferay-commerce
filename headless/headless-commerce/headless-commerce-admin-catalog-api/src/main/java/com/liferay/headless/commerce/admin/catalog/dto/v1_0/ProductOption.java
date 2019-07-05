@@ -405,11 +405,11 @@ public class ProductOption {
 
 	@Schema
 	public ProductOptionValue[] getValues() {
-		return values;
+		return values.clone();
 	}
 
 	public void setValues(ProductOptionValue[] values) {
-		this.values = values;
+		this.values = values.clone();
 	}
 
 	@JsonIgnore
