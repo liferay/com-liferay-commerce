@@ -37,6 +37,8 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
@@ -82,6 +84,7 @@ public class CommerceOrderContentDisplayContext {
 
 	public CommerceOrderContentDisplayContext(
 			CommerceAddressService commerceAddressService,
+			CommerceChannelLocalService commerceChannelLocalService,
 			CommerceOrderNoteService commerceOrderNoteService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderService commerceOrderService,
@@ -94,6 +97,7 @@ public class CommerceOrderContentDisplayContext {
 		throws PortalException {
 
 		_commerceAddressService = commerceAddressService;
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceOrderService = commerceOrderService;
@@ -128,6 +132,11 @@ public class CommerceOrderContentDisplayContext {
 
 		_commerceOrderNoteId = ParamUtil.getLong(
 			_httpServletRequest, "commerceOrderNoteId");
+	}
+
+	public CommerceChannel fetchCommerceChannel() {
+		return _commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+			_cpRequestHelper.getScopeGroupId());
 	}
 
 	public List<CommerceAddress> getAvailableCommerceOrderAddresses()
@@ -475,6 +484,7 @@ public class CommerceOrderContentDisplayContext {
 
 	private final CommerceAccount _commerceAccount;
 	private final CommerceAddressService _commerceAddressService;
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceContext _commerceContext;
 	private final CommerceOrderContentPortletInstanceConfiguration
 		_commerceOrderContentPortletInstanceConfiguration;
