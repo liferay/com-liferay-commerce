@@ -29,7 +29,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = {})
 public class CommerceCatalogPermission {
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, CPDefinition cpDefinition,
 			String actionId)
 		throws PortalException {
@@ -38,7 +38,7 @@ public class CommerceCatalogPermission {
 			permissionChecker, cpDefinition.getCommerceCatalog(), actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long commerceCatalogId,
 			String actionId)
 		throws PortalException {
@@ -57,7 +57,7 @@ public class CommerceCatalogPermission {
 		_commerceCatalogModelResourcePermission = modelResourcePermission;
 	}
 
-	private static ModelResourcePermission<CommerceCatalog>
+	private ModelResourcePermission<CommerceCatalog>
 		_commerceCatalogModelResourcePermission;
 
 }

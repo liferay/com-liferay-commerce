@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CommerceNotificationTemplatePermission {
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker,
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			String actionId)
@@ -40,7 +40,7 @@ public class CommerceNotificationTemplatePermission {
 			permissionChecker, commerceNotificationTemplate, actionId);
 	}
 
-	public static boolean contains(
+	public boolean contains(
 			PermissionChecker permissionChecker, long commerceDiscountId,
 			String actionId)
 		throws PortalException {
@@ -61,7 +61,7 @@ public class CommerceNotificationTemplatePermission {
 			modelResourcePermission;
 	}
 
-	private static ModelResourcePermission<CommerceNotificationTemplate>
+	private ModelResourcePermission<CommerceNotificationTemplate>
 		_commerceNotificationTemplateModelResourcePermission;
 
 }

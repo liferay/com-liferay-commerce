@@ -511,8 +511,6 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		}
 	}
 
-	private static ModelResourcePermission<CommerceOrder>
-		_commerceOrderModelResourcePermission;
 	private static final ThreadLocal<CommerceOrder>
 		_commerceOrderUuidThreadLocal = new CentralizedThreadLocal<>(
 			CommerceOrderHttpHelperImpl.class.getName());
@@ -528,6 +526,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	private ModelResourcePermission<CommerceOrder>
+		_commerceOrderModelResourcePermission;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
