@@ -46,7 +46,6 @@ page import="com.liferay.commerce.product.options.web.internal.display.context.C
 page import="com.liferay.commerce.product.options.web.internal.display.context.CPOptionDisplayContext" %><%@
 page import="com.liferay.commerce.product.options.web.internal.display.context.CPSpecificationOptionDisplayContext" %><%@
 page import="com.liferay.commerce.product.options.web.internal.security.permission.resource.CPOptionCategoryPermission" %><%@
-page import="com.liferay.commerce.product.options.web.internal.security.permission.resource.CPSpecificationOptionPermission" %><%@
 page import="com.liferay.commerce.product.options.web.internal.servlet.taglib.ui.CPOptionCategoryFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.product.options.web.internal.servlet.taglib.ui.CPSpecificationOptionFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.product.util.CPNavigationItemRegistryUtil" %><%@
