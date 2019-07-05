@@ -29,6 +29,9 @@ public class CommerceConstants {
 
 	public static final String RESOURCE_NAME = "com.liferay.commerce";
 
+	public static final String SHIPPING_METHODS_COMMERCE_ADMIN_MODULE_KEY =
+		"shipping-methods";
+
 	public static final String SHIPPING_SERVICE_NAME =
 		"com.liferay.commerce.shipping";
 

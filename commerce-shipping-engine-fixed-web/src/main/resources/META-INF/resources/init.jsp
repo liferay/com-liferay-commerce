@@ -26,6 +26,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
+page import="com.liferay.commerce.constants.CommerceConstants" %><%@
 page import="com.liferay.commerce.inventory.model.CommerceInventoryWarehouse" %><%@
 page import="com.liferay.commerce.model.CommerceCountry" %><%@
 page import="com.liferay.commerce.model.CommerceRegion" %><%@
@@ -36,7 +37,6 @@ page import="com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFi
 page import="com.liferay.commerce.shipping.engine.fixed.web.internal.FixedCommerceShippingEngine" %><%@
 page import="com.liferay.commerce.shipping.engine.fixed.web.internal.display.context.CommerceShippingFixedOptionRelsDisplayContext" %><%@
 page import="com.liferay.commerce.shipping.engine.fixed.web.internal.display.context.CommerceShippingFixedOptionsDisplayContext" %><%@
-page import="com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdminModule" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
@@ -63,7 +63,7 @@ page import="java.util.Map" %>
 <portlet:defineObjects />
 
 <%
-String commerceAdminModuleKey = ShippingMethodsCommerceAdminModule.KEY;
+String commerceAdminModuleKey = CommerceConstants.SHIPPING_METHODS_COMMERCE_ADMIN_MODULE_KEY;
 
 String languageId = LanguageUtil.getLanguageId(locale);
 %>

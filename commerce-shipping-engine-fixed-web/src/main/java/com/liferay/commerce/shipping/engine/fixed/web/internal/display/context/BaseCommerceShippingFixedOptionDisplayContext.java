@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.shipping.engine.fixed.web.internal.display.context;
 
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodService;
-import com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdminModule;
 import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
@@ -114,7 +114,8 @@ public abstract class BaseCommerceShippingFixedOptionDisplayContext<T> {
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setParameter(
-			"commerceAdminModuleKey", ShippingMethodsCommerceAdminModule.KEY);
+			"commerceAdminModuleKey",
+			CommerceConstants.SHIPPING_METHODS_COMMERCE_ADMIN_MODULE_KEY);
 		portletURL.setParameter(
 			"mvcRenderCommandName", "editCommerceShippingMethod");
 		portletURL.setParameter(

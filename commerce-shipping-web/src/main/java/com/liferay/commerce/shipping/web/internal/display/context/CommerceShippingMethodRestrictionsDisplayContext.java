@@ -19,7 +19,7 @@ import com.liferay.commerce.item.selector.criterion.CommerceCountryItemSelectorC
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodService;
-import com.liferay.commerce.shipping.web.admin.ShippingMethodsCommerceAdminModule;
+import com.liferay.commerce.shipping.web.internal.admin.ShippingMethodsCommerceAdminModule;
 import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.item.selector.ItemSelector;
