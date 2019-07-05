@@ -106,7 +106,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if ((user == null) || user.isDefaultUser()) {
 			return commerceAccountLocalService.getGuestCommerceAccount(
-				user.getCompanyId());
+				permissionChecker.getCompanyId());
 		}
 
 		if (_isAccountCompanyAdministrator()) {
@@ -135,7 +135,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		if ((user == null) || user.isDefaultUser()) {
 			return commerceAccountLocalService.getGuestCommerceAccount(
-				user.getCompanyId());
+				permissionChecker.getCompanyId());
 		}
 
 		if (_isAccountCompanyAdministrator()) {

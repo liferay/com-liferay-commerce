@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
@@ -112,10 +113,10 @@ public class EditCPDefinitionInventoryMVCActionCommand
 			actionRequest, "maxOrderQuantity");
 		String multipleOrderQuantityString = ParamUtil.getString(
 			actionRequest, "multipleOrderQuantity");
-		int minStockQuantity = Integer.valueOf(minStockQuantityString);
-		int minOrderQuantity = Integer.valueOf(minOrderQuantityString);
-		int maxOrderQuantity = Integer.valueOf(maxOrderQuantityString);
-		int multipleOrderQuantity = Integer.valueOf(
+		int minStockQuantity = GetterUtil.getInteger(minStockQuantityString);
+		int minOrderQuantity = GetterUtil.getInteger(minOrderQuantityString);
+		int maxOrderQuantity = GetterUtil.getInteger(maxOrderQuantityString);
+		int multipleOrderQuantity = GetterUtil.getInteger(
 			multipleOrderQuantityString);
 		String allowedOrderQuantities = ParamUtil.getString(
 			actionRequest, "allowedOrderQuantities");
