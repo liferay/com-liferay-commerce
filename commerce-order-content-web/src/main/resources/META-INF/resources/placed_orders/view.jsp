@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.commerce.product.model.CommerceChannel" %>
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -18,9 +20,16 @@
 
 <%
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+CommerceChannel commerceChannel = commerceOrderContentDisplayContext.fetchCommerceChannel();
 %>
 
 <c:choose>
+	<c:when test="<%= commerceChannel == null %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="the-site-does-not-belong-to-any-channel" />
+		</div>
+	</c:when>
 	<c:when test="<%= commerceOrderContentDisplayContext.isCommerceSiteTypeB2C() %>">
 		<liferay-util:include page="/placed_orders/b2c/view.jsp" servletContext="<%= application %>" />
 	</c:when>
