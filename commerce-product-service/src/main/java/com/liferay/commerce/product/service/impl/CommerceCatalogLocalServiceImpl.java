@@ -183,7 +183,7 @@ public class CommerceCatalogLocalServiceImpl
 			commerceCatalogPersistence.findByCompanyId(companyId);
 
 		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-			commerceCatalogLocalService.deleteCommerceCatalog(commerceCatalog);
+			commerceCatalogPersistence.remove(commerceCatalog);
 		}
 	}
 
