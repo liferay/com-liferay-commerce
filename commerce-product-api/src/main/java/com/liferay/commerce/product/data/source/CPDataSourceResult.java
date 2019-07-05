@@ -19,6 +19,9 @@ import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.StringBundler;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import java.util.Collections;
@@ -75,6 +78,16 @@ public class CPDataSourceResult implements Serializable {
 		sb.append(CharPool.CLOSE_BRACKET);
 
 		return sb.toString();
+	}
+
+	private void readObject(ObjectInputStream stream)
+		throws ClassNotFoundException, IOException {
+
+		stream.defaultReadObject();
+	}
+
+	private void writeObject(ObjectOutputStream stream) throws IOException {
+		stream.defaultWriteObject();
 	}
 
 	private final List<CPCatalogEntry> _cpCatalogEntries;
