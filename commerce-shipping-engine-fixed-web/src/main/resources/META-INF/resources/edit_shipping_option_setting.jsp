@@ -37,7 +37,7 @@ if (commerceShippingFixedOptionRel != null) {
 
 PortletURL shippingMethodsURL = renderResponse.createRenderURL();
 
-shippingMethodsURL.setParameter("commerceAdminModuleKey", ShippingMethodsCommerceAdminModule.KEY);
+shippingMethodsURL.setParameter("commerceAdminModuleKey", commerceAdminModuleKey);
 
 String localizedKey = (commerceShippingFixedOptionRel == null) ? "add-shipping-option-setting" : "edit-shipping-option-setting";
 

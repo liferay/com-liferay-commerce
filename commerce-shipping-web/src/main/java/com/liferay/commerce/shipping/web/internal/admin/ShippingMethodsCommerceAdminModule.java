@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.shipping.web.admin;
+package com.liferay.commerce.shipping.web.internal.admin;
 
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
@@ -55,7 +55,8 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class ShippingMethodsCommerceAdminModule implements CommerceAdminModule {
 
-	public static final String KEY = "shipping-methods";
+	public static final String KEY =
+		CommerceConstants.SHIPPING_METHODS_COMMERCE_ADMIN_MODULE_KEY;
 
 	@Override
 	public String getLabel(Locale locale) {
