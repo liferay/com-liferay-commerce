@@ -35,6 +35,11 @@ public class CPInstanceImpl extends CPInstanceBaseImpl {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
 	public CommerceCatalog getCommerceCatalog() throws PortalException {
 		CPDefinition cpDefinition = getCPDefinition();
 
@@ -80,6 +85,11 @@ public class CPInstanceImpl extends CPInstanceBaseImpl {
 		}
 
 		return _subscriptionTypeSettingsProperties;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int)getPrimaryKey();
 	}
 
 	@Override

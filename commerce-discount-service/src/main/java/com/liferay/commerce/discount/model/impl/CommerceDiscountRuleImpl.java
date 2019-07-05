@@ -33,6 +33,11 @@ public class CommerceDiscountRuleImpl extends CommerceDiscountRuleBaseImpl {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
 	public UnicodeProperties getSettingsProperties() {
 		if (_settingsProperties == null) {
 			_settingsProperties = new UnicodeProperties(true);
@@ -53,6 +58,11 @@ public class CommerceDiscountRuleImpl extends CommerceDiscountRuleBaseImpl {
 		UnicodeProperties settingsProperties = getSettingsProperties();
 
 		return settingsProperties.getProperty(key);
+	}
+
+	@Override
+	public int hashCode() {
+		return (int)getPrimaryKey();
 	}
 
 	@Override
