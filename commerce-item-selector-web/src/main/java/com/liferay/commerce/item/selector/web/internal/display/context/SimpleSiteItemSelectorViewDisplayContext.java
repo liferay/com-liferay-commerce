@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.GroupService;
@@ -42,6 +43,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 public class SimpleSiteItemSelectorViewDisplayContext
 	extends BaseCommerceItemSelectorViewDisplayContext<Group> {
@@ -132,14 +134,17 @@ public class SimpleSiteItemSelectorViewDisplayContext
 
 		int total = _groupService.searchCount(
 			cpRequestHelper.getCompanyId(), null, null, null);
-		List<Group> siteGroups = _groupService.search(
+		List<Group> groups = _groupService.search(
 			cpRequestHelper.getCompanyId(),
-			new long[] {ClassNameLocalServiceUtil.getClassNameId(Group.class)},
+			new long[] {
+				ClassNameLocalServiceUtil.getClassNameId(Group.class),
+				ClassNameLocalServiceUtil.getClassNameId(Organization.class)
+			},
 			null, params, searchContainer.getStart(), searchContainer.getEnd(),
 			null);
 
 		searchContainer.setTotal(total);
-		searchContainer.setResults(siteGroups);
+		searchContainer.setResults(groups);
 
 		return searchContainer;
 	}
