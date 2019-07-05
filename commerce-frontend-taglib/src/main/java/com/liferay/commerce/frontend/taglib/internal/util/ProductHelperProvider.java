@@ -22,6 +22,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alec Sloan
  */
 @Component(immediate = true, service = ProductHelperProvider.class)
 public class ProductHelperProvider {
@@ -34,9 +35,14 @@ public class ProductHelperProvider {
 		return _productHelperProvider._productHelper;
 	}
 
+	protected static void setProductHelperProvider(
+		ProductHelperProvider productHelperProvider) {
+
+		_productHelperProvider = productHelperProvider;
+	}
+
 	@Activate
 	protected void activate() {
-		_productHelperProvider = this;
 	}
 
 	@Reference(unbind = "-")

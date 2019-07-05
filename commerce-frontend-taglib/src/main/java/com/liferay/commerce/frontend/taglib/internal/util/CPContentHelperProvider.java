@@ -22,6 +22,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alec Sloan
  */
 @Component(immediate = true, service = CPContentHelperProvider.class)
 public class CPContentHelperProvider {
@@ -34,9 +35,14 @@ public class CPContentHelperProvider {
 		return _cpContentHelperProvider._cpContentHelper;
 	}
 
+	protected static void setCPContentHelperProvider(
+		CPContentHelperProvider cpContentHelperProvider) {
+
+		_cpContentHelperProvider = cpContentHelperProvider;
+	}
+
 	@Activate
 	protected void activate() {
-		_cpContentHelperProvider = this;
 	}
 
 	@Reference(unbind = "-")
