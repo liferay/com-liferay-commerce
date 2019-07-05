@@ -34,19 +34,14 @@ import java.util.Map;
  */
 public class CPQuery {
 
-	public static final String[] ORDER_BY_COLUMNS = {
-		"name", "createDate", "modifiedDate", "publishDate", "expirationDate",
-		"priority"
-	};
-
 	public static String checkOrderByCol(String orderByCol) {
-		if (ArrayUtil.contains(ORDER_BY_COLUMNS, orderByCol) ||
+		if (ArrayUtil.contains(_ORDER_BY_COLUMNS, orderByCol) ||
 			(orderByCol != null)) {
 
 			return orderByCol;
 		}
 
-		return ORDER_BY_COLUMNS[2];
+		return _ORDER_BY_COLUMNS[2];
 	}
 
 	public static String checkOrderByType(String orderByType) {
@@ -355,6 +350,11 @@ public class CPQuery {
 
 		return leftRightIds;
 	}
+
+	private static final String[] _ORDER_BY_COLUMNS = {
+		"name", "createDate", "modifiedDate", "publishDate", "expirationDate",
+		"priority"
+	};
 
 	private static final Log _log = LogFactoryUtil.getLog(CPQuery.class);
 
