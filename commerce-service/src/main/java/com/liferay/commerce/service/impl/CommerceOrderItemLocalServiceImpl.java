@@ -91,18 +91,14 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		CPDefinition cpDefinition = null;
-
-		CPInstance cpInstance = _cpInstanceLocalService.fetchCPInstance(
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
 			cpInstanceId);
 
-		if (cpInstance != null) {
-			cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-				cpInstance.getCPDefinitionId());
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpInstance.getCPDefinitionId());
 
-			if (Validator.isNull(json) || json.equals("[]")) {
-				json = cpInstance.getJson();
-			}
+		if (Validator.isNull(json) || json.equals("[]")) {
+			json = cpInstance.getJson();
 		}
 
 		validate(
