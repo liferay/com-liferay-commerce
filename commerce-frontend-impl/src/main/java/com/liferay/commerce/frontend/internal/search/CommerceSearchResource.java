@@ -36,9 +36,14 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -64,6 +69,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 
@@ -269,10 +275,30 @@ public class CommerceSearchResource {
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				themeDisplay.getScopeGroupId());
+
+		if (commerceChannel != null) {
+			attributes.put(
+				"commerceChannelGroupId", commerceChannel.getGroupId());
+		}
+
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(companyId);
-		searchContext.setGroupIds(new long[] {groupId});
+
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogService.getCommerceCatalogs(
+				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		Stream<CommerceCatalog> commerceCatalogStream =
+			commerceCatalogs.stream();
+
+		searchContext.setGroupIds(
+			commerceCatalogStream.mapToLong(
+				CommerceCatalog::getGroupId
+			).toArray());
 
 		searchContext.setKeywords(queryString);
 
@@ -372,6 +398,12 @@ public class CommerceSearchResource {
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceContextFactory _commerceContextFactory;
