@@ -14,13 +14,15 @@
 
 package com.liferay.commerce.product.subscription.type.web.internal.display.context.util.comparator;
 
+import java.io.Serializable;
+
 import java.util.Comparator;
 
 /**
  * @author Alessio Antonio Rendina
  */
 public class WeeklyCPSubscriptionTypeCalendarWeekDaysComparator
-	implements Comparator<Integer> {
+	implements Comparator<Integer>, Serializable {
 
 	public WeeklyCPSubscriptionTypeCalendarWeekDaysComparator() {
 		this(true);
