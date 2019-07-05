@@ -20,7 +20,7 @@ package com.liferay.commerce.frontend.model;
 public class ProductSettingsModel {
 
 	public int[] getAllowedQuantities() {
-		return _allowedQuantities;
+		return _allowedQuantities.clone();
 	}
 
 	public int getLowStockQuantity() {
@@ -44,7 +44,7 @@ public class ProductSettingsModel {
 	}
 
 	public void setAllowedQuantities(int[] allowedQuantities) {
-		_allowedQuantities = allowedQuantities;
+		_allowedQuantities = allowedQuantities.clone();
 	}
 
 	public void setLowStockQuantity(int lowStockQuantity) {
