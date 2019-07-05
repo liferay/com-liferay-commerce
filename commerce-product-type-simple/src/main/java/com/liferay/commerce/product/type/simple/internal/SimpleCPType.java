@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.product.type.simple.internal;
 
+import com.liferay.commerce.product.constants.SimpleCPTypeConstants;
 import com.liferay.commerce.product.type.CPType;
-import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 
