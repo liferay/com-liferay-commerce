@@ -116,7 +116,7 @@ PortletURL portletURL = commerceAccountUserRelAdminDisplayContext.getPortletURL(
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="roles"
-						value="<%= commerceAccountUserRelAdminDisplayContext.getUserRoles(commerceAccountUserRel) %>"
+						value="<%= HtmlUtil.escape(commerceAccountUserRelAdminDisplayContext.getUserRoles(commerceAccountUserRel)) %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp

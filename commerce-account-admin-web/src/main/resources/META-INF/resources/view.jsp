@@ -149,7 +149,7 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="type"
-						value="<%= LanguageUtil.get(request, CommerceAccountConstants.getAccountTypeLabel(commerceAccount.getType())) %>"
+						value="<%= HtmlUtil.escape(LanguageUtil.get(request, CommerceAccountConstants.getAccountTypeLabel(commerceAccount.getType()))) %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp
