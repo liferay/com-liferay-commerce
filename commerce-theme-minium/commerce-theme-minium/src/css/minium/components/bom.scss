@@ -188,28 +188,6 @@
 		}
 	}
 
-	.area-card {
-		border-radius: 8px;
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-		overflow: hidden;
-		transition: box-shadow 0.1s ease-in, transform 0.1s ease-in;
-
-		&:hover {
-			box-shadow: 0 10px 22px -6px rgba(0, 0, 0, 0.2);
-			transform: translateY(-4px);
-		}
-
-		.card-body {
-			padding: 20px;
-		}
-
-		.card-title {
-			color: $color-fg;
-			font-size: 14px;
-			text-align: center;
-		}
-	}
-
 	.card-link {
 		&:hover {
 			text-decoration: none;
@@ -313,5 +291,43 @@
 		overflow: hidden;
 		position: relative;
 		transition: height 0.35s ease;
+	}
+}
+
+.bom-card {
+	border-radius: 8px;
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	overflow: hidden;
+	transition: box-shadow 0.1s ease-in, transform 0.1s ease-in;
+	
+	&.card {
+		box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0);
+
+		&:hover {
+			box-shadow: 0 10px 22px -6px rgba(0, 0, 0, 0.2);
+			transform: translateY(-4px);
+		}
+	}
+	
+	.card-body {
+		padding: 20px;
+	}
+
+	&.image-card .bom-card__folder-picture-container{
+		background-color: #E7EEFE;
+		background-image: none;
+	}
+
+	.card-title {
+		color: $color-fg;
+		font-size: 14px;
+		text-align: center;
+	}
+
+	.sticker {
+		font-size: 40px;
+		height: 40px;
+		width: 40px;
+		color: #99B9FF;
 	}
 }
