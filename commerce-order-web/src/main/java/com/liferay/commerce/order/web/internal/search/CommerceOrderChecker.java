@@ -29,8 +29,13 @@ import javax.portlet.PortletResponse;
  */
 public class CommerceOrderChecker extends EmptyOnClickRowChecker {
 
-	public CommerceOrderChecker(PortletResponse portletResponse) {
+	public CommerceOrderChecker(
+		PortletResponse portletResponse,
+		CommerceOrderPermission commerceOrderPermission) {
+
 		super(portletResponse);
+
+		_commerceOrderPermission = commerceOrderPermission;
 	}
 
 	@Override
@@ -38,7 +43,7 @@ public class CommerceOrderChecker extends EmptyOnClickRowChecker {
 		CommerceOrder commerceOrder = (CommerceOrder)object;
 
 		try {
-			return !CommerceOrderPermission.contains(
+			return !_commerceOrderPermission.contains(
 				PermissionThreadLocal.getPermissionChecker(), commerceOrder,
 				ActionKeys.DELETE);
 		}
@@ -51,5 +56,7 @@ public class CommerceOrderChecker extends EmptyOnClickRowChecker {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderChecker.class);
+
+	private final CommerceOrderPermission _commerceOrderPermission;
 
 }
