@@ -732,7 +732,7 @@ public class CommerceAccountLocalServiceImpl
 
 				indexer.delete(companyId, document.getUID());
 			}
-			else if (commerceAccount != null) {
+			else {
 				User user = _userLocalService.getUser(
 					commerceAccount.getUserId());
 
