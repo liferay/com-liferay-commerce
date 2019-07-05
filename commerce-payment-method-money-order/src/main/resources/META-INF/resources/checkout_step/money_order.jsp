@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-MoneyOrderCheckoutStepDisplayContext moneyOrderCheckoutStepDisplayContext = (MoneyOrderCheckoutStepDisplayContext)request.getAttribute(CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT);
+MoneyOrderCheckoutStepDisplayContext moneyOrderCheckoutStepDisplayContext = (MoneyOrderCheckoutStepDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 %>
 
 <c:if test="<%= Validator.isNotNull(moneyOrderCheckoutStepDisplayContext.getMessage()) %>">

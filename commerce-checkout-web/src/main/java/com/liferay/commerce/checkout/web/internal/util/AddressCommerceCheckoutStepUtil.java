@@ -15,8 +15,8 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.checkout.web.internal.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceAddressConstants;
-import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;

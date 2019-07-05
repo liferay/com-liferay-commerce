@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.payment.method.money.order.internal.util;
 
-import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.payment.method.money.order.internal.MoneyOrderCommercePaymentMethod;
@@ -136,7 +135,7 @@ public class MoneyOrderCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 					httpServletRequest);
 
 		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_CHECKOUT_STEP_DISPLAY_CONTEXT,
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			moneyOrderCheckoutStepDisplayContext);
 
 		_jspRenderer.renderJSP(
