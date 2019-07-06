@@ -18,7 +18,6 @@ import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodRestrictionsDisplayContext;
-import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -80,8 +79,7 @@ public class CommerceShippingMethodCountryRestrictionScreenNavigationEntry
 
 	@Override
 	public String getScreenNavigationKey() {
-		return CommerceShippingScreenNavigationConstants.
-			SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
+		return CommerceConstants.SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
 	}
 
 	@Override
