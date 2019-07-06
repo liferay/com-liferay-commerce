@@ -46,7 +46,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, selected
 
 <liferay-frontend:screen-navigation
 	containerCssClass="col-md-10"
-	key="<%= CommerceShippingScreenNavigationConstants.SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD %>"
+	key="<%= CommerceConstants.SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD %>"
 	modelBean="<%= commerceShippingMethod %>"
 	navCssClass="col-md-2"
 	portletURL="<%= currentURLObj %>"
