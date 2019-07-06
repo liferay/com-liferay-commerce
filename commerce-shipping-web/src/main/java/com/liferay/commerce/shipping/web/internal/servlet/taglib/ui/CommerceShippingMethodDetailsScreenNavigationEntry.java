@@ -18,7 +18,6 @@ import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.internal.display.context.CommerceShippingMethodsDisplayContext;
-import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
@@ -60,8 +59,7 @@ public class CommerceShippingMethodDetailsScreenNavigationEntry
 
 	@Override
 	public String getCategoryKey() {
-		return CommerceShippingScreenNavigationConstants.
-			CATEGORY_KEY_COMMERCE_SHIPPING_METHOD_DETAILS;
+		return CommerceConstants.CATEGORY_KEY_COMMERCE_SHIPPING_METHOD_DETAILS;
 	}
 
 	@Override
@@ -80,8 +78,7 @@ public class CommerceShippingMethodDetailsScreenNavigationEntry
 
 	@Override
 	public String getScreenNavigationKey() {
-		return CommerceShippingScreenNavigationConstants.
-			SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
+		return CommerceConstants.SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
 	}
 
 	@Override

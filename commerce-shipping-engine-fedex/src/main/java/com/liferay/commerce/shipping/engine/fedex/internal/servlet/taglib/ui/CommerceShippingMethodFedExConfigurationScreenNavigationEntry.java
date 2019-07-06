@@ -14,11 +14,11 @@
 
 package com.liferay.commerce.shipping.engine.fedex.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.shipping.engine.fedex.internal.FedExCommerceShippingEngine;
 import com.liferay.commerce.shipping.engine.fedex.internal.configuration.FedExCommerceShippingEngineGroupServiceConfiguration;
 import com.liferay.commerce.shipping.engine.fedex.internal.constants.FedExCommerceShippingEngineConstants;
-import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -79,8 +79,7 @@ public class CommerceShippingMethodFedExConfigurationScreenNavigationEntry
 
 	@Override
 	public String getScreenNavigationKey() {
-		return CommerceShippingScreenNavigationConstants.
-			SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
+		return CommerceConstants.SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD;
 	}
 
 	@Override

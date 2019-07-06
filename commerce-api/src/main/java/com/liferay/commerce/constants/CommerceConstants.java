@@ -21,6 +21,9 @@ package com.liferay.commerce.constants;
  */
 public class CommerceConstants {
 
+	public static final String CATEGORY_KEY_COMMERCE_SHIPPING_METHOD_DETAILS =
+		"details";
+
 	public static final String ORDER_SERVICE_NAME =
 		"com.liferay.commerce.order";
 
@@ -28,6 +31,9 @@ public class CommerceConstants {
 		"com.liferay.commerce.price";
 
 	public static final String RESOURCE_NAME = "com.liferay.commerce";
+
+	public static final String SCREEN_NAVIGATION_KEY_COMMERCE_SHIPPING_METHOD =
+		"commerce.shipping.method";
 
 	public static final String SHIPPING_METHODS_COMMERCE_ADMIN_MODULE_KEY =
 		"shipping-methods";

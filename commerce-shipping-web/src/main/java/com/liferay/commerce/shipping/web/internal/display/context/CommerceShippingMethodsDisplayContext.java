@@ -15,11 +15,11 @@
 package com.liferay.commerce.shipping.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.commerce.shipping.web.internal.admin.ShippingMethodsCommerceAdminModule;
-import com.liferay.commerce.shipping.web.servlet.taglib.ui.CommerceShippingScreenNavigationConstants;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
 import com.liferay.commerce.util.comparator.CommerceShippingMethodNameComparator;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -105,8 +105,7 @@ public class CommerceShippingMethodsDisplayContext {
 	}
 
 	public String getScreenNavigationCategoryKey() {
-		return CommerceShippingScreenNavigationConstants.
-			CATEGORY_KEY_COMMERCE_SHIPPING_METHOD_DETAILS;
+		return CommerceConstants.CATEGORY_KEY_COMMERCE_SHIPPING_METHOD_DETAILS;
 	}
 
 	public SearchContainer<CommerceShippingMethod> getSearchContainer()
