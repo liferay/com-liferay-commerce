@@ -149,7 +149,8 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 
 		return (Sku)skuDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override
