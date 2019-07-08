@@ -109,14 +109,6 @@ public class RatingsImporter {
 
 		String externalSystemType = jsonObject.getString("externalSystemType");
 
-		String externalReferenceId = jsonObject.getString("externalProductId");
-
-		double rating = jsonObject.getDouble("rating");
-
-		long timestamp = jsonObject.getLong("timestamp");
-
-		Date createDate = new Date(timestamp * 1000);
-
 		// Retrieve Liferay User ID
 
 		UserIdMapper userIdMapper = null;
@@ -137,7 +129,7 @@ public class RatingsImporter {
 			return;
 		}
 
-		long userId = userIdMapper.getUserId();
+		String externalReferenceId = jsonObject.getString("externalProductId");
 
 		// Retrieve CPDefinition
 
@@ -154,6 +146,14 @@ public class RatingsImporter {
 		if (cpDefinition == null) {
 			return;
 		}
+
+		long userId = userIdMapper.getUserId();
+
+		double rating = jsonObject.getDouble("rating");
+
+		long timestamp = jsonObject.getLong("timestamp");
+
+		Date createDate = new Date(timestamp * 1000);
 
 		long classNameId = _classNameLocalService.getClassNameId(
 			CPDefinition.class);

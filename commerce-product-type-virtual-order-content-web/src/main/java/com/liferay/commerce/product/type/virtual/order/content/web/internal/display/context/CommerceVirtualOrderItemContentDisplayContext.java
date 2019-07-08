@@ -101,13 +101,10 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 
 		HttpServletRequest httpServletRequest =
 			_commerceVirtualOrderItemContentRequestHelper.getRequest();
-		ThemeDisplay themeDisplay =
-			_commerceVirtualOrderItemContentRequestHelper.getThemeDisplay();
 
 		long groupId = ParamUtil.getLong(httpServletRequest, "groupId");
 		String articleId = ParamUtil.getString(httpServletRequest, "articleId");
 		double version = ParamUtil.getDouble(httpServletRequest, "version");
-		int page = ParamUtil.getInteger(httpServletRequest, "page");
 
 		JournalArticle article = JournalArticleLocalServiceUtil.fetchArticle(
 			groupId, articleId, version);
@@ -115,6 +112,11 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		if (article == null) {
 			return _articleDisplay;
 		}
+
+		ThemeDisplay themeDisplay =
+			_commerceVirtualOrderItemContentRequestHelper.getThemeDisplay();
+
+		int page = ParamUtil.getInteger(httpServletRequest, "page");
 
 		_articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(
 			article, null, null, themeDisplay.getLanguageId(), page,

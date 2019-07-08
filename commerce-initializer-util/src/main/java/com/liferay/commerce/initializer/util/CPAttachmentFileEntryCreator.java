@@ -72,9 +72,6 @@ public class CPAttachmentFileEntryCreator {
 		serviceContext.setUserId(userId);
 		serviceContext.setCompanyId(user.getCompanyId());
 
-		long classNameId = _portal.getClassNameId(classedModel.getModelClass());
-		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
-
 		Map<Locale, String> titleMap = new HashMap<>();
 
 		titleMap.put(serviceContext.getLocale(), fileName);
@@ -166,6 +163,9 @@ public class CPAttachmentFileEntryCreator {
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;
 		}
+
+		long classNameId = _portal.getClassNameId(classedModel.getModelClass());
+		long classPK = GetterUtil.getLong(classedModel.getPrimaryKeyObj());
 
 		return _cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
 			classNameId, classPK, fileEntry.getFileEntryId(), displayDateMonth,

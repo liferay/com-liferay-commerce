@@ -888,16 +888,16 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject productJSONObject = jsonArray.getJSONObject(i);
 
-			String name = productJSONObject.getString("Name");
-
-			CPDefinition cpDefinition = getCPDefinitionByName(name);
-
 			JSONArray relatedProducts = productJSONObject.getJSONArray(
 				"RelatedProducts");
 
 			if (relatedProducts == null) {
 				continue;
 			}
+
+			String name = productJSONObject.getString("Name");
+
+			CPDefinition cpDefinition = getCPDefinitionByName(name);
 
 			_cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(
 				cpDefinition.getCPDefinitionId(),

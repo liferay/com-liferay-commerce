@@ -49,8 +49,6 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 			HttpServletRequest httpServletRequest, int start, int end)
 		throws Exception {
 
-		long groupId = portal.getScopeGroupId(httpServletRequest);
-
 		CPCatalogEntry cpCatalogEntry =
 			(CPCatalogEntry)httpServletRequest.getAttribute(
 				CPWebKeys.CP_CATALOG_ENTRY);
@@ -58,6 +56,8 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 		if (cpCatalogEntry == null) {
 			return new CPDataSourceResult(new ArrayList<>(), 0);
 		}
+
+		long groupId = portal.getScopeGroupId(httpServletRequest);
 
 		SearchContext searchContext = new SearchContext();
 

@@ -41,11 +41,11 @@ public class LanguageUtils {
 	public static Map<Locale, String> getLocalizedMap(Map<String, String> map)
 		throws PortalException {
 
-		Map<Locale, String> localizedMap = new HashMap<>();
-
 		if (map == null) {
 			return null;
 		}
+
+		Map<Locale, String> localizedMap = new HashMap<>();
 
 		for (Map.Entry<String, String> entry : map.entrySet()) {
 			Locale locale = LocaleUtil.fromLanguageId(entry.getKey());
