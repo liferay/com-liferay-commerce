@@ -210,12 +210,6 @@ public class CPFileImporterImpl implements CPFileImporter {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
-			serviceContext.getScopeGroupId(), privateLayout);
-
-		UnicodeProperties typeSettingProperties =
-			layoutSet.getSettingsProperties();
-
 		Theme theme = _themeLocalService.fetchTheme(
 			serviceContext.getCompanyId(), themeId);
 
@@ -226,6 +220,12 @@ public class CPFileImporterImpl implements CPFileImporter {
 
 			return;
 		}
+
+		LayoutSet layoutSet = _layoutSetLocalService.getLayoutSet(
+			serviceContext.getScopeGroupId(), privateLayout);
+
+		UnicodeProperties typeSettingProperties =
+			layoutSet.getSettingsProperties();
 
 		setThemeSettingProperties(theme, typeSettingProperties);
 
@@ -281,10 +281,6 @@ public class CPFileImporterImpl implements CPFileImporter {
 		throws Exception {
 
 		String articleId = jsonObject.getString("articleId");
-		String ddmStructureKey = jsonObject.getString("ddmStructureKey");
-		String ddmTemplateKey = jsonObject.getString("ddmTemplateKey");
-		String description = jsonObject.getString("description");
-		String title = jsonObject.getString("title");
 
 		articleId = StringUtil.toUpperCase(StringUtil.trim(articleId));
 
@@ -295,6 +291,11 @@ public class CPFileImporterImpl implements CPFileImporter {
 		if (journalArticle != null) {
 			return journalArticle;
 		}
+
+		String ddmStructureKey = jsonObject.getString("ddmStructureKey");
+		String ddmTemplateKey = jsonObject.getString("ddmTemplateKey");
+		String description = jsonObject.getString("description");
+		String title = jsonObject.getString("title");
 
 		DDMStructure ddmStructure = fetchOrAddDDMStructure(
 			ddmStructureKey, classLoader, dependenciesFilePath,

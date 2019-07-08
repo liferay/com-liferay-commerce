@@ -225,7 +225,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			long cpDefinitionOptionRelId = jsonObject.getLong("key");
-			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			CPDefinitionOptionRel cpDefinitionOptionRel =
 				_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
@@ -234,6 +233,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			if (cpDefinitionOptionRel == null) {
 				continue;
 			}
+
+			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			for (int j = 0; j < valueJSONArray.length(); j++) {
 				long cpDefinitionOptionValueRelId = GetterUtil.getLong(
@@ -374,14 +375,14 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				continue;
 			}
 
-			String fieldName = "ATTRIBUTE_" + key + "_VALUE_ID";
-
 			JSONArray valuesJSONArray = _jsonFactory.createJSONArray(
 				jsonObject.getString("value"));
 
 			if (valuesJSONArray.length() == 0) {
 				continue;
 			}
+
+			String fieldName = "ATTRIBUTE_" + key + "_VALUE_ID";
 
 			String value = valuesJSONArray.getString(0);
 
@@ -490,7 +491,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			long cpDefinitionOptionRelId = jsonObject.getLong("key");
-			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			CPDefinitionOptionRel cpDefinitionOptionRel =
 				_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
@@ -499,6 +499,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			if (cpDefinitionOptionRel == null) {
 				continue;
 			}
+
+			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			for (int j = 0; j < valueJSONArray.length(); j++) {
 				String value = StringPool.BLANK;
@@ -705,8 +707,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			boolean skuContributor, boolean optional, boolean publicStore)
 		throws PortalException {
 
-		DDMForm ddmForm = new DDMForm();
-
 		List<CPDefinitionOptionRel> cpDefinitionOptionRels;
 
 		if (skuContributor) {
@@ -724,17 +724,19 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			return null;
 		}
 
+		DDMForm ddmForm = new DDMForm();
+
 		for (CPDefinitionOptionRel cpDefinitionOptionRel :
 				cpDefinitionOptionRels) {
-
-			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
-				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
 			if (Validator.isNull(
 					cpDefinitionOptionRel.getDDMFormFieldTypeName())) {
 
 				continue;
 			}
+
+			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
 			DDMFormField ddmFormField = new DDMFormField(
 				String.valueOf(
@@ -833,15 +835,15 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException {
 
+		if (ddmForm == null) {
+			return StringPool.BLANK;
+		}
+
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			renderRequest);
 
 		HttpServletResponse httpServletResponse =
 			_portal.getHttpServletResponse(renderResponse);
-
-		if (ddmForm == null) {
-			return StringPool.BLANK;
-		}
 
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
