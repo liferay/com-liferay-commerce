@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 
 <suppressions>
-	<checkstyle>
-		<suppress checks="ChainingCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
-	</checkstyle>
 	<source-check>
 		<suppress checks="BNDExportsCheck" files="commerce-application-list/bnd\.bnd" />
 		<suppress checks="BNDExportsCheck" files="commerce-initializer-util/bnd\.bnd" />
