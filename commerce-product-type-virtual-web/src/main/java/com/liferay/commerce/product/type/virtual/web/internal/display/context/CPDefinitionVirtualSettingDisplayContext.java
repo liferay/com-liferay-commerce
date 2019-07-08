@@ -121,10 +121,6 @@ public class CPDefinitionVirtualSettingDisplayContext
 	}
 
 	public String getDownloadFileEntryURL() throws PortalException {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
 			getCPDefinitionVirtualSetting();
 
@@ -135,16 +131,16 @@ public class CPDefinitionVirtualSettingDisplayContext
 		FileEntry fileEntry = _dlAppService.getFileEntry(
 			cpDefinitionVirtualSetting.getFileEntryId());
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
 			StringPool.BLANK, true, true);
 	}
 
 	public String getDownloadSampleFileEntryURL() throws PortalException {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
 			getCPDefinitionVirtualSetting();
 
@@ -155,6 +151,10 @@ public class CPDefinitionVirtualSettingDisplayContext
 		long fileEntryId = cpDefinitionVirtualSetting.getSampleFileEntryId();
 
 		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,

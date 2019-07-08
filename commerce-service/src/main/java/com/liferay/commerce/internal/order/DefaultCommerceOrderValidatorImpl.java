@@ -138,10 +138,6 @@ public class DefaultCommerceOrderValidatorImpl
 
 		int minOrderQuantity = cpDefinitionInventoryEngine.getMinOrderQuantity(
 			cpInstance);
-		int maxOrderQuantity = cpDefinitionInventoryEngine.getMaxOrderQuantity(
-			cpInstance);
-		String[] allowedOrderQuantities =
-			cpDefinitionInventoryEngine.getAllowedOrderQuantities(cpInstance);
 
 		if (commerceOrderItem.getQuantity() < minOrderQuantity) {
 			return new CommerceOrderValidatorResult(
@@ -150,6 +146,9 @@ public class DefaultCommerceOrderValidatorImpl
 					locale, "the-minimum-quantity-is-x",
 					new Object[] {minOrderQuantity}));
 		}
+
+		int maxOrderQuantity = cpDefinitionInventoryEngine.getMaxOrderQuantity(
+			cpInstance);
 
 		if ((maxOrderQuantity > 0) &&
 			(commerceOrderItem.getQuantity() > maxOrderQuantity)) {
@@ -160,6 +159,9 @@ public class DefaultCommerceOrderValidatorImpl
 					locale, "the-maximum-quantity-is-x",
 					new Object[] {maxOrderQuantity}));
 		}
+
+		String[] allowedOrderQuantities =
+			cpDefinitionInventoryEngine.getAllowedOrderQuantities(cpInstance);
 
 		if ((allowedOrderQuantities.length > 0) &&
 			!ArrayUtil.contains(

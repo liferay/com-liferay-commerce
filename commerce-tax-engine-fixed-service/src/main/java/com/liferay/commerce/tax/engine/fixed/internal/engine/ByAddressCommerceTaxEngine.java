@@ -58,7 +58,6 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 			CommerceTaxCalculateRequest commerceTaxCalculateRequest)
 		throws CommerceTaxEngineException {
 
-		CommerceTaxValue commerceTaxValue = null;
 		long commerceCountryId = 0;
 		long commerceRegionId = 0;
 		String zip = StringPool.BLANK;
@@ -106,9 +105,7 @@ public class ByAddressCommerceTaxEngine implements CommerceTaxEngine {
 			taxValue = taxValue.divide(_ONE_HUNDRED);
 		}
 
-		commerceTaxValue = new CommerceTaxValue(KEY, KEY, taxValue);
-
-		return commerceTaxValue;
+		return new CommerceTaxValue(KEY, KEY, taxValue);
 	}
 
 	@Override

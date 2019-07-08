@@ -158,8 +158,6 @@ public class CPAssetCategoriesNavigationDisplayContext {
 	public String getDefaultImageSrc(long categoryId, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry = null;
-
 		long classNameId = _portal.getClassNameId(AssetCategory.class);
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
@@ -172,7 +170,8 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			return null;
 		}
 
-		cpAttachmentFileEntry = cpAttachmentFileEntries.get(0);
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntries.get(0);
 
 		if (cpAttachmentFileEntry == null) {
 			return null;
@@ -210,14 +209,14 @@ public class CPAssetCategoriesNavigationDisplayContext {
 	public String getFriendlyURL(long categoryId, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		long classNameId = _portal.getClassNameId(AssetCategory.class);
-
 		AssetCategory assetCategory = _assetCategoryService.fetchCategory(
 			categoryId);
 
 		if (assetCategory == null) {
 			return StringPool.BLANK;
 		}
+
+		long classNameId = _portal.getClassNameId(AssetCategory.class);
 
 		String languageId = LanguageUtil.getLanguageId(
 			themeDisplay.getLocale());

@@ -113,12 +113,6 @@ public class CommerceOrderImporter {
 
 		String externalSystemType = jsonObject.getString("externalSystemType");
 
-		String externalProductId = jsonObject.getString("externalProductId");
-
-		long timestamp = GetterUtil.getLong(jsonObject.getString("timestamp"));
-
-		Date createDate = new Date(timestamp * 1000);
-
 		// Retrieve Liferay User ID
 
 		UserIdMapper userIdMapper = null;
@@ -139,12 +133,9 @@ public class CommerceOrderImporter {
 			return;
 		}
 
-		long userId = userIdMapper.getUserId();
-
-		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.getPersonalCommerceAccount(userId);
-
 		// Retrieve CPDefinition and associated instances
+
+		String externalProductId = jsonObject.getString("externalProductId");
 
 		CProduct cProduct = _cProductLocalService.fetchCProductByReferenceCode(
 			serviceContext.getCompanyId(), externalProductId);
@@ -172,16 +163,23 @@ public class CommerceOrderImporter {
 			return;
 		}
 
-		CPInstance cpInstance = cpInstances.get(0);
-
 		// Create Order
+
+		long userId = userIdMapper.getUserId();
+
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.getPersonalCommerceAccount(userId);
 
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				userId, serviceContext.getScopeGroupId(),
 				commerceAccount.getCommerceAccountId());
 
-		// We upate the order create date to the one in the dataset
+		// We update the order create date to the one in the dataset
+
+		long timestamp = GetterUtil.getLong(jsonObject.getString("timestamp"));
+
+		Date createDate = new Date(timestamp * 1000);
 
 		commerceOrder.setCreateDate(createDate);
 
@@ -195,6 +193,8 @@ public class CommerceOrderImporter {
 			commerceAccount.getCommerceAccountId());
 
 		// Create CommerceOrderItem
+
+		CPInstance cpInstance = cpInstances.get(0);
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,

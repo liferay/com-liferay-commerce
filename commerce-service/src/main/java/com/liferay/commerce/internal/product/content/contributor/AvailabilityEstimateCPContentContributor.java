@@ -63,10 +63,6 @@ public class AvailabilityEstimateCPContentContributor
 			CPInstance cpInstance, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		if (cpInstance == null) {
@@ -80,6 +76,10 @@ public class AvailabilityEstimateCPContentContributor
 		if (commerceChannel == null) {
 			return jsonObject;
 		}
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.

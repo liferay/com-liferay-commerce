@@ -72,8 +72,6 @@ public class CPOptionCategoriesImporter {
 
 		CPOptionCategory cpOptionCategory;
 
-		Locale locale = LocaleUtil.getSiteDefault();
-
 		String key = jsonObject.getString("Key");
 
 		cpOptionCategory = _cpOptionCategoryLocalService.fetchCPOptionCategory(
@@ -82,6 +80,8 @@ public class CPOptionCategoriesImporter {
 		if (cpOptionCategory != null) {
 			return cpOptionCategory;
 		}
+
+		Locale locale = LocaleUtil.getSiteDefault();
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
 			locale, CommerceInitializerUtil.getValue(jsonObject, "Title", key));

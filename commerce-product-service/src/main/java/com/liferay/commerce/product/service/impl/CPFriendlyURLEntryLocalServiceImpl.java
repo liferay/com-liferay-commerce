@@ -195,12 +195,12 @@ public class CPFriendlyURLEntryLocalServiceImpl
 		throws PortalException {
 
 		for (Map.Entry<Locale, String> urlTitleEntry : urlTitleMap.entrySet()) {
-			String languageId = LanguageUtil.getLanguageId(
-				urlTitleEntry.getKey());
-
 			if (Validator.isNull(urlTitleEntry.getValue())) {
 				continue;
 			}
+
+			String languageId = LanguageUtil.getLanguageId(
+				urlTitleEntry.getKey());
 
 			addCPFriendlyURLEntry(
 				groupId, companyId, classNameId, classPK, languageId,

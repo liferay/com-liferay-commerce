@@ -69,11 +69,6 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			DDMDataProviderRequest ddmDataProviderRequest)
 		throws DDMDataProviderException {
 
-		HttpServletRequest httpServletRequest =
-			ddmDataProviderRequest.getHttpServletRequest();
-
-		Locale locale = httpServletRequest.getLocale();
-
 		long cpDefinitionId = GetterUtil.getLong(
 			ddmDataProviderRequest.getParameter("cpDefinitionId"));
 
@@ -100,6 +95,11 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		if (cpDefinitionId == 0) {
 			return DDMDataProviderResponse.of();
 		}
+
+		HttpServletRequest httpServletRequest =
+			ddmDataProviderRequest.getHttpServletRequest();
+
+		Locale locale = httpServletRequest.getLocale();
 
 		try {
 

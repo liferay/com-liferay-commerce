@@ -49,11 +49,11 @@ public class CommerceInventoryWarehousesImporter {
 			JSONArray jsonArray, long scopeGroupId, long userId)
 		throws Exception {
 
-		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
-
 		if ((jsonArray == null) || (jsonArray.length() <= 0)) {
 			return Collections.emptyList();
 		}
+
+		ServiceContext serviceContext = getServiceContext(scopeGroupId, userId);
 
 		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
 			new ArrayList<>(jsonArray.length());

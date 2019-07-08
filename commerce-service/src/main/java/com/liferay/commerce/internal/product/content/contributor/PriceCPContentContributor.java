@@ -62,10 +62,6 @@ public class PriceCPContentContributor implements CPContentContributor {
 			CPInstance cpInstance, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		if (cpInstance == null) {
@@ -88,6 +84,10 @@ public class PriceCPContentContributor implements CPContentContributor {
 		CPDefinitionInventoryEngine cpDefinitionInventoryEngine =
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(

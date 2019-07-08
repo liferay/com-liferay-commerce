@@ -73,14 +73,14 @@ public class CPDefinitionSearcher extends BaseSearcher {
 	protected void addSearchAllCategories(BooleanFilter queryBooleanFilter)
 		throws Exception {
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		long[] allCategoryIds = _cpQuery.getAllCategoryIds();
 
 		if (allCategoryIds.length == 0) {
 			return;
 		}
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
 
 		long[] filteredAllCategoryIds = AssetUtil.filterCategoryIds(
 			permissionChecker, allCategoryIds);
@@ -159,14 +159,14 @@ public class CPDefinitionSearcher extends BaseSearcher {
 	protected void addSearchAnyCategories(BooleanFilter queryBooleanFilter)
 		throws Exception {
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		long[] anyCategoryIds = _cpQuery.getAnyCategoryIds();
 
 		if (anyCategoryIds.length == 0) {
 			return;
 		}
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
 
 		long[] filteredAnyCategoryIds = AssetUtil.filterCategoryIds(
 			permissionChecker, anyCategoryIds);

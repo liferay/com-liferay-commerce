@@ -78,10 +78,6 @@ public class CommercePriceListsImporter {
 			return;
 		}
 
-		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.getCommerceCurrency(
-				serviceContext.getCompanyId(), currencyCode);
-
 		long parentPriceListId = 0;
 
 		String parentPriceListName = jsonObject.getString("ParentPriceList");
@@ -105,6 +101,10 @@ public class CommercePriceListsImporter {
 
 			return;
 		}
+
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.getCommerceCurrency(
+				serviceContext.getCompanyId(), currencyCode);
 
 		User user = _userLocalService.getUser(serviceContext.getUserId());
 

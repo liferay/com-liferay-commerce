@@ -41,8 +41,6 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		int orderStatus = message.getInteger("orderStatus");
-
 		long commerceOrderId = message.getLong("commerceOrderId");
 
 		CommerceOrder commerceOrder =
@@ -51,6 +49,8 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		if (commerceOrder == null) {
 			return;
 		}
+
+		int orderStatus = message.getInteger("orderStatus");
 
 		List<CommerceOrderItem> commerceOrderItems =
 			commerceOrder.getCommerceOrderItems();

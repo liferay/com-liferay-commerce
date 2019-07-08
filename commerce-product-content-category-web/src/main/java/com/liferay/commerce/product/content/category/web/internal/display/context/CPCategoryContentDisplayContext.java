@@ -87,8 +87,6 @@ public class CPCategoryContentDisplayContext {
 			return null;
 		}
 
-		CPAttachmentFileEntry cpAttachmentFileEntry = null;
-
 		long classNameId = _portal.getClassNameId(AssetCategory.class);
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
@@ -101,7 +99,8 @@ public class CPCategoryContentDisplayContext {
 			return null;
 		}
 
-		cpAttachmentFileEntry = cpAttachmentFileEntries.get(0);
+		CPAttachmentFileEntry cpAttachmentFileEntry =
+			cpAttachmentFileEntries.get(0);
 
 		if (cpAttachmentFileEntry == null) {
 			return null;

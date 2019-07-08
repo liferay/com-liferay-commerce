@@ -56,11 +56,11 @@ public class CommerceTaxCalculationImpl implements CommerceTaxCalculation {
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
 
-		Map<String, CommerceTaxValue> taxValueMap = new HashMap<>();
-
 		if (commerceOrder == null) {
 			return Collections.emptyList();
 		}
+
+		Map<String, CommerceTaxValue> taxValueMap = new HashMap<>();
 
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {

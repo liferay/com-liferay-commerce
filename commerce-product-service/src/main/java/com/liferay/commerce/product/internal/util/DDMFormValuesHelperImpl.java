@@ -159,13 +159,13 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 	}
 
 	protected DDMFormFieldValue getDDMFormFieldValue(JSONObject jsonObject) {
-		DDMFormFieldValue ddmFormFieldValue = new DDMFormFieldValue();
-
 		String key = jsonObject.getString("key");
 
 		if (Validator.isNull(key)) {
 			return null;
 		}
+
+		DDMFormFieldValue ddmFormFieldValue = new DDMFormFieldValue();
 
 		ddmFormFieldValue.setName(key);
 
