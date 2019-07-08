@@ -53,7 +53,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.ServiceProxyFactory;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -861,16 +860,14 @@ public class CommerceAccountLocalServiceImpl
 	private static final TransactionConfig _transactionConfig =
 		TransactionConfig.Factory.create(
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
-	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
-		ServiceProxyFactory.newServiceTrackedInstance(
-			UserFileUploadsSettings.class,
-			CommerceAccountLocalServiceImpl.class, "_userFileUploadsSettings",
-			false);
 
 	@ServiceReference(type = CommerceAccountRoleHelper.class)
 	private CommerceAccountRoleHelper _commerceAccountRoleHelper;
 
 	@ServiceReference(type = Portal.class)
 	private Portal _portal;
+
+	@ServiceReference(type = UserFileUploadsSettings.class)
+	private UserFileUploadsSettings _userFileUploadsSettings;
 
 }
