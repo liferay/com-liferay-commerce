@@ -39,6 +39,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -339,7 +340,7 @@ public class CPFileImporterImpl implements CPFileImporter {
 			displayDateHour += 12;
 		}
 
-		return _journalArticleLocalService.addArticle(
+		journalArticle = _journalArticleLocalService.addArticle(
 			serviceContext.getUserId(), serviceContext.getScopeGroupId(), 0L,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, 0L, articleId, false,
 			1, titleMap, descriptionMap, content, ddmStructureKey,
@@ -347,6 +348,29 @@ public class CPFileImporterImpl implements CPFileImporter {
 			displayDateYear, displayDateHour, displayDateMinute, 0, 0, 0, 0, 0,
 			true, 0, 0, 0, 0, 0, true, true, false, StringPool.BLANK, null,
 			null, StringPool.BLANK, serviceContext);
+
+		JSONArray permissionsJSONArray = jsonObject.getJSONArray("permissions");
+
+		if ((permissionsJSONArray != null) &&
+			(permissionsJSONArray.length() > 0)) {
+
+			updatePermissions(
+				journalArticle.getCompanyId(),
+				journalArticle.getModelClassName(),
+				String.valueOf(journalArticle.getResourcePrimKey()),
+				permissionsJSONArray);
+		}
+		else {
+
+			// Give site members view permissions
+
+			updatePermissions(
+				journalArticle.getCompanyId(),
+				journalArticle.getModelClassName(),
+				String.valueOf(journalArticle.getResourcePrimKey()), null);
+		}
+
+		return journalArticle;
 	}
 
 	protected void createLayout(
@@ -868,6 +892,12 @@ public class CPFileImporterImpl implements CPFileImporter {
 	protected void updatePermissions(
 			long companyId, String name, String primKey, JSONArray jsonArray)
 		throws PortalException {
+
+		if (jsonArray == null) {
+			jsonArray = JSONFactoryUtil.createJSONArray(
+				"[{\"actionIds\": [\"VIEW\"], \"roleName\": \"Site Member\"," +
+					"\"scope\": 4}]");
+		}
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);

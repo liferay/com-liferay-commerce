@@ -18,10 +18,15 @@ import com.liferay.knowledge.base.constants.KBFolderConstants;
 import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.knowledge.base.service.KBArticleLocalService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -54,6 +59,41 @@ public class KBArticleImporter {
 		}
 	}
 
+	protected void updatePermissions(
+			long companyId, String name, String primKey, JSONArray jsonArray)
+		throws PortalException {
+
+		if (jsonArray == null) {
+			jsonArray = JSONFactoryUtil.createJSONArray(
+				"[{\"actionIds\": [\"VIEW\"], \"roleName\": \"Site Member\"," +
+					"\"scope\": 4}]");
+		}
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			int scope = jsonObject.getInt("scope");
+
+			String roleName = jsonObject.getString("roleName");
+
+			Role role = _roleLocalService.getRole(companyId, roleName);
+
+			String[] actionIds = new String[0];
+
+			JSONArray actionIdsJSONArray = jsonObject.getJSONArray("actionIds");
+
+			if (actionIdsJSONArray != null) {
+				for (int j = 0; j < actionIdsJSONArray.length(); j++) {
+					actionIds = ArrayUtil.append(
+						actionIds, actionIdsJSONArray.getString(j));
+				}
+			}
+
+			_resourcePermissionLocalService.setResourcePermissions(
+				companyId, name, scope, primKey, role.getRoleId(), actionIds);
+		}
+	}
+
 	private void _addKBArticle(
 			JSONObject jsonObject, long userId, ServiceContext serviceContext)
 		throws Exception {
@@ -83,6 +123,25 @@ public class KBArticleImporter {
 			_kbArticleLocalService.updateKBArticleAsset(
 				userId, kbArticle, new long[0], assetTagNames, new long[0]);
 		}
+
+		JSONArray permissionsJSONArray = jsonObject.getJSONArray("permissions");
+
+		if ((permissionsJSONArray != null) &&
+			(permissionsJSONArray.length() > 0)) {
+
+			updatePermissions(
+				kbArticle.getCompanyId(), kbArticle.getModelClassName(),
+				String.valueOf(kbArticle.getResourcePrimKey()),
+				permissionsJSONArray);
+		}
+		else {
+
+			// Give site members view permissions
+
+			updatePermissions(
+				kbArticle.getCompanyId(), kbArticle.getModelClassName(),
+				String.valueOf(kbArticle.getResourcePrimKey()), null);
+		}
 	}
 
 	@Reference
@@ -90,6 +149,12 @@ public class KBArticleImporter {
 
 	@Reference
 	private KBArticleLocalService _kbArticleLocalService;
+
+	@Reference
+	private ResourcePermissionLocalService _resourcePermissionLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
