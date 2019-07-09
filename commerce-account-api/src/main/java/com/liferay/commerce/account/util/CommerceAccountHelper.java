@@ -19,7 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.portal.kernel.exception.PortalException;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletRequest;
 
 /**
  * @author Marco Leo
@@ -28,23 +28,21 @@ import javax.servlet.http.HttpServletRequest;
 @ProviderType
 public interface CommerceAccountHelper {
 
-	public String getAccountManagementPortletURL(
-			HttpServletRequest httpServletRequest)
+	public String getAccountManagementPortletURL(ServletRequest servletRequest)
 		throws PortalException;
 
 	public long[] getCommerceAccountGroupIds(long commerceAccountId);
 
 	public CommerceAccount getCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest)
+			long groupId, ServletRequest servletRequest)
 		throws PortalException;
 
 	public CommerceAccount getCurrentCommerceAccount(
-			long groupId, HttpServletRequest httpServletRequest)
+			ServletRequest servletRequest)
 		throws PortalException;
 
 	public void setCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest, long groupId,
-			long commerceAccountId)
+			ServletRequest servletRequest, long groupId, long commerceAccountId)
 		throws PortalException;
 
 }

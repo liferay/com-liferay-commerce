@@ -39,6 +39,7 @@ import java.util.stream.Stream;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -53,9 +54,11 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	@Override
-	public String getAccountManagementPortletURL(
-			HttpServletRequest httpServletRequest)
+	public String getAccountManagementPortletURL(ServletRequest servletRequest)
 		throws PortalException {
+
+		HttpServletRequest httpServletRequest =
+			(HttpServletRequest)servletRequest;
 
 		long groupId = _portal.getScopeGroupId(httpServletRequest);
 
@@ -88,20 +91,12 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	@Override
 	public CommerceAccount getCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest)
+			long groupId, ServletRequest servletRequest)
 		throws PortalException {
 
-		return getCurrentCommerceAccount(
-			_portal.getScopeGroupId(httpServletRequest), httpServletRequest);
-	}
-
-	@Override
-	public CommerceAccount getCurrentCommerceAccount(
-			long groupId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		httpServletRequest = _portal.getOriginalServletRequest(
-			httpServletRequest);
+		HttpServletRequest httpServletRequest =
+			_portal.getOriginalServletRequest(
+				(HttpServletRequest)servletRequest);
 
 		CommerceAccount commerceAccount = null;
 
@@ -113,10 +108,10 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 		if (currentCommerceAccountId == 0) {
 			commerceAccount = _getSingleCommerceAccount(
-				groupId, httpServletRequest);
+				groupId, servletRequest);
 
 			if (commerceAccount == null) {
-				setCurrentCommerceAccount(httpServletRequest, groupId, -1);
+				setCurrentCommerceAccount(servletRequest, groupId, -1);
 			}
 		}
 		else if (currentCommerceAccountId > 0) {
@@ -128,9 +123,18 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	}
 
 	@Override
+	public CommerceAccount getCurrentCommerceAccount(
+			ServletRequest servletRequest)
+		throws PortalException {
+
+		return getCurrentCommerceAccount(
+			_portal.getScopeGroupId((HttpServletRequest)servletRequest),
+			servletRequest);
+	}
+
+	@Override
 	public void setCurrentCommerceAccount(
-			HttpServletRequest httpServletRequest, long groupId,
-			long commerceAccountId)
+			ServletRequest servletRequest, long groupId, long commerceAccountId)
 		throws PortalException {
 
 		if (commerceAccountId > 0) {
@@ -140,8 +144,9 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		String curGroupOrganizationIdKey =
 			_CURRENT_COMMERCE_ACCOUNT_ID_KEY + groupId;
 
-		httpServletRequest = _portal.getOriginalServletRequest(
-			httpServletRequest);
+		HttpServletRequest httpServletRequest =
+			_portal.getOriginalServletRequest(
+				(HttpServletRequest)servletRequest);
 
 		HttpSession httpSession = httpServletRequest.getSession();
 
@@ -179,8 +184,11 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	}
 
 	private CommerceAccount _getSingleCommerceAccount(
-			long groupId, HttpServletRequest httpServletRequest)
+			long groupId, ServletRequest servletRequest)
 		throws PortalException {
+
+		HttpServletRequest httpServletRequest =
+			(HttpServletRequest)servletRequest;
 
 		User user = _portal.getUser(httpServletRequest);
 
