@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.mapping.io.DDMFormLayoutJSONDeserializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormValuesJSONDeserializer;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormLayout;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMStructureConstants;
@@ -39,10 +40,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +81,41 @@ public class DDMFormImporter {
 			_addDDMFormInstance(
 				jsonArray.getJSONObject(i), userId, scopeGroupId,
 				serviceContext);
+		}
+	}
+
+	protected void updatePermissions(
+			long companyId, String name, String primKey, JSONArray jsonArray)
+		throws PortalException {
+
+		if (jsonArray == null) {
+			jsonArray = JSONFactoryUtil.createJSONArray(
+				"[{\"actionIds\": [\"VIEW\", \"ADD_FORM_INSTANCE_RECORD\"]," +
+					"\"roleName\": \"Site Member\", \"scope\": 4}]");
+		}
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+			int scope = jsonObject.getInt("scope");
+
+			String roleName = jsonObject.getString("roleName");
+
+			Role role = _roleLocalService.getRole(companyId, roleName);
+
+			String[] actionIds = new String[0];
+
+			JSONArray actionIdsJSONArray = jsonObject.getJSONArray("actionIds");
+
+			if (actionIdsJSONArray != null) {
+				for (int j = 0; j < actionIdsJSONArray.length(); j++) {
+					actionIds = ArrayUtil.append(
+						actionIds, actionIdsJSONArray.getString(j));
+				}
+			}
+
+			_resourcePermissionLocalService.setResourcePermissions(
+				companyId, name, scope, primKey, role.getRoleId(), actionIds);
 		}
 	}
 
@@ -117,9 +157,31 @@ public class DDMFormImporter {
 			_ddmFormValuesJSONDeserializer.deserialize(
 				ddmStructure.getDDMForm(), jsonFormSettings);
 
-		_ddmFormInstanceLocalService.addFormInstance(
-			userId, scopeGroupId, ddmStructure.getStructureId(), nameMap,
-			descriptionMap, settingsDDMFormValues, serviceContext);
+		DDMFormInstance ddmFormInstance =
+			_ddmFormInstanceLocalService.addFormInstance(
+				userId, scopeGroupId, ddmStructure.getStructureId(), nameMap,
+				descriptionMap, settingsDDMFormValues, serviceContext);
+
+		JSONArray permissionsJSONArray = jsonObject.getJSONArray("permissions");
+
+		if ((permissionsJSONArray != null) &&
+			(permissionsJSONArray.length() > 0)) {
+
+			updatePermissions(
+				ddmFormInstance.getCompanyId(),
+				ddmFormInstance.getModelClassName(),
+				String.valueOf(ddmFormInstance.getPrimaryKey()),
+				permissionsJSONArray);
+		}
+		else {
+
+			// Give site members view and add form instance permissions
+
+			updatePermissions(
+				ddmFormInstance.getCompanyId(),
+				ddmFormInstance.getModelClassName(),
+				String.valueOf(ddmFormInstance.getPrimaryKey()), null);
+		}
 	}
 
 	private List<DDMFormFieldValue> _createDDMFormFieldValues(
@@ -232,6 +294,12 @@ public class DDMFormImporter {
 
 	@Reference
 	private DDMStructureLocalService _ddmStructureLocalService;
+
+	@Reference
+	private ResourcePermissionLocalService _resourcePermissionLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
