@@ -57,8 +57,8 @@ class SearchBar extends Component {
 		const noModalsActive = !Array.from(document.querySelectorAll('.modal.show')).length;
 
 		if (
-			!this.active && 
-			evt.key === '/' && 
+			!this.active &&
+			evt.key === '/' &&
 			evt.target.tagName !== 'INPUT' &&
 			noModalsActive
 		) {
