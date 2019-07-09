@@ -71,8 +71,7 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(),
-			commerceContext.getCommerceChannelGroupId(), 0, 0,
+			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -93,8 +92,7 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(),
-			commerceContext.getCommerceChannelGroupId(), 0, 0,
+			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -115,8 +113,7 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			commerceOrder.getCompanyId(),
-			commerceContext.getCommerceChannelGroupId(), 0, 0,
+			commerceOrder.getCompanyId(), commerceOrder.getGroupId(), 0, 0,
 			commerceOrder.getCommerceOrderId(),
 			commerceContext.getCommerceAccountGroupIds(),
 			commerceOrder.getCouponCode(),
@@ -144,8 +141,7 @@ public class CommerceDiscountCalculationImpl
 		}
 
 		SearchContext searchContext = buildSearchContext(
-			cpInstance.getCompanyId(),
-			commerceContext.getCommerceChannelGroupId(),
+			cpInstance.getCompanyId(), cpInstance.getGroupId(),
 			cpInstance.getCPDefinitionId(), cpInstanceId, 0,
 			commerceContext.getCommerceAccountGroupIds(), couponCode,
 			CommerceDiscountTarget.Type.APPLY_TO_PRODUCT);
