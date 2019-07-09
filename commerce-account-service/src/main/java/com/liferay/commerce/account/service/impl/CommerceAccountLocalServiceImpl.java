@@ -26,6 +26,8 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
@@ -585,15 +587,18 @@ public class CommerceAccountLocalServiceImpl
 				commerceAccountPersistence.fetchByPrimaryKey(commerceAccountId);
 
 			if (commerceAccount == null) {
-				commerceAccounts = null;
-
 				Indexer<CommerceAccount> indexer =
 					IndexerRegistryUtil.getIndexer(CommerceAccount.class);
 
 				long companyId = GetterUtil.getLong(
 					document.get(Field.COMPANY_ID));
 
-				indexer.delete(companyId, document.getUID());
+				try {
+					indexer.delete(companyId, document.getUID());
+				}
+				catch (Exception e) {
+					_log.error("Unable to delete indexer result", e);
+				}
 			}
 			else if (commerceAccount != null) {
 				commerceAccounts.add(commerceAccount);
@@ -732,5 +737,8 @@ public class CommerceAccountLocalServiceImpl
 
 	@ServiceReference(type = Portal.class)
 	private Portal _portal;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountLocalServiceImpl.class);
 
 }
