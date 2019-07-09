@@ -7,3 +7,8 @@
 # Bundle Version 1.0.2
 #
 02fdc39d5fea01302dd84fbe97e5c5f8a8e23a69^..86edfd50bc9d3f15f568ec8742bc21a9cee1d4bb=LPS-77699
+
+#
+# Bundle Version 1.0.3
+#
+86edfd50bc9d3f15f568ec8742bc21a9cee1d4bb^..a5d8dd7143c15f8db3be29e5bb85e9228e38f43b=COMMERCE-1309 COMMERCE-1591 COMMERCE-WLT LPS-77699
