@@ -15,9 +15,9 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.model.DLFileEntryTypeConstants;
 import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.document.library.kernel.service.DLFolderLocalService;
 import com.liferay.petra.string.StringPool;
@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Repository;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.RepositoryLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
@@ -125,14 +126,14 @@ public class DLImporter {
 
 			_addDLFileEntry(
 				fileJSONObject, classLoader, documentsDependencyPath, userId,
-				scopeGroupId, dlFolder, serviceContext);
+				dlFolder, serviceContext);
 		}
 	}
 
 	private DLFileEntry _addDLFileEntry(
 			JSONObject jsonObject, ClassLoader classLoader,
-			String documentsDependencyPath, long userId, long scopeGroupId,
-			DLFolder dlFolder, ServiceContext serviceContext)
+			String documentsDependencyPath, long userId, DLFolder dlFolder,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		// DL File Entry
@@ -152,13 +153,14 @@ public class DLImporter {
 
 			File file = FileUtil.createTempFile(inputStream);
 
-			dlFileEntry = _dlFileEntryLocalService.addFileEntry(
-				userId, scopeGroupId, repository.getRepositoryId(),
-				dlFolder.getFolderId(), fileName,
-				MimeTypesUtil.getContentType(file), title, description,
-				StringPool.BLANK,
-				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT,
-				null, file, inputStream, file.length(), serviceContext);
+			FileEntry fileEntry = _dlAppLocalService.addFileEntry(
+				userId, repository.getRepositoryId(), dlFolder.getFolderId(),
+				fileName, MimeTypesUtil.getContentType(file), title,
+				description, StringPool.BLANK, file, serviceContext);
+
+			dlFileEntry = _dlFileEntryLocalService.getDLFileEntry(
+				fileEntry.getFileEntryId());
+
 			JSONArray permissionsJSONArray = jsonObject.getJSONArray(
 				"permissions");
 
@@ -223,6 +225,9 @@ public class DLImporter {
 
 		return dlFolder;
 	}
+
+	@Reference
+	private DLAppLocalService _dlAppLocalService;
 
 	@Reference
 	private DLFileEntryLocalService _dlFileEntryLocalService;
