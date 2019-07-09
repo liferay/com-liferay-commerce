@@ -571,9 +571,7 @@ public class CommerceAccountLocalServiceImpl
 		return searchContext;
 	}
 
-	protected List<CommerceAccount> getCommerceAccounts(Hits hits)
-		throws PortalException {
-
+	protected List<CommerceAccount> getCommerceAccounts(Hits hits) {
 		List<Document> documents = hits.toList();
 
 		List<CommerceAccount> commerceAccounts = new ArrayList<>(
@@ -586,23 +584,13 @@ public class CommerceAccountLocalServiceImpl
 			CommerceAccount commerceAccount =
 				commerceAccountPersistence.fetchByPrimaryKey(commerceAccountId);
 
-			if (commerceAccount == null) {
-				Indexer<CommerceAccount> indexer =
-					IndexerRegistryUtil.getIndexer(CommerceAccount.class);
-
-				long companyId = GetterUtil.getLong(
-					document.get(Field.COMPANY_ID));
-
-				try {
-					indexer.delete(companyId, document.getUID());
-				}
-				catch (Exception e) {
-					_log.error("Unable to delete indexer result", e);
-				}
-			}
-			else if (commerceAccount != null) {
+			if (commerceAccount != null) {
 				commerceAccounts.add(commerceAccount);
+
+				continue;
 			}
+
+			_deleteCommerceAccountIndexer(document);
 		}
 
 		return commerceAccounts;
@@ -688,6 +676,20 @@ public class CommerceAccountLocalServiceImpl
 		}
 	}
 
+	private void _deleteCommerceAccountIndexer(Document document) {
+		Indexer<CommerceAccount> indexer = IndexerRegistryUtil.getIndexer(
+			CommerceAccount.class);
+
+		long companyId = GetterUtil.getLong(document.get(Field.COMPANY_ID));
+
+		try {
+			indexer.delete(companyId, document.getUID());
+		}
+		catch (Exception e) {
+			_log.error("Unable to delete commerce account indexer", e);
+		}
+	}
+
 	private QueryDefinition<CommerceAccount> _getCommerceAccountQueryDefinition(
 		Long parentCommerceAccountId, int commerceSiteType, String keywords,
 		Boolean active) {
@@ -726,6 +728,9 @@ public class CommerceAccountLocalServiceImpl
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAccountLocalServiceImpl.class);
+
 	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
 		ServiceProxyFactory.newServiceTrackedInstance(
 			UserFileUploadsSettings.class,
@@ -737,8 +742,5 @@ public class CommerceAccountLocalServiceImpl
 
 	@ServiceReference(type = Portal.class)
 	private Portal _portal;
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAccountLocalServiceImpl.class);
 
 }
