@@ -168,25 +168,9 @@ public class CommerceUsersImporter {
 		User user = _userLocalService.fetchUserByScreenName(
 			serviceContext.getCompanyId(), screenName);
 
-		if (user != null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"User already exists with screen name: " + screenName);
-			}
-
-			return user;
-		}
-
-		user = _userLocalService.fetchUserByEmailAddress(
-			serviceContext.getCompanyId(), emailAddress);
-
-		if (user != null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"User already exists with email address: " + emailAddress);
-			}
-
-			return user;
+		if (user == null) {
+			user = _userLocalService.fetchUserByEmailAddress(
+				serviceContext.getCompanyId(), emailAddress);
 		}
 
 		long companyId = serviceContext.getCompanyId();
@@ -197,14 +181,22 @@ public class CommerceUsersImporter {
 
 		boolean autoScreenName = Validator.isNull(screenName);
 
-		user = _userLocalService.addUser(
-			creatorUserId, companyId, autoPassword, password, password,
-			autoScreenName, screenName, emailAddress, facebookId, openId,
-			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, userGroupIds, false, serviceContext);
+		if (user == null) {
+			user = _userLocalService.addUser(
+				creatorUserId, companyId, autoPassword, password, password,
+				autoScreenName, screenName, emailAddress, facebookId, openId,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupIds, false,
+				serviceContext);
+		}
+		else {
+			groupIds = ArrayUtil.append(user.getGroupIds(), groupIds);
+		}
 
-		if (Validator.isNotNull(comments)) {
+		if (Validator.isNotNull(comments) ||
+			!groupIds.equals(user.getGroupIds())) {
+
 			user = _userLocalService.updateUser(
 				user.getUserId(), StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, false, userReminderQueryQuestion,
