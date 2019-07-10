@@ -397,6 +397,9 @@
 				"Value": "10.2\" x 10.2\" x 1.7\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 100,
 		"Warehouse2": 100,
