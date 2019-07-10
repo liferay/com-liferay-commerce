@@ -16,8 +16,9 @@ package com.liferay.commerce.shipment.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceOrderItemService;
-import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.commerce.shipment.web.internal.display.context.CommerceShipmentDisplayContext;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -53,8 +54,9 @@ public class SelectCommerceShipmentItemsMVCRenderCommand
 		CommerceShipmentDisplayContext commerceShipmentDisplayContext =
 			new CommerceShipmentDisplayContext(
 				_actionHelper, _portal.getHttpServletRequest(renderRequest),
-				_commerceOrderItemService, _commerceOrderService,
-				_commerceShipmentService, _commerceInventoryWarehouseService);
+				_commerceChannelService, _commerceOrderItemService,
+				_commerceOrderLocalService, _commerceShipmentService,
+				_commerceInventoryWarehouseService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceShipmentDisplayContext);
@@ -66,6 +68,9 @@ public class SelectCommerceShipmentItemsMVCRenderCommand
 	private ActionHelper _actionHelper;
 
 	@Reference
+	private CommerceChannelService _commerceChannelService;
+
+	@Reference
 	private CommerceInventoryWarehouseService
 		_commerceInventoryWarehouseService;
 
@@ -73,7 +78,7 @@ public class SelectCommerceShipmentItemsMVCRenderCommand
 	private CommerceOrderItemService _commerceOrderItemService;
 
 	@Reference
-	private CommerceOrderService _commerceOrderService;
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
 	private CommerceShipmentService _commerceShipmentService;
