@@ -265,9 +265,11 @@ public class ProductDTOConverter implements DTOConverter {
 
 		Stream<AssetTag> stream = assetEntryAssetTags.stream();
 
-		return (String[])stream.map(
+		return stream.map(
 			AssetTag::getName
-		).toArray();
+		).toArray(
+			String[]::new
+		);
 	}
 
 	@Reference
