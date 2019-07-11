@@ -180,6 +180,9 @@ public class CommerceChannelLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceChannel.class.getName());
 
+		// TODO: Replace with a direct call to
+		// groupLocalService.fetchGroup(long, long, long).
+
 		try {
 			return TransactionInvokerUtil.invoke(
 				_transactionConfig,
