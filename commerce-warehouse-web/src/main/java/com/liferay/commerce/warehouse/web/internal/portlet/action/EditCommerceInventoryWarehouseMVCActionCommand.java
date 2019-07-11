@@ -24,7 +24,6 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceRegion;
-import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
@@ -209,7 +208,7 @@ public class EditCommerceInventoryWarehouseMVCActionCommand
 			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceChannelRel.class.getName(), actionRequest);
+			CommerceInventoryWarehouse.class.getName(), actionRequest);
 
 		_commerceChannelRelService.deleteCommerceChannelRels(
 			CommerceInventoryWarehouse.class.getName(),
