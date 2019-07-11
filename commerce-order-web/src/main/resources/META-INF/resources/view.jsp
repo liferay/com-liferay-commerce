@@ -29,6 +29,8 @@ CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrder
 
 <liferay-util:include page="/toolbar.jsp" servletContext="<%= application %>" />
 
+<liferay-ui:error exception="<%= CommerceOrderBillingAddressException.class %>" message="the-order-selected-needs-a-billing-address" />
+
 <aui:form action="<%= editCommerceOrderURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
