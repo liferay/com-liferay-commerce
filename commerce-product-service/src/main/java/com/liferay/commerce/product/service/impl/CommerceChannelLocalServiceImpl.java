@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.transaction.TransactionConfig;
+import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
@@ -177,8 +180,20 @@ public class CommerceChannelLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceChannel.class.getName());
 
-		return groupPersistence.findByC_C_C(
-			commerceChannel.getCompanyId(), classNameId, commerceChannelId);
+		try {
+			return TransactionInvokerUtil.invoke(
+				_transactionConfig,
+				() -> groupPersistence.findByC_C_C(
+					commerceChannel.getCompanyId(), classNameId,
+					commerceChannelId));
+		}
+		catch (Throwable t) {
+			if (t instanceof PortalException) {
+				throw (PortalException)t;
+			}
+
+			throw new PortalException(t);
+		}
 	}
 
 	@Override
@@ -348,5 +363,9 @@ public class CommerceChannelLocalServiceImpl
 	private static final String[] _SELECTED_FIELD_NAMES = {
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
+
+	private static final TransactionConfig _transactionConfig =
+		TransactionConfig.Factory.create(
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 }

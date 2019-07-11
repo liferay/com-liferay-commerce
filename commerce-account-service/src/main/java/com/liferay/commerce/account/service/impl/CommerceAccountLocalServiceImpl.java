@@ -45,6 +45,9 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.transaction.TransactionConfig;
+import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ServiceProxyFactory;
@@ -280,8 +283,20 @@ public class CommerceAccountLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceAccount.class.getName());
 
-		return groupPersistence.findByC_C_C(
-			commerceAccount.getCompanyId(), classNameId, commerceAccountId);
+		try {
+			return TransactionInvokerUtil.invoke(
+				_transactionConfig,
+				() -> groupPersistence.findByC_C_C(
+					commerceAccount.getCompanyId(), classNameId,
+					commerceAccountId));
+		}
+		catch (Throwable t) {
+			if (t instanceof PortalException) {
+				throw (PortalException)t;
+			}
+
+			throw new PortalException(t);
+		}
 	}
 
 	@Override
@@ -721,6 +736,9 @@ public class CommerceAccountLocalServiceImpl
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
 
+	private static final TransactionConfig _transactionConfig =
+		TransactionConfig.Factory.create(
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
 		ServiceProxyFactory.newServiceTrackedInstance(
 			UserFileUploadsSettings.class,
