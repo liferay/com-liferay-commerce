@@ -95,10 +95,21 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 							%>
 
 							<liferay-ui:search-container-column-text
-								cssClass="important table-cell-content"
+								cssClass="important"
 								href="<%= rowURL %>"
 								name="shipment-number"
 								property="commerceShipmentId"
+							/>
+
+							<%
+							long commerceOrderId = commerceShipmentDisplayContext.getCommerceOrderId(commerceShipment.getCommerceShipmentId());
+							%>
+
+							<liferay-ui:search-container-column-text
+								cssClass="important"
+								href="<%= commerceShipmentDisplayContext.getCommerceOrderUrl(commerceOrderId) %>"
+								name="order-number"
+								value="<%= (commerceOrderId == 0) ? StringPool.BLANK : String.valueOf(commerceOrderId) %>"
 							/>
 
 							<liferay-ui:search-container-column-text
