@@ -57,12 +57,9 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 				commerceInventoryBookedQuantity.
 					getCommerceInventoryBookedQuantityId(),
 				quantity);
+		}
 
-			decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
-		}
-		else {
-			decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
-		}
+		decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
 
 		String description =
 			"Consume Quantity: " + _jsonFactory.serialize(context);
