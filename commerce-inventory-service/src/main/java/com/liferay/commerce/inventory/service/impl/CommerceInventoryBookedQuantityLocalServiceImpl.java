@@ -33,13 +33,15 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 
 	@Override
 	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
-			long userId, String sku, int quantity, Date expirationDate,
-			Map<String, String> context)
+			long commerceBookedQuantityId, long userId, String sku,
+			int quantity, Date expirationDate, Map<String, String> context)
 		throws PortalException {
 
 		User user = userLocalService.getUser(userId);
 
-		long commerceBookedQuantityId = counterLocalService.increment();
+		if (commerceBookedQuantityId == 0) {
+			commerceBookedQuantityId = counterLocalService.increment();
+		}
 
 		CommerceInventoryBookedQuantity commerceBookedQuantity =
 			commerceInventoryBookedQuantityPersistence.create(
@@ -60,6 +62,16 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 
 		return commerceInventoryBookedQuantityPersistence.update(
 			commerceBookedQuantity);
+	}
+
+	@Override
+	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
+			long userId, String sku, int quantity, Date expirationDate,
+			Map<String, String> context)
+		throws PortalException {
+
+		return addCommerceBookedQuantity(
+			0, userId, sku, quantity, expirationDate, context);
 	}
 
 	@Override
@@ -106,6 +118,32 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 		}
 
 		return resultQuantity;
+	}
+
+	@Override
+	public CommerceInventoryBookedQuantity resetCommerceBookedQuantity(
+			long commerceBookedQuantityId, long userId, String sku,
+			int quantity, Date expirationDate, Map<String, String> context)
+		throws PortalException {
+
+		CommerceInventoryBookedQuantity commerceBookedQuantity =
+			commerceInventoryBookedQuantityPersistence.fetchByPrimaryKey(
+				commerceBookedQuantityId);
+
+		if (commerceBookedQuantity == null) {
+			commerceBookedQuantity = addCommerceBookedQuantity(
+				commerceBookedQuantityId, userId, sku, quantity, expirationDate,
+				context);
+		}
+		else {
+			commerceBookedQuantity.setQuantity(quantity);
+
+			commerceBookedQuantity =
+				commerceInventoryBookedQuantityPersistence.update(
+					commerceBookedQuantity);
+		}
+
+		return commerceBookedQuantity;
 	}
 
 }

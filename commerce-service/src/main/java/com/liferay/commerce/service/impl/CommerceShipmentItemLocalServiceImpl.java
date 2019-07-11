@@ -18,6 +18,7 @@ import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipmentItem;
@@ -277,6 +278,20 @@ public class CommerceShipmentItemLocalServiceImpl
 			commerceShipmentItem.getUserId(),
 			commerceShipmentItem.getCommerceInventoryWarehouseId(),
 			commerceOrderItem.getSku(), commerceShipmentItem.getQuantity());
+
+		Map<String, String> context = new HashMap<>();
+
+		context.put(
+			"OrderId ", String.valueOf(commerceOrderItem.getCommerceOrderId()));
+		context.put(
+			"OrderItemId ",
+			String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
+
+		_commerceInventoryBookedQuantityLocalService.
+			resetCommerceBookedQuantity(
+				commerceOrderItem.getBookedQuantityId(),
+				commerceOrderItem.getUserId(), commerceOrderItem.getSku(),
+				commerceOrderItem.getQuantity(), null, context);
 	}
 
 	private void _updateStockQuantity(
@@ -341,6 +356,10 @@ public class CommerceShipmentItemLocalServiceImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceShipmentItemLocalServiceImpl.class);
+
+	@ServiceReference(type = CommerceInventoryBookedQuantityLocalService.class)
+	private CommerceInventoryBookedQuantityLocalService
+		_commerceInventoryBookedQuantityLocalService;
 
 	@ServiceReference(type = CommerceInventoryEngine.class)
 	private CommerceInventoryEngine _commerceInventoryEngine;
