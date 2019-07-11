@@ -251,6 +251,45 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 				cpDefinition.getCPDefinitionId()));
 	}
 
+	private ProductShippingConfiguration _getProductShippingConfiguration(
+		Product product) {
+
+		ProductShippingConfiguration shippingConfiguration =
+			product.getShippingConfiguration();
+
+		if (shippingConfiguration != null) {
+			return shippingConfiguration;
+		}
+
+		return new ProductShippingConfiguration();
+	}
+
+	private ProductSubscriptionConfiguration
+		_getProductSubscriptionConfiguration(Product product) {
+
+		ProductSubscriptionConfiguration subscriptionConfiguration =
+			product.getSubscriptionConfiguration();
+
+		if (subscriptionConfiguration != null) {
+			return subscriptionConfiguration;
+		}
+
+		return new ProductSubscriptionConfiguration();
+	}
+
+	private ProductTaxConfiguration _getProductTaxConfiguration(
+		Product product) {
+
+		ProductTaxConfiguration taxConfiguration =
+			product.getTaxConfiguration();
+
+		if (taxConfiguration != null) {
+			return taxConfiguration;
+		}
+
+		return new ProductTaxConfiguration();
+	}
+
 	private List<Product> _toProducts(List<CPDefinition> cpDefinitions)
 		throws Exception {
 
@@ -530,11 +569,11 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		ProductShippingConfiguration shippingConfiguration =
-			product.getShippingConfiguration();
+			_getProductShippingConfiguration(product);
 		ProductSubscriptionConfiguration subscriptionConfiguration =
-			product.getSubscriptionConfiguration();
-		ProductTaxConfiguration taxConfiguration =
-			product.getTaxConfiguration();
+			_getProductSubscriptionConfiguration(product);
+		ProductTaxConfiguration taxConfiguration = _getProductTaxConfiguration(
+			product);
 
 		CommerceCatalog commerceCatalog =
 			_commerceCatalogLocalService.getCommerceCatalog(
@@ -590,7 +629,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		Map<String, ?> expando = product.getExpando();
 
-		if (!expando.isEmpty()) {
+		if ((expando != null) && !expando.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CPDefinition.class,
 				cpDefinition.getPrimaryKey(), expando);
