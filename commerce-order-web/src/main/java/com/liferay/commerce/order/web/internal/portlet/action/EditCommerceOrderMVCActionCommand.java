@@ -20,6 +20,7 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -31,8 +32,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
-import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
 import java.math.BigDecimal;
 
@@ -61,6 +60,21 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 	protected void approveCommerceOrder(long commerceOrderId) throws Exception {
 		_commerceOrderService.approveCommerceOrder(commerceOrderId);
+	}
+
+	protected void checkoutCommerceOrder(
+			ActionRequest actionRequest, long commerceOrderId)
+		throws Exception {
+
+		CommerceContext commerceContext =
+			(CommerceContext)actionRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		_commerceOrderService.checkoutCommerceOrder(
+			commerceOrderId, commerceContext, serviceContext);
 	}
 
 	protected void deleteCommerceOrders(ActionRequest actionRequest)
@@ -138,6 +152,15 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 			approveCommerceOrder(commerceOrderId);
 		}
+		else if (transitionName.equals("checkout")) {
+			checkoutCommerceOrder(actionRequest, commerceOrderId);
+		}
+		else if (transitionName.equals("reorder")) {
+			reorderCommerceOrder(actionRequest, commerceOrderId);
+		}
+		else if (transitionName.equals("submit")) {
+			submitCommerceOrder(commerceOrderId);
+		}
 	}
 
 	protected void executeWorkflowTransition(
@@ -161,6 +184,22 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		catch (Throwable t) {
 			throw new PortletException(t);
 		}
+	}
+
+	protected void reorderCommerceOrder(
+			ActionRequest actionRequest, long commerceOrderId)
+		throws Exception {
+
+		CommerceContext commerceContext =
+			(CommerceContext)actionRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		_commerceOrderService.reorderCommerceOrder(
+			commerceOrderId, commerceContext);
+	}
+
+	protected void submitCommerceOrder(long commerceOrderId) throws Exception {
+		_commerceOrderService.submitCommerceOrder(commerceOrderId);
 	}
 
 	protected void updateBillingAddress(ActionRequest actionRequest)
@@ -338,9 +377,6 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 	private Portal _portal;
 
 	@Reference
-	private WorkflowInstanceManager _workflowInstanceManager;
-
-	@Reference
-	private WorkflowTaskManager _workflowTaskManager;
+	private PortletURLFactory _portletURLFactory;
 
 }
