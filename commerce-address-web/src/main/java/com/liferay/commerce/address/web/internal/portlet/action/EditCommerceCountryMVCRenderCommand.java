@@ -20,6 +20,7 @@ import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -62,7 +63,8 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 				new CommerceCountriesDisplayContext(
 					_actionHelper, _commerceChannelRelService,
 					_commerceChannelService, _commerceCountryService,
-					renderRequest, renderResponse);
+					_commerceRegionsStarterRegistry, renderRequest,
+					renderResponse);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -98,6 +100,9 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
+
+	@Reference
+	private CommerceRegionsStarterRegistry _commerceRegionsStarterRegistry;
 
 	@Reference
 	private Portal _portal;
