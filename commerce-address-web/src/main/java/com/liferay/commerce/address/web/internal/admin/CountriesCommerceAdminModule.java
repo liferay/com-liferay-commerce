@@ -20,6 +20,7 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -94,8 +95,8 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 
 		CommerceCountriesDisplayContext commerceCountriesDisplayContext =
 			new CommerceCountriesDisplayContext(
-				_actionHelper, _commerceCountryService, renderRequest,
-				renderResponse);
+				_actionHelper, _commerceCountryService,
+				_commerceRegionsStarterRegistry, renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCountriesDisplayContext);
@@ -115,6 +116,9 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
+
+	@Reference
+	private CommerceRegionsStarterRegistry _commerceRegionsStarterRegistry;
 
 	@Reference
 	private JSPRenderer _jspRenderer;

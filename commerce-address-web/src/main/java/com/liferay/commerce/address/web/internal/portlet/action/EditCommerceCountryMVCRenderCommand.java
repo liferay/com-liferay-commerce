@@ -18,6 +18,7 @@ import com.liferay.commerce.address.web.internal.display.context.CommerceCountri
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -60,7 +61,8 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 		try {
 			CommerceCountriesDisplayContext commerceCountriesDisplayContext =
 				new CommerceCountriesDisplayContext(
-					_actionHelper, _commerceCountryService, renderRequest,
+					_actionHelper, _commerceCountryService,
+					_commerceRegionsStarterRegistry, renderRequest,
 					renderResponse);
 
 			renderRequest.setAttribute(
@@ -94,6 +96,9 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
+
+	@Reference
+	private CommerceRegionsStarterRegistry _commerceRegionsStarterRegistry;
 
 	@Reference
 	private Portal _portal;
