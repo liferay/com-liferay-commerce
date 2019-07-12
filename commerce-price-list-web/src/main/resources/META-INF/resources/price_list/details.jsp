@@ -21,8 +21,6 @@ CommercePriceListDisplayContext commercePriceListDisplayContext = (CommercePrice
 
 CommercePriceList commercePriceList = commercePriceListDisplayContext.getCommercePriceList();
 List<CommerceCatalog> commerceCatalogs = commercePriceListDisplayContext.getCommerceCatalogs();
-List<CommercePriceListAccountRel> commercePriceListAccountRels = commercePriceListDisplayContext.getCommercePriceListAccountRels();
-List<CommercePriceListCommerceAccountGroupRel> commercePriceListAccountGroupEntryRels = commercePriceListDisplayContext.getCommercePriceListCommerceAccountGroupRels();
 %>
 
 <liferay-ui:error-marker
@@ -102,7 +100,7 @@ if (parentCommercePriceList != null) {
 	total="<%= parentCommercePriceLists.size() %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= parentCommercePriceLists %>"
+		results="<%= parentCommercePriceList %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -134,10 +132,10 @@ if (parentCommercePriceList != null) {
 	headerNames="null,null"
 	id="commercePriceListAccountGroupEntryRelSearchContainer"
 	iteratorURL="<%= currentURLObj %>"
-	total="<%= commercePriceListAccountGroupEntryRels.size() %>"
+	total="<%= commercePriceListDisplayContext.getCommercePriceListCommerceAccountGroupRelsCount() %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= commercePriceListAccountGroupEntryRels.subList(searchContainer.getStart(), searchContainer.getResultEnd()) %>"
+		results="<%= commercePriceListDisplayContext.getCommercePriceListCommerceAccountGroupRels(searchContainer.getStart(), searchContainer.getResultEnd()) %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -174,10 +172,10 @@ if (parentCommercePriceList != null) {
 	headerNames="null,null"
 	id="commercePriceListAccountRelSearchContainer"
 	iteratorURL="<%= currentURLObj %>"
-	total="<%= commercePriceListAccountRels.size() %>"
+	total="<%= commercePriceListDisplayContext.getCommercePriceListAccountRelsCount() %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= commercePriceListAccountRels.subList(searchContainer.getStart(), searchContainer.getResultEnd()) %>"
+		results="<%= commercePriceListDisplayContext.getCommercePriceListAccountRels(searchContainer.getStart(), searchContainer.getResultEnd()) %>"
 	/>
 
 	<liferay-ui:search-container-row

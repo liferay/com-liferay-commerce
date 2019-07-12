@@ -193,7 +193,8 @@ public class CommercePriceListDisplayContext
 			QueryUtil.ALL_POS, new CommerceCurrencyPriorityComparator(true));
 	}
 
-	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels()
+	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
+			int start, int end)
 		throws PortalException {
 
 		long commercePriceListId = getCommercePriceListId();
@@ -203,11 +204,22 @@ public class CommercePriceListDisplayContext
 		}
 
 		return _commercePriceListAccountRelService.
-			getCommercePriceListAccountRels(commercePriceListId);
+			getCommercePriceListAccountRels(commercePriceListId, start, end);
+	}
+
+	public int getCommercePriceListAccountRelsCount() throws PortalException {
+		long commercePriceListId = getCommercePriceListId();
+
+		if (commercePriceListId <= 0) {
+			return 0;
+		}
+
+		return _commercePriceListAccountRelService.
+			getCommercePriceListAccountRelsCount(commercePriceListId);
 	}
 
 	public List<CommercePriceListCommerceAccountGroupRel>
-			getCommercePriceListCommerceAccountGroupRels()
+			getCommercePriceListCommerceAccountGroupRels(int start, int end)
 		throws PortalException {
 
 		long commercePriceListId = getCommercePriceListId();
@@ -217,7 +229,22 @@ public class CommercePriceListDisplayContext
 		}
 
 		return _commercePriceListCommerceAccountGroupRelService.
-			getCommercePriceListCommerceAccountGroupRels(commercePriceListId);
+			getCommercePriceListCommerceAccountGroupRels(
+				commercePriceListId, start, end, null);
+	}
+
+	public int getCommercePriceListCommerceAccountGroupRelsCount()
+		throws PortalException {
+
+		long commercePriceListId = getCommercePriceListId();
+
+		if (commercePriceListId <= 0) {
+			return 0;
+		}
+
+		return _commercePriceListCommerceAccountGroupRelService.
+			getCommercePriceListCommerceAccountGroupRelsCount(
+				commercePriceListId);
 	}
 
 	public List<CommercePriceList> getCommercePriceLists()
@@ -374,7 +401,8 @@ public class CommercePriceListDisplayContext
 
 		List<CommercePriceListCommerceAccountGroupRel>
 			commercePriceListCommerceAccountGroupRels =
-				getCommercePriceListCommerceAccountGroupRels();
+				getCommercePriceListCommerceAccountGroupRels(
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (commercePriceListCommerceAccountGroupRels.isEmpty()) {
 			return new long[0];
@@ -390,7 +418,8 @@ public class CommercePriceListDisplayContext
 
 	protected long[] getCheckedCommerceAccountIds() throws PortalException {
 		List<CommercePriceListAccountRel> commercePriceListAccountRels =
-			getCommercePriceListAccountRels();
+			getCommercePriceListAccountRels(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (commercePriceListAccountRels.isEmpty()) {
 			return new long[0];
