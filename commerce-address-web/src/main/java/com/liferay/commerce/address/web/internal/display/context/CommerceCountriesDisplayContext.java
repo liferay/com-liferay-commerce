@@ -16,7 +16,10 @@ package com.liferay.commerce.address.web.internal.display.context;
 
 import com.liferay.commerce.address.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.starter.CommerceRegionsStarter;
+import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -49,11 +52,26 @@ public class CommerceCountriesDisplayContext
 	public CommerceCountriesDisplayContext(
 		ActionHelper actionHelper,
 		CommerceCountryService commerceCountryService,
+		CommerceRegionsStarterRegistry commerceRegionsStarterRegistry,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		super(actionHelper, renderRequest, renderResponse);
 
 		_commerceCountryService = commerceCountryService;
+		_commerceRegionsStarterRegistry = commerceRegionsStarterRegistry;
+	}
+
+	public CommerceRegionsStarter getCommerceRegionsStarter()
+		throws PortalException {
+
+		CommerceCountry commerceCountry = getCommerceCountry();
+
+		if (commerceCountry == null) {
+			return null;
+		}
+
+		return _commerceRegionsStarterRegistry.getCommerceRegionsStarter(
+			String.valueOf(commerceCountry.getNumericISOCode()));
 	}
 
 	@Override
@@ -142,6 +160,13 @@ public class CommerceCountriesDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasCommerceRegions(CommerceCountry commerceCountry) {
+		List<CommerceRegion> commerceRegions =
+			commerceCountry.getCommerceRegions();
+
+		return !commerceRegions.isEmpty();
+	}
+
 	protected SearchContext buildSearchContext(
 		long companyId, long groupId, Boolean active, String keywords,
 		int start, int end, Sort sort) {
@@ -200,6 +225,8 @@ public class CommerceCountriesDisplayContext
 	}
 
 	private final CommerceCountryService _commerceCountryService;
+	private final CommerceRegionsStarterRegistry
+		_commerceRegionsStarterRegistry;
 	private String _keywords;
 
 }
