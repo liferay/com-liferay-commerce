@@ -178,7 +178,8 @@ public class CommercePriceListAccountRelServiceHttp {
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
 				getCommercePriceListAccountRels(
-					HttpPrincipal httpPrincipal, long commercePriceListId)
+					HttpPrincipal httpPrincipal, long commercePriceListId,
+					int start, int end)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -188,7 +189,7 @@ public class CommercePriceListAccountRelServiceHttp {
 				_getCommercePriceListAccountRelsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commercePriceListId);
+				methodKey, commercePriceListId, start, end);
 
 			Object returnObj = null;
 
@@ -218,6 +219,45 @@ public class CommercePriceListAccountRelServiceHttp {
 		}
 	}
 
+	public static int getCommercePriceListAccountRelsCount(
+			HttpPrincipal httpPrincipal, long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommercePriceListAccountRelServiceUtil.class,
+				"getCommercePriceListAccountRelsCount",
+				_getCommercePriceListAccountRelsCountParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commercePriceListId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		CommercePriceListAccountRelServiceHttp.class);
 
@@ -236,6 +276,10 @@ public class CommercePriceListAccountRelServiceHttp {
 		};
 	private static final Class<?>[]
 		_getCommercePriceListAccountRelsParameterTypes3 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[]
+		_getCommercePriceListAccountRelsCountParameterTypes4 = new Class[] {
 			long.class
 		};
 

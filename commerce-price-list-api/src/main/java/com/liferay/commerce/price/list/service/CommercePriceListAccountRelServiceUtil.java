@@ -75,10 +75,19 @@ public class CommercePriceListAccountRelServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
-				getCommercePriceListAccountRels(long commercePriceListId)
+				getCommercePriceListAccountRels(
+					long commercePriceListId, int start, int end)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommercePriceListAccountRels(
+			commercePriceListId, start, end);
+	}
+
+	public static int getCommercePriceListAccountRelsCount(
+			long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommercePriceListAccountRelsCount(
 			commercePriceListId);
 	}
 

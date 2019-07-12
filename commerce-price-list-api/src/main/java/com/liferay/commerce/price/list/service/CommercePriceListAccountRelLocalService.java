@@ -254,7 +254,7 @@ public interface CommercePriceListAccountRelLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
-		long commercePriceListId);
+		long commercePriceListId, int start, int end);
 
 	/**
 	 * Returns the number of commerce price list account rels.
@@ -263,6 +263,9 @@ public interface CommercePriceListAccountRelLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommercePriceListAccountRelsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommercePriceListAccountRelsCount(long commercePriceListId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
