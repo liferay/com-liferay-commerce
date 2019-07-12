@@ -119,10 +119,16 @@ public class CommercePriceListAccountRelLocalServiceImpl
 
 	@Override
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
-		long commercePriceListId) {
+		long commercePriceListId, int start, int end) {
 
 		return commercePriceListAccountRelPersistence.findByCommercePriceListId(
-			commercePriceListId);
+			commercePriceListId, start, end);
+	}
+
+	@Override
+	public int getCommercePriceListAccountRelsCount(long commercePriceListId) {
+		return commercePriceListAccountRelPersistence.
+			countByCommercePriceListId(commercePriceListId);
 	}
 
 	protected void reindexCommercePriceList(long commercePriceListId)
