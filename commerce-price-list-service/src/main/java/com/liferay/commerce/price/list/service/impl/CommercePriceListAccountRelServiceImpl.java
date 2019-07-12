@@ -73,7 +73,7 @@ public class CommercePriceListAccountRelServiceImpl
 
 	@Override
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
-			long commercePriceListId)
+			long commercePriceListId, int start, int end)
 		throws PortalException {
 
 		PortalPermissionUtil.check(
@@ -81,7 +81,19 @@ public class CommercePriceListAccountRelServiceImpl
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListAccountRelLocalService.
-			getCommercePriceListAccountRels(commercePriceListId);
+			getCommercePriceListAccountRels(commercePriceListId, start, end);
+	}
+
+	@Override
+	public int getCommercePriceListAccountRelsCount(long commercePriceListId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceListAccountRelLocalService.
+			getCommercePriceListAccountRelsCount(commercePriceListId);
 	}
 
 }
