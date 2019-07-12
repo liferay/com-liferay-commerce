@@ -22,8 +22,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -56,6 +59,16 @@ public class USACommerceRegionsStarter implements CommerceRegionsStarter {
 			clazz.getClassLoader(), layoutsPath, false);
 
 		return _jsonFactory.createJSONArray(regionsJSON);
+	}
+
+	@Override
+	public String getKey() {
+		return String.valueOf(USA_NUMERIC_ISO_CODE);
+	}
+
+	@Override
+	public String getLabel(Locale locale) {
+		return LanguageUtil.get(locale, "usa");
 	}
 
 	@Override
