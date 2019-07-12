@@ -17,11 +17,14 @@ package com.liferay.commerce.address.web.internal.display.context;
 import com.liferay.commerce.address.web.internal.display.context.util.CommerceCountryRequestHelper;
 import com.liferay.commerce.address.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.starter.CommerceRegionsStarter;
+import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -56,6 +59,7 @@ public class CommerceCountriesDisplayContext
 		CommerceChannelRelService commerceChannelRelService,
 		CommerceChannelService commerceChannelService,
 		CommerceCountryService commerceCountryService,
+		CommerceRegionsStarterRegistry commerceRegionsStarterRegistry,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		super(actionHelper, renderRequest, renderResponse);
@@ -63,6 +67,7 @@ public class CommerceCountriesDisplayContext
 		_commerceChannelRelService = commerceChannelRelService;
 		_commerceChannelService = commerceChannelService;
 		_commerceCountryService = commerceCountryService;
+		_commerceRegionsStarterRegistry = commerceRegionsStarterRegistry;
 
 		_commerceCountryRequestHelper = new CommerceCountryRequestHelper(
 			renderRequest);
@@ -86,6 +91,19 @@ public class CommerceCountriesDisplayContext
 	public List<CommerceChannel> getCommerceChannels() throws PortalException {
 		return _commerceChannelService.getCommerceChannels(
 			_commerceCountryRequestHelper.getCompanyId());
+	}
+
+	public CommerceRegionsStarter getCommerceRegionsStarter()
+		throws PortalException {
+
+		CommerceCountry commerceCountry = getCommerceCountry();
+
+		if (commerceCountry == null) {
+			return null;
+		}
+
+		return _commerceRegionsStarterRegistry.getCommerceRegionsStarter(
+			String.valueOf(commerceCountry.getNumericISOCode()));
 	}
 
 	@Override
@@ -172,6 +190,13 @@ public class CommerceCountriesDisplayContext
 		return searchContainer;
 	}
 
+	public boolean hasCommerceRegions(CommerceCountry commerceCountry) {
+		List<CommerceRegion> commerceRegions =
+			commerceCountry.getCommerceRegions();
+
+		return !commerceRegions.isEmpty();
+	}
+
 	protected SearchContext buildSearchContext(
 		long companyId, Boolean active, String keywords, int start, int end,
 		Sort sort) {
@@ -232,6 +257,8 @@ public class CommerceCountriesDisplayContext
 	private final CommerceChannelService _commerceChannelService;
 	private final CommerceCountryRequestHelper _commerceCountryRequestHelper;
 	private final CommerceCountryService _commerceCountryService;
+	private final CommerceRegionsStarterRegistry
+		_commerceRegionsStarterRegistry;
 	private String _keywords;
 
 }
