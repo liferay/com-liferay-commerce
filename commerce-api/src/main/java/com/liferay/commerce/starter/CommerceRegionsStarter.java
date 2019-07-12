@@ -16,11 +16,18 @@ package com.liferay.commerce.starter;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.Locale;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public interface CommerceRegionsStarter {
+
+	public String getKey();
+
+	public String getLabel(Locale locale);
 
 	public void start(long userId) throws Exception;
 
