@@ -128,7 +128,8 @@ public class CommercePriceListAccountRelServiceSoap {
 
 	public static
 		com.liferay.commerce.price.list.model.CommercePriceListAccountRelSoap[]
-				getCommercePriceListAccountRels(long commercePriceListId)
+				getCommercePriceListAccountRels(
+					long commercePriceListId, int start, int end)
 			throws RemoteException {
 
 		try {
@@ -137,10 +138,28 @@ public class CommercePriceListAccountRelServiceSoap {
 					CommercePriceListAccountRel> returnValue =
 						CommercePriceListAccountRelServiceUtil.
 							getCommercePriceListAccountRels(
-								commercePriceListId);
+								commercePriceListId, start, end);
 
 			return com.liferay.commerce.price.list.model.
 				CommercePriceListAccountRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommercePriceListAccountRelsCount(
+			long commercePriceListId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommercePriceListAccountRelServiceUtil.
+					getCommercePriceListAccountRelsCount(commercePriceListId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

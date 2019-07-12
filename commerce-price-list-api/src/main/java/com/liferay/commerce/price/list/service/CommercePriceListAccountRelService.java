@@ -76,7 +76,11 @@ public interface CommercePriceListAccountRelService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceListAccountRel> getCommercePriceListAccountRels(
-			long commercePriceListId)
+			long commercePriceListId, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommercePriceListAccountRelsCount(long commercePriceListId)
 		throws PortalException;
 
 	/**

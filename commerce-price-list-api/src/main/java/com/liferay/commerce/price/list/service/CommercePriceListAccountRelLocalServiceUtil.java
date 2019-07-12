@@ -313,10 +313,11 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceListAccountRel>
-			getCommercePriceListAccountRels(long commercePriceListId) {
+			getCommercePriceListAccountRels(
+				long commercePriceListId, int start, int end) {
 
 		return getService().getCommercePriceListAccountRels(
-			commercePriceListId);
+			commercePriceListId, start, end);
 	}
 
 	/**
@@ -326,6 +327,13 @@ public class CommercePriceListAccountRelLocalServiceUtil {
 	 */
 	public static int getCommercePriceListAccountRelsCount() {
 		return getService().getCommercePriceListAccountRelsCount();
+	}
+
+	public static int getCommercePriceListAccountRelsCount(
+		long commercePriceListId) {
+
+		return getService().getCommercePriceListAccountRelsCount(
+			commercePriceListId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
