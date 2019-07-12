@@ -21,6 +21,7 @@ import com.liferay.commerce.price.list.service.CommercePriceListAccountRelLocalS
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -220,7 +221,8 @@ public class CommercePriceListIndexer extends BaseIndexer<CommercePriceList> {
 		List<CommercePriceListAccountRel> commercePriceListAccountRels =
 			_commercePriceListAccountRelLocalService.
 				getCommercePriceListAccountRels(
-					commercePriceList.getCommercePriceListId());
+					commercePriceList.getCommercePriceListId(),
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Stream<CommercePriceListAccountRel> commercePriceListAccountRelStream =
 			commercePriceListAccountRels.stream();
