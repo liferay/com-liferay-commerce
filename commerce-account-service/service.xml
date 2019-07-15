@@ -238,6 +238,7 @@
 		<exception>CommerceAccountGroupName</exception>
 		<exception>CommerceAccountName</exception>
 		<exception>CommerceAccountType</exception>
+		<exception>CommerceAccountUserRelEmailAddress</exception>
 		<exception>DuplicateCommerceAccount</exception>
 		<exception>DuplicateCommerceAccountGroupRel</exception>
 		<exception>SystemCommerceAccountGroup</exception>
