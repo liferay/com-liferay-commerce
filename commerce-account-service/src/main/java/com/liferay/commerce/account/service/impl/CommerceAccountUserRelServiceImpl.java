@@ -34,6 +34,20 @@ public class CommerceAccountUserRelServiceImpl
 	extends CommerceAccountUserRelServiceBaseImpl {
 
 	@Override
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long commerceAccountUserId, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_MEMBERS);
+
+		return commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, roleIds, serviceContext);
+	}
+
+	@Override
 	public void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds, ServiceContext serviceContext)
@@ -126,6 +140,21 @@ public class CommerceAccountUserRelServiceImpl
 
 		return commerceAccountUserRelLocalService.
 			getCommerceAccountUserRelsCount(commerceAccountId);
+	}
+
+	@Override
+	public CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId,
+			CommerceAccountActionKeys.MANAGE_MEMBERS);
+
+		return commerceAccountUserRelLocalService.inviteUser(
+			commerceAccountId, emailAddress, roleIds, userExternalReferenceCode,
+			serviceContext);
 	}
 
 	private static volatile ModelResourcePermission<CommerceAccount>

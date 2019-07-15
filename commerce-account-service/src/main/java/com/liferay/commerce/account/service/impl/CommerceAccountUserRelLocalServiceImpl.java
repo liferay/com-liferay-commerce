@@ -15,6 +15,7 @@
 package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.exception.CommerceAccountTypeException;
+import com.liferay.commerce.account.exception.CommerceAccountUserRelEmailAddressException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.base.CommerceAccountUserRelLocalServiceBaseImpl;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 
@@ -34,6 +36,23 @@ import java.util.List;
  */
 public class CommerceAccountUserRelLocalServiceImpl
 	extends CommerceAccountUserRelLocalServiceBaseImpl {
+
+	@Override
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long commerceAccountUserId, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+				commerceAccountId, commerceAccountUserId, serviceContext);
+
+		updateRoles(
+			commerceAccountUserRel.getCommerceAccountId(),
+			commerceAccountUserRel.getCommerceAccountUserId(), roleIds);
+
+		return commerceAccountUserRel;
+	}
 
 	@Override
 	public CommerceAccountUserRel addCommerceAccountUserRel(
@@ -102,24 +121,9 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 		if (emailAddresses != null) {
 			for (String emailAddress : emailAddresses) {
-				User user = userLocalService.addUserWithWorkflow(
-					serviceContext.getUserId(), serviceContext.getCompanyId(),
-					true, StringPool.BLANK, StringPool.BLANK, true,
-					StringPool.BLANK, emailAddress, 0, StringPool.BLANK,
-					serviceContext.getLocale(), emailAddress, StringPool.BLANK,
-					emailAddress, 0, 0, true, 1, 1, 1970, StringPool.BLANK,
-					new long[] {
-						group.getGroupId(), serviceContext.getScopeGroupId()
-					},
-					null, null, null, true, serviceContext);
-
-				commerceAccountUserRelLocalService.addCommerceAccountUserRel(
-					commerceAccountId, user.getUserId(), serviceContext);
-
-				if (roleIds != null) {
-					userGroupRoleLocalService.addUserGroupRoles(
-						user.getUserId(), group.getGroupId(), roleIds);
-				}
+				commerceAccountUserRelLocalService.inviteUser(
+					commerceAccountId, emailAddress, roleIds, StringPool.BLANK,
+					serviceContext);
 			}
 		}
 	}
@@ -194,6 +198,72 @@ public class CommerceAccountUserRelLocalServiceImpl
 	public int getCommerceAccountUserRelsCount(long commerceAccountId) {
 		return commerceAccountUserRelPersistence.countByCommerceAccountId(
 			commerceAccountId);
+	}
+
+	@Override
+	public CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = null;
+
+		if (Validator.isNotNull(userExternalReferenceCode)) {
+			user = userLocalService.fetchUserByReferenceCode(
+				serviceContext.getCompanyId(), userExternalReferenceCode);
+		}
+
+		if (user == null) {
+			if (Validator.isNull(emailAddress)) {
+				throw new CommerceAccountUserRelEmailAddressException();
+			}
+
+			user = userLocalService.fetchUserByEmailAddress(
+				serviceContext.getCompanyId(), emailAddress);
+		}
+
+		if (user == null) {
+			Group group = commerceAccountLocalService.getCommerceAccountGroup(
+				commerceAccountId);
+
+			user = userLocalService.addUserWithWorkflow(
+				serviceContext.getUserId(), serviceContext.getCompanyId(), true,
+				StringPool.BLANK, StringPool.BLANK, true, StringPool.BLANK,
+				emailAddress, 0, StringPool.BLANK, serviceContext.getLocale(),
+				emailAddress, StringPool.BLANK, emailAddress, 0, 0, true, 1, 1,
+				1970, StringPool.BLANK,
+				new long[] {
+					group.getGroupId(), serviceContext.getScopeGroupId()
+				},
+				null, null, null, true, serviceContext);
+
+			user.setExternalReferenceCode(userExternalReferenceCode);
+
+			userPersistence.update(user);
+		}
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+				commerceAccountId, user.getUserId(), serviceContext);
+
+		updateRoles(
+			commerceAccountUserRel.getCommerceAccountId(),
+			commerceAccountUserRel.getCommerceAccountUserId(), roleIds);
+
+		return commerceAccountUserRel;
+	}
+
+	protected void updateRoles(
+			long commerceAccountId, long userId, long[] roleIds)
+		throws PortalException {
+
+		Group group = commerceAccountLocalService.getCommerceAccountGroup(
+			commerceAccountId);
+
+		if (roleIds != null) {
+			userGroupRoleLocalService.addUserGroupRoles(
+				userId, group.getGroupId(), roleIds);
+		}
 	}
 
 	protected void validate(long commerceAccountId, long commerceAccountUserId)
