@@ -151,10 +151,9 @@ public class FixedCommerceShippingEngine implements CommerceShippingEngine {
 				continue;
 			}
 
-			BigDecimal amount = commerceShippingFixedOption.getAmount();
-
 			commerceShippingOptions.add(
-				new CommerceShippingOption(name, name, amount));
+				new CommerceShippingOption(
+					name, name, commerceShippingFixedOption.getAmount()));
 		}
 
 		return commerceShippingOptions;

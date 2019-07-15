@@ -256,9 +256,7 @@ public class CommerceUsersImporter {
 
 				URI uri = new URI(uriString);
 
-				String scheme = uri.getScheme();
-
-				if (StringUtil.equalsIgnoreCase(scheme, "file")) {
+				if (StringUtil.equalsIgnoreCase(uri.getScheme(), "file")) {
 					inputStream = new FileInputStream(uri.getPath());
 				}
 				else {

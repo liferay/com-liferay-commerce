@@ -41,9 +41,7 @@ public class SuffixParameterMapSettingsLocator
 
 	@Override
 	public Settings getSettings() throws SettingsException {
-		Settings settings = super.getSettings();
-
-		return new BaseSettings(settings) {
+		return new BaseSettings(super.getSettings()) {
 
 			@Override
 			protected String doGetValue(String key) {
