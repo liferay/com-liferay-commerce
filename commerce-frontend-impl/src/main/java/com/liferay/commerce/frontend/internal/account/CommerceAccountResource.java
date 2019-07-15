@@ -161,7 +161,7 @@ public class CommerceAccountResource {
 	@Path("/set-current-account")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCommerceOrders(
+	public Response setCurrentAccount(
 		@QueryParam("groupId") long groupId,
 		@FormParam("accountId") long accountId,
 		@Context HttpServletRequest httpServletRequest) {
