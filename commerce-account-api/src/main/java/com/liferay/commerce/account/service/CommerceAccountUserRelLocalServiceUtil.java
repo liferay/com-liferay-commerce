@@ -58,6 +58,17 @@ public class CommerceAccountUserRelLocalServiceUtil {
 	public static com.liferay.commerce.account.model.CommerceAccountUserRel
 			addCommerceAccountUserRel(
 				long commerceAccountId, long commerceAccountUserId,
+				long[] roleIds,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, roleIds, serviceContext);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -348,6 +359,18 @@ public class CommerceAccountUserRelLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			inviteUser(
+				long commerceAccountId, String emailAddress, long[] roleIds,
+				String userExternalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().inviteUser(
+			commerceAccountId, emailAddress, roleIds, userExternalReferenceCode,
+			serviceContext);
 	}
 
 	/**

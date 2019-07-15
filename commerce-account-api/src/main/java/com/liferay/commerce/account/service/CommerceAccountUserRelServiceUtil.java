@@ -40,6 +40,17 @@ public class CommerceAccountUserRelServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
+				long[] roleIds,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, roleIds, serviceContext);
+	}
+
 	public static void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds,
@@ -103,6 +114,18 @@ public class CommerceAccountUserRelServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			inviteUser(
+				long commerceAccountId, String emailAddress, long[] roleIds,
+				String userExternalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().inviteUser(
+			commerceAccountId, emailAddress, roleIds, userExternalReferenceCode,
+			serviceContext);
 	}
 
 	public static CommerceAccountUserRelService getService() {

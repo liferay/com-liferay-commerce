@@ -61,6 +61,11 @@ public interface CommerceAccountUserRelService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long commerceAccountUserId, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	public void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds, ServiceContext serviceContext)
@@ -97,5 +102,10 @@ public interface CommerceAccountUserRelService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	public CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
 
 }

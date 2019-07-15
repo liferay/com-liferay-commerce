@@ -74,6 +74,11 @@ public interface CommerceAccountUserRelLocalService
 		CommerceAccountUserRel commerceAccountUserRel);
 
 	public CommerceAccountUserRel addCommerceAccountUserRel(
+			long commerceAccountId, long commerceAccountUserId, long[] roleIds,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceAccountUserRel addCommerceAccountUserRel(
 			long commerceAccountId, long commerceAccountUserId,
 			ServiceContext serviceContext)
 		throws PortalException;
@@ -269,6 +274,11 @@ public interface CommerceAccountUserRelLocalService
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
+
+	public CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
