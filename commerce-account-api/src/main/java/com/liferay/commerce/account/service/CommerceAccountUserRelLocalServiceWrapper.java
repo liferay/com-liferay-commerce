@@ -57,6 +57,18 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	public com.liferay.commerce.account.model.CommerceAccountUserRel
 			addCommerceAccountUserRel(
 				long commerceAccountId, long commerceAccountUserId,
+				long[] roleIds,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountUserRelLocalService.addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, roleIds, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -382,6 +394,18 @@ public class CommerceAccountUserRelLocalServiceWrapper
 
 		return _commerceAccountUserRelLocalService.getPersistedModel(
 			primaryKeyObj);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountUserRelLocalService.inviteUser(
+			commerceAccountId, emailAddress, roleIds, userExternalReferenceCode,
+			serviceContext);
 	}
 
 	/**
