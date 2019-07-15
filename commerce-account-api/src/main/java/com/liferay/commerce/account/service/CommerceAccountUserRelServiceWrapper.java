@@ -37,6 +37,18 @@ public class CommerceAccountUserRelServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
+				long[] roleIds,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountUserRelService.addCommerceAccountUserRel(
+			commerceAccountId, commerceAccountUserId, roleIds, serviceContext);
+	}
+
+	@Override
 	public void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds,
@@ -112,6 +124,18 @@ public class CommerceAccountUserRelServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _commerceAccountUserRelService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountUserRel inviteUser(
+			long commerceAccountId, String emailAddress, long[] roleIds,
+			String userExternalReferenceCode,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountUserRelService.inviteUser(
+			commerceAccountId, emailAddress, roleIds, userExternalReferenceCode,
+			serviceContext);
 	}
 
 	@Override
