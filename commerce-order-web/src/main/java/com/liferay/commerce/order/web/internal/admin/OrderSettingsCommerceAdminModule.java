@@ -24,7 +24,6 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
@@ -91,11 +90,8 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			(WorkflowHandlerRegistryUtil.getWorkflowHandler(
 				CommerceOrder.class.getName()) != null)) {
 
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
 			return _portletResourcePermission.contains(
-				permissionChecker, groupId,
+				PermissionThreadLocal.getPermissionChecker(), groupId,
 				CommerceActionKeys.MANAGE_COMMERCE_ORDER_WORKFLOWS);
 		}
 

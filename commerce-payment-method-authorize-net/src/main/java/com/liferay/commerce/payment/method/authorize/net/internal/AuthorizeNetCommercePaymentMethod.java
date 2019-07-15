@@ -404,12 +404,10 @@ public class AuthorizeNetCommercePaymentMethod
 
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
-		String roundingMode = commerceCurrency.getRoundingMode();
-
 		transactionRequestType.setAmount(
 			amount.setScale(
 				commerceCurrency.getMaxFractionDigits(),
-				RoundingMode.valueOf(roundingMode)));
+				RoundingMode.valueOf(commerceCurrency.getRoundingMode())));
 
 		return transactionRequestType;
 	}

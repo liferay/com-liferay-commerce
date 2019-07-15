@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.GroupConstants;
-import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -246,10 +245,8 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			}
 		}
 
-		LayoutSet layoutSet = themeDisplay.getLayoutSet();
-
 		String groupFriendlyUrl = _portal.getGroupFriendlyURL(
-			layoutSet, themeDisplay);
+			themeDisplay.getLayoutSet(), themeDisplay);
 
 		return groupFriendlyUrl + CPConstants.SEPARATOR_ASSET_CATEGORY_URL +
 			cpFriendlyURLEntry.getUrlTitle();

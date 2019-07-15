@@ -48,14 +48,11 @@ public class CommerceDiscountTestUtil {
 			CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
 				userId);*/
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext();
-
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static CommerceDiscount addCouponDiscount(
@@ -88,14 +85,11 @@ public class CommerceDiscountTestUtil {
 		/*CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
 			commerceDiscount.getGroupId(), userId);*/
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext();
-
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static CommerceDiscount addFixedCommerceDiscount(

@@ -136,9 +136,8 @@ public class CommerceVirtualOrderItemEditDisplayContext {
 			return null;
 		}
 
-		long fileEntryId = _commerceVirtualOrderItem.getFileEntryId();
-
-		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
+		FileEntry fileEntry = _dlAppService.getFileEntry(
+			_commerceVirtualOrderItem.getFileEntryId());
 
 		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(),

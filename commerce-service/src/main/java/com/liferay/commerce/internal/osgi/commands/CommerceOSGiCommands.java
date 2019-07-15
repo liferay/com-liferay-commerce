@@ -14,11 +14,8 @@
 
 package com.liferay.commerce.internal.osgi.commands;
 
-import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
-
-import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -37,12 +34,9 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceOSGiCommands {
 
 	public void renewSubscriptionEntries() throws Exception {
-		List<CommerceSubscriptionEntry> activeCommerceSubscriptionEntries =
-			_commerceSubscriptionEntryLocalService.
-				getActiveCommerceSubscriptionEntries();
-
 		_commerceSubscriptionEntryHelper.checkSubscriptionEntriesStatus(
-			activeCommerceSubscriptionEntries);
+			_commerceSubscriptionEntryLocalService.
+				getActiveCommerceSubscriptionEntries());
 	}
 
 	@Reference

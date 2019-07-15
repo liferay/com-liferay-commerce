@@ -36,9 +36,7 @@ public class GroupModelListener extends BaseModelListener<Group> {
 	@Override
 	public void onBeforeRemove(Group group) {
 		try {
-			long groupId = group.getGroupId();
-
-			_commerceOrderLocalService.deleteCommerceOrders(groupId);
+			_commerceOrderLocalService.deleteCommerceOrders(group.getGroupId());
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
