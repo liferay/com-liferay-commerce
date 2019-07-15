@@ -24,7 +24,6 @@ import com.liferay.commerce.health.status.web.internal.util.CommerceHealthStatus
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
@@ -82,11 +81,8 @@ public class GroupInstanceHealthCheckCommerceAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return _portletResourcePermission.contains(
-			permissionChecker, groupId,
+			PermissionThreadLocal.getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_HEALTH_STATUS);
 	}
 

@@ -201,11 +201,9 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CommerceVirtualOrderItem commerceVirtualOrderItem)
 		throws Exception {
 
-		CommerceOrderItem commerceOrderItem =
-			commerceVirtualOrderItem.getCommerceOrderItem();
-
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
-			getCPDefinitionVirtualSetting(commerceOrderItem);
+			getCPDefinitionVirtualSetting(
+				commerceVirtualOrderItem.getCommerceOrderItem());
 
 		if ((cpDefinitionVirtualSetting == null) ||
 			!cpDefinitionVirtualSetting.isTermsOfUseRequired()) {

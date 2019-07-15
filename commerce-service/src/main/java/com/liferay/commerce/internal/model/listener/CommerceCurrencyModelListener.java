@@ -35,10 +35,8 @@ public class CommerceCurrencyModelListener
 	@Override
 	public void onBeforeRemove(CommerceCurrency commerceCurrency) {
 		try {
-			long commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
-
 			_commercePriceListLocalService.updateCommercePriceListCurrencies(
-				commerceCurrencyId);
+				commerceCurrency.getCommerceCurrencyId());
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

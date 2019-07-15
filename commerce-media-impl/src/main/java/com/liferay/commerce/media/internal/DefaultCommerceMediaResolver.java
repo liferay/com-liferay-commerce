@@ -165,12 +165,10 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		Locale siteDefaultLocale = _portal.getSiteDefaultLocale(
 			cpAttachmentFileEntry.getGroupId());
 
-		String className = cpAttachmentFileEntry.getClassName();
-
 		sb.append(
 			setUrl(
-				className, cpAttachmentFileEntry.getClassPK(),
-				siteDefaultLocale));
+				cpAttachmentFileEntry.getClassName(),
+				cpAttachmentFileEntry.getClassPK(), siteDefaultLocale));
 
 		sb.append(StringPool.SLASH);
 		sb.append(cpAttachmentFileEntry.getFileEntryId());

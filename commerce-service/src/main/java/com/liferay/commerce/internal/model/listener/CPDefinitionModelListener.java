@@ -33,10 +33,9 @@ public class CPDefinitionModelListener extends BaseModelListener<CPDefinition> {
 
 	@Override
 	public void onBeforeRemove(CPDefinition cpDefinition) {
-		long cpDefinitionId = cpDefinition.getCPDefinitionId();
-
 		_cpdAvailabilityEstimateLocalService.
-			deleteCPDAvailabilityEstimateByCPDefinitionId(cpDefinitionId);
+			deleteCPDAvailabilityEstimateByCPDefinitionId(
+				cpDefinition.getCPDefinitionId());
 	}
 
 	@Reference

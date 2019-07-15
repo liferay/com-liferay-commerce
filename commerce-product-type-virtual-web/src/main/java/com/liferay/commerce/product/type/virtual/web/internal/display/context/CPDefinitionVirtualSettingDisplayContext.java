@@ -132,9 +132,8 @@ public class CPDefinitionVirtualSettingDisplayContext
 			return null;
 		}
 
-		long fileEntryId = cpDefinitionVirtualSetting.getFileEntryId();
-
-		FileEntry fileEntry = _dlAppService.getFileEntry(fileEntryId);
+		FileEntry fileEntry = _dlAppService.getFileEntry(
+			cpDefinitionVirtualSetting.getFileEntryId());
 
 		return DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
