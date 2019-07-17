@@ -81,6 +81,15 @@ public class CPDisplayLayoutIndexer extends BaseIndexer<CPDisplayLayout> {
 
 		Map<String, Serializable> attributes = searchContext.getAttributes();
 
+		// Temporary search filter workaround. See LPS-98023.
+
+		Boolean searchFilterEnabled = (Boolean)attributes.get(
+			"searchFilterEnabled");
+
+		if ((searchFilterEnabled == null) || !searchFilterEnabled) {
+			return;
+		}
+
 		String entryModelClassName = (String)attributes.get(
 			FIELD_ENTRY_MODEL_CLASS_NAME);
 
