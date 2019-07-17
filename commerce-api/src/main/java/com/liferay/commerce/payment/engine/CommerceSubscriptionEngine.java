@@ -18,7 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 /**
  * @author Luca Pellizzon
@@ -33,16 +33,14 @@ public interface CommerceSubscriptionEngine {
 		throws Exception;
 
 	public CommercePaymentResult completeRecurringPayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
 	public boolean getSubscriptionValidity(long commerceOrderId)
 		throws Exception;
 
 	public CommercePaymentResult processRecurringPayment(
-			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, String checkoutStepUrl, Locale locale)
 		throws Exception;
 
 	public boolean suspendRecurringPayment(long commerceSubscriptionEntryId)

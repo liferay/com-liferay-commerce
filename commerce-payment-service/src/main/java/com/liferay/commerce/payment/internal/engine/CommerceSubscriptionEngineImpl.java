@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.Portal;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -165,8 +165,7 @@ public class CommerceSubscriptionEngineImpl
 		rollbackFor = Exception.class
 	)
 	public CommercePaymentResult completeRecurringPayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception {
 
 		CommercePaymentMethod commercePaymentMethod =
@@ -183,8 +182,8 @@ public class CommerceSubscriptionEngineImpl
 
 		CommercePaymentRequest commercePaymentRequest =
 			_commercePaymentUtils.getCommercePaymentRequest(
-				commerceOrder, _portal.getLocale(httpServletRequest),
-				transactionId, null, commercePaymentMethod);
+				commerceOrder, locale, transactionId, null,
+				commercePaymentMethod);
 
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.completeRecurringPayment(
@@ -237,8 +236,7 @@ public class CommerceSubscriptionEngineImpl
 		rollbackFor = Exception.class
 	)
 	public CommercePaymentResult processRecurringPayment(
-			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, String checkoutStepUrl, Locale locale)
 		throws Exception {
 
 		CommerceOrder commerceOrder =
@@ -255,8 +253,8 @@ public class CommerceSubscriptionEngineImpl
 
 		CommercePaymentRequest commercePaymentRequest =
 			_commercePaymentUtils.getCommercePaymentRequest(
-				commerceOrder, _portal.getLocale(httpServletRequest), null,
-				checkoutStepUrl, commercePaymentMethod);
+				commerceOrder, locale, null, checkoutStepUrl,
+				commercePaymentMethod);
 
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.processRecurringPayment(
