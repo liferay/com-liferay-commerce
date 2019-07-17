@@ -83,10 +83,10 @@ public class CPDisplayLayoutIndexer extends BaseIndexer<CPDisplayLayout> {
 
 		// Temporary search filter workaround. See LPS-98023.
 
-		Boolean searchFilterEnabled = (Boolean)attributes.get(
-			"searchFilterEnabled");
+		boolean searchFilterEnabled = GetterUtil.getBoolean(
+			attributes.get("searchFilterEnabled"));
 
-		if ((searchFilterEnabled == null) || !searchFilterEnabled) {
+		if (!searchFilterEnabled) {
 			return;
 		}
 
