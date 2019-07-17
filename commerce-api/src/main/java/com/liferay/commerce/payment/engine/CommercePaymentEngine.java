@@ -19,14 +19,10 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
-import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Luca Pellizzon
@@ -35,45 +31,19 @@ import javax.servlet.http.HttpServletRequest;
 public interface CommercePaymentEngine {
 
 	public CommercePaymentResult cancelPayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
-	/**
-	 * @param commerceOrderId
-	 * @return
-	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
-	 */
-	@Deprecated
-	public CommercePaymentResult cancelRecurringPayment(long commerceOrderId);
-
 	public CommercePaymentResult capturePayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
 	public CommercePaymentResult completePayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
-		throws Exception;
-
-	/**
-	 * @param commerceOrderId
-	 * @param transactionId
-	 * @param httpServletRequest
-	 * @return
-	 * @throws Exception
-	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
-	 */
-	@Deprecated
-	public CommercePaymentResult completeRecurringPayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
 	public String getCommerceOrderPaymentMethodName(
-			CommerceOrder commerceOrder, HttpServletRequest httpServletRequest,
-			Locale locale)
+			CommerceOrder commerceOrder, Locale locale)
 		throws PortalException;
 
 	public int getCommercePaymentMethodGroupRelsCount(long groupId);
@@ -81,47 +51,15 @@ public interface CommercePaymentEngine {
 	public int getCommercePaymentMethodType(long commerceOrderId)
 		throws Exception;
 
-	/**
-	 * @param commerceOrderId
-	 * @return
-	 * @throws PortalException
-	 * @deprecated As of Mueller (7.2.x), this method is being replaced
-	 */
-	@Deprecated
-	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
-			long commerceOrderId)
-		throws PortalException;
-
 	public List<CommercePaymentMethod> getEnabledCommercePaymentMethodsForOrder(
 			long groupId, long commerceOrderId)
 		throws PortalException;
 
-	/**
-	 * @param commerceOrderId
-	 * @return
-	 * @throws PortalException
-	 * @deprecated As of Mueller (7.2.x), this method will be removed
-	 */
-	@Deprecated
-	public int getOrderStatusUpdateMaxIntervalMinutes(long commerceOrderId)
-		throws PortalException;
-
 	public String getPaymentMethodImageURL(
-			ThemeDisplay themeDisplay, String paymentMethodKey)
+			long groupId, String pathImage, String paymentMethodKey)
 		throws PortalException;
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale);
-
-	/**
-	 * @param commerceOrderId
-	 * @return
-	 * @throws Exception
-	 * @deprecated As of Mueller (7.2.x), this method will be removed
-	 */
-	@Deprecated
-	public CommerceSubscriptionStatusResult getSubscriptionPaymentDetails(
-			long commerceOrderId)
-		throws Exception;
 
 	public CommercePaymentResult partiallyRefundPayment(long commerceOrderId);
 
@@ -129,42 +67,15 @@ public interface CommercePaymentEngine {
 		throws Exception;
 
 	public CommercePaymentResult processPayment(
-			long commerceOrderId, String nextUrl,
-			HttpServletRequest httpServletRequest)
-		throws Exception;
-
-	/**
-	 * @param commerceOrderId
-	 * @param nextUrl
-	 * @param httpServletRequest
-	 * @return
-	 * @throws Exception
-	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
-	 */
-	@Deprecated
-	public CommercePaymentResult processRecurringPayment(
-			long commerceOrderId, String nextUrl,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String nextUrl)
 		throws Exception;
 
 	public CommercePaymentResult refundPayment(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
 	public CommercePaymentResult startPayment(
-			long commerceOrderId, String checkoutStepUrl,
-			HttpServletRequest httpServletRequest)
-		throws Exception;
-
-	/**
-	 * @param commerceSubscriptionEntryId
-	 * @return
-	 * @throws Exception
-	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
-	 */
-	@Deprecated
-	public boolean suspendSubscription(long commerceSubscriptionEntryId)
+			long commerceOrderId, String checkoutStepUrl, Locale locale)
 		throws Exception;
 
 	public CommerceOrder updateOrderPaymentStatus(
@@ -172,8 +83,7 @@ public interface CommercePaymentEngine {
 		throws PortalException;
 
 	public CommercePaymentResult voidTransaction(
-			long commerceOrderId, String transactionId,
-			HttpServletRequest httpServletRequest)
+			long commerceOrderId, Locale locale, String transactionId)
 		throws Exception;
 
 }
