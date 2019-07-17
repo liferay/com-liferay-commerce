@@ -237,6 +237,7 @@ public class CategoryCPDisplayLayoutDisplayContext
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put("entryModelClassName", AssetCategory.class.getName());
+		attributes.put("searchFilterEnabled", true);
 
 		searchContext.setAttributes(attributes);
 

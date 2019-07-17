@@ -241,6 +241,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 
 		attributes.put("commerceCatalogGroupId", _getCatalogGroupIds());
 		attributes.put("entryModelClassName", CPDefinition.class.getName());
+		attributes.put("searchFilterEnabled", true);
 
 		searchContext.setAttributes(attributes);
 
