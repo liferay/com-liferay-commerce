@@ -63,7 +63,8 @@ public class PaymentMethodCheckoutStepDisplayContext {
 		throws PortalException {
 
 		return _commercePaymentEngine.getPaymentMethodImageURL(
-			themeDisplay, paymentMethodKey);
+			themeDisplay.getScopeGroupId(), themeDisplay.getPathImage(),
+			paymentMethodKey);
 	}
 
 	private final CommerceOrder _commerceOrder;

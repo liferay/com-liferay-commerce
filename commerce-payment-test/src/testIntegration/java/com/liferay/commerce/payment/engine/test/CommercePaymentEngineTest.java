@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
@@ -136,7 +137,8 @@ public class CommercePaymentEngineTest {
 			commerceOrder);
 
 		_commercePaymentEngine.processPayment(
-			commerceOrder.getCommerceOrderId(), null, _httpServletRequest);
+			commerceOrder.getCommerceOrderId(),
+			PortalUtil.getLocale(_httpServletRequest), null);
 
 		CommerceOrder paymentOrder =
 			_commerceOrderLocalService.getCommerceOrder(
@@ -149,8 +151,9 @@ public class CommercePaymentEngineTest {
 		Assert.assertNotNull(paymentOrder.getTransactionId());
 
 		_commercePaymentEngine.completePayment(
-			paymentOrder.getCommerceOrderId(), paymentOrder.getTransactionId(),
-			_httpServletRequest);
+			paymentOrder.getCommerceOrderId(),
+			PortalUtil.getLocale(_httpServletRequest),
+			paymentOrder.getTransactionId());
 
 		paymentOrder = _commerceOrderLocalService.getCommerceOrder(
 			checkoutOrder.getCommerceOrderId());
@@ -200,7 +203,8 @@ public class CommercePaymentEngineTest {
 			commerceOrder);
 
 		_commercePaymentEngine.processPayment(
-			commerceOrder.getCommerceOrderId(), null, _httpServletRequest);
+			commerceOrder.getCommerceOrderId(),
+			PortalUtil.getLocale(_httpServletRequest), null);
 
 		CommerceOrder paymentOrder =
 			_commerceOrderLocalService.getCommerceOrder(

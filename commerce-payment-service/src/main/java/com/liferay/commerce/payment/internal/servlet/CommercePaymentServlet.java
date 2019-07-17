@@ -157,7 +157,8 @@ public class CommercePaymentServlet extends HttpServlet {
 				(commercePaymentMethodType == -1)) {
 
 				_commercePaymentEngine.completePayment(
-					_commerceOrderId, null, httpServletRequest);
+					_commerceOrderId, _portal.getLocale(httpServletRequest),
+					null);
 
 				httpServletResponse.sendRedirect(_nextUrl);
 			}
@@ -201,7 +202,7 @@ public class CommercePaymentServlet extends HttpServlet {
 		throws Exception {
 
 		return _commercePaymentEngine.startPayment(
-			_commerceOrderId, _nextUrl, httpServletRequest);
+			_commerceOrderId, _nextUrl, _portal.getLocale(httpServletRequest));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

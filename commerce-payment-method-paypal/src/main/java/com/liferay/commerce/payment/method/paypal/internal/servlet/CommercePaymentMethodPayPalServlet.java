@@ -16,6 +16,7 @@ package com.liferay.commerce.payment.method.paypal.internal.servlet;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
+import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.payment.method.paypal.internal.constants.PayPalCommercePaymentMethodConstants;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.portal.kernel.log.Log;
@@ -28,6 +29,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 
 import java.io.IOException;
+
+import java.util.Locale;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -84,23 +87,22 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 
 			boolean cancel = ParamUtil.getBoolean(httpServletRequest, "cancel");
 
+			Locale locale = _portal.getLocale(httpServletRequest);
+
 			if (cancel) {
 				_commercePaymentEngine.cancelPayment(
-					commerceOrder.getCommerceOrderId(), paymentId,
-					httpServletRequest);
+					commerceOrder.getCommerceOrderId(), locale, paymentId);
 			}
 			else {
 				String token = ParamUtil.getString(httpServletRequest, "token");
 
 				if (paymentId.isEmpty() && !token.isEmpty()) {
-					_commercePaymentEngine.completeRecurringPayment(
-						commerceOrder.getCommerceOrderId(), token,
-						httpServletRequest);
+					_commerceSubscriptionEngine.completeRecurringPayment(
+						commerceOrder.getCommerceOrderId(), locale, token);
 				}
 				else {
 					_commercePaymentEngine.completePayment(
-						commerceOrder.getCommerceOrderId(), paymentId,
-						httpServletRequest);
+						commerceOrder.getCommerceOrderId(), locale, paymentId);
 				}
 			}
 
@@ -122,6 +124,9 @@ public class CommercePaymentMethodPayPalServlet extends HttpServlet {
 
 	@Reference
 	private CommercePaymentEngine _commercePaymentEngine;
+
+	@Reference
+	private CommerceSubscriptionEngine _commerceSubscriptionEngine;
 
 	@Reference
 	private Portal _portal;

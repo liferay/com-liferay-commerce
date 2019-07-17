@@ -84,13 +84,15 @@ public class CompletePaymentAuthorizeNetServlet extends HttpServlet {
 
 			if (cancel) {
 				_commercePaymentEngine.cancelPayment(
-					commerceOrder.getCommerceOrderId(), null,
-					httpServletRequest);
+					commerceOrder.getCommerceOrderId(),
+					_portal.getLocale(httpServletRequest),
+					commerceOrder.getTransactionId());
 			}
 			else {
 				_commercePaymentEngine.completePayment(
-					commerceOrder.getCommerceOrderId(), null,
-					httpServletRequest);
+					commerceOrder.getCommerceOrderId(),
+					_portal.getLocale(httpServletRequest),
+					commerceOrder.getTransactionId());
 			}
 
 			httpServletResponse.sendRedirect(redirect);

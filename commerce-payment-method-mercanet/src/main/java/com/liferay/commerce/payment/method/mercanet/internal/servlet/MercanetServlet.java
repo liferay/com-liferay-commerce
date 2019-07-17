@@ -46,6 +46,7 @@ import com.worldline.sips.model.ResponseData;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -112,6 +113,8 @@ public class MercanetServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
+			Locale locale = _portal.getLocale(httpServletRequest);
+
 			String type = ParamUtil.getString(httpServletRequest, "type");
 
 			String data = ParamUtil.getString(httpServletRequest, "Data");
@@ -143,8 +146,7 @@ public class MercanetServlet extends HttpServlet {
 						"transactionReference");
 
 					_commercePaymentEngine.cancelPayment(
-						commerceOrderId, transactionReference,
-						httpServletRequest);
+						commerceOrderId, locale, transactionReference);
 				}
 
 				httpServletResponse.sendRedirect(redirect);
@@ -209,8 +211,8 @@ public class MercanetServlet extends HttpServlet {
 						commerceOrder.getTransactionId())) {
 
 					_commercePaymentEngine.completePayment(
-						commerceOrder.getCommerceOrderId(),
-						commerceOrder.getTransactionId(), httpServletRequest);
+						commerceOrder.getCommerceOrderId(), locale,
+						commerceOrder.getTransactionId());
 				}
 			}
 		}
