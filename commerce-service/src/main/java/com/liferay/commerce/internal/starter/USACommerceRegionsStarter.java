@@ -59,13 +59,16 @@ public class USACommerceRegionsStarter implements CommerceRegionsStarter {
 	}
 
 	@Override
-	public void start(ServiceContext serviceContext) throws Exception {
-		CommerceCountry commerceCountry = getCommerceCountry(
-			serviceContext.getCompanyId());
+	public void start(long companyId, long userId) throws Exception {
+		CommerceCountry commerceCountry = getCommerceCountry(companyId);
 
 		if (commerceCountry == null) {
 			return;
 		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setUserId(userId);
 
 		JSONArray jsonArray = getCommerceRegionsJSONArray();
 
