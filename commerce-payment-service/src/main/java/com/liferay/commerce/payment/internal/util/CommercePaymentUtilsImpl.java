@@ -39,8 +39,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.Collections;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -93,8 +91,7 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 	@Override
 	public CommercePaymentRequest getCommercePaymentRequest(
 			CommerceOrder commerceOrder, Locale locale, String transactionId,
-			String checkoutStepUrl, HttpServletRequest httpServletRequest,
-			CommercePaymentMethod commercePaymentMethod)
+			String checkoutStepUrl, CommercePaymentMethod commercePaymentMethod)
 		throws PortalException {
 
 		String cancelUrl = null;
@@ -105,19 +102,17 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 					commercePaymentMethod.getPaymentType()) {
 
 			cancelUrl = _getCancelUrl(
-				httpServletRequest, commerceOrder, checkoutStepUrl,
-				commercePaymentMethod);
+				commerceOrder, checkoutStepUrl, commercePaymentMethod);
 			returnUrl = _getReturnUrl(
-				httpServletRequest, commerceOrder, checkoutStepUrl,
-				commercePaymentMethod);
+				commerceOrder, checkoutStepUrl, commercePaymentMethod);
 		}
 
 		CommercePaymentRequestProvider commercePaymentRequestProvider =
 			getCommercePaymentRequestProvider(commercePaymentMethod);
 
 		return commercePaymentRequestProvider.getCommercePaymentRequest(
-			cancelUrl, commerceOrder.getCommerceOrderId(), httpServletRequest,
-			locale, returnUrl, transactionId);
+			cancelUrl, commerceOrder.getCommerceOrderId(), null, locale,
+			returnUrl, transactionId);
 	}
 
 	@Override
@@ -141,14 +136,12 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 	}
 
 	private StringBundler _getBaseUrl(
-		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
-		String redirect, CommercePaymentMethod commercePaymentMethod,
-		int extraCapacity) {
+		CommerceOrder commerceOrder, String redirect,
+		CommercePaymentMethod commercePaymentMethod, int extraCapacity) {
 
 		StringBundler sb = new StringBundler(
 			extraCapacity + (Validator.isNotNull(redirect) ? 13 : 11));
 
-		sb.append(_portal.getPortalURL(httpServletRequest));
 		sb.append(_portal.getPathModule());
 		sb.append(CharPool.SLASH);
 		sb.append(commercePaymentMethod.getServletPath());
@@ -167,12 +160,11 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 	}
 
 	private String _getCancelUrl(
-		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
-		String redirect, CommercePaymentMethod commercePaymentMethod) {
+		CommerceOrder commerceOrder, String redirect,
+		CommercePaymentMethod commercePaymentMethod) {
 
 		StringBundler sb = _getBaseUrl(
-			httpServletRequest, commerceOrder, redirect, commercePaymentMethod,
-			2);
+			commerceOrder, redirect, commercePaymentMethod, 2);
 
 		sb.append("&cancel=");
 		sb.append(StringPool.TRUE);
@@ -181,12 +173,11 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 	}
 
 	private String _getReturnUrl(
-		HttpServletRequest httpServletRequest, CommerceOrder commerceOrder,
-		String redirect, CommercePaymentMethod commercePaymentMethod) {
+		CommerceOrder commerceOrder, String redirect,
+		CommercePaymentMethod commercePaymentMethod) {
 
 		StringBundler sb = _getBaseUrl(
-			httpServletRequest, commerceOrder, redirect, commercePaymentMethod,
-			0);
+			commerceOrder, redirect, commercePaymentMethod, 0);
 
 		return sb.toString();
 	}

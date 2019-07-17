@@ -184,7 +184,7 @@ public class CommerceSubscriptionEngineImpl
 		CommercePaymentRequest commercePaymentRequest =
 			_commercePaymentUtils.getCommercePaymentRequest(
 				commerceOrder, _portal.getLocale(httpServletRequest),
-				transactionId, null, httpServletRequest, commercePaymentMethod);
+				transactionId, null, commercePaymentMethod);
 
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.completeRecurringPayment(
@@ -256,7 +256,7 @@ public class CommerceSubscriptionEngineImpl
 		CommercePaymentRequest commercePaymentRequest =
 			_commercePaymentUtils.getCommercePaymentRequest(
 				commerceOrder, _portal.getLocale(httpServletRequest), null,
-				checkoutStepUrl, httpServletRequest, commercePaymentMethod);
+				checkoutStepUrl, commercePaymentMethod);
 
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.processRecurringPayment(
