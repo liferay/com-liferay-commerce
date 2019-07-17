@@ -87,23 +87,23 @@ public class CPDefinitionInventoryServiceImpl
 
 	@Override
 	public CPDefinitionInventory updateCPDefinitionInventory(
-			long cpDefinitionInventoryId, String cpDefinitionInventoryEngine,
-			String lowStockActivity, boolean displayAvailability,
-			boolean displayStockQuantity, int minStockQuantity,
-			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			long groupId, long cpDefinitionInventoryId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
 		throws PortalException {
 
 		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_PRODUCT_DEFINITION_INVENTORY);
 
 		return cpDefinitionInventoryLocalService.updateCPDefinitionInventory(
 			cpDefinitionInventoryId, cpDefinitionInventoryEngine,
 			lowStockActivity, displayAvailability, displayStockQuantity,
 			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	private static volatile PortletResourcePermission

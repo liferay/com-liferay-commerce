@@ -169,8 +169,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			String lowStockActivity, boolean displayAvailability,
 			boolean displayStockQuantity, int minStockQuantity,
 			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			String allowedOrderQuantities, int multipleOrderQuantity)
 		throws PortalException {
 
 		CPDefinitionInventory cpDefinitionInventory =
