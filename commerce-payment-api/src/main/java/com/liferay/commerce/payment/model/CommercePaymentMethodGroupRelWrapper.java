@@ -339,10 +339,8 @@ public class CommercePaymentMethodGroupRelWrapper
 	}
 
 	@Override
-	public String getImageURL(
-		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay) {
-
-		return _commercePaymentMethodGroupRel.getImageURL(themeDisplay);
+	public String getImageURL(String pathImage) {
+		return _commercePaymentMethodGroupRel.getImageURL(pathImage);
 	}
 
 	/**

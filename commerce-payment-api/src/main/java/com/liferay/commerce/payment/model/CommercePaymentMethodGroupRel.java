@@ -64,7 +64,6 @@ public interface CommercePaymentMethodGroupRel
 
 			};
 
-	public String getImageURL(
-		com.liferay.portal.kernel.theme.ThemeDisplay themeDisplay);
+	public String getImageURL(String pathImage);
 
 }
