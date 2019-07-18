@@ -114,7 +114,7 @@ public class ProductShippingConfigurationResourceImpl
 		_updateProductShippingConfiguration(
 			cpDefinition, productShippingConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -135,7 +135,7 @@ public class ProductShippingConfigurationResourceImpl
 		_updateProductShippingConfiguration(
 			cpDefinition, productShippingConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

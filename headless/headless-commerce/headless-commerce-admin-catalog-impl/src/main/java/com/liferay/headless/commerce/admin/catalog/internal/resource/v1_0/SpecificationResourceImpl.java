@@ -57,7 +57,7 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	public Response deleteSpecification(Long id) throws Exception {
 		_cpSpecificationOptionService.deleteCPSpecificationOption(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -96,7 +96,7 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 		_updateSpecification(id, specification);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

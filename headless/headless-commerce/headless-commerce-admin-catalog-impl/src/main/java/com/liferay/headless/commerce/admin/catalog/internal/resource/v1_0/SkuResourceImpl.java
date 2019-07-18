@@ -60,7 +60,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 	public Response deleteSku(Long id) throws Exception {
 		_cpInstanceService.deleteCPInstance(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -81,7 +81,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 
 		_cpInstanceService.deleteCPInstance(cpInstance.getCPInstanceId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -179,7 +179,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 	public Response patchSku(Long id, Sku sku) throws Exception {
 		_updateSKU(_cpInstanceService.getCPInstance(id), sku);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -200,7 +200,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 
 		_updateSKU(cpInstance, sku);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
