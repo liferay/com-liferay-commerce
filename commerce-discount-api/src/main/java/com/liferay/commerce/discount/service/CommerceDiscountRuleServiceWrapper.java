@@ -57,6 +57,15 @@ public class CommerceDiscountRuleServiceWrapper
 
 	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscountRule
+			fetchCommerceDiscountRule(long commerceDiscountRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountRuleService.fetchCommerceDiscountRule(
+			commerceDiscountRuleId);
+	}
+
+	@Override
+	public com.liferay.commerce.discount.model.CommerceDiscountRule
 			getCommerceDiscountRule(long commerceDiscountRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

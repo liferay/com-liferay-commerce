@@ -148,6 +148,15 @@ public class CommercePriceListServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.price.list.model.CommercePriceList
+			getCommercePriceList(long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceListService.getCommercePriceList(
+			commercePriceListId);
+	}
+
+	@Override
 	public java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceList>
 				getCommercePriceLists(

@@ -64,6 +64,32 @@ public class CommerceDiscountCommerceAccountGroupRelServiceWrapper
 	}
 
 	@Override
+	public
+		com.liferay.commerce.discount.model.
+			CommerceDiscountCommerceAccountGroupRel
+					fetchCommerceDiscountCommerceAccountGroupRel(
+						long commerceDiscountId, long commerceAccountGroupId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountCommerceAccountGroupRelService.
+			fetchCommerceDiscountCommerceAccountGroupRel(
+				commerceDiscountId, commerceAccountGroupId);
+	}
+
+	@Override
+	public
+		com.liferay.commerce.discount.model.
+			CommerceDiscountCommerceAccountGroupRel
+					getCommerceDiscountCommerceAccountGroupRel(
+						long commerceDiscountCommerceAccountGroupRelId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountCommerceAccountGroupRelService.
+			getCommerceDiscountCommerceAccountGroupRel(
+				commerceDiscountCommerceAccountGroupRelId);
+	}
+
+	@Override
 	public java.util.List
 		<com.liferay.commerce.discount.model.
 			CommerceDiscountCommerceAccountGroupRel>
@@ -78,6 +104,16 @@ public class CommerceDiscountCommerceAccountGroupRelServiceWrapper
 		return _commerceDiscountCommerceAccountGroupRelService.
 			getCommerceDiscountCommerceAccountGroupRels(
 				commerceDiscountId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceDiscountCommerceAccountGroupRelsCount(
+			long commerceDiscountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountCommerceAccountGroupRelService.
+			getCommerceDiscountCommerceAccountGroupRelsCount(
+				commerceDiscountId);
 	}
 
 	/**

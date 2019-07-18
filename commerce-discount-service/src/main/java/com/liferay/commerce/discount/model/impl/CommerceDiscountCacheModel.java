@@ -69,10 +69,12 @@ public class CommerceDiscountCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(59);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
+		sb.append(", externalReferenceCode=");
+		sb.append(externalReferenceCode);
 		sb.append(", commerceDiscountId=");
 		sb.append(commerceDiscountId);
 		sb.append(", companyId=");
@@ -141,6 +143,14 @@ public class CommerceDiscountCacheModel
 		}
 		else {
 			commerceDiscountImpl.setUuid(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			commerceDiscountImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceDiscountImpl.setExternalReferenceCode(
+				externalReferenceCode);
 		}
 
 		commerceDiscountImpl.setCommerceDiscountId(commerceDiscountId);
@@ -257,6 +267,7 @@ public class CommerceDiscountCacheModel
 		throws ClassNotFoundException, IOException {
 
 		uuid = objectInput.readUTF();
+		externalReferenceCode = objectInput.readUTF();
 
 		commerceDiscountId = objectInput.readLong();
 
@@ -303,6 +314,13 @@ public class CommerceDiscountCacheModel
 		}
 		else {
 			objectOutput.writeUTF(uuid);
+		}
+
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
 		}
 
 		objectOutput.writeLong(commerceDiscountId);
@@ -382,6 +400,7 @@ public class CommerceDiscountCacheModel
 	}
 
 	public String uuid;
+	public String externalReferenceCode;
 	public long commerceDiscountId;
 	public long companyId;
 	public long userId;

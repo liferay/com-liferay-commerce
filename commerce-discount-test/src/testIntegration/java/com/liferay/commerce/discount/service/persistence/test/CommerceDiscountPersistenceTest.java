@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -46,6 +47,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.junit.After;
@@ -126,6 +128,9 @@ public class CommerceDiscountPersistenceTest {
 
 		newCommerceDiscount.setUuid(RandomTestUtil.randomString());
 
+		newCommerceDiscount.setExternalReferenceCode(
+			RandomTestUtil.randomString());
+
 		newCommerceDiscount.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceDiscount.setUserId(RandomTestUtil.nextLong());
@@ -190,6 +195,9 @@ public class CommerceDiscountPersistenceTest {
 
 		Assert.assertEquals(
 			existingCommerceDiscount.getUuid(), newCommerceDiscount.getUuid());
+		Assert.assertEquals(
+			existingCommerceDiscount.getExternalReferenceCode(),
+			newCommerceDiscount.getExternalReferenceCode());
 		Assert.assertEquals(
 			existingCommerceDiscount.getCommerceDiscountId(),
 			newCommerceDiscount.getCommerceDiscountId());
@@ -326,6 +334,15 @@ public class CommerceDiscountPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceDiscount newCommerceDiscount = addCommerceDiscount();
 
@@ -350,16 +367,16 @@ public class CommerceDiscountPersistenceTest {
 
 	protected OrderByComparator<CommerceDiscount> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"CommerceDiscount", "uuid", true, "commerceDiscountId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "title", true, "target", true,
-			"useCouponCode", true, "couponCode", true, "usePercentage", true,
-			"maximumDiscountAmount", true, "level1", true, "level2", true,
-			"level3", true, "level4", true, "limitationType", true,
-			"limitationTimes", true, "numberOfUse", true, "active", true,
-			"displayDate", true, "expirationDate", true, "lastPublishDate",
-			true, "status", true, "statusByUserId", true, "statusByUserName",
-			true, "statusDate", true);
+			"CommerceDiscount", "uuid", true, "externalReferenceCode", true,
+			"commerceDiscountId", true, "companyId", true, "userId", true,
+			"userName", true, "createDate", true, "modifiedDate", true, "title",
+			true, "target", true, "useCouponCode", true, "couponCode", true,
+			"usePercentage", true, "maximumDiscountAmount", true, "level1",
+			true, "level2", true, "level3", true, "level4", true,
+			"limitationType", true, "limitationTimes", true, "numberOfUse",
+			true, "active", true, "displayDate", true, "expirationDate", true,
+			"lastPublishDate", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -579,12 +596,37 @@ public class CommerceDiscountPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceDiscount newCommerceDiscount = addCommerceDiscount();
+
+		_persistence.clearCache();
+
+		CommerceDiscount existingCommerceDiscount =
+			_persistence.findByPrimaryKey(newCommerceDiscount.getPrimaryKey());
+
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceDiscount.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceDiscount, "getOriginalCompanyId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCommerceDiscount.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(
+					existingCommerceDiscount,
+					"getOriginalExternalReferenceCode", new Class<?>[0])));
+	}
+
 	protected CommerceDiscount addCommerceDiscount() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceDiscount commerceDiscount = _persistence.create(pk);
 
 		commerceDiscount.setUuid(RandomTestUtil.randomString());
+
+		commerceDiscount.setExternalReferenceCode(
+			RandomTestUtil.randomString());
 
 		commerceDiscount.setCompanyId(RandomTestUtil.nextLong());
 

@@ -70,6 +70,11 @@ public interface CommerceDiscountRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscountRel fetchCommerceDiscountRel(
+			String className, long classPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long[] getClassPKs(long commerceDiscountId, String className)
 		throws PortalException;
 

@@ -113,6 +113,10 @@ public interface CommercePriceEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePriceEntry getCommercePriceEntry(long commercePriceEntryId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
 			long cpInstanceId, int start, int end)
 		throws PortalException;

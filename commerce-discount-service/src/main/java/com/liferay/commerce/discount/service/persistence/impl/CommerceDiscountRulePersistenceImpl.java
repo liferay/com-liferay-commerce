@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -739,7 +738,7 @@ public class CommerceDiscountRulePersistenceImpl
 		commerceDiscountRule.setNew(true);
 		commerceDiscountRule.setPrimaryKey(commerceDiscountRuleId);
 
-		commerceDiscountRule.setCompanyId(companyProvider.getCompanyId());
+		commerceDiscountRule.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return commerceDiscountRule;
 	}
@@ -1430,9 +1429,6 @@ public class CommerceDiscountRulePersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

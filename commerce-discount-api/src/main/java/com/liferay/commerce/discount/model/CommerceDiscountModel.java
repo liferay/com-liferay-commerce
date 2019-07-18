@@ -85,6 +85,21 @@ public interface CommerceDiscountModel
 	public void setUuid(String uuid);
 
 	/**
+	 * Returns the external reference code of this commerce discount.
+	 *
+	 * @return the external reference code of this commerce discount
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce discount.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce discount
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce discount ID of this commerce discount.
 	 *
 	 * @return the commerce discount ID of this commerce discount
