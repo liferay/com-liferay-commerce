@@ -18,10 +18,13 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
+import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceDiscountCommerceAccountGroupRelImpl
@@ -36,6 +39,12 @@ public class CommerceDiscountCommerceAccountGroupRelImpl
 
 		return CommerceAccountGroupLocalServiceUtil.getCommerceAccountGroup(
 			getCommerceAccountGroupId());
+	}
+
+	@Override
+	public CommerceDiscount getCommerceDiscount() throws PortalException {
+		return CommerceDiscountLocalServiceUtil.getCommerceDiscount(
+			getCommerceDiscountId());
 	}
 
 }
