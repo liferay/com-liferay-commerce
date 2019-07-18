@@ -32,7 +32,7 @@ if (cpSku != null) {
 	cpInstanceId = cpSku.getCPInstanceId();
 }
 
-String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId, themeDisplay);
+String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId);
 %>
 
 <div class="container-fluid product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">

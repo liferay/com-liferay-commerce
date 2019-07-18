@@ -24,7 +24,7 @@ import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.theme.ThemeDisplayFactory;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -57,8 +57,7 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 	}
 
 	@Override
-	public String getSampleURL(
-			long cpDefinitionId, long cpInstanceId, ThemeDisplay themeDisplay)
+	public String getSampleURL(long cpDefinitionId, long cpInstanceId)
 		throws PortalException {
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting =
@@ -84,7 +83,7 @@ public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
 			cpDefinitionVirtualSetting.getSampleFileEntryId());
 
 		return DLUtil.getDownloadURL(
-			fileEntry, fileEntry.getFileVersion(), themeDisplay,
+			fileEntry, fileEntry.getFileVersion(), ThemeDisplayFactory.create(),
 			StringPool.BLANK);
 	}
 
