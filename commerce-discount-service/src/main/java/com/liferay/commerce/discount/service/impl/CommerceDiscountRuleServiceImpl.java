@@ -63,6 +63,25 @@ public class CommerceDiscountRuleServiceImpl
 	}
 
 	@Override
+	public CommerceDiscountRule fetchCommerceDiscountRule(
+			long commerceDiscountRuleId)
+		throws PortalException {
+
+		CommerceDiscountRule commerceDiscountRule =
+			commerceDiscountRuleLocalService.fetchCommerceDiscountRule(
+				commerceDiscountRuleId);
+
+		if (commerceDiscountRule != null) {
+			_commerceDiscountResourcePermission.check(
+				getPermissionChecker(),
+				commerceDiscountRule.getCommerceDiscountId(),
+				ActionKeys.UPDATE);
+		}
+
+		return commerceDiscountRule;
+	}
+
+	@Override
 	public CommerceDiscountRule getCommerceDiscountRule(
 			long commerceDiscountRuleId)
 		throws PortalException {
