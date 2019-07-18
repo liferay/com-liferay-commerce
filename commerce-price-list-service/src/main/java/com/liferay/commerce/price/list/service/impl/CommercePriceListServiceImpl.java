@@ -158,6 +158,18 @@ public class CommercePriceListServiceImpl
 	}
 
 	@Override
+	public CommercePriceList getCommercePriceList(long commercePriceListId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceListLocalService.getCommercePriceList(
+			commercePriceListId);
+	}
+
+	@Override
 	public List<CommercePriceList> getCommercePriceLists(
 			long companyId, int status, int start, int end,
 			OrderByComparator<CommercePriceList> orderByComparator)
