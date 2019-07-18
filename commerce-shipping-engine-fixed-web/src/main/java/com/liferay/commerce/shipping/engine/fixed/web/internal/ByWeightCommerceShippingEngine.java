@@ -19,7 +19,6 @@ import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.exception.CommerceShippingEngineException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceShippingOption;
@@ -127,11 +126,8 @@ public class ByWeightCommerceShippingEngine implements CommerceShippingEngine {
 			CommerceShippingFixedOption commerceShippingFixedOption)
 		throws PortalException {
 
-		List<CommerceOrderItem> commerceOrderItems =
-			commerceOrder.getCommerceOrderItems();
-
 		double orderWeight = _commerceShippingHelper.getWeight(
-			commerceOrderItems);
+			commerceOrder.getCommerceOrderItems());
 
 		CommerceShippingFixedOptionRel commerceShippingFixedOptionRel =
 			_commerceShippingFixedOptionRelLocalService.

@@ -723,18 +723,12 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTaxAmount(taxValue.getPrice());
 		commerceOrder.setTotal(total.getPrice());
 
-		CommerceDiscountValue shippingDiscountValue =
-			commerceOrderPrice.getShippingDiscountValue();
-		CommerceDiscountValue subtotalDiscountValue =
-			commerceOrderPrice.getSubtotalDiscountValue();
-		CommerceDiscountValue totalDiscountValue =
-			commerceOrderPrice.getTotalDiscountValue();
-
 		_setCommerceOrderShippingDiscountValue(
-			commerceOrder, shippingDiscountValue);
+			commerceOrder, commerceOrderPrice.getShippingDiscountValue());
 		_setCommerceOrderSubtotalDiscountValue(
-			commerceOrder, subtotalDiscountValue);
-		_setCommerceOrderTotalDiscountValue(commerceOrder, totalDiscountValue);
+			commerceOrder, commerceOrderPrice.getSubtotalDiscountValue());
+		_setCommerceOrderTotalDiscountValue(
+			commerceOrder, commerceOrderPrice.getTotalDiscountValue());
 
 		return commerceOrderPersistence.update(commerceOrder);
 	}

@@ -24,7 +24,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.GroupPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -77,11 +76,9 @@ public class CategoryDisplayLayoutsCommerceAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return GroupPermissionUtil.contains(
-			permissionChecker, groupId, ActionKeys.ADD_LAYOUT);
+			PermissionThreadLocal.getPermissionChecker(), groupId,
+			ActionKeys.ADD_LAYOUT);
 	}
 
 	@Override

@@ -170,13 +170,10 @@ public class CPTestUtil {
 	public static CPOptionValue addCPOptionValue(CPOption cpOption)
 		throws PortalException {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext();
-
 		return CPOptionValueLocalServiceUtil.addCPOptionValue(
 			cpOption.getCPOptionId(), RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomDouble(), RandomTestUtil.randomString(),
-			serviceContext);
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static void buildCPInstances(CPDefinition cpDefinition)

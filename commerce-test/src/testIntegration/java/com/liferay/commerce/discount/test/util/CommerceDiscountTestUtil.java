@@ -44,18 +44,16 @@ public class CommerceDiscountTestUtil {
 				CommerceDiscount commerceDiscount, long userId)
 		throws Exception {
 
-		CommerceAccountGroup commerceAccountGroup = null; /*
-			CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
-				userId);*/
+		CommerceAccountGroup commerceAccountGroup = null;
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext();
+		/*CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
+			userId);*/
 
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static CommerceDiscount addCouponDiscount(
@@ -85,17 +83,15 @@ public class CommerceDiscountTestUtil {
 		throws Exception {
 
 		CommerceAccountGroup commerceAccountGroup = null;
+
 		/*CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
 			commerceDiscount.getGroupId(), userId);*/
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext();
 
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static CommerceDiscount addFixedCommerceDiscount(

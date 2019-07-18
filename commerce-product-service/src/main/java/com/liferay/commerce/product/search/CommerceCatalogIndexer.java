@@ -69,9 +69,8 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		long companyId = searchContext.getCompanyId();
-
-		contextBooleanFilter.addRequiredTerm(Field.COMPANY_ID, companyId);
+		contextBooleanFilter.addRequiredTerm(
+			Field.COMPANY_ID, searchContext.getCompanyId());
 
 		String catalogId = GetterUtil.getString(
 			searchContext.getAttribute(Field.ENTRY_CLASS_PK));

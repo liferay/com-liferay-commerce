@@ -79,10 +79,9 @@ public class CPSpecificationOptionDisplayContext
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long cpOptionCategoryId = cpSpecificationOption.getCPOptionCategoryId();
-
 		CPOptionCategory cpOptionCategory =
-			_cpOptionCategoryService.fetchCPOptionCategory(cpOptionCategoryId);
+			_cpOptionCategoryService.fetchCPOptionCategory(
+				cpSpecificationOption.getCPOptionCategoryId());
 
 		if (cpOptionCategory != null) {
 			return cpOptionCategory.getTitle(themeDisplay.getLocale());

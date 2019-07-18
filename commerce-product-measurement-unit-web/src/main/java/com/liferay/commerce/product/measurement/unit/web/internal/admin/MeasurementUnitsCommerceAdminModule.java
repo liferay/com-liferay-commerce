@@ -22,7 +22,6 @@ import com.liferay.commerce.product.service.CPMeasurementUnitService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -80,11 +79,8 @@ public class MeasurementUnitsCommerceAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return PortalPermissionUtil.contains(
-			permissionChecker,
+			PermissionThreadLocal.getPermissionChecker(),
 			CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS);
 	}
 

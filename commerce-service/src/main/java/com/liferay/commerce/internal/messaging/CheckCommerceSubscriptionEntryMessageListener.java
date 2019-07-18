@@ -15,7 +15,6 @@
 package com.liferay.commerce.internal.messaging;
 
 import com.liferay.commerce.configuration.CommerceSubscriptionConfiguration;
-import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
@@ -30,7 +29,6 @@ import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
 
-import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Activate;
@@ -78,12 +76,9 @@ public class CheckCommerceSubscriptionEntryMessageListener
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		List<CommerceSubscriptionEntry> commerceSubscriptionEntriesToRenew =
-			_commerceSubscriptionEntryLocalService.
-				getCommerceSubscriptionEntriesToRenew();
-
 		_commerceSubscriptionEntryHelper.checkSubscriptionEntriesStatus(
-			commerceSubscriptionEntriesToRenew);
+			_commerceSubscriptionEntryLocalService.
+				getCommerceSubscriptionEntriesToRenew());
 	}
 
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")

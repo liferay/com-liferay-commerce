@@ -46,7 +46,7 @@ import org.osgi.service.component.annotations.Component;
 public class LiferayEventProcessorFilter implements ContainerRequestFilter {
 
 	@Override
-	public void filter(ContainerRequestContext requestContext) {
+	public void filter(ContainerRequestContext containerRequestContext) {
 		try {
 			EventsProcessorUtil.process(
 				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,

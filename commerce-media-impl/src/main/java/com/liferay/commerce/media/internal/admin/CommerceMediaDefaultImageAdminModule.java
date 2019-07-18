@@ -25,7 +25,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -87,11 +86,9 @@ public class CommerceMediaDefaultImageAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return PortalPermissionUtil.contains(
-			permissionChecker, CPActionKeys.ADD_COMMERCE_CATALOG);
+			PermissionThreadLocal.getPermissionChecker(),
+			CPActionKeys.ADD_COMMERCE_CATALOG);
 	}
 
 	@Override

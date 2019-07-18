@@ -34,10 +34,9 @@ public class CPInstanceModelListener extends BaseModelListener<CPInstance> {
 	@Override
 	public void onBeforeRemove(CPInstance cpInstance) {
 		try {
-			long cpInstanceId = cpInstance.getCPInstanceId();
-
 			_commercePriceEntryLocalService.
-				deleteCommercePriceEntriesByCPInstanceId(cpInstanceId);
+				deleteCommercePriceEntriesByCPInstanceId(
+					cpInstance.getCPInstanceId());
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

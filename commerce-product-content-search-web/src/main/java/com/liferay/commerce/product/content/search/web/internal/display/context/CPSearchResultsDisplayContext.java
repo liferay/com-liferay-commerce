@@ -264,14 +264,13 @@ public class CPSearchResultsDisplayContext {
 		String curParam = paginationStartParameterName;
 		int cur = paginationStart;
 		int delta = paginationDelta;
-		PortletURL portletURL = getPortletURL();
 		List<String> headerNames = null;
 		String emptyResultsMessage = null;
 		String cssClass = null;
 
 		SearchContainer<CPCatalogEntry> searchContainer = new SearchContainer<>(
 			portletRequest, displayTerms, searchTerms, curParam, cur, delta,
-			portletURL, headerNames, emptyResultsMessage, cssClass);
+			getPortletURL(), headerNames, emptyResultsMessage, cssClass);
 
 		searchContainer.setDeltaParam(paginationDeltaParameterName);
 		searchContainer.setResults(cpDataSourceResult.getCPCatalogEntries());
