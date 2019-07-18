@@ -126,11 +126,9 @@ public class CommerceDiscountRelLocalServiceImpl
 	@Override
 	public CommerceDiscountRel fetchCommerceDiscountRel(
 		String className, long classPK) {
-
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceDiscountRelPersistence.fetchByCN_CPK_First(
-			classNameId, classPK,
+			classNameLocalService.getClassNameId(className), 
+			classPK,
 			new CommerceDiscountRelCreateDateComparator());
 	}
 
