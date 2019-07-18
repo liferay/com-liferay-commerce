@@ -29,10 +29,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -55,7 +54,8 @@ public class SubscriptionInfoCPContentContributor
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -66,14 +66,14 @@ public class SubscriptionInfoCPContentContributor
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
+				groupId);
 
 		if (commerceChannel == null) {
 			return jsonObject;
 		}
 
 		String subscriptionInfo = _getSubscriptionInfo(
-			cpInstance.getCPSubscriptionInfo(), httpServletRequest);
+			cpInstance.getCPSubscriptionInfo(), locale);
 
 		jsonObject.put(
 			CPContentContributorConstants.SUBSCRIPTION_INFO, subscriptionInfo);
@@ -90,8 +90,7 @@ public class SubscriptionInfoCPContentContributor
 	}
 
 	private String _getSubscriptionInfo(
-		CPSubscriptionInfo cpSubscriptionInfo,
-		HttpServletRequest httpServletRequest) {
+		CPSubscriptionInfo cpSubscriptionInfo, Locale locale) {
 
 		if (cpSubscriptionInfo == null) {
 			return StringPool.BLANK;
@@ -108,8 +107,7 @@ public class SubscriptionInfoCPContentContributor
 				cpSubscriptionInfo.getSubscriptionType());
 
 		if (cpSubscriptionType != null) {
-			period = cpSubscriptionType.getLabel(
-				_portal.getLocale(httpServletRequest));
+			period = cpSubscriptionType.getLabel(locale);
 		}
 
 		StringBundler sb = new StringBundler(
@@ -121,7 +119,7 @@ public class SubscriptionInfoCPContentContributor
 			subscriptionLength, period);
 
 		String subscriptionMessage = LanguageUtil.format(
-			httpServletRequest, "every-x-x",
+			locale, "every-x-x",
 			new Object[] {subscriptionLength, subscriptionPeriodKey}, true);
 
 		sb.append(subscriptionMessage);
@@ -136,7 +134,7 @@ public class SubscriptionInfoCPContentContributor
 			String durationPeriodKey = _getPeriodKey(totalLength, period);
 
 			String durationMessage = LanguageUtil.format(
-				httpServletRequest, "duration-x-x",
+				locale, "duration-x-x",
 				new Object[] {totalLength, durationPeriodKey}, true);
 
 			sb.append(durationMessage);
@@ -155,8 +153,5 @@ public class SubscriptionInfoCPContentContributor
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }

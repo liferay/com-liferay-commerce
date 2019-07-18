@@ -28,11 +28,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -55,7 +52,8 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -66,7 +64,7 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
+				groupId);
 
 		if (commerceChannel == null) {
 			return jsonObject;
@@ -84,15 +82,11 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 		boolean displayStockQuantity =
 			cpDefinitionInventoryEngine.isDisplayStockQuantity(cpInstance);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		if (displayStockQuantity) {
 			jsonObject.put(
 				CPContentContributorConstants.STOCK_QUANTITY_NAME,
 				LanguageUtil.format(
-					themeDisplay.getLocale(), "stock-quantity-x",
+					locale, "stock-quantity-x",
 					_commerceInventoryEngine.getStockQuantity(
 						cpInstance.getCompanyId(), commerceChannel.getGroupId(),
 						cpInstance.getSku())));
@@ -117,8 +111,5 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }

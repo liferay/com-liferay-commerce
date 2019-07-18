@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.internal.product.content.contributor;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
@@ -31,13 +31,10 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.Portal;
 
 import java.math.BigDecimal;
 
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -59,7 +56,8 @@ public class PriceCPContentContributor implements CPContentContributor {
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -70,7 +68,7 @@ public class PriceCPContentContributor implements CPContentContributor {
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
+				groupId);
 
 		if (commerceChannel == null) {
 			return jsonObject;
@@ -85,9 +83,9 @@ public class PriceCPContentContributor implements CPContentContributor {
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
+		CommerceContext commerceContext = _commerceContextFactory.create(
+			commerceChannel.getCompanyId(), groupId, 0, commerceOrderId,
+			commerceAccountId);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -98,8 +96,6 @@ public class PriceCPContentContributor implements CPContentContributor {
 		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
 
 		if (unitPriceMoney != null) {
-			Locale locale = _portal.getLocale(httpServletRequest);
-
 			jsonObject.put(
 				CPContentContributorConstants.PRICE,
 				unitPriceMoney.format(locale));
@@ -126,6 +122,9 @@ public class PriceCPContentContributor implements CPContentContributor {
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
+	private CommerceContextFactory _commerceContextFactory;
+
+	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
@@ -138,8 +137,5 @@ public class PriceCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }

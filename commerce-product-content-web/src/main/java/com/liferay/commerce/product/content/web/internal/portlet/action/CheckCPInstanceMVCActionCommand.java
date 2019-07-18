@@ -17,6 +17,7 @@ package com.liferay.commerce.product.content.web.internal.portlet.action;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.permission.CommerceProductViewPermission;
@@ -108,6 +109,15 @@ public class CheckCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 
 				jsonObject.put("sku", cpInstance.getSku());
 
+				long commerceOrderId = 0;
+
+				CommerceOrder commerceOrder =
+					commerceContext.getCommerceOrder();
+
+				if (commerceOrder != null) {
+					commerceOrderId = commerceOrder.getCommerceOrderId();
+				}
+
 				List<CPContentContributor> cpContentContributors =
 					_cpContentContributorRegistry.getCPContentContributors();
 
@@ -115,8 +125,9 @@ public class CheckCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 						cpContentContributors) {
 
 					JSONObject valueJSONObject = cpContentContributor.getValue(
-						cpInstance,
-						_portal.getHttpServletRequest(actionRequest));
+						commerceAccountId, cpInstance, commerceOrderId,
+						themeDisplay.getScopeGroupId(),
+						themeDisplay.getLocale());
 
 					Iterator<String> iterator = valueJSONObject.keys();
 

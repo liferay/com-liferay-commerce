@@ -29,14 +29,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -60,7 +55,8 @@ public class AvailabilityEstimateCPContentContributor
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -71,15 +67,11 @@ public class AvailabilityEstimateCPContentContributor
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
+				groupId);
 
 		if (commerceChannel == null) {
 			return jsonObject;
 		}
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
 
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
@@ -105,9 +97,9 @@ public class AvailabilityEstimateCPContentContributor
 			jsonObject.put(
 				CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
 				getAvailabilityEstimateLabel(
-					themeDisplay.getLocale(),
+					locale,
 					cpDefinitionInventoryEngine.getAvailabilityEstimate(
-						cpInstance, themeDisplay.getLocale())));
+						cpInstance, locale)));
 		}
 
 		return jsonObject;
@@ -140,8 +132,5 @@ public class AvailabilityEstimateCPContentContributor
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }

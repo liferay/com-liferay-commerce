@@ -26,11 +26,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -54,7 +53,8 @@ public class SampleFileCPContentContributor implements CPContentContributor {
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -84,13 +84,8 @@ public class SampleFileCPContentContributor implements CPContentContributor {
 			return jsonObject;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		String sampleURL = _virtualCPTypeHelper.getSampleURL(
-			cpInstance.getCPDefinitionId(), cpInstance.getCPInstanceId(),
-			themeDisplay);
+			cpInstance.getCPDefinitionId(), cpInstance.getCPInstanceId());
 
 		if (Validator.isNull(sampleURL)) {
 			jsonObject.put(NAME, StringPool.BLANK);
@@ -98,23 +93,21 @@ public class SampleFileCPContentContributor implements CPContentContributor {
 			return jsonObject;
 		}
 
-		String sampleFile = _getSampleFileHtml(sampleURL, httpServletRequest);
+		String sampleFile = _getSampleFileHtml(sampleURL, locale);
 
 		jsonObject.put(NAME, sampleFile);
 
 		return jsonObject;
 	}
 
-	private String _getSampleFileHtml(
-		String sampleURL, HttpServletRequest httpServletRequest) {
-
+	private String _getSampleFileHtml(String sampleURL, Locale locale) {
 		StringBundler sb = new StringBundler(6);
 
 		sb.append("<a class=\"btn btn-primary\" href=\"");
 		sb.append(sampleURL);
 		sb.append(StringPool.QUOTE);
 		sb.append(StringPool.GREATER_THAN);
-		sb.append(LanguageUtil.get(httpServletRequest, "download-sample-file"));
+		sb.append(LanguageUtil.get(locale, "download-sample-file"));
 		sb.append("</a>");
 
 		return sb.toString();
@@ -126,6 +119,9 @@ public class SampleFileCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private VirtualCPTypeHelper _virtualCPTypeHelper;

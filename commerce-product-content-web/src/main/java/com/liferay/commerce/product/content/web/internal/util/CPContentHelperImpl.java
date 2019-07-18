@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.media.CommerceCatalogDefaultImage;
 import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -212,8 +213,25 @@ public class CPContentHelperImpl implements CPContentHelper {
 			return null;
 		}
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceOrderId = 0;
+
+		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+
+		if (commerceOrder != null) {
+			commerceOrderId = commerceOrder.getCommerceOrderId();
+		}
+
 		return cpContentContributor.getValue(
-			getDefaultCPInstance(httpServletRequest), httpServletRequest);
+			commerceAccount.getCommerceAccountId(),
+			getDefaultCPInstance(httpServletRequest), commerceOrderId,
+			_portal.getScopeGroupId(httpServletRequest),
+			_portal.getLocale(httpServletRequest));
 	}
 
 	@Override

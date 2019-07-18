@@ -28,11 +28,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -55,7 +52,8 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 	@Override
 	public JSONObject getValue(
-			CPInstance cpInstance, HttpServletRequest httpServletRequest)
+			long commerceAccountId, CPInstance cpInstance, long commerceOrderId,
+			long groupId, Locale locale)
 		throws PortalException {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
@@ -66,15 +64,11 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest));
+				groupId);
 
 		if (commerceChannel == null) {
 			return jsonObject;
 		}
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
 
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
@@ -103,16 +97,14 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 			jsonObject.put(
 				CPContentContributorConstants.AVAILABILITY_NAME,
 				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					CPContentContributorConstants.AVAILABLE));
+					locale, CPContentContributorConstants.AVAILABLE));
 		}
 
 		if (displayAvailability && !available) {
 			jsonObject.put(
 				CPContentContributorConstants.AVAILABILITY_NAME,
 				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					CPContentContributorConstants.UNAVAILABLE));
+					locale, CPContentContributorConstants.UNAVAILABLE));
 		}
 
 		return jsonObject;
@@ -134,8 +126,5 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private Portal _portal;
 
 }
