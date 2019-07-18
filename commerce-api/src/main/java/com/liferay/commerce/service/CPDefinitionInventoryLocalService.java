@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -77,12 +76,12 @@ public interface CPDefinitionInventoryLocalService
 		CPDefinitionInventory cpDefinitionInventory);
 
 	public CPDefinitionInventory addCPDefinitionInventory(
-			long cpDefinitionId, String cpDefinitionInventoryEngine,
-			String lowStockActivity, boolean displayAvailability,
-			boolean displayStockQuantity, int minStockQuantity,
-			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			long groupId, long cpDefinitionId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
 		throws PortalException;
 
 	public void cloneCPDefinitionInventory(
@@ -329,8 +328,7 @@ public interface CPDefinitionInventoryLocalService
 			String lowStockActivity, boolean displayAvailability,
 			boolean displayStockQuantity, int minStockQuantity,
 			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			String allowedOrderQuantities, int multipleOrderQuantity)
 		throws PortalException;
 
 }

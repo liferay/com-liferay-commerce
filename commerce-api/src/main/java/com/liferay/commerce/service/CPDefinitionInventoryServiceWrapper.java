@@ -39,19 +39,19 @@ public class CPDefinitionInventoryServiceWrapper
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory
 			addCPDefinitionInventory(
-				long cpDefinitionId, String cpDefinitionInventoryEngine,
-				String lowStockActivity, boolean displayAvailability,
-				boolean displayStockQuantity, int minStockQuantity,
-				boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-				String allowedOrderQuantities, int multipleOrderQuantity,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				long groupId, long cpDefinitionId,
+				String cpDefinitionInventoryEngine, String lowStockActivity,
+				boolean displayAvailability, boolean displayStockQuantity,
+				int minStockQuantity, boolean backOrders, int minOrderQuantity,
+				int maxOrderQuantity, String allowedOrderQuantities,
+				int multipleOrderQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpDefinitionInventoryService.addCPDefinitionInventory(
-			cpDefinitionId, cpDefinitionInventoryEngine, lowStockActivity,
-			displayAvailability, displayStockQuantity, minStockQuantity,
-			backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			groupId, cpDefinitionId, cpDefinitionInventoryEngine,
+			lowStockActivity, displayAvailability, displayStockQuantity,
+			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	@Override
@@ -84,20 +84,19 @@ public class CPDefinitionInventoryServiceWrapper
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory
 			updateCPDefinitionInventory(
-				long cpDefinitionInventoryId,
+				long groupId, long cpDefinitionInventoryId,
 				String cpDefinitionInventoryEngine, String lowStockActivity,
 				boolean displayAvailability, boolean displayStockQuantity,
 				int minStockQuantity, boolean backOrders, int minOrderQuantity,
 				int maxOrderQuantity, String allowedOrderQuantities,
-				int multipleOrderQuantity,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				int multipleOrderQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpDefinitionInventoryService.updateCPDefinitionInventory(
-			cpDefinitionInventoryId, cpDefinitionInventoryEngine,
+			groupId, cpDefinitionInventoryId, cpDefinitionInventoryEngine,
 			lowStockActivity, displayAvailability, displayStockQuantity,
 			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	@Override

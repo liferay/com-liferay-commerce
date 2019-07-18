@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -59,12 +58,12 @@ public interface CPDefinitionInventoryService extends BaseService {
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionInventoryServiceUtil} to access the cp definition inventory remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CPDefinitionInventoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CPDefinitionInventory addCPDefinitionInventory(
-			long cpDefinitionId, String cpDefinitionInventoryEngine,
-			String lowStockActivity, boolean displayAvailability,
-			boolean displayStockQuantity, int minStockQuantity,
-			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			long groupId, long cpDefinitionId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
 		throws PortalException;
 
 	public void deleteCPDefinitionInventory(long cpDefinitionInventoryId)
@@ -83,12 +82,12 @@ public interface CPDefinitionInventoryService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	public CPDefinitionInventory updateCPDefinitionInventory(
-			long cpDefinitionInventoryId, String cpDefinitionInventoryEngine,
-			String lowStockActivity, boolean displayAvailability,
-			boolean displayStockQuantity, int minStockQuantity,
-			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			long groupId, long cpDefinitionInventoryId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
 		throws PortalException;
 
 }
