@@ -23,7 +23,6 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
-import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -46,6 +45,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 /**
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/option-category.properties",
@@ -141,7 +141,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 			GetterUtil.get(
 				optionCategory.getPriority(), cpOptionCategory.getPriority()),
-			optionCategory.getKey(), _serviceContextHelper.getServiceContext());
+			optionCategory.getKey());
 	}
 
 	private OptionCategory _upsertOptionCategory(OptionCategory optionCategory)
@@ -173,8 +173,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 				LanguageUtils.getLocalizedMap(optionCategory.getTitle()),
 				LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 				GetterUtil.get(optionCategory.getPriority(), 0D),
-				optionCategory.getKey(),
-				_serviceContextHelper.getServiceContext());
+				optionCategory.getKey());
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
@@ -190,9 +189,6 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
-
-	@Reference
-	private ServiceContextHelper _serviceContextHelper;
 
 	@Context
 	private User _user;
