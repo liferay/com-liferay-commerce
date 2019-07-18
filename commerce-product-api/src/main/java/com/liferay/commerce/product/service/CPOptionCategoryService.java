@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -65,7 +64,7 @@ public interface CPOptionCategoryService extends BaseService {
 	 */
 	public CPOptionCategory addCPOptionCategory(
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			double priority, String key, ServiceContext serviceContext)
+			double priority, String key)
 		throws PortalException;
 
 	public void deleteCPOptionCategory(long cpOptionCategoryId)
@@ -93,8 +92,7 @@ public interface CPOptionCategoryService extends BaseService {
 
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException;
 
 }

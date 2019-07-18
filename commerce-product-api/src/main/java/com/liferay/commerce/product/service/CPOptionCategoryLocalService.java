@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -83,8 +82,7 @@ public interface CPOptionCategoryLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOptionCategory addCPOptionCategory(
 			long userId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException;
 
 	/**
@@ -306,8 +304,7 @@ public interface CPOptionCategoryLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException;
 
 }
