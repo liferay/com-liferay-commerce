@@ -42,7 +42,7 @@ public class MeasurementUnitResourceImpl
 	public Response deleteMeasurementUnit(@NotNull Long id) throws Exception {
 		_measurementUnitHelper.deleteMeasurementUnit(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

@@ -113,7 +113,7 @@ public class ProductConfigurationResourceImpl
 			cpDefinition.getCPDefinitionId(),
 			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -136,7 +136,7 @@ public class ProductConfigurationResourceImpl
 			cpDefinition.getCPDefinitionId(),
 			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

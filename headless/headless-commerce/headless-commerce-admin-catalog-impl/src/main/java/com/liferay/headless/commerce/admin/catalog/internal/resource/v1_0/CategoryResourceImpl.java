@@ -128,7 +128,7 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 
 		_updateProductCategories(cpDefinition, categories);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -147,7 +147,7 @@ public class CategoryResourceImpl extends BaseCategoryResourceImpl {
 
 		_updateProductCategories(cpDefinition, categories);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

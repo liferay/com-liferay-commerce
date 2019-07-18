@@ -56,7 +56,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	public Response deleteAccount(Long id) throws Exception {
 		_commerceAccountService.deleteCommerceAccount(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -79,7 +79,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		_commerceAccountService.deleteCommerceAccount(
 			commerceAccount.getCommerceAccountId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -144,7 +144,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	public Response patchAccount(Long id, Account account) throws Exception {
 		_updateAccount(id, account);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -166,7 +166,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		_updateAccount(commerceAccount.getCommerceAccountId(), account);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

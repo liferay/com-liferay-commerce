@@ -103,7 +103,7 @@ public class ProductTaxConfigurationResourceImpl
 
 		_updateProductTaxConfiguration(cpDefinition, productTaxConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -123,7 +123,7 @@ public class ProductTaxConfigurationResourceImpl
 
 		_updateProductTaxConfiguration(cpDefinition, productTaxConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

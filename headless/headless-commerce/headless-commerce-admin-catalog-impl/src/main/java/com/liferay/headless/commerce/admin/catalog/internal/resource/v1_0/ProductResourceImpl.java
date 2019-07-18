@@ -42,7 +42,6 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionC
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.internal.util.ExpandoUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
@@ -59,6 +58,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.DateConfig;
+import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
@@ -110,7 +110,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -134,7 +134,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -210,7 +210,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		_updateProduct(cpDefinition, product);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -233,7 +233,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		_updateProduct(cpDefinition, product);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -496,10 +496,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			CPDefinition cpDefinition, Product product)
 		throws Exception {
 
-		long siteId = cpDefinition.getGroupId();
-
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			siteId);
+			cpDefinition.getGroupId());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
