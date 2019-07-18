@@ -110,8 +110,7 @@ public class ProductConfigurationResourceImpl
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
 			cpDefinition.getGroupId(), _cpDefinitionInventoryService,
-			productConfiguration, cpDefinition.getCPDefinitionId(),
-			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
+			productConfiguration, cpDefinition.getCPDefinitionId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -133,8 +132,7 @@ public class ProductConfigurationResourceImpl
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
 			cpDefinition.getGroupId(), _cpDefinitionInventoryService,
-			productConfiguration, cpDefinition.getCPDefinitionId(),
-			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
+			productConfiguration, cpDefinition.getCPDefinitionId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
