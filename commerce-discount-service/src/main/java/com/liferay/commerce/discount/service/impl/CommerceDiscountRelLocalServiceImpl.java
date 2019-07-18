@@ -17,6 +17,7 @@ package com.liferay.commerce.discount.service.impl;
 import com.liferay.commerce.discount.model.CommerceDiscount;
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.service.base.CommerceDiscountRelLocalServiceBaseImpl;
+import com.liferay.commerce.discount.util.comparator.CommerceDiscountRelCreateDateComparator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
@@ -120,6 +121,17 @@ public class CommerceDiscountRelLocalServiceImpl
 			commerceDiscountRelLocalService.deleteCommerceDiscountRel(
 				commerceDiscountRel);
 		}
+	}
+
+	@Override
+	public CommerceDiscountRel fetchCommerceDiscountRel(
+		String className, long classPK) {
+
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return commerceDiscountRelPersistence.fetchByCN_CPK_First(
+			classNameId, classPK,
+			new CommerceDiscountRelCreateDateComparator());
 	}
 
 	@Override
