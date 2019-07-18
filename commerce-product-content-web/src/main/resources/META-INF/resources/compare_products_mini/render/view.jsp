@@ -22,7 +22,9 @@ CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute
 
 List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries();
 
-List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
+Group group = themeDisplay.getScopeGroup();
+
+List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(group.getGroupId(), request.getSession());
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">

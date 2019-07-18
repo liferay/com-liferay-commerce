@@ -155,7 +155,8 @@ public class MiniumCPContentListEntryRenderer
 		}
 		else {
 			List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
-				httpServletRequest);
+				_portal.getScopeGroupId(httpServletRequest),
+				httpServletRequest.getSession());
 
 			JSONObject jsonObject = _jsonFactory.createJSONObject();
 

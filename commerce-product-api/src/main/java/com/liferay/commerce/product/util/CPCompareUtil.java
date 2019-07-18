@@ -15,12 +15,10 @@
 package com.liferay.commerce.product.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -29,29 +27,22 @@ import javax.servlet.http.HttpSession;
 public class CPCompareUtil {
 
 	public static void addCompareProduct(
-			HttpServletRequest httpServletRequest, long cpDefinitionId)
-		throws PortalException {
+		long groupId, HttpSession httpSession, long cpDefinitionId) {
 
-		List<Long> cpDefinitionIds = getCPDefinitionIds(httpServletRequest);
+		List<Long> cpDefinitionIds = getCPDefinitionIds(groupId, httpSession);
 
 		if (!cpDefinitionIds.contains(cpDefinitionId)) {
 			cpDefinitionIds.add(cpDefinitionId);
 		}
 
-		setCPDefinitionIds(httpServletRequest, cpDefinitionIds);
+		setCPDefinitionIds(groupId, httpSession, cpDefinitionIds);
 	}
 
 	public static List<Long> getCPDefinitionIds(
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		HttpServletRequest originalHttpServletRequest =
-			PortalUtil.getOriginalServletRequest(httpServletRequest);
-
-		HttpSession httpSession = originalHttpServletRequest.getSession();
+		long groupId, HttpSession httpSession) {
 
 		List<Long> cpDefinitionIds = (List<Long>)httpSession.getAttribute(
-			_getSessionAttributeKey(httpServletRequest));
+			_getSessionAttributeKey(groupId));
 
 		if (cpDefinitionIds == null) {
 			return new ArrayList<>();
@@ -61,37 +52,27 @@ public class CPCompareUtil {
 	}
 
 	public static void removeCompareProduct(
-			HttpServletRequest httpServletRequest, long cpDefinitionId)
+			long groupId, HttpSession httpSession, long cpDefinitionId)
 		throws PortalException {
 
-		List<Long> cpDefinitionIds = getCPDefinitionIds(httpServletRequest);
+		List<Long> cpDefinitionIds = getCPDefinitionIds(groupId, httpSession);
 
 		if (cpDefinitionIds.contains(cpDefinitionId)) {
 			cpDefinitionIds.remove(cpDefinitionId);
 		}
 
-		setCPDefinitionIds(httpServletRequest, cpDefinitionIds);
+		setCPDefinitionIds(groupId, httpSession, cpDefinitionIds);
 	}
 
 	public static void setCPDefinitionIds(
-			HttpServletRequest httpServletRequest, List<Long> cpDefinitionIds)
-		throws PortalException {
-
-		httpServletRequest = PortalUtil.getOriginalServletRequest(
-			httpServletRequest);
-
-		HttpSession httpSession = httpServletRequest.getSession();
+		long groupId, HttpSession httpSession, List<Long> cpDefinitionIds) {
 
 		httpSession.setAttribute(
-			_getSessionAttributeKey(httpServletRequest), cpDefinitionIds);
+			_getSessionAttributeKey(groupId), cpDefinitionIds);
 	}
 
-	private static String _getSessionAttributeKey(
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		return _SESSION_COMPARE_CP_DEFINITION_IDS +
-			PortalUtil.getScopeGroupId(httpServletRequest);
+	private static String _getSessionAttributeKey(long groupId) {
+		return _SESSION_COMPARE_CP_DEFINITION_IDS + groupId;
 	}
 
 	private static final String _SESSION_COMPARE_CP_DEFINITION_IDS =

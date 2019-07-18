@@ -20,6 +20,7 @@ import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContex
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class CompareProductTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
+			_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
+				PortalUtil.getScopeGroupId(request), request.getSession());
 
 			if (_cpDefinitionIds == null) {
 				_cpDefinitionIds = new ArrayList<>();

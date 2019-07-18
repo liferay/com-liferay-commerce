@@ -59,11 +59,14 @@ public class EditCompareProductMVCActionCommand extends BaseMVCActionCommand {
 		boolean compare = ParamUtil.getBoolean(actionRequest, compareParam);
 
 		if (compare) {
-			CPCompareUtil.addCompareProduct(httpServletRequest, cpDefinitionId);
+			CPCompareUtil.addCompareProduct(
+				_portal.getScopeGroupId(httpServletRequest),
+				httpServletRequest.getSession(), cpDefinitionId);
 		}
 		else {
 			CPCompareUtil.removeCompareProduct(
-				httpServletRequest, cpDefinitionId);
+				_portal.getScopeGroupId(httpServletRequest),
+				httpServletRequest.getSession(), cpDefinitionId);
 		}
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");

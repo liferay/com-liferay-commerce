@@ -77,7 +77,9 @@ public class CPCompareContentMiniDisplayContext {
 				CPCompareContentMiniPortletInstanceConfiguration.class);
 
 		_cpDefinitionIds = new ArrayList<>(
-			CPCompareUtil.getCPDefinitionIds(httpServletRequest));
+			CPCompareUtil.getCPDefinitionIds(
+				_cpRequestHelper.getScopeGroupId(),
+				httpServletRequest.getSession()));
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {

@@ -24,6 +24,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class CompareCheckboxTag extends ComponentRendererTag {
 			putValue("pictureUrl", cpDefinition.getDefaultImageThumbnailSrc());
 
 			List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
-				request);
+				PortalUtil.getScopeGroupId(request), request.getSession());
 
 			putValue("inCompare", cpDefinitionIds.contains(cpDefinitionId));
 		}

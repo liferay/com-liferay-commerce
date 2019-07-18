@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.Portal;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -45,8 +47,12 @@ public class ClearCompareProductsMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			actionRequest);
+
 		CPCompareUtil.setCPDefinitionIds(
-			_portal.getHttpServletRequest(actionRequest), null);
+			_portal.getScopeGroupId(httpServletRequest),
+			httpServletRequest.getSession(), null);
 
 		hideDefaultErrorMessage(actionRequest);
 		hideDefaultSuccessMessage(actionRequest);

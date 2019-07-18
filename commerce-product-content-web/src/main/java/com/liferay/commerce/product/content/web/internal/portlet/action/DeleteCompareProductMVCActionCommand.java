@@ -54,7 +54,9 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
-		CPCompareUtil.removeCompareProduct(httpServletRequest, cpDefinitionId);
+		CPCompareUtil.removeCompareProduct(
+			_portal.getScopeGroupId(httpServletRequest),
+			httpServletRequest.getSession(), cpDefinitionId);
 
 		hideDefaultErrorMessage(actionRequest);
 		hideDefaultSuccessMessage(actionRequest);

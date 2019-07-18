@@ -76,7 +76,9 @@ public class CPCompareContentDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CPCompareContentPortletInstanceConfiguration.class);
 
-		_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(httpServletRequest);
+		_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
+			_cpRequestHelper.getScopeGroupId(),
+			httpServletRequest.getSession());
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {

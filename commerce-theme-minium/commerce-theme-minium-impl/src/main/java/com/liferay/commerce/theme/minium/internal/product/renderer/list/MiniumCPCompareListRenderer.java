@@ -116,7 +116,8 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 			themeDisplay.getPortletDisplay());
 
 		List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
-			httpServletRequest);
+			_portal.getScopeGroupId(httpServletRequest),
+			httpServletRequest.getSession());
 
 		List<ProductCompareModel> products = new ArrayList<>();
 
