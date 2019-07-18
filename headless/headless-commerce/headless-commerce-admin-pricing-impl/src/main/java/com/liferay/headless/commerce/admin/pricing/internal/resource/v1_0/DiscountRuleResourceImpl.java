@@ -14,9 +14,24 @@
 
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
+import com.liferay.commerce.discount.exception.NoSuchDiscountException;
+import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.model.CommerceDiscountRule;
+import com.liferay.commerce.discount.service.CommerceDiscountRuleService;
+import com.liferay.commerce.discount.service.CommerceDiscountService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DiscountRuleHelper;
+import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.DiscountRuleUtil;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.Response;
 
@@ -36,26 +51,175 @@ public class DiscountRuleResourceImpl extends BaseDiscountRuleResourceImpl {
 
 	@Override
 	public Response deleteDiscountRule(Long id) throws Exception {
-		_discountRuleHelper.deleteDiscountRule(id);
+		_commerceDiscountRuleService.deleteCommerceDiscountRule(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
 
 	@Override
-	public DiscountRule getDiscountRule(Long id) throws Exception {
-		return _discountRuleHelper.getDiscountRule(id);
+	public Page<DiscountRule>
+			getDiscountByExternalReferenceCodeDiscountRulesPage(
+				String externalReferenceCode, Pagination pagination)
+		throws Exception {
+
+		CommerceDiscount commerceDiscount =
+			_commerceDiscountService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceDiscount == null) {
+			throw new NoSuchDiscountException(
+				"Unable to find Discount with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		List<CommerceDiscountRule> commerceDiscountRules =
+			_commerceDiscountRuleService.getCommerceDiscountRules(
+				commerceDiscount.getCommerceDiscountId(),
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int totalItems =
+			_commerceDiscountRuleService.getCommerceDiscountRulesCount(
+				commerceDiscount.getCommerceDiscountId());
+
+		return Page.of(
+			_toDiscountRules(commerceDiscountRules), pagination, totalItems);
 	}
 
 	@Override
-	public DiscountRule postDiscountRule(Long id, DiscountRule discountRule)
+	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
+			Long id, Pagination pagination)
 		throws Exception {
 
-		return _discountRuleHelper.updateDiscountRule(id, discountRule);
+		List<CommerceDiscountRule> commerceDiscountRules =
+			_commerceDiscountRuleService.getCommerceDiscountRules(
+				id, pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int totalItems =
+			_commerceDiscountRuleService.getCommerceDiscountRulesCount(id);
+
+		return Page.of(
+			_toDiscountRules(commerceDiscountRules), pagination, totalItems);
+	}
+
+	@Override
+	public DiscountRule getDiscountRule(Long id) throws Exception {
+		DTOConverter discountRuleDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceDiscountRule.class.getName());
+
+		return (DiscountRule)discountRuleDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
+	}
+
+	@Override
+	public Response patchDiscountRule(Long id, DiscountRule discountRule)
+		throws Exception {
+
+		CommerceDiscountRule commerceDiscountRule =
+			_commerceDiscountRuleService.getCommerceDiscountRule(id);
+
+		_commerceDiscountRuleService.updateCommerceDiscountRule(
+			commerceDiscountRule.getCommerceDiscountRuleId(),
+			discountRule.getType(),
+			GetterUtil.get(
+				discountRule.getTypeSettings(),
+				commerceDiscountRule.getTypeSettings()));
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public DiscountRule postDiscountByExternalReferenceCodeDiscountRule(
+			String externalReferenceCode, DiscountRule discountRule)
+		throws Exception {
+
+		CommerceDiscount commerceDiscount =
+			_commerceDiscountService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceDiscount == null) {
+			throw new NoSuchDiscountException(
+				"Unable to find Discount with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		CommerceDiscountRule commerceDiscountRule =
+			DiscountRuleUtil.addCommerceDiscountRule(
+				_commerceDiscountRuleService, discountRule, commerceDiscount,
+				_serviceContextHelper.getServiceContext());
+
+		DTOConverter discountRuleDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceDiscountRule.class.getName());
+
+		return (DiscountRule)discountRuleDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceDiscountRule.getCommerceDiscountRuleId()));
+	}
+
+	@Override
+	public DiscountRule postDiscountIdDiscountRule(
+			Long id, DiscountRule discountRule)
+		throws Exception {
+
+		CommerceDiscountRule commerceDiscountRule =
+			DiscountRuleUtil.addCommerceDiscountRule(
+				_commerceDiscountRuleService, discountRule,
+				_commerceDiscountService.getCommerceDiscount(id),
+				_serviceContextHelper.getServiceContext());
+
+		DTOConverter discountRuleDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceDiscountRule.class.getName());
+
+		return (DiscountRule)discountRuleDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceDiscountRule.getCommerceDiscountRuleId()));
+	}
+
+	private List<DiscountRule> _toDiscountRules(
+			List<CommerceDiscountRule> commerceDiscountRules)
+		throws Exception {
+
+		List<DiscountRule> discountRules = new ArrayList<>();
+
+		DTOConverter discountRuleDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceDiscountRule.class.getName());
+
+		for (CommerceDiscountRule commerceDiscountRule :
+				commerceDiscountRules) {
+
+			discountRules.add(
+				(DiscountRule)discountRuleDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						contextAcceptLanguage.getPreferredLocale(),
+						commerceDiscountRule.getCommerceDiscountRuleId())));
+		}
+
+		return discountRules;
 	}
 
 	@Reference
-	private DiscountRuleHelper _discountRuleHelper;
+	private CommerceDiscountRuleService _commerceDiscountRuleService;
+
+	@Reference
+	private CommerceDiscountService _commerceDiscountService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
+
+	@Reference
+	private ServiceContextHelper _serviceContextHelper;
 
 }
