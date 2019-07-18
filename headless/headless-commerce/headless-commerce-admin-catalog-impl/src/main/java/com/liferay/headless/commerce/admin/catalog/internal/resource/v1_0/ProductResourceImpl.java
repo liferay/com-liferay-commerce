@@ -90,6 +90,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 /**
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/product.properties",
@@ -241,7 +242,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	@Override
 	public Product postProduct(Product product) throws Exception {
 		CPDefinition cpDefinition = _upsertProduct(product);
-
 		DTOConverter productDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
 
@@ -320,8 +320,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		if (productConfiguration != null) {
 			ProductConfigurationUtil.updateCPDefinitionInventory(
-				_cpDefinitionInventoryService, productConfiguration,
-				cpDefinition.getCPDefinitionId(), serviceContext);
+				cpDefinition.getGroupId(), _cpDefinitionInventoryService,
+				productConfiguration, cpDefinition.getCPDefinitionId());
 		}
 
 		// Product shipping configuration
@@ -551,8 +551,12 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	private CPDefinition _upsertProduct(Product product) throws Exception {
 		boolean neverExpire = Boolean.TRUE;
 
-		ServiceContext serviceContext =
-			_serviceContextHelper.getServiceContext();
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.getCommerceCatalog(
+				product.getCatalogId());
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			commerceCatalog.getGroupId());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -572,10 +576,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			_getProductSubscriptionConfiguration(product);
 		ProductTaxConfiguration taxConfiguration = _getProductTaxConfiguration(
 			product);
-
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.getCommerceCatalog(
-				product.getCatalogId());
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
