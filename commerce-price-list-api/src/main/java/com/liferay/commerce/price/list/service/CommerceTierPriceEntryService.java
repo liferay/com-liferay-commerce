@@ -113,6 +113,11 @@ public interface CommerceTierPriceEntryService extends BaseService {
 	public int getCommerceTierPriceEntriesCountByCompanyId(long companyId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceTierPriceEntry getCommerceTierPriceEntry(
+			long commerceTierPriceEntryId)
+		throws PortalException;
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

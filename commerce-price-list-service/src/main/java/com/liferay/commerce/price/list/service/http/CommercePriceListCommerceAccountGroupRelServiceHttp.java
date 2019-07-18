@@ -179,6 +179,49 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListCommerceAccountGroupRel
+				getCommercePriceListCommerceAccountGroupRel(
+					HttpPrincipal httpPrincipal,
+					long commercePriceListCommerceAccoungGroupRelId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommercePriceListCommerceAccountGroupRelServiceUtil.class,
+				"getCommercePriceListCommerceAccountGroupRel",
+				_getCommercePriceListCommerceAccountGroupRelParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commercePriceListCommerceAccoungGroupRelId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.price.list.model.
+				CommercePriceListCommerceAccountGroupRel)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.
 			CommercePriceListCommerceAccountGroupRel>
@@ -190,7 +233,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePriceListCommerceAccountGroupRelServiceUtil.class,
 				"getCommercePriceListCommerceAccountGroupRels",
-				_getCommercePriceListCommerceAccountGroupRelsParameterTypes3);
+				_getCommercePriceListCommerceAccountGroupRelsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePriceListId);
@@ -239,7 +282,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePriceListCommerceAccountGroupRelServiceUtil.class,
 				"getCommercePriceListCommerceAccountGroupRels",
-				_getCommercePriceListCommerceAccountGroupRelsParameterTypes4);
+				_getCommercePriceListCommerceAccountGroupRelsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePriceListId, start, end, orderByComparator);
@@ -280,7 +323,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePriceListCommerceAccountGroupRelServiceUtil.class,
 				"getCommercePriceListCommerceAccountGroupRelsCount",
-				_getCommercePriceListCommerceAccountGroupRelsCountParameterTypes5);
+				_getCommercePriceListCommerceAccountGroupRelsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePriceListId);
@@ -324,7 +367,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePriceListCommerceAccountGroupRelServiceUtil.class,
 				"updateCommercePriceListCommerceAccountGroupRel",
-				_updateCommercePriceListCommerceAccountGroupRelParameterTypes6);
+				_updateCommercePriceListCommerceAccountGroupRelParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePriceListCommerceAccountGroupRelId, order,
@@ -373,19 +416,22 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 		_fetchCommercePriceListCommerceAccountGroupRelParameterTypes2 =
 			new Class[] {long.class, long.class};
 	private static final Class<?>[]
-		_getCommercePriceListCommerceAccountGroupRelsParameterTypes3 =
+		_getCommercePriceListCommerceAccountGroupRelParameterTypes3 =
 			new Class[] {long.class};
 	private static final Class<?>[]
 		_getCommercePriceListCommerceAccountGroupRelsParameterTypes4 =
+			new Class[] {long.class};
+	private static final Class<?>[]
+		_getCommercePriceListCommerceAccountGroupRelsParameterTypes5 =
 			new Class[] {
 				long.class, int.class, int.class,
 				com.liferay.portal.kernel.util.OrderByComparator.class
 			};
 	private static final Class<?>[]
-		_getCommercePriceListCommerceAccountGroupRelsCountParameterTypes5 =
+		_getCommercePriceListCommerceAccountGroupRelsCountParameterTypes6 =
 			new Class[] {long.class};
 	private static final Class<?>[]
-		_updateCommercePriceListCommerceAccountGroupRelParameterTypes6 =
+		_updateCommercePriceListCommerceAccountGroupRelParameterTypes7 =
 			new Class[] {
 				long.class, int.class,
 				com.liferay.portal.kernel.service.ServiceContext.class

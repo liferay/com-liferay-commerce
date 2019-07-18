@@ -70,4 +70,7 @@ public interface CommerceDiscountCommerceAccountGroupRel
 			getCommerceAccountGroup()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
+	public CommerceDiscount getCommerceDiscount()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

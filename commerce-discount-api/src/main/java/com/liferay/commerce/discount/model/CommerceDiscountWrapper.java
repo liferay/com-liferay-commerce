@@ -62,6 +62,7 @@ public class CommerceDiscountWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceDiscountId", getCommerceDiscountId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -99,6 +100,13 @@ public class CommerceDiscountWrapper
 
 		if (uuid != null) {
 			setUuid(uuid);
+		}
+
+		String externalReferenceCode = (String)attributes.get(
+			"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
 		}
 
 		Long commerceDiscountId = (Long)attributes.get("commerceDiscountId");
@@ -356,6 +364,16 @@ public class CommerceDiscountWrapper
 	@Override
 	public Date getExpirationDate() {
 		return _commerceDiscount.getExpirationDate();
+	}
+
+	/**
+	 * Returns the external reference code of this commerce discount.
+	 *
+	 * @return the external reference code of this commerce discount
+	 */
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceDiscount.getExternalReferenceCode();
 	}
 
 	/**
@@ -828,6 +846,16 @@ public class CommerceDiscountWrapper
 	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_commerceDiscount.setExpirationDate(expirationDate);
+	}
+
+	/**
+	 * Sets the external reference code of this commerce discount.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce discount
+	 */
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceDiscount.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**

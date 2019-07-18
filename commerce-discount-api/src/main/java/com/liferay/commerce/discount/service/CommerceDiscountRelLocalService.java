@@ -195,6 +195,10 @@ public interface CommerceDiscountRelLocalService
 		long commerceDiscountRelId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscountRel fetchCommerceDiscountRel(
+		String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

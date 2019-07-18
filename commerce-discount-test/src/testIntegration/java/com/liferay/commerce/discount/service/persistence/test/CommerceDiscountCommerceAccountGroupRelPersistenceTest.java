@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -210,6 +211,14 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 		_persistence.countByCommerceAccountGroupId(RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceAccountGroupId(0L);
+	}
+
+	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+
+		_persistence.countByC_C(0L, 0L);
 	}
 
 	@Test
@@ -521,6 +530,35 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceTest {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
+	}
+
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceDiscountCommerceAccountGroupRel
+			newCommerceDiscountCommerceAccountGroupRel =
+				addCommerceDiscountCommerceAccountGroupRel();
+
+		_persistence.clearCache();
+
+		CommerceDiscountCommerceAccountGroupRel
+			existingCommerceDiscountCommerceAccountGroupRel =
+				_persistence.findByPrimaryKey(
+					newCommerceDiscountCommerceAccountGroupRel.getPrimaryKey());
+
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceDiscountCommerceAccountGroupRel.
+					getCommerceDiscountId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceDiscountCommerceAccountGroupRel,
+				"getOriginalCommerceDiscountId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceDiscountCommerceAccountGroupRel.
+					getCommerceAccountGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceDiscountCommerceAccountGroupRel,
+				"getOriginalCommerceAccountGroupId", new Class<?>[0]));
 	}
 
 	protected CommerceDiscountCommerceAccountGroupRel

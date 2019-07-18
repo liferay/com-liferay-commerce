@@ -537,6 +537,83 @@ public class CommerceDiscountCommerceAccountGroupRelUtil {
 	}
 
 	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or throws a <code>NoSuchDiscountCommerceAccountGroupRelException</code> if it could not be found.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce discount commerce account group rel
+	 * @throws NoSuchDiscountCommerceAccountGroupRelException if a matching commerce discount commerce account group rel could not be found
+	 */
+	public static CommerceDiscountCommerceAccountGroupRel findByC_C(
+			long commerceDiscountId, long commerceAccountGroupId)
+		throws com.liferay.commerce.discount.exception.
+			NoSuchDiscountCommerceAccountGroupRelException {
+
+		return getPersistence().findByC_C(
+			commerceDiscountId, commerceAccountGroupId);
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce discount commerce account group rel, or <code>null</code> if a matching commerce discount commerce account group rel could not be found
+	 */
+	public static CommerceDiscountCommerceAccountGroupRel fetchByC_C(
+		long commerceDiscountId, long commerceAccountGroupId) {
+
+		return getPersistence().fetchByC_C(
+			commerceDiscountId, commerceAccountGroupId);
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce discount commerce account group rel, or <code>null</code> if a matching commerce discount commerce account group rel could not be found
+	 */
+	public static CommerceDiscountCommerceAccountGroupRel fetchByC_C(
+		long commerceDiscountId, long commerceAccountGroupId,
+		boolean retrieveFromCache) {
+
+		return getPersistence().fetchByC_C(
+			commerceDiscountId, commerceAccountGroupId, retrieveFromCache);
+	}
+
+	/**
+	 * Removes the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; from the database.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the commerce discount commerce account group rel that was removed
+	 */
+	public static CommerceDiscountCommerceAccountGroupRel removeByC_C(
+			long commerceDiscountId, long commerceAccountGroupId)
+		throws com.liferay.commerce.discount.exception.
+			NoSuchDiscountCommerceAccountGroupRelException {
+
+		return getPersistence().removeByC_C(
+			commerceDiscountId, commerceAccountGroupId);
+	}
+
+	/**
+	 * Returns the number of commerce discount commerce account group rels where commerceDiscountId = &#63; and commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce discount commerce account group rels
+	 */
+	public static int countByC_C(
+		long commerceDiscountId, long commerceAccountGroupId) {
+
+		return getPersistence().countByC_C(
+			commerceDiscountId, commerceAccountGroupId);
+	}
+
+	/**
 	 * Caches the commerce discount commerce account group rel in the entity cache if it is enabled.
 	 *
 	 * @param commerceDiscountCommerceAccountGroupRel the commerce discount commerce account group rel

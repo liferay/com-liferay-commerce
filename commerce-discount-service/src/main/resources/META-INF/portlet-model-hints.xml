@@ -3,6 +3,7 @@
 <model-hints>
 	<model name="com.liferay.commerce.discount.model.CommerceDiscount">
 		<field name="uuid" type="String" />
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceDiscountId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

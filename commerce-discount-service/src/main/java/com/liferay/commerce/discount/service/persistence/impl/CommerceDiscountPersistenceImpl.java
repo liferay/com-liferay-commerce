@@ -31,16 +31,16 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -6061,6 +6061,272 @@ public class CommerceDiscountPersistenceImpl
 	private static final String _FINDER_COLUMN_LTE_S_STATUS_2 =
 		"commerceDiscount.status = ?";
 
+	private FinderPath _finderPathFetchByC_ERC;
+	private FinderPath _finderPathCountByC_ERC;
+
+	/**
+	 * Returns the commerce discount where companyId = &#63; and externalReferenceCode = &#63; or throws a <code>NoSuchDiscountException</code> if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce discount
+	 * @throws NoSuchDiscountException if a matching commerce discount could not be found
+	 */
+	@Override
+	public CommerceDiscount findByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchDiscountException {
+
+		CommerceDiscount commerceDiscount = fetchByC_ERC(
+			companyId, externalReferenceCode);
+
+		if (commerceDiscount == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchDiscountException(msg.toString());
+		}
+
+		return commerceDiscount;
+	}
+
+	/**
+	 * Returns the commerce discount where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
+	 */
+	@Override
+	public CommerceDiscount fetchByC_ERC(
+		long companyId, String externalReferenceCode) {
+
+		return fetchByC_ERC(companyId, externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the commerce discount where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
+	 */
+	@Override
+	public CommerceDiscount fetchByC_ERC(
+		long companyId, String externalReferenceCode,
+		boolean retrieveFromCache) {
+
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
+
+		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByC_ERC, finderArgs, this);
+		}
+
+		if (result instanceof CommerceDiscount) {
+			CommerceDiscount commerceDiscount = (CommerceDiscount)result;
+
+			if ((companyId != commerceDiscount.getCompanyId()) ||
+				!Objects.equals(
+					externalReferenceCode,
+					commerceDiscount.getExternalReferenceCode())) {
+
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCEDISCOUNT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CommerceDiscount> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(
+						_finderPathFetchByC_ERC, finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"CommerceDiscountPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CommerceDiscount commerceDiscount = list.get(0);
+
+					result = commerceDiscount;
+
+					cacheResult(commerceDiscount);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceDiscount)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce discount where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce discount that was removed
+	 */
+	@Override
+	public CommerceDiscount removeByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchDiscountException {
+
+		CommerceDiscount commerceDiscount = findByC_ERC(
+			companyId, externalReferenceCode);
+
+		return remove(commerceDiscount);
+	}
+
+	/**
+	 * Returns the number of commerce discounts where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce discounts
+	 */
+	@Override
+	public int countByC_ERC(long companyId, String externalReferenceCode) {
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
+
+		FinderPath finderPath = _finderPathCountByC_ERC;
+
+		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEDISCOUNT_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 =
+		"commerceDiscount.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 =
+		"commerceDiscount.externalReferenceCode = ?";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 =
+		"(commerceDiscount.externalReferenceCode IS NULL OR commerceDiscount.externalReferenceCode = '')";
+
 	public CommerceDiscountPersistenceImpl() {
 		setModelClass(CommerceDiscount.class);
 
@@ -6094,6 +6360,14 @@ public class CommerceDiscountPersistenceImpl
 		entityCache.putResult(
 			CommerceDiscountModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceDiscountImpl.class, commerceDiscount.getPrimaryKey(),
+			commerceDiscount);
+
+		finderCache.putResult(
+			_finderPathFetchByC_ERC,
+			new Object[] {
+				commerceDiscount.getCompanyId(),
+				commerceDiscount.getExternalReferenceCode()
+			},
 			commerceDiscount);
 
 		commerceDiscount.resetOriginalValues();
@@ -6151,6 +6425,9 @@ public class CommerceDiscountPersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(
+			(CommerceDiscountModelImpl)commerceDiscount, true);
 	}
 
 	@Override
@@ -6162,6 +6439,50 @@ public class CommerceDiscountPersistenceImpl
 			entityCache.removeResult(
 				CommerceDiscountModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceDiscountImpl.class, commerceDiscount.getPrimaryKey());
+
+			clearUniqueFindersCache(
+				(CommerceDiscountModelImpl)commerceDiscount, true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceDiscountModelImpl commerceDiscountModelImpl) {
+
+		Object[] args = new Object[] {
+			commerceDiscountModelImpl.getCompanyId(),
+			commerceDiscountModelImpl.getExternalReferenceCode()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_ERC, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_ERC, args, commerceDiscountModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceDiscountModelImpl commerceDiscountModelImpl,
+		boolean clearCurrent) {
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+				commerceDiscountModelImpl.getCompanyId(),
+				commerceDiscountModelImpl.getExternalReferenceCode()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
+		}
+
+		if ((commerceDiscountModelImpl.getColumnBitmask() &
+			 _finderPathFetchByC_ERC.getColumnBitmask()) != 0) {
+
+			Object[] args = new Object[] {
+				commerceDiscountModelImpl.getOriginalCompanyId(),
+				commerceDiscountModelImpl.getOriginalExternalReferenceCode()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
 		}
 	}
 
@@ -6182,7 +6503,7 @@ public class CommerceDiscountPersistenceImpl
 
 		commerceDiscount.setUuid(uuid);
 
-		commerceDiscount.setCompanyId(companyProvider.getCompanyId());
+		commerceDiscount.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return commerceDiscount;
 	}
@@ -6480,6 +6801,9 @@ public class CommerceDiscountPersistenceImpl
 			CommerceDiscountModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceDiscountImpl.class, commerceDiscount.getPrimaryKey(),
 			commerceDiscount, false);
+
+		clearUniqueFindersCache(commerceDiscountModelImpl, false);
+		cacheUniqueFindersCache(commerceDiscountModelImpl);
 
 		commerceDiscount.resetOriginalValues();
 
@@ -7053,6 +7377,21 @@ public class CommerceDiscountPersistenceImpl
 			CommerceDiscountModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtE_S",
 			new String[] {Date.class.getName(), Integer.class.getName()});
+
+		_finderPathFetchByC_ERC = new FinderPath(
+			CommerceDiscountModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountModelImpl.FINDER_CACHE_ENABLED,
+			CommerceDiscountImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceDiscountModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceDiscountModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+
+		_finderPathCountByC_ERC = new FinderPath(
+			CommerceDiscountModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceDiscountModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {
@@ -7061,9 +7400,6 @@ public class CommerceDiscountPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

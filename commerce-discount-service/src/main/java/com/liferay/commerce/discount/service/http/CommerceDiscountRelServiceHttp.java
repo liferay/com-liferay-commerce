@@ -132,6 +132,47 @@ public class CommerceDiscountRelServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.discount.model.CommerceDiscountRel
+			fetchCommerceDiscountRel(
+				HttpPrincipal httpPrincipal, String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceDiscountRelServiceUtil.class,
+				"fetchCommerceDiscountRel",
+				_fetchCommerceDiscountRelParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, className, classPK);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.discount.model.CommerceDiscountRel)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static long[] getClassPKs(
 			HttpPrincipal httpPrincipal, long commerceDiscountId,
 			String className)
@@ -140,7 +181,7 @@ public class CommerceDiscountRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRelServiceUtil.class, "getClassPKs",
-				_getClassPKsParameterTypes2);
+				_getClassPKsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId, className);
@@ -179,7 +220,7 @@ public class CommerceDiscountRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRelServiceUtil.class, "getCommerceDiscountRel",
-				_getCommerceDiscountRelParameterTypes3);
+				_getCommerceDiscountRelParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountRelId);
@@ -221,7 +262,7 @@ public class CommerceDiscountRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRelServiceUtil.class, "getCommerceDiscountRels",
-				_getCommerceDiscountRelsParameterTypes4);
+				_getCommerceDiscountRelsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId, className);
@@ -267,7 +308,7 @@ public class CommerceDiscountRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRelServiceUtil.class, "getCommerceDiscountRels",
-				_getCommerceDiscountRelsParameterTypes5);
+				_getCommerceDiscountRelsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId, className, start, end,
@@ -310,7 +351,7 @@ public class CommerceDiscountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRelServiceUtil.class,
 				"getCommerceDiscountRelsCount",
-				_getCommerceDiscountRelsCountParameterTypes6);
+				_getCommerceDiscountRelsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId, className);
@@ -351,20 +392,22 @@ public class CommerceDiscountRelServiceHttp {
 		};
 	private static final Class<?>[] _deleteCommerceDiscountRelParameterTypes1 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getClassPKsParameterTypes2 = new Class[] {
+	private static final Class<?>[] _fetchCommerceDiscountRelParameterTypes2 =
+		new Class[] {String.class, long.class};
+	private static final Class<?>[] _getClassPKsParameterTypes3 = new Class[] {
 		long.class, String.class
 	};
-	private static final Class<?>[] _getCommerceDiscountRelParameterTypes3 =
+	private static final Class<?>[] _getCommerceDiscountRelParameterTypes4 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getCommerceDiscountRelsParameterTypes4 =
-		new Class[] {long.class, String.class};
 	private static final Class<?>[] _getCommerceDiscountRelsParameterTypes5 =
+		new Class[] {long.class, String.class};
+	private static final Class<?>[] _getCommerceDiscountRelsParameterTypes6 =
 		new Class[] {
 			long.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[]
-		_getCommerceDiscountRelsCountParameterTypes6 = new Class[] {
+		_getCommerceDiscountRelsCountParameterTypes7 = new Class[] {
 			long.class, String.class
 		};
 

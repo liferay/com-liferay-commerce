@@ -73,11 +73,28 @@ public interface CommerceDiscountCommerceAccountGroupRelService
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscountCommerceAccountGroupRel
+			fetchCommerceDiscountCommerceAccountGroupRel(
+				long commerceDiscountId, long commerceAccountGroupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscountCommerceAccountGroupRel
+			getCommerceDiscountCommerceAccountGroupRel(
+				long commerceDiscountCommerceAccountGroupRelId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceDiscountCommerceAccountGroupRel>
 			getCommerceDiscountCommerceAccountGroupRels(
 				long commerceDiscountId, int start, int end,
 				OrderByComparator<CommerceDiscountCommerceAccountGroupRel>
 					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceDiscountCommerceAccountGroupRelsCount(
+			long commerceDiscountId)
 		throws PortalException;
 
 	/**

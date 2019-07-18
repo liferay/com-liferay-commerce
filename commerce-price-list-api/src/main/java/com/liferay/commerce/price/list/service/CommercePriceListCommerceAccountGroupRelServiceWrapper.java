@@ -77,6 +77,18 @@ public class CommercePriceListCommerceAccountGroupRelServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.price.list.model.
+		CommercePriceListCommerceAccountGroupRel
+				getCommercePriceListCommerceAccountGroupRel(
+					long commercePriceListCommerceAccoungGroupRelId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceListCommerceAccountGroupRelService.
+			getCommercePriceListCommerceAccountGroupRel(
+				commercePriceListCommerceAccoungGroupRelId);
+	}
+
+	@Override
 	public java.util.List
 		<com.liferay.commerce.price.list.model.
 			CommercePriceListCommerceAccountGroupRel>
