@@ -261,6 +261,21 @@ public abstract class CommerceDiscountLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce discount with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce discount's external reference code
+	 * @return the matching commerce discount, or <code>null</code> if a matching commerce discount could not be found
+	 */
+	@Override
+	public CommerceDiscount fetchCommerceDiscountByReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceDiscountPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	/**
 	 * Returns the commerce discount with the primary key.
 	 *
 	 * @param commerceDiscountId the primary key of the commerce discount

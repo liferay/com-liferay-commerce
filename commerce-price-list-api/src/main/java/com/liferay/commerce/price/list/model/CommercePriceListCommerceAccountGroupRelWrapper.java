@@ -169,6 +169,15 @@ public class CommercePriceListCommerceAccountGroupRelWrapper
 			commercePriceListCommerceAccountGroupRel);
 	}
 
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccountGroup
+			getCommerceAccountGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceListCommerceAccountGroupRel.
+			getCommerceAccountGroup();
+	}
+
 	/**
 	 * Returns the commerce account group ID of this commerce price list commerce account group rel.
 	 *
@@ -178,6 +187,13 @@ public class CommercePriceListCommerceAccountGroupRelWrapper
 	public long getCommerceAccountGroupId() {
 		return _commercePriceListCommerceAccountGroupRel.
 			getCommerceAccountGroupId();
+	}
+
+	@Override
+	public CommercePriceList getCommercePriceList()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceListCommerceAccountGroupRel.getCommercePriceList();
 	}
 
 	/**

@@ -170,6 +170,13 @@ public class CommerceDiscountRelWrapper
 		return _commerceDiscountRel.getClassPK();
 	}
 
+	@Override
+	public CommerceDiscount getCommerceDiscount()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceDiscountRel.getCommerceDiscount();
+	}
+
 	/**
 	 * Returns the commerce discount ID of this commerce discount rel.
 	 *

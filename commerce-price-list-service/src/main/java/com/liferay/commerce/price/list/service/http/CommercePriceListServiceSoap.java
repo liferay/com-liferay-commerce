@@ -247,6 +247,25 @@ public class CommercePriceListServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceListSoap
+			getCommercePriceList(long commercePriceListId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceList
+				returnValue = CommercePriceListServiceUtil.getCommercePriceList(
+					commercePriceListId);
+
+			return com.liferay.commerce.price.list.model.CommercePriceListSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.price.list.model.CommercePriceListSoap[]
 			getCommercePriceLists(
 				long companyId, int status, int start, int end,

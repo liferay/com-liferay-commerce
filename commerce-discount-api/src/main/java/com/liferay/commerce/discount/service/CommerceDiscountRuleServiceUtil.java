@@ -57,6 +57,13 @@ public class CommerceDiscountRuleServiceUtil {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountRule
+			fetchCommerceDiscountRule(long commerceDiscountRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchCommerceDiscountRule(commerceDiscountRuleId);
+	}
+
+	public static com.liferay.commerce.discount.model.CommerceDiscountRule
 			getCommerceDiscountRule(long commerceDiscountRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

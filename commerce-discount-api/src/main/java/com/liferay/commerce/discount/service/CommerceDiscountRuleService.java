@@ -70,6 +70,11 @@ public interface CommerceDiscountRuleService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceDiscountRule fetchCommerceDiscountRule(
+			long commerceDiscountRuleId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceDiscountRule getCommerceDiscountRule(
 			long commerceDiscountRuleId)
 		throws PortalException;

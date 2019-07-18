@@ -138,6 +138,13 @@ public class CommerceTierPriceEntryServiceUtil {
 			companyId);
 	}
 
+	public static com.liferay.commerce.price.list.model.CommerceTierPriceEntry
+			getCommerceTierPriceEntry(long commerceTierPriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceTierPriceEntry(commerceTierPriceEntryId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

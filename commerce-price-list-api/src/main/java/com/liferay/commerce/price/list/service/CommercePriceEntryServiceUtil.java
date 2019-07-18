@@ -132,6 +132,13 @@ public class CommercePriceEntryServiceUtil {
 		return getService().getCommercePriceEntriesCountByCompanyId(companyId);
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceEntry
+			getCommercePriceEntry(long commercePriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommercePriceEntry(commercePriceEntryId);
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceEntry>
 				getInstanceCommercePriceEntries(

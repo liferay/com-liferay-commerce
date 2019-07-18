@@ -71,6 +71,16 @@ public class CommercePriceListCommerceAccountGroupRelServiceUtil {
 			commercePriceListId, commerceAccountGroupId);
 	}
 
+	public static com.liferay.commerce.price.list.model.
+		CommercePriceListCommerceAccountGroupRel
+				getCommercePriceListCommerceAccountGroupRel(
+					long commercePriceListCommerceAccoungGroupRelId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommercePriceListCommerceAccountGroupRel(
+			commercePriceListCommerceAccoungGroupRelId);
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.
 			CommercePriceListCommerceAccountGroupRel>

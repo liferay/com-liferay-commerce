@@ -37,6 +37,7 @@ public class CommerceDiscountSoap implements Serializable {
 		CommerceDiscountSoap soapModel = new CommerceDiscountSoap();
 
 		soapModel.setUuid(model.getUuid());
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceDiscountId(model.getCommerceDiscountId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -131,6 +132,14 @@ public class CommerceDiscountSoap implements Serializable {
 
 	public void setUuid(String uuid) {
 		_uuid = uuid;
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceDiscountId() {
@@ -362,6 +371,7 @@ public class CommerceDiscountSoap implements Serializable {
 	}
 
 	private String _uuid;
+	private String _externalReferenceCode;
 	private long _commerceDiscountId;
 	private long _companyId;
 	private long _userId;

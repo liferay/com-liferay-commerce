@@ -133,6 +133,30 @@ public class CommercePriceListCommerceAccountGroupRelServiceSoap {
 	}
 
 	public static com.liferay.commerce.price.list.model.
+		CommercePriceListCommerceAccountGroupRelSoap
+				getCommercePriceListCommerceAccountGroupRel(
+					long commercePriceListCommerceAccoungGroupRelId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.
+				CommercePriceListCommerceAccountGroupRel returnValue =
+					CommercePriceListCommerceAccountGroupRelServiceUtil.
+						getCommercePriceListCommerceAccountGroupRel(
+							commercePriceListCommerceAccoungGroupRelId);
+
+			return com.liferay.commerce.price.list.model.
+				CommercePriceListCommerceAccountGroupRelSoap.toSoapModel(
+					returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.
 		CommercePriceListCommerceAccountGroupRelSoap[]
 				getCommercePriceListCommerceAccountGroupRels(
 					long commercePriceListId)

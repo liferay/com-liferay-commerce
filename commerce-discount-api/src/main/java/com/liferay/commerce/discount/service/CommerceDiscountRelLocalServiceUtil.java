@@ -222,6 +222,12 @@ public class CommerceDiscountRelLocalServiceUtil {
 		return getService().fetchCommerceDiscountRel(commerceDiscountRelId);
 	}
 
+	public static com.liferay.commerce.discount.model.CommerceDiscountRel
+		fetchCommerceDiscountRel(String className, long classPK) {
+
+		return getService().fetchCommerceDiscountRel(className, classPK);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 
