@@ -517,24 +517,21 @@ public class CPAttachmentFileEntryLocalServiceImpl
 				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpAttachmentFileEntry == null) {
-			cpAttachmentFileEntry =
-				addCPAttachmentFileEntry(
-					classNameId, classPK, fileEntryId, displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, titleMap, json, priority,
-					type, serviceContext);
+			cpAttachmentFileEntry = addCPAttachmentFileEntry(
+				classNameId, classPK, fileEntryId, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, titleMap, json, priority, type, serviceContext);
 		}
 		else {
-			cpAttachmentFileEntry =
-				updateCPAttachmentFileEntry(
-					cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-					fileEntryId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					titleMap, json, priority, type, serviceContext);
+			cpAttachmentFileEntry = updateCPAttachmentFileEntry(
+				cpAttachmentFileEntry.getCPAttachmentFileEntryId(), fileEntryId,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, titleMap, json, priority,
+				type, serviceContext);
 		}
 
 		return cpAttachmentFileEntry;
