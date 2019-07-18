@@ -64,6 +64,13 @@
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/ProductUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/RelatedProductUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-catalog-impl/src/main/java/com/liferay/headless/commerce/admin/catalog/internal/util/v1_0/SkuUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/DiscountAccountGroupUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/DiscountCategoryUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/DiscountProductUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/DiscountRuleUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/PriceEntryUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/PriceListAccountGroupUtil\.java" />
+		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/TierPriceUtil\.java" />
 		<suppress checks="JavaConfigurationCategoryCheck" files=".*" />
 		<suppress checks="JavaModuleServiceProxyFactoryCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-account-service/service\.xml" />
