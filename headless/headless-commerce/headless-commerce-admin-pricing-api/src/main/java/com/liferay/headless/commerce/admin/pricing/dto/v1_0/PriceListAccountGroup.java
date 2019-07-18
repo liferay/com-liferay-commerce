@@ -26,8 +26,6 @@ import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.math.BigDecimal;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -42,26 +40,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("TierPrice")
+@GraphQLName("PriceListAccountGroup")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "TierPrice")
-public class TierPrice {
+@XmlRootElement(name = "PriceListAccountGroup")
+public class PriceListAccountGroup {
 
 	@Schema
-	public Map<String, ?> getCustomFields() {
-		return customFields;
+	public String getAccountGroupExternalReferenceCode() {
+		return accountGroupExternalReferenceCode;
 	}
 
-	public void setCustomFields(Map<String, ?> customFields) {
-		this.customFields = customFields;
+	public void setAccountGroupExternalReferenceCode(
+		String accountGroupExternalReferenceCode) {
+
+		this.accountGroupExternalReferenceCode =
+			accountGroupExternalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setCustomFields(
-		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+	public void setAccountGroupExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			accountGroupExternalReferenceCodeUnsafeSupplier) {
 
 		try {
-			customFields = customFieldsUnsafeSupplier.get();
+			accountGroupExternalReferenceCode =
+				accountGroupExternalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -73,23 +76,23 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Map<String, ?> customFields;
+	protected String accountGroupExternalReferenceCode;
 
 	@Schema
-	public String getExternalReferenceCode() {
-		return externalReferenceCode;
+	public Long getAccountGroupId() {
+		return accountGroupId;
 	}
 
-	public void setExternalReferenceCode(String externalReferenceCode) {
-		this.externalReferenceCode = externalReferenceCode;
+	public void setAccountGroupId(Long accountGroupId) {
+		this.accountGroupId = accountGroupId;
 	}
 
 	@JsonIgnore
-	public void setExternalReferenceCode(
-		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
+	public void setAccountGroupId(
+		UnsafeSupplier<Long, Exception> accountGroupIdUnsafeSupplier) {
 
 		try {
-			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
+			accountGroupId = accountGroupIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -101,7 +104,7 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String externalReferenceCode;
+	protected Long accountGroupId;
 
 	@Schema
 	public Long getId() {
@@ -126,24 +129,24 @@ public class TierPrice {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
 	@Schema
-	public Integer getMinimumQuantity() {
-		return minimumQuantity;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setMinimumQuantity(Integer minimumQuantity) {
-		this.minimumQuantity = minimumQuantity;
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
 	@JsonIgnore
-	public void setMinimumQuantity(
-		UnsafeSupplier<Integer, Exception> minimumQuantityUnsafeSupplier) {
+	public void setOrder(
+		UnsafeSupplier<Integer, Exception> orderUnsafeSupplier) {
 
 		try {
-			minimumQuantity = minimumQuantityUnsafeSupplier.get();
+			order = orderUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -155,55 +158,27 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Integer minimumQuantity;
+	protected Integer order;
 
 	@Schema
-	public BigDecimal getPrice() {
-		return price;
+	public String getPriceListExternalReferenceCode() {
+		return priceListExternalReferenceCode;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setPriceListExternalReferenceCode(
+		String priceListExternalReferenceCode) {
+
+		this.priceListExternalReferenceCode = priceListExternalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setPrice(
-		UnsafeSupplier<BigDecimal, Exception> priceUnsafeSupplier) {
-
-		try {
-			price = priceUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected BigDecimal price;
-
-	@Schema
-	public String getPriceEntryExternalReferenceCode() {
-		return priceEntryExternalReferenceCode;
-	}
-
-	public void setPriceEntryExternalReferenceCode(
-		String priceEntryExternalReferenceCode) {
-
-		this.priceEntryExternalReferenceCode = priceEntryExternalReferenceCode;
-	}
-
-	@JsonIgnore
-	public void setPriceEntryExternalReferenceCode(
+	public void setPriceListExternalReferenceCode(
 		UnsafeSupplier<String, Exception>
-			priceEntryExternalReferenceCodeUnsafeSupplier) {
+			priceListExternalReferenceCodeUnsafeSupplier) {
 
 		try {
-			priceEntryExternalReferenceCode =
-				priceEntryExternalReferenceCodeUnsafeSupplier.get();
+			priceListExternalReferenceCode =
+				priceListExternalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -215,23 +190,23 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String priceEntryExternalReferenceCode;
+	protected String priceListExternalReferenceCode;
 
 	@Schema
-	public Long getPriceEntryId() {
-		return priceEntryId;
+	public Long getPriceListId() {
+		return priceListId;
 	}
 
-	public void setPriceEntryId(Long priceEntryId) {
-		this.priceEntryId = priceEntryId;
+	public void setPriceListId(Long priceListId) {
+		this.priceListId = priceListId;
 	}
 
 	@JsonIgnore
-	public void setPriceEntryId(
-		UnsafeSupplier<Long, Exception> priceEntryIdUnsafeSupplier) {
+	public void setPriceListId(
+		UnsafeSupplier<Long, Exception> priceListIdUnsafeSupplier) {
 
 		try {
-			priceEntryId = priceEntryIdUnsafeSupplier.get();
+			priceListId = priceListIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -243,35 +218,7 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long priceEntryId;
-
-	@Schema
-	public BigDecimal getPromoPrice() {
-		return promoPrice;
-	}
-
-	public void setPromoPrice(BigDecimal promoPrice) {
-		this.promoPrice = promoPrice;
-	}
-
-	@JsonIgnore
-	public void setPromoPrice(
-		UnsafeSupplier<BigDecimal, Exception> promoPriceUnsafeSupplier) {
-
-		try {
-			promoPrice = promoPriceUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected BigDecimal promoPrice;
+	protected Long priceListId;
 
 	@Override
 	public boolean equals(Object object) {
@@ -279,13 +226,14 @@ public class TierPrice {
 			return true;
 		}
 
-		if (!(object instanceof TierPrice)) {
+		if (!(object instanceof PriceListAccountGroup)) {
 			return false;
 		}
 
-		TierPrice tierPrice = (TierPrice)object;
+		PriceListAccountGroup priceListAccountGroup =
+			(PriceListAccountGroup)object;
 
-		return Objects.equals(toString(), tierPrice.toString());
+		return Objects.equals(toString(), priceListAccountGroup.toString());
 	}
 
 	@Override
@@ -300,28 +248,28 @@ public class TierPrice {
 
 		sb.append("{");
 
-		if (customFields != null) {
+		if (accountGroupExternalReferenceCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"customFields\": ");
+			sb.append("\"accountGroupExternalReferenceCode\": ");
 
-			sb.append(_toJSON(customFields));
+			sb.append("\"");
+
+			sb.append(_escape(accountGroupExternalReferenceCode));
+
+			sb.append("\"");
 		}
 
-		if (externalReferenceCode != null) {
+		if (accountGroupId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"externalReferenceCode\": ");
+			sb.append("\"accountGroupId\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(externalReferenceCode));
-
-			sb.append("\"");
+			sb.append(accountGroupId);
 		}
 
 		if (id != null) {
@@ -334,58 +282,38 @@ public class TierPrice {
 			sb.append(id);
 		}
 
-		if (minimumQuantity != null) {
+		if (order != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"minimumQuantity\": ");
+			sb.append("\"order\": ");
 
-			sb.append(minimumQuantity);
+			sb.append(order);
 		}
 
-		if (price != null) {
+		if (priceListExternalReferenceCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"price\": ");
-
-			sb.append(price);
-		}
-
-		if (priceEntryExternalReferenceCode != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"priceEntryExternalReferenceCode\": ");
+			sb.append("\"priceListExternalReferenceCode\": ");
 
 			sb.append("\"");
 
-			sb.append(_escape(priceEntryExternalReferenceCode));
+			sb.append(_escape(priceListExternalReferenceCode));
 
 			sb.append("\"");
 		}
 
-		if (priceEntryId != null) {
+		if (priceListId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"priceEntryId\": ");
+			sb.append("\"priceListId\": ");
 
-			sb.append(priceEntryId);
-		}
-
-		if (promoPrice != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"promoPrice\": ");
-
-			sb.append(promoPrice);
+			sb.append(priceListId);
 		}
 
 		sb.append("}");

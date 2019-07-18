@@ -55,6 +55,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Discount {
 
 	@Schema
+	public DiscountAccountGroup[] getAccountGroups() {
+		return accountGroups;
+	}
+
+	public void setAccountGroups(DiscountAccountGroup[] accountGroups) {
+		this.accountGroups = accountGroups;
+	}
+
+	@JsonIgnore
+	public void setAccountGroups(
+		UnsafeSupplier<DiscountAccountGroup[], Exception>
+			accountGroupsUnsafeSupplier) {
+
+		try {
+			accountGroups = accountGroupsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected DiscountAccountGroup[] accountGroups;
+
+	@Schema
 	public Boolean getActive() {
 		return active;
 	}
@@ -83,6 +112,35 @@ public class Discount {
 	protected Boolean active;
 
 	@Schema
+	public DiscountCategory[] getCategories() {
+		return categories;
+	}
+
+	public void setCategories(DiscountCategory[] categories) {
+		this.categories = categories;
+	}
+
+	@JsonIgnore
+	public void setCategories(
+		UnsafeSupplier<DiscountCategory[], Exception>
+			categoriesUnsafeSupplier) {
+
+		try {
+			categories = categoriesUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected DiscountCategory[] categories;
+
+	@Schema
 	public String getCouponCode() {
 		return couponCode;
 	}
@@ -109,6 +167,34 @@ public class Discount {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String couponCode;
+
+	@Schema
+	public Map<String, ?> getCustomFields() {
+		return customFields;
+	}
+
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
+	}
+
+	@JsonIgnore
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+
+		try {
+			customFields = customFieldsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, ?> customFields;
 
 	@Schema
 	public Date getDisplayDate() {
@@ -167,20 +253,20 @@ public class Discount {
 	protected Date expirationDate;
 
 	@Schema
-	public Long getGroupId() {
-		return groupId;
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
 	}
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		this.externalReferenceCode = externalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setGroupId(
-		UnsafeSupplier<Long, Exception> groupIdUnsafeSupplier) {
+	public void setExternalReferenceCode(
+		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
 
 		try {
-			groupId = groupIdUnsafeSupplier.get();
+			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -191,8 +277,8 @@ public class Discount {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	protected Long groupId;
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String externalReferenceCode;
 
 	@Schema
 	public Long getId() {
@@ -475,6 +561,62 @@ public class Discount {
 	protected BigDecimal percentageLevel4;
 
 	@Schema
+	public DiscountProduct[] getProducts() {
+		return products;
+	}
+
+	public void setProducts(DiscountProduct[] products) {
+		this.products = products;
+	}
+
+	@JsonIgnore
+	public void setProducts(
+		UnsafeSupplier<DiscountProduct[], Exception> productsUnsafeSupplier) {
+
+		try {
+			products = productsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected DiscountProduct[] products;
+
+	@Schema
+	public DiscountRule[] getRules() {
+		return rules;
+	}
+
+	public void setRules(DiscountRule[] rules) {
+		this.rules = rules;
+	}
+
+	@JsonIgnore
+	public void setRules(
+		UnsafeSupplier<DiscountRule[], Exception> rulesUnsafeSupplier) {
+
+		try {
+			rules = rulesUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected DiscountRule[] rules;
+
+	@Schema
 	public String getTarget() {
 		return target;
 	}
@@ -618,6 +760,26 @@ public class Discount {
 		DateFormat liferayToJSONDateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+		if (accountGroups != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"accountGroups\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < accountGroups.length; i++) {
+				sb.append(String.valueOf(accountGroups[i]));
+
+				if ((i + 1) < accountGroups.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
+		}
+
 		if (active != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -626,6 +788,26 @@ public class Discount {
 			sb.append("\"active\": ");
 
 			sb.append(active);
+		}
+
+		if (categories != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"categories\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < categories.length; i++) {
+				sb.append(String.valueOf(categories[i]));
+
+				if ((i + 1) < categories.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
 		}
 
 		if (couponCode != null) {
@@ -640,6 +822,16 @@ public class Discount {
 			sb.append(_escape(couponCode));
 
 			sb.append("\"");
+		}
+
+		if (customFields != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"customFields\": ");
+
+			sb.append(_toJSON(customFields));
 		}
 
 		if (displayDate != null) {
@@ -670,14 +862,18 @@ public class Discount {
 			sb.append("\"");
 		}
 
-		if (groupId != null) {
+		if (externalReferenceCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"groupId\": ");
+			sb.append("\"externalReferenceCode\": ");
 
-			sb.append(groupId);
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (id != null) {
@@ -782,6 +978,46 @@ public class Discount {
 			sb.append("\"percentageLevel4\": ");
 
 			sb.append(percentageLevel4);
+		}
+
+		if (products != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"products\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < products.length; i++) {
+				sb.append(String.valueOf(products[i]));
+
+				if ((i + 1) < products.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
+		}
+
+		if (rules != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"rules\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < rules.length; i++) {
+				sb.append(String.valueOf(rules[i]));
+
+				if ((i + 1) < rules.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
 		}
 
 		if (target != null) {
