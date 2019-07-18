@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -41,12 +40,16 @@ public interface DiscountResource {
 
 	public Response patchDiscount(Long id, Discount discount) throws Exception;
 
-	public Page<DiscountRule> getDiscountDiscountRulesPage(
-			Long id, Pagination pagination)
+	public Response deleteDiscountByExternalReferenceCode(
+			String externalReferenceCode)
 		throws Exception;
 
-	public DiscountRule postDiscountDiscountRule(
-			Long id, DiscountRule discountRule)
+	public Discount getDiscountByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchDiscountByExternalReferenceCode(
+			String externalReferenceCode, Discount discount)
 		throws Exception;
 
 	public Page<Discount> getDiscountsPage(Pagination pagination)

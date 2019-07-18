@@ -40,10 +40,71 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("DiscountProduct")
+@GraphQLName("DiscountAccountGroup")
 @JsonFilter("Liferay.Vulcan")
-@XmlRootElement(name = "DiscountProduct")
-public class DiscountProduct {
+@XmlRootElement(name = "DiscountAccountGroup")
+public class DiscountAccountGroup {
+
+	@Schema
+	public String getAccountGroupExternalReferenceCode() {
+		return accountGroupExternalReferenceCode;
+	}
+
+	public void setAccountGroupExternalReferenceCode(
+		String accountGroupExternalReferenceCode) {
+
+		this.accountGroupExternalReferenceCode =
+			accountGroupExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setAccountGroupExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			accountGroupExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			accountGroupExternalReferenceCode =
+				accountGroupExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String accountGroupExternalReferenceCode;
+
+	@Schema
+	public Long getAccountGroupId() {
+		return accountGroupId;
+	}
+
+	public void setAccountGroupId(Long accountGroupId) {
+		this.accountGroupId = accountGroupId;
+	}
+
+	@JsonIgnore
+	public void setAccountGroupId(
+		UnsafeSupplier<Long, Exception> accountGroupIdUnsafeSupplier) {
+
+		try {
+			accountGroupId = accountGroupIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long accountGroupId;
 
 	@Schema
 	public String getDiscountExternalReferenceCode() {
@@ -131,79 +192,20 @@ public class DiscountProduct {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	protected Long id;
 
-	@Schema
-	public String getProductExternalReferenceCode() {
-		return productExternalReferenceCode;
-	}
-
-	public void setProductExternalReferenceCode(
-		String productExternalReferenceCode) {
-
-		this.productExternalReferenceCode = productExternalReferenceCode;
-	}
-
-	@JsonIgnore
-	public void setProductExternalReferenceCode(
-		UnsafeSupplier<String, Exception>
-			productExternalReferenceCodeUnsafeSupplier) {
-
-		try {
-			productExternalReferenceCode =
-				productExternalReferenceCodeUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected String productExternalReferenceCode;
-
-	@Schema
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-
-	@JsonIgnore
-	public void setProductId(
-		UnsafeSupplier<Long, Exception> productIdUnsafeSupplier) {
-
-		try {
-			productId = productIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long productId;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
 			return true;
 		}
 
-		if (!(object instanceof DiscountProduct)) {
+		if (!(object instanceof DiscountAccountGroup)) {
 			return false;
 		}
 
-		DiscountProduct discountProduct = (DiscountProduct)object;
+		DiscountAccountGroup discountAccountGroup =
+			(DiscountAccountGroup)object;
 
-		return Objects.equals(toString(), discountProduct.toString());
+		return Objects.equals(toString(), discountAccountGroup.toString());
 	}
 
 	@Override
@@ -217,6 +219,30 @@ public class DiscountProduct {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (accountGroupExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"accountGroupExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(accountGroupExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (accountGroupId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"accountGroupId\": ");
+
+			sb.append(accountGroupId);
+		}
 
 		if (discountExternalReferenceCode != null) {
 			if (sb.length() > 1) {
@@ -250,30 +276,6 @@ public class DiscountProduct {
 			sb.append("\"id\": ");
 
 			sb.append(id);
-		}
-
-		if (productExternalReferenceCode != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"productExternalReferenceCode\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(productExternalReferenceCode));
-
-			sb.append("\"");
-		}
-
-		if (productId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"productId\": ");
-
-			sb.append(productId);
 		}
 
 		sb.append("}");

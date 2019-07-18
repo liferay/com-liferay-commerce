@@ -14,7 +14,6 @@
 
 package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
@@ -35,18 +34,23 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface PriceListResource {
 
-	public Page<PriceEntry> getPriceListPriceEntriesPage(
-			String id, Pagination pagination)
+	public Response deletePriceList(Long id) throws Exception;
+
+	public PriceList getPriceList(Long id) throws Exception;
+
+	public Response patchPriceList(Long id, PriceList priceList)
 		throws Exception;
 
-	public PriceEntry postPriceListPriceEntry(String id, PriceEntry priceEntry)
+	public Response deletePriceListByExternalReferenceCode(
+			String externalReferenceCode)
 		throws Exception;
 
-	public Response deletePriceList(String id) throws Exception;
+	public PriceList getPriceListByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
 
-	public PriceList getPriceList(String id) throws Exception;
-
-	public Response patchPriceList(String id, PriceList priceList)
+	public Response patchPriceListByExternalReferenceCode(
+			String externalReferenceCode, PriceList priceList)
 		throws Exception;
 
 	public Page<PriceList> getPriceListsPage(Pagination pagination)
