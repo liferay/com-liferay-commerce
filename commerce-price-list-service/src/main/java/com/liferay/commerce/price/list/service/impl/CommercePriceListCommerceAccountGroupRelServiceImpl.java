@@ -77,6 +77,21 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 	}
 
 	@Override
+	public CommercePriceListCommerceAccountGroupRel
+			getCommercePriceListCommerceAccountGroupRel(
+				long commercePriceListCommerceAccoungGroupRelId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceListCommerceAccountGroupRelLocalService.
+			getCommercePriceListCommerceAccountGroupRel(
+				commercePriceListCommerceAccoungGroupRelId);
+	}
+
+	@Override
 	public List<CommercePriceListCommerceAccountGroupRel>
 			getCommercePriceListCommerceAccountGroupRels(
 				long commercePriceListId)
