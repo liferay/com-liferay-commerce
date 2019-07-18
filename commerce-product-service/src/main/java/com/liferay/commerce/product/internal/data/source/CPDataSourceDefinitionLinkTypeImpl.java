@@ -17,7 +17,6 @@ package com.liferay.commerce.product.internal.data.source;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration;
-import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -26,7 +25,6 @@ import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
@@ -36,8 +34,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -68,12 +64,9 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 	@Override
 	public CPDataSourceResult getResult(
-			HttpServletRequest httpServletRequest, int start, int end)
+			long companyId, CPCatalogEntry cpCatalogEntry, long groupId,
+			int start, int end)
 		throws Exception {
-
-		CPCatalogEntry cpCatalogEntry =
-			(CPCatalogEntry)httpServletRequest.getAttribute(
-				CPWebKeys.CP_CATALOG_ENTRY);
 
 		if (cpCatalogEntry == null) {
 			return new CPDataSourceResult(new ArrayList<>(), 0);
@@ -99,13 +92,12 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(_portal.getCompanyId(httpServletRequest));
+		searchContext.setCompanyId(companyId);
 
 		searchContext.setKeywords(StringPool.STAR);
 
 		return _cpDefinitionHelper.search(
-			_portal.getScopeGroupId(httpServletRequest), searchContext,
-			new CPQuery(), start, end);
+			groupId, searchContext, new CPQuery(), start, end);
 	}
 
 	@Activate
@@ -121,8 +113,5 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 	private volatile CPDefinitionLinkTypeConfiguration
 		_cpDefinitionLinkTypeConfiguration;
-
-	@Reference
-	private Portal _portal;
 
 }

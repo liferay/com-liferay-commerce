@@ -16,6 +16,7 @@ package com.liferay.commerce.product.content.web.internal.display.context;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRendererRegistry;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
 import com.liferay.commerce.product.content.web.internal.util.CPPublisherWebHelper;
@@ -101,8 +102,16 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 					new ArrayList<>(), 0);
 			}
 			else {
+				HttpServletRequest httpServletRequest =
+					cpContentRequestHelper.getRequest();
+
+				CPCatalogEntry cpCatalogEntry =
+					(CPCatalogEntry)httpServletRequest.getAttribute(
+						CPWebKeys.CP_CATALOG_ENTRY);
+
 				cpDataSourceResult = cpDataSource.getResult(
-					cpContentRequestHelper.getRequest(),
+					cpContentRequestHelper.getCompanyId(), cpCatalogEntry,
+					cpContentRequestHelper.getScopeGroupId(),
 					_searchContainer.getStart(), _searchContainer.getEnd());
 			}
 		}

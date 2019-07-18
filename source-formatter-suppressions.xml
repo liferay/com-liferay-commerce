@@ -42,7 +42,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-media-api/src/main/java/com/liferay/commerce/media/CommerceMediaResolverUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-organization-api/src/main/java/com/liferay/commerce/organization/util/CommerceOrganizationHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-payment-api/src/main/java/com/liferay/commerce/payment/util/CommercePaymentUtils\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/data/source/CPDataSource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/importer/CPFileImporter\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPCompareUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPContentContributor\.java" />

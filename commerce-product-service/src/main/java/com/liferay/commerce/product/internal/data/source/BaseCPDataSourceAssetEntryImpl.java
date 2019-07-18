@@ -16,7 +16,6 @@ package com.liferay.commerce.product.internal.data.source;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -37,8 +36,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Ethan Bustad
  */
@@ -46,18 +43,13 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 
 	@Override
 	public CPDataSourceResult getResult(
-			HttpServletRequest httpServletRequest, int start, int end)
+			long companyId, CPCatalogEntry cpCatalogEntry, long groupId,
+			int start, int end)
 		throws Exception {
-
-		CPCatalogEntry cpCatalogEntry =
-			(CPCatalogEntry)httpServletRequest.getAttribute(
-				CPWebKeys.CP_CATALOG_ENTRY);
 
 		if (cpCatalogEntry == null) {
 			return new CPDataSourceResult(new ArrayList<>(), 0);
 		}
-
-		long groupId = portal.getScopeGroupId(httpServletRequest);
 
 		SearchContext searchContext = new SearchContext();
 
@@ -75,7 +67,7 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(portal.getCompanyId(httpServletRequest));
+		searchContext.setCompanyId(companyId);
 
 		searchContext.setKeywords(StringPool.STAR);
 

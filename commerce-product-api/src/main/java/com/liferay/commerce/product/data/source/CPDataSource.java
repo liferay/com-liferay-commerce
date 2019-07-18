@@ -16,9 +16,9 @@ package com.liferay.commerce.product.data.source;
 
 import aQute.bnd.annotation.ProviderType;
 
-import java.util.Locale;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 /**
  * @author Marco Leo
@@ -31,7 +31,8 @@ public interface CPDataSource {
 	public String getName();
 
 	public CPDataSourceResult getResult(
-			HttpServletRequest httpServletRequest, int start, int end)
+			long companyId, CPCatalogEntry cpCatalogEntry, long groupId,
+			int start, int end)
 		throws Exception;
 
 }
