@@ -414,8 +414,10 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-		if (Validator.isNull(titleMap.get(locale))) {
-			titleMap.put(locale, fileEntry.getFileName());
+		HashMap<Locale, String> validTitleMap = new HashMap<>(titleMap);
+
+		if (Validator.isNull(validTitleMap.get(locale))) {
+			validTitleMap.put(locale, fileEntry.getFileName());
 		}
 
 		fileEntryId = _getFileEntryId(
@@ -435,7 +437,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			cpAttachmentFileEntry.setStatus(WorkflowConstants.STATUS_EXPIRED);
 		}
 
-		cpAttachmentFileEntry.setTitleMap(titleMap);
+		cpAttachmentFileEntry.setTitleMap(validTitleMap);
 		cpAttachmentFileEntry.setJson(json);
 		cpAttachmentFileEntry.setPriority(priority);
 		cpAttachmentFileEntry.setType(type);
