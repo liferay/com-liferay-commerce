@@ -203,7 +203,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			serviceContext.setCommand(Constants.UPDATE);
 			serviceContext.setScopeGroupId(cpAttachmentFileEntry.getGroupId());
 
-			cpAttachmentFileEntryLocalService.updateStatus(
+			updateStatus(
 				userId, cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
 				WorkflowConstants.STATUS_APPROVED, serviceContext,
 				new HashMap<String, Serializable>());
@@ -222,8 +222,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		for (CPAttachmentFileEntry cpAttachmentFileEntry :
 				cpAttachmentFileEntries) {
 
-			cpAttachmentFileEntryLocalService.deleteCPAttachmentFileEntry(
-				cpAttachmentFileEntry);
+			deleteCPAttachmentFileEntry(cpAttachmentFileEntry);
 		}
 	}
 
@@ -278,8 +277,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			cpAttachmentFileEntryPersistence.findByPrimaryKey(
 				cpAttachmentFileEntryId);
 
-		return cpAttachmentFileEntryLocalService.deleteCPAttachmentFileEntry(
-			cpAttachmentFileEntry);
+		return deleteCPAttachmentFileEntry(cpAttachmentFileEntry);
 	}
 
 	@Override
@@ -520,7 +518,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		if (cpAttachmentFileEntry == null) {
 			cpAttachmentFileEntry =
-				cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
+				addCPAttachmentFileEntry(
 					classNameId, classPK, fileEntryId, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -530,7 +528,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		}
 		else {
 			cpAttachmentFileEntry =
-				cpAttachmentFileEntryLocalService.updateCPAttachmentFileEntry(
+				updateCPAttachmentFileEntry(
 					cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
 					fileEntryId, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
@@ -578,7 +576,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 				serviceContext.setScopeGroupId(
 					cpAttachmentFileEntry.getGroupId());
 
-				cpAttachmentFileEntryLocalService.updateStatus(
+				updateStatus(
 					userId, cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
 					WorkflowConstants.STATUS_EXPIRED, serviceContext,
 					new HashMap<String, Serializable>());
@@ -628,7 +626,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			return fileEntry.getFileEntryId();
 		}
 
-		Folder folder = cpAttachmentFileEntryLocalService.getAttachmentsFolder(
+		Folder folder = getAttachmentsFolder(
 			userId, groupId, className, classPK);
 
 		String uniqueFileName = PortletFileRepositoryUtil.getUniqueFileName(

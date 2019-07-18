@@ -90,8 +90,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 		long cpDefinitionId, long newCPDefinitionId) {
 
 		CPDefinitionInventory cpDefinitionInventory =
-			cpDefinitionInventoryLocalService.
-				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+			fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 
 		if (cpDefinitionInventory != null) {
 			CPDefinitionInventory newCPDefinitionInventory =
@@ -103,8 +102,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			newCPDefinitionInventory.setModifiedDate(new Date());
 			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
-			cpDefinitionInventoryLocalService.addCPDefinitionInventory(
-				newCPDefinitionInventory);
+			addCPDefinitionInventory(newCPDefinitionInventory);
 		}
 	}
 
@@ -142,8 +140,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinitionInventoryPersistence.findByPrimaryKey(
 				cpDefinitionInventoryId);
 
-		return cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(
-			cpDefinitionInventory);
+		return deleteCPDefinitionInventory(cpDefinitionInventory);
 	}
 
 	@Override
@@ -151,12 +148,10 @@ public class CPDefinitionInventoryLocalServiceImpl
 		long cpDefinitionId) {
 
 		CPDefinitionInventory cpDefinitionInventory =
-			cpDefinitionInventoryLocalService.
-				fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
+			fetchCPDefinitionInventoryByCPDefinitionId(cpDefinitionId);
 
 		if (cpDefinitionInventory != null) {
-			cpDefinitionInventoryLocalService.deleteCPDefinitionInventory(
-				cpDefinitionInventory);
+			deleteCPDefinitionInventory(cpDefinitionInventory);
 		}
 	}
 
