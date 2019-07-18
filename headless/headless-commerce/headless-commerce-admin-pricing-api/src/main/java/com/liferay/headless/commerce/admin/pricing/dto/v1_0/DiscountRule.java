@@ -34,7 +34,6 @@ import java.util.Set;
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -45,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("DiscountRule")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"discountId", "type"})
+@Schema(requiredProperties = {"type"})
 @XmlRootElement(name = "DiscountRule")
 public class DiscountRule {
 
@@ -75,7 +74,6 @@ public class DiscountRule {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
 	protected Long discountId;
 
 	@Schema

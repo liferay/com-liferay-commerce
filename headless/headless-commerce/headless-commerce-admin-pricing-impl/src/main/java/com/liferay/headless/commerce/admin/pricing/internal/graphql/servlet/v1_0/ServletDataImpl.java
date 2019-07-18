@@ -16,9 +16,13 @@ package com.liferay.headless.commerce.admin.pricing.internal.graphql.servlet.v1_
 
 import com.liferay.headless.commerce.admin.pricing.internal.graphql.mutation.v1_0.Mutation;
 import com.liferay.headless.commerce.admin.pricing.internal.graphql.query.v1_0.Query;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountAccountGroupResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountCategoryResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountProductResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListAccountGroupResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.TierPriceResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
@@ -44,23 +48,39 @@ public class ServletDataImpl implements ServletData {
 	public void activate(BundleContext bundleContext) {
 		Mutation.setDiscountResourceComponentServiceObjects(
 			_discountResourceComponentServiceObjects);
+		Mutation.setDiscountAccountGroupResourceComponentServiceObjects(
+			_discountAccountGroupResourceComponentServiceObjects);
+		Mutation.setDiscountCategoryResourceComponentServiceObjects(
+			_discountCategoryResourceComponentServiceObjects);
+		Mutation.setDiscountProductResourceComponentServiceObjects(
+			_discountProductResourceComponentServiceObjects);
 		Mutation.setDiscountRuleResourceComponentServiceObjects(
 			_discountRuleResourceComponentServiceObjects);
 		Mutation.setPriceEntryResourceComponentServiceObjects(
 			_priceEntryResourceComponentServiceObjects);
 		Mutation.setPriceListResourceComponentServiceObjects(
 			_priceListResourceComponentServiceObjects);
+		Mutation.setPriceListAccountGroupResourceComponentServiceObjects(
+			_priceListAccountGroupResourceComponentServiceObjects);
 		Mutation.setTierPriceResourceComponentServiceObjects(
 			_tierPriceResourceComponentServiceObjects);
 
 		Query.setDiscountResourceComponentServiceObjects(
 			_discountResourceComponentServiceObjects);
+		Query.setDiscountAccountGroupResourceComponentServiceObjects(
+			_discountAccountGroupResourceComponentServiceObjects);
+		Query.setDiscountCategoryResourceComponentServiceObjects(
+			_discountCategoryResourceComponentServiceObjects);
+		Query.setDiscountProductResourceComponentServiceObjects(
+			_discountProductResourceComponentServiceObjects);
 		Query.setDiscountRuleResourceComponentServiceObjects(
 			_discountRuleResourceComponentServiceObjects);
 		Query.setPriceEntryResourceComponentServiceObjects(
 			_priceEntryResourceComponentServiceObjects);
 		Query.setPriceListResourceComponentServiceObjects(
 			_priceListResourceComponentServiceObjects);
+		Query.setPriceListAccountGroupResourceComponentServiceObjects(
+			_priceListAccountGroupResourceComponentServiceObjects);
 		Query.setTierPriceResourceComponentServiceObjects(
 			_tierPriceResourceComponentServiceObjects);
 	}
@@ -85,6 +105,18 @@ public class ServletDataImpl implements ServletData {
 		_discountResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<DiscountAccountGroupResource>
+		_discountAccountGroupResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<DiscountCategoryResource>
+		_discountCategoryResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<DiscountProductResource>
+		_discountProductResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<DiscountRuleResource>
 		_discountRuleResourceComponentServiceObjects;
 
@@ -95,6 +127,10 @@ public class ServletDataImpl implements ServletData {
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<PriceListResource>
 		_priceListResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<PriceListAccountGroupResource>
+		_priceListAccountGroupResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<TierPriceResource>

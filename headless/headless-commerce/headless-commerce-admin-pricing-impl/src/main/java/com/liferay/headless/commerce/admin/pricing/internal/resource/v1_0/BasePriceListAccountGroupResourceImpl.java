@@ -14,8 +14,8 @@
 
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
-import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceListAccountGroup;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListAccountGroupResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -40,7 +40,6 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -55,106 +54,17 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
+public abstract class BasePriceListAccountGroupResourceImpl
+	implements PriceListAccountGroupResource {
 
 	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
+	@Path("/priceListAccountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response deletePriceEntry(
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public Response deletePriceListAccountGroup(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry getPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new PriceEntry();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response patchPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			PriceEntry priceEntry)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@DELETE
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response deletePriceEntryByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry getPriceEntryByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		return new PriceEntry();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Response patchPriceEntryByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			PriceEntry priceEntry)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -171,10 +81,10 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/priceLists/{id}/priceEntries/")
+	@Path("/priceLists/{id}/priceListAccountGroups/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<PriceEntry> getPriceListIdPriceEntriesPage(
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public Page<PriceListAccountGroup> getPriceListIdPriceListAccountGroupsPage(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
@@ -186,15 +96,15 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceLists/{id}/priceEntries/")
+	@Path("/priceLists/{id}/priceListAccountGroups/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry postPriceListIdPriceEntry(
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public PriceListAccountGroup postPriceListIdPriceListAccountGroup(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			PriceEntry priceEntry)
+			PriceListAccountGroup priceListAccountGroup)
 		throws Exception {
 
-		return new PriceEntry();
+		return new PriceListAccountGroup();
 	}
 
 	@Override
@@ -207,14 +117,16 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 		}
 	)
 	@Path(
-		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceEntries/"
+		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceListAccountGroup/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<PriceEntry> getPriceListByExternalReferenceCodePriceEntriesPage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@Context Pagination pagination)
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public Page<PriceListAccountGroup>
+			getPriceListByExternalReferenceCodePriceListAccountGroupPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -229,17 +141,19 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 		}
 	)
 	@Path(
-		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceEntries/"
+		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceListAccountGroup/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceEntry")})
-	public PriceEntry postPriceListByExternalReferenceCodePriceEntry(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			PriceEntry priceEntry)
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public PriceListAccountGroup
+			postPriceListByExternalReferenceCodePriceListAccountGroup(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				PriceListAccountGroup priceListAccountGroup)
 		throws Exception {
 
-		return new PriceEntry();
+		return new PriceListAccountGroup();
 	}
 
 	public void setContextCompany(Company contextCompany) {
@@ -247,7 +161,8 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	}
 
 	protected void preparePatch(
-		PriceEntry priceEntry, PriceEntry existingPriceEntry) {
+		PriceListAccountGroup priceListAccountGroup,
+		PriceListAccountGroup existingPriceListAccountGroup) {
 	}
 
 	protected <T, R> List<R> transform(
