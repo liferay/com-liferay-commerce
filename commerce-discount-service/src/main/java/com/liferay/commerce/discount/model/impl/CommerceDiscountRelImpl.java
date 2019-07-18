@@ -16,13 +16,24 @@ package com.liferay.commerce.discount.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.discount.model.CommerceDiscount;
+import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @ProviderType
 public class CommerceDiscountRelImpl extends CommerceDiscountRelBaseImpl {
 
 	public CommerceDiscountRelImpl() {
+	}
+
+	@Override
+	public CommerceDiscount getCommerceDiscount() throws PortalException {
+		return CommerceDiscountLocalServiceUtil.getCommerceDiscount(
+			getCommerceDiscountId());
 	}
 
 }
