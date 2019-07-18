@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountAccountGroup;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -32,40 +32,27 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface PriceEntryResource {
+public interface DiscountAccountGroupResource {
 
-	public Response deletePriceEntry(Long id) throws Exception;
+	public Response deleteDiscountAccountGroup(Long id) throws Exception;
 
-	public PriceEntry getPriceEntry(Long id) throws Exception;
-
-	public Response patchPriceEntry(Long id, PriceEntry priceEntry)
-		throws Exception;
-
-	public Response deletePriceEntryByExternalReferenceCode(
-			String externalReferenceCode)
-		throws Exception;
-
-	public PriceEntry getPriceEntryByExternalReferenceCode(
-			String externalReferenceCode)
-		throws Exception;
-
-	public Response patchPriceEntryByExternalReferenceCode(
-			String externalReferenceCode, PriceEntry priceEntry)
-		throws Exception;
-
-	public Page<PriceEntry> getPriceListIdPriceEntriesPage(
+	public Page<DiscountAccountGroup> getDiscountIdDiscountAccountGroupsPage(
 			Long id, Pagination pagination)
 		throws Exception;
 
-	public PriceEntry postPriceListIdPriceEntry(Long id, PriceEntry priceEntry)
+	public DiscountAccountGroup postDiscountIdDiscountAccountGroup(
+			Long id, DiscountAccountGroup discountAccountGroup)
 		throws Exception;
 
-	public Page<PriceEntry> getPriceListByExternalReferenceCodePriceEntriesPage(
-			String externalReferenceCode, Pagination pagination)
+	public Page<DiscountAccountGroup>
+			getDiscountByExternalReferenceCodeDiscountAccountGroupsPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public PriceEntry postPriceListByExternalReferenceCodePriceEntry(
-			String externalReferenceCode, PriceEntry priceEntry)
+	public DiscountAccountGroup
+			postDiscountByExternalReferenceCodeDiscountAccountGroup(
+				String externalReferenceCode,
+				DiscountAccountGroup discountAccountGroup)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

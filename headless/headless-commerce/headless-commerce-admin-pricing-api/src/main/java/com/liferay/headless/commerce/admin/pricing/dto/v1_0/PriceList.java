@@ -38,7 +38,6 @@ import java.util.Set;
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -49,14 +48,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("PriceList")
 @JsonFilter("Liferay.Vulcan")
-@Schema(
-	requiredProperties = {
-		"active", "currency", "externalReferenceCode", "name", "neverExpire",
-		"priority"
-	}
-)
+@Schema(requiredProperties = {"currencyCode", "name"})
 @XmlRootElement(name = "PriceList")
 public class PriceList {
+
+	@Schema
+	public PriceListAccountGroup[] getAccountGroups() {
+		return accountGroups;
+	}
+
+	public void setAccountGroups(PriceListAccountGroup[] accountGroups) {
+		this.accountGroups = accountGroups;
+	}
+
+	@JsonIgnore
+	public void setAccountGroups(
+		UnsafeSupplier<PriceListAccountGroup[], Exception>
+			accountGroupsUnsafeSupplier) {
+
+		try {
+			accountGroups = accountGroupsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected PriceListAccountGroup[] accountGroups;
 
 	@Schema
 	public Boolean getActive() {
@@ -84,7 +107,6 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Boolean active;
 
 	@Schema
@@ -116,48 +138,20 @@ public class PriceList {
 	protected Long catalogId;
 
 	@Schema
-	public Long getCommercePriceListId() {
-		return commercePriceListId;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
-	public void setCommercePriceListId(Long commercePriceListId) {
-		this.commercePriceListId = commercePriceListId;
-	}
-
-	@JsonIgnore
-	public void setCommercePriceListId(
-		UnsafeSupplier<Long, Exception> commercePriceListIdUnsafeSupplier) {
-
-		try {
-			commercePriceListId = commercePriceListIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long commercePriceListId;
-
-	@Schema
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
 	}
 
 	@JsonIgnore
-	public void setCurrency(
-		UnsafeSupplier<String, Exception> currencyUnsafeSupplier) {
+	public void setCurrencyCode(
+		UnsafeSupplier<String, Exception> currencyCodeUnsafeSupplier) {
 
 		try {
-			currency = currencyUnsafeSupplier.get();
+			currencyCode = currencyCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -170,7 +164,35 @@ public class PriceList {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	@NotEmpty
-	protected String currency;
+	protected String currencyCode;
+
+	@Schema
+	public Map<String, ?> getCustomFields() {
+		return customFields;
+	}
+
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
+	}
+
+	@JsonIgnore
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+
+		try {
+			customFields = customFieldsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, ?> customFields;
 
 	@Schema
 	public Date getDisplayDate() {
@@ -254,7 +276,6 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
 	@Schema
@@ -336,8 +357,35 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Boolean neverExpire;
+
+	@Schema
+	public PriceEntry[] getPriceEntries() {
+		return priceEntries;
+	}
+
+	public void setPriceEntries(PriceEntry[] priceEntries) {
+		this.priceEntries = priceEntries;
+	}
+
+	@JsonIgnore
+	public void setPriceEntries(
+		UnsafeSupplier<PriceEntry[], Exception> priceEntriesUnsafeSupplier) {
+
+		try {
+			priceEntries = priceEntriesUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected PriceEntry[] priceEntries;
 
 	@Schema
 	public Double getPriority() {
@@ -365,7 +413,6 @@ public class PriceList {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Double priority;
 
 	@Override
@@ -398,6 +445,26 @@ public class PriceList {
 		DateFormat liferayToJSONDateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+		if (accountGroups != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"accountGroups\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < accountGroups.length; i++) {
+				sb.append(String.valueOf(accountGroups[i]));
+
+				if ((i + 1) < accountGroups.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
+		}
+
 		if (active != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -418,28 +485,28 @@ public class PriceList {
 			sb.append(catalogId);
 		}
 
-		if (commercePriceListId != null) {
+		if (currencyCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commercePriceListId\": ");
+			sb.append("\"currencyCode\": ");
 
-			sb.append(commercePriceListId);
+			sb.append("\"");
+
+			sb.append(_escape(currencyCode));
+
+			sb.append("\"");
 		}
 
-		if (currency != null) {
+		if (customFields != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"currency\": ");
+			sb.append("\"customFields\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(currency));
-
-			sb.append("\"");
+			sb.append(_toJSON(customFields));
 		}
 
 		if (displayDate != null) {
@@ -516,6 +583,26 @@ public class PriceList {
 			sb.append("\"neverExpire\": ");
 
 			sb.append(neverExpire);
+		}
+
+		if (priceEntries != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceEntries\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < priceEntries.length; i++) {
+				sb.append(String.valueOf(priceEntries[i]));
+
+				if ((i + 1) < priceEntries.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
 		}
 
 		if (priority != null) {

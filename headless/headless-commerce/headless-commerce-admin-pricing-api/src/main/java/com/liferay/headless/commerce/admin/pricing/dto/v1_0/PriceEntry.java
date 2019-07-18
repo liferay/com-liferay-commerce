@@ -35,7 +35,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -47,30 +46,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("PriceEntry")
 @JsonFilter("Liferay.Vulcan")
-@Schema(
-	requiredProperties = {
-		"commercePriceListId", "externalReferenceCode", "price", "promoPrice",
-		"standardPrice"
-	}
-)
+@Schema(requiredProperties = {"price"})
 @XmlRootElement(name = "PriceEntry")
 public class PriceEntry {
 
 	@Schema
-	public Long getCommercePriceListId() {
-		return commercePriceListId;
+	public Map<String, ?> getCustomFields() {
+		return customFields;
 	}
 
-	public void setCommercePriceListId(Long commercePriceListId) {
-		this.commercePriceListId = commercePriceListId;
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
 	}
 
 	@JsonIgnore
-	public void setCommercePriceListId(
-		UnsafeSupplier<Long, Exception> commercePriceListIdUnsafeSupplier) {
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
 
 		try {
-			commercePriceListId = commercePriceListIdUnsafeSupplier.get();
+			customFields = customFieldsUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -82,38 +76,7 @@ public class PriceEntry {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commercePriceListId;
-
-	@Schema
-	public Long getCommerceProductInstanceId() {
-		return commerceProductInstanceId;
-	}
-
-	public void setCommerceProductInstanceId(Long commerceProductInstanceId) {
-		this.commerceProductInstanceId = commerceProductInstanceId;
-	}
-
-	@JsonIgnore
-	public void setCommerceProductInstanceId(
-		UnsafeSupplier<Long, Exception>
-			commerceProductInstanceIdUnsafeSupplier) {
-
-		try {
-			commerceProductInstanceId =
-				commerceProductInstanceIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long commerceProductInstanceId;
+	protected Map<String, ?> customFields;
 
 	@Schema
 	public String getExternalReferenceCode() {
@@ -141,7 +104,6 @@ public class PriceEntry {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
 	@Schema
@@ -228,6 +190,66 @@ public class PriceEntry {
 	protected BigDecimal price;
 
 	@Schema
+	public String getPriceListExternalReferenceCode() {
+		return priceListExternalReferenceCode;
+	}
+
+	public void setPriceListExternalReferenceCode(
+		String priceListExternalReferenceCode) {
+
+		this.priceListExternalReferenceCode = priceListExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setPriceListExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			priceListExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			priceListExternalReferenceCode =
+				priceListExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String priceListExternalReferenceCode;
+
+	@Schema
+	public Long getPriceListId() {
+		return priceListId;
+	}
+
+	public void setPriceListId(Long priceListId) {
+		this.priceListId = priceListId;
+	}
+
+	@JsonIgnore
+	public void setPriceListId(
+		UnsafeSupplier<Long, Exception> priceListIdUnsafeSupplier) {
+
+		try {
+			priceListId = priceListIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long priceListId;
+
+	@Schema
 	public BigDecimal getPromoPrice() {
 		return promoPrice;
 	}
@@ -253,7 +275,6 @@ public class PriceEntry {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected BigDecimal promoPrice;
 
 	@Schema
@@ -313,20 +334,18 @@ public class PriceEntry {
 	protected String skuExternalReferenceCode;
 
 	@Schema
-	public Boolean getStandardPrice() {
-		return standardPrice;
+	public Long getSkuId() {
+		return skuId;
 	}
 
-	public void setStandardPrice(Boolean standardPrice) {
-		this.standardPrice = standardPrice;
+	public void setSkuId(Long skuId) {
+		this.skuId = skuId;
 	}
 
 	@JsonIgnore
-	public void setStandardPrice(
-		UnsafeSupplier<Boolean, Exception> standardPriceUnsafeSupplier) {
-
+	public void setSkuId(UnsafeSupplier<Long, Exception> skuIdUnsafeSupplier) {
 		try {
-			standardPrice = standardPriceUnsafeSupplier.get();
+			skuId = skuIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -338,8 +357,35 @@ public class PriceEntry {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Boolean standardPrice;
+	protected Long skuId;
+
+	@Schema
+	public TierPrice[] getTierPrices() {
+		return tierPrices;
+	}
+
+	public void setTierPrices(TierPrice[] tierPrices) {
+		this.tierPrices = tierPrices;
+	}
+
+	@JsonIgnore
+	public void setTierPrices(
+		UnsafeSupplier<TierPrice[], Exception> tierPricesUnsafeSupplier) {
+
+		try {
+			tierPrices = tierPricesUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected TierPrice[] tierPrices;
 
 	@Override
 	public boolean equals(Object object) {
@@ -368,24 +414,14 @@ public class PriceEntry {
 
 		sb.append("{");
 
-		if (commercePriceListId != null) {
+		if (customFields != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commercePriceListId\": ");
+			sb.append("\"customFields\": ");
 
-			sb.append(commercePriceListId);
-		}
-
-		if (commerceProductInstanceId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"commerceProductInstanceId\": ");
-
-			sb.append(commerceProductInstanceId);
+			sb.append(_toJSON(customFields));
 		}
 
 		if (externalReferenceCode != null) {
@@ -432,6 +468,30 @@ public class PriceEntry {
 			sb.append(price);
 		}
 
+		if (priceListExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceListExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(priceListExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (priceListId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceListId\": ");
+
+			sb.append(priceListId);
+		}
+
 		if (promoPrice != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -470,14 +530,34 @@ public class PriceEntry {
 			sb.append("\"");
 		}
 
-		if (standardPrice != null) {
+		if (skuId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"standardPrice\": ");
+			sb.append("\"skuId\": ");
 
-			sb.append(standardPrice);
+			sb.append(skuId);
+		}
+
+		if (tierPrices != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"tierPrices\": ");
+
+			sb.append("[");
+
+			for (int i = 0; i < tierPrices.length; i++) {
+				sb.append(String.valueOf(tierPrices[i]));
+
+				if ((i + 1) < tierPrices.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("]");
 		}
 
 		sb.append("}");

@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
@@ -104,38 +103,63 @@ public abstract class BaseDiscountResourceImpl implements DiscountResource {
 	}
 
 	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/discounts/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public Response deleteDiscountByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
 		}
 	)
-	@Path("/discount/{id}/discountRules/")
+	@Path("/discounts/by-externalReferenceCode/{externalReferenceCode}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public Page<DiscountRule> getDiscountDiscountRulesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
+	public Discount getDiscountByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		return new Discount();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discount/{id}/discountRule/")
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/discounts/by-externalReferenceCode/{externalReferenceCode}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public DiscountRule postDiscountDiscountRule(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			DiscountRule discountRule)
+	public Response patchDiscountByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Discount discount)
 		throws Exception {
 
-		return new DiscountRule();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -158,7 +182,7 @@ public abstract class BaseDiscountResourceImpl implements DiscountResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/discount/")
+	@Path("/discounts/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
 	public Discount postDiscount(Discount discount) throws Exception {

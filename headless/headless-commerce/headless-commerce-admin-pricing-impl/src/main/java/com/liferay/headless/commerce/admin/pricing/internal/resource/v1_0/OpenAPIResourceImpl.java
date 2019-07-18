@@ -78,11 +78,19 @@ public class OpenAPIResourceImpl {
 		{
 			add(DiscountResourceImpl.class);
 
+			add(DiscountAccountGroupResourceImpl.class);
+
+			add(DiscountCategoryResourceImpl.class);
+
+			add(DiscountProductResourceImpl.class);
+
 			add(DiscountRuleResourceImpl.class);
 
 			add(PriceEntryResourceImpl.class);
 
 			add(PriceListResourceImpl.class);
+
+			add(PriceListAccountGroupResourceImpl.class);
 
 			add(TierPriceResourceImpl.class);
 
