@@ -57,7 +57,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	public Response deleteOptionCategory(Long id) throws Exception {
 		_cpOptionCategoryService.deleteCPOptionCategory(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -95,7 +95,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 		_updateOptionCategory(id, optionCategory);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

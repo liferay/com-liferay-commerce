@@ -16,7 +16,6 @@ package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
@@ -53,7 +52,6 @@ public class SkuDTOConverter implements DTOConverter {
 				height = cpInstance.getHeight();
 				id = cpInstance.getCPInstanceId();
 				manufacturerPartNumber = cpInstance.getManufacturerPartNumber();
-				neverExpire = cpInstance.isExpired();
 				price = cpInstance.getPrice();
 				promoPrice = cpInstance.getPromoPrice();
 				published = cpInstance.isPublished();
@@ -64,9 +62,6 @@ public class SkuDTOConverter implements DTOConverter {
 			}
 		};
 	}
-
-	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
