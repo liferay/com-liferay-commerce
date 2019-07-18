@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -63,9 +64,15 @@ public class CPOptionCategoryLocalServiceImpl
 	@Override
 	public CPOptionCategory addCPOptionCategory(
 			long userId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		if (serviceContext == null) {
+			throw new PortalException("Unable to obtain valid service context");
+		}
 
 		User user = userLocalService.getUser(userId);
 
@@ -208,8 +215,7 @@ public class CPOptionCategoryLocalServiceImpl
 	@Override
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException {
 
 		CPOptionCategory cpOptionCategory =

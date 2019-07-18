@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
 import java.util.Locale;
@@ -40,7 +39,7 @@ public class CPOptionCategoryServiceImpl
 	@Override
 	public CPOptionCategory addCPOptionCategory(
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			double priority, String key, ServiceContext serviceContext)
+			double priority, String key)
 		throws PortalException {
 
 		PortalPermissionUtil.check(
@@ -48,8 +47,7 @@ public class CPOptionCategoryServiceImpl
 			CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION_CATEGORY);
 
 		return cpOptionCategoryLocalService.addCPOptionCategory(
-			getUserId(), titleMap, descriptionMap, priority, key,
-			serviceContext);
+			getUserId(), titleMap, descriptionMap, priority, key);
 	}
 
 	@Override
@@ -101,16 +99,14 @@ public class CPOptionCategoryServiceImpl
 	@Override
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException {
 
 		_cpOptionCategoryModelResourcePermission.check(
 			getPermissionChecker(), cpOptionCategoryId, ActionKeys.UPDATE);
 
 		return cpOptionCategoryLocalService.updateCPOptionCategory(
-			cpOptionCategoryId, titleMap, descriptionMap, priority, key,
-			serviceContext);
+			cpOptionCategoryId, titleMap, descriptionMap, priority, key);
 	}
 
 	private static volatile ModelResourcePermission<CPOptionCategory>
