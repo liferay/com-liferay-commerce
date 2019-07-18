@@ -81,12 +81,13 @@ public class CommerceDiscountModelImpl
 	public static final String TABLE_NAME = "CommerceDiscount";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", Types.VARCHAR}, {"commerceDiscountId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"title", Types.VARCHAR},
-		{"target", Types.VARCHAR}, {"useCouponCode", Types.BOOLEAN},
-		{"couponCode", Types.VARCHAR}, {"usePercentage", Types.BOOLEAN},
+		{"uuid_", Types.VARCHAR}, {"externalReferenceCode", Types.VARCHAR},
+		{"commerceDiscountId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"title", Types.VARCHAR}, {"target", Types.VARCHAR},
+		{"useCouponCode", Types.BOOLEAN}, {"couponCode", Types.VARCHAR},
+		{"usePercentage", Types.BOOLEAN},
 		{"maximumDiscountAmount", Types.DECIMAL}, {"level1", Types.DECIMAL},
 		{"level2", Types.DECIMAL}, {"level3", Types.DECIMAL},
 		{"level4", Types.DECIMAL}, {"limitationType", Types.VARCHAR},
@@ -103,6 +104,7 @@ public class CommerceDiscountModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceDiscountId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -133,7 +135,7 @@ public class CommerceDiscountModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceDiscount (uuid_ VARCHAR(75) null,commerceDiscountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceDiscount (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceDiscountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,target VARCHAR(75) null,useCouponCode BOOLEAN,couponCode VARCHAR(75) null,usePercentage BOOLEAN,maximumDiscountAmount DECIMAL(30, 16) null,level1 DECIMAL(30, 16) null,level2 DECIMAL(30, 16) null,level3 DECIMAL(30, 16) null,level4 DECIMAL(30, 16) null,limitationType VARCHAR(75) null,limitationTimes INTEGER,numberOfUse INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceDiscount";
 
@@ -172,11 +174,13 @@ public class CommerceDiscountModelImpl
 
 	public static final long EXPIRATIONDATE_COLUMN_BITMASK = 8L;
 
-	public static final long STATUS_COLUMN_BITMASK = 16L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
 
-	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long STATUS_COLUMN_BITMASK = 32L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 64L;
+
+	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -192,6 +196,7 @@ public class CommerceDiscountModelImpl
 		CommerceDiscount model = new CommerceDiscountImpl();
 
 		model.setUuid(soapModel.getUuid());
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceDiscountId(soapModel.getCommerceDiscountId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -396,6 +401,30 @@ public class CommerceDiscountModelImpl
 					CommerceDiscount commerceDiscount, Object uuid) {
 
 					commerceDiscount.setUuid((String)uuid);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"externalReferenceCode",
+			new Function<CommerceDiscount, Object>() {
+
+				@Override
+				public Object apply(CommerceDiscount commerceDiscount) {
+					return commerceDiscount.getExternalReferenceCode();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"externalReferenceCode",
+			new BiConsumer<CommerceDiscount, Object>() {
+
+				@Override
+				public void accept(
+					CommerceDiscount commerceDiscount,
+					Object externalReferenceCode) {
+
+					commerceDiscount.setExternalReferenceCode(
+						(String)externalReferenceCode);
 				}
 
 			});
@@ -1035,6 +1064,32 @@ public class CommerceDiscountModelImpl
 
 	@JSON
 	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
+	@JSON
+	@Override
 	public long getCommerceDiscountId() {
 		return _commerceDiscountId;
 	}
@@ -1595,6 +1650,8 @@ public class CommerceDiscountModelImpl
 		CommerceDiscountImpl commerceDiscountImpl = new CommerceDiscountImpl();
 
 		commerceDiscountImpl.setUuid(getUuid());
+		commerceDiscountImpl.setExternalReferenceCode(
+			getExternalReferenceCode());
 		commerceDiscountImpl.setCommerceDiscountId(getCommerceDiscountId());
 		commerceDiscountImpl.setCompanyId(getCompanyId());
 		commerceDiscountImpl.setUserId(getUserId());
@@ -1689,6 +1746,9 @@ public class CommerceDiscountModelImpl
 		commerceDiscountModelImpl._originalUuid =
 			commerceDiscountModelImpl._uuid;
 
+		commerceDiscountModelImpl._originalExternalReferenceCode =
+			commerceDiscountModelImpl._externalReferenceCode;
+
 		commerceDiscountModelImpl._originalCompanyId =
 			commerceDiscountModelImpl._companyId;
 
@@ -1724,6 +1784,18 @@ public class CommerceDiscountModelImpl
 
 		if ((uuid != null) && (uuid.length() == 0)) {
 			commerceDiscountCacheModel.uuid = null;
+		}
+
+		commerceDiscountCacheModel.externalReferenceCode =
+			getExternalReferenceCode();
+
+		String externalReferenceCode =
+			commerceDiscountCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+			(externalReferenceCode.length() == 0)) {
+
+			commerceDiscountCacheModel.externalReferenceCode = null;
 		}
 
 		commerceDiscountCacheModel.commerceDiscountId = getCommerceDiscountId();
@@ -1936,6 +2008,8 @@ public class CommerceDiscountModelImpl
 
 	private String _uuid;
 	private String _originalUuid;
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceDiscountId;
 	private long _companyId;
 	private long _originalCompanyId;

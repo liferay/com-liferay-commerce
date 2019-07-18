@@ -143,6 +143,13 @@ public class CommercePriceListServiceUtil {
 		return getService().fetchCommercePriceList(commercePriceListId);
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceList
+			getCommercePriceList(long commercePriceListId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommercePriceList(commercePriceListId);
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.price.list.model.CommercePriceList>
 				getCommercePriceLists(

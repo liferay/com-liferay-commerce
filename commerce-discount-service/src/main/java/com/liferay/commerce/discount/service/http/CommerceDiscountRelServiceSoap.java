@@ -100,6 +100,26 @@ public class CommerceDiscountRelServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.discount.model.CommerceDiscountRelSoap
+			fetchCommerceDiscountRel(String className, long classPK)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountRel
+				returnValue =
+					CommerceDiscountRelServiceUtil.fetchCommerceDiscountRel(
+						className, classPK);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRelSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static long[] getClassPKs(long commerceDiscountId, String className)
 		throws RemoteException {
 

@@ -134,6 +134,47 @@ public class CommerceDiscountRuleServiceHttp {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountRule
+			fetchCommerceDiscountRule(
+				HttpPrincipal httpPrincipal, long commerceDiscountRuleId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceDiscountRuleServiceUtil.class,
+				"fetchCommerceDiscountRule",
+				_fetchCommerceDiscountRuleParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceDiscountRuleId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.discount.model.CommerceDiscountRule)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.discount.model.CommerceDiscountRule
 			getCommerceDiscountRule(
 				HttpPrincipal httpPrincipal, long commerceDiscountRuleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -142,7 +183,7 @@ public class CommerceDiscountRuleServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRuleServiceUtil.class,
 				"getCommerceDiscountRule",
-				_getCommerceDiscountRuleParameterTypes2);
+				_getCommerceDiscountRuleParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountRuleId);
@@ -188,7 +229,7 @@ public class CommerceDiscountRuleServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRuleServiceUtil.class,
 				"getCommerceDiscountRules",
-				_getCommerceDiscountRulesParameterTypes3);
+				_getCommerceDiscountRulesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId, start, end, orderByComparator);
@@ -229,7 +270,7 @@ public class CommerceDiscountRuleServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRuleServiceUtil.class,
 				"getCommerceDiscountRulesCount",
-				_getCommerceDiscountRulesCountParameterTypes4);
+				_getCommerceDiscountRulesCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountId);
@@ -270,7 +311,7 @@ public class CommerceDiscountRuleServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceDiscountRuleServiceUtil.class,
 				"updateCommerceDiscountRule",
-				_updateCommerceDiscountRuleParameterTypes5);
+				_updateCommerceDiscountRuleParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceDiscountRuleId, type, typeSettings);
@@ -312,18 +353,20 @@ public class CommerceDiscountRuleServiceHttp {
 		};
 	private static final Class<?>[] _deleteCommerceDiscountRuleParameterTypes1 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getCommerceDiscountRuleParameterTypes2 =
+	private static final Class<?>[] _fetchCommerceDiscountRuleParameterTypes2 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getCommerceDiscountRulesParameterTypes3 =
+	private static final Class<?>[] _getCommerceDiscountRuleParameterTypes3 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceDiscountRulesParameterTypes4 =
 		new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[]
-		_getCommerceDiscountRulesCountParameterTypes4 = new Class[] {
+		_getCommerceDiscountRulesCountParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateCommerceDiscountRuleParameterTypes5 =
+	private static final Class<?>[] _updateCommerceDiscountRuleParameterTypes6 =
 		new Class[] {long.class, String.class, String.class};
 
 }
