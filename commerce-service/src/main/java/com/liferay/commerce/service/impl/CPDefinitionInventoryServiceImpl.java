@@ -21,7 +21,6 @@ import com.liferay.commerce.service.base.CPDefinitionInventoryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 /**
  * @author Alessio Antonio Rendina
@@ -31,23 +30,23 @@ public class CPDefinitionInventoryServiceImpl
 
 	@Override
 	public CPDefinitionInventory addCPDefinitionInventory(
-			long cpDefinitionId, String cpDefinitionInventoryEngine,
-			String lowStockActivity, boolean displayAvailability,
-			boolean displayStockQuantity, int minStockQuantity,
-			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-			String allowedOrderQuantities, int multipleOrderQuantity,
-			ServiceContext serviceContext)
+			long groupId, long cpDefinitionId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
 		throws PortalException {
 
 		_portletResourcePermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_PRODUCT_DEFINITION_INVENTORY);
 
 		return cpDefinitionInventoryLocalService.addCPDefinitionInventory(
-			cpDefinitionId, cpDefinitionInventoryEngine, lowStockActivity,
-			displayAvailability, displayStockQuantity, minStockQuantity,
-			backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			groupId, cpDefinitionId, cpDefinitionInventoryEngine,
+			lowStockActivity, displayAvailability, displayStockQuantity,
+			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	@Override
