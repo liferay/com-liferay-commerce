@@ -64,7 +64,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	public Response deleteAttachment(Long id) throws Exception {
 		_cpAttachmentFileEntryService.deleteCPAttachmentFileEntry(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -87,7 +87,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		_cpAttachmentFileEntryService.deleteCPAttachmentFileEntry(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -217,7 +217,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 		_updateAttachment(cpAttachmentFileEntry, attachment);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -239,7 +239,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 		_updateAttachment(cpAttachmentFileEntry, attachment);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

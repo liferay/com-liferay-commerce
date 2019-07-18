@@ -59,7 +59,7 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 		_cpDefinitionOptionRelService.deleteCPDefinitionOptionRel(
 			cpDefinitionOptionRel.getCPDefinitionOptionRelId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -137,7 +137,7 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 
 		_updateProductOption(id, productOption);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
