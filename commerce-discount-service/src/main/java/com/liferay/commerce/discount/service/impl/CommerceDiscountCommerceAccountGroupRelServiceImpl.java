@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CommerceDiscountCommerceAccountGroupRelServiceImpl
 	extends CommerceDiscountCommerceAccountGroupRelServiceBaseImpl {
@@ -69,6 +70,48 @@ public class CommerceDiscountCommerceAccountGroupRelServiceImpl
 	}
 
 	@Override
+	public CommerceDiscountCommerceAccountGroupRel
+			fetchCommerceDiscountCommerceAccountGroupRel(
+				long commerceDiscountId, long commerceAccountGroupId)
+		throws PortalException {
+
+		CommerceDiscountCommerceAccountGroupRel
+			commerceDiscountCommerceAccountGroupRel =
+				commerceDiscountCommerceAccountGroupRelLocalService.
+					fetchCommerceDiscountCommerceAccountGroupRel(
+						commerceDiscountId, commerceAccountGroupId);
+
+		if (commerceDiscountCommerceAccountGroupRel != null) {
+			_commerceDiscountResourcePermission.check(
+				getPermissionChecker(),
+				commerceDiscountCommerceAccountGroupRel.getCommerceDiscountId(),
+				ActionKeys.UPDATE);
+		}
+
+		return commerceDiscountCommerceAccountGroupRel;
+	}
+
+	@Override
+	public CommerceDiscountCommerceAccountGroupRel
+			getCommerceDiscountCommerceAccountGroupRel(
+				long commerceDiscountCommerceAccountGroupRelId)
+		throws PortalException {
+
+		CommerceDiscountCommerceAccountGroupRel
+			commerceDiscountCommerceAccountGroupRel =
+				commerceDiscountCommerceAccountGroupRelLocalService.
+					getCommerceDiscountCommerceAccountGroupRel(
+						commerceDiscountCommerceAccountGroupRelId);
+
+		_commerceDiscountResourcePermission.check(
+			getPermissionChecker(),
+			commerceDiscountCommerceAccountGroupRel.getCommerceDiscountId(),
+			ActionKeys.UPDATE);
+
+		return commerceDiscountCommerceAccountGroupRel;
+	}
+
+	@Override
 	public List<CommerceDiscountCommerceAccountGroupRel>
 			getCommerceDiscountCommerceAccountGroupRels(
 				long commerceDiscountId, int start, int end,
@@ -82,6 +125,19 @@ public class CommerceDiscountCommerceAccountGroupRelServiceImpl
 		return commerceDiscountCommerceAccountGroupRelLocalService.
 			getCommerceDiscountCommerceAccountGroupRels(
 				commerceDiscountId, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getCommerceDiscountCommerceAccountGroupRelsCount(
+			long commerceDiscountId)
+		throws PortalException {
+
+		_commerceDiscountResourcePermission.check(
+			getPermissionChecker(), commerceDiscountId, ActionKeys.UPDATE);
+
+		return commerceDiscountCommerceAccountGroupRelLocalService.
+			getCommerceDiscountCommerceAccountGroupRelsCount(
+				commerceDiscountId);
 	}
 
 	private static volatile ModelResourcePermission<CommerceDiscount>
