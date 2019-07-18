@@ -4,7 +4,7 @@
 <service-builder auto-namespace-tables="false" package-path="com.liferay.commerce.discount">
 	<author>Marco Leo</author>
 	<namespace>Commerce</namespace>
-	<entity local-service="true" name="CommerceDiscount" remote-service="true" uuid="true">
+	<entity external-reference-code="true" local-service="true" name="CommerceDiscount" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -102,6 +102,10 @@
 			<finder-column name="commerceDiscountId" />
 		</finder>
 		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
+		</finder>
+		<finder name="C_C" return-type="CommerceDiscountCommerceAccountGroupRel" unique="true">
+			<finder-column name="commerceDiscountId" />
 			<finder-column name="commerceAccountGroupId" />
 		</finder>
 	</entity>
