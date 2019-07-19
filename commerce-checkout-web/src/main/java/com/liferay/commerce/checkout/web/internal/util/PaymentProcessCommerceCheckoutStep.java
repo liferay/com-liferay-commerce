@@ -14,17 +14,17 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
-import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.checkout.web.internal.display.context.PaymentProcessCheckoutStepDisplayContext;
-import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.util.BaseCommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.util.Portal;
 

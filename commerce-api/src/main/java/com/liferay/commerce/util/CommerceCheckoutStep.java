@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.checkout.web.util;
+package com.liferay.commerce.util;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.Locale;
 
-import java.util.List;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,27 +25,37 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Marco Leo
  */
-@ProviderType
-public interface CommerceCheckoutStepServicesTracker {
+public interface CommerceCheckoutStep {
 
-	public CommerceCheckoutStep getCommerceCheckoutStep(
-		String commerceCheckoutStepName);
+	public String getLabel(Locale locale);
 
-	public List<CommerceCheckoutStep> getCommerceCheckoutSteps(
+	public String getName();
+
+	public boolean isActive(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws Exception;
 
-	public CommerceCheckoutStep getNextCommerceCheckoutStep(
-			String commerceCheckoutStepName,
+	public boolean isOrder();
+
+	public boolean isSennaDisabled();
+
+	public boolean isVisible(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws Exception;
 
-	public CommerceCheckoutStep getPreviousCommerceCheckoutStep(
-			String commerceCheckoutStepName,
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception;
+
+	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws Exception;
+
+	public boolean showControls(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse);
 
 }

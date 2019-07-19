@@ -15,8 +15,8 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.internal.util.comparator.CommerceCheckoutStepServiceWrapperOrderComparator;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.commerce.util.CommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;

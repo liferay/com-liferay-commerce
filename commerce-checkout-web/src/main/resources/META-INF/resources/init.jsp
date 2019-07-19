@@ -24,15 +24,14 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys" %><%@
-page import="com.liferay.commerce.checkout.web.internal.display.context.BaseAddressCheckoutStepDisplayContext" %><%@
+<%@ page import="com.liferay.commerce.checkout.web.internal.display.context.BaseAddressCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.CheckoutDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.OrderConfirmationCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.OrderSummaryCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.PaymentMethodCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.PaymentProcessCheckoutStepDisplayContext" %><%@
 page import="com.liferay.commerce.checkout.web.internal.display.context.ShippingMethodCheckoutStepDisplayContext" %><%@
-page import="com.liferay.commerce.checkout.web.util.CommerceCheckoutStep" %><%@
+page import="com.liferay.commerce.constants.CommerceCheckoutWebKeys" %><%@
 page import="com.liferay.commerce.constants.CommerceOrderPaymentConstants" %><%@
 page import="com.liferay.commerce.currency.model.CommerceMoney" %><%@
 page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
@@ -57,6 +56,7 @@ page import="com.liferay.commerce.price.CommerceOrderPrice" %><%@
 page import="com.liferay.commerce.price.CommerceProductPrice" %><%@
 page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.commerce.product.model.CPInstance" %><%@
+page import="com.liferay.commerce.util.CommerceCheckoutStep" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@

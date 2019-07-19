@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
-import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
