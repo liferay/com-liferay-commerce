@@ -18,6 +18,7 @@ import com.liferay.commerce.product.exception.DuplicateCommerceChannelSiteGroupI
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -37,12 +38,16 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
-import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
+import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
+import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
+import com.liferay.portal.spring.transaction.TransactionExecutor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -184,11 +189,35 @@ public class CommerceChannelLocalServiceImpl
 		// groupLocalService.fetchGroup(long, long, long).
 
 		try {
-			return TransactionInvokerUtil.invoke(
-				_transactionConfig,
-				() -> groupPersistence.findByC_C_C(
-					commerceChannel.getCompanyId(), classNameId,
-					commerceChannelId));
+			TransactionExecutor transactionExecutor =
+				(TransactionExecutor)PortalBeanLocatorUtil.locate(
+					"transactionExecutor");
+
+			ServiceBeanMethodInvocation serviceBeanMethodInvocation =
+				new ServiceBeanMethodInvocation(
+					groupPersistence,
+					GroupPersistence.class.getMethod(
+						"findByC_C_C", long.class, long.class, long.class),
+					new Object[] {
+						commerceChannel.getCompanyId(), classNameId,
+						commerceChannelId
+					});
+
+			serviceBeanMethodInvocation.setMethodInterceptors(
+				Collections.emptyList());
+
+			return (Group)transactionExecutor.execute(
+				new TransactionAttributeAdapter(
+					TransactionAttributeBuilder.build(
+						true, _transactionConfig.getIsolation(),
+						_transactionConfig.getPropagation(),
+						_transactionConfig.isReadOnly(),
+						_transactionConfig.getTimeout(),
+						_transactionConfig.getRollbackForClasses(),
+						_transactionConfig.getRollbackForClassNames(),
+						_transactionConfig.getNoRollbackForClasses(),
+						_transactionConfig.getNoRollbackForClassNames())),
+				serviceBeanMethodInvocation);
 		}
 		catch (Throwable t) {
 			if (t instanceof PortalException) {
