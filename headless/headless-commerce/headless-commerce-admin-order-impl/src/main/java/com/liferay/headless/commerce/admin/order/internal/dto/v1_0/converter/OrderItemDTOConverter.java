@@ -14,12 +14,20 @@
 
 package com.liferay.headless.commerce.admin.order.internal.dto.v1_0.converter;
 
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
+import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
+import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
+
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -45,27 +53,71 @@ public class OrderItemDTOConverter implements DTOConverter {
 			_commerceOrderItemService.getCommerceOrderItem(
 				dtoConverterContext.getResourcePrimKey());
 
+		CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+		CPInstance cpInstance = commerceOrderItem.getCPInstance();
+		ExpandoBridge expandoBridge = commerceOrderItem.getExpandoBridge();
+
 		return new OrderItem() {
 			{
-				commerceOrderId = commerceOrderItem.getCommerceOrderId();
+				bookedQuantityId = commerceOrderItem.getBookedQuantityId();
+				customFields = expandoBridge.getAttributes();
+				deliveryGroup = commerceOrderItem.getDeliveryGroup();
 				discountAmount = commerceOrderItem.getDiscountAmount();
+				discountPercentageLevel1 =
+					commerceOrderItem.getDiscountPercentageLevel1();
+				discountPercentageLevel2 =
+					commerceOrderItem.getDiscountPercentageLevel2();
+				discountPercentageLevel3 =
+					commerceOrderItem.getDiscountPercentageLevel3();
+				discountPercentageLevel4 =
+					commerceOrderItem.getDiscountPercentageLevel4();
 				externalReferenceCode =
 					commerceOrderItem.getExternalReferenceCode();
 				finalPrice = commerceOrderItem.getFinalPrice();
 				id = commerceOrderItem.getCommerceOrderItemId();
 				name = LanguageUtils.getLanguageIdMap(
 					commerceOrderItem.getNameMap());
+				orderExternalReferenceCode =
+					commerceOrder.getExternalReferenceCode();
+				orderId = commerceOrder.getCommerceOrderId();
+				printedNote = commerceOrderItem.getPrintedNote();
 				quantity = commerceOrderItem.getQuantity();
+				requestedDeliveryDate =
+					commerceOrderItem.getRequestedDeliveryDate();
 				shippedQuantity = commerceOrderItem.getShippedQuantity();
+				shippingAddress = _getShippingAddress(
+					dtoConverterContext.getLocale(),
+					commerceOrderItem.getShippingAddressId());
+				shippingAddressId = commerceOrderItem.getShippingAddressId();
 				sku = commerceOrderItem.getSku();
-				skuId = commerceOrderItem.getCPInstanceId();
+				skuExternalReferenceCode =
+					cpInstance.getExternalReferenceCode();
+				skuId = cpInstance.getCPInstanceId();
 				subscription = commerceOrderItem.isSubscription();
 				unitPrice = commerceOrderItem.getUnitPrice();
 			}
 		};
 	}
 
+	private ShippingAddress _getShippingAddress(
+			Locale locale, long shippingAddressId)
+		throws Exception {
+
+		if (shippingAddressId <= 0) {
+			return new ShippingAddress();
+		}
+
+		DTOConverter shippingAddressDTOConverter =
+			_dtoConverterRegistry.getDTOConverter("ShippingAddress");
+
+		return (ShippingAddress)shippingAddressDTOConverter.toDTO(
+			new DefaultDTOConverterContext(locale, shippingAddressId));
+	}
+
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
+
+	@Reference
+	private DTOConverterRegistry _dtoConverterRegistry;
 
 }
