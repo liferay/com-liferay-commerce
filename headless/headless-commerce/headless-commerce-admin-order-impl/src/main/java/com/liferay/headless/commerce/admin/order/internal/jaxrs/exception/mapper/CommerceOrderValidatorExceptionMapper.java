@@ -57,15 +57,19 @@ public class CommerceOrderValidatorExceptionMapper
 	}
 
 	@Override
-	public Response toResponse(CommerceOrderValidatorException e) {
-		_log.error("General REST exception", e);
+	public Response toResponse(
+		CommerceOrderValidatorException commerceOrderValidatorException) {
+
+		_log.error("General REST exception", commerceOrderValidatorException);
 
 		Response.ResponseBuilder responseBuilder = Response.status(getStatus());
 
 		Response.Status status = getStatus();
 
 		responseBuilder.entity(
-			toJSON(_getErrorMessage(e), status.getStatusCode()));
+			toJSON(
+				_getErrorMessage(commerceOrderValidatorException),
+				status.getStatusCode()));
 
 		responseBuilder.type(MediaType.APPLICATION_JSON_TYPE);
 
