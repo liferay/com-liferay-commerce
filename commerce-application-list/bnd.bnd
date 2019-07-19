@@ -1,4 +1,3 @@
 Bundle-Name: Liferay Commerce Application List
 Bundle-SymbolicName: com.liferay.commerce.application.list
 Bundle-Version: 1.1.1
-Export-Package: com.liferay.commerce.application.list.constants
