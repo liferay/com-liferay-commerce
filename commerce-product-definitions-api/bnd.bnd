@@ -1,0 +1,8 @@
+Bundle-Name: Liferay Commerce Product Definitions API
+Bundle-SymbolicName: com.liferay.commerce.product.definitions.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.commerce.product.definitions.display.context,\
+	com.liferay.commerce.product.definitions.display.context.util,\
+	com.liferay.commerce.product.definitions.portlet.action,\
+	com.liferay.commerce.product.definitions.servlet.taglib.ui
