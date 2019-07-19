@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
 
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionOptionRelDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;

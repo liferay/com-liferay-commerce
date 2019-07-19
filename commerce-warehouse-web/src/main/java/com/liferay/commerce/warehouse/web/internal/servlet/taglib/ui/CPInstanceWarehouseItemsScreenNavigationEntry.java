@@ -16,7 +16,7 @@ package com.liferay.commerce.warehouse.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.warehouse.web.internal.display.context.CommerceInventoryWarehouseItemsDisplayContext;
