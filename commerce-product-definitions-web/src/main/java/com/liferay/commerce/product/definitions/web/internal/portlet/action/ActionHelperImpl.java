@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.web.portlet.action;
+package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPWebKeys;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
@@ -57,9 +58,10 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 @Component(service = ActionHelper.class)
-public class ActionHelper {
+public class ActionHelperImpl implements ActionHelper {
 
 	public ModelResourcePermission<CommerceCatalog>
 		getCommerceCatalogModelResourcePermission() {

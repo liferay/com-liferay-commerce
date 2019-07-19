@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.web.display.context;
+package com.liferay.commerce.product.definitions.display.context;
 
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.definitions.display.context.util.CPDefinitionRequestHelper;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -44,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Alessio Antonio Rendina
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 public abstract class BaseCPDefinitionsDisplayContext {
 
@@ -56,10 +57,10 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CPDefinitionRequestHelper(httpServletRequest);
 
-		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
-		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+		liferayPortletRequest = requestHelper.getLiferayPortletRequest();
+		liferayPortletResponse = requestHelper.getLiferayPortletResponse();
 	}
 
 	public CommerceCatalog getCommerceCatalog() throws PortalException {
@@ -84,7 +85,7 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		}
 
 		_cpDefinition = actionHelper.getCPDefinition(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpDefinition;
 	}
@@ -199,11 +200,11 @@ public abstract class BaseCPDefinitionsDisplayContext {
 	}
 
 	protected final ActionHelper actionHelper;
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final CPDefinitionRequestHelper requestHelper;
 
 	private CommerceCatalog _commerceCatalog;
 	private CPDefinition _cpDefinition;
