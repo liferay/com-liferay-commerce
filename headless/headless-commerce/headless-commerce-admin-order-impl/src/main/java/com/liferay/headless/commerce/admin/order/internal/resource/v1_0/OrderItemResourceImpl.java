@@ -14,21 +14,21 @@
 
 package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
+import com.liferay.headless.commerce.admin.order.internal.util.v1_0.OrderItemUtil;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderItemResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -37,6 +37,7 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -62,13 +63,12 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderItem.getCommerceOrderId());
 
-		CommerceContext commerceContext = _commerceContextFactory.create(
-			commerceOrder.getScopeGroupId(), _user.getUserId(),
-			commerceOrder.getCommerceOrderId(),
-			commerceOrder.getCommerceAccountId());
-
 		_commerceOrderItemService.deleteCommerceOrderItem(
-			commerceOrderItem.getCommerceOrderItemId(), commerceContext);
+			commerceOrderItem.getCommerceOrderItemId(),
+			_commerceContextFactory.create(
+				contextCompany.getCompanyId(), commerceOrder.getGroupId(),
+				_user.getUserId(), commerceOrder.getCommerceOrderId(),
+				commerceOrder.getCommerceAccountId()));
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -93,13 +93,12 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderItem.getCommerceOrderId());
 
-		CommerceContext commerceContext = _commerceContextFactory.create(
-			commerceOrder.getScopeGroupId(), _user.getUserId(),
-			commerceOrder.getCommerceOrderId(),
-			commerceOrder.getCommerceAccountId());
-
 		_commerceOrderItemService.deleteCommerceOrderItem(
-			commerceOrderItem.getCommerceOrderItemId(), commerceContext);
+			commerceOrderItem.getCommerceOrderItemId(),
+			_commerceContextFactory.create(
+				contextCompany.getCompanyId(), commerceOrder.getGroupId(),
+				_user.getUserId(), commerceOrder.getCommerceOrderId(),
+				commerceOrder.getCommerceAccountId()));
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -282,11 +281,21 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 			GetterUtil.get(
 				orderItem.getQuantity(), commerceOrderItem.getQuantity()),
 			_commerceContextFactory.create(
-				commerceOrder.getGroupId(), _user.getUserId(),
-				commerceOrder.getCommerceOrderId(),
+				contextCompany.getCompanyId(), commerceOrder.getGroupId(),
+				_user.getUserId(), commerceOrder.getCommerceOrderId(),
 				commerceOrder.getCommerceAccountId()),
 			_serviceContextHelper.getServiceContext(
 				commerceOrderItem.getGroupId()));
+
+		// Expando
+
+		Map<String, ?> customFields = orderItem.getCustomFields();
+
+		if (!customFields.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				contextCompany.getCompanyId(), CommerceOrderItem.class,
+				commerceOrderItem.getPrimaryKey(), customFields);
+		}
 
 		DTOConverter orderItemDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
@@ -302,22 +311,26 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 			CommerceOrder commerceOrder, OrderItem orderItem)
 		throws Exception {
 
-		CPInstance cpInstance = _cpInstanceService.getCPInstance(
-			orderItem.getSkuId());
-
 		CommerceOrderItem commerceOrderItem =
-			_commerceOrderItemService.upsertCommerceOrderItem(
-				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(),
-				GetterUtil.get(orderItem.getQuantity(), 0),
-				GetterUtil.get(orderItem.getShippedQuantity(), 0),
-				cpInstance.getJson(),
+			OrderItemUtil.upsertCommerceOrderItem(
+				_cpInstanceService, _commerceOrderItemService, orderItem,
+				commerceOrder,
 				_commerceContextFactory.create(
-					commerceOrder.getGroupId(), _user.getUserId(),
-					commerceOrder.getCommerceOrderId(),
+					contextCompany.getCompanyId(), commerceOrder.getGroupId(),
+					_user.getUserId(), commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountId()),
 				_serviceContextHelper.getServiceContext(
 					commerceOrder.getGroupId()));
+
+		// Expando
+
+		Map<String, ?> customFields = orderItem.getCustomFields();
+
+		if (!customFields.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				contextCompany.getCompanyId(), CommerceOrderItem.class,
+				commerceOrderItem.getPrimaryKey(), customFields);
+		}
 
 		DTOConverter orderItemDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
