@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.checkout.web.util;
+package com.liferay.commerce.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
