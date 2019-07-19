@@ -16,10 +16,10 @@ package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.checkout.web.internal.display.context.util.CommerceCheckoutRequestHelper;
 import com.liferay.commerce.checkout.web.internal.util.OrderConfirmationCommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.util.CommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;

@@ -14,9 +14,7 @@
 
 package com.liferay.commerce.payment.method.money.order.internal.util;
 
-import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
-import com.liferay.commerce.checkout.web.util.BaseCommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
+import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.payment.method.money.order.internal.MoneyOrderCommercePaymentMethod;
@@ -24,6 +22,8 @@ import com.liferay.commerce.payment.method.money.order.internal.configuration.Mo
 import com.liferay.commerce.payment.method.money.order.internal.constants.MoneyOrderCommercePaymentEngineMethodConstants;
 import com.liferay.commerce.payment.method.money.order.internal.display.context.MoneyOrderCheckoutStepDisplayContext;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.util.BaseCommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStep;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
