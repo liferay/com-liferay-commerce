@@ -35,8 +35,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -86,14 +84,9 @@ public class CurrenciesCommerceAdminModule implements CommerceAdminModule {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
-			"/view.jsp");
+			_servletContext, _portal.getHttpServletRequest(renderRequest),
+			_portal.getHttpServletResponse(renderResponse), "/view.jsp");
 	}
 
 	@Reference

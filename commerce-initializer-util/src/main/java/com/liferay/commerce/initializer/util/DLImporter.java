@@ -60,11 +60,10 @@ public class DLImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			_addDLFileEntries(
-				jsonObject, classLoader, documentsDependenciesPath, userId,
-				scopeGroupId, serviceContext);
+				jsonArray.getJSONObject(i), classLoader,
+				documentsDependenciesPath, userId, scopeGroupId,
+				serviceContext);
 		}
 	}
 

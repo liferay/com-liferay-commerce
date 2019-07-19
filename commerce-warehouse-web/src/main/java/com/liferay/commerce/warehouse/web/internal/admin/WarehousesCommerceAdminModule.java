@@ -72,13 +72,10 @@ public class WarehousesCommerceAdminModule implements CommerceAdminModule {
 	public PortletURL getSearchURL(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceInventoryWarehousesDisplayContext
 			commerceInventoryWarehousesDisplayContext =
 				setCommerceInventoryWarehousesDisplayContext(
-					httpServletRequest);
+					_portal.getHttpServletRequest(renderRequest));
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 

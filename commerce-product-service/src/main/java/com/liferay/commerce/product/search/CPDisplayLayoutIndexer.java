@@ -187,19 +187,14 @@ public class CPDisplayLayoutIndexer extends BaseIndexer<CPDisplayLayout> {
 
 	@Override
 	protected void doReindex(CPDisplayLayout cpDisplayLayout) throws Exception {
-		Document document = getDocument(cpDisplayLayout);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpDisplayLayout.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpDisplayLayout.getCompanyId(),
+			getDocument(cpDisplayLayout), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPDisplayLayout cpDisplayLayout =
-			_cpDisplayLayoutLocalService.getCPDisplayLayout(classPK);
-
-		doReindex(cpDisplayLayout);
+		doReindex(_cpDisplayLayoutLocalService.getCPDisplayLayout(classPK));
 	}
 
 	@Override
@@ -219,9 +214,8 @@ public class CPDisplayLayoutIndexer extends BaseIndexer<CPDisplayLayout> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPDisplayLayout cpDisplayLayout) -> {
 				try {
-					Document document = getDocument(cpDisplayLayout);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpDisplayLayout));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

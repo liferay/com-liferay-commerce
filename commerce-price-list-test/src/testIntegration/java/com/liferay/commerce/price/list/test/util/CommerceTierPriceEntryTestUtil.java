@@ -67,15 +67,13 @@ public class CommerceTierPriceEntryTestUtil {
 		long groupId = _getGroupId(
 			commercePriceEntryId, priceEntryExternalReferenceCode);
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CommerceTierPriceEntryLocalServiceUtil.
 			upsertCommerceTierPriceEntry(
 				commerceTierPriceEntryId, commercePriceEntryId,
 				externalReferenceCode, BigDecimal.valueOf(price),
 				BigDecimal.valueOf(promoPrice), minQuantity,
-				priceEntryExternalReferenceCode, serviceContext);
+				priceEntryExternalReferenceCode,
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	private static long _getGroupId(

@@ -45,8 +45,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -115,13 +113,9 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			commerceOrderSettingsDisplayContext);
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
+			_servletContext, _portal.getHttpServletRequest(renderRequest),
+			_portal.getHttpServletResponse(renderResponse),
 			"/edit_order_settings.jsp");
 	}
 

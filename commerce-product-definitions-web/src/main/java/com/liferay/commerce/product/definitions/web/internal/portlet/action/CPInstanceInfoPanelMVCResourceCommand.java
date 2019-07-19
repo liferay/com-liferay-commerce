@@ -17,11 +17,8 @@ package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-
-import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -48,10 +45,9 @@ public class CPInstanceInfoPanelMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		List<CPInstance> cpInstances = _actionHelper.getCPInstances(
-			resourceRequest);
-
-		resourceRequest.setAttribute(CPWebKeys.CP_INSTANCES, cpInstances);
+		resourceRequest.setAttribute(
+			CPWebKeys.CP_INSTANCES,
+			_actionHelper.getCPInstances(resourceRequest));
 
 		include(resourceRequest, resourceResponse, "/instance_info_panel.jsp");
 	}

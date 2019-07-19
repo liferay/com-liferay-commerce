@@ -169,11 +169,9 @@ public class ActionHelper {
 			portletRequest, "rowIds");
 
 		for (long cpDefinitionLinkId : cpDefinitionLinkIds) {
-			CPDefinitionLink cpDefinitionLink =
+			cpDefinitionLinks.add(
 				_cpDefinitionLinkService.getCPDefinitionLink(
-					cpDefinitionLinkId);
-
-			cpDefinitionLinks.add(cpDefinitionLink);
+					cpDefinitionLinkId));
 		}
 
 		return cpDefinitionLinks;
@@ -228,11 +226,9 @@ public class ActionHelper {
 			portletRequest, "rowIds");
 
 		for (long cpDefinitionOptionRelId : cpDefinitionOptionRelIds) {
-			CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionRels.add(
 				_cpDefinitionOptionRelService.getCPDefinitionOptionRel(
-					cpDefinitionOptionRelId);
-
-			cpDefinitionOptionRels.add(cpDefinitionOptionRel);
+					cpDefinitionOptionRelId));
 		}
 
 		return cpDefinitionOptionRels;
@@ -294,11 +290,10 @@ public class ActionHelper {
 		for (long cpDefinitionOptionValueRelId :
 				cpDefinitionOptionValueRelIds) {
 
-			CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
+			cpDefinitionOptionValueRels.add(
 				_cpDefinitionOptionValueRelService.
-					getCPDefinitionOptionValueRel(cpDefinitionOptionValueRelId);
-
-			cpDefinitionOptionValueRels.add(cpDefinitionOptionValueRel);
+					getCPDefinitionOptionValueRel(
+						cpDefinitionOptionValueRelId));
 		}
 
 		return cpDefinitionOptionValueRels;
@@ -313,10 +308,8 @@ public class ActionHelper {
 			portletRequest, "rowIds");
 
 		for (long cpDefinitionId : cpDefinitionIds) {
-			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
-				cpDefinitionId);
-
-			cpDefinitions.add(cpDefinition);
+			cpDefinitions.add(
+				_cpDefinitionService.getCPDefinition(cpDefinitionId));
 		}
 
 		return cpDefinitions;
@@ -370,14 +363,10 @@ public class ActionHelper {
 		for (long cpDefinitionSpecificationOptionValueId :
 				cpDefinitionSpecificationOptionValueIds) {
 
-			CPDefinitionSpecificationOptionValue
-				cpDefinitionSpecificationOptionValue =
-					_cpDefinitionSpecificationOptionValueService.
-						getCPDefinitionSpecificationOptionValue(
-							cpDefinitionSpecificationOptionValueId);
-
 			cpDefinitionSpecificationOptionValues.add(
-				cpDefinitionSpecificationOptionValue);
+				_cpDefinitionSpecificationOptionValueService.
+					getCPDefinitionSpecificationOptionValue(
+						cpDefinitionSpecificationOptionValueId));
 		}
 
 		return cpDefinitionSpecificationOptionValues;
@@ -415,10 +404,7 @@ public class ActionHelper {
 			portletRequest, "rowIds");
 
 		for (long cpInstanceId : cpInstanceIds) {
-			CPInstance cpInstance = _cpInstanceService.getCPInstance(
-				cpInstanceId);
-
-			cpInstances.add(cpInstance);
+			cpInstances.add(_cpInstanceService.getCPInstance(cpInstanceId));
 		}
 
 		return cpInstances;

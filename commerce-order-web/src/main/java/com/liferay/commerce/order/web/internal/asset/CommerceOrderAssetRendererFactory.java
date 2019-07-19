@@ -64,11 +64,9 @@ public class CommerceOrderAssetRendererFactory
 	public AssetRenderer<CommerceOrder> getAssetRenderer(long classPK, int type)
 		throws PortalException {
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.getCommerceOrder(classPK);
-
 		CommerceOrderAssetRenderer commerceOrderAssetRenderer =
-			new CommerceOrderAssetRenderer(commerceOrder);
+			new CommerceOrderAssetRenderer(
+				_commerceOrderLocalService.getCommerceOrder(classPK));
 
 		commerceOrderAssetRenderer.setAssetRendererType(type);
 		commerceOrderAssetRenderer.setServletContext(_servletContext);

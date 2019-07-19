@@ -95,11 +95,9 @@ public class CommerceAddressContentPortletDisplayTemplateHandler
 			PortletDisplayTemplateConstants.ENTRIES, "commerce-address",
 			CommerceAddress.class, "curCommerceAddress", "CommerceAddressId");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup commerceAddressServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"commerce-address-services", restrictedVariables);
+				"commerce-address-services", getRestrictedVariables(language));
 
 		commerceAddressServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

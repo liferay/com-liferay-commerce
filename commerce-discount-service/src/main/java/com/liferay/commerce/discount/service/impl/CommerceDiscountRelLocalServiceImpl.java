@@ -112,10 +112,9 @@ public class CommerceDiscountRelLocalServiceImpl
 	public void deleteCommerceDiscountRels(String className, long classPK)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		List<CommerceDiscountRel> commerceDiscountRels =
-			commerceDiscountRelPersistence.findByCN_CPK(classNameId, classPK);
+			commerceDiscountRelPersistence.findByCN_CPK(
+				classNameLocalService.getClassNameId(className), classPK);
 
 		for (CommerceDiscountRel commerceDiscountRel : commerceDiscountRels) {
 			commerceDiscountRelLocalService.deleteCommerceDiscountRel(
@@ -125,11 +124,10 @@ public class CommerceDiscountRelLocalServiceImpl
 
 	@Override
 	public long[] getClassPKs(long commerceDiscountId, String className) {
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return ListUtil.toLongArray(
 			commerceDiscountRelPersistence.findByCD_CN(
-				commerceDiscountId, classNameId),
+				commerceDiscountId,
+				classNameLocalService.getClassNameId(className)),
 			CommerceDiscountRel::getClassPK);
 	}
 
@@ -137,10 +135,9 @@ public class CommerceDiscountRelLocalServiceImpl
 	public List<CommerceDiscountRel> getCommerceDiscountRels(
 		long commerceDiscountId, String className) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceDiscountRelPersistence.findByCD_CN(
-			commerceDiscountId, classNameId);
+			commerceDiscountId,
+			classNameLocalService.getClassNameId(className));
 	}
 
 	@Override
@@ -148,20 +145,18 @@ public class CommerceDiscountRelLocalServiceImpl
 		long commerceDiscountId, String className, int start, int end,
 		OrderByComparator<CommerceDiscountRel> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceDiscountRelPersistence.findByCD_CN(
-			commerceDiscountId, classNameId, start, end, orderByComparator);
+			commerceDiscountId, classNameLocalService.getClassNameId(className),
+			start, end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceDiscountRelsCount(
 		long commerceDiscountId, String className) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceDiscountRelPersistence.countByCD_CN(
-			commerceDiscountId, classNameId);
+			commerceDiscountId,
+			classNameLocalService.getClassNameId(className));
 	}
 
 	protected void reindexCommerceDiscount(long commerceDiscountId)

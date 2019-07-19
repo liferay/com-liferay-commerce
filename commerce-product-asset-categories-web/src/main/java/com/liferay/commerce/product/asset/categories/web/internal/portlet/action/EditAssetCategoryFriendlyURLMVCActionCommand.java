@@ -104,11 +104,10 @@ public class EditAssetCategoryFriendlyURLMVCActionCommand
 				urlTitle = entry.getValue();
 			}
 
-			String languageId = LanguageUtil.getLanguageId(locale);
-
 			urlTitle = _cpFriendlyURLEntryLocalService.buildUrlTitle(
 				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
-				assetCategory.getCategoryId(), languageId, urlTitle);
+				assetCategory.getCategoryId(),
+				LanguageUtil.getLanguageId(locale), urlTitle);
 
 			newUrlTitleMap.put(locale, urlTitle);
 		}

@@ -82,11 +82,9 @@ public class ActionHelper {
 			resourceRequest, "rowIds");
 
 		for (long cpOptionCategoryId : cpOptionCategoryIds) {
-			CPOptionCategory cpOptionCategory =
+			cpOptionCategories.add(
 				_cpOptionCategoryService.getCPOptionCategory(
-					cpOptionCategoryId);
-
-			cpOptionCategories.add(cpOptionCategory);
+					cpOptionCategoryId));
 		}
 
 		return cpOptionCategories;
@@ -100,9 +98,7 @@ public class ActionHelper {
 		long[] cpOptionIds = ParamUtil.getLongValues(resourceRequest, "rowIds");
 
 		for (long cpOptionId : cpOptionIds) {
-			CPOption cpOption = _cpOptionService.getCPOption(cpOptionId);
-
-			cpOptions.add(cpOption);
+			cpOptions.add(_cpOptionService.getCPOption(cpOptionId));
 		}
 
 		return cpOptions;
@@ -144,10 +140,8 @@ public class ActionHelper {
 			resourceRequest, "rowIds");
 
 		for (long cpOptionValuesId : cpOptionValuesIds) {
-			CPOptionValue cpOptionValue =
-				_cpOptionValueService.getCPOptionValue(cpOptionValuesId);
-
-			cpOptionValues.add(cpOptionValue);
+			cpOptionValues.add(
+				_cpOptionValueService.getCPOptionValue(cpOptionValuesId));
 		}
 
 		return cpOptionValues;
@@ -163,11 +157,9 @@ public class ActionHelper {
 			resourceRequest, "rowIds");
 
 		for (long cpSpecificationOptionId : cpSpecificationOptionIds) {
-			CPSpecificationOption cpSpecificationOption =
+			cpSpecificationOptions.add(
 				_cpSpecificationOptionService.getCPSpecificationOption(
-					cpSpecificationOptionId);
-
-			cpSpecificationOptions.add(cpSpecificationOption);
+					cpSpecificationOptionId));
 		}
 
 		return cpSpecificationOptions;

@@ -330,10 +330,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			int nextIterationDateHour, int nextIterationDateMinute)
 		throws PortalException {
 
-		CPSubscriptionType cpSubscriptionType =
-			_cpSubscriptionTypeRegistry.getCPSubscriptionType(subscriptionType);
-
-		validateCPSubscriptionType(cpSubscriptionType);
+		validateCPSubscriptionType(
+			_cpSubscriptionTypeRegistry.getCPSubscriptionType(
+				subscriptionType));
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			commerceSubscriptionEntryPersistence.findByPrimaryKey(

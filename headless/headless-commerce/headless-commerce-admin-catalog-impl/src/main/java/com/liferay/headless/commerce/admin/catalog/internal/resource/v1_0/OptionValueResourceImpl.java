@@ -110,9 +110,8 @@ public class OptionValueResourceImpl extends BaseOptionValueResourceImpl {
 	public OptionValue postOptionIdOptionValue(Long id, OptionValue optionValue)
 		throws Exception {
 
-		CPOption cpOption = _cpOptionService.getCPOption(id);
-
-		return _upsertOptionValue(cpOption, optionValue);
+		return _upsertOptionValue(
+			_cpOptionService.getCPOption(id), optionValue);
 	}
 
 	private List<OptionValue> _toOptionValues(

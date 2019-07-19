@@ -24,7 +24,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -81,10 +80,9 @@ public class CommercePaymentServlet extends HttpServlet {
 				PortalSessionThreadLocal.setHttpSession(httpSession);
 			}
 
-			User user = _portal.getUser(httpServletRequest);
-
 			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user);
+				PermissionCheckerFactoryUtil.create(
+					_portal.getUser(httpServletRequest));
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -115,9 +113,8 @@ public class CommercePaymentServlet extends HttpServlet {
 			}
 
 			if (commercePaymentResult.isOnlineRedirect()) {
-				String portalUrl = _portal.getPortalURL(httpServletRequest);
-
-				URL portalURL = new URL(portalUrl);
+				URL portalURL = new URL(
+					_portal.getPortalURL(httpServletRequest));
 
 				URL redirectUrl = new URL(
 					commercePaymentResult.getRedirectUrl());

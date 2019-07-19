@@ -73,9 +73,8 @@ public class CommerceAccountGroupRelLocalServiceImpl
 
 	@Override
 	public void deleteCommerceAccountGroupRels(String className, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		commerceAccountGroupRelPersistence.removeByC_C(classNameId, classPK);
+		commerceAccountGroupRelPersistence.removeByC_C(
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -92,10 +91,9 @@ public class CommerceAccountGroupRelLocalServiceImpl
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAccountGroupRelPersistence.findByC_C(
-			classNameId, classPK, start, end, orderByComparator);
+			classNameLocalService.getClassNameId(className), classPK, start,
+			end, orderByComparator);
 	}
 
 	@Override
@@ -108,10 +106,8 @@ public class CommerceAccountGroupRelLocalServiceImpl
 	public int getCommerceAccountGroupRelsCount(
 		String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAccountGroupRelPersistence.countByC_C(
-			classNameId, classPK);
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 }

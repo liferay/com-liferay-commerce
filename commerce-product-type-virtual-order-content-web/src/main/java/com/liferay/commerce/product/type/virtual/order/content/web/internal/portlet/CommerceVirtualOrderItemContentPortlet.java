@@ -35,8 +35,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -74,16 +72,13 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CommerceVirtualOrderItemContentDisplayContext
 				commerceVirtualOrderItemContentDisplayContext =
 					new CommerceVirtualOrderItemContentDisplayContext(
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _commerceAccountHelper,
 						_cpDefinitionVirtualSettingService, _cpInstanceHelper,
-						httpServletRequest);
+						_portal.getHttpServletRequest(renderRequest));
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,

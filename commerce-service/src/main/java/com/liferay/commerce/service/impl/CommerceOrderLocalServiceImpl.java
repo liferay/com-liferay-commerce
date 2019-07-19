@@ -1517,10 +1517,9 @@ public class CommerceOrderLocalServiceImpl
 	protected void validateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException {
 
-		int[] availableOrderStatuses = getAvailableOrderStatuses(
-			commerceOrderId);
+		if (!ArrayUtil.contains(
+				getAvailableOrderStatuses(commerceOrderId), orderStatus)) {
 
-		if (!ArrayUtil.contains(availableOrderStatuses, orderStatus)) {
 			throw new CommerceOrderStatusException();
 		}
 	}

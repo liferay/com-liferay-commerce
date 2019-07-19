@@ -56,9 +56,7 @@ public class CommerceDiscountsImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			_importCommerceDiscount(jsonObject, serviceContext);
+			_importCommerceDiscount(jsonArray.getJSONObject(i), serviceContext);
 		}
 	}
 

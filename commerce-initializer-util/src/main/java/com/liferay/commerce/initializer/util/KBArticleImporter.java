@@ -48,9 +48,7 @@ public class KBArticleImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			_addKBArticle(jsonObject, userId, serviceContext);
+			_addKBArticle(jsonArray.getJSONObject(i), userId, serviceContext);
 		}
 	}
 

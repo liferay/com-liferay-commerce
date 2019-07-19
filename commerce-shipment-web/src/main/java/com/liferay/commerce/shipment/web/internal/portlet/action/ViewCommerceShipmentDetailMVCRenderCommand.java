@@ -28,8 +28,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -52,14 +50,11 @@ public class ViewCommerceShipmentDetailMVCRenderCommand
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceShipmentItemDisplayContext commerceShipmentItemDisplayContext =
 			new CommerceShipmentItemDisplayContext(
-				_actionHelper, httpServletRequest, _commerceCountryService,
-				_commerceOrderItemService, _commerceRegionService,
-				_commerceShipmentItemService);
+				_actionHelper, _portal.getHttpServletRequest(renderRequest),
+				_commerceCountryService, _commerceOrderItemService,
+				_commerceRegionService, _commerceShipmentItemService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,

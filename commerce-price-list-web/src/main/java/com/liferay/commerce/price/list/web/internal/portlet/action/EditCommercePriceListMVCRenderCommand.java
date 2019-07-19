@@ -33,8 +33,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -56,16 +54,14 @@ public class EditCommercePriceListMVCRenderCommand implements MVCRenderCommand {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommercePriceListDisplayContext commercePriceListDisplayContext =
 			new CommercePriceListDisplayContext(
 				_commercePriceListActionHelper, _commerceAccountService,
 				_commerceAccountGroupService, _commerceCatalogService,
 				_commerceCurrencyService, _commercePriceListAccountRelService,
 				_commercePriceListCommerceAccountGroupRelService,
-				_commercePriceListService, httpServletRequest, _itemSelector);
+				_commercePriceListService,
+				_portal.getHttpServletRequest(renderRequest), _itemSelector);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commercePriceListDisplayContext);

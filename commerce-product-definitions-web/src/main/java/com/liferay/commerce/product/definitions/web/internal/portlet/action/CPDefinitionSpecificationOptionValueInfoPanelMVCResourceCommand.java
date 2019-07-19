@@ -17,11 +17,8 @@ package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-
-import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -48,14 +45,10 @@ public class CPDefinitionSpecificationOptionValueInfoPanelMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		List<CPDefinitionSpecificationOptionValue>
-			cpDefinitionSpecificationOptionValues =
-				_actionHelper.getCPDefinitionSpecificationOptionValues(
-					resourceRequest);
-
 		resourceRequest.setAttribute(
 			CPWebKeys.CP_DEFINITION_SPECIFICATION_OPTION_VALUES,
-			cpDefinitionSpecificationOptionValues);
+			_actionHelper.getCPDefinitionSpecificationOptionValues(
+				resourceRequest));
 
 		include(
 			resourceRequest, resourceResponse,

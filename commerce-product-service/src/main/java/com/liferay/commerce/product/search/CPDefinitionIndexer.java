@@ -708,19 +708,14 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Override
 	protected void doReindex(CPDefinition cpDefinition) throws Exception {
-		Document document = getDocument(cpDefinition);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpDefinition.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpDefinition.getCompanyId(),
+			getDocument(cpDefinition), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			classPK);
-
-		doReindex(cpDefinition);
+		doReindex(_cpDefinitionLocalService.getCPDefinition(classPK));
 	}
 
 	@Override
@@ -759,9 +754,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPDefinition cpDefinition) -> {
 				try {
-					Document document = getDocument(cpDefinition);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpDefinition));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

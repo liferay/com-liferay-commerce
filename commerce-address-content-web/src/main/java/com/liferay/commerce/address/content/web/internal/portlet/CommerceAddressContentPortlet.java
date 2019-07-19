@@ -35,8 +35,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -74,14 +72,12 @@ public class CommerceAddressContentPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CommerceAddressDisplayContext commerceAddressDisplayContext =
 				new CommerceAddressDisplayContext(
 					_actionHelper, _commerceAccountHelper,
 					_commerceAddressService, _commerceCountryService,
-					_commerceRegionService, httpServletRequest);
+					_commerceRegionService,
+					_portal.getHttpServletRequest(renderRequest));
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, commerceAddressDisplayContext);

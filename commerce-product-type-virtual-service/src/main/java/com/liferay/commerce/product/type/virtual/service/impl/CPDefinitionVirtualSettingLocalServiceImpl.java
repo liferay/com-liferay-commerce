@@ -266,10 +266,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 	public CPDefinitionVirtualSetting fetchCPDefinitionVirtualSetting(
 		String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return cpDefinitionVirtualSettingPersistence.fetchByC_C(
-			classNameId, classPK);
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -277,10 +275,8 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			String className, long classPK)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return cpDefinitionVirtualSettingPersistence.fetchByC_C(
-			classNameId, classPK);
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override

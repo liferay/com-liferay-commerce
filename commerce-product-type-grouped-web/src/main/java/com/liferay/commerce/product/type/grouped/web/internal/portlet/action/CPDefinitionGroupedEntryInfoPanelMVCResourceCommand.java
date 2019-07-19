@@ -51,12 +51,9 @@ public class CPDefinitionGroupedEntryInfoPanelMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		List<CPDefinitionGroupedEntry> cpDefinitionGroupedEntries =
-			getCPDefinitionGroupedEntries(resourceRequest);
-
 		resourceRequest.setAttribute(
 			GroupedCPTypeWebKeys.CP_DEFINITION_GROUPED_ENTRIES,
-			cpDefinitionGroupedEntries);
+			getCPDefinitionGroupedEntries(resourceRequest));
 
 		include(
 			resourceRequest, resourceResponse,
@@ -74,11 +71,9 @@ public class CPDefinitionGroupedEntryInfoPanelMVCResourceCommand
 			resourceRequest, "rowIds");
 
 		for (long cpDefinitionGroupedEntryId : cpDefinitionGroupedEntryIds) {
-			CPDefinitionGroupedEntry cpDefinitionGroupedEntry =
+			cpDefinitionGroupedEntries.add(
 				_cpDefinitionGroupedEntryService.getCPDefinitionGroupedEntry(
-					cpDefinitionGroupedEntryId);
-
-			cpDefinitionGroupedEntries.add(cpDefinitionGroupedEntry);
+					cpDefinitionGroupedEntryId));
 		}
 
 		return cpDefinitionGroupedEntries;

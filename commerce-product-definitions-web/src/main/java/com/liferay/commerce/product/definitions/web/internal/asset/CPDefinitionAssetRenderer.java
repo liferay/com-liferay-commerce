@@ -131,9 +131,7 @@ public class CPDefinitionAssetRenderer
 
 	@Override
 	public String getTitle(Locale locale) {
-		String languageId = LanguageUtil.getLanguageId(locale);
-
-		return _cpDefinition.getName(languageId);
+		return _cpDefinition.getName(LanguageUtil.getLanguageId(locale));
 	}
 
 	@Override
