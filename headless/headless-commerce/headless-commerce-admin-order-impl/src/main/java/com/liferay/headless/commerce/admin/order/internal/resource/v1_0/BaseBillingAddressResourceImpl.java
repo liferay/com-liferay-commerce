@@ -14,15 +14,11 @@
 
 package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
-import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderResource;
+import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
+import com.liferay.headless.commerce.admin.order.resource.v1_0.BillingAddressResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,7 +28,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -40,10 +35,8 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -57,66 +50,32 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseOrderResourceImpl implements OrderResource {
-
-	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Response deleteOrder(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
+public abstract class BaseBillingAddressResourceImpl
+	implements BillingAddressResource {
 
 	@Override
 	@GET
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}")
+	@Path("/orders/{id}/billingAddress/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Order getOrder(
+	@Tags(value = {@Tag(name = "BillingAddress")})
+	public BillingAddress getOrderIdBillingAddress(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return new Order();
+		return new BillingAddress();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}")
+	@Path("/orders/{id}/billingAddress/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Response patchOrder(
+	@Tags(value = {@Tag(name = "BillingAddress")})
+	public Response patchOrderIdBillingAddress(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Order order)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@DELETE
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/orders/by-externalReferenceCode/{externalReferenceCode}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Response deleteOrderByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode)
+			BillingAddress billingAddress)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -131,15 +90,17 @@ public abstract class BaseOrderResourceImpl implements OrderResource {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
 		}
 	)
-	@Path("/orders/by-externalReferenceCode/{externalReferenceCode}")
+	@Path(
+		"/orders/by-externalReferenceCode/{externalReferenceCode}/billingAddress/"
+	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Order getOrderByExternalReferenceCode(
+	@Tags(value = {@Tag(name = "BillingAddress")})
+	public BillingAddress getOrderByExternalReferenceCodeBillingAddress(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
-		return new Order();
+		return new BillingAddress();
 	}
 
 	@Override
@@ -150,56 +111,28 @@ public abstract class BaseOrderResourceImpl implements OrderResource {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
 		}
 	)
-	@Path("/orders/by-externalReferenceCode/{externalReferenceCode}")
+	@Path(
+		"/orders/by-externalReferenceCode/{externalReferenceCode}/billingAddress/"
+	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Response patchOrderByExternalReferenceCode(
+	@Tags(value = {@Tag(name = "BillingAddress")})
+	public Response patchOrderByExternalReferenceCodeBillingAddress(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Order order)
+			BillingAddress billingAddress)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "filter"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
-			@Parameter(in = ParameterIn.QUERY, name = "sort")
-		}
-	)
-	@Path("/orders/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Page<Order> getOrdersPage(
-			@Context Filter filter, @Context Pagination pagination,
-			@Context Sort[] sorts)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/orders/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Order")})
-	public Order postOrder(Order order) throws Exception {
-		return new Order();
 	}
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(Order order, Order existingOrder) {
+	protected void preparePatch(
+		BillingAddress billingAddress, BillingAddress existingBillingAddress) {
 	}
 
 	protected <T, R> List<R> transform(

@@ -14,10 +14,10 @@
 
 package com.liferay.headless.commerce.admin.order.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
-import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -36,40 +36,28 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OrderResource {
 
-	public BillingAddress getOrderByExternalReferenceCodeBillingAddres(
+	public Response deleteOrder(Long id) throws Exception;
+
+	public Order getOrder(Long id) throws Exception;
+
+	public Response patchOrder(Long id, Order order) throws Exception;
+
+	public Response deleteOrderByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
 
-	public Response patchOrderByExternalReferenceCodeBillingAddres(
-			String externalReferenceCode, BillingAddress billingAddress)
+	public Order getOrderByExternalReferenceCode(String externalReferenceCode)
 		throws Exception;
 
-	public ShippingAddress getOrderByExternalReferenceCodeShippingAddres(
-			String externalReferenceCode)
+	public Response patchOrderByExternalReferenceCode(
+			String externalReferenceCode, Order order)
 		throws Exception;
 
-	public Response patchOrderByExternalReferenceCodeShippingAddres(
-			String externalReferenceCode, ShippingAddress shippingAddress)
+	public Page<Order> getOrdersPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
-	public Page<Order> getOrderBySiteIdSite(
-			Long accountId, Long siteId, Pagination pagination)
-		throws Exception;
-
-	public Order postOrderBySiteIdSite(Long siteId, Order order)
-		throws Exception;
-
-	public BillingAddress getOrderBillingAddres(Long id) throws Exception;
-
-	public Response patchOrderBillingAddres(
-			Long id, BillingAddress billingAddress)
-		throws Exception;
-
-	public ShippingAddress getOrderShippingAddres(Long id) throws Exception;
-
-	public Response patchOrderShippingAddres(
-			Long id, ShippingAddress shippingAddress)
-		throws Exception;
+	public Order postOrder(Order order) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

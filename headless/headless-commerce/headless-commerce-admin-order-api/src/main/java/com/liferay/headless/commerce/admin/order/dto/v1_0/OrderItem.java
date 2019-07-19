@@ -28,14 +28,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import javax.annotation.Generated;
-
-import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -46,25 +48,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("OrderItem")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"skuId"})
 @XmlRootElement(name = "OrderItem")
 public class OrderItem {
 
 	@Schema
-	public Long getCommerceOrderId() {
-		return commerceOrderId;
+	public Long getBookedQuantityId() {
+		return bookedQuantityId;
 	}
 
-	public void setCommerceOrderId(Long commerceOrderId) {
-		this.commerceOrderId = commerceOrderId;
+	public void setBookedQuantityId(Long bookedQuantityId) {
+		this.bookedQuantityId = bookedQuantityId;
 	}
 
 	@JsonIgnore
-	public void setCommerceOrderId(
-		UnsafeSupplier<Long, Exception> commerceOrderIdUnsafeSupplier) {
+	public void setBookedQuantityId(
+		UnsafeSupplier<Long, Exception> bookedQuantityIdUnsafeSupplier) {
 
 		try {
-			commerceOrderId = commerceOrderIdUnsafeSupplier.get();
+			bookedQuantityId = bookedQuantityIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -76,7 +77,63 @@ public class OrderItem {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long commerceOrderId;
+	protected Long bookedQuantityId;
+
+	@Schema
+	public Map<String, ?> getCustomFields() {
+		return customFields;
+	}
+
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
+	}
+
+	@JsonIgnore
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+
+		try {
+			customFields = customFieldsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, ?> customFields;
+
+	@Schema
+	public String getDeliveryGroup() {
+		return deliveryGroup;
+	}
+
+	public void setDeliveryGroup(String deliveryGroup) {
+		this.deliveryGroup = deliveryGroup;
+	}
+
+	@JsonIgnore
+	public void setDeliveryGroup(
+		UnsafeSupplier<String, Exception> deliveryGroupUnsafeSupplier) {
+
+		try {
+			deliveryGroup = deliveryGroupUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String deliveryGroup;
 
 	@Schema
 	public BigDecimal getDiscountAmount() {
@@ -105,6 +162,134 @@ public class OrderItem {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected BigDecimal discountAmount;
+
+	@Schema
+	public BigDecimal getDiscountPercentageLevel1() {
+		return discountPercentageLevel1;
+	}
+
+	public void setDiscountPercentageLevel1(
+		BigDecimal discountPercentageLevel1) {
+
+		this.discountPercentageLevel1 = discountPercentageLevel1;
+	}
+
+	@JsonIgnore
+	public void setDiscountPercentageLevel1(
+		UnsafeSupplier<BigDecimal, Exception>
+			discountPercentageLevel1UnsafeSupplier) {
+
+		try {
+			discountPercentageLevel1 =
+				discountPercentageLevel1UnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected BigDecimal discountPercentageLevel1;
+
+	@Schema
+	public BigDecimal getDiscountPercentageLevel2() {
+		return discountPercentageLevel2;
+	}
+
+	public void setDiscountPercentageLevel2(
+		BigDecimal discountPercentageLevel2) {
+
+		this.discountPercentageLevel2 = discountPercentageLevel2;
+	}
+
+	@JsonIgnore
+	public void setDiscountPercentageLevel2(
+		UnsafeSupplier<BigDecimal, Exception>
+			discountPercentageLevel2UnsafeSupplier) {
+
+		try {
+			discountPercentageLevel2 =
+				discountPercentageLevel2UnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected BigDecimal discountPercentageLevel2;
+
+	@Schema
+	public BigDecimal getDiscountPercentageLevel3() {
+		return discountPercentageLevel3;
+	}
+
+	public void setDiscountPercentageLevel3(
+		BigDecimal discountPercentageLevel3) {
+
+		this.discountPercentageLevel3 = discountPercentageLevel3;
+	}
+
+	@JsonIgnore
+	public void setDiscountPercentageLevel3(
+		UnsafeSupplier<BigDecimal, Exception>
+			discountPercentageLevel3UnsafeSupplier) {
+
+		try {
+			discountPercentageLevel3 =
+				discountPercentageLevel3UnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected BigDecimal discountPercentageLevel3;
+
+	@Schema
+	public BigDecimal getDiscountPercentageLevel4() {
+		return discountPercentageLevel4;
+	}
+
+	public void setDiscountPercentageLevel4(
+		BigDecimal discountPercentageLevel4) {
+
+		this.discountPercentageLevel4 = discountPercentageLevel4;
+	}
+
+	@JsonIgnore
+	public void setDiscountPercentageLevel4(
+		UnsafeSupplier<BigDecimal, Exception>
+			discountPercentageLevel4UnsafeSupplier) {
+
+		try {
+			discountPercentageLevel4 =
+				discountPercentageLevel4UnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected BigDecimal discountPercentageLevel4;
 
 	@Schema
 	public String getExternalReferenceCode() {
@@ -217,6 +402,94 @@ public class OrderItem {
 	protected Map<String, String> name;
 
 	@Schema
+	public String getOrderExternalReferenceCode() {
+		return orderExternalReferenceCode;
+	}
+
+	public void setOrderExternalReferenceCode(
+		String orderExternalReferenceCode) {
+
+		this.orderExternalReferenceCode = orderExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setOrderExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			orderExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			orderExternalReferenceCode =
+				orderExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String orderExternalReferenceCode;
+
+	@Schema
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	@JsonIgnore
+	public void setOrderId(
+		UnsafeSupplier<Long, Exception> orderIdUnsafeSupplier) {
+
+		try {
+			orderId = orderIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long orderId;
+
+	@Schema
+	public String getPrintedNote() {
+		return printedNote;
+	}
+
+	public void setPrintedNote(String printedNote) {
+		this.printedNote = printedNote;
+	}
+
+	@JsonIgnore
+	public void setPrintedNote(
+		UnsafeSupplier<String, Exception> printedNoteUnsafeSupplier) {
+
+		try {
+			printedNote = printedNoteUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String printedNote;
+
+	@Schema
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -243,6 +516,34 @@ public class OrderItem {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Integer quantity;
+
+	@Schema
+	public Date getRequestedDeliveryDate() {
+		return requestedDeliveryDate;
+	}
+
+	public void setRequestedDeliveryDate(Date requestedDeliveryDate) {
+		this.requestedDeliveryDate = requestedDeliveryDate;
+	}
+
+	@JsonIgnore
+	public void setRequestedDeliveryDate(
+		UnsafeSupplier<Date, Exception> requestedDeliveryDateUnsafeSupplier) {
+
+		try {
+			requestedDeliveryDate = requestedDeliveryDateUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Date requestedDeliveryDate;
 
 	@Schema
 	public Integer getShippedQuantity() {
@@ -273,6 +574,63 @@ public class OrderItem {
 	protected Integer shippedQuantity;
 
 	@Schema
+	public ShippingAddress getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	@JsonIgnore
+	public void setShippingAddress(
+		UnsafeSupplier<ShippingAddress, Exception>
+			shippingAddressUnsafeSupplier) {
+
+		try {
+			shippingAddress = shippingAddressUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected ShippingAddress shippingAddress;
+
+	@Schema
+	public Long getShippingAddressId() {
+		return shippingAddressId;
+	}
+
+	public void setShippingAddressId(Long shippingAddressId) {
+		this.shippingAddressId = shippingAddressId;
+	}
+
+	@JsonIgnore
+	public void setShippingAddressId(
+		UnsafeSupplier<Long, Exception> shippingAddressIdUnsafeSupplier) {
+
+		try {
+			shippingAddressId = shippingAddressIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long shippingAddressId;
+
+	@Schema
 	public String getSku() {
 		return sku;
 	}
@@ -299,6 +657,36 @@ public class OrderItem {
 	protected String sku;
 
 	@Schema
+	public String getSkuExternalReferenceCode() {
+		return skuExternalReferenceCode;
+	}
+
+	public void setSkuExternalReferenceCode(String skuExternalReferenceCode) {
+		this.skuExternalReferenceCode = skuExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setSkuExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			skuExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			skuExternalReferenceCode =
+				skuExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String skuExternalReferenceCode;
+
+	@Schema
 	public Long getSkuId() {
 		return skuId;
 	}
@@ -322,7 +710,6 @@ public class OrderItem {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Long skuId;
 
 	@Schema
@@ -408,14 +795,41 @@ public class OrderItem {
 
 		sb.append("{");
 
-		if (commerceOrderId != null) {
+		DateFormat liferayToJSONDateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+		if (bookedQuantityId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceOrderId\": ");
+			sb.append("\"bookedQuantityId\": ");
 
-			sb.append(commerceOrderId);
+			sb.append(bookedQuantityId);
+		}
+
+		if (customFields != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"customFields\": ");
+
+			sb.append(_toJSON(customFields));
+		}
+
+		if (deliveryGroup != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"deliveryGroup\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(deliveryGroup));
+
+			sb.append("\"");
 		}
 
 		if (discountAmount != null) {
@@ -426,6 +840,46 @@ public class OrderItem {
 			sb.append("\"discountAmount\": ");
 
 			sb.append(discountAmount);
+		}
+
+		if (discountPercentageLevel1 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"discountPercentageLevel1\": ");
+
+			sb.append(discountPercentageLevel1);
+		}
+
+		if (discountPercentageLevel2 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"discountPercentageLevel2\": ");
+
+			sb.append(discountPercentageLevel2);
+		}
+
+		if (discountPercentageLevel3 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"discountPercentageLevel3\": ");
+
+			sb.append(discountPercentageLevel3);
+		}
+
+		if (discountPercentageLevel4 != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"discountPercentageLevel4\": ");
+
+			sb.append(discountPercentageLevel4);
 		}
 
 		if (externalReferenceCode != null) {
@@ -472,6 +926,44 @@ public class OrderItem {
 			sb.append(_toJSON(name));
 		}
 
+		if (orderExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"orderExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(orderExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (orderId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"orderId\": ");
+
+			sb.append(orderId);
+		}
+
+		if (printedNote != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"printedNote\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(printedNote));
+
+			sb.append("\"");
+		}
+
 		if (quantity != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -480,6 +972,20 @@ public class OrderItem {
 			sb.append("\"quantity\": ");
 
 			sb.append(quantity);
+		}
+
+		if (requestedDeliveryDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"requestedDeliveryDate\": ");
+
+			sb.append("\"");
+
+			sb.append(liferayToJSONDateFormat.format(requestedDeliveryDate));
+
+			sb.append("\"");
 		}
 
 		if (shippedQuantity != null) {
@@ -492,6 +998,26 @@ public class OrderItem {
 			sb.append(shippedQuantity);
 		}
 
+		if (shippingAddress != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"shippingAddress\": ");
+
+			sb.append(String.valueOf(shippingAddress));
+		}
+
+		if (shippingAddressId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"shippingAddressId\": ");
+
+			sb.append(shippingAddressId);
+		}
+
 		if (sku != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -502,6 +1028,20 @@ public class OrderItem {
 			sb.append("\"");
 
 			sb.append(_escape(sku));
+
+			sb.append("\"");
+		}
+
+		if (skuExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"skuExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(skuExternalReferenceCode));
 
 			sb.append("\"");
 		}
