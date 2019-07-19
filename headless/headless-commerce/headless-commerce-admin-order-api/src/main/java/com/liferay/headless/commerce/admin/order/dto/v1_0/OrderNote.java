@@ -33,8 +33,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,7 +42,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("OrderNote")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"commerceOrderId"})
 @XmlRootElement(name = "OrderNote")
 public class OrderNote {
 
@@ -75,35 +72,6 @@ public class OrderNote {
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String author;
-
-	@Schema
-	public Long getCommerceOrderId() {
-		return commerceOrderId;
-	}
-
-	public void setCommerceOrderId(Long commerceOrderId) {
-		this.commerceOrderId = commerceOrderId;
-	}
-
-	@JsonIgnore
-	public void setCommerceOrderId(
-		UnsafeSupplier<Long, Exception> commerceOrderIdUnsafeSupplier) {
-
-		try {
-			commerceOrderId = commerceOrderIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commerceOrderId;
 
 	@Schema
 	public String getContent() {
@@ -188,6 +156,66 @@ public class OrderNote {
 	protected Long id;
 
 	@Schema
+	public String getOrderExternalReferenceCode() {
+		return orderExternalReferenceCode;
+	}
+
+	public void setOrderExternalReferenceCode(
+		String orderExternalReferenceCode) {
+
+		this.orderExternalReferenceCode = orderExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setOrderExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			orderExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			orderExternalReferenceCode =
+				orderExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String orderExternalReferenceCode;
+
+	@Schema
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	@JsonIgnore
+	public void setOrderId(
+		UnsafeSupplier<Long, Exception> orderIdUnsafeSupplier) {
+
+		try {
+			orderId = orderIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long orderId;
+
+	@Schema
 	public Boolean getRestricted() {
 		return restricted;
 	}
@@ -256,16 +284,6 @@ public class OrderNote {
 			sb.append("\"");
 		}
 
-		if (commerceOrderId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"commerceOrderId\": ");
-
-			sb.append(commerceOrderId);
-		}
-
 		if (content != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -302,6 +320,30 @@ public class OrderNote {
 			sb.append("\"id\": ");
 
 			sb.append(id);
+		}
+
+		if (orderExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"orderExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(orderExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
+		if (orderId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"orderId\": ");
+
+			sb.append(orderId);
 		}
 
 		if (restricted != null) {

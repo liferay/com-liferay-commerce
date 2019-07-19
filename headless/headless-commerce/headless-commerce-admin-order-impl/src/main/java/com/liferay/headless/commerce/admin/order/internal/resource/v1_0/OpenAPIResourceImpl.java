@@ -76,6 +76,10 @@ public class OpenAPIResourceImpl {
 
 	private final Set<Class<?>> _resourceClasses = new HashSet<Class<?>>() {
 		{
+			add(BillingAddressResourceImpl.class);
+
+			add(ShippingAddressResourceImpl.class);
+
 			add(OrderResourceImpl.class);
 
 			add(OrderItemResourceImpl.class);

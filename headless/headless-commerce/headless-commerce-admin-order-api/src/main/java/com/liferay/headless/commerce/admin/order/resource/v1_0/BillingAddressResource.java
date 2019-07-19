@@ -14,10 +14,8 @@
 
 package com.liferay.headless.commerce.admin.order.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
+import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -32,40 +30,20 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface OrderItemResource {
+public interface BillingAddressResource {
 
-	public Response deleteOrderItem(Long id) throws Exception;
+	public BillingAddress getOrderIdBillingAddress(Long id) throws Exception;
 
-	public OrderItem getOrderItem(Long id) throws Exception;
-
-	public Response patchOrderItem(Long id, OrderItem orderItem)
+	public Response patchOrderIdBillingAddress(
+			Long id, BillingAddress billingAddress)
 		throws Exception;
 
-	public Response deleteOrderItemByExternalReferenceCode(
+	public BillingAddress getOrderByExternalReferenceCodeBillingAddress(
 			String externalReferenceCode)
 		throws Exception;
 
-	public OrderItem getOrderItemByExternalReferenceCode(
-			String externalReferenceCode)
-		throws Exception;
-
-	public Response patchOrderItemByExternalReferenceCode(
-			String externalReferenceCode, OrderItem orderItem)
-		throws Exception;
-
-	public Page<OrderItem> getOrderIdOrderItemsPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public OrderItem postOrderIdOrderItem(Long id, OrderItem orderItem)
-		throws Exception;
-
-	public Page<OrderItem> getOrderByExternalReferenceCodeOrderItemsPage(
-			String externalReferenceCode, Pagination pagination)
-		throws Exception;
-
-	public OrderItem postOrderByExternalReferenceCodeOrderItem(
-			String externalReferenceCode, OrderItem orderItem)
+	public Response patchOrderByExternalReferenceCodeBillingAddress(
+			String externalReferenceCode, BillingAddress billingAddress)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -19,11 +19,15 @@ import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderNote;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
+import com.liferay.headless.commerce.admin.order.resource.v1_0.BillingAddressResource;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderItemResource;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderNoteResource;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderResource;
+import com.liferay.headless.commerce.admin.order.resource.v1_0.ShippingAddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.vulcan.pagination.Page;
@@ -45,6 +49,14 @@ import org.osgi.service.component.ComponentServiceObjects;
  */
 @Generated("")
 public class Query {
+
+	public static void setBillingAddressResourceComponentServiceObjects(
+		ComponentServiceObjects<BillingAddressResource>
+			billingAddressResourceComponentServiceObjects) {
+
+		_billingAddressResourceComponentServiceObjects =
+			billingAddressResourceComponentServiceObjects;
+	}
 
 	public static void setOrderResourceComponentServiceObjects(
 		ComponentServiceObjects<OrderResource>
@@ -70,49 +82,104 @@ public class Query {
 			orderNoteResourceComponentServiceObjects;
 	}
 
+	public static void setShippingAddressResourceComponentServiceObjects(
+		ComponentServiceObjects<ShippingAddressResource>
+			shippingAddressResourceComponentServiceObjects) {
+
+		_shippingAddressResourceComponentServiceObjects =
+			shippingAddressResourceComponentServiceObjects;
+	}
+
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public BillingAddress getOrderByExternalReferenceCodeBillingAddres(
+	public BillingAddress getOrderIdBillingAddress(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_billingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			billingAddressResource ->
+				billingAddressResource.getOrderIdBillingAddress(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public BillingAddress getOrderByExternalReferenceCodeBillingAddress(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_billingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			billingAddressResource ->
+				billingAddressResource.
+					getOrderByExternalReferenceCodeBillingAddress(
+						externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public ShippingAddress getOrderIdShippingAddress(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_shippingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			shippingAddressResource ->
+				shippingAddressResource.getOrderIdShippingAddress(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public ShippingAddress getOrderByExternalReferenceCodeShippingAddress(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_shippingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			shippingAddressResource ->
+				shippingAddressResource.
+					getOrderByExternalReferenceCodeShippingAddress(
+						externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Order getOrder(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_orderResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			orderResource -> orderResource.getOrder(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Order getOrderByExternalReferenceCode(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_orderResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderResource ->
-				orderResource.getOrderByExternalReferenceCodeBillingAddres(
-					externalReferenceCode));
+			orderResource -> orderResource.getOrderByExternalReferenceCode(
+				externalReferenceCode));
 	}
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public ShippingAddress getOrderByExternalReferenceCodeShippingAddres(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderResource ->
-				orderResource.getOrderByExternalReferenceCodeShippingAddres(
-					externalReferenceCode));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<Order> getOrderBySiteIdSite(
-			@GraphQLName("accountId") Long accountId,
-			@GraphQLName("siteId") Long siteId,
+	public Collection<Order> getOrdersPage(
+			@GraphQLName("filter") Filter filter,
 			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+			@GraphQLName("page") int page, @GraphQLName("sorts") Sort[] sorts)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_orderResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			orderResource -> {
-				Page paginationPage = orderResource.getOrderBySiteIdSite(
-					accountId, siteId, Pagination.of(pageSize, page));
+				Page paginationPage = orderResource.getOrdersPage(
+					filter, Pagination.of(pageSize, page), sorts);
 
 				return paginationPage.getItems();
 			});
@@ -120,24 +187,11 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public BillingAddress getOrderBillingAddres(@GraphQLName("id") Long id)
-		throws Exception {
-
+	public OrderItem getOrderItem(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
-			_orderResourceComponentServiceObjects,
+			_orderItemResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderResource -> orderResource.getOrderBillingAddres(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public ShippingAddress getOrderShippingAddres(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderResource -> orderResource.getOrderShippingAddres(id));
+			orderItemResource -> orderItemResource.getOrderItem(id));
 	}
 
 	@GraphQLField
@@ -156,11 +210,21 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public OrderItem getOrderItem(@GraphQLName("id") Long id) throws Exception {
+	public Collection<OrderItem> getOrderIdOrderItemsPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
 		return _applyComponentServiceObjects(
 			_orderItemResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderItemResource -> orderItemResource.getOrderItem(id));
+			orderItemResource -> {
+				Page paginationPage =
+					orderItemResource.getOrderIdOrderItemsPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
@@ -187,21 +251,11 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<OrderItem> getOrderIdOrderItemsPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
+	public OrderNote getOrderNote(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
-			_orderItemResourceComponentServiceObjects,
+			_orderNoteResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderItemResource -> {
-				Page paginationPage =
-					orderItemResource.getOrderIdOrderItemsPage(
-						id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
+			orderNoteResource -> orderNoteResource.getOrderNote(id));
 	}
 
 	@GraphQLField
@@ -220,11 +274,21 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public OrderNote getOrderNote(@GraphQLName("id") Long id) throws Exception {
+	public Collection<OrderNote> getOrderIdOrderNotesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
 		return _applyComponentServiceObjects(
 			_orderNoteResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderNoteResource -> orderNoteResource.getOrderNote(id));
+			orderNoteResource -> {
+				Page paginationPage =
+					orderNoteResource.getOrderIdOrderNotesPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
@@ -249,25 +313,6 @@ public class Query {
 			});
 	}
 
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<OrderNote> getOrderIdOrderNotesPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderNoteResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderNoteResource -> {
-				Page paginationPage =
-					orderNoteResource.getOrderIdOrderNotesPage(
-						id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
 			_applyComponentServiceObjects(
 				ComponentServiceObjects<T> componentServiceObjects,
@@ -285,6 +330,15 @@ public class Query {
 		finally {
 			componentServiceObjects.ungetService(resource);
 		}
+	}
+
+	private void _populateResourceContext(
+			BillingAddressResource billingAddressResource)
+		throws Exception {
+
+		billingAddressResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private void _populateResourceContext(OrderResource orderResource)
@@ -311,11 +365,24 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			ShippingAddressResource shippingAddressResource)
+		throws Exception {
+
+		shippingAddressResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private static ComponentServiceObjects<BillingAddressResource>
+		_billingAddressResourceComponentServiceObjects;
 	private static ComponentServiceObjects<OrderResource>
 		_orderResourceComponentServiceObjects;
 	private static ComponentServiceObjects<OrderItemResource>
 		_orderItemResourceComponentServiceObjects;
 	private static ComponentServiceObjects<OrderNoteResource>
 		_orderNoteResourceComponentServiceObjects;
+	private static ComponentServiceObjects<ShippingAddressResource>
+		_shippingAddressResourceComponentServiceObjects;
 
 }
