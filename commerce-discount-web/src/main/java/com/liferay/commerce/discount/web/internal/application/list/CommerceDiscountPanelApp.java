@@ -16,7 +16,7 @@ package com.liferay.commerce.discount.web.internal.application.list;
 
 import com.liferay.application.list.BasePanelApp;
 import com.liferay.application.list.PanelApp;
-import com.liferay.commerce.application.list.constants.CommercePanelCategoryKeys;
+import com.liferay.commerce.constants.CommercePanelCategoryKeys;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.portal.kernel.model.Portlet;
 

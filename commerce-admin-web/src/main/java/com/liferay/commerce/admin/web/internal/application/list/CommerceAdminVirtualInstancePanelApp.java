@@ -20,7 +20,7 @@ import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.admin.web.internal.util.CommerceAdminModuleRegistry;
-import com.liferay.commerce.application.list.constants.CommercePanelCategoryKeys;
+import com.liferay.commerce.constants.CommercePanelCategoryKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Portlet;

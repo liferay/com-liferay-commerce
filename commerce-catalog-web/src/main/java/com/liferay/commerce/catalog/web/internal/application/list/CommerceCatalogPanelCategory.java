@@ -17,7 +17,7 @@ package com.liferay.commerce.catalog.web.internal.application.list;
 import com.liferay.application.list.BasePanelCategory;
 import com.liferay.application.list.PanelCategory;
 import com.liferay.application.list.constants.PanelCategoryKeys;
-import com.liferay.commerce.application.list.constants.CommercePanelCategoryKeys;
+import com.liferay.commerce.constants.CommercePanelCategoryKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
