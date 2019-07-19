@@ -30,13 +30,13 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceShipmentItem;
+import com.liferay.commerce.order.content.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.content.web.internal.frontend.OrderFilterImpl;
 import com.liferay.commerce.order.content.web.internal.portlet.configuration.CommerceOrderContentPortletInstanceConfiguration;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceAddressService;
@@ -107,7 +107,7 @@ public class CommerceOrderContentDisplayContext {
 		_modelResourcePermission = modelResourcePermission;
 		_portletResourcePermission = portletResourcePermission;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_cpRequestHelper = new CommerceOrderRequestHelper(httpServletRequest);
 
 		PortletDisplay portletDisplay = _cpRequestHelper.getPortletDisplay();
 
@@ -493,7 +493,7 @@ public class CommerceOrderContentDisplayContext {
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommerceShipmentItemService _commerceShipmentItemService;
-	private final CPRequestHelper _cpRequestHelper;
+	private final CommerceOrderRequestHelper _cpRequestHelper;
 	private long _displayStyleGroupId;
 	private final HttpServletRequest _httpServletRequest;
 	private final ModelResourcePermission<CommerceOrder>

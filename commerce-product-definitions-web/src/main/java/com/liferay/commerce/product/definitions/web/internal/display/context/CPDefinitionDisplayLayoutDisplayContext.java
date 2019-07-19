@@ -14,9 +14,9 @@
 
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.internal.admin.ProductDisplayLayoutsCommerceAdminModule;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.item.selector.criterion.CPDefinitionItemSelectorCriterion;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDisplayLayout;
@@ -93,7 +93,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 		}
 
 		long cpDisplayLayoutId = ParamUtil.getLong(
-			cpRequestHelper.getRequest(), "cpDisplayLayoutId");
+			requestHelper.getRequest(), "cpDisplayLayoutId");
 
 		_cpDisplayLayout = _cpDisplayLayoutService.fetchCPDisplayLayout(
 			cpDisplayLayoutId);
@@ -104,7 +104,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 	public String getDisplayPageItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		LayoutItemSelectorCriterion layoutItemSelectorCriterion =
 			new LayoutItemSelectorCriterion();
@@ -173,7 +173,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 		PortletURL portletURL = super.getPortletURL();
 
 		String commerceAdminModuleKey = ParamUtil.getString(
-			cpRequestHelper.getRequest(), "commerceAdminModuleKey",
+			requestHelper.getRequest(), "commerceAdminModuleKey",
 			ProductDisplayLayoutsCommerceAdminModule.KEY);
 
 		portletURL.setParameter(
@@ -185,7 +185,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 	public String getProductItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		CPDefinitionItemSelectorCriterion cpDefinitionItemSelectorCriterion =
 			new CPDefinitionItemSelectorCriterion();
@@ -245,9 +245,8 @@ public class CPDefinitionDisplayLayoutDisplayContext
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(cpRequestHelper.getCompanyId());
-		searchContext.setGroupIds(
-			new long[] {cpRequestHelper.getScopeGroupId()});
+		searchContext.setCompanyId(requestHelper.getCompanyId());
+		searchContext.setGroupIds(new long[] {requestHelper.getScopeGroupId()});
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
 
@@ -294,7 +293,7 @@ public class CPDefinitionDisplayLayoutDisplayContext
 	private long[] _getCatalogGroupIds() {
 		List<CommerceCatalog> commerceCatalogs =
 			_commerceCatalogService.getCommerceCatalogs(
-				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				requestHelper.getCompanyId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
 		Stream<CommerceCatalog> stream = commerceCatalogs.stream();

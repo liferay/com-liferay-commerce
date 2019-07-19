@@ -63,7 +63,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 
 	public long getCommerceCountryId() {
 		return ParamUtil.getLong(
-			cpRequestHelper.getRenderRequest(), "commerceCountryId", -1);
+			requestHelper.getRenderRequest(), "commerceCountryId", -1);
 	}
 
 	public List<ManagementBarFilterItem> getManagementBarFilterItems()
@@ -71,7 +71,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryService.getWarehouseCommerceCountries(
-				cpRequestHelper.getCompanyId(), false);
+				requestHelper.getCompanyId(), false);
 
 		List<ManagementBarFilterItem> managementBarFilterItems =
 			new ArrayList<>(commerceCountries.size() + 2);
@@ -83,7 +83,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 			managementBarFilterItems.add(
 				getManagementBarFilterItem(
 					commerceCountry.getCommerceCountryId(),
-					commerceCountry.getName(cpRequestHelper.getLocale())));
+					commerceCountry.getName(requestHelper.getLocale())));
 		}
 
 		return managementBarFilterItems;
@@ -121,7 +121,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 			commerceCountry = _commerceCountryService.getCommerceCountry(
 				commerceCountryId);
 
-			Locale locale = cpRequestHelper.getLocale();
+			Locale locale = requestHelper.getLocale();
 
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 				"content.Language", locale, getClass());
@@ -132,7 +132,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 		}
 
 		searchContainer = new SearchContainer<>(
-			cpRequestHelper.getRenderRequest(), getPortletURL(), null,
+			requestHelper.getRenderRequest(), getPortletURL(), null,
 			emptyResultsMessage);
 
 		String orderByCol = getOrderByCol();
@@ -147,7 +147,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(orderByType);
 		searchContainer.setRowChecker(
 			new CommerceInventoryWarehouseChecker(
-				cpRequestHelper.getRenderResponse(),
+				requestHelper.getRenderResponse(),
 				getCheckedCommerceInventoryWarehouseIds(),
 				getDisabledCommerceInventoryWarehouseIds()));
 		searchContainer.setSearch(_search);
@@ -159,13 +159,13 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 			total =
 				_commerceInventoryWarehouseService.
 					searchCommerceInventoryWarehousesCount(
-						cpRequestHelper.getCompanyId(), true,
+						requestHelper.getCompanyId(), true,
 						commerceCountry.getTwoLettersISOCode(), getKeywords());
 
 			results =
 				_commerceInventoryWarehouseService.
 					searchCommerceInventoryWarehouses(
-						cpRequestHelper.getCompanyId(), true,
+						requestHelper.getCompanyId(), true,
 						commerceCountry.getTwoLettersISOCode(), getKeywords(),
 						searchContainer.getStart(), searchContainer.getEnd(),
 						CommerceUtil.getCommerceInventoryWarehouseSort(
@@ -175,13 +175,13 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 			total =
 				_commerceInventoryWarehouseService.
 					getCommerceInventoryWarehousesCount(
-						cpRequestHelper.getCompanyId(), true,
+						requestHelper.getCompanyId(), true,
 						commerceCountry.getTwoLettersISOCode());
 
 			results =
 				_commerceInventoryWarehouseService.
 					getCommerceInventoryWarehouses(
-						cpRequestHelper.getCompanyId(), true,
+						requestHelper.getCompanyId(), true,
 						commerceCountry.getTwoLettersISOCode(),
 						searchContainer.getStart(), searchContainer.getEnd(),
 						orderByComparator);
@@ -195,13 +195,13 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 
 	protected long[] getCheckedCommerceInventoryWarehouseIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(),
+			requestHelper.getRenderRequest(),
 			"checkedCommerceInventoryWarehouseIds");
 	}
 
 	protected long[] getDisabledCommerceInventoryWarehouseIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(),
+			requestHelper.getRenderRequest(),
 			"disabledCommerceInventoryWarehouseIds");
 	}
 
@@ -216,7 +216,7 @@ public class CommerceInventoryWarehouseItemSelectorViewDisplayContext
 		}
 
 		PortletURL portletURL = PortletURLUtil.clone(
-			getPortletURL(), cpRequestHelper.getRenderResponse());
+			getPortletURL(), requestHelper.getRenderResponse());
 
 		portletURL.setParameter(
 			"commerceCountryId", String.valueOf(commerceCountryId));

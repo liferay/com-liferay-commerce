@@ -16,7 +16,7 @@ package com.liferay.commerce.shipment.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.model.CommerceShipment;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.shipment.web.internal.display.context.util.CommerceShipmentRequestHelper;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
@@ -50,10 +50,10 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CommerceShipmentRequestHelper(httpServletRequest);
 
-		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
-		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+		liferayPortletRequest = requestHelper.getLiferayPortletRequest();
+		liferayPortletResponse = requestHelper.getLiferayPortletResponse();
 
 		_portalPreferenceNamespace = portalPreferenceNamespace;
 
@@ -67,7 +67,7 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 		}
 
 		_commerceShipment = actionHelper.getCommerceShipment(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _commerceShipment;
 	}
@@ -214,7 +214,7 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 
 	public boolean hasManageCommerceShipmentsPermission() {
 		return PortalPermissionUtil.contains(
-			cpRequestHelper.getPermissionChecker(),
+			requestHelper.getPermissionChecker(),
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 	}
 
@@ -257,11 +257,11 @@ public abstract class BaseCommerceShipmentDisplayContext<T> {
 	}
 
 	protected final ActionHelper actionHelper;
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final CommerceShipmentRequestHelper requestHelper;
 	protected SearchContainer<T> searchContainer;
 
 	private CommerceShipment _commerceShipment;

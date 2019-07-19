@@ -15,8 +15,8 @@
 package com.liferay.commerce.media.internal.display.context;
 
 import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
+import com.liferay.commerce.media.internal.display.context.util.CommerceMediaRequestHelper;
 import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -51,7 +51,8 @@ public class CommerceMediaDefaultImageDisplayContext {
 		_itemSelector = itemSelector;
 		_httpServletRequest = httpServletRequest;
 
-		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
+		_commerceMediaRequestHelper = new CommerceMediaRequestHelper(
+			_httpServletRequest);
 	}
 
 	public FileEntry getDefaultFileEntry() throws PortalException {
@@ -65,7 +66,7 @@ public class CommerceMediaDefaultImageDisplayContext {
 	}
 
 	public long getDefaultFileEntryId() throws PortalException {
-		Company company = _cpRequestHelper.getCompany();
+		Company company = _commerceMediaRequestHelper.getCompany();
 
 		CommerceMediaDefaultImageConfiguration
 			commerceMediaDefaultImageConfiguration =
@@ -83,7 +84,7 @@ public class CommerceMediaDefaultImageDisplayContext {
 	public String getImageItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				_cpRequestHelper.getRenderRequest());
+				_commerceMediaRequestHelper.getRenderRequest());
 
 		ImageItemSelectorCriterion imageItemSelectorCriterion =
 			new ImageItemSelectorCriterion();
@@ -104,8 +105,8 @@ public class CommerceMediaDefaultImageDisplayContext {
 	}
 
 	private final AttachmentsConfiguration _attachmentsConfiguration;
+	private final CommerceMediaRequestHelper _commerceMediaRequestHelper;
 	private final ConfigurationProvider _configurationProvider;
-	private final CPRequestHelper _cpRequestHelper;
 	private final DLAppService _dlAppService;
 	private final HttpServletRequest _httpServletRequest;
 	private final ItemSelector _itemSelector;

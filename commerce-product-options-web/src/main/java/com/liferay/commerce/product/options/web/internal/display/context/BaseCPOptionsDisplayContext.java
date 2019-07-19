@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.options.web.internal.display.context;
 
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.options.web.internal.display.context.util.CPOptionsRequestHelper;
 import com.liferay.commerce.product.options.web.internal.portlet.action.ActionHelper;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
@@ -49,10 +49,10 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CPOptionsRequestHelper(httpServletRequest);
 
-		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
-		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+		liferayPortletRequest = requestHelper.getLiferayPortletRequest();
+		liferayPortletResponse = requestHelper.getLiferayPortletResponse();
 
 		_defaultOrderByCol = "title";
 		_defaultOrderByType = "asc";
@@ -230,11 +230,11 @@ public abstract class BaseCPOptionsDisplayContext<T> {
 	}
 
 	protected final ActionHelper actionHelper;
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final CPOptionsRequestHelper requestHelper;
 	protected SearchContainer<T> searchContainer;
 
 	private String _defaultOrderByCol;

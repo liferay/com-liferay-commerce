@@ -15,10 +15,10 @@
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
 import com.liferay.commerce.product.constants.CPOptionCategoryConstants;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.item.selector.criterion.CPSpecificationOptionItemSelectorCriterion;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPOptionCategory;
@@ -85,7 +85,7 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 
 		_cpDefinitionSpecificationOptionValue =
 			actionHelper.getCPDefinitionSpecificationOptionValue(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		return _cpDefinitionSpecificationOptionValue;
 	}
@@ -111,7 +111,7 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 		BaseModelSearchResult<CPOptionCategory>
 			cpOptionCategoryBaseModelSearchResult =
 				_cpOptionCategoryService.searchCPOptionCategories(
-					cpRequestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
+					requestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null);
 
 		return cpOptionCategoryBaseModelSearchResult.getBaseModels();
@@ -154,7 +154,7 @@ public class CPDefinitionSpecificationOptionValueDisplayContext
 	public String getItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		CPSpecificationOptionItemSelectorCriterion
 			cpSpecificationOptionItemSelectorCriterion =

@@ -18,13 +18,13 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
+import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionRequestHelper;
 import com.liferay.commerce.subscription.web.internal.subscription.util.CommerceSubscriptionEntryPortletUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItemList;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
@@ -77,7 +77,8 @@ public class CommerceSubscriptionEntryDisplayContext {
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
 		_httpServletRequest = httpServletRequest;
 
-		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
+		_cpRequestHelper = new CommerceSubscriptionRequestHelper(
+			_httpServletRequest);
 
 		_themeDisplay = _cpRequestHelper.getThemeDisplay();
 
@@ -417,7 +418,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final ConfigurationProvider _configurationProvider;
-	private final CPRequestHelper _cpRequestHelper;
+	private final CommerceSubscriptionRequestHelper _cpRequestHelper;
 	private final CPSubscriptionTypeJSPContributorRegistry
 		_cpSubscriptionTypeJSPContributorRegistry;
 	private final CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;

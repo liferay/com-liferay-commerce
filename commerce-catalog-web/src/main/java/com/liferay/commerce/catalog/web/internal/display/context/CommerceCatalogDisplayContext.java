@@ -105,7 +105,7 @@ public class CommerceCatalogDisplayContext
 		throws PortalException {
 
 		return _commerceCurrencyService.getCommerceCurrencies(
-			cpRequestHelper.getCompanyId(), true, QueryUtil.ALL_POS,
+			requestHelper.getCompanyId(), true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 

@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.asset.categories.web.internal.display.context;
 
 import com.liferay.commerce.product.configuration.AttachmentsConfiguration;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -58,7 +58,7 @@ public class CategoryCPAttachmentFileEntriesDisplayContext
 		}
 
 		_cpAttachmentFileEntry = actionHelper.getCPAttachmentFileEntry(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpAttachmentFileEntry;
 	}
@@ -74,7 +74,7 @@ public class CategoryCPAttachmentFileEntriesDisplayContext
 	public String getItemSelectorUrl() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		ImageItemSelectorCriterion imageItemSelectorCriterion =
 			new ImageItemSelectorCriterion();

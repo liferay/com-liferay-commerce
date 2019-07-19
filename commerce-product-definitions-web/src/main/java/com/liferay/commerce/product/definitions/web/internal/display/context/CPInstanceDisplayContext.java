@@ -15,10 +15,10 @@
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -100,7 +100,7 @@ public class CPInstanceDisplayContext
 		throws PortalException {
 
 		return commercePriceFormatter.format(
-			companyId, price, cpRequestHelper.getLocale());
+			companyId, price, requestHelper.getLocale());
 	}
 
 	public List<CPDefinitionOptionRel> getCPDefinitionOptionRels()
@@ -147,7 +147,7 @@ public class CPInstanceDisplayContext
 		}
 
 		_cpInstance = actionHelper.getCPInstance(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpInstance;
 	}

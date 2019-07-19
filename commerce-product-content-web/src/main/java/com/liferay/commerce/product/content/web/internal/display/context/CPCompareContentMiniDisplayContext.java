@@ -24,8 +24,8 @@ import com.liferay.commerce.product.content.render.list.CPContentListRendererReg
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
 import com.liferay.commerce.product.content.web.internal.configuration.CPCompareContentMiniPortletInstanceConfiguration;
+import com.liferay.commerce.product.content.web.internal.display.context.util.CPContentRequestHelper;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPCompareUtil;
@@ -66,7 +66,7 @@ public class CPCompareContentMiniDisplayContext {
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpTypeServicesTracker = cpTypeServicesTracker;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_cpRequestHelper = new CPContentRequestHelper(httpServletRequest);
 
 		ThemeDisplay themeDisplay = _cpRequestHelper.getThemeDisplay();
 
@@ -247,7 +247,7 @@ public class CPCompareContentMiniDisplayContext {
 	private final CPContentListRendererRegistry _cpContentListRendererRegistry;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final List<Long> _cpDefinitionIds;
-	private final CPRequestHelper _cpRequestHelper;
+	private final CPContentRequestHelper _cpRequestHelper;
 	private final CPTypeServicesTracker _cpTypeServicesTracker;
 
 }

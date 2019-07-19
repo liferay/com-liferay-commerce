@@ -98,7 +98,7 @@ public class CommerceShipmentDisplayContext
 
 		_commerceInventoryWarehouses =
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
-				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				requestHelper.getCompanyId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
 		return _commerceInventoryWarehouses;
@@ -149,7 +149,7 @@ public class CommerceShipmentDisplayContext
 		throws PortalException {
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			httpServletRequest, CommercePortletKeys.COMMERCE_ORDER,
+			requestHelper.getRequest(), CommercePortletKeys.COMMERCE_ORDER,
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
@@ -161,13 +161,13 @@ public class CommerceShipmentDisplayContext
 
 	public String getCommerceShipmentStatusLabel(int status) {
 		return LanguageUtil.get(
-			cpRequestHelper.getLocale(),
+			requestHelper.getLocale(),
 			CommerceShipmentConstants.getShipmentStatusLabel(status));
 	}
 
 	public String getNavigation() {
 		return ParamUtil.getString(
-			cpRequestHelper.getRequest(), "navigation", "all");
+			requestHelper.getRequest(), "navigation", "all");
 	}
 
 	public String[] getNavigationKeys() {
@@ -224,7 +224,7 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all")) {
 			emptyResultsMessage = LanguageUtil.format(
-				cpRequestHelper.getRequest(), "no-x-shipments-were-found",
+				requestHelper.getRequest(), "no-x-shipments-were-found",
 				navigation, true);
 		}
 
@@ -241,17 +241,17 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all") && (shipmentStatus != null)) {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getCompanyId(), shipmentStatus);
+				requestHelper.getCompanyId(), shipmentStatus);
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getCompanyId(), shipmentStatus,
+				requestHelper.getCompanyId(), shipmentStatus,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
 		else {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getCompanyId());
+				requestHelper.getCompanyId());
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
+				requestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 
@@ -291,7 +291,7 @@ public class CommerceShipmentDisplayContext
 		searchContext.setAttribute(
 			Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
-		searchContext.setCompanyId(cpRequestHelper.getCompanyId());
+		searchContext.setCompanyId(requestHelper.getCompanyId());
 		searchContext.setStart(QueryUtil.ALL_POS);
 		searchContext.setEnd(QueryUtil.ALL_POS);
 
@@ -314,7 +314,7 @@ public class CommerceShipmentDisplayContext
 	private long[] _getCommerceChannelGroupIds() throws PortalException {
 		List<CommerceChannel> commerceChannels =
 			_commerceChannelService.searchCommerceChannels(
-				cpRequestHelper.getCompanyId());
+				requestHelper.getCompanyId());
 
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 

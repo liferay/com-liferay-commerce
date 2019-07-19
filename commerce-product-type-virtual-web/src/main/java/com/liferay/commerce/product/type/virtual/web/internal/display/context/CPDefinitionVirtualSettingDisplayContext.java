@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.type.virtual.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
@@ -91,8 +91,7 @@ public class CPDefinitionVirtualSettingDisplayContext
 
 		_cpDefinitionVirtualSetting =
 			_cpDefinitionVirtualSettingActionHelper.
-				getCPDefinitionVirtualSetting(
-					cpRequestHelper.getRenderRequest());
+				getCPDefinitionVirtualSetting(requestHelper.getRenderRequest());
 
 		return _cpDefinitionVirtualSetting;
 	}
@@ -103,7 +102,7 @@ public class CPDefinitionVirtualSettingDisplayContext
 		}
 
 		_cpInstance = actionHelper.getCPInstance(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpInstance;
 	}
@@ -179,7 +178,7 @@ public class CPDefinitionVirtualSettingDisplayContext
 	public String getFileEntryItemSelectorURL() {
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		FileItemSelectorCriterion fileItemSelectorCriterion =
 			new FileItemSelectorCriterion();

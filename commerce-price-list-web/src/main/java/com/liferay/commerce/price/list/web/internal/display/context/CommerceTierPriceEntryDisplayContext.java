@@ -20,10 +20,8 @@ import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
-import com.liferay.commerce.price.list.web.display.context.BaseCommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -56,14 +54,12 @@ public class CommerceTierPriceEntryDisplayContext
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
-
 		_commerceTierPriceEntryService = commerceTierPriceEntryService;
 	}
 
 	public CommercePriceEntry getCommercePriceEntry() throws PortalException {
 		return commercePriceListActionHelper.getCommercePriceEntry(
-			_cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 	}
 
 	public long getCommercePriceEntryId() throws PortalException {
@@ -93,7 +89,7 @@ public class CommerceTierPriceEntryDisplayContext
 
 		_commerceTierPriceEntry =
 			commercePriceListActionHelper.getCommerceTierPriceEntry(
-				_cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		return _commerceTierPriceEntry;
 	}
@@ -118,7 +114,7 @@ public class CommerceTierPriceEntryDisplayContext
 
 			CommerceMoney zeroCommerceMoney = commerceCurrency.getZero();
 
-			return zeroCommerceMoney.format(_cpRequestHelper.getLocale());
+			return zeroCommerceMoney.format(requestHelper.getLocale());
 		}
 
 		CommercePriceList commercePriceList = getCommercePriceList();
@@ -126,7 +122,7 @@ public class CommerceTierPriceEntryDisplayContext
 		CommerceMoney priceCommerceMoney = commerceTierPriceEntry.getPriceMoney(
 			commercePriceList.getCommerceCurrencyId());
 
-		return priceCommerceMoney.format(_cpRequestHelper.getLocale());
+		return priceCommerceMoney.format(requestHelper.getLocale());
 	}
 
 	public String getContextTitle() throws PortalException {
@@ -266,6 +262,5 @@ public class CommerceTierPriceEntryDisplayContext
 
 	private CommerceTierPriceEntry _commerceTierPriceEntry;
 	private final CommerceTierPriceEntryService _commerceTierPriceEntryService;
-	private final CPRequestHelper _cpRequestHelper;
 
 }

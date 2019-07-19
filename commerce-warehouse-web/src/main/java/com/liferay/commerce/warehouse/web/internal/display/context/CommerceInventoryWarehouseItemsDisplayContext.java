@@ -19,10 +19,10 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.warehouse.web.internal.display.context.util.CommerceInventoryRequestHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -59,11 +59,13 @@ public class CommerceInventoryWarehouseItemsDisplayContext {
 		_cpInstanceService = cpInstanceService;
 		_portal = portal;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_commerceInventoryRequestHelper = new CommerceInventoryRequestHelper(
+			httpServletRequest);
 	}
 
 	public String getBackURL() throws PortalException {
-		RenderRequest renderRequest = _cpRequestHelper.getRenderRequest();
+		RenderRequest renderRequest =
+			_commerceInventoryRequestHelper.getRenderRequest();
 
 		String lifecycle = (String)renderRequest.getAttribute(
 			LiferayPortletRequest.LIFECYCLE_PHASE);
@@ -107,7 +109,8 @@ public class CommerceInventoryWarehouseItemsDisplayContext {
 	public CPInstance getCPInstance() throws PortalException {
 		if (_cpInstance == null) {
 			long cpInstanceId = ParamUtil.getLong(
-				_cpRequestHelper.getRenderRequest(), "cpInstanceId");
+				_commerceInventoryRequestHelper.getRenderRequest(),
+				"cpInstanceId");
 
 			_cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 		}
@@ -119,7 +122,8 @@ public class CommerceInventoryWarehouseItemsDisplayContext {
 		long commerceInventoryWarehouseId,
 		long commerceInventoryWarehouseItemId, int index) {
 
-		RenderResponse renderResponse = _cpRequestHelper.getRenderResponse();
+		RenderResponse renderResponse =
+			_commerceInventoryRequestHelper.getRenderResponse();
 
 		StringBundler sb = new StringBundler(10);
 
@@ -150,12 +154,14 @@ public class CommerceInventoryWarehouseItemsDisplayContext {
 
 		_commerceInventoryWarehouses =
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
-				_cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
+				_commerceInventoryRequestHelper.getCompanyId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		return _commerceInventoryWarehouses;
 	}
 
+	private final CommerceInventoryRequestHelper
+		_commerceInventoryRequestHelper;
 	private final CommerceInventoryWarehouseItemService
 		_commerceInventoryWarehouseItemService;
 	private List<CommerceInventoryWarehouse> _commerceInventoryWarehouses;
@@ -163,7 +169,6 @@ public class CommerceInventoryWarehouseItemsDisplayContext {
 		_commerceInventoryWarehouseService;
 	private CPInstance _cpInstance;
 	private final CPInstanceService _cpInstanceService;
-	private final CPRequestHelper _cpRequestHelper;
 	private final Portal _portal;
 
 }

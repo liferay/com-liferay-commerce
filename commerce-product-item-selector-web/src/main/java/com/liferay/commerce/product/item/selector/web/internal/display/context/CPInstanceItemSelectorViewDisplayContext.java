@@ -83,7 +83,7 @@ public class CPInstanceItemSelectorViewDisplayContext
 				getOrderByCol(), getOrderByType());
 
 		RowChecker rowChecker = new CPInstanceItemSelectorChecker(
-			cpRequestHelper.getRenderResponse(), getCheckedCPInstanceIds());
+			requestHelper.getRenderResponse(), getCheckedCPInstanceIds());
 
 		searchContainer.setOrderByCol(getOrderByCol());
 		searchContainer.setOrderByComparator(orderByComparator);
@@ -98,14 +98,14 @@ public class CPInstanceItemSelectorViewDisplayContext
 		if (getGroupId() > 0) {
 			cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPInstances(
-					cpRequestHelper.getCompanyId(), getGroupId(), getKeywords(),
+					requestHelper.getCompanyId(), getGroupId(), getKeywords(),
 					WorkflowConstants.STATUS_APPROVED,
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 		}
 		else {
 			cpInstanceBaseModelSearchResult =
 				_cpInstanceService.searchCPInstances(
-					cpRequestHelper.getCompanyId(), getKeywords(),
+					requestHelper.getCompanyId(), getKeywords(),
 					WorkflowConstants.STATUS_APPROVED,
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 		}

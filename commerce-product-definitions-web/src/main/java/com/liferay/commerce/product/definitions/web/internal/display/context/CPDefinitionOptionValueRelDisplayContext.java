@@ -14,10 +14,10 @@
 
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.definitions.web.internal.util.CPDefinitionsPortletUtil;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelService;
@@ -65,7 +65,7 @@ public class CPDefinitionOptionValueRelDisplayContext
 		}
 
 		_cpDefinitionOptionRel = actionHelper.getCPDefinitionOptionRel(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpDefinitionOptionRel;
 	}
@@ -90,7 +90,7 @@ public class CPDefinitionOptionValueRelDisplayContext
 
 		_cpDefinitionOptionValueRel =
 			actionHelper.getCPDefinitionOptionValueRel(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		return _cpDefinitionOptionValueRel;
 	}

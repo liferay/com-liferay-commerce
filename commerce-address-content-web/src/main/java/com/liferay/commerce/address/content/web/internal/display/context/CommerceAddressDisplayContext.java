@@ -16,12 +16,12 @@ package com.liferay.commerce.address.content.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.address.content.web.internal.display.context.util.CommerceAddressRequestHelper;
 import com.liferay.commerce.address.content.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.address.content.web.internal.portlet.configuration.CommerceAddressContentPortletInstanceConfiguration;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -67,10 +67,13 @@ public class CommerceAddressDisplayContext {
 		_commerceRegionService = commerceRegionService;
 		_httpServletRequest = httpServletRequest;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_commerceAddressRequestHelper = new CommerceAddressRequestHelper(
+			httpServletRequest);
 
-		_liferayPortletRequest = _cpRequestHelper.getLiferayPortletRequest();
-		_liferayPortletResponse = _cpRequestHelper.getLiferayPortletResponse();
+		_liferayPortletRequest =
+			_commerceAddressRequestHelper.getLiferayPortletRequest();
+		_liferayPortletResponse =
+			_commerceAddressRequestHelper.getLiferayPortletResponse();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)_httpServletRequest.getAttribute(
@@ -111,7 +114,7 @@ public class CommerceAddressDisplayContext {
 		}
 
 		_commerceAddress = _actionHelper.getCommerceAddress(
-			_cpRequestHelper.getRenderRequest());
+			_commerceAddressRequestHelper.getRenderRequest());
 
 		return _commerceAddress;
 	}
@@ -290,10 +293,10 @@ public class CommerceAddressDisplayContext {
 	private CommerceAddress _commerceAddress;
 	private final CommerceAddressContentPortletInstanceConfiguration
 		_commerceAddressContentPortletInstanceConfiguration;
+	private final CommerceAddressRequestHelper _commerceAddressRequestHelper;
 	private final CommerceAddressService _commerceAddressService;
 	private final CommerceCountryService _commerceCountryService;
 	private final CommerceRegionService _commerceRegionService;
-	private final CPRequestHelper _cpRequestHelper;
 	private long _displayStyleGroupId;
 	private final HttpServletRequest _httpServletRequest;
 	private final LiferayPortletRequest _liferayPortletRequest;

@@ -77,7 +77,7 @@ public class CommerceCountryItemSelectorViewDisplayContext
 				WebKeys.THEME_DISPLAY);
 
 		searchContainer = new SearchContainer<>(
-			cpRequestHelper.getRenderRequest(), getPortletURL(), null, null);
+			requestHelper.getRenderRequest(), getPortletURL(), null, null);
 
 		searchContainer.setEmptyResultsMessage("there-are-no-countries");
 
@@ -92,8 +92,7 @@ public class CommerceCountryItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 
 		RowChecker rowChecker = new CommerceCountryItemSelectorChecker(
-			cpRequestHelper.getRenderResponse(),
-			getCheckedCommerceCountryIds());
+			requestHelper.getRenderResponse(), getCheckedCommerceCountryIds());
 
 		searchContainer.setRowChecker(rowChecker);
 
@@ -114,7 +113,7 @@ public class CommerceCountryItemSelectorViewDisplayContext
 
 	protected long[] getCheckedCommerceCountryIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(), "checkedCommerceCountryIds");
+			requestHelper.getRenderRequest(), "checkedCommerceCountryIds");
 	}
 
 	private final CommerceCountryService _commerceCountryService;

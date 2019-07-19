@@ -78,7 +78,7 @@ public class CPOptionCategoryDisplayContext
 		BaseModelSearchResult<CPOptionCategory>
 			cpOptionCategoryBaseModelSearchResult =
 				_cpOptionCategoryService.searchCPOptionCategories(
-					cpRequestHelper.getCompanyId(), getKeywords(),
+					requestHelper.getCompanyId(), getKeywords(),
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setResults(
@@ -94,7 +94,7 @@ public class CPOptionCategoryDisplayContext
 		throws PortalException {
 
 		return _cpOptionCategoryModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), cpOptionCategory, actionId);
+			requestHelper.getPermissionChecker(), cpOptionCategory, actionId);
 	}
 
 	private final ModelResourcePermission<CPOptionCategory>
