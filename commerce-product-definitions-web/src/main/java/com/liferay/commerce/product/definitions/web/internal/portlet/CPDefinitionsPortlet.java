@@ -15,8 +15,8 @@
 package com.liferay.commerce.product.definitions.web.internal.portlet;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionsDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
