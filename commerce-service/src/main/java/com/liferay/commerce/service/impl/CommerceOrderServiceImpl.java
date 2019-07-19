@@ -127,9 +127,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			getPermissionChecker(), commerceOrderId,
 			CommerceOrderActionKeys.CHECKOUT_COMMERCE_ORDER);
 
-		CommerceOrder commerceOrder = getCommerceOrder(commerceOrderId);
-
-		_bookQuantities(commerceOrder);
+		_bookQuantities(getCommerceOrder(commerceOrderId));
 
 		return commerceOrderLocalService.checkoutCommerceOrder(
 			commerceOrderId, commerceContext, serviceContext);

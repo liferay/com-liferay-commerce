@@ -29,8 +29,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -54,13 +52,11 @@ public class EditCPDefinitionOptionValueRelMVCRenderCommand
 		throws PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CPDefinitionOptionValueRelDisplayContext
 				cpDefinitionOptionValueRelDisplayContext =
 					new CPDefinitionOptionValueRelDisplayContext(
-						_actionHelper, httpServletRequest,
+						_actionHelper,
+						_portal.getHttpServletRequest(renderRequest),
 						_cpDefinitionOptionValueRelService);
 
 			renderRequest.setAttribute(

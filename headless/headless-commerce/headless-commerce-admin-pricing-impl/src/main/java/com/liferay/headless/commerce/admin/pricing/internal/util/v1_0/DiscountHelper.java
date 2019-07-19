@@ -54,10 +54,8 @@ public class DiscountHelper {
 	}
 
 	public Discount getDiscount(Long id) throws PortalException {
-		CommerceDiscount commerceDiscount =
-			_commerceDiscountService.getCommerceDiscount(id);
-
-		return _dtoMapper.modelToDTO(commerceDiscount);
+		return _dtoMapper.modelToDTO(
+			_commerceDiscountService.getCommerceDiscount(id));
 	}
 
 	public Page<Discount> getDiscounts(Long companyId, Pagination pagination)

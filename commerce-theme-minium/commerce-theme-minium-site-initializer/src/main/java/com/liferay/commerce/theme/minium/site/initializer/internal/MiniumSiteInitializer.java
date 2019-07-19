@@ -532,15 +532,13 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	}
 
 	private JSONArray _getJSONArray(String name) throws Exception {
-		String json = _siteInitializerDependencyResolver.getJSON(name);
-
-		return _jsonFactory.createJSONArray(json);
+		return _jsonFactory.createJSONArray(
+			_siteInitializerDependencyResolver.getJSON(name));
 	}
 
 	private JSONObject _getJSONObject(String name) throws Exception {
-		String json = _siteInitializerDependencyResolver.getJSON(name);
-
-		return _jsonFactory.createJSONObject(json);
+		return _jsonFactory.createJSONObject(
+			_siteInitializerDependencyResolver.getJSON(name));
 	}
 
 	private void _importAssetCategories(ServiceContext serviceContext)

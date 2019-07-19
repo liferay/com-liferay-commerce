@@ -94,11 +94,9 @@ public class CPCompareContentPortletDisplayTemplateHandler
 			CPCompareContentDisplayContext.class,
 			"cpCompareContentDisplayContext");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup cpDefinitionsServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"cp-definition-services", restrictedVariables);
+				"cp-definition-services", getRestrictedVariables(language));
 
 		cpDefinitionsServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

@@ -73,10 +73,9 @@ public class DDMFormImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			_addDDMFormInstance(
-				jsonObject, userId, scopeGroupId, serviceContext);
+				jsonArray.getJSONObject(i), userId, scopeGroupId,
+				serviceContext);
 		}
 	}
 

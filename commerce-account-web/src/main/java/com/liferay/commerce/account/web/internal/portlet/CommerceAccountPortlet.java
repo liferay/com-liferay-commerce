@@ -43,8 +43,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
@@ -101,14 +99,12 @@ public class CommerceAccountPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceAccountDisplayContext commerceAccountDisplayContext =
 			new CommerceAccountDisplayContext(
 				_commerceAccountService, _commerceAddressService,
 				_commerceCountryService, _commerceRegionService,
-				_configurationProvider, httpServletRequest,
+				_configurationProvider,
+				_portal.getHttpServletRequest(renderRequest),
 				_modelResourcePermission, _userFileUploadsConfiguration,
 				_userLocalService);
 

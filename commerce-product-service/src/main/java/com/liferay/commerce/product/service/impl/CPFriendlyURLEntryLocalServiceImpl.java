@@ -49,10 +49,9 @@ public class CPFriendlyURLEntryLocalServiceImpl
 			Map<Locale, String> urlTitleMap)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(clazz);
-
 		addCPFriendlyURLEntries(
-			groupId, companyId, classNameId, classPK, urlTitleMap);
+			groupId, companyId, classNameLocalService.getClassNameId(clazz),
+			classPK, urlTitleMap);
 	}
 
 	@Override
@@ -214,10 +213,9 @@ public class CPFriendlyURLEntryLocalServiceImpl
 			String languageId, String urlTitle)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(clazz);
-
 		return addCPFriendlyURLEntry(
-			groupId, companyId, classNameId, classPK, languageId, urlTitle);
+			groupId, companyId, classNameLocalService.getClassNameId(clazz),
+			classPK, languageId, urlTitle);
 	}
 
 	protected CPFriendlyURLEntry addCPFriendlyURLEntry(
@@ -306,9 +304,8 @@ public class CPFriendlyURLEntryLocalServiceImpl
 	protected Map<Locale, String> getUrlTitleMap(
 		long groupId, Class<?> clazz, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(clazz);
-
-		return getUrlTitleMap(groupId, classNameId, classPK);
+		return getUrlTitleMap(
+			groupId, classNameLocalService.getClassNameId(clazz), classPK);
 	}
 
 	protected void validate(

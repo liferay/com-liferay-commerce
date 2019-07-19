@@ -40,8 +40,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
@@ -68,16 +66,14 @@ public class EditCPAttachmentFileEntryMVCRenderCommand
 		throws PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CPAttachmentFileEntriesDisplayContext
 				cpAttachmentFileEntriesDisplayContext =
 					new CPAttachmentFileEntriesDisplayContext(
 						_actionHelper, _attachmentsConfiguration,
 						_cpAttachmentFileEntryService,
 						_cpDefinitionOptionRelService, _cpInstanceHelper,
-						_dlMimeTypeDisplayContext, httpServletRequest,
+						_dlMimeTypeDisplayContext,
+						_portal.getHttpServletRequest(renderRequest),
 						_itemSelector, _portal, _portletResourcePermission,
 						_workflowDefinitionLinkLocalService);
 

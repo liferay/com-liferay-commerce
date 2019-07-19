@@ -95,11 +95,10 @@ public class CommerceCartContentTotalPortletDisplayTemplateHandler
 			CommerceOrderItem.class, "curCommerceOrderItem",
 			"CommerceOrderItemId");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup commerceOrderItemsServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"commerce-order-item-services", restrictedVariables);
+				"commerce-order-item-services",
+				getRestrictedVariables(language));
 
 		commerceOrderItemsServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

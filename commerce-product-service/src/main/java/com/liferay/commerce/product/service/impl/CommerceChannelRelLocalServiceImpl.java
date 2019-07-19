@@ -71,9 +71,8 @@ public class CommerceChannelRelLocalServiceImpl
 
 	@Override
 	public void deleteCommerceChannelRels(String className, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		commerceChannelRelPersistence.removeByC_C(classNameId, classPK);
+		commerceChannelRelPersistence.removeByC_C(
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -90,10 +89,9 @@ public class CommerceChannelRelLocalServiceImpl
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceChannelRel> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceChannelRelPersistence.findByC_C(
-			classNameId, classPK, start, end, orderByComparator);
+			classNameLocalService.getClassNameId(className), classPK, start,
+			end, orderByComparator);
 	}
 
 	@Override
@@ -104,9 +102,8 @@ public class CommerceChannelRelLocalServiceImpl
 
 	@Override
 	public int getCommerceChannelRelsCount(String className, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		return commerceChannelRelPersistence.countByC_C(classNameId, classPK);
+		return commerceChannelRelPersistence.countByC_C(
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 }

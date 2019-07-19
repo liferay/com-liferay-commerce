@@ -35,8 +35,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -75,14 +73,12 @@ public class CommerceWishListContentPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpServletRequest = portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceWishListDisplayContext commerceWishListDisplayContext =
 			new CommerceWishListDisplayContext(
 				commerceProductPriceCalculation, commerceWishListHttpHelper,
 				commerceWishListItemService, commerceWishListService,
-				cpDefinitionHelper, cpInstanceHelper, httpServletRequest,
+				cpDefinitionHelper, cpInstanceHelper,
+				portal.getHttpServletRequest(renderRequest),
 				_portletResourcePermission);
 
 		renderRequest.setAttribute(

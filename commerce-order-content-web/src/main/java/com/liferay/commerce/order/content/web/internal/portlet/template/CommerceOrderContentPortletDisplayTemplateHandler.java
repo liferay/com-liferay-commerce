@@ -95,11 +95,9 @@ public class CommerceOrderContentPortletDisplayTemplateHandler
 			PortletDisplayTemplateConstants.ENTRIES, "commerceOrder",
 			CommerceOrder.class, "curCommerceOrder", "commerceOrderId");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup commerceOrderServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"commerce-order-services", restrictedVariables);
+				"commerce-order-services", getRestrictedVariables(language));
 
 		commerceOrderServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

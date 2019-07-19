@@ -60,10 +60,8 @@ public class CommercePriceListsImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			_importCommercePriceList(
-				catalogGroupId, jsonObject, serviceContext);
+				catalogGroupId, jsonArray.getJSONObject(i), serviceContext);
 		}
 	}
 

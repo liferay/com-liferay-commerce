@@ -19,7 +19,6 @@ import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -32,8 +31,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -58,13 +55,10 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CPDefinitionsDisplayContext cpDefinitionsDisplayContext =
 				new CPDefinitionsDisplayContext(
-					_actionHelper, httpServletRequest, _commerceCatalogService,
-					_cpDefinitionService);
+					_actionHelper, _portal.getHttpServletRequest(renderRequest),
+					_commerceCatalogService, _cpDefinitionService);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpDefinitionsDisplayContext);
@@ -89,10 +83,9 @@ public class EditCPDefinitionMVCRenderCommand implements MVCRenderCommand {
 	protected void setCPDefinitionRequestAttribute(RenderRequest renderRequest)
 		throws PortalException {
 
-		CPDefinition cpDefinition = _actionHelper.getCPDefinition(
-			renderRequest);
-
-		renderRequest.setAttribute(CPWebKeys.CP_DEFINITION, cpDefinition);
+		renderRequest.setAttribute(
+			CPWebKeys.CP_DEFINITION,
+			_actionHelper.getCPDefinition(renderRequest));
 	}
 
 	@Reference

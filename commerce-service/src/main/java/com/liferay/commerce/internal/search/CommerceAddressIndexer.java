@@ -161,19 +161,14 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 
 	@Override
 	protected void doReindex(CommerceAddress commerceAddress) throws Exception {
-		Document document = getDocument(commerceAddress);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceAddress.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceAddress.getCompanyId(),
+			getDocument(commerceAddress), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceAddress commerceAddress =
-			_commerceAddressLocalService.getCommerceAddress(classPK);
-
-		doReindex(commerceAddress);
+		doReindex(_commerceAddressLocalService.getCommerceAddress(classPK));
 	}
 
 	@Override
@@ -193,9 +188,8 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceAddress commerceAddress) -> {
 				try {
-					Document document = getDocument(commerceAddress);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceAddress));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

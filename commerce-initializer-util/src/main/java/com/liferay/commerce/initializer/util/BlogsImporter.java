@@ -56,11 +56,9 @@ public class BlogsImporter {
 		Date now = new Date();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			_addBlogsEntry(
-				jsonObject, classLoader, imageDependenciesPath, userId, now,
-				serviceContext);
+				jsonArray.getJSONObject(i), classLoader, imageDependenciesPath,
+				userId, now, serviceContext);
 		}
 	}
 
@@ -85,11 +83,9 @@ public class BlogsImporter {
 		InputStream inputStream = classLoader.getResourceAsStream(
 			imageDependenciesPath + fileName);
 
-		byte[] bytes = FileUtil.getBytes(inputStream);
-
 		ImageSelector imageSelector = new ImageSelector(
-			bytes, fileName, MimeTypesUtil.getContentType(fileName),
-			StringPool.BLANK);
+			FileUtil.getBytes(inputStream), fileName,
+			MimeTypesUtil.getContentType(fileName), StringPool.BLANK);
 
 		_blogsEntryLocalService.addCoverImage(
 			blogsEntry.getEntryId(), imageSelector);

@@ -75,10 +75,9 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			CommerceOrder commerceOrder = getCommerceOrder(actionRequest);
-
 			actionRequest.setAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
+				CommerceCheckoutWebKeys.COMMERCE_ORDER,
+				getCommerceOrder(actionRequest));
 		}
 		catch (Exception e) {
 			throw new PortletException(e);

@@ -48,11 +48,11 @@ public class CommerceOrderPaymentLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CommerceOrder commerceOrder =
-			commerceOrderLocalService.getCommerceOrder(commerceOrderId);
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		return _getCommerceOrderPayment(status, content, commerceOrder, user);
+		return _getCommerceOrderPayment(
+			status, content,
+			commerceOrderLocalService.getCommerceOrder(commerceOrderId), user);
 	}
 
 	@Override

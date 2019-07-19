@@ -186,20 +186,16 @@ public class CPDefinitionOptionValueRelIndexer
 			CPDefinitionOptionValueRel cpDefinitionOptionValueRel)
 		throws Exception {
 
-		Document document = getDocument(cpDefinitionOptionValueRel);
-
 		_indexWriterHelper.updateDocument(
 			getSearchEngineId(), cpDefinitionOptionValueRel.getCompanyId(),
-			document, isCommitImmediately());
+			getDocument(cpDefinitionOptionValueRel), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
+		doReindex(
 			_cpDefinitionOptionValueRelLocalService.
-				getCPDefinitionOptionValueRel(classPK);
-
-		doReindex(cpDefinitionOptionValueRel);
+				getCPDefinitionOptionValueRel(classPK));
 	}
 
 	@Override
@@ -220,9 +216,8 @@ public class CPDefinitionOptionValueRelIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPDefinitionOptionValueRel cpDefinitionOptionValueRel) -> {
 				try {
-					Document document = getDocument(cpDefinitionOptionValueRel);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpDefinitionOptionValueRel));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

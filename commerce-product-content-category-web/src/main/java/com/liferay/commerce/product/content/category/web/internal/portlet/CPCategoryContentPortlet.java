@@ -32,8 +32,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -70,15 +68,12 @@ public class CPCategoryContentPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CPCategoryContentDisplayContext
 				cpAssetCategoryNavigationDisplayContext =
 					new CPCategoryContentDisplayContext(
-						httpServletRequest, _assetCategoryService,
-						_commerceMediaResolver, _cpAttachmentFileEntryService,
-						_portal);
+						_portal.getHttpServletRequest(renderRequest),
+						_assetCategoryService, _commerceMediaResolver,
+						_cpAttachmentFileEntryService, _portal);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,

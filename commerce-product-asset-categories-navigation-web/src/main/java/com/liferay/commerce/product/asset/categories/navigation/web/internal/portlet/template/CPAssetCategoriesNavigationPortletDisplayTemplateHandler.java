@@ -95,11 +95,9 @@ public class CPAssetCategoriesNavigationPortletDisplayTemplateHandler
 			PortletDisplayTemplateConstants.ENTRIES, "assetCategory",
 			AssetCategory.class, "curAssetCategory", "title");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup assetCategoriesServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"asset-categories-services", restrictedVariables);
+				"asset-categories-services", getRestrictedVariables(language));
 
 		assetCategoriesServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

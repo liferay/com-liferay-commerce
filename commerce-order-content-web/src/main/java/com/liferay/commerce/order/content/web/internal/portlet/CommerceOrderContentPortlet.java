@@ -45,8 +45,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -99,9 +97,6 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 		throws IOException, PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CommerceOrderContentDisplayContext
 				commerceOrderContentDisplayContext =
 					new CommerceOrderContentDisplayContext(
@@ -109,7 +104,8 @@ public class CommerceOrderContentPortlet extends MVCPortlet {
 						_commerceOrderNoteService,
 						_commerceOrderPriceCalculation, _commerceOrderService,
 						_commercePaymentMethodGroupRelService,
-						_commerceShipmentItemService, httpServletRequest,
+						_commerceShipmentItemService,
+						_portal.getHttpServletRequest(renderRequest),
 						_modelResourcePermission, _portletResourcePermission);
 
 			renderRequest.setAttribute(

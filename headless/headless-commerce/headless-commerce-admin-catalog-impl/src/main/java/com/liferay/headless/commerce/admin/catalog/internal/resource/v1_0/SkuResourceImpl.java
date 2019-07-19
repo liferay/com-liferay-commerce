@@ -177,9 +177,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 
 	@Override
 	public Response patchSku(Long id, Sku sku) throws Exception {
-		CPInstance cpInstance = _cpInstanceService.getCPInstance(id);
-
-		_updateSKU(cpInstance, sku);
+		_updateSKU(_cpInstanceService.getCPInstance(id), sku);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 

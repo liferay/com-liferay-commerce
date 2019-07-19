@@ -73,12 +73,10 @@ public class CPDefinitionAssetRendererFactory
 	public AssetRenderer<CPDefinition> getAssetRenderer(long classPK, int type)
 		throws PortalException {
 
-		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
-			classPK);
-
 		CPDefinitionAssetRenderer cpDefinitionAssetRenderer =
 			new CPDefinitionAssetRenderer(
-				cpDefinition, _commerceCatalogModelResourcePermission);
+				_cpDefinitionLocalService.getCPDefinition(classPK),
+				_commerceCatalogModelResourcePermission);
 
 		cpDefinitionAssetRenderer.setAssetRendererType(type);
 		cpDefinitionAssetRenderer.setServletContext(_servletContext);
