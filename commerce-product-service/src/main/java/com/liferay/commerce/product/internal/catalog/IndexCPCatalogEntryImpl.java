@@ -16,9 +16,9 @@ package com.liferay.commerce.product.internal.catalog;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
+import com.liferay.commerce.product.constants.CPDefinitionIndexerConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -55,7 +55,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	@Override
 	public long getCProductId() {
 		return GetterUtil.getLong(
-			_document.get(CPDefinitionIndexer.FIELD_PRODUCT_ID));
+			_document.get(CPDefinitionIndexerConstants.FIELD_PRODUCT_ID));
 	}
 
 	@Override
@@ -84,13 +84,14 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public String getDefaultImageFileUrl() {
-		return _document.get(CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL);
+		return _document.get(
+			CPDefinitionIndexerConstants.FIELD_DEFAULT_IMAGE_FILE_URL);
 	}
 
 	@Override
 	public double getDepth() {
 		return GetterUtil.getDouble(
-			_document.get(CPDefinitionIndexer.FIELD_DEPTH));
+			_document.get(CPDefinitionIndexerConstants.FIELD_DEPTH));
 	}
 
 	@Override
@@ -106,23 +107,25 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	@Override
 	public double getHeight() {
 		return GetterUtil.getDouble(
-			_document.get(CPDefinitionIndexer.FIELD_HEIGHT));
+			_document.get(CPDefinitionIndexerConstants.FIELD_HEIGHT));
 	}
 
 	@Override
 	public String getMetaDescription(String languageId) {
 		return _document.get(
-			_locale, CPDefinitionIndexer.FIELD_META_DESCRIPTION);
+			_locale, CPDefinitionIndexerConstants.FIELD_META_DESCRIPTION);
 	}
 
 	@Override
 	public String getMetaKeywords(String languageId) {
-		return _document.get(_locale, CPDefinitionIndexer.FIELD_META_KEYWORDS);
+		return _document.get(
+			_locale, CPDefinitionIndexerConstants.FIELD_META_KEYWORDS);
 	}
 
 	@Override
 	public String getMetaTitle(String languageId) {
-		return _document.get(_locale, CPDefinitionIndexer.FIELD_META_TITLE);
+		return _document.get(
+			_locale, CPDefinitionIndexerConstants.FIELD_META_TITLE);
 	}
 
 	@Override
@@ -132,13 +135,14 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 
 	@Override
 	public String getProductTypeName() {
-		return _document.get(CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME);
+		return _document.get(
+			CPDefinitionIndexerConstants.FIELD_PRODUCT_TYPE_NAME);
 	}
 
 	@Override
 	public String getShortDescription() {
 		return _document.get(
-			_locale, CPDefinitionIndexer.FIELD_SHORT_DESCRIPTION);
+			_locale, CPDefinitionIndexerConstants.FIELD_SHORT_DESCRIPTION);
 	}
 
 	@Override
@@ -150,7 +154,7 @@ public class IndexCPCatalogEntryImpl implements CPCatalogEntry {
 	public boolean isIgnoreSKUCombinations() {
 		return GetterUtil.getBoolean(
 			_document.get(
-				CPDefinitionIndexer.FIELD_IS_IGNORE_SKU_COMBINATIONS));
+				CPDefinitionIndexerConstants.FIELD_IS_IGNORE_SKU_COMBINATIONS));
 	}
 
 	private final CPDefinitionLocalService _cpDefinitionLocalService;

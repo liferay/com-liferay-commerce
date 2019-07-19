@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.constants.CPInstanceIndexerConstants;
 import com.liferay.commerce.product.exception.CPInstanceDisplayDateException;
 import com.liferay.commerce.product.exception.CPInstanceExpirationDateException;
 import com.liferay.commerce.product.exception.CPInstanceJsonException;
@@ -26,7 +27,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
-import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.service.base.CPInstanceLocalServiceBaseImpl;
 import com.liferay.commerce.product.util.DDMFormValuesUtil;
 import com.liferay.petra.string.StringPool;
@@ -1050,9 +1050,9 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.STATUS, status);
 		attributes.put(
-			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
+			CPInstanceIndexerConstants.FIELD_CP_DEFINITION_ID, cpDefinitionId);
 		attributes.put(
-			CPInstanceIndexer.FIELD_CP_DEFINITION_STATUS,
+			CPInstanceIndexerConstants.FIELD_CP_DEFINITION_STATUS,
 			WorkflowConstants.STATUS_ANY);
 		attributes.put("params", params);
 

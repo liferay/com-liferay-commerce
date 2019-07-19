@@ -17,8 +17,8 @@ package com.liferay.commerce.product.internal.search;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.constants.CPDefinitionIndexerConstants;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.portal.kernel.search.BaseSearcher;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -49,12 +49,13 @@ public class CPDefinitionSearcher extends BaseSearcher {
 		setDefaultSelectedFieldNames(
 			Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.UID, Field.NAME,
 			Field.DESCRIPTION, Field.URL,
-			CPDefinitionIndexer.FIELD_SHORT_DESCRIPTION,
-			CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL,
-			CPDefinitionIndexer.FIELD_DEPTH, CPDefinitionIndexer.FIELD_HEIGHT,
-			CPDefinitionIndexer.FIELD_IS_IGNORE_SKU_COMBINATIONS,
-			CPDefinitionIndexer.FIELD_PRODUCT_TYPE_NAME,
-			CPDefinitionIndexer.FIELD_DEFAULT_IMAGE_FILE_URL);
+			CPDefinitionIndexerConstants.FIELD_SHORT_DESCRIPTION,
+			CPDefinitionIndexerConstants.FIELD_DEFAULT_IMAGE_FILE_URL,
+			CPDefinitionIndexerConstants.FIELD_DEPTH,
+			CPDefinitionIndexerConstants.FIELD_HEIGHT,
+			CPDefinitionIndexerConstants.FIELD_IS_IGNORE_SKU_COMBINATIONS,
+			CPDefinitionIndexerConstants.FIELD_PRODUCT_TYPE_NAME,
+			CPDefinitionIndexerConstants.FIELD_DEFAULT_IMAGE_FILE_URL);
 	}
 
 	@Override

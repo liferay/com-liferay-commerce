@@ -14,6 +14,9 @@
 
 package com.liferay.commerce.product.definitions.web.internal.util;
 
+import com.liferay.commerce.product.constants.CPAttachmentFileEntryIndexerConstants;
+import com.liferay.commerce.product.constants.CPDefinitionIndexerConstants;
+import com.liferay.commerce.product.constants.CPInstanceIndexerConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
@@ -21,9 +24,6 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.search.CPAttachmentFileEntryIndexer;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
-import com.liferay.commerce.product.search.CPInstanceIndexer;
 import com.liferay.commerce.product.util.comparator.CPAttachmentFileEntryDisplayDateComparator;
 import com.liferay.commerce.product.util.comparator.CPAttachmentFileEntryModifiedDateComparator;
 import com.liferay.commerce.product.util.comparator.CPAttachmentFileEntryPriorityComparator;
@@ -92,7 +92,7 @@ public class CPDefinitionsPortletUtil {
 
 		if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPAttachmentFileEntryIndexer.FIELD_DISPLAY_DATE +
+				CPAttachmentFileEntryIndexerConstants.FIELD_DISPLAY_DATE +
 					"_Number_sortable",
 				reverse);
 		}
@@ -270,7 +270,8 @@ public class CPDefinitionsPortletUtil {
 
 		if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPDefinitionIndexer.FIELD_DISPLAY_DATE + "_Number_sortable",
+				CPDefinitionIndexerConstants.FIELD_DISPLAY_DATE +
+					"_Number_sortable",
 				reverse);
 		}
 		else if (orderByCol.equals("modified-date")) {
@@ -348,12 +349,14 @@ public class CPDefinitionsPortletUtil {
 		}
 		else if (orderByCol.equals("display-date")) {
 			sort = SortFactoryUtil.create(
-				CPInstanceIndexer.FIELD_DISPLAY_DATE + "_Number_sortable",
+				CPInstanceIndexerConstants.FIELD_DISPLAY_DATE +
+					"_Number_sortable",
 				reverse);
 		}
 		else if (orderByCol.equals("sku")) {
 			sort = SortFactoryUtil.create(
-				CPInstanceIndexer.FIELD_SKU, Sort.STRING_TYPE, reverse);
+				CPInstanceIndexerConstants.FIELD_SKU, Sort.STRING_TYPE,
+				reverse);
 		}
 
 		return sort;

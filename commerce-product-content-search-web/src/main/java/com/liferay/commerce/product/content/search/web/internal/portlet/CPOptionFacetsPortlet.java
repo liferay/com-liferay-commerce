@@ -17,13 +17,13 @@ package com.liferay.commerce.product.content.search.web.internal.portlet;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.product.constants.CPDefinitionIndexerConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CommerceChannel;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.search.facet.SerializableMultiValueFacet;
@@ -185,7 +185,7 @@ public class CPOptionFacetsPortlet
 		queryConfig.setLocale(themeDisplay.getLocale());
 
 		searchContext.setAttribute(
-			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+			CPDefinitionIndexerConstants.FIELD_PUBLISHED, Boolean.TRUE);
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
@@ -234,14 +234,14 @@ public class CPOptionFacetsPortlet
 
 		Facet facet = new SimpleFacet(searchContext);
 
-		facet.setFieldName(CPDefinitionIndexer.FIELD_OPTION_NAMES);
+		facet.setFieldName(CPDefinitionIndexerConstants.FIELD_OPTION_NAMES);
 
 		searchContext.addFacet(facet);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.addSelectedFieldNames(
-			CPDefinitionIndexer.FIELD_OPTION_NAMES);
+			CPDefinitionIndexerConstants.FIELD_OPTION_NAMES);
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
