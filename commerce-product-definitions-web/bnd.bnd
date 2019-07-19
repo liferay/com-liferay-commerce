@@ -1,10 +1,6 @@
 Bundle-Name: Liferay Commerce Product Definitions Web
 Bundle-SymbolicName: com.liferay.commerce.product.definitions.web
-Bundle-Version: 2.1.0
-Export-Package:\
-	com.liferay.commerce.product.definitions.web.display.context,\
-	com.liferay.commerce.product.definitions.web.portlet.action,\
-	com.liferay.commerce.product.definitions.web.servlet.taglib.ui
+Bundle-Version: 3.0.0
 Import-Package:\
 	com.liferay.portal.kernel.portlet;version="[8.0,8.3)",\
 	\
