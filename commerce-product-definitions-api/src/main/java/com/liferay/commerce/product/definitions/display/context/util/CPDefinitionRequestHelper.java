@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.util.display.context.util;
+package com.liferay.commerce.product.definitions.display.context.util;
 
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
 import com.liferay.portal.kernel.util.JavaConstants;
