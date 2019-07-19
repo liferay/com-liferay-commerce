@@ -131,10 +131,9 @@ public class CommerceUsersImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			_importCommerceUser(
-				jsonObject, classLoader, dependenciesPath, serviceContext);
+				jsonArray.getJSONObject(i), classLoader, dependenciesPath,
+				serviceContext);
 		}
 	}
 

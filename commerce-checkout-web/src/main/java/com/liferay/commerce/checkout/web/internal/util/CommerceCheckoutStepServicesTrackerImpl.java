@@ -121,11 +121,8 @@ public class CommerceCheckoutStepServicesTrackerImpl
 		List<CommerceCheckoutStep> commerceCheckoutSteps =
 			getCommerceCheckoutSteps(httpServletRequest, httpServletResponse);
 
-		CommerceCheckoutStep commerceCheckoutStep = getCommerceCheckoutStep(
-			commerceCheckoutStepName);
-
 		int commerceCheckoutStepIndex = commerceCheckoutSteps.indexOf(
-			commerceCheckoutStep);
+			getCommerceCheckoutStep(commerceCheckoutStepName));
 
 		if ((commerceCheckoutStepIndex >= 0) &&
 			(commerceCheckoutStepIndex < (commerceCheckoutSteps.size() - 1))) {
@@ -150,11 +147,8 @@ public class CommerceCheckoutStepServicesTrackerImpl
 		List<CommerceCheckoutStep> commerceCheckoutSteps =
 			getCommerceCheckoutSteps(httpServletRequest, httpServletResponse);
 
-		CommerceCheckoutStep commerceCheckoutStep = getCommerceCheckoutStep(
-			commerceCheckoutStepName);
-
 		int commerceCheckoutStepIndex = commerceCheckoutSteps.indexOf(
-			commerceCheckoutStep);
+			getCommerceCheckoutStep(commerceCheckoutStepName));
 
 		if (commerceCheckoutStepIndex > 0) {
 			return commerceCheckoutSteps.get(commerceCheckoutStepIndex - 1);

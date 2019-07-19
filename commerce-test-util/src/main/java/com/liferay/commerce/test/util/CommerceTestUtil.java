@@ -209,15 +209,12 @@ public class CommerceTestUtil {
 			addCommercePaymentMethodGroupRel(long groupId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CommercePaymentMethodGroupRelLocalServiceUtil.
 			addCommercePaymentMethodGroupRel(
 				RandomTestUtil.randomLocaleStringMap(),
 				RandomTestUtil.randomLocaleStringMap(), null, "money-order",
 				Collections.<String, String>emptyMap(), 1, true,
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static CommerceShippingFixedOption addCommerceShippingFixedOption(
@@ -241,13 +238,10 @@ public class CommerceTestUtil {
 	public static CommerceShippingMethod addCommerceShippingMethod(long groupId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CommerceShippingMethodLocalServiceUtil.addCommerceShippingMethod(
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(), null, "fixedPrice", 1, true,
-			serviceContext);
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static CommerceAddress addUserCommerceAddress(

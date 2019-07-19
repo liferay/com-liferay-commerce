@@ -160,19 +160,14 @@ public class CommerceCountryIndexer extends BaseIndexer<CommerceCountry> {
 
 	@Override
 	protected void doReindex(CommerceCountry commerceCountry) throws Exception {
-		Document document = getDocument(commerceCountry);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceCountry.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceCountry.getCompanyId(),
+			getDocument(commerceCountry), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.getCommerceCountry(classPK);
-
-		doReindex(commerceCountry);
+		doReindex(_commerceCountryLocalService.getCommerceCountry(classPK));
 	}
 
 	@Override
@@ -192,9 +187,8 @@ public class CommerceCountryIndexer extends BaseIndexer<CommerceCountry> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceCountry commerceCountry) -> {
 				try {
-					Document document = getDocument(commerceCountry);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceCountry));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

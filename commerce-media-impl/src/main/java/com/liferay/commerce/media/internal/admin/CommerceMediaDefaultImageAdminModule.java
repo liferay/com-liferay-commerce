@@ -43,7 +43,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -109,11 +108,9 @@ public class CommerceMediaDefaultImageAdminModule
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			commerceMediaDefaultImageDisplayContext);
 
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
+			_servletContext, httpServletRequest,
+			_portal.getHttpServletResponse(renderResponse),
 			"/configuration/edit_default_images.jsp");
 	}
 

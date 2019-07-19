@@ -44,11 +44,9 @@ public class WarehouseHelper {
 	}
 
 	public Warehouse getWarehouse(Long id) throws PortalException {
-		CommerceInventoryWarehouse commerceInventoryWarehouse =
+		return _dtoMapper.modelToDTO(
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
-				id);
-
-		return _dtoMapper.modelToDTO(commerceInventoryWarehouse);
+				id));
 	}
 
 	public Page<Warehouse> getWarehouses(

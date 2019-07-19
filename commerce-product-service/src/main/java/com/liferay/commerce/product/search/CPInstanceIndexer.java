@@ -307,18 +307,14 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 
 	@Override
 	protected void doReindex(CPInstance cpInstance) throws Exception {
-		Document document = getDocument(cpInstance);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpInstance.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpInstance.getCompanyId(),
+			getDocument(cpInstance), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(classPK);
-
-		doReindex(cpInstance);
+		doReindex(_cpInstanceLocalService.getCPInstance(classPK));
 	}
 
 	@Override
@@ -336,9 +332,8 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPInstance cpInstance) -> {
 				try {
-					Document document = getDocument(cpInstance);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpInstance));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,9 +63,8 @@ public class AssetCategoryFriendlyURLResolver implements FriendlyURLResolver {
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)requestContext.get("request");
 
-		Locale locale = _portal.getLocale(httpServletRequest);
-
-		String languageId = LanguageUtil.getLanguageId(locale);
+		String languageId = LanguageUtil.getLanguageId(
+			_portal.getLocale(httpServletRequest));
 
 		String urlTitle = friendlyURL.substring(
 			CPConstants.SEPARATOR_ASSET_CATEGORY_URL.length());
@@ -79,10 +77,8 @@ public class AssetCategoryFriendlyURLResolver implements FriendlyURLResolver {
 				urlTitle);
 
 		if (cpFriendlyURLEntry == null) {
-			Locale siteDefaultLocale = _portal.getSiteDefaultLocale(groupId);
-
 			String siteDefaultLanguageId = LanguageUtil.getLanguageId(
-				siteDefaultLocale);
+				_portal.getSiteDefaultLocale(groupId));
 
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(
@@ -164,9 +160,8 @@ public class AssetCategoryFriendlyURLResolver implements FriendlyURLResolver {
 		HttpServletRequest httpServletRequest =
 			(HttpServletRequest)requestContext.get("request");
 
-		Locale locale = _portal.getLocale(httpServletRequest);
-
-		String languageId = LanguageUtil.getLanguageId(locale);
+		String languageId = LanguageUtil.getLanguageId(
+			_portal.getLocale(httpServletRequest));
 
 		String urlTitle = friendlyURL.substring(
 			CPConstants.SEPARATOR_ASSET_CATEGORY_URL.length());
@@ -178,10 +173,8 @@ public class AssetCategoryFriendlyURLResolver implements FriendlyURLResolver {
 				urlTitle);
 
 		if (cpFriendlyURLEntry == null) {
-			Locale siteDefaultLocale = _portal.getSiteDefaultLocale(groupId);
-
 			String siteDefaultLanguageId = LanguageUtil.getLanguageId(
-				siteDefaultLocale);
+				_portal.getSiteDefaultLocale(groupId));
 
 			cpFriendlyURLEntry =
 				_cpFriendlyURLEntryLocalService.fetchCPFriendlyURLEntry(

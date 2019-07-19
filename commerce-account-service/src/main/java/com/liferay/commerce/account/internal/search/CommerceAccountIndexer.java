@@ -143,19 +143,14 @@ public class CommerceAccountIndexer extends BaseIndexer<CommerceAccount> {
 
 	@Override
 	protected void doReindex(CommerceAccount commerceAccount) throws Exception {
-		Document document = getDocument(commerceAccount);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceAccount.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceAccount.getCompanyId(),
+			getDocument(commerceAccount), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.getCommerceAccount(classPK);
-
-		doReindex(commerceAccount);
+		doReindex(_commerceAccountLocalService.getCommerceAccount(classPK));
 	}
 
 	@Override
@@ -175,9 +170,8 @@ public class CommerceAccountIndexer extends BaseIndexer<CommerceAccount> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceAccount commerceAccount) -> {
 				try {
-					Document document = getDocument(commerceAccount);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceAccount));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

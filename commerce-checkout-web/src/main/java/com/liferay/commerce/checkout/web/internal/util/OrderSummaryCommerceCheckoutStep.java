@@ -92,10 +92,7 @@ public class OrderSummaryCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 		_validateCommerceOrder(actionRequest, commerceOrderId);
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			actionRequest);
-
-		_checkoutCommerceOrder(httpServletRequest);
+		_checkoutCommerceOrder(_portal.getHttpServletRequest(actionRequest));
 	}
 
 	@Override

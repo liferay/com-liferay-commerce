@@ -16,7 +16,6 @@ package com.liferay.commerce.product.type.grouped.test.util;
 
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 
@@ -29,14 +28,11 @@ public class GroupedCPTypeTestUtil {
 			long groupId, long cpDefinitionId, long entryCPDefinitionId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CPDefinitionGroupedEntryLocalServiceUtil.
 			addCPDefinitionGroupedEntry(
 				cpDefinitionId, entryCPDefinitionId,
 				RandomTestUtil.randomDouble(), RandomTestUtil.randomInt(),
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 }

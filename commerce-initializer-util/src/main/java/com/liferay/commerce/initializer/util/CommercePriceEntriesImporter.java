@@ -56,9 +56,8 @@ public class CommercePriceEntriesImporter {
 		serviceContext.setCompanyId(user.getCompanyId());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			_importCommercePriceEntry(jsonObject, serviceContext);
+			_importCommercePriceEntry(
+				jsonArray.getJSONObject(i), serviceContext);
 		}
 	}
 

@@ -48,10 +48,8 @@ public class DiscountRuleHelper {
 	}
 
 	public DiscountRule getDiscountRule(Long id) throws PortalException {
-		CommerceDiscountRule commerceDiscountRule =
-			_commerceDiscountRuleService.getCommerceDiscountRule(id);
-
-		return _dtoMapper.modelToDTO(commerceDiscountRule);
+		return _dtoMapper.modelToDTO(
+			_commerceDiscountRuleService.getCommerceDiscountRule(id));
 	}
 
 	public Page<DiscountRule> getDiscountRules(

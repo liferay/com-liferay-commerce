@@ -159,10 +159,8 @@ public class CPDefinitionsImporter {
 		List<CPDefinition> cpDefinitions = new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			CPDefinition cpDefinition = _importCPDefinition(
-				jsonObject, assetVocabularyName, catalogGroupId,
+				jsonArray.getJSONObject(i), assetVocabularyName, catalogGroupId,
 				commerceChannelId, commerceInventoryWarehouseIds, classLoader,
 				imageDependenciesPath, serviceContext);
 

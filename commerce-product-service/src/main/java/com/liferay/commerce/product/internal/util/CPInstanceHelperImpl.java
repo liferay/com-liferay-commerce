@@ -588,12 +588,9 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		Locale locale = _portal.getLocale(renderRequest);
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceAccount commerceAccount =
 			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+				_portal.getHttpServletRequest(renderRequest));
 
 		long commerceAccountId = 0;
 

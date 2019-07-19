@@ -36,8 +36,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -75,9 +73,6 @@ public class CommerceDiscountPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceDiscountDisplayContext commerceDiscountDisplayContext =
 			new CommerceDiscountDisplayContext(
 				_commerceChannelRelService, _commerceChannelService,
@@ -85,7 +80,7 @@ public class CommerceDiscountPortlet extends MVCPortlet {
 				_commerceDiscountModelResourcePermission,
 				_commerceDiscountService, _commerceDiscountTargetRegistry,
 				_commerceDiscountCommerceAccountGroupRelService,
-				httpServletRequest, _itemSelector);
+				_portal.getHttpServletRequest(renderRequest), _itemSelector);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceDiscountDisplayContext);

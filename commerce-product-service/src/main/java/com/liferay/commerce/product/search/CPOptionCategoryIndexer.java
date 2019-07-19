@@ -150,19 +150,14 @@ public class CPOptionCategoryIndexer extends BaseIndexer<CPOptionCategory> {
 	protected void doReindex(CPOptionCategory cpOptionCategory)
 		throws Exception {
 
-		Document document = getDocument(cpOptionCategory);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpOptionCategory.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpOptionCategory.getCompanyId(),
+			getDocument(cpOptionCategory), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPOptionCategory cpOptionCategory =
-			_cpOptionCategoryLocalService.getCPOptionCategory(classPK);
-
-		doReindex(cpOptionCategory);
+		doReindex(_cpOptionCategoryLocalService.getCPOptionCategory(classPK));
 	}
 
 	@Override
@@ -182,9 +177,8 @@ public class CPOptionCategoryIndexer extends BaseIndexer<CPOptionCategory> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPOptionCategory cpOptionCategory) -> {
 				try {
-					Document document = getDocument(cpOptionCategory);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpOptionCategory));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

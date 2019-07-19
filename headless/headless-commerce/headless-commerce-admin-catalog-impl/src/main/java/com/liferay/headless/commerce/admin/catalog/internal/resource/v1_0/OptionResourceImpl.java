@@ -122,9 +122,7 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 
 	@Override
 	public Response patchOption(Long id, Option option) throws Exception {
-		CPOption cpOption = _cpOptionService.getCPOption(id);
-
-		_updateOption(cpOption, option);
+		_updateOption(_cpOptionService.getCPOption(id), option);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 

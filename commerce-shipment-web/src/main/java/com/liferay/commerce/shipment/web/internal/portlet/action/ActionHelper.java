@@ -105,11 +105,9 @@ public class ActionHelper {
 			resourceRequest, RowChecker.ROW_IDS);
 
 		for (long commerceShipmentItemId : commerceShipmentItemIds) {
-			CommerceShipmentItem commerceShipmentItem =
+			commerceShipmentItems.add(
 				_commerceShipmentItemLocalService.getCommerceShipmentItem(
-					commerceShipmentItemId);
-
-			commerceShipmentItems.add(commerceShipmentItem);
+					commerceShipmentItemId));
 		}
 
 		return commerceShipmentItems;
@@ -125,11 +123,9 @@ public class ActionHelper {
 			resourceRequest, RowChecker.ROW_IDS);
 
 		for (long commerceShipmentId : commerceShipmentIds) {
-			CommerceShipment commerceShipment =
+			commerceShipments.add(
 				_commerceShipmentLocalService.getCommerceShipment(
-					commerceShipmentId);
-
-			commerceShipments.add(commerceShipment);
+					commerceShipmentId));
 		}
 
 		return commerceShipments;

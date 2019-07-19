@@ -116,9 +116,8 @@ public class CPDisplayLayoutLocalServiceImpl
 
 	@Override
 	public CPDisplayLayout fetchCPDisplayLayout(Class<?> clazz, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(clazz);
-
-		return cpDisplayLayoutPersistence.fetchByC_C(classNameId, classPK);
+		return cpDisplayLayoutPersistence.fetchByC_C(
+			classNameLocalService.getClassNameId(clazz), classPK);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)

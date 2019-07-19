@@ -83,9 +83,8 @@ public class CommerceWishListHttpHelperImpl
 		User user = _portal.getUser(httpServletRequest);
 
 		if (user == null) {
-			long companyId = _portal.getCompanyId(httpServletRequest);
-
-			user = _userLocalService.getDefaultUser(companyId);
+			user = _userLocalService.getDefaultUser(
+				_portal.getCompanyId(httpServletRequest));
 		}
 
 		String cookieName = _getCookieName(groupId);

@@ -118,15 +118,12 @@ public class CommerceOrderItemVirtualSettingsScreenNavigationEntry
 				(RenderRequest)httpServletRequest.getAttribute(
 					JavaConstants.JAVAX_PORTLET_REQUEST);
 
-			CommerceVirtualOrderItem commerceVirtualOrderItem =
-				getCommerceVirtualOrderItem(httpServletRequest);
-
 			CommerceVirtualOrderItemEditDisplayContext
 				commerceVirtualOrderItemEditDisplayContext =
 					new CommerceVirtualOrderItemEditDisplayContext(
 						_commerceOrderService, _commerceOrderItemService,
-						commerceVirtualOrderItem, _dlAppService, _itemSelector,
-						renderRequest);
+						getCommerceVirtualOrderItem(httpServletRequest),
+						_dlAppService, _itemSelector, renderRequest);
 
 			httpServletRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,

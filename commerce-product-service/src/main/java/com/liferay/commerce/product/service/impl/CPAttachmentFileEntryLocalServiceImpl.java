@@ -214,10 +214,9 @@ public class CPAttachmentFileEntryLocalServiceImpl
 	public void deleteCPAttachmentFileEntries(String className, long classPK)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
-			cpAttachmentFileEntryPersistence.findByC_C(classNameId, classPK);
+			cpAttachmentFileEntryPersistence.findByC_C(
+				classNameLocalService.getClassNameId(className), classPK);
 
 		for (CPAttachmentFileEntry cpAttachmentFileEntry :
 				cpAttachmentFileEntries) {

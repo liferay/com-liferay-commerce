@@ -67,10 +67,8 @@ public class TaxCategoryHelper {
 	}
 
 	public TaxCategory getTaxCategory(Long id) throws PortalException {
-		CPTaxCategory cpTaxCategory = _cpTaxCategoryService.getCPTaxCategory(
-			id);
-
-		return _dtoMapper.modelToDTO(cpTaxCategory);
+		return _dtoMapper.modelToDTO(
+			_cpTaxCategoryService.getCPTaxCategory(id));
 	}
 
 	public CPTaxCategory updateTaxCategory(Long id, TaxCategory taxCategory)

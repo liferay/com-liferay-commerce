@@ -438,11 +438,9 @@ public class CPFileImporterImpl implements CPFileImporter {
 		throws Exception {
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			createLayout(
-				jsonObject, parentLayout, classLoader, dependenciesFilePath,
-				serviceContext);
+				jsonArray.getJSONObject(i), parentLayout, classLoader,
+				dependenciesFilePath, serviceContext);
 		}
 	}
 

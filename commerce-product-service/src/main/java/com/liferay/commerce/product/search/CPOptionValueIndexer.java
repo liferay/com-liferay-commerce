@@ -139,19 +139,14 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 
 	@Override
 	protected void doReindex(CPOptionValue cpOptionValue) throws Exception {
-		Document document = getDocument(cpOptionValue);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpOptionValue.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpOptionValue.getCompanyId(),
+			getDocument(cpOptionValue), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPOptionValue cpOptionValue =
-			_cpOptionValueLocalService.getCPOptionValue(classPK);
-
-		doReindex(cpOptionValue);
+		doReindex(_cpOptionValueLocalService.getCPOptionValue(classPK));
 	}
 
 	@Override
@@ -171,9 +166,8 @@ public class CPOptionValueIndexer extends BaseIndexer<CPOptionValue> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPOptionValue cpOptionValue) -> {
 				try {
-					Document document = getDocument(cpOptionValue);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpOptionValue));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

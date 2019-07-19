@@ -157,19 +157,15 @@ public class CommercePriceEntryIndexer extends BaseIndexer<CommercePriceEntry> {
 	protected void doReindex(CommercePriceEntry commercePriceEntry)
 		throws Exception {
 
-		Document document = getDocument(commercePriceEntry);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commercePriceEntry.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commercePriceEntry.getCompanyId(),
+			getDocument(commercePriceEntry), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommercePriceEntry commercePriceEntry =
-			_commercePriceEntryLocalService.getCommercePriceEntry(classPK);
-
-		doReindex(commercePriceEntry);
+		doReindex(
+			_commercePriceEntryLocalService.getCommercePriceEntry(classPK));
 	}
 
 	@Override
@@ -190,9 +186,8 @@ public class CommercePriceEntryIndexer extends BaseIndexer<CommercePriceEntry> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommercePriceEntry commercePriceEntry) -> {
 				try {
-					Document document = getDocument(commercePriceEntry);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commercePriceEntry));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

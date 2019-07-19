@@ -295,20 +295,16 @@ public class CPAttachmentFileEntryIndexer
 	protected void doReindex(CPAttachmentFileEntry cpAttachmentFileEntry)
 		throws Exception {
 
-		Document document = getDocument(cpAttachmentFileEntry);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpAttachmentFileEntry.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpAttachmentFileEntry.getCompanyId(),
+			getDocument(cpAttachmentFileEntry), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPAttachmentFileEntry cpAttachmentFileEntry =
+		doReindex(
 			_cpAttachmentFileEntryLocalService.getCPAttachmentFileEntry(
-				classPK);
-
-		doReindex(cpAttachmentFileEntry);
+				classPK));
 	}
 
 	@Override
@@ -329,9 +325,8 @@ public class CPAttachmentFileEntryIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPAttachmentFileEntry cpAttachmentFileEntry) -> {
 				try {
-					Document document = getDocument(cpAttachmentFileEntry);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpAttachmentFileEntry));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

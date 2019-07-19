@@ -32,8 +32,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -56,14 +54,11 @@ public class EditCPInstanceMVCRenderCommand implements MVCRenderCommand {
 		throws PortletException {
 
 		try {
-			HttpServletRequest httpServletRequest =
-				_portal.getHttpServletRequest(renderRequest);
-
 			CPInstanceDisplayContext cpInstanceDisplayContext =
 				new CPInstanceDisplayContext(
-					_actionHelper, httpServletRequest, _commercePriceFormatter,
-					_cpDefinitionOptionRelService, _cpInstanceService,
-					_cpInstanceHelper);
+					_actionHelper, _portal.getHttpServletRequest(renderRequest),
+					_commercePriceFormatter, _cpDefinitionOptionRelService,
+					_cpInstanceService, _cpInstanceHelper);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpInstanceDisplayContext);

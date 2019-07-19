@@ -168,10 +168,9 @@ public class CommerceAddressLocalServiceImpl
 	public void deleteCommerceAddresses(String className, long classPK)
 		throws PortalException {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		List<CommerceAddress> commerceAddresses =
-			commerceAddressPersistence.findByC_C(classNameId, classPK);
+			commerceAddressPersistence.findByC_C(
+				classNameLocalService.getClassNameId(className), classPK);
 
 		for (CommerceAddress commerceAddress : commerceAddresses) {
 			commerceAddressLocalService.deleteCommerceAddress(commerceAddress);
@@ -226,10 +225,8 @@ public class CommerceAddressLocalServiceImpl
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressPersistence.findByG_C_C(
-			groupId, classNameId, classPK);
+			groupId, classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -237,10 +234,9 @@ public class CommerceAddressLocalServiceImpl
 		long groupId, String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressPersistence.findByG_C_C(
-			groupId, classNameId, classPK, start, end, orderByComparator);
+			groupId, classNameLocalService.getClassNameId(className), classPK,
+			start, end, orderByComparator);
 	}
 
 	@Override
@@ -248,27 +244,23 @@ public class CommerceAddressLocalServiceImpl
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressPersistence.findByC_C(
-			classNameId, classPK, start, end, orderByComparator);
+			classNameLocalService.getClassNameId(className), classPK, start,
+			end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceAddressesCount(
 		long groupId, String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressPersistence.countByG_C_C(
-			groupId, classNameId, classPK);
+			groupId, classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
 	public int getCommerceAddressesCount(String className, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		return commerceAddressPersistence.countByC_C(classNameId, classPK);
+		return commerceAddressPersistence.countByC_C(
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -343,9 +335,9 @@ public class CommerceAddressLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		attributes.put(Field.CLASS_NAME_ID, classNameId);
+		attributes.put(
+			Field.CLASS_NAME_ID,
+			classNameLocalService.getClassNameId(className));
 
 		attributes.put(Field.CLASS_PK, classPK);
 		attributes.put(Field.NAME, keywords);

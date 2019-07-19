@@ -212,10 +212,9 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	public Response patchAttachment(Long id, Attachment attachment)
 		throws Exception {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			_cpAttachmentFileEntryService.getCPAttachmentFileEntry(id);
-
-		_updateAttachment(cpAttachmentFileEntry, attachment);
+		_updateAttachment(
+			_cpAttachmentFileEntryService.getCPAttachmentFileEntry(id),
+			attachment);
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 

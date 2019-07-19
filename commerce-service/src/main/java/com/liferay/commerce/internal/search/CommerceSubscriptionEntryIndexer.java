@@ -179,20 +179,16 @@ public class CommerceSubscriptionEntryIndexer
 			CommerceSubscriptionEntry commerceSubscriptionEntry)
 		throws Exception {
 
-		Document document = getDocument(commerceSubscriptionEntry);
-
 		_indexWriterHelper.updateDocument(
 			getSearchEngineId(), commerceSubscriptionEntry.getCompanyId(),
-			document, isCommitImmediately());
+			getDocument(commerceSubscriptionEntry), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceSubscriptionEntry commerceSubscriptionEntry =
+		doReindex(
 			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
-				classPK);
-
-		doReindex(commerceSubscriptionEntry);
+				classPK));
 	}
 
 	@Override
@@ -213,9 +209,8 @@ public class CommerceSubscriptionEntryIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceSubscriptionEntry commerceSubscriptionEntry) -> {
 				try {
-					Document document = getDocument(commerceSubscriptionEntry);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceSubscriptionEntry));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

@@ -113,19 +113,15 @@ public class CommerceAccountGroupIndexer
 	protected void doReindex(CommerceAccountGroup commerceAccountGroup)
 		throws Exception {
 
-		Document document = getDocument(commerceAccountGroup);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceAccountGroup.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceAccountGroup.getCompanyId(),
+			getDocument(commerceAccountGroup), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceAccountGroup commerceAccountGroup =
-			_commerceAccountGroupLocalService.getCommerceAccountGroup(classPK);
-
-		doReindex(commerceAccountGroup);
+		doReindex(
+			_commerceAccountGroupLocalService.getCommerceAccountGroup(classPK));
 	}
 
 	@Override
@@ -146,9 +142,8 @@ public class CommerceAccountGroupIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceAccountGroup commerceAccountGroup) -> {
 				try {
-					Document document = getDocument(commerceAccountGroup);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceAccountGroup));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {
