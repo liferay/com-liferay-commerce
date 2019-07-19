@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.search;
 
+import com.liferay.commerce.product.constants.CPAttachmentFileEntryIndexerConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -66,22 +67,15 @@ public class CPAttachmentFileEntryIndexer
 	public static final String CLASS_NAME =
 		CPAttachmentFileEntry.class.getName();
 
-	public static final String FIELD_DISPLAY_DATE = "displayDate";
-
-	public static final String FIELD_FILE_ENTRY_ID = "fileEntryId";
-
-	public static final String FIELD_RELATED_ENTITY_CLASS_NAME_ID =
-		"relatedEntityClassNameId";
-
-	public static final String FIELD_RELATED_ENTITY_CLASS_PK =
-		"relatedEntityClassPK";
-
 	public CPAttachmentFileEntryIndexer() {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID,
-			FIELD_RELATED_ENTITY_CLASS_NAME_ID, FIELD_RELATED_ENTITY_CLASS_PK,
-			FIELD_RELATED_ENTITY_CLASS_PK, FIELD_FILE_ENTRY_ID);
+			CPAttachmentFileEntryIndexerConstants.
+				FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+			CPAttachmentFileEntryIndexerConstants.FIELD_RELATED_ENTITY_CLASS_PK,
+			CPAttachmentFileEntryIndexerConstants.FIELD_RELATED_ENTITY_CLASS_PK,
+			CPAttachmentFileEntryIndexerConstants.FIELD_FILE_ENTRY_ID);
 	}
 
 	@Override
@@ -103,7 +97,9 @@ public class CPAttachmentFileEntryIndexer
 		}
 
 		long classNameId = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_RELATED_ENTITY_CLASS_NAME_ID));
+			searchContext.getAttribute(
+				CPAttachmentFileEntryIndexerConstants.
+					FIELD_RELATED_ENTITY_CLASS_NAME_ID));
 
 		int type = GetterUtil.getInteger(
 			searchContext.getAttribute(Field.TYPE), -1);
@@ -114,15 +110,21 @@ public class CPAttachmentFileEntryIndexer
 
 		if (classNameId > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_RELATED_ENTITY_CLASS_NAME_ID, classNameId);
+				CPAttachmentFileEntryIndexerConstants.
+					FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+				classNameId);
 		}
 
 		long classPK = GetterUtil.getLong(
-			searchContext.getAttribute(FIELD_RELATED_ENTITY_CLASS_PK));
+			searchContext.getAttribute(
+				CPAttachmentFileEntryIndexerConstants.
+					FIELD_RELATED_ENTITY_CLASS_PK));
 
 		if (classPK > 0) {
 			contextBooleanFilter.addRequiredTerm(
-				FIELD_RELATED_ENTITY_CLASS_PK, classPK);
+				CPAttachmentFileEntryIndexerConstants.
+					FIELD_RELATED_ENTITY_CLASS_PK,
+				classPK);
 		}
 
 		String[] fieldNames = (String[])searchContext.getAttribute("OPTIONS");
@@ -166,10 +168,14 @@ public class CPAttachmentFileEntryIndexer
 			searchQuery, searchContext, Field.CONTENT, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+			searchQuery, searchContext,
+			CPAttachmentFileEntryIndexerConstants.
+				FIELD_RELATED_ENTITY_CLASS_NAME_ID,
 			false);
 		addSearchTerm(
-			searchQuery, searchContext, FIELD_RELATED_ENTITY_CLASS_PK, false);
+			searchQuery, searchContext,
+			CPAttachmentFileEntryIndexerConstants.FIELD_RELATED_ENTITY_CLASS_PK,
+			false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 
 		LinkedHashMap<String, Object> params =
@@ -212,15 +218,19 @@ public class CPAttachmentFileEntryIndexer
 
 		document.addNumber(Field.TYPE, cpAttachmentFileEntry.getType());
 		document.addDateSortable(
-			FIELD_DISPLAY_DATE, cpAttachmentFileEntry.getDisplayDate());
+			CPAttachmentFileEntryIndexerConstants.FIELD_DISPLAY_DATE,
+			cpAttachmentFileEntry.getDisplayDate());
 
 		document.addNumber(
-			FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+			CPAttachmentFileEntryIndexerConstants.
+				FIELD_RELATED_ENTITY_CLASS_NAME_ID,
 			cpAttachmentFileEntry.getClassNameId());
 		document.addNumber(
-			FIELD_RELATED_ENTITY_CLASS_PK, cpAttachmentFileEntry.getClassPK());
+			CPAttachmentFileEntryIndexerConstants.FIELD_RELATED_ENTITY_CLASS_PK,
+			cpAttachmentFileEntry.getClassPK());
 		document.addNumber(
-			FIELD_FILE_ENTRY_ID, cpAttachmentFileEntry.getFileEntryId());
+			CPAttachmentFileEntryIndexerConstants.FIELD_FILE_ENTRY_ID,
+			cpAttachmentFileEntry.getFileEntryId());
 
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 			cpDefinitionOptionRelListMap =
@@ -283,8 +293,11 @@ public class CPAttachmentFileEntryIndexer
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		Summary summary = createSummary(
-			document, FIELD_RELATED_ENTITY_CLASS_NAME_ID,
-			FIELD_RELATED_ENTITY_CLASS_PK);
+			document,
+			CPAttachmentFileEntryIndexerConstants.
+				FIELD_RELATED_ENTITY_CLASS_NAME_ID,
+			CPAttachmentFileEntryIndexerConstants.
+				FIELD_RELATED_ENTITY_CLASS_PK);
 
 		summary.setMaxContentLength(200);
 
