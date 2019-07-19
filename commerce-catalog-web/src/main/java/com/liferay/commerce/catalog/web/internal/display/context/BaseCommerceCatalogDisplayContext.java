@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.catalog.web.internal.display.context;
 
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.catalog.web.internal.display.context.util.CommerceCatalogRequestHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -40,10 +40,10 @@ public abstract class BaseCommerceCatalogDisplayContext {
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CommerceCatalogRequestHelper(httpServletRequest);
 
-		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
-		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+		liferayPortletRequest = requestHelper.getLiferayPortletRequest();
+		liferayPortletResponse = requestHelper.getLiferayPortletResponse();
 	}
 
 	public PortletURL getPortletURL() throws PortalException {
@@ -58,10 +58,10 @@ public abstract class BaseCommerceCatalogDisplayContext {
 		return portletURL;
 	}
 
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final CommerceCatalogRequestHelper requestHelper;
 
 }

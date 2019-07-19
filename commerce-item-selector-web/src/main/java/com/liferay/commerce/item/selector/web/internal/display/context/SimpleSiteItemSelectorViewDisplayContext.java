@@ -74,7 +74,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 
 	public long getGroupId() {
 		return ParamUtil.getLong(
-			cpRequestHelper.getRenderRequest(), "siteGroupId", -1);
+			requestHelper.getRenderRequest(), "siteGroupId", -1);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 
 			Group group = _groupService.getGroup(groupId);
 
-			Locale locale = cpRequestHelper.getLocale();
+			Locale locale = requestHelper.getLocale();
 
 			ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 				"content.Language", locale, getClass());
@@ -112,7 +112,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		}
 
 		searchContainer = new SearchContainer<>(
-			cpRequestHelper.getRenderRequest(), getPortletURL(), null,
+			requestHelper.getRenderRequest(), getPortletURL(), null,
 			emptyResultsMessage);
 
 		String orderByCol = getOrderByCol();
@@ -133,9 +133,9 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		params.put("site", true);
 
 		int total = _groupService.searchCount(
-			cpRequestHelper.getCompanyId(), null, null, null);
+			requestHelper.getCompanyId(), null, null, null);
 		List<Group> groups = _groupService.search(
-			cpRequestHelper.getCompanyId(),
+			requestHelper.getCompanyId(),
 			new long[] {
 				ClassNameLocalServiceUtil.getClassNameId(Group.class),
 				ClassNameLocalServiceUtil.getClassNameId(Organization.class)
@@ -170,7 +170,7 @@ public class SimpleSiteItemSelectorViewDisplayContext
 		}
 
 		PortletURL portletURL = PortletURLUtil.clone(
-			getPortletURL(), cpRequestHelper.getRenderResponse());
+			getPortletURL(), requestHelper.getRenderResponse());
 
 		portletURL.setParameter("siteGroupId", String.valueOf(siteGroupId));
 

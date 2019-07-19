@@ -70,7 +70,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 				WebKeys.THEME_DISPLAY);
 
 		searchContainer = new SearchContainer<>(
-			cpRequestHelper.getRenderRequest(), getPortletURL(), null, null);
+			requestHelper.getRenderRequest(), getPortletURL(), null, null);
 
 		searchContainer.setEmptyResultsMessage("there-are-no-price-lists");
 
@@ -85,7 +85,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 		searchContainer.setOrderByType(getOrderByType());
 
 		RowChecker rowChecker = new CommercePriceListItemSelectorChecker(
-			cpRequestHelper.getRenderResponse(),
+			requestHelper.getRenderResponse(),
 			getCheckedCommercePriceListIds());
 
 		searchContainer.setRowChecker(rowChecker);
@@ -173,7 +173,7 @@ public class CommercePriceListItemSelectorViewDisplayContext
 
 	protected long[] getCheckedCommercePriceListIds() {
 		return ParamUtil.getLongValues(
-			cpRequestHelper.getRenderRequest(), "checkedCommercePriceListIds");
+			requestHelper.getRenderRequest(), "checkedCommercePriceListIds");
 	}
 
 	private final CommercePriceListService _commercePriceListService;

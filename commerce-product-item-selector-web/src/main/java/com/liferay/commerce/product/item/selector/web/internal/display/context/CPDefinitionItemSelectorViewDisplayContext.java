@@ -110,8 +110,8 @@ public class CPDefinitionItemSelectorViewDisplayContext
 
 		if (!isSingleSelection()) {
 			RowChecker rowChecker = new CPDefinitionItemSelectorChecker(
-				cpRequestHelper.getRenderResponse(),
-				getCheckedCPDefinitionIds(), getDisabledCPDefinitionIds());
+				requestHelper.getRenderResponse(), getCheckedCPDefinitionIds(),
+				getDisabledCPDefinitionIds());
 
 			searchContainer.setRowChecker(rowChecker);
 		}
@@ -124,7 +124,7 @@ public class CPDefinitionItemSelectorViewDisplayContext
 
 		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
 			_cpDefinitionService.searchCPDefinitions(
-				cpRequestHelper.getCompanyId(), getKeywords(),
+				requestHelper.getCompanyId(), getKeywords(),
 				WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(),
 				searchContainer.getEnd(), sort);
 

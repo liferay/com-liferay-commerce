@@ -21,8 +21,8 @@ import com.liferay.commerce.product.content.render.list.CPContentListRendererReg
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
 import com.liferay.commerce.product.content.search.web.internal.configuration.CPSearchResultsPortletInstanceConfiguration;
+import com.liferay.commerce.product.content.search.web.internal.display.context.util.CPSearchResultsRequestHelper;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -75,7 +75,7 @@ public class CPSearchResultsDisplayContext {
 		_httpServletRequest = httpServletRequest;
 		_portletSharedSearchResponse = portletSharedSearchResponse;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_cpRequestHelper = new CPSearchResultsRequestHelper(httpServletRequest);
 
 		PortletDisplay portletDisplay = _cpRequestHelper.getPortletDisplay();
 
@@ -318,7 +318,7 @@ public class CPSearchResultsDisplayContext {
 		_cpContentListEntryRendererRegistry;
 	private final CPContentListRendererRegistry _cpContentListRendererRegistry;
 	private final CPDefinitionHelper _cpDefinitionHelper;
-	private final CPRequestHelper _cpRequestHelper;
+	private final CPSearchResultsRequestHelper _cpRequestHelper;
 	private final CPSearchResultsPortletInstanceConfiguration
 		_cpSearchResultsPortletInstanceConfiguration;
 	private final CPTypeServicesTracker _cpTypeServicesTracker;

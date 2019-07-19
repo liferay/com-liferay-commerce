@@ -23,10 +23,10 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsSearchContainerDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -78,13 +78,12 @@ public class CPInstanceCommercePriceEntryDisplayContext
 	}
 
 	public String format(BigDecimal price) throws PortalException {
-		return _commercePriceFormatter.format(
-			price, cpRequestHelper.getLocale());
+		return _commercePriceFormatter.format(price, requestHelper.getLocale());
 	}
 
 	public CommercePriceEntry getCommercePriceEntry() throws PortalException {
 		return _commercePriceListActionHelper.getCommercePriceEntry(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 	}
 
 	public long getCommercePriceEntryId() throws PortalException {
@@ -109,7 +108,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		CommerceMoney priceCommerceMoney = commercePriceEntry.getPriceMoney(
 			commercePriceList.getCommerceCurrencyId());
 
-		return priceCommerceMoney.format(cpRequestHelper.getLocale());
+		return priceCommerceMoney.format(requestHelper.getLocale());
 	}
 
 	public CPInstance getCPInstance() throws PortalException {
@@ -118,7 +117,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		}
 
 		_cpInstance = actionHelper.getCPInstance(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _cpInstance;
 	}
@@ -224,7 +223,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		}
 
 		searchContainer = new SearchContainer<>(
-			cpRequestHelper.getRenderRequest(), getPortletURL(), null,
+			requestHelper.getRenderRequest(), getPortletURL(), null,
 			"there-are-no-price-entries");
 
 		OrderByComparator<CommercePriceEntry> orderByComparator =
@@ -254,7 +253,7 @@ public class CPInstanceCommercePriceEntryDisplayContext
 
 	public boolean hasManageCommercePriceListPermission() {
 		return PortalPermissionUtil.contains(
-			cpRequestHelper.getPermissionChecker(),
+			requestHelper.getPermissionChecker(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 

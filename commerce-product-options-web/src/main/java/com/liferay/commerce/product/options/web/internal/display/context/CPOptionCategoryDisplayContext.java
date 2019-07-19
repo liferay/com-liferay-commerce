@@ -75,7 +75,7 @@ public class CPOptionCategoryDisplayContext
 		BaseModelSearchResult<CPOptionCategory>
 			cpOptionCategoryBaseModelSearchResult =
 				_cpOptionCategoryService.searchCPOptionCategories(
-					cpRequestHelper.getCompanyId(), getKeywords(),
+					requestHelper.getCompanyId(), getKeywords(),
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setResults(

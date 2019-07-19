@@ -16,8 +16,8 @@ package com.liferay.commerce.product.asset.categories.web.internal.display.conte
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.product.asset.categories.web.internal.admin.CategoryDisplayLayoutsCommerceAdminModule;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.CPDisplayLayoutService;
 import com.liferay.item.selector.ItemSelector;
@@ -86,7 +86,7 @@ public class CategoryCPDisplayLayoutDisplayContext
 		}
 
 		long cpDisplayLayoutId = ParamUtil.getLong(
-			cpRequestHelper.getRequest(), "cpDisplayLayoutId");
+			requestHelper.getRequest(), "cpDisplayLayoutId");
 
 		_cpDisplayLayout = _cpDisplayLayoutService.fetchCPDisplayLayout(
 			cpDisplayLayoutId);
@@ -241,9 +241,8 @@ public class CategoryCPDisplayLayoutDisplayContext
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(cpRequestHelper.getCompanyId());
-		searchContext.setGroupIds(
-			new long[] {cpRequestHelper.getScopeGroupId()});
+		searchContext.setCompanyId(requestHelper.getCompanyId());
+		searchContext.setGroupIds(new long[] {requestHelper.getScopeGroupId()});
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
 

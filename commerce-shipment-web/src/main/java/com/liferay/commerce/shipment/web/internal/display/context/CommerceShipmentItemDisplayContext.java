@@ -102,7 +102,7 @@ public class CommerceShipmentItemDisplayContext
 
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getShippingCommerceCountries(
-			cpRequestHelper.getCompanyId(), true, true);
+			requestHelper.getCompanyId(), true, true);
 	}
 
 	public List<CommerceRegion> getCommerceRegions() throws PortalException {
@@ -129,7 +129,7 @@ public class CommerceShipmentItemDisplayContext
 		}
 
 		_commerceShipmentItem = actionHelper.getCommerceShipmentItem(
-			cpRequestHelper.getRenderRequest());
+			requestHelper.getRenderRequest());
 
 		return _commerceShipmentItem;
 	}

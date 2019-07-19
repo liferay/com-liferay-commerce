@@ -19,7 +19,7 @@ import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -98,8 +98,8 @@ public class CPDefinitionAccountGroupDisplayContext
 		throws PortalException {
 
 		return _commerceAccountGroupService.getCommerceAccountGroups(
-			cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+			requestHelper.getCompanyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public SearchContainer<CommerceAccountGroupRel>

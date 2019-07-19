@@ -15,12 +15,12 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
+import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionRequestHelper;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItemList;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -59,7 +59,8 @@ public class CommerceSubscriptionContentDisplayContext {
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
 		_configurationProvider = configurationProvider;
 
-		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		_cpRequestHelper = new CommerceSubscriptionRequestHelper(
+			httpServletRequest);
 	}
 
 	public DropdownItemList getCommerceSubscriptionEntryActionItemList(
@@ -179,7 +180,7 @@ public class CommerceSubscriptionContentDisplayContext {
 	private final ConfigurationProvider _configurationProvider;
 	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
-	private final CPRequestHelper _cpRequestHelper;
+	private final CommerceSubscriptionRequestHelper _cpRequestHelper;
 	private SearchContainer<CommerceSubscriptionEntry> _searchContainer;
 
 }

@@ -22,9 +22,9 @@ import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.model.impl.CPDefinitionInventoryImpl;
-import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
+import com.liferay.commerce.product.definitions.display.context.BaseCPDefinitionsDisplayContext;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.service.CPDAvailabilityEstimateService;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateService;
 import com.liferay.commerce.stock.activity.CommerceLowStockActivity;
@@ -70,7 +70,7 @@ public class CPDefinitionInventoryDisplayContext
 
 		return _commerceAvailabilityEstimateService.
 			getCommerceAvailabilityEstimates(
-				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				requestHelper.getCompanyId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS,
 				new CommerceAvailabilityEstimatePriorityComparator(true));
 	}
@@ -96,7 +96,7 @@ public class CPDefinitionInventoryDisplayContext
 
 		_cpDefinitionInventory =
 			_cpDefinitionInventoryActionHelper.getCPDefinitionInventory(
-				cpRequestHelper.getRenderRequest());
+				requestHelper.getRenderRequest());
 
 		if (_cpDefinitionInventory == null) {
 			_cpDefinitionInventory = new CPDefinitionInventoryImpl();

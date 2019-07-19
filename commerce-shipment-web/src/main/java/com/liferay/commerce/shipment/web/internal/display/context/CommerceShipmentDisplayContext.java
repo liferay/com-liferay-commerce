@@ -81,7 +81,7 @@ public class CommerceShipmentDisplayContext
 
 		_commerceInventoryWarehouses =
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
-				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
+				requestHelper.getCompanyId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
 		return _commerceInventoryWarehouses;
@@ -100,19 +100,19 @@ public class CommerceShipmentDisplayContext
 
 	public List<CommerceOrder> getCommerceOrders() throws PortalException {
 		return _commerceOrderService.getCommerceOrders(
-			cpRequestHelper.getChannelGroupId(),
+			requestHelper.getChannelGroupId(),
 			CommerceShipmentConstants.ALLOWED_ORDER_STATUSES);
 	}
 
 	public String getCommerceShipmentStatusLabel(int status) {
 		return LanguageUtil.get(
-			cpRequestHelper.getLocale(),
+			requestHelper.getLocale(),
 			CommerceShipmentConstants.getShipmentStatusLabel(status));
 	}
 
 	public String getNavigation() {
 		return ParamUtil.getString(
-			cpRequestHelper.getRequest(), "navigation", "all");
+			requestHelper.getRequest(), "navigation", "all");
 	}
 
 	public String[] getNavigationKeys() {
@@ -162,7 +162,7 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all")) {
 			emptyResultsMessage = LanguageUtil.format(
-				cpRequestHelper.getRequest(), "no-x-shipments-were-found",
+				requestHelper.getRequest(), "no-x-shipments-were-found",
 				navigation, true);
 		}
 
@@ -179,17 +179,17 @@ public class CommerceShipmentDisplayContext
 
 		if (!navigation.equals("all") && (shipmentStatus != null)) {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getCompanyId(), shipmentStatus);
+				requestHelper.getCompanyId(), shipmentStatus);
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getCompanyId(), shipmentStatus,
+				requestHelper.getCompanyId(), shipmentStatus,
 				searchContainer.getStart(), searchContainer.getEnd(),
 				orderByComparator);
 		}
 		else {
 			total = _commerceShipmentService.getCommerceShipmentsCount(
-				cpRequestHelper.getCompanyId());
+				requestHelper.getCompanyId());
 			results = _commerceShipmentService.getCommerceShipments(
-				cpRequestHelper.getCompanyId(), searchContainer.getStart(),
+				requestHelper.getCompanyId(), searchContainer.getStart(),
 				searchContainer.getEnd(), orderByComparator);
 		}
 

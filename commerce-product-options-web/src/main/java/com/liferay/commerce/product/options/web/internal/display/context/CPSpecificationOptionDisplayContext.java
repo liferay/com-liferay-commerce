@@ -65,7 +65,7 @@ public class CPSpecificationOptionDisplayContext
 		BaseModelSearchResult<CPOptionCategory>
 			cpOptionCategoryBaseModelSearchResult =
 				_cpOptionCategoryService.searchCPOptionCategories(
-					cpRequestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
+					requestHelper.getCompanyId(), null, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null);
 
 		return cpOptionCategoryBaseModelSearchResult.getBaseModels();
@@ -139,7 +139,7 @@ public class CPSpecificationOptionDisplayContext
 		BaseModelSearchResult<CPSpecificationOption>
 			cpSpecificationOptionBaseModelSearchResult =
 				_cpSpecificationOptionService.searchCPSpecificationOptions(
-					cpRequestHelper.getCompanyId(), facetable, getKeywords(),
+					requestHelper.getCompanyId(), facetable, getKeywords(),
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(

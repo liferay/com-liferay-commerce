@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.item.selector.web.internal.display.context;
 
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.item.selector.web.internal.display.context.util.CommerceItemSelectorRequestHelper;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -36,7 +36,8 @@ public abstract class BaseCommerceItemSelectorViewDisplayContext<T> {
 		_portletURL = portletURL;
 		this.itemSelectedEventName = itemSelectedEventName;
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CommerceItemSelectorRequestHelper(
+			httpServletRequest);
 
 		_defaultOrderByCol = "name";
 		_defaultOrderByType = "asc";
@@ -48,13 +49,13 @@ public abstract class BaseCommerceItemSelectorViewDisplayContext<T> {
 
 	public String getOrderByCol() {
 		return ParamUtil.getString(
-			cpRequestHelper.getRenderRequest(),
+			requestHelper.getRenderRequest(),
 			SearchContainer.DEFAULT_ORDER_BY_COL_PARAM, _defaultOrderByCol);
 	}
 
 	public String getOrderByType() {
 		return ParamUtil.getString(
-			cpRequestHelper.getRenderRequest(),
+			requestHelper.getRenderRequest(),
 			SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM, _defaultOrderByType);
 	}
 
@@ -79,14 +80,14 @@ public abstract class BaseCommerceItemSelectorViewDisplayContext<T> {
 		}
 
 		_keywords = ParamUtil.getString(
-			cpRequestHelper.getRenderRequest(), "keywords");
+			requestHelper.getRenderRequest(), "keywords");
 
 		return _keywords;
 	}
 
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final String itemSelectedEventName;
+	protected final CommerceItemSelectorRequestHelper requestHelper;
 	protected SearchContainer<T> searchContainer;
 
 	private String _defaultOrderByCol;

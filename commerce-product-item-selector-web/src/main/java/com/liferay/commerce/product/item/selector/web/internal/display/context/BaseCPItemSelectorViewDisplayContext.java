@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.item.selector.web.internal.display.context;
 
-import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.item.selector.web.internal.display.context.util.CPItemSelectorRequestHelper;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -48,10 +48,10 @@ public abstract class BaseCPItemSelectorViewDisplayContext<T> {
 		portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
 			this.httpServletRequest);
 
-		cpRequestHelper = new CPRequestHelper(httpServletRequest);
+		requestHelper = new CPItemSelectorRequestHelper(httpServletRequest);
 
-		liferayPortletRequest = cpRequestHelper.getLiferayPortletRequest();
-		liferayPortletResponse = cpRequestHelper.getLiferayPortletResponse();
+		liferayPortletRequest = requestHelper.getLiferayPortletRequest();
+		liferayPortletResponse = requestHelper.getLiferayPortletResponse();
 
 		_defaultOrderByCol = "title";
 		_defaultOrderByType = "asc";
@@ -134,7 +134,7 @@ public abstract class BaseCPItemSelectorViewDisplayContext<T> {
 	}
 
 	public long getScopeGroupId() {
-		return cpRequestHelper.getScopeGroupId();
+		return requestHelper.getScopeGroupId();
 	}
 
 	public abstract SearchContainer<T> getSearchContainer()
@@ -194,11 +194,11 @@ public abstract class BaseCPItemSelectorViewDisplayContext<T> {
 		return _rowChecker;
 	}
 
-	protected final CPRequestHelper cpRequestHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;
 	protected final LiferayPortletResponse liferayPortletResponse;
 	protected final PortalPreferences portalPreferences;
+	protected final CPItemSelectorRequestHelper requestHelper;
 	protected SearchContainer<T> searchContainer;
 
 	private String _defaultOrderByCol;

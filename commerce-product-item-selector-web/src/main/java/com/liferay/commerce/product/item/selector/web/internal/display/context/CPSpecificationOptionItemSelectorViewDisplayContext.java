@@ -74,7 +74,7 @@ public class CPSpecificationOptionItemSelectorViewDisplayContext
 		BaseModelSearchResult<CPSpecificationOption>
 			cpSpecificationOptionBaseModelSearchResult =
 				_cpSpecificationOptionService.searchCPSpecificationOptions(
-					cpRequestHelper.getCompanyId(), null, getKeywords(),
+					requestHelper.getCompanyId(), null, getKeywords(),
 					searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 		searchContainer.setTotal(

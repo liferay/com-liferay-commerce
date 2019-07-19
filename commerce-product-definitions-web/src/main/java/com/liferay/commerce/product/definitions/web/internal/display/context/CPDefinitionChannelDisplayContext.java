@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.definitions.web.internal.display.context;
 
-import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.portlet.action.ActionHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelRel;
@@ -68,7 +68,7 @@ public class CPDefinitionChannelDisplayContext
 
 	public List<CommerceChannel> getCommerceChannels() throws PortalException {
 		return _commerceChannelService.getCommerceChannels(
-			cpRequestHelper.getCompanyId());
+			requestHelper.getCompanyId());
 	}
 
 	private final CommerceChannelRelService _commerceChannelRelService;
