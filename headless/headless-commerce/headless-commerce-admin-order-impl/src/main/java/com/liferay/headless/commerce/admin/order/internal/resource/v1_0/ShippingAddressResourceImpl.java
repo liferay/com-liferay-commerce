@@ -16,16 +16,22 @@ package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressService;
+import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.ShippingAddressResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.ws.rs.core.Response;
 
@@ -126,6 +132,23 @@ public class ShippingAddressResourceImpl
 		return responseBuilder.build();
 	}
 
+	private long _getCommerceRegionId(
+			CommerceAddress commerceAddress, CommerceCountry commerceCountry,
+			ShippingAddress shippingAddress)
+		throws PortalException {
+
+		if (Validator.isNull(shippingAddress.getRegionISOCode())) {
+			return commerceAddress.getCommerceRegionId();
+		}
+
+		CommerceRegion commerceRegion =
+			_commerceRegionLocalService.getCommerceRegion(
+				commerceCountry.getCommerceCountryId(),
+				shippingAddress.getRegionISOCode());
+
+		return commerceRegion.getCommerceCountryId();
+	}
+
 	private CommerceOrder _updateShippingAddress(
 			CommerceOrder commerceOrder, ShippingAddress shippingAddress)
 		throws Exception {
@@ -133,6 +156,11 @@ public class ShippingAddressResourceImpl
 		CommerceAddress commerceAddress =
 			_commerceAddressService.getCommerceAddress(
 				commerceOrder.getShippingAddressId());
+
+		CommerceCountry commerceCountry =
+			_commerceCountryService.getCommerceCountry(
+				contextCompany.getCompanyId(),
+				shippingAddress.getCountryISOCode());
 
 		return _commerceOrderService.updateBillingAddress(
 			commerceOrder.getCommerceOrderId(), shippingAddress.getName(),
@@ -146,10 +174,9 @@ public class ShippingAddressResourceImpl
 				shippingAddress.getStreet3(), commerceAddress.getStreet3()),
 			shippingAddress.getCity(),
 			GetterUtil.get(shippingAddress.getZip(), commerceAddress.getZip()),
-			GetterUtil.get(
-				shippingAddress.getCommerceRegionId(),
-				commerceAddress.getCommerceRegionId()),
-			shippingAddress.getCommerceCountryId(),
+			_getCommerceRegionId(
+				commerceAddress, commerceCountry, shippingAddress),
+			commerceCountry.getCommerceCountryId(),
 			GetterUtil.get(
 				shippingAddress.getPhoneNumber(),
 				commerceAddress.getPhoneNumber()),
@@ -161,7 +188,13 @@ public class ShippingAddressResourceImpl
 	private CommerceAddressService _commerceAddressService;
 
 	@Reference
+	private CommerceCountryService _commerceCountryService;
+
+	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
