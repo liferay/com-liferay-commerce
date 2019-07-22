@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -36,8 +37,19 @@ public class OrderItemUtil {
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws Exception {
 
-		CPInstance cpInstance = cpInstanceService.getCPInstance(
-			orderItem.getSkuId());
+		ExportImportThreadLocal.setPortletImportInProcess(true);
+
+		CPInstance cpInstance = null;
+
+		if (orderItem.getSkuId() != null) {
+			cpInstance = cpInstanceService.getCPInstance(orderItem.getSkuId());
+		}
+
+		if (orderItem.getSkuExternalReferenceCode() != null) {
+			cpInstance = cpInstanceService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(),
+				orderItem.getSkuExternalReferenceCode());
+		}
 
 		return commerceOrderItemService.upsertCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),

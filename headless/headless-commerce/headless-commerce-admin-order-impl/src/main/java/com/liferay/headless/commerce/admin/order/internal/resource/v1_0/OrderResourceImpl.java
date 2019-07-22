@@ -14,6 +14,8 @@
 
 package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
@@ -43,6 +45,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.util.SearchUtil;
@@ -344,14 +347,29 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyService.getCommerceCurrency(
-				commerceChannel.getSiteGroupId(), order.getCurrencyCode());
+				commerceChannel.getCompanyId(), order.getCurrencyCode());
 
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceChannel.getGroupId());
 
+		CommerceAccount commerceAccount = null;
+
+		if (order.getAccountId() != null) {
+			commerceAccount = _commerceAccountService.getCommerceAccount(
+				order.getAccountId());
+		}
+
+		if (Validator.isNotNull(order.getAccountExternalReferenceCode())) {
+			commerceAccount =
+				_commerceAccountService.fetchByExternalReferenceCode(
+					commerceChannel.getCompanyId(),
+					order.getAccountExternalReferenceCode());
+		}
+
 		CommerceOrder commerceOrder = _commerceOrderService.upsertCommerceOrder(
 			_user.getUserId(), commerceChannel.getGroupId(),
-			order.getAccountId(), commerceCurrency.getCommerceCurrencyId(),
+			commerceAccount.getCommerceAccountId(),
+			commerceCurrency.getCommerceCurrencyId(),
 			GetterUtil.get(order.getBillingAddressId(), 0L),
 			GetterUtil.get(order.getShippingAddressId(), 0L),
 			order.getPaymentMethod(), commerceShippingMethodId,
@@ -362,7 +380,7 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 			order.getExternalReferenceCode(),
 			_commerceContextFactory.create(
 				contextCompany.getCompanyId(), commerceChannel.getSiteGroupId(),
-				_user.getUserId(), 0L, order.getAccountId()),
+				_user.getUserId(), 0L, commerceAccount.getCommerceAccountId()),
 			serviceContext);
 
 		// Expando
@@ -382,6 +400,9 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 		return commerceOrder;
 	}
+
+	@Reference
+	private CommerceAccountService _commerceAccountService;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
