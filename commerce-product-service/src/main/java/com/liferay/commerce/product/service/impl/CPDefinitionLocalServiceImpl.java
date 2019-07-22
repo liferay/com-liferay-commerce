@@ -94,6 +94,8 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -238,16 +240,19 @@ public class CPDefinitionLocalServiceImpl
 		if (Validator.isNotNull(defaultSku)) {
 			ServiceContext cpInstanceServiceContext = new ServiceContext();
 
-			cpInstanceServiceContext.setScopeGroupId(
-				serviceContext.getScopeGroupId());
-			cpInstanceServiceContext.setUserId(serviceContext.getUserId());
+			cpInstanceServiceContext.setScopeGroupId(groupId);
+			cpInstanceServiceContext.setUserId(userId);
 
 			cpInstanceLocalService.addCPInstance(
-				cpDefinitionId, groupId, defaultSku, null, null, true, null,
-				true, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, cpInstanceServiceContext);
+				cpDefinitionId, groupId, defaultSku, null, null, published,
+				null, cpDefinition.getWidth(), cpDefinition.getHeight(),
+				cpDefinition.getDepth(), cpDefinition.getWeight(),
+				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, published,
+				externalReferenceCode, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				cpInstanceServiceContext);
 		}
 
 		// Commerce product friendly URL
