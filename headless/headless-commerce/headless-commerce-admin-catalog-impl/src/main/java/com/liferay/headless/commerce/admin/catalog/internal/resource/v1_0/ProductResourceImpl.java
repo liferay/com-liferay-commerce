@@ -582,7 +582,9 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(product.getShortDescription()),
 			LanguageUtils.getLocalizedMap(product.getDescription()), null,
-			LanguageUtils.getLocalizedMap(product.getName()), null, null,
+			LanguageUtils.getLocalizedMap(product.getMetaTitle()),
+			LanguageUtils.getLocalizedMap(product.getMetaDescription()),
+			LanguageUtils.getLocalizedMap(product.getMetaKeyword()),
 			product.getProductType(), true,
 			GetterUtil.getBoolean(shippingConfiguration.getShippable(), true),
 			GetterUtil.getBoolean(
