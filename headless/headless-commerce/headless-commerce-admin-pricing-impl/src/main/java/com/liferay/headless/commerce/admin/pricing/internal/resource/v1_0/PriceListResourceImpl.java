@@ -328,7 +328,7 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 
 		Map<String, ?> customFields = priceList.getCustomFields();
 
-		if (!customFields.isEmpty()) {
+		if ((customFields != null) && !customFields.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CommercePriceList.class,
 				commercePriceList.getPrimaryKey(), customFields);

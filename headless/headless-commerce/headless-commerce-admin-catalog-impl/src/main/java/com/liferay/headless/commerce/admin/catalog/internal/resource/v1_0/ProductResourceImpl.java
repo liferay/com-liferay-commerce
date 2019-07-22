@@ -534,7 +534,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		Map<String, ?> expando = product.getExpando();
 
-		if (!expando.isEmpty()) {
+		if ((expando != null) && !expando.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CPDefinition.class,
 				cpDefinition.getPrimaryKey(), expando);
