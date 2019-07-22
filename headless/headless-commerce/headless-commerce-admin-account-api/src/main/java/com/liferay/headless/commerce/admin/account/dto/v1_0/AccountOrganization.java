@@ -33,8 +33,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,25 +42,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("AccountOrganization")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"commerceAccountId", "organizationId"})
 @XmlRootElement(name = "AccountOrganization")
 public class AccountOrganization {
 
 	@Schema
-	public Long getCommerceAccountId() {
-		return commerceAccountId;
+	public Long getAccountId() {
+		return accountId;
 	}
 
-	public void setCommerceAccountId(Long commerceAccountId) {
-		this.commerceAccountId = commerceAccountId;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
 
 	@JsonIgnore
-	public void setCommerceAccountId(
-		UnsafeSupplier<Long, Exception> commerceAccountIdUnsafeSupplier) {
+	public void setAccountId(
+		UnsafeSupplier<Long, Exception> accountIdUnsafeSupplier) {
 
 		try {
-			commerceAccountId = commerceAccountIdUnsafeSupplier.get();
+			accountId = accountIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -74,8 +71,7 @@ public class AccountOrganization {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commerceAccountId;
+	protected Long accountId;
 
 	@Schema
 	public String getName() {
@@ -104,6 +100,39 @@ public class AccountOrganization {
 	protected String name;
 
 	@Schema
+	public String getOrganizationExternalReferenceCode() {
+		return organizationExternalReferenceCode;
+	}
+
+	public void setOrganizationExternalReferenceCode(
+		String organizationExternalReferenceCode) {
+
+		this.organizationExternalReferenceCode =
+			organizationExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setOrganizationExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			organizationExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			organizationExternalReferenceCode =
+				organizationExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String organizationExternalReferenceCode;
+
+	@Schema
 	public Long getOrganizationId() {
 		return organizationId;
 	}
@@ -129,7 +158,6 @@ public class AccountOrganization {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Long organizationId;
 
 	@Schema
@@ -187,14 +215,14 @@ public class AccountOrganization {
 
 		sb.append("{");
 
-		if (commerceAccountId != null) {
+		if (accountId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceAccountId\": ");
+			sb.append("\"accountId\": ");
 
-			sb.append(commerceAccountId);
+			sb.append(accountId);
 		}
 
 		if (name != null) {
@@ -207,6 +235,20 @@ public class AccountOrganization {
 			sb.append("\"");
 
 			sb.append(_escape(name));
+
+			sb.append("\"");
+		}
+
+		if (organizationExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"organizationExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(organizationExternalReferenceCode));
 
 			sb.append("\"");
 		}

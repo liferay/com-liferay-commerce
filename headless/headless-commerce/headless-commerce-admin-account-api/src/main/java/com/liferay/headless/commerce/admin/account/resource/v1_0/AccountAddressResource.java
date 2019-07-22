@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -32,46 +32,25 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface AccountMemberResource {
+public interface AccountAddressResource {
 
-	public Page<AccountMember>
-			getAccountByExternalReferenceCodeAccountMembersPage(
+	public Response deleteAccountAddress(Long id) throws Exception;
+
+	public Page<AccountAddress>
+			getAccountByExternalReferenceCodeAccountAddressesPage(
 				String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public AccountMember postAccountByExternalReferenceCodeAccountMember(
-			String externalReferenceCode, AccountMember accountMember)
+	public AccountAddress postAccountByExternalReferenceCodeAccountAddress(
+			String externalReferenceCode, AccountAddress accountAddress)
 		throws Exception;
 
-	public Response deleteAccountByExternalReferenceCodeAccountMember(
-			String externalReferenceCode, Long userId)
-		throws Exception;
-
-	public AccountMember getAccountByExternalReferenceCodeAccountMember(
-			String externalReferenceCode, Long userId)
-		throws Exception;
-
-	public Response patchAccountByExternalReferenceCodeAccountMember(
-			String externalReferenceCode, Long userId,
-			AccountMember accountMember)
-		throws Exception;
-
-	public Page<AccountMember> getAccountIdAccountMembersPage(
+	public Page<AccountAddress> getAccountIdAccountAddressesPage(
 			Long id, Pagination pagination)
 		throws Exception;
 
-	public AccountMember postAccountIdAccountMember(
-			Long id, AccountMember accountMember)
-		throws Exception;
-
-	public Response deleteAccountIdAccountMember(Long id, Long userId)
-		throws Exception;
-
-	public AccountMember getAccountIdAccountMember(Long id, Long userId)
-		throws Exception;
-
-	public Response patchAccountIdAccountMember(
-			Long id, Long userId, AccountMember accountMember)
+	public AccountAddress postAccountIdAccountAddress(
+			Long id, AccountAddress accountAddress)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
