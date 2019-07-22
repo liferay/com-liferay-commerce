@@ -14,12 +14,14 @@
 
 package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountOrganization;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
+
+import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -30,21 +32,42 @@ import javax.annotation.Generated;
  * @generated
  */
 @Generated("")
-public interface AddressResource {
+public interface AccountOrganizationResource {
 
-	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
-			String externalReferenceCode, Pagination pagination)
+	public Page<AccountOrganization>
+			getAccountByExternalReferenceCodeAccountOrganizationsPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public Address postAccountByExternalReferenceCodeAddress(
-			String externalReferenceCode, Address address)
+	public AccountOrganization
+			postAccountByExternalReferenceCodeAccountOrganization(
+				String externalReferenceCode,
+				AccountOrganization accountOrganization)
 		throws Exception;
 
-	public Page<Address> getAccountIdAddressesPage(
+	public Response deleteAccountByExternalReferenceCodeAccountOrganization(
+			String externalReferenceCode, Long organizationId)
+		throws Exception;
+
+	public AccountOrganization
+			getAccountByExternalReferenceCodeAccountOrganization(
+				String externalReferenceCode, Long organizationId)
+		throws Exception;
+
+	public Page<AccountOrganization> getAccountIdAccountOrganizationsPage(
 			Long id, Pagination pagination)
 		throws Exception;
 
-	public Address postAccountIdAddress(Long id, Address address)
+	public AccountOrganization postAccountIdAccountOrganization(
+			Long id, AccountOrganization accountOrganization)
+		throws Exception;
+
+	public Response deleteAccountIdAccountOrganization(
+			Long id, Long organizationId)
+		throws Exception;
+
+	public AccountOrganization getAccountIdAccountOrganization(
+			Long id, Long organizationId)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

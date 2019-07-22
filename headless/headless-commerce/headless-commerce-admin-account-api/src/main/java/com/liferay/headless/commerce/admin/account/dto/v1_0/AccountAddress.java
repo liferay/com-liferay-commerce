@@ -43,11 +43,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @generated
  */
 @Generated("")
-@GraphQLName("Address")
+@GraphQLName("AccountAddress")
 @JsonFilter("Liferay.Vulcan")
 @Schema(requiredProperties = {"city", "commerceCountryId", "name", "street1"})
-@XmlRootElement(name = "Address")
-public class Address {
+@XmlRootElement(name = "AccountAddress")
+public class AccountAddress {
 
 	@Schema
 	public String getCity() {
@@ -471,13 +471,13 @@ public class Address {
 			return true;
 		}
 
-		if (!(object instanceof Address)) {
+		if (!(object instanceof AccountAddress)) {
 			return false;
 		}
 
-		Address address = (Address)object;
+		AccountAddress accountAddress = (AccountAddress)object;
 
-		return Objects.equals(toString(), address.toString());
+		return Objects.equals(toString(), accountAddress.toString());
 	}
 
 	@Override

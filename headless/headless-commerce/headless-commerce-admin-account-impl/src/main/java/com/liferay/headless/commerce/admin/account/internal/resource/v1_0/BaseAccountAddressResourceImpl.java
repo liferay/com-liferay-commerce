@@ -14,8 +14,8 @@
 
 package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
-import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountAddressResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -38,12 +38,14 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -52,7 +54,23 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseAddressResourceImpl implements AddressResource {
+public abstract class BaseAccountAddressResourceImpl
+	implements AccountAddressResource {
+
+	@Override
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accountAddresses/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Response deleteAccountAddress(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
 
 	@Override
 	@GET
@@ -64,14 +82,16 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 		}
 	)
 	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/addresses/"
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountAddresses/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@Context Pagination pagination)
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Page<AccountAddress>
+			getAccountByExternalReferenceCodeAccountAddressesPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -86,17 +106,17 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 		}
 	)
 	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/addresses/"
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountAddresses/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountByExternalReferenceCodeAddress(
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public AccountAddress postAccountByExternalReferenceCodeAccountAddress(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Address address)
+			AccountAddress accountAddress)
 		throws Exception {
 
-		return new Address();
+		return new AccountAddress();
 	}
 
 	@Override
@@ -108,10 +128,10 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/accounts/{id}/addresses/")
+	@Path("/accounts/{id}/accountAddresses/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Page<Address> getAccountIdAddressesPage(
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Page<AccountAddress> getAccountIdAccountAddressesPage(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
@@ -123,22 +143,23 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accounts/{id}/addresses/")
+	@Path("/accounts/{id}/accountAddresses/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountIdAddress(
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public AccountAddress postAccountIdAccountAddress(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Address address)
+			AccountAddress accountAddress)
 		throws Exception {
 
-		return new Address();
+		return new AccountAddress();
 	}
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(Address address, Address existingAddress) {
+	protected void preparePatch(
+		AccountAddress accountAddress, AccountAddress existingAccountAddress) {
 	}
 
 	protected <T, R> List<R> transform(

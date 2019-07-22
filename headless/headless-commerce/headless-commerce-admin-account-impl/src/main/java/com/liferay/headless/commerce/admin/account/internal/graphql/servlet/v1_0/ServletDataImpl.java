@@ -16,10 +16,11 @@ package com.liferay.headless.commerce.admin.account.internal.graphql.servlet.v1_
 
 import com.liferay.headless.commerce.admin.account.internal.graphql.mutation.v1_0.Mutation;
 import com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0.Query;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountAddressResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountOrganizationResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
-import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
 
 import javax.annotation.Generated;
@@ -43,21 +44,25 @@ public class ServletDataImpl implements ServletData {
 	public void activate(BundleContext bundleContext) {
 		Mutation.setAccountResourceComponentServiceObjects(
 			_accountResourceComponentServiceObjects);
+		Mutation.setAccountAddressResourceComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects);
 		Mutation.setAccountGroupResourceComponentServiceObjects(
 			_accountGroupResourceComponentServiceObjects);
 		Mutation.setAccountMemberResourceComponentServiceObjects(
 			_accountMemberResourceComponentServiceObjects);
-		Mutation.setAddressResourceComponentServiceObjects(
-			_addressResourceComponentServiceObjects);
+		Mutation.setAccountOrganizationResourceComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects);
 
 		Query.setAccountResourceComponentServiceObjects(
 			_accountResourceComponentServiceObjects);
+		Query.setAccountAddressResourceComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects);
 		Query.setAccountGroupResourceComponentServiceObjects(
 			_accountGroupResourceComponentServiceObjects);
 		Query.setAccountMemberResourceComponentServiceObjects(
 			_accountMemberResourceComponentServiceObjects);
-		Query.setAddressResourceComponentServiceObjects(
-			_addressResourceComponentServiceObjects);
+		Query.setAccountOrganizationResourceComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects);
 	}
 
 	@Override
@@ -80,6 +85,10 @@ public class ServletDataImpl implements ServletData {
 		_accountResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<AccountAddressResource>
+		_accountAddressResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<AccountGroupResource>
 		_accountGroupResourceComponentServiceObjects;
 
@@ -88,7 +97,7 @@ public class ServletDataImpl implements ServletData {
 		_accountMemberResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
-	private ComponentServiceObjects<AddressResource>
-		_addressResourceComponentServiceObjects;
+	private ComponentServiceObjects<AccountOrganizationResource>
+		_accountOrganizationResourceComponentServiceObjects;
 
 }
