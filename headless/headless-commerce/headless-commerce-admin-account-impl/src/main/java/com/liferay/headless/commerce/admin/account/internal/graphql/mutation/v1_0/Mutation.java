@@ -16,8 +16,10 @@ package com.liferay.headless.commerce.admin.account.internal.graphql.mutation.v1
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
@@ -57,6 +59,14 @@ public class Mutation {
 
 		_accountGroupResourceComponentServiceObjects =
 			accountGroupResourceComponentServiceObjects;
+	}
+
+	public static void setAccountMemberResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountMemberResource>
+			accountMemberResourceComponentServiceObjects) {
+
+		_accountMemberResourceComponentServiceObjects =
+			accountMemberResourceComponentServiceObjects;
 	}
 
 	public static void setAddressResourceComponentServiceObjects(
@@ -223,6 +233,37 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public AccountMember postAccountByExternalReferenceCodeAccountMember(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("accountMember") AccountMember accountMember)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource ->
+				accountMemberResource.
+					postAccountByExternalReferenceCodeAccountMember(
+						externalReferenceCode, accountMember));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountMember postAccountIdAccountMember(
+			@GraphQLName("id") Long id,
+			@GraphQLName("accountMember") AccountMember accountMember)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource ->
+				accountMemberResource.postAccountIdAccountMember(
+					id, accountMember));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Address postAccountByExternalReferenceCodeAddress(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode,
 			@GraphQLName("address") Address address)
@@ -304,6 +345,15 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			AccountMemberResource accountMemberResource)
+		throws Exception {
+
+		accountMemberResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(AddressResource addressResource)
 		throws Exception {
 
@@ -316,6 +366,8 @@ public class Mutation {
 		_accountResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AccountGroupResource>
 		_accountGroupResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountMemberResource>
+		_accountMemberResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AddressResource>
 		_addressResourceComponentServiceObjects;
 

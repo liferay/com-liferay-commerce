@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.account.internal.graphql.servlet.v1_
 import com.liferay.headless.commerce.admin.account.internal.graphql.mutation.v1_0.Mutation;
 import com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0.Query;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
@@ -44,6 +45,8 @@ public class ServletDataImpl implements ServletData {
 			_accountResourceComponentServiceObjects);
 		Mutation.setAccountGroupResourceComponentServiceObjects(
 			_accountGroupResourceComponentServiceObjects);
+		Mutation.setAccountMemberResourceComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects);
 		Mutation.setAddressResourceComponentServiceObjects(
 			_addressResourceComponentServiceObjects);
 
@@ -51,6 +54,8 @@ public class ServletDataImpl implements ServletData {
 			_accountResourceComponentServiceObjects);
 		Query.setAccountGroupResourceComponentServiceObjects(
 			_accountGroupResourceComponentServiceObjects);
+		Query.setAccountMemberResourceComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects);
 		Query.setAddressResourceComponentServiceObjects(
 			_addressResourceComponentServiceObjects);
 	}
@@ -77,6 +82,10 @@ public class ServletDataImpl implements ServletData {
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<AccountGroupResource>
 		_accountGroupResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<AccountMemberResource>
+		_accountMemberResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<AddressResource>

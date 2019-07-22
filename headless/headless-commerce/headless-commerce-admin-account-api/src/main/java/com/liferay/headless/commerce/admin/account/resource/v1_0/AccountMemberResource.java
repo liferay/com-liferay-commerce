@@ -14,7 +14,7 @@
 
 package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -30,21 +30,23 @@ import javax.annotation.Generated;
  * @generated
  */
 @Generated("")
-public interface AddressResource {
+public interface AccountMemberResource {
 
-	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
-			String externalReferenceCode, Pagination pagination)
+	public Page<AccountMember>
+			getAccountByExternalReferenceCodeAccountMembersPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public Address postAccountByExternalReferenceCodeAddress(
-			String externalReferenceCode, Address address)
+	public AccountMember postAccountByExternalReferenceCodeAccountMember(
+			String externalReferenceCode, AccountMember accountMember)
 		throws Exception;
 
-	public Page<Address> getAccountIdAddressesPage(
+	public Page<AccountMember> getAccountIdAccountMembersPage(
 			Long id, Pagination pagination)
 		throws Exception;
 
-	public Address postAccountIdAddress(Long id, Address address)
+	public AccountMember postAccountIdAccountMember(
+			Long id, AccountMember accountMember)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
