@@ -40,20 +40,17 @@ public class CPDefinitionInventoryLocalServiceImpl
 
 	@Override
 	public CPDefinitionInventory addCPDefinitionInventory(
-			long groupId, long cpDefinitionId,
-			String cpDefinitionInventoryEngine, String lowStockActivity,
-			boolean displayAvailability, boolean displayStockQuantity,
-			int minStockQuantity, boolean backOrders, int minOrderQuantity,
-			int maxOrderQuantity, String allowedOrderQuantities,
-			int multipleOrderQuantity)
+			long cpDefinitionId, String cpDefinitionInventoryEngine,
+			String lowStockActivity, boolean displayAvailability,
+			boolean displayStockQuantity, int minStockQuantity,
+			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
+			String allowedOrderQuantities, int multipleOrderQuantity)
 		throws PortalException {
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		if ((serviceContext == null) ||
-			(groupId != serviceContext.getScopeGroupId())) {
-
+		if (serviceContext == null) {
 			throw new PortalException("Unable to obtain valid service context");
 		}
 
@@ -64,19 +61,25 @@ public class CPDefinitionInventoryLocalServiceImpl
 		CPDefinitionInventory cpDefinitionInventory =
 			cpDefinitionInventoryPersistence.create(cpDefinitionInventoryId);
 
-		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
-			CPDefinition newCPDefinition =
-				_cpDefinitionLocalService.copyCPDefinition(cpDefinitionId);
+		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
+			cpDefinitionId);
 
-			cpDefinitionId = newCPDefinition.getCPDefinitionId();
+		if (_cpDefinitionLocalService.isVersionable(cpDefinitionId)) {
+			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
+				cpDefinitionId);
 		}
 
 		cpDefinitionInventory.setUuid(serviceContext.getUuid());
-		cpDefinitionInventory.setGroupId(groupId);
+
+		cpDefinitionInventory.setGroupId(cpDefinition.getGroupId());
+
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
 		cpDefinitionInventory.setUserId(user.getUserId());
 		cpDefinitionInventory.setUserName(user.getFullName());
-		cpDefinitionInventory.setCPDefinitionId(cpDefinitionId);
+
+		cpDefinitionInventory.setCPDefinitionId(
+			cpDefinition.getCPDefinitionId());
+
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
 		cpDefinitionInventory.setLowStockActivity(lowStockActivity);
