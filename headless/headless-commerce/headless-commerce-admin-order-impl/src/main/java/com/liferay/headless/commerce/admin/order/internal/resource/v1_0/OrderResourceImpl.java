@@ -310,7 +310,7 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 		Map<String, ?> customFields = order.getCustomFields();
 
-		if (!customFields.isEmpty()) {
+		if ((customFields != null) && !customFields.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				contextCompany.getCompanyId(), CommerceOrder.class,
 				commerceOrder.getPrimaryKey(), customFields);
@@ -369,7 +369,7 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 		Map<String, ?> customFields = order.getCustomFields();
 
-		if (!customFields.isEmpty()) {
+		if ((customFields != null) && !customFields.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				contextCompany.getCompanyId(), CommerceOrder.class,
 				commerceOrder.getPrimaryKey(), customFields);

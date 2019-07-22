@@ -292,7 +292,7 @@ public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 
 		Map<String, ?> customFields = discount.getCustomFields();
 
-		if (!customFields.isEmpty()) {
+		if ((customFields != null) && !customFields.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CommerceDiscount.class,
 				commerceDiscount.getPrimaryKey(), customFields);
@@ -465,7 +465,7 @@ public class DiscountResourceImpl extends BaseDiscountResourceImpl {
 
 		Map<String, ?> customFields = discount.getCustomFields();
 
-		if (!customFields.isEmpty()) {
+		if ((customFields != null) && !customFields.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CommerceDiscount.class,
 				commerceDiscount.getPrimaryKey(), customFields);
