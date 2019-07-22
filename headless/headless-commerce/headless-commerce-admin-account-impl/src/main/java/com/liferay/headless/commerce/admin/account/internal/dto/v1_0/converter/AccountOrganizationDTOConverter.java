@@ -53,7 +53,7 @@ public class AccountOrganizationDTOConverter implements DTOConverter {
 
 		return new AccountOrganization() {
 			{
-				commerceAccountId =
+				accountId =
 					commerceAccountOrganizationRel.getCommerceAccountId();
 				name = organization.getName();
 				organizationId = organization.getOrganizationId();
