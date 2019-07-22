@@ -35,7 +35,7 @@ public class PriceEntryUtil {
 
 		return commercePriceEntryService.upsertCommercePriceEntry(
 			GetterUtil.getLong(priceEntry.getId()),
-			GetterUtil.getLong(priceEntry.getSkuId()),
+			GetterUtil.getLong(priceEntry.getSkuId()), null,
 			commercePriceList.getCommercePriceListId(),
 			priceEntry.getExternalReferenceCode(), priceEntry.getPrice(),
 			priceEntry.getPromoPrice(),
