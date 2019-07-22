@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 
+import java.math.BigDecimal;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -38,7 +40,8 @@ public class PriceEntryUtil {
 			GetterUtil.getLong(priceEntry.getSkuId()), null,
 			commercePriceList.getCommercePriceListId(),
 			priceEntry.getExternalReferenceCode(), priceEntry.getPrice(),
-			priceEntry.getPromoPrice(),
+			(BigDecimal)GetterUtil.get(
+				priceEntry.getPromoPrice(), BigDecimal.ZERO),
 			priceEntry.getSkuExternalReferenceCode(), serviceContext);
 	}
 

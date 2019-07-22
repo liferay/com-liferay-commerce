@@ -239,7 +239,7 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 			user.setExternalReferenceCode(userExternalReferenceCode);
 
-			userPersistence.update(user);
+			userLocalService.updateUser(user);
 		}
 
 		CommerceAccountUserRel commerceAccountUserRel =
