@@ -76,41 +76,6 @@ public abstract class BasePriceListAccountGroupResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/priceLists/{id}/priceListAccountGroups/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
-	public Page<PriceListAccountGroup> getPriceListIdPriceListAccountGroupsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceLists/{id}/priceListAccountGroups/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
-	public PriceListAccountGroup postPriceListIdPriceListAccountGroup(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			PriceListAccountGroup priceListAccountGroup)
-		throws Exception {
-
-		return new PriceListAccountGroup();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -151,6 +116,41 @@ public abstract class BasePriceListAccountGroupResourceImpl
 				@PathParam("externalReferenceCode") String
 					externalReferenceCode,
 				PriceListAccountGroup priceListAccountGroup)
+		throws Exception {
+
+		return new PriceListAccountGroup();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/priceLists/{id}/priceListAccountGroups/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public Page<PriceListAccountGroup> getPriceListIdPriceListAccountGroupsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}/priceListAccountGroups/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceListAccountGroup")})
+	public PriceListAccountGroup postPriceListIdPriceListAccountGroup(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			PriceListAccountGroup priceListAccountGroup)
 		throws Exception {
 
 		return new PriceListAccountGroup();

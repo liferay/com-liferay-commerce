@@ -34,14 +34,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface DiscountRuleResource {
 
-	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public DiscountRule postDiscountIdDiscountRule(
-			Long id, DiscountRule discountRule)
-		throws Exception;
-
 	public Page<DiscountRule>
 			getDiscountByExternalReferenceCodeDiscountRulesPage(
 				String externalReferenceCode, Pagination pagination)
@@ -56,6 +48,14 @@ public interface DiscountRuleResource {
 	public DiscountRule getDiscountRule(Long id) throws Exception;
 
 	public Response patchDiscountRule(Long id, DiscountRule discountRule)
+		throws Exception;
+
+	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public DiscountRule postDiscountIdDiscountRule(
+			Long id, DiscountRule discountRule)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -76,41 +76,6 @@ public abstract class BaseDiscountCategoryResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/discounts/{id}/discountCategories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "DiscountCategory")})
-	public Page<DiscountCategory> getDiscountIdDiscountCategoriesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discounts/{id}/discountCategories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "DiscountCategory")})
-	public DiscountCategory postDiscountIdDiscountCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			DiscountCategory discountCategory)
-		throws Exception {
-
-		return new DiscountCategory();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -148,6 +113,41 @@ public abstract class BaseDiscountCategoryResourceImpl
 	public DiscountCategory postDiscountByExternalReferenceCodeDiscountCategory(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			DiscountCategory discountCategory)
+		throws Exception {
+
+		return new DiscountCategory();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/discounts/{id}/discountCategories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountCategory")})
+	public Page<DiscountCategory> getDiscountIdDiscountCategoriesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}/discountCategories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountCategory")})
+	public DiscountCategory postDiscountIdDiscountCategory(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			DiscountCategory discountCategory)
 		throws Exception {
 

@@ -34,13 +34,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface TierPriceResource {
 
-	public Page<TierPrice> getPriceEntryIdTierPricesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public TierPrice postPriceEntryIdTierPrice(Long id, TierPrice tierPrice)
-		throws Exception;
-
 	public Page<TierPrice> getPriceEntryByExternalReferenceCodeTierPricesPage(
 			String externalReferenceCode, Pagination pagination)
 		throws Exception;
@@ -49,11 +42,11 @@ public interface TierPriceResource {
 			String externalReferenceCode, TierPrice tierPrice)
 		throws Exception;
 
-	public Response deleteTierPrice(Long id) throws Exception;
+	public Page<TierPrice> getPriceEntryIdTierPricesPage(
+			Long id, Pagination pagination)
+		throws Exception;
 
-	public TierPrice getTierPrice(Long id) throws Exception;
-
-	public Response patchTierPrice(Long id, TierPrice tierPrice)
+	public TierPrice postPriceEntryIdTierPrice(Long id, TierPrice tierPrice)
 		throws Exception;
 
 	public Response deleteTierPriceByExternalReferenceCode(
@@ -66,6 +59,13 @@ public interface TierPriceResource {
 
 	public Response patchTierPriceByExternalReferenceCode(
 			String externalReferenceCode, TierPrice tierPrice)
+		throws Exception;
+
+	public Response deleteTierPrice(Long id) throws Exception;
+
+	public TierPrice getTierPrice(Long id) throws Exception;
+
+	public Response patchTierPrice(Long id, TierPrice tierPrice)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

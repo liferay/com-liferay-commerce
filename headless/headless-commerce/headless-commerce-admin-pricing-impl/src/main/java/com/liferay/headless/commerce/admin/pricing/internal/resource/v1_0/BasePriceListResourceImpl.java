@@ -58,48 +58,30 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BasePriceListResourceImpl implements PriceListResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceLists/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "PriceList")})
-	public Response deletePriceList(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceLists/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/priceLists/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceList getPriceList(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<PriceList> getPriceListsPage(@Context Pagination pagination)
 		throws Exception {
 
-		return new PriceList();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceLists/{id}")
+	@POST
+	@Path("/priceLists/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public Response patchPriceList(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			PriceList priceList)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public PriceList postPriceList(PriceList priceList) throws Exception {
+		return new PriceList();
 	}
 
 	@Override
@@ -163,30 +145,48 @@ public abstract class BasePriceListResourceImpl implements PriceListResource {
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/priceLists/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public Page<PriceList> getPriceListsPage(@Context Pagination pagination)
+	public Response deletePriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceList")})
+	public PriceList getPriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new PriceList();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/priceLists/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/priceLists/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceList")})
-	public PriceList postPriceList(PriceList priceList) throws Exception {
-		return new PriceList();
+	public Response patchPriceList(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			PriceList priceList)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

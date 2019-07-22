@@ -58,48 +58,30 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseDiscountResourceImpl implements DiscountResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discounts/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Discount")})
-	public Response deleteDiscount(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discounts/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/discounts/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public Discount getDiscount(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<Discount> getDiscountsPage(@Context Pagination pagination)
 		throws Exception {
 
-		return new Discount();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discounts/{id}")
+	@POST
+	@Path("/discounts/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public Response patchDiscount(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Discount discount)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public Discount postDiscount(Discount discount) throws Exception {
+		return new Discount();
 	}
 
 	@Override
@@ -163,30 +145,48 @@ public abstract class BaseDiscountResourceImpl implements DiscountResource {
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/discounts/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public Page<Discount> getDiscountsPage(@Context Pagination pagination)
+	public Response deleteDiscount(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Discount")})
+	public Discount getDiscount(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new Discount();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/discounts/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Discount")})
-	public Discount postDiscount(Discount discount) throws Exception {
-		return new Discount();
+	public Response patchDiscount(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Discount discount)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {
