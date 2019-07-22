@@ -196,10 +196,11 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 					_serviceContextHelper.getServiceContext());
 		}
 		else {
-			_commerceAccountGroupService.updateCommerceAccountGroup(
-				commerceAccountGroup.getCommerceAccountGroupId(),
-				accountGroup.getName(),
-				_serviceContextHelper.getServiceContext());
+			commerceAccountGroup =
+				_commerceAccountGroupService.updateCommerceAccountGroup(
+					commerceAccountGroup.getCommerceAccountGroupId(),
+					accountGroup.getName(),
+					_serviceContextHelper.getServiceContext());
 		}
 
 		DTOConverter accountGroupDTOConverter =
