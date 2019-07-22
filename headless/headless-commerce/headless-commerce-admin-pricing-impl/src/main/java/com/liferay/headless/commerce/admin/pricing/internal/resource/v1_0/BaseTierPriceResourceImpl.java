@@ -61,41 +61,6 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/priceEntries/{id}/tierPrices/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TierPrice")})
-	public Page<TierPrice> getPriceEntryIdTierPricesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}/tierPrices/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TierPrice")})
-	public TierPrice postPriceEntryIdTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			TierPrice tierPrice)
-		throws Exception {
-
-		return new TierPrice();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -138,48 +103,38 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 	}
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/tierPrices/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "TierPrice")})
-	public Response deleteTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/tierPrices/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/priceEntries/{id}/tierPrices/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TierPrice")})
-	public TierPrice getTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<TierPrice> getPriceEntryIdTierPricesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
 		throws Exception {
 
-		return new TierPrice();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
+	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/tierPrices/{id}")
+	@Path("/priceEntries/{id}/tierPrices/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "TierPrice")})
-	public Response patchTierPrice(
+	public TierPrice postPriceEntryIdTierPrice(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			TierPrice tierPrice)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new TierPrice();
 	}
 
 	@Override
@@ -234,6 +189,51 @@ public abstract class BaseTierPriceResourceImpl implements TierPriceResource {
 	public Response patchTierPriceByExternalReferenceCode(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			TierPrice tierPrice)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "TierPrice")})
+	public Response deleteTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "TierPrice")})
+	public TierPrice getTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new TierPrice();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/tierPrices/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "TierPrice")})
+	public Response patchTierPrice(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			TierPrice tierPrice)
 		throws Exception {
 
