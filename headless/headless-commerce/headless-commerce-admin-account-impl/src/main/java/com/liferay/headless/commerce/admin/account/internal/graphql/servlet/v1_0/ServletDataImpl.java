@@ -21,6 +21,7 @@ import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupRes
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountOrganizationResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.UserResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
 
 import javax.annotation.Generated;
@@ -52,6 +53,8 @@ public class ServletDataImpl implements ServletData {
 			_accountMemberResourceComponentServiceObjects);
 		Mutation.setAccountOrganizationResourceComponentServiceObjects(
 			_accountOrganizationResourceComponentServiceObjects);
+		Mutation.setUserResourceComponentServiceObjects(
+			_userResourceComponentServiceObjects);
 
 		Query.setAccountResourceComponentServiceObjects(
 			_accountResourceComponentServiceObjects);
@@ -99,5 +102,9 @@ public class ServletDataImpl implements ServletData {
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<AccountOrganizationResource>
 		_accountOrganizationResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<UserResource>
+		_userResourceComponentServiceObjects;
 
 }
