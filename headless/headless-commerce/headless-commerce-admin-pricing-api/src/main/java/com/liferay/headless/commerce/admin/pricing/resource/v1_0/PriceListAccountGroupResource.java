@@ -36,14 +36,6 @@ public interface PriceListAccountGroupResource {
 
 	public Response deletePriceListAccountGroup(Long id) throws Exception;
 
-	public Page<PriceListAccountGroup> getPriceListIdPriceListAccountGroupsPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public PriceListAccountGroup postPriceListIdPriceListAccountGroup(
-			Long id, PriceListAccountGroup priceListAccountGroup)
-		throws Exception;
-
 	public Page<PriceListAccountGroup>
 			getPriceListByExternalReferenceCodePriceListAccountGroupPage(
 				String externalReferenceCode, Pagination pagination)
@@ -53,6 +45,14 @@ public interface PriceListAccountGroupResource {
 			postPriceListByExternalReferenceCodePriceListAccountGroup(
 				String externalReferenceCode,
 				PriceListAccountGroup priceListAccountGroup)
+		throws Exception;
+
+	public Page<PriceListAccountGroup> getPriceListIdPriceListAccountGroupsPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public PriceListAccountGroup postPriceListIdPriceListAccountGroup(
+			Long id, PriceListAccountGroup priceListAccountGroup)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

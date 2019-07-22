@@ -34,13 +34,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface PriceEntryResource {
 
-	public Response deletePriceEntry(Long id) throws Exception;
-
-	public PriceEntry getPriceEntry(Long id) throws Exception;
-
-	public Response patchPriceEntry(Long id, PriceEntry priceEntry)
-		throws Exception;
-
 	public Response deletePriceEntryByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
@@ -53,11 +46,11 @@ public interface PriceEntryResource {
 			String externalReferenceCode, PriceEntry priceEntry)
 		throws Exception;
 
-	public Page<PriceEntry> getPriceListIdPriceEntriesPage(
-			Long id, Pagination pagination)
-		throws Exception;
+	public Response deletePriceEntry(Long id) throws Exception;
 
-	public PriceEntry postPriceListIdPriceEntry(Long id, PriceEntry priceEntry)
+	public PriceEntry getPriceEntry(Long id) throws Exception;
+
+	public Response patchPriceEntry(Long id, PriceEntry priceEntry)
 		throws Exception;
 
 	public Page<PriceEntry> getPriceListByExternalReferenceCodePriceEntriesPage(
@@ -66,6 +59,13 @@ public interface PriceEntryResource {
 
 	public PriceEntry postPriceListByExternalReferenceCodePriceEntry(
 			String externalReferenceCode, PriceEntry priceEntry)
+		throws Exception;
+
+	public Page<PriceEntry> getPriceListIdPriceEntriesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public PriceEntry postPriceListIdPriceEntry(Long id, PriceEntry priceEntry)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

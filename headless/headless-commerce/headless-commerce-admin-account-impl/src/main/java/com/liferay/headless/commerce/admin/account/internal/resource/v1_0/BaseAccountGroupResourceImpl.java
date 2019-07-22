@@ -59,48 +59,33 @@ public abstract class BaseAccountGroupResourceImpl
 	implements AccountGroupResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroups/{id}")
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/accountGroup/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Response deleteAccountGroup(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroups/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroup getAccountGroup(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public AccountGroup postAccountGroup(AccountGroup accountGroup)
 		throws Exception {
 
 		return new AccountGroup();
 	}
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accountGroups/{id}")
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/accountGroups/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Response patchAccountGroup(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			AccountGroup accountGroup)
+	public Page<AccountGroup> getAccountGroupsPage(
+			@Context Pagination pagination)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
@@ -164,33 +149,48 @@ public abstract class BaseAccountGroupResourceImpl
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/accountGroups/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public Page<AccountGroup> getAccountGroupsPage(
-			@Context Pagination pagination)
+	public Response deleteAccountGroup(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accountGroups/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountGroup")})
+	public AccountGroup getAccountGroup(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new AccountGroup();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/accountGroup/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accountGroups/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroup postAccountGroup(AccountGroup accountGroup)
+	public Response patchAccountGroup(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			AccountGroup accountGroup)
 		throws Exception {
 
-		return new AccountGroup();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

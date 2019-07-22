@@ -32,19 +32,19 @@ import javax.annotation.Generated;
 @Generated("")
 public interface AddressResource {
 
-	public Page<Address> getAccountIdAddressesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public Address postAccountIdAddress(Long id, Address address)
+	public Address postAccountByExternalReferenceCodeAddress(
+			String externalReferenceCode, Address address)
 		throws Exception;
 
 	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
 			String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public Address postAccountByExternalReferenceCodeAddress(
-			String externalReferenceCode, Address address)
+	public Address postAccountIdAddress(Long id, Address address)
+		throws Exception;
+
+	public Page<Address> getAccountIdAddressesPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

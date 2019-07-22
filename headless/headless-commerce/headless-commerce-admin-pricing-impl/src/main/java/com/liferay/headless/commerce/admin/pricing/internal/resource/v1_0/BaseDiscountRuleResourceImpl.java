@@ -62,41 +62,6 @@ public abstract class BaseDiscountRuleResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/discounts/{id}/discountRules/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "DiscountRule")})
-	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/discounts/{id}/discountRules/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "DiscountRule")})
-	public DiscountRule postDiscountIdDiscountRule(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			DiscountRule discountRule)
-		throws Exception {
-
-		return new DiscountRule();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -183,6 +148,41 @@ public abstract class BaseDiscountRuleResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/discounts/{id}/discountRules/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}/discountRules/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public DiscountRule postDiscountIdDiscountRule(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			DiscountRule discountRule)
+		throws Exception {
+
+		return new DiscountRule();
 	}
 
 	public void setContextCompany(Company contextCompany) {

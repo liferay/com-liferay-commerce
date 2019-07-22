@@ -36,14 +36,6 @@ public interface DiscountAccountGroupResource {
 
 	public Response deleteDiscountAccountGroup(Long id) throws Exception;
 
-	public Page<DiscountAccountGroup> getDiscountIdDiscountAccountGroupsPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public DiscountAccountGroup postDiscountIdDiscountAccountGroup(
-			Long id, DiscountAccountGroup discountAccountGroup)
-		throws Exception;
-
 	public Page<DiscountAccountGroup>
 			getDiscountByExternalReferenceCodeDiscountAccountGroupsPage(
 				String externalReferenceCode, Pagination pagination)
@@ -53,6 +45,14 @@ public interface DiscountAccountGroupResource {
 			postDiscountByExternalReferenceCodeDiscountAccountGroup(
 				String externalReferenceCode,
 				DiscountAccountGroup discountAccountGroup)
+		throws Exception;
+
+	public Page<DiscountAccountGroup> getDiscountIdDiscountAccountGroupsPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public DiscountAccountGroup postDiscountIdDiscountAccountGroup(
+			Long id, DiscountAccountGroup discountAccountGroup)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

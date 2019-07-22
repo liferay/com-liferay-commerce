@@ -70,29 +70,6 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Account getAccount(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_accountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountResource -> accountResource.getAccount(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Account getAccountByExternalReferenceCode(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountResource ->
-				accountResource.getAccountByExternalReferenceCode(
-					externalReferenceCode));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
 	public Collection<Account> getAccountsPage(
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
@@ -111,27 +88,25 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> accountGroupResource.getAccountGroup(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroup getAccountGroupByExternalReferenceCode(
+	public Account getAccountByExternalReferenceCode(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
+			_accountResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.getAccountGroupByExternalReferenceCode(
+			accountResource ->
+				accountResource.getAccountByExternalReferenceCode(
 					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Account getAccount(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_accountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountResource -> accountResource.getAccount(id));
 	}
 
 	@GraphQLField
@@ -154,20 +129,27 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<Address> getAccountIdAddressesPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+	public AccountGroup getAccountGroupByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_addressResourceComponentServiceObjects,
+			_accountGroupResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			addressResource -> {
-				Page paginationPage = addressResource.getAccountIdAddressesPage(
-					id, Pagination.of(pageSize, page));
+			accountGroupResource ->
+				accountGroupResource.getAccountGroupByExternalReferenceCode(
+					externalReferenceCode));
+	}
 
-				return paginationPage.getItems();
-			});
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.getAccountGroup(id));
 	}
 
 	@GraphQLField
@@ -187,6 +169,24 @@ public class Query {
 						getAccountByExternalReferenceCodeAddressesPage(
 							externalReferenceCode,
 							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<Address> getAccountIdAddressesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_addressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			addressResource -> {
+				Page paginationPage = addressResource.getAccountIdAddressesPage(
+					id, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});

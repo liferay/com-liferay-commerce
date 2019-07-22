@@ -55,34 +55,19 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseAddressResourceImpl implements AddressResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/accounts/{id}/addresses/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Page<Address> getAccountIdAddressesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accounts/{id}/address/")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accounts/by-externalReferenceCode/{externalReferenceCode}/address/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountIdAddress(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+	public Address postAccountByExternalReferenceCodeAddress(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
 			Address address)
 		throws Exception {
 
@@ -115,21 +100,36 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/accounts/by-externalReferenceCode/{externalReferenceCode}/address/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accounts/{id}/address/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountByExternalReferenceCodeAddress(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
+	public Address postAccountIdAddress(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			Address address)
 		throws Exception {
 
 		return new Address();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/accounts/{id}/addresses/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Address")})
+	public Page<Address> getAccountIdAddressesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
 	}
 
 	public void setContextCompany(Company contextCompany) {
