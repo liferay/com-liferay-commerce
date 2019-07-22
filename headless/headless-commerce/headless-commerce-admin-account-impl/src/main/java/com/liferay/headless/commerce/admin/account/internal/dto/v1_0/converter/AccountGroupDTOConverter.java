@@ -19,7 +19,6 @@ import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -57,8 +56,5 @@ public class AccountGroupDTOConverter implements DTOConverter {
 
 	@Reference
 	private CommerceAccountGroupService _commerceAccountGroupService;
-
-	@Reference
-	private DTOConverterRegistry _dtoConverterRegistry;
 
 }
