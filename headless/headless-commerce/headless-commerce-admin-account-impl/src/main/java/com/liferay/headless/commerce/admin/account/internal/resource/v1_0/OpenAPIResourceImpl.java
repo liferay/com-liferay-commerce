@@ -78,13 +78,15 @@ public class OpenAPIResourceImpl {
 		{
 			add(AccountResourceImpl.class);
 
-			add(AccountAddressResourceImpl.class);
-
 			add(AccountGroupResourceImpl.class);
+
+			add(UserResourceImpl.class);
 
 			add(AccountMemberResourceImpl.class);
 
 			add(AccountOrganizationResourceImpl.class);
+
+			add(AccountAddressResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
 		}
