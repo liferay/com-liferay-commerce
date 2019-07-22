@@ -19,8 +19,8 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
-import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountAddressResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
@@ -41,13 +41,14 @@ import org.osgi.service.component.annotations.ServiceScope;
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/address.properties",
-	scope = ServiceScope.PROTOTYPE, service = AddressResource.class
+	scope = ServiceScope.PROTOTYPE, service = AccountAddressResource.class
 )
-public class AddressResourceImpl extends BaseAddressResourceImpl {
+public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 
 	@Override
-	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
-			String externalReferenceCode, Pagination pagination)
+	public Page<AccountAddress>
+			getAccountByExternalReferenceCodeAccountAddressesPage(
+				String externalReferenceCode, Pagination pagination)
 		throws Exception {
 
 		CommerceAccount commerceAccount =
@@ -60,21 +61,21 @@ public class AddressResourceImpl extends BaseAddressResourceImpl {
 					externalReferenceCode);
 		}
 
-		return _getAddressesPage(commerceAccount, pagination);
+		return _getAccountAddressesPage(commerceAccount, pagination);
 	}
 
 	@Override
-	public Page<Address> getAccountIdAddressesPage(
+	public Page<AccountAddress> getAccountIdAccountAddressesPage(
 			Long id, Pagination pagination)
 		throws Exception {
 
-		return _getAddressesPage(
+		return _getAccountAddressesPage(
 			_commerceAccountService.getCommerceAccount(id), pagination);
 	}
 
 	@Override
-	public Address postAccountByExternalReferenceCodeAddress(
-			String externalReferenceCode, Address address)
+	public AccountAddress postAccountByExternalReferenceCodeAccountAddress(
+			String externalReferenceCode, AccountAddress accountAddress)
 		throws Exception {
 
 		CommerceAccount commerceAccount =
@@ -87,44 +88,47 @@ public class AddressResourceImpl extends BaseAddressResourceImpl {
 					externalReferenceCode);
 		}
 
-		return _addAddress(commerceAccount, address);
+		return _addAccountAddress(commerceAccount, accountAddress);
 	}
 
 	@Override
-	public Address postAccountIdAddress(Long id, Address address)
+	public AccountAddress postAccountIdAccountAddress(
+			Long id, AccountAddress accountAddress)
 		throws Exception {
 
-		return _addAddress(
-			_commerceAccountService.getCommerceAccount(id), address);
+		return _addAccountAddress(
+			_commerceAccountService.getCommerceAccount(id), accountAddress);
 	}
 
-	private Address _addAddress(
-			CommerceAccount commerceAccount, Address address)
+	private AccountAddress _addAccountAddress(
+			CommerceAccount commerceAccount, AccountAddress accountAddress)
 		throws Exception {
 
 		CommerceAddress commerceAddress =
 			_commerceAddressService.addCommerceAddress(
 				commerceAccount.getModelClassName(),
-				commerceAccount.getCommerceAccountId(), address.getName(),
-				address.getDescription(), address.getStreet1(),
-				address.getStreet2(), address.getStreet3(), address.getCity(),
-				address.getZip(), address.getCommerceRegionId(),
-				address.getCommerceCountryId(), address.getPhoneNumber(),
-				GetterUtil.get(address.getDefaultBilling(), false),
-				GetterUtil.get(address.getDefaultShipping(), false),
+				commerceAccount.getCommerceAccountId(),
+				accountAddress.getName(), accountAddress.getDescription(),
+				accountAddress.getStreet1(), accountAddress.getStreet2(),
+				accountAddress.getStreet3(), accountAddress.getCity(),
+				accountAddress.getZip(), accountAddress.getCommerceRegionId(),
+				accountAddress.getCommerceCountryId(),
+				accountAddress.getPhoneNumber(),
+				GetterUtil.get(accountAddress.getDefaultBilling(), false),
+				GetterUtil.get(accountAddress.getDefaultShipping(), false),
 				_serviceContextHelper.getServiceContext());
 
-		DTOConverter addressDTOConverter =
+		DTOConverter accountAddressDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommerceAddress.class.getName());
 
-		return (Address)addressDTOConverter.toDTO(
+		return (AccountAddress)accountAddressDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				commerceAddress.getCommerceAddressId()));
 	}
 
-	private Page<Address> _getAddressesPage(
+	private Page<AccountAddress> _getAccountAddressesPage(
 			CommerceAccount commerceAccount, Pagination pagination)
 		throws Exception {
 
@@ -139,27 +143,29 @@ public class AddressResourceImpl extends BaseAddressResourceImpl {
 			commerceAccount.getModelClassName(),
 			commerceAccount.getCommerceAccountId());
 
-		return Page.of(_toAddresses(commerceAddresses), pagination, totalItems);
+		return Page.of(
+			_toAccountAddresses(commerceAddresses), pagination, totalItems);
 	}
 
-	private List<Address> _toAddresses(List<CommerceAddress> commerceAddresses)
+	private List<AccountAddress> _toAccountAddresses(
+			List<CommerceAddress> commerceAddresses)
 		throws Exception {
 
-		List<Address> addresses = new ArrayList<>();
+		List<AccountAddress> accountAddresses = new ArrayList<>();
 
-		DTOConverter addressDTOConverter =
+		DTOConverter accountAddressDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommerceAddress.class.getName());
 
 		for (CommerceAddress commerceAddress : commerceAddresses) {
-			addresses.add(
-				(Address)addressDTOConverter.toDTO(
+			accountAddresses.add(
+				(AccountAddress)accountAddressDTOConverter.toDTO(
 					new DefaultDTOConverterContext(
 						contextAcceptLanguage.getPreferredLocale(),
 						commerceAddress.getCommerceAddressId())));
 		}
 
-		return addresses;
+		return accountAddresses;
 	}
 
 	@Reference
