@@ -14,8 +14,8 @@
 
 package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
-import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -52,7 +52,8 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseAddressResourceImpl implements AddressResource {
+public abstract class BaseAccountMemberResourceImpl
+	implements AccountMemberResource {
 
 	@Override
 	@GET
@@ -64,14 +65,16 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 		}
 	)
 	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/addresses/"
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Page<Address> getAccountByExternalReferenceCodeAddressesPage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@Context Pagination pagination)
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public Page<AccountMember>
+			getAccountByExternalReferenceCodeAccountMembersPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -86,17 +89,17 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 		}
 	)
 	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/addresses/"
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
 	)
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountByExternalReferenceCodeAddress(
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public AccountMember postAccountByExternalReferenceCodeAccountMember(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Address address)
+			AccountMember accountMember)
 		throws Exception {
 
-		return new Address();
+		return new AccountMember();
 	}
 
 	@Override
@@ -108,10 +111,10 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/accounts/{id}/addresses/")
+	@Path("/accounts/{id}/accountMembers/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Page<Address> getAccountIdAddressesPage(
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public Page<AccountMember> getAccountIdAccountMembersPage(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
@@ -123,22 +126,23 @@ public abstract class BaseAddressResourceImpl implements AddressResource {
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accounts/{id}/addresses/")
+	@Path("/accounts/{id}/accountMembers/")
 	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Address")})
-	public Address postAccountIdAddress(
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public AccountMember postAccountIdAccountMember(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Address address)
+			AccountMember accountMember)
 		throws Exception {
 
-		return new Address();
+		return new AccountMember();
 	}
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(Address address, Address existingAddress) {
+	protected void preparePatch(
+		AccountMember accountMember, AccountMember existingAccountMember) {
 	}
 
 	protected <T, R> List<R> transform(

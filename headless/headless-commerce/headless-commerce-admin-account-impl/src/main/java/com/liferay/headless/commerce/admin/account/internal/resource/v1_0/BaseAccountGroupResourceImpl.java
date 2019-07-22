@@ -59,18 +59,6 @@ public abstract class BaseAccountGroupResourceImpl
 	implements AccountGroupResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/accountGroup/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountGroup")})
-	public AccountGroup postAccountGroup(AccountGroup accountGroup)
-		throws Exception {
-
-		return new AccountGroup();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -86,6 +74,18 @@ public abstract class BaseAccountGroupResourceImpl
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/accountGroups/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountGroup")})
+	public AccountGroup postAccountGroup(AccountGroup accountGroup)
+		throws Exception {
+
+		return new AccountGroup();
 	}
 
 	@Override

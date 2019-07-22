@@ -34,10 +34,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AccountGroupResource {
 
-	public AccountGroup postAccountGroup(AccountGroup accountGroup)
+	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
 		throws Exception;
 
-	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
+	public AccountGroup postAccountGroup(AccountGroup accountGroup)
 		throws Exception;
 
 	public Response deleteAccountGroupByExternalReferenceCode(
