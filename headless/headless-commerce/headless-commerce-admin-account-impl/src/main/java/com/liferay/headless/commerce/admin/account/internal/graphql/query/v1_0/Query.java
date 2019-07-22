@@ -16,8 +16,10 @@ package com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0;
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
@@ -58,6 +60,14 @@ public class Query {
 
 		_accountGroupResourceComponentServiceObjects =
 			accountGroupResourceComponentServiceObjects;
+	}
+
+	public static void setAccountMemberResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountMemberResource>
+			accountMemberResourceComponentServiceObjects) {
+
+		_accountMemberResourceComponentServiceObjects =
+			accountMemberResourceComponentServiceObjects;
 	}
 
 	public static void setAddressResourceComponentServiceObjects(
@@ -154,6 +164,49 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public Collection<AccountMember>
+			getAccountByExternalReferenceCodeAccountMembersPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource -> {
+				Page paginationPage =
+					accountMemberResource.
+						getAccountByExternalReferenceCodeAccountMembersPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountMember> getAccountIdAccountMembersPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource -> {
+				Page paginationPage =
+					accountMemberResource.getAccountIdAccountMembersPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Collection<Address> getAccountByExternalReferenceCodeAddressesPage(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode,
 			@GraphQLName("pageSize") int pageSize,
@@ -228,6 +281,15 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			AccountMemberResource accountMemberResource)
+		throws Exception {
+
+		accountMemberResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(AddressResource addressResource)
 		throws Exception {
 
@@ -240,6 +302,8 @@ public class Query {
 		_accountResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AccountGroupResource>
 		_accountGroupResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountMemberResource>
+		_accountMemberResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AddressResource>
 		_addressResourceComponentServiceObjects;
 

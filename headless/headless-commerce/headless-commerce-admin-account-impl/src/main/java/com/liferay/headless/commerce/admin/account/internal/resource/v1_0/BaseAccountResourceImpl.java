@@ -59,16 +59,6 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseAccountResourceImpl implements AccountResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/account/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Account")})
-	public Account postAccount(Account account) throws Exception {
-		return new Account();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -83,6 +73,16 @@ public abstract class BaseAccountResourceImpl implements AccountResource {
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/accounts/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Account")})
+	public Account postAccount(Account account) throws Exception {
+		return new Account();
 	}
 
 	@Override

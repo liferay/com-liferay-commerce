@@ -35,10 +35,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AccountResource {
 
-	public Account postAccount(Account account) throws Exception;
-
 	public Page<Account> getAccountsPage(Pagination pagination)
 		throws Exception;
+
+	public Account postAccount(Account account) throws Exception;
 
 	public Response postAccountByExternalReferenceCodeLogo(
 			String externalReferenceCode, MultipartBody multipartBody)
