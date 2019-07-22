@@ -61,15 +61,14 @@ public class CPDefinitionInventoryLocalServiceUtil {
 				String lowStockActivity, boolean displayAvailability,
 				boolean displayStockQuantity, int minStockQuantity,
 				boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
-				String allowedOrderQuantities, int multipleOrderQuantity,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				String allowedOrderQuantities, int multipleOrderQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPDefinitionInventory(
 			cpDefinitionId, cpDefinitionInventoryEngine, lowStockActivity,
 			displayAvailability, displayStockQuantity, minStockQuantity,
 			backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	public static void cloneCPDefinitionInventory(
@@ -404,15 +403,14 @@ public class CPDefinitionInventoryLocalServiceUtil {
 				boolean displayAvailability, boolean displayStockQuantity,
 				int minStockQuantity, boolean backOrders, int minOrderQuantity,
 				int maxOrderQuantity, String allowedOrderQuantities,
-				int multipleOrderQuantity,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				int multipleOrderQuantity)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().updateCPDefinitionInventory(
 			cpDefinitionInventoryId, cpDefinitionInventoryEngine,
 			lowStockActivity, displayAvailability, displayStockQuantity,
 			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			allowedOrderQuantities, multipleOrderQuantity);
 	}
 
 	public static CPDefinitionInventoryLocalService getService() {
