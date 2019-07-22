@@ -242,6 +242,49 @@ public class CommerceAccountUserRelServiceHttp {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			fetchCommerceAccountUserRel(
+				HttpPrincipal httpPrincipal,
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountUserRelServiceUtil.class,
+				"fetchCommerceAccountUserRel",
+				_fetchCommerceAccountUserRelParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountUserRelPK);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccountUserRel)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
 			getCommerceAccountUserRel(
 				HttpPrincipal httpPrincipal,
 				com.liferay.commerce.account.service.persistence.
@@ -252,7 +295,7 @@ public class CommerceAccountUserRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountUserRelServiceUtil.class,
 				"getCommerceAccountUserRel",
-				_getCommerceAccountUserRelParameterTypes5);
+				_getCommerceAccountUserRelParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountUserRelPK);
@@ -295,7 +338,7 @@ public class CommerceAccountUserRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountUserRelServiceUtil.class,
 				"getCommerceAccountUserRels",
-				_getCommerceAccountUserRelsParameterTypes6);
+				_getCommerceAccountUserRelsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, start, end);
@@ -336,7 +379,7 @@ public class CommerceAccountUserRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountUserRelServiceUtil.class,
 				"getCommerceAccountUserRelsCount",
-				_getCommerceAccountUserRelsCountParameterTypes7);
+				_getCommerceAccountUserRelsCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId);
@@ -378,7 +421,7 @@ public class CommerceAccountUserRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountUserRelServiceUtil.class, "inviteUser",
-				_inviteUserParameterTypes8);
+				_inviteUserParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, emailAddress, roleIds,
@@ -436,18 +479,23 @@ public class CommerceAccountUserRelServiceHttp {
 		_deleteCommerceAccountUserRelsParameterTypes4 = new Class[] {
 			long.class, long[].class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelParameterTypes5 =
+	private static final Class<?>[]
+		_fetchCommerceAccountUserRelParameterTypes5 = new Class[] {
+			com.liferay.commerce.account.service.persistence.
+				CommerceAccountUserRelPK.class
+		};
+	private static final Class<?>[] _getCommerceAccountUserRelParameterTypes6 =
 		new Class[] {
 			com.liferay.commerce.account.service.persistence.
 				CommerceAccountUserRelPK.class
 		};
-	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes6 =
+	private static final Class<?>[] _getCommerceAccountUserRelsParameterTypes7 =
 		new Class[] {long.class, int.class, int.class};
 	private static final Class<?>[]
-		_getCommerceAccountUserRelsCountParameterTypes7 = new Class[] {
+		_getCommerceAccountUserRelsCountParameterTypes8 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _inviteUserParameterTypes8 = new Class[] {
+	private static final Class<?>[] _inviteUserParameterTypes9 = new Class[] {
 		long.class, String.class, long[].class, String.class,
 		com.liferay.portal.kernel.service.ServiceContext.class
 	};
