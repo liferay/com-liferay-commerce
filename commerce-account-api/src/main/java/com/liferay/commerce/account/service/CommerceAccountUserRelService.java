@@ -83,6 +83,11 @@ public interface CommerceAccountUserRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountUserRel fetchCommerceAccountUserRel(
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccountUserRel getCommerceAccountUserRel(
 			CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws PortalException;
