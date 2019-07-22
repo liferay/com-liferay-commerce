@@ -206,8 +206,8 @@ public class CommerceCartResource {
 			serviceContext.setScopeGroupId(commerceChannel.getSiteGroupId());
 
 			_commerceOrderItemService.updateCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId(),
-				quantity, commerceContext, serviceContext);
+				commerceOrderItem.getCommerceOrderItemId(), quantity,
+				commerceContext, serviceContext);
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
