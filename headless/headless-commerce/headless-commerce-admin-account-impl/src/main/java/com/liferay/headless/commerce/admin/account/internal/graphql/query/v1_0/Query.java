@@ -15,13 +15,15 @@
 package com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0;
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
-import com.liferay.headless.commerce.admin.account.dto.v1_0.Address;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountOrganization;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountAddressResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountMemberResource;
+import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountOrganizationResource;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
-import com.liferay.headless.commerce.admin.account.resource.v1_0.AddressResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
@@ -54,6 +56,14 @@ public class Query {
 			accountResourceComponentServiceObjects;
 	}
 
+	public static void setAccountAddressResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountAddressResource>
+			accountAddressResourceComponentServiceObjects) {
+
+		_accountAddressResourceComponentServiceObjects =
+			accountAddressResourceComponentServiceObjects;
+	}
+
 	public static void setAccountGroupResourceComponentServiceObjects(
 		ComponentServiceObjects<AccountGroupResource>
 			accountGroupResourceComponentServiceObjects) {
@@ -70,12 +80,12 @@ public class Query {
 			accountMemberResourceComponentServiceObjects;
 	}
 
-	public static void setAddressResourceComponentServiceObjects(
-		ComponentServiceObjects<AddressResource>
-			addressResourceComponentServiceObjects) {
+	public static void setAccountOrganizationResourceComponentServiceObjects(
+		ComponentServiceObjects<AccountOrganizationResource>
+			accountOrganizationResourceComponentServiceObjects) {
 
-		_addressResourceComponentServiceObjects =
-			addressResourceComponentServiceObjects;
+		_accountOrganizationResourceComponentServiceObjects =
+			accountOrganizationResourceComponentServiceObjects;
 	}
 
 	@GraphQLField
@@ -117,6 +127,49 @@ public class Query {
 			_accountResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			accountResource -> accountResource.getAccount(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountAddress>
+			getAccountByExternalReferenceCodeAccountAddressesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource -> {
+				Page paginationPage =
+					accountAddressResource.
+						getAccountByExternalReferenceCodeAccountAddressesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountAddress> getAccountIdAccountAddressesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource -> {
+				Page paginationPage =
+					accountAddressResource.getAccountIdAccountAddressesPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
@@ -188,6 +241,22 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public AccountMember getAccountByExternalReferenceCodeAccountMember(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("userId") Long userId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource ->
+				accountMemberResource.
+					getAccountByExternalReferenceCodeAccountMember(
+						externalReferenceCode, userId));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Collection<AccountMember> getAccountIdAccountMembersPage(
 			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
@@ -207,19 +276,34 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<Address> getAccountByExternalReferenceCodeAddressesPage(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode,
-			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+	public AccountMember getAccountIdAccountMember(
+			@GraphQLName("id") Long id, @GraphQLName("userId") Long userId)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_addressResourceComponentServiceObjects,
+			_accountMemberResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			addressResource -> {
+			accountMemberResource ->
+				accountMemberResource.getAccountIdAccountMember(id, userId));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountOrganization>
+			getAccountByExternalReferenceCodeAccountOrganizationsPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountOrganizationResource -> {
 				Page paginationPage =
-					addressResource.
-						getAccountByExternalReferenceCodeAddressesPage(
+					accountOrganizationResource.
+						getAccountByExternalReferenceCodeAccountOrganizationsPage(
 							externalReferenceCode,
 							Pagination.of(pageSize, page));
 
@@ -229,20 +313,55 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<Address> getAccountIdAddressesPage(
+	public AccountOrganization
+			getAccountByExternalReferenceCodeAccountOrganization(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("organizationId") Long organizationId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountOrganizationResource ->
+				accountOrganizationResource.
+					getAccountByExternalReferenceCodeAccountOrganization(
+						externalReferenceCode, organizationId));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountOrganization> getAccountIdAccountOrganizationsPage(
 			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_addressResourceComponentServiceObjects,
+			_accountOrganizationResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			addressResource -> {
-				Page paginationPage = addressResource.getAccountIdAddressesPage(
-					id, Pagination.of(pageSize, page));
+			accountOrganizationResource -> {
+				Page paginationPage =
+					accountOrganizationResource.
+						getAccountIdAccountOrganizationsPage(
+							id, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountOrganization getAccountIdAccountOrganization(
+			@GraphQLName("id") Long id,
+			@GraphQLName("organizationId") Long organizationId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountOrganizationResource ->
+				accountOrganizationResource.getAccountIdAccountOrganization(
+					id, organizationId));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -273,6 +392,15 @@ public class Query {
 	}
 
 	private void _populateResourceContext(
+			AccountAddressResource accountAddressResource)
+		throws Exception {
+
+		accountAddressResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(
 			AccountGroupResource accountGroupResource)
 		throws Exception {
 
@@ -290,21 +418,24 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
-	private void _populateResourceContext(AddressResource addressResource)
+	private void _populateResourceContext(
+			AccountOrganizationResource accountOrganizationResource)
 		throws Exception {
 
-		addressResource.setContextCompany(
+		accountOrganizationResource.setContextCompany(
 			CompanyLocalServiceUtil.getCompany(
 				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private static ComponentServiceObjects<AccountResource>
 		_accountResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountAddressResource>
+		_accountAddressResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AccountGroupResource>
 		_accountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AccountMemberResource>
 		_accountMemberResourceComponentServiceObjects;
-	private static ComponentServiceObjects<AddressResource>
-		_addressResourceComponentServiceObjects;
+	private static ComponentServiceObjects<AccountOrganizationResource>
+		_accountOrganizationResourceComponentServiceObjects;
 
 }

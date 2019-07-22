@@ -49,20 +49,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AccountMember {
 
 	@Schema
-	public Long getCommerceAccountId() {
-		return commerceAccountId;
+	public Long getAccountId() {
+		return accountId;
 	}
 
-	public void setCommerceAccountId(Long commerceAccountId) {
-		this.commerceAccountId = commerceAccountId;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
 
 	@JsonIgnore
-	public void setCommerceAccountId(
-		UnsafeSupplier<Long, Exception> commerceAccountIdUnsafeSupplier) {
+	public void setAccountId(
+		UnsafeSupplier<Long, Exception> accountIdUnsafeSupplier) {
 
 		try {
-			commerceAccountId = commerceAccountIdUnsafeSupplier.get();
+			accountId = accountIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -74,7 +74,7 @@ public class AccountMember {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long commerceAccountId;
+	protected Long accountId;
 
 	@Schema
 	public String getEmail() {
@@ -188,6 +188,36 @@ public class AccountMember {
 	protected AccountRole[] roles;
 
 	@Schema
+	public String getUserExternalReferenceCode() {
+		return userExternalReferenceCode;
+	}
+
+	public void setUserExternalReferenceCode(String userExternalReferenceCode) {
+		this.userExternalReferenceCode = userExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setUserExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			userExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			userExternalReferenceCode =
+				userExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String userExternalReferenceCode;
+
+	@Schema
 	public Long getUserId() {
 		return userId;
 	}
@@ -212,7 +242,7 @@ public class AccountMember {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long userId;
 
 	@Override
@@ -242,14 +272,14 @@ public class AccountMember {
 
 		sb.append("{");
 
-		if (commerceAccountId != null) {
+		if (accountId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceAccountId\": ");
+			sb.append("\"accountId\": ");
 
-			sb.append(commerceAccountId);
+			sb.append(accountId);
 		}
 
 		if (email != null) {
@@ -312,6 +342,20 @@ public class AccountMember {
 			}
 
 			sb.append("]");
+		}
+
+		if (userExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"userExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(userExternalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (userId != null) {

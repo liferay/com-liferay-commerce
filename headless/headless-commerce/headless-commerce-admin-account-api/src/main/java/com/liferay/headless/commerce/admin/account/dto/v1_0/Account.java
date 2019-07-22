@@ -49,17 +49,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Account {
 
 	@Schema
-	public Address[] getAddresses() {
+	public AccountAddress[] getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(Address[] addresses) {
+	public void setAddresses(AccountAddress[] addresses) {
 		this.addresses = addresses;
 	}
 
 	@JsonIgnore
 	public void setAddresses(
-		UnsafeSupplier<Address[], Exception> addressesUnsafeSupplier) {
+		UnsafeSupplier<AccountAddress[], Exception> addressesUnsafeSupplier) {
 
 		try {
 			addresses = addressesUnsafeSupplier.get();
@@ -74,7 +74,35 @@ public class Account {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Address[] addresses;
+	protected AccountAddress[] addresses;
+
+	@Schema
+	public Map<String, ?> getCustomFields() {
+		return customFields;
+	}
+
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
+	}
+
+	@JsonIgnore
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+
+		try {
+			customFields = customFieldsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, ?> customFields;
 
 	@Schema
 	public String[] getEmailAddresses() {
@@ -396,6 +424,16 @@ public class Account {
 			}
 
 			sb.append("]");
+		}
+
+		if (customFields != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"customFields\": ");
+
+			sb.append(_toJSON(customFields));
 		}
 
 		if (emailAddresses != null) {
