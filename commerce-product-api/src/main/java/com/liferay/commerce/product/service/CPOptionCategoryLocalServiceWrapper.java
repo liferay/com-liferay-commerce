@@ -57,12 +57,11 @@ public class CPOptionCategoryLocalServiceWrapper
 			addCPOptionCategory(
 				long userId, java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
-				double priority, String key,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				double priority, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpOptionCategoryLocalService.addCPOptionCategory(
-			userId, titleMap, descriptionMap, priority, key, serviceContext);
+			userId, titleMap, descriptionMap, priority, key);
 	}
 
 	/**
@@ -409,13 +408,11 @@ public class CPOptionCategoryLocalServiceWrapper
 				long cpOptionCategoryId,
 				java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
-				double priority, String key,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				double priority, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpOptionCategoryLocalService.updateCPOptionCategory(
-			cpOptionCategoryId, titleMap, descriptionMap, priority, key,
-			serviceContext);
+			cpOptionCategoryId, titleMap, descriptionMap, priority, key);
 	}
 
 	@Override
