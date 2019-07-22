@@ -98,6 +98,26 @@ public class CommerceAccountOrganizationRelServiceImpl
 	}
 
 	@Override
+	public CommerceAccountOrganizationRel fetchCommerceAccountOrganizationRel(
+			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+		throws PortalException {
+
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel =
+			commerceAccountOrganizationRelLocalService.
+				fetchCommerceAccountOrganizationRel(
+					commerceAccountOrganizationRelPK);
+
+		if (commerceAccountOrganizationRel != null) {
+			_commerceAccountModelResourcePermission.check(
+				getPermissionChecker(),
+				commerceAccountOrganizationRelPK.getCommerceAccountId(),
+				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS);
+		}
+
+		return commerceAccountOrganizationRel;
+	}
+
+	@Override
 	public CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
 			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws PortalException {
