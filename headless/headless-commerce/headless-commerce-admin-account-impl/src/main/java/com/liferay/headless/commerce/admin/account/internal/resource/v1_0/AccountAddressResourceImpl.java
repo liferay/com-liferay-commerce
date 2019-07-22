@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.ServiceScope;
  * @author Alessio Antonio Rendina
  */
 @Component(
-	properties = "OSGI-INF/liferay/rest/v1_0/address.properties",
+	properties = "OSGI-INF/liferay/rest/v1_0/account-address.properties",
 	scope = ServiceScope.PROTOTYPE, service = AccountAddressResource.class
 )
 public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
