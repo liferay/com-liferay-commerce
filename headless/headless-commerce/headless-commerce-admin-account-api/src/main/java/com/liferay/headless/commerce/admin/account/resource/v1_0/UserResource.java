@@ -14,14 +14,10 @@
 
 package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
-import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.User;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -32,31 +28,10 @@ import javax.ws.rs.core.Response;
  * @generated
  */
 @Generated("")
-public interface AccountGroupResource {
+public interface UserResource {
 
-	public Response deleteAccountGroup(Long id) throws Exception;
-
-	public AccountGroup getAccountGroup(Long id) throws Exception;
-
-	public Response patchAccountGroup(Long id, AccountGroup accountGroup)
-		throws Exception;
-
-	public Response deleteAccountGroupByExternalReferenceCode(
-			String externalReferenceCode)
-		throws Exception;
-
-	public AccountGroup getAccountGroupByExternalReferenceCode(
-			String externalReferenceCode)
-		throws Exception;
-
-	public Response patchAccountGroupByExternalReferenceCode(
-			String externalReferenceCode, AccountGroup accountGroup)
-		throws Exception;
-
-	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
-		throws Exception;
-
-	public AccountGroup postAccountGroup(AccountGroup accountGroup)
+	public User postAccountByExternalReferenceCodeAccountMemberCreateUser(
+			String externalReferenceCode, User user)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
