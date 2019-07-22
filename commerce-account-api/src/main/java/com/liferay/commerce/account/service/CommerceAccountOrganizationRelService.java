@@ -80,6 +80,11 @@ public interface CommerceAccountOrganizationRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountOrganizationRel fetchCommerceAccountOrganizationRel(
+			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAccountOrganizationRel getCommerceAccountOrganizationRel(
 			CommerceAccountOrganizationRelPK commerceAccountOrganizationRelPK)
 		throws PortalException;

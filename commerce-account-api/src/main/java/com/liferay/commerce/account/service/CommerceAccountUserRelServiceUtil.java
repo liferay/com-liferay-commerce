@@ -83,6 +83,16 @@ public class CommerceAccountUserRelServiceUtil {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountUserRel
+			fetchCommerceAccountUserRel(
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchCommerceAccountUserRel(
+			commerceAccountUserRelPK);
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRel
 			getCommerceAccountUserRel(
 				com.liferay.commerce.account.service.persistence.
 					CommerceAccountUserRelPK commerceAccountUserRelPK)
