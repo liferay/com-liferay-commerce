@@ -927,6 +927,18 @@ public class CommerceOrderLocalServiceImpl
 			CommerceContext commerceContext)
 		throws PortalException {
 
+		if (subtotal == null) {
+			subtotal = BigDecimal.ZERO;
+		}
+
+		if (shippingAmount == null) {
+			shippingAmount = BigDecimal.ZERO;
+		}
+
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
+
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
 
@@ -1250,12 +1262,16 @@ public class CommerceOrderLocalServiceImpl
 
 		// Add
 
-		return commerceOrderLocalService.addCommerceOrder(
+		commerceOrder = commerceOrderLocalService.addCommerceOrder(
 			userId, groupId, commerceAccountId, commerceCurrencyId,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
 			serviceContext);
+
+		commerceOrder.setExternalReferenceCode(externalReferenceCode);
+
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	protected String getCommerceOrderPaymentContent(

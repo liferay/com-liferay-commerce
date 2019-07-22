@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import org.osgi.service.component.annotations.Component;
@@ -63,10 +64,10 @@ public class UserResourceImpl extends BaseUserResourceImpl {
 			commerceAccount.getCommerceAccountGroupId());
 
 		com.liferay.portal.kernel.model.User invitedUser = _userService.addUser(
-			contextCompany.getCompanyId(), true, null, null, false,
-			user.getScreenName(), user.getEmail(), 0L, null,
-			LocaleUtil.getDefault(), user.getFirstName(), user.getMiddleName(),
-			user.getLastName(), 0L, 0L, user.getMale(), 1, 1, 1970,
+			contextCompany.getCompanyId(), true, null, null, true, null,
+			user.getEmail(), 0L, null, LocaleUtil.getDefault(),
+			user.getFirstName(), user.getMiddleName(), user.getLastName(), 0L,
+			0L, GetterUtil.getBoolean(user.getMale(), true), 1, 1, 1970,
 			user.getJobTitle(),
 			new long[] {commerceAccount.getCommerceAccountGroupId()}, null,
 			null, null, false, serviceContext);
