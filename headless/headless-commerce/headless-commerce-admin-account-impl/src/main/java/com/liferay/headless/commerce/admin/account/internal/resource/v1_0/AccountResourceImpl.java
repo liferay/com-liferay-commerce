@@ -182,8 +182,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 				account.getName(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, true, null,
 				_getEmailAddress(account, null), account.getTaxId(),
-				CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL, true,
-				account.getExternalReferenceCode(),
+				account.getType(), true, account.getExternalReferenceCode(),
 				_serviceContextHelper.getServiceContext());
 
 		return (Account)accountDTOConverter.toDTO(
