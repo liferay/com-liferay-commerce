@@ -104,6 +104,25 @@ public class CommerceAccountUserRelServiceImpl
 	}
 
 	@Override
+	public CommerceAccountUserRel fetchCommerceAccountUserRel(
+			CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws PortalException {
+
+		CommerceAccountUserRel commerceAccountUserRel =
+			commerceAccountUserRelLocalService.fetchCommerceAccountUserRel(
+				commerceAccountUserRelPK);
+
+		if (commerceAccountUserRel != null) {
+			_commerceAccountModelResourcePermission.check(
+				getPermissionChecker(),
+				commerceAccountUserRelPK.getCommerceAccountId(),
+				CommerceAccountActionKeys.VIEW_MEMBERS);
+		}
+
+		return commerceAccountUserRel;
+	}
+
+	@Override
 	public CommerceAccountUserRel getCommerceAccountUserRel(
 			CommerceAccountUserRelPK commerceAccountUserRelPK)
 		throws PortalException {
