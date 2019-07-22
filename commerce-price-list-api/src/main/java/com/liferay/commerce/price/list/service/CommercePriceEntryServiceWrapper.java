@@ -231,6 +231,10 @@ public class CommercePriceEntryServiceWrapper
 			commercePriceEntry, externalReferenceCode);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceEntry
 			upsertCommercePriceEntry(
@@ -245,6 +249,23 @@ public class CommercePriceEntryServiceWrapper
 			commercePriceEntryId, cpInstanceId, commercePriceListId,
 			externalReferenceCode, price, promoPrice, skuExternalReferenceCode,
 			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.price.list.model.CommercePriceEntry
+			upsertCommercePriceEntry(
+				long commercePriceEntryId, long cProductId,
+				String cpInstanceUuid, long commercePriceListId,
+				String externalReferenceCode, java.math.BigDecimal price,
+				java.math.BigDecimal promoPrice,
+				String skuExternalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePriceEntryService.upsertCommercePriceEntry(
+			commercePriceEntryId, cProductId, cpInstanceUuid,
+			commercePriceListId, externalReferenceCode, price, promoPrice,
+			skuExternalReferenceCode, serviceContext);
 	}
 
 	@Override
