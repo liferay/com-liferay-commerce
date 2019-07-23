@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.method.impl;
+package com.liferay.commerce.payment.internal.method;
 
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
