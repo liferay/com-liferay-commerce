@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("User")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"email", "firstName", "lastName", "screenName"})
+@Schema(requiredProperties = {"email", "firstName", "lastName"})
 @XmlRootElement(name = "User")
 public class User {
 
@@ -299,35 +299,6 @@ public class User {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected String[] roles;
 
-	@Schema
-	public String getScreenName() {
-		return screenName;
-	}
-
-	public void setScreenName(String screenName) {
-		this.screenName = screenName;
-	}
-
-	@JsonIgnore
-	public void setScreenName(
-		UnsafeSupplier<String, Exception> screenNameUnsafeSupplier) {
-
-		try {
-			screenName = screenNameUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
-	protected String screenName;
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
@@ -481,20 +452,6 @@ public class User {
 			}
 
 			sb.append("]");
-		}
-
-		if (screenName != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"screenName\": ");
-
-			sb.append("\"");
-
-			sb.append(_escape(screenName));
-
-			sb.append("\"");
 		}
 
 		sb.append("}");
