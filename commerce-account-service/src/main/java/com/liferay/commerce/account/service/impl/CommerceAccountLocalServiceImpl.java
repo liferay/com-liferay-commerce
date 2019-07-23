@@ -24,7 +24,6 @@ import com.liferay.commerce.account.model.impl.CommerceAccountImpl;
 import com.liferay.commerce.account.service.base.CommerceAccountLocalServiceBaseImpl;
 import com.liferay.commerce.account.util.CommerceAccountRoleHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.ModelListenerException;
@@ -47,21 +46,14 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.transaction.Propagation;
-import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ServiceProxyFactory;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
 import com.liferay.portal.spring.extender.service.ServiceReference;
-import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
-import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
-import com.liferay.portal.spring.transaction.TransactionExecutor;
 import com.liferay.users.admin.kernel.file.uploads.UserFileUploadsSettings;
 
 import java.io.Serializable;
@@ -313,47 +305,14 @@ public class CommerceAccountLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceAccount.class.getName());
 
-		// TODO: Replace with a direct call to
-		// groupLocalService.fetchGroup(long, long, long).
+		Group group = groupLocalService.fetchGroup(
+			commerceAccount.getCompanyId(), classNameId, commerceAccountId);
 
-		try {
-			TransactionExecutor transactionExecutor =
-				(TransactionExecutor)PortalBeanLocatorUtil.locate(
-					"transactionExecutor");
-
-			ServiceBeanMethodInvocation serviceBeanMethodInvocation =
-				new ServiceBeanMethodInvocation(
-					groupPersistence,
-					GroupPersistence.class.getMethod(
-						"findByC_C_C", long.class, long.class, long.class),
-					new Object[] {
-						commerceAccount.getCompanyId(), classNameId,
-						commerceAccountId
-					});
-
-			serviceBeanMethodInvocation.setMethodInterceptors(
-				Collections.emptyList());
-
-			return (Group)transactionExecutor.execute(
-				new TransactionAttributeAdapter(
-					TransactionAttributeBuilder.build(
-						true, _transactionConfig.getIsolation(),
-						_transactionConfig.getPropagation(),
-						_transactionConfig.isReadOnly(),
-						_transactionConfig.getTimeout(),
-						_transactionConfig.getRollbackForClasses(),
-						_transactionConfig.getRollbackForClassNames(),
-						_transactionConfig.getNoRollbackForClasses(),
-						_transactionConfig.getNoRollbackForClassNames())),
-				serviceBeanMethodInvocation);
+		if (group != null) {
+			return group;
 		}
-		catch (Throwable t) {
-			if (t instanceof PortalException) {
-				throw (PortalException)t;
-			}
 
-			throw new PortalException(t);
-		}
+		throw new PortalException();
 	}
 
 	@Override
@@ -858,9 +817,6 @@ public class CommerceAccountLocalServiceImpl
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
 
-	private static final TransactionConfig _transactionConfig =
-		TransactionConfig.Factory.create(
-			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 	private static volatile UserFileUploadsSettings _userFileUploadsSettings =
 		ServiceProxyFactory.newServiceTrackedInstance(
 			UserFileUploadsSettings.class,
