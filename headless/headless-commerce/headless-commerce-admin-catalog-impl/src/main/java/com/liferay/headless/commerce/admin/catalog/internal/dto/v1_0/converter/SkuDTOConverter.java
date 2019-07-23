@@ -16,9 +16,17 @@ package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.KeyValuePair;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -52,6 +60,8 @@ public class SkuDTOConverter implements DTOConverter {
 				height = cpInstance.getHeight();
 				id = cpInstance.getCPInstanceId();
 				manufacturerPartNumber = cpInstance.getManufacturerPartNumber();
+				options = _getOptions(
+					cpInstance, dtoConverterContext.getLocale());
 				price = cpInstance.getPrice();
 				promoPrice = cpInstance.getPromoPrice();
 				published = cpInstance.isPublished();
@@ -62,6 +72,25 @@ public class SkuDTOConverter implements DTOConverter {
 			}
 		};
 	}
+
+	private Map<String, String> _getOptions(
+			CPInstance cpInstance, Locale locale)
+		throws PortalException {
+
+		Map<String, String> options = new HashMap<>();
+
+		List<KeyValuePair> keyValuePairs = _cpInstanceHelper.getKeyValuePairs(
+			cpInstance.getJson(), locale);
+
+		for (KeyValuePair keyValuePair : keyValuePairs) {
+			options.put(keyValuePair.getKey(), keyValuePair.getValue());
+		}
+
+		return options;
+	}
+
+	@Reference
+	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
 	private CPInstanceService _cpInstanceService;
