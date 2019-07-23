@@ -16,20 +16,17 @@
 
 <%@ include file="/init.jsp" %>
 
+<%
+String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL());
+
+String pathThemeImages = themeDisplay.getPathThemeImages();
+%>
+
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-
-		<%
-		String signedInAs = HtmlUtil.escape(user.getFullName());
-
-		if (themeDisplay.isShowMyAccountIcon() && (themeDisplay.getURLMyAccount() != null)) {
-			String myAccountURL = String.valueOf(themeDisplay.getURLMyAccount());
-
-			signedInAs = "<a class=\"signed-in\" href=\"" + HtmlUtil.escape(myAccountURL) + "\">" + signedInAs + "</a>";
-		}
-		%>
-
-		<liferay-ui:message arguments="<%= signedInAs %>" key="you-are-signed-in-as-x" translateArguments="<%= false %>" />
+		<aui:script>
+			window.location.replace("<%= redirect %>");
+		</aui:script>
 	</c:when>
 	<c:otherwise>
 
@@ -39,8 +36,6 @@
 		if (windowState.equals(LiferayWindowState.EXCLUSIVE)) {
 			formName += "Modal";
 		}
-
-		String redirect = ParamUtil.getString(request, "redirect");
 
 		String login = (String)SessionErrors.get(renderRequest, "login");
 
@@ -67,11 +62,13 @@
 					<portlet:param name="mvcRenderCommandName" value="/login/login" />
 				</portlet:actionURL>
 
-				<div class="login-header">
-					<svg class="raylife-logo">
-						<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
-					</svg>
-				</div>
+				<c:if test="<%= pathThemeImages.contains("/o/minium-login-page") %>">
+					<div class="login-header">
+						<svg class="raylife-logo">
+							<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
+						</svg>
+					</div>
+				</c:if>
 
 				<div class="login-body">
 					<h1 class="login-title">Login to start!</h1>
@@ -185,8 +182,12 @@
 							<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 
 							<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-								<div class="gsdc-form-group form-group">
-									<div class="custom-control custom-checkbox">
+								<portlet:renderURL var="forgotPasswordURL">
+									<portlet:param name="mvcRenderCommandName" value="/login/forgot_password" />
+								</portlet:renderURL>
+
+								<div class="gsdc-form-group form-group row ml-0 mr-0">
+									<div class="col-md-6 p-0">
 										<label for="<portlet:namespace />rememberMe">
 											<input <%= rememberMeIsChecked %> class="custom-control-input" id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="checkbox">
 
@@ -195,13 +196,29 @@
 											</span>
 										</label>
 									</div>
+									<div class="col-md-6 p-0 text-right">
+										<a class="forgot-password" href="<%= forgotPasswordURL %>">
+											<liferay-ui:message key="forgot-password" />
+										</a>
+									</div>
 								</div>
 							</c:if>
 
+							<portlet:renderURL var="registerURL">
+								<portlet:param name="mvcRenderCommandName" value="/login/create_account" />
+							</portlet:renderURL>
+
+
 							<div class="gsdc-form-group form-group">
-								<button class="btn btn-block gsdc-btn-primary" type="submit">
-									Log In
+								<button class="btn btn-primary btn-block gsdc-btn-primary" type="submit">
+									<liferay-ui:message key="login" />
 								</button>
+								<p style="text-align: center; margin-bottom: 0;">or</p>
+								<a href="<%= registerURL %>">
+									<span class="btn btn-block btn-default">
+										<liferay-ui:message key="register" />
+									</span>
+								</a>
 							</div>
 
 						</aui:fieldset>
