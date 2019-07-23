@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.util.impl;
+package com.liferay.commerce.payment.internal.util;
 
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceOrder;
