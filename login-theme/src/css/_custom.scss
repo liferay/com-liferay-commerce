@@ -147,11 +147,12 @@ body {
 	}
 }
 
-.page-maximized {
+.signed-out {
 	background-color: #E5EBF4;
 
 	#wrapper {
 		height: 100%;
+		padding-bottom: 0;
 	}
 
 	#content {
@@ -312,6 +313,12 @@ body {
 				color: #9D9E9E;
 			}
 
+			.forgot-password {
+				color: #4c84ff;
+				font-size: .75rem;
+				line-height:26px;
+			}
+
 			.form-control {
 				background-color: $white;
 			}
@@ -329,5 +336,13 @@ body {
 }
 
 .powered-by {
+	display: none;
+}
+
+.portlet-dropzone.portlet-column-content.portlet-column-content-only {
+	height: 100%;
+}
+
+#currentHead {
 	display: none;
 }
