@@ -414,13 +414,10 @@ components:
                     items:
                         type: string
                     type: array
-                screenName:
-                    type: string
             required:
                 - email
                 - firstName
                 - lastName
-                - screenName
             type: object
         body:
             properties:
