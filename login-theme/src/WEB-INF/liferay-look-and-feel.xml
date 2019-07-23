@@ -5,7 +5,7 @@
 	<compatibility>
 		<version>7.1.0+</version>
 	</compatibility>
-	<theme id="login" name="login">
+	<theme id="minium-login-theme" name="minium-login-theme">
 		<template-extension>ftl</template-extension>
 		<roles>
 			<role-name>User</role-name>

@@ -27,6 +27,8 @@ Calendar birthdayCalendar = CalendarFactoryUtil.getCalendar();
 birthdayCalendar.set(Calendar.MONTH, Calendar.JANUARY);
 birthdayCalendar.set(Calendar.DATE, 1);
 birthdayCalendar.set(Calendar.YEAR, 1970);
+
+String pathThemeImages = themeDisplay.getPathThemeImages();
 %>
 
 <portlet:actionURL name="/login/create_account" secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>" var="createAccountURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
@@ -35,11 +37,13 @@ birthdayCalendar.set(Calendar.YEAR, 1970);
 
 <div class="login-component login-component-create-account">
 	<div class="login-container">
-		<div class="login-header">
-			<svg class="raylife-logo">
-				<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
-			</svg>
-		</div>
+		<c:if test="<%= pathThemeImages.contains("/o/minium-login-theme") %>">
+			<div class="login-header">
+				<svg class="raylife-logo">
+					<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
+				</svg>
+			</div>
+		</c:if>
 
 		<div class="login-body">
 			<h1 class="login-title">Create Account</h1>

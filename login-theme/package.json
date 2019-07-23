@@ -20,6 +20,6 @@
 		"version": "7.1"
 	},
 	"main": "package.json",
-	"name": "login-theme",
+	"name": "minium-login-theme",
 	"version": "1.0.0"
 }
