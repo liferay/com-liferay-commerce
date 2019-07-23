@@ -41,8 +41,7 @@ public class ProductConfigurationUtil {
 		if (cpDefinitionInventory == null) {
 			cpDefinitionInventory =
 				cpDefinitionInventoryService.addCPDefinitionInventory(
-					groupId, cpDefinitionId,
-					productConfiguration.getInventoryEngine(),
+					cpDefinitionId, productConfiguration.getInventoryEngine(),
 					productConfiguration.getLowStockAction(),
 					GetterUtil.get(
 						productConfiguration.getDisplayAvailability(), false),
