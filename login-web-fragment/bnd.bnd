@@ -1,4 +1,0 @@
-Bundle-Name: login-web-fragment
-Bundle-SymbolicName: login.web.fragment
-Bundle-Version: 1.0.0
-Fragment-Host: com.liferay.login.web
