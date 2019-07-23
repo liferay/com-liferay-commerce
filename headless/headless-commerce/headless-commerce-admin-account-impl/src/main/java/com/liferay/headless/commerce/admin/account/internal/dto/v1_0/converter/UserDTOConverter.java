@@ -57,7 +57,6 @@ public class UserDTOConverter implements DTOConverter {
 				male = user.isMale();
 				middleName = user.getMiddleName();
 				roles = _getRoles(user);
-				screenName = user.getScreenName();
 			}
 		};
 	}
