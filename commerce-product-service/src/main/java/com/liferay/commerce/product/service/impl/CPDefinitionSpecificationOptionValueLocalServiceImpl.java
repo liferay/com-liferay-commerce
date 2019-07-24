@@ -93,9 +93,10 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 
 	@Override
 	public CPDefinitionSpecificationOptionValue
-		deleteCPDefinitionSpecificationOptionValue(
-			CPDefinitionSpecificationOptionValue
-				cpDefinitionSpecificationOptionValue) {
+			deleteCPDefinitionSpecificationOptionValue(
+				CPDefinitionSpecificationOptionValue
+					cpDefinitionSpecificationOptionValue)
+		throws PortalException {
 
 		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
@@ -128,6 +129,9 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 		expandoRowLocalService.deleteRows(
 			cpDefinitionSpecificationOptionValue.
 				getCPDefinitionSpecificationOptionValueId());
+
+		reindexCPDefinition(
+			cpDefinitionSpecificationOptionValue.getCPDefinitionId());
 
 		return cpDefinitionSpecificationOptionValue;
 	}
