@@ -20,11 +20,14 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.base.CProductLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 /**
  * @author Ethan Bustad
@@ -55,6 +58,29 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 		cProduct.setLatestVersion(1);
 
 		return cProductPersistence.update(cProduct);
+	}
+
+	@Override
+	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
+	public CProduct deleteCProduct(CProduct cProduct) {
+
+		// Commerce product definitions
+
+		cpDefinitionLocalService.deleteCPDefinitions(
+			cProduct.getCProductId(), WorkflowConstants.STATUS_ANY);
+
+		// Commerce product
+
+		cProductPersistence.remove(cProduct);
+
+		return cProduct;
+	}
+
+	@Override
+	public CProduct deleteCProduct(long cProductId) throws PortalException {
+		CProduct cProduct = cProductPersistence.findByPrimaryKey(cProductId);
+
+		return cProductLocalService.deleteCProduct(cProduct);
 	}
 
 	@Override
