@@ -113,11 +113,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				value="<%= commerceOrderItem.getName(locale) %>"
 			/>
 
-			<liferay-ui:search-container-column-text
-				cssClass="table-cell-content"
-				property="quantity"
-			/>
-
 			<%
 			CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
 			%>
@@ -142,6 +137,51 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
 								showDuration="<%= false %>"
 							/>
+						</span>
+					</div>
+				</c:if>
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				name="discount"
+			>
+				<c:if test="<%= commerceProductPrice != null %>">
+
+					<%
+					CommerceDiscountValue commerceDiscountValue = commerceProductPrice.getDiscountValue();
+					%>
+
+					<c:if test="<%= commerceDiscountValue != null %>">
+
+						<%
+						CommerceMoney discountAmount = commerceDiscountValue.getDiscountAmount();
+						%>
+
+						<div class="value-section">
+							<span class="commerce-value">
+								<%= HtmlUtil.escape(discountAmount.format(locale)) %>
+							</span>
+						</div>
+					</c:if>
+				</c:if>
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				property="quantity"
+			/>
+
+			<liferay-ui:search-container-column-text
+				name="total"
+			>
+				<c:if test="<%= commerceProductPrice != null %>">
+
+					<%
+					CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+					%>
+
+					<div class="value-section">
+						<span class="commerce-value">
+							<%= HtmlUtil.escape(finalPrice.format(locale)) %>
 						</span>
 					</div>
 				</c:if>
