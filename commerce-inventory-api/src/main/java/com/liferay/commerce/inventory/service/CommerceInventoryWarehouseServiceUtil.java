@@ -70,6 +70,16 @@ public class CommerceInventoryWarehouseServiceUtil {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				fetchByExternalReferenceCode(
+					long companyId, String externalReferenceCode)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
 				geolocateCommerceInventoryWarehouse(
 					long commerceInventoryWarehouseId, double latitude,
 					double longitude)

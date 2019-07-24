@@ -298,6 +298,14 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 		return getService().getCommerceInventoryWarehouseItemsCount();
 	}
 
+	public static int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsCount(
+			commerceInventoryWarehouseId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {

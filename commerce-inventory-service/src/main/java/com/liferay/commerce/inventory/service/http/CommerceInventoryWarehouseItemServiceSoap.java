@@ -89,6 +89,22 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 		}
 	}
 
+	public static void deleteCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId)
+		throws RemoteException {
+
+		try {
+			CommerceInventoryWarehouseItemServiceUtil.
+				deleteCommerceInventoryWarehouseItem(
+					commerceInventoryWarehouseItemId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
 				fetchCommerceInventoryWarehouseItem(
@@ -101,6 +117,29 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 					CommerceInventoryWarehouseItemServiceUtil.
 						fetchCommerceInventoryWarehouseItem(
 							commerceInventoryWarehouseId, sku);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
+				getCommerceInventoryWarehouseItem(
+					long commerceInventoryWarehouseItemId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				returnValue =
+					CommerceInventoryWarehouseItemServiceUtil.
+						getCommerceInventoryWarehouseItem(
+							commerceInventoryWarehouseItemId);
 
 			return com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
@@ -129,6 +168,25 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 
 			return com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceInventoryWarehouseItemServiceUtil.
+					getCommerceInventoryWarehouseItemsCount(
+						commerceInventoryWarehouseId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
