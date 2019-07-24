@@ -28,8 +28,6 @@ Integer reminderAttempts = (Integer)portletSession.getAttribute(WebKeys.FORGOT_P
 if (reminderAttempts == null) {
 	reminderAttempts = 0;
 }
-
-String pathThemeImages = themeDisplay.getPathThemeImages();
 %>
 
 <portlet:actionURL name="/login/forgot_password" var="forgotPasswordURL">
@@ -38,13 +36,10 @@ String pathThemeImages = themeDisplay.getPathThemeImages();
 
 <div class="login-component login-component-forgot-password">
 	<div class="login-container">
-		<c:if test="<%= pathThemeImages.contains("/o/minium-login-theme") %>">
-			<div class="login-header">
-				<svg class="raylife-logo">
-					<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
-				</svg>
-			</div>
-		</c:if>
+		<div class="login-header">
+			<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
+		</div>
+
 
 		<div class="login-body">
 			<h1 class="login-title">Forgot Password?</h1>

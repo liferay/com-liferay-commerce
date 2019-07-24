@@ -10,6 +10,10 @@
 	<@liferay_util["include"] page=top_head_include />
 </head>
 
+<#if !themeDisplay.isSignedIn()>
+	<#assign css_class = css_class + " minium-login" />
+</#if>
+
 <body class="${css_class}">
 	<div class="liferay-top">
 		<@liferay_ui["quick-access"] contentId="#main-content" />
@@ -18,16 +22,18 @@
 	</div>
 
 	<main class="minium minium-frame" id="minium">
-		<div class="minium-frame__sidebar">
-			<#include "${full_templates_path}/sidebar.ftl" />
-		</div>
+		<#if themeDisplay.isSignedIn()>
+			<div class="minium-frame__sidebar">
+				<#include "${full_templates_path}/sidebar.ftl" />
+			</div>
 
-		<div class="minium-frame__topbar">
-			<#include "${full_templates_path}/topbar.ftl" />
-		</div>
+			<div class="minium-frame__topbar">
+				<#include "${full_templates_path}/topbar.ftl" />
+			</div>
 
-		<div class="minium-frame__content js-scroll-area">
-			<a name="minium-top"></a>
+			<div class="minium-frame__content js-scroll-area">
+				<a name="minium-top"></a>
+		</#if>
 
 			<div class="${minium_content_css_class}">
 				<#if selectable>
@@ -41,15 +47,17 @@
 					</@>
 				</#if>
 			</div>
-		</div>
+		<#if themeDisplay.isSignedIn()>
+			</div>
 
-		<#--  The toolbar is needed to create the shadow when scrolling  -->
+			<#--  The toolbar is needed to create the shadow when scrolling  -->
 
-		<div class="minium-frame__toolbar"></div>
+			<div class="minium-frame__toolbar"></div>
 
-		<div class="minium-frame__overlay">
-			<@liferay_commerce_ui["search-results"] />
-		</div>
+			<div class="minium-frame__overlay">
+				<@liferay_commerce_ui["search-results"] />
+			</div>
+		</#if>
 	</main>
 
 	<div class="liferay-bottom">
