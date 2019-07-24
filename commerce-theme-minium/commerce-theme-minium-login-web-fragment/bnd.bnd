@@ -1,4 +1,4 @@
 Bundle-Name: Commerce Theme Minium Login Fragment
-Bundle-SymbolicName: commerce.theme.minium.login.web.fragment
+Bundle-SymbolicName: com.liferay.commerce.theme.minium.login.web.fragment
 Bundle-Version: 1.0.0
-Fragment-Host: com.liferay.commerce.theme.minium.login.web.fragment
+Fragment-Host: com.liferay.login.web

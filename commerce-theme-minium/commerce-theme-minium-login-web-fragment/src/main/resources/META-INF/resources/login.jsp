@@ -18,8 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL());
-
-String pathThemeImages = themeDisplay.getPathThemeImages();
 %>
 
 <c:choose>
@@ -45,11 +43,6 @@ String pathThemeImages = themeDisplay.getPathThemeImages();
 
 		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-		String rememberMeIsChecked = "";
-
-		if (rememberMe) {
-			rememberMeIsChecked = "checked";
-		}
 
 		if (Validator.isNull(authType)) {
 			authType = company.getAuthType();
@@ -62,13 +55,9 @@ String pathThemeImages = themeDisplay.getPathThemeImages();
 					<portlet:param name="mvcRenderCommandName" value="/login/login" />
 				</portlet:actionURL>
 
-				<c:if test="<%= pathThemeImages.contains("/o/minium-login-page") %>">
-					<div class="login-header">
-						<svg class="raylife-logo">
-							<use xlink:href="<%= themeDisplay.getPathThemeImages() %>/minium-icons/icons.svg#minium-logo"></use>
-						</svg>
-					</div>
-				</c:if>
+				<div class="login-header">
+					<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
+				</div>
 
 				<div class="login-body">
 					<h1 class="login-title">Login to start!</h1>
@@ -187,16 +176,10 @@ String pathThemeImages = themeDisplay.getPathThemeImages();
 								</portlet:renderURL>
 
 								<div class="gsdc-form-group form-group row ml-0 mr-0">
-									<div class="col-md-6 p-0">
-										<label for="<portlet:namespace />rememberMe">
-											<input <%= rememberMeIsChecked %> class="custom-control-input" id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="checkbox">
-
-											<span class="custom-control-label">
-												<span class="custom-control-label-text"><liferay-ui:message key="remember-me" /></span>
-											</span>
-										</label>
+									<div class="col-xs-6 p-0">
+										<aui:input checked="<%= rememberMe %>" label="remember-me" name="<portlet:namespace />rememberMe" type="checkbox" />
 									</div>
-									<div class="col-md-6 p-0 text-right">
+									<div class="col-xs-6 p-0 text-right">
 										<a class="forgot-password" href="<%= forgotPasswordURL %>">
 											<liferay-ui:message key="forgot-password" />
 										</a>
@@ -213,10 +196,10 @@ String pathThemeImages = themeDisplay.getPathThemeImages();
 								<button class="btn btn-primary btn-block gsdc-btn-primary" type="submit">
 									<liferay-ui:message key="login" />
 								</button>
-								<p style="text-align: center; margin-bottom: 0;">or</p>
+								<p class="login-or-register">or</p>
 								<a href="<%= registerURL %>">
 									<span class="btn btn-block btn-default">
-										<liferay-ui:message key="register" />
+										<liferay-ui:message key="create-account" />
 									</span>
 								</a>
 							</div>
