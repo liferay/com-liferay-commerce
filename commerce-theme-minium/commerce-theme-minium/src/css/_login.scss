@@ -1,165 +1,138 @@
-@import "portlet/portlet_decorators";
-@import "portlet/portlet_hello_world";
+.minium-login {
+	background-color: #E5EBF4;
+	height: 100%;
 
-$footer-height: 120px !default;
-
-.minium-signin {
 	&, > .flipped {
 		height: 100%;
 	}
-}
 
-#wrapper {
-	margin-bottom: math-sign($footer-height);
-	min-height: 100%;
-	padding-bottom: $footer-height;
-	padding-top: 0;
-}
+	.portlet-layout {
+		.portlet {
+			.management-bar, .navbar-underline {
+				> .container-fluid-max-xl {
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
 
-.page-maximized #wrapper {
-	margin-bottom: 0;
-	padding-bottom: 0;
-}
-
-.portlet-layout {
-	.portlet {
-		.management-bar, .navbar-underline {
-			> .container-fluid-max-xl {
-				padding-left: 0;
-				padding-right: 0;
+			.portlet-title-text {
+				color: map-get($theme-colors, secondary);
+				font-size: 0.875rem;
+				font-weight: $font-weight-semi-bold;
+				line-height: 2.2;
+				margin-bottom: 0;
+				text-transform: uppercase;
 			}
 		}
+	}
 
-		.portlet-title-text {
-			color: map-get($theme-colors, secondary);
-			font-size: 0.875rem;
-			font-weight: $font-weight-semi-bold;
-			line-height: 2.2;
-			margin-bottom: 0;
-			text-transform: uppercase;
+	.btn-group + .info-panel {
+		@include md {
+			top: auto;
 		}
 	}
-}
 
-.btn-group + .info-panel {
-	@include md {
-		top: auto;
+	// GSDC Button Variants
+
+	.btn {
+		&.gsdc-btn-primary {
+			@include clay-button-variant($gsdc-btn-primary);
+		}
 	}
-}
 
-// GSDC Button Variants
-
-.btn {
-	&.gsdc-btn-primary {
-		@include clay-button-variant($gsdc-btn-primary);
-	}
-}
-
-// Login Portlet
-
-.raylife-logo {
-	width: 150px;
-}
-
-.login-header {
-	//padding-bottom: 1rem;
-}
-
-.modal-body .login-header {
-	#raylife-text {
-		fill: $gsdc-primary;
-	}
+	// Login Portlet
 
 	.raylife-logo {
-		g:last-child {
-			g:first-child + g #raylife-image {
-				fill: $gsdc-primary;
+		width: 150px;
+	}
+
+	.modal-body .login-header {
+		#raylife-text {
+			fill: $gsdc-primary;
+		}
+
+		.raylife-logo {
+			g:last-child {
+				g:first-child + g #raylife-image {
+					fill: $gsdc-primary;
+				}
 			}
 		}
 	}
-}
 
-.gsdc-form-group {
-	label, .custom-control-label-text {
+	.gsdc-form-group {
+		label, .custom-control-label-text {
+			font-size: 0.75rem;
+			font-weight: $font-weight-normal;
+		}
+	}
+
+	.taglib-icon-list {
 		font-size: 0.75rem;
 		font-weight: $font-weight-normal;
-	}
-}
+		margin-bottom: 0;
 
-.taglib-icon-list {
-	font-size: 0.75rem;
-	font-weight: $font-weight-normal;
-	margin-bottom: 0;
-
-	.lfr-icon-item {
-		color: $gsdc-primary;
-	}
-}
-
-.login-create-account {
-	font-size: 0.75rem;
-
-	.navigation {
-		display: inline-block;
-		vertical-align: middle;
-	}
-
-	.taglib-icon-list li {
-		&:first-child {
-			.icon-plus {
-				display: none;
-			}
-		}
-
-		&:last-child {
-			display: none;
+		.lfr-icon-item {
+			color: $gsdc-primary;
 		}
 	}
-}
 
-.login-forgot-password {
-	position: relative;
-	z-index: 1;
+	.login-create-account {
+		font-size: 0.75rem;
 
-	.taglib-icon-list li {
-		&:first-child {
-			display: none;
+		.navigation {
+			display: inline-block;
+			vertical-align: middle;
 		}
 
-		&:last-child {
-			float: none;
-			margin-right: 0;
-			right: 0;
-			top: 5px;
-
-			.taglib-text::after {
-				content: '?';
+		.taglib-icon-list li {
+			&:first-child {
+				.icon-plus {
+					display: none;
+				}
 			}
 
-			.icon-question-sign {
+			&:last-child {
 				display: none;
 			}
 		}
 	}
-}
 
-.signed-out {
-	background-color: #E5EBF4;
+	.login-forgot-password {
+		position: relative;
+		z-index: 1;
 
-	#wrapper {
+		.taglib-icon-list li {
+			&:first-child {
+				display: none;
+			}
+
+			&:last-child {
+				float: none;
+				margin-right: 0;
+				right: 0;
+				top: 5px;
+
+				.taglib-text::after {
+					content: '?';
+				}
+
+				.icon-question-sign {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.minium {
 		height: 100%;
-		padding-bottom: 0;
 	}
 
-	#content {
+	.minium-content {
 		height: 100%;
 		max-width: 100%;
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-	#main-content {
-		height: 100%;
+		padding: 0;
+		margin: 0;
 
 		> .portlet-layout {
 			height: 100%;
@@ -175,11 +148,36 @@ $footer-height: 120px !default;
 		.portlet, .portlet-boundary {
 			height: 100%;
 		}
+
+		#main-content {
+			height: 100%;
+
+			.row {
+				height: 100%;
+				margin: 0;
+				width: 100%;
+
+				.portlet-column-only {
+					padding: 0;
+				}
+
+				.form-group.form-inline.input-checkbox-wrapper {
+					display: inherit;
+					margin-bottom: 0;
+				}
+			}
+		}
 	}
 
 	.portlet-login {
+		height: 100%;
+
 		.portlet {
 			margin-bottom: 0;
+
+			.portlet-content-container {
+				padding: 0;
+			}
 		}
 
 		.portlet-header {
@@ -187,13 +185,17 @@ $footer-height: 120px !default;
 		}
 
 		.portlet-content {
-			background-color: $lightest;
+			background-color: #FFFFFF;
 			border-radius: 0;
 			border-width: 0;
 			margin-left: auto;
 			margin-right: auto;
 			height: 100%;
 			padding: 0;
+
+			.portlet-icon-back {
+				display: none;
+			}
 		}
 
 		.portlet-body, .portlet-content-container {
@@ -243,20 +245,20 @@ $footer-height: 120px !default;
 			}
 		}
 
-		.login-header {
-			//padding-bottom: 2rem;
-		}
-
 		.login-title {
 			font-style: normal;
 			font-weight: 300;
 			font-size: 26px;
 			line-height: 42px;
 			color: #5C5E5E;
+
+			@include media-breakpoint-down(sm) {
+				color: $white;
+			}
 		}
 
 		.login-container {
-			background-color: $lightest;
+			background-color: #FFFFFF;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
@@ -307,12 +309,16 @@ $footer-height: 120px !default;
 		.gsdc-form-group {
 			label, .custom-control-label-text {
 				color: #9D9E9E;
+
+				@include media-breakpoint-down(sm) {
+					color: $white;
+				}
 			}
 
 			.forgot-password {
 				color: #4c84ff;
 				font-size: .75rem;
-				line-height:26px;
+				line-height: 26px;
 			}
 
 			.form-control {
@@ -323,22 +329,35 @@ $footer-height: 120px !default;
 			.custom-control .custom-control-input:focus ~ .custom-control-label::before {
 				box-shadow: 0 0 0 1px rgba(39, 40, 51, 1), 0 0 0 2px rgba(128, 172, 255, 0.75);
 			}
+
+			.login-or-register {
+				color: #9D9E9E;
+				margin-bottom: 0;
+
+				@include media-breakpoint-down(sm) {
+					color: $white;
+				}
+			}
 		}
 
 		.login-create-account {
 			color: $white;
 		}
 	}
+
+	.powered-by {
+		display: none;
+	}
+
+	.portlet-dropzone.portlet-column-content.portlet-column-content-only {
+		height: 100%;
+	}
+
+	#currentHead {
+		display: none;
+	}
 }
 
-.powered-by {
-	display: none;
-}
-
-.portlet-dropzone.portlet-column-content.portlet-column-content-only {
-	height: 100%;
-}
-
-#currentHead {
-	display: none;
+.login-or-register {
+	text-align: center;
 }
