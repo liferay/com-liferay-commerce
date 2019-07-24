@@ -81,6 +81,15 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 	}
 
 	@Override
+	public int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws PortalException {
+
+		return commerceInventoryWarehouseItemPersistence.
+			countByCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+	}
+
+	@Override
 	public int getStockQuantity(long companyId, long groupId, String sku) {
 		return commerceInventoryWarehouseItemFinder.countStockQuantityByC_G_S(
 			companyId, groupId, sku);
