@@ -68,6 +68,25 @@ public class CommerceInventoryWarehouseServiceImpl
 	}
 
 	@Override
+	public CommerceInventoryWarehouse fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			commerceInventoryWarehouseLocalService.
+				fetchCommerceInventoryWarehouseByReferenceCode(
+					companyId, externalReferenceCode);
+
+		if (commerceInventoryWarehouse != null) {
+			_commerceInventoryWarehouseModelResourcePermission.check(
+				getPermissionChecker(), commerceInventoryWarehouse,
+				ActionKeys.UPDATE);
+		}
+
+		return commerceInventoryWarehouse;
+	}
+
+	@Override
 	public CommerceInventoryWarehouse geolocateCommerceInventoryWarehouse(
 			long commerceInventoryWarehouseId, double latitude,
 			double longitude)
