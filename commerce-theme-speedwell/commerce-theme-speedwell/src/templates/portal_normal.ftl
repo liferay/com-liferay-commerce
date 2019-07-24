@@ -96,8 +96,6 @@
 					<a href="#">Terms and Conditions</a>
 					<a href="#">Legal Notice Patents</a>
 				</nav>
-
-				© 2019 Speedwell
 			</div>
 		</footer>
 	</main>
