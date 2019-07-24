@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/init.jsp" %>
+<!-- test order_search.jsp -->
 
 <%
 CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrderListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
