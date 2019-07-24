@@ -98,14 +98,16 @@ public class CPDefinitionSpecificationOptionValueLocalServiceWrapper
 	 *
 	 * @param cpDefinitionSpecificationOptionValue the cp definition specification option value
 	 * @return the cp definition specification option value that was removed
+	 * @throws PortalException
 	 */
 	@Override
 	public
 		com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue
-			deleteCPDefinitionSpecificationOptionValue(
-				com.liferay.commerce.product.model.
-					CPDefinitionSpecificationOptionValue
-						cpDefinitionSpecificationOptionValue) {
+				deleteCPDefinitionSpecificationOptionValue(
+					com.liferay.commerce.product.model.
+						CPDefinitionSpecificationOptionValue
+							cpDefinitionSpecificationOptionValue)
+			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpDefinitionSpecificationOptionValueLocalService.
 			deleteCPDefinitionSpecificationOptionValue(
