@@ -604,7 +604,7 @@ public class CPDefinitionLocalServiceImpl
 
 		// Commerce product definition links
 
-		cpDefinitionLinkLocalService.deleteCPDefinitionLinks(
+		cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCPDefinitionId(
 			cpDefinition.getCPDefinitionId());
 
 		// Commerce product type
