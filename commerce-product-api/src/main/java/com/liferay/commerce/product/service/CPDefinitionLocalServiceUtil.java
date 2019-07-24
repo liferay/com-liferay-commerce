@@ -167,6 +167,10 @@ public class CPDefinitionLocalServiceUtil {
 		getService().deleteCPDefinitions(companyId);
 	}
 
+	public static void deleteCPDefinitions(long cProductId, int status) {
+		getService().deleteCPDefinitions(cProductId, status);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
