@@ -306,8 +306,7 @@ public interface CPOptionCategoryLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException;
 
 }
