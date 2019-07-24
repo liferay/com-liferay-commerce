@@ -63,6 +63,36 @@ public interface CPDefinitionInventoryService extends BaseService {
 			String lowStockActivity, boolean displayAvailability,
 			boolean displayStockQuantity, int minStockQuantity,
 			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
+			String allowedOrderQuantities, int multipleOrderQuantity)
+		throws PortalException;
+
+	/**
+	 * Adds new CP definition inventory.
+	 *
+	 * @param cpDefinitionId
+	 * @param cpDefinitionInventoryEngine
+	 * @param lowStockActivity
+	 * @param displayAvailability
+	 * @param displayStockQuantity
+	 * @param minStockQuantity
+	 * @param backOrders
+	 * @param minOrderQuantity
+	 * @param maxOrderQuantity
+	 * @param allowedOrderQuantities
+	 * @param multipleOrderQuantity
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), see {@link
+	 #addCPDefinitionInventory(long, String, String, boolean,
+	 boolean, int, boolean, int, int, String, int)}
+	 */
+	@Deprecated
+	public CPDefinitionInventory addCPDefinitionInventory(
+			long cpDefinitionId, String cpDefinitionInventoryEngine,
+			String lowStockActivity, boolean displayAvailability,
+			boolean displayStockQuantity, int minStockQuantity,
+			boolean backOrders, int minOrderQuantity, int maxOrderQuantity,
 			String allowedOrderQuantities, int multipleOrderQuantity,
 			ServiceContext serviceContext)
 		throws PortalException;
@@ -82,6 +112,37 @@ public interface CPDefinitionInventoryService extends BaseService {
 	 */
 	public String getOSGiServiceIdentifier();
 
+	public CPDefinitionInventory updateCPDefinitionInventory(
+			long groupId, long cpDefinitionInventoryId,
+			String cpDefinitionInventoryEngine, String lowStockActivity,
+			boolean displayAvailability, boolean displayStockQuantity,
+			int minStockQuantity, boolean backOrders, int minOrderQuantity,
+			int maxOrderQuantity, String allowedOrderQuantities,
+			int multipleOrderQuantity)
+		throws PortalException;
+
+	/**
+	 * Updates CP definition inventory
+	 *
+	 * @param cpDefinitionInventoryId
+	 * @param cpDefinitionInventoryEngine
+	 * @param lowStockActivity
+	 * @param displayAvailability
+	 * @param displayStockQuantity
+	 * @param minStockQuantity
+	 * @param backOrders
+	 * @param minOrderQuantity
+	 * @param maxOrderQuantity
+	 * @param allowedOrderQuantities
+	 * @param multipleOrderQuantity
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @deprecated As of Mueller (7.2.x), see {@link
+	 #updateCPDefinitionInventory(long, long, String, String,
+	 boolean, boolean, int, boolean, int, int, String, int)}
+	 */
+	@Deprecated
 	public CPDefinitionInventory updateCPDefinitionInventory(
 			long cpDefinitionInventoryId, String cpDefinitionInventoryEngine,
 			String lowStockActivity, boolean displayAvailability,
