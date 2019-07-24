@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/init.jsp" %>
+<!-- test billing.jsp -->
 
 <%
 CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
