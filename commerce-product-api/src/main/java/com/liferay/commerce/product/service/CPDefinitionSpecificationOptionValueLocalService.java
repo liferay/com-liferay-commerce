@@ -101,12 +101,14 @@ public interface CPDefinitionSpecificationOptionValueLocalService
 	 *
 	 * @param cpDefinitionSpecificationOptionValue the cp definition specification option value
 	 * @return the cp definition specification option value that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CPDefinitionSpecificationOptionValue
-		deleteCPDefinitionSpecificationOptionValue(
-			CPDefinitionSpecificationOptionValue
-				cpDefinitionSpecificationOptionValue);
+			deleteCPDefinitionSpecificationOptionValue(
+				CPDefinitionSpecificationOptionValue
+					cpDefinitionSpecificationOptionValue)
+		throws PortalException;
 
 	/**
 	 * Deletes the cp definition specification option value with the primary key from the database. Also notifies the appropriate model listeners.
