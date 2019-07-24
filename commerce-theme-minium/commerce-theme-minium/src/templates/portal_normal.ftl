@@ -10,7 +10,11 @@
 	<@liferay_util["include"] page=top_head_include />
 </head>
 
-<#if !themeDisplay.isSignedIn()>
+<#assign isMiniumLogin = false />
+
+<#if themeDisplay.isSignedIn() && themeDisplay.getLayoutSet().isPrivateLayout()>
+	<#assign isMiniumLogin = true />
+<#else>
 	<#assign css_class = css_class + " minium-login" />
 </#if>
 
@@ -22,7 +26,7 @@
 	</div>
 
 	<main class="minium minium-frame" id="minium">
-		<#if themeDisplay.isSignedIn()>
+		<#if isMiniumLogin>
 			<div class="minium-frame__sidebar">
 				<#include "${full_templates_path}/sidebar.ftl" />
 			</div>
@@ -47,7 +51,7 @@
 					</@>
 				</#if>
 			</div>
-		<#if themeDisplay.isSignedIn()>
+		<#if isMiniumLogin>
 			</div>
 
 			<#--  The toolbar is needed to create the shadow when scrolling  -->
