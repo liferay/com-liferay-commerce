@@ -1,0 +1,7 @@
+apiDir: "../headless-commerce-admin-inventory-api/src/main/java"
+apiPackagePath: "com.liferay.headless.commerce.admin.inventory"
+application:
+    baseURI: "/headless-commerce-admin-inventory"
+    className: "HeadlessCommerceAdminInventoryApplication"
+    name: "Liferay.Headless.Commerce.Admin.Inventory"
+author: "Alessio Antonio Rendina"
