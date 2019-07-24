@@ -1,8 +1,8 @@
 components:
     parameters:
         externalReferenceCodePathParam:
-            explode: false
             in: path
+            explode: false
             name: externalReferenceCode
             required: true
             schema:
@@ -12,8 +12,8 @@ components:
                 type: string
             style: simple
         idPathParam:
-            explode: false
             in: path
+            explode: false
             name: id
             required: true
             schema:
@@ -24,16 +24,16 @@ components:
                 type: integer
             style: simple
         pageQueryParam:
-            explode: true
             in: query
+            explode: true
             name: page
             required: false
             schema:
                 type: integer
             style: form
         pageSizeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: pageSize
             required: false
             schema:
@@ -488,8 +488,8 @@ paths:
         get:
             operationId: getDiscountByExternalReferenceCodeDiscountRulesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -498,15 +498,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -566,8 +566,8 @@ paths:
         post:
             operationId: postDiscountByExternalReferenceCodeDiscountRule
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -640,8 +640,8 @@ paths:
         delete:
             operationId: deleteDiscountAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -675,8 +675,8 @@ paths:
         delete:
             operationId: deleteDiscountCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -710,8 +710,8 @@ paths:
         delete:
             operationId: deleteDiscountProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -745,8 +745,8 @@ paths:
         delete:
             operationId: deleteDiscountRule
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -779,8 +779,8 @@ paths:
         get:
             operationId: getDiscountRule
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -840,8 +840,8 @@ paths:
         patch:
             operationId: patchDiscountRule
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -906,15 +906,15 @@ paths:
         get:
             operationId: getDiscountsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1035,8 +1035,8 @@ paths:
         get:
             operationId: getDiscountByExternalReferenceCodeDiscountAccountGroupsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1045,15 +1045,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1111,8 +1111,8 @@ paths:
         post:
             operationId: postDiscountByExternalReferenceCodeDiscountAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1185,8 +1185,8 @@ paths:
         get:
             operationId: getDiscountByExternalReferenceCodeDiscountCategoriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1195,15 +1195,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1261,8 +1261,8 @@ paths:
         post:
             operationId: postDiscountByExternalReferenceCodeDiscountCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1335,8 +1335,8 @@ paths:
         get:
             operationId: getDiscountByExternalReferenceCodeDiscountProductsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1345,15 +1345,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1411,8 +1411,8 @@ paths:
         post:
             operationId: postDiscountByExternalReferenceCodeDiscountProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1485,8 +1485,8 @@ paths:
         delete:
             operationId: deleteDiscountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1518,8 +1518,8 @@ paths:
         get:
             operationId: getDiscountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1578,8 +1578,8 @@ paths:
         patch:
             operationId: patchDiscountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1643,8 +1643,8 @@ paths:
         get:
             operationId: getDiscountIdDiscountAccountGroupsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1654,15 +1654,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1720,8 +1720,8 @@ paths:
         post:
             operationId: postDiscountIdDiscountAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1795,8 +1795,8 @@ paths:
         get:
             operationId: getDiscountIdDiscountCategoriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1806,15 +1806,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1872,8 +1872,8 @@ paths:
         post:
             operationId: postDiscountIdDiscountCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1947,8 +1947,8 @@ paths:
         get:
             operationId: getDiscountIdDiscountProductsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1958,15 +1958,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2024,8 +2024,8 @@ paths:
         post:
             operationId: postDiscountIdDiscountProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2099,8 +2099,8 @@ paths:
         get:
             operationId: getDiscountIdDiscountRulesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2110,15 +2110,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2178,8 +2178,8 @@ paths:
         post:
             operationId: postDiscountIdDiscountRule
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2253,8 +2253,8 @@ paths:
         delete:
             operationId: deleteDiscount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2287,8 +2287,8 @@ paths:
         get:
             operationId: getDiscount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2348,8 +2348,8 @@ paths:
         patch:
             operationId: patchDiscount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2414,8 +2414,8 @@ paths:
         get:
             operationId: getPriceEntryByExternalReferenceCodeTierPricesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2424,15 +2424,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2492,8 +2492,8 @@ paths:
         post:
             operationId: postPriceEntryByExternalReferenceCodeTierPrice
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2566,8 +2566,8 @@ paths:
         delete:
             operationId: deletePriceEntryByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2599,8 +2599,8 @@ paths:
         get:
             operationId: getPriceEntryByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2659,8 +2659,8 @@ paths:
         patch:
             operationId: patchPriceEntryByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2724,8 +2724,8 @@ paths:
         get:
             operationId: getPriceEntryIdTierPricesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2735,15 +2735,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2803,8 +2803,8 @@ paths:
         post:
             operationId: postPriceEntryIdTierPrice
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2878,8 +2878,8 @@ paths:
         delete:
             operationId: deletePriceEntry
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2912,8 +2912,8 @@ paths:
         get:
             operationId: getPriceEntry
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2973,8 +2973,8 @@ paths:
         patch:
             operationId: patchPriceEntry
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3039,8 +3039,8 @@ paths:
         delete:
             operationId: deletePriceListAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3074,15 +3074,15 @@ paths:
         get:
             operationId: getPriceListsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3203,8 +3203,8 @@ paths:
         get:
             operationId: getPriceListByExternalReferenceCodePriceEntriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3213,15 +3213,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3279,8 +3279,8 @@ paths:
         post:
             operationId: postPriceListByExternalReferenceCodePriceEntry
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3353,8 +3353,8 @@ paths:
         get:
             operationId: getPriceListByExternalReferenceCodePriceListAccountGroupPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3363,15 +3363,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3429,8 +3429,8 @@ paths:
         post:
             operationId: postPriceListByExternalReferenceCodePriceListAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3503,8 +3503,8 @@ paths:
         delete:
             operationId: deletePriceListByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3536,8 +3536,8 @@ paths:
         get:
             operationId: getPriceListByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3596,8 +3596,8 @@ paths:
         patch:
             operationId: patchPriceListByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3661,8 +3661,8 @@ paths:
         get:
             operationId: getPriceListIdPriceEntriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3672,15 +3672,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3738,8 +3738,8 @@ paths:
         post:
             operationId: postPriceListIdPriceEntry
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3813,8 +3813,8 @@ paths:
         get:
             operationId: getPriceListIdPriceListAccountGroupsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3824,15 +3824,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3890,8 +3890,8 @@ paths:
         post:
             operationId: postPriceListIdPriceListAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3965,8 +3965,8 @@ paths:
         delete:
             operationId: deletePriceList
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3999,8 +3999,8 @@ paths:
         get:
             operationId: getPriceList
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4060,8 +4060,8 @@ paths:
         patch:
             operationId: patchPriceList
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4126,8 +4126,8 @@ paths:
         delete:
             operationId: deleteTierPriceByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4159,8 +4159,8 @@ paths:
         get:
             operationId: getTierPriceByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4219,8 +4219,8 @@ paths:
         patch:
             operationId: patchTierPriceByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4284,8 +4284,8 @@ paths:
         delete:
             operationId: deleteTierPrice
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4318,8 +4318,8 @@ paths:
         get:
             operationId: getTierPrice
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4379,8 +4379,8 @@ paths:
         patch:
             operationId: patchTierPrice
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
