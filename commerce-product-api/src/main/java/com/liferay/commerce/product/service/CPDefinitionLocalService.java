@@ -154,6 +154,8 @@ public interface CPDefinitionLocalService
 
 	public void deleteCPDefinitions(long companyId) throws PortalException;
 
+	public void deleteCPDefinitions(long cProductId, int status);
+
 	/**
 	 * @throws PortalException
 	 */
