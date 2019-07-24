@@ -99,12 +99,14 @@ public class CPDefinitionLinkLocalServiceWrapper
 	 *
 	 * @param cpDefinitionLink the cp definition link
 	 * @return the cp definition link that was removed
+	 * @throws PortalException
 	 */
 	@Override
 	public com.liferay.commerce.product.model.CPDefinitionLink
-		deleteCPDefinitionLink(
-			com.liferay.commerce.product.model.CPDefinitionLink
-				cpDefinitionLink) {
+			deleteCPDefinitionLink(
+				com.liferay.commerce.product.model.CPDefinitionLink
+					cpDefinitionLink)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _cpDefinitionLinkLocalService.deleteCPDefinitionLink(
 			cpDefinitionLink);
@@ -131,18 +133,24 @@ public class CPDefinitionLinkLocalServiceWrapper
 	 */
 	@Deprecated
 	@Override
-	public void deleteCPDefinitionLinks(long cpDefinitionId) {
+	public void deleteCPDefinitionLinks(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_cpDefinitionLinkLocalService.deleteCPDefinitionLinks(cpDefinitionId);
 	}
 
 	@Override
-	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId) {
+	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCPDefinitionId(
 			cpDefinitionId);
 	}
 
 	@Override
-	public void deleteCPDefinitionLinksByCProductId(long cProductId) {
+	public void deleteCPDefinitionLinksByCProductId(long cProductId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
 		_cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCProductId(
 			cProductId);
 	}
