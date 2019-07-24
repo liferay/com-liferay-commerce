@@ -101,16 +101,14 @@ public class CPOptionCategoryServiceImpl
 	@Override
 	public CPOptionCategory updateCPOptionCategory(
 			long cpOptionCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, double priority, String key,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, double priority, String key)
 		throws PortalException {
 
 		_cpOptionCategoryModelResourcePermission.check(
 			getPermissionChecker(), cpOptionCategoryId, ActionKeys.UPDATE);
 
 		return cpOptionCategoryLocalService.updateCPOptionCategory(
-			cpOptionCategoryId, titleMap, descriptionMap, priority, key,
-			serviceContext);
+			cpOptionCategoryId, titleMap, descriptionMap, priority, key);
 	}
 
 	private static volatile ModelResourcePermission<CPOptionCategory>
