@@ -140,9 +140,15 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 											document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
 											document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
 											document.querySelector('[data-text-cp-instance-gtin]').innerHTML = Liferay.Util.escape(response.gtin) || '';
-											document.querySelector('[data-text-cp-instance-availability]').innerHTML = response.availability || '';
-											document.querySelector('[data-text-cp-instance-availability-estimate]').innerHTML = response.availabilityEstimate || '';
-											document.querySelector('[data-text-cp-instance-stock-quantity]').innerHTML = response.stockQuantity || '';
+											const availabilityEstimateContainer = document.querySelector('[data-text-cp-instance-availability-estimate]');
+											const availabilityContainer = document.querySelector('[data-text-cp-instance-availability]')
+											const stockQuantityContainer = document.querySelector('[data-text-cp-instance-stock-quantity]')
+
+											if (availabilityEstimateContainer && availabilityContainer && stockQuantityContainer) {
+												availabilityContainer.innerHTML = response.availability || '';
+												availabilityEstimateContainer.innerHTML = response.availabilityEstimate || '';
+												stockQuantityContainer.innerHTML = response.stockQuantity || '';
+											}
 											document.querySelector('[data-text-cp-instance-subscription-info]').innerHTML = response.subscriptionInfo || '';
 											document.querySelector('[data-text-cp-instance-price]').innerHTML = response.price || '';
 
@@ -200,6 +206,8 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 								if (form) {
 									form.after('*:valueChange', ddmFormChange, {});
+
+									checkCPInstance();
 								}
 							}
 						);
