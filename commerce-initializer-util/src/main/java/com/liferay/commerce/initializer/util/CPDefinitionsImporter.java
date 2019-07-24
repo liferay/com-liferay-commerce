@@ -499,7 +499,7 @@ public class CPDefinitionsImporter {
 			cpDefinition.getCPDefinitionId(), cpDefinitionInventoryEngine,
 			lowStockActivity, displayAvailability, displayStockQuantity,
 			minStockQuantity, backOrders, minOrderQuantity, maxOrderQuantity,
-			allowedOrderQuantities, multipleOrderQuantity, serviceContext);
+			allowedOrderQuantities, multipleOrderQuantity);
 
 		// Commerce product definition availability estimate
 
