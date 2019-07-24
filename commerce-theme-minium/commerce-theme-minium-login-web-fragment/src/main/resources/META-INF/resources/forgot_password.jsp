@@ -28,6 +28,10 @@ Integer reminderAttempts = (Integer)portletSession.getAttribute(WebKeys.FORGOT_P
 if (reminderAttempts == null) {
 	reminderAttempts = 0;
 }
+
+String themeId = themeDisplay.getThemeId();
+
+boolean isMiniumTheme = themeId.equals("minium_WAR_miniumtheme");
 %>
 
 <portlet:actionURL name="/login/forgot_password" var="forgotPasswordURL">
@@ -36,13 +40,16 @@ if (reminderAttempts == null) {
 
 <div class="login-component login-component-forgot-password">
 	<div class="login-container">
-		<div class="login-header">
-			<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
-		</div>
-
+		<c:if test="<%= isMiniumTheme %>">
+			<div class="login-header">
+				<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
+			</div>
+		</c:if>
 
 		<div class="login-body">
-			<h1 class="login-title">Forgot Password?</h1>
+			<h1 class="login-title">
+				<liferay-ui:message key="forgot-password" />
+			</h1>
 
 			<aui:form action="<%= forgotPasswordURL %>" method="post" name="fm">
 				<aui:input name="saveLastPath" type="hidden" value="<%= false %>" />
@@ -174,7 +181,7 @@ if (reminderAttempts == null) {
 									</c:if>
 
 									<aui:button-row>
-										<aui:button type="submit" value='<%= company.isSendPasswordResetLink() ? "send-password-reset-link" : "send-new-password" %>' />
+										<aui:button cssClass="btn-block gsdc-btn-primary" type="submit" value='<%= company.isSendPasswordResetLink() ? "send-password-reset-link" : "send-new-password" %>' />
 									</aui:button-row>
 								</c:otherwise>
 							</c:choose>
@@ -190,9 +197,22 @@ if (reminderAttempts == null) {
 		</div>
 
 		<div class="login-footer">
-			<%@ include file="/navigation.jspf" %>
+			<c:choose>
+				<c:when test="<%= !isMiniumTheme %>">
+					<%@ include file="/navigation.jspf" %>
+				</c:when>
+				<c:otherwise>
+					<portlet:renderURL var="loginURL">
+						<portlet:param name="mvcRenderCommandName" value="/login/login" />
+					</portlet:renderURL>
+
+					<a class="forgot-password" href="<%= loginURL %>">
+						<liferay-ui:message key="login" />
+					</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
-	<div class="login-splash login-splash-forgot-password"></div>
+	<div class="login-splash"></div>
 </div>
