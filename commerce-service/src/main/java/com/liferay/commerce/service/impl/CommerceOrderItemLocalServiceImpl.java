@@ -158,7 +158,8 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Mueller (7.2.x), use deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
+	 * @deprecated As of Mueller (7.2.x), use
+	 *             deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
 	 */
 	@Deprecated
 	@Indexable(type = IndexableType.DELETE)
