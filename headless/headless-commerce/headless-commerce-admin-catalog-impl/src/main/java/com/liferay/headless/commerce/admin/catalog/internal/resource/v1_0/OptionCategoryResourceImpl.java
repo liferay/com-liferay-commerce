@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -46,6 +47,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 /**
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/option-category.properties",
@@ -141,7 +143,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 			GetterUtil.get(
 				optionCategory.getPriority(), cpOptionCategory.getPriority()),
-			optionCategory.getKey(), _serviceContextHelper.getServiceContext());
+			optionCategory.getKey());
 	}
 
 	private OptionCategory _upsertOptionCategory(OptionCategory optionCategory)
@@ -168,13 +170,15 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			}
 		}
 
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			_user);
+
 		CPOptionCategory cpOptionCategory =
 			_cpOptionCategoryService.addCPOptionCategory(
 				LanguageUtils.getLocalizedMap(optionCategory.getTitle()),
 				LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 				GetterUtil.get(optionCategory.getPriority(), 0D),
-				optionCategory.getKey(),
-				_serviceContextHelper.getServiceContext());
+				optionCategory.getKey(), serviceContext);
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
