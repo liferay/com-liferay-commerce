@@ -1,0 +1,7 @@
+apply plugin: "com.liferay.lang.merger"
+
+dependencies {
+	compileOnly group: "com.liferay", name: "com.liferay.frontend.js.loader.modules.extender.api", version: "2.0.0"
+	compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
+	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
+}
