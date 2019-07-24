@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/asset/init.jsp" %>
+<!-- test full_content.jsp -->
 
 <%
 CommerceOrder commerceOrder = (CommerceOrder)request.getAttribute(CommerceOrderConstants.COMMERCE_ORDER);
