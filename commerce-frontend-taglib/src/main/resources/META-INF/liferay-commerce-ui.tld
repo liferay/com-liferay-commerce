@@ -26,6 +26,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>header</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.HeaderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>variant</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>add-address-modal</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.AddressModalTag</tag-class>
 		<body-content>empty</body-content>
