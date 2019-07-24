@@ -1,8 +1,8 @@
 components:
     parameters:
         externalReferenceCodePathParam:
-            explode: false
             in: path
+            explode: false
             name: externalReferenceCode
             required: true
             schema:
@@ -12,8 +12,8 @@ components:
                 type: string
             style: simple
         idPathParam:
-            explode: false
             in: path
+            explode: false
             name: id
             required: true
             schema:
@@ -24,8 +24,8 @@ components:
                 type: integer
             style: simple
         organizationIdPathParam:
-            explode: false
             in: path
+            explode: false
             name: organizationId
             required: true
             schema:
@@ -36,24 +36,24 @@ components:
                 type: integer
             style: simple
         pageQueryParam:
-            explode: true
             in: query
+            explode: true
             name: page
             required: false
             schema:
                 type: integer
             style: form
         pageSizeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: pageSize
             required: false
             schema:
                 type: integer
             style: form
         userIdPathParam:
-            explode: false
             in: path
+            explode: false
             name: userId
             required: true
             schema:
@@ -467,8 +467,8 @@ paths:
         delete:
             operationId: deleteAccountAddress
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -502,15 +502,15 @@ paths:
         get:
             operationId: getAccountGroupsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -631,8 +631,8 @@ paths:
         delete:
             operationId: deleteAccountGroupByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -664,8 +664,8 @@ paths:
         get:
             operationId: getAccountGroupByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -724,8 +724,8 @@ paths:
         patch:
             operationId: patchAccountGroupByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -789,8 +789,8 @@ paths:
         delete:
             operationId: deleteAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -823,8 +823,8 @@ paths:
         get:
             operationId: getAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -884,8 +884,8 @@ paths:
         patch:
             operationId: patchAccountGroup
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -950,15 +950,15 @@ paths:
         get:
             operationId: getAccountsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1079,8 +1079,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCodeAccountAddressesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1089,15 +1089,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1157,8 +1157,8 @@ paths:
         post:
             operationId: postAccountByExternalReferenceCodeAccountAddress
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1231,8 +1231,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCodeAccountMembersPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1241,15 +1241,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1309,8 +1309,8 @@ paths:
         post:
             operationId: postAccountByExternalReferenceCodeAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1383,8 +1383,8 @@ paths:
         post:
             operationId: postAccountByExternalReferenceCodeAccountMemberCreateUser
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1457,8 +1457,8 @@ paths:
         delete:
             operationId: deleteAccountByExternalReferenceCodeAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1467,8 +1467,8 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -1502,8 +1502,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCodeAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1512,8 +1512,8 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -1574,8 +1574,8 @@ paths:
         patch:
             operationId: patchAccountByExternalReferenceCodeAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1584,8 +1584,8 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -1651,8 +1651,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCodeAccountOrganizationsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1661,15 +1661,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1729,8 +1729,8 @@ paths:
         post:
             operationId: postAccountByExternalReferenceCodeAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1803,8 +1803,8 @@ paths:
         delete:
             operationId: deleteAccountByExternalReferenceCodeAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1813,8 +1813,8 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: organizationId
                   required: true
                   schema:
@@ -1848,8 +1848,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCodeAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1858,8 +1858,8 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: organizationId
                   required: true
                   schema:
@@ -1921,8 +1921,8 @@ paths:
         post:
             operationId: postAccountByExternalReferenceCodeLogo
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1985,8 +1985,8 @@ paths:
         delete:
             operationId: deleteAccountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2018,8 +2018,8 @@ paths:
         get:
             operationId: getAccountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2078,8 +2078,8 @@ paths:
         patch:
             operationId: patchAccountByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2143,8 +2143,8 @@ paths:
         get:
             operationId: getAccountIdAccountAddressesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2154,15 +2154,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2222,8 +2222,8 @@ paths:
         post:
             operationId: postAccountIdAccountAddress
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2297,8 +2297,8 @@ paths:
         get:
             operationId: getAccountIdAccountMembersPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2308,15 +2308,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2376,8 +2376,8 @@ paths:
         post:
             operationId: postAccountIdAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2451,8 +2451,8 @@ paths:
         delete:
             operationId: deleteAccountIdAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2462,8 +2462,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -2496,8 +2496,8 @@ paths:
         get:
             operationId: getAccountIdAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2507,8 +2507,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -2568,8 +2568,8 @@ paths:
         patch:
             operationId: patchAccountIdAccountMember
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2579,8 +2579,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: userId
                   required: true
                   schema:
@@ -2645,8 +2645,8 @@ paths:
         get:
             operationId: getAccountIdAccountOrganizationsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2656,15 +2656,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2724,8 +2724,8 @@ paths:
         post:
             operationId: postAccountIdAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2799,8 +2799,8 @@ paths:
         delete:
             operationId: deleteAccountIdAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2810,8 +2810,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: organizationId
                   required: true
                   schema:
@@ -2844,8 +2844,8 @@ paths:
         get:
             operationId: getAccountIdAccountOrganization
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2855,8 +2855,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: organizationId
                   required: true
                   schema:
@@ -2917,8 +2917,8 @@ paths:
         post:
             operationId: postAccountLogo
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2982,8 +2982,8 @@ paths:
         delete:
             operationId: deleteAccount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3016,8 +3016,8 @@ paths:
         get:
             operationId: getAccount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3077,8 +3077,8 @@ paths:
         patch:
             operationId: patchAccount
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:

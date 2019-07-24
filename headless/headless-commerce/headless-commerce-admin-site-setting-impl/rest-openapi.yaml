@@ -1,8 +1,8 @@
 components:
     parameters:
         activeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: active
             required: false
             schema:
@@ -11,8 +11,8 @@ components:
                 type: boolean
             style: form
         groupIdPathParam:
-            explode: false
             in: path
+            explode: false
             name: groupId
             required: true
             schema:
@@ -23,8 +23,8 @@ components:
                 type: integer
             style: simple
         idPathParam:
-            explode: false
             in: path
+            explode: false
             name: id
             required: true
             schema:
@@ -35,24 +35,24 @@ components:
                 type: integer
             style: simple
         pageQueryParam:
-            explode: true
             in: query
+            explode: true
             name: page
             required: false
             schema:
                 type: integer
             style: form
         pageSizeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: pageSize
             required: false
             schema:
                 type: integer
             style: form
         typeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: type
             required: false
             schema:
@@ -314,8 +314,8 @@ paths:
         delete:
             operationId: deleteAvailabilityEstimate
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -348,8 +348,8 @@ paths:
         get:
             operationId: getAvailabilityEstimate
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -409,8 +409,8 @@ paths:
         put:
             operationId: putAvailabilityEstimate
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -475,8 +475,8 @@ paths:
         get:
             operationId: getCommerceAdminSiteSettingGroupAvailabilityEstimatePage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -486,15 +486,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -552,8 +552,8 @@ paths:
         post:
             operationId: postCommerceAdminSiteSettingGroupAvailabilityEstimate
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -627,8 +627,8 @@ paths:
         get:
             operationId: getCommerceAdminSiteSettingGroupMeasurementUnitPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -638,22 +638,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
-                  name: page
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: pageSize
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: type
                   required: false
                   schema:
@@ -662,6 +648,20 @@ paths:
                       format: int32
                       maximum: 1
                       minimum: 0
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: pageSize
+                  required: false
+                  schema:
                       type: integer
                   style: form
             responses:
@@ -716,8 +716,8 @@ paths:
         post:
             operationId: postCommerceAdminSiteSettingGroupMeasurementUnit
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -791,8 +791,8 @@ paths:
         get:
             operationId: getCommerceAdminSiteSettingGroupTaxCategoryPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -802,15 +802,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -868,8 +868,8 @@ paths:
         post:
             operationId: postCommerceAdminSiteSettingGroupTaxCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -943,8 +943,8 @@ paths:
         get:
             operationId: getCommerceAdminSiteSettingGroupWarehousePage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -954,8 +954,8 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: active
                   required: false
                   schema:
@@ -963,15 +963,15 @@ paths:
                       example: true
                       type: boolean
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1029,8 +1029,8 @@ paths:
         post:
             operationId: postCommerceAdminSiteSettingGroupWarehouse
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: groupId
                   required: true
                   schema:
@@ -1104,8 +1104,8 @@ paths:
         delete:
             operationId: deleteMeasurementUnit
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1138,8 +1138,8 @@ paths:
         get:
             operationId: getMeasurementUnit
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1199,8 +1199,8 @@ paths:
         put:
             operationId: putMeasurementUnit
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1265,8 +1265,8 @@ paths:
         delete:
             operationId: deleteTaxCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1299,8 +1299,8 @@ paths:
         get:
             operationId: getTaxCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1360,8 +1360,8 @@ paths:
         put:
             operationId: putTaxCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1426,8 +1426,8 @@ paths:
         delete:
             operationId: deleteWarehouse
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1460,8 +1460,8 @@ paths:
         get:
             operationId: getWarehouse
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1521,8 +1521,8 @@ paths:
         put:
             operationId: putWarehouse
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
