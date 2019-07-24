@@ -64,15 +64,29 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 			int quantity)
 		throws PortalException;
 
+	public void deleteCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId)
+		throws PortalException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseId, String sku)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceInventoryWarehouseItem getCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceInventoryWarehouseItem>
 			getCommerceInventoryWarehouseItems(
 				long commerceInventoryWarehouseId, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
 		throws PortalException;
 
 	/**

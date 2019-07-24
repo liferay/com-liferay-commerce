@@ -51,6 +51,14 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
+	public static void deleteCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().deleteCommerceInventoryWarehouseItem(
+			commerceInventoryWarehouseItemId);
+	}
+
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				fetchCommerceInventoryWarehouseItem(
@@ -61,6 +69,16 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			commerceInventoryWarehouseId, sku);
 	}
 
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				getCommerceInventoryWarehouseItem(
+					long commerceInventoryWarehouseItemId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItem(
+			commerceInventoryWarehouseItemId);
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
 				getCommerceInventoryWarehouseItems(
@@ -69,6 +87,14 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 
 		return getService().getCommerceInventoryWarehouseItems(
 			commerceInventoryWarehouseId, start, end);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsCount(
+			commerceInventoryWarehouseId);
 	}
 
 	/**

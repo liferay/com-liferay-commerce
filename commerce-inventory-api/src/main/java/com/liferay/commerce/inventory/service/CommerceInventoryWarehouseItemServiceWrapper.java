@@ -51,6 +51,16 @@ public class CommerceInventoryWarehouseItemServiceWrapper
 	}
 
 	@Override
+	public void deleteCommerceInventoryWarehouseItem(
+			long commerceInventoryWarehouseItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceInventoryWarehouseItemService.
+			deleteCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItemId);
+	}
+
+	@Override
 	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 			fetchCommerceInventoryWarehouseItem(
 				long commerceInventoryWarehouseId, String sku)
@@ -59,6 +69,16 @@ public class CommerceInventoryWarehouseItemServiceWrapper
 		return _commerceInventoryWarehouseItemService.
 			fetchCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouseId, sku);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItem(
+				long commerceInventoryWarehouseItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceInventoryWarehouseItemService.
+			getCommerceInventoryWarehouseItem(commerceInventoryWarehouseItemId);
 	}
 
 	@Override
@@ -71,6 +91,16 @@ public class CommerceInventoryWarehouseItemServiceWrapper
 		return _commerceInventoryWarehouseItemService.
 			getCommerceInventoryWarehouseItems(
 				commerceInventoryWarehouseId, start, end);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceInventoryWarehouseItemService.
+			getCommerceInventoryWarehouseItemsCount(
+				commerceInventoryWarehouseId);
 	}
 
 	/**

@@ -98,6 +98,29 @@ public class CommerceInventoryWarehouseServiceSoap {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
+				fetchByExternalReferenceCode(
+					long companyId, String externalReferenceCode)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				returnValue =
+					CommerceInventoryWarehouseServiceUtil.
+						fetchByExternalReferenceCode(
+							companyId, externalReferenceCode);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap
 				deleteCommerceInventoryWarehouse(
 					long commerceInventoryWarehouseId)
 			throws RemoteException {

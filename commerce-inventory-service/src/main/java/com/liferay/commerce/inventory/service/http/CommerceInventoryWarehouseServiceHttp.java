@@ -107,6 +107,49 @@ public class CommerceInventoryWarehouseServiceHttp {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+				fetchByExternalReferenceCode(
+					HttpPrincipal httpPrincipal, long companyId,
+					String externalReferenceCode)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceInventoryWarehouseServiceUtil.class,
+				"fetchByExternalReferenceCode",
+				_fetchByExternalReferenceCodeParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, externalReferenceCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouse)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
 				deleteCommerceInventoryWarehouse(
 					HttpPrincipal httpPrincipal,
 					long commerceInventoryWarehouseId)
@@ -116,7 +159,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"deleteCommerceInventoryWarehouse",
-				_deleteCommerceInventoryWarehouseParameterTypes1);
+				_deleteCommerceInventoryWarehouseParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId);
@@ -160,7 +203,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"geolocateCommerceInventoryWarehouse",
-				_geolocateCommerceInventoryWarehouseParameterTypes2);
+				_geolocateCommerceInventoryWarehouseParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId, latitude, longitude);
@@ -203,7 +246,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehouse",
-				_getCommerceInventoryWarehouseParameterTypes3);
+				_getCommerceInventoryWarehouseParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId);
@@ -249,7 +292,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehouses",
-				_getCommerceInventoryWarehousesParameterTypes4);
+				_getCommerceInventoryWarehousesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active, commerceCountryCode, start, end,
@@ -297,7 +340,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehouses",
-				_getCommerceInventoryWarehousesParameterTypes5);
+				_getCommerceInventoryWarehousesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, start, end, orderByComparator);
@@ -341,7 +384,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehouses",
-				_getCommerceInventoryWarehousesParameterTypes6);
+				_getCommerceInventoryWarehousesParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, groupId, active);
@@ -382,7 +425,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehousesCount",
-				_getCommerceInventoryWarehousesCountParameterTypes7);
+				_getCommerceInventoryWarehousesCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId);
@@ -422,7 +465,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"getCommerceInventoryWarehousesCount",
-				_getCommerceInventoryWarehousesCountParameterTypes8);
+				_getCommerceInventoryWarehousesCountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active, commerceCountryCode);
@@ -465,7 +508,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"searchCommerceInventoryWarehouses",
-				_searchCommerceInventoryWarehousesParameterTypes9);
+				_searchCommerceInventoryWarehousesParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active, commerceCountryCode, keywords,
@@ -508,7 +551,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"searchCommerceInventoryWarehousesCount",
-				_searchCommerceInventoryWarehousesCountParameterTypes10);
+				_searchCommerceInventoryWarehousesCountParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active, commerceCountryCode, keywords);
@@ -549,7 +592,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class, "setActive",
-				_setActiveParameterTypes11);
+				_setActiveParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId, active);
@@ -598,7 +641,7 @@ public class CommerceInventoryWarehouseServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
 				"updateCommerceInventoryWarehouse",
-				_updateCommerceInventoryWarehouseParameterTypes12);
+				_updateCommerceInventoryWarehouseParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId, name, description,
@@ -644,53 +687,57 @@ public class CommerceInventoryWarehouseServiceHttp {
 			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]
-		_deleteCommerceInventoryWarehouseParameterTypes1 = new Class[] {
+		_fetchByExternalReferenceCodeParameterTypes1 = new Class[] {
+			long.class, String.class
+		};
+	private static final Class<?>[]
+		_deleteCommerceInventoryWarehouseParameterTypes2 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[]
-		_geolocateCommerceInventoryWarehouseParameterTypes2 = new Class[] {
+		_geolocateCommerceInventoryWarehouseParameterTypes3 = new Class[] {
 			long.class, double.class, double.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehouseParameterTypes3 = new Class[] {
+		_getCommerceInventoryWarehouseParameterTypes4 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehousesParameterTypes4 = new Class[] {
+		_getCommerceInventoryWarehousesParameterTypes5 = new Class[] {
 			long.class, boolean.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehousesParameterTypes5 = new Class[] {
+		_getCommerceInventoryWarehousesParameterTypes6 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehousesParameterTypes6 = new Class[] {
+		_getCommerceInventoryWarehousesParameterTypes7 = new Class[] {
 			long.class, long.class, boolean.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehousesCountParameterTypes7 = new Class[] {
+		_getCommerceInventoryWarehousesCountParameterTypes8 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehousesCountParameterTypes8 = new Class[] {
+		_getCommerceInventoryWarehousesCountParameterTypes9 = new Class[] {
 			long.class, boolean.class, String.class
 		};
 	private static final Class<?>[]
-		_searchCommerceInventoryWarehousesParameterTypes9 = new Class[] {
+		_searchCommerceInventoryWarehousesParameterTypes10 = new Class[] {
 			long.class, Boolean.class, String.class, String.class, int.class,
 			int.class, com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[]
-		_searchCommerceInventoryWarehousesCountParameterTypes10 = new Class[] {
+		_searchCommerceInventoryWarehousesCountParameterTypes11 = new Class[] {
 			long.class, Boolean.class, String.class, String.class
 		};
-	private static final Class<?>[] _setActiveParameterTypes11 = new Class[] {
+	private static final Class<?>[] _setActiveParameterTypes12 = new Class[] {
 		long.class, boolean.class
 	};
 	private static final Class<?>[]
-		_updateCommerceInventoryWarehouseParameterTypes12 = new Class[] {
+		_updateCommerceInventoryWarehouseParameterTypes13 = new Class[] {
 			long.class, String.class, String.class, boolean.class, String.class,
 			String.class, String.class, String.class, String.class,
 			String.class, String.class, double.class, double.class,
