@@ -153,8 +153,7 @@ public class CPOptionCategoryServiceSoap {
 			updateCPOptionCategory(
 				long cpOptionCategoryId, String[] titleMapLanguageIds,
 				String[] titleMapValues, String[] descriptionMapLanguageIds,
-				String[] descriptionMapValues, double priority, String key,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				String[] descriptionMapValues, double priority, String key)
 		throws RemoteException {
 
 		try {
@@ -166,8 +165,8 @@ public class CPOptionCategoryServiceSoap {
 
 			com.liferay.commerce.product.model.CPOptionCategory returnValue =
 				CPOptionCategoryServiceUtil.updateCPOptionCategory(
-					cpOptionCategoryId, titleMap, descriptionMap, priority, key,
-					serviceContext);
+					cpOptionCategoryId, titleMap, descriptionMap, priority,
+					key);
 
 			return com.liferay.commerce.product.model.CPOptionCategorySoap.
 				toSoapModel(returnValue);
