@@ -17,13 +17,21 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL());
+String redirect = ParamUtil.getString(request, "redirect");
+
+String themeId = themeDisplay.getThemeId();
+
+boolean isMiniumTheme = themeId.equals("minium_WAR_miniumtheme");
+
+if (isMiniumTheme) {
+	redirect = themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL();
+}
 %>
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<aui:script>
-			window.location.replace("<%= redirect %>");
+			window.location.replace("<%= HtmlUtil.escape(redirect) %>");
 		</aui:script>
 	</c:when>
 	<c:otherwise>
@@ -55,12 +63,18 @@ String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathF
 					<portlet:param name="mvcRenderCommandName" value="/login/login" />
 				</portlet:actionURL>
 
-				<div class="login-header">
-					<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
-				</div>
+				<c:if test="<%= isMiniumTheme %>">
+					<div class="login-header">
+						<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
+					</div>
+				</c:if>
 
 				<div class="login-body">
-					<h1 class="login-title">Login to start!</h1>
+					<c:if test="<%= isMiniumTheme %>">
+						<h1 class="login-title">
+							<liferay-ui:message key="log-in-to-start-exclamation-point" />
+						</h1>
+					</c:if>
 
 					<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form" method="post" name="<%= formName %>" onSubmit="event.preventDefault();" validateOnBlur="<%= false %>">
 						<aui:input name="saveLastPath" type="hidden" value="<%= false %>" />
@@ -74,7 +88,7 @@ String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathF
 						<c:choose>
 							<c:when test='<%= SessionMessages.contains(request, "passwordSent") %>'>
 								<div class="alert alert-success">
-									<liferay-ui:message key="An-email-has-been-sent-to-the-provided-email-address" />
+									<liferay-ui:message key="an-email-has-been-sent-to-the-provided-email-address" />
 								</div>
 							</c:when>
 							<c:when test='<%= SessionMessages.contains(request, "userAdded") %>'>
@@ -110,7 +124,7 @@ String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathF
 								%>
 
 								<div class="alert alert-success">
-									<liferay-ui:message arguments="<%= HtmlUtil.escape(userEmailAddress) %>" key="thank-you-for-creating-an-account.-you-will-be-notified-via-email-at-x-when-your-account-has-been-approved" translateArguments="<%= false %>" />
+									<liferay-ui:message arguments="<%= HtmlUtil.escape(userEmailAddress) %>" key="thank-you-for-creating-an-account-you-will-be-notified-via-email-at-x-when-your-account-has-been-approved" translateArguments="<%= false %>" />
 								</div>
 							</c:when>
 						</c:choose>
@@ -171,19 +185,8 @@ String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathF
 							<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 
 							<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-								<portlet:renderURL var="forgotPasswordURL">
-									<portlet:param name="mvcRenderCommandName" value="/login/forgot_password" />
-								</portlet:renderURL>
-
-								<div class="gsdc-form-group form-group row ml-0 mr-0">
-									<div class="col-xs-6 p-0">
-										<aui:input checked="<%= rememberMe %>" label="remember-me" name="<portlet:namespace />rememberMe" type="checkbox" />
-									</div>
-									<div class="col-xs-6 p-0 text-right">
-										<a class="forgot-password" href="<%= forgotPasswordURL %>">
-											<liferay-ui:message key="forgot-password" />
-										</a>
-									</div>
+								<div class="form-group gsdc-form-group">
+									<aui:input checked="<%= rememberMe %>" label="remember-me" name="<portlet:namespace />rememberMe" type="checkbox" />
 								</div>
 							</c:if>
 
@@ -191,28 +194,34 @@ String redirect = ParamUtil.getString(request, "redirect", themeDisplay.getPathF
 								<portlet:param name="mvcRenderCommandName" value="/login/create_account" />
 							</portlet:renderURL>
 
-
-							<div class="gsdc-form-group form-group">
-								<button class="btn btn-primary btn-block gsdc-btn-primary" type="submit">
+							<div class="form-group gsdc-form-group">
+								<button class="btn btn-primary gsdc-btn-primary" type="submit">
 									<liferay-ui:message key="login" />
 								</button>
-								<p class="login-or-register">or</p>
-								<a href="<%= registerURL %>">
-									<span class="btn btn-block btn-default">
-										<liferay-ui:message key="create-account" />
-									</span>
-								</a>
 							</div>
-
 						</aui:fieldset>
 					</aui:form>
 				</div>
 
 				<div class="login-footer">
+					<c:choose>
+						<c:when test="<%= !isMiniumTheme %>">
+							<%@ include file="/navigation.jspf" %>
+						</c:when>
+						<c:otherwise>
+							<portlet:renderURL var="forgotPasswordURL">
+								<portlet:param name="mvcRenderCommandName" value="/login/forgot_password" />
+							</portlet:renderURL>
+
+							<a class="forgot-password" href="<%= forgotPasswordURL %>">
+								<liferay-ui:message key="forgot-password" />
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 
-			<div class="login-splash login-splash-create-account"></div>
+			<div class="login-splash"></div>
 		</div>
 
 		<aui:script sandbox="<%= true %>">
