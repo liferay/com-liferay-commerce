@@ -195,9 +195,16 @@ if (isMiniumTheme) {
 							</portlet:renderURL>
 
 							<div class="form-group gsdc-form-group">
-								<button class="btn btn-primary gsdc-btn-primary" type="submit">
-									<liferay-ui:message key="login" />
-								</button>
+
+								<%
+								String signIn = "sign-in";
+
+								if (isMiniumTheme) {
+									signIn = "login";
+								}
+								%>
+
+								<aui:button cssClass="gsdc-btn-primary" type="submit" value="<%= signIn %>" />
 							</div>
 						</aui:fieldset>
 					</aui:form>
