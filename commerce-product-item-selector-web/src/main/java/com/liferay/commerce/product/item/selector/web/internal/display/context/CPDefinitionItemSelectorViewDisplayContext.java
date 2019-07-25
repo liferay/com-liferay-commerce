@@ -56,6 +56,8 @@ public class CPDefinitionItemSelectorViewDisplayContext
 
 		_cpDefinitionService = cpDefinitionService;
 		_cpTypeServicesTracker = cpTypeServicesTracker;
+
+		setDefaultOrderByCol("name");
 	}
 
 	public long getCPDefinitionId() {
