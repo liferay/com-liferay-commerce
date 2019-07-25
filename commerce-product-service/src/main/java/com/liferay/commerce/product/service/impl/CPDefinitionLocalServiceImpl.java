@@ -577,7 +577,9 @@ public class CPDefinitionLocalServiceImpl
 		int cpDefinitionsCount = cpDefinitionPersistence.countByC_S(
 			cpDefinition.getCProductId(), WorkflowConstants.STATUS_ANY);
 
-		if (_isVersioningEnabled() && (cpDefinitionsCount == 1)) {
+		if (!_isVersioningEnabled() ||
+			(_isVersioningEnabled() && (cpDefinitionsCount == 1))) {
+
 			cProductLocalService.deleteCProduct(cpDefinition.getCProductId());
 		}
 
