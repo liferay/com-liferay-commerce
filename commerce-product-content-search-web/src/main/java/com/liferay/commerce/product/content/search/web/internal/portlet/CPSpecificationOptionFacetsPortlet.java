@@ -21,6 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSpecificationOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
@@ -259,14 +260,20 @@ public class CPSpecificationOptionFacetsPortlet
 		FacetCollector facetCollector = facet.getFacetCollector();
 
 		for (TermCollector termCollector : facetCollector.getTermCollectors()) {
-			MultiValueFacet multiValueFacet = new MultiValueFacet(
-				searchContext);
+			CPSpecificationOption cpSpecificationOption =
+				_cpSpecificationOptionLocalService.getCPSpecificationOption(
+					searchContext.getCompanyId(), termCollector.getTerm());
 
-			multiValueFacet.setFieldName(
-				CPSpecificationOptionFacetsUtil.getIndexFieldName(
-					termCollector.getTerm(), themeDisplay.getLanguageId()));
+			if (cpSpecificationOption.isFacetable()) {
+				MultiValueFacet multiValueFacet = new MultiValueFacet(
+					searchContext);
 
-			facets.add(multiValueFacet);
+				multiValueFacet.setFieldName(
+					CPSpecificationOptionFacetsUtil.getIndexFieldName(
+						termCollector.getTerm(), themeDisplay.getLanguageId()));
+
+				facets.add(multiValueFacet);
+			}
 		}
 
 		return facets;
