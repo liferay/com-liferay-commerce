@@ -574,7 +574,12 @@ public class CPDefinitionLocalServiceImpl
 
 		// Commerce product
 
-		cProductLocalService.deleteCProduct(cpDefinition.getCProductId());
+		int cpDefinitionsCount = cpDefinitionPersistence.countByC_S(
+			cpDefinition.getCProductId(), WorkflowConstants.STATUS_ANY);
+
+		if (_isVersioningEnabled() && (cpDefinitionsCount == 1)) {
+			cProductLocalService.deleteCProduct(cpDefinition.getCProductId());
+		}
 
 		// Commerce product definition localization
 
