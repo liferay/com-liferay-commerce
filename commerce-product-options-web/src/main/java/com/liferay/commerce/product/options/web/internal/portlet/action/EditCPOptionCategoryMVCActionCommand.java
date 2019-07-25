@@ -146,8 +146,7 @@ public class EditCPOptionCategoryMVCActionCommand extends BaseMVCActionCommand {
 			// Update commerce product option category
 
 			cpOptionCategory = _cpOptionCategoryService.updateCPOptionCategory(
-				cpOptionCategoryId, titleMap, descriptionMap, priority, key,
-				serviceContext);
+				cpOptionCategoryId, titleMap, descriptionMap, priority, key);
 		}
 
 		return cpOptionCategory;
