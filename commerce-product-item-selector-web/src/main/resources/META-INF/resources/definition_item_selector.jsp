@@ -49,7 +49,7 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= cpDefinitionItemSelectorViewDisplayContext.getOrderByCol() %>"
 			orderByType="<%= cpDefinitionItemSelectorViewDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"title", "modified-date", "display-date"} %>'
+			orderColumns='<%= new String[] {"name", "modified-date", "display-date"} %>'
 			portletURL="<%= portletURL %>"
 		/>
 
