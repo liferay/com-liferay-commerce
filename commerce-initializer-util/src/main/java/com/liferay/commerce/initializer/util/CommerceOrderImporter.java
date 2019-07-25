@@ -163,7 +163,7 @@ public class CommerceOrderImporter {
 			List<CommerceAccountUserRel> commerceAccountUserRels =
 				commerceAccount.getCommerceAccountUserRels();
 
-			if (commerceAccountUserRels.size() > 0) {
+			if (!commerceAccountUserRels.isEmpty()) {
 				CommerceAccountUserRel commerceAccountUserRel =
 					commerceAccountUserRels.get(0);
 

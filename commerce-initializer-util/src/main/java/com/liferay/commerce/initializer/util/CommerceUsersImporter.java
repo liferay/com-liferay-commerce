@@ -60,6 +60,7 @@ import java.net.URI;
 import java.net.URLEncoder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -195,7 +196,7 @@ public class CommerceUsersImporter {
 		}
 
 		if (Validator.isNotNull(comments) ||
-			!groupIds.equals(user.getGroupIds())) {
+			!Arrays.equals(groupIds, user.getGroupIds())) {
 
 			user = _userLocalService.updateUser(
 				user.getUserId(), StringPool.BLANK, StringPool.BLANK,

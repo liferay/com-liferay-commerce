@@ -267,6 +267,9 @@ public class CommerceOrderGenerator {
 					cpInstance.getJson(), commerceContext, serviceContext);
 			}
 			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
 			}
 		}
 	}
@@ -449,7 +452,7 @@ public class CommerceOrderGenerator {
 				"Max value must be greater than or equal to the min value");
 		}
 
-		int value = _random.nextInt();
+		int value = _random.nextInt(Integer.MAX_VALUE);
 
 		long range = max + 1 - min;
 
