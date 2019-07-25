@@ -70,23 +70,25 @@ public class CPItemSelectorViewUtil {
 	public static Sort getCPDefinitionSort(
 		String orderByCol, String orderByType) {
 
-		boolean orderByAsc = false;
+		boolean reverse = true;
 
-		if (Objects.equals(orderByType, "asc")) {
-			orderByAsc = true;
+		if (orderByType.equals("asc")) {
+			reverse = false;
 		}
 
 		Sort sort = null;
 
 		if (orderByCol.equals("display-date")) {
-			sort = SortFactoryUtil.create("display-date", orderByAsc);
+			sort = SortFactoryUtil.create(
+				Field.DISPLAY_DATE + "_sortable", reverse);
 		}
 		else if (orderByCol.equals("modified-date")) {
-			sort = SortFactoryUtil.create(Field.MODIFIED_DATE, orderByAsc);
+			sort = SortFactoryUtil.create(
+				Field.MODIFIED_DATE + "_sortable", reverse);
 		}
 		else if (orderByCol.equals("name")) {
 			sort = SortFactoryUtil.create(
-				Field.NAME, Sort.STRING_TYPE, orderByAsc);
+				Field.NAME, Sort.STRING_TYPE, reverse);
 		}
 
 		return sort;
