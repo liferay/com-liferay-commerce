@@ -16,6 +16,6 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-discount-api")
 	compileOnly project(":apps:commerce:commerce-price-list-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "11.0.0"
-	compileOnly project(":apps:commerce:headless:headless-commerce-core-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.core.api", version: "1.1.0"
 	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-pricing-api")
 }
