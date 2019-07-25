@@ -35,6 +35,11 @@ long companyId = company.getCompanyId();
 
 		<%
 		for (Facet facet : facets) {
+			FacetCollector facetCollector = facet.getFacetCollector();
+
+			List<TermCollector> termCollectors = facetCollector.getTermCollectors();
+
+			if (!termCollectors.isEmpty()) {
 		%>
 
 		<liferay-ui:panel-container
@@ -57,9 +62,8 @@ long companyId = company.getCompanyId();
 
 						<%
 						int i = 0;
-						FacetCollector facetCollector = facet.getFacetCollector();
 
-						for (TermCollector termCollector : facetCollector.getTermCollectors()) {
+						for (TermCollector termCollector : termCollectors) {
 							i++;
 						%>
 
@@ -95,6 +99,7 @@ long companyId = company.getCompanyId();
 		</liferay-ui:panel-container>
 
 		<%
+			}
 		}
 		%>
 

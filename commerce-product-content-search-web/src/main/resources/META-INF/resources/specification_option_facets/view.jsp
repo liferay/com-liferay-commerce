@@ -28,6 +28,11 @@ CPSpecificationOptionFacetsDisplayContext cpSpecificationOptionFacetsDisplayCont
 
 <%
 for (Facet facet : cpSpecificationOptionFacetsDisplayContext.getFacets()) {
+	FacetCollector facetCollector = facet.getFacetCollector();
+
+	List<TermCollector> termCollectors = facetCollector.getTermCollectors();
+
+	if (!termCollectors.isEmpty()) {
 %>
 
 	<liferay-ui:panel-container
@@ -50,9 +55,8 @@ for (Facet facet : cpSpecificationOptionFacetsDisplayContext.getFacets()) {
 
 					<%
 					int i = 0;
-					FacetCollector facetCollector = facet.getFacetCollector();
 
-					for (TermCollector termCollector : facetCollector.getTermCollectors()) {
+					for (TermCollector termCollector : termCollectors) {
 						i++;
 					%>
 
@@ -88,6 +92,7 @@ for (Facet facet : cpSpecificationOptionFacetsDisplayContext.getFacets()) {
 	</liferay-ui:panel-container>
 
 <%
+	}
 }
 %>
 
