@@ -613,9 +613,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		String action = createDDMFormRuleAction(
 			ddmForm, groupId, commerceAccountId, cpDefinitionId);
-		String condition = createDDMFormRuleCondition(ddmForm);
 
-		return new DDMFormRule(condition, action);
+		return new DDMFormRule("TRUE", action);
 	}
 
 	/**
@@ -641,28 +640,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			createDDMFormRuleInputMapping(
 				ddmForm, groupId, commerceAccountId, cpDefinitionId),
 			createDDMFormRuleOutputMapping(ddmForm));
-	}
-
-	/**
-	 * Create a DDM form rule condition. The rule action will contain a
-	 * 'nonEmpty' statement for each field using 'OR` operator, e.g.
-	 * <pre>
-	 * 	not(isEmpty(getValue('{sizeFieldName}'))) OR
-	 * 	not(isEmpty(getValue('{colorFieldName}')))
-	 * </pre>
-	 */
-	protected String createDDMFormRuleCondition(DDMForm ddmForm) {
-		String notEmptyStatement = "not(isEmpty(getValue('%s')))";
-
-		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
-
-		Stream<DDMFormField> stream = ddmFormFields.stream();
-
-		return stream.map(
-			field -> String.format(notEmptyStatement, field.getName())
-		).collect(
-			Collectors.joining(" OR ")
-		);
 	}
 
 	protected String createDDMFormRuleInputMapping(
