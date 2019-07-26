@@ -100,6 +100,16 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						property="quantity"
 					/>
 
+					<%
+					CommerceInventoryWarehouse commerceInventoryWarehouse = commerceShipmentItemDisplayContext.getCommerceInventoryWarehouse(commerceShipmentItem.getCommerceInventoryWarehouseId());
+					%>
+
+					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
+						name="warehouse"
+						value="<%= (commerceInventoryWarehouse == null) ? StringPool.BLANK : HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>"
+					/>
+
 					<liferay-ui:search-container-column-jsp
 						cssClass="entry-action-column"
 						path="/shipment_item_action.jsp"

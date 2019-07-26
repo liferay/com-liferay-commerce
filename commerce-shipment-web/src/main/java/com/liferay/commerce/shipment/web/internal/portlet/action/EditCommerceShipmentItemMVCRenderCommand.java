@@ -15,6 +15,7 @@
 package com.liferay.commerce.shipment.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -53,8 +54,9 @@ public class EditCommerceShipmentItemMVCRenderCommand
 		CommerceShipmentItemDisplayContext commerceShipmentItemDisplayContext =
 			new CommerceShipmentItemDisplayContext(
 				_actionHelper, _portal.getHttpServletRequest(renderRequest),
-				_commerceCountryService, _commerceOrderItemService,
-				_commerceRegionService, _commerceShipmentItemService);
+				_commerceCountryService, _commerceInventoryWarehouseService,
+				_commerceOrderItemService, _commerceRegionService,
+				_commerceShipmentItemService);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -68,6 +70,10 @@ public class EditCommerceShipmentItemMVCRenderCommand
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
+
+	@Reference
+	private CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;

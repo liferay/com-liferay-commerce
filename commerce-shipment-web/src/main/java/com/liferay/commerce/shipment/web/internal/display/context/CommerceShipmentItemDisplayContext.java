@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.shipment.web.internal.display.context;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -46,6 +48,7 @@ public class CommerceShipmentItemDisplayContext
 	public CommerceShipmentItemDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
 		CommerceCountryService commerceCountryService,
+		CommerceInventoryWarehouseService commerceInventoryWarehouseService,
 		CommerceOrderItemService commerceOrderItemService,
 		CommerceRegionService commerceRegionService,
 		CommerceShipmentItemService commerceShipmentItemService) {
@@ -55,6 +58,7 @@ public class CommerceShipmentItemDisplayContext
 			CommerceShipmentItem.class.getSimpleName());
 
 		_commerceCountryService = commerceCountryService;
+		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceRegionService = commerceRegionService;
 		_commerceShipmentItemService = commerceShipmentItemService;
@@ -103,6 +107,14 @@ public class CommerceShipmentItemDisplayContext
 	public List<CommerceCountry> getCommerceCountries() {
 		return _commerceCountryService.getShippingCommerceCountries(
 			cpRequestHelper.getCompanyId(), true, true);
+	}
+
+	public CommerceInventoryWarehouse getCommerceInventoryWarehouse(
+			long commerceInventoryWarehouseId)
+		throws PortalException {
+
+		return _commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+			commerceInventoryWarehouseId);
 	}
 
 	public List<CommerceRegion> getCommerceRegions() throws PortalException {
@@ -191,6 +203,8 @@ public class CommerceShipmentItemDisplayContext
 	}
 
 	private final CommerceCountryService _commerceCountryService;
+	private final CommerceInventoryWarehouseService
+		_commerceInventoryWarehouseService;
 	private final CommerceOrderItemService _commerceOrderItemService;
 	private final CommerceRegionService _commerceRegionService;
 	private CommerceShipmentItem _commerceShipmentItem;
