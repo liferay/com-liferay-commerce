@@ -28,10 +28,12 @@ import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefiniti
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -54,6 +56,9 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 
 	public CPInstanceCommerceTierPriceEntryDisplayContext(
 		ActionHelper actionHelper,
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
+		CommerceCatalogService commerceCatalogService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceTierPriceEntryService commercePriceEntryService,
 		HttpServletRequest httpServletRequest) {
@@ -62,6 +67,9 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 			actionHelper, httpServletRequest,
 			CommerceTierPriceEntry.class.getSimpleName());
 
+		_commerceCatalogModelResourcePermission =
+			commerceCatalogModelResourcePermission;
+		_commerceCatalogService = commerceCatalogService;
 		_commercePriceListActionHelper = commercePriceListActionHelper;
 		_commerceTierPriceEntryService = commercePriceEntryService;
 
@@ -319,12 +327,31 @@ public class CPInstanceCommerceTierPriceEntryDisplayContext
 			getCommerceTierPriceEntryId(), null);
 	}
 
-	public boolean hasManageCommercePriceListPermission() {
-		return PortalPermissionUtil.contains(
-			cpRequestHelper.getPermissionChecker(),
+	public boolean hasManageCommercePriceListPermission()
+		throws PortalException {
+
+		CPInstance cpInstance = getCPInstance();
+
+		if (cpInstance == null) {
+			return false;
+		}
+
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogService.fetchCommerceCatalogByGroupId(
+				cpInstance.getGroupId());
+
+		if (commerceCatalog == null) {
+			return false;
+		}
+
+		return _commerceCatalogModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), commerceCatalog,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
+	private final ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;
 	private CommerceTierPriceEntry _commerceTierPriceEntry;
 	private final CommerceTierPriceEntryService _commerceTierPriceEntryService;

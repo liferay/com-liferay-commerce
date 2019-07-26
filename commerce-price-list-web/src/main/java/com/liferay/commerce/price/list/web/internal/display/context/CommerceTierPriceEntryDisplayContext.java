@@ -26,11 +26,14 @@ import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActio
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -50,11 +53,16 @@ public class CommerceTierPriceEntryDisplayContext
 	extends BaseCommercePriceListDisplayContext<CommerceTierPriceEntry> {
 
 	public CommerceTierPriceEntryDisplayContext(
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
+		CommerceCatalogService commerceCatalogService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceTierPriceEntryService commerceTierPriceEntryService,
 		HttpServletRequest httpServletRequest) {
 
-		super(commercePriceListActionHelper, httpServletRequest);
+		super(
+			commerceCatalogModelResourcePermission, commerceCatalogService,
+			commercePriceListActionHelper, httpServletRequest);
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 
