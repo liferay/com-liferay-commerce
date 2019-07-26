@@ -29,10 +29,24 @@ if (isMiniumTheme) {
 %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() %>">
+	<c:when test="<%= themeDisplay.isSignedIn() && isMiniumTheme %>">
 		<aui:script>
 			window.location.replace("<%= HtmlUtil.escape(redirect) %>");
 		</aui:script>
+	</c:when>
+	<c:when test="<%= themeDisplay.isSignedIn() && !isMiniumTheme %>">
+
+		<%
+		String signedInAs = HtmlUtil.escape(user.getFullName());
+
+		if (themeDisplay.isShowMyAccountIcon() && (themeDisplay.getURLMyAccount() != null)) {
+			String myAccountURL = String.valueOf(themeDisplay.getURLMyAccount());
+
+			signedInAs = "<a class=\"signed-in\" href=\"" + HtmlUtil.escape(myAccountURL) + "\">" + signedInAs + "</a>";
+		}
+		%>
+
+		<liferay-ui:message arguments="<%= signedInAs %>" key="you-are-signed-in-as-x" translateArguments="<%= false %>" />
 	</c:when>
 	<c:otherwise>
 
