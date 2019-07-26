@@ -135,8 +135,8 @@ info:
         name: Commerce Team
     description: Liferay Commerce Admin Inventory API
     license:
-        name: GNU Lesser General Public License 2.1
-        url: https://www.gnu.org/licenses/lgpl-2.1.html
+        name: Apache-2.0
+        url: https://spdx.org/licenses/Apache-2.0.html
     title: Liferay Commerce Admin Inventory API
     version: v1.0
 openapi: 3.0.0
