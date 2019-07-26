@@ -1,0 +1,55 @@
+[
+	{
+		"actions": {
+			"actionIds": [
+				"ADD_COMMERCE_ORDER",
+				"APPROVE_OPEN_COMMERCE_ORDERS",
+				"CHECKOUT_OPEN_COMMERCE_ORDERS",
+				"DELETE_COMMERCE_ORDERS",
+				"MANAGE_COMMERCE_ORDERS",
+				"VIEW_COMMERCE_ORDERS",
+				"VIEW_OPEN_COMMERCE_ORDERS"
+			],
+			"resource": "com.liferay.commerce.order"
+		},
+		"name": "Order Manager",
+		"scope": 3,
+		"type": 2
+	},
+	{
+		"actions": {
+			"actionIds": [
+				"ADD_COMMERCE_ORDER",
+				"CHECKOUT_OPEN_COMMERCE_ORDERS",
+				"VIEW_COMMERCE_ORDERS",
+				"VIEW_OPEN_COMMERCE_ORDERS"
+			],
+			"resource": "com.liferay.commerce.order"
+		},
+		"name": "Buyer",
+		"scope": 3,
+		"type": 2
+	},
+	{
+		"actions": {
+			"actionIds": [
+				"MANAGE_AVAILABLE_ACCOUNTS"
+			],
+			"resource": "90"
+		},
+		"name": "Sales Agent",
+		"scope": 1,
+		"type": 1
+	},
+	{
+		"actions": {
+			"actionIds": [
+				"MANAGE_ORGANIZATIONS"
+			],
+			"resource": "com.liferay.commerce.account.model.CommerceAccount"
+		},
+		"name": "Sales Agent",
+		"scope": 1,
+		"type": 1
+	}
+]
