@@ -2,6 +2,10 @@
   display: flex;
   width: 80px;
 
+  @media screen and (max-width: 767px) {
+    width: unset;
+  }
+
   &__bar-wrapper {
     bottom: 0;
     left: 0;
@@ -10,6 +14,10 @@
     position: absolute;
     right: 160px;
     z-index: 3;
+
+    @media screen and (max-width: 767px) {
+      right: 0;
+    }
   }
 
   input {
@@ -59,6 +67,16 @@
     top: calc(56px + 80px);
     transition-delay: .3s;
     transition: all .3s ease-in;
+
+    @media screen and (max-width: 767px) {
+      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small});
+
+      .commerce-suggestions {
+        &__wrapper {
+          padding: 20px;
+        }
+      }
+    }
   }
 
   &:not(.is-open) &__results {

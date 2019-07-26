@@ -18,6 +18,12 @@
   overflow: hidden;
   transition: max-height .2s ease-in, padding .1s ease-in;
 
+  @media screen and (max-width: 767px) {
+    grid-template-areas: "image content actions price"
+                        "image price price" !important;
+    grid-template-columns: $item-image-size-sm 140px $item-image-size 75px !important;
+  }
+
   &__image {
     align-self: center;
     background-position: center center;
@@ -28,6 +34,11 @@
     margin: auto;
     overflow: hidden;
     width: 70px;
+
+    @media screen and (max-width: 767px) {
+      width: 50px !important;
+      height: 50px !important;
+    }
   }
 
   &__content {
@@ -35,6 +46,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px !important;
+    }
 
     big {
       font-weight: bold;

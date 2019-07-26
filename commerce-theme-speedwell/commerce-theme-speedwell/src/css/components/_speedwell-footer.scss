@@ -8,6 +8,22 @@
     border-bottom: 5px solid #F2F2F2;
     padding: 20px;
     text-align: center;
+
+    .payment-methods {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &__method {
+        height: 30px;
+
+        img {
+          height: 100%;
+          width: auto;
+          margin: 0 5px;
+        }
+      }
+    }
   }
 
   &__menu {

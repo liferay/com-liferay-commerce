@@ -6,9 +6,9 @@
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
 	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/standalone/SpeedwellSlider.js" defer></script>
 	<@liferay_util["include"] page=top_head_include />
 </head>
 
@@ -24,10 +24,14 @@
 			<#include "${full_templates_path}/topbar.ftl" />
 		</div>
 
-		<div class="speedwell-frame__content">
+		<#if speedwell_content_css_class?contains("wide")>
+			<div class="speedwell-frame speedwell-frame__content--wide">
+		<#else>
+			<div class="speedwell-frame speedwell-frame__content">
+		</#if>
 			<a name="speedwell-top"></a>
 
-			<div class="container-fluid speedwell-content">
+			<div class="container-fluid ${speedwell_content_css_class}">
 				<#if selectable>
 					<@liferay_util["include"] page=content_include />
 				<#else>
@@ -42,7 +46,14 @@
 		</div>
 
 		<footer class="speedwell-footer">
-			<div class="speedwell-footer__info">logos</div>
+			<div class="speedwell-footer__info">
+				<div class="payment-methods">
+					<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/Visa.png" /></div>
+					<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/MasterCard.png" /></div>
+					<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/PayPal.png" /></div>
+					<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/AmericanExpress.png" /></div>
+				</div>
+			</div>
 			<div class="speedwell-footer__menu">
 				<section>
 					<h2>COMPANY</h2>

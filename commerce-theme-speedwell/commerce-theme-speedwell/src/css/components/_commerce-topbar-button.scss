@@ -15,6 +15,12 @@
 	width: 80px;
 	z-index: 0;
 
+	@media screen and (max-width: 767px) {
+		background-color: $color-bg;
+		width: 60px;
+		height: 70px;
+	}
+
 	& > svg {
 		z-index: 1;
 	}
@@ -25,5 +31,5 @@
 		}
 	}
 
-	@include speedwellButtonEffect();
+	@include speedwellButtonEffect()
 }

@@ -1,4 +1,4 @@
-<div class="commerce-topbar speedwell-topbar">
+<div class="commerce-topbar ${speedwell_topbar_css_class}">
 	<div class="speedwell-topbar__menu speedwell-main-menu">
 		<button class="commerce-topbar-button speedwell-main-menu__open js-toggle-main-menu">
 			<svg class="commerce-icon">
