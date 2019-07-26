@@ -558,8 +558,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			cpDefinitionId, locale);
 
 		return _render(
-			cpDefinitionId, locale, ddmForm, json, renderRequest,
-			renderResponse);
+			String.valueOf(cpDefinitionId), locale, ddmForm, json,
+			renderRequest, renderResponse);
 	}
 
 	@Override
@@ -575,8 +575,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor);
 
 		return _render(
-			cpDefinitionId, locale, ddmForm, json, renderRequest,
-			renderResponse);
+			String.valueOf(cpDefinitionId), locale, ddmForm, json,
+			renderRequest, renderResponse);
 	}
 
 	@Override
@@ -603,8 +603,35 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor);
 
 		return _render(
-			cpDefinitionId, locale, ddmForm, json, renderRequest,
-			renderResponse);
+			String.valueOf(cpDefinitionId), locale, ddmForm, json,
+			renderRequest, renderResponse);
+	}
+
+	@Override
+	public String renderPublicStoreOptions(
+			String containerId, long cpDefinitionId, String json,
+			boolean ignoreSKUCombinations, boolean skuContributor,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException {
+
+		Locale locale = _portal.getLocale(renderRequest);
+
+		CommerceAccount commerceAccount =
+			_commerceAccountHelper.getCurrentCommerceAccount(
+				_portal.getHttpServletRequest(renderRequest));
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
+		DDMForm ddmForm = getPublicStoreDDMForm(
+			_portal.getScopeGroupId(renderRequest), commerceAccountId,
+			cpDefinitionId, locale, ignoreSKUCombinations, skuContributor);
+
+		return _render(
+			containerId, locale, ddmForm, json, renderRequest, renderResponse);
 	}
 
 	protected DDMFormRule createDDMFormRule(
@@ -848,7 +875,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	private String _render(
-			long cpDefinitionId, Locale locale, DDMForm ddmForm, String json,
+			String containerId, Locale locale, DDMForm ddmForm, String json,
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException {
 
@@ -865,7 +892,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
 
-		ddmFormRenderingContext.setContainerId(String.valueOf(cpDefinitionId));
+		ddmFormRenderingContext.setContainerId(containerId);
 		ddmFormRenderingContext.setHttpServletRequest(httpServletRequest);
 		ddmFormRenderingContext.setHttpServletResponse(httpServletResponse);
 		ddmFormRenderingContext.setLocale(locale);

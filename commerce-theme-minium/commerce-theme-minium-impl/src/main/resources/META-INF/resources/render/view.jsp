@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -24,8 +26,9 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
-String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
-String galleryId = PortalUtil.generateRandomKey(request, "gallery");
+String addToCartId = "pasticcio";
+String ddmFormContainerId = "ciccio";
+String galleryId = "pacioccone";
 %>
 
 <div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
@@ -84,33 +87,107 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 			</h4>
 
 			<div class="product-detail-options">
-				<%= cpContentHelper.renderOptions(renderRequest, renderResponse) %>
+				<%= cpContentHelper.renderOptions(ddmFormContainerId, renderRequest, renderResponse) %>
 
-				<script>
-					AUI().use(
-						'liferay-portlet-url', function(A) {
-						Liferay.on(
-							'<%= cpDefinitionId %>DDMForm:render', function() {
-								function ddmFormChange(valueChangeEvent) {
-									checkCPInstance();
+				<aui:script use="liferay-portlet-url">
+
+					// console.count("portlet init");
+					// console.log({
+					// 	ddmFormContainerId: "<%= ddmFormContainerId %>",
+					// 	addToCartId: "<%= addToCartId %>",
+					// 	galleryId: "<%= galleryId %>",
+					// 	cpDefinitionId: "<%= cpDefinitionId %>",
+					// });
+					function checkCPInstance() {
+						console.count('checkCPInstance');
+									
+						const CP_CONTENT_WEB_PORTLET_KEY = 'com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet';
+						const CP_INSTANCE_CHANGE_EVENT = 'CPInstance:change';
+						const cpDefinitionId = <%= cpDefinitionId %>;
+						const portletURL = Liferay.PortletURL.createActionURL();
+						const formData = new FormData();
+
+						portletURL.setPortletId(CP_CONTENT_WEB_PORTLET_KEY);
+						portletURL.setName('checkCPInstance');
+						portletURL.setParameter('cpDefinitionId', cpDefinitionId);
+						portletURL.setParameter('groupId', themeDisplay.getScopeGroupId());
+						portletURL.setParameter('p_auth', Liferay.authToken);
+
+						formData.append('_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues', JSON.stringify(getFormValues()));
+
+						fetch(
+							portletURL,
+							{
+								body: formData,
+								credentials: 'include',
+								method: 'post'
+							}
+						).then(
+							function(response) {
+								return response.json();
+							}
+						).then(
+							function(response) {
+								// console.count("get form values");
+								// console.log({
+								// 	ddmFormContainerId: "<%= ddmFormContainerId %>",
+								// 	addToCartId: "<%= addToCartId %>",
+								// 	galleryId: "<%= galleryId %>",
+								// 	cpDefinitionId: "<%= cpDefinitionId %>",
+								// });
+
+								setTimeout(addToCartExists, 0);
+
+								function addToCartExists() {
+									const AddToCartButton = Liferay.component('<%= addToCartId %>');
+									const ProductGallery = Liferay.component('<%= galleryId %>');
+									if (AddToCartButton && ProductGallery) {
+										syncAddToCart();
+									} else {
+										setTimeout(addToCartExists, 0);
+									}
 								}
 
-								function checkCPInstance() {
-									const portletURL = Liferay.PortletURL.createActionURL();
-									var CP_CONTENT_WEB_PORTLET_KEY = 'com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet';
-									var CP_INSTANCE_CHANGE_EVENT = 'CPInstance:change';
+								function syncAddToCart() {
+									const AddToCartButton = Liferay.component('<%= addToCartId %>');
+									const ProductGallery = Liferay.component('<%= galleryId %>');
+									if (response.cpInstanceExist) {
 
-									portletURL.setPortletId(CP_CONTENT_WEB_PORTLET_KEY);
-									portletURL.setName('checkCPInstance');
-									portletURL.setParameter('cpDefinitionId', cpDefinitionId);
-									portletURL.setParameter('groupId', themeDisplay.getScopeGroupId());
-									portletURL.setParameter('p_auth', Liferay.authToken);
+										AddToCartButton.productId = response.cpInstanceId;
+										AddToCartButton.options = JSON.stringify(getFormValues());
+										AddToCartButton.quantity = 0;
+										AddToCartButton.settings = {
+											maxQuantity: 1000,
+											minQuantity: 1,
+											multipleQuantities: 1
+										};
+										AddToCartButton.disabled = false;
+									}
+									else {
+										AddToCartButton.disabled = true;
+									}
+
+									document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
+									document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
+									document.querySelector('[data-text-cp-instance-gtin]').innerHTML = Liferay.Util.escape(response.gtin) || '';
+									const availabilityEstimateContainer = document.querySelector('[data-text-cp-instance-availability-estimate]');
+									const availabilityContainer = document.querySelector('[data-text-cp-instance-availability]')
+									const stockQuantityContainer = document.querySelector('[data-text-cp-instance-stock-quantity]')
+
+									if (availabilityEstimateContainer && availabilityContainer && stockQuantityContainer) {
+										availabilityContainer.innerHTML = response.availability || '';
+										availabilityEstimateContainer.innerHTML = response.availabilityEstimate || '';
+										stockQuantityContainer.innerHTML = response.stockQuantity || '';
+									}
+									document.querySelector('[data-text-cp-instance-subscription-info]').innerHTML = response.subscriptionInfo || '';
+									document.querySelector('[data-text-cp-instance-price]').innerHTML = response.price || '';
 
 									const formData = new FormData();
-									formData.append('_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues', JSON.stringify(getFormValues()));
+									formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormValues()));
+									formData.append('groupId', themeDisplay.getScopeGroupId());
 
 									fetch(
-										portletURL,
+										'<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
 										{
 											body: formData,
 											credentials: 'include',
@@ -122,97 +199,73 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 										}
 									).then(
 										function(response) {
-											if (response.cpInstanceExist) {
-												AddToCartButton.productId = response.cpInstanceId;
-												AddToCartButton.options = JSON.stringify(getFormValues());
-												AddToCartButton.quantity = 0;
-												AddToCartButton.settings = {
-													maxQuantity: 1000,
-													minQuantity: 1,
-													multipleQuantities: 1
-												};
-												AddToCartButton.disabled = false;
-											}
-											else {
-												AddToCartButton.disabled = true;
-											}
-
-											document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
-											document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
-											document.querySelector('[data-text-cp-instance-gtin]').innerHTML = Liferay.Util.escape(response.gtin) || '';
-											const availabilityEstimateContainer = document.querySelector('[data-text-cp-instance-availability-estimate]');
-											const availabilityContainer = document.querySelector('[data-text-cp-instance-availability]')
-											const stockQuantityContainer = document.querySelector('[data-text-cp-instance-stock-quantity]')
-
-											if (availabilityEstimateContainer && availabilityContainer && stockQuantityContainer) {
-												availabilityContainer.innerHTML = response.availability || '';
-												availabilityEstimateContainer.innerHTML = response.availabilityEstimate || '';
-												stockQuantityContainer.innerHTML = response.stockQuantity || '';
-											}
-											document.querySelector('[data-text-cp-instance-subscription-info]').innerHTML = response.subscriptionInfo || '';
-											document.querySelector('[data-text-cp-instance-price]').innerHTML = response.price || '';
-
-											const formData = new FormData();
-											formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormValues()));
-											formData.append('groupId', themeDisplay.getScopeGroupId());
-
-											fetch(
-												'<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
-												{
-													body: formData,
-													credentials: 'include',
-													method: 'post'
+											ProductGallery.selected = 0
+											ProductGallery.images = response.map(
+												function(image) {
+													return {
+														thumbnailUrl: image.url,
+														url: image.url,
+														title: ''
+													};
 												}
-											).then(
-												function(response) {
-													return response.json();
-												}
-											).then(
-												function(response) {
-													ProductGallery.selected = 0
-													ProductGallery.images = response.map(
-														function(image) {
-															return {
-																thumbnailUrl: image.url,
-																url: image.url,
-																title: ''
-															};
-														}
-													);
-												}
-											)
+											);
 										}
-									);
-								}
-
-								function getFormValues() {
-									return !form ? [] : form.getImmediateFields().map(
-										function(field) {
-											var value = field.getValue();
-
-											return {
-												key: field.get('fieldName'),
-												value: value instanceof Array ? value : [value]
-											};
-										}
-									);
-								}
-
-								const cpDefinitionId = <%= cpDefinitionId %>;
-								const form = Liferay.component('<%= cpDefinitionId %>DDMForm');
-								const AddToCartButton = Liferay.component('<%= addToCartId %>');
-								AddToCartButton.disabled = true;
-								const ProductGallery = Liferay.component('<%= galleryId %>');
-
-								if (form) {
-									form.after('*:valueChange', ddmFormChange, {});
-
-									checkCPInstance();
+									)
 								}
 							}
 						);
-					});
-				</script>
+					}
+
+					function getFormValues() {
+						console.count('getFormValues');
+						const form = Liferay.component('<%= ddmFormContainerId %>DDMForm');
+						return !form ? [] : form.getImmediateFields().map(
+							function(field) {
+								var value = field.getValue();
+
+								return {
+									key: field.get('fieldName'),
+									value: value instanceof Array ? value : [value]
+								};
+							}
+						);
+					}
+
+					function onFormRender() {
+						console.count('onFormRender');
+						const form = Liferay.component('<%= ddmFormContainerId %>DDMForm');
+						const AddToCartButton = Liferay.component('<%= addToCartId %>');
+						const ProductGallery = Liferay.component('<%= galleryId %>');
+
+						if (!!AddToCartButton) {
+							AddToCartButton.disabled = true;
+						}
+						if (form) {
+							form.after('*:valueChange', checkCPInstance, {});
+							checkCPInstance();
+						}
+
+						/*if (Liferay.SPA) {
+							var app = Liferay.SPA.app;
+							app.on('beforeNavigate', function(event) {
+								Liferay.destroyComponent('<%= ddmFormContainerId %>DDMForm');
+							});
+							app.on('endNavigate', function(event) {
+								var ferm1 = Liferay.component('<%= ddmFormContainerId %>DDMForm');
+
+								if (ferm1) {
+									ferm1.after('*:valueChange', checkCPInstance, {});
+								}
+							});
+						}*/
+					}
+
+					<%-- debugger; --%>
+					if (!Liferay.getEvent("<%= ddmFormContainerId %>DDMForm:render")) {
+						Liferay.on('<%= ddmFormContainerId %>DDMForm:render', onFormRender);
+					}
+
+				</aui:script>
 			</div>
 
 			<h2 class="commerce-price" data-text-cp-instance-price>

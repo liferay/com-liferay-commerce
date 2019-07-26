@@ -128,4 +128,7 @@ public interface CPContentHelper {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException;
 
+	String renderOptions(
+			String ddmFormContainerId, RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException;
 }
