@@ -5,8 +5,12 @@
 	<compatibility>
 		<version>7.1.0+</version>
 	</compatibility>
-	<theme id="speedwell" name="speedwell">
+	<theme id="speedwell" name="Speedwell">
 		<template-extension>ftl</template-extension>
+		<settings>
+			<setting configurable="true" key="wide-layout" type="checkbox" value="false" />
+			<setting configurable="true" key="translucent-topbar" type="checkbox" value="false" />
+		</settings>
 		<layout-templates>
 			<custom>
 				<layout-template id="speedwell_sidebar" name="Speedwell sidebar">
@@ -16,13 +20,13 @@
 			</custom>
 		</layout-templates>
 		<portlet-decorator id="barebone" name="Barebone">
+			<default-portlet-decorator>true</default-portlet-decorator>
 			<portlet-decorator-css-class>portlet-barebone</portlet-decorator-css-class>
 		</portlet-decorator>
 		<portlet-decorator id="borderless" name="Borderless">
 			<portlet-decorator-css-class>portlet-borderless</portlet-decorator-css-class>
 		</portlet-decorator>
 		<portlet-decorator id="decorate" name="Decorate">
-			<default-portlet-decorator>true</default-portlet-decorator>
 			<portlet-decorator-css-class>portlet-decorate</portlet-decorator-css-class>
 		</portlet-decorator>
 	</theme>

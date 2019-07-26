@@ -1,7 +1,17 @@
 .speedwell-frame {
+	margin: auto;
+
+	@media screen and (max-width: 767px) {
+		margin-top: -.5em;
+	}
+
 	&__content {
-		margin: auto;
 		max-width: 1240px;
 		padding: 156px 0 40px;
+
+		&--wide {
+			padding: $liferay-topbar-size 0 0 0;
+			max-width: 100%;
+		}
 	}
 }

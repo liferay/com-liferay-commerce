@@ -44,10 +44,40 @@
 @import './components/speedwell-commerce-suggestions';
 @import './components/speedwell-commerce-item';
 @import './components/speedwell-checkboxes';
+@import './components/speedwell-cart-content';
+@import './components/speedwell-order-totals';
+@import './components/landing-page/landing-page';
 @import './portlet';
 @import './overrides';
 @import './test';
 
-body {
+html, body {
   font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.speedwell-content {
+  &--wide {
+    margin: 0 auto;
+    overflow-x: hidden;
+    padding: 0;
+    width: 100%;
+  }
+
+  .portlet-barebone {
+    margin-top: 0 !important;
+
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 350px) {
+  html {
+    width: 126%
+  }
+
+  body {
+    width: 100%;
+    font-size: 12px;
+  }
 }
