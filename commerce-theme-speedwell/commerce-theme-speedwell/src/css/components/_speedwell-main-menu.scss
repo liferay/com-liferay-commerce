@@ -40,6 +40,14 @@
     .main-link {
       display: inline-block;
 
+      @media screen and (max-width: 767px) {
+        display: block;
+        text-align: center;
+        margin-bottom: 4em;
+        font-size: 1.1em;
+        font-weight: 200;
+      }
+
       &__icon {
         display: none;
       }
@@ -52,7 +60,7 @@
       padding-right: 0;
       position: fixed;
       right: 0;
-      top: 120px;
+      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 1px);
     }
   }
 

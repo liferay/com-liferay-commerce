@@ -42,7 +42,7 @@ Liferay.on(
 					document.querySelector('.speedwell-' + el).classList.toggle('is-open');
 				})
 			});
-		})
+		});
 
 		let scrollThreshold = 100;
 		let lastKnownScrollPosition = 0;
@@ -53,6 +53,8 @@ Liferay.on(
 		myMap.set(1, 'down');
 
 		const speedwellWrapper = document.getElementById("speedwell");
+		const speedwellTranslucentTopbar = speedwellWrapper.querySelector('.speedwell-topbar--translucent');
+
 		window.addEventListener("scroll", function() {
 			const offset = window.scrollY - lastKnownScrollPosition;
 			lastKnownScrollPosition = window.scrollY;
@@ -67,7 +69,9 @@ Liferay.on(
 						speedwellWrapper.classList.add("is-scrolling-" + myMap.get(Math.sign(lastKnownScrollOffset)));
 						speedwellWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * Math.sign(lastKnownScrollOffset)));
 					}
+
 					speedwellWrapper.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
+					handleTranslucentTopbar(speedwellTranslucentTopbar, scrollThreshold);
 					ticking = false;
 				});
 				ticking = true;
@@ -75,3 +79,12 @@ Liferay.on(
 		}, false);
 	}
 );
+
+function handleTranslucentTopbar(topbar, threshold) {
+	if (!topbar) return;
+
+	const topbarClass = 'speedwell-topbar--translucent';
+	const isBeyond = window.scrollY <= threshold;
+
+	topbar.classList.toggle(topbarClass, isBeyond);
+}
