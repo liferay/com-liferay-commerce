@@ -15,12 +15,18 @@
 package com.liferay.commerce.price.list.service.impl;
 
 import com.liferay.commerce.price.list.constants.CommercePriceListActionKeys;
+import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
+import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
 import com.liferay.commerce.price.list.service.base.CommercePriceListCommerceAccountGroupRelServiceBaseImpl;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermissionFactory;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.List;
 
@@ -37,8 +43,8 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 				int order, ServiceContext serviceContext)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListId,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListCommerceAccountGroupRelLocalService.
@@ -52,13 +58,19 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 			long commercePriceListCommerceAccountGroupRelId)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		CommercePriceListCommerceAccountGroupRel
+			commercePriceListCommerceAccountGroupRel =
+				commercePriceListCommerceAccountGroupRelLocalService.
+					getCommercePriceListCommerceAccountGroupRel(
+						commercePriceListCommerceAccountGroupRelId);
+
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListCommerceAccountGroupRel.getCommercePriceListId(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		commercePriceListCommerceAccountGroupRelLocalService.
 			deleteCommercePriceListCommerceAccountGroupRel(
-				commercePriceListCommerceAccountGroupRelId);
+				commercePriceListCommerceAccountGroupRel);
 	}
 
 	@Override
@@ -67,28 +79,39 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 				long commercePriceListId, long commerceAccountGroupId)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
-			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		CommercePriceListCommerceAccountGroupRel
+			commercePriceListCommerceAccountGroupRel =
+				commercePriceListCommerceAccountGroupRelLocalService.
+					fetchCommercePriceListCommerceAccountGroupRel(
+						commercePriceListId, commerceAccountGroupId);
 
-		return commercePriceListCommerceAccountGroupRelLocalService.
-			fetchCommercePriceListCommerceAccountGroupRel(
-				commercePriceListId, commerceAccountGroupId);
+		if (commercePriceListCommerceAccountGroupRel != null) {
+			_checkCommerceCatalogPermissionByCommercePriceListId(
+				commercePriceListCommerceAccountGroupRel.
+					getCommercePriceListId(),
+				CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+		}
+
+		return commercePriceListCommerceAccountGroupRel;
 	}
 
 	@Override
 	public CommercePriceListCommerceAccountGroupRel
 			getCommercePriceListCommerceAccountGroupRel(
-				long commercePriceListCommerceAccoungGroupRelId)
+				long commercePriceListCommerceAccountGroupRelId)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		CommercePriceListCommerceAccountGroupRel
+			commercePriceListCommerceAccountGroupRel =
+				commercePriceListCommerceAccountGroupRelLocalService.
+					getCommercePriceListCommerceAccountGroupRel(
+						commercePriceListCommerceAccountGroupRelId);
+
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListCommerceAccountGroupRel.getCommercePriceListId(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
-		return commercePriceListCommerceAccountGroupRelLocalService.
-			getCommercePriceListCommerceAccountGroupRel(
-				commercePriceListCommerceAccoungGroupRelId);
+		return commercePriceListCommerceAccountGroupRel;
 	}
 
 	@Override
@@ -97,8 +120,8 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 				long commercePriceListId)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListId,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListCommerceAccountGroupRelLocalService.
@@ -113,8 +136,8 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 					orderByComparator)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListId,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListCommerceAccountGroupRelLocalService.
@@ -127,8 +150,8 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 			long commercePriceListId)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListId,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListCommerceAccountGroupRelLocalService.
@@ -143,8 +166,14 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 				ServiceContext serviceContext)
 		throws PortalException {
 
-		PortalPermissionUtil.check(
-			getPermissionChecker(),
+		CommercePriceListCommerceAccountGroupRel
+			commercePriceListCommerceAccountGroupRel =
+				commercePriceListCommerceAccountGroupRelLocalService.
+					getCommercePriceListCommerceAccountGroupRel(
+						commercePriceListCommerceAccountGroupRelId);
+
+		_checkCommerceCatalogPermissionByCommercePriceListId(
+			commercePriceListCommerceAccountGroupRel.getCommercePriceListId(),
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 
 		return commercePriceListCommerceAccountGroupRelLocalService.
@@ -152,5 +181,35 @@ public class CommercePriceListCommerceAccountGroupRelServiceImpl
 				commercePriceListCommerceAccountGroupRelId, order,
 				serviceContext);
 	}
+
+	private void _checkCommerceCatalogPermissionByCommercePriceListId(
+			long commercePriceListId, String actionId)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			commercePriceListLocalService.fetchCommercePriceList(
+				commercePriceListId);
+
+		if (commercePriceList == null) {
+			throw new NoSuchPriceListException();
+		}
+
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogService.fetchCommerceCatalogByGroupId(
+				commercePriceList.getGroupId());
+
+		_commerceCatalogModelResourcePermission.check(
+			getPermissionChecker(), commerceCatalog, actionId);
+	}
+
+	private static volatile ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission =
+			ModelResourcePermissionFactory.getInstance(
+				CommercePriceListCommerceAccountGroupRelServiceImpl.class,
+				"_commerceCatalogModelResourcePermission",
+				CommerceCatalog.class);
+
+	@ServiceReference(type = CommerceCatalogService.class)
+	private CommerceCatalogService _commerceCatalogService;
 
 }
