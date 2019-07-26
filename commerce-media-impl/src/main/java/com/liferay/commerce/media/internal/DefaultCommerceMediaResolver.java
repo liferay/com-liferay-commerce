@@ -39,9 +39,7 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.CompanyLocalService;
-import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
@@ -404,12 +402,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	@Reference
 	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
-	)
-	private ModelResourcePermission<CommerceCatalog>
-		_commerceCatalogModelResourcePermission;
-
 	@Reference
 	private CompanyLocalService _companyLocalService;
 
@@ -428,9 +420,6 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 
 	@Reference
 	private File _file;
-
-	@Reference
-	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private Html _html;
