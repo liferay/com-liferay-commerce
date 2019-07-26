@@ -18,9 +18,12 @@ import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceEntryDisplayContext;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -52,8 +55,9 @@ public class EditCommercePriceEntryMVCRenderCommand
 
 		CommercePriceEntryDisplayContext commercePriceEntryDisplayContext =
 			new CommercePriceEntryDisplayContext(
-				_commercePriceListActionHelper, _commercePriceEntryService,
-				_cpInstanceService, _itemSelector,
+				_commerceCatalogModelResourcePermission,
+				_commerceCatalogService, _commercePriceListActionHelper,
+				_commercePriceEntryService, _cpInstanceService, _itemSelector,
 				_portal.getHttpServletRequest(renderRequest));
 
 		renderRequest.setAttribute(
@@ -61,6 +65,15 @@ public class EditCommercePriceEntryMVCRenderCommand
 
 		return "/edit_price_entry.jsp";
 	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommercePriceEntryService _commercePriceEntryService;

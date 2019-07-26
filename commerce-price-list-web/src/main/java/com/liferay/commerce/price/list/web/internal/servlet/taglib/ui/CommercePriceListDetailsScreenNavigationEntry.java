@@ -23,14 +23,14 @@ import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountG
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -87,38 +87,35 @@ public class CommercePriceListDetailsScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		try {
-			CommercePriceListDisplayContext commercePriceListDisplayContext =
-				new CommercePriceListDisplayContext(
-					_commercePriceListActionHelper, _commerceAccountService,
-					_commerceAccountGroupService, _commerceCatalogService,
-					_commerceCurrencyService,
-					_commercePriceListAccountRelService,
-					_commercePriceListCommerceAccountGroupRelService,
-					_commercePriceListService, httpServletRequest,
-					_itemSelector);
+		CommercePriceListDisplayContext commercePriceListDisplayContext =
+			new CommercePriceListDisplayContext(
+				_commercePriceListActionHelper, _commerceAccountService,
+				_commerceAccountGroupService,
+				_commerceCatalogModelResourcePermission,
+				_commerceCatalogService, _commerceCurrencyService,
+				_commercePriceListAccountRelService,
+				_commercePriceListCommerceAccountGroupRelService,
+				_commercePriceListService, httpServletRequest, _itemSelector);
 
-			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				commercePriceListDisplayContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		httpServletRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT, commercePriceListDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_setServletContext, httpServletRequest, httpServletResponse,
 			"/edit_price_list.jsp");
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommercePriceListDetailsScreenNavigationEntry.class);
-
 	@Reference
 	private CommerceAccountGroupService _commerceAccountGroupService;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
