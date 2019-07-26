@@ -20,13 +20,18 @@
   }
 
   &.is-active::before {
-    right: 50%;
-    transform: skew(0deg, 22deg);
+    right: 0;
+    transform: skew(0deg, 22deg) rotateZ(-120deg);
+    top: 50%;
+    margin-top: -2px;
   }
 
   &.is-active::after {
-    left: 50%;
-    transform: skew(0deg, -22deg);
+    top: 50%;
+    left: 100%;
+    transform: skew(0deg, -22deg) rotateZ(120deg);
+    margin-top: 1px;
+    margin-left: -4px;
   }
 
   @media (max-width: 767px) {
