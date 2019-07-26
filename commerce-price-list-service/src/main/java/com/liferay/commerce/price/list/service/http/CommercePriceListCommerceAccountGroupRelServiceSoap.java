@@ -132,7 +132,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceSoap {
 	public static com.liferay.commerce.price.list.model.
 		CommercePriceListCommerceAccountGroupRelSoap
 				getCommercePriceListCommerceAccountGroupRel(
-					long commercePriceListCommerceAccoungGroupRelId)
+					long commercePriceListCommerceAccountGroupRelId)
 			throws RemoteException {
 
 		try {
@@ -140,7 +140,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceSoap {
 				CommercePriceListCommerceAccountGroupRel returnValue =
 					CommercePriceListCommerceAccountGroupRelServiceUtil.
 						getCommercePriceListCommerceAccountGroupRel(
-							commercePriceListCommerceAccoungGroupRelId);
+							commercePriceListCommerceAccountGroupRelId);
 
 			return com.liferay.commerce.price.list.model.
 				CommercePriceListCommerceAccountGroupRelSoap.toSoapModel(
