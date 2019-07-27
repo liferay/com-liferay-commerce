@@ -130,6 +130,10 @@ public class CommerceShipmentServiceImpl
 		List<CommerceChannel> commerceChannels =
 			_commerceChannelService.searchCommerceChannels(companyId);
 
+		if (commerceChannels.isEmpty()) {
+			return 0;
+		}
+
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
 		long[] commerceChannelGroupIds = stream.mapToLong(
