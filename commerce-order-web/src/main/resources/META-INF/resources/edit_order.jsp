@@ -17,10 +17,6 @@
 <%@ include file="/init.jsp" %>
 <!-- test edit_order -->
 
-<!-- header -->
-<commerce-ui:header variant="order header" />
-<!-- /header -->
-
 <%
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
@@ -46,6 +42,20 @@ else {
 
 renderResponse.setTitle(title);
 %>
+
+<!-- header -->
+<commerce-ui:header
+	bean="<%= commerceOrder %>"
+	model="<%= CommerceOrder.class %>"
+	title="<%= title %>"
+	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
+	dropdownItems="<%= commerceOrderEditDisplayContext.getHeaderDropdownItems() %>"
+	previewUrl="/preview"
+	thumbnailUrl="//via.placeholder.com/50"
+	version="1.1"
+
+/>
+<!-- /header -->
 
 <div id="<portlet:namespace />editOrderContainer">
 	<liferay-frontend:screen-navigation

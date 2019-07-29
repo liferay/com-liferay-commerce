@@ -1,0 +1,37 @@
+<div class="commerce-header__assign-to d-none d-xl-flex align-items-center px-3 mr-3 border-right">
+    <span class="mr-3 small">Assigned to:</span>
+    <div class="btn-group dropdown ml-3" role="group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="theDropdownToggleId">Admin<span class="inline-item inline-item-before"><svg class="lexicon-icon lexicon-icon-blogs" focusable="false" role="presentation"><use href="/images/icons/icons.svg#share"></use></svg></span></button>
+        <div aria-labelledby="theDropdownToggleId" class="dropdown-menu">
+            <form>
+                <div class="dropdown-section">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-item">
+                            <input class="form-control input-group-inset input-group-inset-after" placeholder="Search for..." type="text"><span class="input-group-inset-item input-group-inset-item-after"><button class="btn btn-unstyled" type="button"><svg class="lexicon-icon lexicon-icon-search" focusable="false" role="presentation"><use href="/images/icons/icons.svg#search"></use></svg></button></span></div>
+                    </div>
+                </div>
+            </form>
+            <form>
+                <div class="inline-scroller">
+                    <div class="dropdown-subheader" role="presentation">My actions</div>
+                    <ul class="list-unstyled">
+                        <li><a class="dropdown-item" href="#1">D Structure</a></li>
+                        <li><a class="dropdown-item" href="#1">F Structure</a></li>
+                    </ul>
+                    <div class="dropdown-subheader" role="presentation">Assign by role</div>
+                    <ul class="list-unstyled">
+                        <li><a class="dropdown-item" href="#1">D Structure</a></li>
+                        <li><a class="dropdown-item" href="#1">F Structure</a></li>
+                        <li><a class="disabled dropdown-item" href="#1" tabindex="-1">H Structure</a></li>
+                        <li><a class="dropdown-item" href="#1">J Structure</a></li>
+                        <li><a class="dropdown-item" href="#1">L Structure</a></li>
+                    </ul>
+                </div>
+            </form>
+            <div class="dropdown-caption">Showing 7 of 203 Users</div>
+            <div class="dropdown-section">
+                <button class="btn btn-block btn-secondary">More</button>
+            </div>
+        </div>
+    </div>
+</div>
