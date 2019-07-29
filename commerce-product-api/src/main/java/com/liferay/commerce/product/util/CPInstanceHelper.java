@@ -102,4 +102,10 @@ public interface CPInstanceHelper {
 			RenderResponse renderResponse)
 		throws PortalException;
 
+	public String renderPublicStoreOptions(
+			String containerId, long cpDefinitionId, String json,
+			boolean ignoreSKUCombinations, boolean skuContributor,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortalException;
+
 }

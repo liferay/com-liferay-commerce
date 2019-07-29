@@ -477,6 +477,25 @@ public class CPContentHelperImpl implements CPContentHelper {
 			renderResponse);
 	}
 
+	@Override
+	public String renderOptions(
+			String ddmFormContainerId, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws PortalException {
+
+		CPCatalogEntry cpCatalogEntry = getCPCatalogEntry(
+			_portal.getHttpServletRequest(renderRequest));
+
+		if (cpCatalogEntry == null) {
+			return StringPool.BLANK;
+		}
+
+		return _cpInstanceHelper.renderPublicStoreOptions(
+			ddmFormContainerId, cpCatalogEntry.getCPDefinitionId(), null,
+			cpCatalogEntry.isIgnoreSKUCombinations(), false, renderRequest,
+			renderResponse);
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPContentHelperImpl.class);
 
