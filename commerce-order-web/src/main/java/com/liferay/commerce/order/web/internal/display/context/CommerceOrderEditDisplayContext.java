@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.order.web.internal.display.context;
 
+import com.liferay.commerce.frontend.model.HeaderButtonModel;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
@@ -29,6 +30,7 @@ import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelect
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -46,16 +48,15 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.*;
 
 import java.text.DateFormat;
 import java.text.Format;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -105,6 +106,50 @@ public class CommerceOrderEditDisplayContext {
 			FastDateFormatFactoryUtil.getDateTime(
 				DateFormat.SHORT, DateFormat.SHORT, themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
+	}
+
+	public List<HeaderButtonModel> getHeaderButtonModels() {
+		List<HeaderButtonModel> headerButtonModels = new ArrayList<>();
+
+		HeaderButtonModel headerButtonModel = new HeaderButtonModel();
+
+		headerButtonModel.setLabel("Azione 1");
+		headerButtonModel.setStyle("secondary");
+		headerButtonModel.setType("button");
+
+		headerButtonModels.add(headerButtonModel);
+
+		HeaderButtonModel headerButtonModel2 = new HeaderButtonModel();
+
+		headerButtonModel2.setLabel("Azione 2");
+		headerButtonModel.setStyle("primary");
+		headerButtonModel2.setType("submit");
+
+		headerButtonModels.add(headerButtonModel2);
+
+		return headerButtonModels;
+	}
+
+	public List<DropdownItem> getHeaderDropdownItems() {
+		List<DropdownItem> headerDropdownItems = new ArrayList<>();
+
+		DropdownItem headerDropdownItem = new DropdownItem();
+
+		headerDropdownItem.setLabel("First link");
+		headerDropdownItem.setHref("/first-link");
+		headerDropdownItem.setIcon("edit");
+
+		headerDropdownItems.add(headerDropdownItem);
+
+		DropdownItem headerDropdownItem2 = new DropdownItem();
+
+		headerDropdownItem2.setLabel("Second link");
+		headerDropdownItem2.setHref("/second-link");
+		headerDropdownItem2.setIcon("create");
+
+		headerDropdownItems.add(headerDropdownItem2);
+
+		return headerDropdownItems;
 	}
 
 	public int[] getAvailableOrderStatuses() throws PortalException {
