@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -170,15 +169,13 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			}
 		}
 
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			_user);
-
 		CPOptionCategory cpOptionCategory =
 			_cpOptionCategoryService.addCPOptionCategory(
 				LanguageUtils.getLocalizedMap(optionCategory.getTitle()),
 				LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 				GetterUtil.get(optionCategory.getPriority(), 0D),
-				optionCategory.getKey(), serviceContext);
+				optionCategory.getKey(),
+				_serviceContextHelper.getServiceContext(_user));
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(

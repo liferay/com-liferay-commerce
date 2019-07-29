@@ -188,10 +188,8 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 	public Response patchOrderItem(Long id, OrderItem orderItem)
 		throws Exception {
 
-		CommerceOrderItem commerceOrderItem =
-			_commerceOrderItemService.getCommerceOrderItem(id);
-
-		_updateOrderItem(commerceOrderItem, orderItem);
+		_updateOrderItem(
+			_commerceOrderItemService.getCommerceOrderItem(id), orderItem);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -242,10 +240,8 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 	public OrderItem postOrderIdOrderItem(Long id, OrderItem orderItem)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			id);
-
-		return _upsertOrderItem(commerceOrder, orderItem);
+		return _upsertOrderItem(
+			_commerceOrderService.getCommerceOrder(id), orderItem);
 	}
 
 	private List<OrderItem> _toOrderItems(

@@ -122,10 +122,8 @@ public class ShippingAddressResourceImpl
 			Long id, ShippingAddress shippingAddress)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			id);
-
-		_updateShippingAddress(commerceOrder, shippingAddress);
+		_updateShippingAddress(
+			_commerceOrderService.getCommerceOrder(id), shippingAddress);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
