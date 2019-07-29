@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.liferay.portal.kernel.model.WorkflowedModel" %>
+<%@ page import="com.liferay.portal.kernel.model.ClassedModel" %>
+<%@ page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem" %><%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -17,103 +20,103 @@
 <%@ include file="/header/init.jsp" %>
 
 <%
-    String variant = (String)request.getAttribute("liferay-commerce:header:variant");
+    Object bean = request.getAttribute("liferay-commerce:header:bean");
+    Class<?> model = (Class<?>)request.getAttribute("liferay-commerce:header:model");
+    String title = (String)request.getAttribute("liferay-commerce:header:title");
+    boolean hasWorkflow = (boolean)request.getAttribute("liferay-commerce:header:hasWorkflow");
+    String spritemap = (String)request.getAttribute("liferay-commerce:header:spritemap");
+    String version = (String)request.getAttribute("liferay-commerce:header:version");
+    String previewUrl = (String)request.getAttribute("liferay-commerce:header:previewUrl");
+    String thumbnailUrl = (String)request.getAttribute("liferay-commerce:header:thumbnailUrl");
+    List<HeaderButtonModel> headerButtonModels = (List<HeaderButtonModel> )request.getAttribute("liferay-commerce:header:headerButtonModels");
+    List<DropdownItem> dropdownItems = (List<DropdownItem> )request.getAttribute("liferay-commerce:header:dropdownItems");
+    String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
 %>
 
-<div>
-    <!-- Header variant: <%= variant %> -->
-
-    <div class="container-fluid mb-3">
-        <div class="container d-flex">
-            <div class="d-flex align-items-center flex-grow-1">
-                <div class="py-2 pr-3 border-right bg-white d-flex">
-                    <span class="ml-3 sticker sticker-primary sticker-xl">
+<div class="container-fluid">
+    <div class="container d-flex">
+        <div class="d-flex align-items-center flex-grow-1">
+            <c:if test="<%= Validator.isNotNull(thumbnailUrl) %>">
+                <span class="mr-3 sticker sticker-primary sticker-xl">
                     <span class="sticker-overlay">
-                        <img alt="thumbnail" class="img-fluid" src="//via.placeholder.com/50">
+                        <img alt="thumbnail" class="img-fluid" src="<%= thumbnailUrl %>">
                     </span>
-                    </span>
-                </div>
-                <div class="px-3">
+                </span>
+            </c:if>
+            <div class="py-2 mr-3 d-flex">
+                <div class="pr-3">
                     <div class="d-flex">
-                        <h3 class="mb-0">53606</h3><span class="ml-2 badge badge-secondary"><span class="badge-item badge-item-expand">V1.1</span></span>
-                    </div><span class="label label-warning"><span class="label-item label-item-expand">awaiting buyer</span></span>
+                        <h3 class="mb-0"><%= title %></h3>
+                        <c:if test="<%= Validator.isNotNull(version) %>">
+                            <span class="ml-2 badge badge-secondary">
+                                <span class="badge-item badge-item-expand">v<%= version %></span>
+                            </span>
+                        </c:if>
+                    </div>
+                    <c:if test="<%= bean instanceof WorkflowedModel%>">
+                        <% WorkflowedModel workflowedModel = (WorkflowedModel)bean; %>
+                        <aui:workflow-status
+                                bean="<%= bean %>"
+                                model="<%= model %>"
+                                showHelpMessage="<%= false %>"
+                                showIcon="<%= false %>"
+                                showLabel="<%= false %>"
+                                status="<%= workflowedModel.getStatus() %>"
+                        />
+                    </c:if>
                 </div>
-                <table class="small">
-                    <tbody>
-                        <tr>
-                            <td>Total:</td>
-                            <td><strong>$5,000.50</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Items:</td>
-                            <td>17</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-            <div class="commerce-header__actions-wrapper align-items-center d-none d-xl-flex">
-                <div class="commerce-header__actions-primary px-3 d-flex border-right">
-                    <div class="commerce-header__assign-to d-none d-xl-flex align-items-center px-3 mr-3 border-right">
-                        <label for="assigned-to mr-3 small">Assigned to:</label>
-                        <div class="btn-group dropdown ml-3" role="group">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="theDropdownToggleId">Admin<span class="inline-item inline-item-before"><svg class="lexicon-icon lexicon-icon-blogs" focusable="false" role="presentation"><use href="/images/icons/icons.svg#share"></use></svg></span></button>
-                            <div aria-labelledby="theDropdownToggleId" class="dropdown-menu">
-                                <form>
-                                    <div class="dropdown-section">
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-item">
-                                                <input class="form-control input-group-inset input-group-inset-after" placeholder="Search for..." type="text"><span class="input-group-inset-item input-group-inset-item-after"><button class="btn btn-unstyled" type="button"><svg class="lexicon-icon lexicon-icon-search" focusable="false" role="presentation"><use href="/images/icons/icons.svg#search"></use></svg></button></span></div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form>
-                                    <div class="inline-scroller">
-                                        <div class="dropdown-subheader" role="presentation">My actions</div>
-                                        <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="#1">D Structure</a></li>
-                                            <li><a class="dropdown-item" href="#1">F Structure</a></li>
-                                        </ul>
-                                        <div class="dropdown-subheader" role="presentation">Assign by role</div>
-                                        <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="#1">D Structure</a></li>
-                                            <li><a class="dropdown-item" href="#1">F Structure</a></li>
-                                            <li><a class="disabled dropdown-item" href="#1" tabindex="-1">H Structure</a></li>
-                                            <li><a class="dropdown-item" href="#1">J Structure</a></li>
-                                            <li><a class="dropdown-item" href="#1">L Structure</a></li>
-                                        </ul>
-                                    </div>
-                                </form>
-                                <div class="dropdown-caption">Showing 7 of 203 Users</div>
-                                <div class="dropdown-section">
-                                    <button class="btn btn-block btn-secondary">More</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary mr-1">Block</button>
-                    <button class="btn btn-secondary mr-1">Save as Draft</button>
-                    <button class="btn btn-primary">Publish</button>
-                </div>
-                <div class="commerce-header__actions-secondary pl-3 align-items-center d-flex">
-                    <button class="btn btn-monospaced btn-primary dropdown-toggle mr-1" type="button" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="theDropdownActions">
-                        <svg class="lexicon-icon lexicon-icon-blogs" focusable="false" role="presentation">
-                            <use href="/images/icons/icons.svg#blogs"></use>
-                        </svg>
-                    </button>
-                    <div aria-labelledby="theDropdownActions" class="dropdown-menu dropdown-menu-right">
-                        <ul class="list-unstyled">
-                            <li><a class="dropdown-item" href="#1">Option 1</a></li>
-                            <li><a class="disabled dropdown-item" href="#1" tabindex="-1">Option 2</a></li>
-                            <li><a class="dropdown-item" href="#1">Option 3</a></li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-monospaced btn-primary" disabled="" type="button">
-                        <svg class="lexicon-icon lexicon-icon-blogs" focusable="false" role="presentation">
-                            <use href="/images/icons/icons.svg#blogs"></use>
-                        </svg>
-                    </button>
-                </div>
+        </div>
+
+        <div class="commerce-header__actions-wrapper align-items-center d-none d-xl-flex">
+            <div class="commerce-header__actions px-3 d-flex border-right">
+                <c:if test="<%= hasWorkflow %>">
+                    <% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
+
+                    <div id="<%= assignedToWrapperId %>"></div>
+
+                    <aui:script require="commerce-frontend-react@1.0.0/assign_to/AssignTo.es as AssignTo">
+                        var assignTo = new AssignTo.default(
+                        "<%= assignedToWrapperId %>",
+                        "<%= assignedToWrapperId %>",
+                        {
+                        spritemap: "<%= spritemap %>"
+                        }
+                        );
+                    </aui:script>
+                </c:if>
+
+                <c:if test="<%= Validator.isNotNull(headerButtonModels) %>">
+                    <c:forEach items="<%= headerButtonModels %>" var="headerButtonModel">
+                        <clay:button
+                            label="${headerButtonModel.getLabel()}"
+                            style="${headerButtonModel.getStyle()}"
+                            type="${headerButtonModel.getType()}"
+                            elementClasses="mr-1"
+                        />
+                    </c:forEach>
+                </c:if>
+            </div>
+            <div class="commerce-header__actions-secondary pl-3 align-items-center d-flex">
+                <clay:dropdown-menu
+                    icon="ellipsis-v"
+                    buttonType="button"
+                    style="unstyled"
+                    elementClasses="btn-outline-borderless btn-outline-secondary btn-sm"
+                    dropdownItems="<%= dropdownItems %>"
+                />
+
+                <c:if test="<%= Validator.isNotNull(previewUrl) %>">
+                    <clay:link
+                        elementClasses="btn btn-outline-borderless btn-outline-secondary btn-sm text-primary"
+                        href="<%= previewUrl %>"
+                        icon="shortcut"
+                    />
+                </c:if>
             </div>
         </div>
     </div>
 </div>
+
+
+
