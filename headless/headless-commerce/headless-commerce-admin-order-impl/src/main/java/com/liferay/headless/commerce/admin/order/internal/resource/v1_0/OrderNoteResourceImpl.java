@@ -153,10 +153,8 @@ public class OrderNoteResourceImpl extends BaseOrderNoteResourceImpl {
 	public Response patchOrderNote(Long id, OrderNote orderNote)
 		throws Exception {
 
-		CommerceOrderNote commerceOrderNote =
-			_commerceOrderNoteService.getCommerceOrderNote(id);
-
-		_updateOrderNote(commerceOrderNote, orderNote);
+		_updateOrderNote(
+			_commerceOrderNoteService.getCommerceOrderNote(id), orderNote);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -207,10 +205,8 @@ public class OrderNoteResourceImpl extends BaseOrderNoteResourceImpl {
 	public OrderNote postOrderIdOrderNote(Long id, OrderNote orderNote)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			id);
-
-		return _upsertOrderNote(commerceOrder, orderNote);
+		return _upsertOrderNote(
+			_commerceOrderService.getCommerceOrder(id), orderNote);
 	}
 
 	private List<OrderNote> _toOrderNotes(

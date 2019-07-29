@@ -121,10 +121,8 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 			Long id, BillingAddress billingAddress)
 		throws Exception {
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			id);
-
-		_updateBillingAddress(commerceOrder, billingAddress);
+		_updateBillingAddress(
+			_commerceOrderService.getCommerceOrder(id), billingAddress);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
