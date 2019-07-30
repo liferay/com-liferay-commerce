@@ -470,7 +470,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			_speedwellDependencyResolver.getImageDependencyPath() +
-				"speedwell-logo.png");
+				"Speedwell_Logo_Footer.png");
 
 		File file = FileUtil.createTempFile(inputStream);
 
