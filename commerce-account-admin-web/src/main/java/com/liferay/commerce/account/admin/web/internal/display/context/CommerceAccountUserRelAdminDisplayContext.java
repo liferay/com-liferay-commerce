@@ -27,8 +27,10 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupRole;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.roles.item.selector.RoleItemSelectorCriterion;
 import com.liferay.users.admin.item.selector.UserItemSelectorCriterion;
 
 import java.util.ArrayList;
@@ -138,6 +141,55 @@ public class CommerceAccountUserRelAdminDisplayContext
 		_searchContainer.setResults(results);
 
 		return _searchContainer;
+	}
+
+	public String getUserRoleIds(CommerceAccountUserRel commerceAccountUserRel)
+		throws PortalException {
+
+		List<UserGroupRole> userGroupRoles =
+			commerceAccountUserRel.getUserGroupRoles();
+
+		Stream<UserGroupRole> stream = userGroupRoles.stream();
+
+		Long[] rolesArray = stream.map(
+			UserGroupRole::getRoleId
+		).toArray(
+			Long[]::new
+		);
+
+		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
+	}
+
+	public String getUserRoleItemSelectorUrl(
+			CommerceAccountUserRel commerceAccountUserRel)
+		throws Exception {
+
+		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
+			RequestBackedPortletURLFactoryUtil.create(
+				commerceAccountAdminRequestHelper.getRequest());
+
+		RoleItemSelectorCriterion roleItemSelectorCriterion =
+			new RoleItemSelectorCriterion(RoleConstants.TYPE_SITE);
+
+		roleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+			Collections.<ItemSelectorReturnType>singletonList(
+				new UUIDItemSelectorReturnType()));
+
+		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, "userRoleItemSelector",
+			roleItemSelectorCriterion);
+
+		itemSelectorURL.setParameter(
+			"groupId",
+			String.valueOf(commerceAccount.getCommerceAccountGroupId()));
+
+		itemSelectorURL.setParameter(
+			"checkedRoleIds", getUserRoleIds(commerceAccountUserRel));
+		itemSelectorURL.setParameter("rowChecker", "");
+
+		itemSelectorURL.setWindowState(LiferayWindowState.POP_UP);
+
+		return itemSelectorURL.toString();
 	}
 
 	public String getUserRoles(CommerceAccountUserRel commerceAccountUserRel)
