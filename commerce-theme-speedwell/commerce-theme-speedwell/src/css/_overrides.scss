@@ -29,7 +29,8 @@
 }
 
 .multi-step-item.active .multi-step-icon,
-body .multi-step-item.active .multi-step-divider, body .multi-step-item.success-page.complete .multi-step-divider {
+body .multi-step-item.active .multi-step-divider,
+body .multi-step-item.success-page.complete .multi-step-divider {
   background-color: $color-theme;
 }
 
