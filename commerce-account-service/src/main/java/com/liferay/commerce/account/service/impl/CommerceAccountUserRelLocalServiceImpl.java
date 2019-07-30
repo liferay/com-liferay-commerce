@@ -152,7 +152,7 @@ public class CommerceAccountUserRelLocalServiceImpl
 		long commerceAccountId) {
 
 		List<CommerceAccountUserRel> commerceAccountUserRels =
-			commerceAccountUserRelPersistence.findByCommerceAccountUserId(
+			commerceAccountUserRelPersistence.findByCommerceAccountId(
 				commerceAccountId);
 
 		for (CommerceAccountUserRel commerceAccountUserRel :
