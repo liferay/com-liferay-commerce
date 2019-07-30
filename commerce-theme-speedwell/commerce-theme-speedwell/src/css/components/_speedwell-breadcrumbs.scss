@@ -1,0 +1,19 @@
+.breadcrumb-horizontal {
+  background-color: transparent;
+  font-size: 12px;
+
+  li {
+    a {
+      text-decoration: none;
+      color: #353535;
+
+      &:hover {
+        color: #353535;
+      }
+    }
+
+    &.active:not(li.active::before) {
+      font-weight: bold;
+    }
+  }
+}
