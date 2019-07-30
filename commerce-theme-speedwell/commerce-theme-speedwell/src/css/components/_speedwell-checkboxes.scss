@@ -2,7 +2,8 @@
 
 }
 
-label[class*='-checkbox'] {
+label[class*='-checkbox'],
+label[for*='rememberMe'] {
   display: block;
   position: relative;
   cursor: pointer;
