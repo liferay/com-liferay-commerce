@@ -1,0 +1,126 @@
+.login-container,
+#signinmodal {
+  margin: 0 auto;
+  max-width: 31em;
+  padding: 20px 30px;
+  opacity: 0;
+  animation: popUp .2s ease-out 1 forwards;
+  animation-delay: .5s;
+
+  .form-group {
+    font-size: 12px;
+
+    .control-label {
+      font-weight: bold;
+      padding-left: 10px;
+      margin: 0;
+    }
+
+    .form-control {
+      font-size: 14px;
+      color: #353535;
+      background-color: rgba(0, 0, 0, .05);
+      border: 0;
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+
+  .button-holder {
+    .btn {
+      width: 100%;
+      font-weight: bold;
+      font-size: 12px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0;
+    }
+  }
+
+  .sign-in-form {
+    .input-container {
+      margin-top: 20px;
+    }
+
+    &::before {
+      content: 'Sign In';
+      font-size: 1.4em;
+      font-weight: 300;
+    }
+  }
+
+  // sign up + password forgotten
+
+  .navigation {
+    position: relative;
+    margin-top: 50px;
+
+    &::before {
+      content: '';
+      width: 100%;
+      border-top: 1px solid rgba(0, 0, 0, .05);
+      position: absolute;
+      top: -35px;
+      text-align: center;
+    }
+
+    &::after {
+      content: 'New user?';
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      background-color: white;
+      margin: 0 auto;
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      padding: 0 10px;
+      transform: translateX(-50%);
+      font-weight: 200;
+    }
+
+    li {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 12px;
+
+      &:nth-child(1) {
+        border: 1px solid #353535;
+        color: #353535;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      a {
+        color: #353535 !important;
+
+        &:hover {
+          color: #353535 !important;
+        }
+      }
+    }
+
+    a i {
+      display: none;
+    }
+
+    a[href*="create_account"] {
+      color: #353535;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @keyframes popUp {
+    from { opacity: 0; transform: translate3d(0, 2%, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+}
