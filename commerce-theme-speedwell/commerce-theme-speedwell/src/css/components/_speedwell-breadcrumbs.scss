@@ -5,15 +5,19 @@
   li {
     a {
       text-decoration: none;
-      color: #353535;
+      color: $stroke-variant;
 
       &:hover {
-        color: #353535;
+        color: $stroke-variant;
       }
     }
 
-    &.active:not(li.active::before) {
+    &.active {
       font-weight: bold;
+
+      &::before {
+        font-weight: normal;
+      }
     }
   }
 }

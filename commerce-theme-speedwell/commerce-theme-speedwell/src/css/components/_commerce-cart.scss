@@ -6,12 +6,12 @@
   max-width: 500px;
   position: fixed;
   right: 0;
-  top: calc(#{$liferay-topbar-size} + 80px);
+  top: calc(#{$liferay-topbar-size} + #{$liferay-topbar-size} + 80px);
   transition: all ease 200ms;
   width: 100%;
 
   @media screen and (max-width: 767px) {
-    top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 1px);
+    top: calc(#{$speedwell-topbar-size-small} - 1px);
   }
 
   &::before {
