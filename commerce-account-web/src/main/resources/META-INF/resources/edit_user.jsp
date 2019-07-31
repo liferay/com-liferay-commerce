@@ -189,6 +189,26 @@ else {
 							</c:otherwise>
 						</c:choose>
 					</div>
+
+					<div class="col-lg-4">
+						<c:choose>
+							<c:when test='<%= !UsersAdminUtil.hasUpdateFieldPermission(permissionChecker, user, selectedUser, "firstName") %>'>
+								<aui:input disabled="<%= true %>" name="firstName" />
+							</c:when>
+							<c:otherwise>
+								<aui:input bean="<%= selectedUser %>" model="<%= User.class %>" name="firstName" required="<%= true %>" />
+							</c:otherwise>
+						</c:choose>
+
+						<c:choose>
+							<c:when test='<%= !UsersAdminUtil.hasUpdateFieldPermission(permissionChecker, user, selectedUser, "lastName") %>'>
+								<aui:input disabled="<%= true %>" name="lastName" />
+							</c:when>
+							<c:otherwise>
+								<aui:input bean="<%= selectedUser %>" model="<%= User.class %>" name="lastName" required="<%= true %>" />
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
 			</div>
 		</section>
