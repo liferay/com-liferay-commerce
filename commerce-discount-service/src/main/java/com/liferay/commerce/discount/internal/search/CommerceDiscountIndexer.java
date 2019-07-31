@@ -223,10 +223,6 @@ public class CommerceDiscountIndexer extends BaseIndexer<CommerceDiscount> {
 
 			contextBooleanFilter.add(booleanFilter);
 		}
-		else {
-			contextBooleanFilter.addRequiredTerm(
-				FIELD_USE_COUPON_CODE, Boolean.FALSE.toString());
-		}
 
 		long cpDefinitionId = GetterUtil.getLong(
 			searchContext.getAttribute("cpDefinitionId"));
