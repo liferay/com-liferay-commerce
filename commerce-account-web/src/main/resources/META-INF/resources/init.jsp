@@ -62,8 +62,7 @@ page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %><%@
 page import="com.liferay.portal.kernel.webserver.WebServerServletTokenUtil" %><%@
 page import="com.liferay.portal.security.auth.ScreenNameValidatorFactory" %><%@
-page import="com.liferay.users.admin.configuration.UserFileUploadsConfiguration" %><%@
-page import="com.liferay.users.admin.kernel.util.UsersAdminUtil" %>
+page import="com.liferay.users.admin.configuration.UserFileUploadsConfiguration" %>
 
 <%@ page import="java.util.List" %>
 

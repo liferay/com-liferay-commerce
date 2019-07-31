@@ -356,9 +356,17 @@ public class CommerceAccountDisplayContext {
 	}
 
 	public boolean hasManageCommerceAccountPermissions() {
-		return PortalPermissionUtil.contains(
-			_commerceAccountRequestHelper.getPermissionChecker(),
-			CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS);
+		if (PortalPermissionUtil.contains(
+				_commerceAccountRequestHelper.getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS) ||
+			PortalPermissionUtil.contains(
+				_commerceAccountRequestHelper.getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected CommerceAccount getCurrentAccount() throws PortalException {

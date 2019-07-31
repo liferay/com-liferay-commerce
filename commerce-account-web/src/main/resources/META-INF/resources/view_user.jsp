@@ -52,7 +52,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 				<div class="align-items-center col-auto d-flex">
 					<div class="account-management__action">
-						<c:if test="<%= commerceAccountDisplayContext.hasCommerceAccountModelPermissions(CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
+						<c:if test="<%= (selectedUser.getUserId() == user.getUserId()) || commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
 							<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= editCommerceAccountURL %>" value='<%= LanguageUtil.get(request, "edit-user") %>' />
 						</c:if>
 					</div>
@@ -64,7 +64,7 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
 
 <c:if test="<%= commerceAccount != null %>">
 	<div class="commerce-cta is-visible">
-		<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasCommerceAccountModelPermissions(ActionKeys.UPDATE) %>">
+		<c:if test="<%= (selectedUser.getUserId() != user.getUserId()) && commerceAccountDisplayContext.hasCommerceAccountModelPermissions(commerceAccount.getCommerceAccountId(), CommerceAccountActionKeys.MANAGE_MEMBERS) %>">
 			<aui:button cssClass="commerce-button commerce-button--big js-invite-user" onClick='<%= renderResponse.getNamespace() + "openUserRolesModal();" %>' value="roles" />
 		</c:if>
 	</div>
