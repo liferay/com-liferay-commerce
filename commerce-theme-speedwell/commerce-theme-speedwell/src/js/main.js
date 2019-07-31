@@ -58,7 +58,7 @@ Liferay.on(
 		myMap.set(1, 'down');
 
 		const speedwellWrapper = document.getElementById("speedwell");
-		const speedwellTranslucentTopbar = speedwellWrapper.querySelector('.speedwell-topbar--translucent');
+		const speedwellTranslucentTopbar = speedwellWrapper && speedwellWrapper.querySelector('.speedwell-topbar--translucent');
 
 		window.addEventListener("scroll", function() {
 			const offset = window.scrollY - lastKnownScrollPosition;
