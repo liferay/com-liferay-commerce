@@ -480,7 +480,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		InputStream inputStream = classLoader.getResourceAsStream(
 			_siteInitializerDependencyResolver.getImageDependencyPath() +
-				"minium-logo.png");
+				"minium_logo.png");
 
 		File file = FileUtil.createTempFile(inputStream);
 

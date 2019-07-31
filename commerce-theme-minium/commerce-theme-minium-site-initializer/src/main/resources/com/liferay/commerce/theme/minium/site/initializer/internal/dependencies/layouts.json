@@ -1,6 +1,6 @@
 [
 	{
-		"icon": "icon-catalog.png",
+		"icon": "icon_catalog.png",
 		"layoutTemplateId": "minium_sidebar",
 		"name": "Catalog",
 		"portlets": [
@@ -75,7 +75,7 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-orders.png",
+		"icon": "icon_orders.png",
 		"layoutTemplateId": "1_column",
 		"name": "Pending Orders",
 		"portlets": [
@@ -88,7 +88,7 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-orders.png",
+		"icon": "icon_orders.png",
 		"layoutTemplateId": "1_column",
 		"name": "Placed Orders",
 		"portlets": [
@@ -121,7 +121,7 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-account-management.png",
+		"icon": "icon_account_management.png",
 		"layoutTemplateId": "1_column",
 		"name": "Account Management",
 		"portlets": [
