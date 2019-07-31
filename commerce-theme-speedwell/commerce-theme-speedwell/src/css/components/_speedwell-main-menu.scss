@@ -60,7 +60,7 @@
       padding-right: 0;
       position: fixed;
       right: 0;
-      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 1px);
+      top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size-small} - 5px);
     }
   }
 
