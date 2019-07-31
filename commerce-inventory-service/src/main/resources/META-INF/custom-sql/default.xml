@@ -49,7 +49,7 @@
 			WHERE
 				(CIWarehouse.companyId = ?) AND
 				(Group_.groupId = ?) AND
-				(CIWarehouse.active = ?)
+				(CIWarehouse.active_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_S">
