@@ -7,9 +7,19 @@
   animation: popUp .2s ease-out 1 forwards;
   animation-delay: .5s;
 
+  @media screen and (max-width: 767px) {
+    margin-top: 35px;
+    padding: 20px 0 0 0;
+  }
+
   .button-holder {
     .btn {
       width: 100%;
+    }
+
+    .lfr-button-label {
+      font-size: 12px;
+      font-weight: bold;
     }
   }
 
@@ -22,6 +32,7 @@
       content: 'Sign In';
       font-size: 1.4em;
       font-weight: 300;
+      margin-top: -20px;
     }
   }
 
@@ -60,24 +71,24 @@
       width: 100%;
       margin: 0;
       padding: 0;
-      height: 50px;
-      line-height: 50px;
+      height: 50px !important;
+      line-height: 50px !important;
       text-align: center;
-      font-size: 12px;
+      font-size: 12px !important;
 
       &:nth-child(1) {
-        border: 1px solid #353535;
-        color: #353535;
+        border: 1px solid $stroke-variant;
+        color: $stroke-variant !important;
         border-radius: 4px;
-        font-weight: bold;
+        font-weight: bold !important;
         margin-bottom: 20px;
       }
 
       a {
-        color: #353535 !important;
+        color: $stroke-variant !important;
 
         &:hover {
-          color: #353535 !important;
+          color: $stroke-variant !important;
         }
       }
     }
@@ -87,7 +98,7 @@
     }
 
     a[href*="create_account"] {
-      color: #353535;
+      color: $stroke-variant;
 
       &:hover {
         text-decoration: none;

@@ -31,10 +31,12 @@
 @import './components/product-detail';
 @import './components/specification-list';
 @import './components/speedwell-breadcrumbs';
+@import './components/speedwell-vertical-navbar';
 @import './components/speedwell-forms';
 @import './components/speedwell-sign-in';
-@import './components/speedwell-user-management';
+@import './components/speedwell-account-management';
 @import './components/speedwell-account';
+@import './components/speedwell-account-dashboard';
 @import './components/speedwell-add-to-cart-button';
 @import './components/speedwell-cart';
 @import './components/speedwell-cart-item';
@@ -85,6 +87,15 @@ body:not(.signed-in) {
 
   #currentHead {
     display: none;
+  }
+
+  .speedwell-main-menu__links,
+  .commerce-cart {
+    top: calc(#{$speedwell-topbar-size} - 1px);
+
+    @media screen and (max-width: 767px) {
+      top: calc(#{$speedwell-topbar-size-small} - 1px);
+    }
   }
 }
 
