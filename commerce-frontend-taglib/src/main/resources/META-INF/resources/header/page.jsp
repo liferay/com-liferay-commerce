@@ -1,7 +1,4 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.liferay.portal.kernel.model.WorkflowedModel" %>
-<%@ page import="com.liferay.portal.kernel.model.ClassedModel" %>
-<%@ page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem" %><%--
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -68,14 +65,14 @@
             </div>
         </div>
 
-        <div class="commerce-header__actions-wrapper align-items-center d-none d-xl-flex">
-            <div class="commerce-header__actions px-3 d-flex border-right">
+        <div class="commerce-header__actions-wrapper align-items-center d-flex">
+            <div class="commerce-header__actions px-3 d-none d-xl-flex border-right">
                 <c:if test="<%= hasWorkflow %>">
                     <% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
 
                     <div id="<%= assignedToWrapperId %>"></div>
 
-                    <aui:script require="commerce-frontend-react@1.0.0/assign_to/AssignTo.es as AssignTo">
+                    <aui:script require="commerce-frontend-react@1.0.0/assign_to/entry.es as AssignTo">
                         var assignTo = new AssignTo.default(
                         "<%= assignedToWrapperId %>",
                         "<%= assignedToWrapperId %>",
@@ -101,8 +98,6 @@
                 <clay:dropdown-menu
                     icon="ellipsis-v"
                     buttonType="button"
-                    style="unstyled"
-                    elementClasses="btn-outline-borderless btn-outline-secondary btn-sm"
                     dropdownItems="<%= dropdownItems %>"
                 />
 

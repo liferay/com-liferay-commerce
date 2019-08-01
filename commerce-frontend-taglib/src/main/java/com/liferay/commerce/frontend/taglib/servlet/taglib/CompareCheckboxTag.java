@@ -73,7 +73,7 @@ public class CompareCheckboxTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/compare_checkbox/CompareCheckbox.es");
+			"commerce-frontend-taglib/js/compare_checkbox/CompareCheckbox.es");
 	}
 
 	public void setCPDefinitionId(long cpDefinitionId) {

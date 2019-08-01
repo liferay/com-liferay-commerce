@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
-import ClayAlert from '@clayui/alert';
 
-export function SearchForUser(props) {
+export default function AssignTo(props) {
+    console.log('xc')
+
 	return (
 		<Fragment>
 			<form>
@@ -61,7 +61,7 @@ export function SearchForUser(props) {
 					</a>
 					</li>
 					<li>
-					<a className="disabled dropdown-item" href="#1" tabindex="-1">
+					<a className="disabled dropdown-item" href="#1" tabIndex="-1">
 						H Structure
 					</a>
 					</li>
@@ -84,23 +84,4 @@ export function SearchForUser(props) {
 			</div>
 		</Fragment>
 	)
-}
-
-export default function(componentId, id, props) {
-	const portletFrame = window.document.getElementById(id);
-	let instance = null;
-	ReactDOM.render(
-		<SearchForUser
-			ref={component => {
-				instance = component;
-			}}
-			showFilters={false}
-			{...props}
-		/>,
-		portletFrame
-	);
-	if (window.Liferay && window.Liferay.component) {
-		window.Liferay.component(componentId, instance);
-	}
-	return instance;
 }
