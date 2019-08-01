@@ -67,7 +67,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 
 		Liferay.provide(
 			window,
-			'deleteCommerceAccountUser',
+			'removeCommerceAccountUser',
 			function(id) {
 				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = '<%= Constants.REMOVE %>';
 				document.querySelector('#<portlet:namespace />userId').value = id;
