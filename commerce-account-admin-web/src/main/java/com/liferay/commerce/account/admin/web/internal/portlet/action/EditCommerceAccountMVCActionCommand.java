@@ -160,12 +160,24 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 	protected void setActive(ActionRequest actionRequest)
 		throws PortalException {
 
+		long[] commerceAccountIds = null;
+
 		long commerceAccountId = ParamUtil.getLong(
 			actionRequest, "commerceAccountId");
 
+		if (commerceAccountId > 0) {
+			commerceAccountIds = new long[] {commerceAccountId};
+		}
+		else {
+			commerceAccountIds = ParamUtil.getLongValues(
+				actionRequest, "commerceAccountIds");
+		}
+
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		_commerceAccountService.setActive(commerceAccountId, active);
+		for (long curCommerceAccountId : commerceAccountIds) {
+			_commerceAccountService.setActive(curCommerceAccountId, active);
+		}
 	}
 
 	protected CommerceAccount updateCommerceAccount(ActionRequest actionRequest)
