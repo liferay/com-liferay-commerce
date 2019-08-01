@@ -14,7 +14,7 @@
 			<div class="minium-table-actions" ref="actions">
 				<div class="minium-table-actions__buttons">
 					{foreach $item in $actionItems}
-						<a class="commerce-button commerce-button--outline commerce-button--small" href="{$item.href}">
+						<a class="commerce-button commerce-button--outline commerce-button--small {$item.cssClasses}" href="{$item.href}">
 							{$item.label}
 						</a>
 					{/foreach}
