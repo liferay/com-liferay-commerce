@@ -49,11 +49,10 @@ renderResponse.setTitle(title);
 	model="<%= CommerceOrder.class %>"
 	title="<%= title %>"
 	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
-	dropdownItems="<%= commerceOrderEditDisplayContext.getHeaderDropdownItems() %>"
+	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
 	previewUrl="/preview"
 	thumbnailUrl="//via.placeholder.com/50"
 	version="1.1"
-
 />
 <!-- /header -->
 
