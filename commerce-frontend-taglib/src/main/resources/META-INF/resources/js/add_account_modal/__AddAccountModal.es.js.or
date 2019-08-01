@@ -1,0 +1,84 @@
+'use strict';
+
+import template from './AddAccountModal.soy';
+import Component from 'metal-component';
+import Soy, {Config} from 'metal-soy';
+
+import 'clay-modal';
+
+import '../user_utils/UserInvitation.es';
+
+class AddAccountModal extends Component {
+
+	attached() {
+		Liferay.on('updateUsersOnModal', (e) => {
+			this.users = e.details;
+		});
+	}
+
+	close() {
+		return this._isVisible = false;
+	}
+
+	open() {
+		return this._isVisible = true;
+	}
+
+	toggle() {
+		return this._isVisible = !this._isVisible;
+	}
+
+	_addAccounts() {
+		if (!this.users.length) {
+			return false;
+		};
+
+		const result = {
+			account: 'test',
+			users: this.users
+		}
+
+		return this.emit(
+			'addAccount', result
+		);
+	}
+
+	_handleCloseModal(e) {
+		e.preventDefault();
+
+		return this._isVisible = false;
+	}
+
+	_updateAddedUsers(users) {
+		return this.users = users;
+	}
+
+};
+
+Soy.register(AddAccountModal, template);
+
+const USER_SCHEMA = Config.shapeOf(
+	{
+		email: Config.string().required(),
+		name: Config.string().required(),
+		thumbnail: Config.string().required(),
+		userId: Config.oneOfType(
+			[
+				Config.number(),
+				Config.string()
+			]
+		).required()
+	}
+);
+
+AddAccountModal.STATE = {
+	query: Config.string().value(''),
+	spritemap: Config.string(),
+	users: Config.array(USER_SCHEMA).value([]),
+	usersAPI: Config.string().value(''),
+	_isLoading: Config.bool().internal().value(false),
+	_isVisible: Config.bool().internal().value(false)
+};
+
+export {AddAccountModal};
+export default AddAccountModal;

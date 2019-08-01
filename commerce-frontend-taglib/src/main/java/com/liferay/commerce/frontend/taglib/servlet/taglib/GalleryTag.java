@@ -80,7 +80,7 @@ public class GalleryTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/gallery/Gallery.es");
+			"commerce-frontend-taglib/js/gallery/Gallery.es");
 	}
 
 	public void setCPDefinitionId(long cpDefinitionId) {

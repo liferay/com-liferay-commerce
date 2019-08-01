@@ -122,7 +122,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/clay_table/CommerceTable.es");
+			"commerce-frontend-taglib/js/clay_table/CommerceTable.es");
 	}
 
 	public void setDataProviderKey(String dataProviderKey) {

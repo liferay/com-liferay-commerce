@@ -103,7 +103,7 @@ public class AddToCartTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
+			"commerce-frontend-taglib/js/add_to_cart/AddToCartButton.es");
 	}
 
 	public void setCPInstanceId(long cpInstanceId) {
