@@ -278,6 +278,17 @@ public class CommerceAccountClayTable
 			long commerceAccountId, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		if (!_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), commerceAccountId,
+				ActionKeys.VIEW)) {
+
+			return StringPool.BLANK;
+		}
+
 		PortletURL viewURL = PortletProviderUtil.getPortletURL(
 			httpServletRequest, CommerceAccount.class.getName(),
 			PortletProvider.Action.VIEW);
