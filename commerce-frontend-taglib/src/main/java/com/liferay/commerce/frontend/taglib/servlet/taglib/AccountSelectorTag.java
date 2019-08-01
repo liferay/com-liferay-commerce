@@ -140,7 +140,7 @@ public class AccountSelectorTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/account_selector/AccountSelector.es");
+			"commerce-frontend-taglib/js/account_selector/AccountSelector.es");
 	}
 
 	private String _getAccountManagementLayoutURL(

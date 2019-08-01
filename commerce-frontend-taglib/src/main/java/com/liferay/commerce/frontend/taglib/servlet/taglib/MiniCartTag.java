@@ -126,7 +126,7 @@ public class MiniCartTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/mini_cart/MiniCart.es");
+			"commerce-frontend-taglib/js/mini_cart/MiniCart.es");
 	}
 
 	@Override

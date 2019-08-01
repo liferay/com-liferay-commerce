@@ -62,7 +62,7 @@ public class ProductDetailsModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/product_details_modal" +
+			"commerce-frontend-taglib/js/product_details_modal" +
 				"/ProductDetailsModal.es");
 	}
 
