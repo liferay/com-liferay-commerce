@@ -87,6 +87,9 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 				redirect = getSaveAndContinueRedirect(
 					actionRequest, commerceAccount);
 			}
+			else if (cmd.equals("setActive")) {
+				setActive(actionRequest);
+			}
 		}
 		catch (Throwable t) {
 			if (t instanceof NoSuchAccountException ||
@@ -133,6 +136,19 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 			managePortletURL.toString());
 
 		return portletURL.toString();
+	}
+
+	protected void setActive(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceAccountId = ParamUtil.getLong(
+			actionRequest, "commerceAccountId");
+
+		CommerceAccount commerceAccount =
+			_commerceAccountService.getCommerceAccount(commerceAccountId);
+
+		_commerceAccountService.setActive(
+			commerceAccountId, !commerceAccount.isActive());
 	}
 
 	protected CommerceAccount updateCommerceAccount(ActionRequest actionRequest)
