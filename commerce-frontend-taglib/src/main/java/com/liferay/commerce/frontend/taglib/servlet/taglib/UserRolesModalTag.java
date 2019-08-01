@@ -112,7 +112,7 @@ public class UserRolesModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/user_roles_modal/UserRolesModal.es");
+			"commerce-frontend-taglib/js/user_roles_modal/UserRolesModal.es");
 	}
 
 	public void setCommerceAccountId(long commerceAccountId) {

@@ -9,7 +9,7 @@ import Soy, {Config} from 'metal-soy';
 import 'clay-modal';
 
 import '../user_utils/UserListItem.es';
-import '../user_utils/UserInputItem.es';
+import '../js/user_utils/UserInputItem.es';
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

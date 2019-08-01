@@ -122,30 +122,31 @@ public class CommerceOrderEditDisplayContext {
 		HeaderButtonModel headerButtonModel2 = new HeaderButtonModel();
 
 		headerButtonModel2.setLabel("Azione 2");
-		headerButtonModel.setStyle("primary");
-		headerButtonModel2.setType("submit");
+		headerButtonModel2.setStyle("primary");
+		headerButtonModel2.setType("button");
 
 		headerButtonModels.add(headerButtonModel2);
 
 		return headerButtonModels;
 	}
 
-	public List<DropdownItem> getHeaderDropdownItems() {
+	public List<DropdownItem> getDropdownItems() {
 		List<DropdownItem> headerDropdownItems = new ArrayList<>();
 
 		DropdownItem headerDropdownItem = new DropdownItem();
 
 		headerDropdownItem.setLabel("First link");
 		headerDropdownItem.setHref("/first-link");
-		headerDropdownItem.setIcon("edit");
+		headerDropdownItem.setIcon("home");
 
 		headerDropdownItems.add(headerDropdownItem);
 
 		DropdownItem headerDropdownItem2 = new DropdownItem();
 
 		headerDropdownItem2.setLabel("Second link");
+		headerDropdownItem2.setIcon("blogs");
 		headerDropdownItem2.setHref("/second-link");
-		headerDropdownItem2.setIcon("create");
+		headerDropdownItem2.setActive(true);
 
 		headerDropdownItems.add(headerDropdownItem2);
 
