@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"jsx": "react",
+		"target": "esnext",
+		"module": "esnext",
+		"noImplicitAny": false,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"allowJs": true,
+		"baseUrl": ".",
+		"paths": {
+			"*": ["node_modules/*"]
+		},
+		"typeRoots": [
+            "node_modules/@types",
+            "@types"
+        ]
+	},
+	"awesomeTypescriptLoaderOptions": {
+		"useBabel": true,
+		"babelCore": "@babel/core"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
+}
