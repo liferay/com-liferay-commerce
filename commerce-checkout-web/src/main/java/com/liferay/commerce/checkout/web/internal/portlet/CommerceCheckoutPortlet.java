@@ -16,16 +16,23 @@ package com.liferay.commerce.checkout.web.internal.portlet;
 
 import com.liferay.commerce.checkout.web.internal.display.context.CheckoutDisplayContext;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.WorkflowDefinitionLink;
+import com.liferay.portal.kernel.model.WorkflowInstanceLink;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
+import com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.IOException;
 
@@ -34,8 +41,12 @@ import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -94,6 +105,14 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 		try {
 			CommerceOrder commerceOrder = getCommerceOrder(renderRequest);
 
+			if (!isOrderApproved(commerceOrder)) {
+				HttpServletResponse httpServletResponse =
+					_portal.getHttpServletResponse(renderResponse);
+
+				httpServletResponse.sendRedirect(
+					getOrderDetailsURL(renderRequest));
+			}
+
 			renderRequest.setAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 
@@ -127,6 +146,53 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 			_portal.getHttpServletRequest(portletRequest));
 	}
 
+	protected String getOrderDetailsURL(PortletRequest portletRequest)
+		throws PortalException {
+
+		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
+			portletRequest);
+
+		PortletURL portletURL =
+			_commerceOrderHttpHelper.getCommerceCartPortletURL(
+				httpServletRequest, getCommerceOrder(portletRequest));
+
+		if (portletURL == null) {
+			return StringPool.BLANK;
+		}
+
+		return portletURL.toString();
+	}
+
+	protected boolean isOrderApproved(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		WorkflowInstanceLink workflowInstanceLink =
+			_workflowInstanceLinkLocalService.fetchWorkflowInstanceLink(
+				commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
+				CommerceOrder.class.getName(),
+				commerceOrder.getCommerceOrderId());
+
+		if ((workflowInstanceLink != null) &&
+			(commerceOrder.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+
+			return false;
+		}
+
+		WorkflowDefinitionLink workflowDefinitionLink =
+			_workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(
+				commerceOrder.getCompanyId(), commerceOrder.getGroupId(),
+				CommerceOrder.class.getName(), 0,
+				CommerceOrderConstants.TYPE_PK_APPROVAL, true);
+
+		if ((workflowDefinitionLink != null) &&
+			(commerceOrder.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+
+			return false;
+		}
+
+		return true;
+	}
+
 	@Reference
 	private CommerceCheckoutStepServicesTracker
 		_commerceCheckoutStepServicesTracker;
@@ -139,5 +205,12 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private WorkflowDefinitionLinkLocalService
+		_workflowDefinitionLinkLocalService;
+
+	@Reference
+	private WorkflowInstanceLinkLocalService _workflowInstanceLinkLocalService;
 
 }
