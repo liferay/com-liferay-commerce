@@ -20,19 +20,25 @@ package com.liferay.commerce.account.web.internal.model;
 public class Account {
 
 	public Account(
-		long accountId, String name, String email, String address,
-		String thumbnail, String href) {
+		long accountId, boolean active, String name, String email,
+		String address, String statusLabel, String thumbnail, String href) {
 
 		_accountId = accountId;
+		_active = active;
 		_name = name;
 		_email = email;
 		_address = address;
+		_statusLabel = statusLabel;
 		_thumbnail = thumbnail;
 		_href = href;
 	}
 
 	public long getAccountId() {
 		return _accountId;
+	}
+
+	public boolean getActive() {
+		return _active;
 	}
 
 	public String getAddress() {
@@ -51,15 +57,21 @@ public class Account {
 		return _name;
 	}
 
+	public String getStatusLabel() {
+		return _statusLabel;
+	}
+
 	public String getThumbnail() {
 		return _thumbnail;
 	}
 
 	private final long _accountId;
+	private final boolean _active;
 	private final String _address;
 	private final String _email;
 	private final String _href;
 	private final String _name;
+	private final String _statusLabel;
 	private final String _thumbnail;
 
 }
