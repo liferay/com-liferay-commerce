@@ -56,7 +56,7 @@ public class AddOrganizationsModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_organizations_modal" +
+			"commerce-frontend-taglib/js/add_organizations_modal" +
 				"/AddOrganizationsModal.es");
 	}
 

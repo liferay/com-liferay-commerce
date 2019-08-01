@@ -1,6 +1,0 @@
-<div class="commerce-header__actions-primary px-3 d-flex border-right">
-    <%@ include file="/header/order/assigned_to.jspf" %>
-    <button class="btn btn-secondary mr-1">Block</button>
-    <button class="btn btn-secondary mr-1">Save as Draft</button>
-    <button class="btn btn-primary">Publish</button>
-</div>

@@ -56,7 +56,7 @@ public class AddAccountModalTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_account_modal/AddAccountModal.es");
+			"commerce-frontend-taglib/js/add_account_modal/AddAccountModal.es");
 	}
 
 }
