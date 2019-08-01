@@ -78,11 +78,23 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 		</liferay-frontend:management-bar-filters>
 
 		<liferay-frontend:management-bar-action-buttons>
-			<liferay-frontend:management-bar-button
-				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceAccounts();" %>'
-				icon="times"
-				label="delete"
-			/>
+			<liferay-ui:icon-menu
+				direction="left-side"
+				icon="<%= StringPool.BLANK %>"
+				markupView="lexicon"
+				message="<%= StringPool.BLANK %>"
+				showWhenSingleIcon="<%= true %>"
+			>
+				<liferay-ui:icon
+					message="activate"
+					url='<%= "javascript:" + renderResponse.getNamespace() + "activateCommerceAccounts();" %>'
+				/>
+
+				<liferay-ui:icon
+					message="deactivate"
+					url='<%= "javascript:" + renderResponse.getNamespace() + "deactivateCommerceAccounts();" %>'
+				/>
+			</liferay-ui:icon-menu>
 		</liferay-frontend:management-bar-action-buttons>
 	</liferay-frontend:management-bar>
 
@@ -92,9 +104,10 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 		<portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
 
 		<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.DELETE %>" />
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="setActive" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="deleteCommerceAccountIds" type="hidden" />
+			<aui:input name="commerceAccountIds" type="hidden" />
+			<aui:input name="active" type="hidden" />
 
 			<liferay-ui:search-container
 				id="commerceAccounts"
@@ -153,11 +166,21 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 	</div>
 
 	<aui:script>
-		function <portlet:namespace />deleteCommerceAccounts() {
-			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-delete-the-selected-accounts" />')) {
+		function <portlet:namespace />activateCommerceAccounts() {
+			var form = AUI.$(document.<portlet:namespace />fm);
+
+			form.fm('commerceAccountIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+			form.fm('active').val("true");
+
+			submitForm(form);
+		}
+
+		function <portlet:namespace />deactivateCommerceAccounts() {
+			if (confirm('<liferay-ui:message key="are-you-sure-you-want-to-deactivate-the-selected-accounts" />')) {
 				var form = AUI.$(document.<portlet:namespace />fm);
 
-				form.fm('deleteCommerceAccountIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+				form.fm('commerceAccountIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
+				form.fm('active').val("false");
 
 				submitForm(form);
 			}
