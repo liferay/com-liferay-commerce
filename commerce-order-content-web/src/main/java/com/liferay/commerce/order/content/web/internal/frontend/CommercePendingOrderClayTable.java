@@ -14,6 +14,11 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
+import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountModel;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
 import com.liferay.commerce.frontend.ClayTableActionProvider;
@@ -30,12 +35,17 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationException;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
@@ -105,8 +115,6 @@ public class CommercePendingOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
-
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
@@ -115,9 +123,12 @@ public class CommercePendingOrderClayTable
 			return 0;
 		}
 
-		return _commerceOrderService.getPendingCommerceOrdersCount(
-			commerceChannel.getGroupId(), orderFilter.getAccountId(),
-			filter.getKeywords());
+		long[] commerceAccountIds = getUserCommerceAccountIds(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
+
+		return (int)_commerceOrderService.getPendingCommerceOrdersCount(
+			commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
+			commerceAccountIds);
 	}
 
 	@Override
@@ -155,8 +166,6 @@ public class CommercePendingOrderClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
-
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				themeDisplay.getScopeGroupId());
@@ -165,10 +174,13 @@ public class CommercePendingOrderClayTable
 			return Collections.emptyList();
 		}
 
+		long[] commerceAccountIds = getUserCommerceAccountIds(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
+
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				commerceChannel.getGroupId(), orderFilter.getAccountId(),
-				filter.getKeywords(), pagination.getStartPosition(),
+				commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
+				commerceAccountIds, pagination.getStartPosition(),
 				pagination.getEndPosition());
 
 		return CommerceOrderClayTableUtil.getOrders(
@@ -180,14 +192,52 @@ public class CommercePendingOrderClayTable
 		return true;
 	}
 
+	protected int getCommerceSiteType(long groupId)
+		throws ConfigurationException {
+
+		CommerceAccountGroupServiceConfiguration
+			commerceAccountGroupServiceConfiguration =
+				_configurationProvider.getConfiguration(
+					CommerceAccountGroupServiceConfiguration.class,
+					new GroupServiceSettingsLocator(
+						groupId, CommerceAccountConstants.SERVICE_NAME));
+
+		return commerceAccountGroupServiceConfiguration.commerceSiteType();
+	}
+
+	protected long[] getUserCommerceAccountIds(long userId, long groupId)
+		throws PortalException {
+
+		List<CommerceAccount> commerceAccounts =
+			_commerceAccountLocalService.getUserCommerceAccounts(
+				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				getCommerceSiteType(groupId), StringPool.BLANK,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		long[] commerceAccountIds = new long[0];
+
+		if (!commerceAccounts.isEmpty()) {
+			commerceAccountIds = ListUtil.toLongArray(
+				commerceAccounts, CommerceAccountModel::getCommerceAccountId);
+		}
+
+		return commerceAccountIds;
+	}
+
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
+
+	@Reference
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
