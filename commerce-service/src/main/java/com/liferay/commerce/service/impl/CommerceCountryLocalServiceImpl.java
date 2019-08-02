@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.commerce.exception.CommerceCountryAlreadyExistsException;
 import com.liferay.commerce.exception.CommerceCountryNameException;
 import com.liferay.commerce.exception.CommerceCountryThreeLettersISOCodeException;
 import com.liferay.commerce.exception.CommerceCountryTwoLettersISOCodeException;
@@ -62,6 +63,7 @@ import java.util.ResourceBundle;
  * @author Alessio Antonio Rendina
  * @author Andrea Di Giorgi
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 public class CommerceCountryLocalServiceImpl
 	extends CommerceCountryLocalServiceBaseImpl {
@@ -75,6 +77,12 @@ public class CommerceCountryLocalServiceImpl
 			boolean subjectToVAT, double priority, boolean active,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		if (commerceCountryLocalService.fetchCommerceCountry(
+				serviceContext.getCompanyId(), twoLettersISOCode) != null) {
+
+			throw new CommerceCountryAlreadyExistsException();
+		}
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
@@ -162,6 +170,14 @@ public class CommerceCountryLocalServiceImpl
 		throws PortalException {
 
 		return commerceCountryPersistence.fetchByC_N(companyId, numericISOCode);
+	}
+
+	@Override
+	public CommerceCountry fetchCommerceCountry(
+		long companyId, String twoLettersISOCode) {
+
+		return commerceCountryPersistence.fetchByC_Tw(
+			companyId, twoLettersISOCode);
 	}
 
 	@Override
