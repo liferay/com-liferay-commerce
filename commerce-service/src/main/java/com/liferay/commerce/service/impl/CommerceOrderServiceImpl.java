@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.constants.CommerceActionKeys;
@@ -342,6 +343,29 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getPendingCommerceOrders(
+			long companyId, long groupId, long[] commerceAccountIds, int start,
+			int end)
+		throws PortalException {
+
+		if (PortalPermissionUtil.contains(
+				getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+
+			commerceAccountIds = null;
+		}
+
+		return commerceOrderLocalService.getCommerceOrders(
+			companyId, groupId, commerceAccountIds,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false, start,
+			end);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	@Override
+	public List<CommerceOrder> getPendingCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
 			int end)
 		throws PortalException {
@@ -356,6 +380,27 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			end);
 	}
 
+	@Override
+	public long getPendingCommerceOrdersCount(
+			long companyId, long groupId, long[] commerceAccountIds)
+		throws PortalException {
+
+		if (PortalPermissionUtil.contains(
+				getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+
+			commerceAccountIds = null;
+		}
+
+		return commerceOrderLocalService.getCommerceOrdersCount(
+			companyId, groupId, commerceAccountIds,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public int getPendingCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
@@ -372,6 +417,29 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getPlacedCommerceOrders(
+			long companyId, long groupId, long[] commerceAccountIds, int start,
+			int end)
+		throws PortalException {
+
+		if (PortalPermissionUtil.contains(
+				getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+
+			commerceAccountIds = null;
+		}
+
+		return commerceOrderLocalService.getCommerceOrders(
+			companyId, groupId, commerceAccountIds,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true, start,
+			end);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	@Override
+	public List<CommerceOrder> getPlacedCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
 			int end)
 		throws PortalException {
@@ -386,6 +454,27 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			end);
 	}
 
+	@Override
+	public long getPlacedCommerceOrdersCount(
+			long companyId, long groupId, long[] commerceAccountIds)
+		throws PortalException {
+
+		if (PortalPermissionUtil.contains(
+				getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+
+			commerceAccountIds = null;
+		}
+
+		return commerceOrderLocalService.getCommerceOrdersCount(
+			companyId, groupId, commerceAccountIds,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public int getPlacedCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
