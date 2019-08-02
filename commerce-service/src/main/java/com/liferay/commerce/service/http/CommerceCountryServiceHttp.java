@@ -131,6 +131,47 @@ public class CommerceCountryServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry
+			fetchCommerceCountry(
+				HttpPrincipal httpPrincipal, long companyId,
+				String twoLettersISOCode)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceCountryServiceUtil.class, "fetchCommerceCountry",
+				_fetchCommerceCountryParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, twoLettersISOCode);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.security.auth.
+							PrincipalException) {
+
+					throw (com.liferay.portal.kernel.security.auth.
+						PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.model.CommerceCountry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
 			HttpPrincipal httpPrincipal, long companyId, boolean billingAllowed,
@@ -139,7 +180,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getBillingCommerceCountries",
-				_getBillingCommerceCountriesParameterTypes2);
+				_getBillingCommerceCountriesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, billingAllowed, active);
@@ -173,7 +214,7 @@ public class CommerceCountryServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getBillingCommerceCountriesByChannelId",
-				_getBillingCommerceCountriesByChannelIdParameterTypes3);
+				_getBillingCommerceCountriesByChannelIdParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceChannelId, start, end);
@@ -205,7 +246,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountries",
-				_getCommerceCountriesParameterTypes4);
+				_getCommerceCountriesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active);
@@ -242,7 +283,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountries",
-				_getCommerceCountriesParameterTypes5);
+				_getCommerceCountriesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active, start, end, orderByComparator);
@@ -285,7 +326,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountries",
-				_getCommerceCountriesParameterTypes6);
+				_getCommerceCountriesParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, start, end, orderByComparator);
@@ -324,7 +365,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountriesCount",
-				_getCommerceCountriesCountParameterTypes7);
+				_getCommerceCountriesCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId);
@@ -362,7 +403,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountriesCount",
-				_getCommerceCountriesCountParameterTypes8);
+				_getCommerceCountriesCountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, active);
@@ -400,7 +441,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountry",
-				_getCommerceCountryParameterTypes9);
+				_getCommerceCountryParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId);
@@ -439,7 +480,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "getCommerceCountry",
-				_getCommerceCountryParameterTypes10);
+				_getCommerceCountryParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, twoLettersISOCode);
@@ -479,7 +520,7 @@ public class CommerceCountryServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getShippingCommerceCountries",
-				_getShippingCommerceCountriesParameterTypes11);
+				_getShippingCommerceCountriesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, shippingAllowed, active);
@@ -513,7 +554,7 @@ public class CommerceCountryServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getShippingCommerceCountriesByChannelId",
-				_getShippingCommerceCountriesByChannelIdParameterTypes12);
+				_getShippingCommerceCountriesByChannelIdParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceChannelId, start, end);
@@ -547,7 +588,7 @@ public class CommerceCountryServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"getWarehouseCommerceCountries",
-				_getWarehouseCommerceCountriesParameterTypes13);
+				_getWarehouseCommerceCountriesParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, all);
@@ -588,7 +629,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "searchCommerceCountries",
-				_searchCommerceCountriesParameterTypes14);
+				_searchCommerceCountriesParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, searchContext);
@@ -627,7 +668,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "setActive",
-				_setActiveParameterTypes15);
+				_setActiveParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId, active);
@@ -672,7 +713,7 @@ public class CommerceCountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class, "updateCommerceCountry",
-				_updateCommerceCountryParameterTypes16);
+				_updateCommerceCountryParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId, nameMap, billingAllowed,
@@ -715,7 +756,7 @@ public class CommerceCountryServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceCountryServiceUtil.class,
 				"updateCommerceCountryChannelFilter",
-				_updateCommerceCountryChannelFilterParameterTypes17);
+				_updateCommerceCountryChannelFilterParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceCountryId, enable);
@@ -757,52 +798,54 @@ public class CommerceCountryServiceHttp {
 		};
 	private static final Class<?>[] _deleteCommerceCountryParameterTypes1 =
 		new Class[] {long.class};
+	private static final Class<?>[] _fetchCommerceCountryParameterTypes2 =
+		new Class[] {long.class, String.class};
 	private static final Class<?>[]
-		_getBillingCommerceCountriesParameterTypes2 = new Class[] {
+		_getBillingCommerceCountriesParameterTypes3 = new Class[] {
 			long.class, boolean.class, boolean.class
 		};
 	private static final Class<?>[]
-		_getBillingCommerceCountriesByChannelIdParameterTypes3 = new Class[] {
+		_getBillingCommerceCountriesByChannelIdParameterTypes4 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCommerceCountriesParameterTypes4 =
-		new Class[] {long.class, boolean.class};
 	private static final Class<?>[] _getCommerceCountriesParameterTypes5 =
+		new Class[] {long.class, boolean.class};
+	private static final Class<?>[] _getCommerceCountriesParameterTypes6 =
 		new Class[] {
 			long.class, boolean.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceCountriesParameterTypes6 =
+	private static final Class<?>[] _getCommerceCountriesParameterTypes7 =
 		new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceCountriesCountParameterTypes7 =
-		new Class[] {long.class};
 	private static final Class<?>[] _getCommerceCountriesCountParameterTypes8 =
-		new Class[] {long.class, boolean.class};
-	private static final Class<?>[] _getCommerceCountryParameterTypes9 =
 		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceCountriesCountParameterTypes9 =
+		new Class[] {long.class, boolean.class};
 	private static final Class<?>[] _getCommerceCountryParameterTypes10 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceCountryParameterTypes11 =
 		new Class[] {long.class, String.class};
 	private static final Class<?>[]
-		_getShippingCommerceCountriesParameterTypes11 = new Class[] {
+		_getShippingCommerceCountriesParameterTypes12 = new Class[] {
 			long.class, boolean.class, boolean.class
 		};
 	private static final Class<?>[]
-		_getShippingCommerceCountriesByChannelIdParameterTypes12 = new Class[] {
+		_getShippingCommerceCountriesByChannelIdParameterTypes13 = new Class[] {
 			long.class, int.class, int.class
 		};
 	private static final Class<?>[]
-		_getWarehouseCommerceCountriesParameterTypes13 = new Class[] {
+		_getWarehouseCommerceCountriesParameterTypes14 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _searchCommerceCountriesParameterTypes14 =
+	private static final Class<?>[] _searchCommerceCountriesParameterTypes15 =
 		new Class[] {com.liferay.portal.kernel.search.SearchContext.class};
-	private static final Class<?>[] _setActiveParameterTypes15 = new Class[] {
+	private static final Class<?>[] _setActiveParameterTypes16 = new Class[] {
 		long.class, boolean.class
 	};
-	private static final Class<?>[] _updateCommerceCountryParameterTypes16 =
+	private static final Class<?>[] _updateCommerceCountryParameterTypes17 =
 		new Class[] {
 			long.class, java.util.Map.class, boolean.class, boolean.class,
 			String.class, String.class, int.class, boolean.class, double.class,
@@ -810,7 +853,7 @@ public class CommerceCountryServiceHttp {
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]
-		_updateCommerceCountryChannelFilterParameterTypes17 = new Class[] {
+		_updateCommerceCountryChannelFilterParameterTypes18 = new Class[] {
 			long.class, boolean.class
 		};
 
