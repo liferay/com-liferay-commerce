@@ -42,3 +42,11 @@
 		portletName="com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet"
 	/>
 </#macro>
+
+<#macro site_navigation_menu_account default_preferences = "">
+	<@liferay_portlet["runtime"]
+		defaultPreferences=default_preferences
+		instanceId="siteNavigationMenuPortlet_account"
+		portletName="com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet"
+	/>
+</#macro>
