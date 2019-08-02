@@ -42,6 +42,7 @@ import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
+import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.service.base.CommerceOrderLocalServiceBaseImpl;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.petra.string.StringPool;
@@ -63,8 +64,10 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -72,6 +75,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -584,6 +588,22 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceOrder> getCommerceOrders(
+			long companyId, long groupId, long[] commerceAccountIds,
+			int[] orderStatuses, boolean excludeOrderStatus, int start, int end)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, commerceAccountIds, excludeOrderStatus,
+			orderStatuses, start, end);
+
+		BaseModelSearchResult<CommerceOrder> baseModelSearchResult =
+			commerceOrderLocalService.searchCommerceOrders(searchContext);
+
+		return baseModelSearchResult.getBaseModels();
+	}
+
+	@Override
 	public List<CommerceOrder> getCommerceOrdersByBillingAddress(
 		long billingAddressId) {
 
@@ -610,6 +630,24 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public long getCommerceOrdersCount(
+			long companyId, long groupId, long[] commerceAccountIds,
+			int[] orderStatuses, boolean excludeOrderStatus)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, groupId, commerceAccountIds, excludeOrderStatus,
+			orderStatuses, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		return commerceOrderLocalService.searchCommerceOrdersCount(
+			searchContext);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	@Override
 	public List<CommerceOrder> getUserCommerceOrders(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
@@ -628,6 +666,10 @@ public class CommerceOrderLocalServiceImpl
 		return commerceOrderFinder.findByG_U_C_O(userId, queryDefinition);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public int getUserCommerceOrdersCount(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
@@ -1348,6 +1390,58 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setExternalReferenceCode(externalReferenceCode);
 
 		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	protected SearchContext addFacetOrderStatus(
+		boolean negated, int[] orderStatuses, SearchContext searchContext) {
+
+		NegatableMultiValueFacet negatableMultiValueFacet =
+			new NegatableMultiValueFacet(searchContext);
+
+		negatableMultiValueFacet.setFieldName("orderStatus");
+
+		searchContext.addFacet(negatableMultiValueFacet);
+
+		negatableMultiValueFacet.setNegated(negated);
+
+		searchContext.setAttribute(
+			negatableMultiValueFacet.getFieldId(),
+			StringUtil.merge(orderStatuses));
+
+		return searchContext;
+	}
+
+	protected SearchContext buildSearchContext(
+			long companyId, long commerceChannelGroupId,
+			long[] commerceAccountIds, boolean negated, int[] orderStatuses,
+			int start, int end)
+		throws PortalException {
+
+		SearchContext searchContext = new SearchContext();
+
+		addFacetOrderStatus(negated, orderStatuses, searchContext);
+
+		if (commerceAccountIds != null) {
+			MultiValueFacet multiValueFacet = new MultiValueFacet(
+				searchContext);
+
+			multiValueFacet.setFieldName("commerceAccountId");
+			multiValueFacet.setValues(commerceAccountIds);
+
+			searchContext.addFacet(multiValueFacet);
+		}
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setGroupIds(new long[] {commerceChannelGroupId});
+		searchContext.setStart(start);
+		searchContext.setEnd(end);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		return searchContext;
 	}
 
 	protected String getCommerceOrderPaymentContent(
