@@ -136,19 +136,6 @@
 	{
 		"hidden": true,
 		"layoutTemplateId": "1_column",
-		"name": "User Management",
-		"portlets": [
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet"
-			}
-		],
-		"privateLayout": true
-	},
-	{
-		"hidden": true,
-		"layoutTemplateId": "1_column",
 		"name": "Compare",
 		"portlets": [
 			{
