@@ -6,7 +6,9 @@
 
     &.active,
     &:hover {
-      font-weight: 600;
+      span {
+        font-weight: 600;
+      }
     }
 
     &.active::before,
