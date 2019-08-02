@@ -15,9 +15,9 @@
     display: none;
   }
 
-  &.is-open .commerce-topbar-button {
+  &.is-open .speedwell-topbar__button {
     background: $stroke;
-    color: #fff;
+    color: $color-bg;
 
     // &:hover {
     // color: inherit;
@@ -39,9 +39,33 @@
   }
 
   &__content {
-    padding: 10px 30px;
-
     .speedwell-user-nav {
+      &__header {
+        display: grid;
+        grid-auto-flow: column;
+        background-color: $stroke;
+        color: white;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        line-height: 40px;
+
+        p {
+          margin: 0;
+        }
+      }
+
+      &__menu {
+        padding: 10px 30px;
+        display: grid;
+        grid-auto-flow: column;
+
+        .user-account {
+          li {
+            line-height: 14px;
+          }
+        }
+      }
+
       .main-link {
         font-weight: normal;
 
