@@ -2434,11 +2434,6 @@ bonjour@^3.5.0:
     multicast-dns "^6.0.1"
     multicast-dns-service-types "^1.1.0"
 
-bootstrap@^3.3.6:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.4.1.tgz#c3a347d419e289ad11f4033e3c4132b87c081d72"
-  integrity sha512-yN5oZVmRCwe5aKwzRj6736nSmKDX7pLYwsXiCj/EYmo16hODaBiT4En5btW/jhBF/seV+XMx3aYwukYC3A49DA==
-
 bourbon@4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/bourbon/-/bourbon-4.2.3.tgz#d6061c90c0e28737c1a0d015672d72be9770fff0"
@@ -8257,16 +8252,7 @@ merge@^1.2.0, merge@^1.2.1:
   resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
   integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
 
-metal-ajax@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/metal-ajax/-/metal-ajax-2.1.1.tgz#f715dd98fb38bc2ad2269eb960f3318ff8a4e543"
-  integrity sha512-r61ku32uivdaBd3joWrTiGV2kyG9Nvpt4gq4Npo/9MDWj2Tcm4xk2PZ7iKpIAF88JD4dwW+etjgK5Il3SzC9+g==
-  dependencies:
-    metal "^2.0.0"
-    metal-promise "^2.0.0"
-    metal-uri "^2.0.0"
-
-metal-component@^2.13.2, metal-component@^2.16.0, metal-component@^2.16.6, metal-component@^2.16.8, metal-component@^2.4.5:
+metal-component@^2.13.2, metal-component@^2.16.0, metal-component@^2.16.8, metal-component@^2.4.5:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-component/-/metal-component-2.16.8.tgz#99321309e6b3f0766d5b17d08aeffd089025873e"
   integrity sha512-Xx/sVnn1x8yDhpZ6hxPgXAbeuzxEaSZcvZp8rEYwGMi/TousQBLXwOlu7IvPh2NH5KaFZHyHJGjPsAvmPNKjSw==
@@ -8289,14 +8275,14 @@ metal-dom@^2.16.0, metal-dom@^2.16.6, metal-dom@^2.16.8:
     metal "^2.16.8"
     metal-events "^2.16.8"
 
-metal-events@^2.16.0, metal-events@^2.16.5, metal-events@^2.16.8, metal-events@^2.6.4:
+metal-events@^2.16.0, metal-events@^2.16.8, metal-events@^2.6.4:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-events/-/metal-events-2.16.8.tgz#14894c9e3a41dbe527684ff90c1511760cc9e533"
   integrity sha512-Aa9ozlChOuJT0rLMSSpV7V+0RAk+TGhoe8Khlqh9iaJUPWlofptpgTTlagoqNxTm13iFNm6b2+mZauWM65iBlQ==
   dependencies:
     metal "^2.16.8"
 
-metal-incremental-dom@^2.16.6, metal-incremental-dom@^2.16.8:
+metal-incremental-dom@^2.16.8:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-incremental-dom/-/metal-incremental-dom-2.16.8.tgz#45e15a3cd310c4704bb8ba2a0170a5fabcf9e773"
   integrity sha512-i1MOlQlNfU7r64wb1o7vnRErbwoRuKilBCRL17xJIz4D7aeAd0DfRUz9c+3oa5KvMZWI1TO31gH2pOb9C8jAOQ==
@@ -8307,13 +8293,6 @@ metal-incremental-dom@^2.16.6, metal-incremental-dom@^2.16.8:
     metal-component "^2.16.8"
     metal-dom "^2.16.8"
 
-metal-path-parser@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/metal-path-parser/-/metal-path-parser-1.0.4.tgz#3258be7ea9795ce0f7a1787d25ce2602ffb6d5d8"
-  integrity sha512-qKbO7RStzujqRa2/lXqlgQ6vLpQOK+M6fRgolpQanh4+otDrANIQkLhFO8GKVSBCywMjUJyO+vwAHXrRwQsM2w==
-  dependencies:
-    metal "^2.16.6"
-
 metal-position@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/metal-position/-/metal-position-2.1.2.tgz#3643a7f83a6b5a39061841858b058935390bd13c"
@@ -8322,33 +8301,6 @@ metal-position@^2.1.0:
     metal "^2.16.6"
     metal-dom "^2.16.6"
 
-metal-promise@^2.0.0, metal-promise@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/metal-promise/-/metal-promise-2.0.1.tgz#28ff43210e4c69e5fff51dbf201e4ae2fe6f83d5"
-  integrity sha1-KP9DIQ5MaeX/9R2/IB5K4v5vg9U=
-  dependencies:
-    metal "^2.0.0"
-
-metal-promise@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/metal-promise/-/metal-promise-3.0.5.tgz#03d8fb40579e5b97a4e44356e00042f2d34844de"
-  integrity sha512-9LRn5oPcv439xCiNvmKBWVopFBaJ5zBV75lkZMydufJX17YJ8J6+EVrL2ctlrxxxyF/hFhiEGVGPvxNjY9kwxg==
-  dependencies:
-    metal "^2.16.6"
-
-metal-router@^3.6.3:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/metal-router/-/metal-router-3.8.3.tgz#ddaa645a522b9ab4231d52f57d2c4bb3d928d3b9"
-  integrity sha512-cB/n8vpbiZMxQUuRFjeRZdsO2FpOPp3nnuKVt0qfUjABZC29QESH9Zf1G1DxZJlGFy9ma965hXOjHpqVHLKRRA==
-  dependencies:
-    metal "^2.16.6"
-    metal-component "^2.16.6"
-    metal-incremental-dom "^2.16.6"
-    metal-promise "^3.0.5"
-    metal-soy "^2.16.6"
-    metal-uri "^3.1.2"
-    senna "^2.5.0"
-
 metal-soy-bundle@^2.16.8:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-soy-bundle/-/metal-soy-bundle-2.16.8.tgz#67f9e6775aacdc66f9446af4b48c573d647b236a"
@@ -8356,7 +8308,7 @@ metal-soy-bundle@^2.16.8:
   dependencies:
     metal-incremental-dom "^2.16.8"
 
-metal-soy@^2.13.2, metal-soy@^2.16.0, metal-soy@^2.16.6, metal-soy@^2.4.5:
+metal-soy@^2.13.2, metal-soy@^2.16.0, metal-soy@^2.4.5:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-soy/-/metal-soy-2.16.8.tgz#11d1fce0a54a6ce56cd92e2b50772d1658ac0171"
   integrity sha512-1T2J8WUyKshNP1Jdk7nT4PU2GF9Xkd6Y9VLHjZY1zDpyD/CVd+lxQTz94VPq3mPEf/vGbJUV568yMEuljgUHMQ==
@@ -8384,13 +8336,6 @@ metal-state@^2.13.2, metal-state@^2.16.0, metal-state@^2.16.8, metal-state@^2.6.
     metal "^2.16.8"
     metal-events "^2.16.8"
 
-metal-structs@^1.0.0, metal-structs@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/metal-structs/-/metal-structs-1.0.2.tgz#3b4f585f169e61cabb2ccd7ee5f0d97b60b1fc8a"
-  integrity sha512-LoGpcDtHvheGrG0e3eTPlb1vG52M06LbYtD4Oyb1EkVSMUvxpAjwuzVh4eUTkCLH9facAgoLlwkO2j07NBrdeA==
-  dependencies:
-    metal "^2.16.6"
-
 metal-tools-soy@4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/metal-tools-soy/-/metal-tools-soy-4.3.2.tgz#4ca9ba24f09d73990f47176ecec5a5621b158b5d"
@@ -8410,34 +8355,6 @@ metal-tools-soy@4.3.2:
     vinyl-fs "^2.2.1"
     yargs "^8.0.2"
 
-metal-uri@^2.0.0, metal-uri@^2.2.6:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/metal-uri/-/metal-uri-2.4.0.tgz#9636fd4b1ea4021a3914eee3a1124accd9204737"
-  integrity sha512-Fm2cYA8yKhK3Fz4rgajtYagqzYWrdsRTSnG2x6BAaMrQlmKB0s4gEdaxSlZ29XMlaur86D1DtTr9V1Pi0dDMjQ==
-  dependencies:
-    metal "^2.0.0"
-    metal-structs "^1.0.0"
-    path-browserify "0.0.0"
-    url "^0.11.0"
-
-metal-uri@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/metal-uri/-/metal-uri-3.1.2.tgz#a24b6adf129d28ca775ac6c8fd4d6750c0d043f6"
-  integrity sha512-xrjNUkD8khilyeOZwdtmTHuGyDHb5rvEPneQszpfscxg6svrkrAtRvr/UGYRQLnXDTzI/IMZUNuE2tvJ0SNwyg==
-  dependencies:
-    metal "^2.16.6"
-    metal-structs "^1.0.2"
-    path-browserify "0.0.0"
-    resolve-pathname "^2.2.0"
-    url-parse "^1.1.9"
-
-metal-useragent@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/metal-useragent/-/metal-useragent-3.0.1.tgz#9bc3056a744eaef5e15ed6763c77da266e0f0330"
-  integrity sha512-rld1rRGmis/Wt1O/d8nIeEDOBhzCzz2xvteTbsJzE+1sixoTYcCQk6cRBxFFKur6U5LUEEyC7sV4+mHndVHAgQ==
-  dependencies:
-    metal "^2.16.6"
-
 metal-web-component@^2.16.0:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal-web-component/-/metal-web-component-2.16.8.tgz#dde7af3c5efc7dbbeaeeb8253926044d9b8639d1"
@@ -8446,7 +8363,7 @@ metal-web-component@^2.16.0:
     metal "^2.16.8"
     metal-state "2.7.0"
 
-metal@^2.0.0, metal@^2.13.2, metal@^2.16.0, metal@^2.16.5, metal@^2.16.6, metal@^2.16.8, metal@^2.5.18, metal@^2.6.4:
+metal@^2.16.0, metal@^2.16.6, metal@^2.16.8, metal@^2.6.4:
   version "2.16.8"
   resolved "https://registry.yarnpkg.com/metal/-/metal-2.16.8.tgz#7121b2ee18f5165f637d69212ce41ef6e6bcb63c"
   integrity sha512-5XN1DKLPEhgHCql8spIl4d8H+M6DQVNWAkagEryh+Pup3VxQe2v5KqEL7huFhE0cBXJiEq/RtHRBMqwjxOsV1g==
@@ -9484,11 +9401,6 @@ pascalcase@^0.1.1:
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
 
-path-browserify@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-0.0.0.tgz#a0b870729aae214005b7d5032ec2cbbb0fb4451a"
-  integrity sha1-oLhwcpquIUAFt9UDLsLLuw+0RRo=
-
 path-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-0.0.1.tgz#e6c4ddd7ed3aa27c68a20cc4e50e1a4ee83bbc4a"
@@ -10413,11 +10325,6 @@ resolve-from@^4.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
   integrity sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
 
-resolve-pathname@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
-  integrity sha512-bAFz9ld18RzJfddgrO2e/0S2O81710++chRMUxHjXOYKF6jTAMrUNZrEZ1PvV0zlhfjidm08iRPdTLPno1FuRg==
-
 resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
@@ -10697,23 +10604,6 @@ send@0.17.1:
     on-finished "~2.3.0"
     range-parser "~1.2.1"
     statuses "~1.5.0"
-
-senna@^2.4.0, senna@^2.5.0:
-  version "2.7.8"
-  resolved "https://registry.yarnpkg.com/senna/-/senna-2.7.8.tgz#5b3610898d2d94218e635cbbc6bdbe59ff4022d6"
-  integrity sha512-/8bTT0phnukMy/AhgkR9yZZThIpktcIbprpIKmCbMmpRiti/pPtAux9oP0yK9wvyu+KITESF7TibvR6CKnPi6g==
-  dependencies:
-    bootstrap "^3.3.6"
-    metal "^2.16.5"
-    metal-ajax "^2.1.1"
-    metal-debounce "^2.0.0"
-    metal-dom "^2.16.8"
-    metal-events "^2.16.5"
-    metal-path-parser "^1.0.3"
-    metal-promise "^2.0.1"
-    metal-structs "^1.0.0"
-    metal-uri "^2.2.6"
-    metal-useragent "^3.0.0"
 
 sequencify@~0.0.7:
   version "0.0.7"
@@ -11892,7 +11782,7 @@ url-parse-lax@^3.0.0:
   dependencies:
     prepend-http "^2.0.0"
 
-url-parse@^1.1.9, url-parse@^1.4.3:
+url-parse@^1.4.3:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
   integrity sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
