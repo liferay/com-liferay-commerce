@@ -1,0 +1,7 @@
+npmInstall {
+	enabled = false
+}
+
+gulpBuild {
+	scriptFile = "node_modules/.bin/gulp"
+}

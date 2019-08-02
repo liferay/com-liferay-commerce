@@ -1,0 +1,21 @@
+{
+	"devDependencies": {
+		"liferay-npm-scripts": "4.16.0"
+	},
+	"private": true,
+	"scripts": {
+		"checkFormat": "liferay-npm-scripts check",
+		"format": "liferay-npm-scripts fix"
+	},
+	"workspaces": {
+		"packages": [
+			"commerce-cart-tagib",
+			"commerce-frontend-taglib",
+			"commerce-product-definitions-web",
+			"commerce-product-options-web",
+			"commerce-theme-speedwell/commerce-theme-speedwell",
+			"commerce-theme-minium/commerce-theme-minium",
+			"commerce-theme-minium/commerce-theme-minium-impl"
+		]
+	}
+}
