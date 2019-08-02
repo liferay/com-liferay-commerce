@@ -58,7 +58,8 @@ Liferay.on(
 		myMap.set(1, 'down');
 
 		const speedwellWrapper = document.getElementById("speedwell");
-		const speedwellTranslucentTopbar = speedwellWrapper && speedwellWrapper.querySelector('.speedwell-topbar--translucent');
+		const speedwellTranslucentTopbar = speedwellWrapper &&
+			speedwellWrapper.querySelector('.speedwell-topbar--translucent');
 
 		window.addEventListener("scroll", function() {
 			const offset = window.scrollY - lastKnownScrollPosition;
@@ -71,14 +72,20 @@ Liferay.on(
 			if (!ticking) {
 				window.requestAnimationFrame(function () {
 					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-						speedwellWrapper.classList.add("is-scrolling-" + myMap.get(sign(lastKnownScrollOffset)));
-						speedwellWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * sign(lastKnownScrollOffset)));
+						speedwellWrapper
+							.classList.add("is-scrolling-" + myMap.get(Math.sign(lastKnownScrollOffset)));
+						speedwellWrapper
+							.classList
+							.remove("is-scrolling-" + myMap.get(-1 * Math.sign(lastKnownScrollOffset)));
 					}
 
-					speedwellWrapper.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
+					speedwellWrapper
+						.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
+
 					handleTranslucentTopbar(speedwellTranslucentTopbar, scrollThreshold);
 					ticking = false;
 				});
+
 				ticking = true;
 			}
 		}, false);

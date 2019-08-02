@@ -33,12 +33,15 @@ $frame-size: 70px;
 
 $easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
 $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+$easeInQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+$easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
 
 /*
  * COMMON MIXINS
  */
 
-@mixin speedwellButtonEffect() {
+@mixin speedwellButtonEffect($primaryColor, $secondaryColor) {
   &::before {
     content: '';
     position: absolute;
@@ -46,20 +49,29 @@ $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #FFF;
-    transform: scaleY(0);
+    transform: scale3d(1, 0, 1);
     transform-origin: bottom;
     transition: inherit;
     z-index: -1;
   }
 
   &:hover {
-    color: white;
+    color: $primaryColor;
 
     &::before {
-      background-color: $stroke;
-      color: white;
-      transform: scaleY(1);
+      background-color: $secondaryColor;
+      color: $primaryColor;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  @at-root {
+    @media screen and (max-width: 768px) {
+      svg:not(.speedwell-logo-icon) path,
+      .speedwell-logo-icon path:nth-child(1) {
+        fill: $primaryColor;
+        stroke: transparent;
+      }
     }
   }
 }

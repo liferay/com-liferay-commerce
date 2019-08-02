@@ -33,7 +33,6 @@
 @import './components/speedwell-breadcrumbs';
 @import './components/speedwell-vertical-navbar';
 @import './components/speedwell-forms';
-@import './components/speedwell-sign-in';
 @import './components/speedwell-account-management';
 @import './components/speedwell-account';
 @import './components/speedwell-account-dashboard';
@@ -52,6 +51,7 @@
 @import './components/speedwell-checkboxes';
 @import './components/speedwell-cart-content';
 @import './components/speedwell-order-totals';
+@import './components/speedwell-sign-in';
 @import './components/landing-page/landing-page';
 @import './portlet';
 @import './overrides';
@@ -61,6 +61,10 @@ html, body {
   font-family: 'Open Sans', sans-serif;
   overflow-x: hidden;
   width: 100%;
+}
+
+button {
+  background-color: #FFF;
 }
 
 body:not(.signed-in) {
@@ -82,6 +86,10 @@ body:not(.signed-in) {
 
     @media screen and (max-width: 767px) {
       top: $speedwell-topbar-size-small;
+    }
+
+    @media screen and (max-width: 375px) {
+      top: calc(#{$speedwell-topbar-size-small} - 10px);
     }
   }
 
