@@ -15,11 +15,11 @@
   .button-holder {
     .btn {
       width: 100%;
-    }
-
-    .lfr-button-label {
       font-size: 12px;
       font-weight: bold;
+      height: 50px;
+      line-height: 50px;
+      padding: 0;
     }
   }
 
@@ -32,7 +32,14 @@
       content: 'Sign In';
       font-size: 1.4em;
       font-weight: 300;
-      margin-top: -20px;
+      margin: 20px 0;
+      position: relative;
+      display: block;
+
+      @media screen and (max-width: 767px) {
+        margin-top: -25px;
+        margin-bottom: 30px;
+      }
     }
   }
 
@@ -71,16 +78,16 @@
       width: 100%;
       margin: 0;
       padding: 0;
-      height: 50px !important;
-      line-height: 50px !important;
+      height: 50px;
+      line-height: 50px;
       text-align: center;
       font-size: 12px !important;
 
       &:nth-child(1) {
         border: 1px solid $stroke-variant;
-        color: $stroke-variant !important;
+        color: $stroke-variant;
         border-radius: 4px;
-        font-weight: bold !important;
+        font-weight: bold;
         margin-bottom: 20px;
       }
 
