@@ -204,6 +204,10 @@ public interface CommerceCountryLocalService
 			long companyId, int numericISOCode)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCountry fetchCommerceCountry(
+		long companyId, String twoLettersISOCode);
+
 	/**
 	 * Returns the commerce country with the matching UUID and company.
 	 *

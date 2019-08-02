@@ -61,6 +61,15 @@ public class CommerceCountryServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceCountry fetchCommerceCountry(
+			long companyId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return _commerceCountryService.fetchCommerceCountry(
+			companyId, twoLettersISOCode);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
 			long companyId, boolean billingAllowed, boolean active) {

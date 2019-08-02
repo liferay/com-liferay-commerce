@@ -221,6 +221,12 @@ public class CommerceCountryLocalServiceUtil {
 		return getService().fetchCommerceCountry(companyId, numericISOCode);
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry
+		fetchCommerceCountry(long companyId, String twoLettersISOCode) {
+
+		return getService().fetchCommerceCountry(companyId, twoLettersISOCode);
+	}
+
 	/**
 	 * Returns the commerce country with the matching UUID and company.
 	 *

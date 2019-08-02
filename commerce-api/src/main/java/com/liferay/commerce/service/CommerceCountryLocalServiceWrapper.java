@@ -235,6 +235,14 @@ public class CommerceCountryLocalServiceWrapper
 			companyId, numericISOCode);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceCountry fetchCommerceCountry(
+		long companyId, String twoLettersISOCode) {
+
+		return _commerceCountryLocalService.fetchCommerceCountry(
+			companyId, twoLettersISOCode);
+	}
+
 	/**
 	 * Returns the commerce country with the matching UUID and company.
 	 *

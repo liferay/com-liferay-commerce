@@ -64,6 +64,13 @@ public class CommerceCountryServiceUtil {
 		getService().deleteCommerceCountry(commerceCountryId);
 	}
 
+	public static com.liferay.commerce.model.CommerceCountry
+			fetchCommerceCountry(long companyId, String twoLettersISOCode)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().fetchCommerceCountry(companyId, twoLettersISOCode);
+	}
+
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getBillingCommerceCountries(
 			long companyId, boolean billingAllowed, boolean active) {
