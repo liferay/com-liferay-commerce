@@ -15,6 +15,7 @@
 package com.liferay.commerce.address.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
+import com.liferay.commerce.exception.CommerceCountryAlreadyExistsException;
 import com.liferay.commerce.exception.CommerceCountryNameException;
 import com.liferay.commerce.exception.CommerceCountryThreeLettersISOCodeException;
 import com.liferay.commerce.exception.CommerceCountryTwoLettersISOCodeException;
@@ -53,6 +54,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @Component(
 	immediate = true,
@@ -126,7 +128,8 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof CommerceCountryNameException ||
+			else if (e instanceof CommerceCountryAlreadyExistsException ||
+					 e instanceof CommerceCountryNameException ||
 					 e instanceof CommerceCountryThreeLettersISOCodeException ||
 					 e instanceof CommerceCountryTwoLettersISOCodeException) {
 

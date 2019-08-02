@@ -31,6 +31,7 @@ page import="com.liferay.commerce.address.web.internal.servlet.taglib.ui.Commerc
 page import="com.liferay.commerce.admin.constants.CommerceAdminPortletKeys" %><%@
 page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
 page import="com.liferay.commerce.constants.CommerceActionKeys" %><%@
+page import="com.liferay.commerce.exception.CommerceCountryAlreadyExistsException" %><%@
 page import="com.liferay.commerce.exception.CommerceCountryNameException" %><%@
 page import="com.liferay.commerce.exception.CommerceCountryThreeLettersISOCodeException" %><%@
 page import="com.liferay.commerce.exception.CommerceCountryTwoLettersISOCodeException" %><%@
