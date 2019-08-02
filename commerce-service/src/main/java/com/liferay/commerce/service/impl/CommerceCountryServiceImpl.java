@@ -20,6 +20,7 @@ import com.liferay.commerce.service.base.CommerceCountryServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -62,6 +63,19 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
 
 		commerceCountryLocalService.deleteCommerceCountry(commerceCountryId);
+	}
+
+	@Override
+	public CommerceCountry fetchCommerceCountry(
+			long companyId, String twoLettersISOCode)
+		throws PrincipalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
+
+		return commerceCountryLocalService.fetchCommerceCountry(
+			companyId, twoLettersISOCode);
 	}
 
 	@Override

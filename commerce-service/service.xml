@@ -801,6 +801,7 @@
 		<exception>CommerceAddressStreet</exception>
 		<exception>CommerceAddressType</exception>
 		<exception>CommerceAddressZip</exception>
+		<exception>CommerceCountryAlreadyExists</exception>
 		<exception>CommerceCountryName</exception>
 		<exception>CommerceCountryThreeLettersISOCode</exception>
 		<exception>CommerceCountryTwoLettersISOCode</exception>
