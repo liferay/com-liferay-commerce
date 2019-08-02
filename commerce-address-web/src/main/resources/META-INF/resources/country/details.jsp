@@ -32,6 +32,7 @@ long commerceCountryId = commerceCountriesDisplayContext.getCommerceCountryId();
 	<aui:input name="backURL" type="hidden" value="<%= redirect %>" />
 	<aui:input name="commerceCountryId" type="hidden" value="<%= String.valueOf(commerceCountryId) %>" />
 
+	<liferay-ui:error exception="<%= CommerceCountryAlreadyExistsException.class %>" message="the-two-letter-iso-code-is-already-used" />
 	<liferay-ui:error exception="<%= CommerceCountryNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= CommerceCountryThreeLettersISOCodeException.class %>" message="please-enter-a-valid-three-letter-iso-code" />
 	<liferay-ui:error exception="<%= CommerceCountryTwoLettersISOCodeException.class %>" message="please-enter-a-valid-two-letter-iso-code" />
