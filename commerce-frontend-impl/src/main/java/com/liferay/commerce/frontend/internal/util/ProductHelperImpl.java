@@ -21,6 +21,7 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.model.PriceModel;
 import com.liferay.commerce.frontend.model.ProductSettingsModel;
 import com.liferay.commerce.frontend.util.ProductHelper;
+import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
@@ -121,6 +122,11 @@ public class ProductHelperImpl implements ProductHelper {
 				productSettingsModel.setAllowedQuantities(
 					allowedOrderQuantitiesArray);
 			}
+
+			productSettingsModel.setLowStockQuantity(
+				cpDefinitionInventory.getMinStockQuantity());
+			productSettingsModel.setShowAvailabilityDot(
+				cpDefinitionInventory.isDisplayAvailability());
 		}
 
 		productSettingsModel.setMinQuantity(minOrderQuantity);
@@ -132,6 +138,10 @@ public class ProductHelperImpl implements ProductHelper {
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+
+	@Reference
+	private CPDefinitionInventoryEngineRegistry
+		_cpDefinitionInventoryEngineRegistry;
 
 	@Reference
 	private CPDefinitionInventoryLocalService
