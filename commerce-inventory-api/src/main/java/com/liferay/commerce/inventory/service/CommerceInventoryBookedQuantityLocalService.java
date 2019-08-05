@@ -64,6 +64,11 @@ public interface CommerceInventoryBookedQuantityLocalService
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryBookedQuantityLocalServiceUtil} to access the commerce inventory booked quantity local service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
+			long commerceBookedQuantityId, long userId, String sku,
+			int quantity, Date expirationDate, Map<String, String> context)
+		throws PortalException;
+
+	public CommerceInventoryBookedQuantity addCommerceBookedQuantity(
 			long userId, String sku, int quantity, Date expirationDate,
 			Map<String, String> context)
 		throws PortalException;
@@ -250,6 +255,11 @@ public interface CommerceInventoryBookedQuantityLocalService
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException;
+
+	public CommerceInventoryBookedQuantity resetCommerceBookedQuantity(
+			long commerceBookedQuantityId, long userId, String sku,
+			int quantity, Date expirationDate, Map<String, String> context)
 		throws PortalException;
 
 	/**
