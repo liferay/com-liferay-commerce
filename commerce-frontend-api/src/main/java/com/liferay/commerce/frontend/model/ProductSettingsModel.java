@@ -23,6 +23,10 @@ public class ProductSettingsModel {
 		return _allowedQuantities;
 	}
 
+	public int getLowStockQuantity() {
+		return _lowStockQuantity;
+	}
+
 	public int getMaxQuantity() {
 		return _maxQuantity;
 	}
@@ -35,8 +39,16 @@ public class ProductSettingsModel {
 		return _multipleQuantity;
 	}
 
+	public boolean isShowAvailabilityDot() {
+		return _showAvailabilityDot;
+	}
+
 	public void setAllowedQuantities(int[] allowedQuantities) {
 		_allowedQuantities = allowedQuantities;
+	}
+
+	public void setLowStockQuantity(int lowStockQuantity) {
+		_lowStockQuantity = lowStockQuantity;
 	}
 
 	public void setMaxQuantity(int maxQuantity) {
@@ -51,9 +63,15 @@ public class ProductSettingsModel {
 		_multipleQuantity = multipleQuantity;
 	}
 
+	public void setShowAvailabilityDot(boolean showAvailabilityDot) {
+		_showAvailabilityDot = showAvailabilityDot;
+	}
+
 	private int[] _allowedQuantities;
+	private int _lowStockQuantity;
 	private int _maxQuantity;
 	private int _minQuantity;
 	private int _multipleQuantity;
+	private boolean _showAvailabilityDot;
 
 }
