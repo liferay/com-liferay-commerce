@@ -88,8 +88,8 @@ public class SubscriptionCommerceOrderValidatorImpl
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
 					locale,
-					"your-cart-contains-recurring-items-only-one-product-" +
-						"type-is-allowed-per-order"));
+					"cart-cannot-contain-both-subscription-and-non-" +
+						"subscription-products"));
 		}
 		else if (!commerceOrderItem.isSubscription() &&
 				 (cpSubscriptionInfo != null)) {
@@ -98,8 +98,8 @@ public class SubscriptionCommerceOrderValidatorImpl
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
 					locale,
-					"your-cart-contains-recurring-items-only-one-product-" +
-						"type-is-allowed-per-order"));
+					"cart-cannot-contain-both-subscription-and-non-" +
+						"subscription-products"));
 		}
 
 		return new CommerceOrderValidatorResult(true);
@@ -131,8 +131,8 @@ public class SubscriptionCommerceOrderValidatorImpl
 					commerceOrderItem.getCommerceOrderItemId(), false,
 					_getLocalizedMessage(
 						locale,
-						"your-cart-contains-recurring-items-only-one-product-" +
-							"type-is-allowed-per-order"));
+						"cart-cannot-contain-both-subscription-and-non-" +
+							"subscription-products"));
 			}
 		}
 
