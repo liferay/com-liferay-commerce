@@ -26,6 +26,7 @@
 			WHERE
 				(Group_.groupId = ?) AND
 				(CIWarehouseItem.sku = ?)
+				(CIWarehouse.active_ = 1)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findByC_G_A">
