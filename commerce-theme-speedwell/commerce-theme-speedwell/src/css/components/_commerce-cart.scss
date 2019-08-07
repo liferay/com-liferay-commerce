@@ -1,12 +1,11 @@
 .commerce-cart {
-  background: #FFF;
   bottom: 0;
   display: flex;
   flex-direction: column;
   max-width: 500px;
   position: fixed;
   right: 0;
-  top: calc(#{$liferay-topbar-size} + #{$liferay-topbar-size} + 80px);
+  top: $liferay-topbar-size;
   transition: all ease 200ms;
   width: 100%;
 
@@ -38,11 +37,11 @@
   }
 
   & &__close {
-    background: $stroke;
+    background-color: $stroke !important;
+    color: #FFF !important;
     bottom: 100%;
-    color: #FFF;
-    position: absolute;
-    right: 0;
+    top: 0;
+    left: calc(100% - 80px);
 
     &:hover {
       color: #FFF;
