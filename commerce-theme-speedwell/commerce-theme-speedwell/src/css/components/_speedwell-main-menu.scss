@@ -1,6 +1,11 @@
 .speedwell-main-menu {
   animation: main-menu-enter $easeInQuart 400ms reverse;
 
+  &.is-open &__open .speedwell-topbar__button {
+    background-color: $stroke;
+    color: $color-bg;
+  }
+
   &__link-wrapper {
     align-items: center;
     animation: main-menu-enter $easeInQuart 400ms;
@@ -62,7 +67,7 @@
       }
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 376px) and (max-width: 767px) {
       background: $stroke;
       bottom: 0;
       left: 0;
@@ -70,6 +75,16 @@
       position: fixed;
       right: 0;
       top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 5px);
+    }
+
+    @media screen and (max-width: 375px) {
+      background: $stroke;
+      bottom: 0;
+      left: 0;
+      padding-right: 0;
+      position: fixed;
+      right: 0;
+      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 11px);
     }
   }
 
