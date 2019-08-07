@@ -396,36 +396,43 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			FIELD_SHORT_DESCRIPTION,
 			cpDefinition.getShortDescription(cpDefinitionDefaultLanguageId));
 
-		List<Long> channelGroupIds = new ArrayList<>();
+		if (cpDefinition.isChannelFilterEnabled()) {
+			List<Long> channelGroupIds = new ArrayList<>();
 
-		for (CommerceChannelRel commerceChannelRel :
-				_commerceChannelRelLocalService.getCommerceChannelRels(
-					cpDefinition.getModelClassName(),
-					cpDefinition.getCPDefinitionId(), QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null)) {
+			for (CommerceChannelRel commerceChannelRel :
+					_commerceChannelRelLocalService.getCommerceChannelRels(
+						cpDefinition.getModelClassName(),
+						cpDefinition.getCPDefinitionId(), QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null)) {
 
-			CommerceChannel commerceChannel =
-				commerceChannelRel.getCommerceChannel();
+				CommerceChannel commerceChannel =
+					commerceChannelRel.getCommerceChannel();
 
-			channelGroupIds.add(commerceChannel.getGroupId());
+				channelGroupIds.add(commerceChannel.getGroupId());
+			}
+
+			document.addNumber(
+				FIELD_CHANNEL_GROUP_IDS,
+				ArrayUtil.toLongArray(channelGroupIds));
 		}
 
-		document.addNumber(
-			FIELD_CHANNEL_GROUP_IDS, ArrayUtil.toLongArray(channelGroupIds));
+		if (cpDefinition.isAccountGroupFilterEnabled()) {
+			List<CommerceAccountGroupRel> commerceAccountGroupRels =
+				_commerceAccountGroupRelService.getCommerceAccountGroupRels(
+					CPDefinition.class.getName(),
+					cpDefinition.getCPDefinitionId(), QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null);
 
-		List<CommerceAccountGroupRel> commerceAccountGroupRels =
-			_commerceAccountGroupRelService.getCommerceAccountGroupRels(
-				CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			Stream<CommerceAccountGroupRel> stream =
+				commerceAccountGroupRels.stream();
 
-		Stream<CommerceAccountGroupRel> stream =
-			commerceAccountGroupRels.stream();
+			long[] commerceAccountGroupIds = stream.mapToLong(
+				CommerceAccountGroupRel::getCommerceAccountGroupId
+			).toArray();
 
-		long[] commerceAccountGroupIds = stream.mapToLong(
-			CommerceAccountGroupRel::getCommerceAccountGroupId
-		).toArray();
-
-		document.addNumber("commerceAccountGroupIds", commerceAccountGroupIds);
+			document.addNumber(
+				"commerceAccountGroupIds", commerceAccountGroupIds);
+		}
 
 		List<String> optionNames = new ArrayList<>();
 		List<Long> optionIds = new ArrayList<>();
