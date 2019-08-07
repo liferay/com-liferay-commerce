@@ -4,7 +4,7 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param detailsUrl: string}
+	{@param? detailsUrl: string}
 	{@param checkoutUrl: string}
 	{@param spritemap: string }
 
@@ -92,8 +92,9 @@
 				<div class="commerce-cart__products-quantity">
 					<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
 				</div>
-
-				<a class="commerce-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+				{if isNonnull($detailsUrl)}
+					<a class="commerce-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+				{/if}
 			</div>
 
 			<div class="commerce-cart__content">
