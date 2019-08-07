@@ -166,7 +166,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			configureB2BSite(groupId, serviceContext);
 
 			_cpFileImporter.updateLookAndFeel(
-					_SPEEDWELL_THEME_ID, true, serviceContext);
+					_SPEEDWELL_THEME_ID, false, serviceContext);
 
 			updateLogo(serviceContext);
 

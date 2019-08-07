@@ -16,5 +16,11 @@
     "ddmStructureKey": "speedwell-newsletter-structure",
     "ddmTemplateKey": "SPEEDWELL_NEWSLETTER",
     "title": "SPEEDWELL_NEWSLETTER"
+  },
+  {
+    "articleId": "SPEEDWELL_ACCOUNT",
+    "ddmStructureKey": "speedwell-account-dashboard-structure",
+    "ddmTemplateKey": "SPEEDWELL_ACCOUNT",
+    "title": "SPEEDWELL_ACCOUNT"
   }
 ]

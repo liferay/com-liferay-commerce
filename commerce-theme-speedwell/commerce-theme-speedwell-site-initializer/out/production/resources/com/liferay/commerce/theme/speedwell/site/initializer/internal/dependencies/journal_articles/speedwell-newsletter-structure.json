@@ -1,0 +1,130 @@
+{
+  "availableLanguageIds": [
+    "en_US"
+  ],
+  "defaultLanguageId": "en_US",
+  "fields": [
+    {
+      "label": {
+        "en_US": "Image"
+      },
+      "predefinedValue": {
+        "en_US": ""
+      },
+      "style": {
+        "en_US": ""
+      },
+      "tip": {
+        "en_US": ""
+      },
+      "dataType": "image",
+      "fieldNamespace": "ddm",
+      "indexType": "text",
+      "localizable": true,
+      "name": "backgroundImage",
+      "readOnly": false,
+      "repeatable": false,
+      "required": true,
+      "showLabel": true,
+      "type": "ddm-image",
+      "nestedFields": [
+        {
+          "label": {
+            "en_US": "Call to action text"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "string",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "CallToActionText",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "text",
+          "nestedFields": [
+            {
+              "label": {
+                "en_US": "Call to action secondary text"
+              },
+              "predefinedValue": {
+                "en_US": ""
+              },
+              "style": {
+                "en_US": ""
+              },
+              "tip": {
+                "en_US": ""
+              },
+              "dataType": "string",
+              "indexType": "keyword",
+              "localizable": true,
+              "name": "CallToActionSecondaryText",
+              "readOnly": false,
+              "repeatable": false,
+              "required": false,
+              "showLabel": true,
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "label": {
+            "en_US": "Form action"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "string",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "FormAction",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "text",
+          "nestedFields": [
+            {
+              "label": {
+                "en_US": "Input placeholder"
+              },
+              "predefinedValue": {
+                "en_US": ""
+              },
+              "style": {
+                "en_US": ""
+              },
+              "tip": {
+                "en_US": ""
+              },
+              "dataType": "string",
+              "indexType": "keyword",
+              "localizable": true,
+              "name": "InputPlaceholder",
+              "readOnly": false,
+              "repeatable": false,
+              "required": true,
+              "showLabel": true,
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

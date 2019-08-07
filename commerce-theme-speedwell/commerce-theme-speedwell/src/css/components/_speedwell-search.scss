@@ -6,6 +6,11 @@
     width: unset;
   }
 
+  &.is-open &__bar-wrapper .speedwell-topbar__button {
+    background-color: $stroke;
+    color: $color-bg;
+  }
+
   &__bar-wrapper {
     bottom: 0;
     left: 0;
@@ -66,12 +71,22 @@
     position: fixed;
     right: 0;
     opacity: 1;
-    top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 5px);
+    top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
     transition-delay: 500ms !important;
     transition: opacity 200ms ease-in;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 376px) and (max-width: 767px) {
       top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small});
+
+      .commerce-suggestions {
+        &__wrapper {
+          padding: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 375px) {
+      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 11px);
 
       .commerce-suggestions {
         &__wrapper {
