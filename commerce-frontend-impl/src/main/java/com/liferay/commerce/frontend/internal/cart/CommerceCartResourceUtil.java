@@ -25,6 +25,7 @@ import com.liferay.commerce.frontend.model.ProductSettingsModel;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.price.CommerceOrderPrice;
@@ -49,7 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 public class CommerceCartResourceUtil {
 
 	public Cart getCart(
-			long commerceOrderId, Locale locale,
+			long commerceOrderId, String detailsUrl, Locale locale,
 			CommerceContext commerceContext)
 		throws Exception {
 
@@ -57,7 +58,7 @@ public class CommerceCartResourceUtil {
 			commerceOrderId);
 
 		return new Cart(
-			commerceOrderId,
+			detailsUrl, commerceOrderId,
 			getProducts(commerceOrder, locale, commerceContext),
 			getSummary(commerceOrder, locale, commerceContext));
 	}
@@ -154,6 +155,9 @@ public class CommerceCartResourceUtil {
 
 		return summary;
 	}
+
+	@Reference
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
