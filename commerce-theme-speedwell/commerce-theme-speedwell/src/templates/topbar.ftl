@@ -22,7 +22,8 @@
 
 	<div class="speedwell-topbar__logo">
 		<div class="speedwell-logo">
-			<a class="${logo_css_class}" href="${site_default_url}"
+			<a
+				class="${logo_css_class}" href="${site_default_url}"
 			   title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
 				<svg class="commerce-icon speedwell-logo-icon">
 					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#speedwell-logo" />
