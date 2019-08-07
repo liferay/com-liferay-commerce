@@ -33,8 +33,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,9 +42,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("DiscountProduct")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"discountId", "productId"})
 @XmlRootElement(name = "DiscountProduct")
 public class DiscountProduct {
+
+	@Schema
+	public String getDiscountExternalReferenceCode() {
+		return discountExternalReferenceCode;
+	}
+
+	public void setDiscountExternalReferenceCode(
+		String discountExternalReferenceCode) {
+
+		this.discountExternalReferenceCode = discountExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setDiscountExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			discountExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			discountExternalReferenceCode =
+				discountExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String discountExternalReferenceCode;
 
 	@Schema
 	public Long getDiscountId() {
@@ -73,8 +102,7 @@ public class DiscountProduct {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long discountId;
 
 	@Schema
@@ -104,6 +132,38 @@ public class DiscountProduct {
 	protected Long id;
 
 	@Schema
+	public String getProductExternalReferenceCode() {
+		return productExternalReferenceCode;
+	}
+
+	public void setProductExternalReferenceCode(
+		String productExternalReferenceCode) {
+
+		this.productExternalReferenceCode = productExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setProductExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			productExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			productExternalReferenceCode =
+				productExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String productExternalReferenceCode;
+
+	@Schema
 	public Long getProductId() {
 		return productId;
 	}
@@ -128,8 +188,7 @@ public class DiscountProduct {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-	@NotNull
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Long productId;
 
 	@Override
@@ -159,6 +218,20 @@ public class DiscountProduct {
 
 		sb.append("{");
 
+		if (discountExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"discountExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(discountExternalReferenceCode));
+
+			sb.append("\"");
+		}
+
 		if (discountId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -177,6 +250,20 @@ public class DiscountProduct {
 			sb.append("\"id\": ");
 
 			sb.append(id);
+		}
+
+		if (productExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"productExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(productExternalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (productId != null) {

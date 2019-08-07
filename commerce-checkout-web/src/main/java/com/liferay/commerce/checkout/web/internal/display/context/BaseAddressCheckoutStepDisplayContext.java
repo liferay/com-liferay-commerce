@@ -15,10 +15,12 @@
 package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.checkout.web.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
+import com.liferay.commerce.util.comparator.CommerceAddressNameComparator;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
@@ -50,8 +52,9 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 
 	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
 		return _commerceAddressService.getCommerceAddresses(
-			_commerceOrder.getGroupId(), CommerceAccount.class.getName(),
-			_commerceOrder.getCommerceAccountId());
+			CommerceAccount.class.getName(),
+			_commerceOrder.getCommerceAccountId(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, new CommerceAddressNameComparator());
 	}
 
 	public abstract String getCommerceCountrySelectionColumnName();

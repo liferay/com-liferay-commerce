@@ -22,6 +22,7 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
 
 import javax.servlet.ServletContext;
 
@@ -51,18 +52,21 @@ public class CommerceOrderAssetRendererFactory
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException {
 
-		return null;
+		AssetEntryImpl assetEntry = new AssetEntryImpl();
+
+		assetEntry.setClassName(className);
+		assetEntry.setClassPK(classPK);
+
+		return assetEntry;
 	}
 
 	@Override
 	public AssetRenderer<CommerceOrder> getAssetRenderer(long classPK, int type)
 		throws PortalException {
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.getCommerceOrder(classPK);
-
 		CommerceOrderAssetRenderer commerceOrderAssetRenderer =
-			new CommerceOrderAssetRenderer(commerceOrder);
+			new CommerceOrderAssetRenderer(
+				_commerceOrderLocalService.getCommerceOrder(classPK));
 
 		commerceOrderAssetRenderer.setAssetRendererType(type);
 		commerceOrderAssetRenderer.setServletContext(_servletContext);

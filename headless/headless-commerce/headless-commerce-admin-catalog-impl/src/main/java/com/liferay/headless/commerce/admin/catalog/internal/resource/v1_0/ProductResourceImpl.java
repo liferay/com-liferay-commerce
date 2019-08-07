@@ -42,7 +42,6 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionC
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
-import com.liferay.headless.commerce.admin.catalog.internal.util.ExpandoUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
@@ -59,6 +58,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.DateConfig;
+import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
@@ -90,6 +90,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 /**
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/product.properties",
@@ -110,7 +111,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -134,7 +135,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		_cpDefinitionService.deleteCPDefinition(
 			cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -210,7 +211,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		_updateProduct(cpDefinition, product);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -233,7 +234,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		_updateProduct(cpDefinition, product);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -241,7 +242,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	@Override
 	public Product postProduct(Product product) throws Exception {
 		CPDefinition cpDefinition = _upsertProduct(product);
-
 		DTOConverter productDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
 
@@ -249,6 +249,45 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				cpDefinition.getCPDefinitionId()));
+	}
+
+	private ProductShippingConfiguration _getProductShippingConfiguration(
+		Product product) {
+
+		ProductShippingConfiguration shippingConfiguration =
+			product.getShippingConfiguration();
+
+		if (shippingConfiguration != null) {
+			return shippingConfiguration;
+		}
+
+		return new ProductShippingConfiguration();
+	}
+
+	private ProductSubscriptionConfiguration
+		_getProductSubscriptionConfiguration(Product product) {
+
+		ProductSubscriptionConfiguration subscriptionConfiguration =
+			product.getSubscriptionConfiguration();
+
+		if (subscriptionConfiguration != null) {
+			return subscriptionConfiguration;
+		}
+
+		return new ProductSubscriptionConfiguration();
+	}
+
+	private ProductTaxConfiguration _getProductTaxConfiguration(
+		Product product) {
+
+		ProductTaxConfiguration taxConfiguration =
+			product.getTaxConfiguration();
+
+		if (taxConfiguration != null) {
+			return taxConfiguration;
+		}
+
+		return new ProductTaxConfiguration();
 	}
 
 	private List<Product> _toProducts(List<CPDefinition> cpDefinitions)
@@ -281,8 +320,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		if (productConfiguration != null) {
 			ProductConfigurationUtil.updateCPDefinitionInventory(
-				_cpDefinitionInventoryService, productConfiguration,
-				cpDefinition.getCPDefinitionId(), serviceContext);
+				cpDefinition.getGroupId(), _cpDefinitionInventoryService,
+				productConfiguration, cpDefinition.getCPDefinitionId());
 		}
 
 		// Product shipping configuration
@@ -457,10 +496,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			CPDefinition cpDefinition, Product product)
 		throws Exception {
 
-		long siteId = cpDefinition.getGroupId();
-
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			siteId);
+			cpDefinition.getGroupId());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -497,7 +534,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		Map<String, ?> expando = product.getExpando();
 
-		if (!expando.isEmpty()) {
+		if ((expando != null) && !expando.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CPDefinition.class,
 				cpDefinition.getPrimaryKey(), expando);
@@ -514,8 +551,12 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	private CPDefinition _upsertProduct(Product product) throws Exception {
 		boolean neverExpire = Boolean.TRUE;
 
-		ServiceContext serviceContext =
-			_serviceContextHelper.getServiceContext();
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogLocalService.getCommerceCatalog(
+				product.getCatalogId());
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			commerceCatalog.getGroupId());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -530,22 +571,20 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		ProductShippingConfiguration shippingConfiguration =
-			product.getShippingConfiguration();
+			_getProductShippingConfiguration(product);
 		ProductSubscriptionConfiguration subscriptionConfiguration =
-			product.getSubscriptionConfiguration();
-		ProductTaxConfiguration taxConfiguration =
-			product.getTaxConfiguration();
-
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.getCommerceCatalog(
-				product.getCatalogId());
+			_getProductSubscriptionConfiguration(product);
+		ProductTaxConfiguration taxConfiguration = _getProductTaxConfiguration(
+			product);
 
 		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(product.getShortDescription()),
 			LanguageUtils.getLocalizedMap(product.getDescription()), null,
-			LanguageUtils.getLocalizedMap(product.getName()), null, null,
+			LanguageUtils.getLocalizedMap(product.getMetaTitle()),
+			LanguageUtils.getLocalizedMap(product.getMetaDescription()),
+			LanguageUtils.getLocalizedMap(product.getMetaKeyword()),
 			product.getProductType(), true,
 			GetterUtil.getBoolean(shippingConfiguration.getShippable(), true),
 			GetterUtil.getBoolean(
@@ -590,7 +629,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		Map<String, ?> expando = product.getExpando();
 
-		if (!expando.isEmpty()) {
+		if ((expando != null) && !expando.isEmpty()) {
 			ExpandoUtil.updateExpando(
 				serviceContext.getCompanyId(), CPDefinition.class,
 				cpDefinition.getPrimaryKey(), expando);

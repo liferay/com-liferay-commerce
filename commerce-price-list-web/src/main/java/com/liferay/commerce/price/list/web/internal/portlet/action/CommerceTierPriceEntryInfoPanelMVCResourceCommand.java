@@ -16,12 +16,9 @@ package com.liferay.commerce.price.list.web.internal.portlet.action;
 
 import com.liferay.commerce.price.list.constants.CommercePriceListPortletKeys;
 import com.liferay.commerce.price.list.constants.CommercePriceListWebKeys;
-import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-
-import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -48,13 +45,10 @@ public class CommerceTierPriceEntryInfoPanelMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		List<CommerceTierPriceEntry> commerceTierPriceEntries =
-			_commercePriceListActionHelper.getCommerceTierPriceEntries(
-				resourceRequest);
-
 		resourceRequest.setAttribute(
 			CommercePriceListWebKeys.COMMERCE_TIER_PRICE_ENTRIES,
-			commerceTierPriceEntries);
+			_commercePriceListActionHelper.getCommerceTierPriceEntries(
+				resourceRequest));
 
 		include(
 			resourceRequest, resourceResponse,

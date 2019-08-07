@@ -158,30 +158,6 @@ public class CommerceAccountResource {
 		return getResponse(accountList);
 	}
 
-	@Path("/set-current-account")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCommerceOrders(
-		@QueryParam("groupId") long groupId,
-		@FormParam("accountId") long accountId,
-		@Context HttpServletRequest httpServletRequest) {
-
-		try {
-			_commerceAccountHelper.setCurrentCommerceAccount(
-				httpServletRequest, groupId, accountId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			Response.ResponseBuilder responseBuilder = Response.serverError();
-
-			return responseBuilder.build();
-		}
-
-		return Response.ok(
-		).build();
-	}
-
 	@GET
 	@Path("/search-accounts/{accountId}/orders/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -261,6 +237,30 @@ public class CommerceAccountResource {
 		}
 
 		return getResponse(accountUserList);
+	}
+
+	@Path("/set-current-account")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response setCurrentAccount(
+		@QueryParam("groupId") long groupId,
+		@FormParam("accountId") long accountId,
+		@Context HttpServletRequest httpServletRequest) {
+
+		try {
+			_commerceAccountHelper.setCurrentCommerceAccount(
+				httpServletRequest, groupId, accountId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			Response.ResponseBuilder responseBuilder = Response.serverError();
+
+			return responseBuilder.build();
+		}
+
+		return Response.ok(
+		).build();
 	}
 
 	protected List<Account> getAccounts(

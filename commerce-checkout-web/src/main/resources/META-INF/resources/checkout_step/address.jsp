@@ -99,13 +99,13 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 
 		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceRegionId" placeholder="region" title="region" wrapperCssClass="form-group-item" />
 	</div>
-
-	<c:if test="<%= Objects.equals(CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME, paramName) %>">
-		<div class="shipping-as-billing">
-			<aui:input checked="<%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() %>" label="use-shipping-address-as-billing-address" name="use-as-billing" type="checkbox" />
-		</div>
-	</c:if>
 </div>
+
+<c:if test="<%= Objects.equals(CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME, paramName) %>">
+	<div class="shipping-as-billing">
+		<aui:input checked="<%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() %>" disabled="<%= false %>" label="use-shipping-address-as-billing-address" name="use-as-billing" type="checkbox" />
+	</div>
+</c:if>
 
 <aui:script>
 	Liferay.provide(

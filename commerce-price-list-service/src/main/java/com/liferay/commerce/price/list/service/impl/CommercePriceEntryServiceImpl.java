@@ -165,6 +165,18 @@ public class CommercePriceEntryServiceImpl
 	}
 
 	@Override
+	public CommercePriceEntry getCommercePriceEntry(long commercePriceEntryId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceEntryLocalService.getCommercePriceEntry(
+			commercePriceEntryId);
+	}
+
+	@Override
 	public List<CommercePriceEntry> getInstanceCommercePriceEntries(
 			long cpInstanceId, int start, int end)
 		throws PortalException {
@@ -244,6 +256,10 @@ public class CommercePriceEntryServiceImpl
 			commercePriceEntry, externalReferenceCode);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	@Override
 	public CommercePriceEntry upsertCommercePriceEntry(
 			long commercePriceEntryId, long cpInstanceId,
@@ -260,6 +276,24 @@ public class CommercePriceEntryServiceImpl
 			commercePriceEntryId, cpInstanceId, commercePriceListId,
 			externalReferenceCode, price, promoPrice, skuExternalReferenceCode,
 			serviceContext);
+	}
+
+	@Override
+	public CommercePriceEntry upsertCommercePriceEntry(
+			long commercePriceEntryId, long cProductId, String cpInstanceUuid,
+			long commercePriceListId, String externalReferenceCode,
+			BigDecimal price, BigDecimal promoPrice,
+			String skuExternalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commercePriceEntryLocalService.upsertCommercePriceEntry(
+			commercePriceEntryId, cProductId, cpInstanceUuid,
+			commercePriceListId, externalReferenceCode, price, promoPrice,
+			skuExternalReferenceCode, serviceContext);
 	}
 
 }

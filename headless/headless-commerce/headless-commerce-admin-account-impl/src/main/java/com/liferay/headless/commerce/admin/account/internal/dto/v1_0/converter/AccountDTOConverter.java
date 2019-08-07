@@ -18,6 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountOrganization;
@@ -54,12 +55,15 @@ public class AccountDTOConverter implements DTOConverter {
 			_commerceAccountService.getCommerceAccount(
 				dtoConverterContext.getResourcePrimKey());
 
+		ExpandoBridge expandoBridge = commerceAccount.getExpandoBridge();
+
 		return new Account() {
 			{
+				customFields = expandoBridge.getAttributes();
 				emailAddresses = new String[] {commerceAccount.getEmail()};
-				id = commerceAccount.getCommerceAccountId();
 				externalReferenceCode =
 					commerceAccount.getExternalReferenceCode();
+				id = commerceAccount.getCommerceAccountId();
 				logoId = commerceAccount.getLogoId();
 				name = commerceAccount.getName();
 				organizations = _getOrganizations(

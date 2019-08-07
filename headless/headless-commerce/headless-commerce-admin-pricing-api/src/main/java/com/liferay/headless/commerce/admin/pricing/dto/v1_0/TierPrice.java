@@ -35,9 +35,6 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -47,25 +44,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("TierPrice")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"commercePriceEntryId", "externalReferenceCode"})
 @XmlRootElement(name = "TierPrice")
 public class TierPrice {
 
 	@Schema
-	public Long getCommercePriceEntryId() {
-		return commercePriceEntryId;
+	public Map<String, ?> getCustomFields() {
+		return customFields;
 	}
 
-	public void setCommercePriceEntryId(Long commercePriceEntryId) {
-		this.commercePriceEntryId = commercePriceEntryId;
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
 	}
 
 	@JsonIgnore
-	public void setCommercePriceEntryId(
-		UnsafeSupplier<Long, Exception> commercePriceEntryIdUnsafeSupplier) {
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
 
 		try {
-			commercePriceEntryId = commercePriceEntryIdUnsafeSupplier.get();
+			customFields = customFieldsUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -77,8 +73,7 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commercePriceEntryId;
+	protected Map<String, ?> customFields;
 
 	@Schema
 	public String getExternalReferenceCode() {
@@ -106,7 +101,6 @@ public class TierPrice {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotEmpty
 	protected String externalReferenceCode;
 
 	@Schema
@@ -224,6 +218,34 @@ public class TierPrice {
 	protected String priceEntryExternalReferenceCode;
 
 	@Schema
+	public Long getPriceEntryId() {
+		return priceEntryId;
+	}
+
+	public void setPriceEntryId(Long priceEntryId) {
+		this.priceEntryId = priceEntryId;
+	}
+
+	@JsonIgnore
+	public void setPriceEntryId(
+		UnsafeSupplier<Long, Exception> priceEntryIdUnsafeSupplier) {
+
+		try {
+			priceEntryId = priceEntryIdUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Long priceEntryId;
+
+	@Schema
 	public BigDecimal getPromoPrice() {
 		return promoPrice;
 	}
@@ -278,14 +300,14 @@ public class TierPrice {
 
 		sb.append("{");
 
-		if (commercePriceEntryId != null) {
+		if (customFields != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commercePriceEntryId\": ");
+			sb.append("\"customFields\": ");
 
-			sb.append(commercePriceEntryId);
+			sb.append(_toJSON(customFields));
 		}
 
 		if (externalReferenceCode != null) {
@@ -344,6 +366,16 @@ public class TierPrice {
 			sb.append(_escape(priceEntryExternalReferenceCode));
 
 			sb.append("\"");
+		}
+
+		if (priceEntryId != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"priceEntryId\": ");
+
+			sb.append(priceEntryId);
 		}
 
 		if (promoPrice != null) {

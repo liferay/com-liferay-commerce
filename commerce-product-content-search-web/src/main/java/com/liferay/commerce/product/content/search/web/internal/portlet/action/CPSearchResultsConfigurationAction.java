@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchRequest;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchResponse;
 
-import javax.portlet.RenderRequest;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,10 +51,9 @@ public class CPSearchResultsConfigurationAction
 		CPRequestHelper cpRequestHelper = new CPRequestHelper(
 			httpServletRequest);
 
-		RenderRequest renderRequest = cpRequestHelper.getRenderRequest();
-
 		PortletSharedSearchResponse portletSharedSearchResponse =
-			_portletSharedSearchRequest.search(renderRequest);
+			_portletSharedSearchRequest.search(
+				cpRequestHelper.getRenderRequest());
 
 		try {
 			CPSearchResultsDisplayContext cpSearchResultsDisplayContext =

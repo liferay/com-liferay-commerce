@@ -46,10 +46,8 @@ public class ActionHelper {
 			portletRequest, "rowIds");
 
 		for (long commerceCountryId : commerceCountryIds) {
-			CommerceCountry commerceCountry =
-				_commerceCountryService.getCommerceCountry(commerceCountryId);
-
-			commerceCountries.add(commerceCountry);
+			commerceCountries.add(
+				_commerceCountryService.getCommerceCountry(commerceCountryId));
 		}
 
 		return commerceCountries;

@@ -95,11 +95,9 @@ public class CPSearchResultsPortletDisplayTemplateHandler
 			PortletDisplayTemplateConstants.ENTRIES, "cp-catalog-entry",
 			CPCatalogEntry.class, "curCPCatalogEntry", "CPDefinitionId");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup cpDefinitionsServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"cp-definition-services", restrictedVariables);
+				"cp-definition-services", getRestrictedVariables(language));
 
 		cpDefinitionsServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

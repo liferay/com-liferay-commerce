@@ -33,7 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -44,25 +44,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("AccountMember")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"commerceAccountId", "userId"})
+@Schema(requiredProperties = {"email"})
 @XmlRootElement(name = "AccountMember")
 public class AccountMember {
 
 	@Schema
-	public Long getCommerceAccountId() {
-		return commerceAccountId;
+	public Long getAccountId() {
+		return accountId;
 	}
 
-	public void setCommerceAccountId(Long commerceAccountId) {
-		this.commerceAccountId = commerceAccountId;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
 
 	@JsonIgnore
-	public void setCommerceAccountId(
-		UnsafeSupplier<Long, Exception> commerceAccountIdUnsafeSupplier) {
+	public void setAccountId(
+		UnsafeSupplier<Long, Exception> accountIdUnsafeSupplier) {
 
 		try {
-			commerceAccountId = commerceAccountIdUnsafeSupplier.get();
+			accountId = accountIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -74,8 +74,64 @@ public class AccountMember {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commerceAccountId;
+	protected Long accountId;
+
+	@Schema
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@JsonIgnore
+	public void setEmail(
+		UnsafeSupplier<String, Exception> emailUnsafeSupplier) {
+
+		try {
+			email = emailUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotEmpty
+	protected String email;
+
+	@Schema
+	public String getExternalReferenceCode() {
+		return externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		this.externalReferenceCode = externalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setExternalReferenceCode(
+		UnsafeSupplier<String, Exception> externalReferenceCodeUnsafeSupplier) {
+
+		try {
+			externalReferenceCode = externalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String externalReferenceCode;
 
 	@Schema
 	public String getName() {
@@ -132,6 +188,36 @@ public class AccountMember {
 	protected AccountRole[] roles;
 
 	@Schema
+	public String getUserExternalReferenceCode() {
+		return userExternalReferenceCode;
+	}
+
+	public void setUserExternalReferenceCode(String userExternalReferenceCode) {
+		this.userExternalReferenceCode = userExternalReferenceCode;
+	}
+
+	@JsonIgnore
+	public void setUserExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			userExternalReferenceCodeUnsafeSupplier) {
+
+		try {
+			userExternalReferenceCode =
+				userExternalReferenceCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String userExternalReferenceCode;
+
+	@Schema
 	public Long getUserId() {
 		return userId;
 	}
@@ -157,7 +243,6 @@ public class AccountMember {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
 	protected Long userId;
 
 	@Override
@@ -187,14 +272,42 @@ public class AccountMember {
 
 		sb.append("{");
 
-		if (commerceAccountId != null) {
+		if (accountId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceAccountId\": ");
+			sb.append("\"accountId\": ");
 
-			sb.append(commerceAccountId);
+			sb.append(accountId);
+		}
+
+		if (email != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"email\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(email));
+
+			sb.append("\"");
+		}
+
+		if (externalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"externalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(externalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (name != null) {
@@ -229,6 +342,20 @@ public class AccountMember {
 			}
 
 			sb.append("]");
+		}
+
+		if (userExternalReferenceCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"userExternalReferenceCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(userExternalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (userId != null) {

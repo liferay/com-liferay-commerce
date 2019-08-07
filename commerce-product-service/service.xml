@@ -547,7 +547,7 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CPDisplayLayout" remote-service="false" uuid="true">
+	<entity local-service="true" name="CPDisplayLayout" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
@@ -573,10 +573,21 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+		</finder>
 		<finder name="C_C" return-type="CPDisplayLayout" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+
+		<!-- References -->
+
+		<reference entity="Layout" package-path="com.liferay.portal" />
 	</entity>
 	<entity local-service="true" name="CPFriendlyURLEntry" remote-service="false" uuid="true">
 
@@ -1067,6 +1078,8 @@
 		<exception>CPDefinitionMetaTitle</exception>
 		<exception>CPDefinitionOptionValueRelKey</exception>
 		<exception>CPDefinitionProductTypeName</exception>
+		<exception>CPDisplayLayoutEntry</exception>
+		<exception>CPDisplayLayoutLayoutUuid</exception>
 		<exception>CPFriendlyURLEntry</exception>
 		<exception>CPInstanceDisplayDate</exception>
 		<exception>CPInstanceExpirationDate</exception>

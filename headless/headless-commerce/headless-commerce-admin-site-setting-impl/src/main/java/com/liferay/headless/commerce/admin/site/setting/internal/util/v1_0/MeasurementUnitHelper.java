@@ -48,10 +48,8 @@ public class MeasurementUnitHelper {
 	}
 
 	public MeasurementUnit getMeasurementUnit(Long id) throws PortalException {
-		CPMeasurementUnit cpMeasurementUnit =
-			_cpMeasurementUnitService.getCPMeasurementUnit(id);
-
-		return _dtoMapper.modelToDTO(cpMeasurementUnit);
+		return _dtoMapper.modelToDTO(
+			_cpMeasurementUnitService.getCPMeasurementUnit(id));
 	}
 
 	public Page<MeasurementUnit> getMeasurementUnits(

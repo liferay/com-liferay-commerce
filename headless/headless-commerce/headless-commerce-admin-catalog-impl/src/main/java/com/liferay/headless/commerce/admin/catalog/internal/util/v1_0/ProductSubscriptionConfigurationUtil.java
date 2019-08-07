@@ -32,8 +32,14 @@ public class ProductSubscriptionConfigurationUtil {
 			CPDefinition cpDefinition, ServiceContext serviceContext)
 		throws PortalException {
 
+		String subscriptionTypeValue = null;
+
 		ProductSubscriptionConfiguration.SubscriptionType subscriptionType =
 			productSubscriptionConfiguration.getSubscriptionType();
+
+		if (subscriptionType != null) {
+			subscriptionTypeValue = subscriptionType.getValue();
+		}
 
 		return cpDefinitionService.updateSubscriptionInfo(
 			cpDefinition.getCPDefinitionId(),
@@ -43,7 +49,7 @@ public class ProductSubscriptionConfigurationUtil {
 			GetterUtil.get(
 				productSubscriptionConfiguration.getLength(),
 				cpDefinition.getSubscriptionLength()),
-			subscriptionType.getValue(), null,
+			subscriptionTypeValue, null,
 			GetterUtil.get(
 				productSubscriptionConfiguration.getNumberOfLength(),
 				cpDefinition.getMaxSubscriptionCycles()),

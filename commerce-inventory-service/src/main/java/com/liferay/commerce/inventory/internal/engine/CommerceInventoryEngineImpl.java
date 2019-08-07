@@ -60,8 +60,9 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 
 			decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
 		}
-
-		decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
+		else {
+			decreaseStockQuantity(commerceInventoryWarehouseId, sku, quantity);
+		}
 
 		String description =
 			"Consume Quantity: " + _jsonFactory.serialize(context);
@@ -92,12 +93,13 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 
 	@Override
 	public Map<String, Integer> getStockQuantities(
-		long companyId, long groupId, List<String> skus) {
+		long companyId, long channelGroupId, List<String> skus) {
 
 		Map<String, Integer> results = new HashMap<>();
 
 		for (String sku : skus) {
-			int stockQuantity = getStockQuantity(companyId, groupId, sku);
+			int stockQuantity = getStockQuantity(
+				companyId, channelGroupId, sku);
 
 			results.put(sku, stockQuantity);
 		}
@@ -106,10 +108,12 @@ public class CommerceInventoryEngineImpl implements CommerceInventoryEngine {
 	}
 
 	@Override
-	public int getStockQuantity(long companyId, long groupId, String sku) {
+	public int getStockQuantity(
+		long companyId, long channelGroupId, String sku) {
+
 		int stockQuantity =
 			_commerceInventoryWarehouseItemLocalService.getStockQuantity(
-				companyId, groupId, sku);
+				companyId, channelGroupId, sku);
 
 		int commerceBookedQuantity =
 			_commerceBookedQuantityLocalService.getCommerceBookedQuantity(sku);

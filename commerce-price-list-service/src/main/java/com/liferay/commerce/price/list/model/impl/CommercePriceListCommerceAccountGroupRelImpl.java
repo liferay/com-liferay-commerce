@@ -16,6 +16,12 @@ package com.liferay.commerce.price.list.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
+import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -24,6 +30,20 @@ public class CommercePriceListCommerceAccountGroupRelImpl
 	extends CommercePriceListCommerceAccountGroupRelBaseImpl {
 
 	public CommercePriceListCommerceAccountGroupRelImpl() {
+	}
+
+	@Override
+	public CommerceAccountGroup getCommerceAccountGroup()
+		throws PortalException {
+
+		return CommerceAccountGroupLocalServiceUtil.getCommerceAccountGroup(
+			getCommerceAccountGroupId());
+	}
+
+	@Override
+	public CommercePriceList getCommercePriceList() throws PortalException {
+		return CommercePriceListLocalServiceUtil.getCommercePriceList(
+			getCommercePriceListId());
 	}
 
 }

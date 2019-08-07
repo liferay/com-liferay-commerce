@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.pricing.internal.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
@@ -60,12 +59,72 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 
 	@Override
 	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public Response deletePriceEntryByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public PriceEntry getPriceEntryByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return new PriceEntry();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/priceEntries/by-externalReferenceCode/{externalReferenceCode}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public Response patchPriceEntryByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			PriceEntry priceEntry)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/priceEntries/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceEntry")})
 	public Response deletePriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
@@ -80,7 +139,7 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceEntry")})
 	public PriceEntry getPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id)
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new PriceEntry();
@@ -94,7 +153,7 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceEntry")})
 	public Response patchPriceEntry(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			PriceEntry priceEntry)
 		throws Exception {
 
@@ -107,16 +166,61 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path(
+		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceEntries/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public Page<PriceEntry> getPriceListByExternalReferenceCodePriceEntriesPage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/priceLists/by-externalReferenceCode/{externalReferenceCode}/priceEntries/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "PriceEntry")})
+	public PriceEntry postPriceListByExternalReferenceCodePriceEntry(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			PriceEntry priceEntry)
+		throws Exception {
+
+		return new PriceEntry();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
 			@Parameter(in = ParameterIn.PATH, name = "id"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/priceEntries/{id}/tierPrices/")
+	@Path("/priceLists/{id}/priceEntries/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceEntry")})
-	public Page<TierPrice> getPriceEntryTierPricesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
+	public Page<PriceEntry> getPriceListIdPriceEntriesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -127,15 +231,15 @@ public abstract class BasePriceEntryResourceImpl implements PriceEntryResource {
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/priceEntries/{id}/tierPrice/")
+	@Path("/priceLists/{id}/priceEntries/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "PriceEntry")})
-	public TierPrice postPriceEntryTierPrice(
-			@NotNull @Parameter(hidden = true) @PathParam("id") String id,
-			TierPrice tierPrice)
+	public PriceEntry postPriceListIdPriceEntry(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			PriceEntry priceEntry)
 		throws Exception {
 
-		return new TierPrice();
+		return new PriceEntry();
 	}
 
 	public void setContextCompany(Company contextCompany) {

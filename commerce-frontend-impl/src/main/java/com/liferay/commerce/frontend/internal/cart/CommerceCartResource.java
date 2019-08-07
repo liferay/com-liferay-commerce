@@ -24,7 +24,6 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.frontend.internal.cart.model.Cart;
-import com.liferay.commerce.frontend.internal.cart.model.CartItemUpdate;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -56,6 +55,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -169,7 +169,7 @@ public class CommerceCartResource {
 	@PUT
 	public Response updateOrderItem(
 		@PathParam("id") long commerceOrderItemId,
-		CartItemUpdate cartItemUpdate,
+		@QueryParam("quantity") int quantity,
 		@Context HttpServletRequest httpServletRequest) {
 
 		Cart cart = null;
@@ -206,8 +206,8 @@ public class CommerceCartResource {
 			serviceContext.setScopeGroupId(commerceChannel.getSiteGroupId());
 
 			_commerceOrderItemService.updateCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId(),
-				cartItemUpdate.getQuantity(), commerceContext, serviceContext);
+				commerceOrderItem.getCommerceOrderItemId(), quantity,
+				commerceContext, serviceContext);
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),

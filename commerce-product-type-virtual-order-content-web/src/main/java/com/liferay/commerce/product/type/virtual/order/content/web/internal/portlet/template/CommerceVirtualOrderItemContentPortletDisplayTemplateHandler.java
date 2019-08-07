@@ -97,13 +97,11 @@ public class CommerceVirtualOrderItemContentPortletDisplayTemplateHandler
 			CommerceOrder.class, "curCommerceVitualOrderItem",
 			"commerceVirtualOrderItemId");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup
 			commerceVirtualOrderItemServicesTemplateVariableGroup =
 				new TemplateVariableGroup(
 					"commerce-virtual-order-item-services",
-					restrictedVariables);
+					getRestrictedVariables(language));
 
 		commerceVirtualOrderItemServicesTemplateVariableGroup.
 			setAutocompleteEnabled(false);

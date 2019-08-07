@@ -56,10 +56,8 @@ public class CPOptionCategoriesImporter {
 			jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			CPOptionCategory cpOptionCategory = _importCPOptionCategory(
-				jsonObject, i, serviceContext);
+				jsonArray.getJSONObject(i), i, serviceContext);
 
 			cpOptionCategories.add(cpOptionCategory);
 		}

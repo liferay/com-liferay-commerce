@@ -24,7 +24,6 @@ import com.liferay.commerce.payment.web.internal.display.context.CommercePayment
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
@@ -41,8 +40,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -82,11 +79,8 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return _portletResourcePermission.contains(
-			permissionChecker, groupId,
+			PermissionThreadLocal.getPermissionChecker(), groupId,
 			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
 	}
 
@@ -96,23 +90,19 @@ public class PaymentMethodsCommerceAdminModule implements CommerceAdminModule {
 		throws IOException {
 
 		CommercePaymentMethodGroupRelsDisplayContext
-			commerceCurrenciesDisplayContext =
+			commercePaymentMethodGroupRelsDisplayContext =
 				new CommercePaymentMethodGroupRelsDisplayContext(
 					_commercePaymentMethodRegistry,
 					_commercePaymentMethodGroupRelService,
 					_portletResourcePermission, renderRequest, renderResponse);
 
 		renderRequest.setAttribute(
-			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCurrenciesDisplayContext);
-
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
+			commercePaymentMethodGroupRelsDisplayContext);
 
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
-			"/view.jsp");
+			_servletContext, _portal.getHttpServletRequest(renderRequest),
+			_portal.getHttpServletResponse(renderResponse), "/view.jsp");
 	}
 
 	@Reference

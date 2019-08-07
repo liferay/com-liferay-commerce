@@ -29,7 +29,7 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 %>
 
 <liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
+	includeCheckBox="<%= !cpDefinitionItemSelectorViewDisplayContext.isSingleSelection() %>"
 	searchContainerId="cpDefinitions"
 >
 	<liferay-frontend:management-bar-buttons>
@@ -49,7 +49,7 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 		<liferay-frontend:management-bar-sort
 			orderByCol="<%= cpDefinitionItemSelectorViewDisplayContext.getOrderByCol() %>"
 			orderByType="<%= cpDefinitionItemSelectorViewDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"title", "modified-date", "display-date"} %>'
+			orderColumns='<%= new String[] {"name", "modified-date", "display-date"} %>'
 			portletURL="<%= portletURL %>"
 		/>
 
@@ -136,6 +136,14 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 				name="status"
 				status="<%= cpDefinition.getStatus() %>"
 			/>
+
+			<c:if test="<%= cpDefinitionItemSelectorViewDisplayContext.isSingleSelection() %>">
+				<liferay-ui:search-container-column-text
+					cssClass="table-cell-content"
+				>
+					<aui:button cssClass="selector-button" value="choose" />
+				</liferay-ui:search-container-column-text>
+			</c:if>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator
@@ -146,20 +154,50 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 	</liferay-ui:search-container>
 </div>
 
-<aui:script use="liferay-search-container">
-	var cpDefinitionSelectorWrapper = A.one("#<portlet:namespace />cpDefinitionSelectorWrapper");
+<c:choose>
+	<c:when test="<%= cpDefinitionItemSelectorViewDisplayContext.isSingleSelection() %>">
+		<aui:script use="aui-base">
+			A.one('#<portlet:namespace/>cpDefinitions').delegate(
+				'click',
+				function(event) {
+					var row = this.ancestor('tr');
 
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />cpDefinitions');
+					var data = row.getDOM().dataset;
 
-	searchContainer.on(
-		'rowToggled',
-		function(event) {
-			Liferay.Util.getOpener().Liferay.fire(
-				'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
-				{
-					data: Liferay.Util.listCheckedExcept(cpDefinitionSelectorWrapper, '<portlet:namespace />allRowIds')
+					Liferay.Util.getOpener().Liferay.fire(
+						'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
+						{
+							data: {id: data.cpDefinitionId, name: data.name}
+						}
+					);
+
+					var popupWindow = Liferay.Util.getWindow();
+
+					if (popupWindow !== null) {
+						Liferay.Util.getWindow().hide()
+					}
+				},
+				'.selector-button'
+			);
+		</aui:script>
+	</c:when>
+	<c:otherwise>
+		<aui:script use="liferay-search-container">
+			var cpDefinitionSelectorWrapper = A.one("#<portlet:namespace />cpDefinitionSelectorWrapper");
+
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />cpDefinitions');
+
+			searchContainer.on(
+				'rowToggled',
+				function(event) {
+					Liferay.Util.getOpener().Liferay.fire(
+						'<%= HtmlUtil.escapeJS(itemSelectedEventName) %>',
+						{
+							data: Liferay.Util.listCheckedExcept(cpDefinitionSelectorWrapper, '<portlet:namespace />allRowIds')
+						}
+					);
 				}
 			);
-		}
-	);
-</aui:script>
+		</aui:script>
+	</c:otherwise>
+</c:choose>

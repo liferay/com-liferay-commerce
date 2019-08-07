@@ -318,6 +318,16 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
+	public int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsCount(
+				commerceInventoryWarehouseId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

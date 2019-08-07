@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.channel.web.internal.display.context;
 
-import com.liferay.commerce.channel.web.display.context.BaseCommerceChannelSearchContainerDisplayContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
 import com.liferay.commerce.product.channel.CommerceChannelType;
@@ -88,14 +87,12 @@ public class CommerceChannelDisplayContext
 			httpServletRequest, CPPortletKeys.COMMERCE_CHANNELS,
 			PortletRequest.RENDER_PHASE);
 
+		portletURL.setParameter("backURL", portletURL.toString());
+
 		portletURL.setParameter(
 			"commerceChannelId",
 			String.valueOf(commerceChannel.getCommerceChannelId()));
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceChannel");
-
-		String backURL = _portal.getCurrentURL(httpServletRequest);
-
-		portletURL.setParameter("backURL", backURL);
 
 		return portletURL.toString();
 	}

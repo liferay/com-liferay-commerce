@@ -331,14 +331,12 @@ public class CommerceShipmentLocalServiceImpl
 			return commerceAddress;
 		}
 
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
 		return commerceAddressLocalService.addCommerceAddress(
 			commerceShipment.getModelClassName(),
 			commerceShipment.getCommerceShipmentId(), name, description,
 			street1, street2, street3, city, zip, commerceRegionId,
-			commerceCountryId, phoneNumber, false, false, serviceContext);
+			commerceCountryId, phoneNumber, false, false,
+			ServiceContextThreadLocal.getServiceContext());
 	}
 
 	protected void validate(int status, int oldStatus) throws PortalException {

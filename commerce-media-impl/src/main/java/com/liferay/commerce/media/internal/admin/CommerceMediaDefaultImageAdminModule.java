@@ -25,7 +25,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -44,7 +43,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -87,11 +85,9 @@ public class CommerceMediaDefaultImageAdminModule
 
 	@Override
 	public boolean isVisible(long groupId) {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return PortalPermissionUtil.contains(
-			permissionChecker, CPActionKeys.ADD_COMMERCE_CATALOG);
+			PermissionThreadLocal.getPermissionChecker(),
+			CPActionKeys.ADD_COMMERCE_CATALOG);
 	}
 
 	@Override
@@ -112,11 +108,9 @@ public class CommerceMediaDefaultImageAdminModule
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			commerceMediaDefaultImageDisplayContext);
 
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
+			_servletContext, httpServletRequest,
+			_portal.getHttpServletResponse(renderResponse),
 			"/configuration/edit_default_images.jsp");
 	}
 

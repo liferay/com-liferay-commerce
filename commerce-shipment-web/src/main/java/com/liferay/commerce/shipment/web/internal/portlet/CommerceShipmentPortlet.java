@@ -16,8 +16,9 @@ package com.liferay.commerce.shipment.web.internal.portlet;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceOrderItemService;
-import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.commerce.shipment.web.internal.display.context.CommerceShipmentDisplayContext;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
@@ -31,8 +32,6 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -70,13 +69,11 @@ public class CommerceShipmentPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceShipmentDisplayContext commerceShipmentDisplayContext =
 			new CommerceShipmentDisplayContext(
-				_actionHelper, httpServletRequest, _commerceOrderItemService,
-				_commerceOrderService, _commerceShipmentService,
+				_actionHelper, _portal.getHttpServletRequest(renderRequest),
+				_commerceChannelService, _commerceOrderItemService,
+				_commerceOrderLocalService, _commerceShipmentService,
 				_commerceInventoryWarehouseService);
 
 		renderRequest.setAttribute(
@@ -89,6 +86,9 @@ public class CommerceShipmentPortlet extends MVCPortlet {
 	private ActionHelper _actionHelper;
 
 	@Reference
+	private CommerceChannelService _commerceChannelService;
+
+	@Reference
 	private CommerceInventoryWarehouseService
 		_commerceInventoryWarehouseService;
 
@@ -96,7 +96,7 @@ public class CommerceShipmentPortlet extends MVCPortlet {
 	private CommerceOrderItemService _commerceOrderItemService;
 
 	@Reference
-	private CommerceOrderService _commerceOrderService;
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Reference
 	private CommerceShipmentService _commerceShipmentService;

@@ -86,9 +86,7 @@ public class CPAttachmentFileEntryCreator {
 
 		URI uri = new URI(uriString);
 
-		String scheme = uri.getScheme();
-
-		if (StringUtil.equalsIgnoreCase(scheme, "file")) {
+		if (StringUtil.equalsIgnoreCase(uri.getScheme(), "file")) {
 			File file = new File(uri.getPath());
 
 			if (file.exists()) {

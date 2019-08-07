@@ -158,7 +158,8 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of Mueller (7.2.x), use deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
+	 * @deprecated As of Mueller (7.2.x), use
+	 *             deleteCommerceOrderItem(CommerceOrderItem, CommerceContext)
 	 */
 	@Deprecated
 	@Indexable(type = IndexableType.DELETE)
@@ -541,7 +542,10 @@ public class CommerceOrderItemLocalServiceImpl
 			QueryUtil.ALL_POS);
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			if (json.equals(commerceOrderItem.getJson())) {
+			if (json.equals(commerceOrderItem.getJson()) ||
+				(json.equals("[]") &&
+				 Validator.isBlank(commerceOrderItem.getJson()))) {
+
 				return commerceOrderItemLocalService.updateCommerceOrderItem(
 					commerceOrderItem.getCommerceOrderItemId(),
 					commerceOrderItem.getQuantity() + quantity,

@@ -91,11 +91,9 @@ public class CPCategoryContentPortletDisplayTemplateHandler
 		templateVariableGroup.addVariable(
 			"asset-category", AssetCategory.class, "assetCategory");
 
-		String[] restrictedVariables = getRestrictedVariables(language);
-
 		TemplateVariableGroup assetCategoryServicesTemplateVariableGroup =
 			new TemplateVariableGroup(
-				"asset-category-services", restrictedVariables);
+				"asset-category-services", getRestrictedVariables(language));
 
 		assetCategoryServicesTemplateVariableGroup.setAutocompleteEnabled(
 			false);

@@ -260,9 +260,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		PayPalCommercePaymentRequest payPalCommercePaymentRequest =
 			(PayPalCommercePaymentRequest)commercePaymentRequest;
 
-		String transactionId = payPalCommercePaymentRequest.getTransactionId();
-
-		payment.setId(transactionId);
+		payment.setId(payPalCommercePaymentRequest.getTransactionId());
 
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.getCommerceOrder(
@@ -272,9 +270,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		PaymentExecution paymentExecution = new PaymentExecution();
 
-		String payerId = payPalCommercePaymentRequest.getPayerId();
-
-		paymentExecution.setPayerId(payerId);
+		paymentExecution.setPayerId(payPalCommercePaymentRequest.getPayerId());
 
 		payment.execute(apiContext, paymentExecution);
 
@@ -1018,11 +1014,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			subscriptionType = PayPalCommercePaymentMethodConstants.YEAR;
 		}
 
-		BigDecimal finalPrice = commerceOrderItem.getFinalPrice();
-
 		Currency amount = new Currency(
 			commerceCurrency.getCode(),
-			_payPalDecimalFormat.format(finalPrice));
+			_payPalDecimalFormat.format(commerceOrderItem.getFinalPrice()));
 
 		PaymentDefinition paymentDefinition = new PaymentDefinition(
 			_getResource(locale, "payment-definition"),
@@ -1160,11 +1154,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 
 		BigDecimal taxAmount = commerceOrder.getTaxAmount();
 
-		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
-
 		if ((taxAmount != null) && (taxAmount.compareTo(BigDecimal.ZERO) > 0)) {
 			_addItem(
-				commerceCurrency,
+				commerceOrder.getCommerceCurrency(),
 				_getResource(locale, "paypal-taxes-description"), false, items,
 				_getResource(locale, "paypal-taxes"), taxAmount);
 		}

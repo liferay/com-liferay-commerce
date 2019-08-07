@@ -23,7 +23,6 @@ import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -40,8 +39,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -80,11 +77,9 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		return PortalPermissionUtil.contains(
-			permissionChecker, CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
+			PermissionThreadLocal.getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
 	}
 
 	@Override
@@ -100,14 +95,9 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceCountriesDisplayContext);
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
-			"/view.jsp");
+			_servletContext, _portal.getHttpServletRequest(renderRequest),
+			_portal.getHttpServletResponse(renderResponse), "/view.jsp");
 	}
 
 	@Reference

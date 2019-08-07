@@ -194,20 +194,16 @@ public class CommerceInventoryWarehouseIndexer
 			CommerceInventoryWarehouse commerceInventoryWarehouse)
 		throws Exception {
 
-		Document document = getDocument(commerceInventoryWarehouse);
-
 		_indexWriterHelper.updateDocument(
 			getSearchEngineId(), commerceInventoryWarehouse.getCompanyId(),
-			document, isCommitImmediately());
+			getDocument(commerceInventoryWarehouse), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceInventoryWarehouse commerceInventoryWarehouse =
+		doReindex(
 			_commerceInventoryWarehouseLocalService.
-				getCommerceInventoryWarehouse(classPK);
-
-		doReindex(commerceInventoryWarehouse);
+				getCommerceInventoryWarehouse(classPK));
 	}
 
 	@Override
@@ -258,9 +254,8 @@ public class CommerceInventoryWarehouseIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceInventoryWarehouse commerceInventoryWarehouse) -> {
 				try {
-					Document document = getDocument(commerceInventoryWarehouse);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceInventoryWarehouse));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

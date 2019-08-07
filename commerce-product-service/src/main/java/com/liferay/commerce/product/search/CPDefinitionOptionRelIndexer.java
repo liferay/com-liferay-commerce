@@ -222,20 +222,16 @@ public class CPDefinitionOptionRelIndexer
 	protected void doReindex(CPDefinitionOptionRel cpDefinitionOptionRel)
 		throws Exception {
 
-		Document document = getDocument(cpDefinitionOptionRel);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpDefinitionOptionRel.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpDefinitionOptionRel.getCompanyId(),
+			getDocument(cpDefinitionOptionRel), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPDefinitionOptionRel cpDefinitionOptionRel =
+		doReindex(
 			_cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
-				classPK);
-
-		doReindex(cpDefinitionOptionRel);
+				classPK));
 	}
 
 	@Override
@@ -256,9 +252,8 @@ public class CPDefinitionOptionRelIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPDefinitionOptionRel cpDefinitionOptionRel) -> {
 				try {
-					Document document = getDocument(cpDefinitionOptionRel);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpDefinitionOptionRel));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

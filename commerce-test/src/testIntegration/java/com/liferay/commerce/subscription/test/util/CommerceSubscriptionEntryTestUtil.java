@@ -16,7 +16,6 @@ package com.liferay.commerce.subscription.test.util;
 
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
@@ -44,9 +43,8 @@ public class CommerceSubscriptionEntryTestUtil {
 
 		cpInstance = CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
-		CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
+		CommerceTestUtil.addBackOrderCPDefinitionInventory(
+			cpInstance.getCPDefinition());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			groupId, userId, 0);

@@ -19,6 +19,8 @@ import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleRes
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,6 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -37,6 +40,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -53,6 +57,53 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseDiscountRuleResourceImpl
 	implements DiscountRuleResource {
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path(
+		"/discount/by-externalReferenceCode/{externalReferenceCode}/discountRules/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public Page<DiscountRule>
+			getDiscountByExternalReferenceCodeDiscountRulesPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/discount/by-externalReferenceCode/{externalReferenceCode}/discountRules/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public DiscountRule postDiscountByExternalReferenceCodeDiscountRule(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			DiscountRule discountRule)
+		throws Exception {
+
+		return new DiscountRule();
+	}
 
 	@Override
 	@DELETE
@@ -84,12 +135,49 @@ public abstract class BaseDiscountRuleResourceImpl
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
+	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/discountRules/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "DiscountRule")})
-	public DiscountRule postDiscountRule(
+	public Response patchDiscountRule(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			DiscountRule discountRule)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/discounts/{id}/discountRules/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public Page<DiscountRule> getDiscountIdDiscountRulesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/discounts/{id}/discountRules/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "DiscountRule")})
+	public DiscountRule postDiscountIdDiscountRule(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			DiscountRule discountRule)
 		throws Exception {

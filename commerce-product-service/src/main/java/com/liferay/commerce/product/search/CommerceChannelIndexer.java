@@ -70,9 +70,8 @@ public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		long companyId = searchContext.getCompanyId();
-
-		contextBooleanFilter.addRequiredTerm(Field.COMPANY_ID, companyId);
+		contextBooleanFilter.addRequiredTerm(
+			Field.COMPANY_ID, searchContext.getCompanyId());
 
 		String channelId = GetterUtil.getString(
 			searchContext.getAttribute(Field.ENTRY_CLASS_PK));
@@ -147,19 +146,14 @@ public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 
 	@Override
 	protected void doReindex(CommerceChannel commerceChannel) throws Exception {
-		Document document = getDocument(commerceChannel);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceChannel.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceChannel.getCompanyId(),
+			getDocument(commerceChannel), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.getCommerceChannel(classPK);
-
-		doReindex(commerceChannel);
+		doReindex(_commerceChannelLocalService.getCommerceChannel(classPK));
 	}
 
 	@Override
@@ -179,9 +173,8 @@ public class CommerceChannelIndexer extends BaseIndexer<CommerceChannel> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceChannel commerceChannel) -> {
 				try {
-					Document document = getDocument(commerceChannel);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceChannel));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

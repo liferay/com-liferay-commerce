@@ -1,6 +1,6 @@
 [
 	{
-		"icon": "icon-catalog.png",
+		"icon": "icon_catalog.png",
 		"layoutTemplateId": "minium_sidebar",
 		"name": "Catalog",
 		"portlets": [
@@ -12,16 +12,21 @@
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
+				"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet_INSTANCE_minium"
 			},
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 2,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet"
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
 			},
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 3,
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet"
+			},
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 4,
 				"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet"
 			},
 			{
@@ -70,9 +75,9 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-orders.png",
+		"icon": "icon_orders.png",
 		"layoutTemplateId": "1_column",
-		"name": "Open Carts",
+		"name": "Pending Orders",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -83,7 +88,7 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-orders.png",
+		"icon": "icon_orders.png",
 		"layoutTemplateId": "1_column",
 		"name": "Placed Orders",
 		"portlets": [
@@ -116,9 +121,9 @@
 		"privateLayout": true
 	},
 	{
-		"icon": "icon-account-management.png",
+		"icon": "icon_account_management.png",
 		"layoutTemplateId": "1_column",
-		"name": "Accounts",
+		"name": "Account Management",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -156,7 +161,7 @@
 	},
 	{
 		"hidden": true,
-		"layoutTemplateId": "2_columns_ii",
+		"layoutTemplateId": "minium_sidebar",
 		"name": "Lists",
 		"portlets": [
 			{

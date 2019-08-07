@@ -82,17 +82,16 @@ public class CommercePriceListTestUtil {
 		long groupId = commercePriceList.getGroupId();
 
 		CommerceAccountGroup commerceAccountGroup = null;
+
 		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
 			groupId, organizationIds);*/
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CommercePriceListCommerceAccountGroupRelServiceUtil.
 			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				RandomTestUtil.randomInt(), serviceContext);
+				RandomTestUtil.randomInt(),
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static void addRoleSegmentToPriceList(
@@ -102,17 +101,16 @@ public class CommercePriceListTestUtil {
 		long groupId = commercePriceList.getGroupId();
 
 		CommerceAccountGroup commerceAccountGroup = null;
+
 		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
 			groupId, organizationIds);*/
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CommercePriceListCommerceAccountGroupRelServiceUtil.
 			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				RandomTestUtil.randomInt(), serviceContext);
+				RandomTestUtil.randomInt(),
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static CommercePriceList addUserPriceList(
@@ -123,17 +121,16 @@ public class CommercePriceListTestUtil {
 			groupId, priority);
 
 		CommerceAccountGroup commerceAccountGroup = null;
+
 		/*CommerceAccountGroupTestUtil.addOrganizationCommerceAccountGroup(
 			groupId, organizationIds);*/
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CommercePriceListCommerceAccountGroupRelServiceUtil.
 			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				RandomTestUtil.randomInt(), serviceContext);
+				RandomTestUtil.randomInt(),
+				ServiceContextTestUtil.getServiceContext(groupId));
 
 		return commercePriceList;
 	}

@@ -94,8 +94,6 @@ public class CommercePlacedOrderItemClayTable
 
 		clayTableSchemaBuilder.addField("total", "total");
 
-		clayTableSchemaBuilder.addField("total", "total");
-
 		clayTableSchemaBuilder.addField("shippedQuantity", "shippedQuantity");
 
 		ClayTableSchemaField clayTableSchemaField =

@@ -59,10 +59,9 @@ public class CommerceInventoryWarehousesImporter {
 			new ArrayList<>(jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			CommerceInventoryWarehouse commerceInventoryWarehouse =
-				_importCommerceInventoryWarehouse(jsonObject, serviceContext);
+				_importCommerceInventoryWarehouse(
+					jsonArray.getJSONObject(i), serviceContext);
 
 			commerceInventoryWarehouses.add(commerceInventoryWarehouse);
 		}

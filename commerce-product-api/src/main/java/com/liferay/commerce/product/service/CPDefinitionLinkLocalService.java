@@ -102,10 +102,12 @@ public interface CPDefinitionLinkLocalService
 	 *
 	 * @param cpDefinitionLink the cp definition link
 	 * @return the cp definition link that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	public CPDefinitionLink deleteCPDefinitionLink(
-		CPDefinitionLink cpDefinitionLink);
+			CPDefinitionLink cpDefinitionLink)
+		throws PortalException;
 
 	/**
 	 * Deletes the cp definition link with the primary key from the database. Also notifies the appropriate model listeners.
@@ -122,11 +124,14 @@ public interface CPDefinitionLinkLocalService
 	 * @deprecated As of Mueller (7.2.x)
 	 */
 	@Deprecated
-	public void deleteCPDefinitionLinks(long cpDefinitionId);
+	public void deleteCPDefinitionLinks(long cpDefinitionId)
+		throws PortalException;
 
-	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId);
+	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId)
+		throws PortalException;
 
-	public void deleteCPDefinitionLinksByCProductId(long cProductId);
+	public void deleteCPDefinitionLinksByCProductId(long cProductId)
+		throws PortalException;
 
 	/**
 	 * @throws PortalException

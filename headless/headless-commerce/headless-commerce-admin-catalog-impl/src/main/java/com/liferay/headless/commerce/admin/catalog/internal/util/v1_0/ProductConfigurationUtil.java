@@ -19,19 +19,19 @@ import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 public class ProductConfigurationUtil {
 
 	public static CPDefinitionInventory updateCPDefinitionInventory(
+			long groupId,
 			CPDefinitionInventoryService cpDefinitionInventoryService,
-			ProductConfiguration productConfiguration, long cpDefinitionId,
-			ServiceContext serviceContext)
+			ProductConfiguration productConfiguration, long cpDefinitionId)
 		throws PortalException {
 
 		CPDefinitionInventory cpDefinitionInventory =
@@ -64,13 +64,12 @@ public class ProductConfigurationUtil {
 					GetterUtil.get(
 						productConfiguration.getMultipleOrderQuantity(),
 						CPDefinitionInventoryConstants.
-							DEFAULT_MULTIPLE_ORDER_QUANTITY),
-					serviceContext);
+							DEFAULT_MULTIPLE_ORDER_QUANTITY));
 		}
 		else {
 			cpDefinitionInventory =
 				cpDefinitionInventoryService.updateCPDefinitionInventory(
-					cpDefinitionInventory.getCPDefinitionInventoryId(),
+					groupId, cpDefinitionInventory.getCPDefinitionInventoryId(),
 					GetterUtil.get(
 						productConfiguration.getInventoryEngine(),
 						cpDefinitionInventory.getCPDefinitionInventoryEngine()),
@@ -99,8 +98,7 @@ public class ProductConfigurationUtil {
 						cpDefinitionInventory, productConfiguration),
 					GetterUtil.get(
 						productConfiguration.getMultipleOrderQuantity(),
-						cpDefinitionInventory.getMultipleOrderQuantity()),
-					serviceContext);
+						cpDefinitionInventory.getMultipleOrderQuantity()));
 		}
 
 		return cpDefinitionInventory;

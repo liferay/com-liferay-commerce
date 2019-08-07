@@ -15,13 +15,21 @@
 package com.liferay.headless.commerce.admin.pricing.internal.graphql.query.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountAccountGroup;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountCategory;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountProduct;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
+import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceListAccountGroup;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountAccountGroupResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountCategoryResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountProductResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.DiscountRuleResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
+import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListAccountGroupResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListResource;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.TierPriceResource;
 import com.liferay.petra.function.UnsafeConsumer;
@@ -56,6 +64,30 @@ public class Query {
 			discountResourceComponentServiceObjects;
 	}
 
+	public static void setDiscountAccountGroupResourceComponentServiceObjects(
+		ComponentServiceObjects<DiscountAccountGroupResource>
+			discountAccountGroupResourceComponentServiceObjects) {
+
+		_discountAccountGroupResourceComponentServiceObjects =
+			discountAccountGroupResourceComponentServiceObjects;
+	}
+
+	public static void setDiscountCategoryResourceComponentServiceObjects(
+		ComponentServiceObjects<DiscountCategoryResource>
+			discountCategoryResourceComponentServiceObjects) {
+
+		_discountCategoryResourceComponentServiceObjects =
+			discountCategoryResourceComponentServiceObjects;
+	}
+
+	public static void setDiscountProductResourceComponentServiceObjects(
+		ComponentServiceObjects<DiscountProductResource>
+			discountProductResourceComponentServiceObjects) {
+
+		_discountProductResourceComponentServiceObjects =
+			discountProductResourceComponentServiceObjects;
+	}
+
 	public static void setDiscountRuleResourceComponentServiceObjects(
 		ComponentServiceObjects<DiscountRuleResource>
 			discountRuleResourceComponentServiceObjects) {
@@ -80,40 +112,20 @@ public class Query {
 			priceListResourceComponentServiceObjects;
 	}
 
+	public static void setPriceListAccountGroupResourceComponentServiceObjects(
+		ComponentServiceObjects<PriceListAccountGroupResource>
+			priceListAccountGroupResourceComponentServiceObjects) {
+
+		_priceListAccountGroupResourceComponentServiceObjects =
+			priceListAccountGroupResourceComponentServiceObjects;
+	}
+
 	public static void setTierPriceResourceComponentServiceObjects(
 		ComponentServiceObjects<TierPriceResource>
 			tierPriceResourceComponentServiceObjects) {
 
 		_tierPriceResourceComponentServiceObjects =
 			tierPriceResourceComponentServiceObjects;
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Discount getDiscount(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_discountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			discountResource -> discountResource.getDiscount(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<DiscountRule> getDiscountDiscountRulesPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_discountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			discountResource -> {
-				Page paginationPage =
-					discountResource.getDiscountDiscountRulesPage(
-						id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
 	}
 
 	@GraphQLField
@@ -136,6 +148,186 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public Discount getDiscountByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountResource ->
+				discountResource.getDiscountByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Discount getDiscount(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_discountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountResource -> discountResource.getDiscount(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountAccountGroup>
+			getDiscountByExternalReferenceCodeDiscountAccountGroupsPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountAccountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountAccountGroupResource -> {
+				Page paginationPage =
+					discountAccountGroupResource.
+						getDiscountByExternalReferenceCodeDiscountAccountGroupsPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountAccountGroup>
+			getDiscountIdDiscountAccountGroupsPage(
+				@GraphQLName("id") Long id,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountAccountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountAccountGroupResource -> {
+				Page paginationPage =
+					discountAccountGroupResource.
+						getDiscountIdDiscountAccountGroupsPage(
+							id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountCategory>
+			getDiscountByExternalReferenceCodeDiscountCategoriesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountCategoryResource -> {
+				Page paginationPage =
+					discountCategoryResource.
+						getDiscountByExternalReferenceCodeDiscountCategoriesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountCategory> getDiscountIdDiscountCategoriesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountCategoryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountCategoryResource -> {
+				Page paginationPage =
+					discountCategoryResource.
+						getDiscountIdDiscountCategoriesPage(
+							id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountProduct>
+			getDiscountByExternalReferenceCodeDiscountProductsPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountProductResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountProductResource -> {
+				Page paginationPage =
+					discountProductResource.
+						getDiscountByExternalReferenceCodeDiscountProductsPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountProduct> getDiscountIdDiscountProductsPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountProductResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountProductResource -> {
+				Page paginationPage =
+					discountProductResource.getDiscountIdDiscountProductsPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DiscountRule>
+			getDiscountByExternalReferenceCodeDiscountRulesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountRuleResource -> {
+				Page paginationPage =
+					discountRuleResource.
+						getDiscountByExternalReferenceCodeDiscountRulesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public DiscountRule getDiscountRule(@GraphQLName("id") Long id)
 		throws Exception {
 
@@ -147,7 +339,40 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public PriceEntry getPriceEntry(@GraphQLName("id") String id)
+	public Collection<DiscountRule> getDiscountIdDiscountRulesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_discountRuleResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			discountRuleResource -> {
+				Page paginationPage =
+					discountRuleResource.getDiscountIdDiscountRulesPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public PriceEntry getPriceEntryByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_priceEntryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceEntryResource ->
+				priceEntryResource.getPriceEntryByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public PriceEntry getPriceEntry(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -158,8 +383,32 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<TierPrice> getPriceEntryTierPricesPage(
-			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
+	public Collection<PriceEntry>
+			getPriceListByExternalReferenceCodePriceEntriesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_priceEntryResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceEntryResource -> {
+				Page paginationPage =
+					priceEntryResource.
+						getPriceListByExternalReferenceCodePriceEntriesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<PriceEntry> getPriceListIdPriceEntriesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
@@ -168,41 +417,11 @@ public class Query {
 			this::_populateResourceContext,
 			priceEntryResource -> {
 				Page paginationPage =
-					priceEntryResource.getPriceEntryTierPricesPage(
+					priceEntryResource.getPriceListIdPriceEntriesPage(
 						id, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<PriceEntry> getPriceListPriceEntriesPage(
-			@GraphQLName("id") String id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_priceListResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			priceListResource -> {
-				Page paginationPage =
-					priceListResource.getPriceListPriceEntriesPage(
-						id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public PriceList getPriceList(@GraphQLName("id") String id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_priceListResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			priceListResource -> priceListResource.getPriceList(id));
 	}
 
 	@GraphQLField
@@ -225,9 +444,133 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public TierPrice getTierPrice(@GraphQLName("id") String id)
+	public PriceList getPriceListByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
+		return _applyComponentServiceObjects(
+			_priceListResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceListResource ->
+				priceListResource.getPriceListByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public PriceList getPriceList(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_priceListResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceListResource -> priceListResource.getPriceList(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<PriceListAccountGroup>
+			getPriceListByExternalReferenceCodePriceListAccountGroupPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_priceListAccountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceListAccountGroupResource -> {
+				Page paginationPage =
+					priceListAccountGroupResource.
+						getPriceListByExternalReferenceCodePriceListAccountGroupPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<PriceListAccountGroup>
+			getPriceListIdPriceListAccountGroupsPage(
+				@GraphQLName("id") Long id,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_priceListAccountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			priceListAccountGroupResource -> {
+				Page paginationPage =
+					priceListAccountGroupResource.
+						getPriceListIdPriceListAccountGroupsPage(
+							id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<TierPrice>
+			getPriceEntryByExternalReferenceCodeTierPricesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_tierPriceResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			tierPriceResource -> {
+				Page paginationPage =
+					tierPriceResource.
+						getPriceEntryByExternalReferenceCodeTierPricesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<TierPrice> getPriceEntryIdTierPricesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_tierPriceResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			tierPriceResource -> {
+				Page paginationPage =
+					tierPriceResource.getPriceEntryIdTierPricesPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public TierPrice getTierPriceByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_tierPriceResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			tierPriceResource ->
+				tierPriceResource.getTierPriceByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public TierPrice getTierPrice(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
 			_tierPriceResourceComponentServiceObjects,
 			this::_populateResourceContext,
@@ -262,6 +605,33 @@ public class Query {
 	}
 
 	private void _populateResourceContext(
+			DiscountAccountGroupResource discountAccountGroupResource)
+		throws Exception {
+
+		discountAccountGroupResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(
+			DiscountCategoryResource discountCategoryResource)
+		throws Exception {
+
+		discountCategoryResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(
+			DiscountProductResource discountProductResource)
+		throws Exception {
+
+		discountProductResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
+	private void _populateResourceContext(
 			DiscountRuleResource discountRuleResource)
 		throws Exception {
 
@@ -286,6 +656,15 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(
+			PriceListAccountGroupResource priceListAccountGroupResource)
+		throws Exception {
+
+		priceListAccountGroupResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(TierPriceResource tierPriceResource)
 		throws Exception {
 
@@ -296,12 +675,20 @@ public class Query {
 
 	private static ComponentServiceObjects<DiscountResource>
 		_discountResourceComponentServiceObjects;
+	private static ComponentServiceObjects<DiscountAccountGroupResource>
+		_discountAccountGroupResourceComponentServiceObjects;
+	private static ComponentServiceObjects<DiscountCategoryResource>
+		_discountCategoryResourceComponentServiceObjects;
+	private static ComponentServiceObjects<DiscountProductResource>
+		_discountProductResourceComponentServiceObjects;
 	private static ComponentServiceObjects<DiscountRuleResource>
 		_discountRuleResourceComponentServiceObjects;
 	private static ComponentServiceObjects<PriceEntryResource>
 		_priceEntryResourceComponentServiceObjects;
 	private static ComponentServiceObjects<PriceListResource>
 		_priceListResourceComponentServiceObjects;
+	private static ComponentServiceObjects<PriceListAccountGroupResource>
+		_priceListAccountGroupResourceComponentServiceObjects;
 	private static ComponentServiceObjects<TierPriceResource>
 		_tierPriceResourceComponentServiceObjects;
 

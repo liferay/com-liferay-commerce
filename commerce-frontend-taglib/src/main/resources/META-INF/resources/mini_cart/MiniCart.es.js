@@ -266,16 +266,11 @@ class Cart extends Component {
 
 	_sendUpdateRequest(productId) {
 		return fetch(
-			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
+			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&
+					commerceAccountId=${this.commerceAccountId}&quantity=${this._getProductProperty(productId, 'quantity')}`,
 			{
-				body: JSON.stringify(
-					{
-						cartItem: {
-							quantity: this._getProductProperty(productId, 'quantity')
-						}
-					}
-				),
-				headers: new Headers({'Content-Type': 'application/json'}),
+				headers: new Headers({'Content-Type': 'application/json',
+					'Accept': 'application/json'}),
 				method: 'PUT'
 			}
 		)

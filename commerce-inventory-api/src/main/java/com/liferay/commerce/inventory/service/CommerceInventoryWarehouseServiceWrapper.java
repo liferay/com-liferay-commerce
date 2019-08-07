@@ -63,6 +63,16 @@ public class CommerceInventoryWarehouseServiceWrapper
 
 	@Override
 	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceInventoryWarehouseService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
+	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
 			geolocateCommerceInventoryWarehouse(
 				long commerceInventoryWarehouseId, double latitude,
 				double longitude)

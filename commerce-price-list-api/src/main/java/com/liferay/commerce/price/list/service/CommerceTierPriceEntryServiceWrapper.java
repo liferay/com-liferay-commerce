@@ -142,6 +142,15 @@ public class CommerceTierPriceEntryServiceWrapper
 			getCommerceTierPriceEntriesCountByCompanyId(companyId);
 	}
 
+	@Override
+	public com.liferay.commerce.price.list.model.CommerceTierPriceEntry
+			getCommerceTierPriceEntry(long commerceTierPriceEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceTierPriceEntryService.getCommerceTierPriceEntry(
+			commerceTierPriceEntryId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

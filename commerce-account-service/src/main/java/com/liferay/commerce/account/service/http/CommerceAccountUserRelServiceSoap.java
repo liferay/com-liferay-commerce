@@ -64,6 +64,30 @@ import java.rmi.RemoteException;
 @ProviderType
 public class CommerceAccountUserRelServiceSoap {
 
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap
+			addCommerceAccountUserRel(
+				long commerceAccountId, long commerceAccountUserId,
+				long[] roleIds,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				returnValue =
+					CommerceAccountUserRelServiceUtil.addCommerceAccountUserRel(
+						commerceAccountId, commerceAccountUserId, roleIds,
+						serviceContext);
+
+			return com.liferay.commerce.account.model.
+				CommerceAccountUserRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void addCommerceAccountUserRels(
 			long commerceAccountId, long[] userIds, String[] emailAddresses,
 			long[] roleIds,
@@ -127,6 +151,28 @@ public class CommerceAccountUserRelServiceSoap {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap
+			fetchCommerceAccountUserRel(
+				com.liferay.commerce.account.service.persistence.
+					CommerceAccountUserRelPK commerceAccountUserRelPK)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				returnValue =
+					CommerceAccountUserRelServiceUtil.
+						fetchCommerceAccountUserRel(commerceAccountUserRelPK);
+
+			return com.liferay.commerce.account.model.
+				CommerceAccountUserRelSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap
 			getCommerceAccountUserRel(
 				com.liferay.commerce.account.service.persistence.
 					CommerceAccountUserRelPK commerceAccountUserRelPK)
@@ -181,6 +227,29 @@ public class CommerceAccountUserRelServiceSoap {
 					getCommerceAccountUserRelsCount(commerceAccountId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountUserRelSoap
+			inviteUser(
+				long commerceAccountId, String emailAddress, long[] roleIds,
+				String userExternalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccountUserRel
+				returnValue = CommerceAccountUserRelServiceUtil.inviteUser(
+					commerceAccountId, emailAddress, roleIds,
+					userExternalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.account.model.
+				CommerceAccountUserRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

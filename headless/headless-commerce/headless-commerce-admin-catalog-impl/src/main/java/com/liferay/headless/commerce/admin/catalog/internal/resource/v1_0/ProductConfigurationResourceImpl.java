@@ -109,11 +109,10 @@ public class ProductConfigurationResourceImpl
 		}
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
-			_cpDefinitionInventoryService, productConfiguration,
-			cpDefinition.getCPDefinitionId(),
-			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
+			cpDefinition.getGroupId(), _cpDefinitionInventoryService,
+			productConfiguration, cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -132,11 +131,10 @@ public class ProductConfigurationResourceImpl
 		}
 
 		ProductConfigurationUtil.updateCPDefinitionInventory(
-			_cpDefinitionInventoryService, productConfiguration,
-			cpDefinition.getCPDefinitionId(),
-			_serviceContextHelper.getServiceContext(cpDefinition.getGroupId()));
+			cpDefinition.getGroupId(), _cpDefinitionInventoryService,
+			productConfiguration, cpDefinition.getCPDefinitionId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

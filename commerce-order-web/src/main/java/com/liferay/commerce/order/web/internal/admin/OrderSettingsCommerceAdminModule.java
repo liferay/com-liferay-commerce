@@ -24,7 +24,6 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalService;
@@ -46,8 +45,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -91,11 +88,8 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			(WorkflowHandlerRegistryUtil.getWorkflowHandler(
 				CommerceOrder.class.getName()) != null)) {
 
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
 			return _portletResourcePermission.contains(
-				permissionChecker, groupId,
+				PermissionThreadLocal.getPermissionChecker(), groupId,
 				CommerceActionKeys.MANAGE_COMMERCE_ORDER_WORKFLOWS);
 		}
 
@@ -119,13 +113,9 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			commerceOrderSettingsDisplayContext);
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
-
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest, httpServletResponse,
+			_servletContext, _portal.getHttpServletRequest(renderRequest),
+			_portal.getHttpServletResponse(renderResponse),
 			"/edit_order_settings.jsp");
 	}
 

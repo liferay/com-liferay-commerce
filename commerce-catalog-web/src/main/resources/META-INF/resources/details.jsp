@@ -25,7 +25,7 @@ List<CommerceCurrency> commerceCurrencies = commerceCatalogDisplayContext.getCom
 boolean isViewOnly = false;
 
 if (commerceCatalog != null) {
-	isViewOnly = !commerceCatalogDisplayContext.hasPermission(commerceCatalog.getCommerceCatalogId(), ActionKeys.UPDATE);
+	isViewOnly = (!commerceCatalogDisplayContext.hasPermission(commerceCatalog.getCommerceCatalogId(), ActionKeys.UPDATE) || commerceCatalog.isSystem());
 }
 
 portletDisplay.setShowBackIcon(true);

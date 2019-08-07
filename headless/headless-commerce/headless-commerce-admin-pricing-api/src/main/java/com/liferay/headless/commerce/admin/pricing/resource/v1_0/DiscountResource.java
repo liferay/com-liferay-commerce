@@ -15,7 +15,6 @@
 package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.Discount;
-import com.liferay.headless.commerce.admin.pricing.dto.v1_0.DiscountRule;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -35,24 +34,28 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface DiscountResource {
 
+	public Page<Discount> getDiscountsPage(Pagination pagination)
+		throws Exception;
+
+	public Discount postDiscount(Discount discount) throws Exception;
+
+	public Response deleteDiscountByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Discount getDiscountByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchDiscountByExternalReferenceCode(
+			String externalReferenceCode, Discount discount)
+		throws Exception;
+
 	public Response deleteDiscount(Long id) throws Exception;
 
 	public Discount getDiscount(Long id) throws Exception;
 
 	public Response patchDiscount(Long id, Discount discount) throws Exception;
-
-	public Page<DiscountRule> getDiscountDiscountRulesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public DiscountRule postDiscountDiscountRule(
-			Long id, DiscountRule discountRule)
-		throws Exception;
-
-	public Page<Discount> getDiscountsPage(Pagination pagination)
-		throws Exception;
-
-	public Discount postDiscount(Discount discount) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

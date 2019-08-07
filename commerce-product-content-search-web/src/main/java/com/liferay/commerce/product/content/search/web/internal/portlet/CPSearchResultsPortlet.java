@@ -195,7 +195,7 @@ public class CPSearchResultsPortlet
 			portletSharedSearchSettings.getParameter("q");
 
 		portletSharedSearchSettings.setKeywords(
-			parameterValueOptional.orElse(StringPool.STAR));
+			parameterValueOptional.orElse(StringPool.BLANK));
 
 		portletSharedSearchSettings.addCondition(
 			new BooleanClauseImpl<Query>(
@@ -217,6 +217,9 @@ public class CPSearchResultsPortlet
 
 		SearchContext searchContext =
 			portletSharedSearchSettings.getSearchContext();
+
+		searchContext.setEntryClassNames(
+			new String[] {CPDefinition.class.getName()});
 
 		searchContext.setAttribute(
 			CPDefinitionIndexer.FIELD_PUBLISHED, Boolean.TRUE);

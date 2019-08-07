@@ -79,6 +79,18 @@ public class CommerceAccountOrganizationRelServiceUtil {
 
 	public static
 		com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+				fetchCommerceAccountOrganizationRel(
+					com.liferay.commerce.account.service.persistence.
+						CommerceAccountOrganizationRelPK
+							commerceAccountOrganizationRelPK)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchCommerceAccountOrganizationRel(
+			commerceAccountOrganizationRelPK);
+	}
+
+	public static
+		com.liferay.commerce.account.model.CommerceAccountOrganizationRel
 				getCommerceAccountOrganizationRel(
 					com.liferay.commerce.account.service.persistence.
 						CommerceAccountOrganizationRelPK

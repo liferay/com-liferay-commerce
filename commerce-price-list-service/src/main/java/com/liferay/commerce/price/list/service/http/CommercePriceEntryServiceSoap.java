@@ -273,6 +273,26 @@ public class CommercePriceEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap
+			getCommercePriceEntry(long commercePriceEntryId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceEntry
+				returnValue =
+					CommercePriceEntryServiceUtil.getCommercePriceEntry(
+						commercePriceEntryId);
+
+			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap[]
 			getInstanceCommercePriceEntries(
 				long cpInstanceId, int start, int end)
@@ -389,6 +409,10 @@ public class CommercePriceEntryServiceSoap {
 		}
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap
 			upsertCommercePriceEntry(
 				long commercePriceEntryId, long cpInstanceId,
@@ -405,6 +429,34 @@ public class CommercePriceEntryServiceSoap {
 						commercePriceEntryId, cpInstanceId, commercePriceListId,
 						externalReferenceCode, price, promoPrice,
 						skuExternalReferenceCode, serviceContext);
+
+			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap
+			upsertCommercePriceEntry(
+				long commercePriceEntryId, long cProductId,
+				String cpInstanceUuid, long commercePriceListId,
+				String externalReferenceCode, java.math.BigDecimal price,
+				java.math.BigDecimal promoPrice,
+				String skuExternalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.CommercePriceEntry
+				returnValue =
+					CommercePriceEntryServiceUtil.upsertCommercePriceEntry(
+						commercePriceEntryId, cProductId, cpInstanceUuid,
+						commercePriceListId, externalReferenceCode, price,
+						promoPrice, skuExternalReferenceCode, serviceContext);
 
 			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.
 				toSoapModel(returnValue);

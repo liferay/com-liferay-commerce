@@ -94,6 +94,8 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -238,16 +240,19 @@ public class CPDefinitionLocalServiceImpl
 		if (Validator.isNotNull(defaultSku)) {
 			ServiceContext cpInstanceServiceContext = new ServiceContext();
 
-			cpInstanceServiceContext.setScopeGroupId(
-				serviceContext.getScopeGroupId());
-			cpInstanceServiceContext.setUserId(serviceContext.getUserId());
+			cpInstanceServiceContext.setScopeGroupId(groupId);
+			cpInstanceServiceContext.setUserId(userId);
 
 			cpInstanceLocalService.addCPInstance(
-				cpDefinitionId, groupId, defaultSku, null, null, true, null,
-				true, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, cpInstanceServiceContext);
+				cpDefinitionId, groupId, defaultSku, null, null, published,
+				null, cpDefinition.getWidth(), cpDefinition.getHeight(),
+				cpDefinition.getDepth(), cpDefinition.getWeight(),
+				BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, published,
+				externalReferenceCode, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				cpInstanceServiceContext);
 		}
 
 		// Commerce product friendly URL
@@ -567,6 +572,17 @@ public class CPDefinitionLocalServiceImpl
 	public CPDefinition deleteCPDefinition(CPDefinition cpDefinition)
 		throws PortalException {
 
+		// Commerce product
+
+		int cpDefinitionsCount = cpDefinitionPersistence.countByC_S(
+			cpDefinition.getCProductId(), WorkflowConstants.STATUS_ANY);
+
+		if (!_isVersioningEnabled() ||
+			(_isVersioningEnabled() && (cpDefinitionsCount == 1))) {
+
+			cProductLocalService.deleteCProduct(cpDefinition.getCProductId());
+		}
+
 		// Commerce product definition localization
 
 		cpDefinitionLocalizationPersistence.removeByCPDefinitionId(
@@ -595,7 +611,7 @@ public class CPDefinitionLocalServiceImpl
 
 		// Commerce product definition links
 
-		cpDefinitionLinkLocalService.deleteCPDefinitionLinks(
+		cpDefinitionLinkLocalService.deleteCPDefinitionLinksByCPDefinitionId(
 			cpDefinition.getCPDefinitionId());
 
 		// Commerce product type
@@ -669,6 +685,11 @@ public class CPDefinitionLocalServiceImpl
 		for (CPDefinition cpDefinition : cpDefinitions) {
 			cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
+	}
+
+	@Override
+	public void deleteCPDefinitions(long cProductId, int status) {
+		cpDefinitionPersistence.removeByC_S(cProductId, status);
 	}
 
 	@Override
@@ -1402,8 +1423,11 @@ public class CPDefinitionLocalServiceImpl
 
 		// Asset
 
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			serviceContext.getCompanyId());
+
 		assetEntryLocalService.updateEntry(
-			serviceContext.getUserId(), cpDefinition.getGroupId(),
+			serviceContext.getUserId(), companyGroup.getGroupId(),
 			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());

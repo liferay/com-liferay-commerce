@@ -25,9 +25,9 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
@@ -172,8 +172,6 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 
 		LinkedHashMap<String, Object> params = new LinkedHashMap<>();
 
-		params.put("keywords", StringPool.STAR);
-
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
@@ -184,12 +182,12 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 
 		searchContext.setCompanyId(cpContentRequestHelper.getCompanyId());
 
-		searchContext.setKeywords(StringPool.STAR);
-
 		CPQuery cpQuery = new CPQuery();
 
+		Company company = cpContentRequestHelper.getCompany();
+
 		cpPublisherWebHelper.setCategoriesAndTags(
-			cpContentRequestHelper.getScopeGroupId(), cpQuery,
+			company.getGroupId(), cpQuery,
 			cpContentRequestHelper.getPortletPreferences());
 
 		cpPublisherWebHelper.setOrdering(

@@ -63,9 +63,11 @@ public interface CPDisplayLayoutLocalService
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDisplayLayoutLocalServiceUtil} to access the cp display layout local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDisplayLayoutLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public CPDisplayLayout addCPDisplayLayout(
-		Class<?> clazz, long classPK, String layoutUuid,
-		ServiceContext serviceContext);
+			Class<?> clazz, long classPK, String layoutUuid,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Adds the cp display layout to the database. Also notifies the appropriate model listeners.
@@ -85,7 +87,8 @@ public interface CPDisplayLayoutLocalService
 	@Transactional(enabled = false)
 	public CPDisplayLayout createCPDisplayLayout(long CPDisplayLayoutId);
 
-	public void deleteCPDisplayLayout(Class<?> clazz, long classPK);
+	@Indexable(type = IndexableType.DELETE)
+	public CPDisplayLayout deleteCPDisplayLayout(Class<?> clazz, long classPK);
 
 	/**
 	 * Deletes the cp display layout from the database. Also notifies the appropriate model listeners.
@@ -301,5 +304,10 @@ public interface CPDisplayLayoutLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CPDisplayLayout updateCPDisplayLayout(
 		CPDisplayLayout cpDisplayLayout);
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CPDisplayLayout updateCPDisplayLayout(
+			long cpDisplayLayoutId, String layoutUuid)
+		throws PortalException;
 
 }

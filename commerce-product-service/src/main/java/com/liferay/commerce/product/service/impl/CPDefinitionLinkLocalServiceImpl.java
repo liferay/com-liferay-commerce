@@ -93,6 +93,10 @@ public class CPDefinitionLinkLocalServiceImpl
 
 		cpDefinitionLinkPersistence.update(cpDefinitionLink);
 
+		CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+		reindexCPDefinition(cProduct.getPublishedCPDefinitionId());
+
 		reindexCPDefinition(cpDefinitionId);
 
 		return cpDefinitionLink;
@@ -100,7 +104,8 @@ public class CPDefinitionLinkLocalServiceImpl
 
 	@Override
 	public CPDefinitionLink deleteCPDefinitionLink(
-		CPDefinitionLink cpDefinitionLink) {
+			CPDefinitionLink cpDefinitionLink)
+		throws PortalException {
 
 		if (cpDefinitionLocalService.isVersionable(
 				cpDefinitionLink.getCPDefinitionId())) {
@@ -129,6 +134,13 @@ public class CPDefinitionLinkLocalServiceImpl
 		expandoRowLocalService.deleteRows(
 			cpDefinitionLink.getCPDefinitionLinkId());
 
+		CProduct cProduct = cProductLocalService.getCProduct(
+			cpDefinitionLink.getCProductId());
+
+		reindexCPDefinition(cProduct.getPublishedCPDefinitionId());
+
+		reindexCPDefinition(cpDefinitionLink.getCPDefinitionId());
+
 		return cpDefinitionLink;
 	}
 
@@ -148,7 +160,9 @@ public class CPDefinitionLinkLocalServiceImpl
 	 */
 	@Deprecated
 	@Override
-	public void deleteCPDefinitionLinks(long cpDefinitionId) {
+	public void deleteCPDefinitionLinks(long cpDefinitionId)
+		throws PortalException {
+
 		deleteCPDefinitionLinksByCPDefinitionId(cpDefinitionId);
 
 		CPDefinition cpDefinition = cpDefinitionPersistence.fetchByPrimaryKey(
@@ -160,7 +174,9 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId) {
+	public void deleteCPDefinitionLinksByCPDefinitionId(long cpDefinitionId)
+		throws PortalException {
+
 		List<CPDefinitionLink> cpDefinitionLinks =
 			cpDefinitionLinkPersistence.findByCPDefinitionId(cpDefinitionId);
 
@@ -171,7 +187,9 @@ public class CPDefinitionLinkLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPDefinitionLinksByCProductId(long cProductId) {
+	public void deleteCPDefinitionLinksByCProductId(long cProductId)
+		throws PortalException {
+
 		List<CPDefinitionLink> cpDefinitionLinks =
 			cpDefinitionLinkPersistence.findByCProductId(cProductId);
 
@@ -302,6 +320,10 @@ public class CPDefinitionLinkLocalServiceImpl
 							serviceContext);
 				}
 			}
+
+			CProduct cProduct = cProductLocalService.getCProduct(cProductId);
+
+			reindexCPDefinition(cProduct.getPublishedCPDefinitionId());
 		}
 
 		reindexCPDefinition(cpDefinitionId);

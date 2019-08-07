@@ -165,6 +165,19 @@ public class CommerceTierPriceEntryServiceImpl
 	}
 
 	@Override
+	public CommerceTierPriceEntry getCommerceTierPriceEntry(
+			long commerceTierPriceEntryId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
+
+		return commerceTierPriceEntryLocalService.getCommerceTierPriceEntry(
+			commerceTierPriceEntryId);
+	}
+
+	@Override
 	public BaseModelSearchResult<CommerceTierPriceEntry>
 			searchCommerceTierPriceEntries(
 				long companyId, long commercePriceEntryId, String keywords,

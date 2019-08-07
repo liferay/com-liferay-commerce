@@ -22,6 +22,8 @@ import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.model.CommerceShippingEngine;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalService;
 import com.liferay.commerce.service.CommerceShipmentLocalService;
 import com.liferay.commerce.shipment.content.web.internal.display.context.util.CommerceShipmentContentRequestHelper;
@@ -40,6 +42,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import java.text.DateFormat;
 import java.text.Format;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -51,12 +54,14 @@ import javax.portlet.RenderRequest;
 public class CommerceShipmentContentDisplayContext {
 
 	public CommerceShipmentContentDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		CommerceShipmentItemLocalService commerceShipmentItemLocalService,
 		CommerceShipmentLocalService commerceShipmentLocalService,
 		CommerceShippingEngineRegistry commerceShippingEngineRegistry,
 		RenderRequest renderRequest) {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
 		_commerceShipmentItemLocalService = commerceShipmentItemLocalService;
 		_commerceShipmentLocalService = commerceShipmentLocalService;
@@ -244,19 +249,24 @@ public class CommerceShipmentContentDisplayContext {
 
 		_searchContainer.setEmptyResultsMessage("no-shipments-were-found");
 
-		CommerceShipment commerceShipment = getCommerceShipment();
+		int total = 0;
+		List<CommerceShipment> results = new ArrayList<>();
 
-		int total = _commerceShipmentLocalService.getCommerceShipmentsCount(
-			new long[] {commerceShipment.getGroupId()});
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				_commerceShipmentContentRequestHelper.getScopeGroupId());
 
-		_searchContainer.setTotal(total);
+		if (commerceChannel != null) {
+			total = _commerceShipmentLocalService.getCommerceShipmentsCount(
+				new long[] {commerceChannel.getGroupId()});
 
-		List<CommerceShipment> results =
-			_commerceShipmentLocalService.getCommerceShipments(
-				new long[] {commerceShipment.getGroupId()},
+			results = _commerceShipmentLocalService.getCommerceShipments(
+				new long[] {commerceChannel.getGroupId()},
 				_searchContainer.getStart(), _searchContainer.getEnd(),
 				new CommerceShipmentCreateDateComparator());
+		}
 
+		_searchContainer.setTotal(total);
 		_searchContainer.setResults(results);
 
 		return _searchContainer;
@@ -281,6 +291,7 @@ public class CommerceShipmentContentDisplayContext {
 		return portletURL.toString();
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CommerceShipment _commerceShipment;
 	private final CommerceShipmentContentRequestHelper

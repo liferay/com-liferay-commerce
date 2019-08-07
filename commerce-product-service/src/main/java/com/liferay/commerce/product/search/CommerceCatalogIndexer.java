@@ -69,9 +69,8 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 			BooleanFilter contextBooleanFilter, SearchContext searchContext)
 		throws Exception {
 
-		long companyId = searchContext.getCompanyId();
-
-		contextBooleanFilter.addRequiredTerm(Field.COMPANY_ID, companyId);
+		contextBooleanFilter.addRequiredTerm(
+			Field.COMPANY_ID, searchContext.getCompanyId());
 
 		String catalogId = GetterUtil.getString(
 			searchContext.getAttribute(Field.ENTRY_CLASS_PK));
@@ -146,19 +145,14 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 
 	@Override
 	protected void doReindex(CommerceCatalog commerceCatalog) throws Exception {
-		Document document = getDocument(commerceCatalog);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), commerceCatalog.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), commerceCatalog.getCompanyId(),
+			getDocument(commerceCatalog), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CommerceCatalog commerceCatalog =
-			_commerceCatalogLocalService.getCommerceCatalog(classPK);
-
-		doReindex(commerceCatalog);
+		doReindex(_commerceCatalogLocalService.getCommerceCatalog(classPK));
 	}
 
 	@Override
@@ -178,9 +172,8 @@ public class CommerceCatalogIndexer extends BaseIndexer<CommerceCatalog> {
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CommerceCatalog commerceCatalog) -> {
 				try {
-					Document document = getDocument(commerceCatalog);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(commerceCatalog));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

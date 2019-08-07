@@ -184,7 +184,7 @@ public abstract class BaseAccountGroupResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/accountGroup/")
+	@Path("/accountGroups/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "AccountGroup")})
 	public AccountGroup postAccountGroup(AccountGroup accountGroup)

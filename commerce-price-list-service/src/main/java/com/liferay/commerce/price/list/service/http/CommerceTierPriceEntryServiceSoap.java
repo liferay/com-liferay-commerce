@@ -290,6 +290,27 @@ public class CommerceTierPriceEntryServiceSoap {
 
 	public static
 		com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap
+				getCommerceTierPriceEntry(long commerceTierPriceEntryId)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.price.list.model.CommerceTierPriceEntry
+				returnValue =
+					CommerceTierPriceEntryServiceUtil.getCommerceTierPriceEntry(
+						commerceTierPriceEntryId);
+
+			return com.liferay.commerce.price.list.model.
+				CommerceTierPriceEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap
 				updateCommerceTierPriceEntry(
 					long commerceTierPriceEntryId, java.math.BigDecimal price,
 					java.math.BigDecimal promoPrice, int minQuantity,

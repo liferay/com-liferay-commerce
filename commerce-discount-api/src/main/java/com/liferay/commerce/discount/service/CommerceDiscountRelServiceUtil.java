@@ -56,6 +56,13 @@ public class CommerceDiscountRelServiceUtil {
 		getService().deleteCommerceDiscountRel(commerceDiscountRelId);
 	}
 
+	public static com.liferay.commerce.discount.model.CommerceDiscountRel
+			fetchCommerceDiscountRel(String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchCommerceDiscountRel(className, classPK);
+	}
+
 	public static long[] getClassPKs(long commerceDiscountId, String className)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

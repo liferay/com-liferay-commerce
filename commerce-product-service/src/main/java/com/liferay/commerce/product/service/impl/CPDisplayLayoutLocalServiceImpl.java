@@ -14,23 +14,33 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.CPDisplayLayoutEntryException;
+import com.liferay.commerce.product.exception.CPDisplayLayoutLayoutUuidException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.base.CPDisplayLayoutLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CPDisplayLayoutLocalServiceImpl
 	extends CPDisplayLayoutLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPDisplayLayout addCPDisplayLayout(
-		Class<?> clazz, long classPK, String layoutUuid,
-		ServiceContext serviceContext) {
+			Class<?> clazz, long classPK, String layoutUuid,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		validate(classPK, layoutUuid);
 
 		long classNameId = classNameLocalService.getClassNameId(clazz);
 
@@ -74,8 +84,9 @@ public class CPDisplayLayoutLocalServiceImpl
 		return cpDisplayLayoutPersistence.update(cpDisplayLayout);
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public void deleteCPDisplayLayout(Class<?> clazz, long classPK) {
+	public CPDisplayLayout deleteCPDisplayLayout(Class<?> clazz, long classPK) {
 		long classNameId = classNameLocalService.getClassNameId(clazz);
 
 		CPDisplayLayout cpDisplayLayout = cpDisplayLayoutPersistence.fetchByC_C(
@@ -97,15 +108,44 @@ public class CPDisplayLayoutLocalServiceImpl
 				}
 			}
 
-			cpDisplayLayoutPersistence.remove(cpDisplayLayout);
+			return cpDisplayLayoutPersistence.remove(cpDisplayLayout);
 		}
+
+		return null;
 	}
 
 	@Override
 	public CPDisplayLayout fetchCPDisplayLayout(Class<?> clazz, long classPK) {
-		long classNameId = classNameLocalService.getClassNameId(clazz);
+		return cpDisplayLayoutPersistence.fetchByC_C(
+			classNameLocalService.getClassNameId(clazz), classPK);
+	}
 
-		return cpDisplayLayoutPersistence.fetchByC_C(classNameId, classPK);
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPDisplayLayout updateCPDisplayLayout(
+			long cpDisplayLayoutId, String layoutUuid)
+		throws PortalException {
+
+		CPDisplayLayout cpDisplayLayout =
+			cpDisplayLayoutPersistence.findByPrimaryKey(cpDisplayLayoutId);
+
+		validate(cpDisplayLayout.getClassPK(), layoutUuid);
+
+		cpDisplayLayout.setLayoutUuid(layoutUuid);
+
+		return cpDisplayLayoutPersistence.update(cpDisplayLayout);
+	}
+
+	protected void validate(long classPK, String layoutUuid)
+		throws PortalException {
+
+		if (classPK <= 0) {
+			throw new CPDisplayLayoutEntryException();
+		}
+
+		if (Validator.isNull(layoutUuid)) {
+			throw new CPDisplayLayoutLayoutUuidException();
+		}
 	}
 
 }

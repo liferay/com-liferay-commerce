@@ -36,16 +36,20 @@ if (messageLocalizedValuesMap != null) {
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<aui:field-wrapper label="message">
-				<liferay-ui:input-localized
-					editorName="alloyeditor"
-					fieldPrefix="settings"
-					fieldPrefixSeparator="--"
-					name="message"
-					type="editor"
-					xml="<%= messageXml %>"
-				/>
-			</aui:field-wrapper>
+			<aui:input helpMessage="this-toggles-whether-the-money-order-message-page-is-shown-as-a-checkout-step-or-not" label="show-message-page" labelOff="no" labelOn="yes" name="settings--showMessagePage--" type="toggle-switch" value="<%= moneyOrderGroupServiceConfiguration.showMessagePage() %>" />
+
+			<div id="<portlet:namespace />message">
+				<aui:field-wrapper label="message">
+					<liferay-ui:input-localized
+						editorName="alloyeditor"
+						fieldPrefix="settings"
+						fieldPrefixSeparator="--"
+						name="message"
+						type="editor"
+						xml="<%= messageXml %>"
+					/>
+				</aui:field-wrapper>
+			</div>
 		</aui:fieldset>
 	</aui:fieldset-group>
 
@@ -55,3 +59,7 @@ if (messageLocalizedValuesMap != null) {
 		<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	Liferay.Util.toggleBoxes('<portlet:namespace />showMessagePage', '<portlet:namespace />message');
+</aui:script>

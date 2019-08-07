@@ -183,10 +183,11 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 
 		if (commerceCatalog == null) {
 			commerceCatalog = _commerceCatalogService.addCommerceCatalog(
-				commerceCatalog.getName(), catalog.getCurrencyCode(),
+				catalog.getName(), catalog.getCurrencyCode(),
 				catalog.getDefaultLanguageId(),
 				catalog.getExternalReferenceCode(),
-				_serviceContextHelper.getServiceContext());
+				_serviceContextHelper.getServiceContext(
+					commerceCatalog.getGroupId()));
 		}
 		else {
 			commerceCatalog = _commerceCatalogService.updateCommerceCatalog(

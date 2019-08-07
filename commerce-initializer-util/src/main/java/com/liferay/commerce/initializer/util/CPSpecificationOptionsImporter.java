@@ -59,10 +59,9 @@ public class CPSpecificationOptionsImporter {
 			jsonArray.length());
 
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
 			CPSpecificationOption cpSpecificationOption =
-				_importCPSpecificationOption(jsonObject, serviceContext);
+				_importCPSpecificationOption(
+					jsonArray.getJSONObject(i), serviceContext);
 
 			cpSpecificationOptions.add(cpSpecificationOption);
 		}

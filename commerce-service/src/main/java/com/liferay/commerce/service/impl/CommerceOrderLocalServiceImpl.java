@@ -723,18 +723,12 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTaxAmount(taxValue.getPrice());
 		commerceOrder.setTotal(total.getPrice());
 
-		CommerceDiscountValue shippingDiscountValue =
-			commerceOrderPrice.getShippingDiscountValue();
-		CommerceDiscountValue subtotalDiscountValue =
-			commerceOrderPrice.getSubtotalDiscountValue();
-		CommerceDiscountValue totalDiscountValue =
-			commerceOrderPrice.getTotalDiscountValue();
-
 		_setCommerceOrderShippingDiscountValue(
-			commerceOrder, shippingDiscountValue);
+			commerceOrder, commerceOrderPrice.getShippingDiscountValue());
 		_setCommerceOrderSubtotalDiscountValue(
-			commerceOrder, subtotalDiscountValue);
-		_setCommerceOrderTotalDiscountValue(commerceOrder, totalDiscountValue);
+			commerceOrder, commerceOrderPrice.getSubtotalDiscountValue());
+		_setCommerceOrderTotalDiscountValue(
+			commerceOrder, commerceOrderPrice.getTotalDiscountValue());
 
 		return commerceOrderPersistence.update(commerceOrder);
 	}
@@ -932,6 +926,18 @@ public class CommerceOrderLocalServiceImpl
 			String advanceStatus, String externalReferenceCode,
 			CommerceContext commerceContext)
 		throws PortalException {
+
+		if (subtotal == null) {
+			subtotal = BigDecimal.ZERO;
+		}
+
+		if (shippingAmount == null) {
+			shippingAmount = BigDecimal.ZERO;
+		}
+
+		if (total == null) {
+			total = BigDecimal.ZERO;
+		}
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
@@ -1256,12 +1262,16 @@ public class CommerceOrderLocalServiceImpl
 
 		// Add
 
-		return commerceOrderLocalService.addCommerceOrder(
+		commerceOrder = commerceOrderLocalService.addCommerceOrder(
 			userId, groupId, commerceAccountId, commerceCurrencyId,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
 			serviceContext);
+
+		commerceOrder.setExternalReferenceCode(externalReferenceCode);
+
+		return commerceOrderPersistence.update(commerceOrder);
 	}
 
 	protected String getCommerceOrderPaymentContent(
@@ -1523,10 +1533,9 @@ public class CommerceOrderLocalServiceImpl
 	protected void validateOrderStatus(long commerceOrderId, int orderStatus)
 		throws PortalException {
 
-		int[] availableOrderStatuses = getAvailableOrderStatuses(
-			commerceOrderId);
+		if (!ArrayUtil.contains(
+				getAvailableOrderStatuses(commerceOrderId), orderStatus)) {
 
-		if (!ArrayUtil.contains(availableOrderStatuses, orderStatus)) {
 			throw new CommerceOrderStatusException();
 		}
 	}

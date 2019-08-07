@@ -51,11 +51,9 @@ public class AvailabilityEstimateHelper {
 	public AvailabilityEstimate getAvailabilityEstimate(Long id)
 		throws PortalException {
 
-		CommerceAvailabilityEstimate commerceAvailabilityEstimate =
+		return _dtoMapper.modelToDTO(
 			_commerceAvailabilityEstimateService.
-				getCommerceAvailabilityEstimate(id);
-
-		return _dtoMapper.modelToDTO(commerceAvailabilityEstimate);
+				getCommerceAvailabilityEstimate(id));
 	}
 
 	public Page<AvailabilityEstimate> getAvailabilityEstimates(

@@ -56,6 +56,8 @@ public class CPDefinitionItemSelectorViewDisplayContext
 
 		_cpDefinitionService = cpDefinitionService;
 		_cpTypeServicesTracker = cpTypeServicesTracker;
+
+		setDefaultOrderByCol("name");
 	}
 
 	public long getCPDefinitionId() {
@@ -81,6 +83,9 @@ public class CPDefinitionItemSelectorViewDisplayContext
 					httpServletRequest, "checkedCPDefinitionIds"));
 		}
 
+		portletURL.setParameter(
+			"singleSelection", Boolean.toString(isSingleSelection()));
+
 		return portletURL;
 	}
 
@@ -101,14 +106,17 @@ public class CPDefinitionItemSelectorViewDisplayContext
 			CPItemSelectorViewUtil.getCPDefinitionOrderByComparator(
 				getOrderByCol(), getOrderByType());
 
-		RowChecker rowChecker = new CPDefinitionItemSelectorChecker(
-			cpRequestHelper.getRenderResponse(), getCheckedCPDefinitionIds(),
-			getDisabledCPDefinitionIds());
-
 		searchContainer.setOrderByCol(getOrderByCol());
 		searchContainer.setOrderByComparator(orderByComparator);
 		searchContainer.setOrderByType(getOrderByType());
-		searchContainer.setRowChecker(rowChecker);
+
+		if (!isSingleSelection()) {
+			RowChecker rowChecker = new CPDefinitionItemSelectorChecker(
+				cpRequestHelper.getRenderResponse(),
+				getCheckedCPDefinitionIds(), getDisabledCPDefinitionIds());
+
+			searchContainer.setRowChecker(rowChecker);
+		}
 
 		int total;
 		List<CPDefinition> results;
@@ -141,6 +149,10 @@ public class CPDefinitionItemSelectorViewDisplayContext
 		CPInstance cpInstance = cpInstances.get(0);
 
 		return cpInstance.getSku();
+	}
+
+	public boolean isSingleSelection() {
+		return ParamUtil.getBoolean(httpServletRequest, "singleSelection");
 	}
 
 	protected long[] getCheckedCPDefinitionIds() {

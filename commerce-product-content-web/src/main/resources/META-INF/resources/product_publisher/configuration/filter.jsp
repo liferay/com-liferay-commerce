@@ -47,9 +47,10 @@ CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = 
 
 <%
 Map<String, Object> context = new HashMap<>();
+
 context.put("categorySelectorURL", cpPublisherConfigurationDisplayContext.getCategorySelectorURL());
 context.put("id", "autofield");
-context.put("groupIds", String.valueOf(scopeGroupId));
+context.put("groupIds", String.valueOf(company.getGroupId()));
 context.put("namespace", liferayPortletResponse.getNamespace());
 context.put("pathThemeImages", themeDisplay.getPathThemeImages());
 context.put("rules", cpPublisherConfigurationDisplayContext.getAutoFieldRulesJSONArray());

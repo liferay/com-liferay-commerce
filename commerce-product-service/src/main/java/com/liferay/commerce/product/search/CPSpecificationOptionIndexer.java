@@ -213,20 +213,16 @@ public class CPSpecificationOptionIndexer
 	protected void doReindex(CPSpecificationOption cpSpecificationOption)
 		throws Exception {
 
-		Document document = getDocument(cpSpecificationOption);
-
 		_indexWriterHelper.updateDocument(
-			getSearchEngineId(), cpSpecificationOption.getCompanyId(), document,
-			isCommitImmediately());
+			getSearchEngineId(), cpSpecificationOption.getCompanyId(),
+			getDocument(cpSpecificationOption), isCommitImmediately());
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		CPSpecificationOption cpSpecificationOption =
+		doReindex(
 			_cpSpecificationOptionLocalService.getCPSpecificationOption(
-				classPK);
-
-		doReindex(cpSpecificationOption);
+				classPK));
 	}
 
 	@Override
@@ -247,9 +243,8 @@ public class CPSpecificationOptionIndexer
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(CPSpecificationOption cpSpecificationOption) -> {
 				try {
-					Document document = getDocument(cpSpecificationOption);
-
-					indexableActionableDynamicQuery.addDocuments(document);
+					indexableActionableDynamicQuery.addDocuments(
+						getDocument(cpSpecificationOption));
 				}
 				catch (PortalException pe) {
 					if (_log.isWarnEnabled()) {

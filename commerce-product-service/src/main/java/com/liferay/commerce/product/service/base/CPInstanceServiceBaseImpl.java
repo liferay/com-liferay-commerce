@@ -787,6 +787,29 @@ public abstract class CPInstanceServiceBaseImpl
 	}
 
 	/**
+	 * Returns the cp display layout remote service.
+	 *
+	 * @return the cp display layout remote service
+	 */
+	public com.liferay.commerce.product.service.CPDisplayLayoutService
+		getCPDisplayLayoutService() {
+
+		return cpDisplayLayoutService;
+	}
+
+	/**
+	 * Sets the cp display layout remote service.
+	 *
+	 * @param cpDisplayLayoutService the cp display layout remote service
+	 */
+	public void setCPDisplayLayoutService(
+		com.liferay.commerce.product.service.CPDisplayLayoutService
+			cpDisplayLayoutService) {
+
+		this.cpDisplayLayoutService = cpDisplayLayoutService;
+	}
+
+	/**
 	 * Returns the cp display layout persistence.
 	 *
 	 * @return the cp display layout persistence
@@ -1839,6 +1862,12 @@ public abstract class CPInstanceServiceBaseImpl
 	)
 	protected com.liferay.commerce.product.service.CPDisplayLayoutLocalService
 		cpDisplayLayoutLocalService;
+
+	@BeanReference(
+		type = com.liferay.commerce.product.service.CPDisplayLayoutService.class
+	)
+	protected com.liferay.commerce.product.service.CPDisplayLayoutService
+		cpDisplayLayoutService;
 
 	@BeanReference(type = CPDisplayLayoutPersistence.class)
 	protected CPDisplayLayoutPersistence cpDisplayLayoutPersistence;

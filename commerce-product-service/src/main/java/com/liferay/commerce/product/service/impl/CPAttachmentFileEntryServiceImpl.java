@@ -332,11 +332,9 @@ public class CPAttachmentFileEntryServiceImpl
 			long cpAttachmentFileEntryId)
 		throws PortalException {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
+		checkCPAttachmentFileEntryPermissions(
 			cpAttachmentFileEntryLocalService.getCPAttachmentFileEntry(
-				cpAttachmentFileEntryId);
-
-		checkCPAttachmentFileEntryPermissions(cpAttachmentFileEntry);
+				cpAttachmentFileEntryId));
 	}
 
 	protected void checkCPAttachmentFileEntryPermissions(

@@ -110,7 +110,7 @@ public class ProductSubscriptionConfigurationResourceImpl
 		_updateProductSubscriptionConfiguration(
 			cpDefinition, productSubscriptionConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -132,7 +132,7 @@ public class ProductSubscriptionConfigurationResourceImpl
 		_updateProductSubscriptionConfiguration(
 			cpDefinition, productSubscriptionConfiguration);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}

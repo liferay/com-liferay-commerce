@@ -48,23 +48,21 @@ public class MoneyOrderCheckoutStepDisplayContext {
 			return _message;
 		}
 
-		CommerceOrder commerceOrder = getCommerceOrder();
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		MoneyOrderGroupServiceConfiguration
 			moneyOrderGroupServiceConfiguration =
 				_configurationProvider.getConfiguration(
 					MoneyOrderGroupServiceConfiguration.class,
 					new GroupServiceSettingsLocator(
-						commerceOrder.getGroupId(),
+						themeDisplay.getScopeGroupId(),
 						MoneyOrderCommercePaymentEngineMethodConstants.
 							SERVICE_NAME));
 
 		LocalizedValuesMap localizedValuesMap =
 			moneyOrderGroupServiceConfiguration.message();
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
 
 		_message = localizedValuesMap.get(themeDisplay.getLocale());
 

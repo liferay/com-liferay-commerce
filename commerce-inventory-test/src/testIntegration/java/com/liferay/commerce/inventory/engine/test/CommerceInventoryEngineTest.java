@@ -18,20 +18,24 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.inventory.exception.NoSuchInventoryBookedQuantityException;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
-import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
-import com.liferay.commerce.inventory.test.util.CommerceInventoryTestUtil;
-import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceCountryLocalService;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
@@ -48,11 +52,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +62,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceInventoryEngineTest {
 
@@ -73,49 +74,32 @@ public class CommerceInventoryEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
+
+		_user = UserTestUtil.addUser(_company);
+
+		_group = GroupTestUtil.addGroup(
+			_company.getCompanyId(), _user.getUserId(), 0);
+
+		_serviceContext = ServiceContextTestUtil.getServiceContext(
+			_company.getCompanyId(), _group.getGroupId(), _user.getUserId());
+
+		_commerceChannel = _commerceChannelLocalService.addCommerceChannel(
+			_group.getGroupId(),
+			_group.getName(_serviceContext.getLanguageId()) + " Portal",
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null, StringPool.BLANK,
+			StringPool.BLANK, _serviceContext);
 
 		_cpInstance1 = _randomCPInstanceSku();
 		_cpInstance2 = _randomCPInstanceSku();
-		_serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
-		_user = UserTestUtil.addUser(_group.getGroupId());
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		if (_commerceInventoryWarehouseItem1 != null) {
-			CommerceInventoryWarehouse commerceInventoryWarehouse =
-				_commerceInventoryWarehouseItem1.
-					getCommerceInventoryWarehouse();
-
-			CommerceCountry commerceCountry =
-				_commerceCountryLocalService.getCommerceCountry(
-					_group.getCompanyId(),
-					commerceInventoryWarehouse.getCountryTwoLettersISOCode());
-
-			_commerceCountryLocalService.deleteCommerceCountry(commerceCountry);
-		}
-
-		if (_commerceInventoryWarehouseItem2 != null) {
-			CommerceInventoryWarehouse commerceInventoryWarehouse =
-				_commerceInventoryWarehouseItem2.
-					getCommerceInventoryWarehouse();
-
-			CommerceCountry commerceCountry =
-				_commerceCountryLocalService.getCommerceCountry(
-					_group.getCompanyId(),
-					commerceInventoryWarehouse.getCountryTwoLettersISOCode());
-
-			_commerceCountryLocalService.deleteCommerceCountry(commerceCountry);
-		}
 	}
 
 	@Test(expected = NoSuchInventoryBookedQuantityException.class)
 	public void testConsumeQuantity() throws Exception {
 		_commerceInventoryWarehouseItem1 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
-				_cpInstance1.getSku(), 10, _serviceContext);
+				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
+				10, _serviceContext);
 
 		int bookQuantity = 5;
 
@@ -125,7 +109,8 @@ public class CommerceInventoryEngineTest {
 				Collections.emptyMap());
 
 		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
-			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
+			_company.getCompanyId(), _commerceChannel.getGroupId(),
+			_cpInstance1.getSku());
 
 		Assert.assertEquals(
 			_commerceInventoryWarehouseItem1.getQuantity() - bookQuantity,
@@ -139,7 +124,8 @@ public class CommerceInventoryEngineTest {
 			Collections.emptyMap());
 
 		stockQuantity = _commerceInventoryEngine.getStockQuantity(
-			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
+			_company.getCompanyId(), _commerceChannel.getGroupId(),
+			_cpInstance1.getSku());
 
 		Assert.assertEquals(
 			_commerceInventoryWarehouseItem1.getQuantity() - bookQuantity,
@@ -153,11 +139,13 @@ public class CommerceInventoryEngineTest {
 	public void testGetStockQuantities() throws Exception {
 		_commerceInventoryWarehouseItem1 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
-				_cpInstance1.getSku(), 10, _serviceContext);
+				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
+				10, _serviceContext);
 
 		_commerceInventoryWarehouseItem2 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
-				_cpInstance2.getSku(), 15, _serviceContext);
+				_commerceChannel.getCommerceChannelId(), _cpInstance2.getSku(),
+				15, _serviceContext);
 
 		List<String> skuList = new ArrayList<>();
 
@@ -165,7 +153,7 @@ public class CommerceInventoryEngineTest {
 		skuList.add(_cpInstance2.getSku());
 
 		Map stockQuantities = _commerceInventoryEngine.getStockQuantities(
-			_group.getCompanyId(), _group.getGroupId(), skuList);
+			_company.getCompanyId(), _commerceChannel.getGroupId(), skuList);
 
 		Set set = stockQuantities.keySet();
 
@@ -192,10 +180,12 @@ public class CommerceInventoryEngineTest {
 	public void testGetStockQuantity() throws Exception {
 		_commerceInventoryWarehouseItem1 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
-				_cpInstance1.getSku(), 10, _serviceContext);
+				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
+				10, _serviceContext);
 
 		int stockQuantity = _commerceInventoryEngine.getStockQuantity(
-			_group.getCompanyId(), _group.getGroupId(), _cpInstance1.getSku());
+			_company.getCompanyId(), _commerceChannel.getGroupId(),
+			_cpInstance1.getSku());
 
 		Assert.assertEquals(
 			_commerceInventoryWarehouseItem1.getQuantity(), stockQuantity);
@@ -213,6 +203,11 @@ public class CommerceInventoryEngineTest {
 	private CommerceInventoryBookedQuantityLocalService
 		_commerceBookedQuantityLocalService;
 
+	private CommerceChannel _commerceChannel;
+
+	@Inject
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
 	@Inject
 	private CommerceCountryLocalService _commerceCountryLocalService;
 
@@ -221,18 +216,18 @@ public class CommerceInventoryEngineTest {
 
 	private CommerceInventoryWarehouseItem _commerceInventoryWarehouseItem1;
 	private CommerceInventoryWarehouseItem _commerceInventoryWarehouseItem2;
+
+	@DeleteAfterTestRun
+	private Company _company;
+
 	private CPInstance _cpInstance1;
 	private CPInstance _cpInstance2;
 
 	@Inject
 	private CPInstanceLocalService _cpInstanceLocalService;
 
-	@DeleteAfterTestRun
 	private Group _group;
-
 	private ServiceContext _serviceContext;
-
-	@DeleteAfterTestRun
 	private User _user;
 
 }

@@ -17,11 +17,8 @@ package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-
-import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -48,10 +45,9 @@ public class CPDefinitionInfoPanelMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		List<CPDefinition> cpDefinitions = _actionHelper.getCPDefinitions(
-			resourceRequest);
-
-		resourceRequest.setAttribute(CPWebKeys.CP_DEFINITIONS, cpDefinitions);
+		resourceRequest.setAttribute(
+			CPWebKeys.CP_DEFINITIONS,
+			_actionHelper.getCPDefinitions(resourceRequest));
 
 		include(
 			resourceRequest, resourceResponse, "/definition_info_panel.jsp");

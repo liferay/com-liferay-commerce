@@ -26,6 +26,7 @@ import com.liferay.commerce.payment.test.util.TestCommercePaymentMethod;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -120,9 +121,10 @@ public class CommercePaymentEngineTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 
@@ -183,9 +185,10 @@ public class CommercePaymentEngineTest {
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceTestUtil.addCommerceInventoryWarehouse(_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_group.getGroupId());
 
-		CommerceTestUtil.addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 

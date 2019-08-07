@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -1227,6 +1226,248 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 		_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2 =
 			"commerceDiscountCommerceAccountGroupRel.commerceAccountGroupId = ?";
 
+	private FinderPath _finderPathFetchByC_C;
+	private FinderPath _finderPathCountByC_C;
+
+	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or throws a <code>NoSuchDiscountCommerceAccountGroupRelException</code> if it could not be found.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce discount commerce account group rel
+	 * @throws NoSuchDiscountCommerceAccountGroupRelException if a matching commerce discount commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceDiscountCommerceAccountGroupRel findByC_C(
+			long commerceDiscountId, long commerceAccountGroupId)
+		throws NoSuchDiscountCommerceAccountGroupRelException {
+
+		CommerceDiscountCommerceAccountGroupRel
+			commerceDiscountCommerceAccountGroupRel = fetchByC_C(
+				commerceDiscountId, commerceAccountGroupId);
+
+		if (commerceDiscountCommerceAccountGroupRel == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("commerceDiscountId=");
+			msg.append(commerceDiscountId);
+
+			msg.append(", commerceAccountGroupId=");
+			msg.append(commerceAccountGroupId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchDiscountCommerceAccountGroupRelException(
+				msg.toString());
+		}
+
+		return commerceDiscountCommerceAccountGroupRel;
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce discount commerce account group rel, or <code>null</code> if a matching commerce discount commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceDiscountCommerceAccountGroupRel fetchByC_C(
+		long commerceDiscountId, long commerceAccountGroupId) {
+
+		return fetchByC_C(commerceDiscountId, commerceAccountGroupId, true);
+	}
+
+	/**
+	 * Returns the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching commerce discount commerce account group rel, or <code>null</code> if a matching commerce discount commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceDiscountCommerceAccountGroupRel fetchByC_C(
+		long commerceDiscountId, long commerceAccountGroupId,
+		boolean retrieveFromCache) {
+
+		Object[] finderArgs = new Object[] {
+			commerceDiscountId, commerceAccountGroupId
+		};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByC_C, finderArgs, this);
+		}
+
+		if (result instanceof CommerceDiscountCommerceAccountGroupRel) {
+			CommerceDiscountCommerceAccountGroupRel
+				commerceDiscountCommerceAccountGroupRel =
+					(CommerceDiscountCommerceAccountGroupRel)result;
+
+			if ((commerceDiscountId !=
+					commerceDiscountCommerceAccountGroupRel.
+						getCommerceDiscountId()) ||
+				(commerceAccountGroupId !=
+					commerceDiscountCommerceAccountGroupRel.
+						getCommerceAccountGroupId())) {
+
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(
+				_SQL_SELECT_COMMERCEDISCOUNTCOMMERCEACCOUNTGROUPREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEDISCOUNTID_2);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceDiscountId);
+
+				qPos.add(commerceAccountGroupId);
+
+				List<CommerceDiscountCommerceAccountGroupRel> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(
+						_finderPathFetchByC_C, finderArgs, list);
+				}
+				else {
+					CommerceDiscountCommerceAccountGroupRel
+						commerceDiscountCommerceAccountGroupRel = list.get(0);
+
+					result = commerceDiscountCommerceAccountGroupRel;
+
+					cacheResult(commerceDiscountCommerceAccountGroupRel);
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceDiscountCommerceAccountGroupRel)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; from the database.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the commerce discount commerce account group rel that was removed
+	 */
+	@Override
+	public CommerceDiscountCommerceAccountGroupRel removeByC_C(
+			long commerceDiscountId, long commerceAccountGroupId)
+		throws NoSuchDiscountCommerceAccountGroupRelException {
+
+		CommerceDiscountCommerceAccountGroupRel
+			commerceDiscountCommerceAccountGroupRel = findByC_C(
+				commerceDiscountId, commerceAccountGroupId);
+
+		return remove(commerceDiscountCommerceAccountGroupRel);
+	}
+
+	/**
+	 * Returns the number of commerce discount commerce account group rels where commerceDiscountId = &#63; and commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceDiscountId the commerce discount ID
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce discount commerce account group rels
+	 */
+	@Override
+	public int countByC_C(
+		long commerceDiscountId, long commerceAccountGroupId) {
+
+		FinderPath finderPath = _finderPathCountByC_C;
+
+		Object[] finderArgs = new Object[] {
+			commerceDiscountId, commerceAccountGroupId
+		};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(
+				_SQL_COUNT_COMMERCEDISCOUNTCOMMERCEACCOUNTGROUPREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEDISCOUNTID_2);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceDiscountId);
+
+				qPos.add(commerceAccountGroupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_C_COMMERCEDISCOUNTID_2 =
+		"commerceDiscountCommerceAccountGroupRel.commerceDiscountId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2 =
+		"commerceDiscountCommerceAccountGroupRel.commerceAccountGroupId = ?";
+
 	public CommerceDiscountCommerceAccountGroupRelPersistenceImpl() {
 		setModelClass(CommerceDiscountCommerceAccountGroupRel.class);
 
@@ -1266,6 +1507,15 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 				ENTITY_CACHE_ENABLED,
 			CommerceDiscountCommerceAccountGroupRelImpl.class,
 			commerceDiscountCommerceAccountGroupRel.getPrimaryKey(),
+			commerceDiscountCommerceAccountGroupRel);
+
+		finderCache.putResult(
+			_finderPathFetchByC_C,
+			new Object[] {
+				commerceDiscountCommerceAccountGroupRel.getCommerceDiscountId(),
+				commerceDiscountCommerceAccountGroupRel.
+					getCommerceAccountGroupId()
+			},
 			commerceDiscountCommerceAccountGroupRel);
 
 		commerceDiscountCommerceAccountGroupRel.resetOriginalValues();
@@ -1337,6 +1587,11 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(
+			(CommerceDiscountCommerceAccountGroupRelModelImpl)
+				commerceDiscountCommerceAccountGroupRel,
+			true);
 	}
 
 	@Override
@@ -1356,6 +1611,62 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 					ENTITY_CACHE_ENABLED,
 				CommerceDiscountCommerceAccountGroupRelImpl.class,
 				commerceDiscountCommerceAccountGroupRel.getPrimaryKey());
+
+			clearUniqueFindersCache(
+				(CommerceDiscountCommerceAccountGroupRelModelImpl)
+					commerceDiscountCommerceAccountGroupRel,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceDiscountCommerceAccountGroupRelModelImpl
+			commerceDiscountCommerceAccountGroupRelModelImpl) {
+
+		Object[] args = new Object[] {
+			commerceDiscountCommerceAccountGroupRelModelImpl.
+				getCommerceDiscountId(),
+			commerceDiscountCommerceAccountGroupRelModelImpl.
+				getCommerceAccountGroupId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_C, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_C, args,
+			commerceDiscountCommerceAccountGroupRelModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceDiscountCommerceAccountGroupRelModelImpl
+			commerceDiscountCommerceAccountGroupRelModelImpl,
+		boolean clearCurrent) {
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+				commerceDiscountCommerceAccountGroupRelModelImpl.
+					getCommerceDiscountId(),
+				commerceDiscountCommerceAccountGroupRelModelImpl.
+					getCommerceAccountGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
+		}
+
+		if ((commerceDiscountCommerceAccountGroupRelModelImpl.
+				getColumnBitmask() &
+			 _finderPathFetchByC_C.getColumnBitmask()) != 0) {
+
+			Object[] args = new Object[] {
+				commerceDiscountCommerceAccountGroupRelModelImpl.
+					getOriginalCommerceDiscountId(),
+				commerceDiscountCommerceAccountGroupRelModelImpl.
+					getOriginalCommerceAccountGroupId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
 		}
 	}
 
@@ -1378,7 +1689,7 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 			commerceDiscountCommerceAccountGroupRelId);
 
 		commerceDiscountCommerceAccountGroupRel.setCompanyId(
-			companyProvider.getCompanyId());
+			CompanyThreadLocal.getCompanyId());
 
 		return commerceDiscountCommerceAccountGroupRel;
 	}
@@ -1658,6 +1969,11 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 			CommerceDiscountCommerceAccountGroupRelImpl.class,
 			commerceDiscountCommerceAccountGroupRel.getPrimaryKey(),
 			commerceDiscountCommerceAccountGroupRel, false);
+
+		clearUniqueFindersCache(
+			commerceDiscountCommerceAccountGroupRelModelImpl, false);
+		cacheUniqueFindersCache(
+			commerceDiscountCommerceAccountGroupRelModelImpl);
 
 		commerceDiscountCommerceAccountGroupRel.resetOriginalValues();
 
@@ -2216,6 +2532,27 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCommerceAccountGroupId",
 			new String[] {Long.class.getName()});
+
+		_finderPathFetchByC_C = new FinderPath(
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceDiscountCommerceAccountGroupRelImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				COMMERCEDISCOUNTID_COLUMN_BITMASK |
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				COMMERCEACCOUNTGROUPID_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceDiscountCommerceAccountGroupRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
 	}
 
 	public void destroy() {
@@ -2225,9 +2562,6 @@ public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

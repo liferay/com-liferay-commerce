@@ -37,8 +37,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -88,15 +86,13 @@ public class CommerceChannelsPortlet extends MVCPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-
 		CommerceChannelDisplayContext commerceChannelDisplayContext =
 			new CommerceChannelDisplayContext(
 				_commerceChannelModelResourcePermission,
 				_commerceChannelService, _commerceChannelTypeRegistry,
 				_commerceChannelTypeJSPContributorRegistry,
-				_commerceCurrencyService, httpServletRequest, _portal);
+				_commerceCurrencyService,
+				_portal.getHttpServletRequest(renderRequest), _portal);
 
 		renderRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT, commerceChannelDisplayContext);

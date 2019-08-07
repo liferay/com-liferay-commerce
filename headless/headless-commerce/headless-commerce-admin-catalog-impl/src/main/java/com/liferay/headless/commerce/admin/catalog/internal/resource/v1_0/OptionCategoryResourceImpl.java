@@ -46,6 +46,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 /**
  * @author Zoltán Takács
  * @author Alessio Antonio Rendina
+ * @author Igor Beslic
  */
 @Component(
 	properties = "OSGI-INF/liferay/rest/v1_0/option-category.properties",
@@ -57,7 +58,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 	public Response deleteOptionCategory(Long id) throws Exception {
 		_cpOptionCategoryService.deleteCPOptionCategory(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -95,7 +96,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 
 		_updateOptionCategory(id, optionCategory);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -141,7 +142,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 			LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 			GetterUtil.get(
 				optionCategory.getPriority(), cpOptionCategory.getPriority()),
-			optionCategory.getKey(), _serviceContextHelper.getServiceContext());
+			optionCategory.getKey());
 	}
 
 	private OptionCategory _upsertOptionCategory(OptionCategory optionCategory)
@@ -174,7 +175,7 @@ public class OptionCategoryResourceImpl extends BaseOptionCategoryResourceImpl {
 				LanguageUtils.getLocalizedMap(optionCategory.getDescription()),
 				GetterUtil.get(optionCategory.getPriority(), 0D),
 				optionCategory.getKey(),
-				_serviceContextHelper.getServiceContext());
+				_serviceContextHelper.getServiceContext(_user));
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(

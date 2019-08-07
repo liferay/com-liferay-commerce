@@ -15,8 +15,8 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.internal.util.comparator.CommerceCheckoutStepServiceWrapperOrderComparator;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStep;
-import com.liferay.commerce.checkout.web.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.commerce.util.CommerceCheckoutStep;
+import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -121,11 +121,8 @@ public class CommerceCheckoutStepServicesTrackerImpl
 		List<CommerceCheckoutStep> commerceCheckoutSteps =
 			getCommerceCheckoutSteps(httpServletRequest, httpServletResponse);
 
-		CommerceCheckoutStep commerceCheckoutStep = getCommerceCheckoutStep(
-			commerceCheckoutStepName);
-
 		int commerceCheckoutStepIndex = commerceCheckoutSteps.indexOf(
-			commerceCheckoutStep);
+			getCommerceCheckoutStep(commerceCheckoutStepName));
 
 		if ((commerceCheckoutStepIndex >= 0) &&
 			(commerceCheckoutStepIndex < (commerceCheckoutSteps.size() - 1))) {
@@ -150,11 +147,8 @@ public class CommerceCheckoutStepServicesTrackerImpl
 		List<CommerceCheckoutStep> commerceCheckoutSteps =
 			getCommerceCheckoutSteps(httpServletRequest, httpServletResponse);
 
-		CommerceCheckoutStep commerceCheckoutStep = getCommerceCheckoutStep(
-			commerceCheckoutStepName);
-
 		int commerceCheckoutStepIndex = commerceCheckoutSteps.indexOf(
-			commerceCheckoutStep);
+			getCommerceCheckoutStep(commerceCheckoutStepName));
 
 		if (commerceCheckoutStepIndex > 0) {
 			return commerceCheckoutSteps.get(commerceCheckoutStepIndex - 1);

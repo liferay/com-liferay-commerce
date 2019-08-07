@@ -69,19 +69,17 @@ public class CommerceAddressRestrictionLocalServiceImpl
 	public void deleteCommerceAddressRestrictions(
 		String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
-		commerceAddressRestrictionPersistence.removeByC_C(classNameId, classPK);
+		commerceAddressRestrictionPersistence.removeByC_C(
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
 	public CommerceAddressRestriction fetchCommerceAddressRestriction(
 		String className, long classPK, long commerceCountryId) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressRestrictionPersistence.fetchByC_C_C(
-			classNameId, classPK, commerceCountryId);
+			classNameLocalService.getClassNameId(className), classPK,
+			commerceCountryId);
 	}
 
 	@Override
@@ -89,20 +87,17 @@ public class CommerceAddressRestrictionLocalServiceImpl
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressRestrictionPersistence.findByC_C(
-			classNameId, classPK, start, end, orderByComparator);
+			classNameLocalService.getClassNameId(className), classPK, start,
+			end, orderByComparator);
 	}
 
 	@Override
 	public int getCommerceAddressRestrictionsCount(
 		String className, long classPK) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceAddressRestrictionPersistence.countByC_C(
-			classNameId, classPK);
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override

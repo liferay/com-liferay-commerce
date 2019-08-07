@@ -1,8 +1,8 @@
 components:
     parameters:
         externalReferenceCodePathParam:
-            explode: false
             in: path
+            explode: false
             name: externalReferenceCode
             required: true
             schema:
@@ -12,8 +12,8 @@ components:
                 type: string
             style: simple
         idPathParam:
-            explode: false
             in: path
+            explode: false
             name: id
             required: true
             schema:
@@ -24,16 +24,16 @@ components:
                 type: integer
             style: simple
         pageQueryParam:
-            explode: true
             in: query
+            explode: true
             name: page
             required: false
             schema:
                 type: integer
             style: form
         pageSizeQueryParam:
-            explode: true
             in: query
+            explode: true
             name: pageSize
             required: false
             schema:
@@ -883,8 +883,8 @@ info:
         name: Commerce Team
     description: Liferay Commerce Admin Catalog API
     license:
-        name: GNU Lesser General Public License 2.1
-        url: https://www.gnu.org/licenses/lgpl-2.1.html
+        name: Apache-2.0
+        url: https://spdx.org/licenses/Apache-2.0.html
     title: Liferay Commerce Admin Catalog API
     version: v1.0
 openapi: 3.0.0
@@ -893,8 +893,8 @@ paths:
         delete:
             operationId: deleteAttachmentByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -926,8 +926,8 @@ paths:
         get:
             operationId: getAttachmentByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -986,8 +986,8 @@ paths:
         patch:
             operationId: patchAttachmentByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1051,8 +1051,8 @@ paths:
         delete:
             operationId: deleteAttachment
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1085,8 +1085,8 @@ paths:
         get:
             operationId: getAttachment
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1146,8 +1146,8 @@ paths:
         patch:
             operationId: patchAttachment
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1275,8 +1275,8 @@ paths:
         delete:
             operationId: deleteCatalogByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1308,8 +1308,8 @@ paths:
         get:
             operationId: getCatalogByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1368,8 +1368,8 @@ paths:
         patch:
             operationId: patchCatalogByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -1433,8 +1433,8 @@ paths:
         delete:
             operationId: deleteCatalog
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1467,8 +1467,8 @@ paths:
         get:
             operationId: getCatalog
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1528,8 +1528,8 @@ paths:
         patch:
             operationId: patchCatalog
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1594,15 +1594,15 @@ paths:
         get:
             operationId: getCatalogsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1724,15 +1724,15 @@ paths:
         get:
             operationId: getOptionCategoriesPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -1791,8 +1791,8 @@ paths:
         delete:
             operationId: deleteOptionCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1825,8 +1825,8 @@ paths:
         get:
             operationId: getOptionCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -1886,8 +1886,8 @@ paths:
         patch:
             operationId: patchOptionCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2015,15 +2015,15 @@ paths:
         get:
             operationId: getOptionsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2082,8 +2082,8 @@ paths:
         post:
             operationId: postOptionByExternalReferenceCodeOptionValue
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2156,8 +2156,8 @@ paths:
         get:
             operationId: getOptionByExternalReferenceCodeOptionValuesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2166,15 +2166,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2233,8 +2233,8 @@ paths:
         delete:
             operationId: deleteOptionByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2266,8 +2266,8 @@ paths:
         get:
             operationId: getOptionByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2326,8 +2326,8 @@ paths:
         patch:
             operationId: patchOptionByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -2391,8 +2391,8 @@ paths:
         post:
             operationId: postOptionIdOptionValue
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2466,8 +2466,8 @@ paths:
         get:
             operationId: getOptionIdOptionValuesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2477,15 +2477,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2544,8 +2544,8 @@ paths:
         delete:
             operationId: deleteOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2578,8 +2578,8 @@ paths:
         get:
             operationId: getOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2639,8 +2639,8 @@ paths:
         patch:
             operationId: patchOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2768,8 +2768,8 @@ paths:
         post:
             operationId: postProductOptionIdProductOptionValue
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2843,8 +2843,8 @@ paths:
         get:
             operationId: getProductOptionIdProductOptionValuesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2854,15 +2854,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -2921,8 +2921,8 @@ paths:
         delete:
             operationId: deleteProductOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -2955,8 +2955,8 @@ paths:
         get:
             operationId: getProductOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3016,8 +3016,8 @@ paths:
         patch:
             operationId: patchProductOption
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -3082,15 +3082,15 @@ paths:
         get:
             operationId: getProductsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3149,8 +3149,8 @@ paths:
         post:
             operationId: postProductByExternalReferenceCodeAttachment
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3223,8 +3223,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeCategoriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3233,15 +3233,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3300,8 +3300,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCodeCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3369,8 +3369,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3429,8 +3429,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCodeConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3494,8 +3494,8 @@ paths:
         post:
             operationId: postProductByExternalReferenceCodeImage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3568,8 +3568,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeImagesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3578,15 +3578,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3645,8 +3645,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeProductOptionsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3655,15 +3655,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -3723,8 +3723,8 @@ paths:
         post:
             operationId: postProductByExternalReferenceCodeProductOptionsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3805,8 +3805,8 @@ paths:
         post:
             operationId: postProductByExternalReferenceCodeRelatedProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3879,8 +3879,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeRelatedProductsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -3889,26 +3889,26 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
+                  name: type
+                  required: false
+                  schema:
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
                       type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: type
-                  required: false
-                  schema:
-                      type: string
                   style: form
             responses:
                 200:
@@ -3963,8 +3963,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeShippingConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4023,8 +4023,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCodeShippingConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4088,8 +4088,8 @@ paths:
         post:
             operationId: postProductByExternalReferenceCodeSku
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4162,8 +4162,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeSkusPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4172,15 +4172,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -4239,8 +4239,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeSubscriptionConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4299,8 +4299,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCodeSubscriptionConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4364,8 +4364,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeTaxConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4424,8 +4424,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCodeTaxConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4489,8 +4489,8 @@ paths:
         delete:
             operationId: deleteProductByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4522,8 +4522,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4582,8 +4582,8 @@ paths:
         patch:
             operationId: patchProductByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4647,8 +4647,8 @@ paths:
         get:
             operationId: getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -4657,15 +4657,15 @@ paths:
                       minLength: 1
                       type: string
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -4724,8 +4724,8 @@ paths:
         post:
             operationId: postProductIdAttachment
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4799,8 +4799,8 @@ paths:
         get:
             operationId: getProductIdAttachmentsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4810,15 +4810,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -4877,8 +4877,8 @@ paths:
         get:
             operationId: getProductIdCategoriesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -4888,15 +4888,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -4955,8 +4955,8 @@ paths:
         patch:
             operationId: patchProductIdCategory
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5025,8 +5025,8 @@ paths:
         get:
             operationId: getProductIdConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5086,8 +5086,8 @@ paths:
         patch:
             operationId: patchProductIdConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5152,8 +5152,8 @@ paths:
         post:
             operationId: postProductIdImage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5227,8 +5227,8 @@ paths:
         get:
             operationId: getProductIdImagesPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5238,15 +5238,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -5305,8 +5305,8 @@ paths:
         get:
             operationId: getProductIdProductOptionsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5316,15 +5316,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -5384,8 +5384,8 @@ paths:
         post:
             operationId: postProductIdProductOptionsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5467,8 +5467,8 @@ paths:
         post:
             operationId: postProductIdProductSpecification
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5542,8 +5542,8 @@ paths:
         get:
             operationId: getProductIdProductSpecificationsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5553,15 +5553,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -5620,8 +5620,8 @@ paths:
         post:
             operationId: postProductIdRelatedProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5695,8 +5695,8 @@ paths:
         get:
             operationId: getProductIdRelatedProductsPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5706,26 +5706,26 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
+                  name: type
+                  required: false
+                  schema:
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
                       type: integer
-                  style: form
-                - explode: true
-                  in: query
-                  name: type
-                  required: false
-                  schema:
-                      type: string
                   style: form
             responses:
                 200:
@@ -5780,8 +5780,8 @@ paths:
         get:
             operationId: getProductIdShippingConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5841,8 +5841,8 @@ paths:
         patch:
             operationId: patchProductIdShippingConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5907,8 +5907,8 @@ paths:
         post:
             operationId: postProductIdSku
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5982,8 +5982,8 @@ paths:
         get:
             operationId: getProductIdSkusPage
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -5993,15 +5993,15 @@ paths:
                       minimum: 0
                       type: integer
                   style: simple
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -6060,8 +6060,8 @@ paths:
         get:
             operationId: getProductIdSubscriptionConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6121,8 +6121,8 @@ paths:
         patch:
             operationId: patchProductIdSubscriptionConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6187,8 +6187,8 @@ paths:
         get:
             operationId: getProductIdTaxConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6248,8 +6248,8 @@ paths:
         patch:
             operationId: patchProductIdTaxConfiguration
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6314,8 +6314,8 @@ paths:
         delete:
             operationId: deleteProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6348,8 +6348,8 @@ paths:
         get:
             operationId: getProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6409,8 +6409,8 @@ paths:
         patch:
             operationId: patchProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6475,8 +6475,8 @@ paths:
         delete:
             operationId: deleteRelatedProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6509,8 +6509,8 @@ paths:
         get:
             operationId: getRelatedProduct
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6571,8 +6571,8 @@ paths:
         delete:
             operationId: deleteSkuByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -6604,8 +6604,8 @@ paths:
         get:
             operationId: getSkuByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -6664,8 +6664,8 @@ paths:
         patch:
             operationId: patchSkuByExternalReferenceCode
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: externalReferenceCode
                   required: true
                   schema:
@@ -6729,8 +6729,8 @@ paths:
         delete:
             operationId: deleteSku
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6763,8 +6763,8 @@ paths:
         get:
             operationId: getSku
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6824,8 +6824,8 @@ paths:
         patch:
             operationId: patchSku
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -6953,15 +6953,15 @@ paths:
         get:
             operationId: getSpecificationsPage
             parameters:
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: page
                   required: false
                   schema:
                       type: integer
                   style: form
-                - explode: true
-                  in: query
+                - in: query
+                  explode: true
                   name: pageSize
                   required: false
                   schema:
@@ -7020,8 +7020,8 @@ paths:
         delete:
             operationId: deleteSpecification
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -7054,8 +7054,8 @@ paths:
         get:
             operationId: getSpecification
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:
@@ -7115,8 +7115,8 @@ paths:
         patch:
             operationId: patchSpecification
             parameters:
-                - explode: false
-                  in: path
+                - in: path
+                  explode: false
                   name: id
                   required: true
                   schema:

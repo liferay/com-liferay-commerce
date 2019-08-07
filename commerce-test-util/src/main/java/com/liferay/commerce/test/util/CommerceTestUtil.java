@@ -20,9 +20,6 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
-import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
@@ -35,6 +32,7 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalSe
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
@@ -58,6 +56,7 @@ import java.util.Collections;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CommerceTestUtil {
 
@@ -83,9 +82,13 @@ public class CommerceTestUtil {
 			CommerceAccountLocalServiceUtil.addPersonalCommerceAccount(
 				userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
 
+		long commerceChannelGroupId =
+			CommerceChannelLocalServiceUtil.
+				getCommerceChannelGroupIdBySiteGroupId(groupId);
+
 		return CommerceOrderLocalServiceUtil.addCommerceOrder(
-			groupId, userId, commerceAccount.getCommerceAccountId(),
-			commerceCurrencyId);
+			userId, commerceChannelGroupId,
+			commerceAccount.getCommerceAccountId(), commerceCurrencyId);
 	}
 
 	public static CPDefinitionInventory addBackOrderCPDefinitionInventory(
@@ -116,9 +119,9 @@ public class CommerceTestUtil {
 		CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			addCommerceInventoryWarehouse(groupId);
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(groupId);
 
-		addCommerceInventoryWarehouseItem(
+		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			userId, commerceInventoryWarehouse, cpInstance.getSku(), 10);
 
 		addCommerceOrderItem(
@@ -157,60 +160,6 @@ public class CommerceTestUtil {
 			commerceShippingFixedOption.getAmount());
 
 		return CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
-			long groupId)
-		throws PortalException {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		CommerceCountry commerceCountry = _setUpCountry(serviceContext);
-
-		CommerceRegion commerceRegion = _setUpRegion(
-			commerceCountry, serviceContext);
-
-		return CommerceInventoryWarehouseLocalServiceUtil.
-			addCommerceInventoryWarehouse(
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				true, RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-				null, serviceContext);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
-			long groupId, String name)
-		throws Exception {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		return CommerceInventoryWarehouseLocalServiceUtil.
-			addCommerceInventoryWarehouse(
-				name, RandomTestUtil.randomString(), true,
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), null, null,
-				RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
-				null, serviceContext);
-	}
-
-	public static CommerceInventoryWarehouseItem
-			addCommerceInventoryWarehouseItem(
-				long userId,
-				CommerceInventoryWarehouse commerceInventoryWarehouse,
-				String sku, int quantity)
-		throws Exception {
-
-		return CommerceInventoryWarehouseItemLocalServiceUtil.
-			addCommerceInventoryWarehouseItem(
-				userId,
-				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
-				sku, quantity);
 	}
 
 	public static CommerceOrderItem addCommerceOrderItem(
@@ -260,15 +209,12 @@ public class CommerceTestUtil {
 			addCommercePaymentMethodGroupRel(long groupId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CommercePaymentMethodGroupRelLocalServiceUtil.
 			addCommercePaymentMethodGroupRel(
 				RandomTestUtil.randomLocaleStringMap(),
 				RandomTestUtil.randomLocaleStringMap(), null, "money-order",
 				Collections.<String, String>emptyMap(), 1, true,
-				serviceContext);
+				ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static CommerceShippingFixedOption addCommerceShippingFixedOption(
@@ -292,13 +238,10 @@ public class CommerceTestUtil {
 	public static CommerceShippingMethod addCommerceShippingMethod(long groupId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		return CommerceShippingMethodLocalServiceUtil.addCommerceShippingMethod(
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(), null, "fixedPrice", 1, true,
-			serviceContext);
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static CommerceAddress addUserCommerceAddress(

@@ -222,7 +222,7 @@ public abstract class BaseAccountResourceImpl implements AccountResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/account/")
+	@Path("/accounts/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Account")})
 	public Account postAccount(Account account) throws Exception {

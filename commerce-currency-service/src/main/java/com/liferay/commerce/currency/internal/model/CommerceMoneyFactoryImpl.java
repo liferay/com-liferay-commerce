@@ -52,11 +52,10 @@ public class CommerceMoneyFactoryImpl implements CommerceMoneyFactory {
 	public CommerceMoney create(long commerceCurrencyId, BigDecimal price)
 		throws PortalException {
 
-		CommerceCurrency commerceCurrency =
+		return create(
 			_commerceCurrencyLocalService.getCommerceCurrency(
-				commerceCurrencyId);
-
-		return create(commerceCurrency, price);
+				commerceCurrencyId),
+			price);
 	}
 
 	@Activate

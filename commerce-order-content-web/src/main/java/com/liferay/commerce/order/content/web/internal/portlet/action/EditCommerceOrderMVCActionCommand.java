@@ -299,11 +299,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		long commerceOrderId = ParamUtil.getLong(
 			actionRequest, "commerceOrderId");
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
-
 		_commerceOrderHttpHelper.setCurrentCommerceOrder(
-			_portal.getHttpServletRequest(actionRequest), commerceOrder);
+			_portal.getHttpServletRequest(actionRequest),
+			_commerceOrderService.getCommerceOrder(commerceOrderId));
 	}
 
 	protected void submitCommerceOrder(long commerceOrderId) throws Exception {

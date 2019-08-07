@@ -15,7 +15,7 @@
 --%>
 
 <%
-CommerceCatalog catalog = cpDefinitionsDisplayContext.fetchCommerceCatalogByGroupId(cpDefinition.getGroupId());
+CommerceCatalog commerceCatalog = cpDefinitionsDisplayContext.fetchCommerceCatalogByGroupId(cpDefinition.getGroupId());
 %>
 
 <c:choose>
@@ -57,7 +57,7 @@ CommerceCatalog catalog = cpDefinitionsDisplayContext.fetchCommerceCatalogByGrou
 <liferay-ui:search-container-column-text
 	cssClass="table-cell-content"
 	name="catalog"
-	value="<%= (catalog == null) ? StringPool.BLANK : catalog.getName() %>"
+	value="<%= (commerceCatalog == null) ? StringPool.BLANK : commerceCatalog.getName() %>"
 />
 
 <liferay-ui:search-container-column-date

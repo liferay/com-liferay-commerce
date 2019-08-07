@@ -101,6 +101,26 @@ public class CommerceDiscountRuleServiceSoap {
 	}
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
+			fetchCommerceDiscountRule(long commerceDiscountRuleId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.discount.model.CommerceDiscountRule
+				returnValue =
+					CommerceDiscountRuleServiceUtil.fetchCommerceDiscountRule(
+						commerceDiscountRuleId);
+
+			return com.liferay.commerce.discount.model.CommerceDiscountRuleSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.discount.model.CommerceDiscountRuleSoap
 			getCommerceDiscountRule(long commerceDiscountRuleId)
 		throws RemoteException {
 

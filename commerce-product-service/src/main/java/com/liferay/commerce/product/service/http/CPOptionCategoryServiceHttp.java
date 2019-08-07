@@ -261,8 +261,7 @@ public class CPOptionCategoryServiceHttp {
 				HttpPrincipal httpPrincipal, long cpOptionCategoryId,
 				java.util.Map<java.util.Locale, String> titleMap,
 				java.util.Map<java.util.Locale, String> descriptionMap,
-				double priority, String key,
-				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+				double priority, String key)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -272,7 +271,7 @@ public class CPOptionCategoryServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, cpOptionCategoryId, titleMap, descriptionMap,
-				priority, key, serviceContext);
+				priority, key);
 
 			Object returnObj = null;
 
@@ -323,7 +322,7 @@ public class CPOptionCategoryServiceHttp {
 	private static final Class<?>[] _updateCPOptionCategoryParameterTypes5 =
 		new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class, double.class,
-			String.class, com.liferay.portal.kernel.service.ServiceContext.class
+			String.class
 		};
 
 }

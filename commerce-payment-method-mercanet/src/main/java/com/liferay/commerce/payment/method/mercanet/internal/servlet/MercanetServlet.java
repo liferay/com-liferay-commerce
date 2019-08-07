@@ -25,7 +25,6 @@ import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -87,10 +86,9 @@ public class MercanetServlet extends HttpServlet {
 				PortalSessionThreadLocal.setHttpSession(httpSession);
 			}
 
-			User user = _portal.getUser(httpServletRequest);
-
 			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user);
+				PermissionCheckerFactoryUtil.create(
+					_portal.getUser(httpServletRequest));
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
@@ -125,10 +123,9 @@ public class MercanetServlet extends HttpServlet {
 					PortalSessionThreadLocal.setHttpSession(httpSession);
 				}
 
-				User user = _portal.getUser(httpServletRequest);
-
 				PermissionChecker permissionChecker =
-					PermissionCheckerFactoryUtil.create(user);
+					PermissionCheckerFactoryUtil.create(
+						_portal.getUser(httpServletRequest));
 
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 

@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.pricing.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import javax.annotation.Generated;
 
@@ -32,11 +34,38 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface TierPriceResource {
 
-	public Response deleteTierPrice(String id) throws Exception;
+	public Page<TierPrice> getPriceEntryByExternalReferenceCodeTierPricesPage(
+			String externalReferenceCode, Pagination pagination)
+		throws Exception;
 
-	public TierPrice getTierPrice(String id) throws Exception;
+	public TierPrice postPriceEntryByExternalReferenceCodeTierPrice(
+			String externalReferenceCode, TierPrice tierPrice)
+		throws Exception;
 
-	public Response patchTierPrice(String id, TierPrice tierPrice)
+	public Page<TierPrice> getPriceEntryIdTierPricesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public TierPrice postPriceEntryIdTierPrice(Long id, TierPrice tierPrice)
+		throws Exception;
+
+	public Response deleteTierPriceByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public TierPrice getTierPriceByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchTierPriceByExternalReferenceCode(
+			String externalReferenceCode, TierPrice tierPrice)
+		throws Exception;
+
+	public Response deleteTierPrice(Long id) throws Exception;
+
+	public TierPrice getTierPrice(Long id) throws Exception;
+
+	public Response patchTierPrice(Long id, TierPrice tierPrice)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
