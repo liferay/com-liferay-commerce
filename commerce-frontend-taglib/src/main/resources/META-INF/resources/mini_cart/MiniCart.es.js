@@ -9,14 +9,18 @@ import template from './MiniCart.soy';
 import './CommerceCartItem.es';
 import './Summary.es';
 
+const OPEN_CART_CLASS = 'cart-open',
+	COMMERCE_TOPBAR_CLASS = 'commerce-topbar';
+
 class Cart extends Component {
 
 	created() {
+		this._topbar = window.document.querySelector(`.${COMMERCE_TOPBAR_CLASS}`);
 		this._handleClickOutside = this._handleClickOutside.bind(this);
 	}
 
 	_handleClickOutside(e) {
-		const topBar = document.querySelector('.commerce-topbar') || document.body;
+		const topBar = this._topbar || document.body;
 		if (
 			topBar.contains(e.target) && !this.element.contains(e.target)
 		) {
@@ -33,6 +37,7 @@ class Cart extends Component {
 
 	open() {
 		this._open = true;
+		this._topbar && this._topbar.classList.add(OPEN_CART_CLASS);
 		this.element.addEventListener('transitionend', () => {
 			window.addEventListener('click', this._handleClickOutside);
 		});
@@ -41,6 +46,7 @@ class Cart extends Component {
 
 	close() {
 		this._open = false;
+		this._topbar && this._topbar.classList.remove(OPEN_CART_CLASS);
 		this.element.addEventListener(
 			'transitionend',
 			() => {
