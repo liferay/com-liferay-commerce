@@ -40,6 +40,10 @@
 
   &__content {
     .speedwell-user-nav {
+      &__sign-in {
+        padding: 0 20px;
+      }
+
       &__header {
         display: grid;
         grid-auto-flow: column;

@@ -1,7 +1,10 @@
 .speedwell-main-menu {
+  animation: main-menu-enter $easeInQuart 400ms reverse;
+
   &__link-wrapper {
     align-items: center;
-    animation: main-menu-enter ease-out 200ms;
+    animation: main-menu-enter $easeInQuart 400ms;
+    transform-origin: 50% 100%;
     background-color: $stroke;
     bottom: 0;
     color: #FFF;
@@ -23,6 +26,12 @@
       path {
         fill: #FFF;
       }
+    }
+
+    & * {
+      opacity: 0;
+      animation: main-menu-other-elements .5s ease-in forwards;
+      animation-delay: .3s;
     }
   }
 
@@ -60,7 +69,7 @@
       padding-right: 0;
       position: fixed;
       right: 0;
-      top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size-small} - 5px);
+      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 5px);
     }
   }
 
@@ -75,24 +84,37 @@
     left: 0;
     position: fixed;
     right: 0;
-    top: calc(56px + 80px);
+    top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
     transition: all ease 200ms;
+    transition-delay: 500ms;
   }
 
   &:not(.is-open)::before {
     opacity: 0;
     pointer-events: none;
+    transition-duration: 100ms;
+    transition-delay: 0ms;
   }
 }
 
 @keyframes main-menu-enter {
   from {
+    transform: scale3d(1, 0, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes main-menu-other-elements {
+  from {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0)
+    transform: translate3d(0, -5px, 0);
   }
 
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0)
+    transform: translate3d(0, 0, 0);
   }
 }

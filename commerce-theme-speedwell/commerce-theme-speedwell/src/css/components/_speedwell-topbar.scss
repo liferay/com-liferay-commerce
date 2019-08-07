@@ -11,7 +11,7 @@
   transition: background-color .2s $easeOutQuart;
 
   &__button,
-  .speedwell-cart button {
+  .speedwell-cart .commerce-topbar-button {
     align-items: center;
     border: 0;
     color: currentColor;
@@ -62,31 +62,26 @@
       background-color: transparent;
       background-image: linear-gradient(180deg, rgba(0, 0, 0, .3) 30%, transparent);
 
-      svg:not(.speedwell-logo-icon) path,
-      .speedwell-logo-icon path:nth-child(1) {
-        fill: $color-bg;
-        stroke: transparent;
-      }
-
       .speedwell-topbar__button,
-      .speedwell-cart button {
+      .speedwell-cart .commerce-topbar-button {
         background-color: transparent;
         color: $color-bg;
 
-        @include speedwellButtonEffect($stroke, $color-bg);
+        @include speedwellButtonEffect($color-bg, $stroke);
       }
 
-      /* .speedwell-cart {
-        .commerce-topbar-button:not(.lexicon-icon-close) {
-          background-color: white;
+      .speedwell-logo svg path:nth-child(1) {
+        fill: white;
+        stroke: transparent;
+      }
 
-          svg path {
-            fill: $stroke;
-            stroke: $stroke;
-          }
+      .is-open {
+        .speedwell-topbar__button,
+        .speedwell-cart .commerce-topbar-button {
+          background-color: transparent;
+          color: $color-bg;
         }
       }
-      */
     }
   }
 
@@ -117,5 +112,18 @@
 
   &__search {
     // position: absolute;
+  }
+}
+
+.speedwell-topbar--translucent.cart-open {
+  color: $stroke !important;
+  background-image: none !important;
+  background-color: $color-bg !important;
+  transition: background-image .2s $easeOutQuart,
+              background-color .2s $easeOutQuart;
+
+  .speedwell-topbar__button {
+    color: $stroke !important;
+    transition: color .2s $easeOutQuart;
   }
 }

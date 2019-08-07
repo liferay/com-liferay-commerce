@@ -17,7 +17,7 @@ $color-mood-bad-bg: #FEF7F7;
 
 $color-shadow: rgba(92, 94, 94, 0.14);
 
-$stroke: #2A2A2A;
+$stroke: #101010;
 $stroke-alt: #F2F2F2;
 $stroke-variant: #353535;
 
@@ -58,27 +58,22 @@ $easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
   &:hover {
     color: $primaryColor;
 
+    path {
+      fill: $primaryColor;
+    }
+
     &::before {
       background-color: $secondaryColor;
       color: $primaryColor;
       transform: scale3d(1, 1, 1);
-    }
-  }
-
-  @at-root {
-    @media screen and (max-width: 768px) {
-      svg:not(.speedwell-logo-icon) path,
-      .speedwell-logo-icon path:nth-child(1) {
-        fill: $primaryColor;
-        stroke: transparent;
-      }
+      transition: transform .2s $easeInQuart;
     }
   }
 }
 
 @mixin specialPricesStyles() {
   &--promo-price {
-    color: red;
+    color: $color-mood-bad;
   }
 
   &--inactive {
@@ -88,7 +83,7 @@ $easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
   }
 
   &--discount {
-    color: red;
+    color: $color-mood-bad;
 
     &::before {
       content: '\02013\00020'
