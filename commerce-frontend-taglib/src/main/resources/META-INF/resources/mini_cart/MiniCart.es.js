@@ -50,47 +50,46 @@ class Cart extends Component {
 		return this._open;
 	}
 
+	_refreshCartUsingData(evt) {
+		try {
+			this.orderId = evt.orderId;
+			this.products = evt.products;
+			this.summary = evt.summary;
+			this.detailsUrl = evt.detailsUrl || null
+			this._loading = false;
+			this.pendingOperations = [];
+			return true;
+		}
+		catch (error) {
+			return false;
+		}
+	}
+
+	_setAndRefreshOrder(orderId) {
+		this.orderId = orderId;
+		return this.refresh();
+	}
+
 	attached() {
 		window.Liferay.on(
 			'refreshCartUsingData',
-			(evt) => {
-				try {
-					const {
-						products,
-						summary,
-						orderId
-					} = evt;
-					this.orderId = orderId;
-					this.products = products;
-					this.summary = summary;
-					this._loading = false;
-					this.pendingOperations = [];
-					return true;
-				}
-				catch (error) {
-					return false;
-				}
-			}
+			this._refreshCartUsingData.bind(this)
 		);
 
 		window.Liferay.on(
 			'accountSelected',
-			(e) => {
-				this.reset();
-				this.productsQuantity = null;
-				this.orderId = null;
-			}
+			this.reset.bind(this)
 		);
 
 		window.Liferay.on(
 			'orderSelected',
-			(orderId) => {
-				this.orderId = orderId;
-				return this.refresh();
-			}
+			this._setAndRefreshOrder.bind(this)
 		);
+	}
 
-		return this._getData();
+	detached() {
+		super.detached();
+		this._eventHandler.removeAllListeners();
 	}
 
 	_getData() {
@@ -102,6 +101,8 @@ class Cart extends Component {
 	}
 
 	reset() {
+		this.productsQuantity = null;
+		this.orderId = null;
 		this.products = null;
 		this.summary = null;
 		if (this._open === true) {
@@ -433,7 +434,7 @@ Cart.STATE = {
 			Config.string()
 		]
 	),
-	detailsUrl: Config.string().required(),
+	detailsUrl: Config.string(),
 	disabled: Config.bool().value(false),
 	pendingOperations: Config.array().value(
 		[]
