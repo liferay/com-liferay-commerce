@@ -21,7 +21,11 @@ import java.util.List;
  */
 public class Cart {
 
-	public Cart(long orderId, List<Product> products, Summary summary) {
+	public Cart(
+		String detailsUrl, long orderId, List<Product> products,
+		Summary summary) {
+
+		_detailsUrl = detailsUrl;
 		_orderId = orderId;
 		_products = products;
 		_summary = summary;
@@ -31,6 +35,10 @@ public class Cart {
 	public Cart(String[] errorMessages) {
 		_errorMessages = errorMessages;
 		_success = false;
+	}
+
+	public String getDetailsUrl() {
+		return _detailsUrl;
 	}
 
 	public String[] getErrorMessages() {
@@ -61,6 +69,7 @@ public class Cart {
 		_success = success;
 	}
 
+	private String _detailsUrl;
 	private String[] _errorMessages;
 	private long _orderId;
 	private List<Product> _products;

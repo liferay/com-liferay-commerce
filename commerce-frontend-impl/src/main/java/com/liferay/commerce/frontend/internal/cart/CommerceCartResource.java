@@ -44,6 +44,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
 
+import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 
 import javax.ws.rs.Consumes;
@@ -108,9 +110,14 @@ public class CommerceCartResource {
 			_commerceOrderItemService.deleteCommerceOrderItem(
 				commerceOrderItem.getCommerceOrderItemId(), commerceContext);
 
+			PortletURL portletURL =
+				_commerceOrderHttpHelper.getCommerceCartPortletURL(
+					themeDisplay.getScopeGroupId(), httpServletRequest,
+					commerceOrder);
+
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
-				commerceContext);
+				commerceOrder.getCommerceOrderId(), portletURL.toString(),
+				themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
 			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
@@ -151,8 +158,14 @@ public class CommerceCartResource {
 
 			themeDisplay.setScopeGroupId(commerceChannel.getSiteGroupId());
 
+			PortletURL portletURL =
+				_commerceOrderHttpHelper.getCommerceCartPortletURL(
+					themeDisplay.getScopeGroupId(), httpServletRequest,
+					commerceOrder);
+
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderId, themeDisplay.getLocale(), commerceContext);
+				commerceOrderId, portletURL.toString(),
+				themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -209,9 +222,14 @@ public class CommerceCartResource {
 				commerceOrderItem.getCommerceOrderItemId(), quantity,
 				commerceContext, serviceContext);
 
+			PortletURL portletURL =
+				_commerceOrderHttpHelper.getCommerceCartPortletURL(
+					themeDisplay.getScopeGroupId(), httpServletRequest,
+					commerceOrder);
+
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), themeDisplay.getLocale(),
-				commerceContext);
+				commerceOrder.getCommerceOrderId(), portletURL.toString(),
+				themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
@@ -288,8 +306,13 @@ public class CommerceCartResource {
 					commerceOrder.getCommerceOrderId(), cpInstanceId, quantity,
 					0, options, commerceContext, serviceContext);
 
+			PortletURL portletURL =
+				_commerceOrderHttpHelper.getCommerceCartPortletURL(
+					themeDisplay.getScopeGroupId(), httpServletRequest,
+					commerceOrder);
+
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderItem.getCommerceOrderId(),
+				commerceOrderItem.getCommerceOrderId(), portletURL.toString(),
 				themeDisplay.getLocale(), commerceContext);
 		}
 		catch (Exception e) {
