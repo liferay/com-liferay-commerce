@@ -1,0 +1,151 @@
+{
+  "availableLanguageIds": [
+    "en_US"
+  ],
+  "defaultLanguageId": "en_US",
+  "fields": [
+    {
+      "label": {
+        "en_US": "Image"
+      },
+      "predefinedValue": {
+        "en_US": ""
+      },
+      "style": {
+        "en_US": ""
+      },
+      "tip": {
+        "en_US": ""
+      },
+      "dataType": "image",
+      "fieldNamespace": "ddm",
+      "indexType": "text",
+      "localizable": true,
+      "name": "Image2x9w",
+      "readOnly": false,
+      "repeatable": true,
+      "required": false,
+      "showLabel": true,
+      "type": "ddm-image",
+      "nestedFields": [
+        {
+          "label": {
+            "en_US": "captionImage"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "image",
+          "fieldNamespace": "ddm",
+          "indexType": "text",
+          "localizable": true,
+          "name": "captionImage",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "ddm-image"
+        },
+        {
+          "label": {
+            "en_US": "captionCategory"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "string",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "captionCategory",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "text"
+        },
+        {
+          "label": {
+            "en_US": "captionText"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "string",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "captionText",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "text"
+        },
+        {
+          "label": {
+            "en_US": "captionButtonLabel"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "string",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "captionButtonLabel",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "text"
+        },
+        {
+          "label": {
+            "en_US": "captionButtonUrl"
+          },
+          "predefinedValue": {
+            "en_US": ""
+          },
+          "style": {
+            "en_US": ""
+          },
+          "tip": {
+            "en_US": ""
+          },
+          "dataType": "link-to-page",
+          "fieldNamespace": "ddm",
+          "indexType": "keyword",
+          "localizable": true,
+          "name": "captionButtonUrl",
+          "readOnly": false,
+          "repeatable": false,
+          "required": true,
+          "showLabel": true,
+          "type": "ddm-link-to-page"
+        }
+      ]
+    }
+  ]
+}

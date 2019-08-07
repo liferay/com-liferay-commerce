@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<root available-locales="en_US" default-locale="en_US">
+    <dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="uzgx">
+        <dynamic-element name="captionCategory" instance-id="iugq" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Interior equipment]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionText" instance-id="xmtv" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Designed for living. Engineered to last.]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonLabel" instance-id="zalf" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Discover]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonUrl" instance-id="ujhv" type="link_to_layout" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[1@public@20126]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US">
+            <![CDATA[{"groupId":"20126","name":"Header_01.jpeg","alt":"","title":"Header_01.jpeg","type":"journal","uuid":"028a9068-23f4-6cbe-04f6-6f0d3c940cec","fileEntryId":"45309","resourcePrimKey":"45307"}]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="kzgy">
+        <dynamic-element name="captionCategory" instance-id="irsm" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Quality first]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionText" instance-id="cfsc" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Built for the Human Race.]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonLabel" instance-id="mkpu" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Pre-order]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonUrl" instance-id="mjgw" type="link_to_layout" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[1@public@20126]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US">
+            <![CDATA[{"groupId":"20126","name":"Header_02.jpeg","alt":"","title":"Header_02.jpeg","type":"journal","uuid":"6c714760-0170-12be-fdb4-020345079e98","fileEntryId":"45335","resourcePrimKey":"45307"}]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="vfau">
+        <dynamic-element name="captionCategory" instance-id="wtjf" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Unique design]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionText" instance-id="qawk" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US">
+                <![CDATA[The relentless pursuit of perfection.]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonLabel" instance-id="vwsm" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Shake it]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="captionButtonUrl" instance-id="wkzq" type="link_to_layout" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[1@public@20126]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US">
+            <![CDATA[{"groupId":"20126","name":"Header_03.jpeg","alt":"","title":"Header_03.jpeg","type":"journal","uuid":"3d9888b3-b682-370b-b6c9-b1274f5ea12b","fileEntryId":"45357","resourcePrimKey":"45307"}]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="StaticHighlight" type="text" index-type="keyword" instance-id="xgtj">
+        <dynamic-element name="HighlightDesc" instance-id="leue" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US">
+                <![CDATA[Strongly reduced prices on spare parts of many brands]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="HighlightIcon" instance-id="vspt" type="image" index-type="text">
+            <dynamic-content language-id="en_US">
+                <![CDATA[{"groupId":"20126","name":"Discount.png","alt":"","title":"Discount.png","type":"journal","uuid":"a2bc9d79-fa48-55e7-5ac8-b8f4f14868cb","fileEntryId":"46429","resourcePrimKey":"45307"}]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US"><![CDATA[Discount Price]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="StaticHighlight" type="text" index-type="keyword" instance-id="iewq">
+        <dynamic-element name="HighlightDesc" instance-id="pfvn" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US">
+                <![CDATA[Order for at least $250 and we deliver free of charge]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="HighlightIcon" instance-id="fjth" type="image" index-type="text">
+            <dynamic-content language-id="en_US">
+                <![CDATA[{"groupId":"20126","name":"Free_Shipping.png","alt":"","title":"Free_Shipping.png","type":"journal","uuid":"5b1b13bc-901a-ff5a-70b9-ddca80193f72","fileEntryId":"46434","resourcePrimKey":"45307"}]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US"><![CDATA[Free Shipping]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="StaticHighlight" type="text" index-type="keyword" instance-id="beyl">
+        <dynamic-element name="HighlightDesc" instance-id="oebk" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[Within 48 hours after payment receipt]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="HighlightIcon" instance-id="aycz" type="image" index-type="text">
+            <dynamic-content language-id="en_US">
+                <![CDATA[{"groupId":"20126","name":"Delivery (1).png","alt":"","title":"Delivery (1).png","type":"journal","uuid":"584288ea-34f4-db52-c0f6-a5ed8ae4bbfb","fileEntryId":"46439","resourcePrimKey":"45307"}]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US"><![CDATA[Great Delivery]]></dynamic-content>
+    </dynamic-element>
+    <dynamic-element name="StaticHighlight" type="text" index-type="keyword" instance-id="vrpt">
+        <dynamic-element name="HighlightDesc" instance-id="zsji" type="text" index-type="keyword">
+            <dynamic-content language-id="en_US"><![CDATA[UPS, DFL, FedEx, GLS]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-element name="HighlightIcon" instance-id="piwd" type="image" index-type="text">
+            <dynamic-content language-id="en_US">
+                <![CDATA[{"groupId":"20126","name":"Shipping_Method.png","alt":"","title":"Shipping_Method.png","type":"journal","uuid":"c6e37419-2818-13fe-5b87-fc35f2a0e6e1","fileEntryId":"46444","resourcePrimKey":"45307"}]]></dynamic-content>
+        </dynamic-element>
+        <dynamic-content language-id="en_US"><![CDATA[Shipping Method]]></dynamic-content>
+    </dynamic-element>
+</root>
