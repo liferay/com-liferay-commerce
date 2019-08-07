@@ -9,10 +9,11 @@ module.exports = {
 	entry: {
 		components: [
 			path.join(__dirname, './src/main/resources/META-INF/resources/js/assign_to/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/table_toolbar/entry.dev.es.js'),
-		]
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/table_toolbar/entry.dev.es.tsx'),
+		],
 	},
 	mode: 'development',
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{
