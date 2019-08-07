@@ -54,6 +54,7 @@
 					<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/AmericanExpress.png" /></div>
 				</div>
 			</div>
+
 			<div class="speedwell-footer__menu">
 				<section>
 					<h2>COMPANY</h2>
