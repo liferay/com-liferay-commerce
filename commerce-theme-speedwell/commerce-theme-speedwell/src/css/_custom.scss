@@ -97,12 +97,25 @@ body:not(.signed-in) {
     display: none;
   }
 
-  .speedwell-main-menu__links,
-  .commerce-cart {
+  .speedwell-main-menu__links {
     top: calc(#{$speedwell-topbar-size} - 1px);
 
     @media screen and (max-width: 767px) {
       top: calc(#{$speedwell-topbar-size-small} - 1px);
+    }
+  }
+
+  .commerce-cart {
+    top: 0;
+
+    &::before {
+      top: $speedwell-topbar-size;
+    }
+
+    @media screen and (max-width: 767px) {
+      &::before {
+        top: calc(#{$speedwell-topbar-size-small} - 1px);
+      }
     }
   }
 }
