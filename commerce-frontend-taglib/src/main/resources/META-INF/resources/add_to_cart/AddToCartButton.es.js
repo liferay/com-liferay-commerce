@@ -94,6 +94,7 @@ function doSubmit() {
 					Liferay.fire(
 						'refreshCartUsingData',
 						{
+							detailsUrl: jsonresponse.detailsUrl,
 							orderId: jsonresponse.orderId,
 							products: jsonresponse.products,
 							summary: jsonresponse.summary
