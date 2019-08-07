@@ -34,6 +34,7 @@ import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -53,13 +54,12 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.search.filter.Filter;
-import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -218,88 +218,54 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
-		if (GetterUtil.getBoolean(attributes.get("secure"))) {
+		if (!GetterUtil.getBoolean(attributes.get("secure"))) {
 			long commerceChannelId = GetterUtil.getLong(
 				attributes.get("commerceChannelGroupId"));
 
-			BooleanFilter channelBooleanFiler = new BooleanFilter();
+			List<CommerceChannel> commerceChannels =
+				_commerceChannelLocalService.searchCommerceChannels(
+					searchContext.getCompanyId());
+
+			long[] commerceChannelGroupIds = null;
+
+			if (commerceChannelId > 0) {
+				commerceChannelGroupIds = new long[] {commerceChannelId};
+			}
+
+			if (!commerceChannels.isEmpty()) {
+				if (commerceChannelGroupIds == null) {
+					commerceChannelGroupIds = new long[0];
+				}
+
+				long[] userCommerceChannelGroupIds = ListUtil.toLongArray(
+					commerceChannels, CommerceChannel::getGroupId);
+
+				commerceChannelGroupIds = ArrayUtil.append(
+					commerceChannelGroupIds, userCommerceChannelGroupIds);
+			}
+
+			BooleanFilter channelBooleanFilter = new BooleanFilter();
 
 			BooleanFilter channelFilterEnableBooleanFiler = new BooleanFilter();
 
-			channelFilterEnableBooleanFiler.addTerm(
-				FIELD_CHANNEL_FILTER_ENABLED, Boolean.TRUE.toString(),
-				BooleanClauseOccur.MUST);
+			if ((commerceChannelGroupIds != null) &&
+				(commerceChannelGroupIds.length > 0)) {
 
-			if (commerceChannelId > 0) {
-				channelFilterEnableBooleanFiler.addTerm(
-					FIELD_CHANNEL_GROUP_IDS, String.valueOf(commerceChannelId),
-					BooleanClauseOccur.MUST);
-			}
-			else {
-				channelFilterEnableBooleanFiler.addTerm(
-					FIELD_CHANNEL_GROUP_IDS, "-1", BooleanClauseOccur.MUST);
-			}
+				for (long commerceChannelGroupId : commerceChannelGroupIds) {
+					channelFilterEnableBooleanFiler.addTerm(
+						FIELD_CHANNEL_GROUP_IDS,
+						String.valueOf(commerceChannelGroupId));
 
-			channelBooleanFiler.add(
-				channelFilterEnableBooleanFiler, BooleanClauseOccur.SHOULD);
-			channelBooleanFiler.addTerm(
-				FIELD_CHANNEL_FILTER_ENABLED, Boolean.FALSE.toString(),
-				BooleanClauseOccur.SHOULD);
+					channelBooleanFilter.add(channelFilterEnableBooleanFiler);
+					channelBooleanFilter.addTerm(
+						FIELD_CHANNEL_FILTER_ENABLED, Boolean.FALSE.toString());
 
-			contextBooleanFilter.add(
-				channelBooleanFiler, BooleanClauseOccur.MUST);
-
-			long[] commerceAccountGroupIds = GetterUtil.getLongValues(
-				searchContext.getAttribute("commerceAccountGroupIds"), null);
-
-			BooleanFilter accountGroupsBooleanFilter = new BooleanFilter();
-
-			BooleanFilter accountGroupsFilteEnableBooleanFilter =
-				new BooleanFilter();
-
-			accountGroupsFilteEnableBooleanFilter.addTerm(
-				FIELD_ACCOUNT_GROUP_FILTER_ENABLED, Boolean.TRUE.toString(),
-				BooleanClauseOccur.MUST);
-
-			if ((commerceAccountGroupIds != null) &&
-				(commerceAccountGroupIds.length > 0)) {
-
-				BooleanFilter accountGroupIdsBooleanFilter =
-					new BooleanFilter();
-
-				for (long commerceAccountGroupId : commerceAccountGroupIds) {
-					Filter termFilter = new TermFilter(
-						"commerceAccountGroupIds",
-						String.valueOf(commerceAccountGroupId));
-
-					accountGroupIdsBooleanFilter.add(
-						termFilter, BooleanClauseOccur.SHOULD);
+					contextBooleanFilter.add(channelBooleanFilter);
 				}
-
-				accountGroupsFilteEnableBooleanFilter.add(
-					accountGroupIdsBooleanFilter, BooleanClauseOccur.MUST);
 			}
 			else {
-				accountGroupsFilteEnableBooleanFilter.addTerm(
-					"commerceAccountGroupIds", "-1", BooleanClauseOccur.MUST);
-			}
-
-			accountGroupsBooleanFilter.add(
-				accountGroupsFilteEnableBooleanFilter,
-				BooleanClauseOccur.SHOULD);
-			accountGroupsBooleanFilter.addTerm(
-				FIELD_ACCOUNT_GROUP_FILTER_ENABLED, Boolean.FALSE.toString(),
-				BooleanClauseOccur.SHOULD);
-
-			contextBooleanFilter.add(
-				accountGroupsBooleanFilter, BooleanClauseOccur.MUST);
-		}
-		else {
-			long[] groupIds = searchContext.getGroupIds();
-
-			if ((groupIds == null) || (groupIds.length == 0)) {
 				contextBooleanFilter.addTerm(
-					Field.GROUP_ID, "-1", BooleanClauseOccur.MUST);
+					FIELD_CHANNEL_GROUP_IDS, "-1", BooleanClauseOccur.MUST);
 			}
 		}
 	}
@@ -799,6 +765,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
