@@ -55,7 +55,7 @@ class Cart extends Component {
 			this.orderId = evt.orderId;
 			this.products = evt.products;
 			this.summary = evt.summary;
-			this.detailsUrl = evt.detailsUrl || null
+			this.detailsUrl = evt.detailsUrl || null;
 			this._loading = false;
 			this.pendingOperations = [];
 			return true;
