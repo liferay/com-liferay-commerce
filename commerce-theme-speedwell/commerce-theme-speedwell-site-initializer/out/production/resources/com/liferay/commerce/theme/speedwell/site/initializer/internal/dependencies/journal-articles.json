@@ -1,20 +1,20 @@
 [
-  {
-    "articleId": "SPEEDWELL_BUMPER_SLIDER",
-    "ddmStructureKey": "speedwell-bumper-slider-structure",
-    "ddmTemplateKey": "SPEEDWELL_BUMPER_SLIDER",
-    "title": "SPEEDWELL_BUMPER_SLIDER"
-  },
-  {
-    "articleId": "SPEEDWELL_HIGHLIGHT_SLIDER",
-    "ddmStructureKey": "speedwell-highlight-slider-structure",
-    "ddmTemplateKey": "SPEEDWELL_HIGHLIGHT_SLIDER",
-    "title": "SPEEDWELL_HIGHLIGHT_SLIDER"
-  },
-  {
-    "articleId": "SPEEDWELL_NEWSLETTER",
-    "ddmStructureKey": "speedwell-newsletter-structure",
-    "ddmTemplateKey": "SPEEDWELL_NEWSLETTER",
-    "title": "SPEEDWELL_NEWSLETTER"
-  }
+	{
+		"articleId": "SPEEDWELL_BUMPER_SLIDER",
+		"ddmStructureKey": "speedwell-bumper-slider-structure",
+		"ddmTemplateKey": "SPEEDWELL_BUMPER_SLIDER",
+		"title": "SPEEDWELL_BUMPER_SLIDER"
+	},
+	{
+		"articleId": "SPEEDWELL_HIGHLIGHT_SLIDER",
+		"ddmStructureKey": "speedwell-highlight-slider-structure",
+		"ddmTemplateKey": "SPEEDWELL_HIGHLIGHT_SLIDER",
+		"title": "SPEEDWELL_HIGHLIGHT_SLIDER"
+	},
+	{
+		"articleId": "SPEEDWELL_NEWSLETTER",
+		"ddmStructureKey": "speedwell-newsletter-structure",
+		"ddmTemplateKey": "SPEEDWELL_NEWSLETTER",
+		"title": "SPEEDWELL_NEWSLETTER"
+	}
 ]

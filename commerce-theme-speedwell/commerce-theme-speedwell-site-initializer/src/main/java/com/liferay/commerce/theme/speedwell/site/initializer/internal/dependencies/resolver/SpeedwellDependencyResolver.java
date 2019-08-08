@@ -15,17 +15,15 @@
 package com.liferay.commerce.theme.speedwell.site.initializer.internal.dependencies.resolver;
 
 import com.liferay.portal.kernel.util.StringUtil;
-import org.osgi.service.component.annotations.Component;
 
 import java.io.IOException;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Marco Leo
  */
-@Component(
-	immediate = true,
-	service = SpeedwellDependencyResolver.class
-)
+@Component(immediate = true, service = SpeedwellDependencyResolver.class)
 public class SpeedwellDependencyResolver {
 
 	public String getDependenciesPath() {
@@ -36,31 +34,25 @@ public class SpeedwellDependencyResolver {
 		return SpeedwellDependencyResolver.class.getClassLoader();
 	}
 
-
 	public String getDisplayTemplatesDependencyPath() {
 		return _DEPENDENCIES_PATH + "display_templates/";
 	}
-
 
 	public ClassLoader getDocumentsClassLoader() {
 		return SpeedwellDependencyResolver.class.getClassLoader();
 	}
 
-
 	public String getDocumentsDependencyPath() {
 		return _DEPENDENCIES_PATH + "documents/";
 	}
-
 
 	public ClassLoader getImageClassLoader() {
 		return SpeedwellDependencyResolver.class.getClassLoader();
 	}
 
-
 	public String getImageDependencyPath() {
 		return _DEPENDENCIES_PATH + "images/";
 	}
-
 
 	public String getJSON(String name) throws IOException {
 		return StringUtil.read(
