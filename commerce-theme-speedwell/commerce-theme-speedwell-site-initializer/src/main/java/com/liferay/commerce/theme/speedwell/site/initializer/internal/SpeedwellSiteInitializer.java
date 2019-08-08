@@ -166,7 +166,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			configureB2BSite(groupId, serviceContext);
 
 			_cpFileImporter.updateLookAndFeel(
-					_SPEEDWELL_THEME_ID, false, serviceContext);
+				_SPEEDWELL_THEME_ID, false, serviceContext);
 
 			updateLogo(serviceContext);
 
@@ -799,8 +799,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("dl-file-entries.json");
 
 		_dlImporter.importDocuments(
-			jsonArray,
-			_speedwellDependencyResolver.getDocumentsClassLoader(),
+			jsonArray, _speedwellDependencyResolver.getDocumentsClassLoader(),
 			_speedwellDependencyResolver.getDocumentsDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
@@ -819,8 +818,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		JSONArray jsonArray = _getJSONArray("journal-articles.json");
 
 		_journalArticleImporter.importJournalArticles(
-			jsonArray,
-			_speedwellDependencyResolver.getDocumentsClassLoader(),
+			jsonArray, _speedwellDependencyResolver.getDocumentsClassLoader(),
 			_speedwellDependencyResolver.getDependenciesPath() +
 				"journal_articles/",
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
@@ -860,8 +858,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		_portletSettingsImporter.importPortletSettings(
 			jsonArray,
 			_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
-			_speedwellDependencyResolver.
-				getDisplayTemplatesDependencyPath(),
+			_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
@@ -924,12 +921,12 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		_portletSettingsImporter.importPortletSettings(
 			jsonArray,
 			_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
-			_speedwellDependencyResolver.
-				getDisplayTemplatesDependencyPath(),
+			_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
 			serviceContext.getScopeGroupId(), serviceContext.getUserId());
 	}
 
-	private static final String _SPEEDWELL_THEME_ID = "speedwell_WAR_commercethemespeedwell";
+	private static final String _SPEEDWELL_THEME_ID =
+		"speedwell_WAR_commercethemespeedwell";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SpeedwellSiteInitializer.class);
@@ -1033,9 +1030,6 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 	private KBArticleImporter _kbArticleImporter;
 
 	@Reference
-	private SpeedwellLayoutsInitializer _speedwellLayoutsInitializer;
-
-	@Reference
 	private OrganizationImporter _organizationImporter;
 
 	@Reference
@@ -1050,19 +1044,21 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.theme.speedwell.site.initializer)"
 	)
-
 	private ServletContext _servletContext;
 
 	@Reference
 	private SettingsFactory _settingsFactory;
 
 	@Reference
+	private SpeedwellDependencyResolver _speedwellDependencyResolver;
+
+	@Reference
+	private SpeedwellLayoutsInitializer _speedwellLayoutsInitializer;
+
+	@Reference
 	private ThemeLocalService _themeLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;
-
-	@Reference
-	private SpeedwellDependencyResolver _speedwellDependencyResolver;
 
 }
