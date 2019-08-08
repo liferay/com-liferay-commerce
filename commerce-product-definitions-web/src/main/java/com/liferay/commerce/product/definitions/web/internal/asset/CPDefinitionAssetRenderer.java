@@ -21,6 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -55,10 +57,11 @@ public class CPDefinitionAssetRenderer
 	extends BaseJSPAssetRenderer<CPDefinition> {
 
 	public CPDefinitionAssetRenderer(
-		CPDefinition cpDefinition,
+		CPDefinition cpDefinition, CPDefinitionHelper cpDefinitionHelper,
 		ModelResourcePermission<CommerceCatalog> modelResourcePermission) {
 
 		_cpDefinition = cpDefinition;
+		_cpDefinitionHelper = cpDefinitionHelper;
 		_modelResourcePermission = modelResourcePermission;
 	}
 
@@ -178,6 +181,25 @@ public class CPDefinitionAssetRenderer
 	}
 
 	@Override
+	public String getURLViewInContext(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)liferayPortletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			return _cpDefinitionHelper.getFriendlyURL(
+				_cpDefinition.getCPDefinitionId(), themeDisplay);
+		}
+		catch (Exception e) {
+			return noSuchEntryRedirect;
+		}
+	}
+
+	@Override
 	public long getUserId() {
 		return _cpDefinition.getUserId();
 	}
@@ -227,6 +249,7 @@ public class CPDefinitionAssetRenderer
 	}
 
 	private final CPDefinition _cpDefinition;
+	private final CPDefinitionHelper _cpDefinitionHelper;
 	private final ModelResourcePermission<CommerceCatalog>
 		_modelResourcePermission;
 
