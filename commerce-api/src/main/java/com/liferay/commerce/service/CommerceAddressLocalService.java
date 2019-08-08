@@ -204,12 +204,28 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAddress fetchCommerceAddress(long commerceAddressId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAddress fetchDefaultBillingCommerceAddress(
+		long companyId, String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAddress fetchDefaultShippingCommerceAddress(
+		long companyId, String className, long classPK);
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAddress geolocateCommerceAddress(long commerceAddressId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
+		long companyId, String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
+		long companyId, String className, long classPK);
 
 	/**
 	 * Returns the commerce address with the primary key.
@@ -236,10 +252,18 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(int start, int end);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK, int start, int end,
@@ -250,6 +274,15 @@ public interface CommerceAddressLocalService
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator);
+
 	/**
 	 * Returns the number of commerce addresses.
 	 *
@@ -258,12 +291,20 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount();
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(
 		long groupId, String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCountByCompanyId(
+		long companyId, String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -280,10 +321,20 @@ public interface CommerceAddressLocalService
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
 			long companyId, long groupId, String className, long classPK,
 			String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
+			long companyId, String className, long classPK, String keywords,
+			int start, int end, Sort sort)
 		throws PortalException;
 
 	/**

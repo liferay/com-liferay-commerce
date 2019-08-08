@@ -188,16 +188,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -333,13 +333,13 @@ public class CPDefinitionOptionRelUtil {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
 	 */
 	public static CPDefinitionOptionRel fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+		return getPersistence().fetchByUUID_G(uuid, groupId, useFinderCache);
 	}
 
 	/**
@@ -434,16 +434,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -617,16 +617,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+			groupId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -790,16 +790,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -969,16 +969,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPDefinitionId(
-			CPDefinitionId, start, end, orderByComparator, retrieveFromCache);
+			CPDefinitionId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1119,14 +1119,14 @@ public class CPDefinitionOptionRelUtil {
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CPOptionId the cp option ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
 	 */
 	public static CPDefinitionOptionRel fetchByC_C(
-		long CPDefinitionId, long CPOptionId, boolean retrieveFromCache) {
+		long CPDefinitionId, long CPOptionId, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C(
-			CPDefinitionId, CPOptionId, retrieveFromCache);
+			CPDefinitionId, CPOptionId, useFinderCache);
 	}
 
 	/**
@@ -1222,17 +1222,17 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findByC_SC(
 		long CPDefinitionId, boolean skuContributor, int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_SC(
 			CPDefinitionId, skuContributor, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1482,16 +1482,16 @@ public class CPDefinitionOptionRelUtil {
 	 * @param start the lower bound of the range of cp definition option rels
 	 * @param end the upper bound of the range of cp definition option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition option rels
 	 */
 	public static List<CPDefinitionOptionRel> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionOptionRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

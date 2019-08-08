@@ -195,17 +195,17 @@ public class CommerceAccountGroupRelUtil {
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	public static List<CommerceAccountGroupRel> findByCommerceAccountGroupId(
 		long commerceAccountGroupId, int start, int end,
 		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountGroupId(
 			commerceAccountGroupId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -385,17 +385,17 @@ public class CommerceAccountGroupRelUtil {
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	public static List<CommerceAccountGroupRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C(
 			classNameId, classPK, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -548,15 +548,15 @@ public class CommerceAccountGroupRelUtil {
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group rel, or <code>null</code> if a matching commerce account group rel could not be found
 	 */
 	public static CommerceAccountGroupRel fetchByC_C_C(
 		long classNameId, long classPK, long commerceAccountGroupId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C_C(
-			classNameId, classPK, commerceAccountGroupId, retrieveFromCache);
+			classNameId, classPK, commerceAccountGroupId, useFinderCache);
 	}
 
 	/**
@@ -725,16 +725,16 @@ public class CommerceAccountGroupRelUtil {
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account group rels
 	 */
 	public static List<CommerceAccountGroupRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

@@ -101,14 +101,14 @@ public interface CPOptionCategoryPersistence
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public java.util.List<CPOptionCategory> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOptionCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option category in the ordered set where uuid = &#63;.
@@ -313,14 +313,14 @@ public interface CPOptionCategoryPersistence
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public java.util.List<CPOptionCategory> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOptionCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option category in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -533,14 +533,14 @@ public interface CPOptionCategoryPersistence
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public java.util.List<CPOptionCategory> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOptionCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option category in the ordered set where companyId = &#63;.
@@ -714,11 +714,11 @@ public interface CPOptionCategoryPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp option category, or <code>null</code> if a matching cp option category could not be found
 	 */
 	public CPOptionCategory fetchByC_K(
-		long companyId, String key, boolean retrieveFromCache);
+		long companyId, String key, boolean useFinderCache);
 
 	/**
 	 * Removes the cp option category where companyId = &#63; and key = &#63; from the database.
@@ -839,14 +839,14 @@ public interface CPOptionCategoryPersistence
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp option categories
 	 */
 	public java.util.List<CPOptionCategory> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOptionCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp option categories from the database.

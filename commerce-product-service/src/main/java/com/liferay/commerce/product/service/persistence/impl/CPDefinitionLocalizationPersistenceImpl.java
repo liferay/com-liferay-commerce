@@ -152,14 +152,14 @@ public class CPDefinitionLocalizationPersistenceImpl
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition localizations
 	 */
 	@Override
 	public List<CPDefinitionLocalization> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -169,10 +169,13 @@ public class CPDefinitionLocalizationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
-			finderArgs = new Object[] {CPDefinitionId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
+				finderArgs = new Object[] {CPDefinitionId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPDefinitionId;
 			finderArgs = new Object[] {
 				CPDefinitionId, start, end, orderByComparator
@@ -181,7 +184,7 @@ public class CPDefinitionLocalizationPersistenceImpl
 
 		List<CPDefinitionLocalization> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLocalization>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -249,10 +252,14 @@ public class CPDefinitionLocalizationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -669,20 +676,24 @@ public class CPDefinitionLocalizationPersistenceImpl
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param languageId the language ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition localization, or <code>null</code> if a matching cp definition localization could not be found
 	 */
 	@Override
 	public CPDefinitionLocalization fetchByCPDefinitionId_LanguageId(
-		long CPDefinitionId, String languageId, boolean retrieveFromCache) {
+		long CPDefinitionId, String languageId, boolean useFinderCache) {
 
 		languageId = Objects.toString(languageId, "");
 
-		Object[] finderArgs = new Object[] {CPDefinitionId, languageId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionId, languageId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByCPDefinitionId_LanguageId, finderArgs, this);
 		}
@@ -741,9 +752,11 @@ public class CPDefinitionLocalizationPersistenceImpl
 				List<CPDefinitionLocalization> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByCPDefinitionId_LanguageId, finderArgs,
-						list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByCPDefinitionId_LanguageId,
+							finderArgs, list);
+					}
 				}
 				else {
 					CPDefinitionLocalization cpDefinitionLocalization =
@@ -755,8 +768,11 @@ public class CPDefinitionLocalizationPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByCPDefinitionId_LanguageId, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByCPDefinitionId_LanguageId,
+						finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1522,14 +1538,14 @@ public class CPDefinitionLocalizationPersistenceImpl
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition localizations
 	 */
 	@Override
 	public List<CPDefinitionLocalization> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1539,17 +1555,20 @@ public class CPDefinitionLocalizationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPDefinitionLocalization> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLocalization>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1600,10 +1619,14 @@ public class CPDefinitionLocalizationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

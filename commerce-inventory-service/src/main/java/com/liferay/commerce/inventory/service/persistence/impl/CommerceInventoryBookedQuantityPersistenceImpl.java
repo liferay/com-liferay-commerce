@@ -155,14 +155,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
 	public List<CommerceInventoryBookedQuantity> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		sku = Objects.toString(sku, "");
 
@@ -174,17 +174,20 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindBySku;
-			finderArgs = new Object[] {sku};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindBySku;
+				finderArgs = new Object[] {sku};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindBySku;
 			finderArgs = new Object[] {sku, start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryBookedQuantity> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryBookedQuantity>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -266,10 +269,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -725,14 +732,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	@Override
 	public List<CommerceInventoryBookedQuantity> findByLtExpirationDate(
 		Date expirationDate, int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -745,7 +752,7 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 		List<CommerceInventoryBookedQuantity> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryBookedQuantity>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -830,10 +837,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1871,14 +1882,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory booked quantities
 	 */
 	@Override
 	public List<CommerceInventoryBookedQuantity> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryBookedQuantity> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1888,17 +1899,20 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryBookedQuantity> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryBookedQuantity>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1951,10 +1965,14 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

@@ -102,14 +102,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63;.
@@ -246,14 +246,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list item in the ordered set where CPInstanceUuid = &#63;.
@@ -390,14 +390,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findByCProductId(
 		long CProductId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list item in the ordered set where CProductId = &#63;.
@@ -538,14 +538,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findByCW_CPI(
 		long commerceWishListId, String CPInstanceUuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63; and CPInstanceUuid = &#63;.
@@ -694,14 +694,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findByCW_CP(
 		long commerceWishListId, long CProductId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list item in the ordered set where commerceWishListId = &#63; and CProductId = &#63;.
@@ -823,12 +823,12 @@ public interface CommerceWishListItemPersistence
 	 * @param commerceWishListId the commerce wish list ID
 	 * @param CPInstanceUuid the cp instance uuid
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	public CommerceWishListItem fetchByCW_CPI_CP(
 		long commerceWishListId, String CPInstanceUuid, long CProductId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce wish list item where commerceWishListId = &#63; and CPInstanceUuid = &#63; and CProductId = &#63; from the database.
@@ -954,14 +954,14 @@ public interface CommerceWishListItemPersistence
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce wish list items
 	 */
 	public java.util.List<CommerceWishListItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishListItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce wish list items from the database.

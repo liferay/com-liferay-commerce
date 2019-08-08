@@ -101,14 +101,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where uuid = &#63;.
@@ -217,11 +217,11 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	public CPInstance fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp instance where uuid = &#63; and groupId = &#63; from the database.
@@ -298,14 +298,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -448,14 +448,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where groupId = &#63;.
@@ -591,14 +591,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where companyId = &#63;.
@@ -734,14 +734,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where CPDefinitionId = &#63;.
@@ -878,14 +878,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where CPInstanceUuid = &#63;.
@@ -1025,14 +1025,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByG_ST(
 		long groupId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where groupId = &#63; and status = &#63;.
@@ -1148,11 +1148,11 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CPInstanceUuid the cp instance uuid
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	public CPInstance fetchByC_C(
-		long CPDefinitionId, String CPInstanceUuid, boolean retrieveFromCache);
+		long CPDefinitionId, String CPInstanceUuid, boolean useFinderCache);
 
 	/**
 	 * Removes the cp instance where CPDefinitionId = &#63; and CPInstanceUuid = &#63; from the database.
@@ -1198,11 +1198,11 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param sku the sku
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	public CPInstance fetchByC_S(
-		long CPDefinitionId, String sku, boolean retrieveFromCache);
+		long CPDefinitionId, String sku, boolean useFinderCache);
 
 	/**
 	 * Removes the cp instance where CPDefinitionId = &#63; and sku = &#63; from the database.
@@ -1280,14 +1280,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByC_ST(
 		long CPDefinitionId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where CPDefinitionId = &#63; and status = &#63;.
@@ -1434,14 +1434,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByLtD_S(
 		Date displayDate, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where displayDate &lt; &#63; and status = &#63;.
@@ -1593,14 +1593,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	public java.util.List<CPInstance> findByC_LtD_S(
 		long CPDefinitionId, Date displayDate, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp instance in the ordered set where CPDefinitionId = &#63; and displayDate &lt; &#63; and status = &#63;.
@@ -1727,12 +1727,11 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	public CPInstance fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the cp instance where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -1853,14 +1852,14 @@ public interface CPInstancePersistence extends BasePersistence<CPInstance> {
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp instances
 	 */
 	public java.util.List<CPInstance> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPInstance>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp instances from the database.

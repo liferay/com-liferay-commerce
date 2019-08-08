@@ -102,14 +102,14 @@ public interface CommerceNotificationAttachmentPersistence
 	 * @param start the lower bound of the range of commerce notification attachments
 	 * @param end the upper bound of the range of commerce notification attachments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification attachments
 	 */
 	public java.util.List<CommerceNotificationAttachment> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationAttachment> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification attachment in the ordered set where uuid = &#63;.
@@ -220,11 +220,11 @@ public interface CommerceNotificationAttachmentPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce notification attachment, or <code>null</code> if a matching commerce notification attachment could not be found
 	 */
 	public CommerceNotificationAttachment fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce notification attachment where uuid = &#63; and groupId = &#63; from the database.
@@ -303,14 +303,14 @@ public interface CommerceNotificationAttachmentPersistence
 	 * @param start the lower bound of the range of commerce notification attachments
 	 * @param end the upper bound of the range of commerce notification attachments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification attachments
 	 */
 	public java.util.List<CommerceNotificationAttachment> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationAttachment> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification attachment in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -457,7 +457,7 @@ public interface CommerceNotificationAttachmentPersistence
 	 * @param start the lower bound of the range of commerce notification attachments
 	 * @param end the upper bound of the range of commerce notification attachments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification attachments
 	 */
 	public java.util.List<CommerceNotificationAttachment>
@@ -465,7 +465,7 @@ public interface CommerceNotificationAttachmentPersistence
 			long commerceNotificationQueueEntryId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceNotificationAttachment> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification attachment in the ordered set where commerceNotificationQueueEntryId = &#63;.
@@ -665,14 +665,14 @@ public interface CommerceNotificationAttachmentPersistence
 	 * @param start the lower bound of the range of commerce notification attachments
 	 * @param end the upper bound of the range of commerce notification attachments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce notification attachments
 	 */
 	public java.util.List<CommerceNotificationAttachment> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationAttachment> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce notification attachments from the database.

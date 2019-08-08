@@ -66,6 +66,44 @@ public class CommerceAddressServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceAddress
+		fetchDefaultBillingCommerceAddress(
+			long companyId, String className, long classPK) {
+
+		return _commerceAddressService.fetchDefaultBillingCommerceAddress(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceAddress
+		fetchDefaultShippingCommerceAddress(
+			long companyId, String className, long classPK) {
+
+		return _commerceAddressService.fetchDefaultShippingCommerceAddress(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddress>
+			getAvailableBillingCommerceAddresses(
+				long companyId, String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.getAvailableBillingCommerceAddresses(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddress>
+			getAvailableShippingCommerceAddresses(
+				long companyId, String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.getAvailableShippingCommerceAddresses(
+			companyId, className, classPK);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceAddress getCommerceAddress(
 			long commerceAddressId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -73,6 +111,10 @@ public class CommerceAddressServiceWrapper
 		return _commerceAddressService.getCommerceAddress(commerceAddressId);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddress>
 			getCommerceAddresses(long groupId, String className, long classPK)
@@ -82,6 +124,10 @@ public class CommerceAddressServiceWrapper
 			groupId, className, classPK);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddress>
 			getCommerceAddresses(
@@ -110,6 +156,34 @@ public class CommerceAddressServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddress>
+			getCommerceAddressesByCompanyId(
+				long companyId, String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.getCommerceAddressesByCompanyId(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceAddress>
+			getCommerceAddressesByCompanyId(
+				long companyId, String className, long classPK, int start,
+				int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceAddress>
+						orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.getCommerceAddressesByCompanyId(
+			companyId, className, classPK, start, end, orderByComparator);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
+	@Override
 	public int getCommerceAddressesCount(
 			long groupId, String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -126,6 +200,15 @@ public class CommerceAddressServiceWrapper
 			className, classPK);
 	}
 
+	@Override
+	public int getCommerceAddressesCountByCompanyId(
+			long companyId, String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.getCommerceAddressesCountByCompanyId(
+			companyId, className, classPK);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -136,6 +219,10 @@ public class CommerceAddressServiceWrapper
 		return _commerceAddressService.getOSGiServiceIdentifier();
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
 	@Override
 	public com.liferay.portal.kernel.search.BaseModelSearchResult
 		<com.liferay.commerce.model.CommerceAddress> searchCommerceAddresses(
@@ -146,6 +233,17 @@ public class CommerceAddressServiceWrapper
 
 		return _commerceAddressService.searchCommerceAddresses(
 			companyId, groupId, className, classPK, keywords, start, end, sort);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.search.BaseModelSearchResult
+		<com.liferay.commerce.model.CommerceAddress> searchCommerceAddresses(
+				long companyId, String className, long classPK, String keywords,
+				int start, int end, com.liferay.portal.kernel.search.Sort sort)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressService.searchCommerceAddresses(
+			companyId, className, classPK, keywords, start, end, sort);
 	}
 
 	@Override

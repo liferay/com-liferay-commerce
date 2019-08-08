@@ -103,14 +103,14 @@ public interface CommerceInventoryBookedQuantityPersistence
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	public java.util.List<CommerceInventoryBookedQuantity> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryBookedQuantity> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory booked quantity in the ordered set where sku = &#63;.
@@ -248,7 +248,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory booked quantities
 	 */
 	public java.util.List<CommerceInventoryBookedQuantity>
@@ -256,7 +256,7 @@ public interface CommerceInventoryBookedQuantityPersistence
 			Date expirationDate, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceInventoryBookedQuantity> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory booked quantity in the ordered set where expirationDate &lt; &#63;.
@@ -448,14 +448,14 @@ public interface CommerceInventoryBookedQuantityPersistence
 	 * @param start the lower bound of the range of commerce inventory booked quantities
 	 * @param end the upper bound of the range of commerce inventory booked quantities (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory booked quantities
 	 */
 	public java.util.List<CommerceInventoryBookedQuantity> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryBookedQuantity> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce inventory booked quantities from the database.

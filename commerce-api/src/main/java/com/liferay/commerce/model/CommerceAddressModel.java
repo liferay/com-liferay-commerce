@@ -19,9 +19,9 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.AttachedModel;
+import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -42,7 +42,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface CommerceAddressModel
-	extends AttachedModel, BaseModel<CommerceAddress>, GroupedModel,
+	extends AttachedModel, AuditedModel, BaseModel<CommerceAddress>,
 			ShardedModel {
 
 	/*
@@ -78,22 +78,6 @@ public interface CommerceAddressModel
 	 * @param commerceAddressId the commerce address ID of this commerce address
 	 */
 	public void setCommerceAddressId(long commerceAddressId);
-
-	/**
-	 * Returns the group ID of this commerce address.
-	 *
-	 * @return the group ID of this commerce address
-	 */
-	@Override
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this commerce address.
-	 *
-	 * @param groupId the group ID of this commerce address
-	 */
-	@Override
-	public void setGroupId(long groupId);
 
 	/**
 	 * Returns the company ID of this commerce address.

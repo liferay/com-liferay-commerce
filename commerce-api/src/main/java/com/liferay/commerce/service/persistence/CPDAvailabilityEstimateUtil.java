@@ -190,16 +190,16 @@ public class CPDAvailabilityEstimateUtil {
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public static List<CPDAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -368,16 +368,16 @@ public class CPDAvailabilityEstimateUtil {
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public static List<CPDAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -558,18 +558,18 @@ public class CPDAvailabilityEstimateUtil {
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public static List<CPDAvailabilityEstimate>
 		findByCommerceAvailabilityEstimateId(
 			long commerceAvailabilityEstimateId, int start, int end,
 			OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAvailabilityEstimateId(
 			commerceAvailabilityEstimateId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -718,14 +718,13 @@ public class CPDAvailabilityEstimateUtil {
 	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	public static CPDAvailabilityEstimate fetchByCProductId(
-		long CProductId, boolean retrieveFromCache) {
+		long CProductId, boolean useFinderCache) {
 
-		return getPersistence().fetchByCProductId(
-			CProductId, retrieveFromCache);
+		return getPersistence().fetchByCProductId(CProductId, useFinderCache);
 	}
 
 	/**
@@ -885,16 +884,16 @@ public class CPDAvailabilityEstimateUtil {
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cpd availability estimates
 	 */
 	public static List<CPDAvailabilityEstimate> findAll(
 		int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

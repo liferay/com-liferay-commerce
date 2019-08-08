@@ -185,16 +185,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -356,16 +356,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -536,16 +536,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -677,13 +677,13 @@ public class CommerceCurrencyUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param code the code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	public static CommerceCurrency fetchByC_C(
-		long companyId, String code, boolean retrieveFromCache) {
+		long companyId, String code, boolean useFinderCache) {
 
-		return getPersistence().fetchByC_C(companyId, code, retrieveFromCache);
+		return getPersistence().fetchByC_C(companyId, code, useFinderCache);
 	}
 
 	/**
@@ -776,17 +776,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByC_P(
 		long companyId, boolean primary, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_P(
-			companyId, primary, start, end, orderByComparator,
-			retrieveFromCache);
+			companyId, primary, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -963,17 +962,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByC_A(
 		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_A(
-			companyId, active, start, end, orderByComparator,
-			retrieveFromCache);
+			companyId, active, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1155,17 +1153,17 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public static List<CommerceCurrency> findByC_P_A(
 		long companyId, boolean primary, boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_P_A(
 			companyId, primary, active, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1411,16 +1409,16 @@ public class CommerceCurrencyUtil {
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce currencies
 	 */
 	public static List<CommerceCurrency> findAll(
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

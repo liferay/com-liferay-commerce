@@ -102,14 +102,14 @@ public interface CommerceTaxFixedRatePersistence
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	public java.util.List<CommerceTaxFixedRate> findByCPTaxCategoryId(
 		long CPTaxCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxFixedRate>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax fixed rate in the ordered set where CPTaxCategoryId = &#63;.
@@ -246,14 +246,14 @@ public interface CommerceTaxFixedRatePersistence
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	public java.util.List<CommerceTaxFixedRate> findByCommerceTaxMethodId(
 		long commerceTaxMethodId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxFixedRate>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax fixed rate in the ordered set where commerceTaxMethodId = &#63;.
@@ -364,12 +364,11 @@ public interface CommerceTaxFixedRatePersistence
 	 *
 	 * @param CPTaxCategoryId the cp tax category ID
 	 * @param commerceTaxMethodId the commerce tax method ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tax fixed rate, or <code>null</code> if a matching commerce tax fixed rate could not be found
 	 */
 	public CommerceTaxFixedRate fetchByC_C(
-		long CPTaxCategoryId, long commerceTaxMethodId,
-		boolean retrieveFromCache);
+		long CPTaxCategoryId, long commerceTaxMethodId, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce tax fixed rate where CPTaxCategoryId = &#63; and commerceTaxMethodId = &#63; from the database.
@@ -492,14 +491,14 @@ public interface CommerceTaxFixedRatePersistence
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tax fixed rates
 	 */
 	public java.util.List<CommerceTaxFixedRate> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxFixedRate>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce tax fixed rates from the database.

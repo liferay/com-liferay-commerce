@@ -35,7 +35,6 @@ create table CPDefinitionInventory (
 
 create table CommerceAddress (
 	commerceAddressId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

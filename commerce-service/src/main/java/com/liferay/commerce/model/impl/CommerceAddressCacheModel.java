@@ -65,12 +65,10 @@ public class CommerceAddressCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{commerceAddressId=");
 		sb.append(commerceAddressId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -123,7 +121,6 @@ public class CommerceAddressCacheModel
 		CommerceAddressImpl commerceAddressImpl = new CommerceAddressImpl();
 
 		commerceAddressImpl.setCommerceAddressId(commerceAddressId);
-		commerceAddressImpl.setGroupId(groupId);
 		commerceAddressImpl.setCompanyId(companyId);
 		commerceAddressImpl.setUserId(userId);
 
@@ -224,8 +221,6 @@ public class CommerceAddressCacheModel
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		commerceAddressId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
-
 		companyId = objectInput.readLong();
 
 		userId = objectInput.readLong();
@@ -261,8 +256,6 @@ public class CommerceAddressCacheModel
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(commerceAddressId);
-
-		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
 
@@ -352,7 +345,6 @@ public class CommerceAddressCacheModel
 	}
 
 	public long commerceAddressId;
-	public long groupId;
 	public long companyId;
 	public long userId;
 	public String userName;

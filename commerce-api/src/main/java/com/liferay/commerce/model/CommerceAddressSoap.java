@@ -35,7 +35,6 @@ public class CommerceAddressSoap implements Serializable {
 		CommerceAddressSoap soapModel = new CommerceAddressSoap();
 
 		soapModel.setCommerceAddressId(model.getCommerceAddressId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -122,14 +121,6 @@ public class CommerceAddressSoap implements Serializable {
 
 	public void setCommerceAddressId(long commerceAddressId) {
 		_commerceAddressId = commerceAddressId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -309,7 +300,6 @@ public class CommerceAddressSoap implements Serializable {
 	}
 
 	private long _commerceAddressId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

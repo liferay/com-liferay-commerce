@@ -107,7 +107,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce notification template commerce account group rels
 	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification template commerce account group rels
 	 */
 	public java.util.List<CommerceNotificationTemplateCommerceAccountGroupRel>
@@ -116,7 +116,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceNotificationTemplateCommerceAccountGroupRel>
 					orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
@@ -268,7 +268,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce notification template commerce account group rels
 	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification template commerce account group rels
 	 */
 	public java.util.List<CommerceNotificationTemplateCommerceAccountGroupRel>
@@ -277,7 +277,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceNotificationTemplateCommerceAccountGroupRel>
 					orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceNotificationTemplateId = &#63;.
@@ -401,12 +401,12 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
 	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
 	 */
 	public CommerceNotificationTemplateCommerceAccountGroupRel fetchByC_C(
 		long commerceNotificationTemplateId, long commerceAccountGroupId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce notification template commerce account group rel where commerceNotificationTemplateId = &#63; and commerceAccountGroupId = &#63; from the database.
@@ -543,7 +543,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce notification template commerce account group rels
 	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce notification template commerce account group rels
 	 */
 	public java.util.List<CommerceNotificationTemplateCommerceAccountGroupRel>
@@ -552,7 +552,7 @@ public interface CommerceNotificationTemplateCommerceAccountGroupRelPersistence
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceNotificationTemplateCommerceAccountGroupRel>
 					orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce notification template commerce account group rels from the database.

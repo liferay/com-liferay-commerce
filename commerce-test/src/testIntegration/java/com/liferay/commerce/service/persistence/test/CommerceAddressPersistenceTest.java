@@ -123,8 +123,6 @@ public class CommerceAddressPersistenceTest {
 
 		CommerceAddress newCommerceAddress = _persistence.create(pk);
 
-		newCommerceAddress.setGroupId(RandomTestUtil.nextLong());
-
 		newCommerceAddress.setCompanyId(RandomTestUtil.nextLong());
 
 		newCommerceAddress.setUserId(RandomTestUtil.nextLong());
@@ -175,9 +173,6 @@ public class CommerceAddressPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceAddress.getCommerceAddressId(),
 			newCommerceAddress.getCommerceAddressId());
-		Assert.assertEquals(
-			existingCommerceAddress.getGroupId(),
-			newCommerceAddress.getGroupId());
 		Assert.assertEquals(
 			existingCommerceAddress.getCompanyId(),
 			newCommerceAddress.getCompanyId());
@@ -263,31 +258,31 @@ public class CommerceAddressPersistenceTest {
 	}
 
 	@Test
-	public void testCountByG_C_C() throws Exception {
-		_persistence.countByG_C_C(
+	public void testCountByC_C_C() throws Exception {
+		_persistence.countByC_C_C(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
-		_persistence.countByG_C_C(0L, 0L, 0L);
+		_persistence.countByC_C_C(0L, 0L, 0L);
 	}
 
 	@Test
-	public void testCountByG_C_C_DB() throws Exception {
-		_persistence.countByG_C_C_DB(
+	public void testCountByC_C_C_DB() throws Exception {
+		_persistence.countByC_C_C_DB(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
-		_persistence.countByG_C_C_DB(
+		_persistence.countByC_C_C_DB(
 			0L, 0L, 0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test
-	public void testCountByG_C_C_DS() throws Exception {
-		_persistence.countByG_C_C_DS(
+	public void testCountByC_C_C_DS() throws Exception {
+		_persistence.countByC_C_C_DS(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
 
-		_persistence.countByG_C_C_DS(
+		_persistence.countByC_C_C_DS(
 			0L, 0L, 0L, RandomTestUtil.randomBoolean());
 	}
 
@@ -316,10 +311,10 @@ public class CommerceAddressPersistenceTest {
 
 	protected OrderByComparator<CommerceAddress> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"CommerceAddress", "commerceAddressId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "classNameId", true, "classPK", true,
-			"name", true, "description", true, "street1", true, "street2", true,
+			"CommerceAddress", "commerceAddressId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "classNameId", true, "classPK", true, "name",
+			true, "description", true, "street1", true, "street2", true,
 			"street3", true, "city", true, "zip", true, "commerceRegionId",
 			true, "commerceCountryId", true, "latitude", true, "longitude",
 			true, "phoneNumber", true, "defaultBilling", true,
@@ -545,8 +540,6 @@ public class CommerceAddressPersistenceTest {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceAddress commerceAddress = _persistence.create(pk);
-
-		commerceAddress.setGroupId(RandomTestUtil.nextLong());
 
 		commerceAddress.setCompanyId(RandomTestUtil.nextLong());
 

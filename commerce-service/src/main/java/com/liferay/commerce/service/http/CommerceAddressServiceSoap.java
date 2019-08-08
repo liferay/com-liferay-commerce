@@ -125,6 +125,90 @@ public class CommerceAddressServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceAddressSoap
+			fetchDefaultBillingCommerceAddress(
+				long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceAddress returnValue =
+				CommerceAddressServiceUtil.fetchDefaultBillingCommerceAddress(
+					companyId, className, classPK);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap
+			fetchDefaultShippingCommerceAddress(
+				long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceAddress returnValue =
+				CommerceAddressServiceUtil.fetchDefaultShippingCommerceAddress(
+					companyId, className, classPK);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap[]
+			getAvailableBillingCommerceAddresses(
+				long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddress>
+				returnValue =
+					CommerceAddressServiceUtil.
+						getAvailableBillingCommerceAddresses(
+							companyId, className, classPK);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap[]
+			getAvailableShippingCommerceAddresses(
+				long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddress>
+				returnValue =
+					CommerceAddressServiceUtil.
+						getAvailableShippingCommerceAddresses(
+							companyId, className, classPK);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap
 			getCommerceAddress(long commerceAddressId)
 		throws RemoteException {
 
@@ -143,6 +227,10 @@ public class CommerceAddressServiceSoap {
 		}
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceAddressSoap[]
 			getCommerceAddresses(long groupId, String className, long classPK)
 		throws RemoteException {
@@ -162,6 +250,10 @@ public class CommerceAddressServiceSoap {
 		}
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceAddressSoap[]
 			getCommerceAddresses(
 				long groupId, String className, long classPK, int start,
@@ -209,6 +301,57 @@ public class CommerceAddressServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceAddressSoap[]
+			getCommerceAddressesByCompanyId(
+				long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddress>
+				returnValue =
+					CommerceAddressServiceUtil.getCommerceAddressesByCompanyId(
+						companyId, className, classPK);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceAddressSoap[]
+			getCommerceAddressesByCompanyId(
+				long companyId, String className, long classPK, int start,
+				int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.model.CommerceAddress>
+						orderByComparator)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceAddress>
+				returnValue =
+					CommerceAddressServiceUtil.getCommerceAddressesByCompanyId(
+						companyId, className, classPK, start, end,
+						orderByComparator);
+
+			return com.liferay.commerce.model.CommerceAddressSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	public static int getCommerceAddressesCount(
 			long groupId, String className, long classPK)
 		throws RemoteException {
@@ -234,6 +377,24 @@ public class CommerceAddressServiceSoap {
 			int returnValue =
 				CommerceAddressServiceUtil.getCommerceAddressesCount(
 					className, classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceAddressesCountByCompanyId(
+			long companyId, String className, long classPK)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceAddressServiceUtil.getCommerceAddressesCountByCompanyId(
+					companyId, className, classPK);
 
 			return returnValue;
 		}

@@ -101,14 +101,14 @@ public interface CPDAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public java.util.List<CPDAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cpd availability estimate in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface CPDAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public java.util.List<CPDAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cpd availability estimate in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -403,7 +403,7 @@ public interface CPDAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	public java.util.List<CPDAvailabilityEstimate>
@@ -411,7 +411,7 @@ public interface CPDAvailabilityEstimatePersistence
 			long commerceAvailabilityEstimateId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CPDAvailabilityEstimate> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first cpd availability estimate in the ordered set where commerceAvailabilityEstimateId = &#63;.
@@ -521,11 +521,11 @@ public interface CPDAvailabilityEstimatePersistence
 	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	public CPDAvailabilityEstimate fetchByCProductId(
-		long CProductId, boolean retrieveFromCache);
+		long CProductId, boolean useFinderCache);
 
 	/**
 	 * Removes the cpd availability estimate where CProductId = &#63; from the database.
@@ -647,14 +647,14 @@ public interface CPDAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cpd availability estimates
 	 */
 	public java.util.List<CPDAvailabilityEstimate> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cpd availability estimates from the database.

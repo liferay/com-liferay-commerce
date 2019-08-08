@@ -198,18 +198,18 @@ public class CommerceShippingFixedOptionUtil {
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping fixed options
 	 */
 	public static List<CommerceShippingFixedOption>
 		findByCommerceShippingMethodId(
 			long commerceShippingMethodId, int start, int end,
 			OrderByComparator<CommerceShippingFixedOption> orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceShippingMethodId(
 			commerceShippingMethodId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -470,16 +470,16 @@ public class CommerceShippingFixedOptionUtil {
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping fixed options
 	 */
 	public static List<CommerceShippingFixedOption> findAll(
 		int start, int end,
 		OrderByComparator<CommerceShippingFixedOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

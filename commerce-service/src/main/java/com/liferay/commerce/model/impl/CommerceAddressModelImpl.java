@@ -78,18 +78,17 @@ public class CommerceAddressModelImpl
 	public static final String TABLE_NAME = "CommerceAddress";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"commerceAddressId", Types.BIGINT}, {"groupId", Types.BIGINT},
-		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
-		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"classNameId", Types.BIGINT},
-		{"classPK", Types.BIGINT}, {"name", Types.VARCHAR},
-		{"description", Types.VARCHAR}, {"street1", Types.VARCHAR},
-		{"street2", Types.VARCHAR}, {"street3", Types.VARCHAR},
-		{"city", Types.VARCHAR}, {"zip", Types.VARCHAR},
-		{"commerceRegionId", Types.BIGINT}, {"commerceCountryId", Types.BIGINT},
-		{"latitude", Types.DOUBLE}, {"longitude", Types.DOUBLE},
-		{"phoneNumber", Types.VARCHAR}, {"defaultBilling", Types.BOOLEAN},
-		{"defaultShipping", Types.BOOLEAN}
+		{"commerceAddressId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"classNameId", Types.BIGINT}, {"classPK", Types.BIGINT},
+		{"name", Types.VARCHAR}, {"description", Types.VARCHAR},
+		{"street1", Types.VARCHAR}, {"street2", Types.VARCHAR},
+		{"street3", Types.VARCHAR}, {"city", Types.VARCHAR},
+		{"zip", Types.VARCHAR}, {"commerceRegionId", Types.BIGINT},
+		{"commerceCountryId", Types.BIGINT}, {"latitude", Types.DOUBLE},
+		{"longitude", Types.DOUBLE}, {"phoneNumber", Types.VARCHAR},
+		{"defaultBilling", Types.BOOLEAN}, {"defaultShipping", Types.BOOLEAN}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -97,7 +96,6 @@ public class CommerceAddressModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("commerceAddressId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
@@ -122,7 +120,7 @@ public class CommerceAddressModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceAddress (commerceAddressId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN)";
+		"create table CommerceAddress (commerceAddressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceAddress";
 
@@ -161,11 +159,11 @@ public class CommerceAddressModelImpl
 
 	public static final long COMMERCEREGIONID_COLUMN_BITMASK = 8L;
 
-	public static final long DEFAULTBILLING_COLUMN_BITMASK = 16L;
+	public static final long COMPANYID_COLUMN_BITMASK = 16L;
 
-	public static final long DEFAULTSHIPPING_COLUMN_BITMASK = 32L;
+	public static final long DEFAULTBILLING_COLUMN_BITMASK = 32L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 64L;
+	public static final long DEFAULTSHIPPING_COLUMN_BITMASK = 64L;
 
 	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
 
@@ -183,7 +181,6 @@ public class CommerceAddressModelImpl
 		CommerceAddress model = new CommerceAddressImpl();
 
 		model.setCommerceAddressId(soapModel.getCommerceAddressId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -382,28 +379,6 @@ public class CommerceAddressModelImpl
 
 					commerceAddress.setCommerceAddressId(
 						(Long)commerceAddressId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"groupId",
-			new Function<CommerceAddress, Object>() {
-
-				@Override
-				public Object apply(CommerceAddress commerceAddress) {
-					return commerceAddress.getGroupId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"groupId",
-			new BiConsumer<CommerceAddress, Object>() {
-
-				@Override
-				public void accept(
-					CommerceAddress commerceAddress, Object groupId) {
-
-					commerceAddress.setGroupId((Long)groupId);
 				}
 
 			});
@@ -891,36 +866,25 @@ public class CommerceAddressModelImpl
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
-	}
-
-	@JSON
-	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -1353,7 +1317,6 @@ public class CommerceAddressModelImpl
 		CommerceAddressImpl commerceAddressImpl = new CommerceAddressImpl();
 
 		commerceAddressImpl.setCommerceAddressId(getCommerceAddressId());
-		commerceAddressImpl.setGroupId(getGroupId());
 		commerceAddressImpl.setCompanyId(getCompanyId());
 		commerceAddressImpl.setUserId(getUserId());
 		commerceAddressImpl.setUserName(getUserName());
@@ -1438,10 +1401,10 @@ public class CommerceAddressModelImpl
 	public void resetOriginalValues() {
 		CommerceAddressModelImpl commerceAddressModelImpl = this;
 
-		commerceAddressModelImpl._originalGroupId =
-			commerceAddressModelImpl._groupId;
+		commerceAddressModelImpl._originalCompanyId =
+			commerceAddressModelImpl._companyId;
 
-		commerceAddressModelImpl._setOriginalGroupId = false;
+		commerceAddressModelImpl._setOriginalCompanyId = false;
 
 		commerceAddressModelImpl._setModifiedDate = false;
 
@@ -1484,8 +1447,6 @@ public class CommerceAddressModelImpl
 			new CommerceAddressCacheModel();
 
 		commerceAddressCacheModel.commerceAddressId = getCommerceAddressId();
-
-		commerceAddressCacheModel.groupId = getGroupId();
 
 		commerceAddressCacheModel.companyId = getCompanyId();
 
@@ -1671,10 +1632,9 @@ public class CommerceAddressModelImpl
 	}
 
 	private long _commerceAddressId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

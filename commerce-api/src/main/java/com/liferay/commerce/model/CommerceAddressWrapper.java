@@ -59,7 +59,6 @@ public class CommerceAddressWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("commerceAddressId", getCommerceAddressId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
@@ -91,12 +90,6 @@ public class CommerceAddressWrapper
 
 		if (commerceAddressId != null) {
 			setCommerceAddressId(commerceAddressId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -379,16 +372,6 @@ public class CommerceAddressWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceAddress.getExpandoBridge();
-	}
-
-	/**
-	 * Returns the group ID of this commerce address.
-	 *
-	 * @return the group ID of this commerce address
-	 */
-	@Override
-	public long getGroupId() {
-		return _commerceAddress.getGroupId();
 	}
 
 	/**
@@ -716,16 +699,6 @@ public class CommerceAddressWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceAddress.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	 * Sets the group ID of this commerce address.
-	 *
-	 * @param groupId the group ID of this commerce address
-	 */
-	@Override
-	public void setGroupId(long groupId) {
-		_commerceAddress.setGroupId(groupId);
 	}
 
 	/**
