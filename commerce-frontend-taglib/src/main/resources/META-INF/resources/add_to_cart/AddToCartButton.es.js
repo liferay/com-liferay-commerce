@@ -201,6 +201,8 @@ class AddToCartButton extends Component {
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
 		this.orderId = null;
+		this.quantity = 0;
+		resetInputQuantity.call(this);
 	}
 
 	_handleBtnFocus(e) {
