@@ -10,10 +10,6 @@
 
 		<column name="commerceAddressId" primary="true" type="long" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -59,19 +55,19 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="G_C_C" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_C_C" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="G_C_C_DB" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_C_C_DB" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="defaultBilling" />
 		</finder>
-		<finder name="G_C_C_DS" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="C_C_C_DS" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="defaultShipping" />
