@@ -107,19 +107,19 @@ public class CommerceInventoryWarehouseServiceHttp {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
-				fetchByExternalReferenceCode(
-					HttpPrincipal httpPrincipal, long companyId,
-					String externalReferenceCode)
+				deleteCommerceInventoryWarehouse(
+					HttpPrincipal httpPrincipal,
+					long commerceInventoryWarehouseId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
-				"fetchByExternalReferenceCode",
-				_fetchByExternalReferenceCodeParameterTypes1);
+				"deleteCommerceInventoryWarehouse",
+				_deleteCommerceInventoryWarehouseParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, companyId, externalReferenceCode);
+				methodKey, commerceInventoryWarehouseId);
 
 			Object returnObj = null;
 
@@ -150,19 +150,19 @@ public class CommerceInventoryWarehouseServiceHttp {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
-				deleteCommerceInventoryWarehouse(
-					HttpPrincipal httpPrincipal,
-					long commerceInventoryWarehouseId)
+				fetchByExternalReferenceCode(
+					HttpPrincipal httpPrincipal, long companyId,
+					String externalReferenceCode)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseServiceUtil.class,
-				"deleteCommerceInventoryWarehouse",
-				_deleteCommerceInventoryWarehouseParameterTypes2);
+				"fetchByExternalReferenceCode",
+				_fetchByExternalReferenceCodeParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commerceInventoryWarehouseId);
+				methodKey, companyId, externalReferenceCode);
 
 			Object returnObj = null;
 
@@ -687,12 +687,12 @@ public class CommerceInventoryWarehouseServiceHttp {
 			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]
-		_fetchByExternalReferenceCodeParameterTypes1 = new Class[] {
-			long.class, String.class
+		_deleteCommerceInventoryWarehouseParameterTypes1 = new Class[] {
+			long.class
 		};
 	private static final Class<?>[]
-		_deleteCommerceInventoryWarehouseParameterTypes2 = new Class[] {
-			long.class
+		_fetchByExternalReferenceCodeParameterTypes2 = new Class[] {
+			long.class, String.class
 		};
 	private static final Class<?>[]
 		_geolocateCommerceInventoryWarehouseParameterTypes3 = new Class[] {

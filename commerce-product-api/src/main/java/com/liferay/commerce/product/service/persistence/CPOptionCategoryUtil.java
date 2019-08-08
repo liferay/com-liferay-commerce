@@ -185,16 +185,16 @@ public class CPOptionCategoryUtil {
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public static List<CPOptionCategory> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -437,16 +437,16 @@ public class CPOptionCategoryUtil {
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public static List<CPOptionCategory> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -705,16 +705,16 @@ public class CPOptionCategoryUtil {
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp option categories
 	 */
 	public static List<CPOptionCategory> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -928,13 +928,13 @@ public class CPOptionCategoryUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp option category, or <code>null</code> if a matching cp option category could not be found
 	 */
 	public static CPOptionCategory fetchByC_K(
-		long companyId, String key, boolean retrieveFromCache) {
+		long companyId, String key, boolean useFinderCache) {
 
-		return getPersistence().fetchByC_K(companyId, key, retrieveFromCache);
+		return getPersistence().fetchByC_K(companyId, key, useFinderCache);
 	}
 
 	/**
@@ -1087,16 +1087,16 @@ public class CPOptionCategoryUtil {
 	 * @param start the lower bound of the range of cp option categories
 	 * @param end the upper bound of the range of cp option categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp option categories
 	 */
 	public static List<CPOptionCategory> findAll(
 		int start, int end,
 		OrderByComparator<CPOptionCategory> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

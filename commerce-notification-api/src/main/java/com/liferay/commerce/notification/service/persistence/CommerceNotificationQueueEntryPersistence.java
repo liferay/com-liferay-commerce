@@ -103,14 +103,14 @@ public interface CommerceNotificationQueueEntryPersistence
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public java.util.List<CommerceNotificationQueueEntry> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification queue entry in the ordered set where groupId = &#63;.
@@ -250,7 +250,7 @@ public interface CommerceNotificationQueueEntryPersistence
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public java.util.List<CommerceNotificationQueueEntry>
@@ -258,7 +258,7 @@ public interface CommerceNotificationQueueEntryPersistence
 			long commerceNotificationTemplateId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceNotificationQueueEntry> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification queue entry in the ordered set where commerceNotificationTemplateId = &#63;.
@@ -403,14 +403,14 @@ public interface CommerceNotificationQueueEntryPersistence
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public java.util.List<CommerceNotificationQueueEntry> findBySent(
 		boolean sent, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification queue entry in the ordered set where sent = &#63;.
@@ -547,14 +547,14 @@ public interface CommerceNotificationQueueEntryPersistence
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public java.util.List<CommerceNotificationQueueEntry> findByLtS(
 		Date sentDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce notification queue entry in the ordered set where sentDate &lt; &#63;.
@@ -746,14 +746,14 @@ public interface CommerceNotificationQueueEntryPersistence
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce notification queue entries
 	 */
 	public java.util.List<CommerceNotificationQueueEntry> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce notification queue entries from the database.

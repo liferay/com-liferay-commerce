@@ -155,14 +155,14 @@ public class CommerceInventoryAuditPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	@Override
 	public List<CommerceInventoryAudit> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		sku = Objects.toString(sku, "");
 
@@ -174,17 +174,20 @@ public class CommerceInventoryAuditPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindBySku;
-			finderArgs = new Object[] {sku};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindBySku;
+				finderArgs = new Object[] {sku};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindBySku;
 			finderArgs = new Object[] {sku, start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryAudit> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryAudit>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -261,10 +264,14 @@ public class CommerceInventoryAuditPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -709,14 +716,14 @@ public class CommerceInventoryAuditPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	@Override
 	public List<CommerceInventoryAudit> findByLtCreateDate(
 		Date createDate, int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -729,7 +736,7 @@ public class CommerceInventoryAuditPersistenceImpl
 
 		List<CommerceInventoryAudit> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryAudit>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -808,10 +815,14 @@ public class CommerceInventoryAuditPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1802,14 +1813,14 @@ public class CommerceInventoryAuditPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory audits
 	 */
 	@Override
 	public List<CommerceInventoryAudit> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1819,17 +1830,20 @@ public class CommerceInventoryAuditPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryAudit> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryAudit>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1880,10 +1894,14 @@ public class CommerceInventoryAuditPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

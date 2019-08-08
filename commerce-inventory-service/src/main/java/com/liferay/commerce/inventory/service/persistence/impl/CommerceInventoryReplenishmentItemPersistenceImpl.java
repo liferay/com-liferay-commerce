@@ -166,7 +166,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	@Override
@@ -175,7 +175,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			long commerceInventoryWarehouseId, int start, int end,
 			OrderByComparator<CommerceInventoryReplenishmentItem>
 				orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -185,11 +185,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath =
-				_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId;
-			finderArgs = new Object[] {commerceInventoryWarehouseId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceInventoryWarehouseId;
+				finderArgs = new Object[] {commerceInventoryWarehouseId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath =
 				_finderPathWithPaginationFindByCommerceInventoryWarehouseId;
 			finderArgs = new Object[] {
@@ -199,7 +202,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 		List<CommerceInventoryReplenishmentItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list =
 				(List<CommerceInventoryReplenishmentItem>)finderCache.getResult(
 					finderPath, finderArgs, this);
@@ -275,10 +278,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -730,14 +737,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	@Override
 	public List<CommerceInventoryReplenishmentItem> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		sku = Objects.toString(sku, "");
 
@@ -749,17 +756,20 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindBySku;
-			finderArgs = new Object[] {sku};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindBySku;
+				finderArgs = new Object[] {sku};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindBySku;
 			finderArgs = new Object[] {sku, start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryReplenishmentItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list =
 				(List<CommerceInventoryReplenishmentItem>)finderCache.getResult(
 					finderPath, finderArgs, this);
@@ -844,10 +854,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1309,14 +1323,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	@Override
 	public List<CommerceInventoryReplenishmentItem> findByAvailabilityDate(
 		Date availabilityDate, int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1326,10 +1340,13 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByAvailabilityDate;
-			finderArgs = new Object[] {_getTime(availabilityDate)};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByAvailabilityDate;
+				finderArgs = new Object[] {_getTime(availabilityDate)};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByAvailabilityDate;
 			finderArgs = new Object[] {
 				_getTime(availabilityDate), start, end, orderByComparator
@@ -1338,7 +1355,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 		List<CommerceInventoryReplenishmentItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list =
 				(List<CommerceInventoryReplenishmentItem>)finderCache.getResult(
 					finderPath, finderArgs, this);
@@ -1427,10 +1444,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1902,14 +1923,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	@Override
 	public List<CommerceInventoryReplenishmentItem> findByS_AD(
 		String sku, Date availabilityDate, int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		sku = Objects.toString(sku, "");
 
@@ -1921,10 +1942,13 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByS_AD;
-			finderArgs = new Object[] {sku, _getTime(availabilityDate)};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByS_AD;
+				finderArgs = new Object[] {sku, _getTime(availabilityDate)};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByS_AD;
 			finderArgs = new Object[] {
 				sku, _getTime(availabilityDate), start, end, orderByComparator
@@ -1933,7 +1957,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 		List<CommerceInventoryReplenishmentItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list =
 				(List<CommerceInventoryReplenishmentItem>)finderCache.getResult(
 					finderPath, finderArgs, this);
@@ -2037,10 +2061,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3259,14 +3287,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory replenishment items
 	 */
 	@Override
 	public List<CommerceInventoryReplenishmentItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3276,17 +3304,20 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryReplenishmentItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list =
 				(List<CommerceInventoryReplenishmentItem>)finderCache.getResult(
 					finderPath, finderArgs, this);
@@ -3341,10 +3372,14 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

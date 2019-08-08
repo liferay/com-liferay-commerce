@@ -89,31 +89,6 @@ public class CommerceAccountOrganizationRelServiceSoap {
 		}
 	}
 
-	public static
-		com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap
-				fetchCommerceAccountOrganizationRel(
-					com.liferay.commerce.account.service.persistence.
-						CommerceAccountOrganizationRelPK
-							commerceAccountOrganizationRelPK)
-			throws RemoteException {
-
-		try {
-			com.liferay.commerce.account.model.CommerceAccountOrganizationRel
-				returnValue =
-					CommerceAccountOrganizationRelServiceUtil.
-						fetchCommerceAccountOrganizationRel(
-							commerceAccountOrganizationRelPK);
-
-			return com.liferay.commerce.account.model.
-				CommerceAccountOrganizationRelSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void addCommerceAccountOrganizationRels(
 			long commerceAccountId, long[] organizationIds,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -155,6 +130,31 @@ public class CommerceAccountOrganizationRelServiceSoap {
 			CommerceAccountOrganizationRelServiceUtil.
 				deleteCommerceAccountOrganizationRels(
 					commerceAccountId, organizationIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.account.model.CommerceAccountOrganizationRelSoap
+				fetchCommerceAccountOrganizationRel(
+					com.liferay.commerce.account.service.persistence.
+						CommerceAccountOrganizationRelPK
+							commerceAccountOrganizationRelPK)
+			throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccountOrganizationRel
+				returnValue =
+					CommerceAccountOrganizationRelServiceUtil.
+						fetchCommerceAccountOrganizationRel(
+							commerceAccountOrganizationRelPK);
+
+			return com.liferay.commerce.account.model.
+				CommerceAccountOrganizationRelSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

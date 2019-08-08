@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -154,14 +153,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -173,17 +172,20 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -260,10 +262,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -708,14 +714,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -727,10 +733,13 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -739,7 +748,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -822,10 +831,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1298,14 +1311,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1315,10 +1328,13 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCompanyId;
-			finderArgs = new Object[] {companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCompanyId;
+				finderArgs = new Object[] {companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCompanyId;
 			finderArgs = new Object[] {
 				companyId, start, end, orderByComparator
@@ -1327,7 +1343,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1393,10 +1409,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1801,20 +1821,24 @@ public class CommerceCurrencyPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param code the code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	@Override
 	public CommerceCurrency fetchByC_C(
-		long companyId, String code, boolean retrieveFromCache) {
+		long companyId, String code, boolean useFinderCache) {
 
 		code = Objects.toString(code, "");
 
-		Object[] finderArgs = new Object[] {companyId, code};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, code};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C, finderArgs, this);
 		}
@@ -1867,8 +1891,10 @@ public class CommerceCurrencyPersistenceImpl
 				List<CommerceCurrency> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C, finderArgs, list);
+					}
 				}
 				else {
 					CommerceCurrency commerceCurrency = list.get(0);
@@ -1879,7 +1905,9 @@ public class CommerceCurrencyPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2062,14 +2090,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByC_P(
 		long companyId, boolean primary, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2079,10 +2107,13 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_P;
-			finderArgs = new Object[] {companyId, primary};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_P;
+				finderArgs = new Object[] {companyId, primary};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_P;
 			finderArgs = new Object[] {
 				companyId, primary, start, end, orderByComparator
@@ -2091,7 +2122,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2163,10 +2194,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2615,14 +2650,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByC_A(
 		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2632,10 +2667,13 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_A;
-			finderArgs = new Object[] {companyId, active};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_A;
+				finderArgs = new Object[] {companyId, active};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_A;
 			finderArgs = new Object[] {
 				companyId, active, start, end, orderByComparator
@@ -2644,7 +2682,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2716,10 +2754,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3175,14 +3217,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findByC_P_A(
 		long companyId, boolean primary, boolean active, int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3192,10 +3234,13 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_P_A;
-			finderArgs = new Object[] {companyId, primary, active};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_P_A;
+				finderArgs = new Object[] {companyId, primary, active};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_P_A;
 			finderArgs = new Object[] {
 				companyId, primary, active, start, end, orderByComparator
@@ -3204,7 +3249,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3281,10 +3326,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3864,7 +3913,7 @@ public class CommerceCurrencyPersistenceImpl
 
 		commerceCurrency.setUuid(uuid);
 
-		commerceCurrency.setCompanyId(companyProvider.getCompanyId());
+		commerceCurrency.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return commerceCurrency;
 	}
@@ -4495,14 +4544,14 @@ public class CommerceCurrencyPersistenceImpl
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce currencies
 	 */
 	@Override
 	public List<CommerceCurrency> findAll(
 		int start, int end,
 		OrderByComparator<CommerceCurrency> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4512,17 +4561,20 @@ public class CommerceCurrencyPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceCurrency> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceCurrency>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -4572,10 +4624,14 @@ public class CommerceCurrencyPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4854,9 +4910,6 @@ public class CommerceCurrencyPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

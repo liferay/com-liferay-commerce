@@ -188,16 +188,16 @@ public class CPSpecificationOptionUtil {
 	 * @param start the lower bound of the range of cp specification options
 	 * @param end the upper bound of the range of cp specification options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp specification options
 	 */
 	public static List<CPSpecificationOption> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -444,16 +444,16 @@ public class CPSpecificationOptionUtil {
 	 * @param start the lower bound of the range of cp specification options
 	 * @param end the upper bound of the range of cp specification options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp specification options
 	 */
 	public static List<CPSpecificationOption> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -712,16 +712,16 @@ public class CPSpecificationOptionUtil {
 	 * @param start the lower bound of the range of cp specification options
 	 * @param end the upper bound of the range of cp specification options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp specification options
 	 */
 	public static List<CPSpecificationOption> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -971,17 +971,16 @@ public class CPSpecificationOptionUtil {
 	 * @param start the lower bound of the range of cp specification options
 	 * @param end the upper bound of the range of cp specification options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp specification options
 	 */
 	public static List<CPSpecificationOption> findByCPOptionCategoryId(
 		long CPOptionCategoryId, int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPOptionCategoryId(
-			CPOptionCategoryId, start, end, orderByComparator,
-			retrieveFromCache);
+			CPOptionCategoryId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1203,13 +1202,13 @@ public class CPSpecificationOptionUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp specification option, or <code>null</code> if a matching cp specification option could not be found
 	 */
 	public static CPSpecificationOption fetchByC_K(
-		long companyId, String key, boolean retrieveFromCache) {
+		long companyId, String key, boolean useFinderCache) {
 
-		return getPersistence().fetchByC_K(companyId, key, retrieveFromCache);
+		return getPersistence().fetchByC_K(companyId, key, useFinderCache);
 	}
 
 	/**
@@ -1369,16 +1368,16 @@ public class CPSpecificationOptionUtil {
 	 * @param start the lower bound of the range of cp specification options
 	 * @param end the upper bound of the range of cp specification options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp specification options
 	 */
 	public static List<CPSpecificationOption> findAll(
 		int start, int end,
 		OrderByComparator<CPSpecificationOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

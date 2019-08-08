@@ -102,14 +102,14 @@ public interface CommerceAccountUserRelPersistence
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	public java.util.List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account user rel in the ordered set where commerceAccountId = &#63;.
@@ -247,14 +247,14 @@ public interface CommerceAccountUserRelPersistence
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	public java.util.List<CommerceAccountUserRel> findByCommerceAccountUserId(
 		long commerceAccountUserId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account user rel in the ordered set where commerceAccountUserId = &#63;.
@@ -444,14 +444,14 @@ public interface CommerceAccountUserRelPersistence
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account user rels
 	 */
 	public java.util.List<CommerceAccountUserRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountUserRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce account user rels from the database.

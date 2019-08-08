@@ -101,14 +101,14 @@ public interface CPDefinitionVirtualSettingPersistence
 	 * @param start the lower bound of the range of cp definition virtual settings
 	 * @param end the upper bound of the range of cp definition virtual settings (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition virtual settings
 	 */
 	public java.util.List<CPDefinitionVirtualSetting> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionVirtualSetting> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition virtual setting in the ordered set where uuid = &#63;.
@@ -217,11 +217,11 @@ public interface CPDefinitionVirtualSettingPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	 */
 	public CPDefinitionVirtualSetting fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition virtual setting where uuid = &#63; and groupId = &#63; from the database.
@@ -299,14 +299,14 @@ public interface CPDefinitionVirtualSettingPersistence
 	 * @param start the lower bound of the range of cp definition virtual settings
 	 * @param end the upper bound of the range of cp definition virtual settings (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition virtual settings
 	 */
 	public java.util.List<CPDefinitionVirtualSetting> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionVirtualSetting> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition virtual setting in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -423,11 +423,11 @@ public interface CPDefinitionVirtualSettingPersistence
 	 *
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition virtual setting, or <code>null</code> if a matching cp definition virtual setting could not be found
 	 */
 	public CPDefinitionVirtualSetting fetchByC_C(
-		long classNameId, long classPK, boolean retrieveFromCache);
+		long classNameId, long classPK, boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition virtual setting where classNameId = &#63; and classPK = &#63; from the database.
@@ -554,14 +554,14 @@ public interface CPDefinitionVirtualSettingPersistence
 	 * @param start the lower bound of the range of cp definition virtual settings
 	 * @param end the upper bound of the range of cp definition virtual settings (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition virtual settings
 	 */
 	public java.util.List<CPDefinitionVirtualSetting> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionVirtualSetting> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp definition virtual settings from the database.

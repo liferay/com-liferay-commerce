@@ -155,14 +155,14 @@ public interface CommerceDiscountUsageEntryPersistence
 	 * @param start the lower bound of the range of commerce discount usage entries
 	 * @param end the upper bound of the range of commerce discount usage entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount usage entries
 	 */
 	public java.util.List<CommerceDiscountUsageEntry> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceDiscountUsageEntry> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce discount usage entries from the database.

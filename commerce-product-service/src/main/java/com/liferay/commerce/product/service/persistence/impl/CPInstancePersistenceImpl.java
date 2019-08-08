@@ -155,14 +155,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -174,17 +174,20 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -261,10 +264,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -689,20 +696,24 @@ public class CPInstancePersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
 	public CPInstance fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -755,8 +766,10 @@ public class CPInstancePersistenceImpl
 				List<CPInstance> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CPInstance cpInstance = list.get(0);
@@ -767,7 +780,10 @@ public class CPInstancePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -950,14 +966,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -969,10 +985,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -981,7 +1000,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1064,10 +1083,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1533,14 +1556,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1550,17 +1573,20 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByGroupId;
+				finderArgs = new Object[] {groupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1626,10 +1652,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2037,14 +2067,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2054,10 +2084,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCompanyId;
-			finderArgs = new Object[] {companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCompanyId;
+				finderArgs = new Object[] {companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCompanyId;
 			finderArgs = new Object[] {
 				companyId, start, end, orderByComparator
@@ -2066,7 +2099,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2132,10 +2165,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2546,14 +2583,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2563,10 +2600,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
-			finderArgs = new Object[] {CPDefinitionId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
+				finderArgs = new Object[] {CPDefinitionId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPDefinitionId;
 			finderArgs = new Object[] {
 				CPDefinitionId, start, end, orderByComparator
@@ -2575,7 +2615,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2641,10 +2681,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3058,14 +3102,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
@@ -3077,10 +3121,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
-			finderArgs = new Object[] {CPInstanceUuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
+				finderArgs = new Object[] {CPInstanceUuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPInstanceUuid;
 			finderArgs = new Object[] {
 				CPInstanceUuid, start, end, orderByComparator
@@ -3089,7 +3136,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3168,10 +3215,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3619,14 +3670,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByG_ST(
 		long groupId, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3636,10 +3687,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_ST;
-			finderArgs = new Object[] {groupId, status};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_ST;
+				finderArgs = new Object[] {groupId, status};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_ST;
 			finderArgs = new Object[] {
 				groupId, status, start, end, orderByComparator
@@ -3648,7 +3702,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3720,10 +3774,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4152,20 +4210,24 @@ public class CPInstancePersistenceImpl
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CPInstanceUuid the cp instance uuid
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
 	public CPInstance fetchByC_C(
-		long CPDefinitionId, String CPInstanceUuid, boolean retrieveFromCache) {
+		long CPDefinitionId, String CPInstanceUuid, boolean useFinderCache) {
 
 		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
-		Object[] finderArgs = new Object[] {CPDefinitionId, CPInstanceUuid};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionId, CPInstanceUuid};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C, finderArgs, this);
 		}
@@ -4219,8 +4281,10 @@ public class CPInstancePersistenceImpl
 				List<CPInstance> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C, finderArgs, list);
+					}
 				}
 				else {
 					CPInstance cpInstance = list.get(0);
@@ -4231,7 +4295,9 @@ public class CPInstancePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4399,20 +4465,24 @@ public class CPInstancePersistenceImpl
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param sku the sku
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
 	public CPInstance fetchByC_S(
-		long CPDefinitionId, String sku, boolean retrieveFromCache) {
+		long CPDefinitionId, String sku, boolean useFinderCache) {
 
 		sku = Objects.toString(sku, "");
 
-		Object[] finderArgs = new Object[] {CPDefinitionId, sku};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionId, sku};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_S, finderArgs, this);
 		}
@@ -4465,8 +4535,10 @@ public class CPInstancePersistenceImpl
 				List<CPInstance> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_S, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_S, finderArgs, list);
+					}
 				}
 				else {
 					CPInstance cpInstance = list.get(0);
@@ -4477,7 +4549,9 @@ public class CPInstancePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_S, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_S, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4659,14 +4733,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByC_ST(
 		long CPDefinitionId, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4676,10 +4750,13 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_ST;
-			finderArgs = new Object[] {CPDefinitionId, status};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_ST;
+				finderArgs = new Object[] {CPDefinitionId, status};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_ST;
 			finderArgs = new Object[] {
 				CPDefinitionId, status, start, end, orderByComparator
@@ -4688,7 +4765,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -4760,10 +4837,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5208,14 +5289,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByLtD_S(
 		Date displayDate, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5228,7 +5309,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -5312,10 +5393,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5794,14 +5879,14 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp instances
 	 */
 	@Override
 	public List<CPInstance> findByC_LtD_S(
 		long CPDefinitionId, Date displayDate, int status, int start, int end,
 		OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5815,7 +5900,7 @@ public class CPInstancePersistenceImpl
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -5904,10 +5989,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -6397,21 +6486,24 @@ public class CPInstancePersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp instance, or <code>null</code> if a matching cp instance could not be found
 	 */
 	@Override
 	public CPInstance fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_ERC, finderArgs, this);
 		}
@@ -6466,14 +6558,22 @@ public class CPInstancePersistenceImpl
 				List<CPInstance> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_ERC, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
 							_log.warn(
 								"CPInstancePersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -6489,7 +6589,10 @@ public class CPInstancePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -7547,13 +7650,13 @@ public class CPInstancePersistenceImpl
 	 * @param start the lower bound of the range of cp instances
 	 * @param end the upper bound of the range of cp instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp instances
 	 */
 	@Override
 	public List<CPInstance> findAll(
 		int start, int end, OrderByComparator<CPInstance> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -7563,17 +7666,20 @@ public class CPInstancePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPInstance> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPInstance>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -7623,10 +7729,14 @@ public class CPInstancePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

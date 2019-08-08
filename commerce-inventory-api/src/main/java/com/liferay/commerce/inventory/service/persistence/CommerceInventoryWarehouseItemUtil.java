@@ -199,18 +199,18 @@ public class CommerceInventoryWarehouseItemUtil {
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	public static List<CommerceInventoryWarehouseItem>
 		findByCommerceInventoryWarehouseId(
 			long commerceInventoryWarehouseId, int start, int end,
 			OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceInventoryWarehouseId(
 			commerceInventoryWarehouseId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -394,16 +394,16 @@ public class CommerceInventoryWarehouseItemUtil {
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	public static List<CommerceInventoryWarehouseItem> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findBySku(
-			sku, start, end, orderByComparator, retrieveFromCache);
+			sku, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -540,15 +540,14 @@ public class CommerceInventoryWarehouseItemUtil {
 	 *
 	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	public static CommerceInventoryWarehouseItem fetchByC_S(
-		long commerceInventoryWarehouseId, String sku,
-		boolean retrieveFromCache) {
+		long commerceInventoryWarehouseId, String sku, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_S(
-			commerceInventoryWarehouseId, sku, retrieveFromCache);
+			commerceInventoryWarehouseId, sku, useFinderCache);
 	}
 
 	/**
@@ -718,16 +717,16 @@ public class CommerceInventoryWarehouseItemUtil {
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory warehouse items
 	 */
 	public static List<CommerceInventoryWarehouseItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

@@ -102,14 +102,14 @@ public interface CPDefinitionLocalizationPersistence
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition localizations
 	 */
 	public java.util.List<CPDefinitionLocalization> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition localization in the ordered set where CPDefinitionId = &#63;.
@@ -220,11 +220,11 @@ public interface CPDefinitionLocalizationPersistence
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param languageId the language ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition localization, or <code>null</code> if a matching cp definition localization could not be found
 	 */
 	public CPDefinitionLocalization fetchByCPDefinitionId_LanguageId(
-		long CPDefinitionId, String languageId, boolean retrieveFromCache);
+		long CPDefinitionId, String languageId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition localization where CPDefinitionId = &#63; and languageId = &#63; from the database.
@@ -350,14 +350,14 @@ public interface CPDefinitionLocalizationPersistence
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition localizations
 	 */
 	public java.util.List<CPDefinitionLocalization> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp definition localizations from the database.

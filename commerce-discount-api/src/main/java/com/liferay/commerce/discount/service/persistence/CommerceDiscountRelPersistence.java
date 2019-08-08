@@ -102,14 +102,14 @@ public interface CommerceDiscountRelPersistence
 	 * @param start the lower bound of the range of commerce discount rels
 	 * @param end the upper bound of the range of commerce discount rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rels
 	 */
 	public java.util.List<CommerceDiscountRel> findByCommerceDiscountId(
 		long commerceDiscountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount rel in the ordered set where commerceDiscountId = &#63;.
@@ -250,14 +250,14 @@ public interface CommerceDiscountRelPersistence
 	 * @param start the lower bound of the range of commerce discount rels
 	 * @param end the upper bound of the range of commerce discount rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rels
 	 */
 	public java.util.List<CommerceDiscountRel> findByCD_CN(
 		long commerceDiscountId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount rel in the ordered set where commerceDiscountId = &#63; and classNameId = &#63;.
@@ -406,14 +406,14 @@ public interface CommerceDiscountRelPersistence
 	 * @param start the lower bound of the range of commerce discount rels
 	 * @param end the upper bound of the range of commerce discount rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rels
 	 */
 	public java.util.List<CommerceDiscountRel> findByCN_CPK(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount rel in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -605,14 +605,14 @@ public interface CommerceDiscountRelPersistence
 	 * @param start the lower bound of the range of commerce discount rels
 	 * @param end the upper bound of the range of commerce discount rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount rels
 	 */
 	public java.util.List<CommerceDiscountRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce discount rels from the database.

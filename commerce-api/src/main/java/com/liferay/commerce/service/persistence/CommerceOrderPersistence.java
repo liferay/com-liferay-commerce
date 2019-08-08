@@ -102,14 +102,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where uuid = &#63;.
@@ -218,11 +218,11 @@ public interface CommerceOrderPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	public CommerceOrder fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce order where uuid = &#63; and groupId = &#63; from the database.
@@ -300,14 +300,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -450,14 +450,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where groupId = &#63;.
@@ -593,14 +593,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where userId = &#63;.
@@ -737,14 +737,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByBillingAddressId(
 		long billingAddressId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where billingAddressId = &#63;.
@@ -881,14 +881,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByShippingAddressId(
 		long shippingAddressId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where shippingAddressId = &#63;.
@@ -1029,14 +1029,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByG_C(
 		long groupId, long commerceAccountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63;.
@@ -1188,14 +1188,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByG_U_O(
 		long groupId, long userId, int orderStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where groupId = &#63; and userId = &#63; and orderStatus = &#63;.
@@ -1356,7 +1356,7 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByG_C_O(
@@ -1364,7 +1364,7 @@ public interface CommerceOrderPersistence
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where groupId = &#63; and commerceAccountId = &#63; and orderStatus = &#63;.
@@ -1526,14 +1526,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	public java.util.List<CommerceOrder> findByU_LtC_O(
 		long userId, Date createDate, int orderStatus, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order in the ordered set where userId = &#63; and createDate &lt; &#63; and orderStatus = &#63;.
@@ -1658,12 +1658,11 @@ public interface CommerceOrderPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	public CommerceOrder fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce order where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -1784,14 +1783,14 @@ public interface CommerceOrderPersistence
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce orders
 	 */
 	public java.util.List<CommerceOrder> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrder>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce orders from the database.

@@ -37,6 +37,7 @@
 		<field name="phoneNumber" type="String" />
 		<field name="defaultBilling" type="boolean" />
 		<field name="defaultShipping" type="boolean" />
+		<field name="type" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceAddressRestriction">
 		<field name="commerceAddressRestrictionId" type="long" />

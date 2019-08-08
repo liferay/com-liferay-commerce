@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -158,14 +157,14 @@ public class CommerceShippingFixedOptionPersistenceImpl
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping fixed options
 	 */
 	@Override
 	public List<CommerceShippingFixedOption> findByCommerceShippingMethodId(
 		long commerceShippingMethodId, int start, int end,
 		OrderByComparator<CommerceShippingFixedOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -175,11 +174,14 @@ public class CommerceShippingFixedOptionPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath =
-				_finderPathWithoutPaginationFindByCommerceShippingMethodId;
-			finderArgs = new Object[] {commerceShippingMethodId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceShippingMethodId;
+				finderArgs = new Object[] {commerceShippingMethodId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath =
 				_finderPathWithPaginationFindByCommerceShippingMethodId;
 			finderArgs = new Object[] {
@@ -189,7 +191,7 @@ public class CommerceShippingFixedOptionPersistenceImpl
 
 		List<CommerceShippingFixedOption> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceShippingFixedOption>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -262,10 +264,14 @@ public class CommerceShippingFixedOptionPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -750,7 +756,7 @@ public class CommerceShippingFixedOptionPersistenceImpl
 			commerceShippingFixedOptionId);
 
 		commerceShippingFixedOption.setCompanyId(
-			companyProvider.getCompanyId());
+			CompanyThreadLocal.getCompanyId());
 
 		return commerceShippingFixedOption;
 	}
@@ -1260,14 +1266,14 @@ public class CommerceShippingFixedOptionPersistenceImpl
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping fixed options
 	 */
 	@Override
 	public List<CommerceShippingFixedOption> findAll(
 		int start, int end,
 		OrderByComparator<CommerceShippingFixedOption> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1277,17 +1283,20 @@ public class CommerceShippingFixedOptionPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceShippingFixedOption> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceShippingFixedOption>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1338,10 +1347,14 @@ public class CommerceShippingFixedOptionPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1471,9 +1484,6 @@ public class CommerceShippingFixedOptionPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

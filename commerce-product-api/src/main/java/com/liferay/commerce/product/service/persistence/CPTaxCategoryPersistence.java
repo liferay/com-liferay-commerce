@@ -101,14 +101,14 @@ public interface CPTaxCategoryPersistence
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp tax categories
 	 */
 	public java.util.List<CPTaxCategory> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp tax category in the ordered set where companyId = &#63;.
@@ -291,14 +291,14 @@ public interface CPTaxCategoryPersistence
 	 * @param start the lower bound of the range of cp tax categories
 	 * @param end the upper bound of the range of cp tax categories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp tax categories
 	 */
 	public java.util.List<CPTaxCategory> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPTaxCategory>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp tax categories from the database.

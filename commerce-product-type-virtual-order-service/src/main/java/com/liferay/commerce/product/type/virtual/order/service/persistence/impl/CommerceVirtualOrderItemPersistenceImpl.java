@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -156,14 +155,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce virtual order items
 	 * @param end the upper bound of the range of commerce virtual order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce virtual order items
 	 */
 	@Override
 	public List<CommerceVirtualOrderItem> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -175,17 +174,20 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CommerceVirtualOrderItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceVirtualOrderItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -262,10 +264,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -705,20 +711,24 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce virtual order item, or <code>null</code> if a matching commerce virtual order item could not be found
 	 */
 	@Override
 	public CommerceVirtualOrderItem fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -772,8 +782,10 @@ public class CommerceVirtualOrderItemPersistenceImpl
 				List<CommerceVirtualOrderItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CommerceVirtualOrderItem commerceVirtualOrderItem =
@@ -785,7 +797,10 @@ public class CommerceVirtualOrderItemPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -971,14 +986,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce virtual order items
 	 * @param end the upper bound of the range of commerce virtual order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce virtual order items
 	 */
 	@Override
 	public List<CommerceVirtualOrderItem> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -990,10 +1005,13 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -1002,7 +1020,7 @@ public class CommerceVirtualOrderItemPersistenceImpl
 
 		List<CommerceVirtualOrderItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceVirtualOrderItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1086,10 +1104,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1552,18 +1574,22 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	 * Returns the commerce virtual order item where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param commerceOrderItemId the commerce order item ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce virtual order item, or <code>null</code> if a matching commerce virtual order item could not be found
 	 */
 	@Override
 	public CommerceVirtualOrderItem fetchByCommerceOrderItemId(
-		long commerceOrderItemId, boolean retrieveFromCache) {
+		long commerceOrderItemId, boolean useFinderCache) {
 
-		Object[] finderArgs = new Object[] {commerceOrderItemId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {commerceOrderItemId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByCommerceOrderItemId, finderArgs, this);
 		}
@@ -1603,9 +1629,11 @@ public class CommerceVirtualOrderItemPersistenceImpl
 				List<CommerceVirtualOrderItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByCommerceOrderItemId, finderArgs,
-						list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByCommerceOrderItemId, finderArgs,
+							list);
+					}
 				}
 				else {
 					CommerceVirtualOrderItem commerceVirtualOrderItem =
@@ -1617,8 +1645,10 @@ public class CommerceVirtualOrderItemPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByCommerceOrderItemId, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByCommerceOrderItemId, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1938,7 +1968,8 @@ public class CommerceVirtualOrderItemPersistenceImpl
 
 		commerceVirtualOrderItem.setUuid(uuid);
 
-		commerceVirtualOrderItem.setCompanyId(companyProvider.getCompanyId());
+		commerceVirtualOrderItem.setCompanyId(
+			CompanyThreadLocal.getCompanyId());
 
 		return commerceVirtualOrderItem;
 	}
@@ -2470,14 +2501,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce virtual order items
 	 * @param end the upper bound of the range of commerce virtual order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce virtual order items
 	 */
 	@Override
 	public List<CommerceVirtualOrderItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceVirtualOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2487,17 +2518,20 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceVirtualOrderItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceVirtualOrderItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2548,10 +2582,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2733,9 +2771,6 @@ public class CommerceVirtualOrderItemPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

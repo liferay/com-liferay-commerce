@@ -204,7 +204,7 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group commerce account rels
 	 */
 	public static List<CommerceAccountGroupCommerceAccountRel>
@@ -212,11 +212,11 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 			long commerceAccountGroupId, int start, int end,
 			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
 				orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountGroupId(
 			commerceAccountGroupId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -405,7 +405,7 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group commerce account rels
 	 */
 	public static List<CommerceAccountGroupCommerceAccountRel>
@@ -413,11 +413,10 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 			long commerceAccountId, int start, int end,
 			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
 				orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountId(
-			commerceAccountId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceAccountId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -570,15 +569,14 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group commerce account rel, or <code>null</code> if a matching commerce account group commerce account rel could not be found
 	 */
 	public static CommerceAccountGroupCommerceAccountRel fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -755,17 +753,17 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account group commerce account rels
 	 */
 	public static List<CommerceAccountGroupCommerceAccountRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountGroupCommerceAccountRel>
 			orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

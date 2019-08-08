@@ -189,16 +189,16 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -334,13 +334,13 @@ public class CPAttachmentFileEntryUtil {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	public static CPAttachmentFileEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+		return getPersistence().fetchByUUID_G(uuid, groupId, useFinderCache);
 	}
 
 	/**
@@ -435,16 +435,16 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -624,17 +624,17 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C(
 			classNameId, classPK, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -814,17 +814,16 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByLtD_S(
 		Date displayDate, int status, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByLtD_S(
-			displayDate, status, start, end, orderByComparator,
-			retrieveFromCache);
+			displayDate, status, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -975,15 +974,15 @@ public class CPAttachmentFileEntryUtil {
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param fileEntryId the file entry ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	public static CPAttachmentFileEntry fetchByC_C_F(
 		long classNameId, long classPK, long fileEntryId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C_F(
-			classNameId, classPK, fileEntryId, retrieveFromCache);
+			classNameId, classPK, fileEntryId, useFinderCache);
 	}
 
 	/**
@@ -1095,17 +1094,17 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByC_C_LtD_S(
 		long classNameId, long classPK, Date displayDate, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C_LtD_S(
 			classNameId, classPK, displayDate, status, start, end,
-			orderByComparator, retrieveFromCache);
+			orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1318,17 +1317,17 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByC_C_T_ST(
 		long classNameId, long classPK, int type, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C_T_ST(
 			classNameId, classPK, type, status, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1540,17 +1539,17 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findByC_C_T_NotST(
 		long classNameId, long classPK, int type, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C_T_NotST(
 			classNameId, classPK, type, status, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1720,15 +1719,14 @@ public class CPAttachmentFileEntryUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	public static CPAttachmentFileEntry fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -1891,16 +1889,16 @@ public class CPAttachmentFileEntryUtil {
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp attachment file entries
 	 */
 	public static List<CPAttachmentFileEntry> findAll(
 		int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

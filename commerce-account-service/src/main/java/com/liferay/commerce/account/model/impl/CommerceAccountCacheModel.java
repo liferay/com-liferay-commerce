@@ -65,7 +65,7 @@ public class CommerceAccountCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -109,6 +109,10 @@ public class CommerceAccountCacheModel
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
+		sb.append(", defaultBillingAddressId=");
+		sb.append(defaultBillingAddressId);
+		sb.append(", defaultShippingAddressId=");
+		sb.append(defaultShippingAddressId);
 		sb.append("}");
 
 		return sb.toString();
@@ -216,6 +220,10 @@ public class CommerceAccountCacheModel
 			commerceAccountImpl.setStatusDate(new Date(statusDate));
 		}
 
+		commerceAccountImpl.setDefaultBillingAddressId(defaultBillingAddressId);
+		commerceAccountImpl.setDefaultShippingAddressId(
+			defaultShippingAddressId);
+
 		commerceAccountImpl.resetOriginalValues();
 
 		return commerceAccountImpl;
@@ -253,6 +261,10 @@ public class CommerceAccountCacheModel
 		statusByUserId = objectInput.readLong();
 		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
+
+		defaultBillingAddressId = objectInput.readLong();
+
+		defaultShippingAddressId = objectInput.readLong();
 	}
 
 	@Override
@@ -324,6 +336,10 @@ public class CommerceAccountCacheModel
 		}
 
 		objectOutput.writeLong(statusDate);
+
+		objectOutput.writeLong(defaultBillingAddressId);
+
+		objectOutput.writeLong(defaultShippingAddressId);
 	}
 
 	public String externalReferenceCode;
@@ -347,5 +363,7 @@ public class CommerceAccountCacheModel
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
+	public long defaultBillingAddressId;
+	public long defaultShippingAddressId;
 
 }

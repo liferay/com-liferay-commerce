@@ -102,14 +102,14 @@ public interface CommerceAccountGroupPersistence
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
 		long commerceAccountGroupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account group in the ordered set where commerceAccountGroupId = &#63;.
@@ -308,14 +308,14 @@ public interface CommerceAccountGroupPersistence
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	public java.util.List<CommerceAccountGroup> findByCommerceAccountGroupIds(
 		long[] commerceAccountGroupIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce account groups where commerceAccountGroupId = &#63; from the database.
@@ -410,14 +410,14 @@ public interface CommerceAccountGroupPersistence
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	public java.util.List<CommerceAccountGroup> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account group in the ordered set where companyId = &#63;.
@@ -623,14 +623,14 @@ public interface CommerceAccountGroupPersistence
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	public java.util.List<CommerceAccountGroup> findByC_T(
 		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account group in the ordered set where companyId = &#63; and type = &#63;.
@@ -818,12 +818,11 @@ public interface CommerceAccountGroupPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
 	 */
 	public CommerceAccountGroup fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce account group where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -946,14 +945,14 @@ public interface CommerceAccountGroupPersistence
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account groups
 	 */
 	public java.util.List<CommerceAccountGroup> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceAccountGroup>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce account groups from the database.

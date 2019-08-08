@@ -102,14 +102,14 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce address restriction in the ordered set where commerceCountryId = &#63;.
@@ -250,14 +250,14 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce address restriction in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -378,12 +378,12 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceCountryId the commerce country ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	public CommerceAddressRestriction fetchByC_C_C(
 		long classNameId, long classPK, long commerceCountryId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; from the database.
@@ -513,14 +513,14 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce address restrictions from the database.

@@ -65,7 +65,7 @@ public class CommerceAddressCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{commerceAddressId=");
 		sb.append(commerceAddressId);
@@ -113,6 +113,8 @@ public class CommerceAddressCacheModel
 		sb.append(defaultBilling);
 		sb.append(", defaultShipping=");
 		sb.append(defaultShipping);
+		sb.append(", type=");
+		sb.append(type);
 		sb.append("}");
 
 		return sb.toString();
@@ -214,6 +216,7 @@ public class CommerceAddressCacheModel
 
 		commerceAddressImpl.setDefaultBilling(defaultBilling);
 		commerceAddressImpl.setDefaultShipping(defaultShipping);
+		commerceAddressImpl.setType(type);
 
 		commerceAddressImpl.resetOriginalValues();
 
@@ -256,6 +259,8 @@ public class CommerceAddressCacheModel
 		defaultBilling = objectInput.readBoolean();
 
 		defaultShipping = objectInput.readBoolean();
+
+		type = objectInput.readInt();
 	}
 
 	@Override
@@ -349,6 +354,8 @@ public class CommerceAddressCacheModel
 		objectOutput.writeBoolean(defaultBilling);
 
 		objectOutput.writeBoolean(defaultShipping);
+
+		objectOutput.writeInt(type);
 	}
 
 	public long commerceAddressId;
@@ -374,5 +381,6 @@ public class CommerceAddressCacheModel
 	public String phoneNumber;
 	public boolean defaultBilling;
 	public boolean defaultShipping;
+	public int type;
 
 }

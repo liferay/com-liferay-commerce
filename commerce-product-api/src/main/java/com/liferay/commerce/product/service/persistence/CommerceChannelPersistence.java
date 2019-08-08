@@ -101,14 +101,14 @@ public interface CommerceChannelPersistence
 	 * @param start the lower bound of the range of commerce channels
 	 * @param end the upper bound of the range of commerce channels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce channels
 	 */
 	public java.util.List<CommerceChannel> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceChannel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce channel in the ordered set where companyId = &#63;.
@@ -279,11 +279,11 @@ public interface CommerceChannelPersistence
 	 * Returns the commerce channel where siteGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param siteGroupId the site group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
 	 */
 	public CommerceChannel fetchBySiteGroupId(
-		long siteGroupId, boolean retrieveFromCache);
+		long siteGroupId, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce channel where siteGroupId = &#63; from the database.
@@ -329,12 +329,11 @@ public interface CommerceChannelPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce channel, or <code>null</code> if a matching commerce channel could not be found
 	 */
 	public CommerceChannel fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce channel where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -455,14 +454,14 @@ public interface CommerceChannelPersistence
 	 * @param start the lower bound of the range of commerce channels
 	 * @param end the upper bound of the range of commerce channels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce channels
 	 */
 	public java.util.List<CommerceChannel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceChannel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce channels from the database.

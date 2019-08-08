@@ -339,7 +339,28 @@ public interface CommerceAccountLocalService
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
 			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAccount updateDefaultBillingAddress(
+			long commerceAccountId, long commerceAddressId)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAccount updateDefaultShippingAddress(
+			long commerceAccountId, long commerceAddressId)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)

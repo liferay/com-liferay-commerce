@@ -101,14 +101,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where uuid = &#63;.
@@ -217,11 +217,11 @@ public interface CPDefinitionLinkPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	public CPDefinitionLink fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition link where uuid = &#63; and groupId = &#63; from the database.
@@ -299,14 +299,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -450,14 +450,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63;.
@@ -593,14 +593,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByCProductId(
 		long CProductId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where CProductId = &#63;.
@@ -741,14 +741,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByCPD_T(
 		long CPDefinitionId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where CPDefinitionId = &#63; and type = &#63;.
@@ -896,14 +896,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findByCP_T(
 		long CProductId, String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition link in the ordered set where CProductId = &#63; and type = &#63;.
@@ -1024,12 +1024,12 @@ public interface CPDefinitionLinkPersistence
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CProductId the c product ID
 	 * @param type the type
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	public CPDefinitionLink fetchByC_C_T(
 		long CPDefinitionId, long CProductId, String type,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition link where CPDefinitionId = &#63; and CProductId = &#63; and type = &#63; from the database.
@@ -1152,14 +1152,14 @@ public interface CPDefinitionLinkPersistence
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition links
 	 */
 	public java.util.List<CPDefinitionLink> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPDefinitionLink>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp definition links from the database.

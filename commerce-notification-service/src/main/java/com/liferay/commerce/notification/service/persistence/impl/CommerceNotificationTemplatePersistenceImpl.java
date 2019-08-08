@@ -31,11 +31,10 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -158,14 +157,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -177,17 +176,20 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -267,10 +269,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -712,20 +718,24 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce notification template, or <code>null</code> if a matching commerce notification template could not be found
 	 */
 	@Override
 	public CommerceNotificationTemplate fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -779,8 +789,10 @@ public class CommerceNotificationTemplatePersistenceImpl
 				List<CommerceNotificationTemplate> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CommerceNotificationTemplate commerceNotificationTemplate =
@@ -792,7 +804,10 @@ public class CommerceNotificationTemplatePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -979,14 +994,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -998,10 +1013,13 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -1010,7 +1028,7 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1097,10 +1115,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1576,14 +1598,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1593,17 +1615,20 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByGroupId;
+				finderArgs = new Object[] {groupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1674,10 +1699,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2499,14 +2528,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findByG_E(
 		long groupId, boolean enabled, int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2516,10 +2545,13 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_E;
-			finderArgs = new Object[] {groupId, enabled};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_E;
+				finderArgs = new Object[] {groupId, enabled};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_E;
 			finderArgs = new Object[] {
 				groupId, enabled, start, end, orderByComparator
@@ -2528,7 +2560,7 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2604,10 +2636,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3479,14 +3515,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findByG_T_E(
 		long groupId, String type, boolean enabled, int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		type = Objects.toString(type, "");
 
@@ -3498,10 +3534,13 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_T_E;
-			finderArgs = new Object[] {groupId, type, enabled};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_T_E;
+				finderArgs = new Object[] {groupId, type, enabled};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_T_E;
 			finderArgs = new Object[] {
 				groupId, type, enabled, start, end, orderByComparator
@@ -3510,7 +3549,7 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3602,10 +3641,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4720,7 +4763,7 @@ public class CommerceNotificationTemplatePersistenceImpl
 		commerceNotificationTemplate.setUuid(uuid);
 
 		commerceNotificationTemplate.setCompanyId(
-			companyProvider.getCompanyId());
+			CompanyThreadLocal.getCompanyId());
 
 		return commerceNotificationTemplate;
 	}
@@ -5359,14 +5402,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 	 * @param start the lower bound of the range of commerce notification templates
 	 * @param end the upper bound of the range of commerce notification templates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce notification templates
 	 */
 	@Override
 	public List<CommerceNotificationTemplate> findAll(
 		int start, int end,
 		OrderByComparator<CommerceNotificationTemplate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5376,17 +5419,20 @@ public class CommerceNotificationTemplatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceNotificationTemplate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceNotificationTemplate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -5437,10 +5483,14 @@ public class CommerceNotificationTemplatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5705,9 +5755,6 @@ public class CommerceNotificationTemplatePersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

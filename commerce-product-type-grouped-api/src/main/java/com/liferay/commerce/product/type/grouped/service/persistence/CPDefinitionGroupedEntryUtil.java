@@ -191,16 +191,16 @@ public class CPDefinitionGroupedEntryUtil {
 	 * @param start the lower bound of the range of cp definition grouped entries
 	 * @param end the upper bound of the range of cp definition grouped entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition grouped entries
 	 */
 	public static List<CPDefinitionGroupedEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -337,13 +337,13 @@ public class CPDefinitionGroupedEntryUtil {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	 */
 	public static CPDefinitionGroupedEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+		return getPersistence().fetchByUUID_G(uuid, groupId, useFinderCache);
 	}
 
 	/**
@@ -438,16 +438,16 @@ public class CPDefinitionGroupedEntryUtil {
 	 * @param start the lower bound of the range of cp definition grouped entries
 	 * @param end the upper bound of the range of cp definition grouped entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition grouped entries
 	 */
 	public static List<CPDefinitionGroupedEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -624,16 +624,16 @@ public class CPDefinitionGroupedEntryUtil {
 	 * @param start the lower bound of the range of cp definition grouped entries
 	 * @param end the upper bound of the range of cp definition grouped entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition grouped entries
 	 */
 	public static List<CPDefinitionGroupedEntry> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPDefinitionId(
-			CPDefinitionId, start, end, orderByComparator, retrieveFromCache);
+			CPDefinitionId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -774,14 +774,14 @@ public class CPDefinitionGroupedEntryUtil {
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param entryCProductId the entry c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition grouped entry, or <code>null</code> if a matching cp definition grouped entry could not be found
 	 */
 	public static CPDefinitionGroupedEntry fetchByC_E(
-		long CPDefinitionId, long entryCProductId, boolean retrieveFromCache) {
+		long CPDefinitionId, long entryCProductId, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_E(
-			CPDefinitionId, entryCProductId, retrieveFromCache);
+			CPDefinitionId, entryCProductId, useFinderCache);
 	}
 
 	/**
@@ -945,16 +945,16 @@ public class CPDefinitionGroupedEntryUtil {
 	 * @param start the lower bound of the range of cp definition grouped entries
 	 * @param end the upper bound of the range of cp definition grouped entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition grouped entries
 	 */
 	public static List<CPDefinitionGroupedEntry> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionGroupedEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

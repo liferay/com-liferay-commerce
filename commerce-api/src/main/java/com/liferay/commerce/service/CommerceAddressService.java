@@ -63,12 +63,24 @@ public interface CommerceAddressService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAddressServiceUtil} to access the commerce address remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAddressServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	public CommerceAddress addCommerceAddress(
 			String className, long classPK, String name, String description,
 			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
 	public void deleteCommerceAddress(long commerceAddressId)
@@ -79,14 +91,27 @@ public interface CommerceAddressService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getBillingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAddress getCommerceAddress(long commerceAddressId)
 		throws PortalException;
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 			long groupId, String className, long classPK)
 		throws PortalException;
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 			long groupId, String className, long classPK, int start, int end,
@@ -100,12 +125,32 @@ public interface CommerceAddressService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+			long companyId, String className, long classPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+			long companyId, String className, long classPK, int start, int end,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(
 			long groupId, String className, long classPK)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(String className, long classPK)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCountByCompanyId(
+			long companyId, String className, long classPK)
 		throws PortalException;
 
 	/**
@@ -116,17 +161,43 @@ public interface CommerceAddressService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getShippingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
 			long companyId, long groupId, String className, long classPK,
 			String keywords, int start, int end, Sort sort)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
+			long companyId, String className, long classPK, String keywords,
+			int start, int end, Sort sort)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	public CommerceAddress updateCommerceAddress(
 			long commerceAddressId, String name, String description,
 			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceAddress updateCommerceAddress(
+			long commerceAddressId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
 }

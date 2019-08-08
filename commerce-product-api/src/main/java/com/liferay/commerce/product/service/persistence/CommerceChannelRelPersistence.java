@@ -102,14 +102,14 @@ public interface CommerceChannelRelPersistence
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce channel rels
 	 */
 	public java.util.List<CommerceChannelRel> findByCommerceChannelId(
 		long commerceChannelId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceChannelRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce channel rel in the ordered set where commerceChannelId = &#63;.
@@ -250,14 +250,14 @@ public interface CommerceChannelRelPersistence
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce channel rels
 	 */
 	public java.util.List<CommerceChannelRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceChannelRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce channel rel in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -378,12 +378,12 @@ public interface CommerceChannelRelPersistence
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceChannelId the commerce channel ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce channel rel, or <code>null</code> if a matching commerce channel rel could not be found
 	 */
 	public CommerceChannelRel fetchByC_C_C(
 		long classNameId, long classPK, long commerceChannelId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce channel rel where classNameId = &#63; and classPK = &#63; and commerceChannelId = &#63; from the database.
@@ -508,14 +508,14 @@ public interface CommerceChannelRelPersistence
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce channel rels
 	 */
 	public java.util.List<CommerceChannelRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceChannelRel>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce channel rels from the database.

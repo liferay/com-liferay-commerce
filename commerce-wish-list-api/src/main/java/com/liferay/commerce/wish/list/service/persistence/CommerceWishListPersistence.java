@@ -102,14 +102,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where uuid = &#63;.
@@ -218,11 +218,11 @@ public interface CommerceWishListPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce wish list, or <code>null</code> if a matching commerce wish list could not be found
 	 */
 	public CommerceWishList fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce wish list where uuid = &#63; and groupId = &#63; from the database.
@@ -300,14 +300,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -450,14 +450,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where groupId = &#63;.
@@ -593,14 +593,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where userId = &#63;.
@@ -741,14 +741,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByG_U(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where groupId = &#63; and userId = &#63;.
@@ -896,14 +896,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByU_LtC(
 		long userId, Date createDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where userId = &#63; and createDate &lt; &#63;.
@@ -1055,14 +1055,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findByG_U_D(
 		long groupId, long userId, boolean defaultWishList, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce wish list in the ordered set where groupId = &#63; and userId = &#63; and defaultWishList = &#63;.
@@ -1261,14 +1261,14 @@ public interface CommerceWishListPersistence
 	 * @param start the lower bound of the range of commerce wish lists
 	 * @param end the upper bound of the range of commerce wish lists (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce wish lists
 	 */
 	public java.util.List<CommerceWishList> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceWishList>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce wish lists from the database.

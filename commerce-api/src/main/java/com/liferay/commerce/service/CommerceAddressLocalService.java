@@ -73,13 +73,24 @@ public interface CommerceAddressLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAddress addCommerceAddress(CommerceAddress commerceAddress);
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	public CommerceAddress addCommerceAddress(
 			String className, long classPK, String name, String description,
 			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
 	public CommerceAddress copyCommerceAddress(
@@ -211,6 +222,15 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getBillingAndShippingCommerceAddresses(
+		long companyId, String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getBillingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException;
+
 	/**
 	 * Returns the commerce address with the primary key.
 	 *
@@ -236,10 +256,18 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(int start, int end);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK, int start, int end,
@@ -250,6 +278,15 @@ public interface CommerceAddressLocalService
 		String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator);
+
 	/**
 	 * Returns the number of commerce addresses.
 	 *
@@ -258,12 +295,20 @@ public interface CommerceAddressLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount();
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(
 		long groupId, String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceAddressesCount(String className, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceAddressesCountByCompanyId(
+		long companyId, String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -281,9 +326,24 @@ public interface CommerceAddressLocalService
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceAddress> getShippingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
 			long companyId, long groupId, String className, long classPK,
 			String keywords, int start, int end, Sort sort)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
+			long companyId, String className, long classPK, String keywords,
+			int start, int end, Sort sort)
 		throws PortalException;
 
 	/**
@@ -296,13 +356,24 @@ public interface CommerceAddressLocalService
 	public CommerceAddress updateCommerceAddress(
 		CommerceAddress commerceAddress);
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	public CommerceAddress updateCommerceAddress(
 			long commerceAddressId, String name, String description,
 			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAddress updateCommerceAddress(
+			long commerceAddressId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
 }

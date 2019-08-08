@@ -101,14 +101,14 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -399,14 +399,14 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63;.
@@ -516,11 +516,11 @@ public interface CommerceCountryPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByC_Tw(
-		long companyId, String twoLettersISOCode, boolean retrieveFromCache);
+		long companyId, String twoLettersISOCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce country where companyId = &#63; and twoLettersISOCode = &#63; from the database.
@@ -567,11 +567,11 @@ public interface CommerceCountryPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByC_N(
-		long companyId, int numericISOCode, boolean retrieveFromCache);
+		long companyId, int numericISOCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce country where companyId = &#63; and numericISOCode = &#63; from the database.
@@ -649,14 +649,14 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_A(
 		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
@@ -810,7 +810,7 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_B_A(
@@ -818,7 +818,7 @@ public interface CommerceCountryPersistence
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
@@ -982,7 +982,7 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_S_A(
@@ -990,7 +990,7 @@ public interface CommerceCountryPersistence
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
@@ -1190,14 +1190,14 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce countries
 	 */
 	public java.util.List<CommerceCountry> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce countries from the database.

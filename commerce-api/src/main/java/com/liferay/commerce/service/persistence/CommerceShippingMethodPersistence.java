@@ -101,14 +101,14 @@ public interface CommerceShippingMethodPersistence
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	public java.util.List<CommerceShippingMethod> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShippingMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipping method in the ordered set where groupId = &#63;.
@@ -217,11 +217,11 @@ public interface CommerceShippingMethodPersistence
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	public CommerceShippingMethod fetchByG_E(
-		long groupId, String engineKey, boolean retrieveFromCache);
+		long groupId, String engineKey, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce shipping method where groupId = &#63; and engineKey = &#63; from the database.
@@ -299,14 +299,14 @@ public interface CommerceShippingMethodPersistence
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	public java.util.List<CommerceShippingMethod> findByG_A(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShippingMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipping method in the ordered set where groupId = &#63; and active = &#63;.
@@ -500,14 +500,14 @@ public interface CommerceShippingMethodPersistence
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping methods
 	 */
 	public java.util.List<CommerceShippingMethod> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShippingMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipping methods from the database.

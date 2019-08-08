@@ -81,6 +81,7 @@ public class CommerceAddressWrapper
 		attributes.put("phoneNumber", getPhoneNumber());
 		attributes.put("defaultBilling", isDefaultBilling());
 		attributes.put("defaultShipping", isDefaultShipping());
+		attributes.put("type", getType());
 
 		return attributes;
 	}
@@ -223,6 +224,12 @@ public class CommerceAddressWrapper
 
 		if (defaultShipping != null) {
 			setDefaultShipping(defaultShipping);
+		}
+
+		Integer type = (Integer)attributes.get("type");
+
+		if (type != null) {
+			setType(type);
 		}
 	}
 
@@ -484,6 +491,16 @@ public class CommerceAddressWrapper
 	@Override
 	public String getStreet3() {
 		return _commerceAddress.getStreet3();
+	}
+
+	/**
+	 * Returns the type of this commerce address.
+	 *
+	 * @return the type of this commerce address
+	 */
+	@Override
+	public int getType() {
+		return _commerceAddress.getType();
 	}
 
 	/**
@@ -826,6 +843,16 @@ public class CommerceAddressWrapper
 	@Override
 	public void setStreet3(String street3) {
 		_commerceAddress.setStreet3(street3);
+	}
+
+	/**
+	 * Sets the type of this commerce address.
+	 *
+	 * @param type the type of this commerce address
+	 */
+	@Override
+	public void setType(int type) {
+		_commerceAddress.setType(type);
 	}
 
 	/**

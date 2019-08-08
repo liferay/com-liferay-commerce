@@ -165,14 +165,14 @@ public class CommerceAccountGroupPersistenceImpl
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	@Override
 	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
 		long commerceAccountGroupId, int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -182,11 +182,14 @@ public class CommerceAccountGroupPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath =
-				_finderPathWithoutPaginationFindByCommerceAccountGroupIds;
-			finderArgs = new Object[] {commerceAccountGroupId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceAccountGroupIds;
+				finderArgs = new Object[] {commerceAccountGroupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceAccountGroupIds;
 			finderArgs = new Object[] {
 				commerceAccountGroupId, start, end, orderByComparator
@@ -195,7 +198,7 @@ public class CommerceAccountGroupPersistenceImpl
 
 		List<CommerceAccountGroup> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountGroup>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -264,10 +267,14 @@ public class CommerceAccountGroupPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -755,14 +762,14 @@ public class CommerceAccountGroupPersistenceImpl
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	@Override
 	public List<CommerceAccountGroup> findByCommerceAccountGroupIds(
 		long[] commerceAccountGroupIds, int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		if (commerceAccountGroupIds == null) {
 			commerceAccountGroupIds = new long[0];
@@ -785,11 +792,14 @@ public class CommerceAccountGroupPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderArgs = new Object[] {
-				StringUtil.merge(commerceAccountGroupIds)
-			};
+
+			if (useFinderCache) {
+				finderArgs = new Object[] {
+					StringUtil.merge(commerceAccountGroupIds)
+				};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderArgs = new Object[] {
 				StringUtil.merge(commerceAccountGroupIds), start, end,
 				orderByComparator
@@ -798,7 +808,7 @@ public class CommerceAccountGroupPersistenceImpl
 
 		List<CommerceAccountGroup> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountGroup>)finderCache.getResult(
 				_finderPathWithPaginationFindByCommerceAccountGroupIds,
 				finderArgs, this);
@@ -871,14 +881,18 @@ public class CommerceAccountGroupPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(
-					_finderPathWithPaginationFindByCommerceAccountGroupIds,
-					finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(
+						_finderPathWithPaginationFindByCommerceAccountGroupIds,
+						finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathWithPaginationFindByCommerceAccountGroupIds,
-					finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathWithPaginationFindByCommerceAccountGroupIds,
+						finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1231,14 +1245,14 @@ public class CommerceAccountGroupPersistenceImpl
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	@Override
 	public List<CommerceAccountGroup> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1248,10 +1262,13 @@ public class CommerceAccountGroupPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCompanyId;
-			finderArgs = new Object[] {companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCompanyId;
+				finderArgs = new Object[] {companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCompanyId;
 			finderArgs = new Object[] {
 				companyId, start, end, orderByComparator
@@ -1260,7 +1277,7 @@ public class CommerceAccountGroupPersistenceImpl
 
 		List<CommerceAccountGroup> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountGroup>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1326,10 +1343,14 @@ public class CommerceAccountGroupPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2137,14 +2158,14 @@ public class CommerceAccountGroupPersistenceImpl
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account groups
 	 */
 	@Override
 	public List<CommerceAccountGroup> findByC_T(
 		long companyId, int type, int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2154,10 +2175,13 @@ public class CommerceAccountGroupPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_T;
-			finderArgs = new Object[] {companyId, type};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_T;
+				finderArgs = new Object[] {companyId, type};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_T;
 			finderArgs = new Object[] {
 				companyId, type, start, end, orderByComparator
@@ -2166,7 +2190,7 @@ public class CommerceAccountGroupPersistenceImpl
 
 		List<CommerceAccountGroup> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountGroup>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2238,10 +2262,14 @@ public class CommerceAccountGroupPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3086,21 +3114,24 @@ public class CommerceAccountGroupPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group, or <code>null</code> if a matching commerce account group could not be found
 	 */
 	@Override
 	public CommerceAccountGroup fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_ERC, finderArgs, this);
 		}
@@ -3156,14 +3187,22 @@ public class CommerceAccountGroupPersistenceImpl
 				List<CommerceAccountGroup> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_ERC, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
 							_log.warn(
 								"CommerceAccountGroupPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -3179,7 +3218,10 @@ public class CommerceAccountGroupPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4021,14 +4063,14 @@ public class CommerceAccountGroupPersistenceImpl
 	 * @param start the lower bound of the range of commerce account groups
 	 * @param end the upper bound of the range of commerce account groups (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account groups
 	 */
 	@Override
 	public List<CommerceAccountGroup> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountGroup> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4038,17 +4080,20 @@ public class CommerceAccountGroupPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceAccountGroup> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountGroup>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -4099,10 +4144,14 @@ public class CommerceAccountGroupPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

@@ -192,16 +192,16 @@ public class CommerceTaxFixedRateUtil {
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	public static List<CommerceTaxFixedRate> findByCPTaxCategoryId(
 		long CPTaxCategoryId, int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPTaxCategoryId(
-			CPTaxCategoryId, start, end, orderByComparator, retrieveFromCache);
+			CPTaxCategoryId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -371,17 +371,16 @@ public class CommerceTaxFixedRateUtil {
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	public static List<CommerceTaxFixedRate> findByCommerceTaxMethodId(
 		long commerceTaxMethodId, int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceTaxMethodId(
-			commerceTaxMethodId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceTaxMethodId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -523,15 +522,15 @@ public class CommerceTaxFixedRateUtil {
 	 *
 	 * @param CPTaxCategoryId the cp tax category ID
 	 * @param commerceTaxMethodId the commerce tax method ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tax fixed rate, or <code>null</code> if a matching commerce tax fixed rate could not be found
 	 */
 	public static CommerceTaxFixedRate fetchByC_C(
 		long CPTaxCategoryId, long commerceTaxMethodId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C(
-			CPTaxCategoryId, commerceTaxMethodId, retrieveFromCache);
+			CPTaxCategoryId, commerceTaxMethodId, useFinderCache);
 	}
 
 	/**
@@ -694,16 +693,16 @@ public class CommerceTaxFixedRateUtil {
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tax fixed rates
 	 */
 	public static List<CommerceTaxFixedRate> findAll(
 		int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

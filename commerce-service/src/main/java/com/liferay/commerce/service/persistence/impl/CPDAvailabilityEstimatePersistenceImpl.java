@@ -155,14 +155,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -174,17 +174,20 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPDAvailabilityEstimate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -261,10 +264,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -720,14 +727,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -739,10 +746,13 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -751,7 +761,7 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 		List<CPDAvailabilityEstimate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -834,10 +844,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1320,14 +1334,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId, int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1337,11 +1351,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath =
-				_finderPathWithoutPaginationFindByCommerceAvailabilityEstimateId;
-			finderArgs = new Object[] {commerceAvailabilityEstimateId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceAvailabilityEstimateId;
+				finderArgs = new Object[] {commerceAvailabilityEstimateId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath =
 				_finderPathWithPaginationFindByCommerceAvailabilityEstimateId;
 			finderArgs = new Object[] {
@@ -1351,7 +1368,7 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 		List<CPDAvailabilityEstimate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1421,10 +1438,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1848,18 +1869,22 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
 	public CPDAvailabilityEstimate fetchByCProductId(
-		long CProductId, boolean retrieveFromCache) {
+		long CProductId, boolean useFinderCache) {
 
-		Object[] finderArgs = new Object[] {CProductId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CProductId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByCProductId, finderArgs, this);
 		}
@@ -1896,8 +1921,10 @@ public class CPDAvailabilityEstimatePersistenceImpl
 				List<CPDAvailabilityEstimate> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByCProductId, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByCProductId, finderArgs, list);
+					}
 				}
 				else {
 					CPDAvailabilityEstimate cpdAvailabilityEstimate = list.get(
@@ -1909,8 +1936,10 @@ public class CPDAvailabilityEstimatePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByCProductId, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByCProductId, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2747,14 +2776,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findAll(
 		int start, int end,
 		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2764,17 +2793,20 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPDAvailabilityEstimate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2825,10 +2857,14 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

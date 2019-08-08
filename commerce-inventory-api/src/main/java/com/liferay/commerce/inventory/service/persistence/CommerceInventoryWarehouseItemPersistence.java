@@ -104,7 +104,7 @@ public interface CommerceInventoryWarehouseItemPersistence
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	public java.util.List<CommerceInventoryWarehouseItem>
@@ -112,7 +112,7 @@ public interface CommerceInventoryWarehouseItemPersistence
 			long commerceInventoryWarehouseId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceInventoryWarehouseItem> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory warehouse item in the ordered set where commerceInventoryWarehouseId = &#63;.
@@ -256,14 +256,14 @@ public interface CommerceInventoryWarehouseItemPersistence
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouse items
 	 */
 	public java.util.List<CommerceInventoryWarehouseItem> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory warehouse item in the ordered set where sku = &#63;.
@@ -374,12 +374,11 @@ public interface CommerceInventoryWarehouseItemPersistence
 	 *
 	 * @param commerceInventoryWarehouseId the commerce inventory warehouse ID
 	 * @param sku the sku
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
 	 */
 	public CommerceInventoryWarehouseItem fetchByC_S(
-		long commerceInventoryWarehouseId, String sku,
-		boolean retrieveFromCache);
+		long commerceInventoryWarehouseId, String sku, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce inventory warehouse item where commerceInventoryWarehouseId = &#63; and sku = &#63; from the database.
@@ -509,14 +508,14 @@ public interface CommerceInventoryWarehouseItemPersistence
 	 * @param start the lower bound of the range of commerce inventory warehouse items
 	 * @param end the upper bound of the range of commerce inventory warehouse items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory warehouse items
 	 */
 	public java.util.List<CommerceInventoryWarehouseItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryWarehouseItem> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce inventory warehouse items from the database.

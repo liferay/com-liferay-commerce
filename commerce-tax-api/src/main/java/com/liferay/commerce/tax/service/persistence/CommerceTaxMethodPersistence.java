@@ -101,14 +101,14 @@ public interface CommerceTaxMethodPersistence
 	 * @param start the lower bound of the range of commerce tax methods
 	 * @param end the upper bound of the range of commerce tax methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	public java.util.List<CommerceTaxMethod> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax method in the ordered set where groupId = &#63;.
@@ -217,11 +217,11 @@ public interface CommerceTaxMethodPersistence
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tax method, or <code>null</code> if a matching commerce tax method could not be found
 	 */
 	public CommerceTaxMethod fetchByG_E(
-		long groupId, String engineKey, boolean retrieveFromCache);
+		long groupId, String engineKey, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce tax method where groupId = &#63; and engineKey = &#63; from the database.
@@ -299,14 +299,14 @@ public interface CommerceTaxMethodPersistence
 	 * @param start the lower bound of the range of commerce tax methods
 	 * @param end the upper bound of the range of commerce tax methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax methods
 	 */
 	public java.util.List<CommerceTaxMethod> findByG_A(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax method in the ordered set where groupId = &#63; and active = &#63;.
@@ -497,14 +497,14 @@ public interface CommerceTaxMethodPersistence
 	 * @param start the lower bound of the range of commerce tax methods
 	 * @param end the upper bound of the range of commerce tax methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tax methods
 	 */
 	public java.util.List<CommerceTaxMethod> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTaxMethod>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce tax methods from the database.

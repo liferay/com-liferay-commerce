@@ -101,14 +101,14 @@ public interface CommerceShipmentPersistence
 	 * @param start the lower bound of the range of commerce shipments
 	 * @param end the upper bound of the range of commerce shipments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipments
 	 */
 	public java.util.List<CommerceShipment> findByGroupIds(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipment in the ordered set where groupId = &#63;.
@@ -233,14 +233,14 @@ public interface CommerceShipmentPersistence
 	 * @param start the lower bound of the range of commerce shipments
 	 * @param end the upper bound of the range of commerce shipments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipments
 	 */
 	public java.util.List<CommerceShipment> findByGroupIds(
 		long[] groupIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipments where groupId = &#63; from the database.
@@ -321,14 +321,14 @@ public interface CommerceShipmentPersistence
 	 * @param start the lower bound of the range of commerce shipments
 	 * @param end the upper bound of the range of commerce shipments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipments
 	 */
 	public java.util.List<CommerceShipment> findByG_S(
 		long groupId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipment in the ordered set where groupId = &#63; and status = &#63;.
@@ -463,14 +463,14 @@ public interface CommerceShipmentPersistence
 	 * @param start the lower bound of the range of commerce shipments
 	 * @param end the upper bound of the range of commerce shipments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipments
 	 */
 	public java.util.List<CommerceShipment> findByG_S(
 		long[] groupIds, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipments where groupId = &#63; and status = &#63; from the database.
@@ -597,14 +597,14 @@ public interface CommerceShipmentPersistence
 	 * @param start the lower bound of the range of commerce shipments
 	 * @param end the upper bound of the range of commerce shipments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipments
 	 */
 	public java.util.List<CommerceShipment> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipments from the database.

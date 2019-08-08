@@ -103,7 +103,7 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce discount commerce account group rels
 	 * @param end the upper bound of the range of commerce discount commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount commerce account group rels
 	 */
 	public java.util.List<CommerceDiscountCommerceAccountGroupRel>
@@ -111,7 +111,7 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 			long commerceDiscountId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceDiscountCommerceAccountGroupRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount commerce account group rel in the ordered set where commerceDiscountId = &#63;.
@@ -256,7 +256,7 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce discount commerce account group rels
 	 * @param end the upper bound of the range of commerce discount commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount commerce account group rels
 	 */
 	public java.util.List<CommerceDiscountCommerceAccountGroupRel>
@@ -264,7 +264,7 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 			long commerceAccountGroupId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceDiscountCommerceAccountGroupRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
@@ -381,12 +381,12 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 	 *
 	 * @param commerceDiscountId the commerce discount ID
 	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce discount commerce account group rel, or <code>null</code> if a matching commerce discount commerce account group rel could not be found
 	 */
 	public CommerceDiscountCommerceAccountGroupRel fetchByC_C(
 		long commerceDiscountId, long commerceAccountGroupId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce discount commerce account group rel where commerceDiscountId = &#63; and commerceAccountGroupId = &#63; from the database.
@@ -518,14 +518,14 @@ public interface CommerceDiscountCommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce discount commerce account group rels
 	 * @param end the upper bound of the range of commerce discount commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount commerce account group rels
 	 */
 	public java.util.List<CommerceDiscountCommerceAccountGroupRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceDiscountCommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce discount commerce account group rels from the database.

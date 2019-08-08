@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -157,14 +156,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -174,10 +173,14 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCommerceWishListId;
-			finderArgs = new Object[] {commerceWishListId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceWishListId;
+				finderArgs = new Object[] {commerceWishListId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceWishListId;
 			finderArgs = new Object[] {
 				commerceWishListId, start, end, orderByComparator
@@ -186,7 +189,7 @@ public class CommerceWishListItemPersistenceImpl
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -255,10 +258,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -686,14 +693,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
@@ -705,10 +712,13 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
-			finderArgs = new Object[] {CPInstanceUuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPInstanceUuid;
+				finderArgs = new Object[] {CPInstanceUuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPInstanceUuid;
 			finderArgs = new Object[] {
 				CPInstanceUuid, start, end, orderByComparator
@@ -717,7 +727,7 @@ public class CommerceWishListItemPersistenceImpl
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -796,10 +806,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1250,14 +1264,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCProductId(
 		long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1267,10 +1281,13 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCProductId;
-			finderArgs = new Object[] {CProductId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCProductId;
+				finderArgs = new Object[] {CProductId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCProductId;
 			finderArgs = new Object[] {
 				CProductId, start, end, orderByComparator
@@ -1279,7 +1296,7 @@ public class CommerceWishListItemPersistenceImpl
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1345,10 +1362,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1778,14 +1799,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCW_CPI(
 		long commerceWishListId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
@@ -1797,10 +1818,13 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCW_CPI;
-			finderArgs = new Object[] {commerceWishListId, CPInstanceUuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCW_CPI;
+				finderArgs = new Object[] {commerceWishListId, CPInstanceUuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCW_CPI;
 			finderArgs = new Object[] {
 				commerceWishListId, CPInstanceUuid, start, end,
@@ -1810,7 +1834,7 @@ public class CommerceWishListItemPersistenceImpl
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1895,10 +1919,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2383,14 +2411,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findByCW_CP(
 		long commerceWishListId, long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2400,10 +2428,13 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCW_CP;
-			finderArgs = new Object[] {commerceWishListId, CProductId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCW_CP;
+				finderArgs = new Object[] {commerceWishListId, CProductId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCW_CP;
 			finderArgs = new Object[] {
 				commerceWishListId, CProductId, start, end, orderByComparator
@@ -2412,7 +2443,7 @@ public class CommerceWishListItemPersistenceImpl
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2485,10 +2516,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2936,23 +2971,27 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param commerceWishListId the commerce wish list ID
 	 * @param CPInstanceUuid the cp instance uuid
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	@Override
 	public CommerceWishListItem fetchByCW_CPI_CP(
 		long commerceWishListId, String CPInstanceUuid, long CProductId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		CPInstanceUuid = Objects.toString(CPInstanceUuid, "");
 
-		Object[] finderArgs = new Object[] {
-			commerceWishListId, CPInstanceUuid, CProductId
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {
+				commerceWishListId, CPInstanceUuid, CProductId
+			};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByCW_CPI_CP, finderArgs, this);
 		}
@@ -3013,14 +3052,23 @@ public class CommerceWishListItemPersistenceImpl
 				List<CommerceWishListItem> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByCW_CPI_CP, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByCW_CPI_CP, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									commerceWishListId, CPInstanceUuid,
+									CProductId
+								};
+							}
+
 							_log.warn(
 								"CommerceWishListItemPersistenceImpl.fetchByCW_CPI_CP(long, String, long, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -3036,8 +3084,10 @@ public class CommerceWishListItemPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByCW_CPI_CP, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByCW_CPI_CP, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3328,7 +3378,7 @@ public class CommerceWishListItemPersistenceImpl
 		commerceWishListItem.setNew(true);
 		commerceWishListItem.setPrimaryKey(commerceWishListItemId);
 
-		commerceWishListItem.setCompanyId(companyProvider.getCompanyId());
+		commerceWishListItem.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return commerceWishListItem;
 	}
@@ -3940,14 +3990,14 @@ public class CommerceWishListItemPersistenceImpl
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce wish list items
 	 */
 	@Override
 	public List<CommerceWishListItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3957,17 +4007,20 @@ public class CommerceWishListItemPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceWishListItem> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceWishListItem>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -4018,10 +4071,14 @@ public class CommerceWishListItemPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4267,9 +4324,6 @@ public class CommerceWishListItemPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

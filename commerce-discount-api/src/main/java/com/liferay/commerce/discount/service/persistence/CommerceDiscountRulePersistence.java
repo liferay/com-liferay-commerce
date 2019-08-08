@@ -102,14 +102,14 @@ public interface CommerceDiscountRulePersistence
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rules
 	 */
 	public java.util.List<CommerceDiscountRule> findByCommerceDiscountId(
 		long commerceDiscountId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRule>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce discount rule in the ordered set where commerceDiscountId = &#63;.
@@ -294,14 +294,14 @@ public interface CommerceDiscountRulePersistence
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount rules
 	 */
 	public java.util.List<CommerceDiscountRule> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceDiscountRule>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce discount rules from the database.

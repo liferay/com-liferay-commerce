@@ -154,14 +154,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
 	public List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -171,10 +171,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCommerceAccountId;
-			finderArgs = new Object[] {commerceAccountId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceAccountId;
+				finderArgs = new Object[] {commerceAccountId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceAccountId;
 			finderArgs = new Object[] {
 				commerceAccountId, start, end, orderByComparator
@@ -183,7 +187,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		List<CommerceAccountOrganizationRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountOrganizationRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -255,10 +259,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -687,14 +695,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	@Override
 	public List<CommerceAccountOrganizationRel> findByOrganizationId(
 		long organizationId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -704,10 +712,13 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByOrganizationId;
-			finderArgs = new Object[] {organizationId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByOrganizationId;
+				finderArgs = new Object[] {organizationId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByOrganizationId;
 			finderArgs = new Object[] {
 				organizationId, start, end, orderByComparator
@@ -716,7 +727,7 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 		List<CommerceAccountOrganizationRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountOrganizationRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -788,10 +799,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1724,14 +1739,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account organization rels
 	 */
 	@Override
 	public List<CommerceAccountOrganizationRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1741,17 +1756,20 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceAccountOrganizationRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceAccountOrganizationRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1802,10 +1820,14 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

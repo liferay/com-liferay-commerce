@@ -192,17 +192,16 @@ public class CommerceDiscountRuleUtil {
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rules
 	 */
 	public static List<CommerceDiscountRule> findByCommerceDiscountId(
 		long commerceDiscountId, int start, int end,
 		OrderByComparator<CommerceDiscountRule> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceDiscountId(
-			commerceDiscountId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceDiscountId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -439,16 +438,16 @@ public class CommerceDiscountRuleUtil {
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount rules
 	 */
 	public static List<CommerceDiscountRule> findAll(
 		int start, int end,
 		OrderByComparator<CommerceDiscountRule> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

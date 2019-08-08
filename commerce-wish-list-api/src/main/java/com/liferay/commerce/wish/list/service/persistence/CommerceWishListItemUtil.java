@@ -192,17 +192,16 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findByCommerceWishListId(
 		long commerceWishListId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceWishListId(
-			commerceWishListId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceWishListId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -372,16 +371,16 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findByCPInstanceUuid(
 		String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPInstanceUuid(
-			CPInstanceUuid, start, end, orderByComparator, retrieveFromCache);
+			CPInstanceUuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -548,16 +547,16 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findByCProductId(
 		long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCProductId(
-			CProductId, start, end, orderByComparator, retrieveFromCache);
+			CProductId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -732,17 +731,17 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findByCW_CPI(
 		long commerceWishListId, String CPInstanceUuid, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCW_CPI(
 			commerceWishListId, CPInstanceUuid, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -930,17 +929,17 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findByCW_CP(
 		long commerceWishListId, long CProductId, int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCW_CP(
 			commerceWishListId, CProductId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1095,15 +1094,15 @@ public class CommerceWishListItemUtil {
 	 * @param commerceWishListId the commerce wish list ID
 	 * @param CPInstanceUuid the cp instance uuid
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce wish list item, or <code>null</code> if a matching commerce wish list item could not be found
 	 */
 	public static CommerceWishListItem fetchByCW_CPI_CP(
 		long commerceWishListId, String CPInstanceUuid, long CProductId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByCW_CPI_CP(
-			commerceWishListId, CPInstanceUuid, CProductId, retrieveFromCache);
+			commerceWishListId, CPInstanceUuid, CProductId, useFinderCache);
 	}
 
 	/**
@@ -1268,16 +1267,16 @@ public class CommerceWishListItemUtil {
 	 * @param start the lower bound of the range of commerce wish list items
 	 * @param end the upper bound of the range of commerce wish list items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce wish list items
 	 */
 	public static List<CommerceWishListItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceWishListItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

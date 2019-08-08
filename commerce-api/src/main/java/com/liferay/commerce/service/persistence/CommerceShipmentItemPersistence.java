@@ -101,14 +101,14 @@ public interface CommerceShipmentItemPersistence
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
 	public java.util.List<CommerceShipmentItem> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipmentItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipment item in the ordered set where groupId = &#63;.
@@ -245,14 +245,14 @@ public interface CommerceShipmentItemPersistence
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
 	public java.util.List<CommerceShipmentItem> findByCommerceShipment(
 		long commerceShipmentId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipmentItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipment item in the ordered set where commerceShipmentId = &#63;.
@@ -437,14 +437,14 @@ public interface CommerceShipmentItemPersistence
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipment items
 	 */
 	public java.util.List<CommerceShipmentItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceShipmentItem>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipment items from the database.

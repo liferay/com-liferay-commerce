@@ -103,7 +103,7 @@ public interface CommerceAccountOrganizationRelPersistence
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	public java.util.List<CommerceAccountOrganizationRel>
@@ -111,7 +111,7 @@ public interface CommerceAccountOrganizationRelPersistence
 			long commerceAccountId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceAccountOrganizationRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account organization rel in the ordered set where commerceAccountId = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceAccountOrganizationRelPersistence
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	public java.util.List<CommerceAccountOrganizationRel> findByOrganizationId(
 		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account organization rel in the ordered set where organizationId = &#63;.
@@ -449,14 +449,14 @@ public interface CommerceAccountOrganizationRelPersistence
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account organization rels
 	 */
 	public java.util.List<CommerceAccountOrganizationRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce account organization rels from the database.

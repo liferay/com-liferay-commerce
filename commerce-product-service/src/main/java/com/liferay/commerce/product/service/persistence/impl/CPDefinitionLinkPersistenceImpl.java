@@ -153,14 +153,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -172,17 +172,20 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -259,10 +262,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -692,20 +699,24 @@ public class CPDefinitionLinkPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
 	public CPDefinitionLink fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -758,8 +769,10 @@ public class CPDefinitionLinkPersistenceImpl
 				List<CPDefinitionLink> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CPDefinitionLink cpDefinitionLink = list.get(0);
@@ -770,7 +783,10 @@ public class CPDefinitionLinkPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -953,14 +969,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -972,10 +988,13 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -984,7 +1003,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1067,10 +1086,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1544,14 +1567,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1561,10 +1584,13 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
-			finderArgs = new Object[] {CPDefinitionId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
+				finderArgs = new Object[] {CPDefinitionId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPDefinitionId;
 			finderArgs = new Object[] {
 				CPDefinitionId, start, end, orderByComparator
@@ -1573,7 +1599,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1641,10 +1667,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2065,14 +2095,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByCProductId(
 		long CProductId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2082,10 +2112,13 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCProductId;
-			finderArgs = new Object[] {CProductId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCProductId;
+				finderArgs = new Object[] {CProductId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCProductId;
 			finderArgs = new Object[] {
 				CProductId, start, end, orderByComparator
@@ -2094,7 +2127,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2160,10 +2193,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2588,14 +2625,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByCPD_T(
 		long CPDefinitionId, String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		type = Objects.toString(type, "");
 
@@ -2607,10 +2644,13 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPD_T;
-			finderArgs = new Object[] {CPDefinitionId, type};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPD_T;
+				finderArgs = new Object[] {CPDefinitionId, type};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPD_T;
 			finderArgs = new Object[] {
 				CPDefinitionId, type, start, end, orderByComparator
@@ -2619,7 +2659,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2703,10 +2743,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3184,14 +3228,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findByCP_T(
 		long CProductId, String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		type = Objects.toString(type, "");
 
@@ -3203,10 +3247,13 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCP_T;
-			finderArgs = new Object[] {CProductId, type};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCP_T;
+				finderArgs = new Object[] {CProductId, type};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCP_T;
 			finderArgs = new Object[] {
 				CProductId, type, start, end, orderByComparator
@@ -3215,7 +3262,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3298,10 +3345,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3774,21 +3825,25 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CProductId the c product ID
 	 * @param type the type
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	@Override
 	public CPDefinitionLink fetchByC_C_T(
 		long CPDefinitionId, long CProductId, String type,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		type = Objects.toString(type, "");
 
-		Object[] finderArgs = new Object[] {CPDefinitionId, CProductId, type};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionId, CProductId, type};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C_T, finderArgs, this);
 		}
@@ -3846,8 +3901,10 @@ public class CPDefinitionLinkPersistenceImpl
 				List<CPDefinitionLink> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C_T, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C_T, finderArgs, list);
+					}
 				}
 				else {
 					CPDefinitionLink cpDefinitionLink = list.get(0);
@@ -3858,7 +3915,10 @@ public class CPDefinitionLinkPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C_T, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_C_T, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4823,14 +4883,14 @@ public class CPDefinitionLinkPersistenceImpl
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition links
 	 */
 	@Override
 	public List<CPDefinitionLink> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4840,17 +4900,20 @@ public class CPDefinitionLinkPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPDefinitionLink> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionLink>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -4900,10 +4963,14 @@ public class CPDefinitionLinkPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

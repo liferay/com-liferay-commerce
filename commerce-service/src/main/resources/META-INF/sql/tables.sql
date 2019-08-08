@@ -56,7 +56,8 @@ create table CommerceAddress (
 	longitude DOUBLE,
 	phoneNumber VARCHAR(75) null,
 	defaultBilling BOOLEAN,
-	defaultShipping BOOLEAN
+	defaultShipping BOOLEAN,
+	type_ INTEGER
 );
 
 create table CommerceAddressRestriction (

@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -155,14 +154,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce payment method group rels
 	 */
 	@Override
 	public List<CommercePaymentMethodGroupRel> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -172,17 +171,20 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByGroupId;
+				finderArgs = new Object[] {groupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommercePaymentMethodGroupRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommercePaymentMethodGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -253,10 +255,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -672,20 +678,24 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce payment method group rel, or <code>null</code> if a matching commerce payment method group rel could not be found
 	 */
 	@Override
 	public CommercePaymentMethodGroupRel fetchByG_E(
-		long groupId, String engineKey, boolean retrieveFromCache) {
+		long groupId, String engineKey, boolean useFinderCache) {
 
 		engineKey = Objects.toString(engineKey, "");
 
-		Object[] finderArgs = new Object[] {groupId, engineKey};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {groupId, engineKey};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByG_E, finderArgs, this);
 		}
@@ -740,8 +750,10 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				List<CommercePaymentMethodGroupRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByG_E, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByG_E, finderArgs, list);
+					}
 				}
 				else {
 					CommercePaymentMethodGroupRel
@@ -753,7 +765,9 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByG_E, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByG_E, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -939,14 +953,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce payment method group rels
 	 */
 	@Override
 	public List<CommercePaymentMethodGroupRel> findByG_A(
 		long groupId, boolean active, int start, int end,
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -956,10 +970,13 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_A;
-			finderArgs = new Object[] {groupId, active};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_A;
+				finderArgs = new Object[] {groupId, active};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_A;
 			finderArgs = new Object[] {
 				groupId, active, start, end, orderByComparator
@@ -968,7 +985,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 		List<CommercePaymentMethodGroupRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommercePaymentMethodGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1044,10 +1061,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1627,7 +1648,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 			commercePaymentMethodGroupRelId);
 
 		commercePaymentMethodGroupRel.setCompanyId(
-			companyProvider.getCompanyId());
+			CompanyThreadLocal.getCompanyId());
 
 		return commercePaymentMethodGroupRel;
 	}
@@ -2165,14 +2186,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce payment method group rels
 	 */
 	@Override
 	public List<CommercePaymentMethodGroupRel> findAll(
 		int start, int end,
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2182,17 +2203,20 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommercePaymentMethodGroupRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommercePaymentMethodGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2243,10 +2267,14 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2417,9 +2445,6 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

@@ -57,6 +57,7 @@ public class CommerceAddressSoap implements Serializable {
 		soapModel.setPhoneNumber(model.getPhoneNumber());
 		soapModel.setDefaultBilling(model.isDefaultBilling());
 		soapModel.setDefaultShipping(model.isDefaultShipping());
+		soapModel.setType(model.getType());
 
 		return soapModel;
 	}
@@ -308,6 +309,14 @@ public class CommerceAddressSoap implements Serializable {
 		_defaultShipping = defaultShipping;
 	}
 
+	public int getType() {
+		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
+	}
+
 	private long _commerceAddressId;
 	private long _groupId;
 	private long _companyId;
@@ -331,5 +340,6 @@ public class CommerceAddressSoap implements Serializable {
 	private String _phoneNumber;
 	private boolean _defaultBilling;
 	private boolean _defaultShipping;
+	private int _type;
 
 }

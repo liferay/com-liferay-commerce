@@ -89,7 +89,7 @@ public class CommerceAddressModelImpl
 		{"commerceRegionId", Types.BIGINT}, {"commerceCountryId", Types.BIGINT},
 		{"latitude", Types.DOUBLE}, {"longitude", Types.DOUBLE},
 		{"phoneNumber", Types.VARCHAR}, {"defaultBilling", Types.BOOLEAN},
-		{"defaultShipping", Types.BOOLEAN}
+		{"defaultShipping", Types.BOOLEAN}, {"type_", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -119,10 +119,11 @@ public class CommerceAddressModelImpl
 		TABLE_COLUMNS_MAP.put("phoneNumber", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("defaultBilling", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("defaultShipping", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("type_", Types.INTEGER);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceAddress (commerceAddressId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN)";
+		"create table CommerceAddress (commerceAddressId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN,type_ INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceAddress";
 
@@ -161,13 +162,17 @@ public class CommerceAddressModelImpl
 
 	public static final long COMMERCEREGIONID_COLUMN_BITMASK = 8L;
 
-	public static final long DEFAULTBILLING_COLUMN_BITMASK = 16L;
+	public static final long COMPANYID_COLUMN_BITMASK = 16L;
 
-	public static final long DEFAULTSHIPPING_COLUMN_BITMASK = 32L;
+	public static final long DEFAULTBILLING_COLUMN_BITMASK = 32L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 64L;
+	public static final long DEFAULTSHIPPING_COLUMN_BITMASK = 64L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
+	public static final long GROUPID_COLUMN_BITMASK = 128L;
+
+	public static final long TYPE_COLUMN_BITMASK = 256L;
+
+	public static final long CREATEDATE_COLUMN_BITMASK = 512L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -205,6 +210,7 @@ public class CommerceAddressModelImpl
 		model.setPhoneNumber(soapModel.getPhoneNumber());
 		model.setDefaultBilling(soapModel.isDefaultBilling());
 		model.setDefaultShipping(soapModel.isDefaultShipping());
+		model.setType(soapModel.getType());
 
 		return model;
 	}
@@ -871,6 +877,28 @@ public class CommerceAddressModelImpl
 				}
 
 			});
+		attributeGetterFunctions.put(
+			"type",
+			new Function<CommerceAddress, Object>() {
+
+				@Override
+				public Object apply(CommerceAddress commerceAddress) {
+					return commerceAddress.getType();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"type",
+			new BiConsumer<CommerceAddress, Object>() {
+
+				@Override
+				public void accept(
+					CommerceAddress commerceAddress, Object type) {
+
+					commerceAddress.setType((Integer)type);
+				}
+
+			});
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -920,7 +948,19 @@ public class CommerceAddressModelImpl
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -1316,6 +1356,29 @@ public class CommerceAddressModelImpl
 		return _originalDefaultShipping;
 	}
 
+	@JSON
+	@Override
+	public int getType() {
+		return _type;
+	}
+
+	@Override
+	public void setType(int type) {
+		_columnBitmask |= TYPE_COLUMN_BITMASK;
+
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
+		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1375,6 +1438,7 @@ public class CommerceAddressModelImpl
 		commerceAddressImpl.setPhoneNumber(getPhoneNumber());
 		commerceAddressImpl.setDefaultBilling(isDefaultBilling());
 		commerceAddressImpl.setDefaultShipping(isDefaultShipping());
+		commerceAddressImpl.setType(getType());
 
 		commerceAddressImpl.resetOriginalValues();
 
@@ -1443,6 +1507,11 @@ public class CommerceAddressModelImpl
 
 		commerceAddressModelImpl._setOriginalGroupId = false;
 
+		commerceAddressModelImpl._originalCompanyId =
+			commerceAddressModelImpl._companyId;
+
+		commerceAddressModelImpl._setOriginalCompanyId = false;
+
 		commerceAddressModelImpl._setModifiedDate = false;
 
 		commerceAddressModelImpl._originalClassNameId =
@@ -1474,6 +1543,10 @@ public class CommerceAddressModelImpl
 			commerceAddressModelImpl._defaultShipping;
 
 		commerceAddressModelImpl._setOriginalDefaultShipping = false;
+
+		commerceAddressModelImpl._originalType = commerceAddressModelImpl._type;
+
+		commerceAddressModelImpl._setOriginalType = false;
 
 		commerceAddressModelImpl._columnBitmask = 0;
 	}
@@ -1597,6 +1670,8 @@ public class CommerceAddressModelImpl
 
 		commerceAddressCacheModel.defaultShipping = isDefaultShipping();
 
+		commerceAddressCacheModel.type = getType();
+
 		return commerceAddressCacheModel;
 	}
 
@@ -1675,6 +1750,8 @@ public class CommerceAddressModelImpl
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
@@ -1708,6 +1785,9 @@ public class CommerceAddressModelImpl
 	private boolean _defaultShipping;
 	private boolean _originalDefaultShipping;
 	private boolean _setOriginalDefaultShipping;
+	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private long _columnBitmask;
 	private CommerceAddress _escapedModel;
 

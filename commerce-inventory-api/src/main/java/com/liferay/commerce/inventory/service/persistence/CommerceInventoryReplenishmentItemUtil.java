@@ -201,7 +201,7 @@ public class CommerceInventoryReplenishmentItemUtil {
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public static List<CommerceInventoryReplenishmentItem>
@@ -209,11 +209,11 @@ public class CommerceInventoryReplenishmentItemUtil {
 			long commerceInventoryWarehouseId, int start, int end,
 			OrderByComparator<CommerceInventoryReplenishmentItem>
 				orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceInventoryWarehouseId(
 			commerceInventoryWarehouseId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -400,16 +400,16 @@ public class CommerceInventoryReplenishmentItemUtil {
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public static List<CommerceInventoryReplenishmentItem> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findBySku(
-			sku, start, end, orderByComparator, retrieveFromCache);
+			sku, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -582,7 +582,7 @@ public class CommerceInventoryReplenishmentItemUtil {
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public static List<CommerceInventoryReplenishmentItem>
@@ -590,10 +590,10 @@ public class CommerceInventoryReplenishmentItemUtil {
 			Date availabilityDate, int start, int end,
 			OrderByComparator<CommerceInventoryReplenishmentItem>
 				orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByAvailabilityDate(
-			availabilityDate, start, end, orderByComparator, retrieveFromCache);
+			availabilityDate, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -779,17 +779,17 @@ public class CommerceInventoryReplenishmentItemUtil {
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public static List<CommerceInventoryReplenishmentItem> findByS_AD(
 		String sku, Date availabilityDate, int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByS_AD(
 			sku, availabilityDate, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1051,16 +1051,16 @@ public class CommerceInventoryReplenishmentItemUtil {
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory replenishment items
 	 */
 	public static List<CommerceInventoryReplenishmentItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

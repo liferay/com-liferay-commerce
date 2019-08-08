@@ -101,14 +101,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -399,14 +399,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where companyId = &#63;.
@@ -515,11 +515,11 @@ public interface CommerceCurrencyPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param code the code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce currency, or <code>null</code> if a matching commerce currency could not be found
 	 */
 	public CommerceCurrency fetchByC_C(
-		long companyId, String code, boolean retrieveFromCache);
+		long companyId, String code, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce currency where companyId = &#63; and code = &#63; from the database.
@@ -597,14 +597,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByC_P(
 		long companyId, boolean primary, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63;.
@@ -752,14 +752,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByC_A(
 		long companyId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where companyId = &#63; and active = &#63;.
@@ -911,14 +911,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findByC_P_A(
 		long companyId, boolean primary, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce currency in the ordered set where companyId = &#63; and primary = &#63; and active = &#63;.
@@ -1117,14 +1117,14 @@ public interface CommerceCurrencyPersistence
 	 * @param start the lower bound of the range of commerce currencies
 	 * @param end the upper bound of the range of commerce currencies (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce currencies
 	 */
 	public java.util.List<CommerceCurrency> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCurrency>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce currencies from the database.
