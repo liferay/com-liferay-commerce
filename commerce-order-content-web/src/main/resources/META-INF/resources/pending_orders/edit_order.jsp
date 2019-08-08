@@ -45,7 +45,8 @@ if (commerceOrder != null) {
 	commerceAccount = commerceOrder.getCommerceAccount();
 }
 
-List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.getCommerceAddresses(commerceAccount.getCommerceAccountId());
+List<CommerceAddress> shippingAddresses = commerceOrderContentDisplayContext.getShippingCommerceAddresses(commerceAccount.getCommerceAccountId(), commerceAccount.getCompanyId());
+List<CommerceAddress> billingAddresses = commerceOrderContentDisplayContext.getBillingCommerceAddresses(commerceAccount.getCommerceAccountId(), commerceAccount.getCompanyId());
 %>
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderActionURL">
@@ -180,7 +181,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="billingAddressId" wrappedField="<%= false %>">
 
 											<%
-											for (CommerceAddress commerceAddress : commerceAddresses) {
+											for (CommerceAddress commerceAddress : billingAddresses) {
 											%>
 
 												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= billingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />
@@ -217,7 +218,7 @@ List<CommerceAddress> commerceAddresses = commerceOrderContentDisplayContext.get
 										<aui:select cssClass="commerce-input" inlineField="<%= true %>" label="" name="shippingAddressId" wrappedField="<%= false %>">
 
 											<%
-											for (CommerceAddress commerceAddress : commerceAddresses) {
+											for (CommerceAddress commerceAddress : shippingAddresses) {
 											%>
 
 												<aui:option label="<%= commerceAddress.getName() %>" selected="<%= shippingCommerceAddressId == commerceAddress.getCommerceAddressId() %>" value="<%= commerceAddress.getCommerceAddressId() %>" />

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -100,9 +101,8 @@ public class CommerceAccountAddressAdminDisplayContext
 			return null;
 		}
 
-		return _commerceAddressService.getCommerceAddresses(
-			commerceAccountAdminRequestHelper.getScopeGroupId(),
-			CommerceAccount.class.getName(),
+		return _commerceAddressService.getCommerceAddressesByCompanyId(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
 			commerceAccount.getCommerceAccountId());
 	}
 
@@ -214,19 +214,14 @@ public class CommerceAccountAddressAdminDisplayContext
 			new EmptyOnClickRowChecker(
 				commerceAccountAdminRequestHelper.getLiferayPortletResponse()));
 
-		int total = _commerceAddressService.getCommerceAddressesCount(
-			CommerceAccount.class.getName(),
-			commerceAccount.getCommerceAccountId());
+		BaseModelSearchResult<CommerceAddress> baseModelSearchResult =
+			_commerceAddressService.searchCommerceAddresses(
+				commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+				commerceAccount.getCommerceAccountId(), null,
+				_searchContainer.getStart(), _searchContainer.getEnd(), null);
 
-		List<CommerceAddress> results =
-			_commerceAddressService.getCommerceAddresses(
-				CommerceAccount.class.getName(),
-				commerceAccount.getCommerceAccountId(),
-				_searchContainer.getStart(), _searchContainer.getEnd(),
-				orderByComparator);
-
-		_searchContainer.setTotal(total);
-		_searchContainer.setResults(results);
+		_searchContainer.setTotal(baseModelSearchResult.getLength());
+		_searchContainer.setResults(baseModelSearchResult.getBaseModels());
 
 		return _searchContainer;
 	}

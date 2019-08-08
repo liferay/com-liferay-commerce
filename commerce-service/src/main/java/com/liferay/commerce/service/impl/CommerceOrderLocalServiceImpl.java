@@ -1321,11 +1321,11 @@ public class CommerceOrderLocalServiceImpl
 			return commerceAddress;
 		}
 
-		long groupId = serviceContext.getScopeGroupId();
+		long companyId = serviceContext.getCompanyId();
 
 		List<CommerceAddress> commerceAddresses =
-			commerceAddressLocalService.getCommerceAddresses(
-				groupId, CommerceAccount.class.getName(),
+			commerceAddressLocalService.getCommerceAddressesByCompanyId(
+				companyId, CommerceAccount.class.getName(),
 				commerceOrder.getCommerceAccountId());
 
 		for (CommerceAddress newCommerceAddress : commerceAddresses) {

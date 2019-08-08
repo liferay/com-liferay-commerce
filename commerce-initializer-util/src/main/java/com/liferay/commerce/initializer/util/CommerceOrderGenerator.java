@@ -164,8 +164,8 @@ public class CommerceOrderGenerator {
 		// Commerce addresses
 
 		List<CommerceAddress> commerceAddresses =
-			_commerceAddressLocalService.getCommerceAddresses(
-				CommerceAccount.class.getName(),
+			_commerceAddressLocalService.getCommerceAddressesByCompanyId(
+				commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
 				commerceAccount.getCommerceAccountId(), 0, 1, null);
 
 		if (commerceAddresses.isEmpty()) {

@@ -30,7 +30,7 @@
 		flex-grow: 1;
 	}
 
-	&__radio {
+	&__checkbox {
 		&--with-margin {
 			margin-bottom: 30px;
 		}
@@ -48,7 +48,7 @@
 		text-transform: uppercase;
 		white-space: nowrap;
 
-		&--radio {
+		&--checkbox {
 			display: inline-block;
 			font-size: 14px;
 			font-weight: bold;

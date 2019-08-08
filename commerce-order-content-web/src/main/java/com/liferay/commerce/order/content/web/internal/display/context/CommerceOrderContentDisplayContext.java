@@ -70,7 +70,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.Format;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -139,17 +138,12 @@ public class CommerceOrderContentDisplayContext {
 			_cpRequestHelper.getScopeGroupId());
 	}
 
-	public List<CommerceAddress> getAvailableCommerceOrderAddresses()
+	public List<CommerceAddress> getBillingCommerceAddresses(
+			long commerceAccountId, long companyId)
 		throws PortalException {
 
-		if (_commerceAccount == null) {
-			return Collections.emptyList();
-		}
-
-		return _commerceAddressService.getCommerceAddresses(
-			_commerceAccount.getCommerceAccountGroupId(),
-			CommerceAccount.class.getName(),
-			_commerceAccount.getCommerceAccountId());
+		return _commerceAddressService.getAvailableBillingCommerceAddresses(
+			companyId, CommerceAccount.class.getName(), commerceAccountId);
 	}
 
 	public CommerceAccount getCommerceAccount() {
@@ -164,14 +158,6 @@ public class CommerceOrderContentDisplayContext {
 		}
 
 		return commerceAccountId;
-	}
-
-	public List<CommerceAddress> getCommerceAddresses(long commerceAccountId)
-		throws PortalException {
-
-		return _commerceAddressService.getCommerceAddresses(
-			_cpRequestHelper.getScopeGroupId(), CommerceAccount.class.getName(),
-			commerceAccountId);
 	}
 
 	public CommerceOrder getCommerceOrder() throws PortalException {
@@ -417,6 +403,14 @@ public class CommerceOrderContentDisplayContext {
 		}
 
 		return portletURL;
+	}
+
+	public List<CommerceAddress> getShippingCommerceAddresses(
+			long commerceAccountId, long companyId)
+		throws PortalException {
+
+		return _commerceAddressService.getAvailableShippingCommerceAddresses(
+			companyId, CommerceAccount.class.getName(), commerceAccountId);
 	}
 
 	public boolean hasModelPermission(

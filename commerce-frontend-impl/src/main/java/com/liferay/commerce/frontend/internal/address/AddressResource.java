@@ -55,21 +55,6 @@ import org.osgi.service.component.annotations.Reference;
 public class AddressResource {
 
 	@GET
-	@Path("/address/billing-countries")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBillingCommerceCountries(
-		@QueryParam("companyId") long companyId,
-		@Context ThemeDisplay themeDisplay) {
-
-		List<CommerceCountry> commerceCountries =
-			_commerceCountryService.getBillingCommerceCountries(
-				companyId, true, true);
-
-		return _getCommerceCountries(
-			commerceCountries, themeDisplay.getLanguageId());
-	}
-
-	@GET
 	@Path("/address/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCommerceAddress(
@@ -133,15 +118,14 @@ public class AddressResource {
 	}
 
 	@GET
-	@Path("/address/shipping-countries")
+	@Path("/address/countries")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getShippingCommerceCountries(
 		@QueryParam("companyId") long companyId,
 		@Context ThemeDisplay themeDisplay) {
 
 		List<CommerceCountry> commerceCountries =
-			_commerceCountryService.getShippingCommerceCountries(
-				companyId, true, true);
+			_commerceCountryService.getCommerceCountries(companyId, true);
 
 		return _getCommerceCountries(
 			commerceCountries, themeDisplay.getLanguageId());
@@ -156,7 +140,9 @@ public class AddressResource {
 			countryModels.add(
 				new CountryModel(
 					commerceCountry.getCommerceCountryId(),
-					commerceCountry.getName(languageId)));
+					commerceCountry.getName(languageId),
+					commerceCountry.isBillingAllowed(),
+					commerceCountry.isShippingAllowed()));
 		}
 
 		try {

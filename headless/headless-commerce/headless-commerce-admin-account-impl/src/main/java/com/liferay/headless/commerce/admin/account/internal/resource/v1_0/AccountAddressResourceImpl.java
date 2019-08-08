@@ -25,6 +25,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -132,19 +133,16 @@ public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 			CommerceAccount commerceAccount, Pagination pagination)
 		throws Exception {
 
-		List<CommerceAddress> commerceAddresses =
-			_commerceAddressService.getCommerceAddresses(
-				commerceAccount.getModelClassName(),
-				commerceAccount.getCommerceAccountId(),
+		BaseModelSearchResult<CommerceAddress> baseModelSearchResult =
+			_commerceAddressService.searchCommerceAddresses(
+				commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+				commerceAccount.getCommerceAccountId(), null,
 				pagination.getStartPosition(), pagination.getEndPosition(),
 				null);
 
-		int totalItems = _commerceAddressService.getCommerceAddressesCount(
-			commerceAccount.getModelClassName(),
-			commerceAccount.getCommerceAccountId());
-
 		return Page.of(
-			_toAccountAddresses(commerceAddresses), pagination, totalItems);
+			_toAccountAddresses(baseModelSearchResult.getBaseModels()),
+			pagination, baseModelSearchResult.getLength());
 	}
 
 	private List<AccountAddress> _toAccountAddresses(
