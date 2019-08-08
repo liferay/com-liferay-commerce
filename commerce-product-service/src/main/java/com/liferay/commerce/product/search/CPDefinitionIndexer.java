@@ -360,12 +360,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				cpDefinition.getCPDefinitionId());
 
 		long classNameId = _classNameLocalService.getClassNameId(
-			CPDefinition.class);
+			CProduct.class);
 
 		Map<String, String> languageIdToUrlTitleMap =
 			_cpFriendlyURLEntryLocalService.getLanguageIdToUrlTitleMap(
 				GroupConstants.DEFAULT_LIVE_GROUP_ID, classNameId,
-				cpDefinition.getCPDefinitionId());
+				cpDefinition.getCProductId());
 
 		for (String languageId : languageIds) {
 			String description = cpDefinition.getDescription(languageId);
