@@ -71,6 +71,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 			'<portlet:namespace />openAddressModal',
 			function(evt) {
 				const addressModal = Liferay.component('addressModal');
+				addressModal.resetForm();
 				addressModal.open();
 			}
 		);
@@ -80,9 +81,7 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 			'editCommerceAddress',
 			function(id) {
 				const addressModal = Liferay.component('addressModal');
-
-				addressModal._fetchExistingAddress(id);
-
+				addressModal.fetchExistingAddress(id);
 				addressModal.open();
 			}
 		);
@@ -103,7 +102,6 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 				addressModal.on(
 					'addressModalSave',
 					function(formData) {
-
 						document.querySelector('#<portlet:namespace />name').value = formData.referent;
 						document.querySelector('#<portlet:namespace />street1').value = formData.address;
 						document.querySelector('#<portlet:namespace />city').value = formData.city;
@@ -111,7 +109,6 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 						document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
 						document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
 						document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
-
 						document.querySelector('#<portlet:namespace />addressType').value = formData.addressType;
 
 						if (formData.id) {
