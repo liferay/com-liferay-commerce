@@ -13,9 +13,9 @@ class Cart extends Component {
 
 	created() {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
-		this._refreshCartUsingData = this._refreshCartUsingData.bind(this)
-		this.reset = this.reset.bind(this)
-		this._setAndRefreshOrder = this._setAndRefreshOrder.bind(this)
+		this._refreshCartUsingData = this._refreshCartUsingData.bind(this);
+		this.reset = this.reset.bind(this);
+		this._setAndRefreshOrder = this._setAndRefreshOrder.bind(this);
 	}
 
 	_handleClickOutside(e) {
@@ -91,6 +91,8 @@ class Cart extends Component {
 			this._setAndRefreshOrder,
 			this
 		);
+
+		this._getData();
 	}
 
 	detached() {
