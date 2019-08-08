@@ -160,19 +160,9 @@ public class CommerceAccountDisplayContext {
 			return null;
 		}
 
-		List<CommerceAddress> commerceAddresses =
-			_commerceAddressService.getCommerceAddresses(
-				_commerceAccountRequestHelper.getScopeGroupId(),
-				CommerceAccount.class.getName(),
-				commerceAccount.getCommerceAccountId());
-
-		for (CommerceAddress commerceAddress : commerceAddresses) {
-			if (commerceAddress.isDefaultBilling()) {
-				return commerceAddress;
-			}
-		}
-
-		return null;
+		return _commerceAddressService.fetchDefaultBillingCommerceAddress(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId());
 	}
 
 	public String getKeywords() {

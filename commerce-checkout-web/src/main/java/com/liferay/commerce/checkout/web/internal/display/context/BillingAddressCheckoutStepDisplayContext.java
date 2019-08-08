@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -37,6 +39,15 @@ public class BillingAddressCheckoutStepDisplayContext
 	}
 
 	@Override
+	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
+		CommerceOrder commerceOrder = getCommerceOrder();
+
+		return commerceAddressService.getAvailableBillingCommerceAddresses(
+			commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+			commerceOrder.getCommerceAccountId());
+	}
+
+	@Override
 	public String getCommerceCountrySelectionColumnName() {
 		return "billingAllowed";
 	}
@@ -48,20 +59,23 @@ public class BillingAddressCheckoutStepDisplayContext
 
 	@Override
 	public long getDefaultCommerceAddressId() throws PortalException {
-		long defaultCommerceAddressId = 0;
+		CommerceOrder commerceOrder = getCommerceOrder();
 
-		List<CommerceAddress> commerceAddresses = getCommerceAddresses();
+		long billingAddressId = commerceOrder.getBillingAddressId();
 
-		for (CommerceAddress commerceAddress : commerceAddresses) {
-			if (commerceAddress.isDefaultBilling()) {
-				defaultCommerceAddressId =
-					commerceAddress.getCommerceAddressId();
+		if (billingAddressId == 0) {
+			CommerceAddress commerceAddress =
+				commerceAddressService.fetchDefaultBillingCommerceAddress(
+					commerceOrder.getCompanyId(),
+					CommerceAccount.class.getName(),
+					commerceOrder.getCommerceAccountId());
 
-				break;
+			if (commerceAddress != null) {
+				billingAddressId = commerceAddress.getCommerceAddressId();
 			}
 		}
 
-		return defaultCommerceAddressId;
+		return billingAddressId;
 	}
 
 	@Override

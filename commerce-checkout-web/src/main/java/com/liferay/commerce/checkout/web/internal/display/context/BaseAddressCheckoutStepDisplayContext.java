@@ -38,7 +38,7 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 		CommerceAddressService commerceAddressService,
 		HttpServletRequest httpServletRequest) {
 
-		_commerceAddressService = commerceAddressService;
+		this.commerceAddressService = commerceAddressService;
 
 		_commerceOrder = (CommerceOrder)httpServletRequest.getAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER);
@@ -47,12 +47,12 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 	public CommerceAddress getCommerceAddress(long commerceAddressId)
 		throws PortalException {
 
-		return _commerceAddressService.fetchCommerceAddress(commerceAddressId);
+		return commerceAddressService.fetchCommerceAddress(commerceAddressId);
 	}
 
 	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
-		return _commerceAddressService.getCommerceAddresses(
-			CommerceAccount.class.getName(),
+		return commerceAddressService.getCommerceAddressesByCompanyId(
+			_commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
 			_commerceOrder.getCommerceAccountId(), QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new CommerceAddressNameComparator());
 	}
@@ -83,10 +83,27 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 			return true;
 		}
 
+		CommerceAddress defaultBilling =
+			commerceAddressService.fetchDefaultBillingCommerceAddress(
+				_commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				_commerceOrder.getCommerceAccountId());
+
+		CommerceAddress defaultShipping =
+			commerceAddressService.fetchDefaultShippingCommerceAddress(
+				_commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				_commerceOrder.getCommerceAccountId());
+
+		if ((defaultBilling != null) && (defaultShipping != null) &&
+			Objects.equals(defaultBilling, defaultShipping)) {
+
+			return true;
+		}
+
 		return false;
 	}
 
-	private final CommerceAddressService _commerceAddressService;
+	protected final CommerceAddressService commerceAddressService;
+
 	private final CommerceOrder _commerceOrder;
 
 }

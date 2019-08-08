@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.checkout.web.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
@@ -25,6 +26,7 @@ import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.util.CommerceShippingHelper;
@@ -74,10 +76,26 @@ public class CommerceCheckoutStepHelper {
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
+		CommerceAddress defaultBilling =
+			_commerceAddressService.fetchDefaultBillingCommerceAddress(
+				commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				commerceOrder.getCommerceAccountId());
+
+		CommerceAddress defaultShipping =
+			_commerceAddressService.fetchDefaultShippingCommerceAddress(
+				commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				commerceOrder.getCommerceAccountId());
+
 		if ((commerceOrder.getBillingAddressId() > 0) &&
 			Objects.equals(
 				commerceOrder.getBillingAddressId(),
 				commerceOrder.getShippingAddressId())) {
+
+			return false;
+		}
+		else if ((commerceOrder.getBillingAddressId() == -1) &&
+				 (defaultBilling != null) && (defaultShipping != null) &&
+				 Objects.equals(defaultBilling, defaultShipping)) {
 
 			return false;
 		}
@@ -186,6 +204,9 @@ public class CommerceCheckoutStepHelper {
 		httpServletRequest.setAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 	}
+
+	@Reference
+	private CommerceAddressService _commerceAddressService;
 
 	@Reference
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
