@@ -101,14 +101,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp measurement unit in the ordered set where uuid = &#63;.
@@ -217,11 +217,11 @@ public interface CPMeasurementUnitPersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	public CPMeasurementUnit fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp measurement unit where uuid = &#63; and groupId = &#63; from the database.
@@ -299,14 +299,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp measurement unit in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -449,14 +449,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp measurement unit in the ordered set where companyId = &#63;.
@@ -597,14 +597,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findByC_T(
 		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and type = &#63;.
@@ -723,11 +723,11 @@ public interface CPMeasurementUnitPersistence
 	 * @param companyId the company ID
 	 * @param key the key
 	 * @param type the type
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp measurement unit, or <code>null</code> if a matching cp measurement unit could not be found
 	 */
 	public CPMeasurementUnit fetchByC_K_T(
-		long companyId, String key, int type, boolean retrieveFromCache);
+		long companyId, String key, int type, boolean useFinderCache);
 
 	/**
 	 * Removes the cp measurement unit where companyId = &#63; and key = &#63; and type = &#63; from the database.
@@ -811,14 +811,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findByC_P_T(
 		long companyId, boolean primary, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp measurement unit in the ordered set where companyId = &#63; and primary = &#63; and type = &#63;.
@@ -1016,14 +1016,14 @@ public interface CPMeasurementUnitPersistence
 	 * @param start the lower bound of the range of cp measurement units
 	 * @param end the upper bound of the range of cp measurement units (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp measurement units
 	 */
 	public java.util.List<CPMeasurementUnit> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPMeasurementUnit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp measurement units from the database.

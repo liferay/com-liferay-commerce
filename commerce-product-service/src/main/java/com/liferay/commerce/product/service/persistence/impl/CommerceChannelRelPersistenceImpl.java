@@ -154,14 +154,14 @@ public class CommerceChannelRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce channel rels
 	 */
 	@Override
 	public List<CommerceChannelRel> findByCommerceChannelId(
 		long commerceChannelId, int start, int end,
 		OrderByComparator<CommerceChannelRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -171,10 +171,14 @@ public class CommerceChannelRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCommerceChannelId;
-			finderArgs = new Object[] {commerceChannelId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceChannelId;
+				finderArgs = new Object[] {commerceChannelId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceChannelId;
 			finderArgs = new Object[] {
 				commerceChannelId, start, end, orderByComparator
@@ -183,7 +187,7 @@ public class CommerceChannelRelPersistenceImpl
 
 		List<CommerceChannelRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceChannelRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -251,10 +255,14 @@ public class CommerceChannelRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -681,14 +689,14 @@ public class CommerceChannelRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce channel rels
 	 */
 	@Override
 	public List<CommerceChannelRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceChannelRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -698,10 +706,13 @@ public class CommerceChannelRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_C;
-			finderArgs = new Object[] {classNameId, classPK};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C;
+				finderArgs = new Object[] {classNameId, classPK};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
 				classNameId, classPK, start, end, orderByComparator
@@ -710,7 +721,7 @@ public class CommerceChannelRelPersistenceImpl
 
 		List<CommerceChannelRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceChannelRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -782,10 +793,14 @@ public class CommerceChannelRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1230,21 +1245,23 @@ public class CommerceChannelRelPersistenceImpl
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceChannelId the commerce channel ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce channel rel, or <code>null</code> if a matching commerce channel rel could not be found
 	 */
 	@Override
 	public CommerceChannelRel fetchByC_C_C(
 		long classNameId, long classPK, long commerceChannelId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
-		Object[] finderArgs = new Object[] {
-			classNameId, classPK, commerceChannelId
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {classNameId, classPK, commerceChannelId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C_C, finderArgs, this);
 		}
@@ -1292,8 +1309,10 @@ public class CommerceChannelRelPersistenceImpl
 				List<CommerceChannelRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C_C, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C_C, finderArgs, list);
+					}
 				}
 				else {
 					CommerceChannelRel commerceChannelRel = list.get(0);
@@ -1304,7 +1323,10 @@ public class CommerceChannelRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C_C, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_C_C, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2088,14 +2110,14 @@ public class CommerceChannelRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce channel rels
 	 * @param end the upper bound of the range of commerce channel rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce channel rels
 	 */
 	@Override
 	public List<CommerceChannelRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceChannelRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2105,17 +2127,20 @@ public class CommerceChannelRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceChannelRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceChannelRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2165,10 +2190,14 @@ public class CommerceChannelRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

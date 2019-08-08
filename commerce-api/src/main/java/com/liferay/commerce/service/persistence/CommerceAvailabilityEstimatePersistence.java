@@ -101,14 +101,14 @@ public interface CommerceAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce availability estimates
 	 */
 	public java.util.List<CommerceAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce availability estimate in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce availability estimates
 	 */
 	public java.util.List<CommerceAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce availability estimate in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -400,14 +400,14 @@ public interface CommerceAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce availability estimates
 	 */
 	public java.util.List<CommerceAvailabilityEstimate> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce availability estimate in the ordered set where companyId = &#63;.
@@ -599,14 +599,14 @@ public interface CommerceAvailabilityEstimatePersistence
 	 * @param start the lower bound of the range of commerce availability estimates
 	 * @param end the upper bound of the range of commerce availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce availability estimates
 	 */
 	public java.util.List<CommerceAvailabilityEstimate> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce availability estimates from the database.

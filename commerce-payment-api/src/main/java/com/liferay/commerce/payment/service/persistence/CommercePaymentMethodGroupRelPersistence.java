@@ -102,14 +102,14 @@ public interface CommercePaymentMethodGroupRelPersistence
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce payment method group rels
 	 */
 	public java.util.List<CommercePaymentMethodGroupRel> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce payment method group rel in the ordered set where groupId = &#63;.
@@ -220,11 +220,11 @@ public interface CommercePaymentMethodGroupRelPersistence
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce payment method group rel, or <code>null</code> if a matching commerce payment method group rel could not be found
 	 */
 	public CommercePaymentMethodGroupRel fetchByG_E(
-		long groupId, String engineKey, boolean retrieveFromCache);
+		long groupId, String engineKey, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce payment method group rel where groupId = &#63; and engineKey = &#63; from the database.
@@ -303,14 +303,14 @@ public interface CommercePaymentMethodGroupRelPersistence
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce payment method group rels
 	 */
 	public java.util.List<CommercePaymentMethodGroupRel> findByG_A(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce payment method group rel in the ordered set where groupId = &#63; and active = &#63;.
@@ -509,14 +509,14 @@ public interface CommercePaymentMethodGroupRelPersistence
 	 * @param start the lower bound of the range of commerce payment method group rels
 	 * @param end the upper bound of the range of commerce payment method group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce payment method group rels
 	 */
 	public java.util.List<CommercePaymentMethodGroupRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommercePaymentMethodGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce payment method group rels from the database.

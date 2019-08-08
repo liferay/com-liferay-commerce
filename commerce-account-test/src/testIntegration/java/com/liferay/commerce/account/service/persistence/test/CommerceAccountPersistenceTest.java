@@ -166,6 +166,12 @@ public class CommerceAccountPersistenceTest {
 
 		newCommerceAccount.setStatusDate(RandomTestUtil.nextDate());
 
+		newCommerceAccount.setDefaultBillingAddressId(
+			RandomTestUtil.nextLong());
+
+		newCommerceAccount.setDefaultShippingAddressId(
+			RandomTestUtil.nextLong());
+
 		_commerceAccounts.add(_persistence.update(newCommerceAccount));
 
 		CommerceAccount existingCommerceAccount = _persistence.findByPrimaryKey(
@@ -230,6 +236,12 @@ public class CommerceAccountPersistenceTest {
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingCommerceAccount.getStatusDate()),
 			Time.getShortTimestamp(newCommerceAccount.getStatusDate()));
+		Assert.assertEquals(
+			existingCommerceAccount.getDefaultBillingAddressId(),
+			newCommerceAccount.getDefaultBillingAddressId());
+		Assert.assertEquals(
+			existingCommerceAccount.getDefaultShippingAddressId(),
+			newCommerceAccount.getDefaultShippingAddressId());
 	}
 
 	@Test
@@ -288,7 +300,8 @@ public class CommerceAccountPersistenceTest {
 			"email", true, "taxId", true, "type", true, "active", true,
 			"displayDate", true, "expirationDate", true, "lastPublishDate",
 			true, "status", true, "statusByUserId", true, "statusByUserName",
-			true, "statusDate", true);
+			true, "statusDate", true, "defaultBillingAddressId", true,
+			"defaultShippingAddressId", true);
 	}
 
 	@Test
@@ -572,6 +585,10 @@ public class CommerceAccountPersistenceTest {
 		commerceAccount.setStatusByUserName(RandomTestUtil.randomString());
 
 		commerceAccount.setStatusDate(RandomTestUtil.nextDate());
+
+		commerceAccount.setDefaultBillingAddressId(RandomTestUtil.nextLong());
+
+		commerceAccount.setDefaultShippingAddressId(RandomTestUtil.nextLong());
 
 		_commerceAccounts.add(_persistence.update(commerceAccount));
 

@@ -452,6 +452,20 @@ public interface CommerceAddressModel
 	 */
 	public void setDefaultShipping(boolean defaultShipping);
 
+	/**
+	 * Returns the type of this commerce address.
+	 *
+	 * @return the type of this commerce address
+	 */
+	public int getType();
+
+	/**
+	 * Sets the type of this commerce address.
+	 *
+	 * @param type the type of this commerce address
+	 */
+	public void setType(int type);
+
 	@Override
 	public boolean isNew();
 

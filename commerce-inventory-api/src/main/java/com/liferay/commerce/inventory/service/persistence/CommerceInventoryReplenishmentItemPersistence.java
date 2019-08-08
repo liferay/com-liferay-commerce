@@ -105,7 +105,7 @@ public interface CommerceInventoryReplenishmentItemPersistence
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public java.util.List<CommerceInventoryReplenishmentItem>
@@ -113,7 +113,7 @@ public interface CommerceInventoryReplenishmentItemPersistence
 			long commerceInventoryWarehouseId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceInventoryReplenishmentItem> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory replenishment item in the ordered set where commerceInventoryWarehouseId = &#63;.
@@ -258,14 +258,14 @@ public interface CommerceInventoryReplenishmentItemPersistence
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public java.util.List<CommerceInventoryReplenishmentItem> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory replenishment item in the ordered set where sku = &#63;.
@@ -403,7 +403,7 @@ public interface CommerceInventoryReplenishmentItemPersistence
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public java.util.List<CommerceInventoryReplenishmentItem>
@@ -411,7 +411,7 @@ public interface CommerceInventoryReplenishmentItemPersistence
 			Date availabilityDate, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceInventoryReplenishmentItem> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory replenishment item in the ordered set where availabilityDate = &#63;.
@@ -554,14 +554,14 @@ public interface CommerceInventoryReplenishmentItemPersistence
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory replenishment items
 	 */
 	public java.util.List<CommerceInventoryReplenishmentItem> findByS_AD(
 		String sku, Date availabilityDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory replenishment item in the ordered set where sku = &#63; and availabilityDate = &#63;.
@@ -761,14 +761,14 @@ public interface CommerceInventoryReplenishmentItemPersistence
 	 * @param start the lower bound of the range of commerce inventory replenishment items
 	 * @param end the upper bound of the range of commerce inventory replenishment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory replenishment items
 	 */
 	public java.util.List<CommerceInventoryReplenishmentItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceInventoryReplenishmentItem> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce inventory replenishment items from the database.

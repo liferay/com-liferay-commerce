@@ -103,7 +103,7 @@ public interface CommerceTaxFixedRateAddressRelPersistence
 	 * @param start the lower bound of the range of commerce tax fixed rate address rels
 	 * @param end the upper bound of the range of commerce tax fixed rate address rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rate address rels
 	 */
 	public java.util.List<CommerceTaxFixedRateAddressRel>
@@ -111,7 +111,7 @@ public interface CommerceTaxFixedRateAddressRelPersistence
 			long commerceTaxMethodId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceTaxFixedRateAddressRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax fixed rate address rel in the ordered set where commerceTaxMethodId = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceTaxFixedRateAddressRelPersistence
 	 * @param start the lower bound of the range of commerce tax fixed rate address rels
 	 * @param end the upper bound of the range of commerce tax fixed rate address rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rate address rels
 	 */
 	public java.util.List<CommerceTaxFixedRateAddressRel> findByCPTaxCategoryId(
 		long CPTaxCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceTaxFixedRateAddressRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tax fixed rate address rel in the ordered set where CPTaxCategoryId = &#63;.
@@ -448,14 +448,14 @@ public interface CommerceTaxFixedRateAddressRelPersistence
 	 * @param start the lower bound of the range of commerce tax fixed rate address rels
 	 * @param end the upper bound of the range of commerce tax fixed rate address rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tax fixed rate address rels
 	 */
 	public java.util.List<CommerceTaxFixedRateAddressRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceTaxFixedRateAddressRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce tax fixed rate address rels from the database.

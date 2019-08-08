@@ -9,6 +9,7 @@ create unique index IX_274DD5D8 on CPDefinitionInventory (uuid_[$COLUMN_LENGTH:7
 create index IX_15EA4714 on CommerceAddress (classNameId, classPK);
 create index IX_CD76FE87 on CommerceAddress (commerceCountryId);
 create index IX_71C5A9DD on CommerceAddress (commerceRegionId);
+create index IX_6D0EADB7 on CommerceAddress (companyId, classNameId, classPK, type_);
 create index IX_EEACF18E on CommerceAddress (groupId, classNameId, classPK, defaultBilling);
 create index IX_333246DF on CommerceAddress (groupId, classNameId, classPK, defaultShipping);
 

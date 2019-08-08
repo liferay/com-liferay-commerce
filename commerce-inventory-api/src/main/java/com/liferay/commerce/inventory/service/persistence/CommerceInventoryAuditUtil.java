@@ -191,16 +191,16 @@ public class CommerceInventoryAuditUtil {
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	public static List<CommerceInventoryAudit> findBySku(
 		String sku, int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findBySku(
-			sku, start, end, orderByComparator, retrieveFromCache);
+			sku, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -365,16 +365,16 @@ public class CommerceInventoryAuditUtil {
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	public static List<CommerceInventoryAudit> findByLtCreateDate(
 		Date createDate, int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByLtCreateDate(
-			createDate, start, end, orderByComparator, retrieveFromCache);
+			createDate, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -613,16 +613,16 @@ public class CommerceInventoryAuditUtil {
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory audits
 	 */
 	public static List<CommerceInventoryAudit> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

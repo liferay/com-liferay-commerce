@@ -156,14 +156,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -175,17 +175,20 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -262,10 +265,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -698,20 +705,24 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	@Override
 	public CPFriendlyURLEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -764,8 +775,10 @@ public class CPFriendlyURLEntryPersistenceImpl
 				List<CPFriendlyURLEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CPFriendlyURLEntry cpFriendlyURLEntry = list.get(0);
@@ -776,7 +789,10 @@ public class CPFriendlyURLEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -959,14 +975,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -978,10 +994,13 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -990,7 +1009,7 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1073,10 +1092,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1554,14 +1577,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1571,10 +1594,13 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_C;
-			finderArgs = new Object[] {classNameId, classPK};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C;
+				finderArgs = new Object[] {classNameId, classPK};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
 				classNameId, classPK, start, end, orderByComparator
@@ -1583,7 +1609,7 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1655,10 +1681,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2115,14 +2145,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2132,10 +2162,13 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_C_C;
-			finderArgs = new Object[] {groupId, classNameId, classPK};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_C;
+				finderArgs = new Object[] {groupId, classNameId, classPK};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_C_C;
 			finderArgs = new Object[] {
 				groupId, classNameId, classPK, start, end, orderByComparator
@@ -2144,7 +2177,7 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2221,10 +2254,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2707,14 +2744,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByG_C_U(
 		long groupId, long classNameId, String urlTitle, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		urlTitle = Objects.toString(urlTitle, "");
 
@@ -2726,10 +2763,13 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_C_U;
-			finderArgs = new Object[] {groupId, classNameId, urlTitle};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_U;
+				finderArgs = new Object[] {groupId, classNameId, urlTitle};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_C_U;
 			finderArgs = new Object[] {
 				groupId, classNameId, urlTitle, start, end, orderByComparator
@@ -2738,7 +2778,7 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2826,10 +2866,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3348,14 +3392,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findByG_C_C_M(
 		long groupId, long classNameId, long classPK, boolean main, int start,
 		int end, OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3365,10 +3409,13 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_C_C_M;
-			finderArgs = new Object[] {groupId, classNameId, classPK, main};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_C_M;
+				finderArgs = new Object[] {groupId, classNameId, classPK, main};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_C_C_M;
 			finderArgs = new Object[] {
 				groupId, classNameId, classPK, main, start, end,
@@ -3378,7 +3425,7 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3460,10 +3507,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3970,24 +4021,28 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param classNameId the class name ID
 	 * @param languageId the language ID
 	 * @param urlTitle the url title
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	@Override
 	public CPFriendlyURLEntry fetchByG_C_L_U(
 		long groupId, long classNameId, String languageId, String urlTitle,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		languageId = Objects.toString(languageId, "");
 		urlTitle = Objects.toString(urlTitle, "");
 
-		Object[] finderArgs = new Object[] {
-			groupId, classNameId, languageId, urlTitle
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {
+				groupId, classNameId, languageId, urlTitle
+			};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByG_C_L_U, finderArgs, this);
 		}
@@ -4062,14 +4117,22 @@ public class CPFriendlyURLEntryPersistenceImpl
 				List<CPFriendlyURLEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByG_C_L_U, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByG_C_L_U, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									groupId, classNameId, languageId, urlTitle
+								};
+							}
+
 							_log.warn(
 								"CPFriendlyURLEntryPersistenceImpl.fetchByG_C_L_U(long, long, String, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -4085,7 +4148,10 @@ public class CPFriendlyURLEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByG_C_L_U, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByG_C_L_U, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4317,24 +4383,28 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param classPK the class pk
 	 * @param languageId the language ID
 	 * @param urlTitle the url title
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	@Override
 	public CPFriendlyURLEntry fetchByG_C_C_L_U(
 		long groupId, long classNameId, long classPK, String languageId,
-		String urlTitle, boolean retrieveFromCache) {
+		String urlTitle, boolean useFinderCache) {
 
 		languageId = Objects.toString(languageId, "");
 		urlTitle = Objects.toString(urlTitle, "");
 
-		Object[] finderArgs = new Object[] {
-			groupId, classNameId, classPK, languageId, urlTitle
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {
+				groupId, classNameId, classPK, languageId, urlTitle
+			};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByG_C_C_L_U, finderArgs, this);
 		}
@@ -4414,14 +4484,23 @@ public class CPFriendlyURLEntryPersistenceImpl
 				List<CPFriendlyURLEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByG_C_C_L_U, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByG_C_C_L_U, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									groupId, classNameId, classPK, languageId,
+									urlTitle
+								};
+							}
+
 							_log.warn(
 								"CPFriendlyURLEntryPersistenceImpl.fetchByG_C_C_L_U(long, long, long, String, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -4437,8 +4516,10 @@ public class CPFriendlyURLEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByG_C_C_L_U, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByG_C_C_L_U, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4681,23 +4762,27 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param classPK the class pk
 	 * @param languageId the language ID
 	 * @param main the main
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	@Override
 	public CPFriendlyURLEntry fetchByG_C_C_L_M(
 		long groupId, long classNameId, long classPK, String languageId,
-		boolean main, boolean retrieveFromCache) {
+		boolean main, boolean useFinderCache) {
 
 		languageId = Objects.toString(languageId, "");
 
-		Object[] finderArgs = new Object[] {
-			groupId, classNameId, classPK, languageId, main
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {
+				groupId, classNameId, classPK, languageId, main
+			};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByG_C_C_L_M, finderArgs, this);
 		}
@@ -4766,14 +4851,23 @@ public class CPFriendlyURLEntryPersistenceImpl
 				List<CPFriendlyURLEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByG_C_C_L_M, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByG_C_C_L_M, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									groupId, classNameId, classPK, languageId,
+									main
+								};
+							}
+
 							_log.warn(
 								"CPFriendlyURLEntryPersistenceImpl.fetchByG_C_C_L_M(long, long, long, String, boolean, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -4789,8 +4883,10 @@ public class CPFriendlyURLEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByG_C_C_L_M, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByG_C_C_L_M, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5923,14 +6019,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp friendly url entries
 	 */
 	@Override
 	public List<CPFriendlyURLEntry> findAll(
 		int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5940,17 +6036,20 @@ public class CPFriendlyURLEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPFriendlyURLEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPFriendlyURLEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -6000,10 +6099,14 @@ public class CPFriendlyURLEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
