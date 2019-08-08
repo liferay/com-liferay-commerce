@@ -28,8 +28,10 @@ class AccountSelector extends Component {
 		this._getOrders()
 			.then(orders => {
 				this.orders = orders;
-
-				this.currentOrder = this.orders.reduce((found, order) => found || (order.id == orderId ? order : null), null);
+				if(orderId) {
+					this.currentOrder = this.orders.reduce((found, order) => found || (order.id == orderId ? order : null), null);
+					this.currentView = 'orders';
+				}
 			});
 	}
 
