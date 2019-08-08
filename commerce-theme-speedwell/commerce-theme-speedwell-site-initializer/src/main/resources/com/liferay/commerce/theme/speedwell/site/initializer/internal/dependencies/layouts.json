@@ -1,11 +1,11 @@
 [
 	{
-		"name": "Home",
 		"layoutTemplateId": "1_column",
 		"lookAndFeel": {
-			"wide-layout": "true",
 			"translucent-topbar": "true",
+			"wide-layout": "true"
 		},
+		"name": "Home",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -14,8 +14,8 @@
 				"portletPreferences": {
 					"articleId": "SPEEDWELL_BUMPER_SLIDER",
 					"assetEntryId": "",
-					"ddmTemplateKey": "SPEEDWELL_BUMPER_SLIDER",
 					"ddmStructureKey": "speedwell-bumper-slider-structure",
+					"ddmTemplateKey": "SPEEDWELL_BUMPER_SLIDER",
 					"groupId": ""
 				}
 			},
@@ -26,8 +26,8 @@
 				"portletPreferences": {
 					"articleId": "SPEEDWELL_HIGHLIGHT_SLIDER",
 					"assetEntryId": "",
-					"ddmTemplateKey": "SPEEDWELL_HIGHLIGHT_SLIDER",
 					"ddmStructureKey": "speedwell-highlight-slider-structure",
+					"ddmTemplateKey": "SPEEDWELL_HIGHLIGHT_SLIDER",
 					"groupId": ""
 				}
 			},
@@ -38,16 +38,16 @@
 				"portletPreferences": {
 					"articleId": "SPEEDWELL_NEWSLETTER",
 					"assetEntryId": "",
-					"ddmTemplateKey": "SPEEDWELL_NEWSLETTER",
 					"ddmStructureKey": "speedwell-newsletter-structure",
+					"ddmTemplateKey": "SPEEDWELL_NEWSLETTER",
 					"groupId": ""
 				}
 			}
 		]
 	},
 	{
-		"name": "My Account",
 		"layoutTemplateId": "1_column",
+		"name": "My Account",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -56,16 +56,16 @@
 				"portletPreferences": {
 					"articleId": "SPEEDWELL_ACCOUNT",
 					"assetEntryId": "",
-					"ddmTemplateKey": "SPEEDWELL_ACCOUNT",
 					"ddmStructureKey": "speedwell-account-dashboard-structure",
+					"ddmTemplateKey": "SPEEDWELL_ACCOUNT",
 					"groupId": ""
 				}
 			}
 		],
 		"subLayouts": [
 			{
-				"name": "Your Orders",
 				"layoutTemplateId": "1_column",
+				"name": "Your Orders",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -76,8 +76,8 @@
 				"privateLayout": false
 			},
 			{
-				"name": "Login & Security",
 				"layoutTemplateId": "1_2_columns_i",
+				"name": "Login & Security",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -89,11 +89,11 @@
 						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
+							"displayDepth": "2",
 							"displayStyle": {
 								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
 								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
 							},
-							"displayDepth": "2",
 							"displayStyleGroupId": "",
 							"includedLayouts": "auto",
 							"portletSetupCss": "",
@@ -112,8 +112,8 @@
 				"privateLayout": false
 			},
 			{
-				"name": "My Addresses",
 				"layoutTemplateId": "1_column",
+				"name": "My Addresses",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -124,8 +124,8 @@
 				"privateLayout": false
 			},
 			{
-				"name": "Subscriptions",
 				"layoutTemplateId": "1_column",
+				"name": "Subscriptions",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -136,8 +136,8 @@
 				"privateLayout": false
 			},
 			{
-				"name": "Download",
 				"layoutTemplateId": "1_column",
+				"name": "Download",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
