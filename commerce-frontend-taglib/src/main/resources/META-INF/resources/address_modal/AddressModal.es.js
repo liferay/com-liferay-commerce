@@ -106,7 +106,7 @@ class AddressModal extends Component {
 		return this._firstFormValid && this._secondFormValid;
 	}
 
-	_fetchExistingAddress(id) {
+	fetchExistingAddress(id) {
 		fetch(
 			'/o/commerce-ui/address/' + id,
 			{
@@ -116,20 +116,20 @@ class AddressModal extends Component {
 			response => response.json()
 		).then(
 			(jsonResponse) => {
-				jsonResponse = JSON.parse(jsonResponse);
+				const data = JSON.parse(jsonResponse);
 
 				this._formData = Object.assign(
 					{},
 					this._formData,
 					{
-						address: jsonResponse.street1,
-						city: jsonResponse.city,
-						country: jsonResponse.commerceCountryId,
+						address: data.street1,
+						city: data.city,
+						country: data.commerceCountryId,
 						id: id,
-						region: jsonResponse.commerceRegionId,
-						referent: jsonResponse.name,
-						telephone: jsonResponse.phoneNumber,
-						zipCode: jsonResponse.zip
+						region: data.commerceRegionId,
+						referent: data.name,
+						telephone: data.phoneNumber,
+						zipCode: data.zip
 					}
 				);
 
@@ -197,6 +197,19 @@ class AddressModal extends Component {
 				}
 			)
 		);
+	}
+
+	resetForm() {
+		this._formData = {
+			address: null,
+			city: null,
+			country: null,
+			id: null,
+			referent: null,
+			region: null,
+			telephone: null,
+			zipCode: null
+		};
 	}
 
 	toggle() {
