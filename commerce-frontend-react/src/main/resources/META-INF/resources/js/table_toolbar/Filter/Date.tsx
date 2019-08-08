@@ -5,7 +5,11 @@ import ClayButton from '@clayui/button';
 import getAppContext from '../Context';
 import { DateFilterProps } from './definitions'
 
-const DateFilter: React.FunctionComponent<DateFilterProps> = (props: DateFilterProps) => {
+interface IProps extends DateFilterProps {
+    panelType?: 'add' | 'edit'
+}
+
+const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
     const {actions} = getAppContext();
     const [value, setValue] = useState(props.value);
 
@@ -21,7 +25,13 @@ const DateFilter: React.FunctionComponent<DateFilterProps> = (props: DateFilterP
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
                 >
-                    Add filter
+                    {props.panelType === 'edit' 
+                    ? (
+                        <>Edit filter</>
+                    )
+                    : (
+                        <>Add filter</>
+                    )}
                 </ClayButton>
             </div>
         </>
