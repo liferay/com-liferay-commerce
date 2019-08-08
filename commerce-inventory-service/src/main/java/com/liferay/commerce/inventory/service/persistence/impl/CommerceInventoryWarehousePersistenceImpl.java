@@ -157,14 +157,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
 	public List<CommerceInventoryWarehouse> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -174,10 +174,13 @@ public class CommerceInventoryWarehousePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCompanyId;
-			finderArgs = new Object[] {companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCompanyId;
+				finderArgs = new Object[] {companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCompanyId;
 			finderArgs = new Object[] {
 				companyId, start, end, orderByComparator
@@ -186,7 +189,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		List<CommerceInventoryWarehouse> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -256,10 +259,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1076,14 +1083,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
 	public List<CommerceInventoryWarehouse> findByC_A(
 		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1093,10 +1100,13 @@ public class CommerceInventoryWarehousePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_A;
-			finderArgs = new Object[] {companyId, active};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_A;
+				finderArgs = new Object[] {companyId, active};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_A;
 			finderArgs = new Object[] {
 				companyId, active, start, end, orderByComparator
@@ -1105,7 +1115,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		List<CommerceInventoryWarehouse> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1180,10 +1190,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2048,14 +2062,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
 	public List<CommerceInventoryWarehouse> findByC_C(
 		long companyId, String countryTwoLettersISOCode, int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		countryTwoLettersISOCode = Objects.toString(
 			countryTwoLettersISOCode, "");
@@ -2068,10 +2082,13 @@ public class CommerceInventoryWarehousePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_C;
-			finderArgs = new Object[] {companyId, countryTwoLettersISOCode};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C;
+				finderArgs = new Object[] {companyId, countryTwoLettersISOCode};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
 				companyId, countryTwoLettersISOCode, start, end,
@@ -2081,7 +2098,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		List<CommerceInventoryWarehouse> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2169,10 +2186,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3126,7 +3147,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory warehouses
 	 */
 	@Override
@@ -3134,7 +3155,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 		long companyId, boolean active, String countryTwoLettersISOCode,
 		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		countryTwoLettersISOCode = Objects.toString(
 			countryTwoLettersISOCode, "");
@@ -3147,12 +3168,15 @@ public class CommerceInventoryWarehousePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_A_C;
-			finderArgs = new Object[] {
-				companyId, active, countryTwoLettersISOCode
-			};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_A_C;
+				finderArgs = new Object[] {
+					companyId, active, countryTwoLettersISOCode
+				};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_A_C;
 			finderArgs = new Object[] {
 				companyId, active, countryTwoLettersISOCode, start, end,
@@ -3162,7 +3186,7 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 		List<CommerceInventoryWarehouse> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3255,10 +3279,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4244,21 +4272,24 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce inventory warehouse, or <code>null</code> if a matching commerce inventory warehouse could not be found
 	 */
 	@Override
 	public CommerceInventoryWarehouse fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_ERC, finderArgs, this);
 		}
@@ -4314,14 +4345,22 @@ public class CommerceInventoryWarehousePersistenceImpl
 				List<CommerceInventoryWarehouse> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_ERC, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
 							_log.warn(
 								"CommerceInventoryWarehousePersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -4338,7 +4377,10 @@ public class CommerceInventoryWarehousePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5253,14 +5295,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 	 * @param start the lower bound of the range of commerce inventory warehouses
 	 * @param end the upper bound of the range of commerce inventory warehouses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory warehouses
 	 */
 	@Override
 	public List<CommerceInventoryWarehouse> findAll(
 		int start, int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5270,17 +5312,20 @@ public class CommerceInventoryWarehousePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceInventoryWarehouse> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceInventoryWarehouse>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -5331,10 +5376,14 @@ public class CommerceInventoryWarehousePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

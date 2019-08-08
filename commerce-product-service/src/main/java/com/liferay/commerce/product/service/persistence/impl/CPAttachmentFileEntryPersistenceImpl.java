@@ -158,14 +158,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -177,17 +177,20 @@ public class CPAttachmentFileEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -264,10 +267,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -703,20 +710,24 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	@Override
 	public CPAttachmentFileEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -770,8 +781,10 @@ public class CPAttachmentFileEntryPersistenceImpl
 				List<CPAttachmentFileEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CPAttachmentFileEntry cpAttachmentFileEntry = list.get(0);
@@ -782,7 +795,10 @@ public class CPAttachmentFileEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -968,14 +984,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -987,10 +1003,13 @@ public class CPAttachmentFileEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -999,7 +1018,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1082,10 +1101,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1566,14 +1589,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1583,10 +1606,13 @@ public class CPAttachmentFileEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_C;
-			finderArgs = new Object[] {classNameId, classPK};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C;
+				finderArgs = new Object[] {classNameId, classPK};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_C;
 			finderArgs = new Object[] {
 				classNameId, classPK, start, end, orderByComparator
@@ -1595,7 +1621,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1668,10 +1694,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2122,14 +2152,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByLtD_S(
 		Date displayDate, int status, int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2142,7 +2172,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2226,10 +2256,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2699,19 +2733,23 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param fileEntryId the file entry ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	@Override
 	public CPAttachmentFileEntry fetchByC_C_F(
 		long classNameId, long classPK, long fileEntryId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
-		Object[] finderArgs = new Object[] {classNameId, classPK, fileEntryId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {classNameId, classPK, fileEntryId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C_F, finderArgs, this);
 		}
@@ -2759,8 +2797,10 @@ public class CPAttachmentFileEntryPersistenceImpl
 				List<CPAttachmentFileEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C_F, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C_F, finderArgs, list);
+					}
 				}
 				else {
 					CPAttachmentFileEntry cpAttachmentFileEntry = list.get(0);
@@ -2771,7 +2811,10 @@ public class CPAttachmentFileEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C_F, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_C_F, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2962,14 +3005,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByC_C_LtD_S(
 		long classNameId, long classPK, Date displayDate, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2983,7 +3026,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3078,10 +3121,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3626,14 +3673,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByC_C_T_ST(
 		long classNameId, long classPK, int type, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3643,10 +3690,13 @@ public class CPAttachmentFileEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByC_C_T_ST;
-			finderArgs = new Object[] {classNameId, classPK, type, status};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C_T_ST;
+				finderArgs = new Object[] {classNameId, classPK, type, status};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_C_T_ST;
 			finderArgs = new Object[] {
 				classNameId, classPK, type, status, start, end,
@@ -3656,7 +3706,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3739,10 +3789,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4259,14 +4313,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findByC_C_T_NotST(
 		long classNameId, long classPK, int type, int status, int start,
 		int end, OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4279,7 +4333,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -4362,10 +4416,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4858,21 +4916,24 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp attachment file entry, or <code>null</code> if a matching cp attachment file entry could not be found
 	 */
 	@Override
 	public CPAttachmentFileEntry fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_ERC, finderArgs, this);
 		}
@@ -4928,14 +4989,22 @@ public class CPAttachmentFileEntryPersistenceImpl
 				List<CPAttachmentFileEntry> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_ERC, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
 							_log.warn(
 								"CPAttachmentFileEntryPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -4951,7 +5020,10 @@ public class CPAttachmentFileEntryPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5934,14 +6006,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 	 * @param start the lower bound of the range of cp attachment file entries
 	 * @param end the upper bound of the range of cp attachment file entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp attachment file entries
 	 */
 	@Override
 	public List<CPAttachmentFileEntry> findAll(
 		int start, int end,
 		OrderByComparator<CPAttachmentFileEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5951,17 +6023,20 @@ public class CPAttachmentFileEntryPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPAttachmentFileEntry> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPAttachmentFileEntry>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -6012,10 +6087,14 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

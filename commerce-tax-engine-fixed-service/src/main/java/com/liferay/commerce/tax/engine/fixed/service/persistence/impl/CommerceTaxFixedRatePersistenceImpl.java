@@ -30,10 +30,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.CompanyProvider;
-import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -155,14 +154,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	@Override
 	public List<CommerceTaxFixedRate> findByCPTaxCategoryId(
 		long CPTaxCategoryId, int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -172,10 +171,13 @@ public class CommerceTaxFixedRatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCPTaxCategoryId;
-			finderArgs = new Object[] {CPTaxCategoryId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCPTaxCategoryId;
+				finderArgs = new Object[] {CPTaxCategoryId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPTaxCategoryId;
 			finderArgs = new Object[] {
 				CPTaxCategoryId, start, end, orderByComparator
@@ -184,7 +186,7 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 		List<CommerceTaxFixedRate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceTaxFixedRate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -252,10 +254,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -680,14 +686,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tax fixed rates
 	 */
 	@Override
 	public List<CommerceTaxFixedRate> findByCommerceTaxMethodId(
 		long commerceTaxMethodId, int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -697,10 +703,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCommerceTaxMethodId;
-			finderArgs = new Object[] {commerceTaxMethodId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceTaxMethodId;
+				finderArgs = new Object[] {commerceTaxMethodId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceTaxMethodId;
 			finderArgs = new Object[] {
 				commerceTaxMethodId, start, end, orderByComparator
@@ -709,7 +719,7 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 		List<CommerceTaxFixedRate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceTaxFixedRate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -778,10 +788,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1200,21 +1214,23 @@ public class CommerceTaxFixedRatePersistenceImpl
 	 *
 	 * @param CPTaxCategoryId the cp tax category ID
 	 * @param commerceTaxMethodId the commerce tax method ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tax fixed rate, or <code>null</code> if a matching commerce tax fixed rate could not be found
 	 */
 	@Override
 	public CommerceTaxFixedRate fetchByC_C(
 		long CPTaxCategoryId, long commerceTaxMethodId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
-		Object[] finderArgs = new Object[] {
-			CPTaxCategoryId, commerceTaxMethodId
-		};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPTaxCategoryId, commerceTaxMethodId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_C, finderArgs, this);
 		}
@@ -1259,8 +1275,10 @@ public class CommerceTaxFixedRatePersistenceImpl
 				List<CommerceTaxFixedRate> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_C, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C, finderArgs, list);
+					}
 				}
 				else {
 					CommerceTaxFixedRate commerceTaxFixedRate = list.get(0);
@@ -1271,7 +1289,9 @@ public class CommerceTaxFixedRatePersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1530,7 +1550,7 @@ public class CommerceTaxFixedRatePersistenceImpl
 		commerceTaxFixedRate.setNew(true);
 		commerceTaxFixedRate.setPrimaryKey(commerceTaxFixedRateId);
 
-		commerceTaxFixedRate.setCompanyId(companyProvider.getCompanyId());
+		commerceTaxFixedRate.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return commerceTaxFixedRate;
 	}
@@ -2051,14 +2071,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 	 * @param start the lower bound of the range of commerce tax fixed rates
 	 * @param end the upper bound of the range of commerce tax fixed rates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tax fixed rates
 	 */
 	@Override
 	public List<CommerceTaxFixedRate> findAll(
 		int start, int end,
 		OrderByComparator<CommerceTaxFixedRate> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2068,17 +2088,20 @@ public class CommerceTaxFixedRatePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceTaxFixedRate> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceTaxFixedRate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2129,10 +2152,14 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2292,9 +2319,6 @@ public class CommerceTaxFixedRatePersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
-
-	@ServiceReference(type = CompanyProviderWrapper.class)
-	protected CompanyProvider companyProvider;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

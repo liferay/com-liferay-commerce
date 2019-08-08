@@ -156,14 +156,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -175,17 +175,20 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -262,10 +265,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -692,20 +699,24 @@ public class CommerceOrderPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	@Override
 	public CommerceOrder fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -758,8 +769,10 @@ public class CommerceOrderPersistenceImpl
 				List<CommerceOrder> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CommerceOrder commerceOrder = list.get(0);
@@ -770,7 +783,10 @@ public class CommerceOrderPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -953,14 +969,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -972,10 +988,13 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -984,7 +1003,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1067,10 +1086,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1540,14 +1563,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1557,17 +1580,20 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByGroupId;
+				finderArgs = new Object[] {groupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1633,10 +1659,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2044,14 +2074,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByUserId(
 		long userId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2061,17 +2091,20 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUserId;
-			finderArgs = new Object[] {userId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUserId;
+				finderArgs = new Object[] {userId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUserId;
 			finderArgs = new Object[] {userId, start, end, orderByComparator};
 		}
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2137,10 +2170,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2552,14 +2589,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByBillingAddressId(
 		long billingAddressId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2569,10 +2606,13 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByBillingAddressId;
-			finderArgs = new Object[] {billingAddressId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByBillingAddressId;
+				finderArgs = new Object[] {billingAddressId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByBillingAddressId;
 			finderArgs = new Object[] {
 				billingAddressId, start, end, orderByComparator
@@ -2581,7 +2621,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2649,10 +2689,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3072,14 +3116,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByShippingAddressId(
 		long shippingAddressId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3089,10 +3133,14 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByShippingAddressId;
-			finderArgs = new Object[] {shippingAddressId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByShippingAddressId;
+				finderArgs = new Object[] {shippingAddressId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByShippingAddressId;
 			finderArgs = new Object[] {
 				shippingAddressId, start, end, orderByComparator
@@ -3101,7 +3149,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3169,10 +3217,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3597,14 +3649,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByG_C(
 		long groupId, long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3614,10 +3666,13 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_C;
-			finderArgs = new Object[] {groupId, commerceAccountId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C;
+				finderArgs = new Object[] {groupId, commerceAccountId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_C;
 			finderArgs = new Object[] {
 				groupId, commerceAccountId, start, end, orderByComparator
@@ -3626,7 +3681,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3699,10 +3754,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4157,14 +4216,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByG_U_O(
 		long groupId, long userId, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4174,10 +4233,13 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_U_O;
-			finderArgs = new Object[] {groupId, userId, orderStatus};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_U_O;
+				finderArgs = new Object[] {groupId, userId, orderStatus};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_U_O;
 			finderArgs = new Object[] {
 				groupId, userId, orderStatus, start, end, orderByComparator
@@ -4186,7 +4248,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -4263,10 +4325,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4748,14 +4814,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByG_C_O(
 		long groupId, long commerceAccountId, int orderStatus, int start,
 		int end, OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4765,10 +4831,15 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByG_C_O;
-			finderArgs = new Object[] {groupId, commerceAccountId, orderStatus};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_O;
+				finderArgs = new Object[] {
+					groupId, commerceAccountId, orderStatus
+				};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByG_C_O;
 			finderArgs = new Object[] {
 				groupId, commerceAccountId, orderStatus, start, end,
@@ -4778,7 +4849,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -4856,10 +4927,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5345,14 +5420,14 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findByU_LtC_O(
 		long userId, Date createDate, int orderStatus, int start, int end,
 		OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -5366,7 +5441,7 @@ public class CommerceOrderPersistenceImpl
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -5455,10 +5530,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -5500,7 +5579,7 @@ public class CommerceOrderPersistenceImpl
 		msg.append("userId=");
 		msg.append(userId);
 
-		msg.append(", createDate=");
+		msg.append(", createDate<");
 		msg.append(createDate);
 
 		msg.append(", orderStatus=");
@@ -5565,7 +5644,7 @@ public class CommerceOrderPersistenceImpl
 		msg.append("userId=");
 		msg.append(userId);
 
-		msg.append(", createDate=");
+		msg.append(", createDate<");
 		msg.append(createDate);
 
 		msg.append(", orderStatus=");
@@ -5947,21 +6026,24 @@ public class CommerceOrderPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order, or <code>null</code> if a matching commerce order could not be found
 	 */
 	@Override
 	public CommerceOrder fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
-		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_ERC, finderArgs, this);
 		}
@@ -6016,14 +6098,22 @@ public class CommerceOrderPersistenceImpl
 				List<CommerceOrder> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_ERC, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
 				}
 				else {
 					if (list.size() > 1) {
 						Collections.sort(list, Collections.reverseOrder());
 
 						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
 							_log.warn(
 								"CommerceOrderPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
@@ -6039,7 +6129,10 @@ public class CommerceOrderPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_ERC, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -7098,13 +7191,13 @@ public class CommerceOrderPersistenceImpl
 	 * @param start the lower bound of the range of commerce orders
 	 * @param end the upper bound of the range of commerce orders (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce orders
 	 */
 	@Override
 	public List<CommerceOrder> findAll(
 		int start, int end, OrderByComparator<CommerceOrder> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -7114,17 +7207,20 @@ public class CommerceOrderPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceOrder> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceOrder>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -7174,10 +7270,14 @@ public class CommerceOrderPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

@@ -79,6 +79,9 @@ public class CommerceAccountWrapper
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
+		attributes.put("defaultBillingAddressId", getDefaultBillingAddressId());
+		attributes.put(
+			"defaultShippingAddressId", getDefaultShippingAddressId());
 
 		return attributes;
 	}
@@ -212,6 +215,20 @@ public class CommerceAccountWrapper
 		if (statusDate != null) {
 			setStatusDate(statusDate);
 		}
+
+		Long defaultBillingAddressId = (Long)attributes.get(
+			"defaultBillingAddressId");
+
+		if (defaultBillingAddressId != null) {
+			setDefaultBillingAddressId(defaultBillingAddressId);
+		}
+
+		Long defaultShippingAddressId = (Long)attributes.get(
+			"defaultShippingAddressId");
+
+		if (defaultShippingAddressId != null) {
+			setDefaultShippingAddressId(defaultShippingAddressId);
+		}
 	}
 
 	@Override
@@ -289,6 +306,26 @@ public class CommerceAccountWrapper
 	@Override
 	public Date getCreateDate() {
 		return _commerceAccount.getCreateDate();
+	}
+
+	/**
+	 * Returns the default billing address ID of this commerce account.
+	 *
+	 * @return the default billing address ID of this commerce account
+	 */
+	@Override
+	public long getDefaultBillingAddressId() {
+		return _commerceAccount.getDefaultBillingAddressId();
+	}
+
+	/**
+	 * Returns the default shipping address ID of this commerce account.
+	 *
+	 * @return the default shipping address ID of this commerce account
+	 */
+	@Override
+	public long getDefaultShippingAddressId() {
+		return _commerceAccount.getDefaultShippingAddressId();
 	}
 
 	/**
@@ -681,6 +718,26 @@ public class CommerceAccountWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		_commerceAccount.setCreateDate(createDate);
+	}
+
+	/**
+	 * Sets the default billing address ID of this commerce account.
+	 *
+	 * @param defaultBillingAddressId the default billing address ID of this commerce account
+	 */
+	@Override
+	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
+		_commerceAccount.setDefaultBillingAddressId(defaultBillingAddressId);
+	}
+
+	/**
+	 * Sets the default shipping address ID of this commerce account.
+	 *
+	 * @param defaultShippingAddressId the default shipping address ID of this commerce account
+	 */
+	@Override
+	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
+		_commerceAccount.setDefaultShippingAddressId(defaultShippingAddressId);
 	}
 
 	/**

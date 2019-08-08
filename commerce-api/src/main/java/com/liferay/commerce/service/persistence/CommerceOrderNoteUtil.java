@@ -191,16 +191,16 @@ public class CommerceOrderNoteUtil {
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
 	public static List<CommerceOrderNote> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceOrderId(
-			commerceOrderId, start, end, orderByComparator, retrieveFromCache);
+			commerceOrderId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -371,17 +371,17 @@ public class CommerceOrderNoteUtil {
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
 	public static List<CommerceOrderNote> findByC_R(
 		long commerceOrderId, boolean restricted, int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_R(
 			commerceOrderId, restricted, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -526,15 +526,14 @@ public class CommerceOrderNoteUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	public static CommerceOrderNote fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -689,16 +688,16 @@ public class CommerceOrderNoteUtil {
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce order notes
 	 */
 	public static List<CommerceOrderNote> findAll(
 		int start, int end,
 		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

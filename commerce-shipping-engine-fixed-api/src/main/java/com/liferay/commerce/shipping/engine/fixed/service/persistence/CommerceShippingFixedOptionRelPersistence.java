@@ -104,7 +104,7 @@ public interface CommerceShippingFixedOptionRelPersistence
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
 	 * @param end the upper bound of the range of commerce shipping fixed option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping fixed option rels
 	 */
 	public java.util.List<CommerceShippingFixedOptionRel>
@@ -112,7 +112,7 @@ public interface CommerceShippingFixedOptionRelPersistence
 			long commerceShippingMethodId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceShippingFixedOptionRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipping fixed option rel in the ordered set where commerceShippingMethodId = &#63;.
@@ -253,7 +253,7 @@ public interface CommerceShippingFixedOptionRelPersistence
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
 	 * @param end the upper bound of the range of commerce shipping fixed option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping fixed option rels
 	 */
 	public java.util.List<CommerceShippingFixedOptionRel>
@@ -261,7 +261,7 @@ public interface CommerceShippingFixedOptionRelPersistence
 			long commerceShippingFixedOptionId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceShippingFixedOptionRel> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipping fixed option rel in the ordered set where commerceShippingFixedOptionId = &#63;.
@@ -461,14 +461,14 @@ public interface CommerceShippingFixedOptionRelPersistence
 	 * @param start the lower bound of the range of commerce shipping fixed option rels
 	 * @param end the upper bound of the range of commerce shipping fixed option rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping fixed option rels
 	 */
 	public java.util.List<CommerceShippingFixedOptionRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceShippingFixedOptionRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipping fixed option rels from the database.

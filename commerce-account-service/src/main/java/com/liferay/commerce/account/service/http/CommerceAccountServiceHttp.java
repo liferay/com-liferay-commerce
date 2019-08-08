@@ -592,6 +592,135 @@ public class CommerceAccountServiceHttp {
 	}
 
 	public static com.liferay.commerce.account.model.CommerceAccount
+			updateCommerceAccount(
+				HttpPrincipal httpPrincipal, long commerceAccountId,
+				String name, boolean logo, byte[] logoBytes, String email,
+				String taxId, boolean active, long defaultBillingAddressId,
+				long defaultShippingAddressId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountServiceUtil.class, "updateCommerceAccount",
+				_updateCommerceAccountParameterTypes13);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, name, logo, logoBytes, email,
+				taxId, active, defaultBillingAddressId,
+				defaultShippingAddressId, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount
+			updateDefaultBillingAddress(
+				HttpPrincipal httpPrincipal, long commerceAccountId,
+				long commerceAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountServiceUtil.class, "updateDefaultBillingAddress",
+				_updateDefaultBillingAddressParameterTypes14);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, commerceAddressId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount
+			updateDefaultShippingAddress(
+				HttpPrincipal httpPrincipal, long commerceAccountId,
+				long commerceAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountServiceUtil.class,
+				"updateDefaultShippingAddress",
+				_updateDefaultShippingAddressParameterTypes15);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, commerceAddressId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount
 			upsertCommerceAccount(
 				HttpPrincipal httpPrincipal, String name,
 				long parentCommerceAccountId, boolean logo, byte[] logoBytes,
@@ -603,7 +732,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class, "upsertCommerceAccount",
-				_upsertCommerceAccountParameterTypes13);
+				_upsertCommerceAccountParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, name, parentCommerceAccountId, logo, logoBytes,
@@ -691,7 +820,21 @@ public class CommerceAccountServiceHttp {
 			String.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceAccountParameterTypes13 =
+	private static final Class<?>[] _updateCommerceAccountParameterTypes13 =
+		new Class[] {
+			long.class, String.class, boolean.class, byte[].class, String.class,
+			String.class, boolean.class, long.class, long.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[]
+		_updateDefaultBillingAddressParameterTypes14 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[]
+		_updateDefaultShippingAddressParameterTypes15 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _upsertCommerceAccountParameterTypes16 =
 		new Class[] {
 			String.class, long.class, boolean.class, byte[].class, String.class,
 			String.class, int.class, boolean.class, String.class,

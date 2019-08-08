@@ -102,14 +102,14 @@ public interface CommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	public java.util.List<CommerceAccountGroupRel> findByCommerceAccountGroupId(
 		long commerceAccountGroupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
@@ -250,14 +250,14 @@ public interface CommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	public java.util.List<CommerceAccountGroupRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce account group rel in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -378,12 +378,12 @@ public interface CommerceAccountGroupRelPersistence
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group rel, or <code>null</code> if a matching commerce account group rel could not be found
 	 */
 	public CommerceAccountGroupRel fetchByC_C_C(
 		long classNameId, long classPK, long commerceAccountGroupId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the commerce account group rel where classNameId = &#63; and classPK = &#63; and commerceAccountGroupId = &#63; from the database.
@@ -511,14 +511,14 @@ public interface CommerceAccountGroupRelPersistence
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account group rels
 	 */
 	public java.util.List<CommerceAccountGroupRel> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce account group rels from the database.

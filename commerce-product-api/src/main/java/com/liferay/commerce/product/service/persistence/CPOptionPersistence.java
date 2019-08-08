@@ -99,14 +99,14 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp options
 	 */
 	public java.util.List<CPOption> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOption>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option in the ordered set where uuid = &#63;.
@@ -310,14 +310,14 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp options
 	 */
 	public java.util.List<CPOption> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOption>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -530,14 +530,14 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp options
 	 */
 	public java.util.List<CPOption> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOption>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp option in the ordered set where companyId = &#63;.
@@ -710,11 +710,11 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 *
 	 * @param companyId the company ID
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
 	public CPOption fetchByC_K(
-		long companyId, String key, boolean retrieveFromCache);
+		long companyId, String key, boolean useFinderCache);
 
 	/**
 	 * Removes the cp option where companyId = &#63; and key = &#63; from the database.
@@ -760,12 +760,11 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp option, or <code>null</code> if a matching cp option could not be found
 	 */
 	public CPOption fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the cp option where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -884,14 +883,14 @@ public interface CPOptionPersistence extends BasePersistence<CPOption> {
 	 * @param start the lower bound of the range of cp options
 	 * @param end the upper bound of the range of cp options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp options
 	 */
 	public java.util.List<CPOption> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CPOption>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp options from the database.

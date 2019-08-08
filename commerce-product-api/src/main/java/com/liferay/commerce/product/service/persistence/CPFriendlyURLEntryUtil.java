@@ -187,16 +187,16 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -328,13 +328,13 @@ public class CPFriendlyURLEntryUtil {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	public static CPFriendlyURLEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+		return getPersistence().fetchByUUID_G(uuid, groupId, useFinderCache);
 	}
 
 	/**
@@ -428,16 +428,16 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -617,17 +617,17 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C(
 			classNameId, classPK, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -812,17 +812,17 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByG_C_C(
 			groupId, classNameId, classPK, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1020,17 +1020,17 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByG_C_U(
 		long groupId, long classNameId, String urlTitle, int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByG_C_U(
 			groupId, classNameId, urlTitle, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1234,17 +1234,17 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findByG_C_C_M(
 		long groupId, long classNameId, long classPK, boolean main, int start,
 		int end, OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByG_C_C_M(
 			groupId, classNameId, classPK, main, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1421,15 +1421,15 @@ public class CPFriendlyURLEntryUtil {
 	 * @param classNameId the class name ID
 	 * @param languageId the language ID
 	 * @param urlTitle the url title
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	public static CPFriendlyURLEntry fetchByG_C_L_U(
 		long groupId, long classNameId, String languageId, String urlTitle,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByG_C_L_U(
-			groupId, classNameId, languageId, urlTitle, retrieveFromCache);
+			groupId, classNameId, languageId, urlTitle, useFinderCache);
 	}
 
 	/**
@@ -1513,16 +1513,16 @@ public class CPFriendlyURLEntryUtil {
 	 * @param classPK the class pk
 	 * @param languageId the language ID
 	 * @param urlTitle the url title
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	public static CPFriendlyURLEntry fetchByG_C_C_L_U(
 		long groupId, long classNameId, long classPK, String languageId,
-		String urlTitle, boolean retrieveFromCache) {
+		String urlTitle, boolean useFinderCache) {
 
 		return getPersistence().fetchByG_C_C_L_U(
 			groupId, classNameId, classPK, languageId, urlTitle,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1610,15 +1610,15 @@ public class CPFriendlyURLEntryUtil {
 	 * @param classPK the class pk
 	 * @param languageId the language ID
 	 * @param main the main
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp friendly url entry, or <code>null</code> if a matching cp friendly url entry could not be found
 	 */
 	public static CPFriendlyURLEntry fetchByG_C_C_L_M(
 		long groupId, long classNameId, long classPK, String languageId,
-		boolean main, boolean retrieveFromCache) {
+		boolean main, boolean useFinderCache) {
 
 		return getPersistence().fetchByG_C_C_L_M(
-			groupId, classNameId, classPK, languageId, main, retrieveFromCache);
+			groupId, classNameId, classPK, languageId, main, useFinderCache);
 	}
 
 	/**
@@ -1788,16 +1788,16 @@ public class CPFriendlyURLEntryUtil {
 	 * @param start the lower bound of the range of cp friendly url entries
 	 * @param end the upper bound of the range of cp friendly url entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp friendly url entries
 	 */
 	public static List<CPFriendlyURLEntry> findAll(
 		int start, int end,
 		OrderByComparator<CPFriendlyURLEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

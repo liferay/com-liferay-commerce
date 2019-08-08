@@ -56,6 +56,10 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
+		soapModel.setDefaultBillingAddressId(
+			model.getDefaultBillingAddressId());
+		soapModel.setDefaultShippingAddressId(
+			model.getDefaultShippingAddressId());
 
 		return soapModel;
 	}
@@ -287,6 +291,22 @@ public class CommerceAccountSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
+	public long getDefaultBillingAddressId() {
+		return _defaultBillingAddressId;
+	}
+
+	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
+		_defaultBillingAddressId = defaultBillingAddressId;
+	}
+
+	public long getDefaultShippingAddressId() {
+		return _defaultShippingAddressId;
+	}
+
+	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
+		_defaultShippingAddressId = defaultShippingAddressId;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceAccountId;
 	private long _companyId;
@@ -308,5 +328,7 @@ public class CommerceAccountSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+	private long _defaultBillingAddressId;
+	private long _defaultShippingAddressId;
 
 }

@@ -191,16 +191,16 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order items
 	 */
 	public static List<CommerceOrderItem> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceOrderId(
-			commerceOrderId, start, end, orderByComparator, retrieveFromCache);
+			commerceOrderId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -364,16 +364,16 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order items
 	 */
 	public static List<CommerceOrderItem> findByCProductId(
 		long CProductId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCProductId(
-			CProductId, start, end, orderByComparator, retrieveFromCache);
+			CProductId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -539,16 +539,16 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order items
 	 */
 	public static List<CommerceOrderItem> findByCPInstanceId(
 		long CPInstanceId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPInstanceId(
-			CPInstanceId, start, end, orderByComparator, retrieveFromCache);
+			CPInstanceId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -719,17 +719,17 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order items
 	 */
 	public static List<CommerceOrderItem> findByC_I(
 		long commerceOrderId, long CPInstanceId, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_I(
 			commerceOrderId, CPInstanceId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -908,17 +908,17 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order items
 	 */
 	public static List<CommerceOrderItem> findByC_S(
 		long commerceOrderId, boolean subscription, int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_S(
 			commerceOrderId, subscription, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1064,15 +1064,14 @@ public class CommerceOrderItemUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order item, or <code>null</code> if a matching commerce order item could not be found
 	 */
 	public static CommerceOrderItem fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -1227,16 +1226,16 @@ public class CommerceOrderItemUtil {
 	 * @param start the lower bound of the range of commerce order items
 	 * @param end the upper bound of the range of commerce order items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce order items
 	 */
 	public static List<CommerceOrderItem> findAll(
 		int start, int end,
 		OrderByComparator<CommerceOrderItem> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

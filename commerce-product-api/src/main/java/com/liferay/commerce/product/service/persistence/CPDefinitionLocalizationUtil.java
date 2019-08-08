@@ -195,16 +195,16 @@ public class CPDefinitionLocalizationUtil {
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition localizations
 	 */
 	public static List<CPDefinitionLocalization> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPDefinitionId(
-			CPDefinitionId, start, end, orderByComparator, retrieveFromCache);
+			CPDefinitionId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -347,14 +347,14 @@ public class CPDefinitionLocalizationUtil {
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param languageId the language ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition localization, or <code>null</code> if a matching cp definition localization could not be found
 	 */
 	public static CPDefinitionLocalization fetchByCPDefinitionId_LanguageId(
-		long CPDefinitionId, String languageId, boolean retrieveFromCache) {
+		long CPDefinitionId, String languageId, boolean useFinderCache) {
 
 		return getPersistence().fetchByCPDefinitionId_LanguageId(
-			CPDefinitionId, languageId, retrieveFromCache);
+			CPDefinitionId, languageId, useFinderCache);
 	}
 
 	/**
@@ -522,16 +522,16 @@ public class CPDefinitionLocalizationUtil {
 	 * @param start the lower bound of the range of cp definition localizations
 	 * @param end the upper bound of the range of cp definition localizations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition localizations
 	 */
 	public static List<CPDefinitionLocalization> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionLocalization> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

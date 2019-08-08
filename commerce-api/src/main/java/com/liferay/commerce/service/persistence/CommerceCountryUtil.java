@@ -185,16 +185,16 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -356,16 +356,16 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -536,16 +536,16 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -680,14 +680,14 @@ public class CommerceCountryUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public static CommerceCountry fetchByC_Tw(
-		long companyId, String twoLettersISOCode, boolean retrieveFromCache) {
+		long companyId, String twoLettersISOCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_Tw(
-			companyId, twoLettersISOCode, retrieveFromCache);
+			companyId, twoLettersISOCode, useFinderCache);
 	}
 
 	/**
@@ -747,14 +747,14 @@ public class CommerceCountryUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public static CommerceCountry fetchByC_N(
-		long companyId, int numericISOCode, boolean retrieveFromCache) {
+		long companyId, int numericISOCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_N(
-			companyId, numericISOCode, retrieveFromCache);
+			companyId, numericISOCode, useFinderCache);
 	}
 
 	/**
@@ -848,17 +848,16 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByC_A(
 		long companyId, boolean active, int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_A(
-			companyId, active, start, end, orderByComparator,
-			retrieveFromCache);
+			companyId, active, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1041,17 +1040,17 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByC_B_A(
 		long companyId, boolean billingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_B_A(
 			companyId, billingAllowed, active, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1247,17 +1246,17 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public static List<CommerceCountry> findByC_S_A(
 		long companyId, boolean shippingAllowed, boolean active, int start,
 		int end, OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_S_A(
 			companyId, shippingAllowed, active, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1503,16 +1502,16 @@ public class CommerceCountryUtil {
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce countries
 	 */
 	public static List<CommerceCountry> findAll(
 		int start, int end,
 		OrderByComparator<CommerceCountry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

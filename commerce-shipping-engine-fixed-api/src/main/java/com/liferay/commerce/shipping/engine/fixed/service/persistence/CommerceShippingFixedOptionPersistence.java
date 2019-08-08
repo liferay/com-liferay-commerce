@@ -104,7 +104,7 @@ public interface CommerceShippingFixedOptionPersistence
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping fixed options
 	 */
 	public java.util.List<CommerceShippingFixedOption>
@@ -112,7 +112,7 @@ public interface CommerceShippingFixedOptionPersistence
 			long commerceShippingMethodId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CommerceShippingFixedOption> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce shipping fixed option in the ordered set where commerceShippingMethodId = &#63;.
@@ -306,14 +306,14 @@ public interface CommerceShippingFixedOptionPersistence
 	 * @param start the lower bound of the range of commerce shipping fixed options
 	 * @param end the upper bound of the range of commerce shipping fixed options (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping fixed options
 	 */
 	public java.util.List<CommerceShippingFixedOption> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CommerceShippingFixedOption> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce shipping fixed options from the database.

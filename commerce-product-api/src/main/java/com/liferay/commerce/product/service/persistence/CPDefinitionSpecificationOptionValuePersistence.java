@@ -102,14 +102,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where uuid = &#63;.
@@ -220,11 +220,11 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
 	 */
 	public CPDefinitionSpecificationOptionValue fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition specification option value where uuid = &#63; and groupId = &#63; from the database.
@@ -303,14 +303,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -455,14 +455,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where groupId = &#63;.
@@ -600,7 +600,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue>
@@ -608,7 +608,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 			long CPDefinitionId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CPDefinitionSpecificationOptionValue> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63;.
@@ -749,7 +749,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue>
@@ -757,7 +757,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 			long CPSpecificationOptionId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CPDefinitionSpecificationOptionValue> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where CPSpecificationOptionId = &#63;.
@@ -901,7 +901,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue>
@@ -909,7 +909,7 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 			long CPOptionCategoryId, int start, int end,
 			com.liferay.portal.kernel.util.OrderByComparator
 				<CPDefinitionSpecificationOptionValue> orderByComparator,
-			boolean retrieveFromCache);
+			boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where CPOptionCategoryId = &#63;.
@@ -1052,14 +1052,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_COC(
 		long CPDefinitionId, long CPOptionCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
@@ -1208,14 +1208,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findByC_CSO(
 		long CPDefinitionId, long CPSpecificationOptionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPSpecificationOptionId = &#63;.
@@ -1335,12 +1335,12 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 *
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
 	 */
 	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
 		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; from the database.
@@ -1473,14 +1473,14 @@ public interface CPDefinitionSpecificationOptionValuePersistence
 	 * @param start the lower bound of the range of cp definition specification option values
 	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition specification option values
 	 */
 	public java.util.List<CPDefinitionSpecificationOptionValue> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
 			<CPDefinitionSpecificationOptionValue> orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the cp definition specification option values from the database.

@@ -195,16 +195,16 @@ public class CommerceNotificationQueueEntryUtil {
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public static List<CommerceNotificationQueueEntry> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+			groupId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -376,18 +376,18 @@ public class CommerceNotificationQueueEntryUtil {
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public static List<CommerceNotificationQueueEntry>
 		findByCommerceNotificationTemplateId(
 			long commerceNotificationTemplateId, int start, int end,
 			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-			boolean retrieveFromCache) {
+			boolean useFinderCache) {
 
 		return getPersistence().findByCommerceNotificationTemplateId(
 			commerceNotificationTemplateId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -574,16 +574,16 @@ public class CommerceNotificationQueueEntryUtil {
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public static List<CommerceNotificationQueueEntry> findBySent(
 		boolean sent, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findBySent(
-			sent, start, end, orderByComparator, retrieveFromCache);
+			sent, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -748,16 +748,16 @@ public class CommerceNotificationQueueEntryUtil {
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce notification queue entries
 	 */
 	public static List<CommerceNotificationQueueEntry> findByLtS(
 		Date sentDate, int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByLtS(
-			sentDate, start, end, orderByComparator, retrieveFromCache);
+			sentDate, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -999,16 +999,16 @@ public class CommerceNotificationQueueEntryUtil {
 	 * @param start the lower bound of the range of commerce notification queue entries
 	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce notification queue entries
 	 */
 	public static List<CommerceNotificationQueueEntry> findAll(
 		int start, int end,
 		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

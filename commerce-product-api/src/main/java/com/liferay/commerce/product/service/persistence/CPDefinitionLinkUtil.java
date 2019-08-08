@@ -185,16 +185,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -324,13 +324,13 @@ public class CPDefinitionLinkUtil {
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	public static CPDefinitionLink fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
-		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+		return getPersistence().fetchByUUID_G(uuid, groupId, useFinderCache);
 	}
 
 	/**
@@ -424,16 +424,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -610,16 +610,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByCPDefinitionId(
 		long CPDefinitionId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPDefinitionId(
-			CPDefinitionId, start, end, orderByComparator, retrieveFromCache);
+			CPDefinitionId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -786,16 +786,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByCProductId(
 		long CProductId, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCProductId(
-			CProductId, start, end, orderByComparator, retrieveFromCache);
+			CProductId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -968,17 +968,17 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByCPD_T(
 		long CPDefinitionId, String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCPD_T(
 			CPDefinitionId, type, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1158,16 +1158,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition links
 	 */
 	public static List<CPDefinitionLink> findByCP_T(
 		long CProductId, String type, int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCP_T(
-			CProductId, type, start, end, orderByComparator, retrieveFromCache);
+			CProductId, type, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -1318,15 +1318,15 @@ public class CPDefinitionLinkUtil {
 	 * @param CPDefinitionId the cp definition ID
 	 * @param CProductId the c product ID
 	 * @param type the type
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition link, or <code>null</code> if a matching cp definition link could not be found
 	 */
 	public static CPDefinitionLink fetchByC_C_T(
 		long CPDefinitionId, long CProductId, String type,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C_T(
-			CPDefinitionId, CProductId, type, retrieveFromCache);
+			CPDefinitionId, CProductId, type, useFinderCache);
 	}
 
 	/**
@@ -1484,16 +1484,16 @@ public class CPDefinitionLinkUtil {
 	 * @param start the lower bound of the range of cp definition links
 	 * @param end the upper bound of the range of cp definition links (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition links
 	 */
 	public static List<CPDefinitionLink> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionLink> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

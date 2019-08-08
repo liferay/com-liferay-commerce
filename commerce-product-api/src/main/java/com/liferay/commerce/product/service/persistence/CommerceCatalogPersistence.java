@@ -101,14 +101,14 @@ public interface CommerceCatalogPersistence
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	public java.util.List<CommerceCatalog> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCatalog>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce catalog in the ordered set where companyId = &#63;.
@@ -314,14 +314,14 @@ public interface CommerceCatalogPersistence
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	public java.util.List<CommerceCatalog> findByC_S(
 		long companyId, boolean system, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCatalog>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce catalog in the ordered set where companyId = &#63; and system = &#63;.
@@ -509,12 +509,11 @@ public interface CommerceCatalogPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
 	 */
 	public CommerceCatalog fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce catalog where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -635,14 +634,14 @@ public interface CommerceCatalogPersistence
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce catalogs
 	 */
 	public java.util.List<CommerceCatalog> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceCatalog>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce catalogs from the database.

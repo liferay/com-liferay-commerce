@@ -172,12 +172,50 @@ public class CommerceAccountServiceWrapper
 			updateCommerceAccount(
 				long commerceAccountId, String name, boolean logo,
 				byte[] logoBytes, String email, String taxId, boolean active,
+				long defaultBillingAddressId, long defaultShippingAddressId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountService.updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			defaultBillingAddressId, defaultShippingAddressId, serviceContext);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount
+			updateCommerceAccount(
+				long commerceAccountId, String name, boolean logo,
+				byte[] logoBytes, String email, String taxId, boolean active,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceAccountService.updateCommerceAccount(
 			commerceAccountId, name, logo, logoBytes, email, taxId, active,
 			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount
+			updateDefaultBillingAddress(
+				long commerceAccountId, long commerceAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountService.updateDefaultBillingAddress(
+			commerceAccountId, commerceAddressId);
+	}
+
+	@Override
+	public com.liferay.commerce.account.model.CommerceAccount
+			updateDefaultShippingAddress(
+				long commerceAccountId, long commerceAddressId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountService.updateDefaultShippingAddress(
+			commerceAccountId, commerceAddressId);
 	}
 
 	@Override

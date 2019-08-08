@@ -31,7 +31,9 @@ create table CommerceAccount (
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	statusDate DATE null,
+	defaultBillingAddressId LONG,
+	defaultShippingAddressId LONG
 );
 
 create table CommerceAccountGroup (
