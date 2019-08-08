@@ -5,7 +5,11 @@ import getAppContext from '../Context';
 
 import ClayButton from '@clayui/button';
 
-const TextFilter: React.FunctionComponent<TextFilterProps> = (props: TextFilterProps) => {
+interface IProps extends TextFilterProps {
+    panelType?: 'add' | 'edit'
+}
+
+const TextFilter: React.FunctionComponent<IProps> = (props: IProps) => {
     const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
@@ -38,8 +42,9 @@ const TextFilter: React.FunctionComponent<TextFilterProps> = (props: TextFilterP
                 <ClayButton
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
+                    disabled={value === props.value}
                 >
-                    Add filter
+                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
                 </ClayButton>
             </div>
         </div>
