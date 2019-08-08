@@ -135,8 +135,8 @@ public class CommerceAccountAddressClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		return _commerceAddressService.getCommerceAddressesCount(
-			themeDisplay.getScopeGroupId(), CommerceAccount.class.getName(),
+		return _commerceAddressService.getCommerceAddressesCountByCompanyId(
+			themeDisplay.getCompanyId(), CommerceAccount.class.getName(),
 			accountFilter.getAccountId());
 	}
 
@@ -172,8 +172,8 @@ public class CommerceAccountAddressClayTable
 		List<Address> addresses = new ArrayList<>();
 
 		List<CommerceAddress> commerceAddresses =
-			_commerceAddressService.getCommerceAddresses(
-				themeDisplay.getScopeGroupId(), CommerceAccount.class.getName(),
+			_commerceAddressService.getCommerceAddressesByCompanyId(
+				themeDisplay.getCompanyId(), CommerceAccount.class.getName(),
 				accountFilter.getAccountId(), pagination.getStartPosition(),
 				pagination.getEndPosition(), null);
 
