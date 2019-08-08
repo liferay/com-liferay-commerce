@@ -13,6 +13,9 @@ class Cart extends Component {
 
 	created() {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
+		this._refreshCartUsingData = this._refreshCartUsingData.bind(this)
+		this.reset = this.reset.bind(this)
+		this._setAndRefreshOrder = this._setAndRefreshOrder.bind(this)
 	}
 
 	_handleClickOutside(e) {
@@ -73,23 +76,42 @@ class Cart extends Component {
 	attached() {
 		window.Liferay.on(
 			'refreshCartUsingData',
-			this._refreshCartUsingData.bind(this)
+			this._refreshCartUsingData,
+			this
 		);
 
 		window.Liferay.on(
 			'accountSelected',
-			this.reset.bind(this)
+			this.reset,
+			this
 		);
 
 		window.Liferay.on(
 			'orderSelected',
-			this._setAndRefreshOrder.bind(this)
+			this._setAndRefreshOrder,
+			this
 		);
 	}
 
 	detached() {
 		super.detached();
-		this._eventHandler.removeAllListeners();
+		window.Liferay.detach(
+			'refreshCartUsingData',
+			this._refreshCartUsingData,
+			this
+		);
+
+		window.Liferay.detach(
+			'accountSelected',
+			this.reset,
+			this
+		);
+
+		window.Liferay.detach(
+			'orderSelected',
+			this._setAndRefreshOrder,
+			this
+		);
 	}
 
 	_getData() {
