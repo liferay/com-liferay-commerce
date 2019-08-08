@@ -62,7 +62,8 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 		<aui:input name="commerceCountryId" type="hidden" />
 		<aui:input name="commerceRegionId" type="hidden" />
 		<aui:input name="phoneNumber" type="hidden" />
-		<aui:input name="addressType" type="hidden" />
+		<aui:input name="defaultBilling" type="hidden" />
+		<aui:input name="defaultShipping" type="hidden" />
 	</aui:form>
 
 	<aui:script>
@@ -109,7 +110,9 @@ portletURL.setParameter(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backUR
 						document.querySelector('#<portlet:namespace />commerceCountryId').value = formData.country;
 						document.querySelector('#<portlet:namespace />commerceRegionId').value = formData.region;
 						document.querySelector('#<portlet:namespace />phoneNumber').value = formData.telephone;
-						document.querySelector('#<portlet:namespace />addressType').value = formData.addressType;
+
+						document.querySelector('#<portlet:namespace />defaultBilling').value = formData.defaultBilling;
+						document.querySelector('#<portlet:namespace />defaultShipping').value = formData.defaultShipping;
 
 						if (formData.id) {
 							document.querySelector('#<portlet:namespace />commerceAddressId').value = formData.id;

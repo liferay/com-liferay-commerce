@@ -28,9 +28,9 @@ import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
@@ -258,10 +258,6 @@ public class CommerceAddressDisplayContext {
 			return _searchContainer;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		_searchContainer = new SearchContainer<>(
 			_liferayPortletRequest, getPortletURL(), null, null);
 
@@ -275,22 +271,16 @@ public class CommerceAddressDisplayContext {
 		_searchContainer.setOrderByComparator(orderByComparator);
 		_searchContainer.setOrderByType("desc");
 
-		int total = _commerceAddressService.getCommerceAddressesCount(
-			themeDisplay.getScopeGroupId(), User.class.getName(),
-			themeDisplay.getUserId());
-
-		_searchContainer.setTotal(total);
-
 		CommerceAccount commerceAccount = getCommerceAccount();
 
-		List<CommerceAddress> results =
-			_commerceAddressService.getCommerceAddresses(
-				themeDisplay.getScopeGroupId(), CommerceAccount.class.getName(),
-				commerceAccount.getCommerceAccountId(),
-				_searchContainer.getStart(), _searchContainer.getEnd(),
-				orderByComparator);
+		BaseModelSearchResult<CommerceAddress> baseModelSearchResult =
+			_commerceAddressService.searchCommerceAddresses(
+				commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+				commerceAccount.getCommerceAccountId(), null,
+				_searchContainer.getStart(), _searchContainer.getEnd(), null);
 
-		_searchContainer.setResults(results);
+		_searchContainer.setTotal(baseModelSearchResult.getLength());
+		_searchContainer.setResults(baseModelSearchResult.getBaseModels());
 
 		return _searchContainer;
 	}

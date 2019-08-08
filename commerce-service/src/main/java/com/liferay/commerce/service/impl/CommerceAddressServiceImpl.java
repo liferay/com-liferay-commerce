@@ -20,6 +20,8 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.base.CommerceAddressServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -78,6 +80,63 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 	}
 
 	@Override
+	public CommerceAddress fetchDefaultBillingCommerceAddress(
+		long companyId, String className, long classPK) {
+
+		try {
+			checkPermission(className, classPK);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			return null;
+		}
+
+		return commerceAddressLocalService.fetchDefaultBillingCommerceAddress(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public CommerceAddress fetchDefaultShippingCommerceAddress(
+		long companyId, String className, long classPK) {
+
+		try {
+			checkPermission(className, classPK);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			return null;
+		}
+
+		return commerceAddressLocalService.fetchDefaultShippingCommerceAddress(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getAvailableBillingCommerceAddresses(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.
+			getAvailableShippingCommerceAddresses(
+				companyId, className, classPK);
+	}
+
+	@Override
 	public CommerceAddress getCommerceAddress(long commerceAddressId)
 		throws PortalException {
 
@@ -89,6 +148,10 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 		return commerceAddress;
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> getCommerceAddresses(
 			long groupId, String className, long classPK)
@@ -100,6 +163,10 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			groupId, className, classPK);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> getCommerceAddresses(
 			long groupId, String className, long classPK, int start, int end,
@@ -125,6 +192,33 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getCommerceAddressesByCompanyId(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+			long companyId, String className, long classPK, int start, int end,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getCommerceAddressesByCompanyId(
+			companyId, className, classPK, start, end, orderByComparator);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
+	@Override
 	public int getCommerceAddressesCount(
 			long groupId, String className, long classPK)
 		throws PortalException {
@@ -146,6 +240,21 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 	}
 
 	@Override
+	public int getCommerceAddressesCountByCompanyId(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getCommerceAddressesCountByCompanyId(
+			companyId, className, classPK);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
+	@Override
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
 			long companyId, long groupId, String className, long classPK,
 			String keywords, int start, int end, Sort sort)
@@ -155,6 +264,18 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 
 		return commerceAddressLocalService.searchCommerceAddresses(
 			companyId, groupId, className, classPK, keywords, start, end, sort);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
+			long companyId, String className, long classPK, String keywords,
+			int start, int end, Sort sort)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.searchCommerceAddresses(
+			companyId, className, classPK, keywords, start, end, sort);
 	}
 
 	@Override
@@ -194,6 +315,9 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			_commerceAccountService.getCommerceAccount(classPK);
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceAddressServiceImpl.class);
 
 	@ServiceReference(type = CommerceAccountService.class)
 	private CommerceAccountService _commerceAccountService;

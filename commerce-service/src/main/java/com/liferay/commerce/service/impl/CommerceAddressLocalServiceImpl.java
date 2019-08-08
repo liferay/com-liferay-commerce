@@ -24,6 +24,7 @@ import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.base.CommerceAddressLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
@@ -37,6 +38,7 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -54,6 +56,7 @@ import java.util.Map;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alec Sloan
  */
 public class CommerceAddressLocalServiceImpl
 	extends CommerceAddressLocalServiceBaseImpl {
@@ -70,10 +73,10 @@ public class CommerceAddressLocalServiceImpl
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
-		long groupId = serviceContext.getScopeGroupId();
+		long companyId = user.getCompanyId();
 
 		validate(
-			0, groupId, className, classPK, name, street1, city, zip,
+			0, companyId, className, classPK, name, street1, city, zip,
 			commerceCountryId, defaultBilling, defaultShipping);
 
 		long commerceAddressId = counterLocalService.increment();
@@ -81,8 +84,7 @@ public class CommerceAddressLocalServiceImpl
 		CommerceAddress commerceAddress = commerceAddressPersistence.create(
 			commerceAddressId);
 
-		commerceAddress.setGroupId(groupId);
-		commerceAddress.setCompanyId(user.getCompanyId());
+		commerceAddress.setCompanyId(companyId);
 		commerceAddress.setUserId(user.getUserId());
 		commerceAddress.setUserName(user.getFullName());
 		commerceAddress.setClassName(className);
@@ -202,6 +204,38 @@ public class CommerceAddressLocalServiceImpl
 		}
 	}
 
+	@Override
+	public CommerceAddress fetchDefaultBillingCommerceAddress(
+		long companyId, String className, long classPK) {
+
+		List<CommerceAddress> commerceAddresses =
+			commerceAddressPersistence.findByC_C_C_DB(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, true);
+
+		if (commerceAddresses.isEmpty()) {
+			return null;
+		}
+
+		return commerceAddresses.get(0);
+	}
+
+	@Override
+	public CommerceAddress fetchDefaultShippingCommerceAddress(
+		long companyId, String className, long classPK) {
+
+		List<CommerceAddress> commerceAddresses =
+			commerceAddressPersistence.findByC_C_C_DS(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, true);
+
+		if (commerceAddresses.isEmpty()) {
+			return null;
+		}
+
+		return commerceAddresses.get(0);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAddress geolocateCommerceAddress(long commerceAddressId)
@@ -222,21 +256,93 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
+		long companyId, String className, long classPK) {
+
+		List<CommerceAddress> commerceAddresses =
+			commerceAddressPersistence.findByC_C_C_DS(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, false);
+
+		CommerceAddress defaultBillingAddress =
+			fetchDefaultBillingCommerceAddress(companyId, className, classPK);
+
+		if ((defaultBillingAddress != null) &&
+			!commerceAddresses.contains(defaultBillingAddress)) {
+
+			if (commerceAddresses.isEmpty()) {
+				commerceAddresses = new ArrayList<>();
+			}
+
+			commerceAddresses.add(defaultBillingAddress);
+		}
+
+		return commerceAddresses;
+	}
+
+	@Override
+	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
+		long companyId, String className, long classPK) {
+
+		List<CommerceAddress> commerceAddresses =
+			commerceAddressPersistence.findByC_C_C_DB(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, false);
+
+		CommerceAddress defaultShippingAddress =
+			fetchDefaultShippingCommerceAddress(companyId, className, classPK);
+
+		if ((defaultShippingAddress != null) &&
+			!commerceAddresses.contains(defaultShippingAddress)) {
+
+			if (commerceAddresses.isEmpty()) {
+				commerceAddresses = new ArrayList<>();
+			}
+
+			commerceAddresses.add(defaultShippingAddress);
+		}
+
+		return commerceAddresses;
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
+	@Override
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK) {
 
-		return commerceAddressPersistence.findByG_C_C(
-			groupId, classNameLocalService.getClassNameId(className), classPK);
+		Group group = _groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return new ArrayList<>();
+		}
+
+		return commerceAddressPersistence.findByC_C_C(
+			group.getCompanyId(),
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> getCommerceAddresses(
 		long groupId, String className, long classPK, int start, int end,
 		OrderByComparator<CommerceAddress> orderByComparator) {
 
-		return commerceAddressPersistence.findByG_C_C(
-			groupId, classNameLocalService.getClassNameId(className), classPK,
-			start, end, orderByComparator);
+		Group group = _groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return new ArrayList<>();
+		}
+
+		return commerceAddressPersistence.findByC_C_C(
+			group.getCompanyId(),
+			classNameLocalService.getClassNameId(className), classPK, start,
+			end, orderByComparator);
 	}
 
 	@Override
@@ -250,11 +356,41 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK) {
+
+		return commerceAddressPersistence.findByC_C_C(
+			companyId, classNameLocalService.getClassNameId(className),
+			classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getCommerceAddressesByCompanyId(
+		long companyId, String className, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		return commerceAddressPersistence.findByC_C_C(
+			companyId, classNameLocalService.getClassNameId(className), classPK,
+			start, end, orderByComparator);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company use *ByCompanyId
+	 */
+	@Deprecated
+	@Override
 	public int getCommerceAddressesCount(
 		long groupId, String className, long classPK) {
 
-		return commerceAddressPersistence.countByG_C_C(
-			groupId, classNameLocalService.getClassNameId(className), classPK);
+		Group group = _groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return 0;
+		}
+
+		return commerceAddressPersistence.countByC_C_C(
+			group.getCompanyId(),
+			classNameLocalService.getClassNameId(className), classPK);
 	}
 
 	@Override
@@ -264,13 +400,38 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
+	public int getCommerceAddressesCountByCompanyId(
+		long companyId, String className, long classPK) {
+
+		return commerceAddressPersistence.countByC_C_C(
+			companyId, classNameLocalService.getClassNameId(className),
+			classPK);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), commerceAddress is scoped to Company. Don't need to pass groupId
+	 */
+	@Deprecated
+	@Override
 	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
 			long companyId, long groupId, String className, long classPK,
 			String keywords, int start, int end, Sort sort)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, className, classPK, keywords, start, end, sort);
+			companyId, className, classPK, keywords, start, end, sort);
+
+		return searchCommerceAddresses(searchContext);
+	}
+
+	@Override
+	public BaseModelSearchResult<CommerceAddress> searchCommerceAddresses(
+			long companyId, String className, long classPK, String keywords,
+			int start, int end, Sort sort)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, className, classPK, keywords, start, end, sort);
 
 		return searchCommerceAddresses(searchContext);
 	}
@@ -292,7 +453,7 @@ public class CommerceAddressLocalServiceImpl
 
 		validate(
 			commerceAddress.getCommerceAddressId(),
-			commerceAddress.getGroupId(), commerceAddress.getClassName(),
+			commerceAddress.getCompanyId(), commerceAddress.getClassName(),
 			commerceAddress.getClassPK(), name, street1, city, zip,
 			commerceCountryId, defaultBilling, defaultShipping);
 
@@ -328,8 +489,8 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, String className, long classPK,
-		String keywords, int start, int end, Sort sort) {
+		long companyId, String className, long classPK, String keywords,
+		int start, int end, Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -351,7 +512,6 @@ public class CommerceAddressLocalServiceImpl
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
@@ -463,7 +623,7 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	protected void validate(
-			long commerceAddressId, long groupId, String className,
+			long commerceAddressId, long companyId, String className,
 			long classPK, String name, String street1, String city, String zip,
 			long commerceCountryId, boolean defaultBilling,
 			boolean defaultShipping)
@@ -489,46 +649,43 @@ public class CommerceAddressLocalServiceImpl
 			throw new CommerceAddressCountryException();
 		}
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		if (defaultBilling) {
-			List<CommerceAddress> commerceAddresses =
-				commerceAddressPersistence.findByG_C_C_DB(
-					groupId, classNameId, classPK, true);
+			CommerceAddress commerceAddress =
+				fetchDefaultBillingCommerceAddress(
+					companyId, className, classPK);
 
-			for (CommerceAddress commerceAddress : commerceAddresses) {
-				if (commerceAddress.getCommerceAddressId() !=
-						commerceAddressId) {
+			if ((commerceAddress != null) &&
+				(commerceAddress.getCommerceAddressId() != commerceAddressId)) {
 
-					commerceAddress.setDefaultBilling(false);
+				commerceAddress.setDefaultBilling(false);
 
-					commerceAddressPersistence.update(commerceAddress);
-				}
+				commerceAddressPersistence.update(commerceAddress);
 			}
 		}
 
 		if (defaultShipping) {
-			List<CommerceAddress> commerceAddresses =
-				commerceAddressPersistence.findByG_C_C_DS(
-					groupId, classNameId, classPK, true);
+			CommerceAddress commerceAddress =
+				fetchDefaultShippingCommerceAddress(
+					companyId, className, classPK);
 
-			for (CommerceAddress commerceAddress : commerceAddresses) {
-				if (commerceAddress.getCommerceAddressId() !=
-						commerceAddressId) {
+			if ((commerceAddress != null) &&
+				(commerceAddress.getCommerceAddressId() != commerceAddressId)) {
 
-					commerceAddress.setDefaultShipping(false);
+				commerceAddress.setDefaultShipping(false);
 
-					commerceAddressPersistence.update(commerceAddress);
-				}
+				commerceAddressPersistence.update(commerceAddress);
 			}
 		}
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {
-		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.GROUP_ID, Field.UID
+		Field.ENTRY_CLASS_PK, Field.COMPANY_ID, Field.UID
 	};
 
 	@ServiceReference(type = CommerceGeocoder.class)
 	private CommerceGeocoder _commerceGeocoder;
+
+	@ServiceReference(type = GroupLocalService.class)
+	private GroupLocalService _groupLocalService;
 
 }

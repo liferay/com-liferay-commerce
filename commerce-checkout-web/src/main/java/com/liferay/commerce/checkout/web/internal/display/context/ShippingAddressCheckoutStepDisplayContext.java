@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.checkout.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alec Sloan
  */
 public class ShippingAddressCheckoutStepDisplayContext
 	extends BaseAddressCheckoutStepDisplayContext {
@@ -34,6 +37,15 @@ public class ShippingAddressCheckoutStepDisplayContext
 		HttpServletRequest httpServletRequest) {
 
 		super(commerceAddressService, httpServletRequest);
+	}
+
+	@Override
+	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
+		CommerceOrder commerceOrder = getCommerceOrder();
+
+		return commerceAddressService.getAvailableShippingCommerceAddresses(
+			commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+			commerceOrder.getCommerceAccountId());
 	}
 
 	@Override
@@ -48,20 +60,23 @@ public class ShippingAddressCheckoutStepDisplayContext
 
 	@Override
 	public long getDefaultCommerceAddressId() throws PortalException {
-		long defaultCommerceAddressId = 0;
+		CommerceOrder commerceOrder = getCommerceOrder();
 
-		List<CommerceAddress> commerceAddresses = getCommerceAddresses();
+		long shippingAddressId = commerceOrder.getShippingAddressId();
 
-		for (CommerceAddress commerceAddress : commerceAddresses) {
-			if (commerceAddress.isDefaultShipping()) {
-				defaultCommerceAddressId =
-					commerceAddress.getCommerceAddressId();
+		if (shippingAddressId == 0) {
+			CommerceAddress commerceAddress =
+				commerceAddressService.fetchDefaultShippingCommerceAddress(
+					commerceOrder.getCompanyId(),
+					CommerceAccount.class.getName(),
+					commerceOrder.getCommerceAccountId());
 
-				break;
+			if (commerceAddress != null) {
+				shippingAddressId = commerceAddress.getCommerceAddressId();
 			}
 		}
 
-		return defaultCommerceAddressId;
+		return shippingAddressId;
 	}
 
 	@Override

@@ -136,21 +136,11 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 		long commerceRegionId = ParamUtil.getLong(
 			actionRequest, "commerceRegionId");
 		String phoneNumber = ParamUtil.getString(actionRequest, "phoneNumber");
-		String addressType = ParamUtil.getString(actionRequest, "addressType");
 
 		boolean defaultBilling = ParamUtil.getBoolean(
 			actionRequest, "defaultBilling");
 		boolean defaultShipping = ParamUtil.getBoolean(
 			actionRequest, "defaultShipping");
-
-		if (addressType.equals("shipping")) {
-			defaultBilling = false;
-			defaultShipping = true;
-		}
-		else if (addressType.equals("billing")) {
-			defaultBilling = true;
-			defaultShipping = false;
-		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceAddress.class.getName(), actionRequest);
