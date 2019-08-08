@@ -9,8 +9,8 @@ import template from './MiniCart.soy';
 import './CommerceCartItem.es';
 import './Summary.es';
 
-const OPEN_CART_CLASS = 'cart-open',
-	COMMERCE_TOPBAR_CLASS = 'commerce-topbar';
+const COMMERCE_TOPBAR_CLASS = 'commerce-topbar',
+	OPEN_CART_CLASS = 'cart-open';
 
 class Cart extends Component {
 

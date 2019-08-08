@@ -41,18 +41,18 @@
 		"instanceId": "siteNavigationMenuPortlet_account",
 		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 		"portletPreferences": {
+			"displayDepth": "2",
 			"displayStyle": {
 				"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
 				"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
 			},
-			"displayDepth": "2",
 			"displayStyleGroupId": "",
 			"includedLayouts": "auto",
 			"portletSetupCss": "",
 			"portletSetupPortletDecoratorId": "barebone",
 			"portletSetupUseCustomTitle": "false",
-			"rootMenuItemLevel": "2",
 			"rootMenuItemId": "eb4439f2-faaf-2266-6cf3-27d16d34c5f9",
+			"rootMenuItemLevel": "2",
 			"siteNavigationMenuType": "-1"
 		}
 	}

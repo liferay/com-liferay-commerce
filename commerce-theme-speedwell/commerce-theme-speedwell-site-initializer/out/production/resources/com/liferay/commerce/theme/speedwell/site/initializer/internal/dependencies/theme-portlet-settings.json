@@ -41,11 +41,11 @@
 		"instanceId": "siteNavigationMenuPortlet_account",
 		"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 		"portletPreferences": {
+			"displayDepth": "2",
 			"displayStyle": {
 				"Name": "NAVBAR-DEFAULT-FTL",
 				"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
 			},
-			"displayDepth": "2",
 			"displayStyleGroupId": "",
 			"includedLayouts": "auto",
 			"portletSetupCss": "",
