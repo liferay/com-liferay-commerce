@@ -3,7 +3,11 @@ import ClayDatePicker from '@clayui/date-picker';
 
 import { DateRangeFilterProps } from './definitions';
 
-const DateRangeFilter: React.FunctionComponent<DateRangeFilterProps> = (props: DateRangeFilterProps) => {
+interface IProps extends DateRangeFilterProps {
+    panelType?: 'add' | 'edit'
+}
+
+const DateRangeFilter: React.FunctionComponent<IProps> = (props: IProps) => {
     return (
         <div>
             <h6>From</h6>
