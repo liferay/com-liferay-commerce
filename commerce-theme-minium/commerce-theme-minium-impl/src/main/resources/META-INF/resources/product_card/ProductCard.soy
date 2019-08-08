@@ -9,6 +9,7 @@
 	{@param? addToWishlistButtonVisible: bool}
 	{@param? productId: number|string}
 	{@param? orderId: number|string}
+	{@param orderQuantity: int}
 	{@param? availability: string}
 	{@param? sku: string}
 	{@param? skuId: number|string}
@@ -154,7 +155,7 @@
 						{param accountId: $accountId /}
 						{param orderId: $orderId /}
 						{param cartAPI: $cartAPI /}
-						{param quantity: 0 /}
+						{param quantity: $orderQuantity /}
 						{param editMode: false /}
 						{param settings: $settings /}
 						{param productId: $skuId /}
