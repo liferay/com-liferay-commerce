@@ -12,14 +12,14 @@ const TableToolbar: FunctionComponent<any> = () => {
             <nav className="management-bar management-bar-light navbar navbar-expand-md">
                 <div className="container-fluid container-fluid-max-xl">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <div className="custom-control custom-checkbox">
                                 <label>
                                     <input className="custom-control-input" type="checkbox" />
                                     <span className="custom-control-label"></span>
                                 </label>
                             </div>
-                        </li>
+                        </li> */}
                         <FiltersDropdown />
                     </ul>
                     <div className="navbar-form navbar-form-autofit navbar-overlay navbar-overlay-sm-down">
