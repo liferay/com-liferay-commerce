@@ -99,7 +99,8 @@ public class CommerceShippingOriginLocatorImpl
 				entry.getKey();
 
 			originAddress.put(
-				_getCommerceAddress(commerceInventoryWarehouse),
+				_getCommerceAddress(
+					commerceInventoryWarehouse, commerceOrder.getGroupId()),
 				entry.getValue());
 		}
 
@@ -158,7 +159,7 @@ public class CommerceShippingOriginLocatorImpl
 	}
 
 	private CommerceAddress _getCommerceAddress(
-			CommerceInventoryWarehouse commerceInventoryWarehouse)
+			CommerceInventoryWarehouse commerceInventoryWarehouse, long groupId)
 		throws PortalException {
 
 		CommerceAddress commerceAddress =
@@ -172,8 +173,7 @@ public class CommerceShippingOriginLocatorImpl
 		commerceAddress.setZip(commerceInventoryWarehouse.getZip());
 
 		CommerceCountry commerceCountry = _getCommerceCountry(
-			commerceAddress.getGroupId(),
-			commerceInventoryWarehouse.getCountryTwoLettersISOCode());
+			groupId, commerceInventoryWarehouse.getCountryTwoLettersISOCode());
 
 		CommerceRegion commerceRegion = _getCommerceRegion(
 			commerceCountry.getCommerceCountryId(),

@@ -199,7 +199,7 @@ public class CommerceAccountClayTable
 					commerceAccount.getCommerceAccountId(),
 					commerceAccount.getName(), commerceAccount.getEmail(),
 					_getDefaultBillingCommerceAddress(
-						commerceAccount, themeDisplay.getScopeGroupId()),
+						commerceAccount, themeDisplay.getCompanyId()),
 					thumbnailSB.toString(),
 					_getAccountViewDetailURL(
 						commerceAccount.getCommerceAccountId(),
@@ -237,29 +237,27 @@ public class CommerceAccountClayTable
 	}
 
 	private String _getDefaultBillingCommerceAddress(
-			CommerceAccount commerceAccount, long groupId)
+			CommerceAccount commerceAccount, long companyId)
 		throws PortalException {
 
-		List<CommerceAddress> commerceAddresses =
-			_commerceAddressService.getCommerceAddresses(
-				groupId, commerceAccount.getModelClassName(),
+		CommerceAddress commerceAddress =
+			_commerceAddressService.fetchDefaultBillingCommerceAddress(
+				companyId, commerceAccount.getModelClassName(),
 				commerceAccount.getCommerceAccountId());
 
-		for (CommerceAddress commerceAddress : commerceAddresses) {
-			if (commerceAddress.isDefaultBilling()) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append(commerceAddress.getStreet1());
-				sb.append(StringPool.SPACE);
-				sb.append(commerceAddress.getCity());
-				sb.append(StringPool.SPACE);
-				sb.append(commerceAddress.getZip());
-
-				return sb.toString();
-			}
+		if (commerceAddress == null) {
+			return null;
 		}
 
-		return null;
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(commerceAddress.getStreet1());
+		sb.append(StringPool.SPACE);
+		sb.append(commerceAddress.getCity());
+		sb.append(StringPool.SPACE);
+		sb.append(commerceAddress.getZip());
+
+		return sb.toString();
 	}
 
 	@Reference
