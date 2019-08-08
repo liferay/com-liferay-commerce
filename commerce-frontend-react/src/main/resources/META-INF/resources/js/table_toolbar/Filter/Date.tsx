@@ -24,14 +24,9 @@ const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
                 <ClayButton
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
+                    disabled={value === props.value}
                 >
-                    {props.panelType === 'edit' 
-                    ? (
-                        <>Edit filter</>
-                    )
-                    : (
-                        <>Add filter</>
-                    )}
+                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
                 </ClayButton>
             </div>
         </>
