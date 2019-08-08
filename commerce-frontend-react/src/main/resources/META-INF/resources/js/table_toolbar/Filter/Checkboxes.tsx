@@ -6,7 +6,11 @@ import { CheckboxesFilterProps } from './definitions';
 
 import getAppContext from '../Context';
 
-const CheckboxesFilter: React.FunctionComponent<CheckboxesFilterProps> = (props: CheckboxesFilterProps) => {
+interface IProps extends CheckboxesFilterProps {
+    panelType?: 'add' | 'edit'
+}
+
+const CheckboxesFilter: React.FunctionComponent<IProps> = (props: IProps) => {
 
     const { actions } = getAppContext();
     const [value, setValue] = useState(props.value);
@@ -52,8 +56,9 @@ const CheckboxesFilter: React.FunctionComponent<CheckboxesFilterProps> = (props:
                 <ClayButton
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
+                    disabled={value === props.value}
                 >
-                    Add filter
+                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
                 </ClayButton>
             </div>
         </>
