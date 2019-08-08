@@ -17,3 +17,4 @@ buildscript {
 }
 
 apply plugin: "com.liferay.root.defaults.plugin"
+apply plugin: "com.liferay.yarn.plugin"
