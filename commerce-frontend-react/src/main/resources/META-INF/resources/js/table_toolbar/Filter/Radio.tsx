@@ -6,7 +6,11 @@ import { MultiFilterProps } from './definitions';
 
 import ClayButton from '@clayui/button';
 
-const RadioFilter: React.FunctionComponent<MultiFilterProps> = (props: MultiFilterProps) => {
+interface IProps extends MultiFilterProps {
+    panelType?: 'add' | 'edit'
+}
+
+const RadioFilter: React.FunctionComponent<IProps> = (props: IProps) => {
     const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
@@ -24,8 +28,9 @@ const RadioFilter: React.FunctionComponent<MultiFilterProps> = (props: MultiFilt
                 <ClayButton
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
+                    disabled={value === props.value}
                 >
-                    Add filter
+                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
                 </ClayButton>
             </div>
         </>
