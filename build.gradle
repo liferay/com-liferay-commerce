@@ -1,10 +1,14 @@
 buildscript {
 	dependencies {
-		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.defaults", version: "latest.release"
+		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.defaults", version: "6.0.4"
 	}
 
 	repositories {
 		mavenLocal()
+
+		maven {
+			url file(".m2-tmp")
+		}
 
 		maven {
 			url "https://repository-cdn.liferay.com/nexus/content/groups/public"
