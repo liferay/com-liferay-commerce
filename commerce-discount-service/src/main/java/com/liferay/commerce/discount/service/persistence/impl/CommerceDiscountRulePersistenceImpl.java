@@ -156,14 +156,14 @@ public class CommerceDiscountRulePersistenceImpl
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce discount rules
 	 */
 	@Override
 	public List<CommerceDiscountRule> findByCommerceDiscountId(
 		long commerceDiscountId, int start, int end,
 		OrderByComparator<CommerceDiscountRule> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -173,10 +173,14 @@ public class CommerceDiscountRulePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCommerceDiscountId;
-			finderArgs = new Object[] {commerceDiscountId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceDiscountId;
+				finderArgs = new Object[] {commerceDiscountId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCommerceDiscountId;
 			finderArgs = new Object[] {
 				commerceDiscountId, start, end, orderByComparator
@@ -185,7 +189,7 @@ public class CommerceDiscountRulePersistenceImpl
 
 		List<CommerceDiscountRule> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceDiscountRule>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -254,10 +258,14 @@ public class CommerceDiscountRulePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1223,14 +1231,14 @@ public class CommerceDiscountRulePersistenceImpl
 	 * @param start the lower bound of the range of commerce discount rules
 	 * @param end the upper bound of the range of commerce discount rules (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce discount rules
 	 */
 	@Override
 	public List<CommerceDiscountRule> findAll(
 		int start, int end,
 		OrderByComparator<CommerceDiscountRule> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1240,17 +1248,20 @@ public class CommerceDiscountRulePersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CommerceDiscountRule> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CommerceDiscountRule>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -1301,10 +1312,14 @@ public class CommerceDiscountRulePersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

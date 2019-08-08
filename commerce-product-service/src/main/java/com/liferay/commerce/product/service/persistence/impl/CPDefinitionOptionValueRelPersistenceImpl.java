@@ -155,14 +155,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -174,17 +174,20 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -263,10 +266,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -706,20 +713,24 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	 */
 	@Override
 	public CPDefinitionOptionValueRel fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
+		String uuid, long groupId, boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
-		Object[] finderArgs = new Object[] {uuid, groupId};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {uuid, groupId};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByUUID_G, finderArgs, this);
 		}
@@ -773,8 +784,10 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 				List<CPDefinitionOptionValueRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByUUID_G, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByUUID_G, finderArgs, list);
+					}
 				}
 				else {
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
@@ -786,7 +799,10 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByUUID_G, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByUUID_G, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -972,14 +988,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -991,10 +1007,13 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -1003,7 +1022,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1089,10 +1108,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1567,14 +1590,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByGroupId(
 		long groupId, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1584,17 +1607,20 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByGroupId;
-			finderArgs = new Object[] {groupId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByGroupId;
+				finderArgs = new Object[] {groupId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByGroupId;
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1662,10 +1688,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2086,14 +2116,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2103,10 +2133,13 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByCompanyId;
-			finderArgs = new Object[] {companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByCompanyId;
+				finderArgs = new Object[] {companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCompanyId;
 			finderArgs = new Object[] {
 				companyId, start, end, orderByComparator
@@ -2115,7 +2148,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2185,10 +2218,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2615,14 +2652,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByCPDefinitionOptionRelId(
 		long CPDefinitionOptionRelId, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2632,11 +2669,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath =
-				_finderPathWithoutPaginationFindByCPDefinitionOptionRelId;
-			finderArgs = new Object[] {CPDefinitionOptionRelId};
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCPDefinitionOptionRelId;
+				finderArgs = new Object[] {CPDefinitionOptionRelId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByCPDefinitionOptionRelId;
 			finderArgs = new Object[] {
 				CPDefinitionOptionRelId, start, end, orderByComparator
@@ -2645,7 +2685,7 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -2717,10 +2757,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3149,14 +3193,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findByKey(
 		String key, int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		key = Objects.toString(key, "");
 
@@ -3168,17 +3212,20 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByKey;
-			finderArgs = new Object[] {key};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByKey;
+				finderArgs = new Object[] {key};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByKey;
 			finderArgs = new Object[] {key, start, end, orderByComparator};
 		}
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -3257,10 +3304,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -3703,20 +3754,24 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 *
 	 * @param CPDefinitionOptionRelId the cp definition option rel ID
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition option value rel, or <code>null</code> if a matching cp definition option value rel could not be found
 	 */
 	@Override
 	public CPDefinitionOptionValueRel fetchByC_K(
-		long CPDefinitionOptionRelId, String key, boolean retrieveFromCache) {
+		long CPDefinitionOptionRelId, String key, boolean useFinderCache) {
 
 		key = Objects.toString(key, "");
 
-		Object[] finderArgs = new Object[] {CPDefinitionOptionRelId, key};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionOptionRelId, key};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByC_K, finderArgs, this);
 		}
@@ -3771,8 +3826,10 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 				List<CPDefinitionOptionValueRel> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByC_K, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_K, finderArgs, list);
+					}
 				}
 				else {
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
@@ -3784,7 +3841,9 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(_finderPathFetchByC_K, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_K, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -4799,14 +4858,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 	 * @param start the lower bound of the range of cp definition option value rels
 	 * @param end the upper bound of the range of cp definition option value rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition option value rels
 	 */
 	@Override
 	public List<CPDefinitionOptionValueRel> findAll(
 		int start, int end,
 		OrderByComparator<CPDefinitionOptionValueRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4816,17 +4875,20 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<CPDefinitionOptionValueRel> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<CPDefinitionOptionValueRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -4877,10 +4939,14 @@ public class CPDefinitionOptionValueRelPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

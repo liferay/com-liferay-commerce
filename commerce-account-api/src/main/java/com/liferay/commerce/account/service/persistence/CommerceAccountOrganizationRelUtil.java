@@ -195,17 +195,16 @@ public class CommerceAccountOrganizationRelUtil {
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	public static List<CommerceAccountOrganizationRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountId(
-			commerceAccountId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceAccountId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -380,16 +379,16 @@ public class CommerceAccountOrganizationRelUtil {
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account organization rels
 	 */
 	public static List<CommerceAccountOrganizationRel> findByOrganizationId(
 		long organizationId, int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByOrganizationId(
-			organizationId, start, end, orderByComparator, retrieveFromCache);
+			organizationId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -640,16 +639,16 @@ public class CommerceAccountOrganizationRelUtil {
 	 * @param start the lower bound of the range of commerce account organization rels
 	 * @param end the upper bound of the range of commerce account organization rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account organization rels
 	 */
 	public static List<CommerceAccountOrganizationRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountOrganizationRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

@@ -101,14 +101,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tier price entry in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tier price entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -400,14 +400,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tier price entry in the ordered set where companyId = &#63;.
@@ -544,14 +544,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findByCommercePriceEntryId(
 		long commercePriceEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tier price entry in the ordered set where commercePriceEntryId = &#63;.
@@ -662,11 +662,11 @@ public interface CommerceTierPriceEntryPersistence
 	 *
 	 * @param commercePriceEntryId the commerce price entry ID
 	 * @param minQuantity the min quantity
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	 */
 	public CommerceTierPriceEntry fetchByC_M(
-		long commercePriceEntryId, int minQuantity, boolean retrieveFromCache);
+		long commercePriceEntryId, int minQuantity, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce tier price entry where commercePriceEntryId = &#63; and minQuantity = &#63; from the database.
@@ -745,14 +745,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findByC_LtM(
 		long commercePriceEntryId, int minQuantity, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce tier price entry in the ordered set where commercePriceEntryId = &#63; and minQuantity &le; &#63;.
@@ -871,12 +871,11 @@ public interface CommerceTierPriceEntryPersistence
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	 */
 	public CommerceTierPriceEntry fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache);
+		long companyId, String externalReferenceCode, boolean useFinderCache);
 
 	/**
 	 * Removes the commerce tier price entry where companyId = &#63; and externalReferenceCode = &#63; from the database.
@@ -1001,14 +1000,14 @@ public interface CommerceTierPriceEntryPersistence
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tier price entries
 	 */
 	public java.util.List<CommerceTierPriceEntry> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceTierPriceEntry>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce tier price entries from the database.

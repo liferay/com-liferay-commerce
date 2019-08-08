@@ -102,14 +102,14 @@ public interface CommerceOrderPaymentPersistence
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order payments
 	 */
 	public java.util.List<CommerceOrderPayment> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce order payment in the ordered set where commerceOrderId = &#63;.
@@ -294,14 +294,14 @@ public interface CommerceOrderPaymentPersistence
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce order payments
 	 */
 	public java.util.List<CommerceOrderPayment> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce order payments from the database.

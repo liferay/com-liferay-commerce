@@ -195,17 +195,16 @@ public class CommerceAddressRestrictionUtil {
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public static List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceCountryId(
-			commerceCountryId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceCountryId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -379,17 +378,17 @@ public class CommerceAddressRestrictionUtil {
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public static List<CommerceAddressRestriction> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_C(
 			classNameId, classPK, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -543,15 +542,15 @@ public class CommerceAddressRestrictionUtil {
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceCountryId the commerce country ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	public static CommerceAddressRestriction fetchByC_C_C(
 		long classNameId, long classPK, long commerceCountryId,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().fetchByC_C_C(
-			classNameId, classPK, commerceCountryId, retrieveFromCache);
+			classNameId, classPK, commerceCountryId, useFinderCache);
 	}
 
 	/**
@@ -721,16 +720,16 @@ public class CommerceAddressRestrictionUtil {
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce address restrictions
 	 */
 	public static List<CommerceAddressRestriction> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

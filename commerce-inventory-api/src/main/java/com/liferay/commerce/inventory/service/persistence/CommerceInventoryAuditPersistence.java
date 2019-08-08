@@ -102,14 +102,14 @@ public interface CommerceInventoryAuditPersistence
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	public java.util.List<CommerceInventoryAudit> findBySku(
 		String sku, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryAudit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory audit in the ordered set where sku = &#63;.
@@ -246,14 +246,14 @@ public interface CommerceInventoryAuditPersistence
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce inventory audits
 	 */
 	public java.util.List<CommerceInventoryAudit> findByLtCreateDate(
 		Date createDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryAudit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first commerce inventory audit in the ordered set where createDate &lt; &#63;.
@@ -440,14 +440,14 @@ public interface CommerceInventoryAuditPersistence
 	 * @param start the lower bound of the range of commerce inventory audits
 	 * @param end the upper bound of the range of commerce inventory audits (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce inventory audits
 	 */
 	public java.util.List<CommerceInventoryAudit> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<CommerceInventoryAudit>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the commerce inventory audits from the database.

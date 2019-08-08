@@ -186,16 +186,16 @@ public class CommerceCatalogUtil {
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	public static List<CommerceCatalog> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceCatalog> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -440,17 +440,16 @@ public class CommerceCatalogUtil {
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce catalogs
 	 */
 	public static List<CommerceCatalog> findByC_S(
 		long companyId, boolean system, int start, int end,
 		OrderByComparator<CommerceCatalog> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_S(
-			companyId, system, start, end, orderByComparator,
-			retrieveFromCache);
+			companyId, system, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -678,15 +677,14 @@ public class CommerceCatalogUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce catalog, or <code>null</code> if a matching commerce catalog could not be found
 	 */
 	public static CommerceCatalog fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -837,16 +835,16 @@ public class CommerceCatalogUtil {
 	 * @param start the lower bound of the range of commerce catalogs
 	 * @param end the upper bound of the range of commerce catalogs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce catalogs
 	 */
 	public static List<CommerceCatalog> findAll(
 		int start, int end,
 		OrderByComparator<CommerceCatalog> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

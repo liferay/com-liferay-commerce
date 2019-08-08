@@ -306,6 +306,10 @@ public class CommerceAccountServiceSoap {
 		}
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
 	public static com.liferay.commerce.account.model.CommerceAccountSoap
 			updateCommerceAccount(
 				long commerceAccountId, String name, boolean logo,
@@ -318,6 +322,71 @@ public class CommerceAccountServiceSoap {
 				CommerceAccountServiceUtil.updateCommerceAccount(
 					commerceAccountId, name, logo, logoBytes, email, taxId,
 					active, serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			updateCommerceAccount(
+				long commerceAccountId, String name, boolean logo,
+				byte[] logoBytes, String email, String taxId, boolean active,
+				long defaultBillingAddressId, long defaultShippingAddressId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.updateCommerceAccount(
+					commerceAccountId, name, logo, logoBytes, email, taxId,
+					active, defaultBillingAddressId, defaultShippingAddressId,
+					serviceContext);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			updateDefaultBillingAddress(
+				long commerceAccountId, long commerceAddressId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.updateDefaultBillingAddress(
+					commerceAccountId, commerceAddressId);
+
+			return com.liferay.commerce.account.model.CommerceAccountSoap.
+				toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccountSoap
+			updateDefaultShippingAddress(
+				long commerceAccountId, long commerceAddressId)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.account.model.CommerceAccount returnValue =
+				CommerceAccountServiceUtil.updateDefaultShippingAddress(
+					commerceAccountId, commerceAddressId);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.
 				toSoapModel(returnValue);

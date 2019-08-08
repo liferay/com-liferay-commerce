@@ -190,16 +190,16 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid(
-			uuid, start, end, orderByComparator, retrieveFromCache);
+			uuid, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -368,16 +368,16 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, retrieveFromCache);
+			uuid, companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -551,16 +551,16 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findByCompanyId(
 		long companyId, int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCompanyId(
-			companyId, start, end, orderByComparator, retrieveFromCache);
+			companyId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -731,17 +731,17 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findByCommercePriceEntryId(
 		long commercePriceEntryId, int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommercePriceEntryId(
 			commercePriceEntryId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -884,14 +884,14 @@ public class CommerceTierPriceEntryUtil {
 	 *
 	 * @param commercePriceEntryId the commerce price entry ID
 	 * @param minQuantity the min quantity
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	 */
 	public static CommerceTierPriceEntry fetchByC_M(
-		long commercePriceEntryId, int minQuantity, boolean retrieveFromCache) {
+		long commercePriceEntryId, int minQuantity, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_M(
-			commercePriceEntryId, minQuantity, retrieveFromCache);
+			commercePriceEntryId, minQuantity, useFinderCache);
 	}
 
 	/**
@@ -987,17 +987,17 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findByC_LtM(
 		long commercePriceEntryId, int minQuantity, int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByC_LtM(
 			commercePriceEntryId, minQuantity, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -1149,15 +1149,14 @@ public class CommerceTierPriceEntryUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce tier price entry, or <code>null</code> if a matching commerce tier price entry could not be found
 	 */
 	public static CommerceTierPriceEntry fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
 		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -1320,16 +1319,16 @@ public class CommerceTierPriceEntryUtil {
 	 * @param start the lower bound of the range of commerce tier price entries
 	 * @param end the upper bound of the range of commerce tier price entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce tier price entries
 	 */
 	public static List<CommerceTierPriceEntry> findAll(
 		int start, int end,
 		OrderByComparator<CommerceTierPriceEntry> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**

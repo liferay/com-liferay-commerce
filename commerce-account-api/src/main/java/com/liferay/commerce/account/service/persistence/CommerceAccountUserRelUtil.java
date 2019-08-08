@@ -194,17 +194,16 @@ public class CommerceAccountUserRelUtil {
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	public static List<CommerceAccountUserRel> findByCommerceAccountId(
 		long commerceAccountId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountId(
-			commerceAccountId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceAccountId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -376,17 +375,17 @@ public class CommerceAccountUserRelUtil {
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account user rels
 	 */
 	public static List<CommerceAccountUserRel> findByCommerceAccountUserId(
 		long commerceAccountUserId, int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceAccountUserId(
 			commerceAccountUserId, start, end, orderByComparator,
-			retrieveFromCache);
+			useFinderCache);
 	}
 
 	/**
@@ -633,16 +632,16 @@ public class CommerceAccountUserRelUtil {
 	 * @param start the lower bound of the range of commerce account user rels
 	 * @param end the upper bound of the range of commerce account user rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account user rels
 	 */
 	public static List<CommerceAccountUserRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountUserRel> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
