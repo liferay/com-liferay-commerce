@@ -13,16 +13,24 @@ class AccountSelector extends Component {
 
 	created() {
 		this._handleClickOutside = this._handleClickOutside.bind(this);
+		this._refreshOrderState = this._refreshOrderState.bind(this);
+	}
 
-		window.Liferay.on('orderChanged', ({orderId}) => {
-			if (orderId) {
-				this._getOrders(orderId)
-					.then(orders => {
-						this.currentOrder = orders[0];
-						this.orders = orders;
-					});
-			}
-		});
+	attached() {
+		window.Liferay.on('orderChanged', this._refreshOrderState, this);
+	}
+
+	detached() {
+		window.Liferay.detach('orderChanged', this._refreshOrderState, this);
+	}
+
+	_refreshOrderState({orderId}) {
+		this._getOrders()
+			.then(orders => {
+				this.orders = orders;
+
+				this.currentOrder = this.orders.reduce((found, order) => found || (order.id == orderId ? order : null), null);
+			});
 	}
 
 	_handleClickOutside(e) {
