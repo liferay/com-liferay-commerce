@@ -15,7 +15,6 @@
 package com.liferay.commerce.theme.speedwell.site.initializer.internal;
 
 import com.liferay.commerce.product.importer.CPFileImporter;
-
 import com.liferay.commerce.theme.speedwell.site.initializer.internal.dependencies.resolver.SpeedwellDependencyResolver;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -40,8 +39,7 @@ public class SpeedwellLayoutsInitializer {
 	private void _createLayouts(ServiceContext serviceContext)
 		throws Exception {
 
-		String json = _speedwellDependencyResolver.getJSON(
-			"layouts.json");
+		String json = _speedwellDependencyResolver.getJSON("layouts.json");
 
 		JSONArray jsonArray = _jsonFactory.createJSONArray(json);
 
@@ -58,7 +56,6 @@ public class SpeedwellLayoutsInitializer {
 	private JSONFactory _jsonFactory;
 
 	@Reference
-	private SpeedwellDependencyResolver
-			_speedwellDependencyResolver;
+	private SpeedwellDependencyResolver _speedwellDependencyResolver;
 
 }

@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
+
 <root available-locales="en_US" default-locale="en_US">
-    <dynamic-element name="backgroundImage" type="image" index-type="text" instance-id="liac">
-        <dynamic-element name="CallToActionText" instance-id="copu" type="text" index-type="keyword">
-            <dynamic-element name="CallToActionSecondaryText" instance-id="oube" type="text" index-type="keyword">
-                <dynamic-content language-id="en_US">
-                    <![CDATA[Subscribe to our newsletter to stay in the loop]]></dynamic-content>
-            </dynamic-element>
-            <dynamic-content language-id="en_US"><![CDATA[Keep in touch]]></dynamic-content>
-        </dynamic-element>
-        <dynamic-element name="FormAction" instance-id="hvzw" type="text" index-type="keyword">
-            <dynamic-element name="InputPlaceholder" instance-id="fvha" type="text" index-type="keyword">
-                <dynamic-content language-id="en_US"><![CDATA[E-mail]]></dynamic-content>
-            </dynamic-element>
-            <dynamic-content language-id="en_US"><![CDATA[http://someUrl.com?]]></dynamic-content>
-        </dynamic-element>
-        <dynamic-content language-id="en_US">
-            <![CDATA[{"groupId":"20126","name":"Newsletter.jpeg","alt":"","title":"Newsletter.jpeg","type":"journal","uuid":"dbece75b-43f7-2564-a5ad-58916e9d6893","fileEntryId":"44507","resourcePrimKey":"43923"}]]></dynamic-content>
-    </dynamic-element>
+	<dynamic-element index-type="text" instance-id="liac" name="backgroundImage" type="image">
+		<dynamic-element index-type="keyword" instance-id="copu" name="CallToActionText" type="text">
+			<dynamic-element index-type="keyword" instance-id="oube" name="CallToActionSecondaryText" type="text">
+				<dynamic-content language-id="en_US">
+					<![CDATA[Subscribe to our newsletter to stay in the loop]]></dynamic-content>
+			</dynamic-element>
+			<dynamic-content language-id="en_US"><![CDATA[Keep in touch]]></dynamic-content>
+		</dynamic-element>
+		<dynamic-element name="FormAction" instance-id="hvzw" type="text" index-type="keyword">
+			<dynamic-element name="InputPlaceholder" instance-id="fvha" type="text" index-type="keyword">
+				<dynamic-content language-id="en_US"><![CDATA[E-mail]]></dynamic-content>
+			</dynamic-element>
+			<dynamic-content language-id="en_US"><![CDATA[http://someUrl.com?]]></dynamic-content>
+		</dynamic-element>
+		<dynamic-content language-id="en_US">
+			<![CDATA[{"groupId":"20126","name":"Newsletter.jpeg","alt":"","title":"Newsletter.jpeg","type":"journal","uuid":"dbece75b-43f7-2564-a5ad-58916e9d6893","fileEntryId":"44507","resourcePrimKey":"43923"}]]></dynamic-content>
+	</dynamic-element>
 </root>
