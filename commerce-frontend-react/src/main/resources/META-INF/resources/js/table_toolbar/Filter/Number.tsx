@@ -5,9 +5,11 @@ import getAppContext from '../Context';
 
 import ClayButton from '@clayui/button';
 
-type IProps = React.HTMLAttributes<HTMLDivElement> & NumberFilterProps;
+interface IProps extends NumberFilterProps {
+    panelType?: 'add' | 'edit'
+}
 
-const NumberFilter: React.FunctionComponent<any> = (props: IProps) => {
+const NumberFilter: React.FunctionComponent<NumberFilterProps> = (props: IProps) => {
 
     const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
@@ -41,8 +43,9 @@ const NumberFilter: React.FunctionComponent<any> = (props: IProps) => {
                 <ClayButton
                     className="btn-sm"
                     onClick={() => actions.updateFilterValue(props.slug, value)}
+                    disabled={value === props.value}
                 >
-                    Add filter
+                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
                 </ClayButton>
             </div>
         </div>
