@@ -83,6 +83,22 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 			return true;
 		}
 
+		CommerceAddress defaultBilling =
+			commerceAddressService.fetchDefaultBillingCommerceAddress(
+				_commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				_commerceOrder.getCommerceAccountId());
+
+		CommerceAddress defaultShipping =
+			commerceAddressService.fetchDefaultShippingCommerceAddress(
+				_commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
+				_commerceOrder.getCommerceAccountId());
+
+		if ((defaultBilling != null) && (defaultShipping != null) &&
+			Objects.equals(defaultBilling, defaultShipping)) {
+
+			return true;
+		}
+
 		return false;
 	}
 
