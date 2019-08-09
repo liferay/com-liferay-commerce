@@ -10,6 +10,7 @@ import {
     actions as filtersActions
 } from './actions/filters';
 
+
 export const StoreContext = createContext<Partial<any>>({});;
 
 export function initializeActions(actions, dispatch) {
@@ -26,7 +27,8 @@ export function StoreProvider(props) {
 	const [state, dispatch] = useReducer(
 		reducers,
 		{
-			filters: props.filters
+			filters: props.filters || initialFiltersState,
+			app: props.app
 		}
 	);
 
