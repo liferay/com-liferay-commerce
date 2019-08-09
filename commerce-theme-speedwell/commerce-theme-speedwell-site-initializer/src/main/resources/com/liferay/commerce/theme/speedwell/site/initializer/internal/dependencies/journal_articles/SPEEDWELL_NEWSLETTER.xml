@@ -16,6 +16,6 @@
 			<dynamic-content language-id="en_US"><![CDATA[http://someUrl.com?]]></dynamic-content>
 		</dynamic-element>
 		<dynamic-content language-id="en_US">
-			<![CDATA[{"groupId":"20126","name":"Newsletter.jpeg","alt":"","title":"Newsletter.jpeg","type":"journal","uuid":"dbece75b-43f7-2564-a5ad-58916e9d6893","fileEntryId":"44507","resourcePrimKey":"43923"}]]></dynamic-content>
+			<![CDATA[[$Newsletter.jpeg$]]]></dynamic-content>
 	</dynamic-element>
 </root>

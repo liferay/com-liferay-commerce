@@ -2,14 +2,14 @@
 	<div class="speedwell-topbar__menu speedwell-main-menu">
 		<button class="speedwell-topbar__button speedwell-main-menu__open js-toggle-main-menu">
 			<svg class="commerce-icon">
-				<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#icon-menu" />
+				<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#icon-menu" />
 			</svg>
 		</button>
 
 		<div class="speedwell-main-menu__link-wrapper">
 			<button class="speedwell-topbar__button js-toggle-main-menu">
 				<svg class="commerce-icon">
-					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
+					<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#close" />
 				</svg>
 			</button>
 
@@ -26,7 +26,7 @@
 				class="${logo_css_class}" href="${site_default_url}"
 			   title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
 				<svg class="commerce-icon speedwell-logo-icon">
-					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#speedwell-logo" />
+					<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#speedwell-logo" />
 				</svg>
 			</a>
 		</div>
@@ -36,7 +36,7 @@
 		<div class="speedwell-topbar__search speedwell-search">
 			<div class="speedwell-topbar__button js-toggle-search">
 				<svg class="commerce-icon speedwell-topbar__icon">
-					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#search" />
+					<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#search" />
 				</svg>
 			</div>
 
@@ -44,14 +44,14 @@
 				<div class="speedwell-search__bar">
 					<button class="speedwell-topbar__button">
 						<svg class="commerce-icon speedwell-topbar__icon">
-							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#search" />
+							<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#search" />
 						</svg>
 					</button>
 					<@liferay_commerce_ui["search-bar"] id="search-bar" />
 
 					<button class="speedwell-topbar__button js-toggle-search">
 						<svg class="commerce-icon speedwell-topbar__icon">
-							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#close" />
+							<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#close" />
 						</svg>
 					</button>
 				</div>
@@ -65,7 +65,7 @@
 		<div class="speedwell-account">
 			<button class="speedwell-topbar__button js-toggle-account">
 				<svg class="commerce-icon">
-					<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#icon-account" />
+					<use href="${themeDisplay.getPathThemeImages()}/commerce_icons.svg#icon-account" />
 				</svg>
 			</button>
 
