@@ -65,6 +65,27 @@
 							<div class="mb-4 row">
 								<div class="col-6">
 									<input
+											id="add-address-type-billing"
+											class="commerce-modal__checkbox"
+											type="checkbox"
+											name="add-address-type"
+											value="billing"
+											data-onchange="{$_handleTypeChange}"
+											{if $_formData.defaultBilling}
+											checked
+											{/if}
+									/>
+
+									<label
+											class="commerce-modal__label commerce-modal__label--checkbox"
+											for="add-address-type-billing"
+									>
+										{msg desc="Billing"}default-billing{/msg}
+									</label>
+								</div>
+
+								<div class="col-6">
+									<input
 										id="add-address-type-shipping"
 										class="commerce-modal__checkbox"
 										type="checkbox"
@@ -81,27 +102,6 @@
 										for="add-address-type-shipping"
 									>
 										{msg desc="Shipping"}default-shipping{/msg}
-									</label>
-								</div>
-
-								<div class="col-6">
-									<input
-										id="add-address-type-billing"
-										class="commerce-modal__checkbox"
-										type="checkbox"
-										name="add-address-type"
-										value="billing"
-										data-onchange="{$_handleTypeChange}"
-										{if $_formData.defaultBilling}
-											checked
-										{/if}
-									/>
-
-									<label
-										class="commerce-modal__label commerce-modal__label--checkbox"
-										for="add-address-type-billing"
-									>
-										{msg desc="Billing"}default-billing{/msg}
 									</label>
 								</div>
 							</div>
