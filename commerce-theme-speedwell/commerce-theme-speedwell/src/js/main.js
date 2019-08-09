@@ -35,6 +35,11 @@ Liferay.on(
 	*/
 
 	function() {
+
+		function sign(x) {
+			return ((x > 0) - (x < 0)) || + x
+		}
+
 		['main-menu', 'search', 'account'].forEach(function(el) {
 			document.querySelectorAll('.js-toggle-' + el).forEach(function(element) {
 				element.addEventListener('click', function() {
@@ -57,15 +62,15 @@ Liferay.on(
 			const offset = window.scrollY - lastKnownScrollPosition;
 			lastKnownScrollPosition = window.scrollY;
 			lastKnownScrollOffset =
-				Math.sign(offset) === Math.sign(lastKnownScrollOffset)
+				sign(offset) === sign(lastKnownScrollOffset)
 					? lastKnownScrollOffset + offset
 					: offset;
 
 			if (!ticking) {
 				window.requestAnimationFrame(function () {
 					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-						speedwellWrapper.classList.add("is-scrolling-" + myMap.get(Math.sign(lastKnownScrollOffset)));
-						speedwellWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * Math.sign(lastKnownScrollOffset)));
+						speedwellWrapper.classList.add("is-scrolling-" + myMap.get(sign(lastKnownScrollOffset)));
+						speedwellWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * sign(lastKnownScrollOffset)));
 					}
 					speedwellWrapper.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
 					ticking = false;
