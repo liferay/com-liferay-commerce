@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 
 import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
-import ClayButton from '@clayui/button';
 import { renderFilter, getPrettifiedValue } from '../utils';
 import ClayLabel from '@clayui/label';
 import getAppContext from '../Context';
-import FilterProps from './definitions';
 
 
 const Resume: React.FunctionComponent<any> = (props) => {
-    const {state, actions} = getAppContext();
+    const { actions} = getAppContext();
     const [open, setOpen] = useState(false);
-    const prettifiedValue = ['checkbox', 'radio', 'select'].includes(props.type) ? getPrettifiedValue(props) : props.value
-    console.log(prettifiedValue);
+    const prettifiedValue = ['checkbox', 'radio', 'select'].includes(props.type) 
+        ? getPrettifiedValue(props) 
+        : props.value;
 
     return (
         <ClayLabel
