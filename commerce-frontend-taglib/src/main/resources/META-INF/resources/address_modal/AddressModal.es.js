@@ -14,10 +14,6 @@ class AddressModal extends Component {
 		return this._fetchCountries();
 	}
 
-	sync_addressType() {
-		return this._fetchCountries();
-	}
-
 	sync_formData() {
 		return this._validateForms();
 	}
@@ -33,8 +29,28 @@ class AddressModal extends Component {
 	}
 
 	_handleTypeChange(evt) {
-		this.addressType = evt.target.value;
-		return this.addressType;
+		const defaultType = evt.target.value;
+
+		if (defaultType === 'billing') {
+			this._formData = Object.assign(
+				{},
+				this._formData,
+				{
+					defaultBilling: evt.target.checked
+				}
+			);
+		}
+		else if (defaultType === 'shipping') {
+			this._formData = Object.assign(
+				{},
+				this._formData,
+				{
+					defaultShipping: evt.target.checked
+				}
+			);
+		}
+
+		return evt;
 	}
 
 	_handleNextButton(e) {
@@ -125,6 +141,8 @@ class AddressModal extends Component {
 						address: data.street1,
 						city: data.city,
 						country: data.commerceCountryId,
+						defaultBilling: data.defaultBilling,
+						defaultShipping: data.defaultShipping,
 						id: id,
 						region: data.commerceRegionId,
 						referent: data.name,
@@ -140,7 +158,7 @@ class AddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			(this.addressType === 'shipping' ?
+			(this._formData.defaultShipping ?
 				this.shippingCountriesAPI :
 				this.billingCountriesAPI
 			) + '?companyId=' + themeDisplay.getCompanyId(),
@@ -235,12 +253,6 @@ AddressModal.STATE = {
 	regionsAPI: Config.string().required(),
 	shippingCountriesAPI: Config.string().required(),
 	spritemap: Config.string(),
-	_addressType: Config.oneOf(
-		[
-			'billing',
-			'shipping'
-		]
-	).internal(),
 	_countries: Config.array(
 		Config.shapeOf(
 			{
@@ -260,6 +272,8 @@ AddressModal.STATE = {
 					Config.number()
 				]
 			),
+			defaultBilling: Config.bool(),
+			defaultShipping: Config.bool(),
 			id: Config.oneOfType(
 				[
 					Config.string(),
@@ -281,6 +295,8 @@ AddressModal.STATE = {
 			address: null,
 			city: null,
 			country: null,
+			defaultBilling: false,
+			defaultShipping: false,
 			id: null,
 			referent: null,
 			region: null,

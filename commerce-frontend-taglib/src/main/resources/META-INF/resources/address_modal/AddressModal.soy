@@ -8,6 +8,8 @@
 		address: string,
 		city: string,
 		country: string,
+		defaultBilling: bool,
+		defaultShipping: bool,
 		id: string,
 		region: string,
 		referent: string,
@@ -24,7 +26,6 @@
 	]> }
 	{@param? _firstFormValid: bool }
 	{@param? _secondFormValid: bool }
-	{@param? _addressType: string }
 	{@param? _modalVisible: bool }
 	{@param? _handleInputBox: any }
 	{@param? _handleSelectBox: any }
@@ -61,46 +62,46 @@
 				{if (isNonnull($_stage) and $_stage == 2) == false}
 					<form class="row" data-onsubmit="{$_handleNextButton}" ref="firstForm">
 						<div class="col-12">
-							<div class="row">
+							<div class="mb-4 row">
 								<div class="col-6">
 									<input
 										id="add-address-type-shipping"
-										class="commerce-modal__radio commerce-modal__radio--with-margin"
-										type="radio"
+										class="commerce-modal__checkbox"
+										type="checkbox"
 										name="add-address-type"
 										value="shipping"
 										data-onchange="{$_handleTypeChange}"
-										{if (isNonnull($_addressType) and $_addressType == 'billing') == false}
+										{if $_formData.defaultShipping}
 											checked
 										{/if}
 									/>
 
 									<label
-										class="commerce-modal__label commerce-modal__label--radio"
+										class="commerce-modal__label commerce-modal__label--checkbox"
 										for="add-address-type-shipping"
 									>
-										{msg desc="Shipping"}shipping{/msg}
+										{msg desc="Shipping"}default-shipping{/msg}
 									</label>
 								</div>
 
 								<div class="col-6">
 									<input
 										id="add-address-type-billing"
-										class="commerce-modal__radio commerce-modal__radio--with-margin"
-										type="radio"
+										class="commerce-modal__checkbox"
+										type="checkbox"
 										name="add-address-type"
 										value="billing"
 										data-onchange="{$_handleTypeChange}"
-										{if isNonnull($_addressType) and $_addressType == 'billing'}
+										{if $_formData.defaultBilling}
 											checked
 										{/if}
 									/>
 
 									<label
-										class="commerce-modal__label commerce-modal__label--radio"
+										class="commerce-modal__label commerce-modal__label--checkbox"
 										for="add-address-type-billing"
 									>
-										{msg desc="Billing"}billing{/msg}
+										{msg desc="Billing"}default-billing{/msg}
 									</label>
 								</div>
 							</div>
