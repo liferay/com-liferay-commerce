@@ -6,6 +6,11 @@
     color: $color-bg;
   }
 
+  &.is-open &__link-wrapper .speedwell-topbar__button {
+    background-color: $stroke;
+    color: $color-bg;
+  }
+
   &__link-wrapper {
     align-items: center;
     animation: main-menu-enter $easeInQuart 400ms;
