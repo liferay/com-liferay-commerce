@@ -18,8 +18,6 @@ const ActiveFiltersBar: React.FunctionComponent = (props) => {
         []
     )
 
-    console.log(filtersActive);
-
     return filtersActive.length ? (
         <nav className="tbar tbar-inline-md-down subnav-tbar subnav-tbar-primary subnav-tbar-light pt-3 pb-3 border-top">
             <div className="container-fluid container-fluid-max-xl">
@@ -40,7 +38,7 @@ const ActiveFiltersBar: React.FunctionComponent = (props) => {
                             <ClayButton
                                 displayType="link"
                                 className=" tbar-link btn-sm"
-                                onClick={() => actions.resetFiltersValue()}
+                                onClick={actions.resetFiltersValue}
                             >
                                 Reset filters
                             </ClayButton>

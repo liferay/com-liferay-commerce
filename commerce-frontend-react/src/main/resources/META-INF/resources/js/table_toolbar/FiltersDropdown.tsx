@@ -55,7 +55,7 @@ const FiltersDropdown: React.FunctionComponent = (props) => {
                         displayTitle={item.label}
                         displayType="primary"
                         showCollapseIcon={true}
-                        key={i}
+                        key={item.slug}
                     >
                         <ClayPanel.Body className="filter-body">
                             {renderFilter(item, 'add')}

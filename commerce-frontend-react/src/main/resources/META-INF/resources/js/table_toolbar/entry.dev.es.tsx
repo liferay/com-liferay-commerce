@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import TableToolbar from './TableToolbar';
-
 import FilterProps from './Filter/definitions'
-import { StoreProvider } from './Context';
-import { ClayIconSpriteContext } from '@clayui/icon';
 
 const filters: Array<FilterProps> = [
 	{
@@ -76,7 +72,7 @@ const filters: Array<FilterProps> = [
 		label: 'Number test',
 		operator: 'eq',
 		inputText: '$',
-		// value: 123,
+		value: 123,
 		min: 20,
 		max: 200
 	},
@@ -90,14 +86,19 @@ const filters: Array<FilterProps> = [
 ]
 
 const props = {
-	filters: filters
+	filters: filters,
+	spritemap: './icons.svg',
+	plusButton: {
+		onClick: (e) => console.log(e),
+		resetFiltersAfterClickAction: true
+	},
+	queryEndpoint: '/toolbar-test/',
+	inputSearch: {
+		filterName: 'main-search'
+	}
 }
 
 ReactDOM.render(
-	<StoreProvider {...props}>
-		<ClayIconSpriteContext.Provider value={'/icons.svg'}>
-			<TableToolbar />
-		</ClayIconSpriteContext.Provider>
-	</StoreProvider>,
+	<TableToolbar {...props}/>,
 	window.document.getElementById('table-toolbar')
 );
