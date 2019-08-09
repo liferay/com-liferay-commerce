@@ -23,6 +23,7 @@ import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
 import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -30,6 +31,7 @@ import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
 import com.liferay.commerce.wish.list.service.CommerceWishListService;
@@ -167,6 +169,8 @@ public class MiniumCPContentListEntryRenderer
 			context.put("deleteButtonVisible", false);
 		}
 
+		context.put("orderQuantity", 0);
+
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
@@ -208,6 +212,17 @@ public class MiniumCPContentListEntryRenderer
 			context.put("prices", priceModel);
 
 			context.put("settings", productSettingsModel);
+
+			if (commerceOrder != null) {
+				List<CommerceOrderItem> commerceOrderItems =
+					_commerceOrderItemLocalService.getCommerceOrderItems(
+						commerceOrder.getCommerceOrderId(),
+						cpSku.getCPInstanceId(), 0, 1);
+
+				if (!commerceOrderItems.isEmpty()) {
+					context.put("orderQuantity", 1);
+				}
+			}
 		}
 
 		CommerceWishList commerceWishList =
@@ -272,6 +287,9 @@ public class MiniumCPContentListEntryRenderer
 			httpServletRequest, httpServletResponse, componentDescriptor,
 			context);
 	}
+
+	@Reference
+	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
 	@Reference
 	private CommerceWishListItemService _commerceWishListItemService;

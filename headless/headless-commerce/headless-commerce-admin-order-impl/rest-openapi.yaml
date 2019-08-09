@@ -490,9 +490,6 @@ info:
         email: team-commerce@liferay.com
         name: Commerce Team
     description: Liferay Commerce Admin Order API
-    license:
-        name: Apache-2.0
-        url: https://spdx.org/licenses/Apache-2.0.html
     title: Liferay Commerce Admin Order API
     version: v1.0
 openapi: 3.0.0
