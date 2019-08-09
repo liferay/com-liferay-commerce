@@ -1,0 +1,49 @@
+@mixin speedwellButtonEffect($primaryColor, $secondaryColor) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale3d(1, 0, 1);
+    transform-origin: bottom;
+    transition: inherit;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: $primaryColor;
+
+    path {
+      fill: $primaryColor;
+    }
+
+    &::before {
+      background-color: $secondaryColor;
+      color: $primaryColor;
+      transform: scale3d(1, 1, 1);
+      transition: transform .2s $easeInQuart;
+    }
+  }
+}
+
+@mixin specialPricesStyles() {
+  &--promo-price {
+    color: $color-mood-bad;
+  }
+
+  &--inactive {
+    text-decoration: line-through;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  &--discount {
+    color: $color-mood-bad;
+
+    &::before {
+      content: '\02013\00020'
+    }
+  }
+}

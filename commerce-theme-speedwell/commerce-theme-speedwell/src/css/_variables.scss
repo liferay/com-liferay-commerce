@@ -1,7 +1,3 @@
-/*
- *  VARS
- */
-
 $color-theme: #30CFA1;
 $color-fg: #30CFA1;
 $color-fg-alt: #7F848D;
@@ -36,57 +32,3 @@ $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
 $easeInQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
 $easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
 $easeInOutQuint: cubic-bezier(0.86, 0, 0.07, 1);
-
-/*
- * COMMON MIXINS
- */
-
-@mixin speedwellButtonEffect($primaryColor, $secondaryColor) {
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: scale3d(1, 0, 1);
-    transform-origin: bottom;
-    transition: inherit;
-    z-index: -1;
-  }
-
-  &:hover {
-    color: $primaryColor;
-
-    path {
-      fill: $primaryColor;
-    }
-
-    &::before {
-      background-color: $secondaryColor;
-      color: $primaryColor;
-      transform: scale3d(1, 1, 1);
-      transition: transform .2s $easeInQuart;
-    }
-  }
-}
-
-@mixin specialPricesStyles() {
-  &--promo-price {
-    color: $color-mood-bad;
-  }
-
-  &--inactive {
-    text-decoration: line-through;
-    margin-left: 10px;
-    font-size: 14px;
-  }
-
-  &--discount {
-    color: $color-mood-bad;
-
-    &::before {
-      content: '\02013\00020'
-    }
-  }
-}
