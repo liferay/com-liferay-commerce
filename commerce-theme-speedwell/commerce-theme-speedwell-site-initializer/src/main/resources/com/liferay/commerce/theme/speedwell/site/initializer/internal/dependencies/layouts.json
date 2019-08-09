@@ -167,7 +167,7 @@
 		]
 	},
 	{
-		"icon": "icon-catalog.png",
+		"icon": "icon_catalog.png",
 		"layoutTemplateId": "minium_sidebar",
 		"name": "Catalog",
 		"portlets": [
@@ -245,7 +245,7 @@
 		"privateLayout": false
 	},
 	{
-		"icon": "icon-orders.png",
+		"icon": "icon_orders.png",
 		"layoutTemplateId": "1_column",
 		"name": "Open Carts",
 		"portlets": [
@@ -283,7 +283,7 @@
 		"privateLayout": false
 	},
 	{
-		"icon": "icon-account-management.png",
+		"icon": "icon_account_management.png",
 		"layoutTemplateId": "1_column",
 		"name": "Accounts",
 		"portlets": [
