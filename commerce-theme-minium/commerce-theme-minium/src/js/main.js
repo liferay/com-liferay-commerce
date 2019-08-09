@@ -55,6 +55,10 @@ Liferay.on(
 		var jsScrollArea = document.querySelector(".js-scroll-area");
 		var miniumTop = document.querySelector("[name=minium-top]");
 
+		function sign(x) {
+			return ((x > 0) - (x < 0)) || + x
+		}
+
 		if ('IntersectionObserver' in window) {
 			if (jsScrollArea && miniumTop) {
 				new IntersectionObserver(
@@ -85,15 +89,15 @@ Liferay.on(
 			const offset = window.scrollY - lastKnownScrollPosition;
 			lastKnownScrollPosition = window.scrollY;
 			lastKnownScrollOffset =
-				Math.sign(offset) === Math.sign(lastKnownScrollOffset)
+				sign(offset) === sign(lastKnownScrollOffset)
 					? lastKnownScrollOffset + offset
 					: offset;
 
 			if (!ticking) {
 				window.requestAnimationFrame(function () {
 					if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-						miniumWrapper.classList.add("is-scrolling-" + myMap.get(Math.sign(lastKnownScrollOffset)));
-						miniumWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * Math.sign(lastKnownScrollOffset)));
+						miniumWrapper.classList.add("is-scrolling-" + myMap.get(sign(lastKnownScrollOffset)));
+						miniumWrapper.classList.remove("is-scrolling-" + myMap.get(-1 * sign(lastKnownScrollOffset)));
 					}
 					ticking = false;
 				});
