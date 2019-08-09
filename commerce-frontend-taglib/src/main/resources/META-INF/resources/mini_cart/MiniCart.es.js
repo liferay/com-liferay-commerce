@@ -276,7 +276,7 @@ class Cart extends Component {
 	}
 
 	_addPendingOperation(productId) {
-		if (!this.pendingOperations.includes(productId)) {
+		if (!this.pendingOperations.indexOf(productId) > -1) {
 			this.pendingOperations = [...this.pendingOperations, productId];
 		}
 		return this.pendingOperations;

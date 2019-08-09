@@ -14,9 +14,9 @@
 	grid-template-areas: "image content actions price delete";
 
 	grid-template-columns: $item-image-size 180px $item-image-size 75px;
-	max-height: 140px;
+	height: 94px;
 	overflow: hidden;
-	transition: max-height .2s ease-in, padding .1s ease-in;
+	transition: height .2s ease-in, padding .1s ease-in;
 
 	&__image {
 		align-self: center;
@@ -128,8 +128,9 @@
 
 	&.is-collapsed {
 		border-width: 0;
-		max-height: 0;
+		height: 0;
 		padding: 0 10px;
+		overflow: hidden;
 	}
 
 	&.is-not-valid {
