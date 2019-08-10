@@ -2,8 +2,8 @@
 	{
 		"layoutTemplateId": "1_column",
 		"lookAndFeel": {
-			"translucent-topbar": "true",
-			"wide-layout": "true"
+			"lfr-theme:regular:translucent-topbar": "true",
+			"lfr-theme:regular:wide-layout": "true"
 		},
 		"name": "Home",
 		"portlets": [
@@ -46,6 +46,52 @@
 		]
 	},
 	{
+		"icon": "icon_catalog.png",
+		"layoutTemplateId": "1_2_columns",
+		"name": "Catalog",
+		"portlets": [
+			{
+				"layoutColumnId": "column-2",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet_INSTANCE_minium"
+			},
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
+			},
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 1,
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet"
+			},
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 2,
+				"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet"
+			},
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 3,
+				"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet",
+				"portletPreferences": {
+					"allowEmptySearches": "true"
+				}
+			},
+			{
+				"layoutColumnId": "column-2",
+				"layoutColumnPos": 1,
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_minium"
+			},
+			{
+				"layoutColumnId": "column-3",
+				"layoutColumnPos": 2,
+				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_catalog"
+			}
+		],
+		"privateLayout": false
+	},
+	{
 		"layoutTemplateId": "1_column",
 		"name": "My Account",
 		"portlets": [
@@ -65,19 +111,7 @@
 		"subLayouts": [
 			{
 				"layoutTemplateId": "1_column",
-				"name": "Your Orders",
-				"portlets": [
-					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderContentPortlet"
-					}
-				],
-				"privateLayout": false
-			},
-			{
-				"layoutTemplateId": "1_2_columns_i",
-				"name": "Login & Security",
+				"name": "My Orders",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -85,8 +119,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-2",
-						"layoutColumnPos": 0,
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -104,8 +138,44 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-3",
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 2,
+						"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderContentPortlet"
+					}
+				],
+				"privateLayout": false
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "Login & Security",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 2,
 						"portletName": "com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet"
 					}
 				],
@@ -118,6 +188,30 @@
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 2,
 						"portletName": "com_liferay_commerce_address_content_web_internal_portlet_CommerceAddressContentPortlet"
 					}
 				],
@@ -125,11 +219,35 @@
 			},
 			{
 				"layoutTemplateId": "1_column",
-				"name": "Subscriptions",
+				"name": "My Subscriptions",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 2,
 						"portletName": "com_liferay_commerce_subscription_web_internal_portlet_CommerceSubscriptionContentPortlet"
 					}
 				],
@@ -137,29 +255,108 @@
 			},
 			{
 				"layoutTemplateId": "1_column",
-				"name": "Download",
+				"name": "My Downloads",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 2,
 						"portletName": "com_liferay_commerce_product_type_virtual_order_content_web_internal_portlet_CommerceVirtualOrderItemContentPortlet"
 					}
 				],
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "2_columns_ii",
-				"name": "Lists",
+				"layoutTemplateId": "1_2_columns_i",
+				"name": "My Lists",
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_wish_list_web_internal_portlet_MyCommerceWishListsPortlet"
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
 					},
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
+						"portletName": "com_liferay_commerce_wish_list_web_internal_portlet_MyCommerceWishListsPortlet"
+					},
+					{
+						"layoutColumnId": "column-3",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_wish_list_web_internal_portlet_CommerceWishListContentPortlet"
+					}
+				],
+				"privateLayout": false
+			},
+			{
+				"layoutTemplateId": "1_column",
+				"name": "My Payment Methods",
+				"portlets": [
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 0,
+						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+					},
+					{
+						"layoutColumnId": "column-1",
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
+						"portletPreferences": {
+							"displayDepth": "2",
+							"displayStyle": {
+								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
+								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
+							},
+							"displayStyleGroupId": "",
+							"includedLayouts": "auto",
+							"portletSetupCss": "",
+							"portletSetupPortletDecoratorId": "barebone",
+							"portletSetupUseCustomTitle": "false",
+							"rootMenuItemLevel": "1",
+							"rootMenuItemType": "relative"
+						}
 					}
 				],
 				"privateLayout": false
@@ -167,47 +364,15 @@
 		]
 	},
 	{
-		"icon": "icon_catalog.png",
-		"layoutTemplateId": "minium_sidebar",
-		"name": "Catalog",
+		"hidden": true,
+		"icon": "icon_orders.png",
+		"layoutTemplateId": "1_column",
+		"name": "Open Cart",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
-				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet_INSTANCE_minium"
-			},
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
-			},
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 2,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet"
-			},
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 3,
-				"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet"
-			},
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 4,
-				"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet",
-				"portletPreferences": {
-					"allowEmptySearches": "true"
-				}
-			},
-			{
-				"layoutColumnId": "column-2",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_minium"
-			},
-			{
-				"layoutColumnId": "column-2",
-				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_catalog"
+				"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet"
 			}
 		],
 		"privateLayout": false
@@ -245,24 +410,6 @@
 		"privateLayout": false
 	},
 	{
-		"icon": "icon_orders.png",
-		"layoutTemplateId": "1_column",
-		"name": "Open Carts",
-		"portlets": [
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentPortlet"
-			},
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_cart_content_web_internal_portlet_CommerceCartContentTotalPortlet"
-			}
-		],
-		"privateLayout": false
-	},
-	{
 		"hidden": true,
 		"layoutTemplateId": "1_column",
 		"name": "Checkout",
@@ -278,32 +425,6 @@
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_checkout_web_internal_portlet_CommerceCheckoutPortlet"
-			}
-		],
-		"privateLayout": false
-	},
-	{
-		"icon": "icon_account_management.png",
-		"layoutTemplateId": "1_column",
-		"name": "Accounts",
-		"portlets": [
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet"
-			}
-		],
-		"privateLayout": false
-	},
-	{
-		"hidden": true,
-		"layoutTemplateId": "1_column",
-		"name": "User Management",
-		"portlets": [
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet"
 			}
 		],
 		"privateLayout": false
