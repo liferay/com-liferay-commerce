@@ -47,46 +47,46 @@
 	},
 	{
 		"icon": "icon_catalog.png",
-		"layoutTemplateId": "1_2_columns",
+		"layoutTemplateId": "1_2_columns_i",
 		"name": "Catalog",
 		"portlets": [
 			{
-				"layoutColumnId": "column-2",
+				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
-				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet_INSTANCE_minium"
+				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet_INSTANCE_speedwell"
 			},
 			{
-				"layoutColumnId": "column-1",
+				"layoutColumnId": "column-2",
 				"layoutColumnPos": 0,
 				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPOptionFacetsPortlet"
 			},
 			{
-				"layoutColumnId": "column-1",
+				"layoutColumnId": "column-2",
 				"layoutColumnPos": 1,
 				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet"
 			},
 			{
-				"layoutColumnId": "column-1",
+				"layoutColumnId": "column-2",
 				"layoutColumnPos": 2,
 				"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet"
 			},
 			{
-				"layoutColumnId": "column-1",
+				"layoutColumnId": "column-2",
 				"layoutColumnPos": 3,
-				"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet",
+				"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet_INSTANCE_speedwell",
 				"portletPreferences": {
 					"allowEmptySearches": "true"
 				}
 			},
 			{
-				"layoutColumnId": "column-2",
-				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_minium"
+				"layoutColumnId": "column-3",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_speedwell"
 			},
 			{
 				"layoutColumnId": "column-3",
-				"layoutColumnPos": 2,
-				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_catalog"
+				"layoutColumnPos": 1,
+				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_speedwell"
 			}
 		],
 		"privateLayout": false
