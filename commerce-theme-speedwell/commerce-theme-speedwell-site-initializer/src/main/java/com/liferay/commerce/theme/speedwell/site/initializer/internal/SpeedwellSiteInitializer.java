@@ -55,6 +55,9 @@ import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
 import com.liferay.commerce.theme.speedwell.site.initializer.internal.dependencies.resolver.SpeedwellDependencyResolver;
 import com.liferay.commerce.util.CommerceShippingEngineRegistry;
+import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -68,11 +71,13 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.Theme;
 import com.liferay.portal.kernel.model.ThemeSetting;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
@@ -224,6 +229,8 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 			_importPortletSettings(serviceContext);
 
+			fixDLFileEntryPermissions(groupId);
+
 			setCommerceShippingMethod("fixed", serviceContext);
 
 			setDefaultCatalogImage(catalogGroupId, serviceContext);
@@ -333,6 +340,33 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 	@Deactivate
 	protected void deactivate() {
 		_cpDefinitions = null;
+	}
+
+	protected void fixDLFileEntryPermissions(long groupId)
+		throws PortalException {
+
+		List<DLFileEntry> dlFileEntries =
+			_dlFileEntryLocalService.getFileEntries(
+				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		if (dlFileEntries.isEmpty()) {
+			return;
+		}
+
+		Group group = _groupLocalService.getGroup(groupId);
+
+		long companyId = group.getCompanyId();
+
+		for (DLFileEntry dlFileEntry : dlFileEntries) {
+			Role role = _roleLocalService.getRole(
+				companyId, RoleConstants.GUEST);
+
+			_resourcePermissionLocalService.setResourcePermissions(
+				companyId, dlFileEntry.getModelClassName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(dlFileEntry.getPrimaryKey()), role.getRoleId(),
+				new String[] {ActionKeys.VIEW});
+		}
 	}
 
 	protected CPDefinition getCPDefinitionByName(String name) {
@@ -1013,6 +1047,9 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private DDMFormImporter _ddmFormImporter;
+
+	@Reference
+	private DLFileEntryLocalService _dlFileEntryLocalService;
 
 	@Reference
 	private DLImporter _dlImporter;
