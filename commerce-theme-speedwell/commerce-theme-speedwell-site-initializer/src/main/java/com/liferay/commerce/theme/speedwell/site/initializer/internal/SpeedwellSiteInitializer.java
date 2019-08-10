@@ -163,7 +163,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		try {
 			ServiceContext serviceContext = getServiceContext(groupId);
 
-			configureB2BSite(groupId, serviceContext);
+			configureB2CSite(groupId, serviceContext);
 
 			_cpFileImporter.updateLookAndFeel(
 				_SPEEDWELL_THEME_ID, false, serviceContext);
@@ -261,12 +261,12 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		init();
 	}
 
-	protected void configureB2BSite(long groupId, ServiceContext serviceContext)
+	protected void configureB2CSite(long groupId, ServiceContext serviceContext)
 		throws Exception {
 
 		Group group = _groupLocalService.getGroup(groupId);
 
-		group.setType(GroupConstants.TYPE_SITE_PRIVATE);
+		group.setType(GroupConstants.TYPE_SITE_OPEN);
 		group.setManualMembership(true);
 		group.setMembershipRestriction(
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION);
@@ -288,7 +288,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		modifiableSettings.setValue(
 			"commerceSiteType",
-			String.valueOf(CommerceAccountConstants.SITE_TYPE_B2B));
+			String.valueOf(CommerceAccountConstants.SITE_TYPE_B2C));
 
 		modifiableSettings.store();
 	}
