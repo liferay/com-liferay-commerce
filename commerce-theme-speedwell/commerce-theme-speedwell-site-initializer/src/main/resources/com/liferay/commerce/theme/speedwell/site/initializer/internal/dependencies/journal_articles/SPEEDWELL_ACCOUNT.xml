@@ -2,61 +2,86 @@
 
 <root available-locales="en_US" default-locale="en_US">
 	<dynamic-element index-type="keyword" instance-id="drrp" name="PageTitle" type="text">
-		<dynamic-content language-id="en_US"><![CDATA[My Account]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]">
+			<![CDATA[My Account]]>
+		</dynamic-content>
 	</dynamic-element>
 	<dynamic-element index-type="keyword" instance-id="vbzl" name="NavigationItemLink" type="link_to_layout">
 		<dynamic-element index-type="keyword" instance-id="yvwj" name="NavigationItemTitle" type="text">
-			<dynamic-content language-id="en_US"><![CDATA[Your Orders]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[My Orders]]>
+			</dynamic-content>
 		</dynamic-element>
 		<dynamic-element index-type="keyword" instance-id="auae" name="NavigationItemDescription" type="text">
-			<dynamic-content language-id="en_US"><![CDATA[Lorem Ipsum lorem ipsum]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Check out the cool things you bought]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[5@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[4@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element index-type="keyword" instance-id="pejh" name="NavigationItemLinkech5" type="link_to_layout">
 		<dynamic-element index-type="keyword" instance-id="jzye" name="NavigationItemTitlea1vf" type="text">
-			<dynamic-content language-id="en_US"><![CDATA[Login & Security]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Login & Security]]>
+			</dynamic-content>
 		</dynamic-element>
 		<dynamic-element index-type="keyword" instance-id="ivmt" name="NavigationItemDescription3s36" type="text">
-			<dynamic-content language-id="en_US"><![CDATA[Lorem ipsum is real]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Security management made simple]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[8@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[5@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
 	<dynamic-element index-type="keyword" instance-id="ygul" name="NavigationItemLink3kgp" type="link_to_layout">
 		<dynamic-element index-type="keyword" instance-id="mdey" name="NavigationItemTitleictv" type="text">
-			<dynamic-content language-id="en_US"><![CDATA[Your Addresses]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[My Addresses]]>
+			</dynamic-content>
 		</dynamic-element>
 		<dynamic-element index-type="keyword" instance-id="fvhn" name="NavigationItemDescriptionb0lp" type="text">
-			<dynamic-content language-id="en_US">
-				<![CDATA[Where you want to have your orders delivered]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Where you want to have your orders delivered]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[15@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[6@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="NavigationItemLinkbond" type="link_to_layout" index-type="keyword" instance-id="yevy">
-		<dynamic-element name="NavigationItemTitle70k0" instance-id="kmbn" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[Payment Options]]></dynamic-content>
+	<dynamic-element index-type="keyword" instance-id="yevy" name="NavigationItemLinkbond" type="link_to_layout">
+		<dynamic-element index-type="keyword" instance-id="kmbn" name="NavigationItemTitle70k0" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[My Payment Methods]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="NavigationItemDescriptionhwr9" instance-id="kzad" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[Your registered payment methods]]></dynamic-content>
+		<dynamic-element index-type="keyword" instance-id="kzad" name="NavigationItemDescriptionhwr9" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Manage your payment options]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[14@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[10@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="NavigationItemLink5r41" type="link_to_layout" index-type="keyword" instance-id="bjkb">
-		<dynamic-element name="NavigationItemTitle1q7m" instance-id="dbem" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[Subscriptions]]></dynamic-content>
+	<dynamic-element index-type="keyword" instance-id="bjkb" name="NavigationItemLink5r41" type="link_to_layout">
+		<dynamic-element index-type="keyword" instance-id="dbem" name="NavigationItemTitle1q7m" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[My Subscriptions]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="NavigationItemDescriptionbrbx" instance-id="zmqm" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[Your recurrent subscriptions]]></dynamic-content>
+		<dynamic-element index-type="keyword" instance-id="zmqm" name="NavigationItemDescriptionbrbx" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Cancel anytime]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[10@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[7@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="NavigationItemLink54l2" type="link_to_layout" index-type="keyword" instance-id="mehb">
-		<dynamic-element name="NavigationItemTitleavfp" instance-id="pary" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[Download]]></dynamic-content>
+	<dynamic-element index-type="keyword" instance-id="mehb" name="NavigationItemLink54l2" type="link_to_layout">
+		<dynamic-element index-type="keyword" instance-id="pary" name="NavigationItemTitleavfp" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[My Downloads]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="NavigationItemDescriptiondifv" instance-id="ubew" type="text" index-type="keyword">
-			<dynamic-content language-id="en_US"><![CDATA[You receipt]]></dynamic-content>
+		<dynamic-element index-type="keyword" instance-id="ubew" name="NavigationItemDescriptiondifv" type="text">
+			<dynamic-content language-id="[£LOCALE£]">
+				<![CDATA[Download your virtual purchases]]>
+			</dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="en_US"><![CDATA[16@public@65698]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"><![CDATA[8@public@[£groupId£]]]></dynamic-content>
 	</dynamic-element>
 </root>
