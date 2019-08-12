@@ -19,6 +19,7 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.model.CommerceAccountModel;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -27,9 +28,11 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.SessionParamUtil;
 
@@ -128,6 +131,26 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	}
 
 	@Override
+	public long[] getUserCommerceAccountIds(long userId, long groupId)
+		throws PortalException {
+
+		List<CommerceAccount> commerceAccounts =
+			_commerceAccountLocalService.getUserCommerceAccounts(
+				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
+				_getCommerceSiteType(groupId), StringPool.BLANK,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		long[] commerceAccountIds = new long[0];
+
+		if (!commerceAccounts.isEmpty()) {
+			commerceAccountIds = ListUtil.toLongArray(
+				commerceAccounts, CommerceAccountModel::getCommerceAccountId);
+		}
+
+		return commerceAccountIds;
+	}
+
+	@Override
 	public void setCurrentCommerceAccount(
 			HttpServletRequest httpServletRequest, long groupId,
 			long commerceAccountId)
@@ -151,6 +174,29 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	private void _checkAccountType(long groupId, long commerceAccountId)
 		throws PortalException {
 
+		int commerceSiteType = _getCommerceSiteType(groupId);
+
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
+
+		if ((commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) &&
+			commerceAccount.isBusinessAccount()) {
+
+			throw new PortalException(
+				"Only personal accounts are allowed in a b2c site");
+		}
+
+		if ((commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2B) &&
+			commerceAccount.isPersonalAccount()) {
+
+			throw new PortalException(
+				"Only business accounts are allowed in a b2b site");
+		}
+	}
+
+	private int _getCommerceSiteType(long groupId)
+		throws ConfigurationException {
+
 		CommerceAccountGroupServiceConfiguration
 			commerceAccountGroupServiceConfiguration =
 				_configurationProvider.getConfiguration(
@@ -158,24 +204,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 					new GroupServiceSettingsLocator(
 						groupId, CommerceAccountConstants.SERVICE_NAME));
 
-		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
-
-		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				CommerceAccountConstants.SITE_TYPE_B2C) &&
-			commerceAccount.isBusinessAccount()) {
-
-			throw new PortalException(
-				"Only personal accounts are allowed in a b2c site");
-		}
-
-		if ((commerceAccountGroupServiceConfiguration.commerceSiteType() ==
-				CommerceAccountConstants.SITE_TYPE_B2B) &&
-			commerceAccount.isPersonalAccount()) {
-
-			throw new PortalException(
-				"Only business accounts are allowed in a b2b site");
-		}
+		return commerceAccountGroupServiceConfiguration.commerceSiteType();
 	}
 
 	private CommerceAccount _getSingleCommerceAccount(
