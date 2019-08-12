@@ -123,12 +123,8 @@ public class CommercePendingOrderClayTable
 			return 0;
 		}
 
-		long[] commerceAccountIds = getUserCommerceAccountIds(
-			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
-
 		return (int)_commerceOrderService.getPendingCommerceOrdersCount(
-			commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
-			commerceAccountIds);
+			commerceChannel.getCompanyId(), commerceChannel.getGroupId());
 	}
 
 	@Override
@@ -174,14 +170,10 @@ public class CommercePendingOrderClayTable
 			return Collections.emptyList();
 		}
 
-		long[] commerceAccountIds = getUserCommerceAccountIds(
-			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
-
 		List<CommerceOrder> commerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
 				commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
-				commerceAccountIds, pagination.getStartPosition(),
-				pagination.getEndPosition());
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		return CommerceOrderClayTableUtil.getOrders(
 			commerceOrders, themeDisplay, true);
@@ -192,52 +184,14 @@ public class CommercePendingOrderClayTable
 		return true;
 	}
 
-	protected int getCommerceSiteType(long groupId)
-		throws ConfigurationException {
-
-		CommerceAccountGroupServiceConfiguration
-			commerceAccountGroupServiceConfiguration =
-				_configurationProvider.getConfiguration(
-					CommerceAccountGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						groupId, CommerceAccountConstants.SERVICE_NAME));
-
-		return commerceAccountGroupServiceConfiguration.commerceSiteType();
-	}
-
-	protected long[] getUserCommerceAccountIds(long userId, long groupId)
-		throws PortalException {
-
-		List<CommerceAccount> commerceAccounts =
-			_commerceAccountLocalService.getUserCommerceAccounts(
-				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				getCommerceSiteType(groupId), StringPool.BLANK,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		long[] commerceAccountIds = new long[0];
-
-		if (!commerceAccounts.isEmpty()) {
-			commerceAccountIds = ListUtil.toLongArray(
-				commerceAccounts, CommerceAccountModel::getCommerceAccountId);
-		}
-
-		return commerceAccountIds;
-	}
-
 	@Reference
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
-
-	@Reference
-	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private ConfigurationProvider _configurationProvider;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"
