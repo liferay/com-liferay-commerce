@@ -17,6 +17,7 @@ package com.liferay.commerce.service.impl;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
@@ -343,9 +344,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getPendingCommerceOrders(
-			long companyId, long groupId, long[] commerceAccountIds, int start,
-			int end)
+			long companyId, long groupId, int start, int end)
 		throws PortalException {
+
+		long[] commerceAccountIds =
+			_commerceAccountHelper.getUserCommerceAccountIds(
+				getUserId(), groupId);
 
 		if (PortalPermissionUtil.contains(
 				getPermissionChecker(),
@@ -381,9 +385,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
-	public long getPendingCommerceOrdersCount(
-			long companyId, long groupId, long[] commerceAccountIds)
+	public long getPendingCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException {
+
+		long[] commerceAccountIds =
+			_commerceAccountHelper.getUserCommerceAccountIds(
+				getUserId(), groupId);
 
 		if (PortalPermissionUtil.contains(
 				getPermissionChecker(),
@@ -417,9 +424,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@Override
 	public List<CommerceOrder> getPlacedCommerceOrders(
-			long companyId, long groupId, long[] commerceAccountIds, int start,
-			int end)
+			long companyId, long groupId, int start, int end)
 		throws PortalException {
+
+		long[] commerceAccountIds =
+			_commerceAccountHelper.getUserCommerceAccountIds(
+				getUserId(), groupId);
 
 		if (PortalPermissionUtil.contains(
 				getPermissionChecker(),
@@ -455,9 +465,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	@Override
-	public long getPlacedCommerceOrdersCount(
-			long companyId, long groupId, long[] commerceAccountIds)
+	public long getPlacedCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException {
+
+		long[] commerceAccountIds =
+			_commerceAccountHelper.getUserCommerceAccountIds(
+				getUserId(), groupId);
 
 		if (PortalPermissionUtil.contains(
 				getPermissionChecker(),
@@ -852,6 +865,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			PortletResourcePermissionFactory.getInstance(
 				CommerceOrderServiceImpl.class, "_portletResourcePermission",
 				CommerceOrderConstants.RESOURCE_NAME);
+
+	@ServiceReference(type = CommerceAccountHelper.class)
+	private CommerceAccountHelper _commerceAccountHelper;
 
 	@ServiceReference(type = CommerceAccountLocalService.class)
 	private CommerceAccountLocalService _commerceAccountLocalService;
