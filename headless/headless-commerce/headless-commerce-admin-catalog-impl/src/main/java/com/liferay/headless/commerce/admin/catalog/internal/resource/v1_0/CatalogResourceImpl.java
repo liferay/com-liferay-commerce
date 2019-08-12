@@ -186,8 +186,7 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 				catalog.getName(), catalog.getCurrencyCode(),
 				catalog.getDefaultLanguageId(),
 				catalog.getExternalReferenceCode(),
-				_serviceContextHelper.getServiceContext(
-					commerceCatalog.getGroupId()));
+				_serviceContextHelper.getServiceContext());
 		}
 		else {
 			commerceCatalog = _commerceCatalogService.updateCommerceCatalog(
