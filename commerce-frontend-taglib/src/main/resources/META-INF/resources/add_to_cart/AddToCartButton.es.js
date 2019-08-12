@@ -60,10 +60,13 @@ function doFocusOut() {
 	const tabbableElement = !!parentElement &&
 		!!parentElement.closest && parentElement.closest('[tabindex="0"]');
 
-	if (!!tabbableElement) {
+	if (tabbableElement) {
 		parentElement.focus();
-	} else if (!!parentElement) {
+	}
+ else if (parentElement) {
+
 		// IE compatibility
+
 		parentElement.parentElement.focus();
 	}
 
