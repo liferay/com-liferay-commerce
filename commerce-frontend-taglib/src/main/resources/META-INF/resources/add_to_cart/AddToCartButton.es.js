@@ -63,7 +63,7 @@ function doFocusOut() {
 	if (tabbableElement) {
 		parentElement.focus();
 	}
- else if (parentElement) {
+	else if (parentElement) {
 
 		// IE compatibility
 
