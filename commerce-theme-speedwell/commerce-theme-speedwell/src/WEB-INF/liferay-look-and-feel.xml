@@ -13,7 +13,7 @@
 		</settings>
 		<layout-templates>
 			<custom>
-				<layout-template id="speedwell_sidebar" name="Speedwell sidebar">
+				<layout-template id="speedwell_sidebar" name="Speedwell Sidebar">
 					<template-path>/layouttpl/commerce/speedwell_sidebar.tpl</template-path>
 					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
 				</layout-template>
