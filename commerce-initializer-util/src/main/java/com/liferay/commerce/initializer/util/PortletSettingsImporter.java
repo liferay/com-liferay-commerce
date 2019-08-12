@@ -236,6 +236,10 @@ public class PortletSettingsImporter {
 
 				key = key + CharPool.UNDERLINE + serviceContext.getLanguageId();
 			}
+			else if (key.equals("preferenceDisplayStyle")) {
+				value = portletPreferencesJSONObject.getString(key);
+				key = "displayStyle";
+			}
 			else {
 				value = portletPreferencesJSONObject.getString(key);
 			}

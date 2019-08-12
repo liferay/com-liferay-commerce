@@ -36,6 +36,14 @@
 	},
 	{
 		"instanceId": "speedwell",
+		"layoutFriendlyURL": "/catalog",
+		"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet",
+		"portletPreferences": {
+			"preferenceDisplayStyle": "list"
+		}
+	},
+	{
+		"instanceId": "speedwell",
 		"layoutFriendlyURL": "/compare",
 		"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentPortlet",
 		"portletPreferences": {
