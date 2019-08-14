@@ -91,6 +91,13 @@
 	{
 		"layoutTemplateId": "1_column",
 		"name": "My Account",
+		"permissions": [
+			{
+				"actionIds": [],
+				"roleName": "Guest",
+				"scope": 4
+			}
+		],
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -109,6 +116,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "My Orders",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -145,6 +159,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "Login & Security",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -181,6 +202,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "My Addresses",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -217,6 +245,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "My Subscriptions",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -253,6 +288,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "My Downloads",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -289,6 +331,13 @@
 			{
 				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Lists",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -330,6 +379,13 @@
 			{
 				"layoutTemplateId": "1_column",
 				"name": "My Payment Methods",
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -386,7 +442,7 @@
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet_INSTANCE_minium"
+				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet_INSTANCE_speedwell"
 			},
 			{
 				"layoutColumnId": "column-1",
@@ -438,7 +494,7 @@
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentPortlet_INSTANCE_minium"
+				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentPortlet_INSTANCE_speedwell"
 			}
 		],
 		"privateLayout": false
