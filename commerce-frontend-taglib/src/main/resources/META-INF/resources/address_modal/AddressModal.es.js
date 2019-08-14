@@ -228,6 +228,8 @@ class AddressModal extends Component {
 			telephone: null,
 			zipCode: null
 		};
+
+		this._stage = 1;
 	}
 
 	toggle() {
