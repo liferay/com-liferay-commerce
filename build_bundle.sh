@@ -227,7 +227,7 @@ function main {
 function start_tomcat {
 	local timestamp=${1}
 
-	rm -fr ${timestamp}/liferay-commerce-*/data/elasticsearch6/*
+	rm -fr ${timestamp}/liferay-commerce-*/data/elasticsearch**
 
 	fix_tomcat_setenv ${timestamp}/${commerce_bundle_name}/tomcat-$(get_tomcat_version ${timestamp}/${commerce_bundle_name})
 
