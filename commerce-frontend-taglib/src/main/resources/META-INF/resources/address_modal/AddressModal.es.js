@@ -84,9 +84,12 @@ class AddressModal extends Component {
 			if (country.length === 1) {
 				this._isBillingAllowed = country[0].billingAllowed;
 				this._isShippingAllowed = country[0].shippingAllowed;
-			}
 
-			this._fetchRegions();
+				this._fetchRegions();
+			}
+			else {
+				this._regions = [];
+			}
 		}
 		else {
 			this._formData = Object.assign(
