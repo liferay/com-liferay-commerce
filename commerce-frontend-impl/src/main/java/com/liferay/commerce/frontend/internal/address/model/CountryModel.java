@@ -19,9 +19,17 @@ package com.liferay.commerce.frontend.internal.address.model;
  */
 public class CountryModel {
 
-	public CountryModel(long id, String name) {
+	public CountryModel(
+		long id, String name, boolean billingAllowed, boolean shippingAllowed) {
+
 		_id = id;
 		_name = name;
+		_billingAllowed = billingAllowed;
+		_shippingAllowed = shippingAllowed;
+	}
+
+	public boolean getBillingAllowed() {
+		return _billingAllowed;
 	}
 
 	public long getId() {
@@ -32,7 +40,13 @@ public class CountryModel {
 		return _name;
 	}
 
+	public boolean getShippingAllowed() {
+		return _shippingAllowed;
+	}
+
+	private final boolean _billingAllowed;
 	private final long _id;
 	private final String _name;
+	private final boolean _shippingAllowed;
 
 }

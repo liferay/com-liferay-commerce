@@ -78,6 +78,14 @@ class AddressModal extends Component {
 					country: value
 				}
 			);
+
+			const country = this._countries.filter((country) => country.id == value);
+
+			if (country.length === 1) {
+				this._isBillingAllowed = country[0].billingAllowed;
+				this._isShippingAllowed = country[0].shippingAllowed;
+			}
+
 			this._fetchRegions();
 		}
 		else {
@@ -158,10 +166,7 @@ class AddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			(this._formData.defaultShipping ?
-				this.shippingCountriesAPI :
-				this.billingCountriesAPI
-			) + '?companyId=' + themeDisplay.getCompanyId(),
+			this.countriesAPI + '?companyId=' + themeDisplay.getCompanyId(),
 			{
 				method: 'GET'
 			}
@@ -251,15 +256,18 @@ class AddressModal extends Component {
 Soy.register(AddressModal, template);
 
 AddressModal.STATE = {
-	billingCountriesAPI: Config.string().required(),
+	countriesAPI: Config.string().required(),
 	regionsAPI: Config.string().required(),
-	shippingCountriesAPI: Config.string().required(),
 	spritemap: Config.string(),
+	_isBillingAllowed: Config.bool().value(true),
+	_isShippingAllowed: Config.bool().value(true),
 	_countries: Config.array(
 		Config.shapeOf(
 			{
 				id: Config.number().required(),
-				name: Config.string().required()
+				billingAllowed: Config.bool().required(),
+				name: Config.string().required(),
+				shippingAllowed: Config.bool().required()
 			}
 		)
 	).value([]),
