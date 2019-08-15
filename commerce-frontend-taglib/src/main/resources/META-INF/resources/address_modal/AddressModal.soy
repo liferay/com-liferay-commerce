@@ -45,7 +45,7 @@
 					{if isNonnull($_formData.id)}
 						{msg desc="Update address"}update-address{/msg}
 					{else}
-						{msg desc="Add new address to this account"}add-new-address-to-this-account{/msg}
+						{msg desc="Add new address"}add-new-address{/msg}
 					{/if}
 				</h3>
 
@@ -87,7 +87,7 @@
 									</label>
 									{else}
 										<input name="add-address-type" type="hidden" value="billing" />
-										{msg desc="Billing is not allowed to this country."}billing-is-not-allowed-to-the-country-you-selected{/msg}
+										{msg desc="Billing is not allowed to the country you selected."}billing-is-not-allowed-to-the-country-you-selected{/msg}
 									{/if}
 								</div>
 
