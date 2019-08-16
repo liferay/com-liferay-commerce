@@ -42,9 +42,15 @@
 
             height: 60px;
             border-radius: 8px;
-            box-shadow: 0px 20px 20px 5px #4c84ff2e;
+            box-shadow: 0 15px 20px 5px #4c84ff2e;
             display: block;
+            transition: .5s ease;
             width: 100%;
+
+            &:hover {
+                box-shadow: 0 20px 20px 5px #4c84ff2e;
+                transform: translate(0, -5px);
+            }
         }
     }
 
