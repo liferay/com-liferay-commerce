@@ -33,7 +33,7 @@
 		transform: none;
 		transition: none;
 		width: 80px;
-		z-index: 10;
+		z-index: 11;
 	}
 }
 
@@ -83,7 +83,7 @@
 	right: 5px;
 	transform-origin: right bottom;
 	transition: transform ease 200ms;
-	z-index: 10;
+	z-index: 11;
 
 	@media (hover: hover) {
 		.portlet:not(.open) &:not(:hover) {
