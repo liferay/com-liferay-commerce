@@ -485,6 +485,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		File file = FileUtil.createTempFile(inputStream);
 
 		_cpFileImporter.updateLogo(file, true, true, serviceContext);
+		_cpFileImporter.updateLogo(file, false, true, serviceContext);
 	}
 
 	protected void updateThemeSetting(
