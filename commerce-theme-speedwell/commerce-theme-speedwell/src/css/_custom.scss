@@ -87,6 +87,17 @@ body.signed-in {
   }
 }
 
+body:not(.is-accessible) {
+  // Accommodate on a case-by-case basis.
+  // By default, accessibility focus outline
+  // is removed after 5s if no Tab is pressed
+  // at page load-up.
+
+  *:focus {
+    outline: none !important;
+  }
+}
+
 @media screen and (min-width: 320px) and (max-width: 350px) {
   html {
     width: 126%
