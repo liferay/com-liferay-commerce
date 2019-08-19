@@ -9,21 +9,47 @@
     }
 
     .portlet-layout {
-        .portlet {
-            .management-bar, .navbar-underline {
-                > .container-fluid-max-xl {
-                    padding-left: 0;
-                    padding-right: 0;
+        .portlet-column {
+            height: 100%;
+            padding: 0;
+
+            &.portlet-column-last {
+                @include media-breakpoint-down(sm) {
+                    height: 100%;
+                    position: absolute;
                 }
             }
+        }
 
-            .portlet-title-text {
-                color: map-get($theme-colors, secondary);
-                font-size: 0.875rem;
-                font-weight: $font-weight-semi-bold;
-                line-height: 2.2;
-                margin-bottom: 0;
-                text-transform: uppercase;
+        .portlet-dropzone.portlet-column-content {
+            height: 100%;
+
+            .portlet-content {
+                background-color: #FFF;
+                height: 100%;
+
+                .portlet-content-container {
+                    height: 100%;
+
+                    .portlet-body {
+                        height: 100%;
+
+                        .journal-content-article {
+                            height: 100%;
+
+                            p {
+                                height: 100%;
+                                margin: 0;
+                            }
+
+                            picture > img {
+                                height: 100%;
+                                object-fit: cover;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -34,10 +60,8 @@
         }
     }
 
-    // GSDC Button Variants
-
-    .btn {
-        &.gsdc-btn-primary {
+    #_com_liferay_login_web_portlet_LoginPortlet_loginForm {
+        .btn {
             @include clay-button-variant($gsdc-btn-primary);
 
             height: 60px;
@@ -50,90 +74,6 @@
             &:hover {
                 box-shadow: 0 20px 20px 5px #4c84ff2e;
                 transform: translate(0, -5px);
-            }
-        }
-    }
-
-    // Login Portlet
-
-    .raylife-logo {
-        width: 150px;
-    }
-
-    .modal-body .login-header {
-        #raylife-text {
-            fill: $gsdc-primary;
-        }
-
-        .raylife-logo {
-            g:last-child {
-                g:first-child + g #raylife-image {
-                    fill: $gsdc-primary;
-                }
-            }
-        }
-    }
-
-    .gsdc-form-group {
-        label, .custom-control-label-text {
-            font-size: 0.75rem;
-            font-weight: $font-weight-normal;
-        }
-    }
-
-    .taglib-icon-list {
-        font-size: 0.75rem;
-        font-weight: $font-weight-normal;
-        margin-bottom: 0;
-
-        .lfr-icon-item {
-            color: $gsdc-primary;
-        }
-    }
-
-    .login-create-account {
-        font-size: 0.75rem;
-
-        .navigation {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .taglib-icon-list li {
-            &:first-child {
-                .icon-plus {
-                    display: none;
-                }
-            }
-
-            &:last-child {
-                display: none;
-            }
-        }
-    }
-
-    .login-forgot-password {
-        position: relative;
-        z-index: 1;
-
-        .taglib-icon-list li {
-            &:first-child {
-                display: none;
-            }
-
-            &:last-child {
-                float: none;
-                margin-right: 0;
-                right: 0;
-                top: 5px;
-
-                .taglib-text::after {
-                    content: '?';
-                }
-
-                .icon-question-sign {
-                    display: none;
-                }
             }
         }
     }
@@ -171,10 +111,6 @@
                 margin: 0;
                 width: 100%;
 
-                .portlet-column-only {
-                    padding: 0;
-                }
-
                 .form-group.form-inline.input-checkbox-wrapper {
                     display: inherit;
                     margin-bottom: 0;
@@ -194,98 +130,42 @@
             }
         }
 
-        .portlet-header {
-            display: none;
-        }
-
-        .portlet-content {
-            background-color: #FFFFFF;
-            border-radius: 0;
-            border-width: 0;
-            margin-left: auto;
-            margin-right: auto;
-            height: 100%;
-            padding: 0;
-
-            .portlet-icon-back {
-                display: none;
-            }
-        }
-
-        .portlet-body, .portlet-content-container {
-            height: 100%;
-        }
-
-        .login-component {
-            display: flex;
-            min-height: 100%;
-
-            @include media-breakpoint-down(sm) {
-                flex-direction: column;
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-            }
-        }
-
-        .login-component-signin {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
-        .login-component-forgot-password {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
-        .login-component-create-account {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
-        .login-header, .login-body, .login-footer {
-            max-width: 320px;
-            margin-left: auto;
-            width: 100%;
-
-            @include media-breakpoint-down(sm) {
-                margin-left: auto;
-                margin-right: auto;
-                max-width: 350px;
-                width: 100%;
-            }
-
-            @include media-breakpoint-up(xl) {
-                margin-right: 25px;
-            }
-        }
-
-        .login-title {
-            color: #5C5E5E;
-            font-style: normal;
-            font-weight: 300;
-            font-size: 26px;
-            line-height: 42px;
-
-            @include media-breakpoint-down(sm) {
-                color: $white;
-            }
-        }
-
         .login-container {
             background-color: #FFFFFF;
             display: flex;
             flex-direction: column;
+            height: 100%;
             justify-content: space-around;
+            margin-left: auto;
             padding: 20px 75px;
-            width: 40%;
+            width: 80%;
+
+            .navigation {
+                margin-bottom: auto;
+
+                ul > li:first-of-type {
+                    display: none;
+                }
+            }
+
+            input, label {
+                font-size: 16px;
+
+                &#_com_liferay_login_web_portlet_LoginPortlet_login {
+                    height: 55px;
+                    font-size: 20px;
+                }
+
+                &#_com_liferay_login_web_portlet_LoginPortlet_password {
+                    height: 55px;
+                    font-size: 33px;
+                }
+            }
 
             @include media-breakpoint-down(lg) {
                 padding-left: 5rem;
                 padding-right: 3rem;
+                width: 100%;
             }
 
             @include media-breakpoint-down(md) {
@@ -297,63 +177,21 @@
                 background-color: rgba(39, 40, 51, 0.8);
                 flex-grow: 1;
                 justify-content: flex-start;
+                margin-left: 0;
                 padding-top: 15vh;
                 position: relative;
-                width: auto;
                 z-index: 1;
-            }
-        }
 
-        .login-splash {
-            background-image: url('../images/login_portlet_splash.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            width: 60%;
-
-            @include media-breakpoint-down(sm) {
-                display: none;
-            }
-        }
-
-        .gsdc-form-group {
-            input {
-                border-radius: 8px;
-                font-size: 20px;
-            }
-
-            input[type="password"] {
-                font-size: 40px;
-            }
-
-            label, .custom-control-label-text {
-                color: #9D9E9E;
-
-                @include media-breakpoint-down(sm) {
-                    color: $white;
+                input, label {
+                    color: #FFF;
                 }
             }
 
-            .forgot-password {
-                color: #4c84ff;
-                font-size: .75rem;
-                line-height: 26px;
+            form {
+                margin-top: auto;
             }
-
-            .form-control {
-                background-color: $white;
-                height: 60px;
-            }
-        }
-
-        .login-create-account {
-            color: $white;
         }
     }
-}
-
-.portlet-dropzone.portlet-column-content.portlet-column-content-only {
-    height: 100%;
 }
 
 #currentHead {
