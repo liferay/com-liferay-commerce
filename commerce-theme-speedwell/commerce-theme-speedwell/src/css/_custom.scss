@@ -21,6 +21,10 @@ body:not(.signed-in) {
 
   .speedwell-frame__content--wide {
       padding: 0;
+
+      .login-container {
+        padding: 126px 30px !important;
+      }
   }
 
   .speedwell-search__results,
@@ -63,7 +67,7 @@ body:not(.signed-in) {
   }
 }
 
-body.controls-visible {
+body.signed-in {
   .speedwell-content {
     padding-top: 80px !important;
   }
