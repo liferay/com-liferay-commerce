@@ -96,6 +96,13 @@
 				"actionIds": [],
 				"roleName": "Guest",
 				"scope": 4
+			},
+			{
+				"actionIds": [
+					"VIEW"
+				],
+				"roleName": "User",
+				"scope": 4
 			}
 		],
 		"portlets": [
@@ -120,6 +127,13 @@
 					{
 						"actionIds": [],
 						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
 						"scope": 4
 					}
 				],
@@ -164,6 +178,13 @@
 						"actionIds": [],
 						"roleName": "Guest",
 						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
+						"scope": 4
 					}
 				],
 				"portlets": [
@@ -206,6 +227,13 @@
 					{
 						"actionIds": [],
 						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
 						"scope": 4
 					}
 				],
@@ -250,6 +278,13 @@
 						"actionIds": [],
 						"roleName": "Guest",
 						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
+						"scope": 4
 					}
 				],
 				"portlets": [
@@ -293,6 +328,13 @@
 						"actionIds": [],
 						"roleName": "Guest",
 						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
+						"scope": 4
 					}
 				],
 				"portlets": [
@@ -335,6 +377,13 @@
 					{
 						"actionIds": [],
 						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
 						"scope": 4
 					}
 				],
@@ -383,6 +432,13 @@
 					{
 						"actionIds": [],
 						"roleName": "Guest",
+						"scope": 4
+					},
+					{
+						"actionIds": [
+							"VIEW"
+						],
+						"roleName": "User",
 						"scope": 4
 					}
 				],
@@ -474,6 +530,13 @@
 			{
 				"actionIds": [],
 				"roleName": "Guest",
+				"scope": 4
+			},
+			{
+				"actionIds": [
+					"VIEW"
+				],
+				"roleName": "User",
 				"scope": 4
 			}
 		],
