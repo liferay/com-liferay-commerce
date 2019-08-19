@@ -4,16 +4,15 @@ import FilterResume from './Filter/Resume';
 
 import FilterProps from './Filter/definitions';
 
-import getAppContext from './Context';
-import ClayIcon from '@clayui/icon';
+import getAppContext, { ContextProps } from './Context';
 import ClayButton from '@clayui/button';
 
 
 const ActiveFiltersBar: React.FunctionComponent = (props) => {
 
-    const {state, actions} = getAppContext();
+    const {state, actions} : ContextProps = getAppContext();
 
-    const filtersActive: FilterProps[] = state.filters.reduce(
+    const filtersActive: String[] = state.filters.reduce(
         (acc: string[], filter: FilterProps) => !!filter.value ? acc.concat(filter.slug) : acc,
         []
     )
@@ -25,10 +24,15 @@ const ActiveFiltersBar: React.FunctionComponent = (props) => {
                     <li className="tbar-item tbar-item-expand">
                         <div className="tbar-section">
                             {filtersActive.map((slug, i) => {
-                                const filter: FilterProps = state.filters.reduce(
-                                    (found, filter) => found || (filter.slug === slug ? filter : false),
-                                    false
+                                const filter: FilterProps | null = state.filters.reduce(
+                                    (found: FilterProps | null, filter) => found || (filter.slug === slug ? filter : null),
+                                    null
                                 );
+                                
+                                if(!filter) {
+                                    throw new Error(`Filter "${slug}" not found.`);
+                                }
+                                
                                 return (<FilterResume key={i} {...filter} />)
                             })}
                         </div>
