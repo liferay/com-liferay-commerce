@@ -79,7 +79,7 @@ if (isMiniumTheme) {
 
 				<c:if test="<%= isMiniumTheme %>">
 					<div class="login-header">
-						<img class="raylife-logo" src="<%= themeDisplay.getPathThemeImages() %>/minium-logo.svg" />
+						<img class="raylife-logo" src="<%= themeDisplay.getLayoutSetLogo() %>" />
 					</div>
 				</c:if>
 
