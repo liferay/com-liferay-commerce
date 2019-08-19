@@ -7,31 +7,23 @@
 
   &:hover {
     color: currentColor;
+    text-decoration: none;
   }
 
-  &.is-active::before,
+  &:hover::after,
   &.is-active::after {
-    background: $color-theme;
-    content: '';
-    height: 3px;
+    color: #30CFA1;
+    content: '>';
+    height: 10px;
     position: absolute;
-    top: 140%;
-    width: 4px;
-  }
-
-  &.is-active::before {
-    right: 0;
-    transform: skew(0deg, 22deg) rotateZ(-120deg);
-    top: 50%;
-    margin-top: -2px;
-  }
-
-  &.is-active::after {
-    top: 50%;
-    left: 100%;
-    transform: skew(0deg, -22deg) rotateZ(120deg);
-    margin-top: 1px;
-    margin-left: -4px;
+    top: 100%;
+    width: 10px;
+    line-height: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+    left: 50%;
+    transform: rotateZ(90deg) scale(.4, .9);
+    margin-left: -5px;
   }
 
   @media (max-width: 767px) {

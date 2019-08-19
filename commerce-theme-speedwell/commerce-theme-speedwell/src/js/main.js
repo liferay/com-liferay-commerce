@@ -89,6 +89,23 @@ Liferay.on(
 				ticking = true;
 			}
 		}, false);
+
+		function removeUnusedListeners() {
+			window.removeEventListener('keydown', needsAccessibility);
+		}
+
+		function needsAccessibility(e) {
+			const isTabbing = e.which === 9;
+
+			if (isTabbing) {
+				document.body.classList.add('is-accessible');
+				removeUnusedListeners();
+			}
+		}
+
+		window.addEventListener('keydown', needsAccessibility);
+
+		setTimeout(removeUnusedListeners, 5000);
 	}
 );
 
