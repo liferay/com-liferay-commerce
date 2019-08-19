@@ -63,6 +63,12 @@ body:not(.signed-in) {
   }
 }
 
+body.controls-visible {
+  .speedwell-content {
+    padding-top: 80px !important;
+  }
+}
+
 .speedwell-content {
   &--wide {
     margin: 0 auto;
