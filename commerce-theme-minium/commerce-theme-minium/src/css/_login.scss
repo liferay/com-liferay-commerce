@@ -9,21 +9,46 @@
     }
 
     .portlet-layout {
-        .portlet {
-            .management-bar, .navbar-underline {
-                > .container-fluid-max-xl {
-                    padding-left: 0;
-                    padding-right: 0;
+        .portlet-column {
+            height: 100%;
+            padding: 0;
+
+            &.portlet-column-last {
+                @include media-breakpoint-down(sm) {
+                    height: 100%;
+                    position: absolute;
                 }
             }
+        }
 
-            .portlet-title-text {
-                color: map-get($theme-colors, secondary);
-                font-size: 0.875rem;
-                font-weight: $font-weight-semi-bold;
-                line-height: 2.2;
-                margin-bottom: 0;
-                text-transform: uppercase;
+        .portlet-dropzone.portlet-column-content {
+            height: 100%;
+
+            .portlet-content {
+                height: 100%;
+
+                .portlet-content-container {
+                    height: 100%;
+
+                    .portlet-body {
+                        height: 100%;
+
+                        .journal-content-article {
+                            height: 100%;
+
+                            p {
+                                height: 100%;
+                                margin: 0;
+                            }
+
+                            picture > img {
+                                height: 100%;
+                                object-fit: cover;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -78,16 +103,6 @@
         label, .custom-control-label-text {
             font-size: 0.75rem;
             font-weight: $font-weight-normal;
-        }
-    }
-
-    .taglib-icon-list {
-        font-size: 0.75rem;
-        font-weight: $font-weight-normal;
-        margin-bottom: 0;
-
-        .lfr-icon-item {
-            color: $gsdc-primary;
         }
     }
 
@@ -228,24 +243,6 @@
             }
         }
 
-        .login-component-signin {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
-        .login-component-forgot-password {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
-        .login-component-create-account {
-            @include media-breakpoint-down(sm) {
-                background-image: url(../images/login_portlet_splash.jpg);
-            }
-        }
-
         .login-header, .login-body, .login-footer {
             max-width: 320px;
             margin-left: auto;
@@ -280,8 +277,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+            margin-left: auto;
             padding: 20px 75px;
-            width: 40%;
 
             @include media-breakpoint-down(lg) {
                 padding-left: 5rem;
@@ -297,22 +294,11 @@
                 background-color: rgba(39, 40, 51, 0.8);
                 flex-grow: 1;
                 justify-content: flex-start;
+                margin-left: 0;
                 padding-top: 15vh;
                 position: relative;
                 width: auto;
                 z-index: 1;
-            }
-        }
-
-        .login-splash {
-            background-image: url('../images/login_portlet_splash.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            width: 60%;
-
-            @include media-breakpoint-down(sm) {
-                display: none;
             }
         }
 
@@ -350,10 +336,6 @@
             color: $white;
         }
     }
-}
-
-.portlet-dropzone.portlet-column-content.portlet-column-content-only {
-    height: 100%;
 }
 
 #currentHead {
