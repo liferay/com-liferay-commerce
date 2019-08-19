@@ -88,7 +88,7 @@ SpeedwellSlider.prototype = {
         if (this.interval) {
             this.controls.container.classList.add('self-sliding');
             this.interval = setInterval((function() {
-                this.controls.nextBtn.click();
+                this.throttleInteraction(null);
             }).bind(this), this.interval);
         }
     },
@@ -149,8 +149,10 @@ SpeedwellSlider.prototype = {
         });
     },
 
-    throttleInteraction(event) {
-        const direction = event.currentTarget.className.indexOf('prev') > -1 ? BACKWARDS : FORWARDS,
+    throttleInteraction(e) {
+        const direction = e instanceof Event &&
+                        e.currentTarget.className.indexOf('prev') > -1 ?
+                        BACKWARDS : FORWARDS,
             prepare = direction === BACKWARDS ? this.prepareNow.bind(this) : this.prepareLater;
 
         this.toggleControls({isEnabled: false});
