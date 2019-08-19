@@ -29,7 +29,7 @@ if (isMiniumTheme) {
 %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() && isMiniumTheme %>">
+	<c:when test="<%= themeDisplay.isSignedIn() && isMiniumTheme && !themeDisplay.isShowSiteAdministrationIcon() %>">
 		<aui:script>
 			window.location.replace("<%= HtmlUtil.escape(redirect) %>");
 		</aui:script>
