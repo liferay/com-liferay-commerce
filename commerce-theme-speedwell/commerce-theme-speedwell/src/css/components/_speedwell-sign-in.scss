@@ -12,15 +12,14 @@
     padding: 20px 0 0 0;
   }
 
-  .button-holder {
-    .btn {
-      width: 100%;
-      font-size: 12px;
-      font-weight: bold;
-      height: 50px;
-      line-height: 50px;
-      padding: 0;
-    }
+  .btn,
+  .navigation li {
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
   }
 
   .sign-in-form {
@@ -29,7 +28,7 @@
     }
 
     &::before {
-      content: 'Sign In';
+      content: '';
       font-size: 1.4em;
       font-weight: 300;
       margin: 20px 0;
@@ -59,7 +58,7 @@
     }
 
     &::after {
-      content: 'New user?';
+      content: '';
       display: block;
       text-align: center;
       font-size: 12px;
@@ -75,11 +74,8 @@
 
     li {
       display: block;
-      width: 100%;
       margin: 0;
       padding: 0;
-      height: 50px;
-      line-height: 50px;
       text-align: center;
       font-size: 12px !important;
 
