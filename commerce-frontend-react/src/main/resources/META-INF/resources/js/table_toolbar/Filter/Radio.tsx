@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import ClayForm from '@clayui/form';
-import getAppContext from '../Context';
+import getAppContext, { ContextProps } from '../Context';
 
 import { MultiFilterProps } from './definitions';
 
@@ -11,7 +11,7 @@ interface IProps extends MultiFilterProps {
 }
 
 const RadioFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } = getAppContext();
+    const { actions } : ContextProps  = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

@@ -9,7 +9,7 @@ import getAppContext from './Context';
 
 const FiltersDropdown: React.FunctionComponent = (props) => {
     const [ active, setActive ] = useState(false);
-    const [ query, setQuery ] = useState(null);
+    const [ query, setQuery ] = useState('');
     const { state, actions } = getAppContext();
     const [ visibleFilters, setVisibleFilter ] = useState(state.filters.filter(filter => !filter.value))
 

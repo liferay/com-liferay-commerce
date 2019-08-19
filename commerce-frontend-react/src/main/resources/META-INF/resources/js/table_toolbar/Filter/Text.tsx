@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { TextFilterProps } from './definitions';
-import getAppContext from '../Context';
+import getAppContext, { ContextProps } from '../Context';
 
 import ClayButton from '@clayui/button';
 
@@ -10,7 +10,7 @@ interface IProps extends TextFilterProps {
 }
 
 const TextFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } = getAppContext();
+    const { actions } : ContextProps = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

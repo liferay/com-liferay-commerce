@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TableToolbar from './TableToolbar';
 import FilterProps from './Filter/definitions'
 
-const filters: Array<FilterProps> = [
+const filters: FilterProps[] = [
 	{
 		type: "text",
 		label: "Text test",
@@ -62,7 +62,7 @@ const filters: Array<FilterProps> = [
 			}
 		],
 		label: 'Checkbox test',
-		operator: "eq",
+		operator: "contains",
 		slug: 'checkbox-test',
 		value: ['first-option', 'third-option']
 	},
@@ -92,9 +92,9 @@ const props = {
 		onClick: (e) => console.log(e),
 		resetFiltersAfterClickAction: true
 	},
-	queryEndpoint: '/toolbar-test/',
+	queryEndpoint: '/toolbar-test',
 	inputSearch: {
-		filterName: 'main-search'
+		name: 'main-search'
 	}
 }
 
