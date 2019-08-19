@@ -1,9 +1,6 @@
 export const actionsDefinition = {
     UPDATE_FILTER_VALUE: 'updateFilterValue',
     RESET_FILTERS_VALUE: 'resetFiltersValue',
-    PERFORM_UPDATE_REQUEST_PENDING: 'performUpdateRequestPending',
-    PERFORM_UPDATE_REQUEST_FULFILLED: 'performUpdateRequestFullFilled',
-    PERFORM_UPDATE_REQUEST_REJECTED: 'performUpdateRequestRejected'
 }
 
 const updateFilterValue = dispatch => (slug: string, value: any = null) => dispatch(
@@ -22,42 +19,9 @@ const resetFiltersValue = dispatch => () => dispatch(
     }
 )
 
-const performUpdateRequest = dispatch => (url: string, filters: Object) => {
-    
-    dispatch(
-        {
-            type: actionsDefinition.PERFORM_UPDATE_REQUEST_PENDING
-        }
-    )
-
-    return fetch(
-        url,
-        {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        }
-    )
-        .then(
-            () => {
-                dispatch({ 
-                    type: actionsDefinition.PERFORM_UPDATE_REQUEST_FULFILLED,
-                })
-            }
-        )
-        .catch(
-            (err) => dispatch({ 
-                type: actionsDefinition.PERFORM_UPDATE_REQUEST_REJECTED,
-                payload: err 
-            })
-        )
-}
-
 export const actions = {
     updateFilterValue,
     resetFiltersValue,
-    performUpdateRequest
 }
 
 export default actions;

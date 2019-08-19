@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import ClayDatePicker from '@clayui/date-picker';
 import ClayButton from '@clayui/button';
 
-import getAppContext from '../Context';
+import getAppContext, { ContextProps } from '../Context';
 import { DateFilterProps } from './definitions'
 
 interface IProps extends DateFilterProps {
@@ -10,7 +10,7 @@ interface IProps extends DateFilterProps {
 }
 
 const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const {actions} = getAppContext();
+    const {actions} : ContextProps = getAppContext();
     const [value, setValue] = useState(props.value);
 
     return (
