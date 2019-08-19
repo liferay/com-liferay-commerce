@@ -95,7 +95,8 @@
 
   &__logo {
     justify-content: center;
-    text-align: center
+    text-align: center;
+    overflow: hidden;
   }
 
   &__actions {
