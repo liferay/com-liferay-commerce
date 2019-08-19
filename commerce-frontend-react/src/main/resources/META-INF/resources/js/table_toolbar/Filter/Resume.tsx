@@ -4,11 +4,11 @@ import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import { renderFilter, getPrettifiedValue } from '../utils';
 import ClayLabel from '@clayui/label';
-import getAppContext from '../Context';
+import getAppContext, { ContextProps } from '../Context';
 
 
 const Resume: React.FunctionComponent<any> = (props) => {
-    const { actions} = getAppContext();
+    const { actions } : ContextProps = getAppContext();
     const [open, setOpen] = useState(false);
     const prettifiedValue = ['checkbox', 'radio', 'select'].includes(props.type) 
         ? getPrettifiedValue(props) 
@@ -22,7 +22,7 @@ const Resume: React.FunctionComponent<any> = (props) => {
             className='component-label tbar-label mr-2'
         >
             <div className="d-flex">
-                <div className="label-section">
+                <div className="label-section mr-2">
                     {props.label} : {prettifiedValue}
                 </div>
                 <ClayDropDown
