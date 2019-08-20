@@ -146,21 +146,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
 						"layoutColumnId": "column-3",
@@ -196,24 +182,10 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
-						"layoutColumnId": "column-0",
+						"layoutColumnId": "column-3",
 						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet"
 					}
@@ -221,7 +193,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Addresses",
 				"permissions": [
 					{
@@ -246,21 +218,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
 						"layoutColumnId": "column-3",
@@ -296,21 +254,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
 						"layoutColumnId": "column-3",
@@ -346,21 +290,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
 						"layoutColumnId": "column-3",
@@ -396,21 +326,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					},
 					{
 						"layoutColumnId": "column-3",
@@ -451,21 +367,7 @@
 					{
 						"layoutColumnId": "column-2",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
-						"portletPreferences": {
-							"displayDepth": "2",
-							"displayStyle": {
-								"Name": "ddmTemplate_NAVBAR-DEFAULT-FTL",
-								"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
-							},
-							"displayStyleGroupId": "",
-							"includedLayouts": "auto",
-							"portletSetupCss": "",
-							"portletSetupPortletDecoratorId": "barebone",
-							"portletSetupUseCustomTitle": "false",
-							"rootMenuItemLevel": "1",
-							"rootMenuItemType": "relative"
-						}
+						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet_INSTANCE_speedwell"
 					}
 				],
 				"privateLayout": false
@@ -503,7 +405,7 @@
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 1,
-				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPPublisherPortlet_INSTANCE_product_detail",
+				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPPublisherPortlet_INSTANCE_speedwell",
 				"portletPreferences": {
 					"cpContentListRendererKey": "list-minium",
 					"dataSource": "assetCategoriesAndTagsDataSource",

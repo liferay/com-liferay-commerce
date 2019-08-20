@@ -82,10 +82,30 @@ public class PortletSettingsImporter {
 
 			String portletName = jsonObject.getString("portletName");
 
-			_importPortletSettings(
-				jsonObject, portletName, classLoader,
-				displayTemplateDependenciesPath, assetVocabularyGroupId,
-				serviceContext);
+			JSONArray layoutFriendlyURLJSONArray = jsonObject.getJSONArray(
+				"layoutFriendlyURLs");
+
+			if (layoutFriendlyURLJSONArray != null) {
+				for (int j = 0; j < layoutFriendlyURLJSONArray.length(); j++) {
+					if (jsonObject.has("layoutFriendlyURL")) {
+						jsonObject.remove("layoutFriendlyURL");
+					}
+
+					jsonObject.put(
+						"layoutFriendlyURL", layoutFriendlyURLJSONArray.get(j));
+
+					_importPortletSettings(
+						jsonObject, portletName, classLoader,
+						displayTemplateDependenciesPath, assetVocabularyGroupId,
+                        serviceContext);
+				}
+			}
+			else {
+				_importPortletSettings(
+					jsonObject, portletName, classLoader,
+					displayTemplateDependenciesPath, assetVocabularyGroupId,
+                    serviceContext);
+			}
 		}
 	}
 
@@ -204,10 +224,20 @@ public class PortletSettingsImporter {
 					_classNameLocalService.getClassNameId(className));
 			}
 			else if (key.equals("displayStyle")) {
+				JSONObject displayStyleJSONObject =
+					portletPreferencesJSONObject.getJSONObject(key);
+
 				value = _importDisplayTemplate(
-					portletPreferencesJSONObject.getJSONObject(key),
-					classLoader, displayTemplateDependenciesPath,
-					serviceContext);
+					displayStyleJSONObject, classLoader,
+					displayTemplateDependenciesPath, serviceContext);
+
+				String templateName = displayStyleJSONObject.getString("Name");
+
+				if (Validator.isBlank(value) &&
+					templateName.contains("ddmTemplate_")) {
+
+					value = templateName;
+				}
 			}
 			else if (key.equals("displayStyleGroupId")) {
 				value = String.valueOf(groupId);
