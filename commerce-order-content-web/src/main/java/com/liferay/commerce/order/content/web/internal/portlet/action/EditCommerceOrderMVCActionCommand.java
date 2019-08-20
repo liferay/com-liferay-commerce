@@ -290,6 +290,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			_commerceOrderService.reorderCommerceOrder(
 				commerceOrderId, commerceContext);
 
+		_commerceOrderHttpHelper.setCurrentCommerceOrder(
+			_portal.getHttpServletRequest(actionRequest), commerceOrder);
+
 		checkoutOrSubmitCommerceOrder(actionRequest, commerceOrder);
 	}
 
