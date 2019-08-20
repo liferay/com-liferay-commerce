@@ -16,8 +16,10 @@ package com.liferay.commerce.product.definitions.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -70,8 +72,14 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPDefinitionLink.class.getName(), actionRequest);
 
-		_cpDefinitionLinkService.updateCPDefinitionLinks(
-			cpDefinitionId, cpDefinitionIds2, type, serviceContext);
+		for (long curCPDefinitionId : cpDefinitionIds2) {
+			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+				curCPDefinitionId);
+
+			_cpDefinitionLinkService.addCPDefinitionLink(
+				cpDefinitionId, cpDefinition.getCProductId(), 0.0, type,
+				serviceContext);
+		}
 	}
 
 	protected void deleteCPDefinitionLinks(ActionRequest actionRequest)
@@ -151,5 +159,8 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
+
+	@Reference
+	private CPDefinitionService _cpDefinitionService;
 
 }
