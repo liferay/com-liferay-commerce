@@ -121,7 +121,7 @@
 		],
 		"subLayouts": [
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Orders",
 				"permissions": [
 					{
@@ -144,8 +144,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -163,15 +163,15 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 2,
+						"layoutColumnId": "column-3",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_order_content_web_internal_portlet_CommerceOrderContentPortlet"
 					}
 				],
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "Login & Security",
 				"permissions": [
 					{
@@ -194,8 +194,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -213,8 +213,8 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 2,
+						"layoutColumnId": "column-0",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_account_web_internal_portlet_CommerceAccountPortlet"
 					}
 				],
@@ -244,8 +244,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -263,15 +263,15 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 2,
+						"layoutColumnId": "column-3",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_address_content_web_internal_portlet_CommerceAddressContentPortlet"
 					}
 				],
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Subscriptions",
 				"permissions": [
 					{
@@ -294,8 +294,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -313,15 +313,15 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 2,
+						"layoutColumnId": "column-3",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_subscription_web_internal_portlet_CommerceSubscriptionContentPortlet"
 					}
 				],
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Downloads",
 				"permissions": [
 					{
@@ -344,8 +344,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -363,8 +363,8 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 2,
+						"layoutColumnId": "column-3",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_product_type_virtual_order_content_web_internal_portlet_CommerceVirtualOrderItemContentPortlet"
 					}
 				],
@@ -394,8 +394,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
@@ -413,20 +413,20 @@
 						}
 					},
 					{
-						"layoutColumnId": "column-2",
+						"layoutColumnId": "column-3",
 						"layoutColumnPos": 0,
 						"portletName": "com_liferay_commerce_wish_list_web_internal_portlet_MyCommerceWishListsPortlet"
 					},
 					{
 						"layoutColumnId": "column-3",
-						"layoutColumnPos": 0,
+						"layoutColumnPos": 1,
 						"portletName": "com_liferay_commerce_wish_list_web_internal_portlet_CommerceWishListContentPortlet"
 					}
 				],
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_column",
+				"layoutTemplateId": "1_2_columns_i",
 				"name": "My Payment Methods",
 				"permissions": [
 					{
@@ -449,8 +449,8 @@
 						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
 					},
 					{
-						"layoutColumnId": "column-1",
-						"layoutColumnPos": 1,
+						"layoutColumnId": "column-2",
+						"layoutColumnPos": 0,
 						"portletName": "com_liferay_site_navigation_menu_web_portlet_SiteNavigationMenuPortlet",
 						"portletPreferences": {
 							"displayDepth": "2",
