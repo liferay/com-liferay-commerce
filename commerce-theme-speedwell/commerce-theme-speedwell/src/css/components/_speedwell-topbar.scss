@@ -45,6 +45,43 @@
     }
 
     @include speedwellButtonEffect($color-bg, $stroke);
+
+    &[disabled],
+    &.is-disabled,
+    &[data-badge-count="0"]{
+      opacity: 0.5;
+    }
+
+    &:not(.has-badge)::after {
+      display: none;
+    }
+
+    &.has-badge::after {
+      align-items: center;
+      background-color: $color-theme;
+      border-radius: 50%;
+      color: white;
+      content: attr(data-badge-count);
+      display: flex;
+      font-size: 10px;
+      font-weight: bold;
+      height: 18px;
+      justify-content: center;
+      left: 50%;
+      line-height: 1;
+      margin-left: -9px;
+      margin-top: -9px;
+      position: absolute;
+      top: 50%;
+      transform: translate(17px, -7px);
+      transition: all ease 200ms;
+      width: 18px;
+    }
+
+    &:not(.has-badge)::after {
+      opacity: 0;
+      transform: scale(0.1) translate(17px, -7px);
+    }
   }
 
   &__icon {

@@ -10,6 +10,21 @@ AUI().ready(
 	*/
 
 	function() {
+		const searchBar = Liferay.component('search-bar');
+
+		if (searchBar) {
+			searchBar.on('toggled', function(status) {
+				document.querySelectorAll(".js-toggle-search").forEach(function (el) {
+					el.classList.toggle("is-active", status);
+				});
+
+				document.getElementById("speedwell")
+					.classList.toggle("has-search", status);
+
+				document.querySelector('.speedwell-search')
+					.classList.toggle('is-open', status);
+			});
+		}
 	}
 );
 
