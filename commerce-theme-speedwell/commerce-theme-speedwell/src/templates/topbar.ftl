@@ -42,7 +42,7 @@
 
 			<div class="speedwell-search__bar-wrapper">
 				<div class="speedwell-search__bar">
-					<button class="speedwell-topbar__button">
+					<button class="speedwell-topbar__button" disabled>
 						<svg class="commerce-icon speedwell-topbar__icon">
 							<use href="${themeDisplay.getPathThemeImages()}/commerce-icons.svg#search" />
 						</svg>
