@@ -138,7 +138,10 @@ public class CommercePendingOrderItemClayTable
 
 		clayTableSchemaBuilder.addField("name", "name");
 
-		clayTableSchemaBuilder.addField("price", "price");
+		ClayTableSchemaField priceField = clayTableSchemaBuilder.addField(
+			"price", "price");
+
+		priceField.setContentRenderer("commerceTablePrice");
 
 		clayTableSchemaBuilder.addField("discount", "discount");
 
@@ -167,6 +170,7 @@ public class CommercePendingOrderItemClayTable
 		CommerceContext commerceContext =
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -179,6 +183,7 @@ public class CommercePendingOrderItemClayTable
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
 				String price = StringPool.BLANK;
+				String promoPrice = StringPool.BLANK;
 				String discount = StringPool.BLANK;
 				String total = StringPool.BLANK;
 
@@ -193,6 +198,14 @@ public class CommercePendingOrderItemClayTable
 
 					if (unitPrice != null) {
 						price = unitPrice.format(themeDisplay.getLocale());
+					}
+
+					CommerceMoney unitPromoPrice =
+						commerceProductPrice.getUnitPromoPrice();
+
+					if (unitPromoPrice != null) {
+						promoPrice = unitPromoPrice.format(
+							themeDisplay.getLocale());
 					}
 
 					CommerceMoney finalPrice =
@@ -220,12 +233,14 @@ public class CommercePendingOrderItemClayTable
 						commerceOrderItem.getCommerceOrderId(),
 						commerceOrderItem.getSku(),
 						commerceOrderItem.getName(themeDisplay.getLocale()),
-						price, discount, commerceOrderItem.getQuantity(), total,
+						price, promoPrice, discount,
+						commerceOrderItem.getQuantity(), total,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
 						CommerceOrderClayTableUtil.getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
-							themeDisplay)));
+							themeDisplay),
+						0));
 			}
 		}
 		catch (Exception e) {
