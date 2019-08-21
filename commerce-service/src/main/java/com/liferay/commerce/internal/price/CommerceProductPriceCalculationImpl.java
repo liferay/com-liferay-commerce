@@ -88,10 +88,6 @@ public class CommerceProductPriceCalculationImpl
 		commerceProductPrice.setUnitPrice(unitPrice);
 		commerceProductPrice.setUnitPromoPrice(promoPrice);
 
-		CommerceDiscountValue commerceDiscountValue =
-			_commerceDiscountCalculation.getProductCommerceDiscountValue(
-				cpInstanceId, quantity, unitPrice.getPrice(), commerceContext);
-
 		BigDecimal finalPrice = unitPrice.getPrice();
 
 		BigDecimal promo = promoPrice.getPrice();
@@ -101,6 +97,10 @@ public class CommerceProductPriceCalculationImpl
 
 			finalPrice = promoPrice.getPrice();
 		}
+
+		CommerceDiscountValue commerceDiscountValue =
+			_commerceDiscountCalculation.getProductCommerceDiscountValue(
+				cpInstanceId, quantity, finalPrice, commerceContext);
 
 		finalPrice = finalPrice.multiply(BigDecimal.valueOf(quantity));
 
