@@ -27,6 +27,9 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.petra.string.StringPool" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="com.liferay.portal.kernel.model.WorkflowedModel" %>
+<%@ page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem" %>
+<%@ page import="com.liferay.commerce.frontend.model.HeaderButtonModel" %>
 
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 

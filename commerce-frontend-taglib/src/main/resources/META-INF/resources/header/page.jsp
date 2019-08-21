@@ -30,7 +30,7 @@
     String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
 %>
 
-<div class="container-fluid">
+<div class="container-fluid bg-white">
     <div class="container d-flex">
         <div class="d-flex align-items-center flex-grow-1">
             <c:if test="<%= Validator.isNotNull(thumbnailUrl) %>">
