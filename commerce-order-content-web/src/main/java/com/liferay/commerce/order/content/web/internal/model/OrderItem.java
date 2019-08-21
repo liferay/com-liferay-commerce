@@ -21,19 +21,21 @@ public class OrderItem {
 
 	public OrderItem(
 		long orderItemId, long orderId, String sku, String name, String price,
-		String discount, int quantity, String total, String thumbnail,
-		String viewShipmentsURL) {
+		String promoPrice, String discount, int quantity, String total,
+		String thumbnail, String viewShipmentsURL, int shippedQuantity) {
 
 		_orderItemId = orderItemId;
 		_orderId = orderId;
 		_sku = sku;
 		_name = name;
 		_price = price;
+		_promoPrice = promoPrice;
 		_discount = discount;
 		_quantity = quantity;
 		_total = total;
 		_thumbnail = thumbnail;
 		_viewShipmentsURL = viewShipmentsURL;
+		_shippedQuantity = shippedQuantity;
 	}
 
 	public String getDiscount() {
@@ -56,8 +58,16 @@ public class OrderItem {
 		return _price;
 	}
 
+	public String getPromoPrice() {
+		return _promoPrice;
+	}
+
 	public int getQuantity() {
 		return _quantity;
+	}
+
+	public int getShippedQuantity() {
+		return _shippedQuantity;
 	}
 
 	public String getSku() {
@@ -81,7 +91,9 @@ public class OrderItem {
 	private final long _orderId;
 	private final long _orderItemId;
 	private final String _price;
+	private final String _promoPrice;
 	private final int _quantity;
+	private final int _shippedQuantity;
 	private final String _sku;
 	private final String _thumbnail;
 	private final String _total;
