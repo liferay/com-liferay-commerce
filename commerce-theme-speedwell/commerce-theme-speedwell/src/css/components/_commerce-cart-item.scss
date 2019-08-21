@@ -3,8 +3,8 @@
   $item-image-size-sm: 50px;
 
   align-items: center;
-  border-bottom: 1px solid rgba(180, 187, 201, 0.2);
-  color: $color-fg;
+  border-bottom: 1px solid rgba(180, 187 ,201, 0.2);
+  color: $stroke;
   display: grid;
   font-size: 13px;
   grid-gap: 15px;
@@ -64,7 +64,7 @@
   }
 
   &__sku {
-    display: block;
+    display: none;
   }
 
   &__price {
@@ -75,6 +75,8 @@
       display: block;
       font-size: 1.1em;
       margin: 0;
+
+      @include specialPricesStyles;
     }
   }
 
@@ -89,7 +91,7 @@
   &__errors {
     font-weight: 600;
     grid-column: 1/3;
-    color: $color-mood-bad; // TODO change
+    color: $color-mood-bad
   }
 
   &__delete-wrapper {
@@ -99,7 +101,6 @@
   &__delete {
     align-items: center;
     background-color: transparent;
-    border-radius: 50%;
     cursor: pointer;
     display: flex;
     font-size: 28px;
@@ -108,6 +109,7 @@
     padding: 0;
     position: relative;
     transition: background-color .1s ease-out;
+    border: 0;
     width: 22px;
 
     &:hover {
@@ -123,7 +125,7 @@
 
   &__cancel-delete {
     align-items: center;
-    background-color: $color-fg; // TODO change
+    background-color: $color-fg;
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -148,6 +150,6 @@
   }
 
   &.is-not-valid {
-    background-color: $color-mood-bad; // TODO change with appropriate one
+    background-color: $color-mood-bad;
   }
 }
