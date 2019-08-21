@@ -159,8 +159,9 @@
 
         &:hover::after,
         &.is-active::after {
-          color: #30CFA1;
-          content: '>';
+          color: $color-theme;
+          content: '>>';
+          letter-spacing: -14px;
           height: 60px;
           position: absolute;
           width: 25px;
@@ -171,6 +172,7 @@
           -webkit-transform: rotateZ(0deg) scale(0.4, 0.9);
           transform: rotateZ(0deg) scale(0.4, 0.9);
           margin-top: -7px;
+          text-shadow: 0 0 0px #30CFA1;
         }
 
         &__icon {
