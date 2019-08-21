@@ -115,6 +115,7 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
 
 		long commerceOrderItemId = counterLocalService.increment();
 
@@ -133,6 +134,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setShippedQuantity(shippedQuantity);
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 		commerceOrderItem.setNameMap(cpDefinition.getNameMap());
 		commerceOrderItem.setSku(cpInstance.getSku());
@@ -434,6 +436,7 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceContext);
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		validate(
@@ -444,6 +447,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setQuantity(quantity);
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
 
@@ -519,9 +523,11 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceOrderItem.getQuantity(), false, commerceContext);
 
 		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 
 		_setCommerceOrderItemDiscountValue(
