@@ -48,7 +48,7 @@
 	{
 		"icon": "icon_catalog.png",
 		"layoutTemplateId": "speedwell_sidebar",
-		"name": "Catalog",
+		"name": "Car Parts",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
