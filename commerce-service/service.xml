@@ -363,6 +363,7 @@
 		<column localized="true" name="name" type="String" />
 		<column name="sku" type="String" />
 		<column name="unitPrice" type="BigDecimal" />
+		<column name="promoPrice" type="BigDecimal" />
 		<column name="discountAmount" type="BigDecimal" />
 		<column name="finalPrice" type="BigDecimal" />
 		<column name="discountPercentageLevel1" type="BigDecimal" />
