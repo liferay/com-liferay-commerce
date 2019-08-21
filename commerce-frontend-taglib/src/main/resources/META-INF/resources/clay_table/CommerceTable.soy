@@ -134,3 +134,30 @@
 		{/if}
 	</td>
 {/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'commerceTablePrice'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td>
+		{if isNonnull($item.promoPrice)}
+			<span class="price">
+				<span class="price__value price__value--promo-price">
+					{$item.promoPrice}
+				</span>
+				<span class="price__value price__value--inactive">
+					{$value}
+				</span>
+			</span>
+		{else}
+			<span class="price">
+				<span class="price__value">
+					{$value}
+				</span>
+			</span>
+		{/if}
+	</td>
+{/deltemplate}

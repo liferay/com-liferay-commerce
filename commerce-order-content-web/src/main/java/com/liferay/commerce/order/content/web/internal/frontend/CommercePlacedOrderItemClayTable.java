@@ -15,7 +15,6 @@
 package com.liferay.commerce.order.content.web.internal.frontend;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.currency.model.CommerceMoneyFactory;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableSchema;
 import com.liferay.commerce.frontend.ClayTableSchemaBuilder;
@@ -24,15 +23,11 @@ import com.liferay.commerce.frontend.ClayTableSchemaField;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
-import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
-import com.liferay.commerce.order.content.web.internal.model.PlacedOrderItem;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.order.content.web.internal.model.OrderItem;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
-import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -42,6 +37,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,7 +56,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = {ClayTable.class, CommerceDataSetDataProvider.class}
 )
 public class CommercePlacedOrderItemClayTable
-	implements ClayTable, CommerceDataSetDataProvider<PlacedOrderItem> {
+	implements ClayTable, CommerceDataSetDataProvider<OrderItem> {
 
 	public static final String NAME = "commercePlacedOrderItems";
 
@@ -97,7 +93,8 @@ public class CommercePlacedOrderItemClayTable
 		clayTableSchemaBuilder.addField("shippedQuantity", "shippedQuantity");
 
 		ClayTableSchemaField clayTableSchemaField =
-			clayTableSchemaBuilder.addField("shipmentUrl", "shipment");
+			clayTableSchemaBuilder.addField(
+				"viewShipmentsURL", "viewShipmentsURL");
 
 		clayTableSchemaField.setContentRenderer("commerceTableCellModalLink");
 
@@ -110,21 +107,18 @@ public class CommercePlacedOrderItemClayTable
 	}
 
 	@Override
-	public List<PlacedOrderItem> getItems(
+	public List<OrderItem> getItems(
 			HttpServletRequest httpServletRequest, Filter filter,
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		List<PlacedOrderItem> placedOrderItems = new ArrayList<>();
+		List<OrderItem> orderItems = new ArrayList<>();
 
 		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
-
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			orderFilter.getOrderId());
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemService.getCommerceOrderItems(
@@ -133,29 +127,21 @@ public class CommercePlacedOrderItemClayTable
 
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-				String price = StringPool.BLANK;
-				String discount = StringPool.BLANK;
-				String total = StringPool.BLANK;
-
 				CommerceMoney unitPriceMoney =
 					commerceOrderItem.getUnitPriceMoney();
-
-				if (unitPriceMoney != null) {
-					price = unitPriceMoney.format(themeDisplay.getLocale());
-				}
-
-				CommerceMoney finalPrice =
+				CommerceMoney promoPriceMoney =
+					commerceOrderItem.getPromoPriceMoney();
+				CommerceMoney discountAmountMoney =
+					commerceOrderItem.getDiscountAmountMoney();
+				CommerceMoney finalPriceMoney =
 					commerceOrderItem.getFinalPriceMoney();
 
-				if (finalPrice != null) {
-					total = finalPrice.format(themeDisplay.getLocale());
-				}
+				Locale locale = themeDisplay.getLocale();
 
-				CommerceMoney discountAmount = _commerceMoneyFactory.create(
-					commerceOrder.getCommerceCurrency(),
-					commerceOrderItem.getDiscountAmount());
-
-				discount = discountAmount.format(themeDisplay.getLocale());
+				String price = unitPriceMoney.format(locale);
+				String promoPrice = promoPriceMoney.format(locale);
+				String discount = discountAmountMoney.format(locale);
+				String total = finalPriceMoney.format(locale);
 
 				String viewShipmentURL = null;
 
@@ -166,13 +152,14 @@ public class CommercePlacedOrderItemClayTable
 							themeDisplay);
 				}
 
-				placedOrderItems.add(
-					new PlacedOrderItem(
+				orderItems.add(
+					new OrderItem(
 						commerceOrderItem.getCommerceOrderItemId(),
 						commerceOrderItem.getCommerceOrderId(),
 						commerceOrderItem.getSku(),
 						commerceOrderItem.getName(themeDisplay.getLocale()),
-						price, discount, commerceOrderItem.getQuantity(), total,
+						price, promoPrice, discount,
+						commerceOrderItem.getQuantity(), total,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
 						viewShipmentURL,
@@ -183,7 +170,7 @@ public class CommercePlacedOrderItemClayTable
 			_log.error(e, e);
 		}
 
-		return placedOrderItems;
+		return orderItems;
 	}
 
 	@Override
@@ -198,16 +185,7 @@ public class CommercePlacedOrderItemClayTable
 	private ClayTableSchemaBuilderFactory _clayTableSchemaBuilderFactory;
 
 	@Reference
-	private CommerceMoneyFactory _commerceMoneyFactory;
-
-	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
-
-	@Reference
-	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
