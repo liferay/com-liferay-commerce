@@ -60,8 +60,18 @@ Liferay.on(
 				element.addEventListener('click', function() {
 					element.focus();
 					document.querySelector('.speedwell-' + el).classList.toggle('is-open');
+
+					document.querySelector('.speedwell-category-nav').classList.remove('is-open');
 				})
 			});
+		});
+
+		document.querySelector('.speedwell-main-menu__links .main-link')
+			.addEventListener('mouseover', function() {
+				var element = document.querySelector('.speedwell-category-nav');
+
+				element.focus();
+				element.classList.add('is-open')
 		});
 
 		let scrollThreshold = 100;

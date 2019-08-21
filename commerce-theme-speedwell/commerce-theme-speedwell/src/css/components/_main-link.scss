@@ -12,8 +12,9 @@
 
   &:hover::after,
   &.is-active::after {
-    color: #30CFA1;
-    content: '>';
+    color: $color-theme;
+    content: '>>';
+    letter-spacing: -14px;
     height: 10px;
     position: absolute;
     top: 100%;
@@ -24,6 +25,7 @@
     left: 50%;
     transform: rotateZ(90deg) scale(.4, .9);
     margin-left: -5px;
+    text-shadow: 0 0 0px #30CFA1;
   }
 
   @media (max-width: 767px) {
