@@ -37,7 +37,7 @@
       transform: translateX(100%);
     }
 
-    & &__close {
+    &__close {
       background-color: $stroke !important;
       color: #FFF !important;
       bottom: 100%;
@@ -129,6 +129,10 @@
           font-weight: bold;
         }
       }
+    }
+
+    .commerce-button--block {
+      border-radius: 0;
     }
   }
 
