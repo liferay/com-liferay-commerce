@@ -20,6 +20,7 @@ import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.model.CPDefinitionInventory;
+import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.constants.CPContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
@@ -31,6 +32,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Portal;
+
+import java.math.BigDecimal;
+
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -84,16 +89,32 @@ public class PriceCPContentContributor implements CPContentContributor {
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		CommerceMoney commerceMoney =
-			_commerceProductPriceCalculation.getFinalPrice(
+		CommerceProductPrice commerceProductPrice =
+			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstance.getCPInstanceId(),
 				cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
 				commerceContext);
 
-		if (commerceMoney != null) {
+		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+
+		if (unitPrice != null) {
+			Locale locale = _portal.getLocale(httpServletRequest);
+
 			jsonObject.put(
-				CPContentContributorConstants.PRICE,
-				commerceMoney.format(_portal.getLocale(httpServletRequest)));
+				CPContentContributorConstants.PRICE, unitPrice.format(locale));
+
+			CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
+
+			BigDecimal promo = promoPrice.getPrice();
+
+			if ((promoPrice != null) &&
+				(promo.compareTo(BigDecimal.ZERO) > 0) &&
+				(promo.compareTo(unitPrice.getPrice()) <= 0)) {
+
+				jsonObject.put(
+					CPContentContributorConstants.PROMO_PRICE,
+					promoPrice.format(locale));
+			}
 		}
 
 		return jsonObject;
