@@ -69,11 +69,27 @@ public class CommerceOrderItemImpl extends CommerceOrderItemBaseImpl {
 	}
 
 	@Override
+	public CommerceMoney getDiscountAmountMoney() throws PortalException {
+		CommerceOrder commerceOrder = getCommerceOrder();
+
+		return CommerceMoneyFactoryUtil.create(
+			commerceOrder.getCommerceCurrencyId(), getDiscountAmount());
+	}
+
+	@Override
 	public CommerceMoney getFinalPriceMoney() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
 		return CommerceMoneyFactoryUtil.create(
 			commerceOrder.getCommerceCurrencyId(), getFinalPrice());
+	}
+
+	@Override
+	public CommerceMoney getPromoPriceMoney() throws PortalException {
+		CommerceOrder commerceOrder = getCommerceOrder();
+
+		return CommerceMoneyFactoryUtil.create(
+			commerceOrder.getCommerceCurrencyId(), getPromoPrice());
 	}
 
 	@Override
