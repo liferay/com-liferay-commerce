@@ -150,7 +150,20 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 												stockQuantityContainer.innerHTML = response.stockQuantity || '';
 											}
 											document.querySelector('[data-text-cp-instance-subscription-info]').innerHTML = response.subscriptionInfo || '';
-											document.querySelector('[data-text-cp-instance-price]').innerHTML = response.price || '';
+
+											var priceElement = document.querySelector('[data-text-cp-instance-price]');
+
+											if (response.promoPrice != null) {
+												priceElement.innerHTML =
+													'<span class="price__value price__value--promo-price">' + response.promoPrice + '</span>' +
+													'<span class="price__value price__value--inactive">' + response.price + '</span>';
+											}
+											else if (response.price != null) {
+												priceElement.innerHTML = '<span class="price__value">' + response.price + '</span>';
+											}
+											else {
+												priceElement.innerHTML = '';
+											}
 
 											const formData = new FormData();
 											formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormValues()));
