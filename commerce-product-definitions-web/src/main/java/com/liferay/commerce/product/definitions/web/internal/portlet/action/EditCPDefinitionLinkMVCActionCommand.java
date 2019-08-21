@@ -18,6 +18,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
+import com.liferay.commerce.product.model.CPDefinitionLinkModel;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -26,9 +27,13 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -72,13 +77,22 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPDefinitionLink.class.getName(), actionRequest);
 
+		List<CPDefinitionLink> cpDefinitionLinks =
+			_cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId);
+
+		long[] cProductIds = ListUtil.toLongArray(
+			cpDefinitionLinks, CPDefinitionLinkModel::getCProductId);
+
 		for (long curCPDefinitionId : cpDefinitionIds2) {
 			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
 				curCPDefinitionId);
 
-			_cpDefinitionLinkService.addCPDefinitionLink(
-				cpDefinitionId, cpDefinition.getCProductId(), 0.0, type,
-				serviceContext);
+			long cProductId = cpDefinition.getCProductId();
+
+			if (!ArrayUtil.contains(cProductIds, cProductId)) {
+				_cpDefinitionLinkService.addCPDefinitionLink(
+					cpDefinitionId, cProductId, 0.0, type, serviceContext);
+			}
 		}
 	}
 
