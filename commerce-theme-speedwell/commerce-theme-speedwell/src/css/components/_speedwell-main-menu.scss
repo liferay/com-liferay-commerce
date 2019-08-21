@@ -38,7 +38,7 @@
       }
     }
 
-    & * {
+    & .main-link {
       opacity: 0;
       animation: main-menu-other-elements .5s ease-in forwards;
       animation-delay: .3s;

@@ -14,7 +14,8 @@
     &.active::before,
     &:hover::before {
       position: absolute;
-      content: '>';
+      content: '>>';
+      letter-spacing: -18px;
       font-size: 17px;
       font-weight: bold;
       height: 16px;
