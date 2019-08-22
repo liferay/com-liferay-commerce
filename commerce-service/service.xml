@@ -795,6 +795,7 @@
 		<exception>CommerceAddressCountry</exception>
 		<exception>CommerceAddressName</exception>
 		<exception>CommerceAddressStreet</exception>
+		<exception>CommerceAddressType</exception>
 		<exception>CommerceAddressZip</exception>
 		<exception>CommerceCountryName</exception>
 		<exception>CommerceCountryThreeLettersISOCode</exception>
