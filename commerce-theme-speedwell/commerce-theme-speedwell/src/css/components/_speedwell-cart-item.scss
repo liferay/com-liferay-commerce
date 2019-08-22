@@ -3,7 +3,7 @@
   $item-image-size-sm: 50px;
 
   align-items: center;
-  border-bottom: 1px solid rgba(180,187,201,0.2);
+  border-bottom: 1px solid rgba(180, 187 ,201, 0.2);
   color: $stroke;
   display: grid;
   font-size: 13px;
@@ -18,6 +18,18 @@
   overflow: hidden;
   transition: max-height .2s ease-in, padding .1s ease-in;
 
+  @media screen and (min-width: 376px) and (max-width: 767px) {
+    grid-template-areas: "image content actions price"
+    "image price price" !important;
+    grid-template-columns: $item-image-size-sm 120px $item-image-size 75px !important;
+  }
+
+  @media screen and (max-width: 375px) {
+    grid-template-areas: "image content actions price"
+                        "image price price" !important;
+    grid-template-columns: $item-image-size-sm 100px 50px 75px !important;
+  }
+
   &__image {
     align-self: center;
     background-position: center center;
@@ -28,6 +40,11 @@
     margin: auto;
     overflow: hidden;
     width: 70px;
+
+    @media screen and (max-width: 767px) {
+      width: 50px !important;
+      height: 50px !important;
+    }
   }
 
   &__content {
@@ -35,6 +52,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px !important;
+    }
 
     big {
       font-weight: bold;
@@ -110,7 +131,7 @@
 
   &__cancel-delete {
     align-items: center;
-    background-color: $color-bg-alt;
+    background-color: $color-fg;
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -135,6 +156,6 @@
   }
 
   &.is-not-valid {
-    background-color: $color-mood-bad-bg;
+    background-color: $color-mood-bad;
   }
 }

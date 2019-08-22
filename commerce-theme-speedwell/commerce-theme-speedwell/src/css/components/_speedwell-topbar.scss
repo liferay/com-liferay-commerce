@@ -76,6 +76,10 @@
       transform: translate(17px, -7px);
       transition: all ease 200ms;
       width: 18px;
+
+      @media screen and (max-width: 375px) {
+        transform: translate(9px, -12px);
+      }
     }
 
     &:not(.has-badge)::after {

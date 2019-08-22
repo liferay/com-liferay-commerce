@@ -42,7 +42,15 @@
       color: #FFF !important;
       bottom: 100%;
       top: 0;
-      left: calc(100% - 80px);
+      left: calc(100% - #{$speedwell-topbar-size});
+
+      @media screen and (max-width: 375px) {
+        left: calc(100% - #{$speedwell-topbar-size-small} + 25px);
+      }
+
+      @media screen and (min-width: 376px) and (max-width: 767px) {
+        left: calc(100% - #{$speedwell-topbar-size-small} + 10px);
+      }
 
       &:hover {
         color: #FFF;
@@ -136,7 +144,7 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (min-width: 450px) and (max-width: 767px) {
     .commerce-cart.commerce-cart {
       top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small}) !important;
     }
