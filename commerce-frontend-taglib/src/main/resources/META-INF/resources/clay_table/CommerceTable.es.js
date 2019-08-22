@@ -14,13 +14,11 @@ class CommerceTable extends Component {
 	_getApiURL() {
 		let url = this.dataSetAPI;
 
-		url = url + '&pageSize=' + this.pageSize;
+		url += `&pageSize=${this.pageSize}`;
+		url += `&page=${this.currentPage}`;
+		url += `&p_auth=${Liferay.authToken}`;
 
-		url = url + '&page=' + this.currentPage;
-
-		url = url + '&p_auth=' + Liferay.authToken;
-
-		url = url + '&' + Object.keys(this.filters).map(
+		url += '&' + Object.keys(this.filters).map(
 			el => {
 				return encodeURIComponent(el) + '=' + encodeURIComponent(this.filters[el]);
 			}).join('&');
@@ -40,7 +38,7 @@ class CommerceTable extends Component {
 		}
 
 		this.pageSize = event.data.item.label;
-
+		this.currentPage = 1;
 		this.paginationSelectedEntry = this.paginationEntries.map((x) => x.label).indexOf(this.pageSize);
 
 		this._loadData();
@@ -85,7 +83,7 @@ class CommerceTable extends Component {
 				}
 			)
 			.catch(
-				err => {}
+				console.error
 			);
 	}
 
