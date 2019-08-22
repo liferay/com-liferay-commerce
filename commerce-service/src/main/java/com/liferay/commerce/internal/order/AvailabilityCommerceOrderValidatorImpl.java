@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.internal.order;
 
-import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
@@ -31,6 +30,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -98,10 +98,16 @@ public class AvailabilityCommerceOrderValidatorImpl
 			cpInstance.getCompanyId(), commerceOrder.getGroupId(),
 			cpInstance.getSku());
 
-		int orderQuantity =
-			_commerceOrderItemLocalService.getCPInstanceQuantity(
-				cpInstance.getCPInstanceId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN);
+		List<CommerceOrderItem> commerceOrderItems =
+			commerceOrder.getCommerceOrderItems(cpInstance.getCPInstanceId());
+
+		int orderQuantity = 0;
+
+		if (!commerceOrderItems.isEmpty()) {
+			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
+
+			orderQuantity = commerceOrderItem.getQuantity();
+		}
 
 		orderQuantity += quantity;
 
@@ -149,10 +155,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 			cpInstance.getCompanyId(), commerceOrderItem.getGroupId(),
 			cpInstance.getSku());
 
-		int orderQuantity =
-			_commerceOrderItemLocalService.getCPInstanceQuantity(
-				commerceOrderItem.getCPInstanceId(),
-				CommerceOrderConstants.ORDER_STATUS_OPEN);
+		int orderQuantity = commerceOrderItem.getQuantity();
 
 		if (orderQuantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
