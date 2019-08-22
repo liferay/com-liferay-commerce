@@ -43,10 +43,6 @@
       animation: main-menu-other-elements .5s ease-in forwards;
       animation-delay: .3s;
     }
-
-    .portlet-topper-toolbar-wrapper {
-      right: -100px;
-    }
   }
 
   &:not(.is-open) &__link-wrapper {
