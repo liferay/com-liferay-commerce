@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.frontend.model.PanelActionModel;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -25,7 +24,6 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import java.util.List;
 
 /**
  * @author Fabio Diego Mastrorilli
@@ -35,18 +33,43 @@ public class PanelTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 
+		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
+
+		setNamespacedAttribute(request, "spritemap", _spritemap);
+		setNamespacedAttribute(request, "title", _title);
+		setNamespacedAttribute(request, "actionUrl", _actionUrl);
+		setNamespacedAttribute(request, "actionLabel", _actionLabel);
+		setNamespacedAttribute(request, "actionIcon", _actionIcon);
+		setNamespacedAttribute(request, "actionId", _actionId);
+		setNamespacedAttribute(request, "elementClasses", _elementClasses);
+
 		if(_spritemap == null){
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 			_spritemap = themeDisplay.getPathThemeImages() + "/commerce-icons.svg";
 		}
 
-		return super.doStartTag();
+		super.doStartTag();
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	@Override
-	protected String getPage() {
-		return _PAGE;
+	public int doEndTag() throws JspException {
+		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
+
+		return super.doEndTag();
+	}
+
+
+	@Override
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	@Override
+	protected String getStartPage() {
+		return _START_PAGE;
 	}
 
 	@Override
@@ -56,26 +79,32 @@ public class PanelTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
-	@Override
-	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
-		request.setAttribute("liferay-commerce:header:title", _title);
-		request.setAttribute("liferay-commerce:header:panelAction", _panelAction);
-	}
-
-	private static final String _PAGE = "/panel/page.jsp";
+	private static final String _END_PAGE = "/panel/end.jsp";
+	private static final String _START_PAGE = "/panel/start.jsp";
+	private static final String _ATTRIBUTE_NAMESPACE =
+			"liferay-commerce:panel:";
 	private static final Log _log = LogFactoryUtil.getLog(PanelTag.class);
 
 	public String getTitle() {
 		return _title;
 	}
-
 	public String getSpritemap() {
 		return _spritemap;
 	}
-
-	public PanelActionModel getPanelAction() {
-		return _panelAction;
+	public String getActionUrl() {
+		return _actionUrl;
+	}
+	public String getActionLabel() {
+		return _actionLabel;
+	}
+	public String getActionIcon() {
+		return _actionIcon;
+	}
+	public String getActionId() {
+		return _actionId;
+	}
+	public String getElementClasses() {
+		return _elementClasses;
 	}
 
 	@Override
@@ -84,23 +113,41 @@ public class PanelTag extends IncludeTag {
 
 		_title = null;
 		_spritemap = null;
-		_panelAction = null;
+		_actionUrl = null;
+		_actionLabel = null;
+		_actionIcon = null;
+		_actionId = null;
+		_elementClasses = null;
 	}
 
 	private String _title= null;
 	private String _spritemap = null;
-	private PanelActionModel _panelAction = null;
+	private String _actionUrl;
+	private String _actionLabel;
+	private String _actionIcon;
+	private String _actionId;
+	private String _elementClasses;
 
 	public void setTitle(String title) {
 		_title = title;
 	}
-
 	public void setSpritemap(String spritemap) {
 		_spritemap = spritemap;
 	}
-
-	public void setPanelAction(PanelActionModel panelAction) {
-		_panelAction = panelAction;
+	public void setActionUrl(String actionUrl) {
+		_actionUrl = actionUrl;
+	}
+	public void setActionLabel(String actionLabel) {
+		_actionLabel = actionLabel;
+	}
+	public void setActionIcon(String actionIcon) {
+		_actionIcon = actionIcon;
+	}
+	public void setActionId(String actionId) {
+		_actionId = actionId;
+	}
+	public void setElementClasses(String elementClasses) {
+		_elementClasses = elementClasses;
 	}
 
 }
