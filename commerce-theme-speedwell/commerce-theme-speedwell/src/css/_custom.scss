@@ -48,12 +48,12 @@ body:not(.signed-in) {
     top: calc(#{$speedwell-topbar-size} - 1px);
 
     @media screen and (max-width: 767px) {
-      top: calc(#{$speedwell-topbar-size-small} - 1px);
+      top: calc(#{$speedwell-topbar-size-small} - 10px);
     }
   }
 
   .commerce-cart {
-    top: 0;
+    top: 0 !important;
 
     &::before {
       top: $speedwell-topbar-size;
