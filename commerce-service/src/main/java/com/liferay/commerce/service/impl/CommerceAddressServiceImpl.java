@@ -20,8 +20,6 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.base.CommerceAddressServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,6 +34,10 @@ import java.util.List;
  */
 public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	@Override
 	public CommerceAddress addCommerceAddress(
 			String className, long classPK, String name, String description,
@@ -51,6 +53,22 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			className, classPK, name, description, street1, street2, street3,
 			city, zip, commerceRegionId, commerceCountryId, phoneNumber,
 			defaultBilling, defaultShipping, serviceContext);
+	}
+
+	@Override
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.addCommerceAddress(
+			className, classPK, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			serviceContext);
 	}
 
 	@Override
@@ -77,40 +95,6 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 		}
 
 		return commerceAddress;
-	}
-
-	@Override
-	public CommerceAddress fetchDefaultBillingCommerceAddress(
-		long companyId, String className, long classPK) {
-
-		try {
-			checkPermission(className, classPK);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-
-			return null;
-		}
-
-		return commerceAddressLocalService.fetchDefaultBillingCommerceAddress(
-			companyId, className, classPK);
-	}
-
-	@Override
-	public CommerceAddress fetchDefaultShippingCommerceAddress(
-		long companyId, String className, long classPK) {
-
-		try {
-			checkPermission(className, classPK);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-
-			return null;
-		}
-
-		return commerceAddressLocalService.fetchDefaultShippingCommerceAddress(
-			companyId, className, classPK);
 	}
 
 	@Override
@@ -278,6 +262,10 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			companyId, className, classPK, keywords, start, end, sort);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	@Override
 	public CommerceAddress updateCommerceAddress(
 			long commerceAddressId, String name, String description,
@@ -298,6 +286,25 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			phoneNumber, defaultBilling, defaultShipping, serviceContext);
 	}
 
+	@Override
+	public CommerceAddress updateCommerceAddress(
+			long commerceAddressId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceAddress commerceAddress =
+			commerceAddressLocalService.getCommerceAddress(commerceAddressId);
+
+		checkPermission(commerceAddress);
+
+		return commerceAddressLocalService.updateCommerceAddress(
+			commerceAddress.getCommerceAddressId(), name, description, street1,
+			street2, street3, city, zip, commerceRegionId, commerceCountryId,
+			phoneNumber, type, serviceContext);
+	}
+
 	protected void checkPermission(CommerceAddress commerceAddress)
 		throws PortalException {
 
@@ -315,9 +322,6 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			_commerceAccountService.getCommerceAccount(classPK);
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAddressServiceImpl.class);
 
 	@ServiceReference(type = CommerceAccountService.class)
 	private CommerceAccountService _commerceAccountService;
