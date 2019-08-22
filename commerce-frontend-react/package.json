@@ -12,6 +12,7 @@
 		"@clayui/form": "^3.0.0-milestone.2",
 		"@clayui/icon": "^3.0.0-milestone.2",
 		"@clayui/label": "^3.0.0-milestone.2",
+		"@clayui/modal": "^3.0.0-milestone.2",
 		"@clayui/panel": "^3.0.0-milestone.2",
 		"@clayui/select": "^3.0.0-milestone.2",
 		"@types/react": "^16.8.24",

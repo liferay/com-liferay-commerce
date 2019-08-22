@@ -40,3 +40,16 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+<%
+    String spritemap = (String)request.getAttribute("liferay-commerce:panel:spritemap");
+    String title = (String)request.getAttribute("liferay-commerce:panel:title");
+    String actionUrl = (String)request.getAttribute("liferay-commerce:panel:actionUrl");
+    String actionLabel = (String)request.getAttribute("liferay-commerce:panel:actionLabel");
+    String actionIcon = (String)request.getAttribute("liferay-commerce:panel:actionIcon");
+    String actionId = (String)request.getAttribute("liferay-commerce:panel:actionId");
+    String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
+    String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
+
+    String actionLinkId = Validator.isNotNull(actionId) ? actionId : (randomNamespace + "header-button");
+%>

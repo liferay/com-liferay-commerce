@@ -31,23 +31,23 @@ else {
 	portletDisplay.setURLBack(redirect);
 }
 
-String title = null;
+String headerTitle = null;
 
 if (commerceOrder != null) {
-	title = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId());
+	headerTitle = LanguageUtil.format(request, "order-x", commerceOrder.getCommerceOrderId());
 }
 else {
-	title = LanguageUtil.get(request, "add-order");
+	headerTitle = LanguageUtil.get(request, "add-order");
 }
 
-renderResponse.setTitle(title);
+renderResponse.setTitle(headerTitle);
 %>
 
 <!-- header -->
 <commerce-ui:header
 	bean="<%= commerceOrder %>"
 	model="<%= CommerceOrder.class %>"
-	title="<%= title %>"
+	title="<%= headerTitle %>"
 	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
 	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
 	previewUrl="/preview"
@@ -58,60 +58,9 @@ renderResponse.setTitle(title);
 
 <div id="<portlet:namespace />editOrderContainer">
 	<liferay-frontend:screen-navigation
-		containerCssClass="col-md-10"
 		key="<%= CommerceOrderScreenNavigationConstants.SCREEN_NAVIGATION_KEY_COMMERCE_ORDER_GENERAL %>"
 		modelBean="<%= commerceOrder %>"
-		navCssClass="col-md-2"
 		portletURL="<%= currentURLObj %>"
+		fullContainerCssClass="w-100 mt-4"
 	/>
 </div>
-
-<aui:script sandbox="<%= true %>">
-	function enableFormEdit(element, enable) {
-		var form = $(element).closest('form');
-
-		var editFormButtons = form.find('.edit-form-buttons');
-		var editFormLink = form.find('.edit-form-link');
-		var fieldset = form.find('fieldset');
-
-		if (enable) {
-			editFormButtons.removeClass('hide');
-			editFormLink.addClass('hide');
-
-			fieldset.removeAttr('disabled');
-		}
-		else {
-			form[0].reset();
-
-			editFormButtons.addClass('hide');
-			editFormLink.removeClass('hide');
-
-			fieldset.attr('disabled', '');
-		}
-	}
-
-	var editOrderContainerPanels = $('#<portlet:namespace />editOrderContainer .panel-body');
-
-	editOrderContainerPanels.on(
-		'submit', 'form',
-		function(event) {
-			event.preventDefault();
-
-			submitForm(this);
-		}
-	);
-
-	editOrderContainerPanels.on(
-		'click', '.cancel-form-button',
-		function() {
-			enableFormEdit(this, false);
-		}
-	);
-
-	editOrderContainerPanels.on(
-		'click', '.edit-form-link',
-		function() {
-			enableFormEdit(this, true);
-		}
-	);
-</aui:script>

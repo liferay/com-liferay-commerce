@@ -84,16 +84,40 @@
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PanelTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>title</name>
-			<required>true</required>
+			<name>elementClasses</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>panelAction</name>
+			<name>title</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Class</type>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>actionUrl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>actionLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>actionIcon</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>actionId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
