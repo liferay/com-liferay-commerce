@@ -14,10 +14,12 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressNameException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
+import com.liferay.commerce.exception.CommerceAddressTypeException;
 import com.liferay.commerce.exception.CommerceAddressZipException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceGeocoder;
@@ -40,6 +42,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,7 +64,10 @@ import java.util.Map;
 public class CommerceAddressLocalServiceImpl
 	extends CommerceAddressLocalServiceBaseImpl {
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	@Override
 	public CommerceAddress addCommerceAddress(
 			String className, long classPK, String name, String description,
@@ -71,13 +77,37 @@ public class CommerceAddressLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		int type = CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+
+		if (defaultBilling && !defaultShipping) {
+			type = CommerceAddressConstants.TYPE_BILLING;
+		}
+		else if (!defaultBilling && defaultShipping) {
+			type = CommerceAddressConstants.TYPE_SHIPPING;
+		}
+
+		return addCommerceAddress(
+			className, classPK, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
+		throws PortalException {
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long companyId = user.getCompanyId();
 
 		validate(
 			0, companyId, className, classPK, name, street1, city, zip,
-			commerceCountryId, defaultBilling, defaultShipping);
+			commerceCountryId, type);
 
 		long commerceAddressId = counterLocalService.increment();
 
@@ -99,8 +129,7 @@ public class CommerceAddressLocalServiceImpl
 		commerceAddress.setCommerceRegionId(commerceRegionId);
 		commerceAddress.setCommerceCountryId(commerceCountryId);
 		commerceAddress.setPhoneNumber(phoneNumber);
-		commerceAddress.setDefaultBilling(defaultBilling);
-		commerceAddress.setDefaultShipping(defaultShipping);
+		commerceAddress.setType(type);
 
 		commerceAddressPersistence.update(commerceAddress);
 
@@ -204,38 +233,6 @@ public class CommerceAddressLocalServiceImpl
 		}
 	}
 
-	@Override
-	public CommerceAddress fetchDefaultBillingCommerceAddress(
-		long companyId, String className, long classPK) {
-
-		List<CommerceAddress> commerceAddresses =
-			commerceAddressPersistence.findByC_C_C_DB(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, true);
-
-		if (commerceAddresses.isEmpty()) {
-			return null;
-		}
-
-		return commerceAddresses.get(0);
-	}
-
-	@Override
-	public CommerceAddress fetchDefaultShippingCommerceAddress(
-		long companyId, String className, long classPK) {
-
-		List<CommerceAddress> commerceAddresses =
-			commerceAddressPersistence.findByC_C_C_DS(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, true);
-
-		if (commerceAddresses.isEmpty()) {
-			return null;
-		}
-
-		return commerceAddresses.get(0);
-	}
-
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAddress geolocateCommerceAddress(long commerceAddressId)
@@ -259,50 +256,18 @@ public class CommerceAddressLocalServiceImpl
 	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
 		long companyId, String className, long classPK) {
 
-		List<CommerceAddress> commerceAddresses =
-			commerceAddressPersistence.findByC_C_C_DS(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, false);
-
-		CommerceAddress defaultBillingAddress =
-			fetchDefaultBillingCommerceAddress(companyId, className, classPK);
-
-		if ((defaultBillingAddress != null) &&
-			!commerceAddresses.contains(defaultBillingAddress)) {
-
-			if (commerceAddresses.isEmpty()) {
-				commerceAddresses = new ArrayList<>();
-			}
-
-			commerceAddresses.add(defaultBillingAddress);
-		}
-
-		return commerceAddresses;
+		return commerceAddressPersistence.findByC_C_C_C(
+			companyId, classNameLocalService.getClassNameId(className), classPK,
+			CommerceAddressConstants.TYPE_BILLING);
 	}
 
 	@Override
 	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
 		long companyId, String className, long classPK) {
 
-		List<CommerceAddress> commerceAddresses =
-			commerceAddressPersistence.findByC_C_C_DB(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, false);
-
-		CommerceAddress defaultShippingAddress =
-			fetchDefaultShippingCommerceAddress(companyId, className, classPK);
-
-		if ((defaultShippingAddress != null) &&
-			!commerceAddresses.contains(defaultShippingAddress)) {
-
-			if (commerceAddresses.isEmpty()) {
-				commerceAddresses = new ArrayList<>();
-			}
-
-			commerceAddresses.add(defaultShippingAddress);
-		}
-
-		return commerceAddresses;
+		return commerceAddressPersistence.findByC_C_C_C(
+			companyId, classNameLocalService.getClassNameId(className), classPK,
+			CommerceAddressConstants.TYPE_SHIPPING);
 	}
 
 	/**
@@ -436,7 +401,10 @@ public class CommerceAddressLocalServiceImpl
 		return searchCommerceAddresses(searchContext);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), defaultBilling/Shipping exist on Account Entity. Pass type.
+	 */
+	@Deprecated
 	@Override
 	public CommerceAddress updateCommerceAddress(
 			long commerceAddressId, String name, String description,
@@ -444,6 +412,30 @@ public class CommerceAddressLocalServiceImpl
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, boolean defaultBilling, boolean defaultShipping,
 			ServiceContext serviceContext)
+		throws PortalException {
+
+		int type = CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+
+		if (defaultBilling && !defaultShipping) {
+			type = CommerceAddressConstants.TYPE_BILLING;
+		}
+		else if (!defaultBilling && defaultShipping) {
+			type = CommerceAddressConstants.TYPE_SHIPPING;
+		}
+
+		return updateCommerceAddress(
+			commerceAddressId, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAddress updateCommerceAddress(
+			long commerceAddressId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce address
@@ -455,7 +447,7 @@ public class CommerceAddressLocalServiceImpl
 			commerceAddress.getCommerceAddressId(),
 			commerceAddress.getCompanyId(), commerceAddress.getClassName(),
 			commerceAddress.getClassPK(), name, street1, city, zip,
-			commerceCountryId, defaultBilling, defaultShipping);
+			commerceCountryId, type);
 
 		commerceAddress.setName(name);
 		commerceAddress.setDescription(description);
@@ -469,8 +461,7 @@ public class CommerceAddressLocalServiceImpl
 		commerceAddress.setLatitude(0);
 		commerceAddress.setLongitude(0);
 		commerceAddress.setPhoneNumber(phoneNumber);
-		commerceAddress.setDefaultBilling(defaultBilling);
-		commerceAddress.setDefaultShipping(defaultShipping);
+		commerceAddress.setType(type);
 
 		commerceAddressPersistence.update(commerceAddress);
 
@@ -625,8 +616,7 @@ public class CommerceAddressLocalServiceImpl
 	protected void validate(
 			long commerceAddressId, long companyId, String className,
 			long classPK, String name, String street1, String city, String zip,
-			long commerceCountryId, boolean defaultBilling,
-			boolean defaultShipping)
+			long commerceCountryId, int type)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -649,32 +639,10 @@ public class CommerceAddressLocalServiceImpl
 			throw new CommerceAddressCountryException();
 		}
 
-		if (defaultBilling) {
-			CommerceAddress commerceAddress =
-				fetchDefaultBillingCommerceAddress(
-					companyId, className, classPK);
+		if (!ArrayUtil.contains(
+				CommerceAddressConstants.AVAILABLE_ADDRESS_TYPES, type)) {
 
-			if ((commerceAddress != null) &&
-				(commerceAddress.getCommerceAddressId() != commerceAddressId)) {
-
-				commerceAddress.setDefaultBilling(false);
-
-				commerceAddressPersistence.update(commerceAddress);
-			}
-		}
-
-		if (defaultShipping) {
-			CommerceAddress commerceAddress =
-				fetchDefaultShippingCommerceAddress(
-					companyId, className, classPK);
-
-			if ((commerceAddress != null) &&
-				(commerceAddress.getCommerceAddressId() != commerceAddressId)) {
-
-				commerceAddress.setDefaultShipping(false);
-
-				commerceAddressPersistence.update(commerceAddress);
-			}
+			throw new CommerceAddressTypeException();
 		}
 	}
 
