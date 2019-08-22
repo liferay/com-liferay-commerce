@@ -30,7 +30,7 @@
     String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
 %>
 
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white border-bottom">
     <div class="container d-flex">
         <div class="d-flex align-items-center flex-grow-1">
             <c:if test="<%= Validator.isNotNull(thumbnailUrl) %>">
@@ -53,12 +53,12 @@
                     <c:if test="<%= bean instanceof WorkflowedModel%>">
                         <% WorkflowedModel workflowedModel = (WorkflowedModel)bean; %>
                         <aui:workflow-status
-                                bean="<%= bean %>"
-                                model="<%= model %>"
-                                showHelpMessage="<%= false %>"
-                                showIcon="<%= false %>"
-                                showLabel="<%= false %>"
-                                status="<%= workflowedModel.getStatus() %>"
+                            bean="<%= bean %>"
+                            model="<%= model %>"
+                            showHelpMessage="<%= false %>"
+                            showIcon="<%= false %>"
+                            showLabel="<%= false %>"
+                            status="<%= workflowedModel.getStatus() %>"
                         />
                     </c:if>
                 </div>
