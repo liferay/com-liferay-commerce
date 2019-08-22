@@ -468,7 +468,10 @@ public class CommerceAccountLocalServiceImpl
 		return commerceAccount;
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
 	@Override
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
@@ -476,8 +479,32 @@ public class CommerceAccountLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		return updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active, -1,
+			-1, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAccount updateCommerceAccount(
+		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+		String email, String taxId, boolean active,
+		long defaultBillingAddressId, long defaultShippingAddressId,
+		ServiceContext serviceContext)
+		throws PortalException {
+
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		if (defaultBillingAddressId == -1) {
+			defaultBillingAddressId =
+				commerceAccount.getDefaultBillingAddressId();
+		}
+
+		if (defaultShippingAddressId == -1) {
+			defaultShippingAddressId =
+				commerceAccount.getDefaultShippingAddressId();
+		}
 
 		validate(
 			serviceContext.getCompanyId(),
@@ -495,6 +522,8 @@ public class CommerceAccountLocalServiceImpl
 		commerceAccount.setEmail(email);
 		commerceAccount.setTaxId(taxId);
 		commerceAccount.setActive(active);
+		commerceAccount.setDefaultBillingAddressId(defaultBillingAddressId);
+		commerceAccount.setDefaultShippingAddressId(defaultShippingAddressId);
 		commerceAccount.setExpandoBridgeAttributes(serviceContext);
 
 		commerceAccountPersistence.update(commerceAccount);

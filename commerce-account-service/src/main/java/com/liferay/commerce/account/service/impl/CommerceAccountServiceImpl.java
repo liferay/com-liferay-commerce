@@ -280,9 +280,26 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		return commerceAccountLocalService.setActive(commerceAccountId, active);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
 			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			-1, -1, serviceContext);
+	}
+
+	@Override
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -291,7 +308,7 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 
 		return commerceAccountLocalService.updateCommerceAccount(
 			commerceAccountId, name, logo, logoBytes, email, taxId, active,
-			serviceContext);
+			defaultBillingAddressId, defaultShippingAddressId, serviceContext);
 	}
 
 	@Override
