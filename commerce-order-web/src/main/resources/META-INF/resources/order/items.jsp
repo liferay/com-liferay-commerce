@@ -36,23 +36,24 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		<div class="col-md-4 d-flex">
 			<commerce-ui:panel
 					title="Shipping address & method"
-					actionLabel="Edit"
+					headerActionLabel="Edit"
 					elementClasses="flex-fill"
+					headerActionUrl="${editUrl}"
 			>
-				<p class="card-text">PO Box 467 New York NY 10002</p>
-				<p class="mt-4">
-					<clay:icon symbol="geolocation" elementClasses="mr-4" />
+				<div class="card-text">PO Box 467 New York NY 10002</div>
+				<div class="card-text">
+					<clay:icon symbol="geolocation" />
 					Standard delivery
-				</p>
+				</div>
 			</commerce-ui:panel>
 		</div>
 		<div class="col-md-4 d-flex">
 			<commerce-ui:panel
 					title="Billing address"
-					actionLabel="Edit"
+					headerActionLabel="Edit"
 					elementClasses="flex-fill"
 			>
-				<p class="card-text">PO Box 467 New York NY 10002</p>
+				<div class="card-text">PO Box 467 New York NY 10002</div>
 			</commerce-ui:panel>
 		</div>
 		<div class="col-md-4 d-flex">
@@ -248,13 +249,21 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		<div class="col-md-4">
 			<commerce-ui:panel
 					title="Recent order notes"
+					showMoreRefId="hidden-order-details"
 			>
-				<div id="order-timeline-root"></div>
+				<div class="card-text">
+					Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
+				</div>
+				<commerce-ui:panel-hidden-content wrapperId="hidden-order-details">
+					<div class="card-text">
+						Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
+					</div>
+				</commerce-ui:panel-hidden-content>
 			</commerce-ui:panel>
 
 			<commerce-ui:panel
 					title="Order summary"
-					actionLabel="Edit"
+					headerActionLabel="Edit"
 			>
 				<div id="order-timeline-root"></div>
 			</commerce-ui:panel>
