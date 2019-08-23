@@ -44,12 +44,19 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%
     String spritemap = (String)request.getAttribute("liferay-commerce:panel:spritemap");
     String title = (String)request.getAttribute("liferay-commerce:panel:title");
-    String actionUrl = (String)request.getAttribute("liferay-commerce:panel:actionUrl");
-    String actionLabel = (String)request.getAttribute("liferay-commerce:panel:actionLabel");
-    String actionIcon = (String)request.getAttribute("liferay-commerce:panel:actionIcon");
-    String actionId = (String)request.getAttribute("liferay-commerce:panel:actionId");
+    String headerActionUrl = (String)request.getAttribute("liferay-commerce:panel:headerActionUrl");
+    String headerActionLabel = (String)request.getAttribute("liferay-commerce:panel:headerActionLabel");
+    String headerActionIcon = (String)request.getAttribute("liferay-commerce:panel:headerActionIcon");
+    String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");
+    String showMoreRefId = (String)request.getAttribute("liferay-commerce:panel:showMoreRefId");
+    String showMoreId = (String)request.getAttribute("liferay-commerce:panel:showMoreId");
+    String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
+
     String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
     String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
 
-    String actionLinkId = Validator.isNotNull(actionId) ? actionId : (randomNamespace + "header-button");
+    String headerActionLinkId = Validator.isNotNull(headerActionId) ? headerActionId : (randomNamespace + "header-button");
+    String showMoreButtonId = Validator.isNotNull(showMoreId) ? showMoreId : (randomNamespace + "show-more-button");
+    String showMoreButtonWrapperId = randomNamespace + "show-more-button-wrapper";
+
 %>

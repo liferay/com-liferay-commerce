@@ -37,10 +37,13 @@ public class PanelTag extends IncludeTag {
 
 		setNamespacedAttribute(request, "spritemap", _spritemap);
 		setNamespacedAttribute(request, "title", _title);
-		setNamespacedAttribute(request, "actionUrl", _actionUrl);
-		setNamespacedAttribute(request, "actionLabel", _actionLabel);
-		setNamespacedAttribute(request, "actionIcon", _actionIcon);
-		setNamespacedAttribute(request, "actionId", _actionId);
+		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
+		setNamespacedAttribute(request, "headerActionLabel", _headerActionLabel);
+		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
+		setNamespacedAttribute(request, "headerActionId", _headerActionId);
+		setNamespacedAttribute(request, "showMoreRefId", _showMoreRefId);
+        setNamespacedAttribute(request, "showMoreId", _showMoreId);
+        setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
 
 		if(_spritemap == null){
@@ -91,18 +94,27 @@ public class PanelTag extends IncludeTag {
 	public String getSpritemap() {
 		return _spritemap;
 	}
-	public String getActionUrl() {
-		return _actionUrl;
+	public String getHeaderActionUrl() {
+		return _headerActionUrl;
 	}
-	public String getActionLabel() {
-		return _actionLabel;
+	public String getHeaderActionLabel() {
+		return _headerActionLabel;
 	}
-	public String getActionIcon() {
-		return _actionIcon;
+	public String getHeaderActionIcon() {
+		return _headerActionIcon;
 	}
-	public String getActionId() {
-		return _actionId;
+	public String getHeaderActionId() {
+		return _headerActionId;
 	}
+	public String getShowMoreRefId() {
+		return _showMoreRefId;
+	}
+    public String getShowMoreId() {
+        return _showMoreId;
+    }
+    public String getShowMoreUrl() {
+        return _showMoreUrl;
+    }
 	public String getElementClasses() {
 		return _elementClasses;
 	}
@@ -113,19 +125,25 @@ public class PanelTag extends IncludeTag {
 
 		_title = null;
 		_spritemap = null;
-		_actionUrl = null;
-		_actionLabel = null;
-		_actionIcon = null;
-		_actionId = null;
+		_headerActionUrl = null;
+		_headerActionLabel = null;
+		_headerActionIcon = null;
+		_headerActionId = null;
+		_showMoreRefId = null;
+        _showMoreId = null;
+        _showMoreUrl = null;
 		_elementClasses = null;
 	}
 
 	private String _title= null;
 	private String _spritemap = null;
-	private String _actionUrl;
-	private String _actionLabel;
-	private String _actionIcon;
-	private String _actionId;
+	private String _headerActionUrl;
+	private String _headerActionLabel;
+	private String _headerActionIcon;
+	private String _headerActionId;
+	private String _showMoreRefId;
+    private String _showMoreId;
+    private String _showMoreUrl;
 	private String _elementClasses;
 
 	public void setTitle(String title) {
@@ -134,18 +152,27 @@ public class PanelTag extends IncludeTag {
 	public void setSpritemap(String spritemap) {
 		_spritemap = spritemap;
 	}
-	public void setActionUrl(String actionUrl) {
-		_actionUrl = actionUrl;
+	public void setHeaderActionUrl(String headerActionUrl) {
+		_headerActionUrl = headerActionUrl;
 	}
-	public void setActionLabel(String actionLabel) {
-		_actionLabel = actionLabel;
+	public void setHeaderActionLabel(String headerActionLabel) {
+		_headerActionLabel = headerActionLabel;
 	}
-	public void setActionIcon(String actionIcon) {
-		_actionIcon = actionIcon;
+	public void setHeaderActionIcon(String headerActionIcon) {
+		_headerActionIcon = headerActionIcon;
 	}
-	public void setActionId(String actionId) {
-		_actionId = actionId;
+	public void setHeaderActionId(String headerActionId) {
+		_headerActionId = headerActionId;
 	}
+	public void setShowMoreRefId(String showMoreRefId) {
+		_showMoreRefId = showMoreRefId;
+	}
+    public void setShowMoreId(String showMoreId) {
+        _showMoreId = showMoreId;
+    }
+    public void setShowMoreUrl(String showMoreUrl) {
+        _showMoreUrl = showMoreUrl;
+    }
 	public void setElementClasses(String elementClasses) {
 		_elementClasses = elementClasses;
 	}
