@@ -7,98 +7,13 @@
         </div>
 
         <div class="speedwell-category-nav__content col-lg-9">
-            <div class="wrapper">
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="speedwell-category-nav__category">
-                    <div class="category__title">
-                        <h3>category title</h3>
-                    </div>
-                    <div class="category__products">
-                        <ul>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                            <li><a class="product-item" href="">Some item</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
+            <@commerce_category_navigation_menu
+
+                default_preferences=freeMarkerPortletPreferences
+                    .getPreferences("portletSetupPortletDecoratorId", "barebone")
+            />
+
             <div class="show-more">
                 <p>
                     <a href=""><@liferay.language key="show-more" /></a>
