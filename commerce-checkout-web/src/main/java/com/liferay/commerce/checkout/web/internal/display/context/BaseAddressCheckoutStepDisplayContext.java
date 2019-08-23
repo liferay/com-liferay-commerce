@@ -15,7 +15,6 @@
 package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
@@ -76,6 +75,8 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 		CommerceAddress shippingAddress = _commerceOrder.getShippingAddress();
 		CommerceAddress billingAddress = _commerceOrder.getBillingAddress();
 
+		CommerceAccount commerceAccount = _commerceOrder.getCommerceAccount();
+
 		if ((shippingAddress != null) && (billingAddress != null) &&
 			Objects.equals(
 				shippingAddress.getCommerceAddressId(),
@@ -83,8 +84,9 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 
 			return true;
 		}
-		else if (shippingAddress.getType() ==
-			CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING) {
+		else if ((commerceAccount != null) &&
+				 (commerceAccount.getDefaultBillingAddressId() ==
+					 commerceAccount.getDefaultShippingAddressId())) {
 
 			return true;
 		}
