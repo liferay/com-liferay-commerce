@@ -198,8 +198,7 @@ public class CommerceAccountClayTable
 				new Account(
 					commerceAccount.getCommerceAccountId(),
 					commerceAccount.getName(), commerceAccount.getEmail(),
-					_getDefaultBillingCommerceAddress(
-						commerceAccount, themeDisplay.getCompanyId()),
+					_getDefaultBillingCommerceAddress(commerceAccount),
 					thumbnailSB.toString(),
 					_getAccountViewDetailURL(
 						commerceAccount.getCommerceAccountId(),
@@ -237,13 +236,12 @@ public class CommerceAccountClayTable
 	}
 
 	private String _getDefaultBillingCommerceAddress(
-			CommerceAccount commerceAccount, long companyId)
+			CommerceAccount commerceAccount)
 		throws PortalException {
 
 		CommerceAddress commerceAddress =
-			_commerceAddressService.fetchDefaultBillingCommerceAddress(
-				companyId, commerceAccount.getModelClassName(),
-				commerceAccount.getCommerceAccountId());
+			_commerceAddressService.fetchCommerceAddress(
+				commerceAccount.getDefaultBillingAddressId());
 
 		if (commerceAddress == null) {
 			return null;

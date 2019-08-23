@@ -16,16 +16,16 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.exception.NoSuchAddressException;
-import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -76,6 +76,8 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				Callable<CommerceAccount> commerceAccountCallable =
@@ -84,10 +86,8 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 				CommerceAccount commerceAccount = TransactionInvokerUtil.invoke(
 					_transactionConfig, commerceAccountCallable);
 
-				String redirect = getSaveAndContinueRedirect(
+				redirect = getSaveAndContinueRedirect(
 					actionRequest, commerceAccount);
-
-				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Throwable t) {
@@ -99,7 +99,11 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (t instanceof CommerceAccountNameException ||
+			else if (t instanceof
+						CommerceAccountDefaultBillingAddressException ||
+					 t instanceof
+						 CommerceAccountDefaultShippingAddressException ||
+					 t instanceof CommerceAccountNameException ||
 					 t instanceof DuplicateCommerceAccountException) {
 
 				hideDefaultErrorMessage(actionRequest);
@@ -111,7 +115,7 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 
-		hideDefaultSuccessMessage(actionRequest);
+		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
 	protected String getSaveAndContinueRedirect(
@@ -171,13 +175,15 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 		CommerceAccount commerceAccount;
 
 		if (commerceAccountId > 0) {
+			long defaultBillingAddressId = ParamUtil.getLong(
+				actionRequest, "defaultBillingAddressId");
+			long defaultShippingAddressId = ParamUtil.getLong(
+				actionRequest, "defaultShippingAddressId");
+
 			commerceAccount = _commerceAccountService.updateCommerceAccount(
 				commerceAccountId, name, !deleteLogo, logoBytes, email, taxId,
-				true, serviceContext);
-
-			// Update commerce address
-
-			updateCommerceAddress(commerceAccount, actionRequest);
+				true, defaultBillingAddressId, defaultShippingAddressId,
+				serviceContext);
 		}
 		else {
 			commerceAccount =
@@ -188,47 +194,6 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 		}
 
 		return commerceAccount;
-	}
-
-	protected void updateCommerceAddress(
-			CommerceAccount commerceAccount, ActionRequest actionRequest)
-		throws PortalException {
-
-		long commerceAddressId = ParamUtil.getLong(
-			actionRequest, "commerceAddressId");
-
-		CommerceAddress commerceAddress =
-			_commerceAddressService.fetchCommerceAddress(commerceAddressId);
-
-		String street1 = ParamUtil.getString(actionRequest, "street1");
-		String city = ParamUtil.getString(actionRequest, "city");
-		String zip = ParamUtil.getString(actionRequest, "zip");
-		long commerceCountryId = ParamUtil.getLong(
-			actionRequest, "commerceCountryId");
-		long commerceRegionId = ParamUtil.getLong(
-			actionRequest, "commerceRegionId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceAddress.class.getName(), actionRequest);
-
-		if (commerceAddress == null) {
-			_commerceAddressService.addCommerceAddress(
-				commerceAccount.getModelClassName(),
-				commerceAccount.getCommerceAccountId(),
-				commerceAccount.getName(), StringPool.BLANK, street1,
-				StringPool.BLANK, StringPool.BLANK, city, zip, commerceRegionId,
-				commerceCountryId, StringPool.BLANK, true, false,
-				serviceContext);
-		}
-		else {
-			_commerceAddressService.updateCommerceAddress(
-				commerceAddress.getCommerceAddressId(),
-				commerceAddress.getName(), commerceAddress.getDescription(),
-				street1, commerceAddress.getStreet2(),
-				commerceAddress.getStreet3(), city, zip, commerceRegionId,
-				commerceCountryId, commerceAddress.getPhoneNumber(), true,
-				commerceAddress.isDefaultShipping(), serviceContext);
-		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

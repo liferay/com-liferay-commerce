@@ -99,6 +99,34 @@ public class CommerceAccountDisplayContext {
 		return accountFilter;
 	}
 
+    public List<CommerceAddress> getBillingCommerceAddresses()
+        throws PortalException {
+
+        CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+        if (commerceAccount == null) {
+            return null;
+        }
+
+        return _commerceAddressService.getAvailableBillingCommerceAddresses(
+            commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+            commerceAccount.getCommerceAccountId());
+    }
+
+    public List<CommerceAddress> getShippingCommerceAddresses()
+        throws PortalException {
+
+        CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+        if (commerceAccount == null) {
+            return null;
+        }
+
+        return _commerceAddressService.getAvailableShippingCommerceAddresses(
+            commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+            commerceAccount.getCommerceAccountId());
+    }
+
 	public List<CommerceAccount> getCommerceAccounts() throws PortalException {
 		return _commerceAccountService.getUserCommerceAccounts(
 			_commerceAccountRequestHelper.getUserId(),
@@ -160,9 +188,21 @@ public class CommerceAccountDisplayContext {
 			return null;
 		}
 
-		return _commerceAddressService.fetchDefaultBillingCommerceAddress(
-			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
-			commerceAccount.getCommerceAccountId());
+		return _commerceAddressService.fetchCommerceAddress(
+			commerceAccount.getDefaultBillingAddressId());
+	}
+
+	public CommerceAddress getDefaultShippingCommerceAddress()
+		throws PortalException {
+
+		CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+		if (commerceAccount == null) {
+			return null;
+		}
+
+		return _commerceAddressService.fetchCommerceAddress(
+			commerceAccount.getDefaultShippingAddressId());
 	}
 
 	public String getKeywords() {

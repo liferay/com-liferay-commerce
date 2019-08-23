@@ -30,4 +30,18 @@ public class CommerceAddressConstants {
 		ADDRESS_TYPE_SHIPPING
 	};
 
+	public static String getAddressTypeLabel(int type) {
+		if (type == ADDRESS_TYPE_BILLING) {
+			return "billing";
+		}
+		else if (type == ADDRESS_TYPE_BILLING_AND_SHIPPING) {
+			return "billing-and-shipping";
+		}
+		else if (type == ADDRESS_TYPE_SHIPPING) {
+			return "shipping";
+		}
+
+		return null;
+	}
+
 }
