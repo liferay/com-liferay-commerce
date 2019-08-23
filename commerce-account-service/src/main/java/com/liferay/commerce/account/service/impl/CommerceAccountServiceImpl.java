@@ -280,21 +280,6 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		return commerceAccountLocalService.setActive(commerceAccountId, active);
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
-	 */
-	@Deprecated
-	public CommerceAccount updateCommerceAccount(
-			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
-			String email, String taxId, boolean active,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return updateCommerceAccount(
-			commerceAccountId, name, logo, logoBytes, email, taxId, active,
-			-1, -1, serviceContext);
-	}
-
 	@Override
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
@@ -309,6 +294,45 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		return commerceAccountLocalService.updateCommerceAccount(
 			commerceAccountId, name, logo, logoBytes, email, taxId, active,
 			defaultBillingAddressId, defaultShippingAddressId, serviceContext);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active, -1,
+			-1, serviceContext);
+	}
+
+	@Override
+	public CommerceAccount updateDefaultBillingAddress(
+			long commerceAccountId, long commerceAddressId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountLocalService.updateDefaultBillingAddress(
+			commerceAccountId, commerceAddressId);
+	}
+
+	@Override
+	public CommerceAccount updateDefaultShippingAddress(
+			long commerceAccountId, long commerceAddressId)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountLocalService.updateDefaultShippingAddress(
+			commerceAccountId, commerceAddressId);
 	}
 
 	@Override

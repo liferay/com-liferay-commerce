@@ -142,7 +142,7 @@ public class CommerceOrderContentDisplayContext {
 			long commerceAccountId, long companyId)
 		throws PortalException {
 
-		return _commerceAddressService.getAvailableBillingCommerceAddresses(
+		return _commerceAddressService.getBillingCommerceAddresses(
 			companyId, CommerceAccount.class.getName(), commerceAccountId);
 	}
 
@@ -409,7 +409,7 @@ public class CommerceOrderContentDisplayContext {
 			long commerceAccountId, long companyId)
 		throws PortalException {
 
-		return _commerceAddressService.getAvailableShippingCommerceAddresses(
+		return _commerceAddressService.getShippingCommerceAddresses(
 			companyId, CommerceAccount.class.getName(), commerceAccountId);
 	}
 
