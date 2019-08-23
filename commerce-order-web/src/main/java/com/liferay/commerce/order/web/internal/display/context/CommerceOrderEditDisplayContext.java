@@ -56,7 +56,6 @@ import java.text.Format;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -106,51 +105,6 @@ public class CommerceOrderEditDisplayContext {
 			FastDateFormatFactoryUtil.getDateTime(
 				DateFormat.SHORT, DateFormat.SHORT, themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
-	}
-
-	public List<HeaderButtonModel> getHeaderButtonModels() {
-		List<HeaderButtonModel> headerButtonModels = new ArrayList<>();
-
-		HeaderButtonModel headerButtonModel = new HeaderButtonModel();
-
-		headerButtonModel.setLabel("Azione 1");
-		headerButtonModel.setStyle("secondary");
-		headerButtonModel.setType("button");
-
-		headerButtonModels.add(headerButtonModel);
-
-		HeaderButtonModel headerButtonModel2 = new HeaderButtonModel();
-
-		headerButtonModel2.setLabel("Azione 2");
-		headerButtonModel2.setStyle("primary");
-		headerButtonModel2.setType("button");
-
-		headerButtonModels.add(headerButtonModel2);
-
-		return headerButtonModels;
-	}
-
-	public List<DropdownItem> getDropdownItems() {
-		List<DropdownItem> headerDropdownItems = new ArrayList<>();
-
-		DropdownItem headerDropdownItem = new DropdownItem();
-
-		headerDropdownItem.setLabel("First link");
-		headerDropdownItem.setHref("/first-link");
-		headerDropdownItem.setIcon("home");
-
-		headerDropdownItems.add(headerDropdownItem);
-
-		DropdownItem headerDropdownItem2 = new DropdownItem();
-
-		headerDropdownItem2.setLabel("Second link");
-		headerDropdownItem2.setIcon("blogs");
-		headerDropdownItem2.setHref("/second-link");
-		headerDropdownItem2.setActive(true);
-
-		headerDropdownItems.add(headerDropdownItem2);
-
-		return headerDropdownItems;
 	}
 
 	public int[] getAvailableOrderStatuses() throws PortalException {
@@ -317,6 +271,51 @@ public class CommerceOrderEditDisplayContext {
 			commerceOrderItem.getCPInstanceId(),
 			commerceOrderItem.getQuantity(),
 			_commerceOrderRequestHelper.getCommerceContext());
+	}
+
+	public List<DropdownItem> getDropdownItems() {
+		List<DropdownItem> headerDropdownItems = new ArrayList<>();
+
+		DropdownItem headerDropdownItem = new DropdownItem();
+
+		headerDropdownItem.setLabel("First link");
+		headerDropdownItem.setHref("/first-link");
+		headerDropdownItem.setIcon("home");
+
+		headerDropdownItems.add(headerDropdownItem);
+
+		DropdownItem headerDropdownItem2 = new DropdownItem();
+
+		headerDropdownItem2.setLabel("Second link");
+		headerDropdownItem2.setIcon("blogs");
+		headerDropdownItem2.setHref("/second-link");
+		headerDropdownItem2.setActive(true);
+
+		headerDropdownItems.add(headerDropdownItem2);
+
+		return headerDropdownItems;
+	}
+
+	public List<HeaderButtonModel> getHeaderButtonModels() {
+		List<HeaderButtonModel> headerButtonModels = new ArrayList<>();
+
+		HeaderButtonModel headerButtonModel = new HeaderButtonModel();
+
+		headerButtonModel.setLabel("Azione 1");
+		headerButtonModel.setStyle("secondary");
+		headerButtonModel.setType("button");
+
+		headerButtonModels.add(headerButtonModel);
+
+		HeaderButtonModel headerButtonModel2 = new HeaderButtonModel();
+
+		headerButtonModel2.setLabel("Azione 2");
+		headerButtonModel2.setStyle("primary");
+		headerButtonModel2.setType("button");
+
+		headerButtonModels.add(headerButtonModel2);
+
+		return headerButtonModels;
 	}
 
 	public String getItemSelectorUrl() {

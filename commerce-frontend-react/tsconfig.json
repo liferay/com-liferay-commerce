@@ -1,25 +1,33 @@
 {
 	"compilerOptions": {
-		"strict": true,
-		"jsx": "react",
-		"target": "esnext",
-		"module": "esnext",
-		"noImplicitAny": false,
-		"moduleResolution": "node",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
 		"esModuleInterop": true,
+		"jsx": "react",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noImplicitAny": false,
+		"paths": {
+			"*": [
+				"node_modules/*"
+			]
+		},
 		"removeComments": true,
 		"sourceMap": true,
-		"allowJs": true,
-		"baseUrl": ".",
-		"allowSyntheticDefaultImports": true,
-		"paths": {
-			"*": ["node_modules/*"]
-		},
+		"strict": true,
+		"target": "esnext",
 		"typeRoots": [
-            "node_modules/@types",
-            "@types"
-        ]
+			"node_modules/@types",
+			"@types"
+		]
 	},
-	"include": ["src/**/*"],
-	"exclude": ["babel.config.js", "metro.config.js", "jest.config.js"]
+	"exclude": [
+		"babel.config.js",
+		"metro.config.js",
+		"jest.config.js"
+	],
+	"include": [
+		"src/**/*"
+	]
 }
