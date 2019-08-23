@@ -10,12 +10,11 @@
 		address: string,
 		city: string,
 		country: string,
-		defaultBilling: bool,
-		defaultShipping: bool,
 		id: string,
 		region: string,
 		referent: string,
 		telephone: string,
+		addressType: number,
 		zipCode: string
 	]}
 	{@param? _countries: list<[
@@ -34,7 +33,6 @@
 	{@param? _handleCloseModal: any }
 	{@param? _handleFormSubmit: any }
 	{@param? _handleNextButton: any }
-	{@param? _handleTypeChange: any }
 	{@param? _handleFirstDotClick: any }
 	{@param? _handleSecondDotClick: any }
 
@@ -64,59 +62,39 @@
 				{if (isNonnull($_stage) and $_stage == 2) == false}
 					<form class="row" data-onsubmit="{$_handleNextButton}" ref="firstForm">
 						<div class="col-12">
-							<div class="mb-4 row">
-								<div class="col-6">
-									{if $_isBillingAllowed}
-										<input
-											id="add-address-type-billing"
-											class="commerce-modal__checkbox"
-											type="checkbox"
-											name="add-address-type"
-											value="billing"
-											data-onchange="{$_handleTypeChange}"
-											{if $_formData.defaultBilling}
-											checked
-											{/if}
-										/>
+							<label
+									for="addressType"
+									class="commerce-modal__label"
+							>
+								{msg desc="Type"}type{/msg}
+							</label>
 
-									<label
-											class="commerce-modal__label commerce-modal__label--checkbox"
-											for="add-address-type-billing"
-									>
-										{msg desc="Billing"}default-billing{/msg}
-									</label>
-									{else}
-										<input name="add-address-type" type="hidden" value="billing" />
-										{msg desc="Billing is not allowed to the country you selected."}billing-is-not-allowed-to-the-country-you-selected{/msg}
-									{/if}
-								</div>
-
-								<div class="col-6">
-									{if $_isShippingAllowed}
-										<input
-											id="add-address-type-shipping"
-											class="commerce-modal__checkbox"
-											type="checkbox"
-											name="add-address-type"
-											value="shipping"
-											data-onchange="{$_handleTypeChange}"
-											{if $_formData.defaultShipping}
-											checked
-											{/if}
-										/>
-
-									<label
-										class="commerce-modal__label commerce-modal__label--checkbox"
-										for="add-address-type-shipping"
-									>
-										{msg desc="Shipping"}default-shipping{/msg}
-									</label>
-									{else}
-										<input name="add-address-type" type="hidden" value="shipping" />
-											{msg desc="Shipping is not allowed to the country you selected."}shipping-is-not-allowed-to-the-country-you-selected{/msg}
-									{/if}
-								</div>
-							</div>
+							<select
+									id="addressType"
+									name="addressType"
+									class="commerce-modal__select commerce-modal__select--with-margin"
+									required
+									data-onchange="{$_handleSelectBox}"
+							>
+								{if $_isBillingAllowed}
+									<option value="1"
+											{if $_formData.addressType == 1}selected{/if}>
+										Billing
+									</option>
+								{/if}
+								{if $_isShippingAllowed}
+									<option value="3"
+											{if $_formData.addressType == 3}selected{/if}>
+										Shipping
+									</option>
+								{/if}
+								{if $_isBillingAllowed and $_isShippingAllowed}
+									<option value="2"
+											{if $_formData.addressType == 2}selected{/if}>
+										Billing and Shipping
+									</option>
+								{/if}
+							</select>
 						</div>
 
 						<div class="col-12">
