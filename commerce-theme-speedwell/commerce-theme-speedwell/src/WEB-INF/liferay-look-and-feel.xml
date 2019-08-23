@@ -17,6 +17,10 @@
 					<template-path>/layouttpl/commerce/speedwell_sidebar.tpl</template-path>
 					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
 				</layout-template>
+				<layout-template id="speedwell_category_navigation" name="Speedwell Category Navigation">
+					<template-path>/layouttpl/commerce/speedwell_category_navigation.tpl</template-path>
+					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
+				</layout-template>
 			</custom>
 		</layout-templates>
 		<portlet-decorator id="barebone" name="Barebone">
