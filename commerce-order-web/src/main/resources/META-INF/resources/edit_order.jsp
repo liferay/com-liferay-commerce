@@ -46,21 +46,21 @@ renderResponse.setTitle(headerTitle);
 <!-- header -->
 <commerce-ui:header
 	bean="<%= commerceOrder %>"
-	model="<%= CommerceOrder.class %>"
-	title="<%= headerTitle %>"
-	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
 	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
+	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
+	model="<%= CommerceOrder.class %>"
 	previewUrl="/preview"
 	thumbnailUrl="//via.placeholder.com/50"
+	title="<%= headerTitle %>"
 	version="1.1"
 />
 <!-- /header -->
 
 <div id="<portlet:namespace />editOrderContainer">
 	<liferay-frontend:screen-navigation
+		fullContainerCssClass="mt-4 w-100"
 		key="<%= CommerceOrderScreenNavigationConstants.SCREEN_NAVIGATION_KEY_COMMERCE_ORDER_GENERAL %>"
 		modelBean="<%= commerceOrder %>"
 		portletURL="<%= currentURLObj %>"
-		fullContainerCssClass="w-100 mt-4"
 	/>
 </div>

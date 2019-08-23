@@ -14,19 +14,10 @@
  */
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
-taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-<%@taglib uri="http://liferay.com/tld/clay" prefix="clay" %>
-<%@ taglib prefix="aui" uri="http://liferay.com/tld/aui" %>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
 <liferay-theme:defineObjects />
 
-<portlet:defineObjects />
-
 <%
-    String wrapperId = (String)request.getAttribute("liferay-commerce:panel-hidden-content:wrapperId");
+	String wrapperId = (String)request.getAttribute("liferay-commerce:panel-hidden-content:wrapperId");
 %>

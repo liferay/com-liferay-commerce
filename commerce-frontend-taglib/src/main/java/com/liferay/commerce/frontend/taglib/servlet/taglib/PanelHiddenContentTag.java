@@ -28,17 +28,41 @@ import javax.servlet.jsp.PageContext;
 public class PanelHiddenContentTag extends IncludeTag {
 
 	@Override
+	public int doEndTag() throws JspException {
+		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
+
+		return super.doEndTag();
+	}
+
+	@Override
 	public int doStartTag() throws JspException {
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 		setNamespacedAttribute(request, "wrapperId", _wrapperId);
 		super.doStartTag();
+
 		return EVAL_BODY_INCLUDE;
 	}
 
+	public String getWrapperId() {
+		return _wrapperId;
+	}
+
 	@Override
-	public int doEndTag() throws JspException {
-		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
-		return super.doEndTag();
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		servletContext = ServletContextUtil.getServletContext();
+	}
+
+	public void setWrapperId(String wrapperId) {
+		_wrapperId = wrapperId;
+	}
+
+	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_wrapperId = null;
 	}
 
 	@Override
@@ -51,34 +75,16 @@ public class PanelHiddenContentTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
-	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		servletContext = ServletContextUtil.getServletContext();
-	}
+	private static final String _ATTRIBUTE_NAMESPACE =
+		"liferay-commerce:panel-hidden-content:";
 
 	private static final String _END_PAGE = "/panel_hidden_content/end.jsp";
+
 	private static final String _START_PAGE = "/panel_hidden_content/start.jsp";
-	private static final String _ATTRIBUTE_NAMESPACE =
-			"liferay-commerce:panel-hidden-content:";
-	private static final Log _log = LogFactoryUtil.getLog(PanelHiddenContentTag.class);
 
-	public String getWrapperId() {
-		return _wrapperId;
-	}
+	private static final Log _log = LogFactoryUtil.getLog(
+		PanelHiddenContentTag.class);
 
-	@Override
-	protected void cleanUp() {
-		super.cleanUp();
-
-		_wrapperId = null;
-	}
-
-	private String _wrapperId= null;
-
-	public void setWrapperId(String wrapperId) {
-		_wrapperId = wrapperId;
-	}
+	private String _wrapperId;
 
 }
