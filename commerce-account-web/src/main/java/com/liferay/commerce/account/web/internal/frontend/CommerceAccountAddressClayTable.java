@@ -18,6 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.web.internal.model.Address;
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
@@ -146,6 +147,7 @@ public class CommerceAccountAddressClayTable
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
 		clayTableSchemaBuilder.addField("address", "address");
+		clayTableSchemaBuilder.addField("type", "type");
 		clayTableSchemaBuilder.addField("referent", "name");
 		clayTableSchemaBuilder.addField("phoneNumber", "phone");
 
@@ -178,10 +180,15 @@ public class CommerceAccountAddressClayTable
 				pagination.getEndPosition(), null);
 
 		for (CommerceAddress commerceAddress : commerceAddresses) {
+			String typeLabel = LanguageUtil.get(
+				themeDisplay.getLocale(),
+				CommerceAddressConstants.getAddressTypeLabel(
+					commerceAddress.getType()));
+
 			addresses.add(
 				new Address(
 					commerceAddress.getCommerceAddressId(),
-					getCompleteAddress(commerceAddress),
+					getCompleteAddress(commerceAddress), typeLabel,
 					commerceAddress.getName(),
 					commerceAddress.getPhoneNumber()));
 		}

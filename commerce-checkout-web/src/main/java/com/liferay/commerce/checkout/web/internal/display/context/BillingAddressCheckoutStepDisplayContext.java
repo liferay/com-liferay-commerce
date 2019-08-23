@@ -65,10 +65,8 @@ public class BillingAddressCheckoutStepDisplayContext
 
 		if (billingAddressId == 0) {
 			CommerceAddress commerceAddress =
-				commerceAddressService.fetchDefaultBillingCommerceAddress(
-					commerceOrder.getCompanyId(),
-					CommerceAccount.class.getName(),
-					commerceOrder.getCommerceAccountId());
+				commerceAddressService.fetchCommerceAddress(
+					commerceAccount.getDefaultBillingAddressId());
 
 			if (commerceAddress != null) {
 				billingAddressId = commerceAddress.getCommerceAddressId();

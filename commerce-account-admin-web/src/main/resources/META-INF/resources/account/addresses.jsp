@@ -19,6 +19,7 @@
 <%
 CommerceAccountAddressAdminDisplayContext commerceAccountAddressAdminDisplayContext = (CommerceAccountAddressAdminDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CommerceAccount commerceAccount = commerceAccountAddressAdminDisplayContext.getCommerceAccount();
 long commerceAccountId = commerceAccountAddressAdminDisplayContext.getCommerceAccountId();
 SearchContainer<CommerceAddress> commerceAddressSearchContainer = commerceAccountAddressAdminDisplayContext.getSearchContainer();
 
@@ -92,7 +93,11 @@ PortletURL portletURL = commerceAccountAddressAdminDisplayContext.getPortletURL(
 					/>
 
 					<liferay-ui:search-container-column-text
-						cssClass="table-cell-content"
+						name="type"
+						value="<%= LanguageUtil.get(request, CommerceAddressConstants.getAddressTypeLabel(commerceAddress.getType())) %>"
+					/>
+
+					<liferay-ui:search-container-column-text
 						property="street1"
 					/>
 
@@ -103,6 +108,48 @@ PortletURL portletURL = commerceAccountAddressAdminDisplayContext.getPortletURL(
 					<liferay-ui:search-container-column-text
 						property="zip"
 					/>
+
+					<liferay-ui:search-container-column-text
+						name="default-billing"
+					>
+						<c:choose>
+							<c:when test="<%= commerceAccount.getDefaultBillingAddressId() == commerceAddress.getCommerceAddressId() %>">
+								<liferay-ui:icon
+									cssClass="commerce-admin-icon-check"
+									icon="check"
+									markupView="lexicon"
+								/>
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon
+									cssClass="commerce-admin-icon-times"
+									icon="times"
+									markupView="lexicon"
+								/>
+							</c:otherwise>
+						</c:choose>
+					</liferay-ui:search-container-column-text>
+
+					<liferay-ui:search-container-column-text
+						name="default-shipping"
+					>
+						<c:choose>
+							<c:when test="<%= commerceAccount.getDefaultShippingAddressId() == commerceAddress.getCommerceAddressId() %>">
+								<liferay-ui:icon
+									cssClass="commerce-admin-icon-check"
+									icon="check"
+									markupView="lexicon"
+								/>
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon
+									cssClass="commerce-admin-icon-times"
+									icon="times"
+									markupView="lexicon"
+								/>
+							</c:otherwise>
+						</c:choose>
+					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-jsp
 						cssClass="entry-action-column"

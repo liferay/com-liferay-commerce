@@ -47,6 +47,9 @@ if (commerceAddress != null) {
 
 		<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
 
+		<liferay-ui:error exception="<%= CommerceAccountDefaultBillingAddressException.class %>" message="to-set-this-address-as-the-default-billing-you-must-first-unmark-the-current-one" />
+		<liferay-ui:error exception="<%= CommerceAccountDefaultShippingAddressException.class %>" message="to-set-this-address-as-the-default-shipping-you-must-first-unmark-the-current-one" />
+
 		<section class="panel panel-secondary">
 			<div class="panel-body">
 				<div class="row">
@@ -76,77 +79,44 @@ if (commerceAddress != null) {
 						<aui:input name="name" />
 						<aui:input name="email" />
 					</div>
-				</div>
-			</div>
-		</section>
 
-		<section class="panel panel-secondary">
-			<div class="panel-body">
-				<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
-
-				<div class="row">
-					<div class="col-lg-4">
-						<aui:select label="country" name="commerceCountryId" showEmptyOption="<%= true %>">
-
-							<%
-							List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getCommerceCountries();
-
-							for (CommerceCountry commerceCountry : commerceCountries) {
-							%>
-
-								<aui:option label="<%= HtmlUtil.escape(commerceCountry.getName(locale)) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceCountryId() == commerceCountry.getCommerceCountryId()) %>" value="<%= commerceCountry.getCommerceCountryId() %>" />
-
-							<%
-							}
-							%>
-
-						</aui:select>
-
-					</div>
-
-					<div class="col-lg-4">
-						<aui:select label="region" name="commerceRegionId" showEmptyOption="<%= true %>">
-
-							<%
-							List<CommerceRegion> commerceRegions = commerceAccountDisplayContext.getCommerceRegions(commerceCountryId);
-
-							for (CommerceRegion commerceRegion : commerceRegions) {
-							%>
-
-								<aui:option label="<%= HtmlUtil.escape(commerceRegion.getName()) %>" selected="<%= (commerceAddress != null) && (commerceAddress.getCommerceRegionId() == commerceRegion.getCommerceRegionId()) %>" value="<%= commerceRegion.getCommerceRegionId() %>" />
-
-							<%
-							}
-							%>
-
-						</aui:select>
-					</div>
-
-					<div class="col-lg-4">
-						<aui:input label="address" name="street1" />
-					</div>
-
-					<div class="col-lg-4">
-						<aui:input name="zip">
-							<aui:validator name="required" />
-						</aui:input>
-					</div>
-
-					<div class="col-lg-4">
-						<aui:input name="city" />
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="panel panel-secondary">
-			<div class="panel-body">
-				<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
-
-				<div class="row">
 					<div class="col-lg-4">
 						<aui:input label="vat-number" name="taxId" />
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="panel panel-secondary">
+			<div class="panel-body">
+				<div class="row">
+					<aui:select label="default-billing" name="defaultBillingAddressId" showEmptyOption="<%= true %>" wrapperCssClass="col-md-6">
+
+						<%
+						for (CommerceAddress billingAddress : commerceAccountDisplayContext.getBillingCommerceAddresses()) {
+						%>
+
+							<aui:option label="<%= billingAddress.getName() %>" selected="<%= billingAddress.getCommerceAddressId() == commerceAccount.getDefaultBillingAddressId() %>" value="<%= billingAddress.getCommerceAddressId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:select label="default-shipping" name="defaultShippingAddressId" showEmptyOption="<%= true %>" wrapperCssClass="col-md-6">
+
+						<%
+						for (CommerceAddress shippingAddress : commerceAccountDisplayContext.getShippingCommerceAddresses()) {
+						%>
+
+							<aui:option label="<%= shippingAddress.getName() %>" selected="<%= shippingAddress.getCommerceAddressId() == commerceAccount.getDefaultShippingAddressId() %>" value="<%= shippingAddress.getCommerceAddressId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
 				</div>
 			</div>
 		</section>

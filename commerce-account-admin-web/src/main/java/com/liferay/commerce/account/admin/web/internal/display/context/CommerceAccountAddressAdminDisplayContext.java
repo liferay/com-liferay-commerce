@@ -167,7 +167,9 @@ public class CommerceAccountAddressAdminDisplayContext
 		return portletURL.toString();
 	}
 
-	public String getEditCommerceAddressURL(long commerceAddressId) {
+	public String getEditCommerceAddressURL(long commerceAddressId)
+		throws PortalException {
+
 		LiferayPortletResponse liferayPortletResponse =
 			commerceAccountAdminRequestHelper.getLiferayPortletResponse();
 
@@ -176,6 +178,8 @@ public class CommerceAccountAddressAdminDisplayContext
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceAddress");
 		portletURL.setParameter(
 			"redirect", commerceAccountAdminRequestHelper.getCurrentURL());
+		portletURL.setParameter(
+			"commerceAccountId", String.valueOf(getCommerceAccountId()));
 		portletURL.setParameter(
 			"commerceAddressId", String.valueOf(commerceAddressId));
 

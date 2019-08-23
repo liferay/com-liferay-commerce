@@ -20,10 +20,12 @@ package com.liferay.commerce.account.web.internal.model;
 public class Address {
 
 	public Address(
-		long addressId, String address, String referent, String phoneNumber) {
+		long addressId, String address, String type, String referent,
+		String phoneNumber) {
 
 		_addressId = addressId;
 		_address = address;
+		_type = type;
 		_referent = referent;
 		_phoneNumber = phoneNumber;
 	}
@@ -44,9 +46,14 @@ public class Address {
 		return _referent;
 	}
 
+	public String getType() {
+		return _type;
+	}
+
 	private final String _address;
 	private final long _addressId;
 	private final String _phoneNumber;
 	private final String _referent;
+	private final String _type;
 
 }

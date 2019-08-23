@@ -15,7 +15,10 @@
 package com.liferay.commerce.account.admin.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
@@ -82,6 +85,8 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		try {
 			if (cmd.equals(Constants.DELETE)) {
 				deleteCommerceAddress(actionRequest);
@@ -101,23 +106,21 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
 			else if (e instanceof CommerceAddressCityException ||
-					 e instanceof CommerceAddressCountryException ||
-					 e instanceof CommerceAddressStreetException) {
+				 e instanceof CommerceAddressCountryException ||
+				 e instanceof CommerceAddressStreetException ||
+				 e instanceof CommerceAccountDefaultBillingAddressException ||
+				 e instanceof CommerceAccountDefaultShippingAddressException) {
 
 				hideDefaultErrorMessage(actionRequest);
 
 				SessionErrors.add(actionRequest, e.getClass());
-
-				String redirect = _portal.getCurrentURL(actionRequest);
-
-				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
 				throw e;
 			}
 		}
 
-		hideDefaultSuccessMessage(actionRequest);
+		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
 	protected void updateCommerceAddress(ActionRequest actionRequest)
@@ -141,10 +144,7 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 		long commerceRegionId = ParamUtil.getLong(
 			actionRequest, "commerceRegionId");
 		String phoneNumber = ParamUtil.getString(actionRequest, "phoneNumber");
-		boolean defaultBilling = ParamUtil.getBoolean(
-			actionRequest, "defaultBilling");
-		boolean defaultShipping = ParamUtil.getBoolean(
-			actionRequest, "defaultShipping");
+		int type = ParamUtil.getInteger(actionRequest, "type");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceAddress.class.getName(), actionRequest);
@@ -153,16 +153,51 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 			_commerceAddressService.addCommerceAddress(
 				CommerceAccount.class.getName(), commerceAccountId, name,
 				description, street1, street2, street3, city, zip,
-				commerceRegionId, commerceCountryId, phoneNumber,
-				defaultBilling, defaultShipping, serviceContext);
+				commerceRegionId, commerceCountryId, phoneNumber, type,
+				serviceContext);
 		}
 		else {
 			_commerceAddressService.updateCommerceAddress(
 				commerceAddressId, name, description, street1, street2, street3,
 				city, zip, commerceRegionId, commerceCountryId, phoneNumber,
-				defaultBilling, defaultShipping, serviceContext);
+				type, serviceContext);
 		}
+
+		CommerceAccount commerceAccount =
+			_commerceAccountService.getCommerceAccount(commerceAccountId);
+
+		boolean isDefaultBilling =
+            ParamUtil.getBoolean(actionRequest, "defaultBilling");
+
+        if (isDefaultBilling) {
+            _commerceAccountLocalService.updateDefaultBillingAddress(
+                commerceAccountId, commerceAddressId);
+        }
+        else if (commerceAccount.getDefaultBillingAddressId() ==
+			commerceAddressId) {
+
+        	_commerceAccountService.updateDefaultBillingAddress(
+        		commerceAccountId, 0);
+		}
+
+        boolean isDefaultShipping =
+            ParamUtil.getBoolean(actionRequest, "defaultShipping");
+
+        if (isDefaultShipping) {
+            _commerceAccountLocalService.updateDefaultShippingAddress(
+                commerceAccountId, commerceAddressId);
+        }
+		else if (commerceAccount.getDefaultShippingAddressId() ==
+			commerceAddressId) {
+
+			_commerceAccountService.updateDefaultShippingAddress(
+				commerceAccountId, 0);
+		}
+
 	}
+
+	@Reference
+    private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;

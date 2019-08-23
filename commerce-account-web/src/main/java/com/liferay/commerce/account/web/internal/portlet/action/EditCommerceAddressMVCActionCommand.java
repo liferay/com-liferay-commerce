@@ -16,6 +16,7 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
 import com.liferay.commerce.exception.CommerceAddressStreetException;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -137,10 +139,14 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "commerceRegionId");
 		String phoneNumber = ParamUtil.getString(actionRequest, "phoneNumber");
 
-		boolean defaultBilling = ParamUtil.getBoolean(
-			actionRequest, "defaultBilling");
-		boolean defaultShipping = ParamUtil.getBoolean(
-			actionRequest, "defaultShipping");
+		int addressType = ParamUtil.getInteger(actionRequest, "addressType");
+
+		if (!ArrayUtil.contains(
+				CommerceAddressConstants.ADDRESS_TYPES, addressType)) {
+
+			addressType =
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
+		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceAddress.class.getName(), actionRequest);
@@ -149,14 +155,14 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 			_commerceAddressService.addCommerceAddress(
 				CommerceAccount.class.getName(), commerceAccountId, name,
 				description, street1, street2, street3, city, zip,
-				commerceRegionId, commerceCountryId, phoneNumber,
-				defaultBilling, defaultShipping, serviceContext);
+				commerceRegionId, commerceCountryId, phoneNumber, addressType,
+				serviceContext);
 		}
 		else {
 			_commerceAddressService.updateCommerceAddress(
 				commerceAddressId, name, description, street1, street2, street3,
 				city, zip, commerceRegionId, commerceCountryId, phoneNumber,
-				defaultBilling, defaultShipping, serviceContext);
+				addressType, serviceContext);
 		}
 	}
 

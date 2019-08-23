@@ -28,31 +28,6 @@ class AddressModal extends Component {
 		return this._handleNextButton(e);
 	}
 
-	_handleTypeChange(evt) {
-		const defaultType = evt.target.value;
-
-		if (defaultType === 'billing') {
-			this._formData = Object.assign(
-				{},
-				this._formData,
-				{
-					defaultBilling: evt.target.checked
-				}
-			);
-		}
-		else if (defaultType === 'shipping') {
-			this._formData = Object.assign(
-				{},
-				this._formData,
-				{
-					defaultShipping: evt.target.checked
-				}
-			);
-		}
-
-		return evt;
-	}
-
 	_handleNextButton(e) {
 		e.preventDefault();
 		this._firstFormValid = this.refs.modal.refs.firstForm.checkValidity();
@@ -90,6 +65,15 @@ class AddressModal extends Component {
 			else {
 				this._regions = [];
 			}
+		}
+		else if (e.target.name === 'addressType') {
+			this._formData = Object.assign(
+				{},
+				this._formData,
+				{
+					addressType: value
+				}
+			);
 		}
 		else {
 			this._formData = Object.assign(
@@ -152,8 +136,7 @@ class AddressModal extends Component {
 						address: data.street1,
 						city: data.city,
 						country: data.commerceCountryId,
-						defaultBilling: data.defaultBilling,
-						defaultShipping: data.defaultShipping,
+						addressType: data.type,
 						id: id,
 						region: data.commerceRegionId,
 						referent: data.name,
@@ -212,21 +195,13 @@ class AddressModal extends Component {
 	}
 
 	_addAddress(e) {
-		return this.emit(
-			'addressModalSave',
-			Object.assign(
-				{},
-				this._formData,
-				{
-					addressType: this.addressType
-				}
-			)
-		);
+		return this.emit('addressModalSave', this._formData);
 	}
 
 	resetForm() {
 		this._formData = {
 			address: null,
+			addressType: 2,
 			city: null,
 			country: null,
 			id: null,
@@ -277,6 +252,12 @@ AddressModal.STATE = {
 	_formData: Config.shapeOf(
 		{
 			address: Config.string(),
+			addressType: Config.oneOfType(
+				[
+					Config.string(),
+					Config.number()
+				]
+			),
 			city: Config.string(),
 			country: Config.oneOfType(
 				[
@@ -284,8 +265,6 @@ AddressModal.STATE = {
 					Config.number()
 				]
 			),
-			defaultBilling: Config.bool(),
-			defaultShipping: Config.bool(),
 			id: Config.oneOfType(
 				[
 					Config.string(),
@@ -305,10 +284,9 @@ AddressModal.STATE = {
 	).value(
 		{
 			address: null,
+			addressType: 2,
 			city: null,
 			country: null,
-			defaultBilling: false,
-			defaultShipping: false,
 			id: null,
 			referent: null,
 			region: null,

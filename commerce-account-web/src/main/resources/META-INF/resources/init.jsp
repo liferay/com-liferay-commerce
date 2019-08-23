@@ -28,6 +28,8 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.account.constants.CommerceAccountActionKeys" %><%@
 page import="com.liferay.commerce.account.constants.CommerceAccountConstants" %><%@
+page import="com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException" %><%@
+page import="com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException" %><%@
 page import="com.liferay.commerce.account.exception.NoSuchAccountException" %><%@
 page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
 page import="com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext" %><%@
@@ -36,8 +38,6 @@ page import="com.liferay.commerce.account.web.internal.frontend.CommerceAccountO
 page import="com.liferay.commerce.account.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.exception.NoSuchAddressException" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
-page import="com.liferay.commerce.model.CommerceCountry" %><%@
-page import="com.liferay.commerce.model.CommerceRegion" %><%@
 page import="com.liferay.petra.string.StringBundler" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@

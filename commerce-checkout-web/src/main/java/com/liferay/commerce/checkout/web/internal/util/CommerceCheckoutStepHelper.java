@@ -76,15 +76,7 @@ public class CommerceCheckoutStepHelper {
 			(CommerceOrder)httpServletRequest.getAttribute(
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
-		CommerceAddress defaultBilling =
-			_commerceAddressService.fetchDefaultBillingCommerceAddress(
-				commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
-				commerceOrder.getCommerceAccountId());
-
-		CommerceAddress defaultShipping =
-			_commerceAddressService.fetchDefaultShippingCommerceAddress(
-				commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
-				commerceOrder.getCommerceAccountId());
+		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
 		if ((commerceOrder.getBillingAddressId() > 0) &&
 			Objects.equals(
@@ -93,9 +85,9 @@ public class CommerceCheckoutStepHelper {
 
 			return false;
 		}
-		else if ((commerceOrder.getBillingAddressId() == -1) &&
-				 (defaultBilling != null) && (defaultShipping != null) &&
-				 Objects.equals(defaultBilling, defaultShipping)) {
+		else if ((commerceAccount.getDefaultBillingAddressId() > 0) &&
+				 (commerceAccount.getDefaultBillingAddressId() ==
+					 commerceAccount.getDefaultShippingAddressId())) {
 
 			return false;
 		}

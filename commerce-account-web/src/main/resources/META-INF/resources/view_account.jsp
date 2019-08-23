@@ -20,7 +20,8 @@
 CommerceAccountDisplayContext commerceAccountDisplayContext = (CommerceAccountDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceAccount commerceAccount = commerceAccountDisplayContext.getCurrentCommerceAccount();
-CommerceAddress commerceAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
+CommerceAddress billingAddress = commerceAccountDisplayContext.getDefaultBillingCommerceAddress();
+CommerceAddress shippingAddress = commerceAccountDisplayContext.getDefaultShippingCommerceAddress();
 PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
 
 portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
@@ -49,17 +50,31 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 					</span>
 				</div>
 
-				<c:if test="<%= commerceAddress != null %>">
+				<c:if test="<%= (billingAddress != null) || (shippingAddress != null) %>">
 					<div class="align-items-center col d-flex">
-						<div class="account-management__info-wrapper">
-							<span class="account-management__label">
-								<liferay-ui:message key="address" />
-							</span>
-							<span class="account-management__value">
-								<%= HtmlUtil.escape(commerceAddress.getStreet1()) %><br />
-								<%= HtmlUtil.escape(commerceAddress.getCity() + StringPool.SPACE + commerceAddress.getZip()) %>
-							</span>
-						</div>
+						<c:if test="<%= billingAddress != null %>">
+							<div class="account-management__info-wrapper">
+								<span class="account-management__label">
+									<liferay-ui:message key="billing-address" />
+								</span>
+								<span class="account-management__value">
+									<%= HtmlUtil.escape(billingAddress.getStreet1()) %><br />
+									<%= HtmlUtil.escape(billingAddress.getCity() + StringPool.SPACE + billingAddress.getZip()) %>
+								</span>
+							</div>
+						</c:if>
+
+						<c:if test="<%= shippingAddress != null %>">
+							<div class="account-management__info-wrapper">
+								<span class="account-management__label">
+									<liferay-ui:message key="shipping-address" />
+								</span>
+								<span class="account-management__value">
+									<%= HtmlUtil.escape(shippingAddress.getStreet1()) %><br />
+									<%= HtmlUtil.escape(shippingAddress.getCity() + StringPool.SPACE + shippingAddress.getZip()) %>
+								</span>
+							</div>
+						</c:if>
 					</div>
 				</c:if>
 
