@@ -79,7 +79,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<description>Render a panel</description>
 		<name>panel</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PanelTag</tag-class>
 		<body-content>JSP</body-content>
@@ -96,26 +95,55 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>actionUrl</name>
+			<name>headerActionUrl</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>actionLabel</name>
+			<name>headerActionLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>actionIcon</name>
+			<name>headerActionIcon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<name>actionId</name>
+			<name>headerActionId</name>
 			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+        <attribute>
+            <name>showMoreRefId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>showMoreId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>showMoreUrl</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+	</tag>
+	<tag>
+		<name>panel-hidden-content</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PanelHiddenContentTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>wrapperId</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.String</type>
 		</attribute>
