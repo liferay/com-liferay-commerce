@@ -19,6 +19,8 @@
 <%
 CommerceAccountAddressAdminDisplayContext commerceAccountAddressAdminDisplayContext = (CommerceAccountAddressAdminDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CommerceAccount commerceAccount = commerceAccountAddressAdminDisplayContext.getCommerceAccount();
+
 CommerceAddress commerceAddress = commerceAccountAddressAdminDisplayContext.getCommerceAddress();
 
 long commerceAddressId = commerceAccountAddressAdminDisplayContext.getCommerceAddressId();
@@ -31,13 +33,15 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 <div class="container-fluid-1280 mt-4 sheet">
 	<aui:form action="<%= editCommerceAddressActionURL %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAddress == null) ? Constants.ADD : Constants.UPDATE %>" />
-		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 		<aui:input name="commerceAddressId" type="hidden" value="<%= commerceAddressId %>" />
 		<aui:input name="commerceAccountId" type="hidden" value="<%= (commerceAddress == null) ? commerceAccountAddressAdminDisplayContext.getCommerceAccountId() : commerceAddress.getClassPK() %>" />
 
 		<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
 
+		<liferay-ui:error exception="<%= CommerceAccountDefaultBillingAddressException.class %>" message="to-set-this-address-as-the-default-billing-you-must-first-unmark-the-current-one" />
+		<liferay-ui:error exception="<%= CommerceAccountDefaultShippingAddressException.class %>" message="to-set-this-address-as-the-default-shipping-you-must-first-unmark-the-current-one" />
 		<liferay-ui:error exception="<%= CommerceAddressCityException.class %>" message="please-enter-a-valid-city" />
 		<liferay-ui:error exception="<%= CommerceAddressCountryException.class %>" message="please-select-a-country" />
 		<liferay-ui:error exception="<%= CommerceAddressStreetException.class %>" message="please-enter-a-valid-street" />
@@ -97,9 +101,29 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 
 						<aui:input name="phoneNumber" />
 
-						<aui:input name="defaultBilling" />
+						<aui:select label="type" name="type" showEmptyOption="<%= false %>">
 
-						<aui:input name="defaultShipping" />
+							<%
+							int selectedType = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
+
+							if (commerceAddress != null) {
+								selectedType = commerceAddress.getType();
+							}
+
+							for (int type : CommerceAddressConstants.ADDRESS_TYPES) {
+							%>
+
+							<aui:option label="<%= CommerceAddressConstants.getAddressTypeLabel(type) %>" selected="<%= type == selectedType %>" value="<%= type %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:input checked="<%= commerceAccount.getDefaultBillingAddressId() == commerceAddressId %>" name="defaultBilling" type="toggle-switch" />
+
+						<aui:input checked="<%= commerceAccount.getDefaultShippingAddressId() == commerceAddressId %>" name="defaultShipping" type="toggle-switch" />
 					</aui:fieldset>
 				</div>
 
@@ -112,6 +136,42 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 		</div>
 	</aui:form>
 </div>
+
+<aui:script use="aui-base">
+	var typeSelector = A.one('#<portlet:namespace />type');
+
+	typeSelector.on(
+		'change',
+		function() {
+			setDefaultToggles(typeSelector.val());
+		}
+	);
+
+	function setDefaultToggles(type) {
+		if (type == <%= CommerceAddressConstants.ADDRESS_TYPE_BILLING %>) {
+			A.one('#<portlet:namespace />defaultBilling').attr("disabled", false);
+			A.one('#<portlet:namespace />defaultShipping').attr("disabled", true);
+
+			if (A.one('#<portlet:namespace />defaultShipping').attr("checked")) {
+				A.one('#<portlet:namespace />defaultShipping').attr("checked", false);
+			}
+		}
+		else if (type == <%= CommerceAddressConstants.ADDRESS_TYPE_SHIPPING %>) {
+			A.one('#<portlet:namespace />defaultShipping').attr("disabled", false);
+			A.one('#<portlet:namespace />defaultBilling').attr("disabled", true);
+
+			if (A.one('#<portlet:namespace />defaultBilling').attr("checked")) {
+				A.one('#<portlet:namespace />defaultBilling').attr("checked", false);
+			}
+		}
+		else {
+			A.one('#<portlet:namespace />defaultShipping').attr("disabled", false);
+			A.one('#<portlet:namespace />defaultBilling').attr("disabled", false);
+		}
+	}
+
+	window.onload = setDefaultToggles(<%= commerceAddress.getType() %>);
+</aui:script>
 
 <aui:script use="aui-base,liferay-dynamic-select">
 	new Liferay.DynamicSelect(
