@@ -23,10 +23,11 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import java.util.List;
 
 /**
  * @author Fabio Diego Mastrorilli
@@ -35,51 +36,43 @@ public class HeaderTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
+		if (_spritemap == null) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-		if(_spritemap == null){
-
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-			_spritemap = themeDisplay.getPathThemeImages() + "/commerce-icons.svg";
+			_spritemap =
+				themeDisplay.getPathThemeImages() + "/commerce-icons.svg";
 		}
 
 		return super.doStartTag();
 	}
 
-	@Override
-	protected String getPage() {
-		return _PAGE;
-	}
-
-	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		servletContext = ServletContextUtil.getServletContext();
-	}
-
-	@Override
-	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		request.setAttribute("liferay-commerce:header:bean", _bean);
-		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
-		request.setAttribute("liferay-commerce:header:model", _model);
-		request.setAttribute("liferay-commerce:header:title", _title);
-		request.setAttribute("liferay-commerce:header:version", _version);
-		request.setAttribute("liferay-commerce:header:thumbnailUrl", _thumbnailUrl);
-		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
-		request.setAttribute("liferay-commerce:header:headerButtonModels", _headerButtonModels);
-		request.setAttribute("liferay-commerce:header:dropdownItems", _dropdownItems);
-		request.setAttribute("liferay-commerce:header:hasWorkflow", false);
-	}
-
-	private static final String _PAGE = "/header/page.jsp";
-	private static final Log _log = LogFactoryUtil.getLog(HeaderTag.class);
-
 	public Object getBean() {
 		return _bean;
 	}
 
+	public List<DropdownItem> getDropdownItems() {
+		return _dropdownItems;
+	}
+
+	public List<HeaderButtonModel> getHeaderButtons() {
+		return _headerButtonModels;
+	}
+
 	public Class<?> getModel() {
 		return _model;
+	}
+
+	public String getPreviewUrl() {
+		return _previewUrl;
+	}
+
+	public String getSpritemap() {
+		return _spritemap;
+	}
+
+	public String getThumbnailUrl() {
+		return _thumbnailUrl;
 	}
 
 	public String getTitle() {
@@ -90,24 +83,47 @@ public class HeaderTag extends IncludeTag {
 		return _version;
 	}
 
-	public String getSpritemap() {
-		return _spritemap;
+	public void setBean(Object bean) {
+		_bean = bean;
 	}
 
-	public String getPreviewUrl() {
-		return _previewUrl;
+	public void setDropdownItems(List<DropdownItem> dropdownItems) {
+		_dropdownItems = dropdownItems;
 	}
 
-	public String getThumbnailUrl() {
-		return _thumbnailUrl;
+	public void setHeaderButtons(List<HeaderButtonModel> headerButtonModels) {
+		_headerButtonModels = headerButtonModels;
 	}
 
-	public List<HeaderButtonModel> getHeaderButtons() {
-		return _headerButtonModels;
+	public void setModel(Class<?> model) {
+		_model = model;
 	}
 
-	public List<DropdownItem> getDropdownItems() {
-		return _dropdownItems;
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		servletContext = ServletContextUtil.getServletContext();
+	}
+
+	public void setPreviewUrl(String previewUrl) {
+		_previewUrl = previewUrl;
+	}
+
+	public void setSpritemap(String spritemap) {
+		_spritemap = spritemap;
+	}
+
+	public void setThumbnailUrl(String thumbnailUrl) {
+		_thumbnailUrl = thumbnailUrl;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public void setVersion(String version) {
+		_version = version;
 	}
 
 	@Override
@@ -115,58 +131,49 @@ public class HeaderTag extends IncludeTag {
 		super.cleanUp();
 
 		_bean = null;
-		_model = null;
-		_title = null;
-		_thumbnailUrl = null;
-		_previewUrl = null;
-		_version = null;
 		_headerButtonModels = null;
+		_model = null;
+		_previewUrl = null;
+		_thumbnailUrl = null;
+		_title = null;
+		_version = null;
 	}
 
-	private Object _bean = null;
-	private Class<?> _model = null;
-	private String _title= null;
-	private String _spritemap = null;
-	private String _version = null;
-	private String _thumbnailUrl = null;
-	private String _previewUrl = null;
-	private List<HeaderButtonModel> _headerButtonModels;
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
+
+	@Override
+	protected void setAttributes(HttpServletRequest httpServletRequest) {
+		request.setAttribute("liferay-commerce:header:bean", _bean);
+		request.setAttribute(
+			"liferay-commerce:header:dropdownItems", _dropdownItems);
+		request.setAttribute(
+			"liferay-commerce:header:hasWorkflow", Boolean.FALSE);
+		request.setAttribute(
+			"liferay-commerce:header:headerButtonModels", _headerButtonModels);
+		request.setAttribute("liferay-commerce:header:model", _model);
+		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
+		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
+		request.setAttribute(
+			"liferay-commerce:header:thumbnailUrl", _thumbnailUrl);
+		request.setAttribute("liferay-commerce:header:title", _title);
+		request.setAttribute("liferay-commerce:header:version", _version);
+	}
+
+	private static final String _PAGE = "/header/page.jsp";
+
+	private static final Log _log = LogFactoryUtil.getLog(HeaderTag.class);
+
+	private Object _bean;
 	private List<DropdownItem> _dropdownItems;
-
-	public void setBean(Object bean) {
-		_bean = bean;
-	}
-
-	public void setModel(Class<?> model) {
-		_model = model;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public void setSpritemap(String spritemap) {
-		_spritemap = spritemap;
-	}
-
-	public void setVersion(String version) {
-		_version = version;
-	}
-
-	public void setPreviewUrl(String previewUrl) {
-		_previewUrl = previewUrl;
-	}
-
-	public void setThumbnailUrl(String thumbnailUrl) {
-		_thumbnailUrl = thumbnailUrl;
-	}
-
-	public void setHeaderButtons(List<HeaderButtonModel> headerButtonModels) {
-		_headerButtonModels = headerButtonModels;
-	}
-
-	public void setDropdownItems(List<DropdownItem> dropdownItems) {
-		_dropdownItems = dropdownItems;
-	}
+	private List<HeaderButtonModel> _headerButtonModels;
+	private Class<?> _model;
+	private String _previewUrl;
+	private String _spritemap;
+	private String _thumbnailUrl;
+	private String _title;
+	private String _version;
 
 }

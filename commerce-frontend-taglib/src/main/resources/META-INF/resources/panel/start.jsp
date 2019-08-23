@@ -17,31 +17,32 @@
 <%@ include file="/panel/init.jsp" %>
 
 <%
-    String cardCssClasses = "card d-flex" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
+	String cardCssClasses = "card d-flex" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
 %>
 
 <div class="<%= cardCssClasses %>">
-    <c:if test="<%= Validator.isNotNull(headerActionLabel) || Validator.isNotNull(headerActionIcon) || Validator.isNotNull(title) %>">
-        <h5 class="card-header d-flex align-items-center justify-content-between">
-            <%= title %>
+	<c:if test="<%= Validator.isNotNull(headerActionLabel) || Validator.isNotNull(headerActionIcon) || Validator.isNotNull(title) %>">
+		<h5 class="align-items-center card-header d-flex justify-content-between">
+			<%= title %>
 
-            <c:choose>
-                <c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
-                    <clay:link
-                            href="#"
-                        id="<%= headerActionLinkId %>"
-                        label="<%= headerActionLabel %>"
-                    />
-                </c:when>
-                <c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
-                    <clay:link
-                            href="#"
-                        id="<%= headerActionLinkId %>"
-                        elementClasses="btn btn-primary btn-sm"
-                        icon="<%= headerActionIcon %>"
-                    />
-                </c:when>
-            </c:choose>
-        </h5>
-    </c:if>
-    <div class="card-body">
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
+<clay:link
+	href="#"
+	id="<%= headerActionLinkId %>"
+	label="<%= headerActionLabel %>"
+/>
+				</c:when>
+				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
+<clay:link
+	elementClasses="btn btn-primary btn-sm"
+	href="#"
+	icon="<%= headerActionIcon %>"
+	id="<%= headerActionLinkId %>"
+/>
+				</c:when>
+			</c:choose>
+		</h5>
+	</c:if>
+
+	<div class="card-body">
