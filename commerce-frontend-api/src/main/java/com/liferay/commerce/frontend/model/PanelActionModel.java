@@ -22,14 +22,6 @@ public class PanelActionModel {
 	public PanelActionModel() {
 	}
 
-	public String getUrl() {
-		return _url;
-	}
-
-	public String getLabel() {
-		return _label;
-	}
-
 	public String getIcon() {
 		return _icon;
 	}
@@ -38,12 +30,12 @@ public class PanelActionModel {
 		return _id;
 	}
 
-	public void setUrl(String url) {
-		_url = url;
+	public String getLabel() {
+		return _label;
 	}
 
-	public void setLabel(String label) {
-		_label = label;
+	public String getUrl() {
+		return _url;
 	}
 
 	public void setIcon(String icon) {
@@ -54,9 +46,17 @@ public class PanelActionModel {
 		_id = id;
 	}
 
-	private String _url;
-	private String _label;
+	public void setLabel(String label) {
+		_label = label;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
 	private String _icon;
 	private String _id;
+	private String _label;
+	private String _url;
 
 }

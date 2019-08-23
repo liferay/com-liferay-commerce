@@ -16,4 +16,4 @@
 
 <%@ include file="/panel_hidden_content/init.jsp" %>
 
-<div id="<%= wrapperId %>" class="d-none">
+<div class="d-none" id="<%= wrapperId %>">
