@@ -237,6 +237,8 @@
 		<reference entity="UserGroupRole" package-path="com.liferay.portal" />
 	</entity>
 	<exceptions>
+		<exception>CommerceAccountDefaultBillingAddress</exception>
+		<exception>CommerceAccountDefaultShippingAddress</exception>
 		<exception>CommerceAccountGroupName</exception>
 		<exception>CommerceAccountName</exception>
 		<exception>CommerceAccountType</exception>

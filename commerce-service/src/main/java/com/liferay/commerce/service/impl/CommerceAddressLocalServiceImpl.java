@@ -253,21 +253,52 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
+	public List<CommerceAddress> getBillingCommerceAddresses(
 		long companyId, String className, long classPK) {
 
-		return commerceAddressPersistence.findByC_C_C_C(
-			companyId, classNameLocalService.getClassNameId(className), classPK,
-			CommerceAddressConstants.TYPE_BILLING);
+		List<CommerceAddress> billingAddresses =
+			commerceAddressPersistence.findByC_C_C_C(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, CommerceAddressConstants.TYPE_BILLING);
+
+		List <CommerceAddress> billingAndShippingAddresses =
+			getBillingAndShippingCommerceAddresses(
+				companyId, className, classPK);
+
+		if (!billingAndShippingAddresses.isEmpty()) {
+			billingAddresses.addAll(billingAndShippingAddresses);
+		}
+
+		return billingAddresses;
 	}
 
 	@Override
-	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
+	public List<CommerceAddress> getBillingAndShippingCommerceAddresses(
 		long companyId, String className, long classPK) {
 
 		return commerceAddressPersistence.findByC_C_C_C(
-			companyId, classNameLocalService.getClassNameId(className), classPK,
-			CommerceAddressConstants.TYPE_SHIPPING);
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING);
+	}
+
+	@Override
+	public List<CommerceAddress> getShippingCommerceAddresses(
+		long companyId, String className, long classPK) {
+
+		List<CommerceAddress> shippingAddresses =
+			commerceAddressPersistence.findByC_C_C_C(
+				companyId, classNameLocalService.getClassNameId(className),
+				classPK, CommerceAddressConstants.TYPE_SHIPPING);
+
+		List <CommerceAddress> billingAndShippingAddresses =
+			getBillingAndShippingCommerceAddresses(
+				companyId, className, classPK);
+
+		if (!billingAndShippingAddresses.isEmpty()) {
+			shippingAddresses.addAll(billingAndShippingAddresses);
+		}
+
+		return shippingAddresses;
 	}
 
 	/**

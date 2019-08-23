@@ -99,33 +99,19 @@ public class CommerceAccountDisplayContext {
 		return accountFilter;
 	}
 
-    public List<CommerceAddress> getBillingCommerceAddresses()
-        throws PortalException {
+	public List<CommerceAddress> getBillingCommerceAddresses()
+		throws PortalException {
 
-        CommerceAccount commerceAccount = getCurrentCommerceAccount();
+		CommerceAccount commerceAccount = getCurrentCommerceAccount();
 
-        if (commerceAccount == null) {
-            return null;
-        }
+		if (commerceAccount == null) {
+			return null;
+		}
 
-        return _commerceAddressService.getAvailableBillingCommerceAddresses(
-            commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
-            commerceAccount.getCommerceAccountId());
-    }
-
-    public List<CommerceAddress> getShippingCommerceAddresses()
-        throws PortalException {
-
-        CommerceAccount commerceAccount = getCurrentCommerceAccount();
-
-        if (commerceAccount == null) {
-            return null;
-        }
-
-        return _commerceAddressService.getAvailableShippingCommerceAddresses(
-            commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
-            commerceAccount.getCommerceAccountId());
-    }
+		return _commerceAddressService.getBillingCommerceAddresses(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId());
+	}
 
 	public List<CommerceAccount> getCommerceAccounts() throws PortalException {
 		return _commerceAccountService.getUserCommerceAccounts(
@@ -314,6 +300,20 @@ public class CommerceAccountDisplayContext {
 		}
 
 		return _commerceAccountRequestHelper.getUserId();
+	}
+
+	public List<CommerceAddress> getShippingCommerceAddresses()
+		throws PortalException {
+
+		CommerceAccount commerceAccount = getCurrentCommerceAccount();
+
+		if (commerceAccount == null) {
+			return null;
+		}
+
+		return _commerceAddressService.getShippingCommerceAddresses(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId());
 	}
 
 	public UserFileUploadsConfiguration getUserFileUploadsConfiguration() {

@@ -43,7 +43,7 @@ public class ShippingAddressCheckoutStepDisplayContext
 	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
-		return commerceAddressService.getAvailableShippingCommerceAddresses(
+		return commerceAddressService.getShippingCommerceAddresses(
 			commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
 			commerceOrder.getCommerceAccountId());
 	}
@@ -65,14 +65,12 @@ public class ShippingAddressCheckoutStepDisplayContext
 		long shippingAddressId = commerceOrder.getShippingAddressId();
 
 		if (shippingAddressId == 0) {
-			CommerceAddress commerceAddress =
-				commerceAddressService.fetchDefaultShippingCommerceAddress(
-					commerceOrder.getCompanyId(),
-					CommerceAccount.class.getName(),
-					commerceOrder.getCommerceAccountId());
+			CommerceAccount commerceAccount =
+				commerceOrder.getCommerceAccount();
 
-			if (commerceAddress != null) {
-				shippingAddressId = commerceAddress.getCommerceAddressId();
+			if (commerceAccount != null) {
+				shippingAddressId =
+					commerceAccount.getDefaultShippingAddressId();
 			}
 		}
 

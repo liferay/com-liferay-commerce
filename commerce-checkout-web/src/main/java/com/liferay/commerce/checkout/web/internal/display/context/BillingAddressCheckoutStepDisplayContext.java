@@ -42,7 +42,7 @@ public class BillingAddressCheckoutStepDisplayContext
 	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
-		return commerceAddressService.getAvailableBillingCommerceAddresses(
+		return commerceAddressService.getBillingCommerceAddresses(
 			commerceOrder.getCompanyId(), CommerceAccount.class.getName(),
 			commerceOrder.getCommerceAccountId());
 	}
@@ -64,6 +64,9 @@ public class BillingAddressCheckoutStepDisplayContext
 		long billingAddressId = commerceOrder.getBillingAddressId();
 
 		if (billingAddressId == 0) {
+			CommerceAccount commerceAccount =
+				commerceOrder.getCommerceAccount();
+
 			CommerceAddress commerceAddress =
 				commerceAddressService.fetchCommerceAddress(
 					commerceAccount.getDefaultBillingAddressId());

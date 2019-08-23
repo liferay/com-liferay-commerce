@@ -98,26 +98,14 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 	}
 
 	@Override
-	public List<CommerceAddress> getAvailableBillingCommerceAddresses(
+	public List<CommerceAddress> getBillingCommerceAddresses(
 			long companyId, String className, long classPK)
 		throws PortalException {
 
 		checkPermission(className, classPK);
 
-		return commerceAddressLocalService.getAvailableBillingCommerceAddresses(
+		return commerceAddressLocalService.getBillingCommerceAddresses(
 			companyId, className, classPK);
-	}
-
-	@Override
-	public List<CommerceAddress> getAvailableShippingCommerceAddresses(
-			long companyId, String className, long classPK)
-		throws PortalException {
-
-		checkPermission(className, classPK);
-
-		return commerceAddressLocalService.
-			getAvailableShippingCommerceAddresses(
-				companyId, className, classPK);
 	}
 
 	@Override
@@ -231,6 +219,17 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.getCommerceAddressesCountByCompanyId(
+			companyId, className, classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getShippingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		checkPermission(className, classPK);
+
+		return commerceAddressLocalService.getShippingCommerceAddresses(
 			companyId, className, classPK);
 	}
 

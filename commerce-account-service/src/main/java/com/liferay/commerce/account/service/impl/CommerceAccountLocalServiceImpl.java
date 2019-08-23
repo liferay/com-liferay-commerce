@@ -15,6 +15,8 @@
 package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
+import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.internal.search.CommerceAccountIndexer;
@@ -535,6 +537,42 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccount.getUserId(), CommerceAccount.class.getName(),
 			commerceAccountId, commerceAccount, serviceContext,
 			Collections.emptyMap());
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAccount updateDefaultBillingAddress(
+			long commerceAccountId, long commerceAddressId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		if (commerceAccount.getDefaultShippingAddressId() != 0) {
+			throw new CommerceAccountDefaultBillingAddressException();
+		}
+
+		commerceAccount.setDefaultBillingAddressId(commerceAddressId);
+
+		return 	commerceAccountPersistence.update(commerceAccount);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAccount updateDefaultShippingAddress(
+			long commerceAccountId, long commerceAddressId)
+		throws PortalException {
+
+		CommerceAccount commerceAccount =
+			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
+
+		if (commerceAccount.getDefaultShippingAddressId() != 0) {
+			throw new CommerceAccountDefaultShippingAddressException();
+		}
+
+		commerceAccount.setDefaultShippingAddressId(commerceAddressId);
+
+		return 	commerceAccountPersistence.update(commerceAccount);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
