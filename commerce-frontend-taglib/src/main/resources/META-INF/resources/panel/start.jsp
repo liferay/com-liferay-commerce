@@ -17,28 +17,28 @@
 <%@ include file="/panel/init.jsp" %>
 
 <%
-    String cardCssClasses = "card" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
+    String cardCssClasses = "card d-flex" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
 %>
 
 <div class="<%= cardCssClasses %>">
-    <c:if test="<%= Validator.isNotNull(actionLabel) || Validator.isNotNull(actionIcon) || Validator.isNotNull(title) %>">
+    <c:if test="<%= Validator.isNotNull(headerActionLabel) || Validator.isNotNull(headerActionIcon) || Validator.isNotNull(title) %>">
         <h5 class="card-header d-flex align-items-center justify-content-between">
             <%= title %>
 
             <c:choose>
-                <c:when test="<%= Validator.isNotNull(actionLabel) %>">
+                <c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
                     <clay:link
                             href="#"
-                        id="<%= actionLinkId %>"
-                        label="<%= actionLabel %>"
+                        id="<%= headerActionLinkId %>"
+                        label="<%= headerActionLabel %>"
                     />
                 </c:when>
-                <c:when test="<%= Validator.isNotNull(actionIcon) %>">
+                <c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
                     <clay:link
                             href="#"
-                        id="<%= actionLinkId %>"
+                        id="<%= headerActionLinkId %>"
                         elementClasses="btn btn-primary btn-sm"
-                        icon="<%= actionIcon %>"
+                        icon="<%= headerActionIcon %>"
                     />
                 </c:when>
             </c:choose>

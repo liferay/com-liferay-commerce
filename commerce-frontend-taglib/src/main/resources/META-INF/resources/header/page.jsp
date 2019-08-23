@@ -67,7 +67,7 @@
 
         <div class="commerce-header__actions-wrapper align-items-center d-flex">
             <div class="commerce-header__actions px-3 d-none d-xl-flex border-right">
-                <c:if test="<%= hasWorkflow %>">
+                <%--<c:if test="<%= hasWorkflow %>">--%>
                     <% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
 
                     <div id="<%= assignedToWrapperId %>"></div>
@@ -81,7 +81,7 @@
                         }
                         );
                     </aui:script>
-                </c:if>
+                <%--</c:if>--%>
 
                 <c:if test="<%= Validator.isNotNull(headerButtonModels) %>">
                     <c:forEach items="<%= headerButtonModels %>" var="headerButtonModel">
