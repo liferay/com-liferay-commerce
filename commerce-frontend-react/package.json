@@ -22,7 +22,6 @@
 		"redux": "^4.0.4"
 	},
 	"devDependencies": {
-		"typescript": "^3.5.1",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/preset-typescript": "^7.0.0",
 		"babel-core": "^6.26.3",
@@ -52,6 +51,7 @@
 		"sass-loader": "^7.1.0",
 		"style-loader": "^0.23.1",
 		"ts-loader": "^6.0.4",
+		"typescript": "^3.5.1",
 		"webpack": "^4.33.0",
 		"webpack-cli": "^3.3.3"
 	},
@@ -61,9 +61,9 @@
 		"build": "liferay-npm-scripts build",
 		"checkFormat": "liferay-npm-scripts check",
 		"format": "liferay-npm-scripts fix",
+		"start": "webpack-dev-server --config webpack.config.dev.js",
 		"test": "liferay-npm-scripts test",
-		"watch": "liferay-npm-scripts webpack --watch",
-		"start": "webpack-dev-server --config webpack.config.dev.js"
+		"watch": "liferay-npm-scripts webpack --watch"
 	},
 	"version": "1.0.0"
 }

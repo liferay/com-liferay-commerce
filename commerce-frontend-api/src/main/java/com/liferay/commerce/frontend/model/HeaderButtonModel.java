@@ -22,10 +22,6 @@ public class HeaderButtonModel {
 	public HeaderButtonModel() {
 	}
 
-	public String getType() {
-		return _type;
-	}
-
 	public String getLabel() {
 		return _label;
 	}
@@ -34,8 +30,8 @@ public class HeaderButtonModel {
 		return _style;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public String getType() {
+		return _type;
 	}
 
 	public void setLabel(String label) {
@@ -46,8 +42,12 @@ public class HeaderButtonModel {
 		_style = style;
 	}
 
-	private String _type;
+	public void setType(String type) {
+		_type = type;
+	}
+
 	private String _label;
 	private String _style;
+	private String _type;
 
 }
