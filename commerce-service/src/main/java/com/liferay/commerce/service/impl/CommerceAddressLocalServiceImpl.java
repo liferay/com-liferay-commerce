@@ -24,6 +24,7 @@ import com.liferay.commerce.exception.CommerceAddressZipException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceGeocoder;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.service.base.CommerceAddressLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -253,26 +255,6 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceAddress> getBillingCommerceAddresses(
-		long companyId, String className, long classPK) {
-
-		List<CommerceAddress> billingAddresses =
-			commerceAddressPersistence.findByC_C_C_C(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, CommerceAddressConstants.TYPE_BILLING);
-
-		List <CommerceAddress> billingAndShippingAddresses =
-			getBillingAndShippingCommerceAddresses(
-				companyId, className, classPK);
-
-		if (!billingAndShippingAddresses.isEmpty()) {
-			billingAddresses.addAll(billingAndShippingAddresses);
-		}
-
-		return billingAddresses;
-	}
-
-	@Override
 	public List<CommerceAddress> getBillingAndShippingCommerceAddresses(
 		long companyId, String className, long classPK) {
 
@@ -282,23 +264,21 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	@Override
-	public List<CommerceAddress> getShippingCommerceAddresses(
-		long companyId, String className, long classPK) {
+	public List<CommerceAddress> getBillingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException {
 
-		List<CommerceAddress> shippingAddresses =
-			commerceAddressPersistence.findByC_C_C_C(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, CommerceAddressConstants.TYPE_SHIPPING);
+		SearchContext searchContext = buildSearchContext(
+			new int[] {
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING,
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING
+			},
+			companyId, className, classPK, null, -1, -1, null);
 
-		List <CommerceAddress> billingAndShippingAddresses =
-			getBillingAndShippingCommerceAddresses(
-				companyId, className, classPK);
+		BaseModelSearchResult<CommerceAddress> billingAddresses =
+			searchCommerceAddresses(searchContext);
 
-		if (!billingAndShippingAddresses.isEmpty()) {
-			shippingAddresses.addAll(billingAndShippingAddresses);
-		}
-
-		return shippingAddresses;
+		return billingAddresses.getBaseModels();
 	}
 
 	/**
@@ -402,6 +382,24 @@ public class CommerceAddressLocalServiceImpl
 		return commerceAddressPersistence.countByC_C_C(
 			companyId, classNameLocalService.getClassNameId(className),
 			classPK);
+	}
+
+	@Override
+	public List<CommerceAddress> getShippingCommerceAddresses(
+			long companyId, String className, long classPK)
+		throws PortalException {
+
+		SearchContext searchContext = buildSearchContext(
+			new int[] {
+				CommerceAddressConstants.ADDRESS_TYPE_SHIPPING,
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING
+			},
+			companyId, className, classPK, null, -1, -1, null);
+
+		BaseModelSearchResult<CommerceAddress> shippingAddresses =
+			searchCommerceAddresses(searchContext);
+
+		return shippingAddresses.getBaseModels();
 	}
 
 	/**
@@ -508,6 +506,29 @@ public class CommerceAddressLocalServiceImpl
 		}
 
 		return commerceAddress;
+	}
+
+	protected SearchContext buildSearchContext(
+		int[] addressTypes, long companyId, String className, long classPK,
+		String keywords, int start, int end, Sort sort) {
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, className, classPK, keywords, start, end, sort);
+
+		NegatableMultiValueFacet negatableMultiValueFacet =
+			new NegatableMultiValueFacet(searchContext);
+
+		negatableMultiValueFacet.setFieldName(Field.TYPE);
+
+		searchContext.addFacet(negatableMultiValueFacet);
+
+		negatableMultiValueFacet.setNegated(false);
+
+		searchContext.setAttribute(
+			negatableMultiValueFacet.getFieldId(),
+			StringUtil.merge(addressTypes));
+
+		return searchContext;
 	}
 
 	protected SearchContext buildSearchContext(
