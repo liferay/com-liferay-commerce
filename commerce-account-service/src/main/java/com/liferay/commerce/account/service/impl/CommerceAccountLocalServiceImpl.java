@@ -127,7 +127,9 @@ public class CommerceAccountLocalServiceImpl
 		parentCommerceAccountId = getParentCommerceAccountId(
 			serviceContext.getCompanyId(), parentCommerceAccountId);
 
-		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
+		validate(
+			serviceContext.getCompanyId(), 0, name, externalReferenceCode, 0,
+			0);
 
 		long commerceAccountId = counterLocalService.increment();
 
@@ -470,29 +472,13 @@ public class CommerceAccountLocalServiceImpl
 		return commerceAccount;
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
-	 */
-	@Deprecated
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
 			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
 			ServiceContext serviceContext)
-		throws PortalException {
-
-		return updateCommerceAccount(
-			commerceAccountId, name, logo, logoBytes, email, taxId, active, -1,
-			-1, serviceContext);
-	}
-
-	@Indexable(type = IndexableType.REINDEX)
-	@Override
-	public CommerceAccount updateCommerceAccount(
-		long commerceAccountId, String name, boolean logo, byte[] logoBytes,
-		String email, String taxId, boolean active,
-		long defaultBillingAddressId, long defaultShippingAddressId,
-		ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
@@ -508,10 +494,13 @@ public class CommerceAccountLocalServiceImpl
 				commerceAccount.getDefaultShippingAddressId();
 		}
 
+		// Using this method will skip default address validation.
+		// Use updateDefault*Address if you want validation
+
 		validate(
 			serviceContext.getCompanyId(),
 			commerceAccount.getCommerceAccountId(), name,
-			commerceAccount.getExternalReferenceCode());
+			commerceAccount.getExternalReferenceCode(), 0, 0);
 
 		commerceAccount.setName(name);
 
@@ -539,6 +528,22 @@ public class CommerceAccountLocalServiceImpl
 			Collections.emptyMap());
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
+	 */
+	@Deprecated
+	@Override
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active, -1,
+			-1, serviceContext);
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount updateDefaultBillingAddress(
@@ -548,13 +553,14 @@ public class CommerceAccountLocalServiceImpl
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
 
-		if (commerceAccount.getDefaultShippingAddressId() != 0) {
-			throw new CommerceAccountDefaultBillingAddressException();
-		}
+		validate(
+			commerceAccount.getCompanyId(), commerceAccountId,
+			commerceAccount.getName(),
+			commerceAccount.getExternalReferenceCode(), commerceAddressId, 0);
 
 		commerceAccount.setDefaultBillingAddressId(commerceAddressId);
 
-		return 	commerceAccountPersistence.update(commerceAccount);
+		return commerceAccountPersistence.update(commerceAccount);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -566,13 +572,14 @@ public class CommerceAccountLocalServiceImpl
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
 
-		if (commerceAccount.getDefaultShippingAddressId() != 0) {
-			throw new CommerceAccountDefaultShippingAddressException();
-		}
+		validate(
+			commerceAccount.getCompanyId(), commerceAccountId,
+			commerceAccount.getName(),
+			commerceAccount.getExternalReferenceCode(), 0, commerceAddressId);
 
 		commerceAccount.setDefaultShippingAddressId(commerceAddressId);
 
-		return 	commerceAccountPersistence.update(commerceAccount);
+		return commerceAccountPersistence.update(commerceAccount);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -773,7 +780,8 @@ public class CommerceAccountLocalServiceImpl
 
 	protected void validate(
 			long companyId, long commerceAccountId, String name,
-			String externalReferenceCode)
+			String externalReferenceCode, long defaultBillingAddressId,
+			long defaultShippingAddressId)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -794,6 +802,22 @@ public class CommerceAccountLocalServiceImpl
 			throw new DuplicateCommerceAccountException(
 				"There is another commerce account with external reference " +
 					"code " + externalReferenceCode);
+		}
+
+		if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
+			(defaultBillingAddressId != 0) &&
+			(commerceAccount.getDefaultBillingAddressId() !=
+				defaultBillingAddressId)) {
+
+			throw new CommerceAccountDefaultBillingAddressException();
+		}
+
+		if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
+			(defaultShippingAddressId != 0) &&
+			(commerceAccount.getDefaultBillingAddressId() !=
+				defaultShippingAddressId)) {
+
+			throw new CommerceAccountDefaultShippingAddressException();
 		}
 	}
 
