@@ -63,7 +63,7 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 		setDefaultSelectedFieldNames(
 			Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
 			Field.GROUP_ID, Field.MODIFIED_DATE, Field.NAME,
-			Field.SCOPE_GROUP_ID, Field.UID);
+			Field.SCOPE_GROUP_ID, Field.TYPE, Field.UID);
 	}
 
 	@Override
@@ -127,6 +127,7 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 
 		document.addText(FIELD_CITY, commerceAddress.getCity());
 		document.addText(Field.NAME, commerceAddress.getName());
+		document.addNumber(Field.TYPE, commerceAddress.getType());
 		document.addText(FIELD_ZIP, commerceAddress.getZip());
 
 		CommerceCountry commerceCountry = commerceAddress.getCommerceCountry();
