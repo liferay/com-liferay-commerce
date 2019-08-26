@@ -79,13 +79,13 @@ public class CommerceAddressLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		int type = CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+		int type = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
 
 		if (defaultBilling && !defaultShipping) {
-			type = CommerceAddressConstants.TYPE_BILLING;
+			type = CommerceAddressConstants.ADDRESS_TYPE_BILLING;
 		}
 		else if (!defaultBilling && defaultShipping) {
-			type = CommerceAddressConstants.TYPE_SHIPPING;
+			type = CommerceAddressConstants.ADDRESS_TYPE_SHIPPING;
 		}
 
 		return addCommerceAddress(
@@ -259,8 +259,8 @@ public class CommerceAddressLocalServiceImpl
 		long companyId, String className, long classPK) {
 
 		return commerceAddressPersistence.findByC_C_C_C(
-				companyId, classNameLocalService.getClassNameId(className),
-				classPK, CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING);
+			companyId, classNameLocalService.getClassNameId(className), classPK,
+			CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING);
 	}
 
 	@Override
@@ -443,13 +443,13 @@ public class CommerceAddressLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		int type = CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+		int type = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
 
 		if (defaultBilling && !defaultShipping) {
-			type = CommerceAddressConstants.TYPE_BILLING;
+			type = CommerceAddressConstants.ADDRESS_TYPE_BILLING;
 		}
 		else if (!defaultBilling && defaultShipping) {
-			type = CommerceAddressConstants.TYPE_SHIPPING;
+			type = CommerceAddressConstants.ADDRESS_TYPE_SHIPPING;
 		}
 
 		return updateCommerceAddress(
@@ -691,9 +691,7 @@ public class CommerceAddressLocalServiceImpl
 			throw new CommerceAddressCountryException();
 		}
 
-		if (!ArrayUtil.contains(
-				CommerceAddressConstants.AVAILABLE_ADDRESS_TYPES, type)) {
-
+		if (!ArrayUtil.contains(CommerceAddressConstants.ADDRESS_TYPES, type)) {
 			throw new CommerceAddressTypeException();
 		}
 	}
