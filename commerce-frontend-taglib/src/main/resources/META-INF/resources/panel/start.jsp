@@ -27,19 +27,19 @@
 
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
-<clay:link
-	href="#"
-	id="<%= headerActionLinkId %>"
-	label="<%= headerActionLabel %>"
-/>
+					<clay:link
+						href="#"
+						id="<%= headerActionLinkId %>"
+						label="<%= headerActionLabel %>"
+					/>
 				</c:when>
 				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
-<clay:link
-	elementClasses="btn btn-primary btn-sm"
-	href="#"
-	icon="<%= headerActionIcon %>"
-	id="<%= headerActionLinkId %>"
-/>
+					<clay:link
+						elementClasses="btn btn-primary btn-sm"
+						href="#"
+						icon="<%= headerActionIcon %>"
+						id="<%= headerActionLinkId %>"
+					/>
 				</c:when>
 			</c:choose>
 		</h5>

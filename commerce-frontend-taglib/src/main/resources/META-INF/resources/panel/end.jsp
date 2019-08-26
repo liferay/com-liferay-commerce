@@ -19,8 +19,8 @@
 	</div>
 
 	<c:if test="<%= Validator.isNotNull(showMoreId) || Validator.isNotNull(showMoreRefId) || Validator.isNotNull(showMoreUrl) %>">
-<div class="border-top card-footer p-0" id="<%= showMoreButtonWrapperId %>">
-<a class="border-0 btn btn-secondary w-100" href="<%= Validator.isNotNull(showMoreUrl) ? showMoreUrl : '#' %>" id="<%= showMoreButtonId %>">
+		<div class="border-top card-footer p-0" id="<%= showMoreButtonWrapperId %>">
+			<a class="border-0 btn btn-secondary w-100" href="<%= Validator.isNotNull(showMoreUrl) ? showMoreUrl : '#' %>" id="<%= showMoreButtonId %>">
 				Show more
 			</a>
 		</div>
@@ -30,12 +30,12 @@
 <c:if test="<%= Validator.isNotNull(headerActionUrl) %>">
 
 	<%
-String modalId = randomNamespace + "modal-root";
-%>
+		String modalId = randomNamespace + "modal-root";
+	%>
 
-	<div id="<%= modalId %>"></div>
+	<div id="<%= modalId %>" class="modal-root"></div>
 
-	<aui:script require="commerce-frontend-react@1.0.0/commerce_modal/entry.es as Modal">
+	<aui:script require="commerce-frontend-react@1.0.0/js/modal/entry.es as Modal">
 		var modal = new Modal.default(
 			"<%= modalId %>",
 			"<%= modalId %>",
@@ -45,6 +45,8 @@ String modalId = randomNamespace + "modal-root";
 				spritemap: "<%= spritemap %>"
 			}
 		);
+
+		console.log(modal)
 
 		document.querySelector('<%= headerActionLinkId %>')
 			.addEventListener('onClick', () => modal.open());

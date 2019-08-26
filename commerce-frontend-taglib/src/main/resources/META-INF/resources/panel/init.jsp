@@ -35,6 +35,7 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 	String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");
 	String showMoreRefId = (String)request.getAttribute("liferay-commerce:panel:showMoreRefId");
 	String showMoreId = (String)request.getAttribute("liferay-commerce:panel:showMoreId");
+	String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
 
 	String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
 	String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
