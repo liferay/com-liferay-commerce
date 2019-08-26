@@ -15,6 +15,7 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.internal.display.context.BillingAddressCheckoutStepDisplayContext;
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
@@ -110,6 +111,7 @@ public class BillingAddressCommerceCheckoutStep
 		try {
 			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
 				new AddressCommerceCheckoutStepUtil(
+					CommerceAddressConstants.TYPE_BILLING,
 					commerceOrderService, commerceAddressService,
 					commerceOrderModelResourcePermission);
 
