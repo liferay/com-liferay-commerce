@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom';
-import ClayModal from '@clayui/modal';
+import React from 'react';
+import Modal from './Modal';
 
 export default function(componentId, id, props) {
 	const portletFrame = window.document.getElementById(id);
 	let instance = null;
 	ReactDOM.render(
-		<ClayModal
+		<Modal
 			ref={component => {
 				instance = component;
 			}}
