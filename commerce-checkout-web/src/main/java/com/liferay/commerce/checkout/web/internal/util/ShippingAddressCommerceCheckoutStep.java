@@ -72,7 +72,7 @@ public class ShippingAddressCommerceCheckoutStep
 		try {
 			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
 				new AddressCommerceCheckoutStepUtil(
-					CommerceAddressConstants.TYPE_SHIPPING,
+					CommerceAddressConstants.ADDRESS_TYPE_SHIPPING,
 					_commerceOrderService, _commerceAddressService,
 					_commerceOrderModelResourcePermission);
 

@@ -111,7 +111,7 @@ public class BillingAddressCommerceCheckoutStep
 		try {
 			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
 				new AddressCommerceCheckoutStepUtil(
-					CommerceAddressConstants.TYPE_BILLING,
+					CommerceAddressConstants.ADDRESS_TYPE_BILLING,
 					commerceOrderService, commerceAddressService,
 					commerceOrderModelResourcePermission);
 
