@@ -1,3 +1,4 @@
+<%@ taglib prefix="liferay-ui" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -23,6 +24,7 @@ String title = (String)request.getAttribute("liferay-commerce:header:title");
 String spritemap = (String)request.getAttribute("liferay-commerce:header:spritemap");
 String version = (String)request.getAttribute("liferay-commerce:header:version");
 String previewUrl = (String)request.getAttribute("liferay-commerce:header:previewUrl");
+String thumbnailUrl = (String)request.getAttribute("liferay-commerce:header:thumbnailUrl");
 List<HeaderButtonModel> headerButtonModels = (List<HeaderButtonModel>)request.getAttribute("liferay-commerce:header:headerButtonModels");
 List<DropdownItem> dropdownItems = (List<DropdownItem>)request.getAttribute("liferay-commerce:header:dropdownItems");
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
@@ -42,7 +44,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 			<div class="d-flex mr-3 py-2">
 				<div class="pr-3">
 					<div class="d-flex">
-						<h3 class="mb-0"><%= title %></h3>
+						<h3 class="mb-0"><liferay-ui:message key="<%= title %>" /></h3>
 
 						<c:if test="<%= Validator.isNotNull(version) %>">
 							<span class="badge badge-secondary ml-2">
@@ -52,6 +54,11 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 					</div>
 
 					<c:if test="<%= bean instanceof WorkflowedModel %>">
+
+						<%
+						WorkflowedModel workflowedModel = (WorkflowedModel)bean;
+						%>
+
 						<aui:workflow-status bean="<%= bean %>" model="<%= model %>" showHelpMessage="<%= false %>" showIcon="<%= false %>" showLabel="<%= false %>" status="<%= workflowedModel.getStatus() %>" />
 					</c:if>
 				</div>
@@ -68,13 +75,14 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 
 				<div id="<%= assignedToWrapperId %>"></div>
 
-				<aui:script require="commerce-frontend-react@1.0.0/assign_to/entry.es as AssignTo">
+				<aui:script require="commerce-frontend-react@1.0.0/js/assign_to/entry.es as AssignTo">
 					var assignTo = new AssignTo.default(
 					"<%= assignedToWrapperId %>",
 					"<%= assignedToWrapperId %>",
-					{
-					spritemap: "<%= spritemap %>"
-					}
+						{
+							spritemap: "<%= spritemap %>",
+							currentAssignee: null,
+						}
 					);
 				</aui:script>
 				<%--</c:if>--%>

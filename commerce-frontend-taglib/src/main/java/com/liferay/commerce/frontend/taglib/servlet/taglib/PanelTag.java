@@ -42,6 +42,7 @@ public class PanelTag extends IncludeTag {
 
 		setNamespacedAttribute(request, "spritemap", _spritemap);
 		setNamespacedAttribute(request, "title", _title);
+
 		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(
 			request, "headerActionLabel", _headerActionLabel);
