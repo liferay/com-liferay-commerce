@@ -753,8 +753,16 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceAddress billingAddress = getNewCommerceAddress(
 			commerceOrder, commerceOrder.getBillingAddress(), serviceContext);
-		CommerceAddress shippingAddress = getNewCommerceAddress(
-			commerceOrder, commerceOrder.getShippingAddress(), serviceContext);
+
+		CommerceAddress shippingAddress = billingAddress;
+
+		if (commerceOrder.getBillingAddressId() !=
+				commerceOrder.getShippingAddressId()) {
+
+			shippingAddress = getNewCommerceAddress(
+				commerceOrder, commerceOrder.getShippingAddress(),
+				serviceContext);
+		}
 
 		if (billingAddress != null) {
 			billingAddressId = billingAddress.getCommerceAddressId();
@@ -1336,8 +1344,8 @@ public class CommerceOrderLocalServiceImpl
 
 		return commerceAddressLocalService.copyCommerceAddress(
 			commerceAddress.getCommerceAddressId(),
-			CommerceAccount.class.getName(),
-			commerceOrder.getCommerceAccountId(), serviceContext);
+			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId(),
+			serviceContext);
 	}
 
 	protected boolean hasWorkflowDefinition(long groupId, long typePK)
