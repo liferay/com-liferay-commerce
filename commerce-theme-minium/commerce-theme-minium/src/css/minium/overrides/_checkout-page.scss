@@ -42,3 +42,7 @@ body .multi-step-item.success-page.complete .multi-step-divider,
 .multi-step-item.active .multi-step-icon {
 	background-color: $color-theme;
 }
+
+body .multi-step-indicator-label {
+	max-width: 130px !important;
+}
