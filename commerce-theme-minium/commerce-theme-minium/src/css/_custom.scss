@@ -42,12 +42,14 @@ html {
 		}
 	}
 
+	body.open & .minium-frame__overlay,
 	body.open & .minium-frame__topbar,
 	body.open & .minium-frame__toolbar,
 	body.open & .minium-frame__sidebar {
 		left: 320px;
 	}
 
+	body.open-admin-panel & .minium-frame__overlay,
 	body.open-admin-panel & .minium-frame__topbar,
 	body.open-admin-panel & .minium-frame__toolbar,
 	body.open-admin-panel & .minium-frame__sidebar {
