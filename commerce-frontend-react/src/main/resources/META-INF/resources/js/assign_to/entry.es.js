@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import AssignTo from './AssignTo.es';
+import React from 'react';
 
 export default function(componentId, id, props) {
 	const portletFrame = window.document.getElementById(id);
