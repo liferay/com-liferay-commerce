@@ -81,7 +81,7 @@ public class AddressCommerceCheckoutStepUtil {
 
 		if (useAsBilling) {
 			_commerceAddressType =
-				CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
 		}
 
 		return _commerceAddressService.addCommerceAddress(
