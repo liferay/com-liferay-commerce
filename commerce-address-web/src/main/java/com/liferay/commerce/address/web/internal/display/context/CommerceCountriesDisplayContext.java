@@ -104,9 +104,8 @@ public class CommerceCountriesDisplayContext
 				orderByCol, orderByType);
 
 			SearchContext searchContext = buildSearchContext(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				active, getKeywords(), searchContainer.getStart(),
-				searchContainer.getEnd(), sort);
+				themeDisplay.getCompanyId(), active, getKeywords(),
+				searchContainer.getStart(), searchContainer.getEnd(), sort);
 
 			BaseModelSearchResult<CommerceCountry>
 				commerceCountryBaseModelSearchResult =
@@ -143,8 +142,8 @@ public class CommerceCountriesDisplayContext
 	}
 
 	protected SearchContext buildSearchContext(
-		long companyId, long groupId, Boolean active, String keywords,
-		int start, int end, Sort sort) {
+		long companyId, Boolean active, String keywords, int start, int end,
+		Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
@@ -163,7 +162,6 @@ public class CommerceCountriesDisplayContext
 		searchContext.setCompanyId(companyId);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
-		searchContext.setGroupIds(new long[] {groupId});
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
