@@ -7,6 +7,10 @@
 html {
 	background-color: $color-bg-alt;
 	height: 100%;
+
+	.dropdown-menu {
+		z-index: 2000;
+	}
 }
 
 #minium {
