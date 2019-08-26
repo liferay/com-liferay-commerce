@@ -115,7 +115,7 @@ public class CommerceAddressUpgradeProcess
 		PreparedStatement ps = connection.prepareStatement(
 			"update CommerceAddress set type = ? where commerceAddressId = ?");
 
-		int type = CommerceAddressConstants.TYPE_SHIPPING;
+		int type = CommerceAddressConstants.ADDRESS_TYPE_SHIPPING;
 
 		if (defaultBilling && !defaultShipping) {
 			type = CommerceAddressConstants.ADDRESS_TYPE_BILLING;
