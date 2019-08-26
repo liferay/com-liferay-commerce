@@ -126,6 +126,11 @@ public class AddressCommerceCheckoutStepUtil {
 		boolean useAsBilling = ParamUtil.getBoolean(
 			actionRequest, "use-as-billing");
 
+		if (useAsBilling) {
+			_commerceAddressType =
+				CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
+		}
+
 		if (Objects.equals(
 				CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME,
 				paramName) &&
