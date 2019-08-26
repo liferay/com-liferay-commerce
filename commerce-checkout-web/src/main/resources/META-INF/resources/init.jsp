@@ -59,6 +59,7 @@ page import="com.liferay.commerce.product.model.CPInstance" %><%@
 page import="com.liferay.commerce.util.CommerceCheckoutStep" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
+page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.KeyValuePair" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
