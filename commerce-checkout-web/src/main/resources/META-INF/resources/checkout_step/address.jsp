@@ -113,7 +113,7 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 
 <c:if test="<%= Objects.equals(CommerceCheckoutWebKeys.SHIPPING_ADDRESS_PARAM_NAME, paramName) %>">
 	<div class="shipping-as-billing">
-		<aui:input checked="<%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() %>" disabled="<%= false %>" label="use-shipping-address-as-billing-address" name="use-as-billing" type="checkbox" />
+		<aui:input checked="<%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() || (commerceAddressId == 0) %>" disabled="<%= false %>" label="use-shipping-address-as-billing-address" name="use-as-billing" type="checkbox" />
 	</div>
 </c:if>
 
@@ -152,6 +152,8 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 			var selects = A.all('.address-fields select');
 
 			selects.set('selectedIndex', 0);
+
+			A.one('#<portlet:namespace />use-as-billing').attr('checked', true);
 		},
 		['aui-base']
 	);
