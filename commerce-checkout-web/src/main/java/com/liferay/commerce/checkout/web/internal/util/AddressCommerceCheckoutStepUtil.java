@@ -15,6 +15,7 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
@@ -41,11 +42,12 @@ import javax.portlet.ActionRequest;
 public class AddressCommerceCheckoutStepUtil {
 
 	public AddressCommerceCheckoutStepUtil(
-		CommerceOrderService commerceOrderService,
+		int commerceAddressType, CommerceOrderService commerceOrderService,
 		CommerceAddressService commerceAddressService,
 		ModelResourcePermission<CommerceOrder>
 			commerceOrderModelResourcePermission) {
 
+		_commerceAddressType = commerceAddressType;
 		_commerceOrderService = commerceOrderService;
 		_commerceAddressService = commerceAddressService;
 		_commerceOrderModelResourcePermission =
@@ -74,11 +76,19 @@ public class AddressCommerceCheckoutStepUtil {
 
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 
+		boolean useAsBilling = ParamUtil.getBoolean(
+			actionRequest, "use-as-billing");
+
+		if (useAsBilling) {
+			_commerceAddressType =
+				CommerceAddressConstants.TYPE_BILLING_AND_SHIPPING;
+		}
+
 		return _commerceAddressService.addCommerceAddress(
 			CommerceAccount.class.getName(),
 			commerceOrder.getCommerceAccountId(), name, description, street1,
 			street2, street3, city, zip, commerceRegionId, commerceCountryId,
-			phoneNumber, false, false, serviceContext);
+			phoneNumber, _commerceAddressType, serviceContext);
 	}
 
 	protected CommerceOrder updateCommerceOrderAddress(
@@ -179,6 +189,7 @@ public class AddressCommerceCheckoutStepUtil {
 	}
 
 	private final CommerceAddressService _commerceAddressService;
+	private int _commerceAddressType;
 	private final ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
 	private final CommerceOrderService _commerceOrderService;

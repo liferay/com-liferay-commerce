@@ -15,6 +15,7 @@
 package com.liferay.commerce.checkout.web.internal.util;
 
 import com.liferay.commerce.checkout.web.internal.display.context.ShippingAddressCheckoutStepDisplayContext;
+import com.liferay.commerce.constants.CommerceAddressConstants;
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.exception.CommerceAddressCityException;
 import com.liferay.commerce.exception.CommerceAddressCountryException;
@@ -71,6 +72,7 @@ public class ShippingAddressCommerceCheckoutStep
 		try {
 			AddressCommerceCheckoutStepUtil addressCommerceCheckoutStepUtil =
 				new AddressCommerceCheckoutStepUtil(
+					CommerceAddressConstants.TYPE_SHIPPING,
 					_commerceOrderService, _commerceAddressService,
 					_commerceOrderModelResourcePermission);
 
