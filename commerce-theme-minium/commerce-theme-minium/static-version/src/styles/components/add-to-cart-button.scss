@@ -207,35 +207,35 @@
 			&.commerce-button--good {
 				&:hover::before {
 					align-items: center;
+					animation: addMoreHover .1s ease-out 1 forwards;
+					background-color: $color-theme;
+					border-radius: 8px;
 					content: attr(data-add-more-label);
 					display: flex;
-					justify-content: center;
-					position: absolute;
-					background-color: $color-theme;
-					width: 100%;
 					height: 100%;
-					border-radius: 8px;
+					justify-content: center;
 					opacity: 0;
-					animation: addMoreHover .1s ease-out 1 forwards;
+					position: absolute;
+					width: 100%;
 				}
 
 				.add-to-cart-button__ok {
 					opacity: 1;
 
 					.added-quantity {
-						width: inherit;
-						height: 100%;
+						align-items: center;
+						animation: addMoreHover .1s ease-out 1 forwards;
+						animation-delay: 700ms;
+						background-color: transparent;
 						color: $color-fg;
 						display: flex;
-						align-items: center;
+						height: 100%;
 						justify-content: right;
-						background-color: transparent;
+						opacity: 0;
 						position: absolute;
 						top: 0;
 						transform: translate3d(250%, 0, 0);
-						opacity: 0;
-						animation: addMoreHover .1s ease-out 1 forwards;
-						animation-delay: 700ms;
+						width: inherit;
 					}
 				}
 			}
@@ -246,10 +246,10 @@
 			margin-right: 10px;
 
 			&__input {
+				border-radius: 8px;
 				font-size: 18px;
 				height: 60px;
 				width: 60px;
-				border-radius: 8px;
 			}
 
 			&__select {
