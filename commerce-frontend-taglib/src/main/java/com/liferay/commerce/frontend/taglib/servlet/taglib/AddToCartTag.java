@@ -76,8 +76,8 @@ public class AddToCartTag extends ComponentRendererTag {
 			if (commerceOrder != null) {
 				putValue("orderId", commerceOrder.getCommerceOrderId());
 
-				List<CommerceOrderItem> commerceOrderItems = commerceOrder
-						.getCommerceOrderItems(cpInstanceId);
+				List<CommerceOrderItem> commerceOrderItems =
+					commerceOrder.getCommerceOrderItems(cpInstanceId);
 
 				productOrderQuantity = commerceOrderItems.size();
 			}
