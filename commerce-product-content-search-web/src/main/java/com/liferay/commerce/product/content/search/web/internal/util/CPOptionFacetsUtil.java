@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.content.search.web.internal.util;
 
+import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -31,11 +32,14 @@ public class CPOptionFacetsUtil {
 		String[] fieldNameParts = StringUtil.split(
 			fieldName, StringPool.UNDERLINE);
 
-		return fieldNameParts[1];
+		return fieldNameParts[3];
 	}
 
-	public static String getIndexFieldName(String optionKey) {
-		return "ATTRIBUTE_" + optionKey + "_VALUES_NAMES";
+	public static String getIndexFieldName(
+		String optionKey, String languageId) {
+
+		return StringBundler.concat(
+			languageId, "_ATTRIBUTE_", optionKey, "_VALUES_NAMES");
 	}
 
 }

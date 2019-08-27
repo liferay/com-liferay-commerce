@@ -61,7 +61,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -482,31 +481,46 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
-			List<String> optionValueNames = new ArrayList<>();
 			List<Long> optionValueIds = new ArrayList<>();
 
-			for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
-					cpDefinitionOptionValueRels) {
+			Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
+				cpDefinitionOptionRel.getGroupId());
 
-				optionValueNames.add(
-					StringUtil.toLowerCase(
-						cpDefinitionOptionValueRel.getKey()));
-				optionValueIds.add(
-					cpDefinitionOptionValueRel.
-						getCPDefinitionOptionValueRelId());
+			for (Locale locale : availableLocales) {
+				String languageId = LanguageUtil.getLanguageId(locale);
+
+				List<String> localizedOptionValues = new ArrayList<>();
+
+				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+						cpDefinitionOptionValueRels) {
+
+					optionValueIds.add(
+						cpDefinitionOptionValueRel.
+							getCPDefinitionOptionValueRelId());
+
+					String localizedOptionValue =
+						cpDefinitionOptionValueRel.getName(languageId);
+
+					if (Validator.isBlank(localizedOptionValue)) {
+						localizedOptionValue =
+							cpDefinitionOptionValueRel.getName(
+								cpDefinitionDefaultLanguageId);
+					}
+
+					localizedOptionValues.add(localizedOptionValue);
+				}
+
+				document.addText(
+					StringBundler.concat(
+						languageId, "_ATTRIBUTE_", cpOption.getKey(),
+						"_VALUES_NAMES"),
+					ArrayUtil.toStringArray(localizedOptionValues));
 			}
 
-			document.addText(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_NAMES",
-				ArrayUtil.toStringArray(optionValueNames));
 			document.addNumber(
 				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_IDS",
 				ArrayUtil.toLongArray(optionValueIds));
 
-			document.addText(
-				"ATTRIBUTE_" + cpDefinitionOptionRel.getCPOptionId() +
-					"_VALUES_NAMES",
-				ArrayUtil.toStringArray(optionValueNames));
 			document.addNumber(
 				"ATTRIBUTE_" + cpDefinitionOptionRel.getCPOptionId() +
 					"_VALUES_IDS",

@@ -21,6 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPOptionFacetsUtil;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPOptionLocalService;
@@ -216,6 +217,9 @@ public class CPOptionFacetsPortlet
 	protected List<Facet> getFacets(RenderRequest renderRequest)
 		throws PortalException {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		List<Facet> facets = new ArrayList<>();
 
 		AssetCategory assetCategory = (AssetCategory)renderRequest.getAttribute(
@@ -250,13 +254,19 @@ public class CPOptionFacetsPortlet
 		FacetCollector facetCollector = facet.getFacetCollector();
 
 		for (TermCollector termCollector : facetCollector.getTermCollectors()) {
-			MultiValueFacet multiValueFacet = new MultiValueFacet(
-				searchContext);
+			CPOption cpOption = _cpOptionLocalService.getCPOption(
+				searchContext.getCompanyId(), termCollector.getTerm());
 
-			multiValueFacet.setFieldName(
-				CPOptionFacetsUtil.getIndexFieldName(termCollector.getTerm()));
+			if (cpOption.isFacetable()) {
+				MultiValueFacet multiValueFacet = new MultiValueFacet(
+					searchContext);
 
-			facets.add(multiValueFacet);
+				multiValueFacet.setFieldName(
+					CPOptionFacetsUtil.getIndexFieldName(
+						termCollector.getTerm(), themeDisplay.getLanguageId()));
+
+				facets.add(multiValueFacet);
+			}
 		}
 
 		return facets;
