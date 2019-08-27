@@ -177,13 +177,13 @@
 				width: 40px;
 
 				&:nth-child(1) {
-					transform: translate3d(0px, 0, 0);
+					transform: translate3d(0, 0, 0);
 					transform-origin: right center;
 					@include quantityButtonsAnimation('left');
 				}
 
 				&:nth-child(3) {
-					transform: translate3d(0px, 0, 0);
+					transform: translate3d(0, 0, 0);
 					transform-origin: left center;
 					@include quantityButtonsAnimation('right');
 				}
@@ -198,21 +198,45 @@
 			font-size: 12px;
 			height: 60px;
 			min-width: 160px;
+			position: relative;
+
+			.added-quantity {
+				display: none;
+			}
 
 			&.commerce-button--good {
-				&:hover {
-					.added-quantity {
-						display: none;
-						height: inherit;
-						width: inherit;
-					}
-				}
-
 				&:hover::before {
 					align-items: center;
 					content: attr(data-add-more-label);
 					display: flex;
 					justify-content: center;
+					position: absolute;
+					background-color: $color-theme;
+					width: 100%;
+					height: 100%;
+					border-radius: 8px;
+					opacity: 0;
+					animation: addMoreHover .1s ease-out 1 forwards;
+				}
+
+				.add-to-cart-button__ok {
+					opacity: 1;
+
+					.added-quantity {
+						width: inherit;
+						height: 100%;
+						color: $color-fg;
+						display: flex;
+						align-items: center;
+						justify-content: right;
+						background-color: transparent;
+						position: absolute;
+						top: 0;
+						transform: translate3d(250%, 0, 0);
+						opacity: 0;
+						animation: addMoreHover .1s ease-out 1 forwards;
+						animation-delay: 700ms;
+					}
 				}
 			}
 		}
@@ -225,6 +249,7 @@
 				font-size: 18px;
 				height: 60px;
 				width: 60px;
+				border-radius: 8px;
 			}
 
 			&__select {
