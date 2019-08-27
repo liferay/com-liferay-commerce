@@ -173,7 +173,7 @@
 	{let $btnClass kind="text"}
 		commerce-button
 
-		{if $hasQuantityChanged == true}
+		{if $hasQuantityChanged == true or $quantity > 0}
 			{sp}commerce-button--good{sp}quantity-changed
 		{/if}
 
@@ -203,14 +203,19 @@
 		<div
 			class="{$btnClass}"
 			data-add-more-label="{msg desc="Add more"}add-more{/msg}"
+			data-items-added-label="{msg desc="Items added"}items-added{/msg}"
 			data-onclick="{$_handleSubmitClick}"
 			data-onfocus="{$_handleBtnFocus}"
 			data-onfocusin="{$_handleBtnFocusin}"
 			data-onfocusout="{$_handleBtnFocusout}"
 			tabindex="0"
 		>
-			{if $hasQuantityChanged == false }
-				{msg desc="Add to cart"}add-to-cart{/msg}
+			{if $hasQuantityChanged == false}
+				{if $quantity > 0}
+					{msg desc="Items added"}items-added{/msg}
+				{else}
+					{msg desc="Add to cart"}add-to-cart{/msg}
+				{/if}
 			{else}
 				{let $quantityChanged kind="text"}
 					add-to-cart-button__ok
@@ -220,6 +225,8 @@
 				{/let}
 
 				<div class="{$quantityChanged}">
+					{msg desc="Items added"}items-added{/msg}
+
 					<span class="added-quantity">{$quantity} {msg desc="in cart"}added{/msg}</span>
 				</div>
 			{/if}
