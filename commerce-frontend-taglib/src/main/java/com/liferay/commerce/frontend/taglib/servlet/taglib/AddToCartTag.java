@@ -80,6 +80,8 @@ public class AddToCartTag extends ComponentRendererTag {
 				int orderQuantity = commerceOrderItems.size();
 
 				putValue("quantity", orderQuantity);
+			} else {
+				putValue("quantity", 0);
 			}
 
 			putValue("editMode", false);
