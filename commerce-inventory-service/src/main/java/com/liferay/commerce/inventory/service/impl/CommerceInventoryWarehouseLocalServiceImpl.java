@@ -275,6 +275,11 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 			commerceInventoryWarehousePersistence.findByPrimaryKey(
 				commerceInventoryWarehouseId);
 
+		validate(
+			commerceInventoryWarehouse.getName(), active,
+			commerceInventoryWarehouse.getLatitude(),
+			commerceInventoryWarehouse.getLongitude());
+
 		commerceInventoryWarehouse.setActive(active);
 
 		commerceInventoryWarehousePersistence.update(
