@@ -78,11 +78,22 @@ public class CommerceAccountFinderImpl
 
 			String keywords = (String)queryDefinition.getAttribute("keywords");
 
-			String[] names = _customSQL.keywords(keywords, true);
+			String[] names = new String[0];
 
-			sql = _customSQL.replaceKeywords(
-				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
-				names);
+			if (Validator.isNotNull(keywords)) {
+				names = _customSQL.keywords(keywords, true);
+
+				sql = _customSQL.replaceKeywords(
+					sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, true,
+					names);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
 
 			boolean b2b = (Boolean)queryDefinition.getAttribute("B2B");
 			boolean b2c = (Boolean)queryDefinition.getAttribute("B2C");
@@ -116,7 +127,9 @@ public class CommerceAccountFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(names, 2);
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
@@ -175,11 +188,22 @@ public class CommerceAccountFinderImpl
 				keywords = null;
 			}
 
-			String[] names = _customSQL.keywords(keywords, true);
+			String[] names = new String[0];
 
-			sql = _customSQL.replaceKeywords(
-				sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, false,
-				names);
+			if (Validator.isNotNull(keywords)) {
+				names = _customSQL.keywords(keywords, true);
+
+				sql = _customSQL.replaceKeywords(
+					sql, "LOWER(CommerceAccount.name)", StringPool.LIKE, true,
+					names);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql,
+					"AND (LOWER(CommerceAccount.name) LIKE ? " +
+						"[$AND_OR_NULL_CHECK$])",
+					StringPool.BLANK);
+			}
 
 			boolean b2b = (Boolean)queryDefinition.getAttribute("B2B");
 			boolean b2c = (Boolean)queryDefinition.getAttribute("B2C");
@@ -216,7 +240,9 @@ public class CommerceAccountFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(names, 2);
+			if (Validator.isNotNull(keywords)) {
+				qPos.add(names, 2);
+			}
 
 			return (List<CommerceAccount>)QueryUtil.list(
 				q, getDialect(), queryDefinition.getStart(),
