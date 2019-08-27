@@ -71,18 +71,18 @@ public class AddToCartTag extends ComponentRendererTag {
 
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
+			int productOrderQuantity = 0;
+
 			if (commerceOrder != null) {
 				putValue("orderId", commerceOrder.getCommerceOrderId());
 
 				List<CommerceOrderItem> commerceOrderItems = commerceOrder
 						.getCommerceOrderItems(cpInstanceId);
 
-				int orderQuantity = commerceOrderItems.size();
-
-				putValue("quantity", orderQuantity);
-			} else {
-				putValue("quantity", 0);
+				productOrderQuantity = commerceOrderItems.size();
 			}
+
+			putValue("quantity", productOrderQuantity);
 
 			putValue("editMode", false);
 
