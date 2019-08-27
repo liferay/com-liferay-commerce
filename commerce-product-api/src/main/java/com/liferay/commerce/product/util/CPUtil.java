@@ -64,7 +64,7 @@ public class CPUtil {
 		}
 		else if (orderByCol.equals("modified-date")) {
 			sort = SortFactoryUtil.create(
-				Field.MODIFIED_DATE, Sort.STRING_TYPE, reverse);
+				Field.MODIFIED_DATE + "_sortable", reverse);
 		}
 
 		return sort;
