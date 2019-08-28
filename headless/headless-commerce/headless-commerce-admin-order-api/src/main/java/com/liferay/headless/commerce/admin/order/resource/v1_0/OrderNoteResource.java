@@ -34,13 +34,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OrderNoteResource {
 
-	public Response deleteOrderNote(Long id) throws Exception;
-
-	public OrderNote getOrderNote(Long id) throws Exception;
-
-	public Response patchOrderNote(Long id, OrderNote orderNote)
-		throws Exception;
-
 	public Response deleteOrderNoteByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
@@ -53,11 +46,11 @@ public interface OrderNoteResource {
 			String externalReferenceCode, OrderNote orderNote)
 		throws Exception;
 
-	public Page<OrderNote> getOrderIdOrderNotesPage(
-			Long id, Pagination pagination)
-		throws Exception;
+	public Response deleteOrderNote(Long id) throws Exception;
 
-	public OrderNote postOrderIdOrderNote(Long id, OrderNote orderNote)
+	public OrderNote getOrderNote(Long id) throws Exception;
+
+	public Response patchOrderNote(Long id, OrderNote orderNote)
 		throws Exception;
 
 	public Page<OrderNote> getOrderByExternalReferenceCodeOrderNotesPage(
@@ -66,6 +59,13 @@ public interface OrderNoteResource {
 
 	public OrderNote postOrderByExternalReferenceCodeOrderNote(
 			String externalReferenceCode, OrderNote orderNote)
+		throws Exception;
+
+	public Page<OrderNote> getOrderIdOrderNotesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public OrderNote postOrderIdOrderNote(Long id, OrderNote orderNote)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -59,51 +59,6 @@ public abstract class BaseOrderNoteResourceImpl implements OrderNoteResource {
 
 	@Override
 	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orderNotes/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OrderNote")})
-	public Response deleteOrderNote(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orderNotes/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OrderNote")})
-	public OrderNote getOrderNote(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new OrderNote();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orderNotes/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OrderNote")})
-	public Response patchOrderNote(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			OrderNote orderNote)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@DELETE
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -163,38 +118,48 @@ public abstract class BaseOrderNoteResourceImpl implements OrderNoteResource {
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/orders/{id}/orderNotes/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/orderNotes/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OrderNote")})
-	public Page<OrderNote> getOrderIdOrderNotesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
+	public Response deleteOrderNote(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/orderNotes/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OrderNote")})
+	public OrderNote getOrderNote(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new OrderNote();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
+	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}/orderNotes/")
+	@Path("/orderNotes/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OrderNote")})
-	public OrderNote postOrderIdOrderNote(
+	public Response patchOrderNote(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			OrderNote orderNote)
 		throws Exception {
 
-		return new OrderNote();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -236,6 +201,41 @@ public abstract class BaseOrderNoteResourceImpl implements OrderNoteResource {
 	public OrderNote postOrderByExternalReferenceCodeOrderNote(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			OrderNote orderNote)
+		throws Exception {
+
+		return new OrderNote();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/orders/{id}/orderNotes/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OrderNote")})
+	public Page<OrderNote> getOrderIdOrderNotesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/orders/{id}/orderNotes/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OrderNote")})
+	public OrderNote postOrderIdOrderNote(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			OrderNote orderNote)
 		throws Exception {
 
