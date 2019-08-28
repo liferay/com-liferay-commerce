@@ -27,7 +27,7 @@
   @media screen and (max-width: 375px) {
     grid-template-areas: "image content actions price"
                         "image price price" !important;
-    grid-template-columns: $item-image-size-sm 100px 50px 75px !important;
+    grid-template-columns: $item-image-size-sm 1fr 50px 75px !important;
   }
 
   &__image {

@@ -70,7 +70,11 @@ body:not(.signed-in) {
 
 body.signed-in {
   .speedwell-content {
-    padding-top: 80px !important;
+    padding-top: $speedwell-topbar-size !important;
+
+    @media only screen and (max-width: 375px) {
+      padding-top: calc(#{$speedwell-topbar-size-small} - 10px) !important;
+    }
   }
 }
 
