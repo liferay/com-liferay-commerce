@@ -22,7 +22,7 @@
 
 <div class="<%= cardCssClasses %>">
 	<c:if test="<%= Validator.isNotNull(headerActionLabel) || Validator.isNotNull(headerActionIcon) || Validator.isNotNull(title) %>">
-		<h5 class="align-items-center card-header d-flex justify-content-between">
+		<div class="align-items-center card-header d-flex justify-content-between">
 			<%= title %>
 
 			<c:choose>
@@ -35,14 +35,14 @@
 				</c:when>
 				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
 					<clay:link
-						elementClasses="btn btn-primary btn-sm"
+						elementClasses="btn btn-primary btn-monospaced btn-sm text-white"
 						href="<%= headerActionUrl %>"
 						icon="<%= headerActionIcon %>"
 						id="<%= headerActionLinkId %>"
 					/>
 				</c:when>
 			</c:choose>
-		</h5>
+		</div>
 	</c:if>
 
 	<div class="card-body">
