@@ -112,36 +112,42 @@ class Modal extends React.Component {
             showSubmit, 
             submitLabel, 
             showCancel, 
-            cancelLabel 
+            cancelLabel,
+            size,
+            spritemap,
+            status,
+            title,
+            url,
+            children
         } = this.props;
 
         return (
             this.state.open && (
                 <ClayModal 
 					onClose={() => this.close()}
-					size={this.props.size}
-					spritemap={this.props.spritemap}
-					status={this.props.status}
+					size={size}
+					spritemap={spritemap}
+					status={status}
                 >
                     {
                         onClose => (
                             <>
                                 {
-                                    this.props.title && <ClayModal.Header>{this.props.title}</ClayModal.Header>
+                                    title && <ClayModal.Header>{title}</ClayModal.Header>
                                 }
                                 {
-                                    this.props.url 
+                                    url 
                                     ? (
                                         <div className="modal-body modal-body-iframe">
                                             <iframe 
-                                                src={this.props.url} 
-                                                title={this.props.url} 
+                                                src={url} 
+                                                title={url} 
                                                 ref={this.iframeRef} 
                                                 onLoad={() => this.attachListenerToIframe()}
                                             />
                                         </div>
                                     )
-                                    : <ClayModal.Body>{this.props.children}</ClayModal.Body>
+                                    : <ClayModal.Body>{children}</ClayModal.Body>
                                 }
                                 {
                                     (
