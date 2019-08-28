@@ -15,9 +15,12 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -38,28 +41,32 @@ public class PanelTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
+
+
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
-		setNamespacedAttribute(request, "spritemap", _spritemap);
-		setNamespacedAttribute(request, "title", _title);
+		String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
 
+		String spritemap = _spritemap;
+
+		if (Validator.isNull(_spritemap)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
+			spritemap = themeDisplay.getPathThemeImages().concat("/clay/icons.svg");
+		}
+
+		setNamespacedAttribute(request, "spritemap", spritemap);
+		setNamespacedAttribute(request, "title", _title);
 		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(
-			request, "headerActionLabel", _headerActionLabel);
+				request, "headerActionLabel", _headerActionLabel);
 		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
 		setNamespacedAttribute(request, "headerActionId", _headerActionId);
 		setNamespacedAttribute(request, "showMoreRefId", _showMoreRefId);
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
 		setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
-
-		if (_spritemap == null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			_spritemap =
-				themeDisplay.getPathThemeImages() + "/commerce-icons.svg";
-		}
+		setNamespacedAttribute(request, "randomNamespace", randomNamespace);
 
 		super.doStartTag();
 

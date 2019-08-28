@@ -38,9 +38,9 @@ page import="com.liferay.portal.kernel.util.Validator" %>
 	String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
 
 	String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
-	String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
+	String randomNamespace = (String)request.getAttribute("liferay-commerce:panel:randomNamespace");
 
-	String headerActionLinkId = Validator.isNotNull(headerActionId) ? headerActionId : (randomNamespace + "header-button");
+	String headerActionLinkId = Validator.isNotNull(headerActionId) ? headerActionId : (randomNamespace + "header-link");
 	String showMoreButtonId = Validator.isNotNull(showMoreId) ? showMoreId : (randomNamespace + "show-more-button");
 	String showMoreButtonWrapperId = randomNamespace + "show-more-button-wrapper";
 %>
