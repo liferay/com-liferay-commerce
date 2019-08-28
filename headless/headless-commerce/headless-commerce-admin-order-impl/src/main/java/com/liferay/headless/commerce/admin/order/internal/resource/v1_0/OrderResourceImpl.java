@@ -25,12 +25,17 @@ import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
+import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
+import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
+import com.liferay.headless.commerce.admin.order.internal.util.v1_0.BillingAddressUtil;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.OrderItemUtil;
+import com.liferay.headless.commerce.admin.order.internal.util.v1_0.ShippingAddressUtil;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
@@ -254,6 +259,26 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 			}
 		}
 
+		// Billing Address
+
+		BillingAddress billingAddress = order.getBillingAddress();
+
+		if (billingAddress != null) {
+			commerceOrder = BillingAddressUtil.updateBillingAddress(
+				_commerceAddressService, _commerceOrderService, commerceOrder,
+				billingAddress, serviceContext);
+		}
+
+		// Shipping Address
+
+		ShippingAddress shippingAddress = order.getShippingAddress();
+
+		if (shippingAddress != null) {
+			commerceOrder = ShippingAddressUtil.updateShippingAddress(
+				_commerceAddressService, _commerceOrderService, commerceOrder,
+				shippingAddress, serviceContext);
+		}
+
 		return commerceOrder;
 	}
 
@@ -403,6 +428,9 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceAddressService _commerceAddressService;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
