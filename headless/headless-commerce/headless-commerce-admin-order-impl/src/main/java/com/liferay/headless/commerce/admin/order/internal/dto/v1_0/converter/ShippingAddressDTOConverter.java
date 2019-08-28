@@ -54,8 +54,6 @@ public class ShippingAddressDTOConverter implements DTOConverter {
 			{
 				city = commerceAddress.getCity();
 				countryISOCode = commerceCountry.getTwoLettersISOCode();
-				defaultBilling = commerceAddress.isDefaultBilling();
-				defaultShipping = commerceAddress.isDefaultShipping();
 				description = commerceAddress.getDescription();
 				id = commerceAddress.getCommerceAddressId();
 				latitude = commerceAddress.getLatitude();
