@@ -75,8 +75,8 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 
 				<aui:script require="commerce-frontend-react@1.0.0/js/assign_to/entry.es as AssignTo">
 					var assignTo = new AssignTo.default(
-					"<%= assignedToWrapperId %>",
-					"<%= assignedToWrapperId %>",
+						"<%= assignedToWrapperId %>",
+						"<%= assignedToWrapperId %>",
 						{
 							spritemap: "<%= spritemap %>",
 							currentAssignee: null,
