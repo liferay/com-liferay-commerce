@@ -22,4 +22,45 @@
       }
     }
   }
+
+  .panel {
+    &-title {
+      text-transform: uppercase;
+      font-weight: bold !important;
+
+      .collapse-icon {
+        svg path {
+          stroke: $stroke;
+          stroke-width: 24px;
+          fill: $stroke;
+          transform: scale(.7, .7);
+        }
+      }
+    }
+
+    &-collapse {
+      $panelClearButton: ".panel-body form > a.text-default";
+
+      #{$panelClearButton} {
+        position: absolute;
+        right: 35px;
+        top: 8px;
+        font-size: 12px;
+        text-decoration: none;
+        color: $color-fg-alt;
+        font-weight: bold;
+        display: none;
+
+        small {
+          font-size: 90%;
+        }
+      }
+
+      &.show {
+        #{$panelClearButton} {
+          display: inline;
+        }
+      }
+    }
+  }
 }

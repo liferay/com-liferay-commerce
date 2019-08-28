@@ -9,6 +9,12 @@
   &.is-open &__link-wrapper .speedwell-topbar__button {
     background-color: $stroke;
     color: $color-bg;
+
+    svg {
+      opacity: 0;
+      animation: main-menu-other-elements .5s ease-in forwards;
+      animation-delay: .8s;
+    }
   }
 
   &__link-wrapper {
