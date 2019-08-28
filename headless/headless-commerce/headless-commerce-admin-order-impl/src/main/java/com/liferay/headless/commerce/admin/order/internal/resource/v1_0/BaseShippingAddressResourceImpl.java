@@ -55,36 +55,6 @@ public abstract class BaseShippingAddressResourceImpl
 
 	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}/shippingAddress/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ShippingAddress")})
-	public ShippingAddress getOrderIdShippingAddress(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new ShippingAddress();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/orders/{id}/shippingAddress/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ShippingAddress")})
-	public Response patchOrderIdShippingAddress(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ShippingAddress shippingAddress)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -119,6 +89,36 @@ public abstract class BaseShippingAddressResourceImpl
 	public Response patchOrderByExternalReferenceCodeShippingAddress(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			ShippingAddress shippingAddress)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/orders/{id}/shippingAddress/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ShippingAddress")})
+	public ShippingAddress getOrderIdShippingAddress(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ShippingAddress();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/orders/{id}/shippingAddress/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ShippingAddress")})
+	public Response patchOrderIdShippingAddress(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			ShippingAddress shippingAddress)
 		throws Exception {
 
