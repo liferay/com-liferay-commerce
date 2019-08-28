@@ -27,30 +27,6 @@
 	</c:if>
 </div>
 
-<c:if test="<%= Validator.isNotNull(headerActionUrl) %>">
-
-	<%
-		String modalId = randomNamespace + "modal-root";
-	%>
-
-	<div id="<%= modalId %>" class="modal-root"></div>
-
-	<aui:script require="commerce-frontend-react@1.0.0/js/modal/entry.es as entry">
-		var modal = new entry.default(
-			"<%= modalId %>",
-			"<%= modalId %>",
-			{
-				url: "<%= headerActionUrl %>",
-				size: "lg",
-				spritemap: "<%= spritemap %>"
-			}
-		);
-
-		document.querySelector('<%= headerActionLinkId %>')
-			.addEventListener('onClick', () => modal.open());
-	</aui:script>
-</c:if>
-
 <c:if test="<%= Validator.isNotNull(showMoreRefId) %>">
 	<aui:script>
 		(function() {
