@@ -18,10 +18,8 @@ import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
-import com.liferay.commerce.util.comparator.CommercePaymentMethodNameComparator;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
@@ -55,14 +53,9 @@ public class PaymentMethodCheckoutStepDisplayContext {
 			(ThemeDisplay)_httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		List<CommercePaymentMethod> commercePaymentMethods =
-			_commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
-				themeDisplay.getScopeGroupId(),
-				_commerceOrder.getCommerceOrderId());
-
-		return ListUtil.sort(
-			commercePaymentMethods,
-			new CommercePaymentMethodNameComparator(themeDisplay.getLocale()));
+		return _commercePaymentEngine.getEnabledCommercePaymentMethodsForOrder(
+			themeDisplay.getScopeGroupId(),
+			_commerceOrder.getCommerceOrderId());
 	}
 
 	public String getImageURL(
