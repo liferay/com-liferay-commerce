@@ -53,9 +53,9 @@ String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test="<%= commerceWishListItem.isIgnoreSKUCombinations() %>">
+			<c:when test="<%= cpInstance != null %>">
 				<commerce-ui:add-to-cart
-					CPInstanceId="<%= (cpInstance != null) ? cpInstance.getCPInstanceId() : 0 %>"
+					CPInstanceId="<%= cpInstance.getCPInstanceId() %>"
 					id="<%= addToCartId %>"
 				/>
 			</c:when>
