@@ -27,7 +27,6 @@ const NavBar: FunctionComponent<any> = () => {
 
     useEffect(
         () => {
-            console.log(initialized)
             if(!initialized) {
                 return setInitialized(true)
             }

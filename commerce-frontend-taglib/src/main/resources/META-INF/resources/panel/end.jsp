@@ -35,8 +35,8 @@
 
 	<div id="<%= modalId %>" class="modal-root"></div>
 
-	<aui:script require="commerce-frontend-react@1.0.0/js/modal/entry.es as Modal">
-		var modal = new Modal.default(
+	<aui:script require="commerce-frontend-react@1.0.0/js/modal/entry.es as entry">
+		var modal = new entry.default(
 			"<%= modalId %>",
 			"<%= modalId %>",
 			{
@@ -45,8 +45,6 @@
 				spritemap: "<%= spritemap %>"
 			}
 		);
-
-		console.log(modal)
 
 		document.querySelector('<%= headerActionLinkId %>')
 			.addEventListener('onClick', () => modal.open());

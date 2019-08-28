@@ -1,12 +1,8 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import AssignTo from './AssignTo.es';
+import launcher from './entry.es';
 
 const props = {
-	test: 'test'
-}
+	test: 'test',
+	spritemap: './icons.svg',
+};
 
-ReactDOM.render(
-	<AssignTo {...props} />,
-	window.document.getElementById('assign-to')
-);
+window.assignTo = launcher('assignTo', 'assign-to', props);

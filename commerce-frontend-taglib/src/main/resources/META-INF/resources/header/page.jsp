@@ -69,9 +69,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 			<div class="commerce-header__actions px-3 d-none d-xl-flex border-right">
 				<%--<c:if test="<%= hasWorkflow %>">--%>
 
-				<%
-				String assignedToWrapperId = randomNamespace + "assigned-to";
-				%>
+				<% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
 
 				<div id="<%= assignedToWrapperId %>"></div>
 

@@ -1,36 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Icon, { ClayIconSpriteContext } from '@clayui/icon';
+import ClayDropDown, { Align } from '@clayui/drop-down';
+import ClayButton from '@clayui/button';
 
 export default function AssignTo(props) {
+
+	const [ active, setActive ] = useState(false)
+
 	return (
 		<ClayIconSpriteContext.Provider value={props.spritemap}>
+			
 			<div className="commerce-header__assign-to d-none d-xl-flex align-items-center px-3 mr-3 border-right">
-				<label htmlFor="assigned-to mr-3 small">Assigned to:</label>
-				<div className="btn-group dropdown ml-3" role="group">
-					<button
-						className="btn btn-secondary dropdown-toggle"
-						type="button"
-						aria-expanded="false"
-						aria-haspopup="true"
-						data-toggle="dropdown"
-						id="theDropdownToggleId"
-					>
-						Admin
-						<span className="inline-item inline-item-before">
-							<Icon symbol="share" />
-						</span>
-					</button>
-					<div
-						aria-labelledby="theDropdownToggleId"
-						className="dropdown-menu"
-					>
+				<span className="mr-3">Assigned to:</span>
+				<ClayDropDown
+					trigger={
+						<ClayButton displayType="primary">
+							Admin
+							<span className="inline-item inline-item-after">
+								<Icon symbol="share" />
+							</span>
+						</ClayButton>
+					}
+					active={active}
+					onActiveChange={setActive}
+					alignmentPosition={Align.BottomLeft}
+				>
+					<>
 						<form>
 							<div className="dropdown-section">
 								<div className="input-group input-group-sm">
 									<div className="input-group-item">
 										<input
 											className="form-control input-group-inset input-group-inset-after"
-											placeholder="Search for..."
+											placeholder={Liferay.Language.get('search-for')}
 											type="text"
 										/>
 										<span className="input-group-inset-item input-group-inset-item-after">
@@ -51,7 +53,7 @@ export default function AssignTo(props) {
 						<form>
 							<div className="inline-scroller">
 								<div className="dropdown-subheader" role="presentation">
-									My actions
+									{Liferay.Language.get('my-actions')}
 								</div>
 								<ul className="list-unstyled">
 									<li>
@@ -66,7 +68,7 @@ export default function AssignTo(props) {
 									</li>
 								</ul>
 								<div className="dropdown-subheader" role="presentation">
-									Assign by role
+									{Liferay.Language.get('assign-by-role')}
 								</div>
 								<ul className="list-unstyled">
 									<li>
@@ -99,10 +101,10 @@ export default function AssignTo(props) {
 						</form>
 						<div className="dropdown-caption">Showing 7 of 203 Users</div>
 						<div className="dropdown-section">
-							<button className="btn btn-block btn-secondary">More</button>
+							<button className="btn btn-block btn-secondary">{Liferay.Language.get('more')}</button>
 						</div>
-					</div>
-				</div>
+					</>
+				</ClayDropDown>
 			</div>
 		</ClayIconSpriteContext.Provider>
 	)

@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 
 import FilterResume from './Filter/Resume';
-
 import FilterProps from './Filter/definitions';
 
 import getAppContext, { ContextProps } from './Context';

@@ -1,7 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TableToolbar from './TableToolbar';
-import FilterProps from './Filter/definitions'
+import FilterProps from './Filter/definitions';
+import launcher from './entry.es';
 
 const filters: FilterProps[] = [
 	{
@@ -98,7 +96,8 @@ const props = {
 	}
 }
 
-ReactDOM.render(
-	<TableToolbar {...props}/>,
-	window.document.getElementById('table-toolbar')
-);
+declare global {
+    interface Window { tableToolbar: any; }
+}
+
+window.tableToolbar = launcher('tableToolbar', 'table-toolbar', props);
