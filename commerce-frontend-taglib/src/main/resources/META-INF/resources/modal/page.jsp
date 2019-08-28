@@ -1,5 +1,4 @@
-<%@ taglib prefix="liferay-ui" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--
+<%@ page import="com.liferay.portal.kernel.util.Validator" %><%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -28,13 +27,13 @@
 			size: "<%= size %>",
 			title: "<%= title %>",
 			spritemap: "<%= spritemap %>",
-			showSubmit: "<%= showSubmit %>",
+			showSubmit: <%= showSubmit %>,
 			submitLabel: "<%= submitLabel %>",
-			closeOnSubmit: "<%= closeOnSubmit %>",
-			submitAvailableAtLoading: "<%= submitAvailableAtLoading %>",
-			showDelete: "<%= showDelete %>",
+			closeOnSubmit: <%= closeOnSubmit %>,
+			submitAvailableAtLoading: <%= submitAvailableAtLoading %>,
+			showDelete: <%= showDelete %>,
 			deleteLabel: "<%= deleteLabel %>",
-			showCancel: "<%= showCancel %>",
+			showCancel: <%= showCancel %>,
 			cancelLabel: "<%= cancelLabel %>"
 		}
 	);

@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -22,27 +24,12 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Fabio Diego Mastrorilli
  */
 public class ModalTag extends IncludeTag {
-
-	private static final String _PAGE = "/modal/page.jsp";
-
-	private String _url;
-	private String _size;
-	private String _title;
-	private String _spritemap;
-	private String _triggerId;
-	private Boolean _showSubmit;
-	private String _submitLabel;
-	private Boolean _closeOnSubmit;
-	private Boolean _submitAvailableAtLoading;
-	private Boolean _showDelete;
-	private String _deleteLabel;
-	private Boolean _showCancel;
-	private String _cancelLabel;
 
 	public String getUrl() { return _url; }
 	public String getSize() { return _size; }
@@ -73,22 +60,29 @@ public class ModalTag extends IncludeTag {
 	public void setCancelLabel(String cancelLabel) { _cancelLabel = cancelLabel; }
 
 	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
+
+		servletContext = ServletContextUtil.getServletContext();
+	}
+
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_url = null;
-		_size = null;
-		_title = null;
-		_spritemap = null;
-		_triggerId = null;
-		_showSubmit = null;
-		_submitLabel = null;
-		_closeOnSubmit = null;
-		_submitAvailableAtLoading = null;
-		_showDelete = null;
-		_deleteLabel = null;
-		_showCancel = null;
-		_cancelLabel = null;
+		_url = StringPool.BLANK;
+		_size = StringPool.BLANK;
+		_title = StringPool.BLANK;
+		_spritemap = StringPool.BLANK;
+		_triggerId = StringPool.BLANK;
+		_showSubmit = false;
+		_submitLabel = StringPool.BLANK;
+		_closeOnSubmit = false;
+		_submitAvailableAtLoading = false;
+		_showDelete = false;
+		_deleteLabel = StringPool.BLANK;
+		_showCancel = false;
+		_cancelLabel = StringPool.BLANK;
 	}
 
 	@Override
@@ -123,5 +117,22 @@ public class ModalTag extends IncludeTag {
 		request.setAttribute("liferay-commerce:modal:cancelLabel", _cancelLabel);
 	}
 
+	private static final String _PAGE = "/modal/page.jsp";
+
+	private static final Log _log = LogFactoryUtil.getLog(HeaderTag.class);
+
+	private String _url = StringPool.BLANK;
+	private String _size = StringPool.BLANK;
+	private String _title = StringPool.BLANK;
+	private String _spritemap = StringPool.BLANK;
+	private String _triggerId = StringPool.BLANK;
+	private Boolean _showSubmit;
+	private String _submitLabel = StringPool.BLANK;
+	private Boolean _closeOnSubmit;
+	private Boolean _submitAvailableAtLoading;
+	private Boolean _showDelete;
+	private String _deleteLabel = StringPool.BLANK;
+	private Boolean _showCancel;
+	private String _cancelLabel = StringPool.BLANK;
 
 }
