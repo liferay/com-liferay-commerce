@@ -32,18 +32,18 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ShippingAddressResource {
 
-	public ShippingAddress getOrderIdShippingAddress(Long id) throws Exception;
-
-	public Response patchOrderIdShippingAddress(
-			Long id, ShippingAddress shippingAddress)
-		throws Exception;
-
 	public ShippingAddress getOrderByExternalReferenceCodeShippingAddress(
 			String externalReferenceCode)
 		throws Exception;
 
 	public Response patchOrderByExternalReferenceCodeShippingAddress(
 			String externalReferenceCode, ShippingAddress shippingAddress)
+		throws Exception;
+
+	public ShippingAddress getOrderIdShippingAddress(Long id) throws Exception;
+
+	public Response patchOrderIdShippingAddress(
+			Long id, ShippingAddress shippingAddress)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
