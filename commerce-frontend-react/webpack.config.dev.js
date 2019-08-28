@@ -10,6 +10,8 @@ module.exports = {
 		components: [
 			path.join(__dirname, './src/main/resources/META-INF/resources/js/assign_to/entry.dev.es.js'),
 			path.join(__dirname, './src/main/resources/META-INF/resources/js/table_toolbar/entry.dev.es.tsx'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/modal/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/utilities/entry.js'),
 		],
 	},
 	mode: 'development',
