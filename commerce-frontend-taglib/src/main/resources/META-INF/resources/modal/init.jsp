@@ -22,9 +22,8 @@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
+page import="com.liferay.portal.kernel.util.PortalUtil" %>
 
-<%@ page import="java.util.List" %>
 
 <liferay-theme:defineObjects />
 
@@ -38,8 +37,8 @@ page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
     String triggerId = (String)request.getAttribute("liferay-commerce:modal:triggerId");
     Boolean showSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:showSubmit");
     String submitLabel = (String)request.getAttribute("liferay-commerce:modal:submitLabel");
-    String closeOnSubmit = (String)request.getAttribute("liferay-commerce:modal:closeOnSubmit");
-    String submitAvailableAtLoading = (String)request.getAttribute("liferay-commerce:modal:submitAvailableAtLoading");
+    Boolean closeOnSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:closeOnSubmit");
+    Boolean submitAvailableAtLoading = (Boolean)request.getAttribute("liferay-commerce:modal:submitAvailableAtLoading");
     Boolean showDelete = (Boolean)request.getAttribute("liferay-commerce:modal:showDelete");
     String deleteLabel = (String)request.getAttribute("liferay-commerce:modal:deleteLabel");
     Boolean showCancel = (Boolean)request.getAttribute("liferay-commerce:modal:showCancel");

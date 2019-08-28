@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Icon, { ClayIconSpriteContext } from '@clayui/icon';
+import ClayIcon, { ClayIconSpriteContext } from '@clayui/icon';
 import ClayDropDown, { Align } from '@clayui/drop-down';
 import ClayButton from '@clayui/button';
 
@@ -14,10 +14,10 @@ export default function AssignTo(props) {
 				<span className="mr-3">Assigned to:</span>
 				<ClayDropDown
 					trigger={
-						<ClayButton displayType="primary">
+						<ClayButton displayType="secondary">
 							Admin
 							<span className="inline-item inline-item-after">
-								<Icon symbol="share" />
+								<ClayIcon symbol="caret-bottom" />
 							</span>
 						</ClayButton>
 					}
