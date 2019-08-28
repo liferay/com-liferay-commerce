@@ -19,6 +19,7 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.BillingAddressUtil;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.BillingAddressResource;
@@ -104,8 +105,9 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 		}
 
 		BillingAddressUtil.updateBillingAddress(
-			_commerceAddressService, _commerceOrderService, commerceOrder,
-			billingAddress, _serviceContextHelper.getServiceContext());
+			_commerceAddressService, _commerceOrderService,
+			_commerceRegionLocalService, commerceOrder, billingAddress,
+			_serviceContextHelper.getServiceContext());
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -119,6 +121,7 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 
 		BillingAddressUtil.updateBillingAddress(
 			_commerceAddressService, _commerceOrderService,
+			_commerceRegionLocalService,
 			_commerceOrderService.getCommerceOrder(id), billingAddress,
 			_serviceContextHelper.getServiceContext());
 
@@ -132,6 +135,9 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;

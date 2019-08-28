@@ -19,6 +19,7 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.ShippingAddressUtil;
 import com.liferay.headless.commerce.admin.order.resource.v1_0.ShippingAddressResource;
@@ -105,8 +106,9 @@ public class ShippingAddressResourceImpl
 		}
 
 		ShippingAddressUtil.updateShippingAddress(
-			_commerceAddressService, _commerceOrderService, commerceOrder,
-			shippingAddress, _serviceContextHelper.getServiceContext());
+			_commerceAddressService, _commerceOrderService,
+			_commerceRegionLocalService, commerceOrder, shippingAddress,
+			_serviceContextHelper.getServiceContext());
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -120,6 +122,7 @@ public class ShippingAddressResourceImpl
 
 		ShippingAddressUtil.updateShippingAddress(
 			_commerceAddressService, _commerceOrderService,
+			_commerceRegionLocalService,
 			_commerceOrderService.getCommerceOrder(id), shippingAddress,
 			_serviceContextHelper.getServiceContext());
 
@@ -133,6 +136,9 @@ public class ShippingAddressResourceImpl
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
