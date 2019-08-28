@@ -8,12 +8,6 @@ components:
                 countryISOCode:
                     example: US
                     type: string
-                defaultBilling:
-                    example: true
-                    type: boolean
-                defaultShipping:
-                    example: true
-                    type: boolean
                 description:
                     example: right stairs, first room on the left
                     type: string
@@ -419,12 +413,6 @@ components:
                 countryISOCode:
                     example: US
                     type: string
-                defaultBilling:
-                    example: true
-                    type: boolean
-                defaultShipping:
-                    example: true
-                    type: boolean
                 description:
                     example: right stairs, first room on the left
                     type: string
