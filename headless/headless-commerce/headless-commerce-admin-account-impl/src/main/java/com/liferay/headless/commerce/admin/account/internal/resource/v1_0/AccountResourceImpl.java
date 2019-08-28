@@ -24,6 +24,7 @@ import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.service.CommerceAccountUserRelService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
@@ -37,6 +38,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
@@ -356,6 +358,17 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		AccountAddress[] accountAddresses = account.getAddresses();
 
 		if (accountAddresses != null) {
+			List<CommerceAddress> commerceAddresses =
+				_commerceAddressService.getCommerceAddresses(
+					commerceAccount.getModelClassName(),
+					commerceAccount.getCommerceAccountId(), QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null);
+
+			for (CommerceAddress commerceAddress : commerceAddresses) {
+				_commerceAddressService.deleteCommerceAddress(
+					commerceAddress.getCommerceAddressId());
+			}
+
 			for (AccountAddress accountAddress : accountAddresses) {
 				_commerceAddressService.addCommerceAddress(
 					commerceAccount.getModelClassName(),
