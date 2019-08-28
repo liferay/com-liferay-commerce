@@ -105,62 +105,6 @@ public class ShippingAddress {
 	protected String countryISOCode;
 
 	@Schema
-	public Boolean getDefaultBilling() {
-		return defaultBilling;
-	}
-
-	public void setDefaultBilling(Boolean defaultBilling) {
-		this.defaultBilling = defaultBilling;
-	}
-
-	@JsonIgnore
-	public void setDefaultBilling(
-		UnsafeSupplier<Boolean, Exception> defaultBillingUnsafeSupplier) {
-
-		try {
-			defaultBilling = defaultBillingUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean defaultBilling;
-
-	@Schema
-	public Boolean getDefaultShipping() {
-		return defaultShipping;
-	}
-
-	public void setDefaultShipping(Boolean defaultShipping) {
-		this.defaultShipping = defaultShipping;
-	}
-
-	@JsonIgnore
-	public void setDefaultShipping(
-		UnsafeSupplier<Boolean, Exception> defaultShippingUnsafeSupplier) {
-
-		try {
-			defaultShipping = defaultShippingUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Boolean defaultShipping;
-
-	@Schema
 	public String getDescription() {
 		return description;
 	}
@@ -517,26 +461,6 @@ public class ShippingAddress {
 			sb.append(_escape(countryISOCode));
 
 			sb.append("\"");
-		}
-
-		if (defaultBilling != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"defaultBilling\": ");
-
-			sb.append(defaultBilling);
-		}
-
-		if (defaultShipping != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
-
-			sb.append("\"defaultShipping\": ");
-
-			sb.append(defaultShipping);
 		}
 
 		if (description != null) {
