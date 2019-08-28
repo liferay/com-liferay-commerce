@@ -20,6 +20,7 @@ import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
@@ -33,19 +34,6 @@ import javax.servlet.jsp.PageContext;
  * @author Fabio Diego Mastrorilli
  */
 public class HeaderTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		if (_spritemap == null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			_spritemap =
-				themeDisplay.getPathThemeImages() + "/commerce-icons.svg";
-		}
-
-		return super.doStartTag();
-	}
 
 	public Object getBean() {
 		return _bean;
@@ -146,6 +134,14 @@ public class HeaderTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
+		String spritemap = _spritemap;
+
+		if (Validator.isNull(_spritemap)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
+			spritemap = themeDisplay.getPathThemeImages().concat("/clay/icons.svg");
+		}
+
 		request.setAttribute("liferay-commerce:header:bean", _bean);
 		request.setAttribute(
 			"liferay-commerce:header:dropdownItems", _dropdownItems);
@@ -155,7 +151,7 @@ public class HeaderTag extends IncludeTag {
 			"liferay-commerce:header:headerButtonModels", _headerButtonModels);
 		request.setAttribute("liferay-commerce:header:model", _model);
 		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
-		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
+		request.setAttribute("liferay-commerce:header:spritemap", spritemap);
 		request.setAttribute(
 			"liferay-commerce:header:thumbnailUrl", _thumbnailUrl);
 		request.setAttribute("liferay-commerce:header:title", _title);

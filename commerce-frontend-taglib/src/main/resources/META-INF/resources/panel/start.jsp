@@ -28,7 +28,7 @@
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
 					<clay:link
-						href="#"
+						href="<%= headerActionUrl %>"
 						id="<%= headerActionLinkId %>"
 						label="<%= headerActionLabel %>"
 					/>
@@ -36,7 +36,7 @@
 				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
 					<clay:link
 						elementClasses="btn btn-primary btn-sm"
-						href="#"
+						href="<%= headerActionUrl %>"
 						icon="<%= headerActionIcon %>"
 						id="<%= headerActionLinkId %>"
 					/>
