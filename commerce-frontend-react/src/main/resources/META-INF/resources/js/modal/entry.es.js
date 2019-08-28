@@ -1,21 +1,6 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import Modal from './Modal';
+import Modal from './Modal.es';
+import {launcher} from '../utilities/entry';
 
-export default function(componentId, id, props) {
-	const portletFrame = window.document.getElementById(id);
-	let instance = null;
-	ReactDOM.render(
-		<Modal
-			ref={component => {
-				instance = component;
-			}}
-			{...props}
-		/>,
-		portletFrame
-	);
-	if (window.Liferay && window.Liferay.component) {
-		window.Liferay.component(componentId, instance);
-	}
-	return instance;
-}
+const ModalLauncher = (...data) => launcher(Modal, ...data);
+
+export default ModalLauncher;
