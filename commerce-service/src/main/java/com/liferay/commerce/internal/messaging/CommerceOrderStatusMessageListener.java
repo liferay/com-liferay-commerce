@@ -19,6 +19,8 @@ import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.internal.notification.type.OrderPlacedCommerceNotificationTypeImpl;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -50,8 +52,12 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 			// Commerce notifications
 
+			CommerceChannel commerceChannel =
+				_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+					commerceOrder.getGroupId());
+
 			_commerceNotificationHelper.sendNotifications(
-				commerceOrder.getGroupId(),
+				commerceChannel.getSiteGroupId(),
 				OrderPlacedCommerceNotificationTypeImpl.KEY, commerceOrder);
 
 			// Commerce subscriptions
@@ -60,6 +66,9 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 				commerceOrder);
 		}
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceNotificationHelper _commerceNotificationHelper;
