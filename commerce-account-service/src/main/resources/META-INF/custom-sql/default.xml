@@ -99,4 +99,20 @@
 				(CommerceAccount.commerceAccountId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.account.service.persistence.CommerceAccountGroupFinder.findAccountUserIdsFromAccountGroupIds">
+		<![CDATA[
+			SELECT
+				CommerceAccountUserRel.commerceAccountUserId
+			FROM
+				CommerceAccountGroup
+			LEFT JOIN
+				CAccountGroupCAccountRel ON
+					CAccountGroupCAccountRel.commerceAccountGroupId = CommerceAccountGroup.commerceAccountGroupId
+			LEFT JOIN
+				CommerceAccountUserRel ON
+					CommerceAccountUserRel.commerceAccountId = CAccountGroupCAccountRel.commerceAccountId
+			WHERE
+				CommerceAccountGroup.commerceAccountGroupId IN ([$ACCOUNT_GROUP_IDS$])
+		]]>
+	</sql>
 </custom-sql>
