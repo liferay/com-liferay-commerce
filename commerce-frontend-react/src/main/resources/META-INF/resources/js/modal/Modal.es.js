@@ -4,14 +4,8 @@ import ClayModal from '@clayui/modal';
 import ClayButton from '@clayui/button';
 
 /*
-interface Actions {
-    definition: 'cancel' | 'save' | 'add' | 'edit'
-}
-
 export interface ModalProps {
-    id: string,
     url?: string,
-    actions?: Actions[],
     spritemap?: string,
     status?: Status,
     size?: Size,

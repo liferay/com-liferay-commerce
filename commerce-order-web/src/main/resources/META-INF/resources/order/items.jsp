@@ -17,11 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
-SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
-
-PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
+	CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+	SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
+	PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
 
 <liferay-portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
@@ -31,11 +29,19 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 d-flex">
+			<commerce-ui:modal
+				url="<%= editURL %>"
+				size="lg"
+				title="Shipping address and method"
+				closeOnSubmit="<%= true %>"
+				triggerId="shipping-modal-id"
+			/>
 			<commerce-ui:panel
 				elementClasses="flex-fill"
 				headerActionLabel="edit"
 				headerActionUrl="<%= editURL %>"
 				title="shipping-address-and-method"
+				headerActionId="shipping-modal-id"
 			>
 				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
 				<div class="card-text mt-3">
