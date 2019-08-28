@@ -11,7 +11,7 @@
     width: 100%;
 
     @media screen and (max-width: 767px) {
-      top: calc(#{$speedwell-topbar-size-small} - 1px);
+      top: $liferay-topbar-size-small;
     }
 
     &::before {
@@ -71,6 +71,11 @@
       justify-content: space-between;
       padding: 10px 30px;
       position: relative;
+
+      @media only screen and (max-width: 767px) {
+        height: 45px;
+        font-size: 13px;
+      }
 
       a,
       a:hover {
@@ -141,6 +146,10 @@
 
     .commerce-button--block {
       border-radius: 0;
+
+      @media only screen and (max-width: 767px) {
+        height: 60px;
+      }
     }
   }
 
