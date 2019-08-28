@@ -239,6 +239,14 @@ public class CommerceAccountGroupLocalServiceImpl
 	}
 
 	@Override
+	public List<Long> getCommerceAccountUserIdsFromAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end) {
+
+		return commerceAccountGroupFinder.findAccountUserIdsFromAccountGroupIds(
+			commerceAccountGroupIds, start, end);
+	}
+
+	@Override
 	public List<CommerceAccountGroup> searchCommerceAccountGroups(
 			long companyId, String keywords, int start, int end, Sort sort)
 		throws PortalException {
