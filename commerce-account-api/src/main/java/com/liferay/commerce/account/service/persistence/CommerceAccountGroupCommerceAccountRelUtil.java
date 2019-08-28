@@ -177,6 +177,34 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceAccountGroupId(long, int, int, OrderByComparator)}
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce account group commerce account rels
+	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce account group commerce account rels
+	 */
+	@Deprecated
+	public static List<CommerceAccountGroupCommerceAccountRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end,
+			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
+				orderByComparator,
+			boolean useFinderCache) {
+
+		return getPersistence().findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end, orderByComparator,
+			useFinderCache);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
 	 * @param commerceAccountGroupId the commerce account group ID
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
@@ -191,32 +219,6 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 
 		return getPersistence().findByCommerceAccountGroupId(
 			commerceAccountGroupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce account group commerce account rels
-	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce account group commerce account rels
-	 */
-	public static List<CommerceAccountGroupCommerceAccountRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end,
-			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
-				orderByComparator,
-			boolean retrieveFromCache) {
-
-		return getPersistence().findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, orderByComparator,
-			retrieveFromCache);
 	}
 
 	/**
@@ -378,6 +380,33 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceAccountId(long, int, int, OrderByComparator)}
+	 * @param commerceAccountId the commerce account ID
+	 * @param start the lower bound of the range of commerce account group commerce account rels
+	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce account group commerce account rels
+	 */
+	@Deprecated
+	public static List<CommerceAccountGroupCommerceAccountRel>
+		findByCommerceAccountId(
+			long commerceAccountId, int start, int end,
+			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
+				orderByComparator,
+			boolean useFinderCache) {
+
+		return getPersistence().findByCommerceAccountId(
+			commerceAccountId, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
 	 * @param commerceAccountId the commerce account ID
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
@@ -392,32 +421,6 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 
 		return getPersistence().findByCommerceAccountId(
 			commerceAccountId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountId the commerce account ID
-	 * @param start the lower bound of the range of commerce account group commerce account rels
-	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching commerce account group commerce account rels
-	 */
-	public static List<CommerceAccountGroupCommerceAccountRel>
-		findByCommerceAccountId(
-			long commerceAccountId, int start, int end,
-			OrderByComparator<CommerceAccountGroupCommerceAccountRel>
-				orderByComparator,
-			boolean retrieveFromCache) {
-
-		return getPersistence().findByCommerceAccountId(
-			commerceAccountId, start, end, orderByComparator,
-			retrieveFromCache);
 	}
 
 	/**
@@ -553,16 +556,20 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	}
 
 	/**
-	 * Returns the commerce account group commerce account rel where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce account group commerce account rel where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_ERC(long,String)}
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group commerce account rel, or <code>null</code> if a matching commerce account group commerce account rel could not be found
 	 */
+	@Deprecated
 	public static CommerceAccountGroupCommerceAccountRel fetchByC_ERC(
-		long companyId, String externalReferenceCode) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
-		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
+		return getPersistence().fetchByC_ERC(
+			companyId, externalReferenceCode, useFinderCache);
 	}
 
 	/**
@@ -570,15 +577,13 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group commerce account rel, or <code>null</code> if a matching commerce account group commerce account rel could not be found
 	 */
 	public static CommerceAccountGroupCommerceAccountRel fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode) {
 
-		return getPersistence().fetchByC_ERC(
-			companyId, externalReferenceCode, retrieveFromCache);
+		return getPersistence().fetchByC_ERC(companyId, externalReferenceCode);
 	}
 
 	/**
@@ -732,17 +737,22 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account group commerce account rels
 	 */
+	@Deprecated
 	public static List<CommerceAccountGroupCommerceAccountRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountGroupCommerceAccountRel>
-			orderByComparator) {
+			orderByComparator,
+		boolean useFinderCache) {
 
-		return getPersistence().findAll(start, end, orderByComparator);
+		return getPersistence().findAll(
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -755,17 +765,14 @@ public class CommerceAccountGroupCommerceAccountRelUtil {
 	 * @param start the lower bound of the range of commerce account group commerce account rels
 	 * @param end the upper bound of the range of commerce account group commerce account rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce account group commerce account rels
 	 */
 	public static List<CommerceAccountGroupCommerceAccountRel> findAll(
 		int start, int end,
 		OrderByComparator<CommerceAccountGroupCommerceAccountRel>
-			orderByComparator,
-		boolean retrieveFromCache) {
+			orderByComparator) {
 
-		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**

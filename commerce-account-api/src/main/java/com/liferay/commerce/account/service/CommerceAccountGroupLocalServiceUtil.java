@@ -240,6 +240,13 @@ public class CommerceAccountGroupLocalServiceUtil {
 			companyId, externalReferenceCode);
 	}
 
+	public static java.util.List<Long> getAccountUserIdsFromAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end) {
+
+		return getService().getCommerceAccountUserIdsFromAccountGroupIds(
+			commerceAccountGroupIds, start, end);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 

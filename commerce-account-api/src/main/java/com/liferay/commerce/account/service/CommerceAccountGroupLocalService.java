@@ -212,6 +212,10 @@ public interface CommerceAccountGroupLocalService
 		long companyId, String externalReferenceCode);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Long> getCommerceAccountUserIdsFromAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	/**

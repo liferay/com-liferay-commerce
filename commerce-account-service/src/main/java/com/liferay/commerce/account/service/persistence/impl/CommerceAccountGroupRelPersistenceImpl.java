@@ -129,19 +129,23 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceAccountGroupId(long, int, int, OrderByComparator)}
 	 * @param commerceAccountGroupId the commerce account group ID
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAccountGroupRel> findByCommerceAccountGroupId(
 		long commerceAccountGroupId, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, orderByComparator, true);
+			commerceAccountGroupId, start, end, orderByComparator);
 	}
 
 	/**
@@ -155,14 +159,12 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	@Override
 	public List<CommerceAccountGroupRel> findByCommerceAccountGroupId(
 		long commerceAccountGroupId, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -183,22 +185,18 @@ public class CommerceAccountGroupRelPersistenceImpl
 			};
 		}
 
-		List<CommerceAccountGroupRel> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAccountGroupRel>)finderCache.getResult(
+		List<CommerceAccountGroupRel> list =
+			(List<CommerceAccountGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAccountGroupRel commerceAccountGroupRel : list) {
-					if ((commerceAccountGroupId !=
-							commerceAccountGroupRel.
-								getCommerceAccountGroupId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAccountGroupRel commerceAccountGroupRel : list) {
+				if ((commerceAccountGroupId !=
+						commerceAccountGroupRel.getCommerceAccountGroupId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -664,20 +662,23 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_C(long,long, int, int, OrderByComparator)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAccountGroupRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByC_C(
-			classNameId, classPK, start, end, orderByComparator, true);
+		return findByC_C(classNameId, classPK, start, end, orderByComparator);
 	}
 
 	/**
@@ -692,14 +693,12 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce account group rels
 	 */
 	@Override
 	public List<CommerceAccountGroupRel> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -719,22 +718,18 @@ public class CommerceAccountGroupRelPersistenceImpl
 			};
 		}
 
-		List<CommerceAccountGroupRel> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAccountGroupRel>)finderCache.getResult(
+		List<CommerceAccountGroupRel> list =
+			(List<CommerceAccountGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAccountGroupRel commerceAccountGroupRel : list) {
-					if ((classNameId !=
-							commerceAccountGroupRel.getClassNameId()) ||
-						(classPK != commerceAccountGroupRel.getClassPK())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAccountGroupRel commerceAccountGroupRel : list) {
+				if ((classNameId != commerceAccountGroupRel.getClassNameId()) ||
+					(classPK != commerceAccountGroupRel.getClassPK())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1223,18 +1218,22 @@ public class CommerceAccountGroupRelPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce account group rel where classNameId = &#63; and classPK = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce account group rel where classNameId = &#63; and classPK = &#63; and commerceAccountGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_C_C(long,long,long)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group rel, or <code>null</code> if a matching commerce account group rel could not be found
 	 */
+	@Deprecated
 	@Override
 	public CommerceAccountGroupRel fetchByC_C_C(
-		long classNameId, long classPK, long commerceAccountGroupId) {
+		long classNameId, long classPK, long commerceAccountGroupId,
+		boolean useFinderCache) {
 
-		return fetchByC_C_C(classNameId, classPK, commerceAccountGroupId, true);
+		return fetchByC_C_C(classNameId, classPK, commerceAccountGroupId);
 	}
 
 	/**
@@ -1243,24 +1242,19 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce account group rel, or <code>null</code> if a matching commerce account group rel could not be found
 	 */
 	@Override
 	public CommerceAccountGroupRel fetchByC_C_C(
-		long classNameId, long classPK, long commerceAccountGroupId,
-		boolean retrieveFromCache) {
+		long classNameId, long classPK, long commerceAccountGroupId) {
 
 		Object[] finderArgs = new Object[] {
 			classNameId, classPK, commerceAccountGroupId
 		};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByC_C_C, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByC_C_C, finderArgs, this);
 
 		if (result instanceof CommerceAccountGroupRel) {
 			CommerceAccountGroupRel commerceAccountGroupRel =
@@ -2107,17 +2101,21 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce account group rels
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAccountGroupRel> findAll(
 		int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -2130,14 +2128,12 @@ public class CommerceAccountGroupRelPersistenceImpl
 	 * @param start the lower bound of the range of commerce account group rels
 	 * @param end the upper bound of the range of commerce account group rels (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce account group rels
 	 */
 	@Override
 	public List<CommerceAccountGroupRel> findAll(
 		int start, int end,
-		OrderByComparator<CommerceAccountGroupRel> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAccountGroupRel> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2155,12 +2151,9 @@ public class CommerceAccountGroupRelPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CommerceAccountGroupRel> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAccountGroupRel>)finderCache.getResult(
+		List<CommerceAccountGroupRel> list =
+			(List<CommerceAccountGroupRel>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;
