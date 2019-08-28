@@ -28,6 +28,7 @@ import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.payment.result.CommerceSubscriptionStatusResult;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.payment.util.CommercePaymentUtils;
+import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodPriorityComparator;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.petra.string.StringPool;
@@ -38,12 +39,13 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -616,7 +618,11 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels,
 		boolean subscriptionOrder) {
 
-		List<CommercePaymentMethod> commercePaymentMethods = new ArrayList<>();
+		ListUtil.sort(
+			commercePaymentMethodGroupRels,
+			new CommercePaymentMethodPriorityComparator());
+
+		List<CommercePaymentMethod> commercePaymentMethods = new LinkedList<>();
 
 		for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
 				commercePaymentMethodGroupRels) {
