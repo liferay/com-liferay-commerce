@@ -15,6 +15,7 @@
 package com.liferay.commerce.inventory.service.persistence.impl;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
@@ -81,6 +82,10 @@ public class CommerceInventoryWarehouseFinderImpl
 			String sql = _customSQL.get(getClass(), FIND_BY_C_G_A);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				CommerceInventoryWarehouseImpl.TABLE_NAME,
+				CommerceInventoryWarehouseImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

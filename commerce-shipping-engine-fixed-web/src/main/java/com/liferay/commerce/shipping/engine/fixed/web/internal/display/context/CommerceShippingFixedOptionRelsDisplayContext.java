@@ -21,6 +21,7 @@ import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.service.CPMeasurementUnitLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
@@ -54,6 +55,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		<CommerceShippingFixedOptionRel> {
 
 	public CommerceShippingFixedOptionRelsDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceCountryService commerceCountryService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceRegionService commerceRegionService,
@@ -70,6 +72,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 			commerceCurrencyLocalService, commerceShippingMethodService,
 			portletResourcePermission, renderRequest, renderResponse);
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceCountryService = commerceCountryService;
 		_commerceRegionService = commerceRegionService;
 		_commerceShippingFixedOptionService =
@@ -112,7 +115,10 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 
 		return _commerceInventoryWarehouseService.
 			getCommerceInventoryWarehouses(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				themeDisplay.getCompanyId(),
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(
+						themeDisplay.getScopeGroupId()),
 				true);
 	}
 
@@ -250,6 +256,7 @@ public class CommerceShippingFixedOptionRelsDisplayContext
 		return true;
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceCountryService _commerceCountryService;
 	private final CommerceInventoryWarehouseService
 		_commerceInventoryWarehouseService;
