@@ -179,8 +179,7 @@ class AddressModal extends Component {
 
 	_handleFormSubmit(e) {
 		e.preventDefault();
-		const formValid = e.target.checkValidity();
-		if (formValid) {
+		if (this._firstFormValid && this._secondFormValid) {
 			this._addAddress(e);
 		}
 		return e;
