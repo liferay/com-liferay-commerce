@@ -14,7 +14,9 @@
 
 package com.liferay.commerce.notification.internal.util;
 
+import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
+import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
@@ -33,6 +35,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -187,6 +190,21 @@ public class CommerceNotificationHelperImpl
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
+
+		List<Long> commerceAccountUserIds =
+			_commerceAccountGroupLocalService.
+				getCommerceAccountUserIdsFromAccountGroupIds(
+					commerceAccountGroupIds, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS);
+
+		long[] commerceAccountUserIdsArray = ArrayUtil.toLongArray(
+			commerceAccountUserIds);
+
+		for (long userId : commerceAccountUserIdsArray) {
+			sendNotification(
+				commerceNotificationTemplate, commerceNotificationType, object,
+				userId);
+		}
 	}
 
 	protected void sendNotificationsToUserIds(
@@ -194,6 +212,32 @@ public class CommerceNotificationHelperImpl
 			CommerceNotificationTemplate commerceNotificationTemplate,
 			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
+
+		for (long userId : userIds) {
+			List<CommerceAccountUserRel> commerceAccountUserRelsByUserId =
+				_commerceAccountUserRelLocalService.
+					getCommerceAccountUserRelsByCommerceAccountUserId(userId);
+
+			List<Long> commerceAccountIds = new ArrayList<>();
+
+			for (CommerceAccountUserRel commerceAccountUserRel :
+					commerceAccountUserRelsByUserId) {
+
+				commerceAccountIds.add(
+					commerceAccountUserRel.getCommerceAccountId());
+			}
+
+			long[] commerceAccountIdsArray = ArrayUtil.toLongArray(
+				commerceAccountIds);
+
+			if (ArrayUtil.containsAll(
+					commerceAccountIdsArray, commerceAccountGroupIds)) {
+
+				sendNotification(
+					commerceNotificationTemplate, commerceNotificationType,
+					object, userId);
+			}
+		}
 	}
 
 	private static final Pattern _placeholderPattern = Pattern.compile(
@@ -201,6 +245,10 @@ public class CommerceNotificationHelperImpl
 
 	@Reference
 	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
+
+	@Reference
+	private CommerceAccountUserRelLocalService
+		_commerceAccountUserRelLocalService;
 
 	@Reference
 	private CommerceNotificationQueueEntryLocalService
