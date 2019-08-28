@@ -29,13 +29,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 d-flex">
+			<!-- modal -->
 			<commerce-ui:modal
 				url="<%= editURL %>"
-				size="lg"
-				title="Shipping address and method"
+				size="full-screen"
+				title="PLACEHOLDER Shipping address and method"
 				closeOnSubmit="<%= true %>"
 				triggerId="shipping-modal-id"
 			/>
+			<!-- / modal -->
 			<commerce-ui:panel
 				elementClasses="flex-fill"
 				headerActionLabel="edit"
@@ -56,7 +58,7 @@
 		<div class="col-md-4 d-flex">
 			<commerce-ui:panel
 				elementClasses="flex-fill"
-				headerActionLabel="edit"
+				headerActionIcon="plus"
 				title="billing-address"
 			>
 				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
