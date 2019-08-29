@@ -19,6 +19,8 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShippingMethod;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
@@ -64,6 +66,10 @@ public class OrderDTOConverter implements DTOConverter {
 			commerceOrder.getCommerceShippingMethod();
 		ExpandoBridge expandoBridge = commerceOrder.getExpandoBridge();
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
 		return new Order() {
 			{
 				accountExternalReferenceCode =
@@ -74,6 +80,7 @@ public class OrderDTOConverter implements DTOConverter {
 					dtoConverterContext.getLocale(),
 					commerceOrder.getBillingAddressId());
 				billingAddressId = commerceOrder.getBillingAddressId();
+				channelId = commerceChannel.getCommerceChannelId();
 				couponCode = commerceOrder.getCouponCode();
 				currencyCode = commerceCurrency.getName(
 					dtoConverterContext.getLocale());
@@ -200,6 +207,9 @@ public class OrderDTOConverter implements DTOConverter {
 
 		return commerceShippingMethod.getEngineKey();
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
