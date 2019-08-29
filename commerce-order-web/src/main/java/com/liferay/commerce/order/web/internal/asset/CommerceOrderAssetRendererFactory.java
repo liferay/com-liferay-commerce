@@ -20,6 +20,7 @@ import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.asset.kernel.model.BaseAssetRendererFactory;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
@@ -66,6 +67,7 @@ public class CommerceOrderAssetRendererFactory
 
 		CommerceOrderAssetRenderer commerceOrderAssetRenderer =
 			new CommerceOrderAssetRenderer(
+				_commerceChannelLocalService,
 				_commerceOrderLocalService.getCommerceOrder(classPK));
 
 		commerceOrderAssetRenderer.setAssetRendererType(type);
@@ -78,6 +80,9 @@ public class CommerceOrderAssetRendererFactory
 	public String getType() {
 		return TYPE;
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;

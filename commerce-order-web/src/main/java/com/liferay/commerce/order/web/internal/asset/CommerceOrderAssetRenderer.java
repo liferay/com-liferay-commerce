@@ -18,6 +18,8 @@ import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -48,7 +50,11 @@ import javax.servlet.http.HttpServletResponse;
 public class CommerceOrderAssetRenderer
 	extends BaseJSPAssetRenderer<CommerceOrder> {
 
-	public CommerceOrderAssetRenderer(CommerceOrder commerceOrder) {
+	public CommerceOrderAssetRenderer(
+		CommerceChannelLocalService commerceChannelLocalService,
+		CommerceOrder commerceOrder) {
+
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrder = commerceOrder;
 	}
 
@@ -104,15 +110,18 @@ public class CommerceOrderAssetRenderer
 			String noSuchEntryRedirect)
 		throws Exception {
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				_commerceOrder.getGroupId());
+
 		Group group = GroupLocalServiceUtil.getGroup(
-			_commerceOrder.getGroupId());
+			commerceChannel.getSiteGroupId());
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			liferayPortletRequest, group, CommerceOrder.class.getName(),
-			PortletProvider.Action.VIEW);
+			PortletProvider.Action.EDIT);
 
-		portletURL.setParameter(
-			"mvcRenderCommandName", "viewCommerceOrderDetails");
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
 		portletURL.setParameter(
 			"commerceOrderId",
 			String.valueOf(_commerceOrder.getCommerceOrderId()));
@@ -168,6 +177,7 @@ public class CommerceOrderAssetRenderer
 		return true;
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceOrder _commerceOrder;
 
 }
