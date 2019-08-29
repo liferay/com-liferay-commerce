@@ -98,8 +98,6 @@ public class CommerceCheckoutStepServicesTrackerImpl
 				commerceCheckoutStepServiceWrapper.getService();
 
 			if (commerceCheckoutStep.isActive(
-					httpServletRequest, httpServletResponse) &&
-				commerceCheckoutStep.isVisible(
 					httpServletRequest, httpServletResponse)) {
 
 				commerceCheckoutSteps.add(commerceCheckoutStep);
