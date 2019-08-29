@@ -182,16 +182,9 @@ components:
                 city:
                     example: Diamond Bar
                     type: string
-                commerceCountryId:
-                    example: 30130
-                    format: int64
-                    minimum: 0
-                    type: integer
-                commerceRegionId:
-                    example: 30234
-                    format: int64
-                    minimum: 0
-                    type: integer
+                countryISOCode:
+                    example: US
+                    type: string
                 defaultBilling:
                     example: true
                     type: boolean
@@ -220,6 +213,9 @@ components:
                 phoneNumber:
                     example: (123) 456 7890
                     type: string
+                regionISOCode:
+                    example: CA
+                    type: string
                 street1:
                     example: 1400 Montefino Ave
                     type: string
@@ -234,7 +230,7 @@ components:
                     type: string
             required:
                 - city
-                - commerceCountryId
+                - countryISOCode
                 - name
                 - street1
             type: object
@@ -453,6 +449,9 @@ info:
         email: team-commerce@liferay.com
         name: Commerce Team
     description: Liferay Commerce Admin Account API
+    license:
+        name: GNU Lesser General Public License 2.1
+        url: https://www.gnu.org/licenses/lgpl-2.1.html
     title: Liferay Commerce Admin Account API
     version: v1.0
 openapi: 3.0.0
