@@ -48,7 +48,7 @@
 
     &[disabled],
     &.is-disabled,
-    &[data-badge-count="0"]{
+    &[data-badge-count="0"] svg{
       opacity: 0.5;
     }
 

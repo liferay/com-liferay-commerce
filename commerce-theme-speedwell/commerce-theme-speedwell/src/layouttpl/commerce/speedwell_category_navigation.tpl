@@ -24,11 +24,11 @@
 
     <div class="portlet-layout container">
         <div class="portlet-layout row">
-            <div class="portlet-column portlet-column-first col-lg-3 col-md-4 hidden-sm" id="column-3">
+            <div class="portlet-column portlet-column-first col-md-3 hidden-sm" id="column-3">
                 ${processor.processColumn("column-3", "portlet-column-content portlet-column-content-first")}
             </div>
 
-            <div class="portlet-column portlet-column-last col-lg-9 col-md-8 col-sm-12" id="column-4">
+            <div class="portlet-column portlet-column-last col-md-9 col-sm-12" id="column-4">
                 ${processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")}
             </div>
         </div>
