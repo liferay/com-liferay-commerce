@@ -25,7 +25,11 @@ import com.liferay.commerce.account.service.CommerceAccountUserRelService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressService;
+import com.liferay.commerce.service.CommerceCountryService;
+import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
@@ -45,6 +49,7 @@ import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
@@ -276,6 +281,24 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 				commerceAccount.getCommerceAccountGroupId()));
 	}
 
+	private long _getCommerceRegionId(
+			CommerceCountry commerceCountry, AccountAddress accountAddress)
+		throws PortalException {
+
+		if (Validator.isNull(accountAddress.getRegionISOCode()) ||
+			(commerceCountry == null)) {
+
+			return 0;
+		}
+
+		CommerceRegion commerceRegion =
+			_commerceRegionLocalService.getCommerceRegion(
+				commerceCountry.getCommerceCountryId(),
+				accountAddress.getRegionISOCode());
+
+		return commerceRegion.getCommerceRegionId();
+	}
+
 	private String _getEmailAddress(
 		Account account, CommerceAccount commerceAccount) {
 
@@ -370,6 +393,11 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 			}
 
 			for (AccountAddress accountAddress : accountAddresses) {
+				CommerceCountry commerceCountry =
+					_commerceCountryService.getCommerceCountry(
+						commerceAccount.getCompanyId(),
+						accountAddress.getCountryISOCode());
+
 				_commerceAddressService.addCommerceAddress(
 					commerceAccount.getModelClassName(),
 					commerceAccount.getCommerceAccountId(),
@@ -377,8 +405,8 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 					accountAddress.getStreet1(), accountAddress.getStreet2(),
 					accountAddress.getStreet3(), accountAddress.getCity(),
 					accountAddress.getZip(),
-					accountAddress.getCommerceRegionId(),
-					accountAddress.getCommerceCountryId(),
+					_getCommerceRegionId(commerceCountry, accountAddress),
+					commerceCountry.getCommerceCountryId(),
 					accountAddress.getPhoneNumber(),
 					GetterUtil.get(accountAddress.getDefaultBilling(), false),
 					GetterUtil.get(accountAddress.getDefaultShipping(), false),
@@ -457,6 +485,12 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
+
+	@Reference
+	private CommerceCountryService _commerceCountryService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
