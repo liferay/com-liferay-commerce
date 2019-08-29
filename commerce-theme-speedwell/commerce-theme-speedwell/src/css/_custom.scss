@@ -11,7 +11,7 @@ button {
   background-color: #FFF;
 }
 
-body:not(.signed-in) {
+body:not(.has-control-menu) {
   .speedwell-topbar {
     top: 0;
 
@@ -68,7 +68,7 @@ body:not(.signed-in) {
   }
 }
 
-body.signed-in {
+body.has-control-menu {
   .speedwell-content {
     padding-top: $speedwell-topbar-size !important;
 
