@@ -15,10 +15,14 @@
 package com.liferay.headless.commerce.admin.account.internal.dto.v1_0.converter;
 
 import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -44,11 +48,12 @@ public class AccountAddressDTOConverter implements DTOConverter {
 			_commerceAddressService.getCommerceAddress(
 				dtoConverterContext.getResourcePrimKey());
 
+		CommerceCountry commerceCountry = commerceAddress.getCommerceCountry();
+
 		return new AccountAddress() {
 			{
 				city = commerceAddress.getCity();
-				commerceCountryId = commerceAddress.getCommerceCountryId();
-				commerceRegionId = commerceAddress.getCommerceRegionId();
+				countryISOCode = commerceCountry.getTwoLettersISOCode();
 				defaultBilling = commerceAddress.isDefaultBilling();
 				defaultShipping = commerceAddress.isDefaultShipping();
 				description = commerceAddress.getDescription();
@@ -57,12 +62,25 @@ public class AccountAddressDTOConverter implements DTOConverter {
 				longitude = commerceAddress.getLongitude();
 				name = commerceAddress.getName();
 				phoneNumber = commerceAddress.getPhoneNumber();
+				regionISOCode = _getRegionISOCode(commerceAddress);
 				street1 = commerceAddress.getStreet1();
 				street2 = commerceAddress.getStreet2();
 				street3 = commerceAddress.getStreet3();
 				zip = commerceAddress.getZip();
 			}
 		};
+	}
+
+	private String _getRegionISOCode(CommerceAddress commerceAddress)
+		throws PortalException {
+
+		CommerceRegion commerceRegion = commerceAddress.getCommerceRegion();
+
+		if (commerceRegion == null) {
+			return StringPool.BLANK;
+		}
+
+		return commerceRegion.getCode();
 	}
 
 	@Reference
