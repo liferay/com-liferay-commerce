@@ -28,7 +28,6 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
-import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.service.CommerceShippingMethodService;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
@@ -265,10 +264,9 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 		BillingAddress billingAddress = order.getBillingAddress();
 
 		if (billingAddress != null) {
-			commerceOrder = BillingAddressUtil.updateBillingAddress(
-				_commerceAddressService, _commerceOrderService,
-				_commerceRegionLocalService, commerceOrder, billingAddress,
-				serviceContext);
+			commerceOrder = BillingAddressUtil.upsertBillingAddress(
+				_commerceAddressService, _commerceOrderService, commerceOrder,
+				billingAddress, serviceContext);
 		}
 
 		// Shipping Address
@@ -276,10 +274,9 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 		ShippingAddress shippingAddress = order.getShippingAddress();
 
 		if (shippingAddress != null) {
-			commerceOrder = ShippingAddressUtil.updateShippingAddress(
-				_commerceAddressService, _commerceOrderService,
-				_commerceRegionLocalService, commerceOrder, shippingAddress,
-				serviceContext);
+			commerceOrder = ShippingAddressUtil.upsertShippingAddress(
+				_commerceAddressService, _commerceOrderService, commerceOrder,
+				shippingAddress, serviceContext);
 		}
 
 		return commerceOrder;
@@ -449,9 +446,6 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
-
-	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private CommerceShippingMethodService _commerceShippingMethodService;
