@@ -78,7 +78,7 @@ const filters: FilterProps[] = [
 		type: 'date',
 		slug: 'date-test',
 		label: 'Date test',
-		// value: '2018-05-05',
+		value: '',
 		operator: 'eq'
 	}
 ]
