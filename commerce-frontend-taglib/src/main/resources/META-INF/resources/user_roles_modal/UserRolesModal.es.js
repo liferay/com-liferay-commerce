@@ -72,13 +72,10 @@ class UserRolesModal extends Component {
 	}
 
 	_updateRoles() {
-		if (this.selectedRoles.length) {
-			this.emit(
-				'updateRoles',
-				this.selectedRoles
-			);
-		}
-		return this.selectedRoles;
+		this.emit(
+			'updateRoles',
+			this.selectedRoles
+		);
 	}
 
 	toggle() {
