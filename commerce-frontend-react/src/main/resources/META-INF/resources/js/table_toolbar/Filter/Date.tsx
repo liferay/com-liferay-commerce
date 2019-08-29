@@ -11,14 +11,13 @@ interface IProps extends DateFilterProps {
 
 const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
     const {actions} : ContextProps = getAppContext();
-    const [value, setValue] = useState(props.value);
+    const [ value, setValue ] = useState<string | Date>(props.value || '');
 
     return (
         <>
             <ClayDatePicker 
                 onValueChange={setValue}
-                placeholder="YYYY-MM-DD"
-                value={value || ''}
+                value={''}
             />
             <div className="mt-2">
                 <ClayButton
