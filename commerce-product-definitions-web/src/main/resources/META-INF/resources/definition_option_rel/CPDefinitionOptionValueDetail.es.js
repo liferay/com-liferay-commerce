@@ -106,10 +106,6 @@ class CPDefinitionOptionValueDetail extends Component {
 		);
 	}
 
-	_handleCancel() {
-		this.emit('cancel');
-	}
-
 	_handleDeleteOptionValue() {
 		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-option'))) {
 			this._deleteOptionValue();
