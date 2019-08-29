@@ -110,11 +110,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>showMoreRefId</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>showMoreId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -122,16 +117,6 @@
 		<attribute>
 			<name>showMoreUrl</name>
 			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
-		<name>panel-hidden-content</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PanelHiddenContentTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>wrapperId</name>
-			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>

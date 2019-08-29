@@ -62,7 +62,6 @@ public class PanelTag extends IncludeTag {
 				request, "headerActionLabel", _headerActionLabel);
 		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
 		setNamespacedAttribute(request, "headerActionId", _headerActionId);
-		setNamespacedAttribute(request, "showMoreRefId", _showMoreRefId);
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
 		setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
@@ -95,10 +94,6 @@ public class PanelTag extends IncludeTag {
 
 	public String getShowMoreId() {
 		return _showMoreId;
-	}
-
-	public String getShowMoreRefId() {
-		return _showMoreRefId;
 	}
 
 	public String getShowMoreUrl() {
@@ -144,10 +139,6 @@ public class PanelTag extends IncludeTag {
 		_showMoreId = showMoreId;
 	}
 
-	public void setShowMoreRefId(String showMoreRefId) {
-		_showMoreRefId = showMoreRefId;
-	}
-
 	public void setShowMoreUrl(String showMoreUrl) {
 		_showMoreUrl = showMoreUrl;
 	}
@@ -170,7 +161,6 @@ public class PanelTag extends IncludeTag {
 		_headerActionLabel = null;
 		_headerActionUrl = null;
 		_showMoreId = null;
-		_showMoreRefId = null;
 		_showMoreUrl = null;
 		_spritemap = null;
 		_title = null;
@@ -201,7 +191,6 @@ public class PanelTag extends IncludeTag {
 	private String _headerActionLabel;
 	private String _headerActionUrl;
 	private String _showMoreId;
-	private String _showMoreRefId;
 	private String _showMoreUrl;
 	private String _spritemap;
 	private String _title;

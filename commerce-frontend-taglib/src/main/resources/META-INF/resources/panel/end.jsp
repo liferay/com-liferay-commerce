@@ -18,7 +18,7 @@
 
 	</div>
 
-	<c:if test="<%= Validator.isNotNull(showMoreId) || Validator.isNotNull(showMoreRefId) || Validator.isNotNull(showMoreUrl) %>">
+	<c:if test="<%= Validator.isNotNull(showMoreId) || Validator.isNotNull(showMoreUrl) %>">
 		<div class="border-top card-footer p-0" id="<%= showMoreButtonWrapperId %>">
 			<a class="border-0 btn btn-secondary w-100" href="<%= Validator.isNotNull(showMoreUrl) ? showMoreUrl : '#' %>" id="<%= showMoreButtonId %>">
 				Show more
@@ -26,22 +26,3 @@
 		</div>
 	</c:if>
 </div>
-
-<c:if test="<%= Validator.isNotNull(showMoreRefId) %>">
-	<aui:script>
-		(function() {
-			const button = document.getElementById('<%= showMoreButtonId %>');
-			const buttonWrapper = document.getElementById('<%= showMoreButtonWrapperId %>');
-			const hiddenElement = document.getElementById('<%= showMoreRefId %>');
-
-			button.addEventListener(
-				'click',
-				(e) => {
-					e.preventDefault();
-					hiddenElement.classList.remove('d-none');
-					buttonWrapper.parentNode.removeChild(buttonWrapper);
-				}
-			);
-		})()
-	</aui:script>
-</c:if>

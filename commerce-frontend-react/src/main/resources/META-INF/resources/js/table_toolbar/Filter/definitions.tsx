@@ -30,13 +30,13 @@ export interface BaseFilterProps extends React.HTMLAttributes<HTMLDivElement>{
 }
 
 export interface TextFilterProps extends BaseFilterProps {
-    type: 'date',
+    type: 'text',
     inputText?: string,
     value?: string
 }
 
 export interface DateFilterProps extends BaseFilterProps {
-    type: 'text',
+    type: 'date',
     value?: string
 }
 
@@ -50,7 +50,7 @@ export interface NumberFilterProps extends BaseFilterProps {
 
 export interface DateRangeFilterProps extends BaseFilterProps {
     type: 'date-range'
-    value?: string | number
+    value?: string
 }
 
 export interface CheckboxesFilterProps extends BaseFilterProps {
