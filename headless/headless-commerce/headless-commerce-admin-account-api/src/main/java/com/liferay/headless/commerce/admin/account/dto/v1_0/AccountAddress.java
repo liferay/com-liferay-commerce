@@ -34,7 +34,6 @@ import java.util.Set;
 import javax.annotation.Generated;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -45,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("AccountAddress")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"city", "commerceCountryId", "name", "street1"})
+@Schema(requiredProperties = {"city", "countryISOCode", "name", "street1"})
 @XmlRootElement(name = "AccountAddress")
 public class AccountAddress {
 
@@ -77,20 +76,20 @@ public class AccountAddress {
 	protected String city;
 
 	@Schema
-	public Long getCommerceCountryId() {
-		return commerceCountryId;
+	public String getCountryISOCode() {
+		return countryISOCode;
 	}
 
-	public void setCommerceCountryId(Long commerceCountryId) {
-		this.commerceCountryId = commerceCountryId;
+	public void setCountryISOCode(String countryISOCode) {
+		this.countryISOCode = countryISOCode;
 	}
 
 	@JsonIgnore
-	public void setCommerceCountryId(
-		UnsafeSupplier<Long, Exception> commerceCountryIdUnsafeSupplier) {
+	public void setCountryISOCode(
+		UnsafeSupplier<String, Exception> countryISOCodeUnsafeSupplier) {
 
 		try {
-			commerceCountryId = commerceCountryIdUnsafeSupplier.get();
+			countryISOCode = countryISOCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -102,36 +101,8 @@ public class AccountAddress {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	@NotNull
-	protected Long commerceCountryId;
-
-	@Schema
-	public Long getCommerceRegionId() {
-		return commerceRegionId;
-	}
-
-	public void setCommerceRegionId(Long commerceRegionId) {
-		this.commerceRegionId = commerceRegionId;
-	}
-
-	@JsonIgnore
-	public void setCommerceRegionId(
-		UnsafeSupplier<Long, Exception> commerceRegionIdUnsafeSupplier) {
-
-		try {
-			commerceRegionId = commerceRegionIdUnsafeSupplier.get();
-		}
-		catch (RuntimeException re) {
-			throw re;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Long commerceRegionId;
+	@NotEmpty
+	protected String countryISOCode;
 
 	@Schema
 	public Boolean getDefaultBilling() {
@@ -355,6 +326,34 @@ public class AccountAddress {
 	protected String phoneNumber;
 
 	@Schema
+	public String getRegionISOCode() {
+		return regionISOCode;
+	}
+
+	public void setRegionISOCode(String regionISOCode) {
+		this.regionISOCode = regionISOCode;
+	}
+
+	@JsonIgnore
+	public void setRegionISOCode(
+		UnsafeSupplier<String, Exception> regionISOCodeUnsafeSupplier) {
+
+		try {
+			regionISOCode = regionISOCodeUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String regionISOCode;
+
+	@Schema
 	public String getStreet1() {
 		return street1;
 	}
@@ -506,24 +505,18 @@ public class AccountAddress {
 			sb.append("\"");
 		}
 
-		if (commerceCountryId != null) {
+		if (countryISOCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"commerceCountryId\": ");
+			sb.append("\"countryISOCode\": ");
 
-			sb.append(commerceCountryId);
-		}
+			sb.append("\"");
 
-		if (commerceRegionId != null) {
-			if (sb.length() > 1) {
-				sb.append(", ");
-			}
+			sb.append(_escape(countryISOCode));
 
-			sb.append("\"commerceRegionId\": ");
-
-			sb.append(commerceRegionId);
+			sb.append("\"");
 		}
 
 		if (defaultBilling != null) {
@@ -614,6 +607,20 @@ public class AccountAddress {
 			sb.append("\"");
 
 			sb.append(_escape(phoneNumber));
+
+			sb.append("\"");
+		}
+
+		if (regionISOCode != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"regionISOCode\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(regionISOCode));
 
 			sb.append("\"");
 		}
