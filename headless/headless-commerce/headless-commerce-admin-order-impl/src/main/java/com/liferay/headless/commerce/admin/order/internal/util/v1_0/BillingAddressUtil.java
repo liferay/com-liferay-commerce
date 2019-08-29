@@ -164,7 +164,7 @@ public class BillingAddressUtil {
 
 		CommerceAddress commerceAddress =
 			commerceAddressService.fetchCommerceAddress(
-				commerceOrder.getShippingAddressId());
+				commerceOrder.getBillingAddressId());
 
 		CommerceCountry commerceCountry = null;
 
