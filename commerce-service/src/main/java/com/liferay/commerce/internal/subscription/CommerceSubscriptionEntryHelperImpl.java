@@ -22,13 +22,11 @@ import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
-import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Date;
 import java.util.List;
@@ -49,29 +47,22 @@ public class CommerceSubscriptionEntryHelperImpl
 	public void checkCommerceSubscriptions(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
-				commerceOrder.getGroupId());
-
-		serviceContext.setScopeGroupId(commerceChannel.getSiteGroupId());
-
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
-
-		serviceContext.setUserId(commerceAccount.getUserId());
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemLocalService.getSubscriptionCommerceOrderItems(
 				commerceOrder.getCommerceOrderId());
 
 		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
 			if (_isNewSubscription(commerceOrderItem)) {
 				_commerceSubscriptionEntryLocalService.
 					addCommerceSubscriptionEntry(
-						commerceOrderItem.getCPInstanceId(),
-						commerceOrderItem.getCommerceOrderItemId(),
-						serviceContext);
+						commerceAccount.getUserId(), commerceOrder.getGroupId(),
+						cpInstance.getCPInstanceUuid(),
+						commerceOrderItem.getCProductId(),
+						commerceOrderItem.getCommerceOrderItemId());
 			}
 		}
 	}
