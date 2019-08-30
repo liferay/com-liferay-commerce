@@ -269,7 +269,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		HttpSession httpSession = httpServletRequest.getSession();
 
 		httpSession.setAttribute(
-			_getCookieName(commerceOrder.getCommerceAccountId()),
+			_getCookieName(commerceOrder.getGroupId()),
 			commerceOrder.getUuid());
 	}
 
@@ -307,7 +307,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		String domain = CookieKeys.getDomain(themeDisplay.getRequest());
 
 		String commerceOrderUuidWebKey = _getCookieName(
-			commerceOrder.getCommerceAccountId());
+			commerceOrder.getGroupId());
 
 		if (commerceOrder.isGuestOrder()) {
 			CookieKeys.deleteCookies(
@@ -385,12 +385,10 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		}
 
 		if (commerceAccountId != CommerceAccountConstants.GUEST_ACCOUNT_ID) {
-			HttpServletRequest httpServletRequest = themeDisplay.getRequest();
+			String cookieName = _getCookieName(commerceChannel.getGroupId());
 
-			HttpSession httpSession = httpServletRequest.getSession();
-
-			String commerceOrderUuid = (String)httpSession.getAttribute(
-				_getCookieName(commerceAccountId));
+			String commerceOrderUuid = CookieKeys.getCookie(
+				themeDisplay.getRequest(), cookieName, true);
 
 			commerceOrder = _commerceOrderService.fetchCommerceOrder(
 				commerceOrderUuid, commerceChannel.getGroupId());
