@@ -13,11 +13,15 @@
 		</settings>
 		<layout-templates>
 			<custom>
-				<layout-template id="speedwell_sidebar" name="Speedwell Sidebar">
+				<layout-template id="speedwell_sidebar" name="Speedwell 1-2">
 					<template-path>/layouttpl/commerce/speedwell_sidebar.tpl</template-path>
 					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
 				</layout-template>
-				<layout-template id="speedwell_category_navigation" name="Speedwell Category Navigation">
+				<layout-template id="speedwell_account" name="Speedwell 1-1-2">
+					<template-path>/layouttpl/commerce/speedwell_account.tpl</template-path>
+					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
+				</layout-template>
+				<layout-template id="speedwell_category_navigation" name="Speedwell 1-1-1-2">
 					<template-path>/layouttpl/commerce/speedwell_category_navigation.tpl</template-path>
 					<thumbnail-path>/layouttpl/commerce/speedwell_sidebar.png</thumbnail-path>
 				</layout-template>
