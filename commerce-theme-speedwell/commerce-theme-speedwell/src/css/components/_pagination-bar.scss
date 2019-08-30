@@ -40,6 +40,13 @@
       &.active a {
         border-bottom: 2px solid currentColor;
       }
+
+      @media only screen and (max-width: 767px) {
+        &:first-child,
+        &:last-child {
+          display: none
+        }
+      }
     }
   }
 }

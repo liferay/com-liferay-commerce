@@ -77,8 +77,9 @@
       transition: all ease 200ms;
       width: 18px;
 
-      @media screen and (max-width: 375px) {
-        transform: translate(9px, -12px);
+      @media screen and (max-width: 450px) {
+        margin: 0;
+        transform: translate(0, -23px);
       }
     }
 

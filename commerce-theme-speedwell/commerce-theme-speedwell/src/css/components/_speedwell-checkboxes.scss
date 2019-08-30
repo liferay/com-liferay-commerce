@@ -21,9 +21,9 @@ label[for*='rememberMe'] {
       position: absolute;
       height: 16px;
       width: 16px;
-      border: 1px solid $color-fg-alt;
+      border: 1px solid #D7D7D7;
       background-color: $color-bg;
-      border-radius: 2px;
+      border-radius: 4px;
       transition: background-color .1s ease-out;
     }
 
