@@ -92,14 +92,14 @@ public class PortletSettingsImporter {
 					_importPortletSettings(
 						jsonObject, portletName, classLoader,
 						displayTemplateDependenciesPath, assetVocabularyGroupId,
-                        serviceContext);
+                            serviceContext);
 				}
 			}
 			else {
 				_importPortletSettings(
 					jsonObject, portletName, classLoader,
 					displayTemplateDependenciesPath, assetVocabularyGroupId,
-                    serviceContext);
+                        serviceContext);
 			}
 		}
 	}
