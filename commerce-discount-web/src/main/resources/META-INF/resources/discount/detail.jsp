@@ -46,6 +46,7 @@ if ((commerceDiscount != null) && (commerceDiscount.getExpirationDate() != null)
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceDiscount == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="addCommerceAccountGroupIds" type="hidden" />
+	<aui:input name="commerceChannelIds" type="hidden" />
 	<aui:input name="commerceDiscountId" type="hidden" value="<%= commerceDiscountId %>" />
 	<aui:input name="deleteCommerceDiscountCommerceAccountGroupRelIds" type="hidden" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
