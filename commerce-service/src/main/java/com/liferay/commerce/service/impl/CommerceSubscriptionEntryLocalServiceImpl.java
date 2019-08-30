@@ -55,6 +55,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
@@ -72,6 +73,10 @@ import java.util.Map;
 public class CommerceSubscriptionEntryLocalServiceImpl
 	extends CommerceSubscriptionEntryLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
 	@Override
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long cpInstanceId, long commerceOrderItemId,
@@ -84,22 +89,22 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
 
-		return commerceSubscriptionEntryLocalService.
-			addCommerceSubscriptionEntry(
-				cpInstance.getCPInstanceUuid(), cpDefinition.getCProductId(),
-				commerceOrderItemId, serviceContext);
+		return addCommerceSubscriptionEntry(
+			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+			cpInstance.getCPInstanceUuid(), cpDefinition.getCProductId(),
+			commerceOrderItemId);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
-			String cpInstanceUuid, long cProductId, long commerceOrderItemId,
-			ServiceContext serviceContext)
+			long userId, long groupId, String cpInstanceUuid, long cProductId,
+			long commerceOrderItemId)
 		throws PortalException {
 
 		CPSubscriptionInfo cpSubscriptionInfo = null;
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
+		User user = userLocalService.getUser(userId);
 
 		CPInstance cpInstance = _cpInstanceLocalService.fetchCProductInstance(
 			cProductId, cpInstanceUuid);
@@ -118,17 +123,13 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		validateCPSubscriptionType(cpSubscriptionType);
 
-		long groupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				serviceContext.getScopeGroupId());
-
 		long commerceSubscriptionEntryId = counterLocalService.increment();
 
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			commerceSubscriptionEntryPersistence.create(
 				commerceSubscriptionEntryId);
 
-		commerceSubscriptionEntry.setUuid(serviceContext.getUuid());
+		commerceSubscriptionEntry.setUuid(PortalUUIDUtil.generate());
 		commerceSubscriptionEntry.setGroupId(groupId);
 		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
 		commerceSubscriptionEntry.setUserId(user.getUserId());
@@ -169,6 +170,21 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
 
 		return commerceSubscriptionEntry;
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
+	@Override
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			String cpInstanceUuid, long cProductId, long commerceOrderItemId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return addCommerceSubscriptionEntry(
+			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+			cpInstanceUuid, cProductId, commerceOrderItemId);
 	}
 
 	@Override
