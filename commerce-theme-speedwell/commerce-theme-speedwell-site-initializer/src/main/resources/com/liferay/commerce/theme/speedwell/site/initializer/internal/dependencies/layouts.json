@@ -154,7 +154,7 @@
 		],
 		"subLayouts": [
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Orders",
 				"permissions": [
 					{
@@ -190,7 +190,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "Login & Security",
 				"permissions": [
 					{
@@ -226,7 +226,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Addresses",
 				"permissions": [
 					{
@@ -262,7 +262,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Subscriptions",
 				"permissions": [
 					{
@@ -298,7 +298,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Downloads",
 				"permissions": [
 					{
@@ -334,7 +334,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Lists",
 				"permissions": [
 					{
@@ -375,7 +375,7 @@
 				"privateLayout": false
 			},
 			{
-				"layoutTemplateId": "1_2_columns_i",
+				"layoutTemplateId": "speedwell_account",
 				"name": "My Payment Methods",
 				"permissions": [
 					{
