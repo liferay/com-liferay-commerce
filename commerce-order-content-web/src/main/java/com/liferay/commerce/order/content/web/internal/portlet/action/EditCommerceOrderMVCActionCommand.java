@@ -20,6 +20,7 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -224,6 +225,14 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				SessionErrors.add(actionRequest, e.getClass());
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+			}
+			else if (e instanceof CommerceOrderValidatorException) {
+				CommerceOrderValidatorException cove =
+					(CommerceOrderValidatorException)e;
+
+				SessionErrors.add(actionRequest, cove.getClass(), cove);
+
+				hideDefaultErrorMessage(actionRequest);
 			}
 			else {
 				throw e;
