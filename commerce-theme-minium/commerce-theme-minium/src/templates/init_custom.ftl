@@ -1,5 +1,4 @@
 <#assign
-	copyright = getterUtil.getString(themeDisplay.getThemeSetting("copyright"))
 	show_top_menu = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-top-menu"))
 	wide_layout = getterUtil.getBoolean(themeDisplay.getThemeSetting("wide-layout"))
 	userManagementUrl = commerceThemeMiniumHttpHelper.getAccountManagementPortletURL(request)
