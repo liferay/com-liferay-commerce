@@ -368,10 +368,10 @@ public class CommerceSearchResource {
 		String subtitle = cpCatalogEntry.getShortDescription();
 
 		if (Validator.isNull(subtitle)) {
-			subtitle = cpCatalogEntry.getDescription();
+			subtitle = HtmlUtil.extractText(cpCatalogEntry.getDescription());
 		}
 
-		searchItemModel.setSubtitle(HtmlUtil.escape(subtitle));
+		searchItemModel.setSubtitle(subtitle);
 
 		searchItemModel.setImage(cpCatalogEntry.getDefaultImageFileUrl());
 
