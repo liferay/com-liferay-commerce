@@ -41,6 +41,24 @@ if (commerceOrder != null) {
 }
 %>
 
+<liferay-ui:error exception="<%= CommerceOrderValidatorException.class %>">
+
+	<%
+	CommerceOrderValidatorException cove = (CommerceOrderValidatorException)errorException;
+
+	if (cove != null) {
+		for (CommerceOrderValidatorResult commerceOrderValidatorResult : cove.getCommerceOrderValidatorResults()) {
+	%>
+
+			<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
+
+	<%
+		}
+	}
+	%>
+
+</liferay-ui:error>
+
 <div class="commerce-panel">
 	<div class="commerce-panel__content">
 		<div class="align-items-center row">
