@@ -2,6 +2,8 @@
 @import "add-to-cart-button/local-mixins";
 
 .add-to-cart-button {
+	text-transform: capitalize;
+
 	&--compact {
 		::selection {
 			background-color: #D0D0D0;
@@ -12,7 +14,12 @@
 		min-width: 180px;
 		position: relative;
 		transition: min-width .1s ease,
-		border .1s ease;
+					border .1s ease;
+
+		@media only screen and (max-width: 767px) {
+			height: 40px;
+			min-width: 135px;
+		}
 
 		&:hover {
 			background-color: $color-theme-dark;

@@ -5,20 +5,24 @@
   margin-left: auto;
   margin-right: 135px;
 
+  @media only screen and (max-width: 767px) {
+    margin-right: 50px;
+  }
+
   .row {
     align-items: center;
     justify-content: flex-end;
 
     &:last-child {
       .h4 {
-        font-weight: bold;
-        font-size: 1.2em !important;
+        font-weight: 600;
+        font-size: 16px !important;
         margin-top: 20px;
       }
     }
 
     .col {
-      max-width: 30%;
+      max-width: 7em;
 
       .h4 {
         font-weight: bold;
@@ -39,6 +43,18 @@
   & ~ .button-holder {
     text-align: right;
 
+    @media only screen and (max-width: 767px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      padding: 0;
+      height: 60px;
+      margin: 0;
+      text-align: center;
+    }
+
     .btn {
       cursor: pointer;
       height: 50px;
@@ -51,6 +67,16 @@
       min-width: 150px;
       margin-top: 20px;
       margin-right: 80px;
+
+      @media only screen and (max-width: 767px) {
+        height: 100%;
+        width: 100%;
+        padding: 0 !important;
+        line-height: 60px;
+        font-weight: 600;
+        margin: 0;
+        border-radius: 0;
+      }
     }
   }
 }

@@ -5,9 +5,15 @@
 	border-radius: 4px;
 	color: #FFF;
 	display: flex;
-	font-size: 12px;
-	font-weight: bold;
+	font-size: 14px;
+	font-weight: 600;
 	height: 50px;
 	justify-content: center;
 	min-width: 180px;
+
+	@media only screen and (max-width: 767px) {
+		height: 40px;
+		line-height: 40px;
+		min-width: 135px;
+	}
 }
