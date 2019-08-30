@@ -863,6 +863,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_log.info("Importing portlet settings...");
 		}
 
+		Company company = _companyLocalService.getCompany(
+			serviceContext.getCompanyId());
+
 		JSONArray jsonArray = _getJSONArray("portlet-settings.json");
 
 		_portletSettingsImporter.importPortletSettings(
@@ -870,7 +873,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_siteInitializerDependencyResolver.getDisplayTemplatesClassLoader(),
 			_siteInitializerDependencyResolver.
 				getDisplayTemplatesDependencyPath(),
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+			serviceContext.getScopeGroupId(), company.getGroupId(),
+			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portlet settings successfully imported");
@@ -927,6 +931,9 @@ public class MiniumSiteInitializer implements SiteInitializer {
 	private void _importThemePortletSettings(ServiceContext serviceContext)
 		throws Exception {
 
+		Company company = _companyLocalService.getCompany(
+			serviceContext.getCompanyId());
+
 		JSONArray jsonArray = _getJSONArray("theme-portlet-settings.json");
 
 		_portletSettingsImporter.importPortletSettings(
@@ -934,7 +941,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 			_siteInitializerDependencyResolver.getDisplayTemplatesClassLoader(),
 			_siteInitializerDependencyResolver.
 				getDisplayTemplatesDependencyPath(),
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+			serviceContext.getScopeGroupId(), company.getGroupId(),
+			serviceContext.getUserId());
 	}
 
 	private static final String _MINIUM_THEME_ID = "minium_WAR_miniumtheme";

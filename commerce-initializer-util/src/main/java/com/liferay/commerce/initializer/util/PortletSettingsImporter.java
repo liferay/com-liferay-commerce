@@ -66,7 +66,7 @@ public class PortletSettingsImporter {
 	public void importPortletSettings(
 			JSONArray jsonArray, ClassLoader classLoader,
 			String displayTemplateDependenciesPath, long scopeGroupId,
-			long userId)
+			long assetVocabularyGroupId, long userId)
 		throws Exception {
 
 		User user = _userLocalService.getUser(userId);
@@ -84,7 +84,8 @@ public class PortletSettingsImporter {
 
 			_importPortletSettings(
 				jsonObject, portletName, classLoader,
-				displayTemplateDependenciesPath, serviceContext);
+				displayTemplateDependenciesPath, assetVocabularyGroupId,
+				serviceContext);
 		}
 	}
 
@@ -127,7 +128,7 @@ public class PortletSettingsImporter {
 
 	private void _importPortletSettings(
 			JSONObject jsonObject, String portletName, ClassLoader classLoader,
-			String displayTemplateDependenciesPath,
+			String displayTemplateDependenciesPath, long assetVocabularyGroupId,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -192,7 +193,7 @@ public class PortletSettingsImporter {
 
 				AssetVocabulary assetVocabulary =
 					_assetVocabularyLocalService.getGroupVocabulary(
-						groupId, value);
+						assetVocabularyGroupId, value);
 
 				value = String.valueOf(assetVocabulary.getVocabularyId());
 			}
