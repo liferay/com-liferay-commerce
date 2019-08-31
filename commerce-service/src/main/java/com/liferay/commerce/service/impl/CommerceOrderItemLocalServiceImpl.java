@@ -421,8 +421,9 @@ public class CommerceOrderItemLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrderItem updateCommerceOrderItem(
-			long commerceOrderItemId, int quantity, String json,
-			CommerceContext commerceContext, ServiceContext serviceContext)
+			long commerceOrderItemId, int quantity, CommerceMoney unitPrice,
+			String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -433,7 +434,10 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceOrderItem.getCPInstanceId(), quantity, false,
 				commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		if (unitPrice == null) {
+			unitPrice = commerceProductPrice.getUnitPrice();
+		}
+
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		validate(
@@ -456,6 +460,18 @@ public class CommerceOrderItemLocalServiceImpl
 			commerceOrderItem.getCommerceOrderId(), commerceContext);
 
 		return commerceOrderItem;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity, String json,
+			CommerceContext commerceContext, ServiceContext serviceContext)
+		throws PortalException {
+
+		return updateCommerceOrderItem(
+			commerceOrderItemId, quantity, null, json, commerceContext,
+			serviceContext);
 	}
 
 	@Override
